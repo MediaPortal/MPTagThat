@@ -112,6 +112,14 @@ namespace MPTagThat.GridView
       CreateContextMenu();
 
       List<Burner> burners = burnManager.GetDrives();
+      // Try 5 times to get burners. might be a problem with the Burner Service not ready yet
+      int i = 0;
+      while (burners.Count == 0 && i < 4)
+      {
+        burners = burnManager.GetDrives();
+        i++;
+      }
+
       foreach (Burner burner in burners)
       {
         if (burner.DriveFeatures.WriteCDR)
@@ -189,6 +197,7 @@ namespace MPTagThat.GridView
     public void SetActiveBurner(Burner burner)
     {
       burnManager.SetActiveBurner(burner);
+      SetMediaInfo();
     }
     #endregion
 

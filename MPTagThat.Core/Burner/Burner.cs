@@ -291,7 +291,7 @@ namespace MPTagThat.Core.Burning
       List<string> FeatureDescription = new List<string>(85);
       string cdrParam = string.Format(@"dev={0} -prcap -v", fBusId);
 
-      FeatureDescription = DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", cdrParam, 10000);
+      FeatureDescription = DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", cdrParam, 20000);
       ParseDescriptionForFeatures(FeatureDescription);
     }
 
@@ -388,7 +388,7 @@ namespace MPTagThat.Core.Burning
       List<string> FeatureDescription = new List<string>();
       string cdrParam = string.Format(@"dev={0} -prcap -v", fBusId);
 
-      FeatureDescription = DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", cdrParam, 10000);
+      FeatureDescription = DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", cdrParam, 20000);
 
       List<string> speed = new List<string>();
       string savedSpeed = string.Empty;

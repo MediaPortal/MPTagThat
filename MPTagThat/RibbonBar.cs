@@ -565,7 +565,9 @@ namespace MPTagThat
           ribbonComboBoxSpeed.Items.Add(ri);
         }
       }
-      ribbonComboBoxSpeed.SelectedIndex = 0;
+      if (ribbonComboBoxSpeed.Items.Count > 0)
+        ribbonComboBoxSpeed.SelectedIndex = 0;
+
       main.BurnGridView.SetActiveBurner(burner);
     }
 
