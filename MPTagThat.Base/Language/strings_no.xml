@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Language>
+  <Section name="system">
+    <String id="NotFound">### String ikke funnet ###</String>
+		<String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
+  </Section>
+
+  <!-- Main --> 
+  <Section name="main">
+    <String id="toolStripLabelFiles">Filer: {0} (Valgt: {1})</String>
+    <String id="toolStripLabelPlay">Spiller Status: Spiller</String>
+    <String id="toolStripLabelPause">Spiller Status: Pauset</String>
+  </Section>
+
+  
+  
+  <!-- Tag Edit --> 
+  <Section name="TagEdit">
+	<!--  Title / Headers -->
+	<String id="MultiHeading">Multiple Tag Edit</String>
+	<String id="SingleHeading">Tag Edit</String>
+	<String id="HeaderUser">Bruker definert</String>
+	<String id="HeaderRating">Rating</String>
+	<String id="HeaderLyrics">Tekster</String>
+	<String id="HeaderWeb">Web Informasjon</String>
+	<String id="HeaderInvolved">Involved People</String>
+	<String id="HeaderOriginal">Original Informasjon</String>
+	<String id="HeaderDetail">Detaljert Informasjon</String>
+	<String id="HeaderMainTags">Hoved Tagger</String>
+	<String id="HeaderPictures">Bilder</String>
+	<!--  Main Tags -->
+	<String id="AlbumArtist">AlbumArtist:</String>
+	<String id="Track">Spor:</String>
+	<String id="Artist">Artist:</String>
+	<String id="Year">År:</String>
+	<String id="Title">Tittel:</String>
+	<String id="Album">Album:</String>
+	<String id="GroupBoxComment">Kommentart</String>
+	<String id="RemoveExistingComments">Fjern Kommentarer Først</String>
+	<String id="MoveTop">Flytt til Toppen</String>
+	<String id="RemoveComment">Fjern Kommentarer</String>
+	<String id="AddComment">Legg til Kommentarer</String>
+	<String id="Comment">Kommentar:</String>
+	<String id="CommentLanguage">Språk (ID3 only):</String>
+	<String id="CommentDescriptor">Beskrivelse (ID3 only):</String>
+	<String id="CommentHeaderDescriptor">Beskrivelse</String>
+	<String id="CommentHeaderLanguage">Språk</String>
+	<String id="CommentHeaderComment">Kommentar</String>
+	<String id="RemoveGenre">Fjern Sjanger</String>
+	<String id="AddGenre">Legg til sjanger</String>
+	<String id="Genre">Sjanger:</String>
+	<String id="Disc">Disk:</String>
+	<String id="BPM">BPM:</String>
+	<!--  Picture -->
+	<String id="GroupBoxPicture">Bilde</String>
+	<String id="RemoveExistingPictures">Fjern Esisterende Bilde Først</String>
+	<String id="ExportPicture">Eksporter Bilde</String>
+	<String id="RemovePicture">Fjern Bilde</String>
+	<String id="GetPicture">Hent Bilde</String>
+	<String id="AddPicture">Legg til Bilde</String>
+	<String id="PictureType">Bilde Type:</String>
+	<String id="PictureHeaderType">Bilde Type</String>
+	<String id="PictureDescriptor">Beskrivelse:</String>
+	<!--  Detailed Information -->
+	<String id="GetTrackLength">Hent Spor Lengde fra Fil</String>
+	<String id="TrackLength">Spor Lengde (ms):</String>
+	<String id="MediaType">Media Type:</String>
+	<String id="TitleSort">Tittel Sortering (ID3 2.4):</String>
+	<String id="AlbumSort">Album Sortering (ID3 2.4):</String>
+	<String id="ArtistSort">Artist Sortering (ID3 2.4):</String>
+	<String id="SubTitle">Undertekst:</String>
+	<String id="ContentGroup">Innhold gruppe:</String>
+	<String id="Copyright">Copyright:</String>
+	<String id="EncodedBy">Encoded av:</String>
+	<String id="Publisher">Utgiver:</String>
+	<String id="TextWriter">Lyrikk / Tekst forfatter:</String>
+	<String id="Interpreter">Interpreted by:</String>
+	<String id="Composer">Komponist:</String>
+	<String id="Conductor">Dirigent:</String>
+	<!--  Original Information -->
+	<String id="OriginalReleaseYear">Originalt Utgivelse År:</String>
+	<String id="OriginalOwber">Original Eier:</String>
+	<String id="OriginalArtist">Original Artist:</String>
+	<String id="OriginalTextWriter">Original Lyrikk Forfatter:</String>
+	<String id="OriginalFileName">Originalt Filnavn:</String>
+	<String id="OriginalAlbumTitle">Original Album Tittel:</String>
+	<!--  Involved Persons -->
+	<String id="ID3V24only">Bare ID3 V2.4</String>
+	<String id="RemoveMusician">Fjern Musiker</String>
+	<String id="AddMusician">Legg til Musiker</String>
+	<String id="MusicianName">Musikers Navn:</String>
+	<String id="MusicianInstrument">Instrumenter:</String>
+	<String id="MusicianHeaderInstrument">Instrument</String>
+	<String id="MusicianHeaderName">Navn</String>
+	<String id="RemovePerson">Fjern Person</String>
+	<String id="AddPerson">Legg til Person</String>
+	<String id="PersonName">Involverte Personers Navn:</String>
+	<String id="PersonFunction">Involverte Personers Funksj:</String>
+	<String id="PersonHeaderName">Navn</String>
+	<String id="PersonHeaderFunction">Funksjoner</String>
+	<!--  Web Information -->
+	<String id="CommercialUrl">Komersiell Informasjon URL:</String>
+	<String id="PublisherUrl">Offisiell Utgiver URL:</String>
+	<String id="PaymentUrl">Offisiell Betaling URL:</String>
+	<String id="InternetRadioUrl">Offisiell Web Radio Stasj URL:</String>
+	<String id="AudioSourceUrl">Offisiell Lydkilde URL:</String>
+	<String id="ArtistUrl">Offisiell Artist URL:</String>
+	<String id="AudioFileUrl">Offisiell Lydfil URL:</String>
+	<String id="CopyrightUrl">Copyright Informasjon URL:</String>
+	<!--  Lyrics -->
+	<String id="GetLyricsFromInternet">Hent Lyrikk fra Internett</String>
+	<String id="GetLyricsFromText">Hent Lyrikk fra Tekst Fil</String>
+	<String id="RemoveExistingLyrics">Fjern eksisterende Lyrikk Først</String>
+	<String id="RemoveLyrics">Remove Lyrikk</String>
+	<String id="AddLyrics">Legg til Lyrikk</String>
+	<String id="LyricsLanguage">Språk (ID3 only):</String>
+	<String id="LyricsDescriptor">Beskrivelse (ID3 only):</String>
+	<String id="LyricsHeaderDescriptor">Beskrivelse</String>
+	<String id="LyricsHeaderLanguage">Språk</String>
+	<String id="LyricsHeaderLyrics">Lyrikk</String>
+	<!--  Rating -->
+	<String id="RemoveExistingRatings">Fjern eksisterende Rating Først</String>
+	<String id="ttLabel1">lblRatingNote.Text</String>
+	<String id="PlayCounter">Teller Avspilt:</String>
+	<String id="RemoveRating">Fjern Rating</String>
+	<String id="AddRating">Legg til Rating</String>
+	<String id="Rating">Rating:</String>
+	<String id="RatingUser">Bruker (e-Post):</String>
+	<!--  Navigation Pane -->
+	<String id="panelNavigation">Tagg Informasjon</String>
+	<String id="LinkUserDefined">Bruker Definert</String>
+	<String id="LinkRating">Rating</String>
+	<String id="LinkLyrics">Lyrikk</String>
+	<String id="LinkWeb">Web Informasjon</String>
+	<String id="LinkInvolvedPeople">Involverte Personer</String>
+	<String id="LinkOriginalInfo">Original Informasjon</String>
+	<String id="LinkDetailedInfo">Detaljert Informasjon</String>
+	<String id="LinkMainTags">Hoved Tagger</String>
+	<String id="LinkPictures">Bilder</String>
+	<!--  General Buttons -->
+	<String id="Cancel">Avbryt</String>
+	<String id="Apply">Utfør</String>
+  </Section>
+	
+	
+	<!--  Header of the Grid View -->
+  <Section name="column_header">
+    <String id="FileName">Fil Navn</String>
+    <String id="Status">Status</String>
+    <String id="Track">Spor</String>
+    <String id="Title">Tittel</String>
+    <String id="Artist">Artist</String>
+    <String id="AlbumArtist">Album Artist</String>
+    <String id="Album">Album</String>
+    <String id="Year">År</String>
+    <String id="Genre">Sjanger</String>
+    <String id="CreationTime">Opprettet</String>
+    <String id="LastWriteTime">Forandret</String>
+    <String id="TagType">Type</String>
+    <String id="Disc">Disk #</String>
+    <String id="BPM">BPM</String>
+    <String id="Rating">Rating</String>
+    <String id="Comment">Kommentar</String>
+    <String id="Composer">Komponist</String>
+    <String id="Conductor">Dirigent</String>
+    <String id="NumPics"># Bilder</String>
+    <String id="Duration">Lengde</String>
+    <String id="FileSize">Størrelse (kb)</String>
+    <String id="BitRate">Bitrate</String>
+    <String id="SampleRate">Samplerate</String>
+    <String id="Channels">Kanaler</String>
+    <String id="Version">Kode type</String>
+  </Section>
+	
+	<!-- File Info Panel on the right side -->
+  <Section name="file_info">
+    <String id="Duration">Lengde</String>
+    <String id="FileSize">Fil Størrelse</String>
+    <String id="Bitrate">Bitrate</String>
+    <String id="Channels">Kanaler</String>
+    <String id="Samplerate">Samplerate</String>
+    <String id="Version">Kodet som</String>
+    <String id="Created">Opprettet</String>
+    <String id="Changed">Forandret</String>
+  </Section>
+	
+   <!-- Tag from Filename  / Rename File --> 
+  <Section name="TagAndRename">
+    <String id="HeadingTag">Filnavn Til Tag</String>
+	<String id="HeadingRename">Tag Til Fil Navn</String>
+    <String id="InvalidParm">Ugyldig Parameter for Formatet. Venligst korriger.</String>
+	<String id="NameTooLong">Filnavn for langt. Venligs korriger.</String>
+    <String id="FileExists">Filen eksisterer allerede. Samme Tag brukt?</String>
+    <String id="Rename">Kan ikke gi nytt navn til filen {0}: {1}</String>
+  </Section>
+
+  <!-- Settings --> 
+  <Section name="settings">
+    <String id="Heading">Innstillinger</String>
+    <String id="InvalidParm">Ugyldig Parameter brukt i Formatet for Rippet Filnavn. Vennligst korriger.</String>
+    <String id="DescPrefMedium">Denne innstillingen burde være mest vanlig for de fleste.</String>
+    <String id="DescPrefStandard">Denne innstillingen burde være bra for de fleste siden kvaliteten er ganske høy.</String>
+    <String id="DescPrefExtreme">Hvis du har ekstremt god hørsel og like godt avspillingsutstyr, vil denne innstillingen gi noe høyere kvalitet en ”standard” innstillingen.</String>
+    <String id="DescPrefInsane">CBR 320. Denne innstillingen vil være I overkant for de fleste I de fleste situasjoner, men hvis du må ha høyest mulig kvalitet uten å tenke på filstørrelse, er dette veien å gå..</String>
+    <String id="DescPrefABR">ABR modellen (høy kvalitet/bitrate men ikke så høy som VBR).\r\nVed bruk av denne innstillingen vil vanligvis gi god kvalitet ved en gitt bitrate. \r\nMen denne innstillingen er ikke like fleksibel som VBR og vil som regel ikke gi bedre kvalitet en VBR ved høyere bitrater.</String>
+  </Section>
+ 
+ 
+	<!-- Messages shown by the program -->
+  <Section name="message">
+    <String id="Ok">Ok</String>
+    <String id="Error">Feil</String>
+    <String id="Error_Title">Feil</String>
+    <String id="Save_Changes">Endringene har ikke blitt lagret. Ønsker du å lagre disse nå?</String>
+    <String id="Save_Changes_Title">Lagre endringer</String>
+    <String id="Script_Compile_Failed">Kjøring av skriptet feilet. Vennligst se i loggen og korriger feilen.</String>
+  </Section>
+	
+  <!-- Progress Dialog -->
+  <Section name="progress">
+    <String id="Scanning">Henter tagger for spor {0}/{1}</String>
+	<String id="Saving">Lagrer spor {0}/{1}</String>
+  </Section> 
+</Language>

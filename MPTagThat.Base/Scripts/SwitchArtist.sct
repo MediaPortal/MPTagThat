@@ -1,0 +1,32 @@
+// Title: Switch Artist
+// Description: This script switches the Artists First and Last Name.
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  public TrackData Invoke(TrackData track)
+  {
+    if (track == null) return null;
+
+    string artist = track.Artist;
+    artist.Trim();
+
+    int iPos = artist.IndexOf(' ');
+    if (iPos > 0)
+    {
+      track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1), artist.Substring(0, iPos));
+    }
+    return track;
+  }
+}

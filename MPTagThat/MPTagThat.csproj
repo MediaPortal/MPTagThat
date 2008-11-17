@@ -1,0 +1,390 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A4EC0924-5A90-4E83-8D61-4164ABFE13A5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MPTagThat</RootNamespace>
+    <AssemblyName>MPTagThat</AssemblyName>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bass.Net, Version=2.4.0.1, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Bass.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="BassRegistration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\BassRegistration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSScriptLibrary, Version=1.9.0.0, Culture=neutral, PublicKeyToken=70fcc3d18c749033">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp, Version=2.0.2.17, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\taglib-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\TelerikCommon.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialogues\CaseConversion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\CaseConversion.Designer.cs">
+      <DependentUpon>CaseConversion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\ColumnSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\ColumnSelect.Designer.cs">
+      <DependentUpon>ColumnSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\FileNameToTag\FileNameToTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\FileNameToTag\FileNameToTag.Designer.cs">
+      <DependentUpon>FileNameToTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\FileNameToTag\ParameterPart.cs" />
+    <Compile Include="Dialogues\FileNameToTag\TagFormat.cs" />
+    <Compile Include="Dialogues\AmazonAlbumSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\AmazonAlbumSearchResults.Designer.cs">
+      <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\MultiTagEdit.Designer.cs">
+      <DependentUpon>MultiTagEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\TagEditBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\TagEditBase.designer.cs">
+      <DependentUpon>TagEditBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Tracks\GridViewColumnsLyrics.cs" />
+    <Compile Include="Grids\Tracks\LyricsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grids\Tracks\LyricsSearch.Designer.cs">
+      <DependentUpon>LyricsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Tracks\MusicBrainzAlbumResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grids\Tracks\MusicBrainzAlbumResults.Designer.cs">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\Comment.cs" />
+    <Compile Include="Dialogues\TagEdit\LyricsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\LyricsSearch.Designer.cs">
+      <DependentUpon>LyricsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\SingleTagEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\SingleTagEdit.Designer.cs">
+      <DependentUpon>SingleTagEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\Rating.cs" />
+    <Compile Include="Dialogues\TagEdit\Lyrics.cs" />
+    <Compile Include="Dialogues\TagEdit\MultiTagEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\TagEdit\MultiTagEditOptions.cs" />
+    <Compile Include="Dialogues\Preferences\Preferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\Preferences\Preferences.Designer.cs">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\Progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\OrganiseFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\OrganiseFiles.Designer.cs">
+      <DependentUpon>OrganiseFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\TagToFileName\TagToFileName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\TagToFileName\TagToFileName.Designer.cs">
+      <DependentUpon>TagToFileName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Burning\GridViewBurn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\Burning\GridViewBurn.Designer.cs">
+      <DependentUpon>GridViewBurn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Burning\GridViewColumnsBurn.cs" />
+    <Compile Include="Grids\Conversion\GridViewColumnsConvert.cs" />
+    <Compile Include="Grids\Conversion\GridViewConvert.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\Conversion\GridViewConvert.Designer.cs">
+      <DependentUpon>GridViewConvert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Conversion\ConversionData.cs" />
+    <Compile Include="Grids\Ripping\FreeDBMultiCDSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grids\Ripping\FreeDBMultiCDSelect.Designer.cs">
+      <DependentUpon>FreeDBMultiCDSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Ripping\GridViewColumnsRip.cs" />
+    <Compile Include="Grids\Ripping\GridViewRip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\Ripping\GridViewRip.Designer.cs">
+      <DependentUpon>GridViewRip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Grids\Tracks\GridViewColumns.cs" />
+    <Compile Include="Grids\Tracks\GridViewSettings.cs" />
+    <Compile Include="Grids\Tracks\GridViewTracks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Grids\Tracks\GridViewTracks.Designer.cs">
+      <DependentUpon>GridViewTracks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Player\PlayerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Player\PlayerControl.Designer.cs">
+      <DependentUpon>PlayerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Player\PlayListData.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogues\CaseConversion.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CaseConversion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\ColumnSelect.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ColumnSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\FileNameToTag\FileNameToTag.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FileNameToTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\AmazonAlbumSearchResults.resx">
+      <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\TagEdit\MultiTagEdit.resx">
+      <DependentUpon>MultiTagEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\TagEdit\TagEditBase.resx">
+      <DependentUpon>TagEditBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Tracks\LyricsSearch.resx">
+      <DependentUpon>LyricsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Tracks\MusicBrainzAlbumResults.resx">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\TagEdit\LyricsSearch.resx">
+      <DependentUpon>LyricsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\TagEdit\SingleTagEdit.resx">
+      <DependentUpon>SingleTagEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\Preferences\Preferences.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\Progress.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\OrganiseFiles.resx">
+      <DependentUpon>OrganiseFiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\TagToFileName\TagToFileName.resx">
+      <DependentUpon>TagToFileName.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Burning\GridViewBurn.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridViewBurn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Conversion\GridViewConvert.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridViewConvert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Ripping\FreeDBMultiCDSelect.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FreeDBMultiCDSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Ripping\GridViewRip.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridViewRip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grids\Tracks\GridViewTracks.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GridViewTracks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player\PlayerControl.resx">
+      <DependentUpon>PlayerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RibbonBar.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RibbonBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RibbonBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RibbonBar.Designer.cs">
+      <DependentUpon>RibbonBar.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LyricsEngine\LyricsEngine.csproj">
+      <Project>{B0760CE8-086F-4301-9091-C9BE54F261FD}</Project>
+      <Name>LyricsEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPTagThat.Core\MPTagThat.Core.csproj">
+      <Project>{329DC657-B4D5-4324-AA0D-4B77B6F72D8C}</Project>
+      <Name>MPTagThat.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Run.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FormRunHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RefreshDocViewHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QuickAccessMenuOptions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NavForward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NavBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HelpSign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playprev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playnext.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playpause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playstop.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)PostBuild.bat" "$(SolutionDir)" $(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

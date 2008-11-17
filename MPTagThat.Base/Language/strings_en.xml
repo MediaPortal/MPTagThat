@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--  
+       Atention: When translating to a new language, copy this file and replace the "en" in the filename with the 2 character ISO code. e.g. de = German, fr = French, etc.
+                        If the target language contains special characters (e.g. German Umlaut or French accents), you must ensure that the editor used is capable of storing    the file in UTF-8 format.
+                        If this is not the case, the special characters will not be displayed correctly.
+                        The string "\n" in a literal represents a line feed.
+-->
+<Language>
+  <Section name="system">
+    <String id="NotFound">### String Not Found ###</String>
+        <String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
+  </Section>
+
+  <!-- Main --> 
+  <Section name="main">
+    <String id="TreeViewPanel">Folders</String>
+    <String id="PicturePanel">Picture</String>
+    <String id="InformationPanel">Information</String>
+    <String id="PlayerPanel">Player</String>
+    <!-- Options Panel -->
+    <String id="OptionsPanel">Options</String>
+    <String id="ScanSubfolder">Scan subfolders</String>
+    <String id="ButtonRefreshFolder">Refresh Folder View</String>
+    <!-- Error Gridview -->
+    <String id="ErrorHeaderFile">File</String>
+    <String id="ErrorHeaderMessage">Message</String>
+    <!-- Toolstrip -->
+    <String id="toolStripLabelFiles">Files: {0} (Selected: {1})</String>
+    <String id="toolStripLabelPlay">Player Status: Playing</String>
+    <String id="toolStripLabelPause">Player Status: Paused</String>
+  </Section>
+
+  <!-- Ribbon --> 
+  <Section name="ribbon">
+    <!-- Start Menu -->
+    <String id="Settings">Settings</String>
+    <String id="Refresh">Refresh</String>
+    <String id="Save">Save</String>
+    <String id="ColumnsSelect">Select Columns Displayed</String>
+    <String id="Exit">Exit</String>
+
+    <!-- Tags Tab-->
+    <String id="TagTab">Tags</String>
+    <String id="TagFromFile">Tag from\nFilename</String>
+    <String id="RenameFile">Rename\nFile</String>
+    <String id="IdentifyFile">Identify\nFile</String>
+    <String id="MultiTagEdit">Multiple Tag\nEdit</String>
+    <String id="GetCoverArt">Get Cover Art</String>
+    <String id="GetLyrics">Get Lyrics</String>
+    <String id="CaseConversion">Case\nConversion</String>
+    <String id="DeleteTags">Delete\nTags</String>
+    <String id="DeleteAllTags">Delete All Tags</String>
+    <String id="DeleteID3V1Tags">Delete ID3 V1 Tags only</String>
+    <String id="DeleteID3V2Tags">Delete ID3 V2 Tags only</String>
+    <String id="EditTags">Edit Tags</String>
+    
+    <String id="ExecuteScript">Execute\nScript</String>
+    <String id="Scripts">Scripts</String>
+    
+    <String id="Organise">Organise\nFiles</String>
+    <String id="AddBurner">Add to\nBurner</String>
+    <String id="Other">Other</String>
+
+    <!-- Rip Tab-->
+    <String id="RipTab">Rip</String>
+    <String id="RipEncoder">Select Encoder:</String>
+    <String id="RipFolder">Output Folder:</String>
+    <String id="RipCancel">Cancel\nRip</String>
+    <String id="RipOptions">Rip Options</String>
+
+    <!-- Convert Tab-->
+    <String id="ConvertTab">Convert</String>
+    <String id="ConvertEncoder">Select Encoder:</String>
+    <String id="ConvertFolder">Output Folder:</String>
+    <String id="ConvertCancel">Cancel\nConvert</String>
+    <String id="ConvertOptions">Convert Options</String>
+
+    <!-- Burn Tab-->
+    <String id="BurnTab">Burn</String>
+    <String id="Burn">Burn</String>
+    <String id="BurnCancel">Cancel\nBurn</String>
+    <String id="BurnOptions">Burn Options</String>
+
+  </Section>
+  
+  <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
+  <Section name="TagEdit">
+    <!--  Title / Headers -->
+    <String id="MultiHeading">Multiple Tag Edit</String>
+    <String id="SingleHeading">Tag Edit</String>
+    <String id="HeaderUser">User Defined</String>
+    <String id="HeaderRating">Rating</String>
+    <String id="HeaderLyrics">Lyrics</String>
+    <String id="HeaderWeb">Web Information</String>
+    <String id="HeaderInvolved">Involved People</String>
+    <String id="HeaderOriginal">Original Information</String>
+    <String id="HeaderDetail">Detailed Information</String>
+    <String id="HeaderMainTags">Main Tags</String>
+    <String id="HeaderPictures">Pictures</String>
+    <!--  Main Tags -->
+    <String id="AlbumArtist">AlbumArtist:</String>
+    <String id="Track">Track:</String>
+    <String id="Artist">Artist:</String>
+    <String id="Year">Year:</String>
+    <String id="Title">Title:</String>
+    <String id="Album">Album:</String>
+    <String id="GroupBoxComment">Comment</String>
+    <String id="RemoveExistingComments">Remove Comments First</String>
+    <String id="MoveTop">Move to Top</String>
+    <String id="RemoveComment">Remove Comment</String>
+    <String id="AddComment">Add Comment</String>
+    <String id="Comment">Comment:</String>
+    <String id="CommentLanguage">Language (ID3 only):</String>
+    <String id="CommentDescriptor">Descriptor (ID3 only):</String>
+    <String id="CommentHeaderDescriptor">Descriptor</String>
+    <String id="CommentHeaderLanguage">Lang</String>
+    <String id="CommentHeaderComment">Comment</String>
+    <String id="RemoveGenre">Remove Genre</String>
+    <String id="AddGenre">Add Genre</String>
+    <String id="Genre">Genre:</String>
+    <String id="Disc">Disc:</String>
+    <String id="BPM">BPM:</String>
+    <!--  Picture -->
+    <String id="GroupBoxPicture">Picture</String>
+    <String id="RemoveExistingPictures">Remove Existing Pictures First</String>
+    <String id="ExportPicture">Export Picture</String>
+    <String id="RemovePicture">Remove Picture</String>
+    <String id="GetPicture">Get from File</String>
+    <String id="GetPictureInternet">Get from Internet</String>
+    <String id="AddPicture">Add Picture</String>
+    <String id="PictureType">Picture Type:</String>
+    <String id="PictureHeaderType">Picture Type</String>
+    <String id="PictureDescriptor">Descriptor:</String>
+    <!--  Detailed Information -->
+    <String id="GetTrackLength">Get Track Length from File</String>
+    <String id="TrackLength">Track Length (ms):</String>
+    <String id="MediaType">Media Type:</String>
+    <String id="TitleSort">Title Sort (ID3 2.4):</String>
+    <String id="AlbumSort">Album Sort (ID3 2.4):</String>
+    <String id="ArtistSort">Artist Sort (ID3 2.4):</String>
+    <String id="SubTitle">Subtitle:</String>
+    <String id="ContentGroup">Content group:</String>
+    <String id="Copyright">Copyright:</String>
+    <String id="EncodedBy">Encoded by:</String>
+    <String id="Publisher">Publisher:</String>
+    <String id="TextWriter">Lyrics / Text Writer:</String>
+    <String id="Interpreter">Interpreted by:</String>
+    <String id="Composer">Composer:</String>
+    <String id="Conductor">Conductor:</String>
+    <!--  Original Information -->
+    <String id="OriginalReleaseYear">Original Release Year:</String>
+    <String id="OriginalOwber">Original Owner:</String>
+    <String id="OriginalArtist">Original Artist:</String>
+    <String id="OriginalTextWriter">Original Lyrics Writer:</String>
+    <String id="OriginalFileName">Original Filename:</String>
+    <String id="OriginalAlbumTitle">Original Album Title:</String>
+    <!--  Involved Persons -->
+    <String id="ID3V24only">ID3 V2.4 only</String>
+    <String id="RemoveMusician">Remove Musician</String>
+    <String id="AddMusician">Add Musician</String>
+    <String id="MusicianName">Musician Name:</String>
+    <String id="MusicianInstrument">Musician Instrument:</String>
+    <String id="MusicianHeaderInstrument">Instrument</String>
+    <String id="MusicianHeaderName">Name</String>
+    <String id="RemovePerson">Remove Person</String>
+    <String id="AddPerson">Add Person</String>
+    <String id="PersonName">Involved Person Name:</String>
+    <String id="PersonFunction">Involved Person Function:</String>
+    <String id="PersonHeaderName">Name</String>
+    <String id="PersonHeaderFunction">Function</String>
+    <!--  Web Information -->
+    <String id="CommercialUrl">Commercial Information URL:</String>
+    <String id="PublisherUrl">Official Publisher URL:</String>
+    <String id="PaymentUrl">Official Payment URL:</String>
+    <String id="InternetRadioUrl">Official Internet Radio Stat. URL:</String>
+    <String id="AudioSourceUrl">Official Audiosource URL:</String>
+    <String id="ArtistUrl">Official Artist URL:</String>
+    <String id="AudioFileUrl">Official Audiofile URL:</String>
+    <String id="CopyrightUrl">Copyright Information URL:</String>
+    <!--  Lyrics -->
+    <String id="GetLyricsFromInternet">Get Lyrics from the Internet</String>
+    <String id="GetLyricsFromText">Get Lyrics from Text File</String>
+    <String id="RemoveExistingLyrics">Remove existing Lyrics First</String>
+    <String id="RemoveLyrics">Remove Lyrics</String>
+    <String id="AddLyrics">Add Lyrics</String>
+    <String id="LyricsLanguage">Language (ID3 only):</String>
+    <String id="LyricsDescriptor">Descriptor (ID3 only):</String>
+    <String id="LyricsHeaderDescriptor">Descriptor</String>
+    <String id="LyricsHeaderLanguage">Lang</String>
+    <String id="LyricsHeaderLyrics">Lyrics</String>
+    <!--  Rating -->
+    <String id="RemoveExistingRatings">Remove existing Ratings First</String>
+    <String id="RatingNote">The rating is 1-255 where 1 is worst and 255 is best. 0 is unknown.\n\nNote: Many programs have their own rating and may redefine the ID3 standard. If no personal counter is wanted it may be omitted.</String>
+    <String id="PlayCounter">Play Counter:</String>
+    <String id="RemoveRating">Remove Rating</String>
+    <String id="AddRating">Add Rating</String>
+    <String id="Rating">Rating:</String>
+    <String id="RatingUser">User (eMail):</String>
+    <!--  Navigation Pane -->
+    <String id="panelNavigation">Tag Information</String>
+    <String id="LinkUserDefined">User Defined</String>
+    <String id="LinkRating">Rating</String>
+    <String id="LinkLyrics">Lyrics</String>
+    <String id="LinkWeb">Web Information</String>
+    <String id="LinkInvolvedPeople">Involved People</String>
+    <String id="LinkOriginalInfo">Original Information</String>
+    <String id="LinkDetailedInfo">Detailed Information</String>
+    <String id="LinkMainTags">Main Tags</String>
+    <String id="LinkPictures">Pictures</String>
+    <!--  General Buttons -->
+    <String id="Cancel">Cancel</String>
+    <String id="Apply">Apply</String>
+
+    <!--  Single Tag Edit Commands -->
+    <String id="Previous">Previous File</String>
+    <String id="Next">Next File</String>
+    <String id="Commands">Commands</String>
+  </Section>
+  
+    
+  <Section name="LyricsSearch">
+    <!--  Single Lyrics Search as called out of Single / Multiple Tag Edit -->
+    <String id="Header">Find a lyric for {0} - {1}</String>
+    <String id="Cancel">Cancel</String>
+    <String id="Site">Site</String>
+    <String id="Result">Result</String>
+    <String id="Lyric">Lyric</String>
+    <String id="GroupBoxSearchResults">Search results</String>
+    <String id="Title">Title:</String>
+    <String id="Update">Update</String>
+    <String id="Find">Fetch</String>
+    <String id="Close">Close</String>
+    <String id="GroupBoxLyric">Lyric</String>
+    <String id="Artist">Artist:</String>
+    <String id="GroupBoxSearchInfo">Search information</String>
+    <String id="SwitchArtist">Switch Artist</String>
+    <!--  Multiple Lyrics Search  -->
+    <String id="Heading">Lyrics Search</String>
+    <String id="Status">Searching for Lyrics ... Please Wait</String>
+    <String id="Finished">Search Finished. Unselect tracks with incorrect  Lyrics.</String>
+    <String id="NothingToSearch">There is nothing to search for</String>
+    <String id="FoundLyrics">Ok</String>
+    <String id="NoLyricsFound">N/A</String>
+  </Section>
+
+  <!--  Amazon Album Search -->
+  <Section name="AmazonAlbumSearch">
+    <String id="Header">Album Search</String>
+    <String id="Close">Cancel</String>
+    <String id="Update">Select</String>
+    <String id="Albums">Albums</String>
+    <String id="GroupBoxResults">Multiple Albums found. Please select ...</String>
+  </Section>
+
+  <!--  MusicBrainz Search -->
+  <Section name="MusicBrainz">
+    <String id="Header">Internet Lookup</String>
+    <String id="Cancel">Cancel</String>
+    <String id="Update">Select</String>
+    <String id="SearchInfo">Identified Track</String>
+    <String id="Album">Album</String>
+    <String id="Duration">Duration</String>
+    <String id="GroupBoxResults">The track is available on multiple albums. Please select</String>
+  </Section>
+  
+  <!--  Header of the Grid View showing the Tracks -->
+  <Section name="column_header">
+    <String id="FileName">File Name</String>
+    <String id="Status">Status</String>
+    <String id="Track">Track</String>
+    <String id="Title">Title</String>
+    <String id="Artist">Artist</String>
+    <String id="AlbumArtist">Album Artist</String>
+    <String id="Album">Album</String>
+    <String id="Year">Year</String>
+    <String id="Genre">Genre</String>
+    <String id="CreationTime">Created</String>
+    <String id="LastWriteTime">Changed</String>
+    <String id="TagType">Type</String>
+    <String id="Disc">Disc #</String>
+    <String id="BPM">BPM</String>
+    <String id="Rating">Rating</String>
+    <String id="Comment">Comment</String>
+    <String id="Composer">Composer</String>
+    <String id="Conductor">Conductor</String>
+    <String id="NumPics"># Pics</String>
+    <String id="ArtistSortName">Artist Sortname</String>
+    <String id="AlbumSortName">Album Sortname</String>
+    <String id="CommercialInformation">Commercial Information</String>
+    <String id="Copyright">Copyright</String>
+    <String id="CopyrightInformation">Copyright Information</String>
+    <String id="EncodedBy">Encoded by</String>
+    <String id="Interpreter">Interpreted by</String>
+    <String id="Grouping">Grouping</String>
+    <String id="Lyrics">Lyrics</String>
+    <String id="MediaType">Media Type</String>
+    <String id="OfficialAudioFileInformation">Off. Audiofile Information</String>
+    <String id="OfficialArtistInformation">Off. Artist Information</String>
+    <String id="OfficialAudioSourceInformation">Off. Audiosource Information</String>
+    <String id="OfficialInternetRadioInformation">Off. Internet Radio Information</String>
+    <String id="OfficialPaymentInformation">Off. Payment Information</String>
+    <String id="OfficialPublisherInformation">Off. Publisher Information</String>
+    <String id="OriginalAlbum">Original Album</String>
+    <String id="OriginalFileName">Original Filename</String>
+    <String id="OriginalLyricsWriter">Original Lyricswriter</String>
+    <String id="OriginalArtist">Original Artist</String>
+    <String id="OriginalOwner">Original Owner</String>
+    <String id="OriginalRelease">Original Release</String>
+    <String id="Publisher">Publisher</String>
+    <String id="SubTitle">Subtitle</String>
+    <String id="TextWriter">Textwriter</String>
+    <String id="TitleSortName">Title Sortname</String>
+    <String id="Duration">Duration</String>
+    <String id="FileSize">Size (kb)</String>
+    <String id="BitRate">Bitrate</String>
+    <String id="SampleRate">Samplerate</String>
+    <String id="Channels">Channels</String>
+    <String id="Version">Codec</String>
+  </Section>
+
+  <!--  Context Menus -->
+  <Section name="contextmenu">
+    <String id="AddBurner">Add Item(s) to Burner</String>
+    <String id="AddConverter">Add Item(s) to Converter</String>
+    <String id="AddPlayList">Add Item(s) to PlayList</String>
+    <String id="ClearPlayList">Clear PlayList</String>
+ </Section>
+  
+    <!-- File Info Panel on the right side -->
+  <Section name="file_info">
+    <String id="Duration">Duration</String>
+    <String id="FileSize">File Size</String>
+    <String id="Bitrate">Bitrate</String>
+    <String id="Channels">Channels</String>
+    <String id="Samplerate">Samplerate</String>
+    <String id="Version">Codec</String>
+    <String id="Created">Created</String>
+    <String id="Changed">Changed</String>
+  </Section>
+    
+  <!-- Tag from Filename  / Rename File --> 
+  <Section name="TagAndRename">
+    <String id="HeadingTag">Tag from FileName</String>
+    <String id="HeadingRename">Rename File</String>
+    <String id="Apply">Apply</String>
+    <String id="Cancel">Cancel</String>
+    <String id="Format">Format:</String>
+    <String id="RemoveFormat">Remove Format From List</String>
+    <String id="AddFormat">Add Format To List</String>
+    <String id="GroupBoxParm">Parameters (Click to add to the list)</String>
+    <String id="Folder">\ = Folder: to specify that parameters in front of it to be taken from the folder name</String> 
+    <String id="Unused">&lt;X&gt; = Unused</String>
+    <String id="Comment">&lt;C&gt; = Comment</String>
+    <String id="AlbumArtist">&lt;O&gt; = Orchestra / Album Artist</String>
+    <String id="Genre">&lt;G&gt; = Genre</String>
+    <String id="DiscTotal">&lt;d&gt; = Total # of discs</String>
+    <String id="Disc">&lt;D&gt; = Disc Number</String>
+    <String id="TrackTotal">&lt;k&gt; = Total # of tracks</String>
+    <String id="Track">&lt;K&gt; = Track Number</String>
+    <String id="Year">&lt;Y&gt; = Year</String>
+    <String id="Album">&lt;B&gt; = Album</String>
+    <String id="Title">&lt;T&gt; = Title</String>
+    <String id="Artist">&lt;A&gt; = Artist</String>
+    <String id="Conductor">&lt;N&gt; = Conductor</String>
+    <String id="Composer">&lt;R&gt; = Composer</String>
+    <String id="Group">&lt;U&gt; = Content Group</String>
+    <String id="SubTitle">&lt;S&gt; = SubTitle</String>
+    <String id="BPM">&lt;E&gt; = BPM</String>
+    <String id="ModifiedBY">&lt;M&gt; = Modified / remixed by</String>
+    <String id="Filename">&lt;F&gt; = Current Filename</String>
+    <String id="Enumerate">&lt;#&gt; = Enumerates Files</String>
+    <String id="BitRate">&lt;I&gt; = Bitrate</String>
+    <String id="FirstNofArtist">&lt;A:n&gt; = First "n" characters of Artist</String>
+    <String id="FirstNofAlbumArtist">&lt;O:n&gt; = First "n" characters of Album Artist</String>
+    <String id="StartAt">Start at</String>
+    <String id="NumberDigits">Number of Digits</String>
+    <String id="NameTooLong">Filename too long. Please change it.</String>
+    <String id="FileExists">File already exists. Common Tags used?</String>
+    <String id="Rename">Can't Rename File {0}: {1}</String>
+    <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String> 
+  </Section>
+
+  <!--  Case Conversion -->
+  <Section name="CaseConversion">
+    <String id="Header">Case Conversion</String>
+    <String id="TabSettings">Settings</String>
+    <String id="GroupBoxOptions">Options</String>
+    <String id="AlwaysUpperCaseFirstLetter">Always Uppercase First Letter</String>
+    <String id="ReplaceSpaceByUnderscore">Replace Space by "_"</String>
+    <String id="ReplaceUnderscoreBySpace">Replace "_" by Space</String>
+    <String id="ReplaceSpaceby20">Replace Space by "%20"</String>
+    <String id="Replace20bySpace">Replace "%20" by Space</String>
+    <String id="GroupBoxMethod">Conversion Method</String>
+    <String id="AllFirstLetterUpperCase">All First Letter Upper Case</String>
+    <String id="FirstLetterUpperCase">First Letter Upper Case</String>
+    <String id="AllUpperCase">All Upper Case</String>
+    <String id="AllLowerCase">All Lower Case</String>
+    <String id="GroupBoxConvert">Convert Tags for ...</String>
+    <String id="Comment">Comment</String>
+    <String id="Title">Title</String>
+    <String id="Album">Album</String>
+    <String id="AlbumArtist">AlbumArtist</String>
+    <String id="Artist">Artist</String>
+    <String id="ConvertTags">Convert Tags</String>
+    <String id="ConvertFileName">Convert Filename</String>
+    <String id="Exceptions">Exceptions</String>
+    <String id="RemoveException">Remove</String>
+    <String id="AddException">Add</String>
+    <String id="Convert">Convert</String>
+    <String id="Cancel">Cancel</String>
+  </Section>
+
+  <!--  Column Select -->
+  <Section name="ColumnSelect">
+    <String id="Header">Select the Columns to Display</String>
+    <String id="Ok">Ok</String>
+    <String id="Cancel">Cancel</String>
+  </Section>
+  
+  <!-- Organise --> 
+  <!-- Note :the Parameter are found in the TagAndRename section --> 
+  <Section name="organise">
+    <String id="Heading">Organise Files</String>
+    <String id="TargetRootDrectory">Target Root Directory:</String>
+    <String id="BrowseRootDir">Browse</String>
+    <String id="OverWriteFiles">Overwrite existing files</String>
+    <String id="CopyFiles">Copy Files instead of Moving them</String>
+    <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String>
+    <String id="FileExists">File already exists. Will not be replaced</String>
+    <String id="Exists">Exists</String>
+    <String id="Copied">Copied</String>
+    <String id="Moved">Moved</String>
+  </Section>
+  
+  <!-- Settings  / Preferences --> 
+  <Section name="Settings">
+    <String id="Heading">Settings</String>
+    <String id="NavigationPanel">Navigation</String>
+    <String id="Blue">Blue</String>
+    <String id="Silver">Silver</String>
+    <String id="Black">Black</String>
+    <String id="EncoderMP3">MP3 Encoder</String>
+    <String id="EncoderOgg">OGG Encoder</String>
+    <String id="EncoderFlac">Flac Encoder</String>
+    <String id="EncoderAAC">AAC Encoder</String>
+    <String id="EncoderWMA">WMA Encoder</String>
+    <String id="EncoderWMA">WMA Encoder</String>
+    <String id="EncoderWAV">WAV Encoder</String>
+    <String id="EncoderMPC">Musepack Encoder</String>
+    <String id="EncoderWV">WavPack Encoder</String>
+    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
+    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
+    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
+    <String id="EncoderWMAStandard">Windows Media Audio Standard</String>
+    <String id="EncoderWMAPro">Windows Media Audio Professional</String>
+    <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
+    <String id="EncoderMPCStandard">High Quality (142-184 kbps)</String>
+    <String id="EncoderMPCxtreme">Higher Quality (168-212 kbps)</String>
+    <String id="EncoderMPCinsane">Much Higher Quality (232-268 kbps)</String>
+    <String id="EncoderMPCbraindead">Highest Quality (232-278 kbps)</String>
+    <String id="EncoderWVFast">Fast Mode (fast, but some compromise in compression ratio)</String>
+    <String id="EncoderWVHigh">High quality (better compression, but slower)</String>
+    <String id="Stereo">Stereo</String>
+    <String id="Mono">Mono</String>
+    <String id="ParametricStereo">Parametric Stereo</String>
+    <String id="Cbr">CBR</String>
+    <String id="Vbr">VBR</String>
+    <String id="InvalidParm">Invalid Parameter Format for Ripped Filename. Please Correct.</String>
+    <String id="DescPrefMedium">This preset should provide near transparency to most people on most music.</String>
+    <String id="DescPrefStandard">This preset should generally be transparent to most people on most music and is already quite high in quality.</String>
+    <String id="DescPrefExtreme">If you have extremely good hearing and similar equipment, this preset will generally provide slightly higher quality than the "standard" mode.</String>
+    <String id="DescPrefInsane">CBR 320 kbps. This preset will usually be overkill for most people and most situations, but if you must have the absolute highest quality with no  regard to filesize, this is the way to go.</String>
+    <String id="DescPrefABR">For ABR modes (high quality per given bitrate but not as high as VBR). Using this preset will usually give you good quality at a specified bitrate.\n\nDepending on the bitrate entered, this preset will determine the optimal settings for that particular situation. While this approach works, it is not nearly as flexible as VBR, and usually will not attain the same level of quality as VBR at higher bitrates.</String>
+    <String id="TabGeneral">General</String>
+    <String id="GroupBoxKeys">Keyboard Shortcuts</String>
+    <String id="ChangeKey">Change</String>
+    <String id="Shift">Shift</String>
+    <String id="Ctrl">Ctrl</String>
+    <String id="Alt">Alt</String>
+    <String id="KeyDescription">Description:</String>
+    <String id="KeyAction">Action:</String>
+    <String id="GroupBoxGeneral">General Settings</String>
+    <String id="DebugLevel">Debug Level:</String>
+    <String id="Theme">Theme:</String>
+    <String id="Language">Language:</String>
+    <String id="TabTags">Tags</String>
+    <String id="GroupBoxLyrics">Lyrics</String>
+    <String id="SwitchArtist">Switch Artist before submit</String>
+    <String id="GroupBoxLyricsSites">Sites to Search</String>
+    <String id="SeekLyrics">Seek Lyrics</String>
+    <String id="LyricsOnDemand">Lyrics On Demand</String>
+    <String id="Lyrics007">Lyrics007</String>
+    <String id="HotLyrics">Hot Lyrics</String>
+    <String id="LyricWiki">Lyric Wiki</String>
+    <String id="GroupBoxTagsGeneral">General</String>
+    <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
+    <String id="GroupBoxTagsID3">ID3</String>
+    <String id="UseV4">Use Version 2.4 for ID3 V2 Tags</String>
+    <String id="UseV3">Use Version 2.3 for ID3 V2 Tags</String>
+    <String id="GroupBoxID3Update">Update</String>
+    <String id="RemoveID3V1">Remove ID3V1</String>
+    <String id="RemoveID3V2">Remove ID3V2</String>
+    <String id="ID3Both">ID3V1 and ID3V2</String>
+    <String id="ID3V2">ID3V2</String>
+    <String id="ID3V1">ID3V1</String>
+    <String id="TabRipping">Ripping</String>
+    <String id="TabRippingGeneral">General</String>
+    <String id="CustomPath">Custom Paths and Filenames</String>
+    <String id="Format">Format:</String>
+    <String id="TargetFolder">Target Folder:</String>
+    <String id="GroupBoxEncoding">Encoding Format</String>
+    <String id="EncodingFormat">Select the format you wish to encode to:</String>
+    <String id="TabRippingMP3">MP3</String>
+    <String id="GroupBoxMp3Experts">Expert Settings</String>
+    <String id="LameExpertsWarning">Warning: Preset settings will not be used, when specifying Lame parameters</String>
+    <String id="LameExpertOptions">Enter LAME Encoder parameters (Experts only):</String>
+    <String id="GroupBoxPresets">MP3 Encoder Presets</String>
+    <String id="ABRBitrate">ABR Bitrate:</String>
+    <String id="Preset">Preset:</String>
+    <String id="TabRippingOGG">OGG</String>
+    <String id="GroupBoxOggExpert">Expert Settings</String>
+    <String id="OggExpertWarning">Warning: Above settings will not be used, when specifying Ogg Expert parameters</String>
+    <String id="OggExpert">Enter Ogg Encoder parameters (Experts only):</String>
+    <String id="GroupBoxOggEncoding">OGG Encoding Settings</String>
+    <String id="OggQuality">Quality:</String>
+    <String id="TabRippingFlac">FLAC</String>
+    <String id="GroupBoxFlacSettings">Expert Settings</String>
+    <String id="FlacExpertsWarning">Warning: Above settings will not be used, when specifying FLAC Expert parameters</String>
+    <String id="FlacExperts">Enter FLAC Encoder parameters (Experts only):</String>
+    <String id="GroupBoxFlacEncoding">FLAC Encoding Settings</String>
+    <String id="FlacQuality">Quality:</String>
+    <String id="TabRippingAAC">AAC</String>
+    <String id="GroupBoxAACAttention">Attention !</String>
+    <String id="AACAttention">Attention: For AAC Encoding you need to install Winamp first.\nThen you need to copy "nscrt.dll" and "enc_aacplus.dll" from the winamp plugins folder\ninto the MPTagThat bin\Encoder folder.</String>
+    <String id="GroupBoxAACEncoding">AAC / AACPlus / LC-AAC Encoding Settings</String>
+    <String id="AACWarning">Note: some channel modes are only available for certain bitrates.</String>
+    <String id="ChannelMode">Channel Modes:</String>
+    <String id="AACBitRate">Bitrate:</String>
+    <String id="AACEncoder">AAC Encoder:</String>
+    <String id="TabRippingWMA">WMA</String>
+    <String id="GroupBoxWMASettings">WMA Encoding Settings</String>
+    <String id="WMAQuality">Quality:</String>
+    <String id="WMASample">Sample Format:</String>
+    <String id="WMAEncoder">Encoder Format:</String>
+    <String id="TabRippingMPC">MPC</String>
+    <String id="GroupBoxMpcExperts">Expert Settings</String>
+    <String id="MpcExpertsWarning">Warning: Preset settings will not be used, when specifying Musepack parameters</String>
+    <String id="MPCExpertOptions">Enter Musepack Encoder parameters (Experts only):</String>
+    <String id="GroupBoxMPCPresets">Musepack Encoder Presets</String>
+    <String id="MPCPreset">Preset:</String>
+    <String id="TabRippingWV">WV</String>
+    <String id="groupBoxWvExperts">Expert Settings</String>
+    <String id="WvExpertsWarning">Warning: Preset settings will not be used, when specifying WavPackparameters</String>
+    <String id="WvExpertOptions">Enter WavPack Encoder parameters (Experts only):</String>
+    <String id="GroupBoxWvPresets">WavPack Encoder Presets</String>
+    <String id="WvPreset">Preset:</String>
+    <String id="Cancel">Cancel</String>
+    <String id="Apply">Apply</String>
+    <String id="LinkTags">Tags</String>
+    <String id="LinkGeneral">General</String>
+    <String id="LinkRipping">Ripping / Conversion</String>
+  </Section>
+ 
+  <!-- Burning -->
+  <Section name="Burning">
+    <String id="NoMedia">No Media ifound in drive. Please insert an empty Disc.</String>
+    <String id="DragAndDrop">Use Drag &amp; Drop to order the tracks for burning</String>
+    <String id="Decoding">Decoding files ...</String>
+    <String id="Cancelled">Burning cancelled</String>
+    <String id="Checking">Checking Media</String>
+    <String id="Erasing">Erasing RW Media</String>
+    <String id="Leadin">Writing Leadin</String>
+    <String id="Leadout">Writing Leadout</String>
+    <String id="Burning">Burning ...</String>
+    <String id="Finished">Finished Burning</String>
+    <String id="Failed">Burning Failed: {0}</String>
+    <String id="FinishedMedia">Can't burn on a finished media. Please insert an empty Disc</String>
+    <String id="ClearList">Clear List</String>
+    <String id="Retrieving">Retrieving Media Information ....</String>
+    <String id="MediaInfo">Media: {0} ({1} minutes) Status: {2}</String>
+    <String id="Used">Used: {0}:{1} ( {2} Track(s))</String>
+    <String id="Capacity"> Warning: Collection exceed Device Capacity! Remove some files.</String>
+  </Section>
+
+  <!--  Conversion-/ Ripping -->
+  <Section name="Conversion">
+    <String id="ErrorDirectory">Error creating Music Directory</String>
+    <String id="SameFile">Conversion aborted: Input and Output file are the same</String>
+    <String id="OpenFileError">Error opening File</String>
+    <String id="EncodingFileError">Error encoding File</String>
+    <String id="Ripping">Ripping ....</String>
+    <String id="RippingFinished">Finished Ripping the selected Audio Tracks.</String>
+    <String id="FreeDBAccess">Retrieving CD Information from FreeDB ...</String>
+  </Section>
+ 
+   <!--  FreeDB-->
+  <Section name="FreeDB">
+    <String id="Header">FreeDB Search Results</String>
+    <String id="MultipleMatches">Multiple Matches Found on FreeDB. Please select a valid disc</String>
+    <String id="Ok">Ok</String>
+    <String id="Cancel">Cancel</String>
+  </Section>
+ 
+  <!-- Messages shown by the program -->
+  <Section name="message">
+    <String id="Ok">Ok</String>
+    <String id="Error">Error</String>
+    <String id="Error_Title">Error</String>
+    <String id="Save_Changes">Changes have not been saved. Do you want to save the changes?</String>
+    <String id="Save_Changes_Title">Save changes</String>
+    <String id="Script_Compile_Failed">The compile of the script failed.\n\nPlease look for the error in the log and correct it.</String>
+    <String id="DataEntryError">The specified value is invalid.</String>
+    <String id="NoSelectionHeader">No Selection</String>
+    <String id="NoSelection">Please select at least one row to perform the action</String>
+  </Section>
+    
+  <!-- Progress Dialog -->
+  <Section name="progress">
+    <String id="ScanningHeader">Getting Track tags</String>
+    <String id="Scanning">Getting tags for track {0}/{1}</String>
+    <String id="Cancel">Cancel</String>
+    <String id="SavingHeader">Saving tracks</String>
+    <String id="Saving">Saving track {0}/{1}</String>
+    <String id="InternetHeader">Internet Lookup</String>
+    <String id="Internet">Retrieving information for track {0}/{1}</String>
+    <String id="InternetMusicBrainz">Getting Fingerprint and identifying file</String>
+    <String id="InternetAlbum">Retrieving Album Information</String>
+    <String id="CoverArtHeader">Cover Art Lookup</String>
+    <String id="CoverArt">Retrieving Cover Art for track {0}/{1}</String>
+    <String id="LyricsHeader">Lyrics Lookup</String>
+    <String id="Lyrics">Retrieving Lyrics for track {0}/{1}</String>
+  </Section>
+</Language>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<keymap>
+  <window>
+    <id>0</id>
+    <description>Main Window</description>
+    <action>
+      <id>1</id>
+      <key>Ctrl-S</key>
+      <description>Save the selected files</description>
+    </action>
+    <action>
+      <id>2</id>
+      <key>Ctrl-M</key>
+      <description>Multiple Files Tag Edit</description>
+    </action>
+    <action>
+      <id>19</id>
+      <key>Ctrl-E</key>
+      <description>Single File Tag Edit</description>
+    </action>
+    <action>
+      <id>3</id>
+      <key>Ctrl-F</key>
+      <description>Filename to Tag</description>
+    </action>
+    <action>
+      <id>4</id>
+      <key>Ctrl-R</key>
+      <description>Rename File Based on Tag</description>
+    </action>
+    <action>
+      <id>5</id>
+      <key>Ctrl-A</key>
+      <description>Select All</description>
+    </action>
+    <action>
+      <id>6</id>
+      <key>Ctrl-C</key>
+      <description>Copy Cell Content</description>
+    </action>
+    <action>
+      <id>7</id>
+      <key>Ctrl-P</key>
+      <description>Paste Cell Content</description>
+    </action>
+    <action>
+      <id>8</id>
+      <key>Alt-E</key>
+      <description>Execute active script</description>
+    </action>
+    <action>
+      <id>9</id>
+      <key>Ctrl-F5</key>
+      <description>Refresh Treeview</description>
+    </action>
+    <action>
+      <id>10</id>
+      <key>Shift-Delete</key>
+      <description>Delete Folder</description>
+    </action>
+    <action>
+      <id>11</id>
+      <key>F6</key>
+      <description>Case Conversion</description>
+    </action>
+    <action>
+      <id>12</id>
+      <key>F5</key>
+      <description>Refresh</description>
+    </action>
+    <action>
+      <id>13</id>
+      <key>F12</key>
+      <description>Options dialogue</description>
+    </action>
+    <action>
+      <id>14</id>
+      <key>Delete</key>
+      <description>Delete selected file</description>
+    </action>
+    <action>
+      <id>20</id>
+      <key>Ctrl-O</key>
+      <description>Organise Files</description>
+    </action>
+    <action>
+      <id>21</id>
+      <key>Ctrl-I</key>
+      <description>Tag from Internet</description>
+    </action>
+    <action>
+      <id>22</id>
+      <key>Ctrl-B</key>
+      <description>Get Coverart</description>
+    </action>
+    <action>
+      <id>23</id>
+      <key>Ctrl-L</key>
+      <description>Get Lyrics</description>
+    </action>
+    <action>
+      <id>24</id>
+      <key>Alt-F4</key>
+      <description>Exit</description>
+    </action>
+    <action>
+      <id>25</id>
+      <key>F1</key>
+      <description>Help</description>
+    </action>
+  </window>
+  <window>
+    <id>1</id>
+    <description>Multi Tag Edit</description>
+    <action>
+      <id>15</id>
+      <key>PageDown</key>
+      <description>Move to next Page</description>
+    </action>
+    <action>
+      <id>16</id>
+      <key>Prior</key>
+      <description>Move to previous Page</description>
+    </action>
+  </window>
+  <window>
+    <id>2</id>
+    <description>Single Tag Edit</description>
+    <action>
+      <id>15</id>
+      <key>PageDown</key>
+      <description>Move to next Page</description>
+    </action>
+    <action>
+      <id>16</id>
+      <key>Prior</key>
+      <description>Move to previous Page</description>
+    </action>
+   <action>
+      <id>17</id>
+      <key>F8</key>
+      <description>Move to next File</description>
+    </action>
+    <action>
+      <id>18</id>
+      <key>F7</key>
+      <description>Move to previous File</description>
+    </action>
+   <action>
+      <id>8</id>
+      <key>Alt-E</key>
+      <description>Execute active script</description>
+    </action>
+  </window>
+</keymap>
