@@ -368,7 +368,10 @@ namespace MPTagThat.TagEdit
     private void btRemoveGenre_Click(object sender, EventArgs e)
     {
       if (listBoxGenre.SelectedIndex > -1)
+      {
+        ckGenre.Checked = true;
         listBoxGenre.Items.RemoveAt(listBoxGenre.SelectedIndex);
+      }
     }
 
     /// <summary>
@@ -380,6 +383,7 @@ namespace MPTagThat.TagEdit
     {
       if (listBoxGenre.SelectedIndex > -1)
       {
+        ckGenre.Checked = true;
         string item = listBoxGenre.SelectedItem.ToString();
         listBoxGenre.Items.RemoveAt(listBoxGenre.SelectedIndex);
         listBoxGenre.Items.Insert(0, item);
