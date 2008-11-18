@@ -85,7 +85,7 @@ namespace MPTagThat
       this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelTop.Location = new System.Drawing.Point(0, 0);
       this.panelTop.Name = "panelTop";
-      this.panelTop.Size = new System.Drawing.Size(1008, 139);
+      this.panelTop.Size = new System.Drawing.Size(1008, 149);
       this.panelTop.TabIndex = 0;
       // 
       // panelLeft
@@ -93,9 +93,9 @@ namespace MPTagThat
       this.panelLeft.Controls.Add(this.panelLeftTop);
       this.panelLeft.Controls.Add(this.panelLeftBottom);
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-      this.panelLeft.Location = new System.Drawing.Point(0, 139);
+      this.panelLeft.Location = new System.Drawing.Point(0, 149);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 589);
+      this.panelLeft.Size = new System.Drawing.Size(150, 579);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -104,7 +104,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 448);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 438);
       this.panelLeftTop.TabIndex = 4;
       // 
       // treeViewPanel
@@ -126,7 +126,7 @@ namespace MPTagThat
       this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanel.Location = new System.Drawing.Point(0, 0);
       this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(150, 448);
+      this.treeViewPanel.Size = new System.Drawing.Size(150, 438);
       this.treeViewPanel.TabIndex = 3;
       // 
       // treeViewPanelBottom
@@ -135,7 +135,7 @@ namespace MPTagThat
       this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
       this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(150, 424);
+      this.treeViewPanelBottom.Size = new System.Drawing.Size(150, 414);
       this.treeViewPanelBottom.TabIndex = 2;
       // 
       // treeViewFolderBrowser
@@ -150,7 +150,7 @@ namespace MPTagThat
       this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
       this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(150, 424);
+      this.treeViewFolderBrowser.Size = new System.Drawing.Size(150, 414);
       this.treeViewFolderBrowser.TabIndex = 0;
       this.treeViewFolderBrowser.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_Click);
       this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
@@ -168,7 +168,7 @@ namespace MPTagThat
       // 
       this.panelLeftBottom.Controls.Add(this.optionsPanelLeft);
       this.panelLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelLeftBottom.Location = new System.Drawing.Point(0, 448);
+      this.panelLeftBottom.Location = new System.Drawing.Point(0, 438);
       this.panelLeftBottom.Name = "panelLeftBottom";
       this.panelLeftBottom.Size = new System.Drawing.Size(150, 141);
       this.panelLeftBottom.TabIndex = 5;
@@ -234,11 +234,11 @@ namespace MPTagThat
       this.panelRight.Controls.Add(this.picturePanel);
       this.panelRight.Controls.Add(this.fileInfoPanel);
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(808, 139);
+      this.panelRight.Location = new System.Drawing.Point(808, 149);
       this.panelRight.MaximumSize = new System.Drawing.Size(200, 0);
       this.panelRight.MinimumSize = new System.Drawing.Size(170, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(200, 589);
+      this.panelRight.Size = new System.Drawing.Size(200, 579);
       this.panelRight.TabIndex = 3;
       // 
       // playerPanel
@@ -257,7 +257,7 @@ namespace MPTagThat
       this.playerPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.playerPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.playerPanel.Location = new System.Drawing.Point(0, 306);
+      this.playerPanel.Location = new System.Drawing.Point(0, 296);
       this.playerPanel.Name = "playerPanel";
       this.playerPanel.Size = new System.Drawing.Size(200, 283);
       this.playerPanel.TabIndex = 2;
@@ -402,9 +402,9 @@ namespace MPTagThat
       // panelFileList
       // 
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(158, 139);
+      this.panelFileList.Location = new System.Drawing.Point(158, 149);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(642, 464);
+      this.panelFileList.Size = new System.Drawing.Size(642, 454);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterBottom
@@ -435,7 +435,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(800, 139);
+      this.splitterRight.Location = new System.Drawing.Point(800, 149);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -453,7 +453,7 @@ namespace MPTagThat
       this.splitterLeft.ExpandParentForm = false;
       this.splitterLeft.Localisation = "splitterLeft";
       this.splitterLeft.LocalisationContext = "Main";
-      this.splitterLeft.Location = new System.Drawing.Point(150, 139);
+      this.splitterLeft.Location = new System.Drawing.Point(150, 149);
       this.splitterLeft.Name = "splitterLeft";
       this.splitterLeft.TabIndex = 2;
       this.splitterLeft.TabStop = false;
