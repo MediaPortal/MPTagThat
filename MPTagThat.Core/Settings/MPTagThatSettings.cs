@@ -53,6 +53,7 @@ namespace MPTagThat.Core
     private bool _tagsRemoveID3V2;
 
     private bool _tagsCopyArtist;
+    private bool _tagsUseCaseConversion;
     private int _playerSpectrumIndex;
     #endregion
 
@@ -177,6 +178,13 @@ namespace MPTagThat.Core
     {
       get { return _tagsCopyArtist; }
       set { _tagsCopyArtist = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool UseCaseConversion
+    {
+      get { return _tagsUseCaseConversion; }
+      set { _tagsUseCaseConversion = value; }
     }
     #endregion
 

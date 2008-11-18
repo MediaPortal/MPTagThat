@@ -367,7 +367,6 @@ namespace MPTagThat.CaseConversion
       // buttonRemoveException
       // 
       this.buttonRemoveException.Localisation = "RemoveException";
-      this.buttonCancel.LocalisationContext = "CaseConversion";
       this.buttonRemoveException.Location = new System.Drawing.Point(281, 53);
       this.buttonRemoveException.Name = "buttonRemoveException";
       this.buttonRemoveException.Size = new System.Drawing.Size(178, 23);
@@ -379,7 +378,6 @@ namespace MPTagThat.CaseConversion
       // buttonAddException
       // 
       this.buttonAddException.Localisation = "AddException";
-      this.buttonCancel.LocalisationContext = "CaseConversion";
       this.buttonAddException.Location = new System.Drawing.Point(281, 12);
       this.buttonAddException.Name = "buttonAddException";
       this.buttonAddException.Size = new System.Drawing.Size(178, 23);
@@ -405,6 +403,7 @@ namespace MPTagThat.CaseConversion
       // 
       // buttonConvert
       // 
+      this.buttonConvert.AutoSize = true;
       this.buttonConvert.Localisation = "Convert";
       this.buttonConvert.LocalisationContext = "CaseConversion";
       this.buttonConvert.Location = new System.Drawing.Point(125, 435);
@@ -417,6 +416,7 @@ namespace MPTagThat.CaseConversion
       // 
       // buttonCancel
       // 
+      this.buttonCancel.AutoSize = true;
       this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.buttonCancel.Localisation = "Cancel";
       this.buttonCancel.LocalisationContext = "CaseConversion";
@@ -454,6 +454,7 @@ namespace MPTagThat.CaseConversion
       this.Exceptions.ResumeLayout(false);
       this.Exceptions.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 

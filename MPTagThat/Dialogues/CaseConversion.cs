@@ -70,10 +70,108 @@ namespace MPTagThat.CaseConversion
     }
     #endregion
 
-    private void CaseConvert()
+    /// <summary>
+    /// Do Case Conversion for the given track.
+    /// Called internally by the Convert button and by the Save clause, if set in Preferences
+    /// </summary>
+    /// <param name="track"></param>
+    public void CaseConvert(TrackData track, int rowIndex)
+    {
+      bool bErrors = false;
+      // Convert the Filename
+      if (checkBoxConvertFileName.Checked)
+      {
+        string fileName = ConvertCase(System.IO.Path.GetFileNameWithoutExtension(track.FileName));
+
+        // Now check the length of the filename
+        if (fileName.Length > 255)
+        {
+          log.Debug("Filename too long: {0}", fileName);
+          _main.TracksGridView.View.Rows[rowIndex].Cells[1].Value = localisation.ToString("tag2filename", "NameTooLong");
+          _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "NameTooLong"), fileName));
+          bErrors = true;
+        }
+
+        // Check, if we would generate duplicate file names
+        foreach (DataGridViewRow file in _main.TracksGridView.View.Rows)
+        {
+          // Don't compare the file with itself
+          if (rowIndex == file.Index)
+            continue;
+
+          TrackData filedata = _main.TracksGridView.TrackList[file.Index];
+          if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
+          {
+            log.Debug("New Filename already exists: {0}", fileName);
+            _main.TracksGridView.View.Rows[rowIndex].Cells[1].Value = localisation.ToString("tag2filename", "FileExists");
+            _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[rowIndex].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "FileExists"), fileName));
+            bErrors = true;
+            break;
+          }
+        }
+        if (!bErrors)
+        {
+          // Now that we have a correct Filename and no duplicates accept the changes
+          track.FileName = string.Format("{0}{1}", fileName, System.IO.Path.GetExtension(track.FileName));
+          track.Changed = true;
+          _main.TracksGridView.Changed = true;
+          _main.TracksGridView.SetBackgroundColorChanged(rowIndex);
+        }
+      }
+
+      // Convert the Tags
+      if (checkBoxConvertTags.Checked)
+      {
+        string strConv = "";
+        bool bChanged = false;
+        if (checkBoxArtist.Checked)
+        {
+          strConv = track.Artist;
+          bChanged = (strConv = ConvertCase(strConv)) != track.Artist ? true : false || bChanged;
+          if (bChanged)
+            track.Artist = strConv;
+        }
+        if (checkBoxAlbumArtist.Checked)
+        {
+          strConv = track.AlbumArtist;
+          bChanged = (strConv = ConvertCase(strConv)) != track.AlbumArtist ? true : false || bChanged;
+          if (bChanged)
+            track.AlbumArtist = strConv;
+        }
+        if (checkBoxAlbum.Checked)
+        {
+          strConv = track.Album;
+          bChanged = (strConv = ConvertCase(strConv)) != track.Album ? true : false || bChanged;
+          if (bChanged)
+            track.Album = strConv;
+        }
+        if (checkBoxTitle.Checked)
+        {
+          strConv = track.Title;
+          bChanged = (strConv = ConvertCase(strConv)) != track.Title ? true : false || bChanged;
+          if (bChanged)
+            track.Title = strConv;
+        }
+        if (checkBoxComment.Checked)
+        {
+          strConv = track.Comment;
+          bChanged = (strConv = ConvertCase(strConv)) != track.Comment ? true : false || bChanged;
+          if (bChanged)
+            track.Comment = strConv;
+        }
+
+        if (bChanged)
+        {
+          track.Changed = true;
+          _main.TracksGridView.Changed = true;
+          _main.TracksGridView.SetBackgroundColorChanged(rowIndex);
+        }
+      }
+    }
+
+    private void CaseConvertSelectedTracks()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      bool bErrors = false;
       DataGridView tracksGrid = _main.TracksGridView.View;
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -82,97 +180,9 @@ namespace MPTagThat.CaseConversion
           continue;
 
         TrackData track = _main.TracksGridView.TrackList[row.Index];
-
-        // Convert the Filename
-        if (checkBoxConvertFileName.Checked)
-        {
-          string fileName = ConvertCase(System.IO.Path.GetFileNameWithoutExtension(track.FileName));
-
-          // Now check the length of the filename
-          if (fileName.Length > 255)
-          {
-            log.Debug("Filename too long: {0}", fileName);
-            row.Cells[1].Value = localisation.ToString("tag2filename", "NameTooLong");
-            _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "NameTooLong"), fileName));
-            bErrors = true;
-          }
-
-          // Check, if we would generate duplicate file names
-          foreach (DataGridViewRow file in tracksGrid.Rows)
-          {
-            // Don't compare the file with itself
-            if (row.Index == file.Index)
-              continue;
-
-            TrackData filedata = _main.TracksGridView.TrackList[file.Index];
-            if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
-            {
-              log.Debug("New Filename already exists: {0}", fileName);
-              row.Cells[1].Value = localisation.ToString("tag2filename", "FileExists");
-              _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "FileExists"), fileName));
-              bErrors = true;
-              break;
-            }
-          }
-          if (!bErrors)
-          {
-            // Now that we have a correct Filename and no duplicates accept the changes
-            track.FileName = string.Format("{0}{1}", fileName, System.IO.Path.GetExtension(track.FileName));
-            track.Changed = true;
-            _main.TracksGridView.Changed = true;
-            _main.TracksGridView.SetBackgroundColorChanged(row.Index);
-          }
-        }
-
-        // Convert the Tags
-        if (checkBoxConvertTags.Checked)
-        {
-          string strConv = "";
-          bool bChanged = false;
-          if (checkBoxArtist.Checked)
-          {
-            strConv = track.Artist;
-            bChanged = (strConv = ConvertCase(strConv)) != track.Artist ? true : false || bChanged;
-            if (bChanged)
-              track.Artist = strConv;
-          }
-          if (checkBoxAlbumArtist.Checked)
-          {
-            strConv = track.AlbumArtist;
-            bChanged = (strConv = ConvertCase(strConv)) != track.AlbumArtist ? true : false || bChanged;
-            if (bChanged)
-              track.AlbumArtist = strConv;
-          }
-          if (checkBoxAlbum.Checked)
-          {
-            strConv = track.Album;
-            bChanged = (strConv = ConvertCase(strConv)) != track.Album ? true : false || bChanged;
-            if (bChanged)
-              track.Album = strConv;
-          }
-          if (checkBoxTitle.Checked)
-          {
-            strConv = track.Title;
-            bChanged = (strConv = ConvertCase(strConv)) != track.Title ? true : false || bChanged;
-            if (bChanged)
-              track.Title = strConv;
-          }
-          if (checkBoxComment.Checked)
-          {
-            strConv = track.Comment;
-            bChanged = (strConv = ConvertCase(strConv)) != track.Comment ? true : false || bChanged;
-            if (bChanged)
-              track.Comment = strConv;
-          }
-
-          if (bChanged)
-          {
-            track.Changed = true;
-            _main.TracksGridView.Changed = true;
-            _main.TracksGridView.SetBackgroundColorChanged(row.Index);
-          }
-        }
+        CaseConvert(track, row.Index);
       }
+
       foreach (TrackData track in _main.TracksGridView.TrackList)
       {
         if (track.Changed)
@@ -207,9 +217,17 @@ namespace MPTagThat.CaseConversion
       else if (radioButtonAllUpperCase.Checked)
         strText = strText.ToUpperInvariant();
       else if (radioButtonFirstLetterUpperCase.Checked)
+      {
+        // Go to Lowercase first, in case that everything is already uppercase
+        strText = strText.ToLowerInvariant();
         strText = strText.Substring(0, 1).ToUpperInvariant() + strText.Substring(1);
+      }
       else if (radioButtonAllFirstLetterUpperCase.Checked)
+      {
+        // Go to Lowercase first, in case that everything is already uppercase
+        strText = strText.ToLowerInvariant();
         strText = textinfo.ToTitleCase(strText);
+      }
 
       // Handle the Exceptions
       foreach (string excep in Options.ConversionSettings.CaseConvExceptions)
@@ -244,7 +262,7 @@ namespace MPTagThat.CaseConversion
     /// <param name="e"></param>
     private void buttonConvert_Click(object sender, EventArgs e)
     {
-      CaseConvert();
+      CaseConvertSelectedTracks();
 
       // Save the settings
       Options.ConversionSettings.ConvertFileName = checkBoxConvertFileName.Checked;

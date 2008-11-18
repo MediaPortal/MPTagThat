@@ -22,6 +22,7 @@ namespace MPTagThat.GridView
   {
     #region Variables
     private delegate void ThreadSafeGridDelegate();
+    private delegate void ThreadSafeGridDelegate1(object sender, DoWorkEventArgs e);
     private delegate void ThreadSafeAddTracksDelegate(TrackData track);
     private delegate void ThreadSafeAddErrorDelegate(string file, string message);
     private GridViewColumns gridColumns;
@@ -42,6 +43,7 @@ namespace MPTagThat.GridView
     private Point _screenOffset;
 
     private Thread _asyncThread = null;
+    private BackgroundWorker _bgWorker = null;
     #endregion
 
     #region Properties
@@ -196,32 +198,8 @@ namespace MPTagThat.GridView
             return;
           }
           TrackData track = bindingList[row.Index];
-          if (track.Changed)
-          {
-            if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
-              track.AlbumArtist = track.Artist;
+          SaveTrack(track, row.Index);
 
-            // Save the file 
-            track.File = Util.FormatID3Tag(track.File);
-            track.File.Save();
-
-            if (RenameFile(track))
-            {
-              // rename was ok, so get the new file into the binding list
-              string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(track.File.Name), track.FileName);
-              TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-              TagLib.File file = TagLib.File.Create(newFileName);
-              track.File = file;
-            }
-
-            row.Cells[1].Value = localisation.ToString("message", "Ok");
-            if (row.Index % 2 == 0)
-              row.DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-            else
-              row.DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-
-            track.Changed = false;
-          }
         }
         catch (Exception ex)
         {
@@ -290,43 +268,10 @@ namespace MPTagThat.GridView
           dlgProgress.Close();
           return;
         }
-        try
-        {
-          tracksGrid.Rows[i].Cells[1].Value = "";
-          if (track.Changed)
-          {
-            if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
-              track.AlbumArtist = track.Artist;
 
-            // Save the file 
-            track.File = Util.FormatID3Tag(track.File);
-            track.File.Save();
-
-            if (RenameFile(track))
-            {
-              // rename was ok, so get the new file into the binding list
-              string ext = System.IO.Path.GetExtension(track.File.Name);
-              string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(track.File.Name), String.Format("{0}{1}", track.FileName, ext));
-              TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-              TagLib.File file = TagLib.File.Create(newFileName);
-              track.File = file;
-            }
-
-            tracksGrid.Rows[i].Cells[1].Value = localisation.ToString("message", "Ok");
-            if (i % 2 == 0)
-              tracksGrid.Rows[i].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-            else
-              tracksGrid.Rows[i].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-
-            track.Changed = false;
-          }
-        }
-        catch (Exception ex)
-        {
-          tracksGrid.Rows[i].Cells[1].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(track.File.Name, ex.Message);
+        if (!SaveTrack(track, i))
           bErrors = true;
-        }
+
         i++;
       }
 
@@ -334,6 +279,61 @@ namespace MPTagThat.GridView
       _itemsChanged = bErrors;
 
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+
+    /// <summary>
+    /// Does the actual save of the track
+    /// </summary>
+    /// <param name="track"></param>
+    /// <returns></returns>
+    private bool SaveTrack(TrackData track, int rowIndex)
+    {
+      try
+      {
+        tracksGrid.Rows[rowIndex].Cells[1].Value = "";
+        if (track.Changed)
+        {
+          if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
+            track.AlbumArtist = track.Artist;
+
+          if (Options.MainSettings.UseCaseConversion)
+          {
+            CaseConversion.CaseConversion convert = new MPTagThat.CaseConversion.CaseConversion(_main);
+            convert.CaseConvert(track, rowIndex);
+            convert.Dispose();
+          }
+
+          // Save the file 
+          track.File = Util.FormatID3Tag(track.File);
+          track.File.Save();
+
+          if (RenameFile(track))
+          {
+            // rename was ok, so get the new file into the binding list
+            string ext = System.IO.Path.GetExtension(track.File.Name);
+            string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(track.File.Name), String.Format("{0}{1}", System.IO.Path.GetFileNameWithoutExtension(track.FileName), ext));
+            TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+            TagLib.File file = TagLib.File.Create(newFileName);
+            track.File = file;
+          }
+
+          tracksGrid.Rows[rowIndex].Cells[1].Value = localisation.ToString("message", "Ok");
+          if (rowIndex % 2 == 0)
+            tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+          else
+            tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+
+          track.Changed = false;
+        }
+      }
+      catch (Exception ex)
+      {
+        tracksGrid.Rows[rowIndex].Cells[1].Value = localisation.ToString("message", "Error");
+        AddErrorMessage(track.File.Name, ex.Message);
+        return false;
+      }
+      return true;
     }
 
     /// <summary>
@@ -358,30 +358,28 @@ namespace MPTagThat.GridView
     #region Identify File
     public void TagTracksFromInternet()
     {
-      if (_asyncThread == null)
+      if (_bgWorker == null)
       {
-        _asyncThread = new Thread(new ThreadStart(TagTracksFromInternetThread));
-        _asyncThread.Name = "TagFromInternet";
+        _bgWorker = new BackgroundWorker();
+        _bgWorker.DoWork += new DoWorkEventHandler(TagTracksFromInternetThread);
       }
 
-      if (_asyncThread.ThreadState != ThreadState.Running)
+      if (!_bgWorker.IsBusy)
       {
-        _asyncThread = new Thread(new ThreadStart(TagTracksFromInternetThread));
-        _asyncThread.Start();
+        _bgWorker.RunWorkerAsync();
       }
     }
-
     /// <summary>
     /// Tag the the Selected files from Internet
     /// </summary>
-    private void TagTracksFromInternetThread()
+    private void TagTracksFromInternetThread(object sender, DoWorkEventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
       //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
-        ThreadSafeGridDelegate d = new ThreadSafeGridDelegate(TagTracksFromInternetThread);
-        tracksGrid.Invoke(d, new object[] { });
+        ThreadSafeGridDelegate1 d = new ThreadSafeGridDelegate1(TagTracksFromInternetThread);
+        tracksGrid.Invoke(d, new object[] { sender, e });
         return;
       }
 

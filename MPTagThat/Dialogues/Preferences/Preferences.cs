@@ -225,6 +225,7 @@ namespace MPTagThat.Preferences
 
       #region TabPage Tags
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
+      ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
 
       if (Options.MainSettings.ID3V2Version == 3)
         radioButtonUseV3.Checked = true;
@@ -678,6 +679,7 @@ namespace MPTagThat.Preferences
 
       #region Tags
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
+      Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
 
       if (radioButtonUseV3.Checked)
         Options.MainSettings.ID3V2Version = 3;

@@ -52,6 +52,9 @@ namespace MPTagThat.Preferences
       this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
       this.lbLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageTags = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -164,8 +167,6 @@ namespace MPTagThat.Preferences
       this.lbLinkTags = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
-      this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -173,6 +174,7 @@ namespace MPTagThat.Preferences
       this.groupBoxKeys.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
       this.tabPageTags.SuspendLayout();
+      this.groupBoxTagsGeneral.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       this.groupBoxLyricsSites.SuspendLayout();
       this.groupBoxTagsID3.SuspendLayout();
@@ -206,7 +208,6 @@ namespace MPTagThat.Preferences
       this.panelBottom.SuspendLayout();
       this.panelLeft.SuspendLayout();
       this.navPanel.SuspendLayout();
-      this.groupBoxTagsGeneral.SuspendLayout();
       this.SuspendLayout();
       // 
       // panelRight
@@ -482,6 +483,43 @@ namespace MPTagThat.Preferences
       this.tabPageTags.Size = new System.Drawing.Size(613, 567);
       this.tabPageTags.TabIndex = 2;
       this.tabPageTags.Text = "Tags";
+      // 
+      // groupBoxTagsGeneral
+      // 
+      this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
+      this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
+      this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
+      this.groupBoxTagsGeneral.LocalisationContext = "Settings";
+      this.groupBoxTagsGeneral.Location = new System.Drawing.Point(13, 14);
+      this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
+      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(582, 100);
+      this.groupBoxTagsGeneral.TabIndex = 3;
+      this.groupBoxTagsGeneral.TabStop = false;
+      this.groupBoxTagsGeneral.Text = "General";
+      // 
+      // ckUseCaseConversionWhenSaving
+      // 
+      this.ckUseCaseConversionWhenSaving.AutoSize = true;
+      this.ckUseCaseConversionWhenSaving.Localisation = "CaseConversion";
+      this.ckUseCaseConversionWhenSaving.LocalisationContext = "Settings";
+      this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(15, 48);
+      this.ckUseCaseConversionWhenSaving.Name = "ckUseCaseConversionWhenSaving";
+      this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(208, 17);
+      this.ckUseCaseConversionWhenSaving.TabIndex = 2;
+      this.ckUseCaseConversionWhenSaving.Text = "Use case conversion settings on Save";
+      this.ckUseCaseConversionWhenSaving.UseVisualStyleBackColor = true;
+      // 
+      // ckCopyArtistToAlbumArtist
+      // 
+      this.ckCopyArtistToAlbumArtist.AutoSize = true;
+      this.ckCopyArtistToAlbumArtist.Localisation = "CopyArtist";
+      this.ckCopyArtistToAlbumArtist.LocalisationContext = "Settings";
+      this.ckCopyArtistToAlbumArtist.Location = new System.Drawing.Point(15, 25);
+      this.ckCopyArtistToAlbumArtist.Name = "ckCopyArtistToAlbumArtist";
+      this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(203, 17);
+      this.ckCopyArtistToAlbumArtist.TabIndex = 1;
+      this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
+      this.ckCopyArtistToAlbumArtist.UseVisualStyleBackColor = true;
       // 
       // groupBoxLyrics
       // 
@@ -1858,30 +1896,6 @@ namespace MPTagThat.Preferences
       this.lbLinkRipping.Text = "Ripping / Conversion";
       this.lbLinkRipping.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNavpageLink_Clicked);
       // 
-      // groupBoxTagsGeneral
-      // 
-      this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
-      this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.LocalisationContext = "Settings";
-      this.groupBoxTagsGeneral.Location = new System.Drawing.Point(13, 14);
-      this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(582, 100);
-      this.groupBoxTagsGeneral.TabIndex = 3;
-      this.groupBoxTagsGeneral.TabStop = false;
-      this.groupBoxTagsGeneral.Text = "General";
-      // 
-      // ckCopyArtistToAlbumArtist
-      // 
-      this.ckCopyArtistToAlbumArtist.AutoSize = true;
-      this.ckCopyArtistToAlbumArtist.Localisation = "CopyArtist";
-      this.ckCopyArtistToAlbumArtist.LocalisationContext = "Settings";
-      this.ckCopyArtistToAlbumArtist.Location = new System.Drawing.Point(15, 25);
-      this.ckCopyArtistToAlbumArtist.Name = "ckCopyArtistToAlbumArtist";
-      this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(203, 17);
-      this.ckCopyArtistToAlbumArtist.TabIndex = 1;
-      this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
-      this.ckCopyArtistToAlbumArtist.UseVisualStyleBackColor = true;
-      // 
       // Preferences
       // 
       this.AcceptButton = this.buttonApply;
@@ -1909,6 +1923,8 @@ namespace MPTagThat.Preferences
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
       this.tabPageTags.ResumeLayout(false);
+      this.groupBoxTagsGeneral.ResumeLayout(false);
+      this.groupBoxTagsGeneral.PerformLayout();
       this.groupBoxLyrics.ResumeLayout(false);
       this.groupBoxLyrics.PerformLayout();
       this.groupBoxLyricsSites.ResumeLayout(false);
@@ -1963,8 +1979,6 @@ namespace MPTagThat.Preferences
       this.panelLeft.ResumeLayout(false);
       this.navPanel.ResumeLayout(false);
       this.navPanel.PerformLayout();
-      this.groupBoxTagsGeneral.ResumeLayout(false);
-      this.groupBoxTagsGeneral.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -2109,5 +2123,6 @@ namespace MPTagThat.Preferences
     private System.Windows.Forms.ComboBox comboBoxDebugLevel;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxTagsGeneral;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyArtistToAlbumArtist;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckUseCaseConversionWhenSaving;
   }
 }

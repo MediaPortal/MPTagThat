@@ -383,7 +383,7 @@
   <!--  Case Conversion -->
   <Section name="CaseConversion">
     <String id="Header">Groß- / Kleinschreibung umwandeln</String>
-    <String id="TabSettings">einstellungen</String>
+    <String id="TabSettings">Einstellungen</String>
     <String id="GroupBoxOptions">Optionen</String>
     <String id="AlwaysUpperCaseFirstLetter">Erster Buchstabe immer groß</String>
     <String id="ReplaceSpaceByUnderscore">Ersetze Leerzeichen durch "_"</String>
@@ -494,6 +494,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
+    <String id="CaseConverion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Version 2.4 für ID3 V2 Tags benutzen</String>
     <String id="UseV3">Version 2.3 für ID3 V2 Tags benutzen</String>
