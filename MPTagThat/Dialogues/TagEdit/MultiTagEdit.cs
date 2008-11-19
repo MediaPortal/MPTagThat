@@ -461,6 +461,10 @@ namespace MPTagThat.TagEdit
             options.Genre += ";" + item;
           i++;
         }
+
+        // We have removed all Genres, without setting a bew one
+        if (options.Genre == null)
+          options.Genre = "";
       }
       else
         options.Genre = null;
