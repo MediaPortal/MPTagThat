@@ -432,6 +432,7 @@
     <String id="Copied">Copied</String>
     <String id="Moved">Moved</String>
     <String id="GroupBoxOptions">Options</String>
+    <String id="ButtonOrganise">Organise</String>
   </Section>
   
   <!-- Settings  / Preferences --> 
