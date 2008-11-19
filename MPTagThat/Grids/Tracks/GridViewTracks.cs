@@ -631,6 +631,24 @@ namespace MPTagThat.GridView
               track.Pictures = pics.ToArray();
             }
 
+            // And also set the Year from the Release Date delivered by Amazon
+            // only if not present in Track
+            if (amazonAlbum.Year != null)
+            {
+              string strYear = amazonAlbum.Year;
+              if (strYear.Length > 4)
+                strYear = strYear.Substring(0, 4);
+
+              int year = 0;
+              try
+              {
+                year = Convert.ToInt32(strYear);
+              }
+              catch (Exception)
+              { }
+              if (year > 0 && track.Year == 0)
+                track.Year = year;
+            }
 
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;

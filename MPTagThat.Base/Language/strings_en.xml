@@ -425,11 +425,13 @@
     <String id="BrowseRootDir">Browse</String>
     <String id="OverWriteFiles">Overwrite existing files</String>
     <String id="CopyFiles">Copy Files instead of Moving them</String>
+    <String id="CopyNonMusicFiles">Copy/Move Non-Music Files (Pictures, etc.)</String>
     <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String>
     <String id="FileExists">File already exists. Will not be replaced</String>
     <String id="Exists">Exists</String>
     <String id="Copied">Copied</String>
     <String id="Moved">Moved</String>
+    <String id="GroupBoxOptions">Options</String>
   </Section>
   
   <!-- Settings  / Preferences --> 
