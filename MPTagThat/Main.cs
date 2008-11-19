@@ -534,7 +534,7 @@ namespace MPTagThat
         }
         try
         {
-          if (IsAudio(fi.FullName))
+          if (Util.IsAudio(fi.FullName))
           {
             // Read the Tag
             try
@@ -604,32 +604,6 @@ namespace MPTagThat
       {
         ServiceScope.Get<ILogger>().Error(ex);
       }
-    }
-
-
-    private bool IsAudio(string fileName)
-    {
-      string ext = Path.GetExtension(fileName).ToLower();
-
-      switch (ext)
-      {
-        case ".ape":
-        case ".asf":
-        case ".flac":
-        case ".mp3":
-        case ".ogg":
-        case ".wv":
-        case ".wma":
-        case ".mp4":
-        case ".m4a":
-        case ".m4p":
-        case ".mpc":
-        case ".mp+":
-        case ".mpp":
-        case ".wav":
-          return true;
-      }
-      return false;
     }
     #endregion
 

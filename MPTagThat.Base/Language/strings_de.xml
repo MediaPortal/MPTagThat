@@ -425,11 +425,14 @@
     <String id="BrowseRootDir">Durchsuchen</String>
     <String id="OverWriteFiles">Existierende Dateien überschreiben</String>
     <String id="CopyFiles">Dateien kopieren statt zu verschieben</String>
+    <String id="CopyNonMusicFiles">Nicht-Audio Dateien (Bilder, etc.) verschieben/kopieren</String>
     <String id="InvalidParm">Falsches Parameter Format. Bitte ändern</String>
     <String id="FileExists">Datei existiert bereits. Wird nicht ersetzt</String>
     <String id="Exists">Existiert</String>
     <String id="Copied">Kopiert</String>
     <String id="Moved">Verschoben</String>
+    <String id="GroupBoxOptions">Optionen</String>
+    <String id="ButtonOrganise">Organisieren</String>
   </Section>
   
   <!-- Settings  / Preferences --> 

@@ -15,6 +15,7 @@ namespace MPTagThat.Organise
     private Main _main;
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
+    private Dictionary<string, string> _directories = null;
     #endregion
 
     #region ctor
@@ -22,7 +23,10 @@ namespace MPTagThat.Organise
     {
       this._main = main;
       InitializeComponent();
+      
       LoadSettings();
+
+      LocaliseScreen();
 
       tbRootDir.Text = Options.OrganiseSettings.LastUsedFolder == "" ? Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) : Options.OrganiseSettings.LastUsedFolder;
 
@@ -32,9 +36,25 @@ namespace MPTagThat.Organise
     #endregion
 
     #region Methods
+    #region Localisation
+    /// <summary>
+    /// Localise the Screen
+    /// </summary>
+    private void LocaliseScreen()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      this.Text = localisation.ToString("organise", "Heading");
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
+
     private void LoadSettings()
     {
       Util.EnterMethod(Util.GetCallingMethod());
+      ckCopyFiles.Checked = Options.OrganiseSettings.CopyFiles;
+      ckOverwriteFiles.Checked = Options.OrganiseSettings.OverWriteFiles;
+      ckCopyNonMusicFiles.Checked = Options.OrganiseSettings.CopyNonMusicFiles;
+
       foreach (string item in Options.OrganiseSettings.FormatValues)
         cbFormat.Items.Add(new Item(item, item, ""));
 
@@ -54,6 +74,7 @@ namespace MPTagThat.Organise
     {
       Util.EnterMethod(Util.GetCallingMethod());
       DataGridView tracksGrid = _main.TracksGridView.View;
+      _directories = new Dictionary<string, string>();
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -195,6 +216,11 @@ namespace MPTagThat.Organise
             }
           }
 
+          // Store the directory of the current file in the dictionary, so that we may copy later all non-music files
+          string dir = System.IO.Path.GetDirectoryName(track.FullFileName);
+          if (!_directories.ContainsKey(dir))
+            _directories.Add(dir, directoryName);
+
           string newFilename = System.IO.Path.Combine(directoryName, track.FileName);
           try
           {
@@ -222,7 +248,7 @@ namespace MPTagThat.Organise
           }
           catch (Exception e2)
           {
-            log.Debug("Error Copy/Move File: {0} {1}", track.FullFileName, e2.Message);
+            log.Error("Error Copy/Move File: {0} {1}", track.FullFileName, e2.Message);
             row.Cells[1].Value = localisation.ToString("mesage", "Error");
             _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e2.Message));
           }
@@ -232,6 +258,47 @@ namespace MPTagThat.Organise
           log.Error("Error Organising Files: {0} stack: {1}", ex.Message, ex.StackTrace);
           row.Cells[1].Value = localisation.ToString("message", "Error");
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, ex.Message));
+        }
+      }
+
+      // Now that we have Moved/Copied the individual Files, we will copy / move the Pictures, etc.
+      if (ckCopyNonMusicFiles.Checked)
+      {
+        foreach (string dir in _directories.Keys)
+        {
+          string[] files = System.IO.Directory.GetFiles(dir);
+          foreach (string file in files)
+          {
+            // ignore audio files, we've processed them before
+            if (Util.IsAudio(file))
+              continue;
+
+            string newFilename = System.IO.Path.Combine(_directories[dir], System.IO.Path.GetFileName(file));
+            try
+            {
+              if (!ckOverwriteFiles.Checked)
+              {
+                if (System.IO.File.Exists(newFilename))
+                {
+                  log.Debug("File exists: {0}", newFilename);
+                  continue;
+                }
+              }
+
+              if (ckCopyFiles.Checked)
+              {
+                System.IO.File.Copy(file, newFilename, true);
+              }
+              else
+              {
+                System.IO.File.Move(file, newFilename);
+              }
+            }
+            catch (Exception ex)
+            {
+              log.Error("Error Copy/Move File: {0} {1}", file, ex.Message);
+            }
+          }
         }
       }
 
@@ -252,6 +319,9 @@ namespace MPTagThat.Organise
     {
       Options.OrganiseSettings.LastUsedFormat = cbFormat.SelectedIndex;
       Options.OrganiseSettings.LastUsedFolder = tbRootDir.Text;
+      Options.OrganiseSettings.CopyFiles = ckCopyFiles.Checked;
+      Options.OrganiseSettings.OverWriteFiles = ckOverwriteFiles.Checked;
+      Options.OrganiseSettings.CopyNonMusicFiles = ckCopyNonMusicFiles.Checked;
     }
 
     /// <summary>

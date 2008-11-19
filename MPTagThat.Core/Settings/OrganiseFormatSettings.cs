@@ -8,6 +8,9 @@ namespace MPTagThat.Core
   {
     #region Variable
     private string _lastUsedFolder;
+    private bool _overWriteFiles;
+    private bool _copyFiles;
+    private bool _copyNonMusicFiles;
     #endregion
 
     #region Properties
@@ -16,6 +19,27 @@ namespace MPTagThat.Core
     {
       get { return _lastUsedFolder; }
       set { _lastUsedFolder = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool CopyFiles
+    {
+      get { return _copyFiles; }
+      set { _copyFiles = value; }
+    }
+
+    [Setting(SettingScope.User, "true")]
+    public bool OverWriteFiles
+    {
+      get { return _overWriteFiles; }
+      set { _overWriteFiles = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool CopyNonMusicFiles
+    {
+      get { return _copyNonMusicFiles; }
+      set { _copyNonMusicFiles = value; }
     }
     #endregion
 

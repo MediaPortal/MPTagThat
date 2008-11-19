@@ -118,6 +118,37 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// Is this an Audio file, which can be handled by MPTagThat
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    public static bool IsAudio(string fileName)
+    {
+      string ext = Path.GetExtension(fileName).ToLower();
+
+      switch (ext)
+      {
+        case ".ape":
+        case ".asf":
+        case ".flac":
+        case ".mp3":
+        case ".ogg":
+        case ".wv":
+        case ".wma":
+        case ".mp4":
+        case ".m4a":
+        case ".m4p":
+        case ".mpc":
+        case ".mp+":
+        case ".mpp":
+        case ".wav":
+          return true;
+      }
+      return false;
+    }
+
+
+    /// <summary>
     /// Check the Parameter Format for validity
     /// </summary>
     /// <param name="str"></param>
