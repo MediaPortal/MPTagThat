@@ -253,6 +253,8 @@ namespace MPTagThat.TagEdit
 
         if (comments.Count > 0)
         {
+          // Clear existing Comments first, otherwise, we will have them stored several times
+          track.Comment = "";
           if (track.TagType.ToLower() == "mp3")
           {
             id3v1tag.Comment = comments[0].Text;
