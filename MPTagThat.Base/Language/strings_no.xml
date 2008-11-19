@@ -47,7 +47,7 @@
     <String id="MultiTagEdit">Endre Flervalgte\nTagger</String>
     <String id="GetCoverArt">Finn Cover bilde</String>
     <String id="GetLyrics">Finn Tekster</String>
-    <String id="CaseConversion">Konverter\nForbokstav</String>
+    <String id="CaseConversion">Konverter\nBokstaver</String>
     <String id="DeleteTags">Slette\nTagger</String>
     <String id="DeleteAllTags">Slette Alle Tagger</String>
     <String id="DeleteID3V1Tags">Slette Bare ID3 V1 Tagger</String>
@@ -382,7 +382,7 @@
 
   <!--  Case Conversion -->
   <Section name="CaseConversion">
-    <String id="Header">Case Conversion</String>
+    <String id="Header">Bokstav Konvertering</String>
     <String id="TabSettings">Innstillinger</String>
     <String id="GroupBoxOptions">Valg</String>
     <String id="AlwaysUpperCaseFirstLetter">Altid Stor Forbokstav</String>
