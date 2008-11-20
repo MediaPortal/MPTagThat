@@ -696,7 +696,13 @@ namespace MPTagThat.TagEdit
       string[] tracks = track.Track.Split('/');
       if (tbTrack.Text != tracks[0]) _trackIsChanged = true;
       if (tracks.Length > 1)
+      {
         if (tbNumTracks.Text != tracks[1]) _trackIsChanged = true;
+      }
+      else
+      {
+        if (tbNumTracks.Text.Trim().Length > 0) _trackIsChanged = true;
+      }
 
       string genre = "";
       int i = 0;
