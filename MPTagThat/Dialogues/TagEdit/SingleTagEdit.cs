@@ -691,7 +691,13 @@ namespace MPTagThat.TagEdit
       string[] disc = track.Disc.Split('/');
       if (tbDisc.Text != disc[0]) _trackIsChanged = true;
       if (disc.Length > 1)
+      {
         if (tbNumDiscs.Text != disc[1]) _trackIsChanged = true;
+      }
+      else
+      {
+        if (tbNumDiscs.Text.Trim().Length > 0) _trackIsChanged = true;
+      }
 
       string[] tracks = track.Track.Split('/');
       if (tbTrack.Text != tracks[0]) _trackIsChanged = true;
