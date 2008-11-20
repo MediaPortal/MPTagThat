@@ -425,11 +425,14 @@
     <String id="BrowseRootDir">Utforsk</String>
     <String id="OverWriteFiles">Overskriv eksisterende filer</String>
     <String id="CopyFiles">Kopier filer i stedenfor å flytte dem</String>
+    <String id="CopyNonMusicFiles">Kopiere/Flytte Ikke Musikk Relaterte Filer (Bilder, etc.)</String>
     <String id="InvalidParm">Feil i Parameter Formatet, vennligst korriger.</String>
     <String id="FileExists">Filen eksisterer allerede, vil ikke bli overskrevet</String>
     <String id="Exists">Eksisterer</String>
     <String id="Copied">Kopiert</String>
     <String id="Moved">Flyttet</String>
+    <String id="GroupBoxOptions">Innstillinger</String>
+    <String id="ButtonOrganise">Organisere</String>
   </Section>
   
   <!-- Settings  / Preferences --> 
@@ -494,6 +497,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når den er tom</String>
+    <String id="CaseConverion">Bruk Bokstav Konvertering når du lagrer</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Bruk Versjon 2.4 for ID3 V2 Tagger</String>
     <String id="UseV3">Bruk Versjon 2.3 for ID3 V2 Tagger</String>
@@ -584,13 +588,13 @@
 
   <!--  Conversion-/ Ripping -->
   <Section name="Conversion">
-    <String id="ErrorDirectory">Error creating Music Directory</String>
-    <String id="SameFile">Conversion aborted: Input and Output file are the same</String>
-    <String id="OpenFileError">Error opening File</String>
-    <String id="EncodingFileError">Error encoding File</String>
-    <String id="Ripping">Ripping ....</String>
-    <String id="RippingFinished">Finished Ripping the selected Audio Tracks.</String>
-    <String id="FreeDBAccess">Retrieving CD Information from FreeDB ...</String>
+    <String id="ErrorDirectory">Feil ved laging av Musikk Mappen</String>
+    <String id="SameFile">Konvertering avbrutt: Inn og Ut-filer er de samme</String>
+    <String id="OpenFileError">Feil ved åpning av fil</String>
+    <String id="EncodingFileError">Feil ved encoding av fil</String>
+    <String id="Ripping">Ripper ....</String>
+    <String id="RippingFinished">Ferdig med Ripping av de valgte Lyd Sporene.</String>
+    <String id="FreeDBAccess">Henter CD Informasjon fra FreeDB ...</String>
   </Section>
  
    <!--  FreeDB-->
