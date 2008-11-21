@@ -204,7 +204,7 @@
     <String id="LinkWeb">Web Information</String>
     <String id="LinkInvolvedPeople">Beteiligte Personen</String>
     <String id="LinkOriginalInfo">Original Information</String>
-    <String id="LinkDetailedInfo">Detailirte Information</String>
+    <String id="LinkDetailedInfo">Detailierte Information</String>
     <String id="LinkMainTags">Haupteinträge</String>
     <String id="LinkPictures">Bilder</String>
     <!--  General Buttons -->
@@ -246,8 +246,8 @@
   <!--  Amazon Album Search -->
   <Section name="AmazonAlbumSearch">
     <String id="Header">Album Suche</String>
-    <String id="Close">Abbrecehn</String>
-    <String id="Update">auswählen</String>
+    <String id="Close">Abbrechen</String>
+    <String id="Update">Auswählen</String>
     <String id="Albums">Album(s)</String>
     <String id="GroupBoxResults">Mehrere Album gefunden. Bitte auswählen ...</String>
   </Section>
@@ -497,7 +497,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
-    <String id="CaseConverion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
+    <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Version 2.4 für ID3 V2 Tags benutzen</String>
     <String id="UseV3">Version 2.3 für ID3 V2 Tags benutzen</String>

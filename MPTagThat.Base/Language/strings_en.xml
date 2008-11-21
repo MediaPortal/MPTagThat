@@ -497,7 +497,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="GroupBoxTagsGeneral">General</String>
     <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
-    <String id="CaseConverion">Use case conversion settings on Save</String>
+    <String id="CaseConversion">Use case conversion settings on Save</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Use Version 2.4 for ID3 V2 Tags</String>
     <String id="UseV3">Use Version 2.3 for ID3 V2 Tags</String>
