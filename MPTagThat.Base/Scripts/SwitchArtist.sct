@@ -25,7 +25,7 @@ public class Script : IScript
     int iPos = artist.IndexOf(' ');
     if (iPos > 0)
     {
-      track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1), artist.Substring(0, iPos));
+      track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1).Trim(), artist.Substring(0, iPos));
     }
     return track;
   }
