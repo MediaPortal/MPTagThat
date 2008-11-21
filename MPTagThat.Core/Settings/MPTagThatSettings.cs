@@ -240,7 +240,7 @@ namespace MPTagThat.Core
     #endregion
 
     #region General
-    [Setting(SettingScope.User, "0")]
+    [Setting(SettingScope.User, "1")]
     public int Theme
     {
       get { return _theme; }
