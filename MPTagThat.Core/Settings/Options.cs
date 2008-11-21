@@ -270,6 +270,9 @@ namespace MPTagThat.Core
         _fileNameToTagSettings.FormatValues.Add(@"<A> - <T>");
         _fileNameToTagSettings.FormatValues.Add(@"<K> - <A> - <T>");
         _fileNameToTagSettings.FormatValues.Add(@"<A> - <K> - <T>");
+        _fileNameToTagSettings.FormatValues.Add(@"<A>\<B>\<K> - <T>");
+        _fileNameToTagSettings.FormatValues.Add(@"<A>\<B>\<A> - <K> - <T>");
+        _fileNameToTagSettings.FormatValues.Add(@"<A>\<B>\<K> - <A> - <T>");
       }
 
       _fileNameToTagSettingsTemp = new List<string>(_fileNameToTagSettings.FormatValues);
