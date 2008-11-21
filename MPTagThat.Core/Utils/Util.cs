@@ -79,7 +79,12 @@ namespace MPTagThat.Core
       log = ServiceScope.Get<ILogger>();
       _invalidFilenameChars = System.IO.Path.GetInvalidFileNameChars();
       _invalidFoldernameChars = System.IO.Path.GetInvalidPathChars();
-      
+
+      // The above function doesn't return "?" as an invalid Path Characters. so we add it ourselves here
+      StringBuilder sb = new StringBuilder();
+      sb.Append(_invalidFoldernameChars);
+      sb.Append('?');
+      _invalidFoldernameChars = sb.ToString().ToCharArray();
     }
     #endregion
 
