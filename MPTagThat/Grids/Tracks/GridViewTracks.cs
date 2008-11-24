@@ -145,35 +145,12 @@ namespace MPTagThat.GridView
     }
 
     #region Save
-    public void Save()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(new ThreadStart(SaveThread));
-        _asyncThread.Name = "Save";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(new ThreadStart(SaveThread));
-        _asyncThread.Start();
-      }
-    }
-
     /// <summary>
     /// Save the Selected files only
     /// </summary>
-    private void SaveThread()
+    public void Save()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = new ThreadSafeGridDelegate(SaveThread);
-        tracksGrid.Invoke(d, new object[] { });
-        return;
-      }
-
       dlgProgress = new Progress();
       dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
       ShowForm(dlgProgress);
@@ -222,34 +199,12 @@ namespace MPTagThat.GridView
 
     }
 
-    public void SaveAll()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(new ThreadStart(SaveAllThread));
-        _asyncThread.Name = "SaveAll";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(new ThreadStart(SaveAllThread));
-        _asyncThread.Start();
-      }
-    }
-
     /// <summary>
     /// Save All changed files, regardless, if they are selected or not
     /// </summary>
-    private void SaveAllThread()
+    public void SaveAll()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = new ThreadSafeGridDelegate(SaveAllThread);
-        tracksGrid.Invoke(d, new object[] { });
-        return;
-      }
 
       bool bErrors = false;
       int i = 0;
