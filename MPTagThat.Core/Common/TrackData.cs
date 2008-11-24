@@ -307,6 +307,9 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (TagType != "mp3")
+          return "";
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -317,6 +320,9 @@ namespace MPTagThat.Core
       }
       set
       {
+        if (TagType != "mp3")
+          return;
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -475,6 +481,9 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (TagType != "mp3")
+          return "";
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -485,6 +494,9 @@ namespace MPTagThat.Core
       }
       set
       {
+        if (TagType != "mp3")
+          return;
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -524,6 +536,9 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (TagType != "mp3")
+          return 0;
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -535,6 +550,9 @@ namespace MPTagThat.Core
       }
       set
       {
+        if (TagType != "mp3")
+          return;
+
         if (id3v2tag == null)
           id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -718,6 +736,9 @@ namespace MPTagThat.Core
     #region Private Methods
     private string GetFrame(string frameID)
     {
+      if (TagType != "mp3")
+        return "";
+
       if (id3v2tag == null)
         id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
@@ -735,6 +756,9 @@ namespace MPTagThat.Core
 
     private void SetText(string frameID, string text)
     {
+      if (TagType != "mp3")
+        return;
+
       if (id3v2tag == null)
         id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
