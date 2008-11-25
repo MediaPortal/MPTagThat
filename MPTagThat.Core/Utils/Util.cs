@@ -80,10 +80,13 @@ namespace MPTagThat.Core
       _invalidFilenameChars = System.IO.Path.GetInvalidFileNameChars();
       _invalidFoldernameChars = System.IO.Path.GetInvalidPathChars();
 
-      // The above function doesn't return "?" as an invalid Path Characters. so we add it ourselves here
+      // The above function doesn't return all character, which would for an invalid Path. so we add it ourselves here
       StringBuilder sb = new StringBuilder();
       sb.Append(_invalidFoldernameChars);
       sb.Append('?');
+      sb.Append(':');  // is allowed after the drive letter, but not afterwards
+      sb.Append('*');
+      sb.Append('/');
       _invalidFoldernameChars = sb.ToString().ToCharArray();
     }
     #endregion
@@ -639,6 +642,46 @@ namespace MPTagThat.Core
     static public void LeaveMethod(CallingMethod method)
     {
       log.Debug("<<< {0}", method.MethodNameFull);
+    }
+
+    /// <summary>
+    /// This function matches the Longet Common Substring of the source string found in target string
+    /// </summary>
+    /// <param name="sourceString">The Source String to match</param>
+    /// <param name="targetString">The Target String to search within</param>
+    /// <returns>a match ratio</returns>
+    public static double LongestCommonSubstring(string sourceString, string targetString)
+    {
+      if (String.IsNullOrEmpty(sourceString) || String.IsNullOrEmpty(targetString))
+        return 0;
+
+      sourceString = sourceString.Replace(",", "").Replace(" ", "").Replace(";", "");
+      targetString = targetString.Replace(",", "").Replace(" ", "").Replace(";", "");
+
+      int[,] num = new int[sourceString.Length, targetString.Length];
+      int maxlen = 0;
+
+      for (int i = 0; i < sourceString.Length; i++)
+      {
+        for (int j = 0; j < targetString.Length; j++)
+        {
+          if (sourceString[i] != targetString[j])
+            num[i, j] = 0;
+          else
+          {
+            if ((i == 0) || (j == 0))
+              num[i, j] = 1;
+            else
+              num[i, j] = 1 + num[i - 1, j - 1];
+
+            if (num[i, j] > maxlen)
+            {
+              maxlen = num[i, j];
+            }
+          }
+        }
+      }
+      return (double)maxlen / (double)sourceString.Length;
     }
     #endregion
   }
