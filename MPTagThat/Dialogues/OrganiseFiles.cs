@@ -197,8 +197,9 @@ namespace MPTagThat.Organise
           // replace it with underscore
           if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
             directoryName += "_";
-
-          directoryName = Util.MakeValidFolderName(System.IO.Path.Combine(tbRootDir.Text, directoryName));
+          
+          directoryName = Util.MakeValidFolderName(directoryName);
+          directoryName = System.IO.Path.Combine(tbRootDir.Text, directoryName);
 
           // Now check the validity of the directory
           if (!System.IO.Directory.Exists(directoryName))
