@@ -605,6 +605,31 @@
     <String id="Cancel">Abbrechen</String>
   </Section>
  
+   <!--  Internet Lookup -->
+  <Section name="Lookup">
+    <!--  Dialog to specify Artist / Album for the searchg -->
+    <String id="HeaderArtistAlbum">Internet Lookup - Bitte Artist / Album eingeben</String>
+    <String id="Continue">Weiter &gt;</String>
+    <String id="Cancel">Abbrechen</String>
+    <!--  Search Result Dialog for Multiple Albums found -->
+    <String id="HeaderSearchResult">Mehrere Alben gefunden. Bitte auswählen ...</String>
+    <String id="ColArtist">Interpret</String>
+    <String id="ColAlbum">Album</String>
+    <String id="ColTracks"># Titel</String>
+    <String id="ColYear">Jahr</String>
+    <String id="ColLabel">Label</String>
+   <!--  Album Details  -->
+    <String id="HeaderDetails">Details für ausgewähltes Album</String>
+    <String id="AlbumTracks">Titel auf Album</String>
+    <String id="TracksToTag">Zu bearbeitende Dateinamen</String>
+    <String id="ColTrackNum">#</String>
+    <String id="ColTitle">Titel</String>
+    <String id="ColFileName">Datei Name</String>
+    <String id="Unassigned">&lt; Nicht ausgewählt &gt;</String>
+    <String id="MoveUp">Nach Oben</String>
+    <String id="MoveDown">Nach Unten</String>
+  </Section>
+  
   <!-- Messages shown by the program -->
   <Section name="message">
     <String id="Ok">Ok</String>
@@ -625,7 +650,7 @@
     <String id="Cancel">Abbrechen</String>
     <String id="SavingHeader">Speichere tracks</String>
     <String id="Saving">Speichere track {0}/{1}</String>
-    <String id="InternetHeader">Suuche Information im Internet</String>
+    <String id="InternetHeader">Suche Information im Internet</String>
     <String id="Internet">Hole information für track {0}/{1}</String>
     <String id="InternetMusicBrainz">Erstelle Fingerabdruck und identifiziere Datei</String>
     <String id="InternetAlbum">Hole Album Information</String>

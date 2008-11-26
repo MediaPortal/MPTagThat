@@ -970,7 +970,18 @@ Util.LeaveMethod(Util.GetCallingMethod());
           break;
 
         case Action.ActionType.ACTION_TAGFROMINTERNET:
+          if (!gridViewControl.CheckSelections())
+            break;
+
           gridViewControl.TagTracksFromInternet();
+          break;
+
+        case Action.ActionType.ACTION_INTERNETLOOKUP:
+          if (!gridViewControl.CheckSelections())
+            break;
+
+          MPTagThat.InternetLookup.InternetLookup lookup = new MPTagThat.InternetLookup.InternetLookup(this);
+          lookup.SearchForAlbumInformation();
           break;
 
         case Action.ActionType.ACTION_ORGANISE:

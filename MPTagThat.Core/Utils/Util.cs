@@ -655,8 +655,8 @@ namespace MPTagThat.Core
       if (String.IsNullOrEmpty(sourceString) || String.IsNullOrEmpty(targetString))
         return 0;
 
-      sourceString = sourceString.Replace(",", "").Replace(" ", "").Replace(";", "");
-      targetString = targetString.Replace(",", "").Replace(" ", "").Replace(";", "");
+      sourceString = sourceString.ToLower().Replace(",", "").Replace(" ", "").Replace(";", "").Replace("_", "");
+      targetString = targetString.ToLower().Replace(",", "").Replace(" ", "").Replace(";", "").Replace("_", "");
 
       int[,] num = new int[sourceString.Length, targetString.Length];
       int maxlen = 0;

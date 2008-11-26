@@ -7,44 +7,66 @@ namespace MPTagThat.Core.Amazon
   public class AmazonAlbum
   {
     #region Private Fields
-    private string asin;
-    private string title;
-    private string artist;
-    private string year;
+    private string _asin;
+    private string _title;
+    private string _artist;
+    private string _year;
     private string _smallImage;
     private string _mediumImage;
     private string _largeImage;
+    private List<List<AmazonAlbumTrack>> _discs;
+    private string _binding;
+    private string _label;
     #endregion
 
     #region ctor
     public AmazonAlbum()
     {
+      _discs = new List<List<AmazonAlbumTrack>>();
     }
     #endregion
 
     #region Properties
     public string Asin
     {
-      get { return asin; }
-      set { asin = value; }
+      get { return _asin; }
+      set { _asin = value; }
     }
 
     public string Title
     {
-      get { return title; }
-      set { title = value; }
+      get { return _title; }
+      set { _title = value; }
     }
 
     public string Artist
     {
-      get { return artist; }
-      set { artist = value; }
+      get { return _artist; }
+      set { _artist = value; }
+    }
+
+    public string Binding
+    {
+      get { return _binding; }
+      set { _binding = value; }
+    }
+
+    public string Label
+    {
+      get { return _label; }
+      set { _label = value; }
     }
 
     public string Year
     {
-      get { return year; }
-      set { year = value; }
+      get { return _year; }
+      set { _year = value; }
+    }
+
+    public List<List<AmazonAlbumTrack>> Discs
+    {
+      get { return _discs; }
+      set { _discs = value; }
     }
 
     public string SmallImageUrl

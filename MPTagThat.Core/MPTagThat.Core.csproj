@@ -58,6 +58,7 @@
     <Compile Include="ActionHandler\WindowMap.cs" />
     <Compile Include="Amazon\AmazonAlbum.cs" />
     <Compile Include="Amazon\AmazonAlbumInfo.cs" />
+    <Compile Include="Amazon\AmazonAlbumTrack.cs" />
     <Compile Include="AudioEncoder\AudioEncoder.cs" />
     <Compile Include="AudioEncoder\IAudioEncoder.cs" />
     <Compile Include="Burner\Burner.cs" />

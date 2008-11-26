@@ -108,6 +108,11 @@
       <key>F1</key>
       <description>Help</description>
     </action>
+    <action>
+      <id>26</id>
+      <key>Ctrl-K</key>
+      <description>Internet Lookup</description>
+    </action>
   </window>
   <window>
     <id>1</id>

@@ -35,6 +35,7 @@ namespace MPTagThat.Core
       ACTION_GETLYRICS = 23,
       ACTION_EXIT = 24,
       ACTION_HELP = 25,
+      ACTION_INTERNETLOOKUP = 26,
     }
     #endregion
 

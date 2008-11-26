@@ -605,6 +605,31 @@
     <String id="Cancel">Cancel</String>
   </Section>
  
+  <!--  Internet Lookup -->
+  <Section name="Lookup">
+    <!--  Dialog to specify Artist / Album for the searchg -->
+    <String id="HeaderArtistAlbum">Internet Lookup - Specify Artist / Album</String>
+    <String id="Continue">Continue &gt;</String>
+    <String id="Cancel">Cancel</String>
+    <!--  Search Result Dialog for Multiple Albums found -->
+    <String id="HeaderSearchResult">Mulitple Albums found. Please select ...</String>
+    <String id="ColArtist">Artist</String>
+    <String id="ColAlbum">Album</String>
+    <String id="ColTracks"># Tracks</String>
+    <String id="ColYear">Year</String>
+    <String id="ColLabel">Label</String>
+   <!--  Album Details  -->
+    <String id="HeaderDetails">Details on selected Album</String>
+    <String id="AlbumTracks">Tracks on Album</String>
+    <String id="TracksToTag">Tracks to Tag</String>
+    <String id="ColTrackNum">#</String>
+    <String id="ColTitle">Title</String>
+    <String id="ColFileName">File Name</String>
+    <String id="Unassigned">&lt; Unassigned &gt;</String>
+    <String id="MoveUp">Move Up</String>
+    <String id="MoveDown">Move Down</String>
+  </Section>
+  
   <!-- Messages shown by the program -->
   <Section name="message">
     <String id="Ok">Ok</String>

@@ -96,6 +96,25 @@
     <Compile Include="Dialogues\AmazonAlbumSearchResults.Designer.cs">
       <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogues\InternetLookup\AlbumDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\AlbumDetails.Designer.cs">
+      <DependentUpon>AlbumDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.Designer.cs">
+      <DependentUpon>AlbumSearchResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.Designer.cs">
+      <DependentUpon>ArtistAlbumDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogues\InternetLookup\InternetLookup.cs" />
     <Compile Include="Dialogues\TagEdit\MultiTagEdit.Designer.cs">
       <DependentUpon>MultiTagEdit.cs</DependentUpon>
     </Compile>
@@ -226,6 +245,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\AmazonAlbumSearchResults.resx">
       <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\InternetLookup\AlbumDetails.resx">
+      <DependentUpon>AlbumDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\InternetLookup\AlbumSearchResult.resx">
+      <DependentUpon>AlbumSearchResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\InternetLookup\ArtistAlbumDialog.resx">
+      <DependentUpon>ArtistAlbumDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\MultiTagEdit.resx">
       <DependentUpon>MultiTagEdit.cs</DependentUpon>
