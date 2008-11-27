@@ -76,6 +76,9 @@ namespace MPTagThat.Organise
       DataGridView tracksGrid = _main.TracksGridView.View;
       _directories = new Dictionary<string, string>();
 
+      // First do an automatic save of all pending changes
+      _main.TracksGridView.SaveAll(false);
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)

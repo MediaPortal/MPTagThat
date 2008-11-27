@@ -204,24 +204,40 @@ namespace MPTagThat.GridView
     /// </summary>
     public void SaveAll()
     {
+      SaveAll(true);
+    }
+
+    /// <summary>
+    /// Save All changed files, regardless, if they are selected or not
+    /// </summary>
+    /// <param name="showProgressDialog">Show / Hide the progress dialogue</param>
+    public void SaveAll(bool showProgressDialog)
+    {
       Util.EnterMethod(Util.GetCallingMethod());
 
       bool bErrors = false;
       int i = 0;
 
-      dlgProgress = new Progress();
-      dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
-      ShowForm(dlgProgress);
+      if (showProgressDialog)
+      {
+        dlgProgress = new Progress();
+        dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
+        ShowForm(dlgProgress);
+      }
 
       int trackCount = bindingList.Count;
       foreach (TrackData track in bindingList)
       {
         Application.DoEvents();
-        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Saving"), i + 1, trackCount), i + 1, trackCount, true);
-        if (dlgProgress.IsCancelled)
+
+        if (showProgressDialog)
         {
-          dlgProgress.Close();
-          return;
+          dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Saving"), i + 1, trackCount), i + 1, trackCount, true);
+          if (dlgProgress.IsCancelled)
+          {
+            dlgProgress.Close();
+            return;
+          }
         }
 
         if (!SaveTrack(track, i))
@@ -230,7 +246,8 @@ namespace MPTagThat.GridView
         i++;
       }
 
-      dlgProgress.Close();
+      if (showProgressDialog)
+        dlgProgress.Close();
       _itemsChanged = bErrors;
 
       Util.LeaveMethod(Util.GetCallingMethod());
