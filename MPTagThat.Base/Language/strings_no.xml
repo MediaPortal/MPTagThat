@@ -605,6 +605,31 @@
     <String id="Cancel">Avbryt</String>
   </Section>
  
+   <!--  Internet Lookup -->
+  <Section name="Lookup">
+    <!--  Dialog to specify Artist / Album for the searchg -->
+    <String id="HeaderArtistAlbum">Hent på Internett - Spesifiser Artist / Album</String>
+    <String id="Continue">Fortsett &gt;</String>
+    <String id="Cancel">Avbryt</String>
+    <!--  Search Result Dialog for Multiple Albums found -->
+    <String id="HeaderSearchResult">Flere Album funnet, vennligst velg ...</String>
+    <String id="ColArtist">Artist</String>
+    <String id="ColAlbum">Album</String>
+    <String id="ColTracks"># Spor</String>
+    <String id="ColYear">År</String>
+    <String id="ColLabel">Label</String>
+   <!--  Album Details  -->
+    <String id="HeaderDetails">Detaljer om valgte Album</String>
+    <String id="AlbumTracks">Spor på Album</String>
+    <String id="TracksToTag">Sport til Tag</String>
+    <String id="ColTrackNum">#</String>
+    <String id="ColTitle">Tittel</String>
+    <String id="ColFileName">Filnavn</String>
+    <String id="Unassigned">&lt; Ikke valgt &gt;</String>
+    <String id="MoveUp">Flytt Opp</String>
+    <String id="MoveDown">Flytt Ned</String>
+  </Section>
+
   <!-- Messages shown by the program -->
   <Section name="message">
     <String id="Ok">Ok</String>
