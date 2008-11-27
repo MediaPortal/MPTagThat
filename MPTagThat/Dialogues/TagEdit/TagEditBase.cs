@@ -505,13 +505,20 @@ namespace MPTagThat.TagEdit
     {
       if (e.RowIndex > -1)
       {
-        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(_pictures[e.RowIndex].Data.Data))
+        try
         {
-          Image img = Image.FromStream(ms);
-          if (img != null)
+          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(_pictures[e.RowIndex].Data.Data))
           {
-            pictureBoxCover.Image = img;
+            Image img = Image.FromStream(ms);
+            if (img != null)
+            {
+              pictureBoxCover.Image = img;
+            }
           }
+        }
+        catch(Exception ex)
+        {
+          log.Error("TagEdit: Error creating Picture: {0}.", ex.Message);
         }
         _selectedPictureGridRow = e.RowIndex;
         buttonExportPicture.Enabled = true;
