@@ -84,7 +84,8 @@ namespace MPTagThat.FileNameToTag
           List<string> splittedFileValues = new List<string>();
 
           // Split up the file name
-          string file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.File.Name), Path.GetFileNameWithoutExtension(track.File.Name));
+          // We use already the FileName from the Track instance, which might be already modified by the user.
+          string file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.File.Name), Path.GetFileNameWithoutExtension(track.FileName));
           string[] fileArray = file.Split(new char[] { '\\' });
 
           // Now set Upper Bound depending on the length of parameters and file
