@@ -42,6 +42,9 @@ namespace MPTagThat.InternetLookup
       set
       {
         string strYear = value;
+        if (strYear == null) 
+          strYear = "";
+
         if (strYear.Length > 4)
           strYear = strYear.Substring(0, 4);
 

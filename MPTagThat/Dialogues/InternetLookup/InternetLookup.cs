@@ -166,19 +166,7 @@ namespace MPTagThat.InternetLookup
         }
       }
 
-
-      // create a file list and init it with default values
-      _fileList = new List<ListViewItem>();
-      for (int i = 0; i < dlgAlbumDetails.AlbumTracks.Items.Count; i++)
-      {
-        ListViewItem unassignedItem = new ListViewItem(ServiceScope.Get<ILocalisation>().ToString("Lookup", "Unassigned"));
-        unassignedItem.Tag = -1;
-        unassignedItem.Checked = false;
-        _fileList.Add(unassignedItem);
-      }
-
       // Add selected Files from Grid
-      // Try to match the Filename to the Track
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -187,24 +175,38 @@ namespace MPTagThat.InternetLookup
         TrackData track = main.TracksGridView.TrackList[row.Index];
         ListViewItem lvItem = new ListViewItem(track.FileName);
         lvItem.Tag = row.Index;
+        dlgAlbumDetails.DiscTracks.Items.Add(lvItem);
+      }
 
-        int pos = 0;
-        foreach (List<AmazonAlbumTrack> disc in amazonAlbum.Discs)
+      // if we have less files selected, than in the album, fill the rest with"unassigned"
+      if (dlgAlbumDetails.DiscTracks.Items.Count < dlgAlbumDetails.AlbumTracks.Items.Count)
+      {
+        for (int i = dlgAlbumDetails.DiscTracks.Items.Count - 1; i < dlgAlbumDetails.AlbumTracks.Items.Count; i++)
         {
-          foreach (AmazonAlbumTrack albumtrack in disc)
-          {
-            if (Util.LongestCommonSubstring(albumtrack.Title, track.FileName) > 0.75)
-            {
-              lvItem.Checked = true;
-              _fileList[pos] = lvItem;
-            }
-            pos++;
-          }
+          ListViewItem unassignedItem = new ListViewItem(ServiceScope.Get<ILocalisation>().ToString("Lookup", "Unassigned"));
+          unassignedItem.Tag = -1;
+          unassignedItem.Checked = false;
+          dlgAlbumDetails.DiscTracks.Items.Add(unassignedItem);
         }
       }
 
-      foreach (ListViewItem lvItem in _fileList)
-        dlgAlbumDetails.DiscTracks.Items.Add(lvItem);
+      int albumTrackPos = 0;
+      foreach (ListViewItem lvAlbumItem in dlgAlbumDetails.AlbumTracks.Items)
+      {
+        int discTrackPos = 0;
+        foreach (ListViewItem lvDiscItem in dlgAlbumDetails.DiscTracks.Items)
+        {
+          if (Util.LongestCommonSubstring(lvAlbumItem.SubItems[1].Text, lvDiscItem.SubItems[0].Text) > 0.75)
+          {
+            lvDiscItem.Checked = true;
+            dlgAlbumDetails.DiscTracks.Items.RemoveAt(discTrackPos);
+            dlgAlbumDetails.DiscTracks.Items.Insert(albumTrackPos, lvDiscItem);
+            break;
+          }
+          discTrackPos++;
+        }
+        albumTrackPos++;
+      }
 
       if (dlgAlbumDetails.ShowDialog() == DialogResult.OK)
       {
@@ -253,7 +255,6 @@ namespace MPTagThat.InternetLookup
           track.Changed = true;
           main.TracksGridView.View.Rows[index].Cells[1].Value = ServiceScope.Get<ILocalisation>().ToString("message", "Ok");
         }
-
       }
       dlgAlbumDetails.Dispose();
     }
