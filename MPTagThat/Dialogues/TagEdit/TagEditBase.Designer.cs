@@ -991,7 +991,7 @@
       this.groupBoxPicture.LocalisationContext = "TagEdit";
       this.groupBoxPicture.Location = new System.Drawing.Point(7, 6);
       this.groupBoxPicture.Name = "groupBoxPicture";
-      this.groupBoxPicture.Size = new System.Drawing.Size(685, 276);
+      this.groupBoxPicture.Size = new System.Drawing.Size(685, 372);
       this.groupBoxPicture.TabIndex = 0;
       this.groupBoxPicture.TabStop = false;
       this.groupBoxPicture.Text = "Picture";
@@ -1000,9 +1000,9 @@
       // 
       this.buttonGetPictureInternet.Localisation = "GetPictureInternet";
       this.buttonGetPictureInternet.LocalisationContext = "TagEdit";
-      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 141);
+      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 188);
       this.buttonGetPictureInternet.Name = "buttonGetPictureInternet";
-      this.buttonGetPictureInternet.Size = new System.Drawing.Size(125, 23);
+      this.buttonGetPictureInternet.Size = new System.Drawing.Size(125, 45);
       this.buttonGetPictureInternet.TabIndex = 2;
       this.buttonGetPictureInternet.Text = "Get from Internet";
       this.buttonGetPictureInternet.UseVisualStyleBackColor = true;
@@ -1013,7 +1013,7 @@
       this.checkBoxRemoveExistingPictures.AutoSize = true;
       this.checkBoxRemoveExistingPictures.Localisation = "RemoveExistingPictures";
       this.checkBoxRemoveExistingPictures.LocalisationContext = "TagEdit";
-      this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(151, 238);
+      this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(151, 319);
       this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
       this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(207, 20);
       this.checkBoxRemoveExistingPictures.TabIndex = 5;
@@ -1036,7 +1036,7 @@
       this.dataGridViewPicture.ReadOnly = true;
       this.dataGridViewPicture.RowHeadersVisible = false;
       this.dataGridViewPicture.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewPicture.Size = new System.Drawing.Size(330, 152);
+      this.dataGridViewPicture.Size = new System.Drawing.Size(330, 223);
       this.dataGridViewPicture.TabIndex = 24;
       this.dataGridViewPicture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPicture_CellClick);
       // 
@@ -1061,9 +1061,9 @@
       this.buttonExportPicture.Enabled = false;
       this.buttonExportPicture.Localisation = "ExportPicture";
       this.buttonExportPicture.LocalisationContext = "TagEdit";
-      this.buttonExportPicture.Location = new System.Drawing.Point(9, 201);
+      this.buttonExportPicture.Location = new System.Drawing.Point(9, 294);
       this.buttonExportPicture.Name = "buttonExportPicture";
-      this.buttonExportPicture.Size = new System.Drawing.Size(125, 23);
+      this.buttonExportPicture.Size = new System.Drawing.Size(125, 45);
       this.buttonExportPicture.TabIndex = 4;
       this.buttonExportPicture.Text = "Export Picture";
       this.buttonExportPicture.UseVisualStyleBackColor = true;
@@ -1074,9 +1074,9 @@
       this.buttonRemovePicture.Enabled = false;
       this.buttonRemovePicture.Localisation = "RemovePicture";
       this.buttonRemovePicture.LocalisationContext = "TagEdit";
-      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 172);
+      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 241);
       this.buttonRemovePicture.Name = "buttonRemovePicture";
-      this.buttonRemovePicture.Size = new System.Drawing.Size(125, 23);
+      this.buttonRemovePicture.Size = new System.Drawing.Size(125, 45);
       this.buttonRemovePicture.TabIndex = 3;
       this.buttonRemovePicture.Text = "Remove Picture";
       this.buttonRemovePicture.UseVisualStyleBackColor = true;
@@ -1086,9 +1086,9 @@
       // 
       this.buttonGetPicture.Localisation = "GetPicture";
       this.buttonGetPicture.LocalisationContext = "TagEdit";
-      this.buttonGetPicture.Location = new System.Drawing.Point(9, 111);
+      this.buttonGetPicture.Location = new System.Drawing.Point(9, 135);
       this.buttonGetPicture.Name = "buttonGetPicture";
-      this.buttonGetPicture.Size = new System.Drawing.Size(125, 23);
+      this.buttonGetPicture.Size = new System.Drawing.Size(125, 45);
       this.buttonGetPicture.TabIndex = 1;
       this.buttonGetPicture.Text = "Get from File";
       this.buttonGetPicture.UseVisualStyleBackColor = true;
@@ -1101,7 +1101,7 @@
       this.buttonAddPicture.LocalisationContext = "TagEdit";
       this.buttonAddPicture.Location = new System.Drawing.Point(9, 82);
       this.buttonAddPicture.Name = "buttonAddPicture";
-      this.buttonAddPicture.Size = new System.Drawing.Size(125, 23);
+      this.buttonAddPicture.Size = new System.Drawing.Size(125, 45);
       this.buttonAddPicture.TabIndex = 0;
       this.buttonAddPicture.Text = "Add Picture";
       this.buttonAddPicture.UseVisualStyleBackColor = true;
