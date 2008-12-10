@@ -377,7 +377,7 @@
       this.checkBoxRemoveComments.Location = new System.Drawing.Point(487, 97);
       this.checkBoxRemoveComments.Name = "checkBoxRemoveComments";
       this.checkBoxRemoveComments.Size = new System.Drawing.Size(174, 20);
-      this.checkBoxRemoveComments.TabIndex = 10;
+      this.checkBoxRemoveComments.TabIndex = 4;
       this.checkBoxRemoveComments.Text = "Remove Comments First";
       this.checkBoxRemoveComments.UseVisualStyleBackColor = true;
       // 
@@ -388,7 +388,7 @@
       this.buttonMoveTop.Location = new System.Drawing.Point(487, 68);
       this.buttonMoveTop.Name = "buttonMoveTop";
       this.buttonMoveTop.Size = new System.Drawing.Size(189, 23);
-      this.buttonMoveTop.TabIndex = 9;
+      this.buttonMoveTop.TabIndex = 3;
       this.buttonMoveTop.Text = "Move to Top";
       this.buttonMoveTop.UseVisualStyleBackColor = true;
       this.buttonMoveTop.Click += new System.EventHandler(this.buttonMoveTop_Click);
@@ -400,7 +400,7 @@
       this.buttonRemoveComment.Location = new System.Drawing.Point(487, 42);
       this.buttonRemoveComment.Name = "buttonRemoveComment";
       this.buttonRemoveComment.Size = new System.Drawing.Size(189, 23);
-      this.buttonRemoveComment.TabIndex = 8;
+      this.buttonRemoveComment.TabIndex = 2;
       this.buttonRemoveComment.Text = "Remove Comment";
       this.buttonRemoveComment.UseVisualStyleBackColor = true;
       this.buttonRemoveComment.Click += new System.EventHandler(this.buttonRemoveComment_Click);
@@ -412,7 +412,7 @@
       this.buttonAddComment.Location = new System.Drawing.Point(487, 15);
       this.buttonAddComment.Name = "buttonAddComment";
       this.buttonAddComment.Size = new System.Drawing.Size(189, 23);
-      this.buttonAddComment.TabIndex = 7;
+      this.buttonAddComment.TabIndex = 1;
       this.buttonAddComment.Text = "Add Comment";
       this.buttonAddComment.UseVisualStyleBackColor = true;
       this.buttonAddComment.Click += new System.EventHandler(this.buttonAddComment_Click);
@@ -479,7 +479,7 @@
       this.textBoxComment.Multiline = true;
       this.textBoxComment.Name = "textBoxComment";
       this.textBoxComment.Size = new System.Drawing.Size(330, 39);
-      this.textBoxComment.TabIndex = 4;
+      this.textBoxComment.TabIndex = 0;
       // 
       // lbCommentLanguage
       // 
@@ -511,6 +511,7 @@
       this.cbCommentLanguage.Name = "cbCommentLanguage";
       this.cbCommentLanguage.Size = new System.Drawing.Size(280, 24);
       this.cbCommentLanguage.TabIndex = 1;
+      this.cbCommentLanguage.TabStop = false;
       // 
       // cbCommentDescriptor
       // 
@@ -519,6 +520,7 @@
       this.cbCommentDescriptor.Name = "cbCommentDescriptor";
       this.cbCommentDescriptor.Size = new System.Drawing.Size(280, 24);
       this.cbCommentDescriptor.TabIndex = 0;
+      this.cbCommentDescriptor.TabStop = false;
       // 
       // groupBoxGenre
       // 
@@ -544,7 +546,7 @@
       this.btGenreToTop.Location = new System.Drawing.Point(491, 71);
       this.btGenreToTop.Name = "btGenreToTop";
       this.btGenreToTop.Size = new System.Drawing.Size(174, 23);
-      this.btGenreToTop.TabIndex = 3;
+      this.btGenreToTop.TabIndex = 4;
       this.btGenreToTop.Text = "Move To Top";
       this.btGenreToTop.UseVisualStyleBackColor = true;
       this.btGenreToTop.Click += new System.EventHandler(this.btGenreToTop_Click);
@@ -556,7 +558,7 @@
       this.btRemoveGenre.Location = new System.Drawing.Point(491, 43);
       this.btRemoveGenre.Name = "btRemoveGenre";
       this.btRemoveGenre.Size = new System.Drawing.Size(174, 23);
-      this.btRemoveGenre.TabIndex = 4;
+      this.btRemoveGenre.TabIndex = 3;
       this.btRemoveGenre.Text = "Remove Genre";
       this.btRemoveGenre.UseVisualStyleBackColor = true;
       this.btRemoveGenre.Click += new System.EventHandler(this.btRemoveGenre_Click);
@@ -613,6 +615,7 @@
       this.ckGenre.Name = "ckGenre";
       this.ckGenre.Size = new System.Drawing.Size(15, 14);
       this.ckGenre.TabIndex = 16;
+      this.ckGenre.TabStop = false;
       this.ckGenre.UseVisualStyleBackColor = true;
       // 
       // groupBoxArtist
@@ -682,7 +685,8 @@
       this.ckDisk.Location = new System.Drawing.Point(673, 145);
       this.ckDisk.Name = "ckDisk";
       this.ckDisk.Size = new System.Drawing.Size(15, 14);
-      this.ckDisk.TabIndex = 9;
+      this.ckDisk.TabIndex = 10;
+      this.ckDisk.TabStop = false;
       this.ckDisk.UseVisualStyleBackColor = true;
       // 
       // lblDisc
@@ -714,7 +718,8 @@
       this.ckBPM.Location = new System.Drawing.Point(673, 119);
       this.ckBPM.Name = "ckBPM";
       this.ckBPM.Size = new System.Drawing.Size(15, 14);
-      this.ckBPM.TabIndex = 28;
+      this.ckBPM.TabIndex = 10;
+      this.ckBPM.TabStop = false;
       this.ckBPM.UseVisualStyleBackColor = true;
       // 
       // lblBPM
@@ -735,7 +740,7 @@
       this.tbBPM.Location = new System.Drawing.Point(532, 115);
       this.tbBPM.Name = "tbBPM";
       this.tbBPM.Size = new System.Drawing.Size(133, 22);
-      this.tbBPM.TabIndex = 7;
+      this.tbBPM.TabIndex = 5;
       // 
       // tbNumTracks
       // 
@@ -743,7 +748,7 @@
       this.tbNumTracks.Location = new System.Drawing.Point(292, 141);
       this.tbNumTracks.Name = "tbNumTracks";
       this.tbNumTracks.Size = new System.Drawing.Size(45, 22);
-      this.tbNumTracks.TabIndex = 6;
+      this.tbNumTracks.TabIndex = 7;
       // 
       // label1
       // 
@@ -773,7 +778,8 @@
       this.ckYear.Location = new System.Drawing.Point(343, 122);
       this.ckYear.Name = "ckYear";
       this.ckYear.Size = new System.Drawing.Size(15, 14);
-      this.ckYear.TabIndex = 14;
+      this.ckYear.TabIndex = 10;
+      this.ckYear.TabStop = false;
       this.ckYear.UseVisualStyleBackColor = true;
       // 
       // ckTrack
@@ -785,7 +791,8 @@
       this.ckTrack.Location = new System.Drawing.Point(343, 145);
       this.ckTrack.Name = "ckTrack";
       this.ckTrack.Size = new System.Drawing.Size(15, 14);
-      this.ckTrack.TabIndex = 6;
+      this.ckTrack.TabIndex = 10;
+      this.ckTrack.TabStop = false;
       this.ckTrack.UseVisualStyleBackColor = true;
       // 
       // lblAlbumArtist
@@ -809,7 +816,8 @@
       this.ckArtist.Location = new System.Drawing.Point(673, 16);
       this.ckArtist.Name = "ckArtist";
       this.ckArtist.Size = new System.Drawing.Size(15, 14);
-      this.ckArtist.TabIndex = 8;
+      this.ckArtist.TabIndex = 10;
+      this.ckArtist.TabStop = false;
       this.ckArtist.UseVisualStyleBackColor = true;
       // 
       // lblTrack
@@ -830,7 +838,7 @@
       this.tbTrack.Location = new System.Drawing.Point(205, 141);
       this.tbTrack.Name = "tbTrack";
       this.tbTrack.Size = new System.Drawing.Size(45, 22);
-      this.tbTrack.TabIndex = 5;
+      this.tbTrack.TabIndex = 6;
       // 
       // ckAlbumArtist
       // 
@@ -841,7 +849,8 @@
       this.ckAlbumArtist.Location = new System.Drawing.Point(673, 41);
       this.ckAlbumArtist.Name = "ckAlbumArtist";
       this.ckAlbumArtist.Size = new System.Drawing.Size(15, 14);
-      this.ckAlbumArtist.TabIndex = 23;
+      this.ckAlbumArtist.TabIndex = 10;
+      this.ckAlbumArtist.TabStop = false;
       this.ckAlbumArtist.UseVisualStyleBackColor = true;
       // 
       // lblArtist
@@ -882,6 +891,7 @@
       this.ckAlbum.Name = "ckAlbum";
       this.ckAlbum.Size = new System.Drawing.Size(15, 14);
       this.ckAlbum.TabIndex = 10;
+      this.ckAlbum.TabStop = false;
       this.ckAlbum.UseVisualStyleBackColor = true;
       // 
       // lblYear
@@ -937,7 +947,8 @@
       this.ckTitle.Location = new System.Drawing.Point(673, 91);
       this.ckTitle.Name = "ckTitle";
       this.ckTitle.Size = new System.Drawing.Size(15, 14);
-      this.ckTitle.TabIndex = 12;
+      this.ckTitle.TabIndex = 10;
+      this.ckTitle.TabStop = false;
       this.ckTitle.UseVisualStyleBackColor = true;
       // 
       // tbTitle
@@ -992,7 +1003,7 @@
       this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 141);
       this.buttonGetPictureInternet.Name = "buttonGetPictureInternet";
       this.buttonGetPictureInternet.Size = new System.Drawing.Size(125, 23);
-      this.buttonGetPictureInternet.TabIndex = 26;
+      this.buttonGetPictureInternet.TabIndex = 2;
       this.buttonGetPictureInternet.Text = "Get from Internet";
       this.buttonGetPictureInternet.UseVisualStyleBackColor = true;
       this.buttonGetPictureInternet.Click += new System.EventHandler(this.buttonGetPictureInternet_Click);
@@ -1005,7 +1016,7 @@
       this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(151, 238);
       this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
       this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(207, 20);
-      this.checkBoxRemoveExistingPictures.TabIndex = 25;
+      this.checkBoxRemoveExistingPictures.TabIndex = 5;
       this.checkBoxRemoveExistingPictures.Text = "Remove Existing Pictures First";
       this.checkBoxRemoveExistingPictures.UseVisualStyleBackColor = true;
       // 
@@ -1053,7 +1064,7 @@
       this.buttonExportPicture.Location = new System.Drawing.Point(9, 201);
       this.buttonExportPicture.Name = "buttonExportPicture";
       this.buttonExportPicture.Size = new System.Drawing.Size(125, 23);
-      this.buttonExportPicture.TabIndex = 23;
+      this.buttonExportPicture.TabIndex = 4;
       this.buttonExportPicture.Text = "Export Picture";
       this.buttonExportPicture.UseVisualStyleBackColor = true;
       this.buttonExportPicture.Click += new System.EventHandler(this.buttonExportPicture_Click);
@@ -1066,7 +1077,7 @@
       this.buttonRemovePicture.Location = new System.Drawing.Point(9, 172);
       this.buttonRemovePicture.Name = "buttonRemovePicture";
       this.buttonRemovePicture.Size = new System.Drawing.Size(125, 23);
-      this.buttonRemovePicture.TabIndex = 22;
+      this.buttonRemovePicture.TabIndex = 3;
       this.buttonRemovePicture.Text = "Remove Picture";
       this.buttonRemovePicture.UseVisualStyleBackColor = true;
       this.buttonRemovePicture.Click += new System.EventHandler(this.buttonRemovePicture_Click);
@@ -1078,7 +1089,7 @@
       this.buttonGetPicture.Location = new System.Drawing.Point(9, 111);
       this.buttonGetPicture.Name = "buttonGetPicture";
       this.buttonGetPicture.Size = new System.Drawing.Size(125, 23);
-      this.buttonGetPicture.TabIndex = 21;
+      this.buttonGetPicture.TabIndex = 1;
       this.buttonGetPicture.Text = "Get from File";
       this.buttonGetPicture.UseVisualStyleBackColor = true;
       this.buttonGetPicture.Click += new System.EventHandler(this.buttonGetPicture_Click);
@@ -1091,7 +1102,7 @@
       this.buttonAddPicture.Location = new System.Drawing.Point(9, 82);
       this.buttonAddPicture.Name = "buttonAddPicture";
       this.buttonAddPicture.Size = new System.Drawing.Size(125, 23);
-      this.buttonAddPicture.TabIndex = 20;
+      this.buttonAddPicture.TabIndex = 0;
       this.buttonAddPicture.Text = "Add Picture";
       this.buttonAddPicture.UseVisualStyleBackColor = true;
       this.buttonAddPicture.Click += new System.EventHandler(this.buttonAddPicture_Click);
@@ -1115,7 +1126,7 @@
       this.cbPicType.Location = new System.Drawing.Point(150, 45);
       this.cbPicType.Name = "cbPicType";
       this.cbPicType.Size = new System.Drawing.Size(330, 24);
-      this.cbPicType.TabIndex = 19;
+      this.cbPicType.TabIndex = 7;
       // 
       // pictureBoxCover
       // 
@@ -1133,7 +1144,7 @@
       this.tbPicDesc.Location = new System.Drawing.Point(150, 18);
       this.tbPicDesc.Name = "tbPicDesc";
       this.tbPicDesc.Size = new System.Drawing.Size(330, 22);
-      this.tbPicDesc.TabIndex = 11;
+      this.tbPicDesc.TabIndex = 6;
       // 
       // lblPicDesc
       // 
@@ -1198,6 +1209,7 @@
       this.ckMediaType.Name = "ckMediaType";
       this.ckMediaType.Size = new System.Drawing.Size(15, 14);
       this.ckMediaType.TabIndex = 45;
+      this.ckMediaType.TabStop = false;
       this.ckMediaType.UseVisualStyleBackColor = true;
       // 
       // cbMediaType
@@ -1207,7 +1219,7 @@
       this.cbMediaType.Location = new System.Drawing.Point(205, 15);
       this.cbMediaType.Name = "cbMediaType";
       this.cbMediaType.Size = new System.Drawing.Size(303, 24);
-      this.cbMediaType.TabIndex = 33;
+      this.cbMediaType.TabIndex = 0;
       // 
       // lblMediaType
       // 
@@ -1246,7 +1258,7 @@
       this.tbTitleSort.Location = new System.Drawing.Point(205, 72);
       this.tbTitleSort.Name = "tbTitleSort";
       this.tbTitleSort.Size = new System.Drawing.Size(460, 22);
-      this.tbTitleSort.TabIndex = 42;
+      this.tbTitleSort.TabIndex = 2;
       // 
       // ckTitleSort
       // 
@@ -1258,6 +1270,7 @@
       this.ckTitleSort.Name = "ckTitleSort";
       this.ckTitleSort.Size = new System.Drawing.Size(15, 14);
       this.ckTitleSort.TabIndex = 44;
+      this.ckTitleSort.TabStop = false;
       this.ckTitleSort.UseVisualStyleBackColor = true;
       // 
       // lblTitleSort
@@ -1278,7 +1291,7 @@
       this.tbAlbumSort.Location = new System.Drawing.Point(205, 44);
       this.tbAlbumSort.Name = "tbAlbumSort";
       this.tbAlbumSort.Size = new System.Drawing.Size(460, 22);
-      this.tbAlbumSort.TabIndex = 39;
+      this.tbAlbumSort.TabIndex = 1;
       // 
       // ckAlbumSort
       // 
@@ -1290,6 +1303,7 @@
       this.ckAlbumSort.Name = "ckAlbumSort";
       this.ckAlbumSort.Size = new System.Drawing.Size(15, 14);
       this.ckAlbumSort.TabIndex = 41;
+      this.ckAlbumSort.TabStop = false;
       this.ckAlbumSort.UseVisualStyleBackColor = true;
       // 
       // lblAlbumSort
@@ -1310,7 +1324,7 @@
       this.tbArtistSort.Location = new System.Drawing.Point(205, 16);
       this.tbArtistSort.Name = "tbArtistSort";
       this.tbArtistSort.Size = new System.Drawing.Size(460, 22);
-      this.tbArtistSort.TabIndex = 36;
+      this.tbArtistSort.TabIndex = 0;
       // 
       // ckArtistSort
       // 
@@ -1322,6 +1336,7 @@
       this.ckArtistSort.Name = "ckArtistSort";
       this.ckArtistSort.Size = new System.Drawing.Size(15, 14);
       this.ckArtistSort.TabIndex = 38;
+      this.ckArtistSort.TabStop = false;
       this.ckArtistSort.UseVisualStyleBackColor = true;
       // 
       // lblArtistSort
@@ -1358,7 +1373,7 @@
       this.tbSubTitle.Location = new System.Drawing.Point(205, 48);
       this.tbSubTitle.Name = "tbSubTitle";
       this.tbSubTitle.Size = new System.Drawing.Size(460, 22);
-      this.tbSubTitle.TabIndex = 33;
+      this.tbSubTitle.TabIndex = 1;
       // 
       // ckSubTitle
       // 
@@ -1370,6 +1385,7 @@
       this.ckSubTitle.Name = "ckSubTitle";
       this.ckSubTitle.Size = new System.Drawing.Size(15, 14);
       this.ckSubTitle.TabIndex = 35;
+      this.ckSubTitle.TabStop = false;
       this.ckSubTitle.UseVisualStyleBackColor = true;
       // 
       // lblSubTitle
@@ -1390,7 +1406,7 @@
       this.tbContentGroup.Location = new System.Drawing.Point(205, 20);
       this.tbContentGroup.Name = "tbContentGroup";
       this.tbContentGroup.Size = new System.Drawing.Size(460, 22);
-      this.tbContentGroup.TabIndex = 30;
+      this.tbContentGroup.TabIndex = 0;
       // 
       // ckContentGroup
       // 
@@ -1402,6 +1418,7 @@
       this.ckContentGroup.Name = "ckContentGroup";
       this.ckContentGroup.Size = new System.Drawing.Size(15, 14);
       this.ckContentGroup.TabIndex = 32;
+      this.ckContentGroup.TabStop = false;
       this.ckContentGroup.UseVisualStyleBackColor = true;
       // 
       // lblContentGroup
@@ -1453,7 +1470,7 @@
       this.tbCopyright.Location = new System.Drawing.Point(205, 192);
       this.tbCopyright.Name = "tbCopyright";
       this.tbCopyright.Size = new System.Drawing.Size(460, 22);
-      this.tbCopyright.TabIndex = 27;
+      this.tbCopyright.TabIndex = 6;
       // 
       // ckCopyright
       // 
@@ -1465,6 +1482,7 @@
       this.ckCopyright.Name = "ckCopyright";
       this.ckCopyright.Size = new System.Drawing.Size(15, 14);
       this.ckCopyright.TabIndex = 29;
+      this.ckCopyright.TabStop = false;
       this.ckCopyright.UseVisualStyleBackColor = true;
       // 
       // lblCopyright
@@ -1485,7 +1503,7 @@
       this.tbEncodedBy.Location = new System.Drawing.Point(205, 164);
       this.tbEncodedBy.Name = "tbEncodedBy";
       this.tbEncodedBy.Size = new System.Drawing.Size(460, 22);
-      this.tbEncodedBy.TabIndex = 24;
+      this.tbEncodedBy.TabIndex = 5;
       // 
       // ckEncodedBy
       // 
@@ -1497,6 +1515,7 @@
       this.ckEncodedBy.Name = "ckEncodedBy";
       this.ckEncodedBy.Size = new System.Drawing.Size(15, 14);
       this.ckEncodedBy.TabIndex = 26;
+      this.ckEncodedBy.TabStop = false;
       this.ckEncodedBy.UseVisualStyleBackColor = true;
       // 
       // lblEncodedBy
@@ -1517,7 +1536,7 @@
       this.tbPublisher.Location = new System.Drawing.Point(205, 136);
       this.tbPublisher.Name = "tbPublisher";
       this.tbPublisher.Size = new System.Drawing.Size(460, 22);
-      this.tbPublisher.TabIndex = 21;
+      this.tbPublisher.TabIndex = 4;
       // 
       // ckPublisher
       // 
@@ -1529,6 +1548,7 @@
       this.ckPublisher.Name = "ckPublisher";
       this.ckPublisher.Size = new System.Drawing.Size(15, 14);
       this.ckPublisher.TabIndex = 23;
+      this.ckPublisher.TabStop = false;
       this.ckPublisher.UseVisualStyleBackColor = true;
       // 
       // lblPublisher
@@ -1549,7 +1569,7 @@
       this.tbTextWriter.Location = new System.Drawing.Point(205, 108);
       this.tbTextWriter.Name = "tbTextWriter";
       this.tbTextWriter.Size = new System.Drawing.Size(460, 22);
-      this.tbTextWriter.TabIndex = 18;
+      this.tbTextWriter.TabIndex = 3;
       // 
       // ckTextWriter
       // 
@@ -1561,6 +1581,7 @@
       this.ckTextWriter.Name = "ckTextWriter";
       this.ckTextWriter.Size = new System.Drawing.Size(15, 14);
       this.ckTextWriter.TabIndex = 20;
+      this.ckTextWriter.TabStop = false;
       this.ckTextWriter.UseVisualStyleBackColor = true;
       // 
       // lblTextWriter
@@ -1581,7 +1602,7 @@
       this.tbInterpretedBy.Location = new System.Drawing.Point(205, 80);
       this.tbInterpretedBy.Name = "tbInterpretedBy";
       this.tbInterpretedBy.Size = new System.Drawing.Size(460, 22);
-      this.tbInterpretedBy.TabIndex = 15;
+      this.tbInterpretedBy.TabIndex = 2;
       // 
       // ckInterpretedBy
       // 
@@ -1593,6 +1614,7 @@
       this.ckInterpretedBy.Name = "ckInterpretedBy";
       this.ckInterpretedBy.Size = new System.Drawing.Size(15, 14);
       this.ckInterpretedBy.TabIndex = 17;
+      this.ckInterpretedBy.TabStop = false;
       this.ckInterpretedBy.UseVisualStyleBackColor = true;
       // 
       // lblInterpretedBy
@@ -1613,7 +1635,7 @@
       this.tbComposer.Location = new System.Drawing.Point(205, 52);
       this.tbComposer.Name = "tbComposer";
       this.tbComposer.Size = new System.Drawing.Size(460, 22);
-      this.tbComposer.TabIndex = 12;
+      this.tbComposer.TabIndex = 1;
       // 
       // ckComposer
       // 
@@ -1625,6 +1647,7 @@
       this.ckComposer.Name = "ckComposer";
       this.ckComposer.Size = new System.Drawing.Size(15, 14);
       this.ckComposer.TabIndex = 14;
+      this.ckComposer.TabStop = false;
       this.ckComposer.UseVisualStyleBackColor = true;
       // 
       // lblComposer
@@ -1645,7 +1668,7 @@
       this.tbConductor.Location = new System.Drawing.Point(205, 24);
       this.tbConductor.Name = "tbConductor";
       this.tbConductor.Size = new System.Drawing.Size(460, 22);
-      this.tbConductor.TabIndex = 9;
+      this.tbConductor.TabIndex = 0;
       // 
       // ckConductor
       // 
@@ -1657,6 +1680,7 @@
       this.ckConductor.Name = "ckConductor";
       this.ckConductor.Size = new System.Drawing.Size(15, 14);
       this.ckConductor.TabIndex = 11;
+      this.ckConductor.TabStop = false;
       this.ckConductor.UseVisualStyleBackColor = true;
       // 
       // lblConductor
@@ -1717,7 +1741,7 @@
       this.tbOriginalRelease.Location = new System.Drawing.Point(205, 164);
       this.tbOriginalRelease.Name = "tbOriginalRelease";
       this.tbOriginalRelease.Size = new System.Drawing.Size(94, 22);
-      this.tbOriginalRelease.TabIndex = 24;
+      this.tbOriginalRelease.TabIndex = 5;
       // 
       // ckOriginalRelease
       // 
@@ -1729,6 +1753,7 @@
       this.ckOriginalRelease.Name = "ckOriginalRelease";
       this.ckOriginalRelease.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalRelease.TabIndex = 26;
+      this.ckOriginalRelease.TabStop = false;
       this.ckOriginalRelease.UseVisualStyleBackColor = true;
       // 
       // lblOriginalRelease
@@ -1749,7 +1774,7 @@
       this.tbOriginalOwner.Location = new System.Drawing.Point(205, 133);
       this.tbOriginalOwner.Name = "tbOriginalOwner";
       this.tbOriginalOwner.Size = new System.Drawing.Size(460, 22);
-      this.tbOriginalOwner.TabIndex = 21;
+      this.tbOriginalOwner.TabIndex = 4;
       // 
       // ckOriginalOwner
       // 
@@ -1761,6 +1786,7 @@
       this.ckOriginalOwner.Name = "ckOriginalOwner";
       this.ckOriginalOwner.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalOwner.TabIndex = 23;
+      this.ckOriginalOwner.TabStop = false;
       this.ckOriginalOwner.UseVisualStyleBackColor = true;
       // 
       // lblOriginalOwner
@@ -1781,7 +1807,7 @@
       this.tbOriginalArtist.Location = new System.Drawing.Point(205, 105);
       this.tbOriginalArtist.Name = "tbOriginalArtist";
       this.tbOriginalArtist.Size = new System.Drawing.Size(460, 22);
-      this.tbOriginalArtist.TabIndex = 18;
+      this.tbOriginalArtist.TabIndex = 3;
       // 
       // ckOriginalArtist
       // 
@@ -1793,6 +1819,7 @@
       this.ckOriginalArtist.Name = "ckOriginalArtist";
       this.ckOriginalArtist.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalArtist.TabIndex = 20;
+      this.ckOriginalArtist.TabStop = false;
       this.ckOriginalArtist.UseVisualStyleBackColor = true;
       // 
       // lblOriginalArtist
@@ -1813,7 +1840,7 @@
       this.tbOriginalLyricsWriter.Location = new System.Drawing.Point(205, 77);
       this.tbOriginalLyricsWriter.Name = "tbOriginalLyricsWriter";
       this.tbOriginalLyricsWriter.Size = new System.Drawing.Size(460, 22);
-      this.tbOriginalLyricsWriter.TabIndex = 15;
+      this.tbOriginalLyricsWriter.TabIndex = 2;
       // 
       // ckOriginalLyricsWriter
       // 
@@ -1825,6 +1852,7 @@
       this.ckOriginalLyricsWriter.Name = "ckOriginalLyricsWriter";
       this.ckOriginalLyricsWriter.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalLyricsWriter.TabIndex = 17;
+      this.ckOriginalLyricsWriter.TabStop = false;
       this.ckOriginalLyricsWriter.UseVisualStyleBackColor = true;
       // 
       // lblOriginalLyricsWriter
@@ -1845,7 +1873,7 @@
       this.tbOriginalFileName.Location = new System.Drawing.Point(205, 49);
       this.tbOriginalFileName.Name = "tbOriginalFileName";
       this.tbOriginalFileName.Size = new System.Drawing.Size(460, 22);
-      this.tbOriginalFileName.TabIndex = 12;
+      this.tbOriginalFileName.TabIndex = 1;
       // 
       // ckOriginalFileName
       // 
@@ -1857,6 +1885,7 @@
       this.ckOriginalFileName.Name = "ckOriginalFileName";
       this.ckOriginalFileName.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalFileName.TabIndex = 14;
+      this.ckOriginalFileName.TabStop = false;
       this.ckOriginalFileName.UseVisualStyleBackColor = true;
       // 
       // lblOriginalFileName
@@ -1877,7 +1906,7 @@
       this.tbOriginalAlbum.Location = new System.Drawing.Point(205, 21);
       this.tbOriginalAlbum.Name = "tbOriginalAlbum";
       this.tbOriginalAlbum.Size = new System.Drawing.Size(460, 22);
-      this.tbOriginalAlbum.TabIndex = 9;
+      this.tbOriginalAlbum.TabIndex = 0;
       // 
       // ckOriginalAlbum
       // 
@@ -1889,6 +1918,7 @@
       this.ckOriginalAlbum.Name = "ckOriginalAlbum";
       this.ckOriginalAlbum.Size = new System.Drawing.Size(15, 14);
       this.ckOriginalAlbum.TabIndex = 11;
+      this.ckOriginalAlbum.TabStop = false;
       this.ckOriginalAlbum.UseVisualStyleBackColor = true;
       // 
       // lblOriginalAlbum
@@ -1957,6 +1987,7 @@
       this.ckInvolvedMusician.Name = "ckInvolvedMusician";
       this.ckInvolvedMusician.Size = new System.Drawing.Size(15, 14);
       this.ckInvolvedMusician.TabIndex = 24;
+      this.ckInvolvedMusician.TabStop = false;
       this.ckInvolvedMusician.UseVisualStyleBackColor = true;
       // 
       // buttonRemoveMusician
@@ -1966,7 +1997,7 @@
       this.buttonRemoveMusician.Location = new System.Drawing.Point(497, 50);
       this.buttonRemoveMusician.Name = "buttonRemoveMusician";
       this.buttonRemoveMusician.Size = new System.Drawing.Size(184, 25);
-      this.buttonRemoveMusician.TabIndex = 17;
+      this.buttonRemoveMusician.TabIndex = 3;
       this.buttonRemoveMusician.Text = "Remove Musician";
       this.buttonRemoveMusician.UseVisualStyleBackColor = true;
       this.buttonRemoveMusician.Click += new System.EventHandler(this.buttonRemoveMusician_Click);
@@ -1978,7 +2009,7 @@
       this.buttonAddMusician.Location = new System.Drawing.Point(498, 19);
       this.buttonAddMusician.Name = "buttonAddMusician";
       this.buttonAddMusician.Size = new System.Drawing.Size(183, 25);
-      this.buttonAddMusician.TabIndex = 16;
+      this.buttonAddMusician.TabIndex = 2;
       this.buttonAddMusician.Text = "Add Musician";
       this.buttonAddMusician.UseVisualStyleBackColor = true;
       this.buttonAddMusician.Click += new System.EventHandler(this.buttonAddMusician_Click);
@@ -2025,7 +2056,7 @@
       this.tbMusicianName.Location = new System.Drawing.Point(187, 51);
       this.tbMusicianName.Name = "tbMusicianName";
       this.tbMusicianName.Size = new System.Drawing.Size(304, 22);
-      this.tbMusicianName.TabIndex = 13;
+      this.tbMusicianName.TabIndex = 1;
       // 
       // lblMusicianName
       // 
@@ -2045,7 +2076,7 @@
       this.tbMusicianInstrument.Location = new System.Drawing.Point(187, 21);
       this.tbMusicianInstrument.Name = "tbMusicianInstrument";
       this.tbMusicianInstrument.Size = new System.Drawing.Size(304, 22);
-      this.tbMusicianInstrument.TabIndex = 11;
+      this.tbMusicianInstrument.TabIndex = 0;
       // 
       // lblMusicianInstrument
       // 
@@ -2087,6 +2118,7 @@
       this.ckInvolvedPerson.Name = "ckInvolvedPerson";
       this.ckInvolvedPerson.Size = new System.Drawing.Size(15, 14);
       this.ckInvolvedPerson.TabIndex = 24;
+      this.ckInvolvedPerson.TabStop = false;
       this.ckInvolvedPerson.UseVisualStyleBackColor = true;
       // 
       // buttonRemovePerson
@@ -2096,7 +2128,7 @@
       this.buttonRemovePerson.Location = new System.Drawing.Point(497, 50);
       this.buttonRemovePerson.Name = "buttonRemovePerson";
       this.buttonRemovePerson.Size = new System.Drawing.Size(184, 25);
-      this.buttonRemovePerson.TabIndex = 17;
+      this.buttonRemovePerson.TabIndex = 3;
       this.buttonRemovePerson.Text = "Remove Person";
       this.buttonRemovePerson.UseVisualStyleBackColor = true;
       this.buttonRemovePerson.Click += new System.EventHandler(this.buttonRemovePerson_Click);
@@ -2108,7 +2140,7 @@
       this.buttonAddInvolvedPerson.Location = new System.Drawing.Point(498, 19);
       this.buttonAddInvolvedPerson.Name = "buttonAddInvolvedPerson";
       this.buttonAddInvolvedPerson.Size = new System.Drawing.Size(183, 25);
-      this.buttonAddInvolvedPerson.TabIndex = 16;
+      this.buttonAddInvolvedPerson.TabIndex = 2;
       this.buttonAddInvolvedPerson.Text = "Add Person";
       this.buttonAddInvolvedPerson.UseVisualStyleBackColor = true;
       this.buttonAddInvolvedPerson.Click += new System.EventHandler(this.buttonAddInvolvedPerson_Click);
@@ -2155,7 +2187,7 @@
       this.tbInvolvedPersonName.Location = new System.Drawing.Point(187, 51);
       this.tbInvolvedPersonName.Name = "tbInvolvedPersonName";
       this.tbInvolvedPersonName.Size = new System.Drawing.Size(304, 22);
-      this.tbInvolvedPersonName.TabIndex = 13;
+      this.tbInvolvedPersonName.TabIndex = 1;
       // 
       // lblInvolvedPersonName
       // 
@@ -2175,7 +2207,7 @@
       this.tbInvolvedPersonFunction.Location = new System.Drawing.Point(187, 21);
       this.tbInvolvedPersonFunction.Name = "tbInvolvedPersonFunction";
       this.tbInvolvedPersonFunction.Size = new System.Drawing.Size(304, 22);
-      this.tbInvolvedPersonFunction.TabIndex = 11;
+      this.tbInvolvedPersonFunction.TabIndex = 0;
       // 
       // lblInvolvedPersonFunction
       // 
@@ -2241,7 +2273,7 @@
       this.tbCommercialInformationUrl.Location = new System.Drawing.Point(205, 220);
       this.tbCommercialInformationUrl.Name = "tbCommercialInformationUrl";
       this.tbCommercialInformationUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbCommercialInformationUrl.TabIndex = 30;
+      this.tbCommercialInformationUrl.TabIndex = 7;
       // 
       // ckCommercialInformationUrl
       // 
@@ -2253,6 +2285,7 @@
       this.ckCommercialInformationUrl.Name = "ckCommercialInformationUrl";
       this.ckCommercialInformationUrl.Size = new System.Drawing.Size(15, 14);
       this.ckCommercialInformationUrl.TabIndex = 32;
+      this.ckCommercialInformationUrl.TabStop = false;
       this.ckCommercialInformationUrl.UseVisualStyleBackColor = true;
       // 
       // lblCommercialInformationUrl
@@ -2273,7 +2306,7 @@
       this.tbOfficialPublisherUrl.Location = new System.Drawing.Point(205, 192);
       this.tbOfficialPublisherUrl.Name = "tbOfficialPublisherUrl";
       this.tbOfficialPublisherUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialPublisherUrl.TabIndex = 27;
+      this.tbOfficialPublisherUrl.TabIndex = 6;
       // 
       // ckOfficialPublisherUrl
       // 
@@ -2285,6 +2318,7 @@
       this.ckOfficialPublisherUrl.Name = "ckOfficialPublisherUrl";
       this.ckOfficialPublisherUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialPublisherUrl.TabIndex = 29;
+      this.ckOfficialPublisherUrl.TabStop = false;
       this.ckOfficialPublisherUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialPublisherUrl
@@ -2305,7 +2339,7 @@
       this.tbOfficialPaymentUrl.Location = new System.Drawing.Point(205, 163);
       this.tbOfficialPaymentUrl.Name = "tbOfficialPaymentUrl";
       this.tbOfficialPaymentUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialPaymentUrl.TabIndex = 24;
+      this.tbOfficialPaymentUrl.TabIndex = 5;
       // 
       // ckOfficialPaymentUrl
       // 
@@ -2317,6 +2351,7 @@
       this.ckOfficialPaymentUrl.Name = "ckOfficialPaymentUrl";
       this.ckOfficialPaymentUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialPaymentUrl.TabIndex = 26;
+      this.ckOfficialPaymentUrl.TabStop = false;
       this.ckOfficialPaymentUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialPaymentUrl
@@ -2337,7 +2372,7 @@
       this.tbOfficialInternetRadioUrl.Location = new System.Drawing.Point(205, 133);
       this.tbOfficialInternetRadioUrl.Name = "tbOfficialInternetRadioUrl";
       this.tbOfficialInternetRadioUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialInternetRadioUrl.TabIndex = 21;
+      this.tbOfficialInternetRadioUrl.TabIndex = 4;
       // 
       // ckOfficialInternetRadioUrl
       // 
@@ -2349,6 +2384,7 @@
       this.ckOfficialInternetRadioUrl.Name = "ckOfficialInternetRadioUrl";
       this.ckOfficialInternetRadioUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialInternetRadioUrl.TabIndex = 23;
+      this.ckOfficialInternetRadioUrl.TabStop = false;
       this.ckOfficialInternetRadioUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialInternetRadioUrl
@@ -2369,7 +2405,7 @@
       this.tbOfficialAudioSourceUrl.Location = new System.Drawing.Point(205, 105);
       this.tbOfficialAudioSourceUrl.Name = "tbOfficialAudioSourceUrl";
       this.tbOfficialAudioSourceUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialAudioSourceUrl.TabIndex = 18;
+      this.tbOfficialAudioSourceUrl.TabIndex = 3;
       // 
       // ckOfficialAudioSourceUrl
       // 
@@ -2381,6 +2417,7 @@
       this.ckOfficialAudioSourceUrl.Name = "ckOfficialAudioSourceUrl";
       this.ckOfficialAudioSourceUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialAudioSourceUrl.TabIndex = 20;
+      this.ckOfficialAudioSourceUrl.TabStop = false;
       this.ckOfficialAudioSourceUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialAudioSourceUrl
@@ -2401,7 +2438,7 @@
       this.tbOfficialArtistUrl.Location = new System.Drawing.Point(205, 77);
       this.tbOfficialArtistUrl.Name = "tbOfficialArtistUrl";
       this.tbOfficialArtistUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialArtistUrl.TabIndex = 15;
+      this.tbOfficialArtistUrl.TabIndex = 2;
       // 
       // ckOfficialArtistUrl
       // 
@@ -2413,6 +2450,7 @@
       this.ckOfficialArtistUrl.Name = "ckOfficialArtistUrl";
       this.ckOfficialArtistUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialArtistUrl.TabIndex = 17;
+      this.ckOfficialArtistUrl.TabStop = false;
       this.ckOfficialArtistUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialArtistUrl
@@ -2433,7 +2471,7 @@
       this.tbOfficialAudioFileUrl.Location = new System.Drawing.Point(205, 49);
       this.tbOfficialAudioFileUrl.Name = "tbOfficialAudioFileUrl";
       this.tbOfficialAudioFileUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbOfficialAudioFileUrl.TabIndex = 12;
+      this.tbOfficialAudioFileUrl.TabIndex = 1;
       // 
       // ckOfficialAudioFileUrl
       // 
@@ -2445,6 +2483,7 @@
       this.ckOfficialAudioFileUrl.Name = "ckOfficialAudioFileUrl";
       this.ckOfficialAudioFileUrl.Size = new System.Drawing.Size(15, 14);
       this.ckOfficialAudioFileUrl.TabIndex = 14;
+      this.ckOfficialAudioFileUrl.TabStop = false;
       this.ckOfficialAudioFileUrl.UseVisualStyleBackColor = true;
       // 
       // lbOfficialAudioFileUrl
@@ -2465,7 +2504,7 @@
       this.tbCopyrightUrl.Location = new System.Drawing.Point(205, 21);
       this.tbCopyrightUrl.Name = "tbCopyrightUrl";
       this.tbCopyrightUrl.Size = new System.Drawing.Size(460, 22);
-      this.tbCopyrightUrl.TabIndex = 9;
+      this.tbCopyrightUrl.TabIndex = 0;
       // 
       // ckCopyrightUrl
       // 
@@ -2477,6 +2516,7 @@
       this.ckCopyrightUrl.Name = "ckCopyrightUrl";
       this.ckCopyrightUrl.Size = new System.Drawing.Size(15, 14);
       this.ckCopyrightUrl.TabIndex = 11;
+      this.ckCopyrightUrl.TabStop = false;
       this.ckCopyrightUrl.UseVisualStyleBackColor = true;
       // 
       // lblCopyrightUrl
@@ -2531,7 +2571,7 @@
       this.btGetLyricsFromText.Location = new System.Drawing.Point(26, 246);
       this.btGetLyricsFromText.Name = "btGetLyricsFromText";
       this.btGetLyricsFromText.Size = new System.Drawing.Size(307, 23);
-      this.btGetLyricsFromText.TabIndex = 11;
+      this.btGetLyricsFromText.TabIndex = 1;
       this.btGetLyricsFromText.Text = "Get Lyrics from Text File";
       this.btGetLyricsFromText.UseVisualStyleBackColor = true;
       this.btGetLyricsFromText.Click += new System.EventHandler(this.btGetLyricsFromText_Click);
@@ -2544,7 +2584,7 @@
       this.ckRemoveLyrics.Location = new System.Drawing.Point(10, 313);
       this.ckRemoveLyrics.Name = "ckRemoveLyrics";
       this.ckRemoveLyrics.Size = new System.Drawing.Size(193, 20);
-      this.ckRemoveLyrics.TabIndex = 10;
+      this.ckRemoveLyrics.TabIndex = 5;
       this.ckRemoveLyrics.Text = "Remove existing Lyrics First";
       this.ckRemoveLyrics.UseVisualStyleBackColor = true;
       // 
@@ -2555,7 +2595,7 @@
       this.lblLyricsMoveTop.Location = new System.Drawing.Point(477, 275);
       this.lblLyricsMoveTop.Name = "lblLyricsMoveTop";
       this.lblLyricsMoveTop.Size = new System.Drawing.Size(189, 23);
-      this.lblLyricsMoveTop.TabIndex = 9;
+      this.lblLyricsMoveTop.TabIndex = 4;
       this.lblLyricsMoveTop.Text = "Move to Top";
       this.lblLyricsMoveTop.UseVisualStyleBackColor = true;
       this.lblLyricsMoveTop.Click += new System.EventHandler(this.lblLyricsMoveTop_Click);
@@ -2567,7 +2607,7 @@
       this.btRemoveLyrics.Location = new System.Drawing.Point(252, 275);
       this.btRemoveLyrics.Name = "btRemoveLyrics";
       this.btRemoveLyrics.Size = new System.Drawing.Size(189, 23);
-      this.btRemoveLyrics.TabIndex = 8;
+      this.btRemoveLyrics.TabIndex = 3;
       this.btRemoveLyrics.Text = "Remove Lyrics";
       this.btRemoveLyrics.UseVisualStyleBackColor = true;
       this.btRemoveLyrics.Click += new System.EventHandler(this.btRemoveLyrics_Click);
@@ -2579,7 +2619,7 @@
       this.btAddLyrics.Location = new System.Drawing.Point(26, 275);
       this.btAddLyrics.Name = "btAddLyrics";
       this.btAddLyrics.Size = new System.Drawing.Size(189, 23);
-      this.btAddLyrics.TabIndex = 7;
+      this.btAddLyrics.TabIndex = 2;
       this.btAddLyrics.Text = "Add Lyrics";
       this.btAddLyrics.UseVisualStyleBackColor = true;
       this.btAddLyrics.Click += new System.EventHandler(this.btAddLyrics_Click);
@@ -2636,7 +2676,7 @@
       this.tbLyrics.Name = "tbLyrics";
       this.tbLyrics.ScrollBars = System.Windows.Forms.ScrollBars.Both;
       this.tbLyrics.Size = new System.Drawing.Size(667, 153);
-      this.tbLyrics.TabIndex = 4;
+      this.tbLyrics.TabIndex = 0;
       // 
       // lblLyricsLanguage
       // 
@@ -2667,7 +2707,7 @@
       this.cbLyricsLanguage.Location = new System.Drawing.Point(200, 46);
       this.cbLyricsLanguage.Name = "cbLyricsLanguage";
       this.cbLyricsLanguage.Size = new System.Drawing.Size(280, 24);
-      this.cbLyricsLanguage.TabIndex = 1;
+      this.cbLyricsLanguage.TabIndex = 7;
       // 
       // cbLyricsDescriptor
       // 
@@ -2675,7 +2715,7 @@
       this.cbLyricsDescriptor.Location = new System.Drawing.Point(200, 15);
       this.cbLyricsDescriptor.Name = "cbLyricsDescriptor";
       this.cbLyricsDescriptor.Size = new System.Drawing.Size(280, 24);
-      this.cbLyricsDescriptor.TabIndex = 0;
+      this.cbLyricsDescriptor.TabIndex = 6;
       // 
       // tabPageRating
       // 
@@ -2719,7 +2759,7 @@
       this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 157);
       this.ckRemoveExistingRatings.Name = "ckRemoveExistingRatings";
       this.ckRemoveExistingRatings.Size = new System.Drawing.Size(204, 20);
-      this.ckRemoveExistingRatings.TabIndex = 15;
+      this.ckRemoveExistingRatings.TabIndex = 6;
       this.ckRemoveExistingRatings.Text = "Remove existing Ratings First";
       this.ckRemoveExistingRatings.UseVisualStyleBackColor = true;
       // 
@@ -2745,7 +2785,7 @@
             0});
       this.numericUpDownPlayCounter.Name = "numericUpDownPlayCounter";
       this.numericUpDownPlayCounter.Size = new System.Drawing.Size(49, 22);
-      this.numericUpDownPlayCounter.TabIndex = 13;
+      this.numericUpDownPlayCounter.TabIndex = 2;
       // 
       // numericUpDownRating
       // 
@@ -2757,14 +2797,14 @@
             0});
       this.numericUpDownRating.Name = "numericUpDownRating";
       this.numericUpDownRating.Size = new System.Drawing.Size(49, 22);
-      this.numericUpDownRating.TabIndex = 12;
+      this.numericUpDownRating.TabIndex = 1;
       // 
       // tbRatingUser
       // 
       this.tbRatingUser.Location = new System.Drawing.Point(200, 15);
       this.tbRatingUser.Name = "tbRatingUser";
       this.tbRatingUser.Size = new System.Drawing.Size(280, 22);
-      this.tbRatingUser.TabIndex = 11;
+      this.tbRatingUser.TabIndex = 0;
       // 
       // lblRatingPlayCounter
       // 
@@ -2784,7 +2824,7 @@
       this.btRatingMoveTop.Location = new System.Drawing.Point(528, 125);
       this.btRatingMoveTop.Name = "btRatingMoveTop";
       this.btRatingMoveTop.Size = new System.Drawing.Size(152, 23);
-      this.btRatingMoveTop.TabIndex = 9;
+      this.btRatingMoveTop.TabIndex = 5;
       this.btRatingMoveTop.Text = "Move to Top";
       this.btRatingMoveTop.UseVisualStyleBackColor = true;
       this.btRatingMoveTop.Click += new System.EventHandler(this.btRatingMoveTop_Click);
@@ -2796,7 +2836,7 @@
       this.btRemoveRating.Location = new System.Drawing.Point(350, 125);
       this.btRemoveRating.Name = "btRemoveRating";
       this.btRemoveRating.Size = new System.Drawing.Size(158, 23);
-      this.btRemoveRating.TabIndex = 8;
+      this.btRemoveRating.TabIndex = 4;
       this.btRemoveRating.Text = "Remove Rating";
       this.btRemoveRating.UseVisualStyleBackColor = true;
       this.btRemoveRating.Click += new System.EventHandler(this.btRemoveRating_Click);
@@ -2808,7 +2848,7 @@
       this.btAddRating.Location = new System.Drawing.Point(200, 125);
       this.btAddRating.Name = "btAddRating";
       this.btAddRating.Size = new System.Drawing.Size(135, 23);
-      this.btAddRating.TabIndex = 7;
+      this.btAddRating.TabIndex = 3;
       this.btAddRating.Text = "Add Rating";
       this.btAddRating.UseVisualStyleBackColor = true;
       this.btAddRating.Click += new System.EventHandler(this.btAddRating_Click);

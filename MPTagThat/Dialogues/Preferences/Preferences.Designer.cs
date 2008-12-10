@@ -351,7 +351,7 @@ namespace MPTagThat.Preferences
       this.tbKeyDescription.Location = new System.Drawing.Point(137, 342);
       this.tbKeyDescription.Name = "tbKeyDescription";
       this.tbKeyDescription.Size = new System.Drawing.Size(343, 20);
-      this.tbKeyDescription.TabIndex = 4;
+      this.tbKeyDescription.TabIndex = 1;
       // 
       // lbKeyDescription
       // 
@@ -371,7 +371,7 @@ namespace MPTagThat.Preferences
       this.tbAction.Name = "tbAction";
       this.tbAction.ReadOnly = true;
       this.tbAction.Size = new System.Drawing.Size(343, 20);
-      this.tbAction.TabIndex = 2;
+      this.tbAction.TabIndex = 0;
       // 
       // lbKeyAction
       // 
@@ -416,7 +416,7 @@ namespace MPTagThat.Preferences
       this.comboBoxDebugLevel.Location = new System.Drawing.Point(137, 77);
       this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
       this.comboBoxDebugLevel.Size = new System.Drawing.Size(168, 21);
-      this.comboBoxDebugLevel.TabIndex = 6;
+      this.comboBoxDebugLevel.TabIndex = 2;
       // 
       // lbDebugLevel
       // 
@@ -447,7 +447,7 @@ namespace MPTagThat.Preferences
       this.comboBoxThemes.Location = new System.Drawing.Point(137, 49);
       this.comboBoxThemes.Name = "comboBoxThemes";
       this.comboBoxThemes.Size = new System.Drawing.Size(343, 21);
-      this.comboBoxThemes.TabIndex = 3;
+      this.comboBoxThemes.TabIndex = 1;
       this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
       // comboBoxLanguage
@@ -457,7 +457,7 @@ namespace MPTagThat.Preferences
       this.comboBoxLanguage.Location = new System.Drawing.Point(137, 20);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
       this.comboBoxLanguage.Size = new System.Drawing.Size(343, 21);
-      this.comboBoxLanguage.TabIndex = 1;
+      this.comboBoxLanguage.TabIndex = 0;
       // 
       // lbLanguage
       // 
@@ -505,7 +505,7 @@ namespace MPTagThat.Preferences
       this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(15, 48);
       this.ckUseCaseConversionWhenSaving.Name = "ckUseCaseConversionWhenSaving";
       this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(208, 17);
-      this.ckUseCaseConversionWhenSaving.TabIndex = 2;
+      this.ckUseCaseConversionWhenSaving.TabIndex = 1;
       this.ckUseCaseConversionWhenSaving.Text = "Use case conversion settings on Save";
       this.ckUseCaseConversionWhenSaving.UseVisualStyleBackColor = true;
       // 
@@ -517,7 +517,7 @@ namespace MPTagThat.Preferences
       this.ckCopyArtistToAlbumArtist.Location = new System.Drawing.Point(15, 25);
       this.ckCopyArtistToAlbumArtist.Name = "ckCopyArtistToAlbumArtist";
       this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(203, 17);
-      this.ckCopyArtistToAlbumArtist.TabIndex = 1;
+      this.ckCopyArtistToAlbumArtist.TabIndex = 0;
       this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
       this.ckCopyArtistToAlbumArtist.UseVisualStyleBackColor = true;
       // 
@@ -654,7 +654,7 @@ namespace MPTagThat.Preferences
       this.radioButtonUseV4.Location = new System.Drawing.Point(288, 26);
       this.radioButtonUseV4.Name = "radioButtonUseV4";
       this.radioButtonUseV4.Size = new System.Drawing.Size(178, 17);
-      this.radioButtonUseV4.TabIndex = 4;
+      this.radioButtonUseV4.TabIndex = 1;
       this.radioButtonUseV4.Text = "Use Version 2.4 for ID3 V2 Tags";
       this.radioButtonUseV4.UseVisualStyleBackColor = true;
       // 
@@ -667,7 +667,7 @@ namespace MPTagThat.Preferences
       this.radioButtonUseV3.Location = new System.Drawing.Point(17, 26);
       this.radioButtonUseV3.Name = "radioButtonUseV3";
       this.radioButtonUseV3.Size = new System.Drawing.Size(178, 17);
-      this.radioButtonUseV3.TabIndex = 3;
+      this.radioButtonUseV3.TabIndex = 0;
       this.radioButtonUseV3.TabStop = true;
       this.radioButtonUseV3.Text = "Use Version 2.3 for ID3 V2 Tags";
       this.radioButtonUseV3.UseVisualStyleBackColor = true;
@@ -684,7 +684,7 @@ namespace MPTagThat.Preferences
       this.groupBoxID3Update.Location = new System.Drawing.Point(17, 49);
       this.groupBoxID3Update.Name = "groupBoxID3Update";
       this.groupBoxID3Update.Size = new System.Drawing.Size(542, 97);
-      this.groupBoxID3Update.TabIndex = 0;
+      this.groupBoxID3Update.TabIndex = 1;
       this.groupBoxID3Update.TabStop = false;
       this.groupBoxID3Update.Text = "Update";
       // 

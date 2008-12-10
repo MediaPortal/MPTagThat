@@ -33,9 +33,9 @@
       this.tbYear = new System.Windows.Forms.TextBox();
       this.cbGenre = new System.Windows.Forms.ComboBox();
       this.lvAlbumTracks = new System.Windows.Forms.ListView();
-      this.lvDiscTracks = new System.Windows.Forms.ListView();
       this.chTrackNum = new System.Windows.Forms.ColumnHeader();
       this.chTitle = new System.Windows.Forms.ColumnHeader();
+      this.lvDiscTracks = new System.Windows.Forms.ListView();
       this.chFileName = new System.Windows.Forms.ColumnHeader();
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
@@ -56,21 +56,21 @@
       this.tbArtist.Location = new System.Drawing.Point(211, 25);
       this.tbArtist.Name = "tbArtist";
       this.tbArtist.Size = new System.Drawing.Size(306, 20);
-      this.tbArtist.TabIndex = 4;
+      this.tbArtist.TabIndex = 1;
       // 
       // tbAlbum
       // 
       this.tbAlbum.Location = new System.Drawing.Point(211, 57);
       this.tbAlbum.Name = "tbAlbum";
       this.tbAlbum.Size = new System.Drawing.Size(306, 20);
-      this.tbAlbum.TabIndex = 5;
+      this.tbAlbum.TabIndex = 2;
       // 
       // tbYear
       // 
       this.tbYear.Location = new System.Drawing.Point(211, 89);
       this.tbYear.Name = "tbYear";
       this.tbYear.Size = new System.Drawing.Size(89, 20);
-      this.tbYear.TabIndex = 6;
+      this.tbYear.TabIndex = 3;
       // 
       // cbGenre
       // 
@@ -78,7 +78,7 @@
       this.cbGenre.Location = new System.Drawing.Point(211, 121);
       this.cbGenre.Name = "cbGenre";
       this.cbGenre.Size = new System.Drawing.Size(306, 21);
-      this.cbGenre.TabIndex = 7;
+      this.cbGenre.TabIndex = 4;
       // 
       // lvAlbumTracks
       // 
@@ -94,6 +94,16 @@
       this.lvAlbumTracks.UseCompatibleStateImageBehavior = false;
       this.lvAlbumTracks.View = System.Windows.Forms.View.Details;
       // 
+      // chTrackNum
+      // 
+      this.chTrackNum.Text = "#";
+      this.chTrackNum.Width = 43;
+      // 
+      // chTitle
+      // 
+      this.chTitle.Text = "Title";
+      this.chTitle.Width = 243;
+      // 
       // lvDiscTracks
       // 
       this.lvDiscTracks.CheckBoxes = true;
@@ -107,16 +117,6 @@
       this.lvDiscTracks.TabIndex = 11;
       this.lvDiscTracks.UseCompatibleStateImageBehavior = false;
       this.lvDiscTracks.View = System.Windows.Forms.View.Details;
-      // 
-      // chTrackNum
-      // 
-      this.chTrackNum.Text = "#";
-      this.chTrackNum.Width = 43;
-      // 
-      // chTitle
-      // 
-      this.chTitle.Text = "Title";
-      this.chTitle.Width = 243;
       // 
       // chFileName
       // 
@@ -141,7 +141,7 @@
       this.btCancel.Location = new System.Drawing.Point(417, 536);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(125, 43);
-      this.btCancel.TabIndex = 14;
+      this.btCancel.TabIndex = 6;
       this.btCancel.Text = "Cancel";
       this.btCancel.UseVisualStyleBackColor = true;
       // 
@@ -153,7 +153,7 @@
       this.btContinue.Location = new System.Drawing.Point(214, 536);
       this.btContinue.Name = "btContinue";
       this.btContinue.Size = new System.Drawing.Size(125, 43);
-      this.btContinue.TabIndex = 13;
+      this.btContinue.TabIndex = 5;
       this.btContinue.Text = "Continue >";
       this.btContinue.UseVisualStyleBackColor = true;
       // 
@@ -230,7 +230,7 @@
       this.btUp.Location = new System.Drawing.Point(716, 283);
       this.btUp.Name = "btUp";
       this.btUp.Size = new System.Drawing.Size(115, 49);
-      this.btUp.TabIndex = 15;
+      this.btUp.TabIndex = 7;
       this.btUp.Text = "Move Up";
       this.btUp.UseVisualStyleBackColor = true;
       this.btUp.Click += new System.EventHandler(this.btUp_Click);
@@ -242,7 +242,7 @@
       this.btDown.Location = new System.Drawing.Point(716, 369);
       this.btDown.Name = "btDown";
       this.btDown.Size = new System.Drawing.Size(115, 49);
-      this.btDown.TabIndex = 16;
+      this.btDown.TabIndex = 8;
       this.btDown.Text = "Move Down";
       this.btDown.UseVisualStyleBackColor = true;
       this.btDown.Click += new System.EventHandler(this.btDown_Click);
