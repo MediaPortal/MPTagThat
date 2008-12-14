@@ -54,6 +54,8 @@ namespace MPTagThat.Core
 
     private bool _tagsCopyArtist;
     private bool _tagsUseCaseConversion;
+    private bool _tagsUseMediaPortalDatabase;
+    private string _tagsMediaPortalDatabase;
     private int _playerSpectrumIndex;
     #endregion
 
@@ -185,6 +187,20 @@ namespace MPTagThat.Core
     {
       get { return _tagsUseCaseConversion; }
       set { _tagsUseCaseConversion = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool UseMediaPortalDatabase
+    {
+      get { return _tagsUseMediaPortalDatabase; }
+      set { _tagsUseMediaPortalDatabase = value; }
+    }
+
+    [Setting(SettingScope.User, "")]
+    public string MediaPortalDatabase
+    {
+      get { return _tagsMediaPortalDatabase; }
+      set { _tagsMediaPortalDatabase = value; }
     }
     #endregion
 

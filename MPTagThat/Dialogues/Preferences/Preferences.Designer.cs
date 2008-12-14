@@ -53,6 +53,9 @@ namespace MPTagThat.Preferences
       this.lbLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageTags = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.buttonMusicDatabaseBrowse = new MPTagThat.Core.WinControls.MPTButton();
+      this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
+      this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -486,16 +489,50 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxTagsGeneral
       // 
+      this.groupBoxTagsGeneral.Controls.Add(this.buttonMusicDatabaseBrowse);
+      this.groupBoxTagsGeneral.Controls.Add(this.tbMediaPortalDatabase);
+      this.groupBoxTagsGeneral.Controls.Add(this.ckUseMediaPortalDatabase);
       this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
       this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
       this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
       this.groupBoxTagsGeneral.LocalisationContext = "Settings";
       this.groupBoxTagsGeneral.Location = new System.Drawing.Point(13, 14);
       this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(582, 100);
+      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(582, 178);
       this.groupBoxTagsGeneral.TabIndex = 3;
       this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
+      // 
+      // buttonMusicDatabaseBrowse
+      // 
+      this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
+      this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
+      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(513, 92);
+      this.buttonMusicDatabaseBrowse.Name = "buttonMusicDatabaseBrowse";
+      this.buttonMusicDatabaseBrowse.Size = new System.Drawing.Size(46, 23);
+      this.buttonMusicDatabaseBrowse.TabIndex = 4;
+      this.buttonMusicDatabaseBrowse.Text = "...";
+      this.buttonMusicDatabaseBrowse.UseVisualStyleBackColor = true;
+      this.buttonMusicDatabaseBrowse.Click += new System.EventHandler(this.buttonMusicDatabaseBrowse_Click);
+      // 
+      // tbMediaPortalDatabase
+      // 
+      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(36, 93);
+      this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
+      this.tbMediaPortalDatabase.Size = new System.Drawing.Size(474, 20);
+      this.tbMediaPortalDatabase.TabIndex = 3;
+      // 
+      // ckUseMediaPortalDatabase
+      // 
+      this.ckUseMediaPortalDatabase.AutoSize = true;
+      this.ckUseMediaPortalDatabase.Localisation = "AutoCompletion";
+      this.ckUseMediaPortalDatabase.LocalisationContext = "Settings";
+      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(15, 71);
+      this.ckUseMediaPortalDatabase.Name = "ckUseMediaPortalDatabase";
+      this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(303, 17);
+      this.ckUseMediaPortalDatabase.TabIndex = 2;
+      this.ckUseMediaPortalDatabase.Text = "Use MediaPortal Music Database for Artist auto completion";
+      this.ckUseMediaPortalDatabase.UseVisualStyleBackColor = true;
       // 
       // ckUseCaseConversionWhenSaving
       // 
@@ -527,9 +564,9 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
       this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
       this.groupBoxLyrics.LocalisationContext = "Settings";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(13, 297);
+      this.groupBoxLyrics.Location = new System.Drawing.Point(13, 370);
       this.groupBoxLyrics.Name = "groupBoxLyrics";
-      this.groupBoxLyrics.Size = new System.Drawing.Size(582, 239);
+      this.groupBoxLyrics.Size = new System.Drawing.Size(582, 166);
       this.groupBoxLyrics.TabIndex = 2;
       this.groupBoxLyrics.TabStop = false;
       this.groupBoxLyrics.Text = "Lyrics";
@@ -539,7 +576,7 @@ namespace MPTagThat.Preferences
       this.ckSwitchArtist.AutoSize = true;
       this.ckSwitchArtist.Localisation = "SwitchArtist";
       this.ckSwitchArtist.LocalisationContext = "Settings";
-      this.ckSwitchArtist.Location = new System.Drawing.Point(294, 61);
+      this.ckSwitchArtist.Location = new System.Drawing.Point(17, 143);
       this.ckSwitchArtist.Name = "ckSwitchArtist";
       this.ckSwitchArtist.Size = new System.Drawing.Size(150, 17);
       this.ckSwitchArtist.TabIndex = 1;
@@ -555,9 +592,9 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.Controls.Add(this.ckLyricWiki);
       this.groupBoxLyricsSites.Localisation = "GroupBoxLyricsSites";
       this.groupBoxLyricsSites.LocalisationContext = "Settings";
-      this.groupBoxLyricsSites.Location = new System.Drawing.Point(17, 33);
+      this.groupBoxLyricsSites.Location = new System.Drawing.Point(17, 27);
       this.groupBoxLyricsSites.Name = "groupBoxLyricsSites";
-      this.groupBoxLyricsSites.Size = new System.Drawing.Size(242, 186);
+      this.groupBoxLyricsSites.Size = new System.Drawing.Size(406, 106);
       this.groupBoxLyricsSites.TabIndex = 0;
       this.groupBoxLyricsSites.TabStop = false;
       this.groupBoxLyricsSites.Text = "Sites to Search";
@@ -569,7 +606,7 @@ namespace MPTagThat.Preferences
       this.ckSeekLyrics.CheckState = System.Windows.Forms.CheckState.Checked;
       this.ckSeekLyrics.Localisation = "SeekLyrics";
       this.ckSeekLyrics.LocalisationContext = "Settings";
-      this.ckSeekLyrics.Location = new System.Drawing.Point(15, 148);
+      this.ckSeekLyrics.Location = new System.Drawing.Point(145, 60);
       this.ckSeekLyrics.Name = "ckSeekLyrics";
       this.ckSeekLyrics.Size = new System.Drawing.Size(81, 17);
       this.ckSeekLyrics.TabIndex = 4;
@@ -583,7 +620,7 @@ namespace MPTagThat.Preferences
       this.ckLyricsOnDemand.CheckState = System.Windows.Forms.CheckState.Checked;
       this.ckLyricsOnDemand.Localisation = "LyricsOnDemand";
       this.ckLyricsOnDemand.LocalisationContext = "Settings";
-      this.ckLyricsOnDemand.Location = new System.Drawing.Point(15, 121);
+      this.ckLyricsOnDemand.Location = new System.Drawing.Point(15, 60);
       this.ckLyricsOnDemand.Name = "ckLyricsOnDemand";
       this.ckLyricsOnDemand.Size = new System.Drawing.Size(113, 17);
       this.ckLyricsOnDemand.TabIndex = 3;
@@ -597,7 +634,7 @@ namespace MPTagThat.Preferences
       this.ckLyrics007.CheckState = System.Windows.Forms.CheckState.Checked;
       this.ckLyrics007.Localisation = "Lyrics007";
       this.ckLyrics007.LocalisationContext = "Settings";
-      this.ckLyrics007.Location = new System.Drawing.Point(15, 92);
+      this.ckLyrics007.Location = new System.Drawing.Point(305, 28);
       this.ckLyrics007.Name = "ckLyrics007";
       this.ckLyrics007.Size = new System.Drawing.Size(71, 17);
       this.ckLyrics007.TabIndex = 2;
@@ -611,7 +648,7 @@ namespace MPTagThat.Preferences
       this.ckHotLyrics.CheckState = System.Windows.Forms.CheckState.Checked;
       this.ckHotLyrics.Localisation = "HotLyrics";
       this.ckHotLyrics.LocalisationContext = "Settings";
-      this.ckHotLyrics.Location = new System.Drawing.Point(15, 59);
+      this.ckHotLyrics.Location = new System.Drawing.Point(145, 28);
       this.ckHotLyrics.Name = "ckHotLyrics";
       this.ckHotLyrics.Size = new System.Drawing.Size(73, 17);
       this.ckHotLyrics.TabIndex = 1;
@@ -639,7 +676,7 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsID3.Controls.Add(this.groupBoxID3Update);
       this.groupBoxTagsID3.Localisation = "GroupBoxTagsID3";
       this.groupBoxTagsID3.LocalisationContext = "Settings";
-      this.groupBoxTagsID3.Location = new System.Drawing.Point(13, 125);
+      this.groupBoxTagsID3.Location = new System.Drawing.Point(13, 198);
       this.groupBoxTagsID3.Name = "groupBoxTagsID3";
       this.groupBoxTagsID3.Size = new System.Drawing.Size(582, 166);
       this.groupBoxTagsID3.TabIndex = 1;
@@ -2124,5 +2161,8 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxTagsGeneral;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyArtistToAlbumArtist;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseCaseConversionWhenSaving;
+    private MPTagThat.Core.WinControls.MPTButton buttonMusicDatabaseBrowse;
+    private System.Windows.Forms.TextBox tbMediaPortalDatabase;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
   }
 }

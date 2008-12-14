@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using TagLib;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
+using MPTagThat.Core.ShellLib;
 using MPTagThat.Dialogues;
 
 namespace MPTagThat.TagEdit
@@ -95,6 +96,39 @@ namespace MPTagThat.TagEdit
       Localisation();
 
       this.tabControlTagEdit.SelectedIndex = 0;
+
+      if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
+      {
+        // Add Auto Complete Option for Artist
+        ShellAutoComplete acArtist = new ShellAutoComplete();
+
+        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
+        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
+        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UpDownKeyDropsList;
+        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.FilterPreFixes;
+        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UseTab;
+
+        SourceCustomList custom = new SourceCustomList();
+        custom.StringList = Options.MediaPortalArtists;
+        acArtist.ListSource = custom;
+
+        acArtist.EditHandle = tbArtist.Handle;
+        acArtist.SetAutoComplete(true);
+
+        // Add Auto Complete Option for AlbumArtist
+        ShellAutoComplete acAlbumArtist = new ShellAutoComplete();
+
+        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
+        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
+        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UpDownKeyDropsList;
+        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.FilterPreFixes;
+        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UseTab;
+
+        acAlbumArtist.ListSource = custom;
+
+        acAlbumArtist.EditHandle = tbAlbumArtist.Handle;
+        acAlbumArtist.SetAutoComplete(true);
+      }
     }
 
     private void Localisation()

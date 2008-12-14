@@ -41,6 +41,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -215,6 +219,29 @@
     <Compile Include="Settings\Options.cs" />
     <Compile Include="Settings\MPTagThatSettings.cs" />
     <Compile Include="Common\SortableBindingList.cs" />
+    <Compile Include="ShellLib\ApplicationDesktopToolbar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShellLib\FilterByExtension.cs" />
+    <Compile Include="ShellLib\IACList.cs" />
+    <Compile Include="ShellLib\IACList2.cs" />
+    <Compile Include="ShellLib\IAutoComplete.cs" />
+    <Compile Include="ShellLib\IAutoComplete2.cs" />
+    <Compile Include="ShellLib\ICurrentWorkingDirectory.cs" />
+    <Compile Include="ShellLib\IFolderFilter.cs" />
+    <Compile Include="ShellLib\IFolderFilterSite.cs" />
+    <Compile Include="ShellLib\IMalloc.cs" />
+    <Compile Include="ShellLib\IObjMgr.cs" />
+    <Compile Include="ShellLib\IShellFolder.cs" />
+    <Compile Include="ShellLib\ShellAddRecent.cs" />
+    <Compile Include="ShellLib\ShellApi.cs" />
+    <Compile Include="ShellLib\ShellAutoComplete.cs" />
+    <Compile Include="ShellLib\ShellBrowseForFolderDialog.cs" />
+    <Compile Include="ShellLib\ShellExecute.cs" />
+    <Compile Include="ShellLib\ShellFileOperation.cs" />
+    <Compile Include="ShellLib\ShellFunctions.cs" />
+    <Compile Include="ShellLib\ShellGUIDs.cs" />
+    <Compile Include="ShellLib\SourceCustomList.cs" />
     <Compile Include="ThemeManager\IThemeManager.cs" />
     <Compile Include="ThemeManager\NoThemeManager.cs" />
     <Compile Include="ThemeManager\Theme.cs" />
@@ -236,6 +263,9 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShellLib\ApplicationDesktopToolbar.resx">
+      <DependentUpon>ApplicationDesktopToolbar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

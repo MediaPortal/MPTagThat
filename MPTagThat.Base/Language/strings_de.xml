@@ -498,6 +498,7 @@
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
     <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
+    <String id="AutoCompletion">MediaPortal Datenbank für automatisches Vervollständigen der Interpreten verwenden</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Version 2.4 für ID3 V2 Tags benutzen</String>
     <String id="UseV3">Version 2.3 für ID3 V2 Tags benutzen</String>

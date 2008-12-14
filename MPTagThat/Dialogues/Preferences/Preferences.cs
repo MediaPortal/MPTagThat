@@ -227,6 +227,9 @@ namespace MPTagThat.Preferences
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
 
+      ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
+      tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
+
       if (Options.MainSettings.ID3V2Version == 3)
         radioButtonUseV3.Checked = true;
       else
@@ -680,6 +683,17 @@ namespace MPTagThat.Preferences
       #region Tags
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
+
+      if (ckUseMediaPortalDatabase.Checked && File.Exists(tbMediaPortalDatabase.Text))
+      {
+        Options.MainSettings.UseMediaPortalDatabase = true;
+        Options.MainSettings.MediaPortalDatabase = tbMediaPortalDatabase.Text;
+      }
+      else
+      {
+        Options.MainSettings.UseMediaPortalDatabase = false;
+        Options.MainSettings.MediaPortalDatabase = "";
+      }
 
       if (radioButtonUseV3.Checked)
         Options.MainSettings.ID3V2Version = 3;
@@ -1156,6 +1170,22 @@ namespace MPTagThat.Preferences
     #endregion
 
     #region TabPage Tags
+    /// <summary>
+    /// Offers a File Selection Duialogue to select the MediaPortal Music Database
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void buttonMusicDatabaseBrowse_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog oFD = new OpenFileDialog();
+      oFD.Multiselect = false;
+      oFD.Filter = "MediaPortal DB | *.db3";
+      if (oFD.ShowDialog() == DialogResult.OK)
+      {
+        tbMediaPortalDatabase.Text = oFD.FileName;
+      }
+    }
+
     private void radioButtonID3Both_CheckedChanged(object sender, EventArgs e)
     {
       checkBoxRemoveID3V1.Checked = false;
