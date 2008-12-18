@@ -11,6 +11,9 @@ namespace MPTagThat.Core
   /// </summary>
   public class SettingsManager : ISettingsManager
   {
+
+    private int _portable = 0;
+
     /// <summary>
     /// Retrieves an object's public properties from an Xml file 
     /// </summary>
@@ -27,6 +30,24 @@ namespace MPTagThat.Core
     public void Save(object settingsObject)
     {
       ObjectParser.Serialize(settingsObject);
+    }
+
+    /// <summary>
+    /// Sets the Portable Status
+    /// </summary>
+    /// <param name="portable"></param>
+    public void SetPortable(int portable)
+    {
+      _portable = portable;
+    }
+
+    /// <summary>
+    /// Gets the Portable Status
+    /// </summary>
+    /// <returns></returns>
+    public int GetPortable()
+    {
+      return _portable;
     }
   }
 }

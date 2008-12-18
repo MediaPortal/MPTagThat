@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SQLite;
+using System.Windows.Forms;
 
 namespace MPTagThat.Core
 {
@@ -213,7 +214,11 @@ namespace MPTagThat.Core
 
     public Options()
     {
-      _configDir = String.Format(@"{0}\MPTagThat\Config", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      int portable = ServiceScope.Get<ISettingsManager>().GetPortable();
+      if (portable == 0)
+        _configDir = String.Format(@"{0}\MPTagThat\Config", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      else
+        _configDir = String.Format(@"{0}\Config", Application.StartupPath);
 
       _MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);

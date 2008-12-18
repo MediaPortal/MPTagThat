@@ -23,6 +23,21 @@ namespace MPTagThat.Core
     public void Save(object settingsObject)
     {}
 
+    /// <summary>
+    /// Sets the Portable Status
+    /// </summary>
+    /// <param name="portable"></param>
+    public void SetPortable(int portable)
+    {}
+
+    /// <summary>
+    /// Gets the Portable Status
+    /// </summary>
+    /// <returns></returns>
+    public int GetPortable()
+    {
+      return 0;
+    }
     #endregion
   }
 }

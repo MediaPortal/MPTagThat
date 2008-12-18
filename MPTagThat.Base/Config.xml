@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <!-- Setting Portable to "1" allows to run the application from a USB stick 
+       All Settings are stored in <ApplicationStartupPath>\Config folder
+	   The Log is written to the <ApplicationStartupPath>\Logs folder
+  -->
+  <portable>0</portable>
+</config>

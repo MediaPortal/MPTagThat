@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace MPTagThat.Core
 {
@@ -19,9 +20,12 @@ namespace MPTagThat.Core
     /// </summary>
     /// <param name="fileName">The full path of the file to write the messages to.</param>
     /// <param name="level">The minimum level messages must have to be written to the file.</param>
-    public FileLogger(string fileName, LogLevel level)
+    public FileLogger(string fileName, LogLevel level, int portable)
     {
       string logPath = String.Format(@"{0}\MPTagThat\Log", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      if (portable == 1)
+        logPath = String.Format(@"{0}\Log", Application.StartupPath);
+
       if (!Directory.Exists(logPath))
         Directory.CreateDirectory(logPath);
 

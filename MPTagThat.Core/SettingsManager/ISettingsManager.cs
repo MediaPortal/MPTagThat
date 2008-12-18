@@ -20,5 +20,17 @@ namespace MPTagThat.Core
     /// <param name="filename">Xml file where we wanna store datas</param>
     void Save(object settingsObject);
 
+    /// <summary>
+    /// Sets the Portable Status
+    /// </summary>
+    /// <param name="portable"></param>
+    void SetPortable(int portable);
+
+    /// <summary>
+    /// Gets the Portable Status
+    /// </summary>
+    /// <param name="portable"></param>
+    int GetPortable();
+
   }
 }
