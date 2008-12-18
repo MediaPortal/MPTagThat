@@ -36,6 +36,7 @@ namespace MPTagThat.Core
       ACTION_EXIT = 24,
       ACTION_HELP = 25,
       ACTION_INTERNETLOOKUP = 26,
+      ACTION_TOGGLESPLITTER = 27,
     }
     #endregion
 

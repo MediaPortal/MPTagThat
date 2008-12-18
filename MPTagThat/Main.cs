@@ -1065,6 +1065,10 @@ Util.LeaveMethod(Util.GetCallingMethod());
 
           gridViewControl.DeleteTracks();
           break;
+
+        case Action.ActionType.ACTION_TOGGLESPLITTER:
+          this.splitterLeft.ToggleState();
+          break;
       }
       return handled;
     }

@@ -113,6 +113,11 @@
       <key>Ctrl-K</key>
       <description>Internet Lookup</description>
     </action>
+    <action>
+      <id>27</id>
+      <key>F11</key>
+      <description>Toggle Splitter</description>
+    </action>
   </window>
   <window>
     <id>1</id>
