@@ -61,7 +61,7 @@ namespace MPTagThat
       this.splitterRight = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
       this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
       this.toolStripStatusLabelFiles = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripStatusLabelMiddle = new System.Windows.Forms.ToolStripStatusLabel();
+      this.toolStripStatusLabelFolder = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.panelLeft.SuspendLayout();
       this.panelLeftTop.SuspendLayout();
@@ -469,21 +469,21 @@ namespace MPTagThat
       this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(250, 19);
       this.toolStripStatusLabelFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
-      // toolStripStatusLabelMiddle
+      // toolStripStatusLabelFolder
       // 
-      this.toolStripStatusLabelMiddle.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-      this.toolStripStatusLabelMiddle.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
-      this.toolStripStatusLabelMiddle.Name = "toolStripStatusLabelMiddle";
-      this.toolStripStatusLabelMiddle.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-      this.toolStripStatusLabelMiddle.Size = new System.Drawing.Size(25, 19);
-      this.toolStripStatusLabelMiddle.Text = "   ";
-      this.toolStripStatusLabelMiddle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.toolStripStatusLabelFolder.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+      this.toolStripStatusLabelFolder.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
+      this.toolStripStatusLabelFolder.Name = "toolStripStatusLabelFolder";
+      this.toolStripStatusLabelFolder.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(25, 19);
+      this.toolStripStatusLabelFolder.Text = "   ";
+      this.toolStripStatusLabelFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // statusStrip
       // 
       this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelFiles,
-            this.toolStripStatusLabelMiddle});
+            this.toolStripStatusLabelFolder});
       this.statusStrip.Location = new System.Drawing.Point(0, 728);
       this.statusStrip.Name = "statusStrip";
       this.statusStrip.Size = new System.Drawing.Size(1008, 24);
@@ -567,7 +567,7 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.TTExtendedPanel playerPanel;
     private MPTagThat.Player.PlayerControl playerControl;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFiles;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelMiddle;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFolder;
     private System.Windows.Forms.StatusStrip statusStrip;
   }
 }

@@ -500,6 +500,8 @@ namespace MPTagThat
       if (!System.IO.Directory.Exists(_selectedDirectory))
         return;
 
+      toolStripStatusLabelFolder.Text = _selectedDirectory;
+
       try // just in case we are lacking sufficent permissions
       {
         dirInfo = new DirectoryInfo(_selectedDirectory);
@@ -787,6 +789,7 @@ namespace MPTagThat
           }
           RefreshTrackList();
         }
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
