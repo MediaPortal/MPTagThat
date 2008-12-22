@@ -328,12 +328,12 @@ namespace MPTagThat.GridView
     #endregion
 
     #region Identify File
-    public void TagTracksFromInternet()
+    public void IdentifyFiles()
     {
       if (_bgWorker == null)
       {
         _bgWorker = new BackgroundWorker();
-        _bgWorker.DoWork += new DoWorkEventHandler(TagTracksFromInternetThread);
+        _bgWorker.DoWork += new DoWorkEventHandler(IdentifyFilesThread);
       }
 
       if (!_bgWorker.IsBusy)
@@ -344,13 +344,13 @@ namespace MPTagThat.GridView
     /// <summary>
     /// Tag the the Selected files from Internet
     /// </summary>
-    private void TagTracksFromInternetThread(object sender, DoWorkEventArgs e)
+    private void IdentifyFilesThread(object sender, DoWorkEventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
       //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
-        ThreadSafeGridDelegate1 d = new ThreadSafeGridDelegate1(TagTracksFromInternetThread);
+        ThreadSafeGridDelegate1 d = new ThreadSafeGridDelegate1(IdentifyFilesThread);
         tracksGrid.Invoke(d, new object[] { sender, e });
         return;
       }
@@ -1264,7 +1264,7 @@ namespace MPTagThat.GridView
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
-    private void tracksGrid_AddToBurner(object o, System.EventArgs e)
+    public void tracksGrid_AddToBurner(object o, System.EventArgs e)
     {
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -1281,7 +1281,7 @@ namespace MPTagThat.GridView
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
-    private void tracksGrid_AddToConvert(object o, System.EventArgs e)
+    public void tracksGrid_AddToConvert(object o, System.EventArgs e)
     {
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -1298,7 +1298,7 @@ namespace MPTagThat.GridView
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
-    private void tracksGrid_AddToPlayList(object o, System.EventArgs e)
+    public void tracksGrid_AddToPlayList(object o, System.EventArgs e)
     {
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {

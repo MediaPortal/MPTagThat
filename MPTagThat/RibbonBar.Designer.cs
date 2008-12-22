@@ -33,10 +33,12 @@ namespace MPTagThat
       Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab2 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
       Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab3 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
       Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab4 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
-      this.radRibbonBarChunkTagsEdit = new Telerik.WinControls.UI.RadRibbonBarChunk();
+      this.radRibbonBarChunkTagsRetrieve = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonTagFromFile = new Telerik.WinControls.UI.RadButtonElement();
-      this.ribbonButtonTagToFile = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonButtonTagIdentify = new Telerik.WinControls.UI.RadButtonElement();
       this.ribbonButtonTagFromInternet = new Telerik.WinControls.UI.RadButtonElement();
+      this.radRibbonBarChunkTagsEdit = new Telerik.WinControls.UI.RadRibbonBarChunk();
+      this.ribbonButtonSingleEdit = new Telerik.WinControls.UI.RadButtonElement();
       this.ribbonButtonMultiEdit = new Telerik.WinControls.UI.RadButtonElement();
       this.radRibbonBarButtonGroup3 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
       this.ribbonButtonGetCoverArt = new Telerik.WinControls.UI.RadButtonElement();
@@ -47,13 +49,17 @@ namespace MPTagThat
       this.radMenuSeparatorItemDeleteID3 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
       this.ribbonButtondeleteID3V1 = new Telerik.WinControls.UI.RadMenuItem();
       this.ribbonButtondeleteID3V2 = new Telerik.WinControls.UI.RadMenuItem();
+      this.radRibbonBarChunkOrganise = new Telerik.WinControls.UI.RadRibbonBarChunk();
+      this.ribbonButtonTagToFile = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonButtonOrganise = new Telerik.WinControls.UI.RadButtonElement();
       this.radRibbonBarChunkScripts = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonScriptExecute = new Telerik.WinControls.UI.RadButtonElement();
       this.radRibbonBarButtonGroup1 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
       this.ribbonComboBoxScripts = new Telerik.WinControls.UI.RadComboBoxElement();
       this.radRibbonBarChunkOther = new Telerik.WinControls.UI.RadRibbonBarChunk();
-      this.ribbonButtonOrganise = new Telerik.WinControls.UI.RadButtonElement();
       this.ribbonButtonAddToBurnList = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonButtonAddToConvertList = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonButtonAddToPlayList = new Telerik.WinControls.UI.RadButtonElement();
       this.ribbonTabTag = new Telerik.WinControls.UI.TabItem();
       this.radRibbonBarChunkRip = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonRip = new Telerik.WinControls.UI.RadButtonElement();
@@ -96,24 +102,21 @@ namespace MPTagThat
       this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
       this.startMenuExit = new Telerik.WinControls.UI.RadMenuItem();
       this.startMenuItemChangeDisplayColumns = new Telerik.WinControls.UI.RadMenuItem();
+      this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
       ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar)).BeginInit();
       this.SuspendLayout();
       // 
-      // radRibbonBarChunkTagsEdit
+      // radRibbonBarChunkTagsRetrieve
       // 
-      this.radRibbonBarChunkTagsEdit.AccessibleDescription = "";
-      this.radRibbonBarChunkTagsEdit.Items.AddRange(new Telerik.WinControls.RadItem[] {
+      this.radRibbonBarChunkTagsRetrieve.AccessibleDescription = "";
+      this.radRibbonBarChunkTagsRetrieve.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ribbonButtonTagFromFile,
-            this.ribbonButtonTagToFile,
-            this.ribbonButtonTagFromInternet,
-            this.ribbonButtonMultiEdit,
-            this.radRibbonBarButtonGroup3,
-            this.ribbonButtonCaseConversion,
-            this.ribbonButtonDeleteTags});
-      this.radRibbonBarChunkTagsEdit.KeyTip = "";
-      this.radRibbonBarChunkTagsEdit.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      this.radRibbonBarChunkTagsEdit.Text = "Edit Tags";
-      this.radRibbonBarChunkTagsEdit.ToolTipText = null;
+            this.ribbonButtonTagIdentify,
+            this.ribbonButtonTagFromInternet});
+      this.radRibbonBarChunkTagsRetrieve.KeyTip = "";
+      this.radRibbonBarChunkTagsRetrieve.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.radRibbonBarChunkTagsRetrieve.Text = "Retrieve Tags";
+      this.radRibbonBarChunkTagsRetrieve.ToolTipText = null;
       // 
       // ribbonButtonTagFromFile
       // 
@@ -131,21 +134,20 @@ namespace MPTagThat
       this.ribbonButtonTagFromFile.ToolTipText = null;
       this.ribbonButtonTagFromFile.Click += new System.EventHandler(this.ribbonButton_Click);
       // 
-      // ribbonButtonTagToFile
+      // ribbonButtonTagIdentify
       // 
-      this.ribbonButtonTagToFile.AccessibleDescription = "";
-      this.ribbonButtonTagToFile.CanFocus = true;
-      this.ribbonButtonTagToFile.Class = "RibbonBarButtonElement";
-      this.ribbonButtonTagToFile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagToFile.Image")));
-      this.ribbonButtonTagToFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-      this.ribbonButtonTagToFile.KeyTip = "";
-      this.ribbonButtonTagToFile.ShowBorder = true;
-      this.ribbonButtonTagToFile.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonTagToFile.Text = "Tag 2 File";
-      this.ribbonButtonTagToFile.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
-      this.ribbonButtonTagToFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-      this.ribbonButtonTagToFile.ToolTipText = null;
-      this.ribbonButtonTagToFile.Click += new System.EventHandler(this.ribbonButton_Click);
+      this.ribbonButtonTagIdentify.AccessibleDescription = "";
+      this.ribbonButtonTagIdentify.CanFocus = true;
+      this.ribbonButtonTagIdentify.Class = "RibbonBarButtonElement";
+      this.ribbonButtonTagIdentify.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagIdentify.Image")));
+      this.ribbonButtonTagIdentify.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+      this.ribbonButtonTagIdentify.KeyTip = "";
+      this.ribbonButtonTagIdentify.ShowBorder = true;
+      this.ribbonButtonTagIdentify.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonTagIdentify.Text = "Identify\r\nFiles";
+      this.ribbonButtonTagIdentify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonTagIdentify.ToolTipText = null;
+      this.ribbonButtonTagIdentify.Click += new System.EventHandler(this.ribbonButton_Click);
       // 
       // ribbonButtonTagFromInternet
       // 
@@ -153,14 +155,41 @@ namespace MPTagThat
       this.ribbonButtonTagFromInternet.CanFocus = true;
       this.ribbonButtonTagFromInternet.Class = "RibbonBarButtonElement";
       this.ribbonButtonTagFromInternet.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagFromInternet.Image")));
-      this.ribbonButtonTagFromInternet.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonTagFromInternet.KeyTip = "";
       this.ribbonButtonTagFromInternet.ShowBorder = true;
       this.ribbonButtonTagFromInternet.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonTagFromInternet.Text = "Tag from \r\nInternet";
+      this.ribbonButtonTagFromInternet.Text = "Tag from\r\nInternet";
       this.ribbonButtonTagFromInternet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonTagFromInternet.ToolTipText = null;
       this.ribbonButtonTagFromInternet.Click += new System.EventHandler(this.ribbonButton_Click);
+      // 
+      // radRibbonBarChunkTagsEdit
+      // 
+      this.radRibbonBarChunkTagsEdit.AccessibleDescription = "";
+      this.radRibbonBarChunkTagsEdit.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.ribbonButtonSingleEdit,
+            this.ribbonButtonMultiEdit,
+            this.radRibbonBarButtonGroup3,
+            this.ribbonButtonCaseConversion,
+            this.ribbonButtonDeleteTags});
+      this.radRibbonBarChunkTagsEdit.KeyTip = "";
+      this.radRibbonBarChunkTagsEdit.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.radRibbonBarChunkTagsEdit.Text = "Edit Tags";
+      this.radRibbonBarChunkTagsEdit.ToolTipText = null;
+      // 
+      // ribbonButtonSingleEdit
+      // 
+      this.ribbonButtonSingleEdit.AccessibleDescription = "";
+      this.ribbonButtonSingleEdit.CanFocus = true;
+      this.ribbonButtonSingleEdit.Class = "RibbonBarButtonElement";
+      this.ribbonButtonSingleEdit.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonSingleEdit.Image")));
+      this.ribbonButtonSingleEdit.KeyTip = "";
+      this.ribbonButtonSingleEdit.ShowBorder = true;
+      this.ribbonButtonSingleEdit.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonSingleEdit.Text = "Single \r\nTag Edit";
+      this.ribbonButtonSingleEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonSingleEdit.ToolTipText = null;
+      this.ribbonButtonSingleEdit.Click += new System.EventHandler(this.ribbonButton_Click);
       // 
       // ribbonButtonMultiEdit
       // 
@@ -172,7 +201,7 @@ namespace MPTagThat
       this.ribbonButtonMultiEdit.KeyTip = "";
       this.ribbonButtonMultiEdit.ShowBorder = true;
       this.ribbonButtonMultiEdit.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonMultiEdit.Text = "Multi Edit";
+      this.ribbonButtonMultiEdit.Text = "Multiple \r\nTag Edit";
       this.ribbonButtonMultiEdit.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
       this.ribbonButtonMultiEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonMultiEdit.ToolTipText = null;
@@ -212,6 +241,7 @@ namespace MPTagThat
       this.ribbonButtonGetLyrics.CanFocus = true;
       this.ribbonButtonGetLyrics.Class = "RibbonBarButtonElement";
       this.ribbonButtonGetLyrics.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetLyrics.Image")));
+      this.ribbonButtonGetLyrics.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
       this.ribbonButtonGetLyrics.KeyTip = "";
       this.ribbonButtonGetLyrics.ShowBorder = true;
       this.ribbonButtonGetLyrics.Text = "Get Lyrics";
@@ -251,7 +281,7 @@ namespace MPTagThat
             this.ribbonButtondeleteID3V2});
       this.ribbonButtonDeleteTags.KeyTip = "";
       this.ribbonButtonDeleteTags.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonDeleteTags.Text = "Delete Tags";
+      this.ribbonButtonDeleteTags.Text = "Delete \r\nTags";
       this.ribbonButtonDeleteTags.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
       this.ribbonButtonDeleteTags.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonDeleteTags.ToolTipText = null;
@@ -305,11 +335,53 @@ namespace MPTagThat
       this.ribbonButtondeleteID3V2.ToolTipText = null;
       this.ribbonButtondeleteID3V2.Click += new System.EventHandler(this.ribbonButtondeleteTags_Click);
       // 
+      // radRibbonBarChunkOrganise
+      // 
+      this.radRibbonBarChunkOrganise.AccessibleDescription = "";
+      this.radRibbonBarChunkOrganise.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.ribbonButtonTagToFile,
+            this.ribbonButtonOrganise});
+      this.radRibbonBarChunkOrganise.KeyTip = "";
+      this.radRibbonBarChunkOrganise.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.radRibbonBarChunkOrganise.Text = "Organise";
+      this.radRibbonBarChunkOrganise.ToolTipText = null;
+      // 
+      // ribbonButtonTagToFile
+      // 
+      this.ribbonButtonTagToFile.AccessibleDescription = "";
+      this.ribbonButtonTagToFile.CanFocus = true;
+      this.ribbonButtonTagToFile.Class = "RibbonBarButtonElement";
+      this.ribbonButtonTagToFile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagToFile.Image")));
+      this.ribbonButtonTagToFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+      this.ribbonButtonTagToFile.KeyTip = "";
+      this.ribbonButtonTagToFile.ShowBorder = true;
+      this.ribbonButtonTagToFile.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonTagToFile.Text = "Rename\r\nFiles";
+      this.ribbonButtonTagToFile.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
+      this.ribbonButtonTagToFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonTagToFile.ToolTipText = null;
+      this.ribbonButtonTagToFile.Click += new System.EventHandler(this.ribbonButton_Click);
+      // 
+      // ribbonButtonOrganise
+      // 
+      this.ribbonButtonOrganise.AccessibleDescription = "";
+      this.ribbonButtonOrganise.CanFocus = true;
+      this.ribbonButtonOrganise.Class = "RibbonBarButtonElement";
+      this.ribbonButtonOrganise.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonOrganise.Image")));
+      this.ribbonButtonOrganise.KeyTip = "";
+      this.ribbonButtonOrganise.ShowBorder = true;
+      this.ribbonButtonOrganise.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonOrganise.Text = "Organise \r\nFiles";
+      this.ribbonButtonOrganise.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
+      this.ribbonButtonOrganise.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonOrganise.ToolTipText = null;
+      this.ribbonButtonOrganise.Click += new System.EventHandler(this.ribbonButton_Click);
+      // 
       // radRibbonBarChunkScripts
       // 
       this.radRibbonBarChunkScripts.AccessibleDescription = "";
       this.radRibbonBarChunkScripts.AutoSize = false;
-      this.radRibbonBarChunkScripts.Bounds = new System.Drawing.Rectangle(520, 0, 199, 91);
+      this.radRibbonBarChunkScripts.Bounds = new System.Drawing.Rectangle(659, 0, 199, 91);
       this.radRibbonBarChunkScripts.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ribbonButtonScriptExecute,
             this.radRibbonBarButtonGroup1});
@@ -364,27 +436,14 @@ namespace MPTagThat
       // 
       this.radRibbonBarChunkOther.AccessibleDescription = "";
       this.radRibbonBarChunkOther.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.ribbonButtonOrganise,
-            this.ribbonButtonAddToBurnList});
+            this.ribbonButtonAddToBurnList,
+            this.ribbonButtonAddToConvertList,
+            this.ribbonButtonAddToPlayList});
       this.radRibbonBarChunkOther.KeyTip = "";
       this.radRibbonBarChunkOther.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.radRibbonBarChunkOther.StringAlignment = System.Drawing.StringAlignment.Center;
       this.radRibbonBarChunkOther.Text = "Other";
       this.radRibbonBarChunkOther.ToolTipText = null;
-      // 
-      // ribbonButtonOrganise
-      // 
-      this.ribbonButtonOrganise.AccessibleDescription = "";
-      this.ribbonButtonOrganise.CanFocus = true;
-      this.ribbonButtonOrganise.Class = "RibbonBarButtonElement";
-      this.ribbonButtonOrganise.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonOrganise.Image")));
-      this.ribbonButtonOrganise.KeyTip = "";
-      this.ribbonButtonOrganise.ShowBorder = true;
-      this.ribbonButtonOrganise.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonOrganise.Text = "Organise";
-      this.ribbonButtonOrganise.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
-      this.ribbonButtonOrganise.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-      this.ribbonButtonOrganise.ToolTipText = null;
-      this.ribbonButtonOrganise.Click += new System.EventHandler(this.ribbonButton_Click);
       // 
       // ribbonButtonAddToBurnList
       // 
@@ -400,7 +459,35 @@ namespace MPTagThat
       this.ribbonButtonAddToBurnList.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
       this.ribbonButtonAddToBurnList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonAddToBurnList.ToolTipText = null;
-      this.ribbonButtonAddToBurnList.Click += new System.EventHandler(this.ribbonButtonAddToBurnList_Click);
+      this.ribbonButtonAddToBurnList.Click += new System.EventHandler(this.ribbonButtonAddToList_Click);
+      // 
+      // ribbonButtonAddToConvertList
+      // 
+      this.ribbonButtonAddToConvertList.AccessibleDescription = "";
+      this.ribbonButtonAddToConvertList.CanFocus = true;
+      this.ribbonButtonAddToConvertList.Class = "RibbonBarButtonElement";
+      this.ribbonButtonAddToConvertList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
+      this.ribbonButtonAddToConvertList.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToConvertList.Image")));
+      this.ribbonButtonAddToConvertList.KeyTip = "";
+      this.ribbonButtonAddToConvertList.ShowBorder = true;
+      this.ribbonButtonAddToConvertList.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonAddToConvertList.Text = "Add to \r\nConversion";
+      this.ribbonButtonAddToConvertList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonAddToConvertList.ToolTipText = null;
+      this.ribbonButtonAddToConvertList.Click += new System.EventHandler(this.ribbonButtonAddToList_Click);
+      // 
+      // ribbonButtonAddToPlayList
+      // 
+      this.ribbonButtonAddToPlayList.AccessibleDescription = "";
+      this.ribbonButtonAddToPlayList.CanFocus = true;
+      this.ribbonButtonAddToPlayList.Class = "RibbonBarButtonElement";
+      this.ribbonButtonAddToPlayList.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToPlayList.Image")));
+      this.ribbonButtonAddToPlayList.KeyTip = "";
+      this.ribbonButtonAddToPlayList.ShowBorder = true;
+      this.ribbonButtonAddToPlayList.Text = "Add to \r\nPlaylist";
+      this.ribbonButtonAddToPlayList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonAddToPlayList.ToolTipText = null;
+      this.ribbonButtonAddToPlayList.Click += new System.EventHandler(this.ribbonButtonAddToList_Click);
       // 
       // ribbonTabTag
       // 
@@ -921,7 +1008,9 @@ namespace MPTagThat
       this.radRibbonBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(254)))));
       radRibbonBarCommandTab1.ContextualTabGroup = null;
       radRibbonBarCommandTab1.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.radRibbonBarChunkTagsRetrieve,
             this.radRibbonBarChunkTagsEdit,
+            this.radRibbonBarChunkOrganise,
             this.radRibbonBarChunkScripts,
             this.radRibbonBarChunkOther});
       radRibbonBarCommandTab1.Tab = this.ribbonTabTag;
@@ -960,7 +1049,7 @@ namespace MPTagThat
       this.radRibbonBar.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
       this.radRibbonBar.RootElement.KeyTip = "";
       this.radRibbonBar.RootElement.ToolTipText = null;
-      this.radRibbonBar.Size = new System.Drawing.Size(979, 146);
+      this.radRibbonBar.Size = new System.Drawing.Size(1163, 146);
       this.radRibbonBar.SmallImageList = null;
       this.radRibbonBar.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar.StartButtonImage")));
       this.radRibbonBar.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
@@ -1072,13 +1161,27 @@ namespace MPTagThat
       this.startMenuItemChangeDisplayColumns.ToolTipText = null;
       this.startMenuItemChangeDisplayColumns.Click += new System.EventHandler(this.startMenuItemChangeDisplayColumns_Click);
       // 
+      // radButtonElement1
+      // 
+      this.radButtonElement1.AccessibleDescription = "";
+      this.radButtonElement1.CanFocus = true;
+      this.radButtonElement1.Class = "RibbonBarButtonElement";
+      this.radButtonElement1.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement1.Image")));
+      this.radButtonElement1.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+      this.radButtonElement1.KeyTip = "";
+      this.radButtonElement1.ShowBorder = true;
+      this.radButtonElement1.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.radButtonElement1.Text = "Identify\r\nFiles";
+      this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.radButtonElement1.ToolTipText = null;
+      // 
       // RibbonBar
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.radRibbonBar);
       this.Name = "RibbonBar";
-      this.Size = new System.Drawing.Size(979, 154);
+      this.Size = new System.Drawing.Size(1163, 154);
       ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar)).EndInit();
       this.ResumeLayout(false);
 
@@ -1143,10 +1246,17 @@ namespace MPTagThat
     private Telerik.WinControls.UI.RadTextBoxItem ribbonTextBoxRipOutputDirectory;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonRipSelectOutputDirectory;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonOrganise;
-    private Telerik.WinControls.UI.RadButtonElement ribbonButtonTagFromInternet;
+    private Telerik.WinControls.UI.RadButtonElement ribbonButtonTagIdentify;
     private Telerik.WinControls.UI.RadRibbonBarButtonGroup radRibbonBarButtonGroup3;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonGetCoverArt;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonGetLyrics;
     private Telerik.WinControls.UI.RadMenuItem startMenuItemChangeDisplayColumns;
+    private Telerik.WinControls.UI.RadRibbonBarChunk radRibbonBarChunkTagsRetrieve;
+    private Telerik.WinControls.UI.RadRibbonBarChunk radRibbonBarChunkOrganise;
+    private Telerik.WinControls.UI.RadButtonElement radButtonElement1;
+    private Telerik.WinControls.UI.RadButtonElement ribbonButtonTagFromInternet;
+    private Telerik.WinControls.UI.RadButtonElement ribbonButtonSingleEdit;
+    private Telerik.WinControls.UI.RadButtonElement ribbonButtonAddToConvertList;
+    private Telerik.WinControls.UI.RadButtonElement ribbonButtonAddToPlayList;
   }
 }

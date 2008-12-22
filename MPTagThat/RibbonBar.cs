@@ -178,11 +178,11 @@ namespace MPTagThat
         {
           ribbonComboBoxEncoder.SelectedIndex = i;
         }
-        
+
         if (item.Value == Options.MainSettings.RipEncoder)
         {
           ribbonComboBoxRipEncoder.SelectedIndex = i;
-        } 
+        }
         i++;
       }
 
@@ -223,8 +223,11 @@ namespace MPTagThat
       // Tags Tab
       this.ribbonTabTag.Text = localisation.ToString("ribbon", "TagTab");
       this.ribbonButtonTagFromFile.Text = localisation.ToString("ribbon", "TagFromFile");
-      this.ribbonButtonTagToFile.Text = localisation.ToString("ribbon", "RenameFile");
-      this.ribbonButtonTagFromInternet.Text = localisation.ToString("ribbon", "IdentifyFile");
+      this.ribbonButtonTagIdentify.Text = localisation.ToString("ribbon", "IdentifyFile");
+      this.ribbonButtonTagFromInternet.Text = localisation.ToString("ribbon", "TagFromInternet");
+      this.radRibbonBarChunkTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");
+
+      this.ribbonButtonSingleEdit.Text = localisation.ToString("ribbon", "SingleTagEdit");
       this.ribbonButtonMultiEdit.Text = localisation.ToString("ribbon", "MultiTagEdit");
       this.ribbonButtonGetCoverArt.Text = localisation.ToString("ribbon", "GetCoverArt");
       this.ribbonButtonGetLyrics.Text = localisation.ToString("ribbon", "GetLyrics");
@@ -235,13 +238,18 @@ namespace MPTagThat
       this.ribbonButtondeleteID3V2.Text = localisation.ToString("ribbon", "DeleteID3V2Tags");
       this.radRibbonBarChunkTagsEdit.Text = localisation.ToString("ribbon", "EditTags");
 
+      this.ribbonButtonTagToFile.Text = localisation.ToString("ribbon", "RenameFile");
+      this.ribbonButtonOrganise.Text = localisation.ToString("ribbon", "Organise");
+      this.radRibbonBarChunkOrganise.Text = localisation.ToString("ribbon", "OrganiseFiles");
+
       this.ribbonButtonScriptExecute.Text = localisation.ToString("ribbon", "ExecuteScript");
       this.radRibbonBarChunkScripts.Text = localisation.ToString("ribbon", "Scripts");
 
-      this.ribbonButtonOrganise.Text = localisation.ToString("ribbon", "Organise");
       this.ribbonButtonAddToBurnList.Text = localisation.ToString("ribbon", "AddBurner");
+      this.ribbonButtonAddToConvertList.Text = localisation.ToString("ribbon", "AddConvert");
+      this.ribbonButtonAddToPlayList.Text = localisation.ToString("ribbon", "AddPlaylist");
       this.radRibbonBarChunkOther.Text = localisation.ToString("ribbon", "Other");
-     
+
       // Rip Tab
       this.ribbonTabRip.Text = localisation.ToString("ribbon", "RipTab");
       this.ribbonLabelRipEncoder.Text = localisation.ToString("ribbon", "RipEncoder");
@@ -431,6 +439,9 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void ribbonButton_Click(object sender, EventArgs e)
     {
+      if (!main.TracksGridView.CheckSelections())
+        return;
+
       RadButtonElement rb = sender as RadButtonElement;
       if (rb == ribbonButtonTagFromFile)
       {
@@ -447,6 +458,11 @@ namespace MPTagThat
         MPTagThat.TagEdit.MultiTagEdit dlgMultiTagEdit = new MPTagThat.TagEdit.MultiTagEdit(main);
         main.ShowForm(dlgMultiTagEdit);
       }
+      else if (rb == ribbonButtonSingleEdit)
+      {
+        MPTagThat.TagEdit.SingleTagEdit dlgSingleTagEdit = new MPTagThat.TagEdit.SingleTagEdit(main);
+        main.ShowForm(dlgSingleTagEdit);
+      }
       else if (rb == ribbonButtonCaseConversion)
       {
         MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main);
@@ -457,9 +473,14 @@ namespace MPTagThat
         MPTagThat.Organise.OrganiseFiles dlgOrganise = new MPTagThat.Organise.OrganiseFiles(main);
         main.ShowForm(dlgOrganise);
       }
+      else if (rb == ribbonButtonTagIdentify)
+      {
+        main.TracksGridView.IdentifyFiles();
+      }
       else if (rb == ribbonButtonTagFromInternet)
       {
-        main.TracksGridView.TagTracksFromInternet();
+        MPTagThat.InternetLookup.InternetLookup lookup = new MPTagThat.InternetLookup.InternetLookup(main);
+        lookup.SearchForAlbumInformation();
       }
       else if (rb == ribbonButtonGetCoverArt)
         main.TracksGridView.GetCoverArt();
@@ -498,20 +519,19 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Add to the Burning List
+    /// Add to the Burning, Conversion or PlayList List
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void ribbonButtonAddToBurnList_Click(object sender, EventArgs e)
+    private void ribbonButtonAddToList_Click(object sender, EventArgs e)
     {
-      foreach (DataGridViewRow row in main.TracksGridView.View.Rows)
-      {
-        if (!row.Selected)
-          continue;
-
-        TrackData track = main.TracksGridView.TrackList[row.Index];
-        main.BurnGridView.AddToBurner(track);
-      }
+      RadButtonElement rb = sender as RadButtonElement;
+      if (rb == ribbonButtonAddToBurnList)
+        main.TracksGridView.tracksGrid_AddToBurner(sender, new EventArgs());
+      else if (rb == ribbonButtonAddToConvertList)
+        main.TracksGridView.tracksGrid_AddToConvert(sender, new EventArgs());
+      else if (rb == ribbonButtonAddToPlayList)
+        main.TracksGridView.tracksGrid_AddToPlayList(sender, new EventArgs());
     }
     #endregion
 

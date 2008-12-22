@@ -125,7 +125,7 @@
         AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="ribbonButtonTagToFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ribbonButtonTagIdentify.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
@@ -133,6 +133,13 @@
 </value>
   </data>
   <data name="ribbonButtonTagFromInternet.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
+        AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="ribbonButtonSingleEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
@@ -243,6 +250,20 @@
         AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="ribbonButtonTagToFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
+        AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="ribbonButtonOrganise.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
+        AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="ribbonButtonScriptExecute.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -260,14 +281,21 @@
         Z55cIL+ugMzqbLQPs2IS/wJeMl2cJ5b34gAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="ribbonButtonOrganise.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ribbonButtonAddToBurnList.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
         AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="ribbonButtonAddToBurnList.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ribbonButtonAddToConvertList.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
+        AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="ribbonButtonAddToPlayList.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
@@ -382,6 +410,13 @@
         e41tHNbucUGnKxICiqXjHpTPJgHBZ/Nv4U1oHqGZJVwstiNe72JwI+J3PYA2MV8IMjOG2dzLfOatBg+2
         7JDQ0tEPX9cguvv8GHg5hH0mC9S6eiQweLumDhqNVQgo06dP9fN4UsIoJHRnOhVtmxZGM1NXKoJ3JmTH
         Cv71r/4OTrQ4xWMwWlcAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="radButtonElement1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAnCAYAAACFSPFPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAADBJREFUWEft0DEB
+        AAAAwqD1T20JT4hAYcCAAQMGDBgwYMCAAQMGDBgwYMCAAQPngQEVewABlQ33PAAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

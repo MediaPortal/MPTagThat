@@ -972,14 +972,14 @@ Util.LeaveMethod(Util.GetCallingMethod());
           _showForm = true;
           break;
 
-        case Action.ActionType.ACTION_TAGFROMINTERNET:
+        case Action.ActionType.ACTION_IDENTIFYFILE:
           if (!gridViewControl.CheckSelections())
             break;
 
-          gridViewControl.TagTracksFromInternet();
+          gridViewControl.IdentifyFiles();
           break;
 
-        case Action.ActionType.ACTION_INTERNETLOOKUP:
+        case Action.ActionType.ACTION_TAGFROMINTERNET:
           if (!gridViewControl.CheckSelections())
             break;
 

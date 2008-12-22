@@ -44,6 +44,8 @@
     <String id="TagFromFile">Tag from\nFilename</String>
     <String id="RenameFile">Rename\nFile</String>
     <String id="IdentifyFile">Identify\nFile</String>
+    <String id="TagFromInternet">Tag from\nInternet</String>
+    <String id="SingleTagEdit">Single Tag\nEdit</String>
     <String id="MultiTagEdit">Multiple Tag\nEdit</String>
     <String id="GetCoverArt">Get Cover Art</String>
     <String id="GetLyrics">Get Lyrics</String>
@@ -53,12 +55,16 @@
     <String id="DeleteID3V1Tags">Delete ID3 V1 Tags only</String>
     <String id="DeleteID3V2Tags">Delete ID3 V2 Tags only</String>
     <String id="EditTags">Edit Tags</String>
+    <String id="RetrieveTags">Retrieve Tags</String>
+	<String id="OrganiseFiles">Organise</String>
     
     <String id="ExecuteScript">Execute\nScript</String>
     <String id="Scripts">Scripts</String>
     
     <String id="Organise">Organise\nFiles</String>
     <String id="AddBurner">Add to\nBurner</String>
+    <String id="AddConvert">Add to\nConversion</String>
+    <String id="AddPlaylist">Add to\nPlaylist</String>
     <String id="Other">Other</String>
 
     <!-- Rip Tab-->

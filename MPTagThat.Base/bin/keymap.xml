@@ -86,7 +86,7 @@
     <action>
       <id>21</id>
       <key>Ctrl-I</key>
-      <description>Tag from Internet</description>
+      <description>Identify Files</description>
     </action>
     <action>
       <id>22</id>
