@@ -60,6 +60,13 @@ namespace MPTagThat.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CursorNumbering {
+            get {
+                object obj = ResourceManager.GetObject("CursorNumbering", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap DeleteHS {
             get {
                 object obj = ResourceManager.GetObject("DeleteHS", resourceCulture);

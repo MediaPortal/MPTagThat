@@ -44,6 +44,9 @@ namespace MPTagThat.GridView
 
     private Thread _asyncThread = null;
     private BackgroundWorker _bgWorker = null;
+
+    private Cursor _numberingCursor = Util.CreateCursorFromResource("CursorNumbering", 0, 0);
+    private Cursor _defaultCursor = Cursors.Default;
     #endregion
 
     #region Properties
@@ -111,6 +114,8 @@ namespace MPTagThat.GridView
       tracksGrid.MouseUp += new MouseEventHandler(tracksGrid_MouseUp);
       tracksGrid.MouseMove += new MouseEventHandler(tracksGrid_MouseMove);
       tracksGrid.QueryContinueDrag += new QueryContinueDragEventHandler(tracksGrid_QueryContinueDrag);
+      tracksGrid.MouseEnter += new EventHandler(tracksGrid_MouseEnter);
+      tracksGrid.MouseLeave += new EventHandler(tracksGrid_MouseLeave);
 
       // The Color for the Image Cell for the Rating is not handled correctly. so we need to handle it via an event
       tracksGrid.SelectionChanged += new EventHandler(tracksGrid_SelectionChanged);
@@ -748,14 +753,34 @@ namespace MPTagThat.GridView
     }
     #endregion
 
-    /// <summary>
-    /// Discards any changes
-    /// </summary>
-    public void DiscardChanges()
+    #region Numbering
+    public void AutoNumber()
     {
-      _itemsChanged = false;
-    }
+      Util.EnterMethod(Util.GetCallingMethod());
+      int numberValue = _main.MainRibbon.AutoNumber;
+      if (numberValue == -1)
+        return;
 
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = bindingList[row.Index];
+        track.Track = numberValue.ToString();
+        SetBackgroundColorChanged(row.Index);
+        track.Changed = true;
+        _itemsChanged = true;
+        numberValue++;
+      }
+      _main.MainRibbon.AutoNumber = numberValue;
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
+
+    #region Delete Tags / Delete Files
     /// <summary>
     /// Remove the Tags
     /// </summary>
@@ -828,7 +853,15 @@ namespace MPTagThat.GridView
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+    #endregion
 
+    /// <summary>
+    /// Discards any changes
+    /// </summary>
+    public void DiscardChanges()
+    {
+      _itemsChanged = false;
+    }
 
     /// <summary>
     /// Checks, if we have something selected
@@ -1223,6 +1256,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
+    /// Handle Left Mouse Click for Numbering on Click
     /// Handle Right Mouse Click to open the context Menu in the Grid
     /// </summary>
     /// <param name="sender"></param>
@@ -1236,6 +1270,31 @@ namespace MPTagThat.GridView
 
         if (selectedRow.Type != DataGridViewHitTestType.ColumnHeader)
           this.tracksGrid.ContextMenu.Show(tracksGrid, new Point(e.X, e.Y));
+      }
+      else
+      {
+        // Handle Numbering on Click
+        if (_main.MainRibbon.NumberingOnClick)
+        {
+          Point mouse = tracksGrid.PointToClient(Cursor.Position);
+          System.Windows.Forms.DataGridView.HitTestInfo selectedRow = tracksGrid.HitTest(mouse.X, mouse.Y);
+
+          if (selectedRow.Type != DataGridViewHitTestType.ColumnHeader)
+          {
+            int numberValue = _main.MainRibbon.AutoNumber;
+            if (numberValue == -1)
+              return;
+
+            TrackData track = bindingList[selectedRow.RowIndex];
+            track.Track = numberValue.ToString();
+            SetBackgroundColorChanged(selectedRow.RowIndex);
+            track.Changed = true;
+            _itemsChanged = true;
+            _main.MainRibbon.AutoNumber = numberValue + 1;
+            tracksGrid.Refresh();
+            tracksGrid.Parent.Refresh();
+          }
+        }
       }
     }
 
@@ -1259,6 +1318,36 @@ namespace MPTagThat.GridView
       f.ShowDialog();
     }
 
+    /// <summary>
+    /// Mouse is over Trackgrid
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void tracksGrid_MouseEnter(object sender, EventArgs e)
+    {
+      // Numbering on Click enabled
+      if (_main.MainRibbon.NumberingOnClick && this.Cursor != _numberingCursor)
+      {
+        this.Cursor = _numberingCursor;
+        this.Update();
+      }
+    }
+
+    /// <summary>
+    /// The Mouse leaves the Trackgrid
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void tracksGrid_MouseLeave(object sender, EventArgs e)
+    {
+      if (!_main.MainRibbon.NumberingOnClick)
+      {
+        this.Cursor = _defaultCursor;
+        this.Update();
+      }
+    }
+
+    #region Context Menu Handler
     /// <summary>
     /// Add to Burner
     /// </summary>
@@ -1313,6 +1402,7 @@ namespace MPTagThat.GridView
         _main.Player.PlayList.Add(playListItem);
       }
     }
+    #endregion
 
     /// <summary>
     /// Handle the Background Color for the Rating Image Cell
@@ -1342,6 +1432,7 @@ namespace MPTagThat.GridView
       }
     }
 
+    #region Drag & Drop
     /// <summary>
     /// Handle Drag and Drop Operation
     /// </summary>
@@ -1436,6 +1527,7 @@ namespace MPTagThat.GridView
         }
       }
     }
+    #endregion
     #endregion
   }
 }

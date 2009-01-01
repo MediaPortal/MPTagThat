@@ -455,7 +455,7 @@ namespace MPTagThat
       gridViewConvert.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       gridViewConvert.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
-      gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;   
+      gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
       // We want to have our own header color
       dataGridViewError.EnableHeadersVisualStyles = false;
       dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -809,7 +809,7 @@ namespace MPTagThat
     /// </summary>
     public void RefreshTrackList()
     {
-Util.EnterMethod(Util.GetCallingMethod());
+      Util.EnterMethod(Util.GetCallingMethod());
       CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
@@ -817,7 +817,7 @@ Util.EnterMethod(Util.GetCallingMethod());
         FolderScan();
       }
       dataGridViewError.Rows.Clear();
-Util.LeaveMethod(Util.GetCallingMethod());
+      Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     /// <summary>
@@ -898,6 +898,9 @@ Util.LeaveMethod(Util.GetCallingMethod());
       // We can show the dialog from the OnKeydown only here. oterwise we hear the annoying bell.
       if (_showForm && _dialog != null)
         ShowForm(_dialog);
+
+      _showForm = false;
+      _dialog = null;
     }
 
 

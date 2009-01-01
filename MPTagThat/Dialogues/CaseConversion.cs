@@ -171,7 +171,6 @@ namespace MPTagThat.CaseConversion
 
     private void CaseConvertSelectedTracks()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       DataGridView tracksGrid = _main.TracksGridView.View;
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -191,8 +190,6 @@ namespace MPTagThat.CaseConversion
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     private string ConvertCase(string strText)

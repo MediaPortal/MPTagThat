@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Net;
+using System.Resources;
+using System.Reflection;
 
 using Un4seen.Bass.AddOn.Cd;
 
@@ -26,6 +29,15 @@ namespace MPTagThat.Core
       public bool fAnyOperationsAborted;
       public IntPtr hNameMappings;
       public string lpszProgressTitle;
+    }
+
+    public struct IconInfo
+    {
+      public bool fIcon;
+      public int xHotspot;
+      public int yHotspot;
+      public IntPtr hbmMask;
+      public IntPtr hbmColor;
     }
     #endregion
 
@@ -97,6 +109,13 @@ namespace MPTagThat.Core
 
     [DllImport("User32.dll", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
     public static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool GetIconInfo(IntPtr hIcon, ref IconInfo pIconInfo);
+
+    [DllImport("user32.dll")]
+    public static extern IntPtr CreateIconIndirect(ref IconInfo icon);
     #endregion
 
     #region Properties
@@ -200,14 +219,14 @@ namespace MPTagThat.Core
       if (formattype == Options.ParameterFormat.Organise)
       {
         str = str.Replace("<I>", "\x0001"); // Bitrate      
-        
+
         int index = str.IndexOf("<A:");
         int last = -1;
         if (index > -1)
         {
           last = str.IndexOf(">", index);
           string s1 = str.Substring(index, last - index + 1);
-          
+
           char c = s1[3];
           if (!Char.IsDigit(c))
             return false;
@@ -217,7 +236,7 @@ namespace MPTagThat.Core
 
           str = str.Replace(s1, "\x0001");
         }
-        
+
         index = str.IndexOf("<O:");
         last = -1;
         if (index > -1)
@@ -682,6 +701,33 @@ namespace MPTagThat.Core
         }
       }
       return (double)maxlen / (double)sourceString.Length;
+    }
+
+
+    /// <summary>
+    /// Create a cursor from the given Resource Name
+    /// </summary>
+    /// <param name="resourceName"></param>
+    /// <param name="xHotSpot"></param>
+    /// <param name="yHotSpot"></param>
+    /// <returns></returns>
+    public static Cursor CreateCursorFromResource(string resourceName, int xHotSpot, int yHotSpot)
+    {
+      ResourceManager resourceManager = new ResourceManager("MPTagThat.Properties.Resources", Assembly.GetCallingAssembly());
+      Bitmap bmp = (Bitmap)resourceManager.GetObject(resourceName);
+
+      if (bmp != null)
+      {
+        IntPtr ptr = bmp.GetHicon();
+        IconInfo tmp = new IconInfo();
+        GetIconInfo(ptr, ref tmp);
+        tmp.xHotspot = xHotSpot;
+        tmp.yHotspot = yHotSpot;
+        tmp.fIcon = false;
+        ptr = CreateIconIndirect(ref tmp);
+        return new Cursor(ptr);
+      }
+      return Cursors.Default;
     }
     #endregion
   }

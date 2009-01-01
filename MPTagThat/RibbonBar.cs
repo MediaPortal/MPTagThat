@@ -21,6 +21,7 @@ namespace MPTagThat
     private Main main;
     private List<Item> encoders = new List<Item>();
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private bool _numberingOnClick;
     #endregion
 
     #region Properties
@@ -111,6 +112,37 @@ namespace MPTagThat
     public string RipOutputDirectory
     {
       get { return ribbonTextBoxRipOutputDirectory.Text; }
+    }
+
+    /// <summary>
+    /// Get / Set Auto Numbering
+    /// </summary>
+    public int AutoNumber
+    {
+      get 
+      {
+        try
+        {
+          return Convert.ToInt32(ribbonTextBoxNumber.Text);
+        }
+        catch (Exception)
+        {
+          return -1;
+        }
+      }
+
+      set 
+      {
+        ribbonTextBoxNumber.Text = value.ToString(); 
+      }
+    }
+
+    /// <summary>
+    /// Return Numbering On Click
+    /// </summary>
+    public bool NumberingOnClick
+    {
+      get { return _numberingOnClick; }
     }
     #endregion
 
@@ -486,6 +518,8 @@ namespace MPTagThat
         main.TracksGridView.GetCoverArt();
       else if (rb == ribbonButtonGetLyrics)
         main.TracksGridView.GetLyrics();
+      else if (rb == ribbonButtonAutoNumber)
+        main.TracksGridView.AutoNumber();
     }
 
     /// <summary>
@@ -532,6 +566,20 @@ namespace MPTagThat
         main.TracksGridView.tracksGrid_AddToConvert(sender, new EventArgs());
       else if (rb == ribbonButtonAddToPlayList)
         main.TracksGridView.tracksGrid_AddToPlayList(sender, new EventArgs());
+    }
+
+
+    /// <summary>
+    /// Turn On / Off the Numbering on Click option
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private void ribbonButtonClickNumber_ToggleStateChanged(object sender, StateChangedEventArgs args)
+    {
+      if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
+        _numberingOnClick = true;
+      else
+        _numberingOnClick = false;
     }
     #endregion
 

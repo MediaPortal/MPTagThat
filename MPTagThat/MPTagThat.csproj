@@ -396,13 +396,13 @@
     <None Include="Resources\play.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pause.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\playpause.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\playstop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CursorNumbering.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
