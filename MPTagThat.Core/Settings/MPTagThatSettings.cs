@@ -12,7 +12,7 @@ namespace MPTagThat.Core
     private string _lastFolderUsed = "";
     private bool _scanSubFolders = false;
     private Point _formLocation;
-    private Size _formSize;
+    private Size _formSize = new Size(1200, 1024);
     private int _leftPanelSize;
     private int _rightPanelSize;
     private bool _rightPanelCollapsed;
