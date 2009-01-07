@@ -153,17 +153,17 @@ namespace MPTagThat.TagEdit
         #region Main Tags
         if (tbTrack.Text.Trim().Length > 0 || tbNumTracks.Text.Trim().Length > 0)
         {
-          string tracknumber = "";
-          string numbertracks = "";
+          int tracknumber = 0;
+          int numbertracks = 0;
           try
           {
-            tracknumber = Int32.Parse(tbTrack.Text.Trim()).ToString();
+            tracknumber = Int32.Parse(tbTrack.Text.Trim());
           }
           catch (Exception)
           { }
           try
           {
-            numbertracks = Int32.Parse(tbNumTracks.Text.Trim()).ToString();
+            numbertracks = Int32.Parse(tbNumTracks.Text.Trim());
           }
           catch (Exception)
           { }
@@ -177,17 +177,17 @@ namespace MPTagThat.TagEdit
 
         if (tbDisc.Text.Trim().Length > 0 || tbNumDiscs.Text.Trim().Length > 0)
         {
-          string discnumber = "";
-          string numberdiscs = "";
+          int discnumber = 0;
+          int numberdiscs = 0;
           try
           {
-            discnumber = Int32.Parse(tbDisc.Text.Trim()).ToString();
+            discnumber = Int32.Parse(tbDisc.Text.Trim());
           }
           catch (Exception)
           { }
           try
           {
-            numberdiscs = Int32.Parse(tbNumDiscs.Text.Trim()).ToString();
+            numberdiscs = Int32.Parse(tbNumDiscs.Text.Trim());
           }
           catch (Exception)
           { }

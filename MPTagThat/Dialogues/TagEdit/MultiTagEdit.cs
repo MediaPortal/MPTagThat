@@ -391,7 +391,10 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          options.Track = Int32.Parse(tbTrack.Text.Trim());
+          if (tbTrack.Text.Trim() == "")
+            options.Track = 0;
+          else
+            options.Track = Int32.Parse(tbTrack.Text.Trim());
         }
         catch (Exception)
         {
@@ -400,7 +403,10 @@ namespace MPTagThat.TagEdit
 
         try
         {
-          options.NumTracks = Int32.Parse(tbNumTracks.Text.Trim());
+          if (tbNumTracks.Text.Trim() == "")
+            options.NumTracks = 0;
+          else
+            options.NumTracks = Int32.Parse(tbNumTracks.Text.Trim());
         }
         catch (Exception)
         {
@@ -412,7 +418,10 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          options.Disc = Int32.Parse(tbDisc.Text.Trim());
+          if (tbDisc.Text.Trim() == "")
+            options.Disc = 0;
+          else
+            options.Disc = Int32.Parse(tbDisc.Text.Trim());
         }
         catch (Exception)
         {
@@ -421,7 +430,10 @@ namespace MPTagThat.TagEdit
 
         try
         {
-          options.NumDiscs = Int32.Parse(tbNumDiscs.Text.Trim());
+          if (tbNumDiscs.Text.Trim() == "")
+            options.NumDiscs = 0;
+          else
+            options.NumDiscs = Int32.Parse(tbNumDiscs.Text.Trim());
         }
         catch (Exception)
         {
@@ -433,7 +445,10 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          options.BPM = Int32.Parse(tbBPM.Text.Trim());
+          if (tbBPM.Text.Trim() == "")
+            options.BPM = 0;
+          else
+            options.BPM = Int32.Parse(tbBPM.Text.Trim());
         }
         catch (Exception)
         {
@@ -441,13 +456,19 @@ namespace MPTagThat.TagEdit
         }
       }
 
-      try
+      if (ckYear.Checked)
       {
-        options.Year = (ckYear.Checked ? Int32.Parse(tbYear.Text) : -1);
-      }
-      catch (Exception)
-      {
-        options.Year = -1;
+        try
+        {
+          if (tbYear.Text.Trim() == "")
+            options.Year = 0;
+          else
+            options.Year = Int32.Parse(tbYear.Text.Trim());
+        }
+        catch (Exception)
+        {
+          options.Year = -1;
+        }
       }
 
       if (ckGenre.Checked)

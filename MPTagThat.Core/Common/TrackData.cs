@@ -621,6 +621,8 @@ namespace MPTagThat.Core
         {
           if (track[0] != "")
             _file.Tag.Track = Convert.ToUInt32(track[0]);
+          else
+            _file.Tag.Track = 0;
         }
         catch (Exception) { }
 
@@ -628,6 +630,8 @@ namespace MPTagThat.Core
         {
           if (track.Length > 1 && track[1] != "")
             _file.Tag.TrackCount = Convert.ToUInt32(track[1]);
+          else
+            _file.Tag.TrackCount = 0;
         }
         catch (Exception) { }
       }
