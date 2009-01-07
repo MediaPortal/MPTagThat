@@ -471,9 +471,17 @@ namespace MPTagThat.TagEdit
         }
       }
 
-      if (ckGenre.Checked)
+      if (ckGenre.Checked || cbGenre.Text.Trim() != "")
       {
         int i = 0;
+
+        // Add the Genre, found in the combo, so we don't need to press "Add Genre" every time
+        if (cbGenre.Text.Trim() != "")
+        {
+          options.Genre += cbGenre.Text.Trim();
+          i = 1;
+        }
+
         foreach (string item in listBoxGenre.Items)
         {
           if (i == 0)

@@ -234,6 +234,13 @@ namespace MPTagThat.TagEdit
 
         string genre = "";
         int i = 0;
+        
+        // Add the Genre, found in the combo, so we don't need to press "Add Genre" every time
+        if (cbGenre.Text.Trim() != "")
+        {
+          genre += cbGenre.Text.Trim();
+          i = 1;
+        }
         foreach (string item in listBoxGenre.Items)
         {
           if (i == 0)
@@ -712,6 +719,11 @@ namespace MPTagThat.TagEdit
 
       string genre = "";
       int i = 0;
+      if (cbGenre.Text.Trim() != "")
+      {
+        genre += cbGenre.Text.Trim();
+        i = 1;
+      }
       foreach (string item in listBoxGenre.Items)
       {
         if (i == 0)
