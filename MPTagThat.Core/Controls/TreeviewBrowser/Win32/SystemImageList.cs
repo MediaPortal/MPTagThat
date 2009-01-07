@@ -771,7 +771,6 @@ namespace Raccoom.Win32
 
 			if (retVal.Equals(IntPtr.Zero))
 			{
-				System.Diagnostics.Debug.Assert((!retVal.Equals(IntPtr.Zero)),"Failed to get icon index");
 				return 0;
 			}
 			else
