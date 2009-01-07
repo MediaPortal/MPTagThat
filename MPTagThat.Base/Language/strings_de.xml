@@ -648,6 +648,8 @@
     <String id="DataEntryError">Der eingegebene Wert ist ungültig.</String>
     <String id="NoSelectionHeader">Keine Auswahl getroffen</String>
     <String id="NoSelection">Bitte selektieren Sie mindestens eine Zeile, um die gewählte Aktion auszuführen.</String>
+    <String id="DeleteConfirmHeader">Datei(en) löschen</String>
+    <String id="DeleteConfirm">Wollen Sie die ausgewählten Dateien tatsächlich löschen?</String>
   </Section>
     
   <!-- Progress Dialog -->

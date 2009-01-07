@@ -648,6 +648,8 @@
     <String id="DataEntryError">The specified value is invalid.</String>
     <String id="NoSelectionHeader">No Selection</String>
     <String id="NoSelection">Please select at least one row to perform the action</String>
+    <String id="DeleteConfirmHeader">Delete File(s)</String>
+    <String id="DeleteConfirm">Do you really want to delete the selected files(s)?</String>
   </Section>
     
   <!-- Progress Dialog -->
