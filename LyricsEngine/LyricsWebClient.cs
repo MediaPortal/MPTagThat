@@ -45,6 +45,7 @@ namespace LyricsEngine
 
       if (request.GetType() == typeof(HttpWebRequest))
       {
+        ((HttpWebRequest)request).Proxy.Credentials = CredentialCache.DefaultCredentials;
         ((HttpWebRequest)request).CookieContainer = cookieContainer;
         ((HttpWebRequest)request).UserAgent = userAgent;
         ((HttpWebRequest)request).Timeout = timeout;

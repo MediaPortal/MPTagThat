@@ -569,6 +569,7 @@ namespace MPTagThat.Core
       try
       {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestString);
+        request.Proxy.Credentials = CredentialCache.DefaultCredentials;
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         Stream responseStream = response.GetResponseStream();
         StreamReader reader = new StreamReader(responseStream);
