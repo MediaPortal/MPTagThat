@@ -842,14 +842,24 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// Refreshes the Foldrs
+    /// </summary>
+    public void RefreshFolders()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      treeViewFolderBrowser.Populate();
+      treeViewFolderBrowser.ShowFolder(_selectedDirectory);
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
     /// Refresh the Folder List
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void btnRefreshFolder_Click(object sender, EventArgs e)
     {
-      treeViewFolderBrowser.Populate();
-      treeViewFolderBrowser.ShowFolder(_selectedDirectory);
+      RefreshFolders();
     }
 
     /// <summary>

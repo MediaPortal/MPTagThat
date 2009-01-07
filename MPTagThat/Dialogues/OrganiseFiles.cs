@@ -192,7 +192,7 @@ namespace MPTagThat.Organise
           // Empty Values would create invalid folders
           directoryName = directoryName.Replace(@"\\", @"\_\");
 
-          // If the directory name starts with a backslash, we've got an empty value on the biginning
+          // If the directory name starts with a backslash, we've got an empty value on the beginning
           if (directoryName.IndexOf("\\") == 0)
             directoryName = "_" + directoryName;
 
@@ -246,6 +246,9 @@ namespace MPTagThat.Organise
             }
             else
             {
+              if (System.IO.File.Exists(newFilename))
+                System.IO.File.Delete(newFilename);
+
               System.IO.File.Move(track.FullFileName, newFilename);
               row.Cells[1].Value = localisation.ToString("organise", "Moved");
             }
@@ -295,6 +298,9 @@ namespace MPTagThat.Organise
               }
               else
               {
+                if (System.IO.File.Exists(newFilename))
+                  System.IO.File.Delete(newFilename);
+
                 System.IO.File.Move(file, newFilename);
               }
             }
@@ -304,6 +310,27 @@ namespace MPTagThat.Organise
             }
           }
         }
+      }
+
+      if (!ckCopyFiles.Checked)
+      {
+        foreach (string dir in _directories.Keys)
+        {
+          string[] files = System.IO.Directory.GetFiles(dir);
+          if (files.Length == 0)
+          {
+            try
+            {
+              System.IO.Directory.Delete(dir);
+            }
+            catch (Exception ex)
+            {
+              log.Error("Error Delteing Folder: {0} {1}", dir, ex.Message);
+            }
+          }
+        }
+        _main.RefreshFolders();
+        _main.RefreshTrackList();
       }
 
       tracksGrid.Refresh();
