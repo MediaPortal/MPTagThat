@@ -47,6 +47,7 @@ namespace MPTagThat.Dialogues
       // 
       // btOk
       // 
+      this.btOk.AutoSize = true;
       this.btOk.Localisation = "Ok";
       this.btOk.LocalisationContext = "ColumnSelect";
       this.btOk.Location = new System.Drawing.Point(71, 530);
@@ -59,6 +60,7 @@ namespace MPTagThat.Dialogues
       // 
       // btCancel
       // 
+      this.btCancel.AutoSize = true;
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "ColumnSelect";
@@ -96,7 +98,7 @@ namespace MPTagThat.Dialogues
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "ColumnSelect";
       this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "ColumnSelect";
       this.Load += new System.EventHandler(this.OnLoad);
       this.ResumeLayout(false);

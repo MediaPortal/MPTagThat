@@ -1216,7 +1216,6 @@ namespace MPTagThat.GridView
       if (e.Button == MouseButtons.Right)
       {
         MPTagThat.Dialogues.ColumnSelect dialog = new MPTagThat.Dialogues.ColumnSelect(this);
-        dialog.Location = this.PointToScreen(new Point(20, 50));
         dialog.ShowDialog();
       }
     }
