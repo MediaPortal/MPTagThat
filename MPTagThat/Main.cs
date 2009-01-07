@@ -31,6 +31,7 @@ namespace MPTagThat
     private bool _showForm = false;
     private object _dialog = null;
     private bool _rightPanelCollapsed = false;
+    private bool _folderScanInProgress = false;
 
     // Grids: Can't have them in Designer, as it will fail loading
     private MPTagThat.GridView.GridViewTracks gridViewControl;
@@ -500,6 +501,7 @@ namespace MPTagThat
       if (!System.IO.Directory.Exists(_selectedDirectory))
         return;
 
+      _folderScanInProgress = true;
       toolStripStatusLabelFolder.Text = _selectedDirectory;
 
       try // just in case we are lacking sufficent permissions
@@ -531,6 +533,7 @@ namespace MPTagThat
         dlgScan.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, trackCount), count, trackCount, true);
         if (dlgScan.IsCancelled)
         {
+          _folderScanInProgress = false;
           dlgScan.Close();
           return;
         }
@@ -561,6 +564,7 @@ namespace MPTagThat
         count++;
       }
 
+      _folderScanInProgress = false;
       dlgScan.Close();
 
       // Display Status Information
@@ -750,6 +754,18 @@ namespace MPTagThat
 
     #region Event Handler
     #region Treeview Events
+    /// <summary>
+    /// A new Folder has been selected
+    /// Only allow navigation, if no folder scanning is active
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+    {
+      if (_folderScanInProgress)
+        e.Cancel = true;
+    }
+
     /// <summary>
     /// A Folder has been selected in the TreeView. Read the content
     /// </summary>

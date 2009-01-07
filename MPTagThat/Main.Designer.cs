@@ -155,6 +155,7 @@ namespace MPTagThat
       this.treeViewFolderBrowser.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_Click);
       this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
       this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
+      this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
       // 
       // treeViewPanelTop
       // 
