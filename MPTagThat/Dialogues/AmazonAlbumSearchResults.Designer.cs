@@ -103,8 +103,8 @@
       this.Controls.Add(this.btUpdate);
       this.Controls.Add(this.btClose);
       this.Name = "AmazonAlbumSearchResults";
+      this.ShowInTaskbar = false;
       this.Text = "Internet Search Results";
-      this.TopMost = true;
       this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
       this.ResumeLayout(false);
 

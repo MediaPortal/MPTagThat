@@ -35,6 +35,10 @@ namespace MPTagThat.TagToFileName
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.groupBoxParm = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.numericUpDownNumberDigits = new System.Windows.Forms.NumericUpDown();
+      this.lblNumberDigits = new MPTagThat.Core.WinControls.MPTLabel();
+      this.numericUpDownStartAt = new System.Windows.Forms.NumericUpDown();
+      this.lblStartAt = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmEnumerate = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblModifiedBy = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblBPM = new MPTagThat.Core.WinControls.MPTLabel();
@@ -54,13 +58,9 @@ namespace MPTagThat.TagToFileName
       this.lblParmAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblStartAt = new MPTagThat.Core.WinControls.MPTLabel();
-      this.numericUpDownStartAt = new System.Windows.Forms.NumericUpDown();
-      this.numericUpDownNumberDigits = new System.Windows.Forms.NumericUpDown();
-      this.lblNumberDigits = new MPTagThat.Core.WinControls.MPTLabel();
       this.groupBoxParm.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartAt)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberDigits)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartAt)).BeginInit();
       this.SuspendLayout();
       // 
       // btRemoveFormat
@@ -165,6 +165,72 @@ namespace MPTagThat.TagToFileName
       this.groupBoxParm.TabIndex = 22;
       this.groupBoxParm.TabStop = false;
       this.groupBoxParm.Text = "Parameters (Click to add to the list)";
+      // 
+      // numericUpDownNumberDigits
+      // 
+      this.numericUpDownNumberDigits.Location = new System.Drawing.Point(274, 199);
+      this.numericUpDownNumberDigits.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.numericUpDownNumberDigits.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericUpDownNumberDigits.Name = "numericUpDownNumberDigits";
+      this.numericUpDownNumberDigits.Size = new System.Drawing.Size(62, 20);
+      this.numericUpDownNumberDigits.TabIndex = 23;
+      this.numericUpDownNumberDigits.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+      // 
+      // lblNumberDigits
+      // 
+      this.lblNumberDigits.AutoSize = true;
+      this.lblNumberDigits.Localisation = "NumberDigits";
+      this.lblNumberDigits.LocalisationContext = "TagAndRename";
+      this.lblNumberDigits.Location = new System.Drawing.Point(342, 201);
+      this.lblNumberDigits.Name = "lblNumberDigits";
+      this.lblNumberDigits.Size = new System.Drawing.Size(85, 13);
+      this.lblNumberDigits.TabIndex = 22;
+      this.lblNumberDigits.Text = "Number of Digits";
+      // 
+      // numericUpDownStartAt
+      // 
+      this.numericUpDownStartAt.Location = new System.Drawing.Point(274, 173);
+      this.numericUpDownStartAt.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+      this.numericUpDownStartAt.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.numericUpDownStartAt.Name = "numericUpDownStartAt";
+      this.numericUpDownStartAt.Size = new System.Drawing.Size(62, 20);
+      this.numericUpDownStartAt.TabIndex = 21;
+      this.numericUpDownStartAt.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      // 
+      // lblStartAt
+      // 
+      this.lblStartAt.AutoSize = true;
+      this.lblStartAt.Localisation = "StartAt";
+      this.lblStartAt.LocalisationContext = "TagAndRename";
+      this.lblStartAt.Location = new System.Drawing.Point(342, 175);
+      this.lblStartAt.Name = "lblStartAt";
+      this.lblStartAt.Size = new System.Drawing.Size(41, 13);
+      this.lblStartAt.TabIndex = 20;
+      this.lblStartAt.Text = "Start at";
       // 
       // lblParmEnumerate
       // 
@@ -394,72 +460,6 @@ namespace MPTagThat.TagToFileName
       this.lblParmArtist.Text = "<A> = Artist";
       this.lblParmArtist.Click += new System.EventHandler(this.lblParm_Click);
       // 
-      // lblStartAt
-      // 
-      this.lblStartAt.AutoSize = true;
-      this.lblStartAt.Localisation = "StartAt";
-      this.lblStartAt.LocalisationContext = "TagAndRename";
-      this.lblStartAt.Location = new System.Drawing.Point(342, 175);
-      this.lblStartAt.Name = "lblStartAt";
-      this.lblStartAt.Size = new System.Drawing.Size(41, 13);
-      this.lblStartAt.TabIndex = 20;
-      this.lblStartAt.Text = "Start at";
-      // 
-      // numericUpDownStartAt
-      // 
-      this.numericUpDownStartAt.Location = new System.Drawing.Point(274, 173);
-      this.numericUpDownStartAt.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-      this.numericUpDownStartAt.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-      this.numericUpDownStartAt.Name = "numericUpDownStartAt";
-      this.numericUpDownStartAt.Size = new System.Drawing.Size(62, 20);
-      this.numericUpDownStartAt.TabIndex = 21;
-      this.numericUpDownStartAt.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-      // 
-      // numericUpDownNumberDigits
-      // 
-      this.numericUpDownNumberDigits.Location = new System.Drawing.Point(274, 199);
-      this.numericUpDownNumberDigits.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-      this.numericUpDownNumberDigits.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-      this.numericUpDownNumberDigits.Name = "numericUpDownNumberDigits";
-      this.numericUpDownNumberDigits.Size = new System.Drawing.Size(62, 20);
-      this.numericUpDownNumberDigits.TabIndex = 23;
-      this.numericUpDownNumberDigits.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-      // 
-      // lblNumberDigits
-      // 
-      this.lblNumberDigits.AutoSize = true;
-      this.lblNumberDigits.Localisation = "NumberDigits";
-      this.lblNumberDigits.LocalisationContext = "TagAndRename";
-      this.lblNumberDigits.Location = new System.Drawing.Point(342, 201);
-      this.lblNumberDigits.Name = "lblNumberDigits";
-      this.lblNumberDigits.Size = new System.Drawing.Size(85, 13);
-      this.lblNumberDigits.TabIndex = 22;
-      this.lblNumberDigits.Text = "Number of Digits";
-      // 
       // TagToFileName
       // 
       this.AcceptButton = this.btApply;
@@ -478,13 +478,14 @@ namespace MPTagThat.TagToFileName
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "TagToFileName";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagToFileName";
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);
       this.groupBoxParm.ResumeLayout(false);
       this.groupBoxParm.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartAt)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberDigits)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartAt)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 

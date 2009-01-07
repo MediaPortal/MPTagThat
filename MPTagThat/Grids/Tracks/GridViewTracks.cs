@@ -157,6 +157,7 @@ namespace MPTagThat.GridView
     {
       Util.EnterMethod(Util.GetCallingMethod());
       dlgProgress = new Progress();
+      dlgProgress.Owner = _main;
       dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
       ShowForm(dlgProgress);
 
@@ -226,6 +227,7 @@ namespace MPTagThat.GridView
       if (showProgressDialog)
       {
         dlgProgress = new Progress();
+        dlgProgress.Owner = _main;
         dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
         ShowForm(dlgProgress);
       }
@@ -361,6 +363,7 @@ namespace MPTagThat.GridView
       }
 
       dlgProgress = new Progress();
+      dlgProgress.Owner = _main;
       dlgProgress.Text = localisation.ToString("progress", "InternetHeader");
       ShowForm(dlgProgress);
 
@@ -413,6 +416,7 @@ namespace MPTagThat.GridView
                 if (!albumFound)
                 {
                   MusicBrainzAlbumResults dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
+                  dlgAlbumResults.Owner = _main;
                   if (_main.ShowForm(dlgAlbumResults) == DialogResult.OK)
                   {
                     if (dlgAlbumResults.SelectedListItem > -1)
@@ -522,6 +526,7 @@ namespace MPTagThat.GridView
       }
 
       dlgProgress = new Progress();
+      dlgProgress.Owner = _main;
       dlgProgress.Text = localisation.ToString("progress", "CoverArtHeader");
       ShowForm(dlgProgress);
 
@@ -576,6 +581,7 @@ namespace MPTagThat.GridView
               else
               {
                 AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
+                dlgAlbumResults.Owner = _main;
                 if (_main.ShowForm(dlgAlbumResults) == DialogResult.OK)
                 {
                   if (dlgAlbumResults.SelectedListItem > -1)
@@ -682,6 +688,7 @@ namespace MPTagThat.GridView
       }
 
       dlgProgress = new Progress();
+      dlgProgress.Owner = _main;
       dlgProgress.Text = localisation.ToString("progress", "LyricsHeader");
       ShowForm(dlgProgress);
 
@@ -712,6 +719,7 @@ namespace MPTagThat.GridView
         try
         {
           LyricsSearch lyricssearch = new LyricsSearch(tracks);
+          lyricssearch.Owner = _main;
           if (_main.ShowForm(lyricssearch) == DialogResult.OK)
           {
             DataGridView lyricsResult = lyricssearch.GridView;

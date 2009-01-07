@@ -3143,6 +3143,7 @@
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "TagEditBase";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagEditBase";
       this.Load += new System.EventHandler(this.OnLoad);

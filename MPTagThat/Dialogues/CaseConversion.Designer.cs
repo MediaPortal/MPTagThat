@@ -440,6 +440,7 @@ namespace MPTagThat.CaseConversion
       this.Controls.Add(this.buttonConvert);
       this.Controls.Add(this.tabControlConversion);
       this.Name = "CaseConversion";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "CaseConversion";
       this.tabControlConversion.ResumeLayout(false);

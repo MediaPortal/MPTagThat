@@ -525,6 +525,7 @@ namespace MPTagThat.Organise
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "OrganiseFiles";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Organise Files";
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);

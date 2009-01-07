@@ -270,6 +270,7 @@
       this.Controls.Add(this.lbAlbum);
       this.Controls.Add(this.lbArtist);
       this.Name = "AlbumDetails";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Details on selected Album";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();

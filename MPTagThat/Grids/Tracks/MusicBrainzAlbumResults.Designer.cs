@@ -172,8 +172,8 @@
       this.Controls.Add(this.btClose);
       this.Controls.Add(this.gbSearchInfo);
       this.Name = "MusicBrainzAlbumResults";
+      this.ShowInTaskbar = false;
       this.Text = "Internet Search Results";
-      this.TopMost = true;
       this.groupBoxMusicBrainzMultipleAlbums.ResumeLayout(false);
       this.gbSearchInfo.ResumeLayout(false);
       this.gbSearchInfo.PerformLayout();

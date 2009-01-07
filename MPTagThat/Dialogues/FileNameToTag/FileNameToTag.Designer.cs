@@ -32,6 +32,12 @@ namespace MPTagThat.FileNameToTag
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.cbFormat = new System.Windows.Forms.ComboBox();
       this.groupBoxParm = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.lblModifiedBy = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblBPM = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblSubTitle = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblContentGroup = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblComposer = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblConductor = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmFolder = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmUnused = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmComment = new MPTagThat.Core.WinControls.MPTLabel();
@@ -48,12 +54,6 @@ namespace MPTagThat.FileNameToTag
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.lblFormat = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblConductor = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblComposer = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblContentGroup = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblSubTitle = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblBPM = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblModifiedBy = new MPTagThat.Core.WinControls.MPTLabel();
       this.groupBoxParm.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -119,6 +119,78 @@ namespace MPTagThat.FileNameToTag
       this.groupBoxParm.TabIndex = 21;
       this.groupBoxParm.TabStop = false;
       this.groupBoxParm.Text = "Parameters (Click to add to the list)";
+      // 
+      // lblModifiedBy
+      // 
+      this.lblModifiedBy.AutoSize = true;
+      this.lblModifiedBy.Localisation = "ModifiedBY";
+      this.lblModifiedBy.LocalisationContext = "TagAndRename";
+      this.lblModifiedBy.Location = new System.Drawing.Point(6, 137);
+      this.lblModifiedBy.Name = "lblModifiedBy";
+      this.lblModifiedBy.Size = new System.Drawing.Size(141, 13);
+      this.lblModifiedBy.TabIndex = 18;
+      this.lblModifiedBy.Text = "<M> = Modified / remixed by";
+      this.lblModifiedBy.Click += new System.EventHandler(this.lblParm_Click);
+      // 
+      // lblBPM
+      // 
+      this.lblBPM.AutoSize = true;
+      this.lblBPM.Localisation = "BPM";
+      this.lblBPM.LocalisationContext = "TagAndRename";
+      this.lblBPM.Location = new System.Drawing.Point(271, 137);
+      this.lblBPM.Name = "lblBPM";
+      this.lblBPM.Size = new System.Drawing.Size(61, 13);
+      this.lblBPM.TabIndex = 17;
+      this.lblBPM.Text = "<E> = BPM";
+      this.lblBPM.Click += new System.EventHandler(this.lblParm_Click);
+      // 
+      // lblSubTitle
+      // 
+      this.lblSubTitle.AutoSize = true;
+      this.lblSubTitle.Localisation = "SubTitle";
+      this.lblSubTitle.LocalisationContext = "TagAndRename";
+      this.lblSubTitle.Location = new System.Drawing.Point(533, 111);
+      this.lblSubTitle.Name = "lblSubTitle";
+      this.lblSubTitle.Size = new System.Drawing.Size(77, 13);
+      this.lblSubTitle.TabIndex = 16;
+      this.lblSubTitle.Text = "<S> = SubTitle";
+      this.lblSubTitle.Click += new System.EventHandler(this.lblParm_Click);
+      // 
+      // lblContentGroup
+      // 
+      this.lblContentGroup.AutoSize = true;
+      this.lblContentGroup.Localisation = "Group";
+      this.lblContentGroup.LocalisationContext = "TagAndRename";
+      this.lblContentGroup.Location = new System.Drawing.Point(533, 87);
+      this.lblContentGroup.Name = "lblContentGroup";
+      this.lblContentGroup.Size = new System.Drawing.Size(108, 13);
+      this.lblContentGroup.TabIndex = 15;
+      this.lblContentGroup.Text = "<U> = Content Group";
+      this.lblContentGroup.Click += new System.EventHandler(this.lblParm_Click);
+      // 
+      // lblComposer
+      // 
+      this.lblComposer.AutoSize = true;
+      this.lblComposer.Localisation = "Composer";
+      this.lblComposer.LocalisationContext = "TagAndRename";
+      this.lblComposer.Location = new System.Drawing.Point(533, 64);
+      this.lblComposer.Name = "lblComposer";
+      this.lblComposer.Size = new System.Drawing.Size(86, 13);
+      this.lblComposer.TabIndex = 14;
+      this.lblComposer.Text = "<R> = Composer";
+      this.lblComposer.Click += new System.EventHandler(this.lblParm_Click);
+      // 
+      // lblConductor
+      // 
+      this.lblConductor.AutoSize = true;
+      this.lblConductor.Localisation = "Conductor";
+      this.lblConductor.LocalisationContext = "TagAndRename";
+      this.lblConductor.Location = new System.Drawing.Point(271, 64);
+      this.lblConductor.Name = "lblConductor";
+      this.lblConductor.Size = new System.Drawing.Size(88, 13);
+      this.lblConductor.TabIndex = 13;
+      this.lblConductor.Text = "<N> = Conductor";
+      this.lblConductor.Click += new System.EventHandler(this.lblParm_Click);
       // 
       // lblParmFolder
       // 
@@ -313,78 +385,6 @@ namespace MPTagThat.FileNameToTag
       this.lblFormat.TabIndex = 13;
       this.lblFormat.Text = "Format:";
       // 
-      // lblConductor
-      // 
-      this.lblConductor.AutoSize = true;
-      this.lblConductor.Localisation = "Conductor";
-      this.lblConductor.LocalisationContext = "TagAndRename";
-      this.lblConductor.Location = new System.Drawing.Point(271, 64);
-      this.lblConductor.Name = "lblConductor";
-      this.lblConductor.Size = new System.Drawing.Size(88, 13);
-      this.lblConductor.TabIndex = 13;
-      this.lblConductor.Text = "<N> = Conductor";
-      this.lblConductor.Click += new System.EventHandler(this.lblParm_Click);
-      // 
-      // lblComposer
-      // 
-      this.lblComposer.AutoSize = true;
-      this.lblComposer.Localisation = "Composer";
-      this.lblComposer.LocalisationContext = "TagAndRename";
-      this.lblComposer.Location = new System.Drawing.Point(533, 64);
-      this.lblComposer.Name = "lblComposer";
-      this.lblComposer.Size = new System.Drawing.Size(86, 13);
-      this.lblComposer.TabIndex = 14;
-      this.lblComposer.Text = "<R> = Composer";
-      this.lblComposer.Click += new System.EventHandler(this.lblParm_Click);
-      // 
-      // lblContentGroup
-      // 
-      this.lblContentGroup.AutoSize = true;
-      this.lblContentGroup.Localisation = "Group";
-      this.lblContentGroup.LocalisationContext = "TagAndRename";
-      this.lblContentGroup.Location = new System.Drawing.Point(533, 87);
-      this.lblContentGroup.Name = "lblContentGroup";
-      this.lblContentGroup.Size = new System.Drawing.Size(108, 13);
-      this.lblContentGroup.TabIndex = 15;
-      this.lblContentGroup.Text = "<U> = Content Group";
-      this.lblContentGroup.Click += new System.EventHandler(this.lblParm_Click);
-      // 
-      // lblSubTitle
-      // 
-      this.lblSubTitle.AutoSize = true;
-      this.lblSubTitle.Localisation = "SubTitle";
-      this.lblSubTitle.LocalisationContext = "TagAndRename";
-      this.lblSubTitle.Location = new System.Drawing.Point(533, 111);
-      this.lblSubTitle.Name = "lblSubTitle";
-      this.lblSubTitle.Size = new System.Drawing.Size(77, 13);
-      this.lblSubTitle.TabIndex = 16;
-      this.lblSubTitle.Text = "<S> = SubTitle";
-      this.lblSubTitle.Click += new System.EventHandler(this.lblParm_Click);
-      // 
-      // lblBPM
-      // 
-      this.lblBPM.AutoSize = true;
-      this.lblBPM.Localisation = "BPM";
-      this.lblBPM.LocalisationContext = "TagAndRename";
-      this.lblBPM.Location = new System.Drawing.Point(271, 137);
-      this.lblBPM.Name = "lblBPM";
-      this.lblBPM.Size = new System.Drawing.Size(61, 13);
-      this.lblBPM.TabIndex = 17;
-      this.lblBPM.Text = "<E> = BPM";
-      this.lblBPM.Click += new System.EventHandler(this.lblParm_Click);
-      // 
-      // lblModifiedBy
-      // 
-      this.lblModifiedBy.AutoSize = true;
-      this.lblModifiedBy.Localisation = "ModifiedBY";
-      this.lblModifiedBy.LocalisationContext = "TagAndRename";
-      this.lblModifiedBy.Location = new System.Drawing.Point(6, 137);
-      this.lblModifiedBy.Name = "lblModifiedBy";
-      this.lblModifiedBy.Size = new System.Drawing.Size(141, 13);
-      this.lblModifiedBy.TabIndex = 18;
-      this.lblModifiedBy.Text = "<M> = Modified / remixed by";
-      this.lblModifiedBy.Click += new System.EventHandler(this.lblParm_Click);
-      // 
       // FileNameToTag
       // 
       this.AcceptButton = this.btApply;
@@ -403,6 +403,7 @@ namespace MPTagThat.FileNameToTag
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "FileNameToTag";
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "FileNameToTag";
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);

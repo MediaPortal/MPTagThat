@@ -241,8 +241,8 @@
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.gbSearchInfo);
       this.Name = "LyricsSearch";
+      this.ShowInTaskbar = false;
       this.Text = "LyricsSearch";
-      this.TopMost = true;
       this.groupBox1.ResumeLayout(false);
       this.groupBox2.ResumeLayout(false);
       this.groupBox2.PerformLayout();

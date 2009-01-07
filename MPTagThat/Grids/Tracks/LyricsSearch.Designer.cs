@@ -29,7 +29,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.dataGridViewLyrics = new System.Windows.Forms.DataGridView();
       this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
@@ -42,8 +42,8 @@
       // 
       this.dataGridViewLyrics.AllowUserToAddRows = false;
       this.dataGridViewLyrics.AllowUserToDeleteRows = false;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.dataGridViewLyrics.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.dataGridViewLyrics.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.dataGridViewLyrics.BackgroundColor = System.Drawing.Color.White;
       this.dataGridViewLyrics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridViewLyrics.Location = new System.Drawing.Point(30, 54);
@@ -113,10 +113,10 @@
       this.Controls.Add(this.btUpdate);
       this.Controls.Add(this.dataGridViewLyrics);
       this.Name = "LyricsSearch";
+      this.ShowInTaskbar = false;
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "LyricsSearch";
-      this.TopMost = true;
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).EndInit();
       this.ResumeLayout(false);
