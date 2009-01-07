@@ -28,7 +28,7 @@ namespace MPTagThat.Core.Amazon
       string requestString = amazonUrl + string.Format(itemLookup, albumID);
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
-        return null;
+        return album;
 
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
@@ -56,7 +56,7 @@ namespace MPTagThat.Core.Amazon
       string requestString = amazonUrl + string.Format(itemSearch, System.Web.HttpUtility.UrlEncode(artist), System.Web.HttpUtility.UrlEncode(albumTitle));
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
-        return null;
+        return albums;
 
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
