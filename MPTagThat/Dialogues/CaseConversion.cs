@@ -27,12 +27,32 @@ namespace MPTagThat.CaseConversion
     public CaseConversion(Main main)
     {
       _main = main;
+      InitForm(false);
+    }
+
+    public CaseConversion(Main main, bool batchMode)
+    {
+      _main = main;
+      InitForm(batchMode);
+    }
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// The form is used in Batch Mode, when saving tags
+    /// </summary>
+    /// <param name="batchMode"></param>
+    private void InitForm(bool batchMode)
+    {
       InitializeComponent();
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+      if (!batchMode)
+      {
+        this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+        ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-      LocaliseScreen();
+        LocaliseScreen();
+      }
 
       // Bind the List with the Exceptions to the list box
       listBoxExceptions.DataSource = Options.ConversionSettings.CaseConvExceptions;
@@ -55,9 +75,7 @@ namespace MPTagThat.CaseConversion
       checkBoxReplaceUnderscoreBySpace.Checked = Options.ConversionSettings.ReplaceUnderscoreBySpace;
       checkBoxAlwaysUpperCaseFirstLetter.Checked = Options.ConversionSettings.ConvertAllWaysFirstUpper;
     }
-    #endregion
 
-    #region Methods
     #region Localisation
     /// <summary>
     /// Localise the Screen

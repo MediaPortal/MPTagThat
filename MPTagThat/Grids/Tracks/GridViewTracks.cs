@@ -276,7 +276,7 @@ namespace MPTagThat.GridView
 
           if (Options.MainSettings.UseCaseConversion)
           {
-            CaseConversion.CaseConversion convert = new MPTagThat.CaseConversion.CaseConversion(_main);
+            CaseConversion.CaseConversion convert = new MPTagThat.CaseConversion.CaseConversion(_main, true);
             convert.CaseConvert(track, rowIndex);
             convert.Dispose();
           }
