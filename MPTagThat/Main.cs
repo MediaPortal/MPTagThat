@@ -575,8 +575,13 @@ namespace MPTagThat
       // And set the background color of the rating cell, as it isn#t reset by the grid
       if (gridViewControl.View.Rows.Count > 0)
       {
-        gridViewControl.View.Rows[0].Selected = false;
-        gridViewControl.View.Rows[0].Cells[10].Style.BackColor = themeManager.CurrentTheme.DefaultBackColor;
+        try
+        {
+          gridViewControl.View.Rows[0].Selected = false;
+          gridViewControl.View.Rows[0].Cells[10].Style.BackColor = themeManager.CurrentTheme.DefaultBackColor;
+        }
+        catch (ArgumentOutOfRangeException)
+        { }  // Sometimes the grid throws an argumenoutofrangeexception
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
