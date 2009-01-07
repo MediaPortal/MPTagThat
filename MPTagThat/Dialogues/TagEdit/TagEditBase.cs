@@ -423,6 +423,18 @@ namespace MPTagThat.TagEdit
         listBoxGenre.Items.Insert(0, item);
       }
     }
+
+    /// <summary>
+    /// Double Click on Genre. 
+    /// Remove the selected Genre
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void listBoxGenre_DoubleClick(object sender, EventArgs e)
+    {
+      ckGenre.Checked = true;
+      listBoxGenre.Items.Remove(listBoxGenre.SelectedItem);
+    }
     #endregion
 
     #region Picture
@@ -843,7 +855,6 @@ namespace MPTagThat.TagEdit
     }
     #endregion
     #endregion
-
 
     #region Key Events
     /// <summary>

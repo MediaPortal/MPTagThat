@@ -583,6 +583,7 @@
       this.listBoxGenre.Name = "listBoxGenre";
       this.listBoxGenre.Size = new System.Drawing.Size(225, 68);
       this.listBoxGenre.TabIndex = 1;
+      this.listBoxGenre.DoubleClick += new System.EventHandler(this.listBoxGenre_DoubleClick);
       // 
       // lblGenre
       // 
