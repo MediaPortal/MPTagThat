@@ -610,6 +610,7 @@ namespace MPTagThat.TagEdit
       Util.EnterMethod(Util.GetCallingMethod());
       int i = 0;
       string strGenreTemp = "";
+      string strCommentTemp = "";
       string strInvoledPeopleTemp = "";
       string strMusicianCreditList = "";
 
@@ -619,6 +620,15 @@ namespace MPTagThat.TagEdit
           continue;
 
         TrackData track = main.TracksGridView.TrackList[row.Index];
+
+        // Get the ID3 Frame for ID3 specifc frame handling
+        TagLib.Id3v1.Tag id3v1tag = null;
+        TagLib.Id3v2.Tag id3v2tag = null;
+        if (track.TagType.ToLower() == "mp3")
+        {
+          id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
+          id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+        }
 
         #region Main Tags
         if (tbArtist.Text.Trim() != track.Artist.Trim())
@@ -697,6 +707,39 @@ namespace MPTagThat.TagEdit
           }
           else
             listBoxGenre.Items.Clear();
+        }
+
+        // Get Comment
+        string sComment = "";
+        if (track.TagType.ToLower() == "mp3")
+        {
+          sComment += id3v1tag.Comment;
+          foreach (TagLib.Id3v2.CommentsFrame commentsframe in id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>())
+          {
+            sComment += commentsframe.Text;
+          }
+        }
+        else
+          sComment = track.Comment;
+
+        if (strCommentTemp != sComment)
+        {
+          if (i == 0)
+          {
+            strCommentTemp = sComment;
+            if (track.TagType.ToLower() == "mp3")
+            {
+              AddComment("", "", id3v1tag.Comment);
+              foreach (TagLib.Id3v2.CommentsFrame commentsframe in id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>())
+              {
+                AddComment(commentsframe.Description, commentsframe.Language, commentsframe.Text);
+              }
+            }
+            else
+              AddComment("", "", track.Comment);
+          }
+          else
+            dataGridViewComment.Rows.Clear();
         }
         #endregion
 
