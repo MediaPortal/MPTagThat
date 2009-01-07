@@ -471,7 +471,8 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void ribbonButton_Click(object sender, EventArgs e)
     {
-      if (!main.TracksGridView.CheckSelections())
+      // If no Rows are selected, select ALL of them and do the necessary action
+      if (!main.TracksGridView.CheckSelections(true))
         return;
 
       RadButtonElement rb = sender as RadButtonElement;

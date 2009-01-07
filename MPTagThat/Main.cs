@@ -968,7 +968,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_MULTI_EDIT:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           _dialog = new MPTagThat.TagEdit.MultiTagEdit(this);
@@ -981,7 +981,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_FILENAME2TAG:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           _dialog = new MPTagThat.FileNameToTag.FileNameToTag(this);
@@ -989,7 +989,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TAG2FILENAME:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           _dialog = new MPTagThat.TagToFileName.TagToFileName(this);
@@ -997,14 +997,14 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_IDENTIFYFILE:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           gridViewControl.IdentifyFiles();
           break;
 
         case Action.ActionType.ACTION_TAGFROMINTERNET:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           MPTagThat.InternetLookup.InternetLookup lookup = new MPTagThat.InternetLookup.InternetLookup(this);
@@ -1012,7 +1012,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_ORGANISE:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           _dialog = new MPTagThat.Organise.OrganiseFiles(this);
@@ -1020,12 +1020,12 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_GETCOVERART:
-          if (gridViewControl.CheckSelections())
+          if (gridViewControl.CheckSelections(true))
             gridViewControl.GetCoverArt();
           break;
 
         case Action.ActionType.ACTION_GETLYRICS:
-          if (gridViewControl.CheckSelections())
+          if (gridViewControl.CheckSelections(true))
             gridViewControl.GetLyrics();
           break;
 
@@ -1063,7 +1063,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_CASECONVERSION:
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(true))
             break;
 
           _dialog = new MPTagThat.CaseConversion.CaseConversion(this);
@@ -1087,7 +1087,7 @@ namespace MPTagThat
           if (!gridViewControl.Visible)
             break;
 
-          if (!gridViewControl.CheckSelections())
+          if (!gridViewControl.CheckSelections(false))
             break;
 
           gridViewControl.DeleteTracks();

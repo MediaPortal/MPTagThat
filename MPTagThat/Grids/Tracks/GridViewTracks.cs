@@ -831,6 +831,13 @@ namespace MPTagThat.GridView
     public void DeleteTracks()
     {
       Util.EnterMethod(Util.GetCallingMethod());
+      DialogResult result = MessageBox.Show(localisation.ToString("message", "DeleteConfirm"), localisation.ToString("message", "DeleteConfirmHeader"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+      if (result == DialogResult.Cancel)
+      {
+        Util.LeaveMethod(Util.GetCallingMethod());
+        return;
+      }
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -875,25 +882,20 @@ namespace MPTagThat.GridView
     /// Checks, if we have something selected
     /// </summary>
     /// <returns></returns>
-    public bool CheckSelections()
+    public bool CheckSelections(bool selectAll)
     {
-      bool selected = false;
-
-      // Check for at least one row selected
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      if (tracksGrid.SelectedRows.Count == 0)
       {
-        if (row.Selected)
+        // If no Rows are selected, select ALL of them and do the necessary action
+        if (selectAll)
+          tracksGrid.SelectAll();
+        else
         {
-          selected = true;
-          break;
+          MessageBox.Show(localisation.ToString("message", "NoSelection"), localisation.ToString("message", "NoSelectionHeader"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          return false;
         }
       }
-
-      // display a message box, when nothing is selected
-      if (!selected)
-        MessageBox.Show(localisation.ToString("message", "NoSelection"), localisation.ToString("message", "NoSelectionHeader"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-      return selected;
+      return true;
     }
 
     /// <summary>
