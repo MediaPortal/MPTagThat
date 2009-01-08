@@ -70,6 +70,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogues\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogues\CaseConversion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +237,9 @@
     <Compile Include="Player\PlayListData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogues\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\CaseConversion.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CaseConversion.cs</DependentUpon>

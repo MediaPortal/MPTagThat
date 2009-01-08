@@ -8,7 +8,7 @@
 <Language>
   <Section name="system">
     <String id="NotFound">### String Not Found ###</String>
-        <String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
+    <String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
   </Section>
 
   <!-- Main --> 
@@ -77,6 +77,7 @@
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Convert</String>
+    <String id="ConvertButton">Start\nConvert</String>
     <String id="ConvertEncoder">Select Encoder:</String>
     <String id="ConvertFolder">Output Folder:</String>
     <String id="ConvertCancel">Cancel\nConvert</String>
@@ -668,5 +669,14 @@
     <String id="CoverArt">Retrieving Cover Art for track {0}/{1}</String>
     <String id="LyricsHeader">Lyrics Lookup</String>
     <String id="Lyrics">Retrieving Lyrics for track {0}/{1}</String>
+  </Section>
+  
+  <!-- About Dialog -->
+  <Section name="about">
+    <String id="Header">About</String>
+    <String id="Ok">Ok</String>
+    <String id="Description">MPTagThat is an open source Tag Editor, which allows managing your complete Music Collection.\n\nMore information at:</String>
+	<String id="Version">Version:</String>
+	<String id="BuildDate">Build Date:</String>
   </Section>
 </Language>

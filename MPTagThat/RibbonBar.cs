@@ -292,6 +292,7 @@ namespace MPTagThat
 
       // Convert Tab
       this.ribbonTabConvert.Text = localisation.ToString("ribbon", "ConvertTab");
+      this.ribbonButtonConvert.Text = localisation.ToString("ribbon", "ConvertButton");
       this.ribbonLabelConvertEncoder.Text = localisation.ToString("ribbon", "ConvertEncoder");
       this.ribbonLabelConvertOutputDirectory.Text = localisation.ToString("ribbon", "ConvertFolder");
       this.ribbonButtonConvertCancel.Text = localisation.ToString("ribbon", "ConvertCancel");
@@ -724,7 +725,8 @@ namespace MPTagThat
     /// <param name="e"></param>
     void helpButton_Click(object sender, EventArgs e)
     {
-      System.Diagnostics.Process.Start(Options.HelpLocation);
+      MPTagThat.Dialogues.About dlgAbout = new MPTagThat.Dialogues.About();
+      main.ShowForm(dlgAbout);
     }
     #endregion
 
