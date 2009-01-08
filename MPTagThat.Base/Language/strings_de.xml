@@ -69,6 +69,7 @@
 
     <!-- Rip Tab-->
     <String id="RipTab">Rip</String>
+	<String id="RipButton">Rip\nstarten</String>
     <String id="RipEncoder">Encoder auswählen:</String>
     <String id="RipFolder">Ausgabe in Verzeichnis:</String>
     <String id="RipCancel">Rip\nabbrechen</String>

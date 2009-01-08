@@ -284,6 +284,7 @@ namespace MPTagThat
 
       // Rip Tab
       this.ribbonTabRip.Text = localisation.ToString("ribbon", "RipTab");
+      this.ribbonButtonRip.Text = localisation.ToString("ribbon", "RipButton");
       this.ribbonLabelRipEncoder.Text = localisation.ToString("ribbon", "RipEncoder");
       this.ribbonLabelRipOutputDirectory.Text = localisation.ToString("ribbon", "RipFolder");
       this.ribbonButtonRipCancel.Text = localisation.ToString("ribbon", "RipCancel");
