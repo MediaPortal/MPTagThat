@@ -111,6 +111,10 @@ namespace MPTagThat.InternetLookup
         {
           foreach (AmazonAlbum foundAlbum in albums)
           {
+            // Skip Albums with no Discs returned
+            if (foundAlbum.Discs.Count == 0)
+              continue;
+
             // count the number of tracks, as we may have multiple discs
             int trackCount = 0;
             foreach (List<AmazonAlbumTrack> tracks in foundAlbum.Discs)
@@ -130,12 +134,24 @@ namespace MPTagThat.InternetLookup
             else
               amazonAlbum = albums[0];
           }
+          else
+          {
+            dlgSearchResult.Dispose();
+            return;
+          }
           dlgSearchResult.Dispose();
         }
       }
 
-      if (amazonAlbum == null)
+      // It may happen that an album doesn't return Track Information
+      // Inform the uer to make a new selection
+      if (amazonAlbum == null || amazonAlbum.Discs.Count == 0)
+      {
+        MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("Lookup", "NoAlbumFound"), ServiceScope.Get<ILocalisation>().ToString("message", "Error"), MessageBoxButtons.OK);
+        dlg.Dispose();
+        dlgAlbumDetails.Dispose();
         return;
+      }
 
       // Prepare the Details Dialog
       dlgAlbumDetails.Artist = amazonAlbum.Artist;

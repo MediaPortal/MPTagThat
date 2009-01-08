@@ -620,6 +620,7 @@
     <String id="HeaderArtistAlbum">Internet Lookup - Specify Artist / Album</String>
     <String id="Continue">Continue &gt;</String>
     <String id="Cancel">Cancel</String>
+    <String id="NoAlbumFound">No album found, please choose another selection criteria.</String>
     <!--  Search Result Dialog for Multiple Albums found -->
     <String id="HeaderSearchResult">Mulitple Albums found. Please select ...</String>
     <String id="ColArtist">Artist</String>

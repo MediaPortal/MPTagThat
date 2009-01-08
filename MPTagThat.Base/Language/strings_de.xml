@@ -620,6 +620,7 @@
     <String id="HeaderArtistAlbum">Internet Lookup - Bitte Artist / Album eingeben</String>
     <String id="Continue">Weiter &gt;</String>
     <String id="Cancel">Abbrechen</String>
+    <String id="NoAlbumFound">Kein Album gefunden. Bitte eine neue Auswahl treffen.</String>
     <!--  Search Result Dialog for Multiple Albums found -->
     <String id="HeaderSearchResult">Mehrere Alben gefunden. Bitte auswählen ...</String>
     <String id="ColArtist">Interpret</String>
