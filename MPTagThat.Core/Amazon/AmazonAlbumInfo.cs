@@ -103,13 +103,25 @@ namespace MPTagThat.Core.Amazon
           album.Asin = childNode.InnerText;
 
         if (childNode.Name == "SmallImage")
-          album.SmallImageUrl = GetUrl(childNode);
+        {
+          album.SmallImageUrl = GetNode(childNode, "URL");
+          album.CoverWidth = GetNode(childNode, "Width");
+          album.CoverHeight = GetNode(childNode, "Height");
+        }
 
         if (childNode.Name == "MediumImage")
-          album.MediumImageUrl = GetUrl(childNode);
+        {
+          album.MediumImageUrl = GetNode(childNode, "URL");
+          album.CoverWidth = GetNode(childNode, "Width");
+          album.CoverHeight = GetNode(childNode, "Height");
+        }
 
         if (childNode.Name == "LargeImage")
-          album.LargeImageUrl = GetUrl(childNode);
+        {
+          album.LargeImageUrl = GetNode(childNode, "URL");
+          album.CoverWidth = GetNode(childNode, "Width");
+          album.CoverHeight = GetNode(childNode, "Height");
+        }
 
         if (childNode.Name == "ItemAttributes")
         {
@@ -161,15 +173,14 @@ namespace MPTagThat.Core.Amazon
     /// </summary>
     /// <param name="node"></param>
     /// <returns></returns>
-    private string GetUrl(XmlNode node)
+    private string GetNode(XmlNode node, string nodeString)
     {
-      string url = "";
       foreach (XmlNode child in node.ChildNodes)
       {
-        if (child.Name == "URL")
+        if (child.Name == nodeString)
           return child.InnerText;
       }
-      return url;
+      return "";
     }
     #endregion
 

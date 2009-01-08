@@ -17,6 +17,8 @@ namespace MPTagThat.Core.Amazon
     private List<List<AmazonAlbumTrack>> _discs;
     private string _binding;
     private string _label;
+    private string _coverWidth = "";
+    private string _coverHeight = "";
     #endregion
 
     #region ctor
@@ -85,6 +87,18 @@ namespace MPTagThat.Core.Amazon
     {
       get { return _largeImage; }
       set { _largeImage = value; }
+    }
+
+    public string CoverWidth
+    {
+      get { return _coverWidth; }
+      set { _coverWidth = value; }
+    }
+
+    public string CoverHeight
+    {
+      get { return _coverHeight; }
+      set { _coverHeight = value; }
     }
 
     public TagLib.ByteVector AlbumImage

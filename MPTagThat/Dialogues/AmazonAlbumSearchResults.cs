@@ -67,7 +67,8 @@ namespace MPTagThat.Dialogues
       foreach (AmazonAlbum album in albums)
       {
         AddImageToList(album);
-        ListViewItem item = new ListViewItem(album.Title);
+        string itmText = string.Format("{0} {1}x{2}", album.Title, album.CoverWidth, album.CoverHeight);
+        ListViewItem item = new ListViewItem(itmText);
         item.ImageIndex = i;
         lvSearchResults.Items.Add(item);
         i++;
