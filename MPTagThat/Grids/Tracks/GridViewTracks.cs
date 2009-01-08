@@ -394,6 +394,10 @@ namespace MPTagThat.GridView
           {
             dlgProgress.StatusLabel2 = localisation.ToString("progress", "InternetMusicBrainz");
             List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
+
+            if (musicBrainzTracks == null)
+              continue;
+
             if (musicBrainzTracks.Count > 0)
             {
               MusicBrainzTrack musicBrainzTrack = null;
