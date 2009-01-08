@@ -145,11 +145,12 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Current Selected Directory in the Treeview
+    /// Gets / Sets the Current Selected Directory in the Treeview
     /// </summary>
     public string CurrentDirectory
     {
       get { return _selectedDirectory; }
+      set { _selectedDirectory = value; }
     }
 
     /// <summary>

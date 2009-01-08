@@ -325,10 +325,23 @@ namespace MPTagThat.Organise
             }
             catch (Exception ex)
             {
-              log.Error("Error Delteing Folder: {0} {1}", dir, ex.Message);
+              log.Error("Error Deleting Folder: {0} {1}", dir, ex.Message);
             }
           }
         }
+
+        string currentSelectedFolder = _main.CurrentDirectory;
+        // Go up 1 level in the directory structure to find an existing folder
+        int i = 0;
+        while (i < 10)
+        {
+          if (System.IO.Directory.Exists(currentSelectedFolder))
+            break;
+
+          currentSelectedFolder = currentSelectedFolder.Substring(0, currentSelectedFolder.LastIndexOf("\\"));
+          i++; // Max of 10 levels, to avoid possible infinity loop
+        }
+        _main.CurrentDirectory = currentSelectedFolder;
         _main.RefreshFolders();
         _main.RefreshTrackList();
       }
