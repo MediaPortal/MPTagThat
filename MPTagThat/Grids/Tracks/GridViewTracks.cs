@@ -779,7 +779,16 @@ namespace MPTagThat.GridView
           continue;
 
         TrackData track = bindingList[row.Index];
-        track.Track = numberValue.ToString();
+        
+        // Get the Number of tracks, so that we don't loose it
+        string[] tracks = track.Track.Split('/');
+        string numTracks = "0";
+        if (tracks.Length > 1)
+        {
+          numTracks = tracks[1];
+        }
+
+        track.Track = string.Format("{0}/{1}", numberValue.ToString(), numTracks);
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
         _itemsChanged = true;
@@ -1299,7 +1308,16 @@ namespace MPTagThat.GridView
               return;
 
             TrackData track = bindingList[selectedRow.RowIndex];
-            track.Track = numberValue.ToString();
+
+            // Get the Number of tracks, so that we don't loose it
+            string[] tracks = track.Track.Split('/');
+            string numTracks = "0";
+            if (tracks.Length > 1)
+            {
+              numTracks = tracks[1];
+            }
+
+            track.Track = string.Format("{0}/{1}", numberValue.ToString(), numTracks);
             SetBackgroundColorChanged(selectedRow.RowIndex);
             track.Changed = true;
             _itemsChanged = true;

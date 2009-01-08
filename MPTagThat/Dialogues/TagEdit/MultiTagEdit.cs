@@ -391,10 +391,7 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          if (tbTrack.Text.Trim() == "")
-            options.Track = 0;
-          else
-            options.Track = Int32.Parse(tbTrack.Text.Trim());
+          options.Track = Int32.Parse(tbTrack.Text.Trim());
         }
         catch (Exception)
         {
@@ -403,10 +400,7 @@ namespace MPTagThat.TagEdit
 
         try
         {
-          if (tbNumTracks.Text.Trim() == "")
-            options.NumTracks = 0;
-          else
-            options.NumTracks = Int32.Parse(tbNumTracks.Text.Trim());
+          options.NumTracks = Int32.Parse(tbNumTracks.Text.Trim());
         }
         catch (Exception)
         {
@@ -418,10 +412,7 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          if (tbDisc.Text.Trim() == "")
-            options.Disc = 0;
-          else
-            options.Disc = Int32.Parse(tbDisc.Text.Trim());
+          options.Disc = Int32.Parse(tbDisc.Text.Trim());
         }
         catch (Exception)
         {
@@ -430,10 +421,7 @@ namespace MPTagThat.TagEdit
 
         try
         {
-          if (tbNumDiscs.Text.Trim() == "")
-            options.NumDiscs = 0;
-          else
-            options.NumDiscs = Int32.Parse(tbNumDiscs.Text.Trim());
+          options.NumDiscs = Int32.Parse(tbNumDiscs.Text.Trim());
         }
         catch (Exception)
         {
