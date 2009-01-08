@@ -41,11 +41,13 @@
 
     <!-- Tags Tab-->
     <String id="TagTab">Tagger</String>
-    <String id="TagFromFile">Tag Fra\nFilnavn</String>
+    <String id="TagFromFile">Tagg Fra\nFilnavn</String>
     <String id="RenameFile">Nytt Navn\ntil Fil</String>
     <String id="IdentifyFile">Identifiser\nFil</String>
-    <String id="MultiTagEdit">Endre Flervalgte\nTagger</String>
-    <String id="GetCoverArt">Finn Cover bilde</String>
+    <String id="TagFromInternet">Tagg fra\nInternett</String>
+    <String id="SingleTagEdit">Enkel\nTagg</String>
+    <String id="MultiTagEdit">Flervalgte\nTagger</String>
+    <String id="GetCoverArt">Finn Bilde</String>
     <String id="GetLyrics">Finn Tekster</String>
     <String id="CaseConversion">Konverter\nBokstaver</String>
     <String id="DeleteTags">Slette\nTagger</String>
@@ -53,16 +55,21 @@
     <String id="DeleteID3V1Tags">Slette Bare ID3 V1 Tagger</String>
     <String id="DeleteID3V2Tags">Slette Bare ID3 V2 Tagger</String>
     <String id="EditTags">Tag Endring</String>
+    <String id="RetrieveTags">Finn Tagger</String>
+    <String id="OrganiseFiles">Organiser</String>
     
     <String id="ExecuteScript">Kjør\nScript</String>
     <String id="Scripts">Scripts</String>
     
     <String id="Organise">Organiser\nFiler</String>
     <String id="AddBurner">Legg til i\nBrenner</String>
+    <String id="AddConvert">Legg til i\nKonvertering</String>
+    <String id="AddPlaylist">Legg til i\nSpilleliste</String>
     <String id="Other">Andre</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Ripp</String>
+    <String id="RipButton">Start\nRipping</String>
     <String id="RipEncoder">Velg Encoder:</String>
     <String id="RipFolder">Til Mappe:</String>
     <String id="RipCancel">Avbryt\nRipping</String>
@@ -70,6 +77,7 @@
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Konvertere</String>
+    <String id="ConvertButton">Start\nKonvertering</String>
     <String id="ConvertEncoder">Velg Encoder:</String>
     <String id="ConvertFolder">Til Mappe:</String>
     <String id="ConvertCancel">Avbryt\nKonvertering</String>
@@ -77,7 +85,7 @@
 
     <!-- Burn Tab-->
     <String id="BurnTab">Brenner</String>
-    <String id="Burn">Brenn</String>
+    <String id="Burn">Start\nBrenner</String>
     <String id="BurnCancel">Avbryt\nBrenner</String>
     <String id="BurnOptions">Innstillinger for Brenner</String>
 
@@ -498,6 +506,7 @@
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når den er tom</String>
     <String id="CaseConversion">Bruk Bokstav Konvertering når du lagrer</String>
+    <String id="AutoCompletion">Bruk MediaPortal Musikk Database for Artist auto fullfør</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Bruk Versjon 2.4 for ID3 V2 Tagger</String>
     <String id="UseV3">Bruk Versjon 2.3 for ID3 V2 Tagger</String>
@@ -641,6 +650,8 @@
     <String id="DataEntryError">Valgte verdi er ugyldig.</String>
     <String id="NoSelectionHeader">Ingen Valgt</String>
     <String id="NoSelection">Vennligst spesifiser minimum 1 linje</String>
+    <String id="DeleteConfirmHeader">Slette Fil(er)</String>
+    <String id="DeleteConfirm">Vil du virkelig slette valgte fil(er)?</String>
   </Section>
     
   <!-- Progress Dialog -->
@@ -658,5 +669,14 @@
     <String id="CoverArt">Tar imot Cover Art for spor {0}/{1}</String>
     <String id="LyricsHeader">Tekst Lookup</String>
     <String id="Lyrics">Tar imot tekst for spor {0}/{1}</String>
+  </Section>
+    
+  <!-- About Dialog -->
+  <Section name="about">
+    <String id="Header">Om</String>
+    <String id="Ok">Ok</String>
+    <String id="Description">MPTagThat er en åpen kildekode Tagg Editor, som tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</String>
+	<String id="Version">Versjon:</String>
+	<String id="BuildDate">Bygd Dato:</String>
   </Section>
 </Language>
