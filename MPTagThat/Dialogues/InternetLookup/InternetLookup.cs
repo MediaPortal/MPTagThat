@@ -15,13 +15,15 @@ namespace MPTagThat.InternetLookup
     private Main main;
     private Thread _asyncThread = null;
 
+    private bool _askForAlbum = false;   
     private string _selectedArtist = "";
     private string _selectedAlbum = "";
 
     private List<ListViewItem> _fileList = null;
+    DataGridView _tracksGrid = null;
 
     // Dialogs
-    private ArtistAlbumDialog dlg = null;
+    private ArtistAlbumDialog dlgAlbumArtist = null;
     private AlbumSearchResult dlgSearchResult = null;
     private AlbumDetails dlgAlbumDetails = null;
     #endregion
@@ -30,36 +32,16 @@ namespace MPTagThat.InternetLookup
     public InternetLookup(Main main)
     {
       this.main = main;
+      _tracksGrid = main.TracksGridView.View;
     }
     #endregion
 
     #region Methods
     public void SearchForAlbumInformation()
     {
-      if (_asyncThread == null)
-      {
-        // Do the init outside the thread, so that we don't get Crossthread errors
-        dlg = new ArtistAlbumDialog();
-        dlgSearchResult = new AlbumSearchResult();
-        dlgAlbumDetails = new AlbumDetails();
-        _asyncThread = new Thread(new ThreadStart(SearchForAlbumInformationThread));
-        _asyncThread.Name = "InternetLookup";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(new ThreadStart(SearchForAlbumInformationThread));
-        _asyncThread.Start();
-      }
-    }
-
-    private void SearchForAlbumInformationThread()
-    {
-      DataGridView tracksGrid = main.TracksGridView.View;
-
       // Loop through the selected rows and see, if we got an Artist and/or Album set
       // Need at least an album
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in _tracksGrid.Rows)
       {
         if (!row.Selected)
           continue;
@@ -76,23 +58,60 @@ namespace MPTagThat.InternetLookup
           break;
       }
 
-      // If no Album was specified, we need to show the select dialog
-      if (_selectedAlbum == "")
-      {
-        dlg.Artist = _selectedArtist;
-        dlg.Album = _selectedAlbum;
+      _askForAlbum = (_selectedAlbum == "");
 
-        if (main.ShowForm(dlg) != DialogResult.OK)
+      while (true)
+      {
+        // If no Album was specified, we need to show the select dialog
+        if (_askForAlbum)
         {
-          dlg.Dispose();
-          return;
+          if (!RequestArtistAlbum())
+            break;
         }
 
-        _selectedArtist = dlg.Artist;
-        _selectedAlbum = dlg.Album;
+        AmazonAlbum album = GetAlbumInformation();
+        
+        // It may happen that an album doesn't return Track Information
+        // Inform the uer to make a new selection
+        if (album == null || album.Discs.Count == 0)
+        {
+          if (_askForAlbum)
+          {
+            MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("Lookup", "NoAlbumFound"), ServiceScope.Get<ILocalisation>().ToString("message", "Error"), MessageBoxButtons.OK);
+            continue;
+          }
+          else
+            break;
+        }
+
+        ShowAlbumDetails(album);
+
+        // Now that we've come so far, we don't need to reshow that artist / album selection panel
+        break;
+      }
+    }
+
+    public bool RequestArtistAlbum()
+    {
+      dlgAlbumArtist = new ArtistAlbumDialog();
+      dlgAlbumArtist.Artist = _selectedArtist;
+      dlgAlbumArtist.Album = _selectedAlbum;
+
+      if (main.ShowForm(dlgAlbumArtist) != DialogResult.OK)
+      {
+        dlgAlbumArtist.Dispose();
+        return false;
       }
 
-      // Query Amazon for the Album
+      _selectedArtist = dlgAlbumArtist.Artist;
+      _selectedAlbum = dlgAlbumArtist.Album;
+      dlgAlbumArtist.Dispose();
+      return true;
+    }
+
+    public AmazonAlbum GetAlbumInformation()
+    {
+      main.Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
@@ -101,14 +120,20 @@ namespace MPTagThat.InternetLookup
 
       // Show the Album Selection dialog, if we got more than one album
       AmazonAlbum amazonAlbum = null;
+      _askForAlbum = true;
       if (albums.Count > 0)
       {
+        _askForAlbum = false;
         if (albums.Count == 1)
         {
           amazonAlbum = albums[0];
+          // If we didn't get any disc info, consider the album as not found
+          if (amazonAlbum.Discs.Count == 0)
+            _askForAlbum = true;
         }
         else
         {
+          dlgSearchResult = new AlbumSearchResult();
           foreach (AmazonAlbum foundAlbum in albums)
           {
             // Skip Albums with no Discs returned
@@ -127,6 +152,7 @@ namespace MPTagThat.InternetLookup
             lvItem.SubItems.Add(foundAlbum.Label);
             dlgSearchResult.ResultView.Items.Add(lvItem);
           }
+          main.Cursor = Cursors.Default;
           if (main.ShowForm(dlgSearchResult) == DialogResult.OK)
           {
             if (dlgSearchResult.ResultView.SelectedIndices[0] > -1)
@@ -136,31 +162,30 @@ namespace MPTagThat.InternetLookup
           }
           else
           {
+            // Don't ask for album again, since the user cancelled
+            _askForAlbum = false;
             dlgSearchResult.Dispose();
-            return;
+            return amazonAlbum;
           }
           dlgSearchResult.Dispose();
         }
       }
+      main.Cursor = Cursors.Default;
+      return amazonAlbum;
+    }
 
-      // It may happen that an album doesn't return Track Information
-      // Inform the uer to make a new selection
-      if (amazonAlbum == null || amazonAlbum.Discs.Count == 0)
-      {
-        MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("Lookup", "NoAlbumFound"), ServiceScope.Get<ILocalisation>().ToString("message", "Error"), MessageBoxButtons.OK);
-        dlg.Dispose();
-        dlgAlbumDetails.Dispose();
-        return;
-      }
+    public void ShowAlbumDetails(AmazonAlbum album)
+    {
+      dlgAlbumDetails = new AlbumDetails();
 
       // Prepare the Details Dialog
-      dlgAlbumDetails.Artist = amazonAlbum.Artist;
-      dlgAlbumDetails.Album = amazonAlbum.Title;
-      dlgAlbumDetails.Year = amazonAlbum.Year;
+      dlgAlbumDetails.Artist = album.Artist;
+      dlgAlbumDetails.Album = album.Title;
+      dlgAlbumDetails.Year = album.Year;
 
       try
       {
-        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(amazonAlbum.AlbumImage.Data))
+        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(album.AlbumImage.Data))
         {
           System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
           if (img != null)
@@ -172,7 +197,7 @@ namespace MPTagThat.InternetLookup
       catch { }
 
       // Add Tracks of the selected album
-      foreach (List<AmazonAlbumTrack> disc in amazonAlbum.Discs)
+      foreach (List<AmazonAlbumTrack> disc in album.Discs)
       {
         foreach (AmazonAlbumTrack track in disc)
         {
@@ -183,7 +208,7 @@ namespace MPTagThat.InternetLookup
       }
 
       // Add selected Files from Grid
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in _tracksGrid.Rows)
       {
         if (!row.Selected)
           continue;
@@ -252,7 +277,7 @@ namespace MPTagThat.InternetLookup
             track.Year = year;
 
           // Add the picture
-          TagLib.ByteVector vector = amazonAlbum.AlbumImage;
+          TagLib.ByteVector vector = album.AlbumImage;
           if (vector != null)
           {
             // Get the availbe Covers
