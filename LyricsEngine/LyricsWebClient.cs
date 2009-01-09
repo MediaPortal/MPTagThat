@@ -49,6 +49,7 @@ namespace LyricsEngine
         ((HttpWebRequest)request).CookieContainer = cookieContainer;
         ((HttpWebRequest)request).UserAgent = userAgent;
         ((HttpWebRequest)request).Timeout = timeout;
+        ((HttpWebRequest)request).Proxy.Credentials = CredentialCache.DefaultCredentials;
       }
 
       return request;

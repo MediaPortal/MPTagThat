@@ -487,9 +487,17 @@ namespace MPTagThat
     #region Folder Scanning
     private void FolderScan()
     {
-      System.Threading.ThreadStart ts = new System.Threading.ThreadStart(ScanFoldersAsync);
-      System.Threading.Thread t = new System.Threading.Thread(ts);
-      t.Start();
+        try
+        {
+            System.Threading.Thread t = new System.Threading.Thread(ScanFoldersAsync);
+            t.Name = "FolderScanner";
+            t.IsBackground = true;
+            t.Start();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Could not launch thread {0}", ex.Message);
+        }
     }
 
     private void ScanFoldersAsync()
@@ -499,7 +507,7 @@ namespace MPTagThat
       DirectoryInfo dirInfo = null;
       List<FileInfo> files = new List<FileInfo>();
 
-      if (!System.IO.Directory.Exists(_selectedDirectory))
+      if (!Directory.Exists(_selectedDirectory))
         return;
 
       _folderScanInProgress = true;
@@ -528,7 +536,7 @@ namespace MPTagThat
 
       int count = 1;
       int trackCount = files.Count;
-      foreach (System.IO.FileInfo fi in files)
+      foreach (FileInfo fi in files)
       {
         Application.DoEvents();
         dlgScan.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, trackCount), count, trackCount, true);
@@ -573,21 +581,20 @@ namespace MPTagThat
       {
         toolStripStatusLabelFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
       }
-      catch (InvalidOperationException)
-      { }
+      catch (InvalidOperationException) { }
 
       // unselect the first row, which would be selected automatically by the grid
       // And set the background color of the rating cell, as it isn#t reset by the grid
-      if (gridViewControl.View.Rows.Count > 0)
+      try
       {
-        try
-        {
-          gridViewControl.View.Rows[0].Selected = false;
-          gridViewControl.View.Rows[0].Cells[10].Style.BackColor = themeManager.CurrentTheme.DefaultBackColor;
-        }
-        catch (ArgumentOutOfRangeException)
-        { }  // Sometimes the grid throws an argumenoutofrangeexception
+          if (gridViewControl.View.Rows.Count > 0)
+          {
+              gridViewControl.View.Rows[0].Selected = false;
+              gridViewControl.View.Rows[0].Cells[10].Style.BackColor = themeManager.CurrentTheme.DefaultBackColor;
+          }
       }
+      catch (ArgumentOutOfRangeException) { }
+
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
@@ -766,7 +773,6 @@ namespace MPTagThat
       if (_folderScanInProgress)
         e.Cancel = true;
     }
-
     /// <summary>
     /// A Folder has been selected in the TreeView. Read the content
     /// </summary>

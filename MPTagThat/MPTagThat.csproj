@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A4EC0924-5A90-4E83-8D61-4164ABFE13A5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -239,6 +239,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dialogues\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\CaseConversion.resx">
       <SubType>Designer</SubType>
@@ -254,30 +255,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\AmazonAlbumSearchResults.resx">
       <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\InternetLookup\AlbumDetails.resx">
       <DependentUpon>AlbumDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\InternetLookup\AlbumSearchResult.resx">
       <DependentUpon>AlbumSearchResult.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\InternetLookup\ArtistAlbumDialog.resx">
       <DependentUpon>ArtistAlbumDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\MultiTagEdit.resx">
       <DependentUpon>MultiTagEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\TagEditBase.resx">
       <DependentUpon>TagEditBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Grids\Tracks\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Grids\Tracks\MusicBrainzAlbumResults.resx">
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\SingleTagEdit.resx">
       <DependentUpon>SingleTagEdit.cs</DependentUpon>
@@ -325,6 +335,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Player\PlayerControl.resx">
       <DependentUpon>PlayerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -412,6 +423,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CursorNumbering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_launch_script.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_case_conversion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_delete_tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_edit_multi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_edit_single.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_from_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_from_internet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_identify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon_add_burner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
