@@ -620,6 +620,7 @@
     <String id="HeaderArtistAlbum">Hent på Internett - Spesifiser Artist / Album</String>
     <String id="Continue">Fortsett &gt;</String>
     <String id="Cancel">Avbryt</String>
+    <String id="NoAlbumFound">Ingen album funnet, vennligst velg andre søker kriterier.</String>
     <!--  Search Result Dialog for Multiple Albums found -->
     <String id="HeaderSearchResult">Flere Album funnet, vennligst velg ...</String>
     <String id="ColArtist">Artist</String>
