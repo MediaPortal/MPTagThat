@@ -183,6 +183,10 @@ namespace MPTagThat
       RadToolStripOverFlowButtonElement quickAccessButton = ((RadToolStripOverFlowButtonElement)this.radRibbonBar.RootElement.Children[0].Children[0].Children[0].Children[1].Children[1]);
       quickAccessButton.DropDownOpened += new EventHandler(quickAccessButton_DropDownOpened);
 
+      // Set the DefaultItem for the Split Buttons to indicate which action should happen, when pressing the button only
+      // Note: If this isn't set, then the button opens it's menu. with the property set, only the arrow opens the menu
+      ribbonButtonCaseConversion.DefaultItem = ribbonButtonCaseConversionExecute;
+
       // Load the available Scripts
       PopulateScriptsCombo();
 
@@ -264,6 +268,8 @@ namespace MPTagThat
       this.ribbonButtonGetCoverArt.Text = localisation.ToString("ribbon", "GetCoverArt");
       this.ribbonButtonGetLyrics.Text = localisation.ToString("ribbon", "GetLyrics");
       this.ribbonButtonCaseConversion.Text = localisation.ToString("ribbon", "CaseConversion");
+      this.ribbonButtonCaseConversionExecute.Text = localisation.ToString("ribbon", "CaseConversionMenu");
+      this.ribbonButtonCaseConversionOptions.Text = localisation.ToString("ribbon", "CaseConversionOption");
       this.ribbonButtonDeleteTags.Text = localisation.ToString("ribbon", "DeleteTags");
       this.ribbonButtonDeleteAllTags.Text = localisation.ToString("ribbon", "DeleteAllTags");
       this.ribbonButtondeleteID3V1.Text = localisation.ToString("ribbon", "DeleteID3V1Tags");
@@ -498,11 +504,6 @@ namespace MPTagThat
         MPTagThat.TagEdit.SingleTagEdit dlgSingleTagEdit = new MPTagThat.TagEdit.SingleTagEdit(main);
         main.ShowForm(dlgSingleTagEdit);
       }
-      else if (rb == ribbonButtonCaseConversion)
-      {
-        MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main);
-        main.ShowForm(dlgCaseConversion);
-      }
       else if (rb == ribbonButtonOrganise)
       {
         MPTagThat.Organise.OrganiseFiles dlgOrganise = new MPTagThat.Organise.OrganiseFiles(main);
@@ -523,6 +524,28 @@ namespace MPTagThat
         main.TracksGridView.GetLyrics();
       else if (rb == ribbonButtonAutoNumber)
         main.TracksGridView.AutoNumber();
+    }
+
+    /// <summary>
+    /// Case Conversion Execute has been pressed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ribbonButtonCaseConversionExecute_Click(object sender, EventArgs e)
+    {
+      MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main, true);
+      dlgCaseConversion.CaseConvertSelectedTracks();
+    }
+
+    /// <summary>
+    /// Case Conversion Options has been pressed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ribbonButtonCaseConversionOptions_Click(object sender, EventArgs e)
+    {
+      MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main);
+      main.ShowForm(dlgCaseConversion);
     }
 
     /// <summary>

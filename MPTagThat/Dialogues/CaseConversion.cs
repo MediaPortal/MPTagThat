@@ -187,7 +187,7 @@ namespace MPTagThat.CaseConversion
       }
     }
 
-    private void CaseConvertSelectedTracks()
+    public void CaseConvertSelectedTracks()
     {
       DataGridView tracksGrid = _main.TracksGridView.View;
 

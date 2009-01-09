@@ -49,7 +49,9 @@
     <String id="MultiTagEdit">Mehrfach\neditieren</String>
     <String id="GetCoverArt">Cover Art holen</String>
     <String id="GetLyrics">Liedtext holen</String>
-    <String id="CaseConversion">Groß-/Klein-\nschreibung</String>
+    <String id="CaseConversion">Groß-/ Klein-\nschreibung</String>
+    <String id="CaseConversionMenu">Groß-/ Kleinschreibung</String>
+    <String id="CaseConversionOption">Groß-/ Kleinschreibung Einstellungen</String>
     <String id="DeleteTags">Tags\nlöschen</String>
     <String id="DeleteAllTags">Alle Tags löschen</String>
     <String id="DeleteID3V1Tags">Nur ID3 V1 Tags löschen</String>

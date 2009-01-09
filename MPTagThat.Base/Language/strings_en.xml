@@ -50,6 +50,8 @@
     <String id="GetCoverArt">Get Cover Art</String>
     <String id="GetLyrics">Get Lyrics</String>
     <String id="CaseConversion">Case\nConversion</String>
+    <String id="CaseConversionMenu">Case Conversion</String>
+    <String id="CaseConversionOption">Case Conversion Options</String>
     <String id="DeleteTags">Delete\nTags</String>
     <String id="DeleteAllTags">Delete All Tags</String>
     <String id="DeleteID3V1Tags">Delete ID3 V1 Tags only</String>
