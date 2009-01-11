@@ -1307,6 +1307,9 @@ namespace MPTagThat.GridView
             if (numberValue == -1)
               return;
 
+            if (selectedRow.RowIndex == -1)
+              return;
+
             TrackData track = bindingList[selectedRow.RowIndex];
 
             // Get the Number of tracks, so that we don't loose it
