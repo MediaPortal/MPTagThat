@@ -115,7 +115,6 @@ namespace MPTagThat.GridView
       tracksGrid.MouseMove += new MouseEventHandler(tracksGrid_MouseMove);
       tracksGrid.QueryContinueDrag += new QueryContinueDragEventHandler(tracksGrid_QueryContinueDrag);
       tracksGrid.MouseEnter += new EventHandler(tracksGrid_MouseEnter);
-      tracksGrid.MouseLeave += new EventHandler(tracksGrid_MouseLeave);
 
       // The Color for the Image Cell for the Rating is not handled correctly. so we need to handle it via an event
       tracksGrid.SelectionChanged += new EventHandler(tracksGrid_SelectionChanged);
@@ -1360,25 +1359,10 @@ namespace MPTagThat.GridView
     void tracksGrid_MouseEnter(object sender, EventArgs e)
     {
       // Numbering on Click enabled
-      if (_main.MainRibbon.NumberingOnClick && this.Cursor != _numberingCursor)
-      {
-        this.Cursor = _numberingCursor;
-        this.Update();
-      }
-    }
-
-    /// <summary>
-    /// The Mouse leaves the Trackgrid
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void tracksGrid_MouseLeave(object sender, EventArgs e)
-    {
-      if (!_main.MainRibbon.NumberingOnClick)
-      {
-        this.Cursor = _defaultCursor;
-        this.Update();
-      }
+      if (_main.MainRibbon.NumberingOnClick)
+        this.tracksGrid.Cursor = _numberingCursor;
+      else
+        this.tracksGrid.Cursor = _defaultCursor;
     }
 
     #region Context Menu Handler
