@@ -23,7 +23,7 @@ namespace MPTagThat.Organise
     {
       this._main = main;
       InitializeComponent();
-      
+
       LoadSettings();
 
       LocaliseScreen();
@@ -200,7 +200,7 @@ namespace MPTagThat.Organise
           // replace it with underscore
           if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
             directoryName += "_";
-          
+
           directoryName = Util.MakeValidFolderName(directoryName);
           directoryName = System.IO.Path.Combine(tbRootDir.Text, directoryName);
 
@@ -312,22 +312,13 @@ namespace MPTagThat.Organise
         }
       }
 
+      // Delete empty folders
       if (!ckCopyFiles.Checked)
       {
         foreach (string dir in _directories.Keys)
         {
-          string[] files = System.IO.Directory.GetFiles(dir);
-          if (files.Length == 0)
-          {
-            try
-            {
-              System.IO.Directory.Delete(dir);
-            }
-            catch (Exception ex)
-            {
-              log.Error("Error Deleting Folder: {0} {1}", dir, ex.Message);
-            }
-          }
+          DeleteSubFolders(dir);
+          DeleteParentFolders(dir);
         }
 
         string currentSelectedFolder = _main.CurrentDirectory;
@@ -350,6 +341,51 @@ namespace MPTagThat.Organise
       tracksGrid.Parent.Refresh();
 
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    private void DeleteSubFolders(string folder)
+    {
+      string[] subFolders = System.IO.Directory.GetDirectories(folder);
+      for (int i = 0; i < subFolders.Length; ++i)
+      {
+        DeleteSubFolders(subFolders[i]);
+      }
+      string[] files = System.IO.Directory.GetFiles(folder);
+      string[] subDirs = System.IO.Directory.GetDirectories(folder);
+      // Do we still have files or folders then skip the delete
+      if (files.Length == 0 && subDirs.Length == 0)
+        DeleteFolder(folder);
+    }
+
+    private void DeleteParentFolders(string folder)
+    {
+      int lastSlash = folder.LastIndexOf("\\");
+
+      string parentFolder = folder;
+      while (lastSlash > -1)
+      {
+        parentFolder = parentFolder.Substring(0, lastSlash);
+        string[] files = System.IO.Directory.GetFiles(parentFolder);
+        string[] subDirs = System.IO.Directory.GetDirectories(parentFolder);
+        // Do we still have files or folders then skip the delete
+        if (files.Length == 0 && subDirs.Length == 0)
+          DeleteFolder(parentFolder);
+
+        lastSlash = parentFolder.LastIndexOf("\\");
+      }
+
+    }
+
+    private void DeleteFolder(string folder)
+    {
+      try
+      {
+        System.IO.Directory.Delete(folder);
+      }
+      catch (Exception ex)
+      {
+        log.Error("Error Deleting Folder: {0} {1}", folder, ex.Message);
+      }
     }
     #endregion
 
