@@ -153,19 +153,26 @@ namespace MPTagThat.InternetLookup
             dlgSearchResult.ResultView.Items.Add(lvItem);
           }
           main.Cursor = Cursors.Default;
-          if (main.ShowForm(dlgSearchResult) == DialogResult.OK)
-          {
-            if (dlgSearchResult.ResultView.SelectedIndices[0] > -1)
-              amazonAlbum = albums[dlgSearchResult.ResultView.SelectedIndices[0]];
-            else
-              amazonAlbum = albums[0];
-          }
+
+          // When the Listview contains no items, none of the found albums has track information
+          if (dlgSearchResult.ResultView.Items.Count == 0)
+            _askForAlbum = true;
           else
           {
-            // Don't ask for album again, since the user cancelled
-            _askForAlbum = false;
-            dlgSearchResult.Dispose();
-            return amazonAlbum;
+            if (main.ShowForm(dlgSearchResult) == DialogResult.OK)
+            {
+              if (dlgSearchResult.ResultView.SelectedIndices[0] > -1)
+                amazonAlbum = albums[dlgSearchResult.ResultView.SelectedIndices[0]];
+              else
+                amazonAlbum = albums[0];
+            }
+            else
+            {
+              // Don't ask for album again, since the user cancelled
+              _askForAlbum = false;
+              dlgSearchResult.Dispose();
+              return amazonAlbum;
+            }
           }
           dlgSearchResult.Dispose();
         }
