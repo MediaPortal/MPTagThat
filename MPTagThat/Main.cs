@@ -721,6 +721,15 @@ namespace MPTagThat
       ListViewItem lvi = new ListViewItem(items);
       listViewFileInfo.Items.Add(lvi);
     }
+
+    /// <summary>
+    /// Clears the information in the FileInfo Panel
+    /// </summary>
+    public void ClearFileInfoPanel()
+    {
+      pictureBoxAlbumArt.Image = null;
+      listViewFileInfo.Items.Clear();
+    }
     #endregion
 
     /// <summary>
@@ -841,6 +850,7 @@ namespace MPTagThat
       CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
+        ClearFileInfoPanel();
         gridViewControl.View.Rows.Clear();
         FolderScan();
       }
