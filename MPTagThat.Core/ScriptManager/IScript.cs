@@ -7,6 +7,6 @@ namespace MPTagThat.Core
 {
   public interface IScript
   {
-    TrackData Invoke(TrackData track);
+    bool Invoke(List<TrackData> tracks);
   }
 }

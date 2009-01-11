@@ -5,6 +5,7 @@
 //css_ref bin\taglib-sharp.dll; 
 //css_ref MPTagThat.Core.dll; 
 using System;
+using System.Collections.Generic;
 using MPTagThat.Core;
 using TagLib;
 // ----------------------------------------------------------------
@@ -15,18 +16,25 @@ using TagLib;
 
 public class Script : IScript
 {
-  public TrackData Invoke(TrackData track)
+  public bool Invoke(List<TrackData> tracks)
   {
-    if (track == null) return null;
+    if (tracks == null) return false;
 
-    string artist = track.Artist;
-    artist.Trim();
+	// Loop through all Music Tracks and perform the necessary action
+	foreach (TrackData track in tracks)
+	{
+		string artist = track.Artist;
+		artist.Trim();
 
-    int iPos = artist.IndexOf(' ');
-    if (iPos > 0)
-    {
-      track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1).Trim(), artist.Substring(0, iPos));
-    }
-    return track;
+		// Search for the first Blank
+		int iPos = artist.IndexOf(' ');
+		if (iPos > 0)
+		{
+		  // Switch the Artist name
+		  track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1).Trim(), artist.Substring(0, iPos));
+		  track.Changed = true; // Indicate that the track has been changed
+		}
+	}
+    return true;
   }
 }

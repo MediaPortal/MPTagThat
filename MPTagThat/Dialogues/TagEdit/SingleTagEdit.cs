@@ -913,7 +913,9 @@ namespace MPTagThat.TagEdit
               if (assembly != null)
               {
                 IScript script = (IScript)assembly.CreateInstance("Script");
-                script.Invoke(track);
+                List<TrackData> tracks = new List<TrackData>();
+                tracks.Add(track);
+                script.Invoke(tracks);
                 FillForm();
                 main.TracksGridView.Changed = true;
                 main.TracksGridView.SetBackgroundColorChanged(_currentRowIndex);

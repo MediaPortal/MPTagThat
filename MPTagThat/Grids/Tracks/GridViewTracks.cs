@@ -778,7 +778,7 @@ namespace MPTagThat.GridView
           continue;
 
         TrackData track = bindingList[row.Index];
-        
+
         // Get the Number of tracks, so that we don't loose it
         string[] tracks = track.Track.Split('/');
         string numTracks = "0";
@@ -952,18 +952,21 @@ namespace MPTagThat.GridView
         if (assembly != null)
         {
           IScript script = (IScript)assembly.CreateInstance("Script");
-          int i = 0;
-          foreach (TrackData track in bindingList)
+
+          List<TrackData> tracks = new List<TrackData>();
+          foreach (DataGridViewRow row in tracksGrid.SelectedRows)
           {
-            if (tracksGrid.Rows[i].Selected)
-            {
-              script.Invoke(track);
-              track.Changed = true;
-              SetBackgroundColorChanged(i);
-            }
-            i++;
+            tracks.Add(bindingList[row.Index]);
           }
-          _itemsChanged = true;
+          script.Invoke(tracks);
+          foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+          {
+            if (bindingList[row.Index].Changed)
+            {
+              SetBackgroundColorChanged(row.Index);
+              _itemsChanged = true;
+            }
+          }
         }
       }
       catch (Exception ex)
