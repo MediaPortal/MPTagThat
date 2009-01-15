@@ -50,6 +50,8 @@
     <String id="GetCoverArt">Finn Bilde</String>
     <String id="GetLyrics">Finn Tekster</String>
     <String id="CaseConversion">Konverter\nBokstaver</String>
+    <String id="CaseConversionMenu">Konverter Bokstaver</String>
+    <String id="CaseConversionOption">Innstillinger for Bokstav Konvertering</String>
     <String id="DeleteTags">Slette\nTagger</String>
     <String id="DeleteAllTags">Slette Alle Tagger</String>
     <String id="DeleteID3V1Tags">Slette Bare ID3 V1 Tagger</String>
