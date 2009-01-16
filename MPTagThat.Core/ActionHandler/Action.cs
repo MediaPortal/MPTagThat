@@ -37,6 +37,8 @@ namespace MPTagThat.Core
       ACTION_HELP = 25,
       ACTION_TAGFROMINTERNET = 26,
       ACTION_TOGGLESPLITTER = 27,
+      ACTION_REMOVECOMMENT = 28,
+      ACTION_REMOVEPICTURE = 29,
     }
     #endregion
 

@@ -118,6 +118,16 @@
       <key>F11</key>
       <description>Toggle Splitter</description>
     </action>
+    <action>
+      <id>28</id>
+      <key>F2</key>
+      <description>Remove all Comments</description>
+    </action>
+    <action>
+      <id>29</id>
+      <key>F3</key>
+      <description>Remove all Pictures</description>
+    </action>
   </window>
   <window>
     <id>1</id>

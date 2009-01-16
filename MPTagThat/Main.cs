@@ -1136,7 +1136,20 @@ namespace MPTagThat
         case Action.ActionType.ACTION_TOGGLESPLITTER:
           this.splitterLeft.ToggleState();
           break;
-      }
+
+        case Action.ActionType.ACTION_REMOVECOMMENT:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.RemoveComments();
+          break;
+
+        case Action.ActionType.ACTION_REMOVEPICTURE:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.RemovePictures();
+          break;
+      } 
+
       return handled;
     }
     #endregion
