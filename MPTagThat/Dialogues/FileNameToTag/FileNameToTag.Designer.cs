@@ -404,7 +404,7 @@ namespace MPTagThat.FileNameToTag
       this.MinimizeBox = false;
       this.Name = "FileNameToTag";
       this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "FileNameToTag";
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);
       this.groupBoxParm.ResumeLayout(false);

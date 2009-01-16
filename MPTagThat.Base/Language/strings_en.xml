@@ -43,6 +43,8 @@
     <String id="TagTab">Tags</String>
     <String id="TagFromFile">Tag from\nFilename</String>
     <String id="RenameFile">Rename\nFile</String>
+    <String id="RenameFileMenu">Rename File</String>
+    <String id="RenameFileOptions">Rename File Options</String>
     <String id="IdentifyFile">Identify\nFile</String>
     <String id="TagFromInternet">Tag from\nInternet</String>
     <String id="SingleTagEdit">Single Tag\nEdit</String>

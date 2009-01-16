@@ -43,6 +43,8 @@
     <String id="TagTab">Tags</String>
     <String id="TagFromFile">Tag von\nDateiname</String>
     <String id="RenameFile">Datei\numbenennen</String>
+    <String id="RenameFileMenu">Datei umbenennen</String>
+    <String id="RenameFileOptions">Datei umbenennen Einstellungen</String>
     <String id="IdentifyFile">Datei\nIdentifizieren</String>
 	<String id="TagFromInternet">Tag von\nInternet</String>
 	<String id="SingleTagEdit">Einzeln\neditieren</String>

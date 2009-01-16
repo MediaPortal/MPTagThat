@@ -186,6 +186,7 @@ namespace MPTagThat
       // Set the DefaultItem for the Split Buttons to indicate which action should happen, when pressing the button only
       // Note: If this isn't set, then the button opens it's menu. with the property set, only the arrow opens the menu
       ribbonButtonCaseConversion.DefaultItem = ribbonButtonCaseConversionExecute;
+      ribbonButtonRenameFile.DefaultItem = ribbonButtonRenameFileExecute;
 
       // Load the available Scripts
       PopulateScriptsCombo();
@@ -281,7 +282,9 @@ namespace MPTagThat
       this.ribbonButtondeleteID3V2.Text = localisation.ToString("ribbon", "DeleteID3V2Tags");
       this.radRibbonBarChunkTagsEdit.Text = localisation.ToString("ribbon", "EditTags");
 
-      this.ribbonButtonTagToFile.Text = localisation.ToString("ribbon", "RenameFile");
+      this.ribbonButtonRenameFile.Text = localisation.ToString("ribbon", "RenameFile");
+      this.ribbonButtonRenameFileExecute.Text = localisation.ToString("ribbon", "RenameFileMenu");
+      this.ribbonButtonRenameFileOptions.Text = localisation.ToString("ribbon", "RenameFileOptions");
       this.ribbonButtonOrganise.Text = localisation.ToString("ribbon", "Organise");
       this.radRibbonBarChunkOrganise.Text = localisation.ToString("ribbon", "OrganiseFiles");
 
@@ -494,11 +497,6 @@ namespace MPTagThat
         MPTagThat.FileNameToTag.FileNameToTag dlgFileNameToTag = new MPTagThat.FileNameToTag.FileNameToTag(main);
         main.ShowForm(dlgFileNameToTag);
       }
-      else if (rb == ribbonButtonTagToFile)
-      {
-        MPTagThat.TagToFileName.TagToFileName dlgTagToFileName = new MPTagThat.TagToFileName.TagToFileName(main);
-        main.ShowForm(dlgTagToFileName);
-      }
       else if (rb == ribbonButtonMultiEdit)
       {
         MPTagThat.TagEdit.MultiTagEdit dlgMultiTagEdit = new MPTagThat.TagEdit.MultiTagEdit(main);
@@ -533,6 +531,23 @@ namespace MPTagThat
         main.TracksGridView.RemoveComments();
       else if (rb == ribbonButtonRemovePictures)
         main.TracksGridView.RemovePictures();
+    }
+
+
+    /// <summary>
+    /// Rename File Execute has been pressed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ribbonButtonRenameFileExecute_Click(object sender, EventArgs e)
+    {
+      MPTagThat.TagToFileName.TagToFileName dlgTagToFile = new MPTagThat.TagToFileName.TagToFileName(main, true);
+    }
+
+    private void ribbonButtonRenameFileOptions_Click(object sender, EventArgs e)
+    {
+      MPTagThat.TagToFileName.TagToFileName dlgTagToFile = new MPTagThat.TagToFileName.TagToFileName(main, false);
+      main.ShowForm(dlgTagToFile);
     }
 
     /// <summary>

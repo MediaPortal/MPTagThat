@@ -62,7 +62,7 @@ namespace MPTagThat
       this.ribbonButtondeleteID3V1 = new Telerik.WinControls.UI.RadMenuItem();
       this.ribbonButtondeleteID3V2 = new Telerik.WinControls.UI.RadMenuItem();
       this.radRibbonBarChunkOrganise = new Telerik.WinControls.UI.RadRibbonBarChunk();
-      this.ribbonButtonTagToFile = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonButtonRenameFile = new Telerik.WinControls.UI.RadSplitButtonElement();
       this.ribbonButtonOrganise = new Telerik.WinControls.UI.RadButtonElement();
       this.radRibbonBarChunkScripts = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonScriptExecute = new Telerik.WinControls.UI.RadButtonElement();
@@ -113,6 +113,8 @@ namespace MPTagThat
       this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
       this.startMenuExit = new Telerik.WinControls.UI.RadMenuItem();
       this.startMenuItemChangeDisplayColumns = new Telerik.WinControls.UI.RadMenuItem();
+      this.ribbonButtonRenameFileExecute = new Telerik.WinControls.UI.RadMenuItem();
+      this.ribbonButtonRenameFileOptions = new Telerik.WinControls.UI.RadMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar)).BeginInit();
       this.SuspendLayout();
       // 
@@ -250,7 +252,7 @@ namespace MPTagThat
       this.ribbonButtonGetCoverArt.Class = "RibbonBarButtonElement";
       this.ribbonButtonGetCoverArt.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetCoverArt.Image")));
       this.ribbonButtonGetCoverArt.KeyTip = "";
-      this.ribbonButtonGetCoverArt.ShowBorder = false;
+      this.ribbonButtonGetCoverArt.ShowBorder = true;
       this.ribbonButtonGetCoverArt.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetCoverArt.SmallImage")));
       this.ribbonButtonGetCoverArt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.ribbonButtonGetCoverArt.ToolTipText = "Get Cover Art";
@@ -264,7 +266,7 @@ namespace MPTagThat
       this.ribbonButtonGetLyrics.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetLyrics.Image")));
       this.ribbonButtonGetLyrics.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
       this.ribbonButtonGetLyrics.KeyTip = "";
-      this.ribbonButtonGetLyrics.ShowBorder = false;
+      this.ribbonButtonGetLyrics.ShowBorder = true;
       this.ribbonButtonGetLyrics.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetLyrics.SmallImage")));
       this.ribbonButtonGetLyrics.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.ribbonButtonGetLyrics.ToolTipText = "Get Lyrics";
@@ -436,7 +438,7 @@ namespace MPTagThat
             this.ribbonButtonCaseConversionOptions});
       this.ribbonButtonCaseConversion.KeyTip = "";
       this.ribbonButtonCaseConversion.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonCaseConversion.Text = "Case\r\nConversion";
+      this.ribbonButtonCaseConversion.Text = "Rename\r\nFile";
       this.ribbonButtonCaseConversion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonCaseConversion.ToolTipText = null;
       // 
@@ -542,7 +544,7 @@ namespace MPTagThat
       // 
       this.radRibbonBarChunkOrganise.AccessibleDescription = "";
       this.radRibbonBarChunkOrganise.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.ribbonButtonTagToFile,
+            this.ribbonButtonRenameFile,
             this.ribbonButtonOrganise});
       this.radRibbonBarChunkOrganise.KeyTip = "";
       this.radRibbonBarChunkOrganise.Margin = new System.Windows.Forms.Padding(0);
@@ -552,22 +554,25 @@ namespace MPTagThat
       this.radRibbonBarChunkOrganise.Text = "Organise";
       this.radRibbonBarChunkOrganise.ToolTipText = null;
       // 
-      // ribbonButtonTagToFile
+      // ribbonButtonRenameFile
       // 
-      this.ribbonButtonTagToFile.AccessibleDescription = "";
-      this.ribbonButtonTagToFile.CanFocus = true;
-      this.ribbonButtonTagToFile.Class = "RibbonBarButtonElement";
-      this.ribbonButtonTagToFile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagToFile.Image")));
-      this.ribbonButtonTagToFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-      this.ribbonButtonTagToFile.KeyTip = "";
-      this.ribbonButtonTagToFile.ShowBorder = true;
-      this.ribbonButtonTagToFile.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagToFile.SmallImage")));
-      this.ribbonButtonTagToFile.StringAlignment = System.Drawing.StringAlignment.Center;
-      this.ribbonButtonTagToFile.Text = "Rename\r\nFiles";
-      this.ribbonButtonTagToFile.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
-      this.ribbonButtonTagToFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-      this.ribbonButtonTagToFile.ToolTipText = null;
-      this.ribbonButtonTagToFile.Click += new System.EventHandler(this.ribbonButton_Click);
+      this.ribbonButtonRenameFile.AccessibleDescription = "";
+      this.ribbonButtonRenameFile.ArrowButtonMinSize = new System.Drawing.Size(12, 12);
+      this.ribbonButtonRenameFile.ArrowPosition = Telerik.WinControls.UI.DropDownButtonArrowPosition.Bottom;
+      this.ribbonButtonRenameFile.DefaultItem = null;
+      this.ribbonButtonRenameFile.DropDownDirection = Telerik.WinControls.UI.RadDirection.Down;
+      this.ribbonButtonRenameFile.ExpandArrowButton = false;
+      this.ribbonButtonRenameFile.HasTwoColumnDropDown = false;
+      this.ribbonButtonRenameFile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonRenameFile.Image")));
+      this.ribbonButtonRenameFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+      this.ribbonButtonRenameFile.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.ribbonButtonRenameFileExecute,
+            this.ribbonButtonRenameFileOptions});
+      this.ribbonButtonRenameFile.KeyTip = "";
+      this.ribbonButtonRenameFile.StringAlignment = System.Drawing.StringAlignment.Center;
+      this.ribbonButtonRenameFile.Text = "Rename\r\nFiles";
+      this.ribbonButtonRenameFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.ribbonButtonRenameFile.ToolTipText = null;
       // 
       // ribbonButtonOrganise
       // 
@@ -590,7 +595,7 @@ namespace MPTagThat
       // 
       this.radRibbonBarChunkScripts.AccessibleDescription = "";
       this.radRibbonBarChunkScripts.AutoSize = false;
-      this.radRibbonBarChunkScripts.Bounds = new System.Drawing.Rectangle(627, 0, 199, 95);
+      this.radRibbonBarChunkScripts.Bounds = new System.Drawing.Rectangle(613, 0, 199, 95);
       this.radRibbonBarChunkScripts.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ribbonButtonScriptExecute,
             this.radRibbonBarButtonGroupScripts});
@@ -637,7 +642,6 @@ namespace MPTagThat
       this.ribbonComboBoxScripts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
       this.ribbonComboBoxScripts.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxScripts.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxScripts.FormatString = null;
       this.ribbonComboBoxScripts.KeyTip = "";
       this.ribbonComboBoxScripts.MaxLength = 32767;
       this.ribbonComboBoxScripts.MaxSize = new System.Drawing.Size(140, 0);
@@ -800,7 +804,6 @@ namespace MPTagThat
       this.ribbonComboBoxRipEncoder.AutoSize = false;
       this.ribbonComboBoxRipEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxRipEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxRipEncoder.FormatString = null;
       this.ribbonComboBoxRipEncoder.KeyTip = "";
       this.ribbonComboBoxRipEncoder.MaxLength = 32767;
       this.ribbonComboBoxRipEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -997,7 +1000,6 @@ namespace MPTagThat
       this.ribbonComboBoxEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxEncoder.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxEncoder.FormatString = null;
       this.ribbonComboBoxEncoder.KeyTip = "";
       this.ribbonComboBoxEncoder.MaxLength = 32767;
       this.ribbonComboBoxEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1186,6 +1188,7 @@ namespace MPTagThat
       this.ribbonComboBoxBurner.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxBurner.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxBurner.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxBurner.FormatString = null;
       this.ribbonComboBoxBurner.KeyTip = "";
       this.ribbonComboBoxBurner.MaxLength = 32767;
       this.ribbonComboBoxBurner.MaxSize = new System.Drawing.Size(140, 0);
@@ -1201,6 +1204,7 @@ namespace MPTagThat
       this.ribbonComboBoxSpeed.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxSpeed.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxSpeed.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxSpeed.FormatString = null;
       this.ribbonComboBoxSpeed.KeyTip = "";
       this.ribbonComboBoxSpeed.MaxLength = 32767;
       this.ribbonComboBoxSpeed.MaxSize = new System.Drawing.Size(140, 0);
@@ -1366,6 +1370,33 @@ namespace MPTagThat
       this.startMenuItemChangeDisplayColumns.ToolTipText = null;
       this.startMenuItemChangeDisplayColumns.Click += new System.EventHandler(this.startMenuItemChangeDisplayColumns_Click);
       // 
+      // ribbonButtonRenameFileExecute
+      // 
+      this.ribbonButtonRenameFileExecute.AccessibleDescription = "";
+      this.ribbonButtonRenameFileExecute.Class = "RadMenuItem";
+      this.ribbonButtonRenameFileExecute.HasTwoColumnDropDown = false;
+      this.ribbonButtonRenameFileExecute.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonRenameFileExecute.Image")));
+      this.ribbonButtonRenameFileExecute.IsMainMenuItem = false;
+      this.ribbonButtonRenameFileExecute.KeyTip = "";
+      this.ribbonButtonRenameFileExecute.Text = "Rename Files";
+      this.ribbonButtonRenameFileExecute.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.ribbonButtonRenameFileExecute.ToggleState = Telerik.WinControls.Enumerations.ToggleState.Off;
+      this.ribbonButtonRenameFileExecute.ToolTipText = null;
+      this.ribbonButtonRenameFileExecute.Click += new System.EventHandler(this.ribbonButtonRenameFileExecute_Click);
+      // 
+      // ribbonButtonRenameFileOptions
+      // 
+      this.ribbonButtonRenameFileOptions.AccessibleDescription = "";
+      this.ribbonButtonRenameFileOptions.Class = "RadMenuItem";
+      this.ribbonButtonRenameFileOptions.HasTwoColumnDropDown = false;
+      this.ribbonButtonRenameFileOptions.IsMainMenuItem = false;
+      this.ribbonButtonRenameFileOptions.KeyTip = "";
+      this.ribbonButtonRenameFileOptions.Text = "Rename Files Options";
+      this.ribbonButtonRenameFileOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.ribbonButtonRenameFileOptions.ToggleState = Telerik.WinControls.Enumerations.ToggleState.Off;
+      this.ribbonButtonRenameFileOptions.ToolTipText = null;
+      this.ribbonButtonRenameFileOptions.Click += new System.EventHandler(this.ribbonButtonRenameFileOptions_Click);
+      // 
       // RibbonBar
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1387,9 +1418,9 @@ namespace MPTagThat
     private Telerik.WinControls.UI.RadRibbonBarChunk radRibbonBarChunkScripts;
     private Telerik.WinControls.UI.RadRibbonBarChunk radRibbonBarChunkOther;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonTagFromFile;
-    private Telerik.WinControls.UI.RadButtonElement ribbonButtonTagToFile;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonMultiEdit;
     private Telerik.WinControls.UI.RadSplitButtonElement ribbonButtonCaseConversion;
+    private Telerik.WinControls.UI.RadSplitButtonElement ribbonButtonRenameFile;
     private Telerik.WinControls.UI.RadDropDownButtonElement ribbonButtonDeleteTags;
     private Telerik.WinControls.UI.RadMenuItem ribbonButtonDeleteAllTags;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonScriptExecute;
@@ -1459,5 +1490,7 @@ namespace MPTagThat
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonRemoveComments;
     private Telerik.WinControls.UI.RadButtonElement ribbonButtonRemovePictures;
     private Telerik.WinControls.UI.RadLabelElement radLabelRemove;
+    private Telerik.WinControls.UI.RadMenuItem ribbonButtonRenameFileExecute;
+    private Telerik.WinControls.UI.RadMenuItem ribbonButtonRenameFileOptions;
   }
 }

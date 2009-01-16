@@ -20,18 +20,54 @@ namespace MPTagThat.TagToFileName
     #region ctor
     public TagToFileName(Main main)
     {
-      this._main = main;
-      InitializeComponent();
-      LoadSettings();
+      _main = main;
+      InitForm(false);
 
-      LocaliseScreen();
+    }
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+    public TagToFileName(Main main, bool batchMode)
+    {
+      _main = main;
+      InitForm(batchMode);
     }
     #endregion
 
     #region Methods
+        /// <summary>
+    /// The form is used in Batch Mode, when using the default button on the ribbon
+    /// </summary>
+    /// <param name="batchMode"></param>
+    private void InitForm(bool batchMode)
+    {
+      InitializeComponent();
+      LoadSettings();
+
+      if (!batchMode)
+      {
+        this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+        ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+
+        LocaliseScreen();
+      }
+      else
+      {
+        if (cbFormat.Text == "")
+        {
+          this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+          ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+
+          LocaliseScreen();
+
+          // We don't have a valid parameter. Show dialog
+          this.ShowDialog();
+        }
+        else
+        {
+          Tag2FileName(cbFormat.Text);
+        }
+      }
+    }
+
     #region Localisation
     /// <summary>
     /// Localise the Screen
