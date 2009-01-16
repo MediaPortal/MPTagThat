@@ -54,6 +54,7 @@ namespace MPTagThat.Core
 
     private bool _tagsCopyArtist;
     private bool _tagsUseCaseConversion;
+    private bool _tagsCreateFolderThumb;
     private bool _tagsUseMediaPortalDatabase;
     private string _tagsMediaPortalDatabase;
     private int _playerSpectrumIndex;
@@ -187,6 +188,13 @@ namespace MPTagThat.Core
     {
       get { return _tagsUseCaseConversion; }
       set { _tagsUseCaseConversion = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool CreateFolderThumb
+    {
+      get { return _tagsCreateFolderThumb; }
+      set { _tagsCreateFolderThumb = value; }
     }
 
     [Setting(SettingScope.User, "false")]

@@ -334,6 +334,7 @@
     <String id="AddConverter">Add Item(s) to Converter</String>
     <String id="AddPlayList">Add Item(s) to PlayList</String>
     <String id="ClearPlayList">Clear PlayList</String>
+    <String id="CreateFolderThumb">Create Folder Thumb</String>
  </Section>
   
     <!-- File Info Panel on the right side -->
@@ -508,6 +509,7 @@
     <String id="GroupBoxTagsGeneral">General</String>
     <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
     <String id="CaseConversion">Use case conversion settings on Save</String>
+    <String id="CreateMissingFolderThumb">Create missing folder thumb (folder.jpg) on Save</String>
     <String id="AutoCompletion">Use MediaPortal Music Database for Artist auto completion</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Use Version 2.4 for ID3 V2 Tags</String>

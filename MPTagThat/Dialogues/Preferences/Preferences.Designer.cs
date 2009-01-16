@@ -53,6 +53,7 @@ namespace MPTagThat.Preferences
       this.lbLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageTags = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.buttonMusicDatabaseBrowse = new MPTagThat.Core.WinControls.MPTButton();
       this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
       this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -489,6 +490,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxTagsGeneral
       // 
+      this.groupBoxTagsGeneral.Controls.Add(this.ckCreateMissingFolderThumb);
       this.groupBoxTagsGeneral.Controls.Add(this.buttonMusicDatabaseBrowse);
       this.groupBoxTagsGeneral.Controls.Add(this.tbMediaPortalDatabase);
       this.groupBoxTagsGeneral.Controls.Add(this.ckUseMediaPortalDatabase);
@@ -503,11 +505,23 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
       // 
+      // ckCreateMissingFolderThumb
+      // 
+      this.ckCreateMissingFolderThumb.AutoSize = true;
+      this.ckCreateMissingFolderThumb.Localisation = "CreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.LocalisationContext = "Settings";
+      this.ckCreateMissingFolderThumb.Location = new System.Drawing.Point(15, 71);
+      this.ckCreateMissingFolderThumb.Name = "ckCreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(250, 17);
+      this.ckCreateMissingFolderThumb.TabIndex = 5;
+      this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on Save";
+      this.ckCreateMissingFolderThumb.UseVisualStyleBackColor = true;
+      // 
       // buttonMusicDatabaseBrowse
       // 
       this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
       this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
-      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(513, 92);
+      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(513, 114);
       this.buttonMusicDatabaseBrowse.Name = "buttonMusicDatabaseBrowse";
       this.buttonMusicDatabaseBrowse.Size = new System.Drawing.Size(46, 23);
       this.buttonMusicDatabaseBrowse.TabIndex = 4;
@@ -517,7 +531,7 @@ namespace MPTagThat.Preferences
       // 
       // tbMediaPortalDatabase
       // 
-      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(36, 93);
+      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(36, 115);
       this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
       this.tbMediaPortalDatabase.Size = new System.Drawing.Size(474, 20);
       this.tbMediaPortalDatabase.TabIndex = 3;
@@ -527,7 +541,7 @@ namespace MPTagThat.Preferences
       this.ckUseMediaPortalDatabase.AutoSize = true;
       this.ckUseMediaPortalDatabase.Localisation = "AutoCompletion";
       this.ckUseMediaPortalDatabase.LocalisationContext = "Settings";
-      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(15, 71);
+      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(15, 93);
       this.ckUseMediaPortalDatabase.Name = "ckUseMediaPortalDatabase";
       this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(303, 17);
       this.ckUseMediaPortalDatabase.TabIndex = 2;
@@ -2164,5 +2178,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTButton buttonMusicDatabaseBrowse;
     private System.Windows.Forms.TextBox tbMediaPortalDatabase;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckCreateMissingFolderThumb;
   }
 }

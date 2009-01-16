@@ -296,6 +296,12 @@ namespace MPTagThat.GridView
             track.File = file;
           }
 
+          // Check, if we need to create a folder.jpg
+          if (!System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg")) && Options.MainSettings.CreateFolderThumb)
+          {
+            SavePicture(track);
+          }
+
           tracksGrid.Rows[rowIndex].Cells[1].Value = localisation.ToString("message", "Ok");
           if (rowIndex % 2 == 0)
             tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
@@ -1073,7 +1079,7 @@ namespace MPTagThat.GridView
     private void CreateContextMenu()
     {
       // Build the Context Menu for the Grid
-      MenuItem[] rmitems = new MenuItem[3];
+      MenuItem[] rmitems = new MenuItem[5];
       rmitems[0] = new MenuItem();
       rmitems[0].Text = localisation.ToString("contextmenu", "AddBurner");
       rmitems[0].Click += new System.EventHandler(tracksGrid_AddToBurner);
@@ -1084,6 +1090,11 @@ namespace MPTagThat.GridView
       rmitems[2] = new MenuItem();
       rmitems[2].Text = localisation.ToString("contextmenu", "AddPlaylist");
       rmitems[2].Click += new System.EventHandler(tracksGrid_AddToPlayList);
+      rmitems[3] = new MenuItem();
+      rmitems[3].Text = "-"; // Create a separator
+      rmitems[4] = new MenuItem();
+      rmitems[4].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
+      rmitems[4].Click += new System.EventHandler(tracksGrid_CreateFolderThumb);
       this.tracksGrid.ContextMenu = new ContextMenu(rmitems);
     }
 
@@ -1096,6 +1107,34 @@ namespace MPTagThat.GridView
       y += clientLocation.Y;
       f.Location = new Point(x, y);
       f.Show();
+    }
+
+    /// <summary>
+    /// Save the Picture of the track as folder.jpg
+    /// </summary>
+    /// <param name="track"></param>
+    private void SavePicture(TrackData track)
+    {
+      if (track.NumPics > 0)
+      {
+        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
+        try
+        {
+          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(track.Pictures[0].Data.Data))
+          {
+            Image img = Image.FromStream(ms);
+            if (img != null)
+            {
+              img.Save(fileName);
+              System.IO.File.SetAttributes(fileName, FileAttributes.Hidden);
+            }
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
+        }
+      }
     }
     #endregion
 
@@ -1421,6 +1460,20 @@ namespace MPTagThat.GridView
         playListItem.Title = string.Format("{0} - {1}", track.Artist, track.Title);
         playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
         _main.Player.PlayList.Add(playListItem);
+      }
+    }
+
+    /// <summary>
+    /// Create a Folder Thumb out of the selected Track Picture
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    public void tracksGrid_CreateFolderThumb(object o, System.EventArgs e)
+    {
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      {
+        TrackData track = bindingList[row.Index];
+        SavePicture(track);
       }
     }
     #endregion

@@ -226,6 +226,7 @@ namespace MPTagThat.Preferences
       #region TabPage Tags
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
+      ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
 
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
@@ -683,6 +684,7 @@ namespace MPTagThat.Preferences
       #region Tags
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
+      Options.MainSettings.CreateFolderThumb = ckCreateMissingFolderThumb.Checked;
 
       if (ckUseMediaPortalDatabase.Checked && File.Exists(tbMediaPortalDatabase.Text))
       {

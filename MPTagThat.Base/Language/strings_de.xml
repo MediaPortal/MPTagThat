@@ -334,6 +334,7 @@
     <String id="AddConverter">Zur Konvertierungliste hinzufügen</String>
     <String id="AddPlayList">Zur Playlist hinzufügen</String>
     <String id="ClearPlayList">PlayList löschen</String>
+    <String id="CreateFolderThumb">Erstelle Ordnervorschau</String>
  </Section>
 
     <!-- File Info Panel on the right side -->
@@ -508,6 +509,7 @@
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
     <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
+    <String id="CreateMissingFolderThumb">Erstelle fehlende Ordnervorschau (folder.jpg) beim Speichern</String>
     <String id="AutoCompletion">MediaPortal Datenbank für automatisches Vervollständigen der Interpreten verwenden</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Version 2.4 für ID3 V2 Tags benutzen</String>
