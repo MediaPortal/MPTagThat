@@ -133,10 +133,11 @@ namespace MPTagThat
       this.ribbonButtonTagFromFile.AccessibleDescription = "";
       this.ribbonButtonTagFromFile.CanFocus = true;
       this.ribbonButtonTagFromFile.Class = "RibbonBarButtonElement";
-      this.ribbonButtonTagFromFile.Image = global::MPTagThat.Properties.Resources.ribbon_from_file;
+      this.ribbonButtonTagFromFile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagFromFile.Image")));
       this.ribbonButtonTagFromFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonTagFromFile.KeyTip = "";
       this.ribbonButtonTagFromFile.ShowBorder = true;
+      this.ribbonButtonTagFromFile.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagFromFile.SmallImage")));
       this.ribbonButtonTagFromFile.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonTagFromFile.Text = "Filename \r\nto Tag";
       this.ribbonButtonTagFromFile.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -149,10 +150,11 @@ namespace MPTagThat
       this.ribbonButtonTagIdentify.AccessibleDescription = "";
       this.ribbonButtonTagIdentify.CanFocus = true;
       this.ribbonButtonTagIdentify.Class = "RibbonBarButtonElement";
-      this.ribbonButtonTagIdentify.Image = global::MPTagThat.Properties.Resources.ribbon_identify;
+      this.ribbonButtonTagIdentify.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagIdentify.Image")));
       this.ribbonButtonTagIdentify.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonTagIdentify.KeyTip = "";
       this.ribbonButtonTagIdentify.ShowBorder = true;
+      this.ribbonButtonTagIdentify.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagIdentify.SmallImage")));
       this.ribbonButtonTagIdentify.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonTagIdentify.Text = "Identify\r\nFiles";
       this.ribbonButtonTagIdentify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -164,9 +166,11 @@ namespace MPTagThat
       this.ribbonButtonTagFromInternet.AccessibleDescription = "";
       this.ribbonButtonTagFromInternet.CanFocus = true;
       this.ribbonButtonTagFromInternet.Class = "RibbonBarButtonElement";
-      this.ribbonButtonTagFromInternet.Image = global::MPTagThat.Properties.Resources.ribbon_from_internet;
+      this.ribbonButtonTagFromInternet.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagFromInternet.Image")));
+      this.ribbonButtonTagFromInternet.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonTagFromInternet.KeyTip = "";
       this.ribbonButtonTagFromInternet.ShowBorder = true;
+      this.ribbonButtonTagFromInternet.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagFromInternet.SmallImage")));
       this.ribbonButtonTagFromInternet.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonTagFromInternet.Text = "Tag from\r\nInternet";
       this.ribbonButtonTagFromInternet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -193,9 +197,11 @@ namespace MPTagThat
       this.ribbonButtonSingleEdit.AccessibleDescription = "";
       this.ribbonButtonSingleEdit.CanFocus = true;
       this.ribbonButtonSingleEdit.Class = "RibbonBarButtonElement";
-      this.ribbonButtonSingleEdit.Image = global::MPTagThat.Properties.Resources.ribbon_edit_single;
+      this.ribbonButtonSingleEdit.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonSingleEdit.Image")));
+      this.ribbonButtonSingleEdit.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonSingleEdit.KeyTip = "";
       this.ribbonButtonSingleEdit.ShowBorder = true;
+      this.ribbonButtonSingleEdit.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonSingleEdit.SmallImage")));
       this.ribbonButtonSingleEdit.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonSingleEdit.Text = "Single \r\nTag Edit";
       this.ribbonButtonSingleEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -207,10 +213,11 @@ namespace MPTagThat
       this.ribbonButtonMultiEdit.AccessibleDescription = "";
       this.ribbonButtonMultiEdit.CanFocus = true;
       this.ribbonButtonMultiEdit.Class = "RibbonBarButtonElement";
-      this.ribbonButtonMultiEdit.Image = global::MPTagThat.Properties.Resources.ribbon_edit_multi;
+      this.ribbonButtonMultiEdit.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonMultiEdit.Image")));
       this.ribbonButtonMultiEdit.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonMultiEdit.KeyTip = "";
       this.ribbonButtonMultiEdit.ShowBorder = true;
+      this.ribbonButtonMultiEdit.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonMultiEdit.SmallImage")));
       this.ribbonButtonMultiEdit.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonMultiEdit.Text = "Multiple \r\nTag Edit";
       this.ribbonButtonMultiEdit.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -241,6 +248,7 @@ namespace MPTagThat
       this.ribbonButtonGetCoverArt.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetCoverArt.Image")));
       this.ribbonButtonGetCoverArt.KeyTip = "";
       this.ribbonButtonGetCoverArt.ShowBorder = true;
+      this.ribbonButtonGetCoverArt.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetCoverArt.SmallImage")));
       this.ribbonButtonGetCoverArt.Text = "Get Cover Art";
       this.ribbonButtonGetCoverArt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.ribbonButtonGetCoverArt.ToolTipText = null;
@@ -255,6 +263,7 @@ namespace MPTagThat
       this.ribbonButtonGetLyrics.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
       this.ribbonButtonGetLyrics.KeyTip = "";
       this.ribbonButtonGetLyrics.ShowBorder = true;
+      this.ribbonButtonGetLyrics.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonGetLyrics.SmallImage")));
       this.ribbonButtonGetLyrics.Text = "Get Lyrics";
       this.ribbonButtonGetLyrics.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.ribbonButtonGetLyrics.ToolTipText = null;
@@ -368,7 +377,7 @@ namespace MPTagThat
       this.ribbonButtonCaseConversion.DropDownDirection = Telerik.WinControls.UI.RadDirection.Down;
       this.ribbonButtonCaseConversion.ExpandArrowButton = false;
       this.ribbonButtonCaseConversion.HasTwoColumnDropDown = false;
-      this.ribbonButtonCaseConversion.Image = global::MPTagThat.Properties.Resources.ribbon_case_conversion;
+      this.ribbonButtonCaseConversion.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonCaseConversion.Image")));
       this.ribbonButtonCaseConversion.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonCaseConversion.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ribbonButtonCaseConversionExecute,
@@ -414,7 +423,7 @@ namespace MPTagThat
       this.ribbonButtonDeleteTags.DropDownDirection = Telerik.WinControls.UI.RadDirection.Down;
       this.ribbonButtonDeleteTags.ExpandArrowButton = false;
       this.ribbonButtonDeleteTags.HasTwoColumnDropDown = false;
-      this.ribbonButtonDeleteTags.Image = global::MPTagThat.Properties.Resources.ribbon_delete_tag;
+      this.ribbonButtonDeleteTags.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonDeleteTags.Image")));
       this.ribbonButtonDeleteTags.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonDeleteTags.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.ribbonButtonDeleteAllTags,
@@ -500,6 +509,7 @@ namespace MPTagThat
       this.ribbonButtonTagToFile.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonTagToFile.KeyTip = "";
       this.ribbonButtonTagToFile.ShowBorder = true;
+      this.ribbonButtonTagToFile.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonTagToFile.SmallImage")));
       this.ribbonButtonTagToFile.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonTagToFile.Text = "Rename\r\nFiles";
       this.ribbonButtonTagToFile.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -513,8 +523,10 @@ namespace MPTagThat
       this.ribbonButtonOrganise.CanFocus = true;
       this.ribbonButtonOrganise.Class = "RibbonBarButtonElement";
       this.ribbonButtonOrganise.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonOrganise.Image")));
+      this.ribbonButtonOrganise.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonOrganise.KeyTip = "";
       this.ribbonButtonOrganise.ShowBorder = true;
+      this.ribbonButtonOrganise.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonOrganise.SmallImage")));
       this.ribbonButtonOrganise.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonOrganise.Text = "Organise \r\nFiles";
       this.ribbonButtonOrganise.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -542,10 +554,11 @@ namespace MPTagThat
       this.ribbonButtonScriptExecute.CanFocus = true;
       this.ribbonButtonScriptExecute.Class = "RibbonBarButtonElement";
       this.ribbonButtonScriptExecute.DisplayStyle = Telerik.WinControls.DisplayStyle.ImageAndText;
-      this.ribbonButtonScriptExecute.Image = global::MPTagThat.Properties.Resources.ribbon_launch_script;
+      this.ribbonButtonScriptExecute.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonScriptExecute.Image")));
       this.ribbonButtonScriptExecute.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonScriptExecute.KeyTip = "";
       this.ribbonButtonScriptExecute.ShowBorder = true;
+      this.ribbonButtonScriptExecute.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonScriptExecute.SmallImage")));
       this.ribbonButtonScriptExecute.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonScriptExecute.Text = "Execute";
       this.ribbonButtonScriptExecute.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -572,7 +585,6 @@ namespace MPTagThat
       this.ribbonComboBoxScripts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
       this.ribbonComboBoxScripts.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxScripts.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxScripts.FormatString = null;
       this.ribbonComboBoxScripts.KeyTip = "";
       this.ribbonComboBoxScripts.MaxLength = 32767;
       this.ribbonComboBoxScripts.MaxSize = new System.Drawing.Size(140, 0);
@@ -598,10 +610,11 @@ namespace MPTagThat
       this.ribbonButtonAddToBurnList.AccessibleDescription = "";
       this.ribbonButtonAddToBurnList.CanFocus = true;
       this.ribbonButtonAddToBurnList.Class = "RibbonBarButtonElement";
-      this.ribbonButtonAddToBurnList.Image = global::MPTagThat.Properties.Resources.ribbon_add_burner;
+      this.ribbonButtonAddToBurnList.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToBurnList.Image")));
       this.ribbonButtonAddToBurnList.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonAddToBurnList.KeyTip = "";
       this.ribbonButtonAddToBurnList.ShowBorder = true;
+      this.ribbonButtonAddToBurnList.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToBurnList.SmallImage")));
       this.ribbonButtonAddToBurnList.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonAddToBurnList.Text = "Add to\r\nBurner";
       this.ribbonButtonAddToBurnList.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -616,8 +629,10 @@ namespace MPTagThat
       this.ribbonButtonAddToConvertList.Class = "RibbonBarButtonElement";
       this.ribbonButtonAddToConvertList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
       this.ribbonButtonAddToConvertList.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToConvertList.Image")));
+      this.ribbonButtonAddToConvertList.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonAddToConvertList.KeyTip = "";
       this.ribbonButtonAddToConvertList.ShowBorder = true;
+      this.ribbonButtonAddToConvertList.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToConvertList.SmallImage")));
       this.ribbonButtonAddToConvertList.StringAlignment = System.Drawing.StringAlignment.Center;
       this.ribbonButtonAddToConvertList.Text = "Add to \r\nConversion";
       this.ribbonButtonAddToConvertList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -630,8 +645,10 @@ namespace MPTagThat
       this.ribbonButtonAddToPlayList.CanFocus = true;
       this.ribbonButtonAddToPlayList.Class = "RibbonBarButtonElement";
       this.ribbonButtonAddToPlayList.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToPlayList.Image")));
+      this.ribbonButtonAddToPlayList.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
       this.ribbonButtonAddToPlayList.KeyTip = "";
       this.ribbonButtonAddToPlayList.ShowBorder = true;
+      this.ribbonButtonAddToPlayList.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddToPlayList.SmallImage")));
       this.ribbonButtonAddToPlayList.Text = "Add to \r\nPlaylist";
       this.ribbonButtonAddToPlayList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.ribbonButtonAddToPlayList.ToolTipText = null;
@@ -730,7 +747,6 @@ namespace MPTagThat
       this.ribbonComboBoxRipEncoder.AutoSize = false;
       this.ribbonComboBoxRipEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxRipEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxRipEncoder.FormatString = null;
       this.ribbonComboBoxRipEncoder.KeyTip = "";
       this.ribbonComboBoxRipEncoder.MaxLength = 32767;
       this.ribbonComboBoxRipEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -927,7 +943,6 @@ namespace MPTagThat
       this.ribbonComboBoxEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxEncoder.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxEncoder.FormatString = null;
       this.ribbonComboBoxEncoder.KeyTip = "";
       this.ribbonComboBoxEncoder.MaxLength = 32767;
       this.ribbonComboBoxEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1116,6 +1131,7 @@ namespace MPTagThat
       this.ribbonComboBoxBurner.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxBurner.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxBurner.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxBurner.FormatString = null;
       this.ribbonComboBoxBurner.KeyTip = "";
       this.ribbonComboBoxBurner.MaxLength = 32767;
       this.ribbonComboBoxBurner.MaxSize = new System.Drawing.Size(140, 0);
@@ -1131,6 +1147,7 @@ namespace MPTagThat
       this.ribbonComboBoxSpeed.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxSpeed.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxSpeed.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxSpeed.FormatString = null;
       this.ribbonComboBoxSpeed.KeyTip = "";
       this.ribbonComboBoxSpeed.MaxLength = 32767;
       this.ribbonComboBoxSpeed.MaxSize = new System.Drawing.Size(140, 0);
