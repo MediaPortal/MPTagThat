@@ -154,7 +154,14 @@ namespace MPTagThat.TagEdit
           }
 
           if (options.RemoveExistingComments)
+          {
             track.Comment = "";
+            if (track.TagType.ToLower() == "mp3")
+            {
+              id3v1tag.Comment = null;
+              id3v2tag.RemoveFrames("COMM");
+            }
+          }
 
           if (options.Comments.Count > 0)
           {
