@@ -96,7 +96,14 @@ namespace MPTagThat.Core
     /// </summary>
     public string Artist
     {
-      get { return String.Join(";", File.Tag.Performers); }
+      get 
+      {
+        string artist = String.Join(";", File.Tag.Performers);
+        if (artist.Contains("AC;DC"))
+          artist = artist.Replace("AC;DC", "AC/DC");
+
+        return artist; 
+      }
       set
       {
         string[] artists = value.Split(new char[] { ';', '|' });
@@ -120,7 +127,14 @@ namespace MPTagThat.Core
     /// </summary>
     public string AlbumArtist
     {
-      get { return String.Join(";", File.Tag.AlbumArtists); }
+      get 
+      {
+        string albumartist = String.Join(";", File.Tag.AlbumArtists);
+        if (albumartist.Contains("AC;DC"))
+          albumartist = albumartist.Replace("AC;DC", "AC/DC");
+
+        return albumartist; 
+      }
       set
       {
         string[] artists = new string[] { };
