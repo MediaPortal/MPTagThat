@@ -344,6 +344,7 @@
   
     <!-- File Info Panel on the right side -->
   <Section name="file_info">
+    <String id="SaveFolderThumb">Save as Folder Thumb</String>
     <String id="Duration">Duration</String>
     <String id="FileSize">File Size</String>
     <String id="Bitrate">Bitrate</String>

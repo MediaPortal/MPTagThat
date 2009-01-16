@@ -687,6 +687,7 @@ namespace MPTagThat
         //  picturePanel.Collapse();
         IPicture[] pics = new IPicture[] { };
         pics = track.File.Tag.Pictures;
+        btnSaveFolderThumb.Enabled = false;
         if (pics.Length > 0)
         {
           using (MemoryStream ms = new MemoryStream(pics[0].Data.Data))
@@ -695,6 +696,7 @@ namespace MPTagThat
             if (img != null)
             {
               pictureBoxAlbumArt.Image = img;
+              btnSaveFolderThumb.Enabled = true;
             }
           }
         }
@@ -729,6 +731,17 @@ namespace MPTagThat
     {
       pictureBoxAlbumArt.Image = null;
       listViewFileInfo.Items.Clear();
+    }
+
+    /// <summary>
+    /// Save the currently selected picture as folder.jpg
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btnSaveFolderThumb_Click(object sender, EventArgs e)
+    {
+      TrackData track = gridViewControl.SelectedTrack;
+      TracksGridView.SavePicture(track);
     }
     #endregion
 

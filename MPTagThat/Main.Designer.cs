@@ -43,7 +43,6 @@ namespace MPTagThat
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.panelRight = new MPTagThat.Core.WinControls.TTPanel();
       this.playerPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.playerControl = new MPTagThat.Player.PlayerControl();
       this.picturePanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.panelPicSize = new MPTagThat.Core.WinControls.TTPanel();
       this.pictureBoxAlbumArt = new System.Windows.Forms.PictureBox();
@@ -63,6 +62,8 @@ namespace MPTagThat
       this.toolStripStatusLabelFiles = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabelFolder = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
+      this.btnSaveFolderThumb = new MPTagThat.Core.WinControls.MPTButton();
+      this.playerControl = new MPTagThat.Player.PlayerControl();
       this.panelLeft.SuspendLayout();
       this.panelLeftTop.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
@@ -204,7 +205,7 @@ namespace MPTagThat
       this.checkBoxRecursive.Location = new System.Drawing.Point(8, 43);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 0);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
@@ -220,7 +221,7 @@ namespace MPTagThat
       this.btnRefreshFolder.Location = new System.Drawing.Point(5, 66);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 0);
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -258,17 +259,10 @@ namespace MPTagThat
       this.playerPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.playerPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.playerPanel.Location = new System.Drawing.Point(0, 296);
+      this.playerPanel.Location = new System.Drawing.Point(0, 338);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(200, 283);
+      this.playerPanel.Size = new System.Drawing.Size(200, 241);
       this.playerPanel.TabIndex = 2;
-      // 
-      // playerControl
-      // 
-      this.playerControl.Location = new System.Drawing.Point(3, 25);
-      this.playerControl.Name = "playerControl";
-      this.playerControl.Size = new System.Drawing.Size(197, 255);
-      this.playerControl.TabIndex = 1;
       // 
       // picturePanel
       // 
@@ -289,7 +283,7 @@ namespace MPTagThat
       this.picturePanel.Dock = System.Windows.Forms.DockStyle.Top;
       this.picturePanel.Location = new System.Drawing.Point(0, 0);
       this.picturePanel.Name = "picturePanel";
-      this.picturePanel.Size = new System.Drawing.Size(200, 183);
+      this.picturePanel.Size = new System.Drawing.Size(200, 237);
       this.picturePanel.TabIndex = 1;
       // 
       // panelPicSize
@@ -297,15 +291,16 @@ namespace MPTagThat
       this.panelPicSize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                   | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
+      this.panelPicSize.Controls.Add(this.btnSaveFolderThumb);
       this.panelPicSize.Controls.Add(this.pictureBoxAlbumArt);
       this.panelPicSize.Location = new System.Drawing.Point(5, 28);
       this.panelPicSize.Name = "panelPicSize";
-      this.panelPicSize.Size = new System.Drawing.Size(190, 150);
+      this.panelPicSize.Size = new System.Drawing.Size(190, 204);
       this.panelPicSize.TabIndex = 2;
       // 
       // pictureBoxAlbumArt
       // 
-      this.pictureBoxAlbumArt.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pictureBoxAlbumArt.Dock = System.Windows.Forms.DockStyle.Top;
       this.pictureBoxAlbumArt.Location = new System.Drawing.Point(0, 0);
       this.pictureBoxAlbumArt.Name = "pictureBoxAlbumArt";
       this.pictureBoxAlbumArt.Size = new System.Drawing.Size(190, 150);
@@ -328,9 +323,9 @@ namespace MPTagThat
       this.fileInfoPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
       this.fileInfoPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.fileInfoPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.fileInfoPanel.Location = new System.Drawing.Point(3, 189);
+      this.fileInfoPanel.Location = new System.Drawing.Point(3, 243);
       this.fileInfoPanel.Name = "fileInfoPanel";
-      this.fileInfoPanel.Size = new System.Drawing.Size(194, 187);
+      this.fileInfoPanel.Size = new System.Drawing.Size(194, 170);
       this.fileInfoPanel.TabIndex = 0;
       // 
       // listViewFileInfo
@@ -339,7 +334,7 @@ namespace MPTagThat
       this.listViewFileInfo.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
       this.listViewFileInfo.Location = new System.Drawing.Point(0, 25);
       this.listViewFileInfo.Name = "listViewFileInfo";
-      this.listViewFileInfo.Size = new System.Drawing.Size(198, 159);
+      this.listViewFileInfo.Size = new System.Drawing.Size(198, 192);
       this.listViewFileInfo.TabIndex = 1;
       this.listViewFileInfo.UseCompatibleStateImageBehavior = false;
       this.listViewFileInfo.View = System.Windows.Forms.View.Details;
@@ -491,6 +486,26 @@ namespace MPTagThat
       this.statusStrip.TabIndex = 0;
       this.statusStrip.Text = "statusStrip";
       // 
+      // btnSaveFolderThumb
+      // 
+      this.btnSaveFolderThumb.AutoSize = true;
+      this.btnSaveFolderThumb.Localisation = "SaveFolderThumb";
+      this.btnSaveFolderThumb.LocalisationContext = "file_info";
+      this.btnSaveFolderThumb.Location = new System.Drawing.Point(0, 157);
+      this.btnSaveFolderThumb.Name = "btnSaveFolderThumb";
+      this.btnSaveFolderThumb.Size = new System.Drawing.Size(187, 44);
+      this.btnSaveFolderThumb.TabIndex = 3;
+      this.btnSaveFolderThumb.Text = "Save as Folder Thumb";
+      this.btnSaveFolderThumb.UseVisualStyleBackColor = true;
+      this.btnSaveFolderThumb.Click += new System.EventHandler(this.btnSaveFolderThumb_Click);
+      // 
+      // playerControl
+      // 
+      this.playerControl.Location = new System.Drawing.Point(3, 25);
+      this.playerControl.Name = "playerControl";
+      this.playerControl.Size = new System.Drawing.Size(197, 255);
+      this.playerControl.TabIndex = 1;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,6 +539,7 @@ namespace MPTagThat
       this.playerPanel.ResumeLayout(false);
       this.picturePanel.ResumeLayout(false);
       this.panelPicSize.ResumeLayout(false);
+      this.panelPicSize.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbumArt)).EndInit();
       this.fileInfoPanel.ResumeLayout(false);
       this.contextMenuTreeView.ResumeLayout(false);
@@ -570,6 +586,7 @@ namespace MPTagThat
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFiles;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFolder;
     private System.Windows.Forms.StatusStrip statusStrip;
+    private MPTagThat.Core.WinControls.MPTButton btnSaveFolderThumb;
   }
 }
 

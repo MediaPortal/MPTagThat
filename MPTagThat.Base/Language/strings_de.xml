@@ -344,6 +344,7 @@
 
     <!-- File Info Panel on the right side -->
   <Section name="file_info">
+    <String id="SaveFolderThumb">Als Ordnervorschau speichern</String>
     <String id="Duration">Dauer</String>
     <String id="FileSize">Dateigröße</String>
     <String id="Bitrate">Bitrate</String>

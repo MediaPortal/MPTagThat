@@ -655,6 +655,34 @@ namespace MPTagThat.GridView
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
+    /// <summary>
+    /// Save the Picture of the track as folder.jpg
+    /// </summary>
+    /// <param name="track"></param>
+    public void SavePicture(TrackData track)
+    {
+      if (track.NumPics > 0)
+      {
+        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
+        try
+        {
+          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(track.Pictures[0].Data.Data))
+          {
+            Image img = Image.FromStream(ms);
+            if (img != null)
+            {
+              img.Save(fileName);
+              System.IO.File.SetAttributes(fileName, FileAttributes.Hidden);
+            }
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
+        }
+      }
+    }
     #endregion
 
     #region Lyrics
@@ -1167,34 +1195,6 @@ namespace MPTagThat.GridView
       y += clientLocation.Y;
       f.Location = new Point(x, y);
       f.Show();
-    }
-
-    /// <summary>
-    /// Save the Picture of the track as folder.jpg
-    /// </summary>
-    /// <param name="track"></param>
-    private void SavePicture(TrackData track)
-    {
-      if (track.NumPics > 0)
-      {
-        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
-        try
-        {
-          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(track.Pictures[0].Data.Data))
-          {
-            Image img = Image.FromStream(ms);
-            if (img != null)
-            {
-              img.Save(fileName);
-              System.IO.File.SetAttributes(fileName, FileAttributes.Hidden);
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
-        }
-      }
     }
     #endregion
 
