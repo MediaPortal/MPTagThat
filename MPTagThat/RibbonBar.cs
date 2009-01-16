@@ -265,8 +265,13 @@ namespace MPTagThat
 
       this.ribbonButtonSingleEdit.Text = localisation.ToString("ribbon", "SingleTagEdit");
       this.ribbonButtonMultiEdit.Text = localisation.ToString("ribbon", "MultiTagEdit");
-      this.ribbonButtonGetCoverArt.Text = localisation.ToString("ribbon", "GetCoverArt");
-      this.ribbonButtonGetLyrics.Text = localisation.ToString("ribbon", "GetLyrics");
+      this.ribbonButtonGetCoverArt.ToolTipText = localisation.ToString("ribbon", "GetCoverArt");
+      this.ribbonButtonGetLyrics.ToolTipText = localisation.ToString("ribbon", "GetLyrics");
+      this.ribbonButtonAutoNumber.ToolTipText = localisation.ToString("ribbon", "AutoNumber");
+      this.ribbonButtonClickNumber.ToolTipText = localisation.ToString("ribbon", "NumberOnClick");
+      this.radLabelRemove.Text = localisation.ToString("ribbon", "RemoveCommentPicture");
+      this.ribbonButtonRemoveComments.ToolTipText = localisation.ToString("ribbon", "RemoveComments");
+      this.ribbonButtonRemovePictures.ToolTipText = localisation.ToString("ribbon", "RemovePictures");
       this.ribbonButtonCaseConversion.Text = localisation.ToString("ribbon", "CaseConversion");
       this.ribbonButtonCaseConversionExecute.Text = localisation.ToString("ribbon", "CaseConversionMenu");
       this.ribbonButtonCaseConversionOptions.Text = localisation.ToString("ribbon", "CaseConversionOption");
@@ -524,6 +529,10 @@ namespace MPTagThat
         main.TracksGridView.GetLyrics();
       else if (rb == ribbonButtonAutoNumber)
         main.TracksGridView.AutoNumber();
+      else if (rb == ribbonButtonRemoveComments)
+        main.TracksGridView.RemoveComments();
+      else if (rb == ribbonButtonRemovePictures)
+        main.TracksGridView.RemovePictures();
     }
 
     /// <summary>

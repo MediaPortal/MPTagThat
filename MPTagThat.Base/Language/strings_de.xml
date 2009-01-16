@@ -49,6 +49,11 @@
     <String id="MultiTagEdit">Mehrfach\neditieren</String>
     <String id="GetCoverArt">Cover Art holen</String>
     <String id="GetLyrics">Liedtext holen</String>
+    <String id="AutoNumber">Automatisch nummerieren</String>
+    <String id="NumberOnClick">Nummeriern bei Click</String>
+    <String id="RemoveCommentPicture">Entfernen:</String>
+    <String id="RemoveComments">Alle Kommentare entferenen</String>
+    <String id="RemovePictures">Alle Bilder entfernen</String>
     <String id="CaseConversion">Groß-/ Klein-\nschreibung</String>
     <String id="CaseConversionMenu">Groß-/ Kleinschreibung</String>
     <String id="CaseConversionOption">Groß-/ Kleinschreibung Einstellungen</String>

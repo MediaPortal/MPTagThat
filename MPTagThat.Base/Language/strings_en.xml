@@ -49,6 +49,11 @@
     <String id="MultiTagEdit">Multiple Tag\nEdit</String>
     <String id="GetCoverArt">Get Cover Art</String>
     <String id="GetLyrics">Get Lyrics</String>
+    <String id="AutoNumber">Auto Number</String>
+    <String id="NumberOnClick">Number on Click</String>
+    <String id="RemoveCommentPicture">Remove:</String>
+    <String id="RemoveComments">Remove all comments</String>
+    <String id="RemovePictures">Remove all pictures</String>
     <String id="CaseConversion">Case\nConversion</String>
     <String id="CaseConversionMenu">Case Conversion</String>
     <String id="CaseConversionOption">Case Conversion Options</String>

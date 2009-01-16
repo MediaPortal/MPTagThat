@@ -162,12 +162,9 @@ namespace MPTagThat.GridView
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
         row.Cells[1].Value = "";
-
-        if (!row.Selected)
-          continue;
 
         count++;
         try
@@ -376,12 +373,9 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
         row.Cells[1].Value = "";
-
-        if (!row.Selected)
-          continue;
 
         count++;
         try
@@ -546,12 +540,9 @@ namespace MPTagThat.GridView
       string savedArtist = "";
       string savedAlbum = "";
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
         row.Cells[1].Value = "";
-
-        if (!row.Selected)
-          continue;
 
         count++;
         try
@@ -705,11 +696,8 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
 
       List<TrackData> tracks = new List<TrackData>();
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
-        if (!row.Selected)
-          continue;
-
         count++;
         Application.DoEvents();
         dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Lyrics"), count, trackCount), count, trackCount, true);
@@ -778,11 +766,8 @@ namespace MPTagThat.GridView
       if (numberValue == -1)
         return;
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
-        if (!row.Selected)
-          continue;
-
         TrackData track = bindingList[row.Index];
 
         // Get the Number of tracks, so that we don't loose it
@@ -814,11 +799,8 @@ namespace MPTagThat.GridView
     public void DeleteTags(TagTypes type)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
-        if (!row.Selected)
-          continue;
-
         TrackData track = bindingList[row.Index];
         try
         {
@@ -856,11 +838,8 @@ namespace MPTagThat.GridView
         return;
       }
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
-        if (!row.Selected)
-          continue;
-
         TrackData track = bindingList[row.Index];
         try
         {
@@ -884,6 +863,87 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
+
+    #region Remove Comments / Remove Pictures
+    /// <summary>
+    /// Remove all Comments in te selected tracks
+    /// </summary>
+    public void RemoveComments()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      {
+        TrackData track = bindingList[row.Index];
+        
+        bool commentRemoved = false;
+        if (track.TagType.ToLower() == "mp3")
+        {
+          TagLib.Id3v1.Tag id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
+          TagLib.Id3v2.Tag id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+
+          if (id3v1tag.Comment != null)
+          {
+            id3v1tag.Comment = null;
+            commentRemoved = true;
+          }
+          IEnumerator<TagLib.Id3v2.CommentsFrame> id3v2comments = id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>().GetEnumerator();
+          if (id3v2comments.MoveNext())
+          {
+            id3v2tag.RemoveFrames("COMM");
+            commentRemoved = true;
+          }
+        }
+        else
+        {
+          if (track.Comment != "")
+          {
+            commentRemoved = true;
+            track.Comment = "";
+          }
+        }
+
+        if (commentRemoved)
+        {
+          SetBackgroundColorChanged(row.Index);
+          track.Changed = true;
+          _itemsChanged = true;
+        }
+      }
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Remove all Picture data for the selected tracks
+    /// </summary>
+    public void RemovePictures()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      {
+        TrackData track = bindingList[row.Index];
+
+        bool pictureRemoved = false;
+        if (track.NumPics > 0)
+        {
+          track.Pictures = null;
+          pictureRemoved = true;
+        }
+
+        if (pictureRemoved)
+        {
+          SetBackgroundColorChanged(row.Index);
+          track.Changed = true;
+          _itemsChanged = true;
+        }
+      }
+      _main.FillInfoPanel();
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
