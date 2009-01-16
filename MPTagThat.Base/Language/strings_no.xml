@@ -43,12 +43,19 @@
     <String id="TagTab">Tagger</String>
     <String id="TagFromFile">Tagg Fra\nFilnavn</String>
     <String id="RenameFile">Nytt Navn\ntil Fil</String>
+    <String id="RenameFileMenu">Nytt Navn til Fil</String>
+    <String id="RenameFileOptions">Innstillinger for Nytt Navn til Fil</String>
     <String id="IdentifyFile">Identifiser\nFil</String>
     <String id="TagFromInternet">Tagg fra\nInternett</String>
     <String id="SingleTagEdit">Enkel\nTagg</String>
     <String id="MultiTagEdit">Flervalgte\nTagger</String>
     <String id="GetCoverArt">Finn Bilde</String>
     <String id="GetLyrics">Finn Tekster</String>
+    <String id="AutoNumber">Auto Nummerering</String>
+    <String id="NumberOnClick">Klikk og Nummerer</String>
+    <String id="RemoveCommentPicture">Fjern:</String>
+    <String id="RemoveComments">Fjern kommentarer</String>
+    <String id="RemovePictures">Fjern bilder</String>
     <String id="CaseConversion">Konverter\nBokstaver</String>
     <String id="CaseConversionMenu">Konverter Bokstaver</String>
     <String id="CaseConversionOption">Innstillinger for Bokstav Konvertering</String>
@@ -334,10 +341,12 @@
     <String id="AddConverter">Legg til for Konvertering</String>
     <String id="AddPlayList">Legg til i Spilleliste</String>
     <String id="ClearPlayList">Tøm Spilleliste</String>
+    <String id="CreateFolderThumb">Lag ikon for folder</String>
  </Section>
   
     <!-- File Info Panel on the right side -->
   <Section name="file_info">
+    <String id="SaveFolderThumb">Lagre som Folder Ikon</String>
     <String id="Duration">Lengde</String>
     <String id="FileSize">Filstørrelse</String>
     <String id="Bitrate">Bitrate</String>
@@ -508,6 +517,7 @@
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når den er tom</String>
     <String id="CaseConversion">Bruk Bokstav Konvertering når du lagrer</String>
+    <String id="CreateMissingFolderThumb">Lag manglende Folder Ikon (folder.jpg) ved Lagring</String>
     <String id="AutoCompletion">Bruk MediaPortal Musikk Database for Artist auto fullfør</String>
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Bruk Versjon 2.4 for ID3 V2 Tagger</String>
