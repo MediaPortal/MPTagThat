@@ -162,9 +162,14 @@ namespace MPTagThat.GridView
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         row.Cells[1].Value = "";
+
+        if (!row.Selected)
+        {
+          continue;
+        }
 
         count++;
         try
@@ -373,9 +378,14 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
 
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         row.Cells[1].Value = "";
+
+        if (!row.Selected)
+        {
+          continue;
+        }
 
         count++;
         try
@@ -540,9 +550,14 @@ namespace MPTagThat.GridView
       string savedArtist = "";
       string savedAlbum = "";
 
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         row.Cells[1].Value = "";
+
+        if (!row.Selected)
+        {
+          continue;
+        }
 
         count++;
         try
@@ -724,8 +739,13 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
 
       List<TrackData> tracks = new List<TrackData>();
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         count++;
         Application.DoEvents();
         dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Lyrics"), count, trackCount), count, trackCount, true);
@@ -794,8 +814,13 @@ namespace MPTagThat.GridView
       if (numberValue == -1)
         return;
 
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
 
         // Get the Number of tracks, so that we don't loose it
@@ -827,8 +852,13 @@ namespace MPTagThat.GridView
     public void DeleteTags(TagTypes type)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
         try
         {
@@ -866,8 +896,13 @@ namespace MPTagThat.GridView
         return;
       }
 
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
         try
         {
@@ -902,8 +937,13 @@ namespace MPTagThat.GridView
     public void RemoveComments()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
         
         bool commentRemoved = false;
@@ -951,8 +991,13 @@ namespace MPTagThat.GridView
     public void RemovePictures()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
 
         bool pictureRemoved = false;
@@ -1048,13 +1093,23 @@ namespace MPTagThat.GridView
           IScript script = (IScript)assembly.CreateInstance("Script");
 
           List<TrackData> tracks = new List<TrackData>();
-          foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+          foreach (DataGridViewRow row in tracksGrid.Rows)
           {
+            if (!row.Selected)
+            {
+              continue;
+            }
+
             tracks.Add(bindingList[row.Index]);
           }
           script.Invoke(tracks);
-          foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+          foreach (DataGridViewRow row in tracksGrid.Rows)
           {
+            if (!row.Selected)
+            {
+              continue;
+            }
+
             if (bindingList[row.Index].Changed)
             {
               SetBackgroundColorChanged(row.Index);
@@ -1530,8 +1585,13 @@ namespace MPTagThat.GridView
     /// <param name="e"></param>
     public void tracksGrid_CreateFolderThumb(object o, System.EventArgs e)
     {
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
         TrackData track = bindingList[row.Index];
         SavePicture(track);
       }
