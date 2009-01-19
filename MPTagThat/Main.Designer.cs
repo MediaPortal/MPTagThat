@@ -45,6 +45,7 @@ namespace MPTagThat
       this.playerPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.picturePanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.panelPicSize = new MPTagThat.Core.WinControls.TTPanel();
+      this.btnSaveFolderThumb = new MPTagThat.Core.WinControls.MPTButton();
       this.pictureBoxAlbumArt = new System.Windows.Forms.PictureBox();
       this.fileInfoPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.listViewFileInfo = new System.Windows.Forms.ListView();
@@ -62,7 +63,6 @@ namespace MPTagThat
       this.toolStripStatusLabelFiles = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabelFolder = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
-      this.btnSaveFolderThumb = new MPTagThat.Core.WinControls.MPTButton();
       this.playerControl = new MPTagThat.Player.PlayerControl();
       this.panelLeft.SuspendLayout();
       this.panelLeftTop.SuspendLayout();
@@ -141,7 +141,6 @@ namespace MPTagThat
       // 
       // treeViewFolderBrowser
       // 
-      this.treeViewFolderBrowser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.treeViewFolderBrowser.DataSource = null;
       this.treeViewFolderBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk)
@@ -179,6 +178,7 @@ namespace MPTagThat
       // 
       this.optionsPanelLeft.AnimationStep = 30;
       this.optionsPanelLeft.BorderColor = System.Drawing.Color.Gray;
+      this.optionsPanelLeft.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.optionsPanelLeft.CaptionBrush = Stepi.UI.BrushType.Solid;
       this.optionsPanelLeft.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
       this.optionsPanelLeft.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -205,7 +205,7 @@ namespace MPTagThat
       this.checkBoxRecursive.Location = new System.Drawing.Point(8, 43);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 0);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@ namespace MPTagThat
       this.btnRefreshFolder.Location = new System.Drawing.Point(5, 66);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 0);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -247,6 +247,7 @@ namespace MPTagThat
       // 
       this.playerPanel.AnimationStep = 30;
       this.playerPanel.BorderColor = System.Drawing.Color.Gray;
+      this.playerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.playerPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
       this.playerPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
       this.playerPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -269,6 +270,7 @@ namespace MPTagThat
       this.picturePanel.AnimationStep = 30;
       this.picturePanel.BackColor = System.Drawing.Color.White;
       this.picturePanel.BorderColor = System.Drawing.Color.Gray;
+      this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.picturePanel.CaptionBrush = Stepi.UI.BrushType.Solid;
       this.picturePanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
       this.picturePanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -295,15 +297,28 @@ namespace MPTagThat
       this.panelPicSize.Controls.Add(this.pictureBoxAlbumArt);
       this.panelPicSize.Location = new System.Drawing.Point(5, 28);
       this.panelPicSize.Name = "panelPicSize";
-      this.panelPicSize.Size = new System.Drawing.Size(190, 204);
+      this.panelPicSize.Size = new System.Drawing.Size(186, 200);
       this.panelPicSize.TabIndex = 2;
+      // 
+      // btnSaveFolderThumb
+      // 
+      this.btnSaveFolderThumb.AutoSize = true;
+      this.btnSaveFolderThumb.Localisation = "SaveFolderThumb";
+      this.btnSaveFolderThumb.LocalisationContext = "file_info";
+      this.btnSaveFolderThumb.Location = new System.Drawing.Point(0, 157);
+      this.btnSaveFolderThumb.Name = "btnSaveFolderThumb";
+      this.btnSaveFolderThumb.Size = new System.Drawing.Size(187, 44);
+      this.btnSaveFolderThumb.TabIndex = 3;
+      this.btnSaveFolderThumb.Text = "Save as Folder Thumb";
+      this.btnSaveFolderThumb.UseVisualStyleBackColor = true;
+      this.btnSaveFolderThumb.Click += new System.EventHandler(this.btnSaveFolderThumb_Click);
       // 
       // pictureBoxAlbumArt
       // 
       this.pictureBoxAlbumArt.Dock = System.Windows.Forms.DockStyle.Top;
       this.pictureBoxAlbumArt.Location = new System.Drawing.Point(0, 0);
       this.pictureBoxAlbumArt.Name = "pictureBoxAlbumArt";
-      this.pictureBoxAlbumArt.Size = new System.Drawing.Size(190, 150);
+      this.pictureBoxAlbumArt.Size = new System.Drawing.Size(186, 150);
       this.pictureBoxAlbumArt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
       this.pictureBoxAlbumArt.TabIndex = 2;
       this.pictureBoxAlbumArt.TabStop = false;
@@ -312,6 +327,7 @@ namespace MPTagThat
       // 
       this.fileInfoPanel.AnimationStep = 30;
       this.fileInfoPanel.BorderColor = System.Drawing.Color.Gray;
+      this.fileInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.fileInfoPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
       this.fileInfoPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
       this.fileInfoPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -367,6 +383,7 @@ namespace MPTagThat
       // dataGridViewError
       // 
       this.dataGridViewError.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridViewError.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.dataGridViewError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridViewError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
@@ -397,6 +414,7 @@ namespace MPTagThat
       // 
       // panelFileList
       // 
+      this.panelFileList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(158, 149);
       this.panelFileList.Name = "panelFileList";
@@ -486,24 +504,11 @@ namespace MPTagThat
       this.statusStrip.TabIndex = 0;
       this.statusStrip.Text = "statusStrip";
       // 
-      // btnSaveFolderThumb
-      // 
-      this.btnSaveFolderThumb.AutoSize = true;
-      this.btnSaveFolderThumb.Localisation = "SaveFolderThumb";
-      this.btnSaveFolderThumb.LocalisationContext = "file_info";
-      this.btnSaveFolderThumb.Location = new System.Drawing.Point(0, 157);
-      this.btnSaveFolderThumb.Name = "btnSaveFolderThumb";
-      this.btnSaveFolderThumb.Size = new System.Drawing.Size(187, 44);
-      this.btnSaveFolderThumb.TabIndex = 3;
-      this.btnSaveFolderThumb.Text = "Save as Folder Thumb";
-      this.btnSaveFolderThumb.UseVisualStyleBackColor = true;
-      this.btnSaveFolderThumb.Click += new System.EventHandler(this.btnSaveFolderThumb_Click);
-      // 
       // playerControl
       // 
       this.playerControl.Location = new System.Drawing.Point(3, 25);
       this.playerControl.Name = "playerControl";
-      this.playerControl.Size = new System.Drawing.Size(197, 255);
+      this.playerControl.Size = new System.Drawing.Size(197, 211);
       this.playerControl.TabIndex = 1;
       // 
       // Main
