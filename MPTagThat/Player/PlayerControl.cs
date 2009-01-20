@@ -70,7 +70,7 @@ namespace MPTagThat.Player
       col.DataPropertyName = "Title";
       col.ReadOnly = true;
       col.Visible = true;
-      col.Width = 160;
+      col.Width = 140;
       playListGrid.Columns.Add(col);
 
       col = new DataGridViewTextBoxColumn();
@@ -78,7 +78,7 @@ namespace MPTagThat.Player
       col.DataPropertyName = "Duration";
       col.ReadOnly = true;
       col.Visible = true;
-      col.Width = 40;
+      col.Width = 70;
       playListGrid.Columns.Add(col);
 
       lblTitle.DisplayText = "";

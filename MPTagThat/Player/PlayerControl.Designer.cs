@@ -31,12 +31,12 @@
       this.buttonPause = new System.Windows.Forms.Button();
       this.buttonStop = new System.Windows.Forms.Button();
       this.playListGrid = new System.Windows.Forms.DataGridView();
-      this.lblTitle = new MPTagThat.Core.MarqueeLabel();
       this.buttonNext = new System.Windows.Forms.Button();
       this.buttonPlay = new System.Windows.Forms.Button();
       this.buttonPrev = new System.Windows.Forms.Button();
       this.pictureBoxSpectrum = new System.Windows.Forms.PictureBox();
       this.pictureBoxTime = new System.Windows.Forms.PictureBox();
+      this.lblTitle = new MPTagThat.Core.MarqueeLabel();
       ((System.ComponentModel.ISupportInitialize)(this.playListGrid)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpectrum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTime)).BeginInit();
@@ -68,29 +68,21 @@
       this.playListGrid.AllowUserToAddRows = false;
       this.playListGrid.AllowUserToDeleteRows = false;
       this.playListGrid.AllowUserToResizeRows = false;
+      this.playListGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.playListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.playListGrid.ColumnHeadersVisible = false;
       this.playListGrid.Location = new System.Drawing.Point(0, 85);
       this.playListGrid.Name = "playListGrid";
       this.playListGrid.ReadOnly = true;
       this.playListGrid.RowHeadersVisible = false;
+      this.playListGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
       this.playListGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.playListGrid.Size = new System.Drawing.Size(198, 192);
+      this.playListGrid.Size = new System.Drawing.Size(194, 125);
       this.playListGrid.TabIndex = 7;
       this.playListGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.playListGrid_MouseClick);
       this.playListGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playListGrid_MouseDoubleClick);
       this.playListGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.playListGrid_DragOver);
       this.playListGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.playListGrid_DragDrop);
-      // 
-      // lblTitle
-      // 
-      this.lblTitle.DisplayText = "Title";
-      this.lblTitle.Location = new System.Drawing.Point(94, 4);
-      this.lblTitle.MinimumSize = new System.Drawing.Size(100, 0);
-      this.lblTitle.Name = "lblTitle";
-      this.lblTitle.ScrollPixelAmount = 10;
-      this.lblTitle.Size = new System.Drawing.Size(100, 13);
-      this.lblTitle.TabIndex = 8;
       // 
       // buttonNext
       // 
@@ -141,6 +133,16 @@
       this.pictureBoxTime.TabIndex = 0;
       this.pictureBoxTime.TabStop = false;
       // 
+      // lblTitle
+      // 
+      this.lblTitle.DisplayText = "Title";
+      this.lblTitle.Location = new System.Drawing.Point(94, 4);
+      this.lblTitle.MinimumSize = new System.Drawing.Size(100, 0);
+      this.lblTitle.Name = "lblTitle";
+      this.lblTitle.ScrollPixelAmount = 10;
+      this.lblTitle.Size = new System.Drawing.Size(100, 13);
+      this.lblTitle.TabIndex = 8;
+      // 
       // PlayerControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -155,7 +157,7 @@
       this.Controls.Add(this.pictureBoxSpectrum);
       this.Controls.Add(this.pictureBoxTime);
       this.Name = "PlayerControl";
-      this.Size = new System.Drawing.Size(198, 280);
+      this.Size = new System.Drawing.Size(194, 210);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.playListGrid)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpectrum)).EndInit();
