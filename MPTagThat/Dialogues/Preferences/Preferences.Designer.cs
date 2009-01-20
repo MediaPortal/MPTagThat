@@ -68,6 +68,7 @@ namespace MPTagThat.Preferences
       this.ckHotLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyricWiki = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonUseV3 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.groupBoxID3Update = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -578,7 +579,7 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
       this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
       this.groupBoxLyrics.LocalisationContext = "Settings";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(13, 370);
+      this.groupBoxLyrics.Location = new System.Drawing.Point(13, 391);
       this.groupBoxLyrics.Name = "groupBoxLyrics";
       this.groupBoxLyrics.Size = new System.Drawing.Size(582, 166);
       this.groupBoxLyrics.TabIndex = 2;
@@ -590,7 +591,8 @@ namespace MPTagThat.Preferences
       this.ckSwitchArtist.AutoSize = true;
       this.ckSwitchArtist.Localisation = "SwitchArtist";
       this.ckSwitchArtist.LocalisationContext = "Settings";
-      this.ckSwitchArtist.Location = new System.Drawing.Point(17, 143);
+      this.ckSwitchArtist.Location = new System.Drawing.Point(20, 141);
+      this.ckSwitchArtist.MaximumSize = new System.Drawing.Size(400, 0);
       this.ckSwitchArtist.Name = "ckSwitchArtist";
       this.ckSwitchArtist.Size = new System.Drawing.Size(150, 17);
       this.ckSwitchArtist.TabIndex = 1;
@@ -608,7 +610,7 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.LocalisationContext = "Settings";
       this.groupBoxLyricsSites.Location = new System.Drawing.Point(17, 27);
       this.groupBoxLyricsSites.Name = "groupBoxLyricsSites";
-      this.groupBoxLyricsSites.Size = new System.Drawing.Size(406, 106);
+      this.groupBoxLyricsSites.Size = new System.Drawing.Size(542, 106);
       this.groupBoxLyricsSites.TabIndex = 0;
       this.groupBoxLyricsSites.TabStop = false;
       this.groupBoxLyricsSites.Text = "Sites to Search";
@@ -685,6 +687,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxTagsID3
       // 
+      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseApe);
       this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV4);
       this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV3);
       this.groupBoxTagsID3.Controls.Add(this.groupBoxID3Update);
@@ -692,17 +695,29 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsID3.LocalisationContext = "Settings";
       this.groupBoxTagsID3.Location = new System.Drawing.Point(13, 198);
       this.groupBoxTagsID3.Name = "groupBoxTagsID3";
-      this.groupBoxTagsID3.Size = new System.Drawing.Size(582, 166);
+      this.groupBoxTagsID3.Size = new System.Drawing.Size(582, 187);
       this.groupBoxTagsID3.TabIndex = 1;
       this.groupBoxTagsID3.TabStop = false;
       this.groupBoxTagsID3.Text = "ID3";
+      // 
+      // radioButtonUseApe
+      // 
+      this.radioButtonUseApe.AutoSize = true;
+      this.radioButtonUseApe.Localisation = "UseAPE";
+      this.radioButtonUseApe.LocalisationContext = "Settings";
+      this.radioButtonUseApe.Location = new System.Drawing.Point(17, 79);
+      this.radioButtonUseApe.Name = "radioButtonUseApe";
+      this.radioButtonUseApe.Size = new System.Drawing.Size(152, 17);
+      this.radioButtonUseApe.TabIndex = 2;
+      this.radioButtonUseApe.Text = "Use APE and ID3 V1 Tags";
+      this.radioButtonUseApe.UseVisualStyleBackColor = true;
       // 
       // radioButtonUseV4
       // 
       this.radioButtonUseV4.AutoSize = true;
       this.radioButtonUseV4.Localisation = "UseV4";
       this.radioButtonUseV4.LocalisationContext = "Settings";
-      this.radioButtonUseV4.Location = new System.Drawing.Point(288, 26);
+      this.radioButtonUseV4.Location = new System.Drawing.Point(17, 52);
       this.radioButtonUseV4.Name = "radioButtonUseV4";
       this.radioButtonUseV4.Size = new System.Drawing.Size(178, 17);
       this.radioButtonUseV4.TabIndex = 1;
@@ -732,9 +747,9 @@ namespace MPTagThat.Preferences
       this.groupBoxID3Update.Controls.Add(this.radioButtonID3V1);
       this.groupBoxID3Update.Localisation = "GroupBoxID3Update";
       this.groupBoxID3Update.LocalisationContext = "Settings";
-      this.groupBoxID3Update.Location = new System.Drawing.Point(17, 49);
+      this.groupBoxID3Update.Location = new System.Drawing.Point(258, 19);
       this.groupBoxID3Update.Name = "groupBoxID3Update";
-      this.groupBoxID3Update.Size = new System.Drawing.Size(542, 97);
+      this.groupBoxID3Update.Size = new System.Drawing.Size(301, 148);
       this.groupBoxID3Update.TabIndex = 1;
       this.groupBoxID3Update.TabStop = false;
       this.groupBoxID3Update.Text = "Update";
@@ -744,7 +759,7 @@ namespace MPTagThat.Preferences
       this.checkBoxRemoveID3V1.AutoSize = true;
       this.checkBoxRemoveID3V1.Localisation = "RemoveID3V1";
       this.checkBoxRemoveID3V1.LocalisationContext = "Settings";
-      this.checkBoxRemoveID3V1.Location = new System.Drawing.Point(277, 44);
+      this.checkBoxRemoveID3V1.Location = new System.Drawing.Point(168, 44);
       this.checkBoxRemoveID3V1.Name = "checkBoxRemoveID3V1";
       this.checkBoxRemoveID3V1.Size = new System.Drawing.Size(99, 17);
       this.checkBoxRemoveID3V1.TabIndex = 4;
@@ -756,7 +771,7 @@ namespace MPTagThat.Preferences
       this.checkBoxRemoveID3V2.AutoSize = true;
       this.checkBoxRemoveID3V2.Localisation = "RemoveID3V2";
       this.checkBoxRemoveID3V2.LocalisationContext = "Settings";
-      this.checkBoxRemoveID3V2.Location = new System.Drawing.Point(277, 20);
+      this.checkBoxRemoveID3V2.Location = new System.Drawing.Point(168, 21);
       this.checkBoxRemoveID3V2.Name = "checkBoxRemoveID3V2";
       this.checkBoxRemoveID3V2.Size = new System.Drawing.Size(99, 17);
       this.checkBoxRemoveID3V2.TabIndex = 3;
@@ -2179,5 +2194,6 @@ namespace MPTagThat.Preferences
     private System.Windows.Forms.TextBox tbMediaPortalDatabase;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCreateMissingFolderThumb;
+    private MPTagThat.Core.WinControls.MPTRadioButton radioButtonUseApe;
   }
 }

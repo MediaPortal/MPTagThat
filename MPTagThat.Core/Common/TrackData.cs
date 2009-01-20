@@ -16,6 +16,7 @@ namespace MPTagThat.Core
     private int _numTrackDigits = Options.MainSettings.NumberTrackDigits;
     private TagLib.Id3v1.Tag id3v1tag = null;
     private TagLib.Id3v2.Tag id3v2tag = null;
+    private TagLib.Ape.Tag apetag = null;
     #endregion
 
     #region ctor
@@ -31,6 +32,7 @@ namespace MPTagThat.Core
       {
         id3v1tag = _file.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
         id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+        apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
       }
     }
     #endregion
@@ -550,29 +552,73 @@ namespace MPTagThat.Core
     {
       get
       {
-        if (TagType != "mp3")
-          return 0;
+        if (TagType == "mp3")
+        {
+          if (id3v2tag == null)
+            id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+          TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
+          if (popmFrame != null)
+            return popmFrame.Rating;
 
-        TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
-        if (popmFrame != null)
-          return popmFrame.Rating;
-
+          // Now check for Ape Rating
+          TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
+          if (apeItem != null)
+          {
+            string rating = apeItem.ToString();
+            try
+            {
+              return Convert.ToInt32(rating);
+            }
+            catch (Exception)
+            {
+              return 0;
+            }
+          }
+        }
+        else
+        {
+          if (TagType == "ape")
+          {
+            TagLib.Ape.Tag apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
+            TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
+            if (apeItem != null)
+            {
+              string rating = apeItem.ToString();
+              try
+              {
+                return Convert.ToInt32(rating);
+              }
+              catch (Exception)
+              {
+                return 0;
+              }
+            }
+          }
+        }
         return 0;
       }
       set
       {
-        if (TagType != "mp3")
-          return;
+        if (TagType == "mp3")
+        {
+          if (id3v2tag == null)
+            id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+          // Set ID3 V2
+          TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", true);
+          popmFrame.Rating = Convert.ToByte(value);
+          popmFrame.PlayCount = Convert.ToUInt32(0);
 
-        TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", true);
-        popmFrame.Rating = Convert.ToByte(value);
-        popmFrame.PlayCount = Convert.ToUInt32(0);
+          // Set Ape Tag
+          apetag.SetItem(new TagLib.Ape.Item("RATING", value.ToString()));
+
+        }
+        else if (TagType == "ape")
+        {
+          TagLib.Ape.Tag apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
+          apetag.SetItem(new TagLib.Ape.Item("RATING", value.ToString()));
+        } 
       }
     }
 

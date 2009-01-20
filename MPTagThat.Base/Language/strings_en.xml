@@ -522,6 +522,7 @@
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Use Version 2.4 for ID3 V2 Tags</String>
     <String id="UseV3">Use Version 2.3 for ID3 V2 Tags</String>
+    <String id="UseAPE">Use APE and ID3 V1 Tags</String>
     <String id="GroupBoxID3Update">Update</String>
     <String id="RemoveID3V1">Remove ID3V1</String>
     <String id="RemoveID3V2">Remove ID3V2</String>

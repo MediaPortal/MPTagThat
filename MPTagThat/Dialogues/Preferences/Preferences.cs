@@ -231,10 +231,20 @@ namespace MPTagThat.Preferences
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
 
-      if (Options.MainSettings.ID3V2Version == 3)
-        radioButtonUseV3.Checked = true;
-      else
-        radioButtonUseV4.Checked = true;
+      switch (Options.MainSettings.ID3V2Version)
+      {
+        case 0:         // APE Tags embedded in mp3
+          radioButtonUseApe.Checked = true;
+          break;
+
+        case 3:
+          radioButtonUseV3.Checked = true;
+          break;
+
+        case 4:
+          radioButtonUseV4.Checked = true;
+          break;
+      }
 
       switch (Options.MainSettings.ID3Version)
       {
@@ -699,8 +709,10 @@ namespace MPTagThat.Preferences
 
       if (radioButtonUseV3.Checked)
         Options.MainSettings.ID3V2Version = 3;
-      else
+      else if (radioButtonUseV4.Checked)
         Options.MainSettings.ID3V2Version = 4;
+      else
+        Options.MainSettings.ID3V2Version = 0;  // APE Support
 
       if (radioButtonID3V1.Checked)
         Options.MainSettings.ID3Version = 1;

@@ -507,7 +507,7 @@
     <String id="Language">Sprache:</String>
     <String id="TabTags">Tags</String>
     <String id="GroupBoxLyrics">Liedtexte</String>
-    <String id="SwitchArtist">Interpret (Nachname, Vorname) tauschen\nvor Durchführung</String>
+    <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>
     <String id="GroupBoxLyricsSites">Durchsuchen der Lyricsseiten</String>
     <String id="SeekLyrics">Seek Lyrics</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>
@@ -522,6 +522,7 @@
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Version 2.4 für ID3 V2 Tags benutzen</String>
     <String id="UseV3">Version 2.3 für ID3 V2 Tags benutzen</String>
+    <String id="UseAPE">APE und ID3 V1 Tags benutzen</String>
     <String id="GroupBoxID3Update">Bei Änderung</String>
     <String id="RemoveID3V1">ID3 V1 entfernen</String>
     <String id="RemoveID3V2">ID3 V2 entfernen</String>
