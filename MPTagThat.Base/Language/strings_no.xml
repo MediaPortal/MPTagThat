@@ -522,6 +522,7 @@
     <String id="GroupBoxTagsID3">ID3</String>
     <String id="UseV4">Bruk Versjon 2.4 for ID3 V2 Tagger</String>
     <String id="UseV3">Bruk Versjon 2.3 for ID3 V2 Tagger</String>
+    <String id="UseAPE">Bruk APE and ID3 V1 Tagger</String>
     <String id="GroupBoxID3Update">Oppdater</String>
     <String id="RemoveID3V1">Fjern ID3V1</String>
     <String id="RemoveID3V2">Fjern ID3V2</String>
