@@ -10,7 +10,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.InternetLookup
 {
-  public partial class AlbumDetails : Form
+  public partial class AlbumDetails : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
@@ -85,6 +85,9 @@ namespace MPTagThat.InternetLookup
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
       LocaliseScreen();
     }
     #endregion
@@ -96,7 +99,7 @@ namespace MPTagThat.InternetLookup
     /// </summary>
     private void LocaliseScreen()
     {
-      this.Text = localisation.ToString("Lookup", "HeaderDetails");
+      this.labelHeader.Text = localisation.ToString("Lookup", "HeaderDetails");
       this.chTrackNum.Text = localisation.ToString("Lookup", "ColTrackNum");
       this.chTitle.Text = localisation.ToString("Lookup", "ColTitle");
       this.chFileName.Text = localisation.ToString("Lookup", "ColFileName");

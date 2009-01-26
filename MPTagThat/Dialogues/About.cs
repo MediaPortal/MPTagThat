@@ -11,7 +11,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class About : Form
+  public partial class About : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();

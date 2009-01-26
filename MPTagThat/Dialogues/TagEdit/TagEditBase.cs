@@ -13,7 +13,7 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.TagEdit
 {
-  public partial class TagEditBase : Form
+  public partial class TagEditBase : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     protected Main main;
@@ -34,6 +34,13 @@ namespace MPTagThat.TagEdit
                                     "Web Information", "Lyrics", "Rating", "User Defined"};
     #endregion
 
+    #region Properties
+    public string Header
+    {
+      set { this.labelHeader.Text = value; }
+    }
+    #endregion
+
     #region ctor
     public TagEditBase()
     {
@@ -52,6 +59,9 @@ namespace MPTagThat.TagEdit
       Util.EnterMethod(Util.GetCallingMethod());
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
       // Set the region for the Tabcontrol to hide the tabs
       this.tabControlTagEdit.Region = new Region(new RectangleF(this.tabPageMain.Left,

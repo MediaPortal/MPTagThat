@@ -172,6 +172,7 @@ namespace MPTagThat.Preferences
       this.lbLinkTags = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -223,7 +224,7 @@ namespace MPTagThat.Preferences
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelRight.Location = new System.Drawing.Point(208, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(621, 661);
+      this.panelRight.Size = new System.Drawing.Size(647, 690);
       this.panelRight.TabIndex = 2;
       // 
       // panelOptions
@@ -232,7 +233,7 @@ namespace MPTagThat.Preferences
       this.panelOptions.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelOptions.Location = new System.Drawing.Point(0, 0);
       this.panelOptions.Name = "panelOptions";
-      this.panelOptions.Size = new System.Drawing.Size(621, 596);
+      this.panelOptions.Size = new System.Drawing.Size(647, 625);
       this.panelOptions.TabIndex = 1;
       this.panelOptions.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOptions_Paint);
       // 
@@ -246,7 +247,7 @@ namespace MPTagThat.Preferences
       this.tabControlOptions.Location = new System.Drawing.Point(0, 0);
       this.tabControlOptions.Name = "tabControlOptions";
       this.tabControlOptions.SelectedIndex = 0;
-      this.tabControlOptions.Size = new System.Drawing.Size(621, 596);
+      this.tabControlOptions.Size = new System.Drawing.Size(647, 625);
       this.tabControlOptions.TabIndex = 0;
       // 
       // tabPageGeneral
@@ -259,7 +260,7 @@ namespace MPTagThat.Preferences
       this.tabPageGeneral.Location = new System.Drawing.Point(4, 25);
       this.tabPageGeneral.Name = "tabPageGeneral";
       this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageGeneral.Size = new System.Drawing.Size(613, 567);
+      this.tabPageGeneral.Size = new System.Drawing.Size(639, 596);
       this.tabPageGeneral.TabIndex = 0;
       this.tabPageGeneral.Text = "General";
       // 
@@ -1842,9 +1843,9 @@ namespace MPTagThat.Preferences
       this.panelBottom.Controls.Add(this.buttonCancel);
       this.panelBottom.Controls.Add(this.buttonApply);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 596);
+      this.panelBottom.Location = new System.Drawing.Point(0, 625);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(621, 65);
+      this.panelBottom.Size = new System.Drawing.Size(647, 65);
       this.panelBottom.TabIndex = 0;
       // 
       // buttonCancel
@@ -1896,13 +1897,11 @@ namespace MPTagThat.Preferences
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(200, 661);
+      this.panelLeft.Size = new System.Drawing.Size(200, 690);
       this.panelLeft.TabIndex = 0;
       // 
       // navPanel
       // 
-      this.navPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
       this.navPanel.AnimationStep = 30;
       this.navPanel.BorderColor = System.Drawing.Color.Gray;
       this.navPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
@@ -1918,9 +1917,10 @@ namespace MPTagThat.Preferences
       this.navPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
       this.navPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.navPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.navPanel.Location = new System.Drawing.Point(3, 12);
+      this.navPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.navPanel.Location = new System.Drawing.Point(0, 0);
       this.navPanel.Name = "navPanel";
-      this.navPanel.Size = new System.Drawing.Size(191, 637);
+      this.navPanel.Size = new System.Drawing.Size(200, 690);
       this.navPanel.TabIndex = 2;
       // 
       // lbLinkTags
@@ -1968,7 +1968,7 @@ namespace MPTagThat.Preferences
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.buttonCancel;
-      this.ClientSize = new System.Drawing.Size(829, 661);
+      this.ClientSize = new System.Drawing.Size(855, 690);
       this.Controls.Add(this.panelRight);
       this.Controls.Add(this.splitterLeft);
       this.Controls.Add(this.panelLeft);
@@ -1976,6 +1976,7 @@ namespace MPTagThat.Preferences
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "Preferences";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Preferences";
@@ -2195,5 +2196,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCreateMissingFolderThumb;
     private MPTagThat.Core.WinControls.MPTRadioButton radioButtonUseApe;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

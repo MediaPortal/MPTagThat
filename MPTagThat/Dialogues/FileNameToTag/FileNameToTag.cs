@@ -10,7 +10,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.FileNameToTag
 {
-  public partial class FileNameToTag : Form
+  public partial class FileNameToTag : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private Main _main;
@@ -27,6 +27,9 @@ namespace MPTagThat.FileNameToTag
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
       LoadSettings();
 
       LocaliseScreen();
@@ -40,9 +43,7 @@ namespace MPTagThat.FileNameToTag
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = localisation.ToString("TagAndRename", "HeadingTag");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      this.labelHeader.Text = localisation.ToString("TagAndRename", "HeadingTag");
     }
     #endregion
 

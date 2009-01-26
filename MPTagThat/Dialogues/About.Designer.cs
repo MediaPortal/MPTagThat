@@ -36,6 +36,7 @@
       this.lbWikiLink = new System.Windows.Forms.LinkLabel();
       this.lbVersionDetail = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbDate = new MPTagThat.Core.WinControls.MPTLabel();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.SuspendLayout();
       // 
       // lbAppTitle
@@ -144,6 +145,7 @@
       this.Controls.Add(this.lbDescription);
       this.Controls.Add(this.lbAppTitle);
       this.Name = "About";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "About";
@@ -162,5 +164,6 @@
     private System.Windows.Forms.LinkLabel lbWikiLink;
     private MPTagThat.Core.WinControls.MPTLabel lbVersionDetail;
     private MPTagThat.Core.WinControls.MPTLabel lbDate;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

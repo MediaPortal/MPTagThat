@@ -33,6 +33,7 @@
       this.groupBoxAmazonMultipleAlbums = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
       this.btClose = new MPTagThat.Core.WinControls.MPTButton();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.groupBoxAmazonMultipleAlbums.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -103,6 +104,7 @@
       this.Controls.Add(this.btUpdate);
       this.Controls.Add(this.btClose);
       this.Name = "AmazonAlbumSearchResults";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.Text = "Internet Search Results";
       this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
@@ -117,5 +119,6 @@
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxAmazonMultipleAlbums;
     private MPTagThat.Core.WinControls.MPTButton btUpdate;
     private MPTagThat.Core.WinControls.MPTButton btClose;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

@@ -9,7 +9,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.InternetLookup
 {
-  public partial class ArtistAlbumDialog : Form
+  public partial class ArtistAlbumDialog : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
@@ -38,6 +38,9 @@ namespace MPTagThat.InternetLookup
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
       LocaliseScreen();
     }
     #endregion
@@ -49,7 +52,7 @@ namespace MPTagThat.InternetLookup
     /// </summary>
     private void LocaliseScreen()
     {
-      this.Text = localisation.ToString("Lookup", "HeaderArtistAlbum");
+      this.labelHeader.Text = localisation.ToString("Lookup", "HeaderArtistAlbum");
     }
     #endregion
     #endregion

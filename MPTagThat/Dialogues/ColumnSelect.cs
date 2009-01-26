@@ -9,7 +9,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class ColumnSelect : Form
+  public partial class ColumnSelect : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     MPTagThat.GridView.GridViewTracks grid;

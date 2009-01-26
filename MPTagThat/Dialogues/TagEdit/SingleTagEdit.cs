@@ -114,11 +114,9 @@ namespace MPTagThat.TagEdit
 
     private void Localisation()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       _headerText = localisation.ToString("TagEdit", "SingleHeading");
-      this.Text = _headerText;
+      base.Header = _headerText;
       this.cmdPanel.CaptionText = localisation.ToString("TagEdit", "Commands");
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
 
@@ -477,7 +475,7 @@ namespace MPTagThat.TagEdit
       }
       track = main.TracksGridView.TrackList[_currentRowIndex];
 
-      this.Text = string.Format("{0} - {1}", _headerText, track.FileName);
+      base.Header = string.Format("{0} - {1}", _headerText, track.FileName);
 
       // Get the ID3 Frame for ID3 specifc frame handling
       TagLib.Id3v1.Tag id3v1tag = null;

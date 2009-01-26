@@ -48,26 +48,28 @@
       this.lbArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUp = new MPTagThat.Core.WinControls.MPTButton();
       this.btDown = new MPTagThat.Core.WinControls.MPTButton();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
+      this.labelHeader = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
       this.SuspendLayout();
       // 
       // tbArtist
       // 
-      this.tbArtist.Location = new System.Drawing.Point(211, 25);
+      this.tbArtist.Location = new System.Drawing.Point(213, 58);
       this.tbArtist.Name = "tbArtist";
       this.tbArtist.Size = new System.Drawing.Size(306, 20);
       this.tbArtist.TabIndex = 1;
       // 
       // tbAlbum
       // 
-      this.tbAlbum.Location = new System.Drawing.Point(211, 57);
+      this.tbAlbum.Location = new System.Drawing.Point(213, 90);
       this.tbAlbum.Name = "tbAlbum";
       this.tbAlbum.Size = new System.Drawing.Size(306, 20);
       this.tbAlbum.TabIndex = 2;
       // 
       // tbYear
       // 
-      this.tbYear.Location = new System.Drawing.Point(211, 89);
+      this.tbYear.Location = new System.Drawing.Point(213, 122);
       this.tbYear.Name = "tbYear";
       this.tbYear.Size = new System.Drawing.Size(89, 20);
       this.tbYear.TabIndex = 3;
@@ -75,7 +77,7 @@
       // cbGenre
       // 
       this.cbGenre.FormattingEnabled = true;
-      this.cbGenre.Location = new System.Drawing.Point(211, 121);
+      this.cbGenre.Location = new System.Drawing.Point(213, 154);
       this.cbGenre.Name = "cbGenre";
       this.cbGenre.Size = new System.Drawing.Size(306, 21);
       this.cbGenre.TabIndex = 4;
@@ -86,7 +88,7 @@
             this.chTrackNum,
             this.chTitle});
       this.lvAlbumTracks.FullRowSelect = true;
-      this.lvAlbumTracks.Location = new System.Drawing.Point(30, 211);
+      this.lvAlbumTracks.Location = new System.Drawing.Point(32, 244);
       this.lvAlbumTracks.MultiSelect = false;
       this.lvAlbumTracks.Name = "lvAlbumTracks";
       this.lvAlbumTracks.Size = new System.Drawing.Size(291, 298);
@@ -110,7 +112,7 @@
       this.lvDiscTracks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chFileName});
       this.lvDiscTracks.FullRowSelect = true;
-      this.lvDiscTracks.Location = new System.Drawing.Point(354, 211);
+      this.lvDiscTracks.Location = new System.Drawing.Point(356, 244);
       this.lvDiscTracks.MultiSelect = false;
       this.lvDiscTracks.Name = "lvDiscTracks";
       this.lvDiscTracks.Size = new System.Drawing.Size(344, 298);
@@ -126,7 +128,7 @@
       // pictureBoxCover
       // 
       this.pictureBoxCover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.pictureBoxCover.Location = new System.Drawing.Point(578, 22);
+      this.pictureBoxCover.Location = new System.Drawing.Point(580, 55);
       this.pictureBoxCover.Name = "pictureBoxCover";
       this.pictureBoxCover.Size = new System.Drawing.Size(120, 120);
       this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -138,7 +140,7 @@
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "Lookup";
-      this.btCancel.Location = new System.Drawing.Point(417, 536);
+      this.btCancel.Location = new System.Drawing.Point(419, 569);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(125, 43);
       this.btCancel.TabIndex = 6;
@@ -150,7 +152,7 @@
       this.btContinue.DialogResult = System.Windows.Forms.DialogResult.OK;
       this.btContinue.Localisation = "Continue";
       this.btContinue.LocalisationContext = "Lookup";
-      this.btContinue.Location = new System.Drawing.Point(214, 536);
+      this.btContinue.Location = new System.Drawing.Point(216, 569);
       this.btContinue.Name = "btContinue";
       this.btContinue.Size = new System.Drawing.Size(125, 43);
       this.btContinue.TabIndex = 5;
@@ -162,7 +164,7 @@
       this.lbTracksToTag.AutoSize = true;
       this.lbTracksToTag.Localisation = "TracksToTag";
       this.lbTracksToTag.LocalisationContext = "AlbumDetails";
-      this.lbTracksToTag.Location = new System.Drawing.Point(351, 179);
+      this.lbTracksToTag.Location = new System.Drawing.Point(353, 212);
       this.lbTracksToTag.Name = "lbTracksToTag";
       this.lbTracksToTag.Size = new System.Drawing.Size(74, 13);
       this.lbTracksToTag.TabIndex = 9;
@@ -173,7 +175,7 @@
       this.lbAlbumTracks.AutoSize = true;
       this.lbAlbumTracks.Localisation = "AlbumTracks";
       this.lbAlbumTracks.LocalisationContext = "AlbumDetails";
-      this.lbAlbumTracks.Location = new System.Drawing.Point(27, 179);
+      this.lbAlbumTracks.Location = new System.Drawing.Point(29, 212);
       this.lbAlbumTracks.Name = "lbAlbumTracks";
       this.lbAlbumTracks.Size = new System.Drawing.Size(87, 13);
       this.lbAlbumTracks.TabIndex = 8;
@@ -184,7 +186,7 @@
       this.lbGenre.AutoSize = true;
       this.lbGenre.Localisation = "Genre";
       this.lbGenre.LocalisationContext = "TagEdit";
-      this.lbGenre.Location = new System.Drawing.Point(25, 125);
+      this.lbGenre.Location = new System.Drawing.Point(27, 158);
       this.lbGenre.Name = "lbGenre";
       this.lbGenre.Size = new System.Drawing.Size(39, 13);
       this.lbGenre.TabIndex = 3;
@@ -195,7 +197,7 @@
       this.lbYear.AutoSize = true;
       this.lbYear.Localisation = "Year";
       this.lbYear.LocalisationContext = "TagEdit";
-      this.lbYear.Location = new System.Drawing.Point(25, 93);
+      this.lbYear.Location = new System.Drawing.Point(27, 126);
       this.lbYear.Name = "lbYear";
       this.lbYear.Size = new System.Drawing.Size(32, 13);
       this.lbYear.TabIndex = 2;
@@ -206,7 +208,7 @@
       this.lbAlbum.AutoSize = true;
       this.lbAlbum.Localisation = "Album";
       this.lbAlbum.LocalisationContext = "TagEdit";
-      this.lbAlbum.Location = new System.Drawing.Point(25, 61);
+      this.lbAlbum.Location = new System.Drawing.Point(27, 94);
       this.lbAlbum.Name = "lbAlbum";
       this.lbAlbum.Size = new System.Drawing.Size(39, 13);
       this.lbAlbum.TabIndex = 1;
@@ -217,7 +219,7 @@
       this.lbArtist.AutoSize = true;
       this.lbArtist.Localisation = "Artist";
       this.lbArtist.LocalisationContext = "TagEdit";
-      this.lbArtist.Location = new System.Drawing.Point(25, 29);
+      this.lbArtist.Location = new System.Drawing.Point(27, 62);
       this.lbArtist.Name = "lbArtist";
       this.lbArtist.Size = new System.Drawing.Size(33, 13);
       this.lbArtist.TabIndex = 0;
@@ -227,7 +229,7 @@
       // 
       this.btUp.Localisation = "MoveUp";
       this.btUp.LocalisationContext = "AlbumDetails";
-      this.btUp.Location = new System.Drawing.Point(716, 283);
+      this.btUp.Location = new System.Drawing.Point(718, 316);
       this.btUp.Name = "btUp";
       this.btUp.Size = new System.Drawing.Size(115, 49);
       this.btUp.TabIndex = 7;
@@ -239,7 +241,7 @@
       // 
       this.btDown.Localisation = "MoveDown";
       this.btDown.LocalisationContext = "AlbumDetails";
-      this.btDown.Location = new System.Drawing.Point(716, 369);
+      this.btDown.Location = new System.Drawing.Point(718, 402);
       this.btDown.Name = "btDown";
       this.btDown.Size = new System.Drawing.Size(115, 49);
       this.btDown.TabIndex = 8;
@@ -247,11 +249,23 @@
       this.btDown.UseVisualStyleBackColor = true;
       this.btDown.Click += new System.EventHandler(this.btDown_Click);
       // 
+      // labelHeader
+      // 
+      this.labelHeader.AutoSize = true;
+      this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Location = new System.Drawing.Point(28, 21);
+      this.labelHeader.Name = "labelHeader";
+      this.labelHeader.Size = new System.Drawing.Size(62, 20);
+      this.labelHeader.TabIndex = 23;
+      this.labelHeader.Text = "Header";
+      // 
       // AlbumDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(845, 599);
+      this.ClientSize = new System.Drawing.Size(845, 637);
+      this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.btDown);
       this.Controls.Add(this.btUp);
       this.Controls.Add(this.btCancel);
@@ -270,8 +284,9 @@
       this.Controls.Add(this.lbAlbum);
       this.Controls.Add(this.lbArtist);
       this.Name = "AlbumDetails";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Details on selected Album";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
       this.ResumeLayout(false);
@@ -301,5 +316,7 @@
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private MPTagThat.Core.WinControls.MPTButton btUp;
     private MPTagThat.Core.WinControls.MPTButton btDown;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
+    private System.Windows.Forms.Label labelHeader;
   }
 }

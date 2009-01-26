@@ -76,9 +76,7 @@ namespace MPTagThat.TagEdit
 
     private void Localisation()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = localisation.ToString("TagEdit", "MultiHeading");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      base.Header = localisation.ToString("TagEdit", "MultiHeading");
     }
     #endregion
 

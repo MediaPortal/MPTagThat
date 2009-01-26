@@ -523,7 +523,7 @@ namespace MPTagThat
       }
 
       dlgScan = new Progress();
-      dlgScan.Text = localisation.ToString("progress", "ScanningHeader");
+      dlgScan.Header = localisation.ToString("progress", "ScanningHeader");
       int x = ClientSize.Width / 2 - dlgScan.Width / 2;
       int y = ClientSize.Height / 2 - dlgScan.Height / 2;
       Point clientLocation = this.Location;

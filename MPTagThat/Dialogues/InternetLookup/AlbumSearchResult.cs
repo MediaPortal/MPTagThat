@@ -11,7 +11,7 @@ using MPTagThat.Core.Amazon;
 
 namespace MPTagThat.InternetLookup
 {
-  public partial class AlbumSearchResult : Form
+  public partial class AlbumSearchResult : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
@@ -33,6 +33,9 @@ namespace MPTagThat.InternetLookup
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
       LocaliseScreen();
     }
     #endregion
@@ -44,7 +47,7 @@ namespace MPTagThat.InternetLookup
     /// </summary>
     private void LocaliseScreen()
     {
-      this.Text = localisation.ToString("Lookup", "HeaderSearchResult");
+      this.labelHeader.Text = localisation.ToString("Lookup", "HeaderSearchResult");
       this.chArtist.Text = localisation.ToString("Lookup", "ColArtist");
       this.chTitle.Text = localisation.ToString("Lookup", "ColAlbum");
       this.chTracks.Text = localisation.ToString("Lookup", "ColTracks");

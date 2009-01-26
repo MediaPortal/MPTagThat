@@ -11,7 +11,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.CaseConversion
 {
-  public partial class CaseConversion : Form
+  public partial class CaseConversion : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private Main _main;
@@ -51,6 +51,9 @@ namespace MPTagThat.CaseConversion
         this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
         ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
+        this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+        this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
         LocaliseScreen();
       }
 
@@ -82,9 +85,7 @@ namespace MPTagThat.CaseConversion
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = localisation.ToString("CaseConversion", "Header");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      this.labelHeader.Text = localisation.ToString("CaseConversion", "Header");
     }
     #endregion
 

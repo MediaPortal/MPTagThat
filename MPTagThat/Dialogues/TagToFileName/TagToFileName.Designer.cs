@@ -58,6 +58,8 @@ namespace MPTagThat.TagToFileName
       this.lblParmAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmArtist = new MPTagThat.Core.WinControls.MPTLabel();
+      this.labelHeader = new System.Windows.Forms.Label();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.groupBoxParm.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumberDigits)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownStartAt)).BeginInit();
@@ -67,7 +69,7 @@ namespace MPTagThat.TagToFileName
       // 
       this.btRemoveFormat.Localisation = "RemoveFormat";
       this.btRemoveFormat.LocalisationContext = "TagAndRename";
-      this.btRemoveFormat.Location = new System.Drawing.Point(377, 74);
+      this.btRemoveFormat.Location = new System.Drawing.Point(375, 106);
       this.btRemoveFormat.Name = "btRemoveFormat";
       this.btRemoveFormat.Size = new System.Drawing.Size(235, 23);
       this.btRemoveFormat.TabIndex = 2;
@@ -79,7 +81,7 @@ namespace MPTagThat.TagToFileName
       // 
       this.btAddFormat.Localisation = "AddFormat";
       this.btAddFormat.LocalisationContext = "TagAndRename";
-      this.btAddFormat.Location = new System.Drawing.Point(95, 74);
+      this.btAddFormat.Location = new System.Drawing.Point(93, 106);
       this.btAddFormat.Name = "btAddFormat";
       this.btAddFormat.Size = new System.Drawing.Size(235, 23);
       this.btAddFormat.TabIndex = 1;
@@ -90,7 +92,7 @@ namespace MPTagThat.TagToFileName
       // cbFormat
       // 
       this.cbFormat.FormattingEnabled = true;
-      this.cbFormat.Location = new System.Drawing.Point(95, 37);
+      this.cbFormat.Location = new System.Drawing.Point(93, 69);
       this.cbFormat.Name = "cbFormat";
       this.cbFormat.Size = new System.Drawing.Size(517, 21);
       this.cbFormat.TabIndex = 0;
@@ -101,7 +103,7 @@ namespace MPTagThat.TagToFileName
       this.lblFormat.AutoSize = true;
       this.lblFormat.Localisation = "Format";
       this.lblFormat.LocalisationContext = "TagAndRename";
-      this.lblFormat.Location = new System.Drawing.Point(29, 40);
+      this.lblFormat.Location = new System.Drawing.Point(27, 72);
       this.lblFormat.Name = "lblFormat";
       this.lblFormat.Size = new System.Drawing.Size(42, 13);
       this.lblFormat.TabIndex = 13;
@@ -111,7 +113,7 @@ namespace MPTagThat.TagToFileName
       // 
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagAndRename";
-      this.btApply.Location = new System.Drawing.Point(200, 409);
+      this.btApply.Location = new System.Drawing.Point(198, 441);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(99, 23);
       this.btApply.TabIndex = 3;
@@ -124,7 +126,7 @@ namespace MPTagThat.TagToFileName
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagAndRename";
-      this.btCancel.Location = new System.Drawing.Point(420, 409);
+      this.btCancel.Location = new System.Drawing.Point(418, 441);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(99, 23);
       this.btCancel.TabIndex = 4;
@@ -159,7 +161,7 @@ namespace MPTagThat.TagToFileName
       this.groupBoxParm.Controls.Add(this.lblParmArtist);
       this.groupBoxParm.Localisation = "GroupBoxParm";
       this.groupBoxParm.LocalisationContext = "TagAndRename";
-      this.groupBoxParm.Location = new System.Drawing.Point(18, 122);
+      this.groupBoxParm.Location = new System.Drawing.Point(16, 154);
       this.groupBoxParm.Name = "groupBoxParm";
       this.groupBoxParm.Size = new System.Drawing.Size(748, 264);
       this.groupBoxParm.TabIndex = 22;
@@ -460,6 +462,17 @@ namespace MPTagThat.TagToFileName
       this.lblParmArtist.Text = "<A> = Artist";
       this.lblParmArtist.Click += new System.EventHandler(this.lblParm_Click);
       // 
+      // labelHeader
+      // 
+      this.labelHeader.AutoSize = true;
+      this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Location = new System.Drawing.Point(26, 22);
+      this.labelHeader.Name = "labelHeader";
+      this.labelHeader.Size = new System.Drawing.Size(62, 20);
+      this.labelHeader.TabIndex = 23;
+      this.labelHeader.Text = "Header";
+      // 
       // TagToFileName
       // 
       this.AcceptButton = this.btApply;
@@ -467,7 +480,8 @@ namespace MPTagThat.TagToFileName
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.LightSteelBlue;
       this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(784, 444);
+      this.ClientSize = new System.Drawing.Size(784, 496);
+      this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.groupBoxParm);
       this.Controls.Add(this.btCancel);
       this.Controls.Add(this.btApply);
@@ -478,6 +492,7 @@ namespace MPTagThat.TagToFileName
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "TagToFileName";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagToFileName";
@@ -523,5 +538,7 @@ namespace MPTagThat.TagToFileName
     private MPTagThat.Core.WinControls.MPTLabel lblNumberDigits;
     private System.Windows.Forms.NumericUpDown numericUpDownStartAt;
     private MPTagThat.Core.WinControls.MPTLabel lblStartAt;
+    private System.Windows.Forms.Label labelHeader;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

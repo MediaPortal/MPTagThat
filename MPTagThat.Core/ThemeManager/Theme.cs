@@ -10,6 +10,8 @@ namespace MPTagThat.Core
     private Color _backColor;
     private Color _labelForeColor;
     private Font _labelFont;
+    private Color _formHeaderForeColor;
+    private Font _formHeaderFont;
     private string _themeName;
     private Color _panelHeadingBackColor;
     private Font _panelHeadingFont;
@@ -114,7 +116,19 @@ namespace MPTagThat.Core
       get { return _labelForeColor; }
       set { _labelForeColor = value; }
     }
-	
+
+    public Font FormHeaderFont
+    {
+      get { return _formHeaderFont; }
+      set { _formHeaderFont = value; }
+    }
+
+    public Color FormHeaderForeColor
+    {
+      get { return _formHeaderForeColor; }
+      set { _formHeaderForeColor = value; }
+    }
+
     public Color BackColor
     {
       get { return _backColor; }

@@ -265,6 +265,8 @@
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
+      this.labelHeader = new System.Windows.Forms.Label();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -305,7 +307,7 @@
       // panelTabPage
       // 
       this.panelTabPage.Controls.Add(this.tabControlTagEdit);
-      this.panelTabPage.Location = new System.Drawing.Point(177, 13);
+      this.panelTabPage.Location = new System.Drawing.Point(177, 54);
       this.panelTabPage.Name = "panelTabPage";
       this.panelTabPage.Size = new System.Drawing.Size(714, 558);
       this.panelTabPage.TabIndex = 28;
@@ -2934,7 +2936,7 @@
       // panelNavigation
       // 
       this.panelNavigation.Controls.Add(this.tagPanel);
-      this.panelNavigation.Location = new System.Drawing.Point(5, 13);
+      this.panelNavigation.Location = new System.Drawing.Point(5, 54);
       this.panelNavigation.Name = "panelNavigation";
       this.panelNavigation.Size = new System.Drawing.Size(166, 558);
       this.panelNavigation.TabIndex = 27;
@@ -3092,7 +3094,7 @@
       this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagEdit";
-      this.btCancel.Location = new System.Drawing.Point(547, 577);
+      this.btCancel.Location = new System.Drawing.Point(547, 618);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(120, 40);
       this.btCancel.TabIndex = 1;
@@ -3105,7 +3107,7 @@
       this.btApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagEdit";
-      this.btApply.Location = new System.Drawing.Point(367, 577);
+      this.btApply.Location = new System.Drawing.Point(367, 618);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(120, 40);
       this.btApply.TabIndex = 0;
@@ -3127,6 +3129,17 @@
       this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
       this.dataGridViewTextBoxColumn2.Width = 126;
       // 
+      // labelHeader
+      // 
+      this.labelHeader.AutoSize = true;
+      this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Location = new System.Drawing.Point(177, 16);
+      this.labelHeader.Name = "labelHeader";
+      this.labelHeader.Size = new System.Drawing.Size(62, 20);
+      this.labelHeader.TabIndex = 29;
+      this.labelHeader.Text = "Header";
+      // 
       // TagEditBase
       // 
       this.AcceptButton = this.btApply;
@@ -3134,7 +3147,8 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.LightSteelBlue;
       this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(904, 624);
+      this.ClientSize = new System.Drawing.Size(904, 690);
+      this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.panelTabPage);
       this.Controls.Add(this.panelNavigation);
       this.Controls.Add(this.btCancel);
@@ -3143,6 +3157,7 @@
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "TagEditBase";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagEditBase";
@@ -3198,6 +3213,7 @@
       this.tagPanel.ResumeLayout(false);
       this.tagPanel.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
     #endregion
@@ -3437,5 +3453,7 @@
     protected MPTagThat.Core.WinControls.MPTCheckBox ckRemoveExistingRatings;
     protected MPTagThat.Core.WinControls.MPTButton btGetLyricsFromText;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPictureInternet;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
+    private System.Windows.Forms.Label labelHeader;
   }
 }

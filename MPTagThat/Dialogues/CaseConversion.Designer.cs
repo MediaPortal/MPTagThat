@@ -56,6 +56,8 @@ namespace MPTagThat.CaseConversion
       this.listBoxExceptions = new System.Windows.Forms.ListBox();
       this.buttonConvert = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonCancel = new MPTagThat.Core.WinControls.MPTButton();
+      this.labelHeader = new System.Windows.Forms.Label();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.tabControlConversion.SuspendLayout();
       this.tabPageSettings.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
@@ -68,7 +70,7 @@ namespace MPTagThat.CaseConversion
       // 
       this.tabControlConversion.Controls.Add(this.tabPageSettings);
       this.tabControlConversion.Controls.Add(this.Exceptions);
-      this.tabControlConversion.Location = new System.Drawing.Point(1, 1);
+      this.tabControlConversion.Location = new System.Drawing.Point(5, 38);
       this.tabControlConversion.Name = "tabControlConversion";
       this.tabControlConversion.SelectedIndex = 0;
       this.tabControlConversion.Size = new System.Drawing.Size(478, 413);
@@ -360,7 +362,7 @@ namespace MPTagThat.CaseConversion
       this.Exceptions.Location = new System.Drawing.Point(4, 22);
       this.Exceptions.Name = "Exceptions";
       this.Exceptions.Padding = new System.Windows.Forms.Padding(3);
-      this.Exceptions.Size = new System.Drawing.Size(470, 387);
+      this.Exceptions.Size = new System.Drawing.Size(476, 387);
       this.Exceptions.TabIndex = 1;
       this.Exceptions.Text = "Exceptions";
       // 
@@ -406,7 +408,7 @@ namespace MPTagThat.CaseConversion
       this.buttonConvert.AutoSize = true;
       this.buttonConvert.Localisation = "Convert";
       this.buttonConvert.LocalisationContext = "CaseConversion";
-      this.buttonConvert.Location = new System.Drawing.Point(125, 435);
+      this.buttonConvert.Location = new System.Drawing.Point(125, 472);
       this.buttonConvert.Name = "buttonConvert";
       this.buttonConvert.Size = new System.Drawing.Size(75, 23);
       this.buttonConvert.TabIndex = 1;
@@ -420,13 +422,24 @@ namespace MPTagThat.CaseConversion
       this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.buttonCancel.Localisation = "Cancel";
       this.buttonCancel.LocalisationContext = "CaseConversion";
-      this.buttonCancel.Location = new System.Drawing.Point(230, 435);
+      this.buttonCancel.Location = new System.Drawing.Point(230, 472);
       this.buttonCancel.Name = "buttonCancel";
       this.buttonCancel.Size = new System.Drawing.Size(75, 23);
       this.buttonCancel.TabIndex = 2;
       this.buttonCancel.Text = "Cancel";
       this.buttonCancel.UseVisualStyleBackColor = true;
       this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+      // 
+      // labelHeader
+      // 
+      this.labelHeader.AutoSize = true;
+      this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Location = new System.Drawing.Point(7, 9);
+      this.labelHeader.Name = "labelHeader";
+      this.labelHeader.Size = new System.Drawing.Size(62, 20);
+      this.labelHeader.TabIndex = 23;
+      this.labelHeader.Text = "Header";
       // 
       // CaseConversion
       // 
@@ -435,11 +448,13 @@ namespace MPTagThat.CaseConversion
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.LightSteelBlue;
       this.CancelButton = this.buttonCancel;
-      this.ClientSize = new System.Drawing.Size(476, 480);
+      this.ClientSize = new System.Drawing.Size(489, 507);
+      this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.buttonConvert);
       this.Controls.Add(this.tabControlConversion);
       this.Name = "CaseConversion";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "CaseConversion";
@@ -489,5 +504,7 @@ namespace MPTagThat.CaseConversion
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxReplaceSpaceby20;
     private MPTagThat.Core.WinControls.MPTButton buttonConvert;
     private MPTagThat.Core.WinControls.MPTButton buttonCancel;
+    private System.Windows.Forms.Label labelHeader;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

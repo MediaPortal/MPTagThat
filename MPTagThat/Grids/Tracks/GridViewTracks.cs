@@ -157,7 +157,7 @@ namespace MPTagThat.GridView
       Util.EnterMethod(Util.GetCallingMethod());
       dlgProgress = new Progress();
       dlgProgress.Owner = _main;
-      dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
+      dlgProgress.Header = localisation.ToString("progress", "SavingHeader");
       ShowForm(dlgProgress);
 
       int count = 0;
@@ -229,7 +229,7 @@ namespace MPTagThat.GridView
       {
         dlgProgress = new Progress();
         dlgProgress.Owner = _main;
-        dlgProgress.Text = localisation.ToString("progress", "SavingHeader");
+        dlgProgress.Header = localisation.ToString("progress", "SavingHeader");
         ShowForm(dlgProgress);
       }
 
@@ -371,7 +371,7 @@ namespace MPTagThat.GridView
 
       dlgProgress = new Progress();
       dlgProgress.Owner = _main;
-      dlgProgress.Text = localisation.ToString("progress", "InternetHeader");
+      dlgProgress.Header = localisation.ToString("progress", "InternetHeader");
       ShowForm(dlgProgress);
 
       int count = 0;
@@ -540,7 +540,7 @@ namespace MPTagThat.GridView
 
       dlgProgress = new Progress();
       dlgProgress.Owner = _main;
-      dlgProgress.Text = localisation.ToString("progress", "CoverArtHeader");
+      dlgProgress.Header = localisation.ToString("progress", "CoverArtHeader");
       ShowForm(dlgProgress);
 
       int count = 0;
@@ -732,7 +732,7 @@ namespace MPTagThat.GridView
 
       dlgProgress = new Progress();
       dlgProgress.Owner = _main;
-      dlgProgress.Text = localisation.ToString("progress", "LyricsHeader");
+      dlgProgress.Header = localisation.ToString("progress", "LyricsHeader");
       ShowForm(dlgProgress);
 
       int count = 0;

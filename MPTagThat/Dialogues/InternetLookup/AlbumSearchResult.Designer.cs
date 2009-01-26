@@ -36,6 +36,8 @@
       this.chLabel = new System.Windows.Forms.ColumnHeader();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.btContinue = new MPTagThat.Core.WinControls.MPTButton();
+      this.labelHeader = new System.Windows.Forms.Label();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.SuspendLayout();
       // 
       // lvAlbumSearchResult
@@ -47,7 +49,7 @@
             this.chYear,
             this.chLabel});
       this.lvAlbumSearchResult.FullRowSelect = true;
-      this.lvAlbumSearchResult.Location = new System.Drawing.Point(30, 27);
+      this.lvAlbumSearchResult.Location = new System.Drawing.Point(31, 71);
       this.lvAlbumSearchResult.MultiSelect = false;
       this.lvAlbumSearchResult.Name = "lvAlbumSearchResult";
       this.lvAlbumSearchResult.Size = new System.Drawing.Size(723, 432);
@@ -86,7 +88,7 @@
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "Lookup";
-      this.btCancel.Location = new System.Drawing.Point(419, 486);
+      this.btCancel.Location = new System.Drawing.Point(420, 530);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(125, 43);
       this.btCancel.TabIndex = 7;
@@ -98,12 +100,23 @@
       this.btContinue.DialogResult = System.Windows.Forms.DialogResult.OK;
       this.btContinue.Localisation = "Continue";
       this.btContinue.LocalisationContext = "Lookup";
-      this.btContinue.Location = new System.Drawing.Point(216, 486);
+      this.btContinue.Location = new System.Drawing.Point(217, 530);
       this.btContinue.Name = "btContinue";
       this.btContinue.Size = new System.Drawing.Size(125, 43);
       this.btContinue.TabIndex = 6;
       this.btContinue.Text = "Continue >";
       this.btContinue.UseVisualStyleBackColor = true;
+      // 
+      // labelHeader
+      // 
+      this.labelHeader.AutoSize = true;
+      this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Location = new System.Drawing.Point(27, 29);
+      this.labelHeader.Name = "labelHeader";
+      this.labelHeader.Size = new System.Drawing.Size(62, 20);
+      this.labelHeader.TabIndex = 23;
+      this.labelHeader.Text = "Header";
       // 
       // AlbumSearchResult
       // 
@@ -111,15 +124,18 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(784, 564);
+      this.ClientSize = new System.Drawing.Size(784, 605);
+      this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.btCancel);
       this.Controls.Add(this.btContinue);
       this.Controls.Add(this.lvAlbumSearchResult);
       this.Name = "AlbumSearchResult";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Mulitple Albums found. Please select ...";
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -133,5 +149,7 @@
     private MPTagThat.Core.WinControls.MPTButton btCancel;
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private System.Windows.Forms.ColumnHeader chTracks;
+    private System.Windows.Forms.Label labelHeader;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

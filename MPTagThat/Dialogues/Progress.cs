@@ -9,7 +9,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class Progress : Form
+  public partial class Progress : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private delegate void ThreadSafeProgressUpdateDelegate(ProgressBarStyle style, string formattedMsg, int curCount, int trackCount, bool showProgressBar);
@@ -20,6 +20,11 @@ namespace MPTagThat.Dialogues
     public bool IsCancelled
     {
       get { return _cancel; }
+    }
+
+    public string Header
+    {
+      set { this.labelHeader.Text = value; }
     }
 
     public string StatusLabel
@@ -45,6 +50,8 @@ namespace MPTagThat.Dialogues
       this.buttonCancel.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ButtonBackColor;
       this.buttonCancel.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ButtonForeColor;
       this.buttonCancel.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.ButtonFont;
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
       this.labelStatus.Text = "";
       this.labelStatus2.Text = "";

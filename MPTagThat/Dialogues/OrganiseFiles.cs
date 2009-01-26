@@ -9,7 +9,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Organise
 {
-  public partial class OrganiseFiles : Form
+  public partial class OrganiseFiles : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private Main _main;
@@ -32,6 +32,9 @@ namespace MPTagThat.Organise
 
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
+
+      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
     }
     #endregion
 
@@ -42,9 +45,7 @@ namespace MPTagThat.Organise
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = localisation.ToString("organise", "Heading");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      this.labelHeader.Text = localisation.ToString("organise", "Heading");
     }
     #endregion
 

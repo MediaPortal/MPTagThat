@@ -32,6 +32,7 @@ namespace MPTagThat.Dialogues
       this.btOk = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.lvColumns = new System.Windows.Forms.ListView();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.SuspendLayout();
       // 
       // lblHeading
@@ -50,7 +51,7 @@ namespace MPTagThat.Dialogues
       this.btOk.AutoSize = true;
       this.btOk.Localisation = "Ok";
       this.btOk.LocalisationContext = "ColumnSelect";
-      this.btOk.Location = new System.Drawing.Point(71, 530);
+      this.btOk.Location = new System.Drawing.Point(84, 543);
       this.btOk.Name = "btOk";
       this.btOk.Size = new System.Drawing.Size(75, 23);
       this.btOk.TabIndex = 2;
@@ -64,7 +65,7 @@ namespace MPTagThat.Dialogues
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "ColumnSelect";
-      this.btCancel.Location = new System.Drawing.Point(251, 530);
+      this.btCancel.Location = new System.Drawing.Point(248, 543);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(75, 23);
       this.btCancel.TabIndex = 3;
@@ -89,7 +90,7 @@ namespace MPTagThat.Dialogues
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.LightSteelBlue;
       this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(437, 585);
+      this.ClientSize = new System.Drawing.Size(437, 625);
       this.ControlBox = false;
       this.Controls.Add(this.lvColumns);
       this.Controls.Add(this.btCancel);
@@ -97,6 +98,7 @@ namespace MPTagThat.Dialogues
       this.Controls.Add(this.lblHeading);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "ColumnSelect";
+      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "ColumnSelect";
@@ -112,5 +114,6 @@ namespace MPTagThat.Dialogues
     private MPTagThat.Core.WinControls.MPTButton btOk;
     private MPTagThat.Core.WinControls.MPTButton btCancel;
     private System.Windows.Forms.ListView lvColumns;
+    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

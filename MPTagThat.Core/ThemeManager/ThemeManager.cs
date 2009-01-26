@@ -108,6 +108,12 @@ namespace MPTagThat.Core
                 theme.PanelHeadingFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
                 break;
 
+              case "FormHeader":
+                colorArray = attr.Attributes.GetNamedItem("forecolor").Value.Split(',');
+                theme.FormHeaderForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                theme.FormHeaderFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
+                break;
+
               case "GridView":
                 colorArray = attr.Attributes.GetNamedItem("defaultbackcolor").Value.Split(',');
                 theme.DefaultBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));

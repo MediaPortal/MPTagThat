@@ -12,7 +12,7 @@ using MPTagThat.Core.Amazon;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class AmazonAlbumSearchResults : Form
+  public partial class AmazonAlbumSearchResults : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     ImageList imagelist = new ImageList();
@@ -54,10 +54,8 @@ namespace MPTagThat.Dialogues
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       this.Text = localisation.ToString("AmazonAlbumSearch", "Header");
       this.chAlbum.Text = localisation.ToString("AmazonAlbumSearch", "Albums");
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
 

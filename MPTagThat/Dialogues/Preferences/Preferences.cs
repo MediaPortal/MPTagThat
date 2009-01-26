@@ -13,7 +13,7 @@ using Un4seen.Bass.AddOn.Wma;
 
 namespace MPTagThat.Preferences
 {
-  public partial class Preferences : Form
+  public partial class Preferences : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     private Main main;
@@ -755,10 +755,8 @@ namespace MPTagThat.Preferences
     #region Localisation
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       this.Text = localisation.ToString("Settings", "Header");
       this.navPanel.CaptionText = localisation.ToString("Settings", "NavigationPanel");
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
 
