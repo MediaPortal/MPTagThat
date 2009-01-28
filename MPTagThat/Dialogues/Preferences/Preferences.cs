@@ -1224,6 +1224,11 @@ namespace MPTagThat.Preferences
 
 
     #endregion
+
+    private void lbWVExpertWarning_Click(object sender, EventArgs e)
+    {
+
+    }
     #endregion
   }
 }
