@@ -80,6 +80,8 @@ namespace MPTagThat.Organise
       // First do an automatic save of all pending changes
       _main.TracksGridView.SaveAll(false);
 
+      bool bError = false;
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -214,6 +216,7 @@ namespace MPTagThat.Organise
             }
             catch (Exception e1)
             {
+              bError = true;
               log.Debug("Error creating folder: {0} {1]", directoryName, e1.Message);
               row.Cells[1].Value = localisation.ToString("message", "Error");
               _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, e1.Message));
@@ -224,7 +227,9 @@ namespace MPTagThat.Organise
           // Store the directory of the current file in the dictionary, so that we may copy later all non-music files
           string dir = System.IO.Path.GetDirectoryName(track.FullFileName);
           if (!_directories.ContainsKey(dir))
+          {
             _directories.Add(dir, directoryName);
+          }
 
           string newFilename = System.IO.Path.Combine(directoryName, track.FileName);
           try
@@ -233,11 +238,23 @@ namespace MPTagThat.Organise
             {
               if (System.IO.File.Exists(newFilename))
               {
+                bError = true;
                 log.Debug("File exists: {0}", newFilename);
                 row.Cells[1].Value = localisation.ToString("organise", "Exists");
                 _main.TracksGridView.AddErrorMessage(newFilename, localisation.ToString("organise", "FileExists"));
                 continue;
               }
+            }
+
+            // If new file name validates to be the same as the ol file, i.e. it goes into the source folder
+            // then continue, as this would lead in the source file to be deleted first and then there's nothing, which could be copied
+            if (newFilename.ToLowerInvariant() == track.FullFileName.ToLowerInvariant())
+            {
+              bError = true;
+              log.Debug("Old File and New File same: {0}", newFilename);
+              row.Cells[1].Value = localisation.ToString("organise", "Exists");
+              _main.TracksGridView.AddErrorMessage(newFilename, localisation.ToString("organise", "SameFile"));
+              continue;
             }
 
             if (ckCopyFiles.Checked)
@@ -256,6 +273,7 @@ namespace MPTagThat.Organise
           }
           catch (Exception e2)
           {
+            bError = true;
             log.Error("Error Copy/Move File: {0} {1}", track.FullFileName, e2.Message);
             row.Cells[1].Value = localisation.ToString("mesage", "Error");
             _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e2.Message));
@@ -263,6 +281,7 @@ namespace MPTagThat.Organise
         }
         catch (Exception ex)
         {
+          bError = true;
           log.Error("Error Organising Files: {0} stack: {1}", ex.Message, ex.StackTrace);
           row.Cells[1].Value = localisation.ToString("message", "Error");
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, ex.Message));
@@ -313,8 +332,8 @@ namespace MPTagThat.Organise
         }
       }
 
-      // Delete empty folders
-      if (!ckCopyFiles.Checked)
+      // Delete empty folders,if we didn't get any error
+      if (!ckCopyFiles.Checked && !bError)
       {
         foreach (string dir in _directories.Keys)
         {

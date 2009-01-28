@@ -447,6 +447,7 @@
     <String id="CopyNonMusicFiles">Nicht-Audio Dateien (Bilder, etc.) verschieben/kopieren</String>
     <String id="InvalidParm">Falsches Parameter Format. Bitte ändern</String>
     <String id="FileExists">Datei existiert bereits. Wird nicht ersetzt</String>
+    <String id="SameFile">Quell- und Ziel Datei sind ident. Datei übersprungen</String>
     <String id="Exists">Existiert</String>
     <String id="Copied">Kopiert</String>
     <String id="Moved">Verschoben</String>

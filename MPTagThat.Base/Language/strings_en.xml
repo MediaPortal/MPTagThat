@@ -447,6 +447,7 @@
     <String id="CopyNonMusicFiles">Copy/Move Non-Music Files (Pictures, etc.)</String>
     <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String>
     <String id="FileExists">File already exists. Will not be replaced</String>
+    <String id="SameFile">Source and Target File are the same. File skipped</String>
     <String id="Exists">Exists</String>
     <String id="Copied">Copied</String>
     <String id="Moved">Moved</String>
