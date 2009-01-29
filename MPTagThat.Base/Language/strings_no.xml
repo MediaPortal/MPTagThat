@@ -360,7 +360,7 @@
   <!-- Tag from Filename  / Rename File --> 
   <Section name="TagAndRename">
     <String id="HeadingTag">Tag fra Filnavn</String>
-    <String id="HeadingRename">¨Gi Nytt Navn til Fil</String>
+    <String id="HeadingRename">Gi Nytt Navn til Fil</String>
     <String id="Apply">OK</String>
     <String id="Cancel">Avbryt</String>
     <String id="Format">Format:</String>
@@ -447,6 +447,7 @@
     <String id="CopyNonMusicFiles">Kopiere/Flytte Ikke Musikk Relaterte Filer (Bilder, etc.)</String>
     <String id="InvalidParm">Feil i Parameter Formatet, vennligst korriger.</String>
     <String id="FileExists">Filen eksisterer allerede, vil ikke bli overskrevet</String>
+    <String id="SameFile">Kilde og Målfil er den samme. Filen ble hoppet over</String>
     <String id="Exists">Eksisterer</String>
     <String id="Copied">Kopiert</String>
     <String id="Moved">Flyttet</String>
