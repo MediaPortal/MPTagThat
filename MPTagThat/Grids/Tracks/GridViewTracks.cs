@@ -619,10 +619,8 @@ namespace MPTagThat.GridView
             ByteVector vector = amazonAlbum.AlbumImage;
             if (vector != null)
             {
-              // Get the availbe Covers
+              // Prepare Picture Array and then add the cover retrieved
               List<IPicture> pics = new List<IPicture>();
-              pics = new List<IPicture>(track.Pictures);
-
               Picture pic = new Picture(vector);
               pics.Add(pic);
 

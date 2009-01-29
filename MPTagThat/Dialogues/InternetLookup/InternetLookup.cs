@@ -287,9 +287,8 @@ namespace MPTagThat.InternetLookup
           TagLib.ByteVector vector = album.AlbumImage;
           if (vector != null)
           {
-            // Get the availbe Covers
+            // Prepare Picture Array and then add the cover retrieved
             List<TagLib.IPicture> pics = new List<TagLib.IPicture>();
-            pics = new List<TagLib.IPicture>(track.Pictures);
             TagLib.Picture pic = new TagLib.Picture(vector);
             pics.Add(pic);
             track.Pictures = pics.ToArray();
