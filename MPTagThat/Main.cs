@@ -370,7 +370,6 @@ namespace MPTagThat
       this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
       this.optionsPanelLeft.CaptionText = localisation.ToString("main", "OptionsPanel");
       this.picturePanel.CaptionText = localisation.ToString("main", "PicturePanel");
-      this.playerPanel.CaptionText = localisation.ToString("main", "PlayerPanel");
       this.fileInfoPanel.CaptionText = localisation.ToString("main", "InformationPanel");
       this.dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
       this.dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");

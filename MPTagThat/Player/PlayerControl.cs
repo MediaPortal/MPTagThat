@@ -28,12 +28,18 @@ namespace MPTagThat.Player
     private BASSTimer _updateTimer = null;
     private int _specIdx = 15;
     private int _voicePrintIdx = 0;
+    private string _currentTheme = "";
+    private Image _imgPlay = null;
+    private Image _imgPause = null;
     #endregion
 
     #region ctor
     public PlayerControl()
     {
       InitializeComponent();
+
+      IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
     }
     #endregion
 
@@ -154,6 +160,21 @@ namespace MPTagThat.Player
       Util.EnterMethod(Util.GetCallingMethod());
       
       _updateTimer.Stop();
+      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
+      {
+        pictureBoxPlayPause.Image = _imgPlay;
+        Bass.BASS_ChannelPause(_stream);
+        return;
+      }
+
+      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
+      {
+        pictureBoxPlayPause.Image = _imgPause;
+        _updateTimer.Start();
+        Bass.BASS_ChannelPlay(_stream, false);
+        return;
+      }
+
       if (Bass.BASS_GetDevice() == -1)
       {
         log.Info("Player: Bass not Initialised. Doing Initialisation");
@@ -210,34 +231,12 @@ namespace MPTagThat.Player
       playListGrid.ClearSelection();
       playListGrid.Rows[_currentStartIndex].Selected = true;
 
+      pictureBoxPlayPause.Image = _imgPause;
       _updateTimer.Start();
       this.lblTitle.DisplayText = string.Format("{0} ({1})",_playList[_currentStartIndex].Title, _playList[_currentStartIndex].Duration);
       this.lblTitle.ScrollTimer.Enabled = true;
 
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Pause the Playback
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void buttonPause_Click(object sender, EventArgs e)
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_STOPPED)
-        return;
-
-      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
-      {
-        Bass.BASS_ChannelPause(_stream);
-      }
-      else
-      {
-        Bass.BASS_ChannelPlay(_stream, false);
-      }
-      Util.LeaveMethod(Util.GetCallingMethod());
-
     }
 
     /// <summary>
@@ -527,6 +526,35 @@ namespace MPTagThat.Player
         case 15:
           this.pictureBoxSpectrum.Image = _vis.CreateWaveForm(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, true, false, true);
           break;
+      }
+    }
+    #endregion
+
+    #region Message Handling
+    /// <summary>
+    /// Handle Messages
+    /// </summary>
+    /// <param name="message"></param>
+    private void OnMessageReceive(QueueMessage message)
+    {
+      string action = message.MessageData["action"] as string;
+
+      switch (action.ToLower())
+      {
+        // Message sent, when a Theme is changing
+        case "themechanged":
+          {
+            if (ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName == _currentTheme)
+            {
+              return;
+            }
+
+            _currentTheme = ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName;
+            string imageDir = System.IO.Path.Combine(Application.StartupPath, "Themes\\" + _currentTheme); 
+            _imgPlay = Image.FromFile(System.IO.Path.Combine(imageDir, "Play_btn.png"));
+            _imgPause = Image.FromFile(System.IO.Path.Combine(imageDir, "Pause_btn.png"));
+            break;
+          }
       }
     }
     #endregion

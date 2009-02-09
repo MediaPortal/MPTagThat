@@ -35,6 +35,8 @@ namespace MPTagThat
       this.menuRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.dataGridViewError = new System.Windows.Forms.DataGridView();
+      this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.toolStripStatusLabelFiles = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabelFolder = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -42,13 +44,10 @@ namespace MPTagThat
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panelFileList = new MPTagThat.Core.WinControls.TTPanel();
       this.splitterBottom = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.panelMiddleBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.splitterRight = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
       this.panelRight = new MPTagThat.Core.WinControls.TTPanel();
       this.btnSaveFolderThumb = new MPTagThat.Core.WinControls.MPTButton();
-      this.playerPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.playerControl = new MPTagThat.Player.PlayerControl();
       this.picturePanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.panelPicSize = new MPTagThat.Core.WinControls.TTPanel();
       this.pictureBoxAlbumArt = new System.Windows.Forms.PictureBox();
@@ -66,11 +65,15 @@ namespace MPTagThat
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddleTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
+      this.playerControl = new MPTagThat.Player.PlayerControl();
       this.contextMenuTreeView.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
       this.statusStrip.SuspendLayout();
+      this.panelMiddleBottom.SuspendLayout();
       this.panelRight.SuspendLayout();
-      this.playerPanel.SuspendLayout();
       this.picturePanel.SuspendLayout();
       this.panelPicSize.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbumArt)).BeginInit();
@@ -81,6 +84,9 @@ namespace MPTagThat
       this.treeViewPanelBottom.SuspendLayout();
       this.panelLeftBottom.SuspendLayout();
       this.optionsPanelLeft.SuspendLayout();
+      this.panelMiddle.SuspendLayout();
+      this.panelMiddleTop.SuspendLayout();
+      this.playerPanel.SuspendLayout();
       this.SuspendLayout();
       // 
       // contextMenuTreeView
@@ -117,15 +123,29 @@ namespace MPTagThat
       this.dataGridViewError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.File,
             this.Message});
-      this.dataGridViewError.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.dataGridViewError.Location = new System.Drawing.Point(158, 611);
+      this.dataGridViewError.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dataGridViewError.Location = new System.Drawing.Point(0, 0);
       this.dataGridViewError.MultiSelect = false;
       this.dataGridViewError.Name = "dataGridViewError";
       this.dataGridViewError.ReadOnly = true;
       this.dataGridViewError.RowHeadersVisible = false;
-      this.dataGridViewError.Size = new System.Drawing.Size(642, 117);
+      this.dataGridViewError.Size = new System.Drawing.Size(658, 100);
       this.dataGridViewError.TabIndex = 5;
       this.dataGridViewError.MouseClick += new System.Windows.Forms.MouseEventHandler(this.datagridViewError_MouseClick);
+      // 
+      // File
+      // 
+      this.File.HeaderText = "File";
+      this.File.Name = "File";
+      this.File.ReadOnly = true;
+      this.File.Width = 300;
+      // 
+      // Message
+      // 
+      this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.Message.HeaderText = "Message";
+      this.Message.Name = "Message";
+      this.Message.ReadOnly = true;
       // 
       // toolStripStatusLabelFiles
       // 
@@ -172,9 +192,9 @@ namespace MPTagThat
       // panelFileList
       // 
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(158, 149);
+      this.panelFileList.Location = new System.Drawing.Point(0, 0);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(642, 454);
+      this.panelFileList.Size = new System.Drawing.Size(658, 421);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterBottom
@@ -182,31 +202,26 @@ namespace MPTagThat
       this.splitterBottom.AnimationDelay = 20;
       this.splitterBottom.AnimationStep = 20;
       this.splitterBottom.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-      this.splitterBottom.ControlToHide = this.dataGridViewError;
+      this.splitterBottom.ControlToHide = this.panelMiddleBottom;
       this.splitterBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(158, 603);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 413);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
       this.splitterBottom.UseAnimations = false;
       this.splitterBottom.VisualStyle = NJFLib.Controls.VisualStyles.XP;
       // 
-      // File
+      // panelMiddleBottom
       // 
-      this.File.HeaderText = "File";
-      this.File.Name = "File";
-      this.File.ReadOnly = true;
-      this.File.Width = 300;
-      // 
-      // Message
-      // 
-      this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.Message.HeaderText = "Message";
-      this.Message.Name = "Message";
-      this.Message.ReadOnly = true;
+      this.panelMiddleBottom.Controls.Add(this.dataGridViewError);
+      this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 421);
+      this.panelMiddleBottom.Name = "panelMiddleBottom";
+      this.panelMiddleBottom.Size = new System.Drawing.Size(658, 100);
+      this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterRight
       // 
@@ -219,7 +234,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(800, 149);
+      this.splitterRight.Location = new System.Drawing.Point(800, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -232,15 +247,14 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Controls.Add(this.btnSaveFolderThumb);
-      this.panelRight.Controls.Add(this.playerPanel);
       this.panelRight.Controls.Add(this.picturePanel);
       this.panelRight.Controls.Add(this.fileInfoPanel);
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(808, 149);
+      this.panelRight.Location = new System.Drawing.Point(808, 0);
       this.panelRight.MaximumSize = new System.Drawing.Size(200, 0);
       this.panelRight.MinimumSize = new System.Drawing.Size(170, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(200, 579);
+      this.panelRight.Size = new System.Drawing.Size(200, 521);
       this.panelRight.TabIndex = 3;
       // 
       // btnSaveFolderThumb
@@ -255,34 +269,6 @@ namespace MPTagThat
       this.btnSaveFolderThumb.Text = "Save as folder thumb";
       this.btnSaveFolderThumb.UseVisualStyleBackColor = true;
       this.btnSaveFolderThumb.Click += new System.EventHandler(this.btnSaveFolderThumb_Click);
-      // 
-      // playerPanel
-      // 
-      this.playerPanel.AnimationStep = 30;
-      this.playerPanel.BorderColor = System.Drawing.Color.Transparent;
-      this.playerPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
-      this.playerPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
-      this.playerPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
-      this.playerPanel.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.playerPanel.CaptionSize = 24;
-      this.playerPanel.CaptionText = "Player";
-      this.playerPanel.CaptionTextColor = System.Drawing.Color.Black;
-      this.playerPanel.Controls.Add(this.playerControl);
-      this.playerPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
-      this.playerPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
-      this.playerPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.playerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.playerPanel.Location = new System.Drawing.Point(0, 338);
-      this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(200, 241);
-      this.playerPanel.TabIndex = 2;
-      // 
-      // playerControl
-      // 
-      this.playerControl.Location = new System.Drawing.Point(3, 25);
-      this.playerControl.Name = "playerControl";
-      this.playerControl.Size = new System.Drawing.Size(194, 210);
-      this.playerControl.TabIndex = 1;
       // 
       // picturePanel
       // 
@@ -369,7 +355,7 @@ namespace MPTagThat
       this.splitterLeft.ExpandParentForm = false;
       this.splitterLeft.Localisation = "splitterLeft";
       this.splitterLeft.LocalisationContext = "Main";
-      this.splitterLeft.Location = new System.Drawing.Point(150, 149);
+      this.splitterLeft.Location = new System.Drawing.Point(150, 0);
       this.splitterLeft.Name = "splitterLeft";
       this.splitterLeft.TabIndex = 2;
       this.splitterLeft.TabStop = false;
@@ -381,9 +367,9 @@ namespace MPTagThat
       this.panelLeft.Controls.Add(this.panelLeftTop);
       this.panelLeft.Controls.Add(this.panelLeftBottom);
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-      this.panelLeft.Location = new System.Drawing.Point(0, 149);
+      this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 579);
+      this.panelLeft.Size = new System.Drawing.Size(150, 521);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -392,7 +378,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 438);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 380);
       this.panelLeftTop.TabIndex = 4;
       // 
       // treeViewPanel
@@ -414,7 +400,7 @@ namespace MPTagThat
       this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanel.Location = new System.Drawing.Point(0, 0);
       this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(150, 438);
+      this.treeViewPanel.Size = new System.Drawing.Size(150, 380);
       this.treeViewPanel.TabIndex = 3;
       // 
       // treeViewPanelBottom
@@ -423,7 +409,7 @@ namespace MPTagThat
       this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
       this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(150, 414);
+      this.treeViewPanelBottom.Size = new System.Drawing.Size(150, 356);
       this.treeViewPanelBottom.TabIndex = 2;
       // 
       // treeViewFolderBrowser
@@ -439,7 +425,7 @@ namespace MPTagThat
       this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
       this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(150, 414);
+      this.treeViewFolderBrowser.Size = new System.Drawing.Size(150, 356);
       this.treeViewFolderBrowser.TabIndex = 0;
       this.treeViewFolderBrowser.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_Click);
       this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
@@ -458,7 +444,7 @@ namespace MPTagThat
       // 
       this.panelLeftBottom.Controls.Add(this.optionsPanelLeft);
       this.panelLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelLeftBottom.Location = new System.Drawing.Point(0, 438);
+      this.panelLeftBottom.Location = new System.Drawing.Point(0, 380);
       this.panelLeftBottom.Name = "panelLeftBottom";
       this.panelLeftBottom.Size = new System.Drawing.Size(150, 141);
       this.panelLeftBottom.TabIndex = 5;
@@ -493,7 +479,7 @@ namespace MPTagThat
       this.checkBoxRecursive.Location = new System.Drawing.Point(8, 43);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 0);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
@@ -509,7 +495,7 @@ namespace MPTagThat
       this.btnRefreshFolder.Location = new System.Drawing.Point(5, 66);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 0);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -524,19 +510,55 @@ namespace MPTagThat
       this.panelTop.Size = new System.Drawing.Size(1008, 149);
       this.panelTop.TabIndex = 0;
       // 
+      // panelMiddle
+      // 
+      this.panelMiddle.Controls.Add(this.panelMiddleTop);
+      this.panelMiddle.Controls.Add(this.splitterLeft);
+      this.panelMiddle.Controls.Add(this.splitterRight);
+      this.panelMiddle.Controls.Add(this.splitterBottom);
+      this.panelMiddle.Controls.Add(this.panelMiddleBottom);
+      this.panelMiddle.Controls.Add(this.panelLeft);
+      this.panelMiddle.Controls.Add(this.panelRight);
+      this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelMiddle.Location = new System.Drawing.Point(0, 149);
+      this.panelMiddle.Name = "panelMiddle";
+      this.panelMiddle.Size = new System.Drawing.Size(1008, 521);
+      this.panelMiddle.TabIndex = 10;
+      // 
+      // panelMiddleTop
+      // 
+      this.panelMiddleTop.Controls.Add(this.panelFileList);
+      this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelMiddleTop.Location = new System.Drawing.Point(150, 0);
+      this.panelMiddleTop.Name = "panelMiddleTop";
+      this.panelMiddleTop.Size = new System.Drawing.Size(658, 421);
+      this.panelMiddleTop.TabIndex = 11;
+      // 
+      // playerPanel
+      // 
+      this.playerPanel.Controls.Add(this.playerControl);
+      this.playerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.playerPanel.Location = new System.Drawing.Point(0, 670);
+      this.playerPanel.Name = "playerPanel";
+      this.playerPanel.Size = new System.Drawing.Size(1008, 58);
+      this.playerPanel.TabIndex = 11;
+      // 
+      // playerControl
+      // 
+      this.playerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.playerControl.Location = new System.Drawing.Point(0, 0);
+      this.playerControl.Name = "playerControl";
+      this.playerControl.Size = new System.Drawing.Size(1008, 58);
+      this.playerControl.TabIndex = 0;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1008, 752);
       this.ControlBox = false;
-      this.Controls.Add(this.panelFileList);
-      this.Controls.Add(this.splitterBottom);
-      this.Controls.Add(this.dataGridViewError);
-      this.Controls.Add(this.splitterRight);
-      this.Controls.Add(this.panelRight);
-      this.Controls.Add(this.splitterLeft);
-      this.Controls.Add(this.panelLeft);
+      this.Controls.Add(this.panelMiddle);
+      this.Controls.Add(this.playerPanel);
       this.Controls.Add(this.panelTop);
       this.Controls.Add(this.statusStrip);
       this.KeyPreview = true;
@@ -550,9 +572,9 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).EndInit();
       this.statusStrip.ResumeLayout(false);
       this.statusStrip.PerformLayout();
+      this.panelMiddleBottom.ResumeLayout(false);
       this.panelRight.ResumeLayout(false);
       this.panelRight.PerformLayout();
-      this.playerPanel.ResumeLayout(false);
       this.picturePanel.ResumeLayout(false);
       this.panelPicSize.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbumArt)).EndInit();
@@ -564,6 +586,9 @@ namespace MPTagThat
       this.panelLeftBottom.ResumeLayout(false);
       this.optionsPanelLeft.ResumeLayout(false);
       this.optionsPanelLeft.PerformLayout();
+      this.panelMiddle.ResumeLayout(false);
+      this.panelMiddleTop.ResumeLayout(false);
+      this.playerPanel.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -599,14 +624,17 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.TTPanel panelFileList;
     private System.Windows.Forms.DataGridViewTextBoxColumn File;
     private System.Windows.Forms.DataGridViewTextBoxColumn Message;
-    private MPTagThat.Core.WinControls.TTExtendedPanel playerPanel;
-    private MPTagThat.Player.PlayerControl playerControl;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFiles;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFolder;
     private System.Windows.Forms.StatusStrip statusStrip;
     private MPTagThat.Core.WinControls.MPTButton btnSaveFolderThumb;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+    private MPTagThat.Core.WinControls.TTPanel panelMiddle;
+    private MPTagThat.Core.WinControls.TTPanel playerPanel;
+    private MPTagThat.Player.PlayerControl playerControl;
+    private MPTagThat.Core.WinControls.TTPanel panelMiddleTop;
+    private MPTagThat.Core.WinControls.TTPanel panelMiddleBottom;
   }
 }
 

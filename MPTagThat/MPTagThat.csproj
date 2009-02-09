@@ -380,9 +380,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Run.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\DeleteHS.png" />
   </ItemGroup>
   <ItemGroup>
@@ -404,55 +401,19 @@
     <None Include="Resources\NavBack.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\HelpSign.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\playprev.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\playnext.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\play.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\playpause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\playstop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CursorNumbering.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_launch_script.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_case_conversion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_delete_tag.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_edit_multi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_edit_single.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_from_file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_from_internet.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ribbon_help.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ribbon_identify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ribbon_add_burner.png" />
+    <None Include="Resources\Play_btn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -163,7 +163,7 @@ namespace MPTagThat
       RadButtonElement helpButton = new RadButtonElement();
       helpButton.MaxSize = new Size(18, 18);
       helpButton.Margin = new Padding(40, 0, 0, 0);
-      helpButton.Image = MPTagThat.Properties.Resources.HelpSign;
+      helpButton.Image = MPTagThat.Properties.Resources.ribbon_help;
       helpButton.Alignment = ContentAlignment.MiddleRight;
       helpButton.Click += new EventHandler(helpButton_Click);
       this.radRibbonBar.RootElement.Children[0].Children[1].Children[0].Children.Insert(3, helpButton);
