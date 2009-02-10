@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{329DC657-B4D5-4324-AA0D-4B77B6F72D8C}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -81,6 +81,12 @@
     <Compile Include="Burner\ProjectType.cs" />
     <Compile Include="ActionHandler\Action.cs" />
     <Compile Include="ActionHandler\ActionHandler.cs" />
+    <Compile Include="Controls\Colorslider\ColorSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Colorslider\ColorSlider.designer.cs">
+      <DependentUpon>ColorSlider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DatagridViewCheckBoxHeaderCell.cs" />
     <Compile Include="Controls\DataGridViewProgressColumn.cs" />
     <Compile Include="Controls\CollapsibleSplitter\CollapsibleSplitter.cs">
@@ -251,6 +257,9 @@
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Colorslider\ColorSlider.resx">
+      <DependentUpon>ColorSlider.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ExtendedPanel\ExtendedPanel.resx">
       <DependentUpon>ExtendedPanel.cs</DependentUpon>
       <SubType>Designer</SubType>

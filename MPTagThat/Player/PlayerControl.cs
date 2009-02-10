@@ -15,11 +15,13 @@ namespace MPTagThat.Player
   public partial class PlayerControl : UserControl
   {
     #region Variables
+    private delegate void ThreadSafeSetText(MPTagThat.Core.WinControls.MPTLabel label, string text);
     private SYNCPROC PlaybackEndProcDelegate = null;          // SyncProc called to indicate the song has ended
     private ILogger log = ServiceScope.Get<ILogger>();
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private SortableBindingList<PlayListData> _playList;
     private int _currentStartIndex = -1;
+    private int _currentIndexPlaying = -1;
     private int _stream = 0;
     private int _syncHandleEnd = 0;
     private Visuals _vis = new Visuals();                     // visuals class instance
@@ -31,6 +33,10 @@ namespace MPTagThat.Player
     private string _currentTheme = "";
     private Image _imgPlay = null;
     private Image _imgPause = null;
+    private double _songLength = 0.0;
+    private PlayList _playListForm = null;
+    private bool _playListOpen = false;
+    private int _mainFormWidth = 0;
     #endregion
 
     #region ctor
@@ -44,59 +50,78 @@ namespace MPTagThat.Player
     #endregion
 
     #region Properties
-    /// <summary>
-    /// Returns the PlaylistGrid
-    /// </summary>
-    public DataGridView PlayListGrid
-    {
-      get { return playListGrid; }
-    }
-
-    /// <summary>
+     /// <summary>
     /// Returns the Playlist
     /// </summary>
     public SortableBindingList<PlayListData> PlayList
     {
       get { return _playList; }
     }
+
+    /// <summary>
+    /// Returns the PlayList Form
+    /// </summary>
+    public PlayList PlayListForm
+    {
+      get { return _playListForm; }
+    }
     #endregion
 
     #region Form Load
     private void OnLoad(object sender, EventArgs e)
     {
+      _playListForm = new PlayList(this);
+
       _specIdx = Options.MainSettings.PlayerSpectrumIndex;
       _playList = new SortableBindingList<PlayListData>();
 
-      // Setup Grid
-      playListGrid.AutoGenerateColumns = false;
-      playListGrid.DataSource = _playList;
+      lbTitleText.Text = "";
+      lbArtistText.Text = "";
+      lbAlbumText.Text = "";
 
-      DataGridViewColumn col = new DataGridViewTextBoxColumn();
-      col.Name = "Title";
-      col.DataPropertyName = "Title";
-      col.ReadOnly = true;
-      col.Visible = true;
-      col.Width = 140;
-      playListGrid.Columns.Add(col);
-
-      col = new DataGridViewTextBoxColumn();
-      col.Name = "Duration";
-      col.DataPropertyName = "Duration";
-      col.ReadOnly = true;
-      col.Visible = true;
-      col.Width = 70;
-      playListGrid.Columns.Add(col);
-
-      lblTitle.DisplayText = "";
-      lblTitle.ScrollPixelAmount = 10;
-      lblTitle.ScrollTimer.Interval = 750;
-      lblTitle.ScrollTimer.Enabled = false;
+      playBackSlider.Enabled = false;
 
       // create a secure timer
       _updateTimer = new BASSTimer(_updateInterval);
       _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
+    }
+    #endregion
 
-      CreateContextMenu();
+    #region Public Methods
+    /// <summary>
+    /// Starts Playback of the given PlayList Index
+    /// </summary>
+    /// <param name="index"></param>
+    public void Play(int index)
+    {
+      _currentStartIndex = index;
+      buttonPlay_Click(null, new EventArgs());
+    }
+
+    /// <summary>
+    /// Stop Playback of Stream
+    /// </summary>
+    public void Stop()
+    {
+      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING ||
+          Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
+      {
+        Bass.BASS_ChannelStop(_stream);
+        Bass.BASS_ChannelRemoveSync(_stream, _syncHandleEnd);
+      }
+      playBackSlider.Enabled = false;
+    }
+
+    /// <summary>
+    /// Moves the Playlist panel, when it is docked and the mainform is resized
+    /// </summary>
+    public void MovePlayList()
+    {
+      if (_playListOpen)
+      {
+        _playListForm.Height = this.Parent.Parent.Height;
+        _playListForm.Location = new Point(this.Parent.Parent.Location.X + this.Parent.Parent.Width, this.Parent.Parent.Location.Y);
+      }
     }
     #endregion
 
@@ -109,48 +134,35 @@ namespace MPTagThat.Player
       {
         // the stream is NOT playing anymore...
         _updateTimer.Stop();
+        playBackSlider.Value = 0;
         this.pictureBoxSpectrum.Image = null;
         return;
       }
 
       // from here on, the stream is for sure playing...
       _tickCounter++;
-      long pos = Bass.BASS_ChannelGetPosition(_stream); // position in bytes
-      long len = Bass.BASS_ChannelGetLength(_stream); // length in bytes
 
       if (_tickCounter == 5)
       {
         // display the position every 250ms (since timer is 50ms)
         _tickCounter = 0;
-        double totaltime = Bass.BASS_ChannelBytes2Seconds(_stream, len); // the total time length
-        double elapsedtime = Bass.BASS_ChannelBytes2Seconds(_stream, pos); // the elapsed time length
+        double elapsedtime = Bass.BASS_ChannelBytes2Seconds(_stream, Bass.BASS_ChannelGetPosition(_stream)); // the elapsed time length
         string timeFormatted = String.Format("{0:#0:00}", Utils.FixTimespan(elapsedtime, "MMSS"));
+
+        // Move the PlaybackSlider
+        playBackSlider.Value = (int)(Math.Round((elapsedtime / _songLength), 2) * 100.0);
 
         // Now Paint the time to the Picturebox
         Graphics g = Graphics.FromHwnd(this.pictureBoxTime.Handle);
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         g.Clear(Color.Black);
-        g.DrawString(timeFormatted, new Font("Verdana", 20), new SolidBrush(Color.CornflowerBlue), 0, 0);
+        g.DrawString(timeFormatted, new Font("Verdana", 18), new SolidBrush(Color.CornflowerBlue), 0, 0);
         g.Dispose();
 
       }
 
       // update spectrum
       DrawSpectrum();
-    }
-
-    /// <summary>
-    /// Create Context Menu
-    /// </summary>
-    private void CreateContextMenu()
-    {
-      // Build the Context Menu for the Grid
-      MenuItem[] rmitems = new MenuItem[1];
-      rmitems[0] = new MenuItem();
-      rmitems[0].Text = localisation.ToString("contextmenu", "ClearPlayList");
-      rmitems[0].Click += new System.EventHandler(playListGrid_ClearPlayList);
-      rmitems[0].DefaultItem = true;
-      this.playListGrid.ContextMenu = new ContextMenu(rmitems);
     }
     #endregion
 
@@ -160,19 +172,24 @@ namespace MPTagThat.Player
       Util.EnterMethod(Util.GetCallingMethod());
       
       _updateTimer.Stop();
-      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
-      {
-        pictureBoxPlayPause.Image = _imgPlay;
-        Bass.BASS_ChannelPause(_stream);
-        return;
-      }
 
-      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
+      // Are we still on the same file, then it is a Play / Pause situation
+      if (_currentIndexPlaying == _currentStartIndex)
       {
-        pictureBoxPlayPause.Image = _imgPause;
-        _updateTimer.Start();
-        Bass.BASS_ChannelPlay(_stream, false);
-        return;
+        if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING)
+        {
+          pictureBoxPlayPause.Image = _imgPlay;
+          Bass.BASS_ChannelPause(_stream);
+          return;
+        }
+
+        if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
+        {
+          pictureBoxPlayPause.Image = _imgPause;
+          _updateTimer.Start();
+          Bass.BASS_ChannelPlay(_stream, false);
+          return;
+        }
       }
 
       if (Bass.BASS_GetDevice() == -1)
@@ -200,7 +217,7 @@ namespace MPTagThat.Player
         return;
       }
 
-      DataGridViewSelectedRowCollection selectedRows = playListGrid.SelectedRows;
+      DataGridViewSelectedRowCollection selectedRows = _playListForm.PlayListGrid.SelectedRows;
       if (_currentStartIndex == -1)
       {
         if (selectedRows.Count == 0)
@@ -212,7 +229,7 @@ namespace MPTagThat.Player
       // Stop the Current Stream
       Stop();
 
-      if ((_stream = Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0, BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE)) == 0)
+      if ((_stream = Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0, BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE | BASSFlag.BASS_STREAM_PRESCAN)) == 0)
       {
         int error = (int)Bass.BASS_ErrorGetCode();
         log.Error("Player: Error Creating stream for {0}: {1}", _playList[_currentStartIndex].FileName, Enum.GetName(typeof(BASSError), error));
@@ -221,6 +238,7 @@ namespace MPTagThat.Player
 
       RegisterPlaybackEvents();
 
+      _songLength = Bass.BASS_ChannelBytes2Seconds(_stream, Bass.BASS_ChannelGetLength(_stream, BASSMode.BASS_POS_BYTES));
       if (!Bass.BASS_ChannelPlay(_stream, true))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
@@ -228,48 +246,18 @@ namespace MPTagThat.Player
         return;
       }
 
-      playListGrid.ClearSelection();
-      playListGrid.Rows[_currentStartIndex].Selected = true;
+      _currentIndexPlaying = _currentStartIndex;
+      playBackSlider.Enabled = true;
+      _playListForm.PlayListGrid.ClearSelection();
+      _playListForm.PlayListGrid.Rows[_currentStartIndex].Selected = true;
 
       pictureBoxPlayPause.Image = _imgPause;
       _updateTimer.Start();
-      this.lblTitle.DisplayText = string.Format("{0} ({1})",_playList[_currentStartIndex].Title, _playList[_currentStartIndex].Duration);
-      this.lblTitle.ScrollTimer.Enabled = true;
+      SetText(this.lbTitleText,string.Format("{0} ({1})",_playList[_currentStartIndex].Title, _playList[_currentStartIndex].Duration));
+      SetText(this.lbArtistText, _playList[_currentStartIndex].Artist);
+      SetText(this.lbAlbumText, _playList[_currentStartIndex].Album);
 
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Stop Button has been pressed
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void buttonStop_Click(object sender, EventArgs e)
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      _updateTimer.Stop();
-      Stop();
-      // Clear the Spectrum and Time
-      this.pictureBoxSpectrum.Image = null;
-      _vis.ClearPeaks();
-      Graphics g = Graphics.FromHwnd(this.pictureBoxTime.Handle);
-      g.Clear(Color.Black);
-      lblTitle.DisplayText = "";
-      lblTitle.ScrollTimer.Enabled = false;
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Stop Playback of Stream
-    /// </summary>
-    private void Stop()
-    {
-      if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING ||
-          Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
-      {
-        Bass.BASS_ChannelStop(_stream);
-        Bass.BASS_ChannelRemoveSync(_stream, _syncHandleEnd);
-      }
     }
 
     /// <summary>
@@ -299,83 +287,61 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    /// Clear the Playlist
-    /// </summary>
-    /// <param name="o"></param>
-    /// <param name="e"></param>
-    private void playListGrid_ClearPlayList(object o, System.EventArgs e)
-    {
-      _playList.Clear();
-      Stop();
-    }
-
-    /// <summary>
-    /// Mouse Click in Datagrid
+    /// The slider was scrolled. Position within the file
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void playListGrid_MouseClick(object sender, MouseEventArgs e)
+    private void playBackSlider_Scroll(object sender, ScrollEventArgs e)
     {
-      if (e.Button == MouseButtons.Right)
-        playListGrid.ContextMenu.Show(playListGrid, new Point(e.X, e.Y));
+      double newPos = _songLength * (double)playBackSlider.Value / 100.00;
+      Bass.BASS_ChannelSetPosition(_stream, newPos);
     }
 
     /// <summary>
-    /// Double click on a playlist entry. Start Playback for the item
+    /// Sets the Text of a label
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void playListGrid_MouseDoubleClick(object sender, MouseEventArgs e)
+    /// <param name="label"></param>
+    private void SetText(MPTagThat.Core.WinControls.MPTLabel label, string text)
     {
-      _currentStartIndex = playListGrid.HitTest(e.X, e.Y).RowIndex;
-      buttonPlay_Click(null, new EventArgs());
-    }
-
-    /// <summary>
-    /// Tracks are Dropped on the Playlist Grid
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void playListGrid_DragDrop(object sender, DragEventArgs e)
-    {
-      List<PlayListData> selectedRows = (List<PlayListData>)e.Data.GetData(typeof(List<PlayListData>));
-      foreach (PlayListData item in selectedRows)
+      if (this.InvokeRequired)
       {
-        _playList.Add(item);
+        ThreadSafeSetText d = new ThreadSafeSetText(SetText);
+        this.Invoke(d, new object[] { label, text});
+        return;
       }
+      label.Text = text;
     }
 
     /// <summary>
-    /// Tracks are dragged over the Playlist
+    /// Show / Hide PlayList Panel
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void playListGrid_DragOver(object sender, DragEventArgs e)
+    private void btnPlayList_Click(object sender, EventArgs e)
     {
-      e.Effect = DragDropEffects.Copy;
-    }
-
-    /// <summary>
-    /// Handle Key input on the Grid
-    /// </summary>
-    /// <param name="msg"></param>
-    /// <param name="keyData"></param>
-    /// <returns></returns>
-    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-    {
-      switch (keyData)
+      if (_playListOpen)
       {
-        case Keys.Delete:
-          for (int i = playListGrid.Rows.Count - 1; i > -1; i--)
-          {
-            if (!playListGrid.Rows[i].Selected)
-              continue;
-
-            _playList.RemoveAt(i);
-          }
-          return true;
+        // Enlarge the Main Form to it's original size
+        this.Parent.Parent.Width = _mainFormWidth;
+        _playListOpen = false;
+        _playListForm.Hide();
       }
-      return base.ProcessCmdKey(ref msg, keyData);
+      else
+      {
+        // Set the height of the Playlist equals to the height of the main Window
+        // Decrease the width of the main window and set the playlist to the right
+        _mainFormWidth = this.Parent.Parent.Width;
+        _playListForm.Height = this.Parent.Parent.Height;
+
+        if ((_mainFormWidth + _playListForm.Width + this.Parent.Parent.Location.X) > Screen.PrimaryScreen.Bounds.Width)
+        {
+          this.Parent.Parent.Width -= _playListForm.Width;
+        }
+        _playListForm.Location = new Point(this.Parent.Parent.Location.X + this.Parent.Parent.Width, this.Parent.Parent.Location.Y);
+
+        _playListOpen = true;
+        _playListForm.Show();
+      }
     }
     #endregion
 

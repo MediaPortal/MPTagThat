@@ -694,4 +694,12 @@
 	<String id="Version">Version:</String>
 	<String id="BuildDate">Build Datum:</String>
   </Section>
+   
+  <!-- Player -->
+  <Section name="player">
+    <String id="Title">Titel</String>
+    <String id="Artist">Interpret</String>
+    <String id="Album">Album</String>
+    <String id="PlayListButton">PL</String>
+  </Section>
 </Language>

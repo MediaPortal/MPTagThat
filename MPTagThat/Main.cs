@@ -424,7 +424,6 @@ namespace MPTagThat
       pictureBoxAlbumArt.BackColor = themeManager.CurrentTheme.BackColor;
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
-      playerControl.PlayListGrid.BackgroundColor = themeManager.CurrentTheme.BackColor;
       listViewFileInfo.BackColor = themeManager.CurrentTheme.BackColor;
       listViewFileInfo.ForeColor = themeManager.CurrentTheme.LabelForeColor;
 
@@ -1227,6 +1226,28 @@ namespace MPTagThat
     private void splitterRight_Click(object sender, EventArgs e)
     {
       _rightPanelCollapsed = splitterRight.IsCollapsed;
+    }
+    #endregion
+
+    #region Form Resize / Move events
+    /// <summary>
+    /// The Form is resized, if Playlist is docked, move it as well
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Main_Resize(object sender, EventArgs e)
+    {
+      playerControl.MovePlayList();
+    }
+
+    /// <summary>
+    /// The Form is resized, if Playlist is docked, move it as well
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Main_Move(object sender, EventArgs e)
+    {
+      playerControl.MovePlayList();
     }
     #endregion
     #endregion

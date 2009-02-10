@@ -1570,7 +1570,9 @@ namespace MPTagThat.GridView
         TrackData track = bindingList[row.Index];
         PlayListData playListItem = new PlayListData();
         playListItem.FileName = track.FullFileName;
-        playListItem.Title = string.Format("{0} - {1}", track.Artist, track.Title);
+        playListItem.Title = track.Title;
+        playListItem.Artist = track.Artist;
+        playListItem.Album = track.Album;
         playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
         _main.Player.PlayList.Add(playListItem);
       }
@@ -1674,7 +1676,9 @@ namespace MPTagThat.GridView
             TrackData track = bindingList[row.Index];
             PlayListData playListItem = new PlayListData();
             playListItem.FileName = track.FullFileName;
-            playListItem.Title = string.Format("{0} - {1}", track.Artist, track.Title);
+            playListItem.Artist = track.Artist;
+            playListItem.Album = track.Album;
+            playListItem.Title = track.Title;
             playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
             selectedRows.Add(playListItem);
           }
@@ -1710,7 +1714,7 @@ namespace MPTagThat.GridView
         // takes into account any desktop bands that may be at the top or left
         // side of the screen.
         if (((Control.MousePosition.X - _screenOffset.X) < f.DesktopBounds.Left) ||
-            ((Control.MousePosition.X - _screenOffset.X) > f.DesktopBounds.Right) ||
+            ((Control.MousePosition.X - _screenOffset.X) > f.DesktopBounds.Right + _main.Player.PlayListForm.Width) ||
             ((Control.MousePosition.Y - _screenOffset.Y) < f.DesktopBounds.Top) ||
             ((Control.MousePosition.Y - _screenOffset.Y) > f.DesktopBounds.Bottom))
         {

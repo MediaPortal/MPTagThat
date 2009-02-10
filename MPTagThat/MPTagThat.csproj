@@ -234,6 +234,12 @@
     <Compile Include="Player\PlayerControl.Designer.cs">
       <DependentUpon>PlayerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player\PlayList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Player\PlayList.Designer.cs">
+      <DependentUpon>PlayList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player\PlayListData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -336,6 +342,9 @@
     <EmbeddedResource Include="Player\PlayerControl.resx">
       <DependentUpon>PlayerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player\PlayList.resx">
+      <DependentUpon>PlayList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
