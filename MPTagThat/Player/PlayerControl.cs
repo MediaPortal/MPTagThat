@@ -248,8 +248,12 @@ namespace MPTagThat.Player
 
       _currentIndexPlaying = _currentStartIndex;
       playBackSlider.Enabled = true;
-      _playListForm.PlayListGrid.ClearSelection();
-      _playListForm.PlayListGrid.Rows[_currentStartIndex].Selected = true;
+
+      if (_playListOpen)
+      {
+        _playListForm.PlayListGrid.ClearSelection();
+        _playListForm.PlayListGrid.Rows[_currentStartIndex].Selected = true;
+      }
 
       pictureBoxPlayPause.Image = _imgPause;
       _updateTimer.Start();
@@ -341,6 +345,13 @@ namespace MPTagThat.Player
 
         _playListOpen = true;
         _playListForm.Show();
+
+        // Set the selection to the active song
+        if (_currentStartIndex > -1)
+        {
+          _playListForm.PlayListGrid.ClearSelection();
+          _playListForm.PlayListGrid.Rows[_currentStartIndex].Selected = true;
+        }
       }
     }
     #endregion
