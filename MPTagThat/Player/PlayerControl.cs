@@ -109,6 +109,8 @@ namespace MPTagThat.Player
         Bass.BASS_ChannelStop(_stream);
         Bass.BASS_ChannelRemoveSync(_stream, _syncHandleEnd);
       }
+      pictureBoxPlayPause.Image = _imgPlay;
+      playBackSlider.Value = 0;
       playBackSlider.Enabled = false;
     }
 
@@ -213,6 +215,7 @@ namespace MPTagThat.Player
       if (_currentStartIndex > _playList.Count - 1)
       {
         log.Info("Player: Reached end of Playlist");
+        _currentStartIndex = 0;
         Stop();
         return;
       }
