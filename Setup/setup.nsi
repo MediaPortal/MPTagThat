@@ -90,14 +90,26 @@ ShowUninstDetails show
 # Installer sections
 Section -Main SEC0000
     SetOverwrite on
+    
+    # Bin Dir including Lyrics
     SetOutPath $INSTDIR\bin
     File /r /x .svn ..\MPTagThat.Base\bin\*
+    File ..\LyricsEngine\bin\Release\LyricsEngine.dll
+    File ..\LyricsEngine\bin\Release\LyricsEngine.dll.config
+    
+    # Language Dir
     SetOutPath $INSTDIR\Language
     File /r /x .svn ..\MPTagThat.Base\Language\*
+    
+    # Scripts
     SetOutPath $INSTDIR\Scripts
     File /r /x .svn ..\MPTagThat.Base\Scripts\*
+    
+    # Themes
     SetOutPath $INSTDIR\Themes
     File /r /x .svn ..\MPTagThat.Base\Themes\*
+    
+    # Base Files
     SetOutPath $INSTDIR
     File ..\MPTagThat.Base\Config.xml
     File ..\MPTagThat.Base\libfftw3-3.dll
