@@ -188,6 +188,12 @@ namespace MPTagThat
       ribbonButtonCaseConversion.DefaultItem = ribbonButtonCaseConversionExecute;
       ribbonButtonRenameFile.DefaultItem = ribbonButtonRenameFileExecute;
 
+      // Hide the Maximize Button, as this causes problems on some systems.
+      // It's a failure of the RibbonBar
+      ClassSelector buttonSelector = new ClassSelector();
+      buttonSelector.ElementClass = "MaximizeButton";
+      buttonSelector.GetSelectedElements(this.radRibbonBar.RibbonBarElement)[0].Visibility = ElementVisibility.Collapsed;
+
       // Load the available Scripts
       PopulateScriptsCombo();
 
@@ -245,6 +251,7 @@ namespace MPTagThat
     private void LocaliseScreen()
     {
       Util.EnterMethod(Util.GetCallingMethod());
+      this.radRibbonBar.Text = localisation.ToString("system", "ApplicationName");
 
       // Start Menu
       this.startMenuSave.Text = localisation.ToString("ribbon", "Save");
