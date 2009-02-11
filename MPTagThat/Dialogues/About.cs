@@ -25,6 +25,7 @@ namespace MPTagThat.Dialogues
       lbWikiLink.Text = Options.HelpLocation;
 
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      this.lbWikiLink.LinkColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       LocaliseScreen();
