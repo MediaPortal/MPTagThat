@@ -667,6 +667,7 @@
     <String id="NoSelection">Vennligst spesifiser minimum 1 linje</String>
     <String id="DeleteConfirmHeader">Slette Fil(er)</String>
     <String id="DeleteConfirm">Vil du virkelig slette valgte fil(er)?</String>
+    <String id="DeleteFolders">For å slette en Folder, bruk Shift+Del</String>
   </Section>
     
   <!-- Progress Dialog -->
@@ -693,5 +694,13 @@
     <String id="Description">MPTagThat er en åpen kildekode Tagg Editor, som tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</String>
 	<String id="Version">Versjon:</String>
 	<String id="BuildDate">Bygd Dato:</String>
+  </Section>
+    
+  <!-- Player -->
+  <Section name="player">
+    <String id="Title">Tittel</String>
+    <String id="Artist">Artist</String>
+    <String id="Album">Album</String>
+    <String id="PlayListButton">PL</String>
   </Section>
 </Language>
