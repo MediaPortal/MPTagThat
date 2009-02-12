@@ -667,6 +667,7 @@
     <String id="NoSelection">Please select at least one row to perform the action</String>
     <String id="DeleteConfirmHeader">Delete File(s)</String>
     <String id="DeleteConfirm">Do you really want to delete the selected files(s)?</String>
+    <String id="DeleteFolders">To delete a Folder, please use Shift-Del</String>
   </Section>
     
   <!-- Progress Dialog -->

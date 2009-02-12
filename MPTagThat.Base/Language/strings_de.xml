@@ -667,6 +667,7 @@
     <String id="NoSelection">Bitte selektieren Sie mindestens eine Zeile, um die gewählte Aktion auszuführen.</String>
     <String id="DeleteConfirmHeader">Datei(en) löschen</String>
     <String id="DeleteConfirm">Wollen Sie die ausgewählten Dateien tatsächlich löschen?</String>
+    <String id="DeleteFolders">Zum löschen eines Verzeichnisses, bitte Shift-Del benutzen</String>
   </Section>
     
   <!-- Progress Dialog -->

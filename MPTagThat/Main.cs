@@ -34,6 +34,7 @@ namespace MPTagThat
     private object _dialog = null;
     private bool _rightPanelCollapsed = false;
     private bool _folderScanInProgress = false;
+    private bool _treeViewFolderSelected = false;
 
     // Grids: Can't have them in Designer, as it will fail loading
     private MPTagThat.GridView.GridViewTracks gridViewControl;
@@ -784,6 +785,26 @@ namespace MPTagThat
     #region Event Handler
     #region Treeview Events
     /// <summary>
+    /// The Treeview Control is the active control
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_Enter(object sender, EventArgs e)
+    {
+      _treeViewFolderSelected = true;
+    }
+
+    /// <summary>
+    /// The Treeview Control is no longer the active Control
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_Leave(object sender, EventArgs e)
+    {
+      _treeViewFolderSelected = false;
+    }
+
+    /// <summary>
     /// A new Folder has been selected
     /// Only allow navigation, if no folder scanning is active
     /// </summary>
@@ -1123,7 +1144,13 @@ namespace MPTagThat
             break;
           }
 
-          // When the TRacks grid is not visible, don't handle the delete key
+          if (_treeViewFolderSelected)
+          {
+            MessageBox.Show(localisation.ToString("message", "DeleteFolders"), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            break;
+          }
+
+          // When the Tracks grid is not visible, don't handle the delete key
           if (!gridViewControl.Visible)
             break;
 
