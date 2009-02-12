@@ -63,7 +63,10 @@ namespace MPTagThat.TagEdit
         comboBoxScripts.SelectedIndex = 0;
 
       // Fill in Fields, which are the same in all selected rows
-      FillForm();
+      if (main.TracksGridView.TrackList.Count > 0)
+      {
+        FillForm();
+      }
 
       // Hide the check boxes, which are available in Multi Tag edit only
       ckTrack.Visible = false;
@@ -126,6 +129,13 @@ namespace MPTagThat.TagEdit
     private void SingleTagEditApply()
     {
       Util.EnterMethod(Util.GetCallingMethod());
+
+      // if we don't have any rows in the griddon't do any action
+      if (main.TracksGridView.TrackList.Count == 0)
+      {
+        return;
+      }
+
       CheckForChanges();
 
       if (!_trackIsChanged && !_commentIsChanged && !_involvedPeopleIsChanged && !_lyricsIsChanged &&
