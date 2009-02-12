@@ -887,11 +887,15 @@ namespace MPTagThat.GridView
     public void DeleteTracks()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      DialogResult result = MessageBox.Show(localisation.ToString("message", "DeleteConfirm"), localisation.ToString("message", "DeleteConfirmHeader"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-      if (result == DialogResult.Cancel)
+
+      if (tracksGrid.SelectedRows.Count > 0)
       {
-        Util.LeaveMethod(Util.GetCallingMethod());
-        return;
+        DialogResult result = MessageBox.Show(localisation.ToString("message", "DeleteConfirm"), localisation.ToString("message", "DeleteConfirmHeader"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+        if (result == DialogResult.Cancel)
+        {
+          Util.LeaveMethod(Util.GetCallingMethod());
+          return;
+        }
       }
 
       foreach (DataGridViewRow row in tracksGrid.Rows)

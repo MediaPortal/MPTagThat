@@ -8,6 +8,8 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Microsoft.VisualBasic.FileIO;
+
 using Raccoom.Windows.Forms;
 using TagLib;
 using System.Reflection;
@@ -764,12 +766,11 @@ namespace MPTagThat
       TreeNodePath node = treeViewFolderBrowser.SelectedNode as TreeNodePath;
       if (node != null)
       {
-        // Delete the directory
-        Util.SHFILEOPSTRUCT shf = new Util.SHFILEOPSTRUCT();
-        shf.wFunc = Util.FO_DELETE;
-        shf.fFlags = Util.FOF_ALLOWUNDO;
-        shf.pFrom = node.Path;
-        Util.SHFileOperation(ref shf);
+        FileSystem.DeleteDirectory(node.Path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+
+        // Clear the tracks
+        gridViewControl.TrackList.Clear();
+        ClearFileInfoPanel();
 
         // Now set the Selected directory to the Parent of the delted folder and reread the view
         TreeNodePath parent = node.Parent as TreeNodePath;
@@ -793,6 +794,7 @@ namespace MPTagThat
       if (_folderScanInProgress)
         e.Cancel = true;
     }
+
     /// <summary>
     /// A Folder has been selected in the TreeView. Read the content
     /// </summary>
@@ -1123,9 +1125,6 @@ namespace MPTagThat
 
           // When the TRacks grid is not visible, don't handle the delete key
           if (!gridViewControl.Visible)
-            break;
-
-          if (!gridViewControl.CheckSelections(false))
             break;
 
           gridViewControl.DeleteTracks();
