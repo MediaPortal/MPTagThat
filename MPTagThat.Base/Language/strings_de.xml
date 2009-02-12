@@ -122,7 +122,7 @@
     <String id="Title">Titel:</String>
     <String id="Album">Album:</String>
     <String id="GroupBoxComment">Kommentare</String>
-    <String id="RemoveExistingComments">Vorhandene Kommentare zuerst entfernen</String>
+    <String id="RemoveExistingComments">Vorh. Kommentare entfernen</String>
     <String id="MoveTop">An den Anfang</String>
     <String id="RemoveComment">Kommentar entfernen</String>
     <String id="AddComment">Kommentar hinzufügen</String>
@@ -444,7 +444,7 @@
     <String id="BrowseRootDir">Durchsuchen</String>
     <String id="OverWriteFiles">Existierende Dateien überschreiben</String>
     <String id="CopyFiles">Dateien kopieren statt zu verschieben</String>
-    <String id="CopyNonMusicFiles">Nicht-Audio Dateien (Bilder, etc.) verschieben/kopieren</String>
+    <String id="CopyNonMusicFiles">Nicht-Audio Dateien (Bilder, etc.)\nverschieben/kopieren</String>
     <String id="InvalidParm">Falsches Parameter Format. Bitte ändern</String>
     <String id="FileExists">Datei existiert bereits. Wird nicht ersetzt</String>
     <String id="SameFile">Quell- und Ziel Datei sind ident. Datei übersprungen</String>

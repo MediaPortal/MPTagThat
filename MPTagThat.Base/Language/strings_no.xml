@@ -444,7 +444,7 @@
     <String id="BrowseRootDir">Utforsk</String>
     <String id="OverWriteFiles">Overskriv eksisterende filer</String>
     <String id="CopyFiles">Kopier filer i stedenfor å flytte dem</String>
-    <String id="CopyNonMusicFiles">Kopiere/Flytte Ikke Musikk Relaterte Filer (Bilder, etc.)</String>
+    <String id="CopyNonMusicFiles">Kopiere/Flytte Ikke Musikk\nRelaterte Filer (Bilder, etc.)</String>
     <String id="InvalidParm">Feil i Parameter Formatet, vennligst korriger.</String>
     <String id="FileExists">Filen eksisterer allerede, vil ikke bli overskrevet</String>
     <String id="SameFile">Kilde og Målfil er den samme. Filen ble hoppet over</String>
