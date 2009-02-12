@@ -40,7 +40,7 @@
     <String id="Exit">Avslutt</String>
 
     <!-- Tags Tab-->
-    <String id="TagTab">Tagger</String>
+    <String id="TagTab">Tagg</String>
     <String id="TagFromFile">Tagg Fra\nFilnavn</String>
     <String id="RenameFile">Nytt Navn\ntil Fil</String>
     <String id="RenameFileMenu">Nytt Navn til Fil</String>
@@ -85,7 +85,7 @@
     <String id="RipOptions">Innstillinger for Ripp</String>
 
     <!-- Convert Tab-->
-    <String id="ConvertTab">Konvertere</String>
+    <String id="ConvertTab">Konverter</String>
     <String id="ConvertButton">Start\nKonvertering</String>
     <String id="ConvertEncoder">Velg Encoder:</String>
     <String id="ConvertFolder">Til Mappe:</String>
@@ -93,7 +93,7 @@
     <String id="ConvertOptions">Innstillinger for Konvertering</String>
 
     <!-- Burn Tab-->
-    <String id="BurnTab">Brenner</String>
+    <String id="BurnTab">Brenn</String>
     <String id="Burn">Start\nBrenner</String>
     <String id="BurnCancel">Avbryt\nBrenner</String>
     <String id="BurnOptions">Innstillinger for Brenner</String>
@@ -444,7 +444,7 @@
     <String id="BrowseRootDir">Utforsk</String>
     <String id="OverWriteFiles">Overskriv eksisterende filer</String>
     <String id="CopyFiles">Kopier filer i stedenfor å flytte dem</String>
-    <String id="CopyNonMusicFiles">Kopiere/Flytte Ikke Musikk\nRelaterte Filer (Bilder, etc.)</String>
+    <String id="CopyNonMusicFiles">Kopier/Flytt ikke Musikk\nRelaterte Filer (Bilder, etc.)</String>
     <String id="InvalidParm">Feil i Parameter Formatet, vennligst korriger.</String>
     <String id="FileExists">Filen eksisterer allerede, vil ikke bli overskrevet</String>
     <String id="SameFile">Kilde og Målfil er den samme. Filen ble hoppet over</String>
