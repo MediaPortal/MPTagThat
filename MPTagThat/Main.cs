@@ -56,6 +56,8 @@ namespace MPTagThat
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
     private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
+
+    private SplashScreen _splashScreen;
     #endregion
 
     #region Constructor
@@ -174,16 +176,22 @@ namespace MPTagThat
     private void Main_Load(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
+      _splashScreen = new SplashScreen();
+      _splashScreen.Run();
+      _splashScreen.SetInformation("Starting up ...");
+
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
       queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       /// Add the Ribbon Control to the Top Panel
+      _splashScreen.SetInformation("Adding Ribbon ...");
       ribbon = new RibbonBar(this);
       ribbon.Dock = DockStyle.Fill;
       this.panelTop.Controls.Add(ribbon);
 
       #region Setup Grids
+      _splashScreen.SetInformation("Setting up Grids ...");
       // Add the Grids to the Main Form
       gridViewControl = new MPTagThat.GridView.GridViewTracks();
       gridViewBurn = new MPTagThat.GridView.GridViewBurn(this);
@@ -241,12 +249,15 @@ namespace MPTagThat
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
 
       // Load BASS
+      _splashScreen.SetInformation("Loading Bass ...");
       LoadBass();
 
       // Load the Settings
+      _splashScreen.SetInformation("Loading Settings ...");
       LoadSettings();
 
       // Localise the Screens
+      _splashScreen.SetInformation("Localisation ...");
       LocaliseScreen();
 
       // Populate the Treeview with the directories found
@@ -267,6 +278,8 @@ namespace MPTagThat
       rmitems[0].Click += new System.EventHandler(dataGridViewError_ClearList);
       rmitems[0].DefaultItem = true;
       this.dataGridViewError.ContextMenu = new ContextMenu(rmitems);
+
+      _splashScreen.Stop();
 
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty)
