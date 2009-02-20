@@ -41,7 +41,7 @@ SetCompressor /SOLID lzma
 !define URL www.team-mediaportal.com
 
 # MUI defines
-!define MUI_ICON "..\MPTagThat\MPTagThat.ico"
+!define MUI_ICON "MPTagThat.ico"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
