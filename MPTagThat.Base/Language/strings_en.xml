@@ -397,6 +397,8 @@
     <String id="FileExists">File already exists. Common Tags used?</String>
     <String id="Rename">Can't Rename File {0}: {1}</String>
     <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String> 
+    <String id="Original">Original:</String> 
+    <String id="Preview">Preview:</String> 
   </Section>
 
   <!--  Case Conversion -->

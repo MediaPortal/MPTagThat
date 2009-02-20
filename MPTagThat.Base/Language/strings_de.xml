@@ -397,6 +397,8 @@
     <String id="FileExists">Datei existiert bereits. Wurden zu allgemeine Tags verwendet?</String>
     <String id="Rename">Kann Datei nicht umbenennen {0}: {1}</String>
     <String id="InvalidParm">Falsches Parameter Format. Bitte ändern</String> 
+    <String id="Original">Original:</String> 
+    <String id="Preview">Vorschau:</String> 
   </Section>
 
   <!--  Case Conversion -->

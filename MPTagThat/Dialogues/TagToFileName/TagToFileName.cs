@@ -15,6 +15,8 @@ namespace MPTagThat.TagToFileName
     private Main _main;
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
+    int enumerateStartValue = 0;
+    int enumerateNumberDigits = 0;
     #endregion
 
     #region ctor
@@ -33,7 +35,7 @@ namespace MPTagThat.TagToFileName
     #endregion
 
     #region Methods
-        /// <summary>
+    /// <summary>
     /// The form is used in Batch Mode, when using the default button on the ribbon
     /// </summary>
     /// <param name="batchMode"></param>
@@ -61,6 +63,7 @@ namespace MPTagThat.TagToFileName
 
           LocaliseScreen();
 
+          lbPreviewValue.Text = "";
           // We don't have a valid parameter. Show dialog
           this.ShowDialog();
         }
@@ -104,8 +107,8 @@ namespace MPTagThat.TagToFileName
       Util.EnterMethod(Util.GetCallingMethod());
       bool bErrors = false;
       DataGridView tracksGrid = _main.TracksGridView.View;
-      int enumerateStartValue = (int)numericUpDownStartAt.Value;
-      int enumerateNumberDigits = (int)numericUpDownNumberDigits.Value;
+      enumerateStartValue = (int)numericUpDownStartAt.Value;
+      enumerateNumberDigits = (int)numericUpDownNumberDigits.Value;
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -117,82 +120,8 @@ namespace MPTagThat.TagToFileName
 
         try
         {
-          if (fileName.IndexOf("<A>") > -1)
-            fileName = fileName.Replace("<A>", track.Artist.Replace(';', '_').Trim());
 
-          if (fileName.IndexOf("<T>") > -1)
-            fileName = fileName.Replace("<T>", track.Title.Trim());
-
-          if (fileName.IndexOf("<B>") > -1)
-            fileName = fileName.Replace("<B>", track.Album.Trim());
-
-          if (fileName.IndexOf("<Y>") > -1)
-            fileName = fileName.Replace("<Y>", track.Year.ToString().Trim());
-
-          if (fileName.IndexOf("<K>") > -1)
-          {
-            string[] str = track.Track.Split('/');
-            fileName = fileName.Replace("<K>", str[0]);
-          }
-
-          if (fileName.IndexOf("<k>") > -1)
-          {
-            string[] str = track.Track.Split('/');
-            fileName = fileName.Replace("<k>", str[1]);
-          }
-
-          if (fileName.IndexOf("<D>") > -1)
-          {
-            string[] str = track.Disc.Split('/');
-            fileName = fileName.Replace("<D>", str[0]);
-          }
-
-          if (fileName.IndexOf("<d>") > -1)
-          {
-            string[] str = track.Disc.Split('/');
-            fileName = fileName.Replace("<d>", str[1]);
-          }
-
-          if (fileName.IndexOf("<G>") > -1)
-          {
-            string[] str = track.Genre.Split(';');
-            fileName = fileName.Replace("<G>", str[0].Trim());
-          }
-
-          if (fileName.IndexOf("<O>") > -1)
-            fileName = fileName.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
-
-          if (fileName.IndexOf("<C>") > -1)
-            fileName = fileName.Replace("<C>", track.Comment.Trim());
-
-          if (fileName.IndexOf("<U>") > -1)
-            fileName = fileName.Replace("<U>", track.Grouping.Trim());
-
-          if (fileName.IndexOf("<N>") > -1)
-            fileName = fileName.Replace("<N>", track.Conductor.Trim());
-
-          if (fileName.IndexOf("<R>") > -1)
-            fileName = fileName.Replace("<R>", track.Composer.Replace(';', '_').Trim());
-
-          if (fileName.IndexOf("<S>") > -1)
-            fileName = fileName.Replace("<S>", track.SubTitle.Trim());
-
-          if (fileName.IndexOf("<E>") > -1)
-            fileName = fileName.Replace("<E>", track.BPM.ToString());
-
-          if (fileName.IndexOf("<M>") > -1)
-            fileName = fileName.Replace("<M>", track.Interpreter.Trim());
-
-          if (fileName.IndexOf("<F>") > -1)
-            fileName = fileName.Replace("<F>", System.IO.Path.GetFileNameWithoutExtension(track.FileName));
-
-          if (fileName.IndexOf("<#>") > -1)
-          {
-            fileName = fileName.Replace("<#>", enumerateStartValue.ToString().PadLeft(enumerateNumberDigits, '0'));
-            enumerateStartValue++;
-          }
-
-          fileName = Util.MakeValidFileName(fileName);
+          fileName = ReplaceParametersWithValues(parameter, track, false);
 
           // Now check the length of the filename
           if (fileName.Length > 255)
@@ -226,7 +155,7 @@ namespace MPTagThat.TagToFileName
           string ext = System.IO.Path.GetExtension(track.FileName);
 
           // Now that we have a correct Filename and no duplicates accept the changes
-          track.FileName = string.Format("{0}{1}",fileName, ext);
+          track.FileName = string.Format("{0}{1}", fileName, ext);
           track.Changed = true;
 
           _main.TracksGridView.Changed = true;
@@ -253,6 +182,119 @@ namespace MPTagThat.TagToFileName
       tracksGrid.Parent.Refresh();
 
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Replace the parameter with the REAL values of the file
+    /// </summary>
+    /// <param name="parameter">The Parameter Vlue</param>
+    /// <param name="track">The Track Data</param>
+    /// <param name="preView">Is it a Preview only</param>
+    /// <returns></returns>
+    private string ReplaceParametersWithValues(string parameter, TrackData track, bool preView)
+    {
+      string fileName = "";
+      try
+      {
+        if (parameter.IndexOf("<A>") > -1)
+          parameter = parameter.Replace("<A>", track.Artist.Replace(';', '_').Trim());
+
+        if (parameter.IndexOf("<T>") > -1)
+          parameter = parameter.Replace("<T>", track.Title.Trim());
+
+        if (parameter.IndexOf("<B>") > -1)
+          parameter = parameter.Replace("<B>", track.Album.Trim());
+
+        if (parameter.IndexOf("<Y>") > -1)
+          parameter = parameter.Replace("<Y>", track.Year.ToString().Trim());
+
+        if (parameter.IndexOf("<K>") > -1)
+        {
+          string[] str = track.Track.Split('/');
+          parameter = parameter.Replace("<K>", str[0]);
+        }
+
+        if (parameter.IndexOf("<k>") > -1)
+        {
+          string[] str = track.Track.Split('/');
+          if (str.Length > 1)
+          {
+            parameter = parameter.Replace("<k>", str[1]);
+          }
+          else
+          {
+            parameter = parameter.Replace("<k>", "");
+          }
+        }
+
+        if (parameter.IndexOf("<D>") > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          parameter = parameter.Replace("<D>", str[0]);
+        }
+
+        if (parameter.IndexOf("<d>") > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          if (str.Length > 1)
+          {
+            parameter = parameter.Replace("<d>", str[1]);
+          }
+          else
+          {
+            parameter = parameter.Replace("<d>", "");
+          }
+        }
+
+        if (parameter.IndexOf("<G>") > -1)
+        {
+          string[] str = track.Genre.Split(';');
+          parameter = parameter.Replace("<G>", str[0].Trim());
+        }
+
+        if (parameter.IndexOf("<O>") > -1)
+          parameter = parameter.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
+
+        if (parameter.IndexOf("<C>") > -1)
+          parameter = parameter.Replace("<C>", track.Comment.Trim());
+
+        if (parameter.IndexOf("<U>") > -1)
+          parameter = parameter.Replace("<U>", track.Grouping.Trim());
+
+        if (parameter.IndexOf("<N>") > -1)
+          parameter = parameter.Replace("<N>", track.Conductor.Trim());
+
+        if (parameter.IndexOf("<R>") > -1)
+          parameter = parameter.Replace("<R>", track.Composer.Replace(';', '_').Trim());
+
+        if (parameter.IndexOf("<S>") > -1)
+          parameter = parameter.Replace("<S>", track.SubTitle.Trim());
+
+        if (parameter.IndexOf("<E>") > -1)
+          parameter = parameter.Replace("<E>", track.BPM.ToString());
+
+        if (parameter.IndexOf("<M>") > -1)
+          parameter = parameter.Replace("<M>", track.Interpreter.Trim());
+
+        if (parameter.IndexOf("<F>") > -1)
+          parameter = parameter.Replace("<F>", System.IO.Path.GetFileNameWithoutExtension(track.FileName));
+
+        if (parameter.IndexOf("<#>") > -1)
+        {
+          if (!preView)
+          {
+            parameter = parameter.Replace("<#>", enumerateStartValue.ToString().PadLeft(enumerateNumberDigits, '0'));
+            enumerateStartValue++;
+          }
+        }
+
+        fileName = Util.MakeValidFileName(parameter);
+      }
+      catch (Exception ex)
+      {
+        log.Error("Error Replacing parameters in file: {0} stack: {1}", ex.Message, ex.StackTrace);
+      }
+      return fileName;
     }
     #endregion
 
@@ -308,6 +350,35 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
+    /// Text in the Combo is been changed, Update the Preview Value
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbFormat_TextChanged(object sender, EventArgs e)
+    {
+      if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.TagToFileName))
+      {
+        DataGridViewRow row = _main.TracksGridView.View.SelectedRows[_main.TracksGridView.View.SelectedRows.Count - 1];
+        if (row == null)
+        {
+          if (_main.TracksGridView.View.Rows.Count > 0)
+          {
+            row = _main.TracksGridView.View.Rows[0];
+          }
+        }
+        if (row != null)
+        {
+          lbOriginalValue.Text = _main.TracksGridView.TrackList[row.Index].FileName;
+          lbPreviewValue.Text = ReplaceParametersWithValues(cbFormat.Text, _main.TracksGridView.TrackList[row.Index], true);
+        }
+      }
+      else
+      {
+        lbPreviewValue.Text = localisation.ToString("TagAndRename", "InvalidParm");
+      }
+    }
+
+    /// <summary>
     /// User clicked on a parameter label. Update combo box with value.
     /// </summary>
     /// <param name="sender"></param>
@@ -356,7 +427,7 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    /// R>emoves the current selected format from the list
+    /// Removes the current selected format from the list
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
