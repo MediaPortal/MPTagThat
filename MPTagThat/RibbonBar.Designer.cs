@@ -29,10 +29,10 @@ namespace MPTagThat
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RibbonBar));
-      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab5 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
-      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab6 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
-      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab7 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
-      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab8 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
+      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab1 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
+      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab2 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
+      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab3 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
+      Telerik.WinControls.UI.RadRibbonBarCommandTab radRibbonBarCommandTab4 = new Telerik.WinControls.UI.RadRibbonBarCommandTab();
       this.radRibbonBarChunkTagsRetrieve = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonTagFromFile = new Telerik.WinControls.UI.RadButtonElement();
       this.ribbonButtonTagIdentify = new Telerik.WinControls.UI.RadButtonElement();
@@ -669,7 +669,6 @@ namespace MPTagThat
       this.ribbonComboBoxScripts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
       this.ribbonComboBoxScripts.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxScripts.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxScripts.FormatString = null;
       this.ribbonComboBoxScripts.KeyTip = "";
       this.ribbonComboBoxScripts.MaxLength = 32767;
       this.ribbonComboBoxScripts.MaxSize = new System.Drawing.Size(140, 0);
@@ -833,7 +832,6 @@ namespace MPTagThat
       this.ribbonComboBoxRipEncoder.AutoSize = false;
       this.ribbonComboBoxRipEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxRipEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxRipEncoder.FormatString = null;
       this.ribbonComboBoxRipEncoder.KeyTip = "";
       this.ribbonComboBoxRipEncoder.MaxLength = 32767;
       this.ribbonComboBoxRipEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1032,7 +1030,6 @@ namespace MPTagThat
       this.ribbonComboBoxEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxEncoder.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxEncoder.FormatString = null;
       this.ribbonComboBoxEncoder.KeyTip = "";
       this.ribbonComboBoxEncoder.MaxLength = 32767;
       this.ribbonComboBoxEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1224,6 +1221,7 @@ namespace MPTagThat
       this.ribbonComboBoxBurner.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxBurner.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxBurner.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxBurner.FormatString = null;
       this.ribbonComboBoxBurner.KeyTip = "";
       this.ribbonComboBoxBurner.MaxLength = 32767;
       this.ribbonComboBoxBurner.MaxSize = new System.Drawing.Size(140, 0);
@@ -1239,6 +1237,7 @@ namespace MPTagThat
       this.ribbonComboBoxSpeed.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
       this.ribbonComboBoxSpeed.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxSpeed.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxSpeed.FormatString = null;
       this.ribbonComboBoxSpeed.KeyTip = "";
       this.ribbonComboBoxSpeed.MaxLength = 32767;
       this.ribbonComboBoxSpeed.MaxSize = new System.Drawing.Size(140, 0);
@@ -1249,31 +1248,31 @@ namespace MPTagThat
       // radRibbonBar
       // 
       this.radRibbonBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(254)))));
-      radRibbonBarCommandTab5.ContextualTabGroup = null;
-      radRibbonBarCommandTab5.Items.AddRange(new Telerik.WinControls.RadItem[] {
+      radRibbonBarCommandTab1.ContextualTabGroup = null;
+      radRibbonBarCommandTab1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarChunkTagsRetrieve,
             this.radRibbonBarChunkTagsEdit,
             this.radRibbonBarChunkOrganise,
             this.radRibbonBarChunkScripts,
             this.radRibbonBarChunkOther});
-      radRibbonBarCommandTab5.Tab = this.ribbonTabTag;
-      radRibbonBarCommandTab6.ContextualTabGroup = null;
-      radRibbonBarCommandTab6.Items.AddRange(new Telerik.WinControls.RadItem[] {
+      radRibbonBarCommandTab1.Tab = this.ribbonTabTag;
+      radRibbonBarCommandTab2.ContextualTabGroup = null;
+      radRibbonBarCommandTab2.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarChunkRip});
-      radRibbonBarCommandTab6.Tab = this.ribbonTabRip;
-      radRibbonBarCommandTab7.ContextualTabGroup = null;
-      radRibbonBarCommandTab7.Items.AddRange(new Telerik.WinControls.RadItem[] {
+      radRibbonBarCommandTab2.Tab = this.ribbonTabRip;
+      radRibbonBarCommandTab3.ContextualTabGroup = null;
+      radRibbonBarCommandTab3.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarChunkConvert});
-      radRibbonBarCommandTab7.Tab = this.ribbonTabConvert;
-      radRibbonBarCommandTab8.ContextualTabGroup = null;
-      radRibbonBarCommandTab8.Items.AddRange(new Telerik.WinControls.RadItem[] {
+      radRibbonBarCommandTab3.Tab = this.ribbonTabConvert;
+      radRibbonBarCommandTab4.ContextualTabGroup = null;
+      radRibbonBarCommandTab4.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarChunkBurn});
-      radRibbonBarCommandTab8.Tab = this.ribbonTabBurn;
+      radRibbonBarCommandTab4.Tab = this.ribbonTabBurn;
       this.radRibbonBar.CommandTabs.AddRange(new Telerik.WinControls.UI.RadRibbonBarCommandTab[] {
-            radRibbonBarCommandTab5,
-            radRibbonBarCommandTab6,
-            radRibbonBarCommandTab7,
-            radRibbonBarCommandTab8});
+            radRibbonBarCommandTab1,
+            radRibbonBarCommandTab2,
+            radRibbonBarCommandTab3,
+            radRibbonBarCommandTab4});
       this.radRibbonBar.DisableMouseEvents = false;
       this.radRibbonBar.Dock = System.Windows.Forms.DockStyle.Top;
       this.radRibbonBar.ImageList = null;
@@ -1292,7 +1291,7 @@ namespace MPTagThat
       this.radRibbonBar.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
       this.radRibbonBar.RootElement.KeyTip = "";
       this.radRibbonBar.RootElement.ToolTipText = null;
-      this.radRibbonBar.Size = new System.Drawing.Size(1163, 141);
+      this.radRibbonBar.Size = new System.Drawing.Size(1163, 151);
       this.radRibbonBar.SmallImageList = null;
       this.radRibbonBar.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar.StartButtonImage")));
       this.radRibbonBar.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {

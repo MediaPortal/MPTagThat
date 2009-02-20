@@ -32,7 +32,7 @@
 
 Name "MPTagThat"
 
-SetCompressor zlib
+SetCompressor /SOLID lzma
 
 # Defines
 !define REGKEY "SOFTWARE\Team MediaPortal\$(^Name)"
@@ -41,7 +41,7 @@ SetCompressor zlib
 !define URL www.team-mediaportal.com
 
 # MUI defines
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\classic-install.ico"
+!define MUI_ICON "..\MPTagThat\MPTagThat.ico"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
@@ -87,6 +87,8 @@ VIAddVersionKey LegalCopyright ""
 InstallDirRegKey HKLM "${REGKEY}" Path
 ShowUninstDetails show
 
+BrandingText  "$(^Name) ${VERSION} by ${COMPANY}"
+
 # Installer sections
 Section -Main SEC0000
     SetOverwrite on
@@ -124,6 +126,9 @@ Section -post SEC0001
     WriteRegStr HKLM "${REGKEY}" Path $INSTDIR
     SetOutPath $INSTDIR
     WriteUninstaller $INSTDIR\uninstall.exe
+    
+    CreateShortCut "$DESKTOP\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe"   0 "" "" "MPTagThat"
+    
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe" 0 "" "" "MPTagThat" 
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" "$INSTDIR\uninstall.exe"
@@ -172,6 +177,7 @@ Section -un.post UNSEC0001
     DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
+    Delete "$DESKTOP\$(^Name).lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     DeleteRegValue HKLM "${REGKEY}" StartMenuGroup
     DeleteRegValue HKLM "${REGKEY}" Path
