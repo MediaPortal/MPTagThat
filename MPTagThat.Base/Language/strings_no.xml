@@ -396,7 +396,9 @@
     <String id="NameTooLong">Filnavn for langt. Vennligst forandre det</String>
     <String id="FileExists">Fil eksisterer. Normale Tagger brukt?</String>
     <String id="Rename">Kan ikke gi nytt navn til fil {0}: {1}</String>
-    <String id="InvalidParm">Feil Parameter Format. Vennligst Korriger.</String> 
+    <String id="InvalidParm">Feil Parameter Format. Vennligst Korriger.</String>
+    <String id="Original">Original:</String> 
+    <String id="Preview">Forhåndsvisning:</String> 
   </Section>
 
   <!--  Case Conversion -->
