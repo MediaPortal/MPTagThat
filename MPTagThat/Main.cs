@@ -546,6 +546,9 @@ namespace MPTagThat
       dlgScan.Location = new Point(x, y);
       dlgScan.Show();
 
+      // The Folder scan should stay on Top
+      dlgScan.TopMost = true;
+
       string dlgMessage = localisation.ToString("progress", "Scanning");
 
       int count = 1;
