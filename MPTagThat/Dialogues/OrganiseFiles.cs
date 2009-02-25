@@ -28,8 +28,6 @@ namespace MPTagThat.Organise
 
       LocaliseScreen();
 
-      tbRootDir.Text = Options.OrganiseSettings.LastUsedFolder == "" ? Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) : Options.OrganiseSettings.LastUsedFolder;
-
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
@@ -56,8 +54,34 @@ namespace MPTagThat.Organise
       ckOverwriteFiles.Checked = Options.OrganiseSettings.OverWriteFiles;
       ckCopyNonMusicFiles.Checked = Options.OrganiseSettings.CopyNonMusicFiles;
 
+      foreach (string item in Options.OrganiseSettings.LastUsedFolders)
+      {
+        cbRootDir.Items.Add(new Item(item, item, ""));
+      }
+
+      if (Options.OrganiseSettings.LastUsedFolders.Count == 0)
+      {
+        string musicFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+        Options.OrganiseSettings.LastUsedFolders.Insert(0, musicFolder);
+        cbRootDir.Items.Add(new Item(musicFolder, musicFolder, ""));
+        cbRootDir.SelectedIndex = 0;
+      }
+      else
+      {
+        if (Options.OrganiseSettings.LastUsedFolderIndex == -1)
+        {
+          cbRootDir.SelectedIndex = 0;
+        }
+        else
+        {
+          cbRootDir.SelectedIndex = Options.OrganiseSettings.LastUsedFolderIndex;
+        }
+      }
+
       foreach (string item in Options.OrganiseSettings.FormatValues)
+      {
         cbFormat.Items.Add(new Item(item, item, ""));
+      }
 
       if (Options.OrganiseSettings.LastUsedFormat > cbFormat.Items.Count - 1)
         cbFormat.SelectedIndex = -1;
@@ -205,7 +229,7 @@ namespace MPTagThat.Organise
             directoryName += "_";
 
           directoryName = Util.MakeValidFolderName(directoryName);
-          directoryName = System.IO.Path.Combine(tbRootDir.Text, directoryName);
+          directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
 
           // Now check the validity of the directory
           if (!System.IO.Directory.Exists(directoryName))
@@ -418,7 +442,7 @@ namespace MPTagThat.Organise
     private void OnClose(object sender, FormClosedEventArgs e)
     {
       Options.OrganiseSettings.LastUsedFormat = cbFormat.SelectedIndex;
-      Options.OrganiseSettings.LastUsedFolder = tbRootDir.Text;
+      Options.OrganiseSettings.LastUsedFolderIndex = cbRootDir.SelectedIndex;
       Options.OrganiseSettings.CopyFiles = ckCopyFiles.Checked;
       Options.OrganiseSettings.OverWriteFiles = ckOverwriteFiles.Checked;
       Options.OrganiseSettings.CopyNonMusicFiles = ckCopyNonMusicFiles.Checked;
@@ -434,7 +458,76 @@ namespace MPTagThat.Organise
       FolderBrowserDialog oFD = new FolderBrowserDialog();
       //oFD.RootFolder = Environment.SpecialFolder.MyMusic;
       if (oFD.ShowDialog() == DialogResult.OK)
-        tbRootDir.Text = oFD.SelectedPath;
+      {
+        cbRootDir.Items.Insert(0, new Item(oFD.SelectedPath, oFD.SelectedPath, ""));
+        cbRootDir.SelectedIndex = 0;
+      }
+    }
+
+    /// <summary>
+    /// A folder has been selected from the combo box, set the text
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbRootDir_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      cbRootDir.Text = (cbRootDir.Items[cbRootDir.SelectedIndex] as Item).Value;
+    }
+
+    /// <summary>
+    /// The user has left the Control, now let's see, if there's a new folder in the combo and add it to the list 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbRootDir_Leave(object sender, EventArgs e)
+    {
+      string selectedFolder = cbRootDir.Text.Trim();
+      if (selectedFolder == "")
+        return;
+
+      bool found = false;
+      foreach (Item item in cbRootDir.Items)
+      {
+        if (item.Value == selectedFolder)
+        {
+          found = true;
+          break;
+        }
+      }
+      if (!found)
+      {
+        Options.OrganiseSettings.LastUsedFolders.Insert(0, selectedFolder);
+        cbRootDir.Items.Insert(0, new Item(selectedFolder, selectedFolder, ""));
+        cbRootDir.SelectedIndex = 0;
+      }
+    }
+
+    /// <summary>
+    /// Check for the Delete Key pressed, while the Combo is dropped down and delete the selected folder
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbRootDir_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Delete)
+      {
+        if (cbRootDir.DroppedDown)
+        {
+          int selIndex = cbRootDir.SelectedIndex;
+          cbRootDir.Items.RemoveAt(selIndex);
+          Options.OrganiseSettings.LastUsedFolders.RemoveAt(selIndex);
+          selIndex--;
+          if (selIndex == -1 && cbRootDir.Items.Count > 0)
+          {
+            selIndex = 0;
+          }
+          if (selIndex > -1)
+          {
+            cbRootDir.SelectedIndex = selIndex;
+          }
+          e.Handled = true;
+        }
+      }
     }
 
     /// <summary>

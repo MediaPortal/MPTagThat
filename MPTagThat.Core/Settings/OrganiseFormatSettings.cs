@@ -7,7 +7,8 @@ namespace MPTagThat.Core
   public class OrganiseFormatSettings : ParameterFormat
   {
     #region Variable
-    private string _lastUsedFolder;
+    private List<string> _lastUsedFolders = new List<string>();
+    private int _lastUsedFolderIndex = -1;
     private bool _overWriteFiles;
     private bool _copyFiles;
     private bool _copyNonMusicFiles;
@@ -15,10 +16,17 @@ namespace MPTagThat.Core
 
     #region Properties
     [Setting(SettingScope.User, "")]
-    public string LastUsedFolder
+    public List<string> LastUsedFolders
     {
-      get { return _lastUsedFolder; }
-      set { _lastUsedFolder = value; }
+      get { return _lastUsedFolders; }
+      set { _lastUsedFolders = value; }
+    }
+
+    [Setting(SettingScope.User, "-1")]
+    public int LastUsedFolderIndex
+    {
+      get { return _lastUsedFolderIndex; }
+      set { _lastUsedFolderIndex = value; }
     }
 
     [Setting(SettingScope.User, "false")]

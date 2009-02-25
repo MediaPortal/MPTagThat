@@ -59,8 +59,8 @@ namespace MPTagThat.Organise
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.cbRootDir = new System.Windows.Forms.ComboBox();
       this.buttonBrowseRootDir = new MPTagThat.Core.WinControls.MPTButton();
-      this.tbRootDir = new System.Windows.Forms.TextBox();
       this.lblTargetRootDrectory = new MPTagThat.Core.WinControls.MPTLabel();
       this.btRemoveFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
@@ -455,8 +455,8 @@ namespace MPTagThat.Organise
       // 
       this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBox1.Controls.Add(this.cbRootDir);
       this.groupBox1.Controls.Add(this.buttonBrowseRootDir);
-      this.groupBox1.Controls.Add(this.tbRootDir);
       this.groupBox1.Controls.Add(this.lblTargetRootDrectory);
       this.groupBox1.Controls.Add(this.btRemoveFormat);
       this.groupBox1.Controls.Add(this.btAddFormat);
@@ -469,24 +469,28 @@ namespace MPTagThat.Organise
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Selection";
       // 
+      // cbRootDir
+      // 
+      this.cbRootDir.FormattingEnabled = true;
+      this.cbRootDir.Location = new System.Drawing.Point(133, 22);
+      this.cbRootDir.Name = "cbRootDir";
+      this.cbRootDir.Size = new System.Drawing.Size(526, 21);
+      this.cbRootDir.TabIndex = 33;
+      this.cbRootDir.SelectedIndexChanged += new System.EventHandler(this.cbRootDir_SelectedIndexChanged);
+      this.cbRootDir.Leave += new System.EventHandler(this.cbRootDir_Leave);
+      this.cbRootDir.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbRootDir_KeyDown);
+      // 
       // buttonBrowseRootDir
       // 
       this.buttonBrowseRootDir.Localisation = "BrowseRootDir";
       this.buttonBrowseRootDir.LocalisationContext = "TagAndRename";
-      this.buttonBrowseRootDir.Location = new System.Drawing.Point(665, 17);
+      this.buttonBrowseRootDir.Location = new System.Drawing.Point(665, 20);
       this.buttonBrowseRootDir.Name = "buttonBrowseRootDir";
       this.buttonBrowseRootDir.Size = new System.Drawing.Size(68, 23);
       this.buttonBrowseRootDir.TabIndex = 32;
       this.buttonBrowseRootDir.Text = "Browse";
       this.buttonBrowseRootDir.UseVisualStyleBackColor = true;
       this.buttonBrowseRootDir.Click += new System.EventHandler(this.buttonBrowseRootDir_Click);
-      // 
-      // tbRootDir
-      // 
-      this.tbRootDir.Location = new System.Drawing.Point(133, 19);
-      this.tbRootDir.Name = "tbRootDir";
-      this.tbRootDir.Size = new System.Drawing.Size(526, 20);
-      this.tbRootDir.TabIndex = 31;
       // 
       // lblTargetRootDrectory
       // 
@@ -609,11 +613,11 @@ namespace MPTagThat.Organise
     private System.Windows.Forms.Label labelHeader;
     private System.Windows.Forms.GroupBox groupBox1;
     private MPTagThat.Core.WinControls.MPTButton buttonBrowseRootDir;
-    private System.Windows.Forms.TextBox tbRootDir;
     private MPTagThat.Core.WinControls.MPTLabel lblTargetRootDrectory;
     private MPTagThat.Core.WinControls.MPTButton btRemoveFormat;
     private MPTagThat.Core.WinControls.MPTButton btAddFormat;
     private System.Windows.Forms.ComboBox cbFormat;
     private MPTagThat.Core.WinControls.MPTLabel lblFormat;
+    private System.Windows.Forms.ComboBox cbRootDir;
   }
 }
