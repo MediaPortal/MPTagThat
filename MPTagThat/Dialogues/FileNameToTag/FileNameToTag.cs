@@ -16,6 +16,10 @@ namespace MPTagThat.FileNameToTag
     private Main _main;
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
+    private TrackData track = null;
+    private TrackDataPreview trackPreview = null;
+    private bool _isPreviewOpen = false;
+    private FileNameToTagPreview _previewForm = null;
     #endregion
 
     #region ctor
@@ -47,6 +51,7 @@ namespace MPTagThat.FileNameToTag
     }
     #endregion
 
+    #region Settings
     private void LoadSettings()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -59,7 +64,9 @@ namespace MPTagThat.FileNameToTag
         cbFormat.SelectedIndex = Options.FileNameToTagSettings.LastUsedFormat;
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+    #endregion
 
+    #region File Name To Tag
     /// <summary>
     /// Convert File Name to Tag
     /// </summary>
@@ -79,140 +86,16 @@ namespace MPTagThat.FileNameToTag
         {
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(row.Index);
-          TrackData track = _main.TracksGridView.TrackList[row.Index];
+          track = _main.TracksGridView.TrackList[row.Index];
           track.Changed = true;
 
-          List<string> splittedFileValues = new List<string>();
-
-          // Split up the file name
-          // We use already the FileName from the Track instance, which might be already modified by the user.
-          string file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.File.Name), Path.GetFileNameWithoutExtension(track.FileName));
-          string[] fileArray = file.Split(new char[] { '\\' });
-
-          // Now set Upper Bound depending on the length of parameters and file
-          int upperBound;
-          if (parameters.Count >= fileArray.Length)
-            upperBound = fileArray.Length - 1;
-          else
-            upperBound = parameters.Count - 1;
-
-          // Now loop through the delimiters and assign files
-          for (int i = 0; i <= upperBound; i++)
-          {
-            MPTagThat.FileNameToTag.ParameterPart parameterpart = parameters[i];
-            string[] delims = parameterpart.Delimiters;
-            List<string> parms = parameterpart.Parameters;
-
-            // Set the part of the File to Process
-            string filePart = fileArray[fileArray.GetUpperBound(0) - i];
-            splittedFileValues.Clear();
-
-            int upperBoundDelims = delims.GetUpperBound(0);
-            for (int j = 0; j <= upperBoundDelims; j++)
-            {
-              if ((j == upperBoundDelims) | (delims[j] != ""))
-              {
-                if (filePart.IndexOf(delims[j]) == 0)
-                {
-                  splittedFileValues.Add(filePart);
-                  break;
-                }
-                splittedFileValues.Add(filePart.Substring(0, filePart.IndexOf(delims[j])));
-                filePart = filePart.Substring(filePart.IndexOf(delims[j]) + delims[j].Length);
-              }
-            }
-
-            int index = -1;
-            // Now we need to Update the Tag Values
-            foreach (string parm in parms)
-            {
-              index++;
-              switch (parm)
-              {
-                case "<A>":
-                  string[] artists = splittedFileValues[index].Split(';');
-                  track.File.Tag.Performers = artists;
-                  break;
-
-                case "<T>":
-                  track.File.Tag.Title = splittedFileValues[index];
-                  break;
-
-                case "<B>":
-                  track.File.Tag.Album = splittedFileValues[index];
-                  break;
-
-                case "<Y>":
-                  track.File.Tag.Year = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<K>":
-                  track.File.Tag.Track = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<k>":
-                  track.File.Tag.TrackCount = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<D>":
-                  track.File.Tag.Disc = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<d>":
-                  track.File.Tag.DiscCount = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<G>":
-                  string[] genres = splittedFileValues[index].Split(';');
-                  track.File.Tag.Genres = genres;
-                  break;
-
-                case "<O>":
-                  string[] albumartists = splittedFileValues[index].Split(';');
-                  track.File.Tag.AlbumArtists = albumartists;
-                  break;
-
-                case "<C>":
-                  track.File.Tag.Comment = splittedFileValues[index];
-                  break;
-
-                case "<N>":
-                  track.File.Tag.Conductor = splittedFileValues[index];
-                  break;
-
-                case "<R>":
-                  string[] composers = splittedFileValues[index].Split(';');
-                  track.File.Tag.Composers = composers;
-                  break;
-
-                case "<U>":
-                  track.File.Tag.Grouping = splittedFileValues[index];
-                  break;
-
-                case "<S>":
-                  track.SubTitle = splittedFileValues[index];
-                  break;
-
-                case "<M>":
-                  track.Interpreter = splittedFileValues[index];
-                  break;
-
-                case "<E>":
-                  track.File.Tag.BeatsPerMinute = Convert.ToUInt32(splittedFileValues[index]);
-                  break;
-
-                case "<X>":
-                  // ignore it
-                  break;
-              }
-            }
-          }
+          ReplaceParametersWithValues(parameters, false);
         }
         catch (Exception ex)
         {
           log.Error("Error applying changes from Filename To Tag: {0} stack: {1}", ex.Message, ex.StackTrace);
           row.Cells[1].Value = localisation.ToString("message", "Error");
-          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, ex.Message);
+          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, localisation.ToString("TagAndRename", "InvalidParm"));
           bErrors = true;
         }
       }
@@ -229,6 +112,267 @@ namespace MPTagThat.FileNameToTag
       tracksGrid.Parent.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
+    private void ReplaceParametersWithValues(List<MPTagThat.FileNameToTag.ParameterPart> parameters, bool preview)
+    {
+      List<string> splittedFileValues = new List<string>();
+
+      // Split up the file name
+      // We use already the FileName from the Track instance, which might be already modified by the user.
+      string file;
+      if (preview)
+        file = String.Format(@"{0}\{1}", Path.GetDirectoryName(trackPreview.FullFileName), Path.GetFileNameWithoutExtension(trackPreview.FullFileName));
+      else
+        file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.File.Name), Path.GetFileNameWithoutExtension(track.FileName));
+
+      string[] fileArray = file.Split(new char[] { '\\' });
+
+      // Now set Upper Bound depending on the length of parameters and file
+      int upperBound;
+      if (parameters.Count >= fileArray.Length)
+        upperBound = fileArray.Length - 1;
+      else
+        upperBound = parameters.Count - 1;
+
+      // Now loop through the delimiters and assign files
+      for (int i = 0; i <= upperBound; i++)
+      {
+        MPTagThat.FileNameToTag.ParameterPart parameterpart = parameters[i];
+        string[] delims = parameterpart.Delimiters;
+        List<string> parms = parameterpart.Parameters;
+
+        // Set the part of the File to Process
+        string filePart = fileArray[fileArray.GetUpperBound(0) - i];
+        splittedFileValues.Clear();
+
+        int upperBoundDelims = delims.GetUpperBound(0);
+        for (int j = 0; j <= upperBoundDelims; j++)
+        {
+          if ((j == upperBoundDelims) | (delims[j] != ""))
+          {
+            if (filePart.IndexOf(delims[j]) == 0)
+            {
+              splittedFileValues.Add(filePart);
+              break;
+            }
+
+            int delimIndex = filePart.IndexOf(delims[j]);
+            if (delimIndex > -1)
+            {
+              splittedFileValues.Add(filePart.Substring(0, filePart.IndexOf(delims[j])));
+              filePart = filePart.Substring(filePart.IndexOf(delims[j]) + delims[j].Length);
+            }
+          }
+        }
+
+        int index = -1;
+        // Now we need to Update the Tag Values
+        foreach (string parm in parms)
+        {
+          index++;
+          switch (parm)
+          {
+            case "<A>":
+              string[] artists = splittedFileValues[index].Split(';');
+              if (preview)
+                trackPreview.Artist = splittedFileValues[index];
+              else
+                track.File.Tag.Performers = artists;
+              break;
+
+            case "<T>":
+              if (preview)
+                trackPreview.Title = splittedFileValues[index];
+              else
+                track.File.Tag.Title = splittedFileValues[index];
+              break;
+
+            case "<B>":
+              if (preview)
+                trackPreview.Album = splittedFileValues[index];
+              else
+                track.File.Tag.Album = splittedFileValues[index];
+              break;
+
+            case "<Y>":
+              if (preview)
+                trackPreview.Year = splittedFileValues[index];
+              else
+                track.File.Tag.Year = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<K>":
+              if (preview)
+                trackPreview.Track = splittedFileValues[index];
+              else
+                track.File.Tag.Track = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<k>":
+              if (preview)
+                trackPreview.NumTrack = splittedFileValues[index];
+              else
+                track.File.Tag.TrackCount = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<D>":
+              if (preview)
+                trackPreview.Disc = splittedFileValues[index];
+              else
+                track.File.Tag.Disc = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<d>":
+              if (preview)
+                trackPreview.NumDisc = splittedFileValues[index];
+              else
+                track.File.Tag.DiscCount = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<G>":
+              string[] genres = splittedFileValues[index].Split(';');
+              if (preview)
+                trackPreview.Genre = splittedFileValues[index];
+              else
+                track.File.Tag.Genres = genres;
+              break;
+
+            case "<O>":
+              string[] albumartists = splittedFileValues[index].Split(';');
+              if (preview)
+                trackPreview.AlbumArtist = splittedFileValues[index];
+              else
+                track.File.Tag.AlbumArtists = albumartists;
+              break;
+
+            case "<C>":
+              if (preview)
+                trackPreview.Comment = splittedFileValues[index];
+              else
+                track.File.Tag.Comment = splittedFileValues[index];
+              break;
+
+            case "<N>":
+              if (preview)
+                trackPreview.Conductor = splittedFileValues[index];
+              else
+                track.File.Tag.Conductor = splittedFileValues[index];
+              break;
+
+            case "<R>":
+              string[] composers = splittedFileValues[index].Split(';');
+              if (preview)
+                trackPreview.Composer = splittedFileValues[index];
+              else
+                track.File.Tag.Composers = composers;
+              break;
+
+            case "<U>":
+              if (preview)
+                trackPreview.Grouping = splittedFileValues[index];
+              else
+                track.File.Tag.Grouping = splittedFileValues[index];
+              break;
+
+            case "<S>":
+              if (preview)
+                trackPreview.SubTitle = splittedFileValues[index];
+              else
+                track.SubTitle = splittedFileValues[index];
+              break;
+
+            case "<M>":
+              if (preview)
+                trackPreview.Interpreter = splittedFileValues[index];
+              else
+                track.Interpreter = splittedFileValues[index];
+              break;
+
+            case "<E>":
+              if (preview)
+                trackPreview.BPM = splittedFileValues[index];
+              else
+                track.File.Tag.BeatsPerMinute = Convert.ToUInt32(splittedFileValues[index]);
+              break;
+
+            case "<X>":
+              // ignore it
+              break;
+          }
+        }
+      }
+    }
+    #endregion
+
+    #region Preview Handling
+    /// <summary>
+    /// Fill the Preview Grid with the selected rows
+    /// </summary>
+    private void FillPreview()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      _previewForm.Tracks.Clear();
+      foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
+      }
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Loop through all the selected rows and set the Preview
+    /// </summary>
+    /// <param name="parameters"></param>
+    private void FileName2TagPreview(List<MPTagThat.FileNameToTag.ParameterPart> parameters)
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+
+      BuildPreviewGrid(cbFormat.Text);
+
+      foreach (TrackDataPreview row in _previewForm.Tracks)
+      {
+        try
+        {
+          trackPreview = row;
+          ReplaceParametersWithValues(parameters, true);
+        }
+        catch (Exception ex)
+        {
+        }
+      }
+
+      _previewForm.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Now Add /remove / Columns based on the value set in the Parameter
+    /// </summary>
+    /// <param name="parameters"></param>
+    private void BuildPreviewGrid(string parameters)
+    {
+      List<string> parms = new List<string>();
+      int index = -1;
+      while ((index = parameters.IndexOf("<")) > -1)
+      {
+        string parm = parameters.Substring(index, 3);
+        parms.Add(parm);
+        parameters = parameters.Substring(index + 3);
+      }
+
+      index = 0;  // Index 0 is the filename, so we should start processing at index 1 then
+      foreach (string parm in parms)
+      {
+        index++;
+        _previewForm.AddRemoveColumn(index, parm);
+      }
+      _previewForm.RemoveRedundantColumns(index++);
+    }
+    #endregion
     #endregion
 
     #region Event Handlers
@@ -271,6 +415,9 @@ namespace MPTagThat.FileNameToTag
         if (newFormat)
           Options.FileNameToTagSettingsTemp.Add(cbFormat.Text);
 
+        if (_previewForm != null)
+          _previewForm.Close();
+
         this.Close();
       }
     }
@@ -282,7 +429,28 @@ namespace MPTagThat.FileNameToTag
     /// <param name="e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
+      if (_previewForm != null)
+        _previewForm.Close();
+
       this.Close();
+    }
+
+    /// <summary>
+    /// Text in the Combo is been changed, Update the Preview Values
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbFormat_TextChanged(object sender, EventArgs e)
+    {
+      if (!_isPreviewOpen)
+        return;
+
+      if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.FileNameToTag))
+      {
+        TagFormat tagFormat = new TagFormat(cbFormat.Text);
+        List<ParameterPart> parts = tagFormat.ParameterParts;
+        FileName2TagPreview(parts);
+      }
     }
 
     /// <summary>
@@ -356,6 +524,46 @@ namespace MPTagThat.FileNameToTag
 
       Options.FileNameToTagSettingsTemp.RemoveAt(cbFormat.SelectedIndex);
       cbFormat.Items.RemoveAt(cbFormat.SelectedIndex);
+    }
+
+    /// <summary>
+    /// Toggle the Review window display
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btReview_Click(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _isPreviewOpen = false;
+        _previewForm.Hide();
+      }
+      else
+      {
+        _isPreviewOpen = true;
+        if (_previewForm == null)
+        {
+          _previewForm = new FileNameToTagPreview();
+          FillPreview();
+        }
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+        cbFormat_TextChanged(null, new EventArgs());
+        _previewForm.Show();
+
+      }
+    }
+
+    /// <summary>
+    /// The form is moved. Move the Preview Window as well
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void FileNameToTag_Move(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+      }
     }
 
     /// <summary>

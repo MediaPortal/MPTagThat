@@ -285,6 +285,7 @@
     <String id="FileName">File Name</String>
     <String id="Status">Status</String>
     <String id="Track">Track</String>
+	<String id="NumTracks">Num. Tracks</String>
     <String id="Title">Title</String>
     <String id="Artist">Artist</String>
     <String id="AlbumArtist">Album Artist</String>
@@ -295,6 +296,7 @@
     <String id="LastWriteTime">Changed</String>
     <String id="TagType">Type</String>
     <String id="Disc">Disc #</String>
+	<String id="NumDisc">Num. Discs/String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
     <String id="Comment">Comment</String>
@@ -398,7 +400,7 @@
     <String id="Rename">Can't Rename File {0}: {1}</String>
     <String id="InvalidParm">Invalid Parameter Format. Please Correct.</String> 
     <String id="Original">Original:</String> 
-    <String id="Preview">Preview:</String> 
+    <String id="Preview">Preview</String> 
   </Section>
 
   <!--  Case Conversion -->
