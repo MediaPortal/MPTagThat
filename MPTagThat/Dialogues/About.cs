@@ -23,9 +23,11 @@ namespace MPTagThat.Dialogues
       InitializeComponent();
 
       lbWikiLink.Text = Options.HelpLocation;
+      lbLinkForum.Text = Options.ForumLocation;
 
       this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       this.lbWikiLink.LinkColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      this.lbLinkForum.LinkColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       LocaliseScreen();
@@ -55,6 +57,11 @@ namespace MPTagThat.Dialogues
     private void lbWikiLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       System.Diagnostics.Process.Start(Options.HelpLocation);
+    }
+
+    private void lbLinkForum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+      System.Diagnostics.Process.Start(Options.ForumLocation);
     }
     #endregion
   }

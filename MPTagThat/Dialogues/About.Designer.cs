@@ -39,6 +39,7 @@
       this.lbDate = new MPTagThat.Core.WinControls.MPTLabel();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
+      this.lbLinkForum = new System.Windows.Forms.LinkLabel();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
       this.SuspendLayout();
       // 
@@ -142,6 +143,17 @@
       this.pictureBoxAbout.TabIndex = 8;
       this.pictureBoxAbout.TabStop = false;
       // 
+      // lbLinkForum
+      // 
+      this.lbLinkForum.AutoSize = true;
+      this.lbLinkForum.Location = new System.Drawing.Point(18, 249);
+      this.lbLinkForum.Name = "lbLinkForum";
+      this.lbLinkForum.Size = new System.Drawing.Size(243, 13);
+      this.lbLinkForum.TabIndex = 9;
+      this.lbLinkForum.TabStop = true;
+      this.lbLinkForum.Text = "http://forum.team-mediaportal.com/mptagthat-310";
+      this.lbLinkForum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbLinkForum_LinkClicked);
+      // 
       // About
       // 
       this.AcceptButton = this.btOk;
@@ -149,6 +161,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btOk;
       this.ClientSize = new System.Drawing.Size(528, 340);
+      this.Controls.Add(this.lbLinkForum);
       this.Controls.Add(this.pictureBoxAbout);
       this.Controls.Add(this.lbDate);
       this.Controls.Add(this.lbVersionDetail);
@@ -181,5 +194,6 @@
     private MPTagThat.Core.WinControls.MPTLabel lbDate;
     private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.PictureBox pictureBoxAbout;
+    private System.Windows.Forms.LinkLabel lbLinkForum;
   }
 }

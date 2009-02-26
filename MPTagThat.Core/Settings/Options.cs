@@ -29,6 +29,7 @@ namespace MPTagThat.Core
 
     #region public Variables
     public static string HelpLocation = "http://www.team-mediaportal.com/manual/MediaPortalTools/MPTagThat";
+    public static string ForumLocation = "http://forum.team-mediaportal.com/mptagthat-310";
 
     public static Item[] WmaStandardSampleVBR = new Item[] { new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
                                                        new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
