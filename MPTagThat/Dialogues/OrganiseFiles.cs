@@ -459,6 +459,7 @@ namespace MPTagThat.Organise
       //oFD.RootFolder = Environment.SpecialFolder.MyMusic;
       if (oFD.ShowDialog() == DialogResult.OK)
       {
+        Options.OrganiseSettings.LastUsedFolders.Insert(0, oFD.SelectedPath);
         cbRootDir.Items.Insert(0, new Item(oFD.SelectedPath, oFD.SelectedPath, ""));
         cbRootDir.SelectedIndex = 0;
       }
