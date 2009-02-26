@@ -693,7 +693,7 @@
   <Section name="about">
     <String id="Header">Om</String>
     <String id="Ok">Ok</String>
-    <String id="Description">MPTagThat er en åpen kildekode Tagg Editor, som tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</String>
+    <String id="Description">MPTagThat er en åpen kildekode Tagg Editor, \nsom tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</String>
 	<String id="Version">Versjon:</String>
 	<String id="BuildDate">Bygd Dato:</String>
   </Section>
