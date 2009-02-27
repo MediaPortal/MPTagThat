@@ -229,8 +229,8 @@
     <String id="Apply">Ok</String>
 
     <!--  Single Tag Edit Commands -->
-    <String id="Previous">Vorige Datei</String>
-    <String id="Next">Mächste Datei</String>
+    <String id="Previous">Vorherige Datei</String>
+    <String id="Next">Nächste Datei</String>
     <String id="Commands">Befehle</String>
   </Section>
   
