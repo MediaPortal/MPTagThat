@@ -46,7 +46,6 @@ namespace MPTagThat
     private Progress dlgScan;
 
     private string _selectedDirectory;          // The currently selcted Directory
-    private bool _scanSubFolders = false;       // Scan Sub directories
     private bool _treeViewSelected = false;     // Has the user selected the Treeview
     private Point _formLocation;
     private Size _formSize;
@@ -306,7 +305,7 @@ namespace MPTagThat
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
-      Options.MainSettings.ScanSubFolders = _scanSubFolders;
+      Options.MainSettings.ScanSubFolders = checkBoxRecursive.Checked;
       Options.MainSettings.FormLocation = this.Location;
       Options.MainSettings.FormSize = this.ClientSize;
       Options.MainSettings.LeftPanelSize = this.panelLeft.Width;
@@ -401,7 +400,7 @@ namespace MPTagThat
     {
       Util.EnterMethod(Util.GetCallingMethod());
       _selectedDirectory = Options.MainSettings.LastFolderUsed;
-      _scanSubFolders = Options.MainSettings.ScanSubFolders;
+      checkBoxRecursive.Checked = Options.MainSettings.ScanSubFolders;
       _formLocation = Options.MainSettings.FormLocation;
       _formSize = Options.MainSettings.FormSize;
 
