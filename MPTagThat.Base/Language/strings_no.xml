@@ -283,8 +283,10 @@
   <!--  Header of the Grid View showing the Tracks -->
   <Section name="column_header">
     <String id="FileName">Fil Navn</String>
+    <String id="NewFileName">Nytt Fil Navn</String>
     <String id="Status">Status</String>
     <String id="Track">Spor</String>
+    <String id="NumTracks">Ant. Spor</String>
     <String id="Title">Tittel</String>
     <String id="Artist">Artist</String>
     <String id="AlbumArtist">Album Artist</String>
@@ -295,6 +297,7 @@
     <String id="LastWriteTime">Forandret</String>
     <String id="TagType">Type</String>
     <String id="Disc">Disk #</String>
+    <String id="NumDisc">Ant. CD'r</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
     <String id="Comment">Kommentar</String>

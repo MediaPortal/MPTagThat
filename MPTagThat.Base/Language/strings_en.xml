@@ -297,7 +297,7 @@
     <String id="LastWriteTime">Changed</String>
     <String id="TagType">Type</String>
     <String id="Disc">Disc #</String>
-	<String id="NumDisc">Num. Discs/String>
+	<String id="NumDisc">Num. Discs</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
     <String id="Comment">Comment</String>
