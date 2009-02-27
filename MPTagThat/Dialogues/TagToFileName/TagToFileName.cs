@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.Dialogues;
 
 namespace MPTagThat.TagToFileName
 {
@@ -15,8 +16,12 @@ namespace MPTagThat.TagToFileName
     private Main _main;
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
-    int enumerateStartValue = 0;
-    int enumerateNumberDigits = 0;
+    private int enumerateStartValue = 0;
+    private int enumerateNumberDigits = 0;
+    private bool _isPreviewOpen = false;
+    private Preview _previewForm = null;
+    private TrackData track = null;
+    private TrackDataPreview trackPreview = null;
     #endregion
 
     #region ctor
@@ -63,7 +68,6 @@ namespace MPTagThat.TagToFileName
 
           LocaliseScreen();
 
-          lbPreviewValue.Text = "";
           // We don't have a valid parameter. Show dialog
           this.ShowDialog();
         }
@@ -98,6 +102,7 @@ namespace MPTagThat.TagToFileName
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
+    #region Tag2FileName
     /// <summary>
     /// Convert File Name to Tag
     /// </summary>
@@ -116,12 +121,12 @@ namespace MPTagThat.TagToFileName
           continue;
 
         string fileName = parameter;
-        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        track = _main.TracksGridView.TrackList[row.Index];
 
         try
         {
 
-          fileName = ReplaceParametersWithValues(parameter, track, false);
+          fileName = ReplaceParametersWithValues(parameter);
 
           // Now check the length of the filename
           if (fileName.Length > 255)
@@ -191,7 +196,7 @@ namespace MPTagThat.TagToFileName
     /// <param name="track">The Track Data</param>
     /// <param name="preView">Is it a Preview only</param>
     /// <returns></returns>
-    private string ReplaceParametersWithValues(string parameter, TrackData track, bool preView)
+    private string ReplaceParametersWithValues(string parameter)
     {
       string fileName = "";
       try
@@ -281,11 +286,8 @@ namespace MPTagThat.TagToFileName
 
         if (parameter.IndexOf("<#>") > -1)
         {
-          if (!preView)
-          {
             parameter = parameter.Replace("<#>", enumerateStartValue.ToString().PadLeft(enumerateNumberDigits, '0'));
             enumerateStartValue++;
-          }
         }
 
         fileName = Util.MakeValidFileName(parameter);
@@ -296,6 +298,60 @@ namespace MPTagThat.TagToFileName
       }
       return fileName;
     }
+    #endregion
+
+    #region Preview Handling
+    /// <summary>
+    /// Fill the Preview Grid with the selected rows
+    /// </summary>
+    private void FillPreview()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      _previewForm.Tracks.Clear();
+      foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
+      }
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Loop through all the selected rows and set the Preview
+    /// </summary>
+    /// <param name="parameters"></param>
+    private void Tag2FileNamePreview(string parameters)
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      
+      enumerateStartValue = (int)numericUpDownStartAt.Value;
+      enumerateNumberDigits = (int)numericUpDownNumberDigits.Value;
+      int index = -1;
+
+      foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+        
+        index++;
+        try
+        {
+          track = _main.TracksGridView.TrackList[row.Index];
+          trackPreview = _previewForm.Tracks[index];
+          trackPreview.NewFileName = ReplaceParametersWithValues(parameters);
+        }
+        catch (Exception)
+        {
+        }
+      }
+
+      _previewForm.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
     #endregion
 
     #region Event Handlers
@@ -335,6 +391,9 @@ namespace MPTagThat.TagToFileName
         if (newFormat)
           Options.TagToFileNameSettingsTemp.Add(cbFormat.Text);
 
+        if (_isPreviewOpen)
+          _previewForm.Close();
+
         this.Close();
       }
     }
@@ -346,6 +405,9 @@ namespace MPTagThat.TagToFileName
     /// <param name="e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
+      if (_isPreviewOpen)
+        _previewForm.Close();
+
       this.Close();
     }
 
@@ -356,25 +418,12 @@ namespace MPTagThat.TagToFileName
     /// <param name="e"></param>
     private void cbFormat_TextChanged(object sender, EventArgs e)
     {
+      if (!_isPreviewOpen)
+        return;
+
       if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.TagToFileName))
       {
-        DataGridViewRow row = _main.TracksGridView.View.SelectedRows[_main.TracksGridView.View.SelectedRows.Count - 1];
-        if (row == null)
-        {
-          if (_main.TracksGridView.View.Rows.Count > 0)
-          {
-            row = _main.TracksGridView.View.Rows[0];
-          }
-        }
-        if (row != null)
-        {
-          lbOriginalValue.Text = _main.TracksGridView.TrackList[row.Index].FileName;
-          lbPreviewValue.Text = ReplaceParametersWithValues(cbFormat.Text, _main.TracksGridView.TrackList[row.Index], true);
-        }
-      }
-      else
-      {
-        lbPreviewValue.Text = localisation.ToString("TagAndRename", "InvalidParm");
+        Tag2FileNamePreview(cbFormat.Text);
       }
     }
 
@@ -444,6 +493,48 @@ namespace MPTagThat.TagToFileName
 
       Options.TagToFileNameSettingsTemp.RemoveAt(cbFormat.SelectedIndex);
       cbFormat.Items.RemoveAt(cbFormat.SelectedIndex);
+    }
+
+    /// <summary>
+    /// Toggle the Review window display
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btReview_Click(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _isPreviewOpen = false;
+        _previewForm.Hide();
+      }
+      else
+      {
+        _isPreviewOpen = true;
+        if (_previewForm == null)
+        {
+          _previewForm = new Preview();
+          // Add the second column for the new filename to preview
+          _previewForm.AddGridColumn(1, "NewFileName", localisation.ToString("column_header", "NewFileName"), 350);
+          FillPreview();
+        }
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+        cbFormat_TextChanged(null, new EventArgs());
+        _previewForm.Show();
+
+      }
+    }
+
+    /// <summary>
+    /// The form is moved. Move the Preview Window as well
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TagToFileName_Move(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+      }
     }
 
     /// <summary>

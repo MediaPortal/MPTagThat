@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 using MPTagThat.Core;
 
-namespace MPTagThat.FileNameToTag
+namespace MPTagThat.Dialogues
 {
-  public partial class FileNameToTagPreview : Telerik.WinControls.UI.ShapedForm
+  public partial class Preview : Telerik.WinControls.UI.ShapedForm
   {
     #region Variables
     BindingList<TrackDataPreview> _previewTracks = new BindingList<TrackDataPreview>();
@@ -26,12 +26,12 @@ namespace MPTagThat.FileNameToTag
     #endregion
 
     #region ctor
-    public FileNameToTagPreview()
+    public Preview()
     {
       InitializeComponent();
 
       // Insert the first Column
-      AddGridColumn(0, "FileName", "File", 250);
+      AddGridColumn(0, "FileName", localisation.ToString("column_header", "FileName"), 250);
     }
     #endregion
 
@@ -257,6 +257,30 @@ namespace MPTagThat.FileNameToTag
       {
         dataGridViewPreview.Columns.RemoveAt(i);
       }
+    }
+
+    /// <summary>
+    /// Now Add /remove / Columns based on the value set in the Parameter
+    /// </summary>
+    /// <param name="parameters"></param>
+    public void BuildPreviewGrid(string parameters)
+    {
+      List<string> parms = new List<string>();
+      int index = -1;
+      while ((index = parameters.IndexOf("<")) > -1)
+      {
+        string parm = parameters.Substring(index, 3);
+        parms.Add(parm);
+        parameters = parameters.Substring(index + 3);
+      }
+
+      index = 0;  // Index 0 is the filename, so we should start processing at index 1 then
+      foreach (string parm in parms)
+      {
+        index++;
+        AddRemoveColumn(index, parm);
+      }
+      RemoveRedundantColumns(index++);
     }
     #endregion
   }

@@ -11,6 +11,8 @@ namespace MPTagThat.Core
     #region Variables
     private string _fullFileName;
     private string _fileName;
+    private string _newFullFileName;
+    private string _newFileName;
     private string _artist;
     private string _title;
     private string _album;
@@ -55,6 +57,24 @@ namespace MPTagThat.Core
     {
       get { return _fileName; }
       set { _fileName = value; }
+    }
+
+    /// <summary>
+    /// The New Full Filename including the path
+    /// </summary>
+    public string NewFullFileName
+    {
+      get { return _newFullFileName; }
+      set { _newFullFileName = value; }
+    }
+
+    /// <summary>
+    /// New Filename without Path
+    /// </summary>
+    public string NewFileName
+    {
+      get { return _newFileName; }
+      set { _newFileName = value; }
     }
     #endregion
 

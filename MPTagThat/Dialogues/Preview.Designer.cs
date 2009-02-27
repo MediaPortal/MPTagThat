@@ -1,6 +1,6 @@
-﻿namespace MPTagThat.FileNameToTag
+﻿namespace MPTagThat.Dialogues
 {
-  partial class FileNameToTagPreview
+  partial class Preview
   {
     /// <summary>
     /// Required designer variable.

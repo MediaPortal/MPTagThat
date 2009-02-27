@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.Dialogues;
 
 namespace MPTagThat.FileNameToTag
 {
@@ -19,7 +20,7 @@ namespace MPTagThat.FileNameToTag
     private TrackData track = null;
     private TrackDataPreview trackPreview = null;
     private bool _isPreviewOpen = false;
-    private FileNameToTagPreview _previewForm = null;
+    private Preview _previewForm = null;
     #endregion
 
     #region ctor
@@ -331,7 +332,7 @@ namespace MPTagThat.FileNameToTag
     {
       Util.EnterMethod(Util.GetCallingMethod());
 
-      BuildPreviewGrid(cbFormat.Text);
+      _previewForm.BuildPreviewGrid(cbFormat.Text);
 
       foreach (TrackDataPreview row in _previewForm.Tracks)
       {
@@ -340,37 +341,13 @@ namespace MPTagThat.FileNameToTag
           trackPreview = row;
           ReplaceParametersWithValues(parameters, true);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
         }
       }
 
       _previewForm.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Now Add /remove / Columns based on the value set in the Parameter
-    /// </summary>
-    /// <param name="parameters"></param>
-    private void BuildPreviewGrid(string parameters)
-    {
-      List<string> parms = new List<string>();
-      int index = -1;
-      while ((index = parameters.IndexOf("<")) > -1)
-      {
-        string parm = parameters.Substring(index, 3);
-        parms.Add(parm);
-        parameters = parameters.Substring(index + 3);
-      }
-
-      index = 0;  // Index 0 is the filename, so we should start processing at index 1 then
-      foreach (string parm in parms)
-      {
-        index++;
-        _previewForm.AddRemoveColumn(index, parm);
-      }
-      _previewForm.RemoveRedundantColumns(index++);
     }
     #endregion
     #endregion
@@ -543,7 +520,7 @@ namespace MPTagThat.FileNameToTag
         _isPreviewOpen = true;
         if (_previewForm == null)
         {
-          _previewForm = new FileNameToTagPreview();
+          _previewForm = new Preview();
           FillPreview();
         }
         _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
