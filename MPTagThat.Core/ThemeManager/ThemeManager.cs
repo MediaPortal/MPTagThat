@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Xml;
 
@@ -97,7 +98,7 @@ namespace MPTagThat.Core
               case "Label" :
                 colorArray = attr.Attributes.GetNamedItem("color").Value.Split(',');
                 theme.LabelForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
-                theme.LabelFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
+                theme.LabelFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value, CultureInfo.InvariantCulture), FontStyle.Regular);
                 break;
 
               case "PanelHeading":
@@ -105,13 +106,13 @@ namespace MPTagThat.Core
                 theme.PanelHeadingBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 colorArray = attr.Attributes.GetNamedItem("directionctrlcolor").Value.Split(',');
                 theme.PanelHeadingDirectionCtrlColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
-                theme.PanelHeadingFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
+                theme.PanelHeadingFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value, CultureInfo.InvariantCulture), FontStyle.Regular);
                 break;
 
               case "FormHeader":
                 colorArray = attr.Attributes.GetNamedItem("forecolor").Value.Split(',');
                 theme.FormHeaderForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
-                theme.FormHeaderFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
+                theme.FormHeaderFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value, CultureInfo.InvariantCulture), FontStyle.Regular);
                 break;
 
               case "GridView":
@@ -134,7 +135,7 @@ namespace MPTagThat.Core
                 theme.ButtonBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 colorArray = attr.Attributes.GetNamedItem("color").Value.Split(',');
                 theme.ButtonForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
-                theme.ButtonFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value), FontStyle.Regular);
+                theme.ButtonFont = new Font(attr.Attributes.GetNamedItem("font").Value, (float)Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value, CultureInfo.InvariantCulture), FontStyle.Regular);
                 break;
 
             }
