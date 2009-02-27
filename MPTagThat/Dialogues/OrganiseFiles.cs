@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.Dialogues;
 
 namespace MPTagThat.Organise
 {
@@ -16,6 +17,10 @@ namespace MPTagThat.Organise
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
     private Dictionary<string, string> _directories = null;
+    private bool _isPreviewOpen = false;
+    private Preview _previewForm = null;
+    private TrackData track = null;
+    private TrackDataPreview trackPreview = null;
     #endregion
 
     #region ctor
@@ -47,6 +52,7 @@ namespace MPTagThat.Organise
     }
     #endregion
 
+    #region Settings
     private void LoadSettings()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -90,7 +96,9 @@ namespace MPTagThat.Organise
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+    #endregion
 
+    #region Organise
     /// <summary>
     /// Organise Files
     /// </summary>
@@ -111,126 +119,11 @@ namespace MPTagThat.Organise
         if (!row.Selected)
           continue;
 
-        // Trim trailing slashes
-        string directoryName = parameter.Trim(new char[] { '\\' });
-        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        track = _main.TracksGridView.TrackList[row.Index];
+        string directoryName = ReplaceParametersWithValues(parameter);
 
         try
         {
-          if (directoryName.IndexOf("<A>") > -1)
-            directoryName = directoryName.Replace("<A>", track.Artist.Replace(';', '_').Trim());
-
-          if (directoryName.IndexOf("<T>") > -1)
-            directoryName = directoryName.Replace("<T>", track.Title.Trim());
-
-          if (directoryName.IndexOf("<B>") > -1)
-            directoryName = directoryName.Replace("<B>", track.Album.Trim());
-
-          if (directoryName.IndexOf("<Y>") > -1)
-            directoryName = directoryName.Replace("<Y>", track.Year.ToString().Trim());
-
-          if (directoryName.IndexOf("<K>") > -1)
-          {
-            string[] str = track.Track.Split('/');
-            directoryName = directoryName.Replace("<K>", str[0]);
-          }
-
-          if (directoryName.IndexOf("<k>") > -1)
-          {
-            string[] str = track.Track.Split('/');
-            directoryName = directoryName.Replace("<k>", str[1]);
-          }
-
-          if (directoryName.IndexOf("<D>") > -1)
-          {
-            string[] str = track.Disc.Split('/');
-            directoryName = directoryName.Replace("<D>", str[0]);
-          }
-
-          if (directoryName.IndexOf("<d>") > -1)
-          {
-            string[] str = track.Disc.Split('/');
-            directoryName = directoryName.Replace("<d>", str[1]);
-          }
-
-          if (directoryName.IndexOf("<G>") > -1)
-          {
-            string[] str = track.Genre.Split(';');
-            directoryName = directoryName.Replace("<G>", str[0].Trim());
-          }
-
-          if (directoryName.IndexOf("<O>") > -1)
-            directoryName = directoryName.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
-
-          if (directoryName.IndexOf("<C>") > -1)
-            directoryName = directoryName.Replace("<C>", track.Comment.Trim());
-
-          if (directoryName.IndexOf("<U>") > -1)
-            directoryName = directoryName.Replace("<U>", track.Grouping.Trim());
-
-          if (directoryName.IndexOf("<N>") > -1)
-            directoryName = directoryName.Replace("<N>", track.Conductor.Trim());
-
-          if (directoryName.IndexOf("<R>") > -1)
-            directoryName = directoryName.Replace("<R>", track.Composer.Replace(';', '_').Trim());
-
-          if (directoryName.IndexOf("<S>") > -1)
-            directoryName = directoryName.Replace("<S>", track.SubTitle.Trim());
-
-          if (directoryName.IndexOf("<E>") > -1)
-            directoryName = directoryName.Replace("<E>", track.BPM.ToString());
-
-          if (directoryName.IndexOf("<M>") > -1)
-            directoryName = directoryName.Replace("<M>", track.Interpreter.Trim());
-
-          if (directoryName.IndexOf("<I>") > -1)
-            directoryName = directoryName.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
-
-          int index = directoryName.IndexOf("<A:");
-          int last = -1;
-          if (index > -1)
-          {
-            last = directoryName.IndexOf(">", index);
-            string s1 = directoryName.Substring(index, last - index + 1);
-            int strLength = Convert.ToInt32(s1.Substring(3, 1));
-            string s2 = track.Artist.Replace(';', '_').Trim();
-
-            if (s2.Length >= strLength)
-              s2 = s2.Substring(0, strLength);
-
-            directoryName = directoryName.Replace(s1, s2);
-          }
-
-          index = directoryName.IndexOf("<O:");
-          last = -1;
-          if (index > -1)
-          {
-            last = directoryName.IndexOf(">", index);
-            string s1 = directoryName.Substring(index, last - index + 1);
-            int strLength = Convert.ToInt32(s1.Substring(3, 1));
-            string s2 = track.AlbumArtist.Replace(';', '_').Trim();
-
-            if (s2.Length >= strLength)
-              s2 = s2.Substring(0, strLength);
-
-            directoryName = directoryName.Replace(s1, s2);
-          }
-
-          // Empty Values would create invalid folders
-          directoryName = directoryName.Replace(@"\\", @"\_\");
-
-          // If the directory name starts with a backslash, we've got an empty value on the beginning
-          if (directoryName.IndexOf("\\") == 0)
-            directoryName = "_" + directoryName;
-
-          // We might have an empty value on the end of the path, which is indicated by a slash. 
-          // replace it with underscore
-          if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
-            directoryName += "_";
-
-          directoryName = Util.MakeValidFolderName(directoryName);
-          directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
-
           // Now check the validity of the directory
           if (!System.IO.Directory.Exists(directoryName))
           {
@@ -387,6 +280,133 @@ namespace MPTagThat.Organise
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
+    private string ReplaceParametersWithValues(string parameter)
+    {
+      string directoryName = parameter.Trim(new char[] { '\\' });
+
+      try
+      {
+        if (directoryName.IndexOf("<A>") > -1)
+          directoryName = directoryName.Replace("<A>", track.Artist.Replace(';', '_').Trim());
+
+        if (directoryName.IndexOf("<T>") > -1)
+          directoryName = directoryName.Replace("<T>", track.Title.Trim());
+
+        if (directoryName.IndexOf("<B>") > -1)
+          directoryName = directoryName.Replace("<B>", track.Album.Trim());
+
+        if (directoryName.IndexOf("<Y>") > -1)
+          directoryName = directoryName.Replace("<Y>", track.Year.ToString().Trim());
+
+        if (directoryName.IndexOf("<K>") > -1)
+        {
+          string[] str = track.Track.Split('/');
+          directoryName = directoryName.Replace("<K>", str[0]);
+        }
+
+        if (directoryName.IndexOf("<k>") > -1)
+        {
+          string[] str = track.Track.Split('/');
+          directoryName = directoryName.Replace("<k>", str[1]);
+        }
+
+        if (directoryName.IndexOf("<D>") > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          directoryName = directoryName.Replace("<D>", str[0]);
+        }
+
+        if (directoryName.IndexOf("<d>") > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          directoryName = directoryName.Replace("<d>", str[1]);
+        }
+
+        if (directoryName.IndexOf("<G>") > -1)
+        {
+          string[] str = track.Genre.Split(';');
+          directoryName = directoryName.Replace("<G>", str[0].Trim());
+        }
+
+        if (directoryName.IndexOf("<O>") > -1)
+          directoryName = directoryName.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
+
+        if (directoryName.IndexOf("<C>") > -1)
+          directoryName = directoryName.Replace("<C>", track.Comment.Trim());
+
+        if (directoryName.IndexOf("<U>") > -1)
+          directoryName = directoryName.Replace("<U>", track.Grouping.Trim());
+
+        if (directoryName.IndexOf("<N>") > -1)
+          directoryName = directoryName.Replace("<N>", track.Conductor.Trim());
+
+        if (directoryName.IndexOf("<R>") > -1)
+          directoryName = directoryName.Replace("<R>", track.Composer.Replace(';', '_').Trim());
+
+        if (directoryName.IndexOf("<S>") > -1)
+          directoryName = directoryName.Replace("<S>", track.SubTitle.Trim());
+
+        if (directoryName.IndexOf("<E>") > -1)
+          directoryName = directoryName.Replace("<E>", track.BPM.ToString());
+
+        if (directoryName.IndexOf("<M>") > -1)
+          directoryName = directoryName.Replace("<M>", track.Interpreter.Trim());
+
+        if (directoryName.IndexOf("<I>") > -1)
+          directoryName = directoryName.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
+
+        int index = directoryName.IndexOf("<A:");
+        int last = -1;
+        if (index > -1)
+        {
+          last = directoryName.IndexOf(">", index);
+          string s1 = directoryName.Substring(index, last - index + 1);
+          int strLength = Convert.ToInt32(s1.Substring(3, 1));
+          string s2 = track.Artist.Replace(';', '_').Trim();
+
+          if (s2.Length >= strLength)
+            s2 = s2.Substring(0, strLength);
+
+          directoryName = directoryName.Replace(s1, s2);
+        }
+
+        index = directoryName.IndexOf("<O:");
+        last = -1;
+        if (index > -1)
+        {
+          last = directoryName.IndexOf(">", index);
+          string s1 = directoryName.Substring(index, last - index + 1);
+          int strLength = Convert.ToInt32(s1.Substring(3, 1));
+          string s2 = track.AlbumArtist.Replace(';', '_').Trim();
+
+          if (s2.Length >= strLength)
+            s2 = s2.Substring(0, strLength);
+
+          directoryName = directoryName.Replace(s1, s2);
+        }
+
+        // Empty Values would create invalid folders
+        directoryName = directoryName.Replace(@"\\", @"\_\");
+
+        // If the directory name starts with a backslash, we've got an empty value on the beginning
+        if (directoryName.IndexOf("\\") == 0)
+          directoryName = "_" + directoryName;
+
+        // We might have an empty value on the end of the path, which is indicated by a slash. 
+        // replace it with underscore
+        if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
+          directoryName += "_";
+
+        directoryName = Util.MakeValidFolderName(directoryName);
+        directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
+      }
+      catch (Exception)
+      {
+        return "";
+      }
+      return directoryName;
+    }
+
     private void DeleteSubFolders(string folder)
     {
       string[] subFolders = System.IO.Directory.GetDirectories(folder);
@@ -431,6 +451,58 @@ namespace MPTagThat.Organise
         log.Error("Error Deleting Folder: {0} {1}", folder, ex.Message);
       }
     }
+    #endregion
+
+    #region Preview Handling
+    /// <summary>
+    /// Fill the Preview Grid with the selected rows
+    /// </summary>
+    private void FillPreview()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      _previewForm.Tracks.Clear();
+      foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
+      }
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Loop through all the selected rows and set the Preview
+    /// </summary>
+    /// <param name="parameters"></param>
+    private void OrganiseFilesPreview(string parameters)
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+
+      int index = -1;
+
+      foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        index++;
+        try
+        {
+          track = _main.TracksGridView.TrackList[row.Index];
+          trackPreview = _previewForm.Tracks[index];
+          trackPreview.NewFullFileName = System.IO.Path.Combine(ReplaceParametersWithValues(parameters), trackPreview.FileName);
+        }
+        catch (Exception)
+        {
+        }
+      }
+
+      _previewForm.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
     #endregion
 
     #region Event Handlers
@@ -557,6 +629,9 @@ namespace MPTagThat.Organise
         if (newFormat)
           Options.OrganiseSettingsTemp.Add(cbFormat.Text);
 
+        if (_isPreviewOpen)
+          _previewForm.Close();
+
         this.Close();
       }
     }
@@ -568,7 +643,26 @@ namespace MPTagThat.Organise
     /// <param name="e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
+      if (_isPreviewOpen)
+        _previewForm.Close();
+
       this.Close();
+    }
+
+    /// <summary>
+    /// Text in the Combo is been changed, Update the Preview Value
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbFormat_TextChanged(object sender, EventArgs e)
+    {
+      if (!_isPreviewOpen)
+        return;
+
+      if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.Organise))
+      {
+        OrganiseFilesPreview(cbFormat.Text);
+      }
     }
 
     /// <summary>
@@ -637,6 +731,50 @@ namespace MPTagThat.Organise
 
       Options.OrganiseSettingsTemp.RemoveAt(cbFormat.SelectedIndex);
       cbFormat.Items.RemoveAt(cbFormat.SelectedIndex);
+    }
+
+    /// <summary>
+    /// Toggle the Review window display
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btReview_Click(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _isPreviewOpen = false;
+        _previewForm.Hide();
+      }
+      else
+      {
+        _isPreviewOpen = true;
+        if (_previewForm == null)
+        {
+          _previewForm = new Preview();
+          // Add the second column for the new filename to preview
+          _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFileName"), 480);
+          FillPreview();
+        }
+        _previewForm.MaximumSize = new Size(this.Width, _previewForm.Height);
+        _previewForm.Size = new Size(this.Width + 50, _previewForm.Height);
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+        cbFormat_TextChanged(null, new EventArgs());
+        _previewForm.Show();
+
+      }
+    }
+
+    /// <summary>
+    /// The form is moved. Move the Preview Window as well
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OrganiseFiles_Move(object sender, EventArgs e)
+    {
+      if (_isPreviewOpen)
+      {
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+      }
     }
 
     /// <summary>
