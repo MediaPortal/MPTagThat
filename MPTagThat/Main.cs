@@ -945,17 +945,8 @@ namespace MPTagThat
         TreeNode node = treeViewFolderBrowser.GetNodeAt(p);
         if (node != null)
         {
-
-          // Select the node the user has clicked.
-          // The node appears selected until the menu is displayed on the screen.
-          _oldSelectNode = treeViewFolderBrowser.SelectedNode;
           treeViewFolderBrowser.SelectedNode = node;
-
           contextMenuTreeView.Show(treeViewFolderBrowser, p);
-
-          // Highlight the selected node.
-          treeViewFolderBrowser.SelectedNode = _oldSelectNode;
-          _oldSelectNode = null;
         }
       }
     }
