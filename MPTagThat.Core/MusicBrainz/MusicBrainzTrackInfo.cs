@@ -13,6 +13,7 @@ namespace MPTagThat.Core.MusicBrainz
   public class MusicBrainzTrackInfo : IDisposable
   {
     #region Private Fields
+    private ILogger log = ServiceScope.Get<ILogger>();
     private string fingerprint = string.Empty;
     private long lengthInMS = 0;
     private string puid = string.Empty;
@@ -31,6 +32,7 @@ namespace MPTagThat.Core.MusicBrainz
     #region Public Methods
     public List<MusicBrainzTrack> GetMusicBrainzTrack(string fileName)
     {
+      log.Debug("Creating Fingerprint");
       // Create a Decoding Channel
       int channel = Bass.BASS_StreamCreateFile(fileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
       if (channel == 0)
@@ -88,6 +90,7 @@ namespace MPTagThat.Core.MusicBrainz
         "0",                        // Year,
         "");
 
+      log.Debug("Get MusicBrainz PUID");
       string responseXml = Util.GetWebPage(requestString);
       string puid = string.Empty;
 

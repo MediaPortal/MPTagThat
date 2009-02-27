@@ -401,11 +401,15 @@ namespace MPTagThat.GridView
 
           using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
           {
+            log.Debug("Processing file: {0}", track.FullFileName);
             dlgProgress.StatusLabel2 = localisation.ToString("progress", "InternetMusicBrainz");
             List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
 
             if (musicBrainzTracks == null)
+            {
+              log.Debug("Couldn't identify file");
               continue;
+            }
 
             if (musicBrainzTracks.Count > 0)
             {
