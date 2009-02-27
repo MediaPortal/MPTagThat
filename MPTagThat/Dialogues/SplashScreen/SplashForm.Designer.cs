@@ -126,6 +126,7 @@
       this.Name = "SplashForm";
       this.Opacity = 0.75;
       this.Shape = this.roundRectShape1;
+      this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "SplashForm";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).EndInit();

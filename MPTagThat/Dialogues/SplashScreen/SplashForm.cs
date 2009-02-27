@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
@@ -15,6 +16,8 @@ namespace MPTagThat.Dialogues
     public SplashForm()
     {
       InitializeComponent();
+
+      this.Text = ServiceScope.Get<ILocalisation>().ToString("system", "ApplicationName");
 
       Assembly assembly = Assembly.GetExecutingAssembly();
       AssemblyName assemblyName = assembly.GetName();
