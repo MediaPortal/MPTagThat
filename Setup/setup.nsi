@@ -43,6 +43,8 @@ SetCompressor /SOLID lzma
 # MUI defines
 !define MUI_ICON "MPTagThat.ico"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
+!define MUI_FINISHPAGE_RUN            "$INSTDIR\MPTagThat.exe"
+!define MUI_FINISHPAGE_RUN_TEXT       "Run MPTagThat after install"
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${REGKEY}"
@@ -99,6 +101,10 @@ Section -Main SEC0000
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll.config
     
+	# Docs Dir
+	SetOutPath $INSTDIR\Docs
+	File /r /x .svn ..\MPTagThat.Base\Docs\*
+	
     # Language Dir
     SetOutPath $INSTDIR\Language
     File /r /x .svn ..\MPTagThat.Base\Language\*
@@ -159,6 +165,7 @@ done${UNSECTION_ID}:
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
     RmDir /r /REBOOTOK $INSTDIR\bin
+    RmDir /r /REBOOTOK $INSTDIR\Docs
     RmDir /r /REBOOTOK $INSTDIR\Language
     RmDir /r /REBOOTOK $INSTDIR\Scripts
     RmDir /r /REBOOTOK $INSTDIR\Themes

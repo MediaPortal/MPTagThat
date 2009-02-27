@@ -1,0 +1,12 @@
+Changelog
+---------
+
+1.0.3345 Build 29007 Date: 27.02.2009
+-------------------------------------
+- Labels were not displayed on US English systems
+- Added Preview Dialogs to "Tag From File", Rename and Organise
+- State of "Scan Subfolders" is saved
+
+1.0.3344 Build 3400 Date: 26.02.2009
+------------------------------------
+- Initial Release
