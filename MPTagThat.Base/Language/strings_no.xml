@@ -144,7 +144,6 @@
     <String id="RemovePicture">Fjern Bilde</String>
     <String id="GetPicture">Hent fra Fil</String>
     <String id="GetPictureInternet">Hent fra Internett</String>
-    <String id="AddPicture">Legg til Bilde</String>
     <String id="PictureType">Bilde Type:</String>
     <String id="PictureHeaderType">Bilde Type</String>
     <String id="PictureDescriptor">Beskrivelse:</String>

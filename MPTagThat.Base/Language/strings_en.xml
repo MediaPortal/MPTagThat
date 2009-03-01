@@ -144,7 +144,6 @@
     <String id="RemovePicture">Remove Picture</String>
     <String id="GetPicture">Get from File</String>
     <String id="GetPictureInternet">Get from Internet</String>
-    <String id="AddPicture">Add Picture</String>
     <String id="PictureType">Picture Type:</String>
     <String id="PictureHeaderType">Picture Type</String>
     <String id="PictureDescriptor">Descriptor:</String>

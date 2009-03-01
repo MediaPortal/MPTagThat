@@ -215,12 +215,31 @@ namespace MPTagThat.TagEdit
               pictureBoxCover.Image = img;
             }
           }
-          buttonAddPicture.Enabled = true;
         }
       }
       catch (Exception ex)
       {
         log.Error("Exception adding picture: {0}", ex.Message);
+      }
+    }
+
+    /// <summary>
+    /// Add the currently selected Picture to the collection
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void AddPictureToList()
+    {
+      if (_pic != null)
+      {
+        _pic.Description = tbPicDesc.Text;
+        _pic.Type = (PictureType)Enum.Parse(typeof(TagLib.PictureType), cbPicType.SelectedItem != null ? cbPicType.SelectedItem.ToString() : "FrontCover");
+
+        dataGridViewPicture.Rows.Add(new object[] { _pic.Description, Enum.Format(typeof(TagLib.PictureType), _pic.Type, "G") });
+
+        _pictures.Add(_pic);
+        pictureBoxCover.Image = null;
+        _pictureIsChanged = true;
       }
     }
 
@@ -449,27 +468,6 @@ namespace MPTagThat.TagEdit
 
     #region Picture
     /// <summary>
-    /// Add the currently selected Picture to the collection
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void buttonAddPicture_Click(object sender, EventArgs e)
-    {
-      if (_pic != null)
-      {
-        _pic.Description = tbPicDesc.Text;
-        _pic.Type = (PictureType)Enum.Parse(typeof(TagLib.PictureType), cbPicType.SelectedItem != null ? cbPicType.SelectedItem.ToString() : "FrontCover");
-
-        dataGridViewPicture.Rows.Add(new object[] { _pic.Description, Enum.Format(typeof(TagLib.PictureType), _pic.Type, "G") });
-
-        _pictures.Add(_pic);
-        pictureBoxCover.Image = null;
-        buttonAddPicture.Enabled = false;
-        _pictureIsChanged = true;
-      }
-    }
-
-    /// <summary>
     /// Load a new picture from a file
     /// </summary>
     /// <param name="sender"></param>
@@ -486,6 +484,7 @@ namespace MPTagThat.TagEdit
         try
         {
           _pic = new Picture(oFD.FileName);
+          AddPictureToList();
           AddPictureToPictureBox();
         }
         catch (Exception ex)
@@ -628,8 +627,7 @@ namespace MPTagThat.TagEdit
           _pic.MimeType = "image/jpg";
           _pic.Description = "";
           _pic.Type = TagLib.PictureType.FrontCover;
-          AddPictureToPictureBox();
-          buttonAddPicture.PerformClick();
+          AddPictureToList();
           AddPictureToPictureBox();
           _pictureIsChanged = true;
         }

@@ -95,7 +95,6 @@
       this.buttonExportPicture = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonRemovePicture = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonGetPicture = new MPTagThat.Core.WinControls.MPTButton();
-      this.buttonAddPicture = new MPTagThat.Core.WinControls.MPTButton();
       this.lblPicType = new MPTagThat.Core.WinControls.MPTLabel();
       this.cbPicType = new System.Windows.Forms.ComboBox();
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
@@ -988,7 +987,6 @@
       this.groupBoxPicture.Controls.Add(this.buttonExportPicture);
       this.groupBoxPicture.Controls.Add(this.buttonRemovePicture);
       this.groupBoxPicture.Controls.Add(this.buttonGetPicture);
-      this.groupBoxPicture.Controls.Add(this.buttonAddPicture);
       this.groupBoxPicture.Controls.Add(this.lblPicType);
       this.groupBoxPicture.Controls.Add(this.cbPicType);
       this.groupBoxPicture.Controls.Add(this.pictureBoxCover);
@@ -1007,7 +1005,7 @@
       // 
       this.buttonGetPictureInternet.Localisation = "GetPictureInternet";
       this.buttonGetPictureInternet.LocalisationContext = "TagEdit";
-      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 188);
+      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 133);
       this.buttonGetPictureInternet.Name = "buttonGetPictureInternet";
       this.buttonGetPictureInternet.Size = new System.Drawing.Size(125, 45);
       this.buttonGetPictureInternet.TabIndex = 2;
@@ -1068,7 +1066,7 @@
       this.buttonExportPicture.Enabled = false;
       this.buttonExportPicture.Localisation = "ExportPicture";
       this.buttonExportPicture.LocalisationContext = "TagEdit";
-      this.buttonExportPicture.Location = new System.Drawing.Point(9, 294);
+      this.buttonExportPicture.Location = new System.Drawing.Point(9, 239);
       this.buttonExportPicture.Name = "buttonExportPicture";
       this.buttonExportPicture.Size = new System.Drawing.Size(125, 45);
       this.buttonExportPicture.TabIndex = 4;
@@ -1081,7 +1079,7 @@
       this.buttonRemovePicture.Enabled = false;
       this.buttonRemovePicture.Localisation = "RemovePicture";
       this.buttonRemovePicture.LocalisationContext = "TagEdit";
-      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 241);
+      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 186);
       this.buttonRemovePicture.Name = "buttonRemovePicture";
       this.buttonRemovePicture.Size = new System.Drawing.Size(125, 45);
       this.buttonRemovePicture.TabIndex = 3;
@@ -1093,26 +1091,13 @@
       // 
       this.buttonGetPicture.Localisation = "GetPicture";
       this.buttonGetPicture.LocalisationContext = "TagEdit";
-      this.buttonGetPicture.Location = new System.Drawing.Point(9, 135);
+      this.buttonGetPicture.Location = new System.Drawing.Point(9, 80);
       this.buttonGetPicture.Name = "buttonGetPicture";
       this.buttonGetPicture.Size = new System.Drawing.Size(125, 45);
       this.buttonGetPicture.TabIndex = 1;
       this.buttonGetPicture.Text = "Get from File";
       this.buttonGetPicture.UseVisualStyleBackColor = true;
       this.buttonGetPicture.Click += new System.EventHandler(this.buttonGetPicture_Click);
-      // 
-      // buttonAddPicture
-      // 
-      this.buttonAddPicture.Enabled = false;
-      this.buttonAddPicture.Localisation = "AddPicture";
-      this.buttonAddPicture.LocalisationContext = "TagEdit";
-      this.buttonAddPicture.Location = new System.Drawing.Point(9, 82);
-      this.buttonAddPicture.Name = "buttonAddPicture";
-      this.buttonAddPicture.Size = new System.Drawing.Size(125, 45);
-      this.buttonAddPicture.TabIndex = 0;
-      this.buttonAddPicture.Text = "Add Picture";
-      this.buttonAddPicture.UseVisualStyleBackColor = true;
-      this.buttonAddPicture.Click += new System.EventHandler(this.buttonAddPicture_Click);
       // 
       // lblPicType
       // 
@@ -3273,7 +3258,6 @@
     protected MPTagThat.Core.WinControls.MPTLabel lblPicType;
     protected System.Windows.Forms.ComboBox cbPicType;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPicture;
-    protected MPTagThat.Core.WinControls.MPTButton buttonAddPicture;
     protected MPTagThat.Core.WinControls.MPTButton buttonExportPicture;
     protected MPTagThat.Core.WinControls.MPTButton buttonRemovePicture;
     protected System.Windows.Forms.DataGridView dataGridViewPicture;

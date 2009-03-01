@@ -144,7 +144,6 @@
     <String id="RemovePicture">Bild entfernen</String>
     <String id="GetPicture">Bild von Datei laden</String>
     <String id="GetPictureInternet">Bild im Internet suchen</String>
-    <String id="AddPicture"> Bild hinzufügen</String>
     <String id="PictureType">Bild Typ:</String>
     <String id="PictureHeaderType">Bild Typ</String>
     <String id="PictureDescriptor">Beschreibung</String>
