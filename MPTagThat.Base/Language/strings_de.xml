@@ -511,8 +511,14 @@
     <String id="Theme">Farbschema:</String>
     <String id="Language">Sprache:</String>
     <String id="TabTags">Tags</String>
+    <String id="TabTagsID3">ID3</String>
+    <String id="TabTagsLyricsCover">Liedtexte / Bilder</String>
+	<String id="GroupBoxPictures">Bilder</String>
+    <String id="OverwriteExistingCover">Existierende Bilder beim automatischen Taggen überschreiben</String>
+    <String id="EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</String>
     <String id="GroupBoxLyrics">Liedtexte</String>
     <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>
+    <String id="OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</String>
     <String id="GroupBoxLyricsSites">Durchsuchen der Lyricsseiten</String>
     <String id="SeekLyrics">Seek Lyrics</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>

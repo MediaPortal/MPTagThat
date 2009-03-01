@@ -279,9 +279,9 @@ namespace MPTagThat.GridView
     #region Delegate Called Methods
     private void lyricFound(String lyricStrings, String artist, String title, String site, int row)
     {
-        dataGridViewLyrics.Rows[row].Cells[0].Value = true;
-        dataGridViewLyrics.Rows[row].Cells[1].Value = localisation.ToString("lyricssearch", "FoundLyrics");
-        dataGridViewLyrics.Rows[row].Cells[5].Value = lyricStrings;
+      dataGridViewLyrics.Rows[row].Cells[0].Value = true;
+      dataGridViewLyrics.Rows[row].Cells[1].Value = localisation.ToString("lyricssearch", "FoundLyrics");
+      dataGridViewLyrics.Rows[row].Cells[5].Value = lyricStrings;
     }
 
     private void lyricNotFound(String artist, String title, String message, String site, int row)
@@ -297,7 +297,7 @@ namespace MPTagThat.GridView
       {
         lc.StopSearches = true;
       }
-      
+
       // Due to a bug, we first need the view to readonly, otherwise the checkbox in the first column is not displayed as checked.
       dataGridViewLyrics.ReadOnly = false;
       dataGridViewLyrics.Refresh();

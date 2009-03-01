@@ -55,6 +55,9 @@ namespace MPTagThat.Core
     private bool _tagsCopyArtist;
     private bool _tagsUseCaseConversion;
     private bool _tagsCreateFolderThumb;
+    private bool _tagsEmbedFolderThumb;
+    private bool _tagsOverwriteExitingCovers;
+    private bool _tagsOverwriteExitingLyrics;
     private bool _tagsUseMediaPortalDatabase;
     private string _tagsMediaPortalDatabase;
     private int _playerSpectrumIndex;
@@ -195,6 +198,27 @@ namespace MPTagThat.Core
     {
       get { return _tagsCreateFolderThumb; }
       set { _tagsCreateFolderThumb = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool EmbedFolderThumb
+    {
+      get { return _tagsEmbedFolderThumb; }
+      set { _tagsEmbedFolderThumb = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool OverwriteExistingCovers
+    {
+      get { return _tagsOverwriteExitingCovers; }
+      set { _tagsOverwriteExitingCovers = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool OverwriteExistingLyrics
+    {
+      get { return _tagsOverwriteExitingLyrics; }
+      set { _tagsOverwriteExitingLyrics = value; }
     }
 
     [Setting(SettingScope.User, "false")]

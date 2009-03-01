@@ -227,6 +227,9 @@ namespace MPTagThat.Preferences
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
       ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
+      ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
+      ckOverwriteExistingCovers.Checked = Options.MainSettings.OverwriteExistingCovers;
+      ckOverwriteExistingLyrics.Checked = Options.MainSettings.OverwriteExistingLyrics;
 
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
@@ -695,6 +698,9 @@ namespace MPTagThat.Preferences
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
       Options.MainSettings.CreateFolderThumb = ckCreateMissingFolderThumb.Checked;
+      Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
+      Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
+      Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
 
       if (ckUseMediaPortalDatabase.Checked && File.Exists(tbMediaPortalDatabase.Text))
       {

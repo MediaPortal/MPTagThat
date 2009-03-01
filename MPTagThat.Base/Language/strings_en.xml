@@ -511,8 +511,14 @@
     <String id="Theme">Theme:</String>
     <String id="Language">Language:</String>
     <String id="TabTags">Tags</String>
+    <String id="TabTagsID3">ID3</String>
+    <String id="TabTagsLyricsCover">Lyrics / Cover</String>
+    <String id="GroupBoxPictures">Pictures</String>
+    <String id="OverwriteExistingCover">Overwrite existing Cover(s) on automatic tagging</String>
+    <String id="EmbedExistingThumb">Embed existing folder thumb (folder.jpg) on cover search</String>
     <String id="GroupBoxLyrics">Lyrics</String>
     <String id="SwitchArtist">Switch Artist before submit</String>
+    <String id="OverwriteExistingLyrics">Overwrite existing lyrics on automatic tagging</String>
     <String id="GroupBoxLyricsSites">Sites to Search</String>
     <String id="SeekLyrics">Seek Lyrics</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>

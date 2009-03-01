@@ -477,15 +477,18 @@ namespace MPTagThat.GridView
               // Do we have a valid Amazon Album?
               if (musicBrainzAlbum.Amazon != null)
               {
-                // Get the picture
-                ByteVector vector = musicBrainzAlbum.Amazon.AlbumImage;
-                if (vector != null)
+                // Only write a picture if we don't have a picture OR Overwrite Pictures is set
+                if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
                 {
-                  Picture pic = new Picture(vector);
-                  pic.MimeType = "image/jpg";
-                  pic.Description = "";
-                  pic.Type = PictureType.FrontCover;
-                  track.Pictures = new TagLib.IPicture[] { pic };
+                  ByteVector vector = musicBrainzAlbum.Amazon.AlbumImage;
+                  if (vector != null)
+                  {
+                    Picture pic = new Picture(vector);
+                    pic.MimeType = "image/jpg";
+                    pic.Description = "";
+                    pic.Type = PictureType.FrontCover;
+                    track.Pictures = new TagLib.IPicture[] { pic };
+                  }
                 }
               }
 
@@ -553,6 +556,9 @@ namespace MPTagThat.GridView
 
       string savedArtist = "";
       string savedAlbum = "";
+      string savedFolder = "";
+
+      Picture folderThumb = null;
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -575,6 +581,30 @@ namespace MPTagThat.GridView
           }
           TrackData track = bindingList[row.Index];
 
+          // Should we take an existing folder.jpg instead of searching the web
+          if (Options.MainSettings.EmbedFolderThumb)
+          {
+            if (folderThumb == null || Path.GetDirectoryName(track.FullFileName) != savedFolder)
+            {
+              savedFolder = Path.GetDirectoryName(track.FullFileName);
+              folderThumb = GetFolderThumb(savedFolder);
+            }
+
+            if (folderThumb != null)
+            {
+              // Only write a picture if we don't have a picture OR Overwrite Pictures is set
+              if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
+              {
+                // Prepare Picture Array and then add the cover retrieved
+                List<IPicture> pics = new List<IPicture>();
+                pics.Add(folderThumb);
+                track.Pictures = pics.ToArray();
+              }
+            }
+            continue;
+          }
+
+          // If we don't have an Album or Artist, don't even query
           if (track.Album == "" || track.Artist == "")
             continue;
 
@@ -620,15 +650,19 @@ namespace MPTagThat.GridView
           // Now update the Cover Art
           if (amazonAlbum != null)
           {
-            ByteVector vector = amazonAlbum.AlbumImage;
-            if (vector != null)
+            // Only write a picture if we don't have a picture OR Overwrite Pictures is set
+            if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
             {
-              // Prepare Picture Array and then add the cover retrieved
-              List<IPicture> pics = new List<IPicture>();
-              Picture pic = new Picture(vector);
-              pics.Add(pic);
+              ByteVector vector = amazonAlbum.AlbumImage;
+              if (vector != null)
+              {
+                // Prepare Picture Array and then add the cover retrieved
+                List<IPicture> pics = new List<IPicture>();
+                Picture pic = new Picture(vector);
+                pics.Add(pic);
 
-              track.Pictures = pics.ToArray();
+                track.Pictures = pics.ToArray();
+              }
             }
 
             // And also set the Year from the Release Date delivered by Amazon
@@ -671,6 +705,32 @@ namespace MPTagThat.GridView
       dlgProgress.Close();
 
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Return the folder.jpg as a Taglib.Picture
+    /// </summary>
+    /// <param name="folder"></param>
+    /// <returns></returns>
+    public Picture GetFolderThumb(string folder)
+    {
+      string thumb = Path.Combine(folder, "folder.jpg");
+      if (!System.IO.File.Exists(thumb))
+      {
+        return null;
+      }
+
+      try
+      {
+
+        Picture pic = new Picture(thumb);
+        return pic;
+      }
+      catch (Exception ex)
+      {
+        log.Error("Exception loading thumb file: {0} {1}", thumb, ex.Message);
+        return null;
+      }
     }
 
     /// <summary>
@@ -756,7 +816,11 @@ namespace MPTagThat.GridView
           dlgProgress.Close();
           return;
         }
-        tracks.Add(bindingList[row.Index]);
+        TrackData track = bindingList[row.Index];
+        if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
+        {
+          tracks.Add(track);
+        }
       }
 
       dlgProgress.Close();
@@ -951,7 +1015,7 @@ namespace MPTagThat.GridView
         }
 
         TrackData track = bindingList[row.Index];
-        
+
         bool commentRemoved = false;
         if (track.TagType.ToLower() == "mp3")
         {
