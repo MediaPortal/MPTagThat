@@ -29,11 +29,7 @@ namespace MPTagThat
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-      this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.menuRefresh = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.dataGridViewError = new System.Windows.Forms.DataGridView();
       this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,20 +52,11 @@ namespace MPTagThat
       this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
       this.panelLeft = new MPTagThat.Core.WinControls.TTPanel();
       this.panelLeftTop = new MPTagThat.Core.WinControls.TTPanel();
-      this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.treeViewPanelBottom = new MPTagThat.Core.WinControls.TTPanel();
-      this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
-      this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelLeftBottom = new MPTagThat.Core.WinControls.TTPanel();
-      this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddleTop = new MPTagThat.Core.WinControls.TTPanel();
       this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
       this.playerControl = new MPTagThat.Player.PlayerControl();
-      this.contextMenuTreeView.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
       this.statusStrip.SuspendLayout();
       this.panelMiddleBottom.SuspendLayout();
@@ -79,40 +66,10 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbumArt)).BeginInit();
       this.fileInfoPanel.SuspendLayout();
       this.panelLeft.SuspendLayout();
-      this.panelLeftTop.SuspendLayout();
-      this.treeViewPanel.SuspendLayout();
-      this.treeViewPanelBottom.SuspendLayout();
-      this.panelLeftBottom.SuspendLayout();
-      this.optionsPanelLeft.SuspendLayout();
       this.panelMiddle.SuspendLayout();
       this.panelMiddleTop.SuspendLayout();
       this.playerPanel.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // contextMenuTreeView
-      // 
-      this.contextMenuTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuRefresh,
-            this.menuDelete});
-      this.contextMenuTreeView.Name = "contextMenuTreeView";
-      this.contextMenuTreeView.Size = new System.Drawing.Size(114, 48);
-      // 
-      // menuRefresh
-      // 
-      this.menuRefresh.Image = global::MPTagThat.Properties.Resources.RefreshDocViewHS;
-      this.menuRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.menuRefresh.Name = "menuRefresh";
-      this.menuRefresh.Size = new System.Drawing.Size(113, 22);
-      this.menuRefresh.Text = "Refresh";
-      this.menuRefresh.Click += new System.EventHandler(this.contextMenuTreeViewRefresh_Click);
-      // 
-      // menuDelete
-      // 
-      this.menuDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuDelete.Image")));
-      this.menuDelete.Name = "menuDelete";
-      this.menuDelete.Size = new System.Drawing.Size(113, 22);
-      this.menuDelete.Text = "Delete";
-      this.menuDelete.Click += new System.EventHandler(this.contextMenuTreeViewDelete_Click);
       // 
       // dataGridViewError
       // 
@@ -365,7 +322,6 @@ namespace MPTagThat
       // panelLeft
       // 
       this.panelLeft.Controls.Add(this.panelLeftTop);
-      this.panelLeft.Controls.Add(this.panelLeftBottom);
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
@@ -374,135 +330,11 @@ namespace MPTagThat
       // 
       // panelLeftTop
       // 
-      this.panelLeftTop.Controls.Add(this.treeViewPanel);
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 370);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 511);
       this.panelLeftTop.TabIndex = 4;
-      // 
-      // treeViewPanel
-      // 
-      this.treeViewPanel.AnimationStep = 30;
-      this.treeViewPanel.BorderColor = System.Drawing.Color.Transparent;
-      this.treeViewPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
-      this.treeViewPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
-      this.treeViewPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
-      this.treeViewPanel.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.treeViewPanel.CaptionSize = 24;
-      this.treeViewPanel.CaptionText = "Folders";
-      this.treeViewPanel.CaptionTextColor = System.Drawing.Color.Black;
-      this.treeViewPanel.Controls.Add(this.treeViewPanelBottom);
-      this.treeViewPanel.Controls.Add(this.treeViewPanelTop);
-      this.treeViewPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
-      this.treeViewPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
-      this.treeViewPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewPanel.Location = new System.Drawing.Point(0, 0);
-      this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(150, 370);
-      this.treeViewPanel.TabIndex = 3;
-      // 
-      // treeViewPanelBottom
-      // 
-      this.treeViewPanelBottom.Controls.Add(this.treeViewFolderBrowser);
-      this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
-      this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(150, 346);
-      this.treeViewPanelBottom.TabIndex = 2;
-      // 
-      // treeViewFolderBrowser
-      // 
-      this.treeViewFolderBrowser.BackColor = System.Drawing.SystemColors.Window;
-      this.treeViewFolderBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.treeViewFolderBrowser.DataSource = null;
-      this.treeViewFolderBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk)
-                  | Raccoom.Windows.Forms.DriveTypes.LocalDisk)
-                  | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
-      this.treeViewFolderBrowser.HideSelection = false;
-      this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
-      this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
-      this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(150, 346);
-      this.treeViewFolderBrowser.TabIndex = 0;
-      this.treeViewFolderBrowser.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_Click);
-      this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
-      this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
-      this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
-      this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
-      this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
-      // 
-      // treeViewPanelTop
-      // 
-      this.treeViewPanelTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.treeViewPanelTop.Location = new System.Drawing.Point(0, 0);
-      this.treeViewPanelTop.Name = "treeViewPanelTop";
-      this.treeViewPanelTop.Size = new System.Drawing.Size(150, 24);
-      this.treeViewPanelTop.TabIndex = 1;
-      // 
-      // panelLeftBottom
-      // 
-      this.panelLeftBottom.Controls.Add(this.optionsPanelLeft);
-      this.panelLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelLeftBottom.Location = new System.Drawing.Point(0, 370);
-      this.panelLeftBottom.Name = "panelLeftBottom";
-      this.panelLeftBottom.Size = new System.Drawing.Size(150, 141);
-      this.panelLeftBottom.TabIndex = 5;
-      // 
-      // optionsPanelLeft
-      // 
-      this.optionsPanelLeft.AnimationStep = 30;
-      this.optionsPanelLeft.BorderColor = System.Drawing.Color.Transparent;
-      this.optionsPanelLeft.CaptionBrush = Stepi.UI.BrushType.Solid;
-      this.optionsPanelLeft.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
-      this.optionsPanelLeft.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
-      this.optionsPanelLeft.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.optionsPanelLeft.CaptionSize = 24;
-      this.optionsPanelLeft.CaptionText = "Options";
-      this.optionsPanelLeft.CaptionTextColor = System.Drawing.Color.Black;
-      this.optionsPanelLeft.Controls.Add(this.checkBoxRecursive);
-      this.optionsPanelLeft.Controls.Add(this.btnRefreshFolder);
-      this.optionsPanelLeft.CornerStyle = Stepi.UI.CornerStyle.Normal;
-      this.optionsPanelLeft.DirectionCtrlColor = System.Drawing.Color.DarkGray;
-      this.optionsPanelLeft.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.optionsPanelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.optionsPanelLeft.Location = new System.Drawing.Point(0, 0);
-      this.optionsPanelLeft.Name = "optionsPanelLeft";
-      this.optionsPanelLeft.Size = new System.Drawing.Size(150, 141);
-      this.optionsPanelLeft.TabIndex = 2;
-      // 
-      // checkBoxRecursive
-      // 
-      this.checkBoxRecursive.AutoSize = true;
-      this.checkBoxRecursive.Localisation = "ScanSubfolder";
-      this.checkBoxRecursive.LocalisationContext = "main";
-      this.checkBoxRecursive.Location = new System.Drawing.Point(8, 43);
-      this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
-      this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
-      this.checkBoxRecursive.TabIndex = 3;
-      this.checkBoxRecursive.Text = "Scan all subdirectories";
-      this.checkBoxRecursive.UseVisualStyleBackColor = true;
-      // 
-      // btnRefreshFolder
-      // 
-      this.btnRefreshFolder.AutoSize = true;
-      this.btnRefreshFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.btnRefreshFolder.Image = global::MPTagThat.Properties.Resources.RefreshDocViewHS;
-      this.btnRefreshFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnRefreshFolder.Localisation = "ButtonRefreshFolder";
-      this.btnRefreshFolder.LocalisationContext = "main";
-      this.btnRefreshFolder.Location = new System.Drawing.Point(5, 66);
-      this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
-      this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
-      this.btnRefreshFolder.TabIndex = 4;
-      this.btnRefreshFolder.Text = "Refresh Folder View";
-      this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-      this.btnRefreshFolder.UseVisualStyleBackColor = true;
-      this.btnRefreshFolder.Click += new System.EventHandler(this.btnRefreshFolder_Click);
       // 
       // panelTop
       // 
@@ -572,7 +404,6 @@ namespace MPTagThat
       this.Move += new System.EventHandler(this.Main_Move);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_Close);
       this.Resize += new System.EventHandler(this.Main_Resize);
-      this.contextMenuTreeView.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).EndInit();
       this.statusStrip.ResumeLayout(false);
       this.statusStrip.PerformLayout();
@@ -584,12 +415,6 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbumArt)).EndInit();
       this.fileInfoPanel.ResumeLayout(false);
       this.panelLeft.ResumeLayout(false);
-      this.panelLeftTop.ResumeLayout(false);
-      this.treeViewPanel.ResumeLayout(false);
-      this.treeViewPanelBottom.ResumeLayout(false);
-      this.panelLeftBottom.ResumeLayout(false);
-      this.optionsPanelLeft.ResumeLayout(false);
-      this.optionsPanelLeft.PerformLayout();
       this.panelMiddle.ResumeLayout(false);
       this.panelMiddleTop.ResumeLayout(false);
       this.playerPanel.ResumeLayout(false);
@@ -604,7 +429,6 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.TTPanel panelLeft;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterLeft;
     private MPTagThat.Core.WinControls.TTPanel panelRight;
-    private Raccoom.Windows.Forms.TreeViewFolderBrowser treeViewFolderBrowser;
     private MPTagThat.Core.WinControls.TTExtendedPanel fileInfoPanel;
     private MPTagThat.Core.WinControls.TTExtendedPanel picturePanel;
     private System.Windows.Forms.ListView listViewFileInfo;
@@ -612,17 +436,7 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterRight;
     private MPTagThat.Core.WinControls.TTPanel panelPicSize;
     private System.Windows.Forms.PictureBox pictureBoxAlbumArt;
-    private MPTagThat.Core.WinControls.MPTCheckBox checkBoxRecursive;
     private MPTagThat.Core.WinControls.TTPanel panelLeftTop;
-    private MPTagThat.Core.WinControls.TTPanel panelLeftBottom;
-    private MPTagThat.Core.WinControls.TTExtendedPanel optionsPanelLeft;
-    private MPTagThat.Core.WinControls.TTExtendedPanel treeViewPanel;
-    private MPTagThat.Core.WinControls.TTPanel treeViewPanelTop;
-    private MPTagThat.Core.WinControls.MPTButton btnRefreshFolder;
-    private System.Windows.Forms.ContextMenuStrip contextMenuTreeView;
-    private System.Windows.Forms.ToolStripMenuItem menuRefresh;
-    private System.Windows.Forms.ToolStripMenuItem menuDelete;
-    private MPTagThat.Core.WinControls.TTPanel treeViewPanelBottom;
     private System.Windows.Forms.DataGridView dataGridViewError;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterBottom;
     private MPTagThat.Core.WinControls.TTPanel panelFileList;

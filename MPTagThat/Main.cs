@@ -8,9 +8,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using Microsoft.VisualBasic.FileIO;
 
-using Raccoom.Windows.Forms;
 using TagLib;
 using System.Reflection;
 using MPTagThat.GridView;
@@ -35,6 +33,8 @@ namespace MPTagThat
     private bool _rightPanelCollapsed = false;
     private bool _folderScanInProgress = false;
     private bool _treeViewFolderSelected = false;
+
+    private TreeViewControl treeViewControl;
 
     // Grids: Can't have them in Designer, as it will fail loading
     private MPTagThat.GridView.GridViewTracks gridViewControl;
@@ -164,6 +164,23 @@ namespace MPTagThat
     {
       get { return playerControl; }
     }
+
+    public bool TreeViewSelected
+    {
+      get { return _treeViewFolderSelected; }
+      set { _treeViewFolderSelected = value; }
+
+    }
+
+    public bool FolderScanning
+    {
+      get { return _folderScanInProgress; }
+    }
+
+    public TreeViewControl TreeView
+    {
+      get { return treeViewControl; }
+    }
     #endregion
 
     #region Form Open / Close
@@ -244,6 +261,11 @@ namespace MPTagThat
       gridViewControl.SetMainRef(this);
       #endregion
 
+      // Setup Treeview
+      treeViewControl = new TreeViewControl(this);
+      treeViewControl.Dock = DockStyle.Fill;
+      this.panelLeftTop.Controls.Add(treeViewControl);
+
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
 
@@ -260,12 +282,9 @@ namespace MPTagThat
       LocaliseScreen();
 
       // Populate the Treeview with the directories found
-      treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
-      treeViewFolderBrowser.DriveTypes = DriveTypes.LocalDisk | DriveTypes.NetworkDrive | DriveTypes.RemovableDisk | DriveTypes.CompactDisc;
-      treeViewFolderBrowser.RootFolder = Environment.SpecialFolder.Desktop;
-      treeViewFolderBrowser.CheckboxBehaviorMode = CheckboxBehaviorMode.None;
-      treeViewFolderBrowser.Populate();
-      treeViewFolderBrowser.ShowFolder(_selectedDirectory);
+      treeViewControl.Init();
+      treeViewControl.TreeView.Populate();
+      treeViewControl.TreeView.ShowFolder(_selectedDirectory);
 
       // Setup File Info Listeview
       SetupFileInfo();
@@ -305,7 +324,7 @@ namespace MPTagThat
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
-      Options.MainSettings.ScanSubFolders = checkBoxRecursive.Checked;
+      Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = this.Location;
       Options.MainSettings.FormSize = this.ClientSize;
       Options.MainSettings.LeftPanelSize = this.panelLeft.Width;
@@ -382,8 +401,6 @@ namespace MPTagThat
       this.Text = localisation.ToString("system", "ApplicationName");
 
       // Extended Panels. Doing it via TTExtendedPanel doesn't work for some reason
-      this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
-      this.optionsPanelLeft.CaptionText = localisation.ToString("main", "OptionsPanel");
       this.picturePanel.CaptionText = localisation.ToString("main", "PicturePanel");
       this.fileInfoPanel.CaptionText = localisation.ToString("main", "InformationPanel");
       this.dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
@@ -400,7 +417,7 @@ namespace MPTagThat
     {
       Util.EnterMethod(Util.GetCallingMethod());
       _selectedDirectory = Options.MainSettings.LastFolderUsed;
-      checkBoxRecursive.Checked = Options.MainSettings.ScanSubFolders;
+      treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
       _formLocation = Options.MainSettings.FormLocation;
       _formSize = Options.MainSettings.FormSize;
 
@@ -529,7 +546,7 @@ namespace MPTagThat
       try // just in case we are lacking sufficent permissions
       {
         dirInfo = new DirectoryInfo(_selectedDirectory);
-        GetFiles(_selectedDirectory, ref files, checkBoxRecursive.Checked);
+        GetFiles(_selectedDirectory, ref files, treeViewControl.ScanFolderRecursive);
       }
       catch (Exception)
       {
@@ -776,119 +793,8 @@ namespace MPTagThat
       }
     }
 
-    private void DeleteFolder()
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      TreeNodePath node = treeViewFolderBrowser.SelectedNode as TreeNodePath;
-      if (node != null)
-      {
-        FileSystem.DeleteDirectory(node.Path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
-
-        // Clear the tracks
-        gridViewControl.TrackList.Clear();
-        ClearFileInfoPanel();
-
-        // Now set the Selected directory to the Parent of the delted folder and reread the view
-        TreeNodePath parent = node.Parent as TreeNodePath;
-        _selectedDirectory = parent.Path;
-        treeViewFolderBrowser.Populate();
-        treeViewFolderBrowser.ShowFolder(_selectedDirectory);
-      }
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
     #region Event Handler
     #region Treeview Events
-    /// <summary>
-    /// The Treeview Control is the active control
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_Enter(object sender, EventArgs e)
-    {
-      _treeViewFolderSelected = true;
-    }
-
-    /// <summary>
-    /// The Treeview Control is no longer the active Control
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_Leave(object sender, EventArgs e)
-    {
-      _treeViewFolderSelected = false;
-    }
-
-    /// <summary>
-    /// A new Folder has been selected
-    /// Only allow navigation, if no folder scanning is active
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-    {
-      if (_folderScanInProgress)
-        e.Cancel = true;
-    }
-
-    /// <summary>
-    /// A Folder has been selected in the TreeView. Read the content
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      if (e.Action == TreeViewAction.Unknown)
-        // Called on startup of the program and can be ignored
-        return;
-
-      // Don't allow navigation, while Ripping or Burning
-      if (Burning || Ripping)
-        return;
-
-      TreeNodePath node = e.Node as TreeNodePath;
-      if (node != null)
-      {
-        _selectedDirectory = node.Path;
-        if (node.Text.Contains("CD-ROM Disc ("))
-        {
-          ribbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = ribbon.TabRip;
-          gridViewBurn.Hide();
-          gridViewRip.Show();
-          gridViewControl.Hide();
-          if (!splitterRight.IsCollapsed)
-            splitterRight.ToggleState();
-          gridViewRip.SelectedCDRomDrive = node.Text.Substring("CD-ROM Disc (".Length, 1);
-        }
-        else
-        {
-          // If we selected a folder, while being in the Burn or Rip View, go to the TagTab
-          if (ribbon.TabBurn.IsSelected || ribbon.TabRip.IsSelected || ribbon.TabConvert.IsSelected)
-          {
-            ribbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = ribbon.TabTag;
-            gridViewBurn.Hide();
-            gridViewRip.Hide();
-            gridViewControl.Show();
-            if (splitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
-              splitterRight.ToggleState();
-          }
-          RefreshTrackList();
-        }
-        toolStripStatusLabelFolder.Text = _selectedDirectory;
-      }
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// The User selected the Treeview
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_Click(object sender, MouseEventArgs e)
-    {
-      _treeViewSelected = true;
-    }
 
     /// <summary>
     /// Refreshes the Track List
@@ -902,74 +808,10 @@ namespace MPTagThat
         ClearFileInfoPanel();
         gridViewControl.View.Rows.Clear();
         FolderScan();
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       dataGridViewError.Rows.Clear();
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Refreshes the Foldrs
-    /// </summary>
-    public void RefreshFolders()
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      treeViewFolderBrowser.Populate();
-      treeViewFolderBrowser.ShowFolder(_selectedDirectory);
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Refresh the Folder List
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void btnRefreshFolder_Click(object sender, EventArgs e)
-    {
-      RefreshFolders();
-    }
-
-    /// <summary>
-    /// Show the Treview Context Menu on Right Mouse Click
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void treeViewFolderBrowser_MouseUp(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Right)
-      {
-
-        // Point where the mouse is clicked.
-        Point p = new Point(e.X, e.Y);
-
-        // Get the node that the user has clicked.
-        TreeNode node = treeViewFolderBrowser.GetNodeAt(p);
-        if (node != null)
-        {
-          treeViewFolderBrowser.SelectedNode = node;
-          contextMenuTreeView.Show(treeViewFolderBrowser, p);
-        }
-      }
-    }
-
-    /// <summary>
-    /// Refresh Button on Treeview Context Menu has been clicked
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void contextMenuTreeViewRefresh_Click(object sender, EventArgs e)
-    {
-      treeViewFolderBrowser.Populate();
-      treeViewFolderBrowser.ShowFolder(_selectedDirectory);
-    }
-
-    /// <summary>
-    /// Delete Button on Treeview Context Menu has been clicked
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void contextMenuTreeViewDelete_Click(object sender, EventArgs e)
-    {
-      DeleteFolder();
     }
     #endregion
 
@@ -1102,7 +944,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_SELECTALL:
-          TreeNodePath node = treeViewFolderBrowser.SelectedNode as TreeNodePath;
+          Raccoom.Windows.Forms.TreeNodePath node = treeViewControl.TreeView.SelectedNode as Raccoom.Windows.Forms.TreeNodePath;
           if (node != null)
             gridViewControl.View.SelectAll();
           break;
@@ -1119,14 +961,14 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TREEREFRESH:
-          contextMenuTreeViewRefresh_Click(null, null);
+          treeViewControl.RefreshFolders();
           break;
 
         case Action.ActionType.ACTION_FOLDERDELETE:
           if (!_treeViewSelected)
             break;
 
-          DeleteFolder();
+          treeViewControl.DeleteFolder();
           break;
 
         case Action.ActionType.ACTION_CASECONVERSION:

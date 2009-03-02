@@ -270,7 +270,7 @@ namespace MPTagThat.Organise
           i++; // Max of 10 levels, to avoid possible infinity loop
         }
         _main.CurrentDirectory = currentSelectedFolder;
-        _main.RefreshFolders();
+        _main.TreeView.RefreshFolders();
         _main.RefreshTrackList();
       }
 

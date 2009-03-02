@@ -376,6 +376,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>RibbonBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TreeViewControl.resx">
+      <DependentUpon>TreeViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -397,6 +400,12 @@
     </Compile>
     <Compile Include="RibbonBar.Designer.cs">
       <DependentUpon>RibbonBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TreeViewControl.Designer.cs">
+      <DependentUpon>TreeViewControl.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
