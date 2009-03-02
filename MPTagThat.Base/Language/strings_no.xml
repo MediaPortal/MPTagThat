@@ -512,7 +512,13 @@
     <String id="Language">Språk:</String>
     <String id="TabTags">Tagger</String>
     <String id="GroupBoxLyrics">Tekster</String>
+    <String id="TabTagsID3">ID3</String>
+    <String id="TabTagsLyricsCover">Lyrikk / Bilde</String>
+    <String id="GroupBoxPictures">Bilder</String>
+    <String id="OverwriteExistingCover">Skriv over eksisterende Bilde(r) ved automatisk tagging</String>
+    <String id="EmbedExistingThumb">Legg til eksisterende bilde (folder.jpg) ved bilde søk</String>
     <String id="SwitchArtist">Bytt Artist føre utførelse</String>
+    <String id="OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</String>
     <String id="GroupBoxLyricsSites">Sider å søke i</String>
     <String id="SeekLyrics">Søk etter Tekster</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>
