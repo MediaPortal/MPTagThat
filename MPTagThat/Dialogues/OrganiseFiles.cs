@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
+
 using MPTagThat.Core;
 using MPTagThat.Dialogues;
 
@@ -163,7 +165,7 @@ namespace MPTagThat.Organise
               }
             }
 
-            // If new file name validates to be the same as the ol file, i.e. it goes into the source folder
+            // If new file name validates to be the same as the old file, i.e. it goes into the source folder
             // then continue, as this would lead in the source file to be deleted first and then there's nothing, which could be copied
             if (newFilename.ToLowerInvariant() == track.FullFileName.ToLowerInvariant())
             {
@@ -176,15 +178,12 @@ namespace MPTagThat.Organise
 
             if (ckCopyFiles.Checked)
             {
-              System.IO.File.Copy(track.FullFileName, newFilename, true);
+              FileSystem.CopyFile(track.FullFileName, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
               row.Cells[1].Value = localisation.ToString("organise", "Copied");
             }
             else
             {
-              if (System.IO.File.Exists(newFilename))
-                System.IO.File.Delete(newFilename);
-
-              System.IO.File.Move(track.FullFileName, newFilename);
+              FileSystem.MoveFile(track.FullFileName, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
               row.Cells[1].Value = localisation.ToString("organise", "Moved");
             }
           }
@@ -231,14 +230,11 @@ namespace MPTagThat.Organise
 
               if (ckCopyFiles.Checked)
               {
-                System.IO.File.Copy(file, newFilename, true);
+                FileSystem.CopyFile(file, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
               }
               else
               {
-                if (System.IO.File.Exists(newFilename))
-                  System.IO.File.Delete(newFilename);
-
-                System.IO.File.Move(file, newFilename);
+                FileSystem.MoveFile(file, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
               }
             }
             catch (Exception ex)
