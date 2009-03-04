@@ -344,6 +344,11 @@
     <String id="AddPlayList">Legg til i Spilleliste</String>
     <String id="ClearPlayList">Tøm Spilleliste</String>
     <String id="CreateFolderThumb">Lag ikon for folder</String>
+    <String id="Copy">Kopier</String>
+    <String id="Cut">Klipp ut</String>
+    <String id="Paste">Lim Inn</String>
+    <String id="Delete">Slett</String>
+    <String id="Refresh">Oppdater</String>
  </Section>
   
     <!-- File Info Panel on the right side -->
@@ -511,11 +516,11 @@
     <String id="Theme">Tema:</String>
     <String id="Language">Språk:</String>
     <String id="TabTags">Tagger</String>
-    <String id="GroupBoxLyrics">Tekster</String>
     <String id="TabTagsID3">ID3</String>
     <String id="TabTagsLyricsCover">Lyrikk / Bilde</String>
     <String id="GroupBoxPictures">Bilder</String>
     <String id="OverwriteExistingCover">Skriv over eksisterende Bilde(r) ved automatisk tagging</String>
+    <String id="GroupBoxLyrics">Tekster</String>
     <String id="EmbedExistingThumb">Legg til eksisterende bilde (folder.jpg) ved bilde søk</String>
     <String id="SwitchArtist">Bytt Artist føre utførelse</String>
     <String id="OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</String>
