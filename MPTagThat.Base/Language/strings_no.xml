@@ -197,7 +197,7 @@
 	<String id="GetLyricsFromInternet">Hent Lyrikk fra Internett</String>
 	<String id="GetLyricsFromText">Hent Lyrikk fra Tekst Fil</String>
 	<String id="RemoveExistingLyrics">Fjern eksisterende Lyrikk Først</String>
-	<String id="RemoveLyrics">Remove Lyrikk</String>
+	<String id="RemoveLyrics">Fjern Lyrikk</String>
 	<String id="AddLyrics">Legg til Lyrikk</String>
 	<String id="LyricsLanguage">Språk (ID3 only):</String>
 	<String id="LyricsDescriptor">Beskrivelse (ID3 only):</String>
