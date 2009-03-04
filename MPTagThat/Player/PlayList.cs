@@ -27,7 +27,7 @@ namespace MPTagThat.Player
     public PlayList(PlayerControl player)
     {
       _player = player;
-      
+
       InitializeComponent();
 
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -122,10 +122,22 @@ namespace MPTagThat.Player
     /// <param name="e"></param>
     private void playListGrid_DragDrop(object sender, DragEventArgs e)
     {
-      List<PlayListData> selectedRows = (List<PlayListData>)e.Data.GetData(typeof(List<PlayListData>));
-      foreach (PlayListData item in selectedRows)
+      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
       {
-        _player.PlayList.Add(item);
+        return;
+      }
+
+      List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof(List<TrackData>));
+      foreach (TrackData track in selectedRows)
+      {
+        PlayListData playListItem = new PlayListData();
+        playListItem.FileName = track.FullFileName;
+        playListItem.Artist = track.Artist;
+        playListItem.Album = track.Album;
+        playListItem.Title = track.Title;
+        playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
+
+        _player.PlayList.Add(playListItem);
       }
     }
 

@@ -344,6 +344,11 @@
     <String id="AddPlayList">Zur Playlist hinzufügen</String>
     <String id="ClearPlayList">PlayList löschen</String>
     <String id="CreateFolderThumb">Erstelle Ordnervorschau</String>
+    <String id="Copy">Kopieren</String>
+    <String id="Cut">Ausschneiden</String>
+    <String id="Paste">Einfügen</String>
+    <String id="Delete">Löschen</String>
+    <String id="Refresh">Refresh</String>
  </Section>
 
     <!-- File Info Panel on the right side -->

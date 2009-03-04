@@ -676,6 +676,24 @@ namespace MPTagThat
       return f.ShowDialog();
     }
 
+    /// <summary>
+    /// Refreshes the Track List
+    /// </summary>
+    public void RefreshTrackList()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      CheckForChanges();
+      if (_selectedDirectory != String.Empty)
+      {
+        ClearFileInfoPanel();
+        gridViewControl.View.Rows.Clear();
+        FolderScan();
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
+      }
+      dataGridViewError.Rows.Clear();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
     #region File Info Panel
     /// <summary>
     /// Sets up the File Info Panel
@@ -794,27 +812,6 @@ namespace MPTagThat
     }
 
     #region Event Handler
-    #region Treeview Events
-
-    /// <summary>
-    /// Refreshes the Track List
-    /// </summary>
-    public void RefreshTrackList()
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      CheckForChanges();
-      if (_selectedDirectory != String.Empty)
-      {
-        ClearFileInfoPanel();
-        gridViewControl.View.Rows.Clear();
-        FolderScan();
-        toolStripStatusLabelFolder.Text = _selectedDirectory;
-      }
-      dataGridViewError.Rows.Clear();
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-    #endregion
-
     #region Key Events
     /// <summary>
     /// Handle the OnKeypress, otherwise we get the "Bell", when using shortcuts, with the Treeview active

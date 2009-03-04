@@ -8,6 +8,7 @@ using System.Text;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
 
 using TagLib;
 using MPTagThat.Core;
@@ -28,6 +29,8 @@ namespace MPTagThat.GridView
     private GridViewColumns gridColumns;
 
     private Main _main;
+
+    private bool _actionCopy = false;
 
     private bool _itemsChanged;
     private List<string> _lyrics = new List<string>();
@@ -121,9 +124,6 @@ namespace MPTagThat.GridView
 
       // Now Setup the columns, we want to display
       CreateColumns();
-
-      // Create the Context Menu
-      CreateContextMenu();
     }
     #endregion
 
@@ -1218,6 +1218,13 @@ namespace MPTagThat.GridView
       {
         col.HeaderText = localisation.ToString("column_header", col.Name);
       }
+      contextMenu.Items[0].Text = localisation.ToString("contextmenu", "Copy");
+      contextMenu.Items[1].Text = localisation.ToString("contextmenu", "Cut");
+      contextMenu.Items[2].Text = localisation.ToString("contextmenu", "Paste");
+      contextMenu.Items[4].Text = localisation.ToString("contextmenu", "AddBurner");
+      contextMenu.Items[5].Text = localisation.ToString("contextmenu", "AddConverter");
+      contextMenu.Items[6].Text = localisation.ToString("contextmenu", "AddPlaylist");
+      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
     }
     #endregion
 
@@ -1284,31 +1291,6 @@ namespace MPTagThat.GridView
       }
 
       bindingList.Add(track);
-    }
-
-    /// <summary>
-    /// Create Context Menu
-    /// </summary>
-    private void CreateContextMenu()
-    {
-      // Build the Context Menu for the Grid
-      MenuItem[] rmitems = new MenuItem[5];
-      rmitems[0] = new MenuItem();
-      rmitems[0].Text = localisation.ToString("contextmenu", "AddBurner");
-      rmitems[0].Click += new System.EventHandler(tracksGrid_AddToBurner);
-      rmitems[0].DefaultItem = true;
-      rmitems[1] = new MenuItem();
-      rmitems[1].Text = localisation.ToString("contextmenu", "AddConverter");
-      rmitems[1].Click += new System.EventHandler(tracksGrid_AddToConvert);
-      rmitems[2] = new MenuItem();
-      rmitems[2].Text = localisation.ToString("contextmenu", "AddPlaylist");
-      rmitems[2].Click += new System.EventHandler(tracksGrid_AddToPlayList);
-      rmitems[3] = new MenuItem();
-      rmitems[3].Text = "-"; // Create a separator
-      rmitems[4] = new MenuItem();
-      rmitems[4].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
-      rmitems[4].Click += new System.EventHandler(tracksGrid_CreateFolderThumb);
-      this.tracksGrid.ContextMenu = new ContextMenu(rmitems);
     }
 
     private void ShowForm(Form f)
@@ -1517,7 +1499,7 @@ namespace MPTagThat.GridView
         System.Windows.Forms.DataGridView.HitTestInfo selectedRow = tracksGrid.HitTest(mouse.X, mouse.Y);
 
         if (selectedRow.Type != DataGridViewHitTestType.ColumnHeader)
-          this.tracksGrid.ContextMenu.Show(tracksGrid, new Point(e.X, e.Y));
+          this.contextMenu.Show(tracksGrid, new Point(e.X, e.Y));
       }
       else
       {
@@ -1668,6 +1650,70 @@ namespace MPTagThat.GridView
         SavePicture(track);
       }
     }
+
+    public void tracksGrid_Copy(object o, System.EventArgs e)
+    {
+      contextMenu.Items[2].Enabled = true;  // Enable the Paste Menu item
+      Options.CopyPasteBuffer.Clear();
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = bindingList[row.Index];
+        Options.CopyPasteBuffer.Add(track);
+      }
+      _actionCopy = true;
+    }
+
+    public void tracksGrid_Cut(object o, System.EventArgs e)
+    {
+      contextMenu.Items[2].Enabled = true;  // Enable the Paste Menu item
+      Options.CopyPasteBuffer.Clear();
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = bindingList[row.Index];
+        Options.CopyPasteBuffer.Add(track);
+      }
+      _actionCopy = false;
+    }
+
+    public void tracksGrid_Paste(object o, System.EventArgs e)
+    {
+      contextMenu.Items[2].Enabled = false;  // Disable the Paste Menu item
+      if (Options.CopyPasteBuffer.Count == 0)
+      {
+        log.Debug("Copy Paste: No files in Copy Buffer");
+        return;
+      }
+
+
+      foreach (TrackData track in Options.CopyPasteBuffer)
+      {
+        string targetFile = Path.Combine(_main.CurrentDirectory, track.FileName);
+        try
+        {
+          if (_actionCopy)
+          {
+            log.Debug("^TracksGrid: Copying file {0} to {1}", track.FullFileName, targetFile);
+            FileSystem.CopyFile(track.FullFileName, targetFile, UIOption.AllDialogs, UICancelOption.DoNothing);
+          }
+          else
+          {
+            log.Debug("TracksGrid: Moving file {0} to {1}", track.FullFileName, targetFile);
+            FileSystem.MoveFile(track.FullFileName, targetFile, UIOption.AllDialogs, UICancelOption.DoNothing);
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("TracksGrid: Error copying / moving file {0}. {1}", track.FullFileName, ex.Message);
+        }
+      }
+      _main.RefreshTrackList();
+          }
     #endregion
 
     /// <summary>
@@ -1739,22 +1785,16 @@ namespace MPTagThat.GridView
           // determining when to cancel the drag drop operation.
           _screenOffset = SystemInformation.WorkingArea.Location;
 
-          List<PlayListData> selectedRows = new List<PlayListData>();
+          List<TrackData> selectedRows = new List<TrackData>();
           foreach (DataGridViewRow row in tracksGrid.Rows)
           {
             if (!row.Selected)
               continue;
 
             TrackData track = bindingList[row.Index];
-            PlayListData playListItem = new PlayListData();
-            playListItem.FileName = track.FullFileName;
-            playListItem.Artist = track.Artist;
-            playListItem.Album = track.Album;
-            playListItem.Title = track.Title;
-            playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
-            selectedRows.Add(playListItem);
+            selectedRows.Add(track);
           }
-          tracksGrid.DoDragDrop(selectedRows, DragDropEffects.Copy);
+          tracksGrid.DoDragDrop(selectedRows, DragDropEffects.Copy | DragDropEffects.Move);
         }
       }
     }

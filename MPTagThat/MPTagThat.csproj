@@ -456,6 +456,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\ribbon_CoverArt_16x.png" />
+    <None Include="Resources\ribbon_AddPlayList_16x.png" />
+    <None Include="Resources\ribbon_AddBurnList_16x.png" />
+    <None Include="Resources\ribbon_AddConversionList_16x.png" />
+    <None Include="Resources\PasteHS.png" />
+    <None Include="Resources\CutHS.png" />
+    <None Include="Resources\CopyHS.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

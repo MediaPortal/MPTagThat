@@ -39,8 +39,12 @@
       this.treeViewPanelBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.menuRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuCopy = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuCut = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuPaste = new System.Windows.Forms.ToolStripMenuItem();
       this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.menuRefresh = new System.Windows.Forms.ToolStripMenuItem();
       this.panelLeftBottom.SuspendLayout();
       this.optionsPanelLeft.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
@@ -64,11 +68,14 @@
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
       this.treeViewFolderBrowser.Size = new System.Drawing.Size(180, 411);
       this.treeViewFolderBrowser.TabIndex = 1;
+      this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
       this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
       this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
+      this.treeViewFolderBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragDrop);
       this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
       this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
       this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
+      this.treeViewFolderBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragOver);
       this.treeViewFolderBrowser.Click += new System.EventHandler(this.treeViewFolderBrowser_Click);
       // 
       // panelLeftBottom
@@ -175,10 +182,52 @@
       // contextMenuTreeView
       // 
       this.contextMenuTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuRefresh,
-            this.menuDelete});
+            this.menuCopy,
+            this.menuCut,
+            this.menuPaste,
+            this.menuDelete,
+            this.toolStripSeparator1,
+            this.menuRefresh});
       this.contextMenuTreeView.Name = "contextMenuTreeView";
-      this.contextMenuTreeView.Size = new System.Drawing.Size(114, 48);
+      this.contextMenuTreeView.Size = new System.Drawing.Size(153, 142);
+      // 
+      // menuCopy
+      // 
+      this.menuCopy.Image = global::MPTagThat.Properties.Resources.CopyHS;
+      this.menuCopy.Name = "menuCopy";
+      this.menuCopy.Size = new System.Drawing.Size(152, 22);
+      this.menuCopy.Text = "Copy";
+      this.menuCopy.Click += new System.EventHandler(this.contextMenuTreeViewCopy_Click);
+      // 
+      // menuCut
+      // 
+      this.menuCut.Image = global::MPTagThat.Properties.Resources.CutHS;
+      this.menuCut.Name = "menuCut";
+      this.menuCut.Size = new System.Drawing.Size(152, 22);
+      this.menuCut.Text = "Cut";
+      this.menuCut.Click += new System.EventHandler(this.contextMenuTreeViewCut_Click);
+      // 
+      // menuPaste
+      // 
+      this.menuPaste.Enabled = false;
+      this.menuPaste.Image = global::MPTagThat.Properties.Resources.PasteHS;
+      this.menuPaste.Name = "menuPaste";
+      this.menuPaste.Size = new System.Drawing.Size(152, 22);
+      this.menuPaste.Text = "Paste";
+      this.menuPaste.Click += new System.EventHandler(this.contextMenuTreeViewPaste_Click);
+      // 
+      // menuDelete
+      // 
+      this.menuDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuDelete.Image")));
+      this.menuDelete.Name = "menuDelete";
+      this.menuDelete.Size = new System.Drawing.Size(152, 22);
+      this.menuDelete.Text = "Delete";
+      this.menuDelete.Click += new System.EventHandler(this.contextMenuTreeViewDelete_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
       // 
       // menuRefresh
       // 
@@ -188,14 +237,6 @@
       this.menuRefresh.Size = new System.Drawing.Size(152, 22);
       this.menuRefresh.Text = "Refresh";
       this.menuRefresh.Click += new System.EventHandler(this.contextMenuTreeViewRefresh_Click);
-      // 
-      // menuDelete
-      // 
-      this.menuDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuDelete.Image")));
-      this.menuDelete.Name = "menuDelete";
-      this.menuDelete.Size = new System.Drawing.Size(152, 22);
-      this.menuDelete.Text = "Delete";
-      this.menuDelete.Click += new System.EventHandler(this.contextMenuTreeViewDelete_Click);
       // 
       // TreeViewControl
       // 
@@ -228,5 +269,9 @@
     private System.Windows.Forms.ContextMenuStrip contextMenuTreeView;
     private System.Windows.Forms.ToolStripMenuItem menuRefresh;
     private System.Windows.Forms.ToolStripMenuItem menuDelete;
+    private System.Windows.Forms.ToolStripMenuItem menuCopy;
+    private System.Windows.Forms.ToolStripMenuItem menuCut;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem menuPaste;
   }
 }

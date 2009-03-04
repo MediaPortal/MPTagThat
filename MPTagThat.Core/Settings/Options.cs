@@ -22,6 +22,8 @@ namespace MPTagThat.Core
     private static OrganiseFormatSettings _organiseSettings;
     private static List<string> _organiseSettingsTemp;
 
+    private static List<TrackData> _copyPasteBuffer;
+
     private static string _configDir;
     private static string[] availableThemes = new string[] { "ControlDefault", "Office2007Silver", "Office2007Black" };
     private static string[] _mediaPortalArtists;      // String array filled with database content to be available in tagedit
@@ -206,6 +208,11 @@ namespace MPTagThat.Core
     {
       get { return _organiseSettingsTemp; }
     }
+
+    public static List<TrackData> CopyPasteBuffer
+    {
+      get { return _copyPasteBuffer; }
+    }
     #endregion
 
     #region Constructor
@@ -320,7 +327,11 @@ namespace MPTagThat.Core
 
       // Load Artists / AlbumArtists for Auto Completion
       if (_MPTagThatSettings.UseMediaPortalDatabase)
+      {
         ReadArtistDatabase();
+      }
+
+      _copyPasteBuffer = new List<TrackData>();
     }
     #endregion
 

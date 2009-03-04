@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
@@ -17,6 +18,11 @@ namespace MPTagThat
     #region Variables
     private Main _main;
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log = ServiceScope.Get<ILogger>();
+    private TreeNode _previousHoverNode = null;
+    private DateTime _savedTime;
+    private bool _actionCopy = false;
+    private TreeNodePath _nodeToCopyCut = null;
     #endregion
 
     #region Properties
@@ -100,12 +106,34 @@ namespace MPTagThat
       // Extended Panels. Doing it via TTExtendedPanel doesn't work for some reason
       this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
       this.optionsPanelLeft.CaptionText = localisation.ToString("main", "OptionsPanel");
+      this.contextMenuTreeView.Items[0].Text = localisation.ToString("contextmenu", "Copy");
+      this.contextMenuTreeView.Items[1].Text = localisation.ToString("contextmenu", "Cut");
+      this.contextMenuTreeView.Items[2].Text = localisation.ToString("contextmenu", "Paste");
+      this.contextMenuTreeView.Items[3].Text = localisation.ToString("contextmenu", "Delete");
+      this.contextMenuTreeView.Items[4].Text = localisation.ToString("contextmenu", "Refresh");
     }
     #endregion
 
+    private void SetNodeHoverColor(TreeNode node)
+    {
+      if (node == _previousHoverNode)
+      {
+        return;
+      }
+
+      _savedTime = DateTime.Now;
+      node.BackColor = Color.LightSkyBlue;
+      if (_previousHoverNode != null)
+      {
+        _previousHoverNode.BackColor = Color.White;
+      }
+      _previousHoverNode = node;
+
+    }
     #endregion
 
     #region Events
+    #region Treeview
     /// <summary>
     /// The Treeview Control is the active control
     /// </summary>
@@ -222,6 +250,129 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// The user hoevrs with the mouse over a node. 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+    {
+      SetNodeHoverColor(e.Node);
+    }
+
+    /// <summary>
+    /// Gets the treenode, where the cursor currently points to
+    /// </summary>
+    /// <param name="point"></param>
+    /// <returns></returns>
+    private TreeNode GetNode(Point point)
+    {
+      // We need to tranlate the coordinates to the position within the Main form
+      Point pt = this.Parent.Parent.PointToClient(this.Parent.PointToScreen(this.PointToScreen(treeViewFolderBrowser.Location)));
+      TreeViewHitTestInfo hitTestInfo = treeViewFolderBrowser.HitTest(point.X - pt.X, point.Y - pt.Y - 20);
+      return hitTestInfo.Node;
+    }
+    #endregion
+
+    #region Drag & Drop
+    /// <summary>
+    /// Some files are dragged over the Treeview
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_DragOver(object sender, DragEventArgs e)
+    {
+      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
+      {
+        return;
+      }
+
+      if (e.KeyState == 9 && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy) // The Ctrl Key + LMB was pressed
+      {
+        e.Effect = DragDropEffects.Copy;
+      }
+      else
+      {
+        e.Effect = DragDropEffects.Move;
+      }
+
+      TreeNode node = GetNode(new Point(e.X, e.Y));
+      if (node != null)
+      {
+        SetNodeHoverColor(node);
+
+
+        if (!node.IsExpanded)
+        {
+          TimeSpan span = DateTime.Now - _savedTime;
+          if (span.Seconds >= 1)
+          {
+            node.Expand();
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// The drag and drop is completed. do the actual move / copy
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_DragDrop(object sender, DragEventArgs e)
+    {
+      bool bMove = true;
+      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
+      {
+        return;
+      }
+
+      if (e.KeyState == 8) // The Ctrl Key was pressed
+      {
+        bMove = false;
+      }
+      else
+      {
+        bMove = true;
+      }
+
+      try
+      {
+        TreeNodePath node = GetNode(new Point(e.X, e.Y)) as TreeNodePath; ;
+        if (node == null)
+        {
+          log.Debug("TreeView: Files are not dragged to a node. Abort processing");
+          return;
+        }
+        if (node.Path == (treeViewFolderBrowser.SelectedNode as TreeNodePath).Path)
+        {
+          log.Debug("TreeView: Source and Target may not be the same on drag and drop. Abort processing");
+          return;
+        }
+
+        List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof(List<TrackData>));
+        foreach (TrackData track in selectedRows)
+        {
+          string targetFile = System.IO.Path.Combine(node.Path, track.FileName);
+          if (bMove)
+          {
+            log.Debug("TreeView: Moving file {0} to {1}", track.FullFileName, targetFile);
+            FileSystem.MoveFile(track.FullFileName, targetFile, UIOption.AllDialogs, UICancelOption.DoNothing);
+          }
+          else
+          {
+            log.Debug("TreeView: Copying file {0} to {1}", track.FullFileName, targetFile);
+            FileSystem.CopyFile(track.FullFileName, targetFile, UIOption.AllDialogs, UICancelOption.DoNothing);
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Debug("TreeView: Exception while copying moving file {0} to {1}", ex.Message, ex.StackTrace);
+      }
+    }
+    #endregion
+
+    #region Context Menu
+    /// <summary>
     /// Refresh Button on Treeview Context Menu has been clicked
     /// </summary>
     /// <param name="sender"></param>
@@ -241,7 +392,81 @@ namespace MPTagThat
       DeleteFolder();
     }
 
+    /// <summary>
+    /// Copy Button has been selected in Context Menu
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void contextMenuTreeViewCopy_Click(object sender, EventArgs e)
+    {
+      contextMenuTreeView.Items[2].Enabled = true;  // Enable the Paste Menu item
+      _actionCopy = true;
+      _nodeToCopyCut = treeViewFolderBrowser.SelectedNode as TreeNodePath;
+    }
 
+    /// <summary>
+    /// Cut Button has been selected in Context Menu
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void contextMenuTreeViewCut_Click(object sender, EventArgs e)
+    {
+      contextMenuTreeView.Items[2].Enabled = true;  // Enable the Paste Menu item
+      _actionCopy = false;  // we do a move
+      _nodeToCopyCut = treeViewFolderBrowser.SelectedNode as TreeNodePath;
+    }
+
+    /// <summary>
+    /// Paste Button has been selected in Context Menu
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void contextMenuTreeViewPaste_Click(object sender, EventArgs e)
+    {
+      contextMenuTreeView.Items[2].Enabled = false;  // Disable the Paste Menu item
+      string targetPath = Path.Combine((treeViewFolderBrowser.SelectedNode as TreeNodePath).Path, _nodeToCopyCut.Text);
+      try
+      {
+        if (!Directory.Exists(targetPath))
+        {
+          Directory.CreateDirectory(targetPath);
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Error("TreeView: Error creating folder {0}. {1}", targetPath, ex.Message);
+      }
+
+      bool bError = false;
+      try
+      {
+        if (_actionCopy)
+        {
+          log.Debug("TreeView: Copying folder {0} to {1}", _nodeToCopyCut, targetPath);
+          FileSystem.CopyDirectory(_nodeToCopyCut.Path, targetPath, UIOption.AllDialogs, UICancelOption.DoNothing);
+        }
+        else
+        {
+          log.Debug("TreeView: Moving folder {0} to {1}", _nodeToCopyCut, targetPath);
+          FileSystem.MoveDirectory(_nodeToCopyCut.Path, targetPath, UIOption.AllDialogs, UICancelOption.DoNothing);
+        }
+      }
+      catch (Exception ex)
+      {
+        bError = true;
+        log.Error("TreeView: Error copying / moving folder {0}. {1}", _nodeToCopyCut.Path, ex.Message);
+      }
+      if (!bError)
+      {
+        _nodeToCopyCut = null;
+        _main.CurrentDirectory = targetPath;
+        RefreshFolders();
+        _main.RefreshTrackList();
+      }
+    }
+    #endregion
+
+    #region Butons
     /// <summary>
     /// Refresh the Folder List
     /// </summary>
@@ -251,6 +476,7 @@ namespace MPTagThat
     {
       RefreshFolders();
     }
+    #endregion
     #endregion
 
     #region General Message Handling
