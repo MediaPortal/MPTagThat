@@ -410,7 +410,7 @@ namespace MPTagThat
         if (main.Burning || main.Ripping)
           return;
 
-        ribbonTextBoxConvertOutputDirectory.Text = main.CurrentDirectory;
+        ribbonTextBoxConvertOutputDirectory.Text = Options.MainSettings.RipTargetFolder;
 
         main.TracksGridView.Hide();
         main.RipGridView.Hide();

@@ -124,6 +124,8 @@ namespace MPTagThat.GridView
 
       // Now Setup the columns, we want to display
       CreateColumns();
+
+      LocaliseScreen();
     }
     #endregion
 

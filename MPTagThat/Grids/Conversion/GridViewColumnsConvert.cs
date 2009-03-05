@@ -19,8 +19,8 @@ namespace MPTagThat.GridView
     public GridViewColumnsConvert()
     {
       _status = new GridViewColumn("Status", "process", 100, true, true, false, true);
-      _filename = new GridViewColumn("FileName", "text", 200, true, true, true, true);
-      _newfilename = new GridViewColumn("NewFileName", "text", 200, true, true, true, true);
+      _filename = new GridViewColumn("FileName", "text", 350, true, true, true, true);
+      _newfilename = new GridViewColumn("NewFileName", "text", 350, true, true, true, true);
       LoadSettings();
     }
     #endregion

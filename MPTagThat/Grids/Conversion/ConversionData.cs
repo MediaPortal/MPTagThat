@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using TagLib;
+using MPTagThat.Core;
 
 namespace MPTagThat.GridView
 {
   public class ConversionData
   {
     private string _fileNameNew;
-    private string _fileNameOld;
+    private TrackData _track; 
 
     public ConversionData()
     {
@@ -17,14 +17,19 @@ namespace MPTagThat.GridView
 
     public string FileName
     {
-      get { return _fileNameOld; }
-      set { _fileNameOld = value; }
+      get { return Track.FullFileName; }
     }
 
     public string NewFileName
     {
       get { return _fileNameNew; }
       set { _fileNameNew = value; }
+    }
+
+    public TrackData Track
+    {
+      get { return _track; }
+      set { _track = value; }
     }
   }
 }

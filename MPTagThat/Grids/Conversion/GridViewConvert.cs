@@ -136,7 +136,7 @@ namespace MPTagThat.GridView
         return;
 
       ConversionData convdata = new ConversionData();
-      convdata.FileName = track.FileName;
+      convdata.Track = track;
 
       bindingList.Add(convdata);
     }
@@ -147,8 +147,12 @@ namespace MPTagThat.GridView
     private void ConversionThread()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      string outputDir = _main.MainRibbon.EncoderOutputDirectory;
-      bool OutputAndCurrentDirEqual = (outputDir == _main.CurrentDirectory);
+      string rootFolder = _main.MainRibbon.EncoderOutputDirectory;
+      if (string.IsNullOrEmpty(rootFolder))
+      {
+        rootFolder = Options.MainSettings.RipTargetFolder;
+      }
+
       string encoder = null;
 
       List<Item> encoders = (List<Item>)_main.MainRibbon.EncoderCombo.DataSource;
@@ -162,13 +166,13 @@ namespace MPTagThat.GridView
 
       try
       {
-        if (!System.IO.Directory.Exists(outputDir) && !string.IsNullOrEmpty(outputDir))
-          System.IO.Directory.CreateDirectory(outputDir);
+        if (!System.IO.Directory.Exists(rootFolder) && !string.IsNullOrEmpty(rootFolder))
+          System.IO.Directory.CreateDirectory(rootFolder);
       }
       catch (Exception ex)
       {
         _main.ErrorGridView.Rows.Add("", localisation.ToString("Conversion","ErrorDirectory"));
-        log.Error("Error creating Output Directory directory: {0}. {1}", outputDir, ex.Message);
+        log.Error("Error creating Conversion output directory: {0}. {1}", rootFolder, ex.Message);
         return;
       }
 
@@ -183,11 +187,31 @@ namespace MPTagThat.GridView
       {
         _currentRow = row.Index;
 
-        string inputFile = System.IO.Path.Combine(_main.CurrentDirectory, bindingList[_currentRow].FileName);
-        string outFile = System.IO.Path.GetFileNameWithoutExtension(bindingList[_currentRow].FileName);
-        outFile = System.IO.Path.Combine(outputDir, outFile);
+        ConversionData track = (ConversionData)bindingList[_currentRow];
+
+        string inputFile = track.Track.FullFileName;
+        string outFile = Util.ReplaceParametersWithTrackValues(Options.MainSettings.RipFileNameFormat, track.Track);
+        outFile = System.IO.Path.Combine(rootFolder, outFile);
+        string directoryName = System.IO.Path.GetDirectoryName(outFile);
+
+        // Now check the validity of the directory
+        if (!System.IO.Directory.Exists(directoryName))
+        {
+          try
+          {
+            System.IO.Directory.CreateDirectory(directoryName);
+          }
+          catch (Exception e1)
+          {
+            log.Error("Error creating folder: {0} {1]", directoryName, e1.Message);
+            row.Cells[1].Value = localisation.ToString("message", "Error");
+            AddErrorMessage(directoryName, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message));
+            continue; // Process next row
+          }
+        }
+
         outFile = audioEncoder.SetEncoder(encoder, outFile);
-        UpdateNewFileName(System.IO.Path.GetFileName(outFile));
+        UpdateNewFileName(outFile);
 
         if (inputFile == outFile)
         {
@@ -262,7 +286,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      bindingList[_currentRow].NewFileName = System.IO.Path.GetFileName(fileName);
+      bindingList[_currentRow].NewFileName = fileName;
       dataGridViewConvert.Refresh();
     }
 
