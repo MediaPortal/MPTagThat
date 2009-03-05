@@ -122,7 +122,8 @@ namespace MPTagThat.Organise
           continue;
 
         track = _main.TracksGridView.TrackList[row.Index];
-        string directoryName = ReplaceParametersWithValues(parameter);
+        string directoryName = Util.ReplaceParametersWithTrackValues(parameter, track);
+        directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
 
         try
         {
@@ -276,133 +277,6 @@ namespace MPTagThat.Organise
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
-    private string ReplaceParametersWithValues(string parameter)
-    {
-      string directoryName = parameter.Trim(new char[] { '\\' });
-
-      try
-      {
-        if (directoryName.IndexOf("<A>") > -1)
-          directoryName = directoryName.Replace("<A>", track.Artist.Replace(';', '_').Trim());
-
-        if (directoryName.IndexOf("<T>") > -1)
-          directoryName = directoryName.Replace("<T>", track.Title.Trim());
-
-        if (directoryName.IndexOf("<B>") > -1)
-          directoryName = directoryName.Replace("<B>", track.Album.Trim());
-
-        if (directoryName.IndexOf("<Y>") > -1)
-          directoryName = directoryName.Replace("<Y>", track.Year.ToString().Trim());
-
-        if (directoryName.IndexOf("<K>") > -1)
-        {
-          string[] str = track.Track.Split('/');
-          directoryName = directoryName.Replace("<K>", str[0]);
-        }
-
-        if (directoryName.IndexOf("<k>") > -1)
-        {
-          string[] str = track.Track.Split('/');
-          directoryName = directoryName.Replace("<k>", str[1]);
-        }
-
-        if (directoryName.IndexOf("<D>") > -1)
-        {
-          string[] str = track.Disc.Split('/');
-          directoryName = directoryName.Replace("<D>", str[0]);
-        }
-
-        if (directoryName.IndexOf("<d>") > -1)
-        {
-          string[] str = track.Disc.Split('/');
-          directoryName = directoryName.Replace("<d>", str[1]);
-        }
-
-        if (directoryName.IndexOf("<G>") > -1)
-        {
-          string[] str = track.Genre.Split(';');
-          directoryName = directoryName.Replace("<G>", str[0].Trim());
-        }
-
-        if (directoryName.IndexOf("<O>") > -1)
-          directoryName = directoryName.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
-
-        if (directoryName.IndexOf("<C>") > -1)
-          directoryName = directoryName.Replace("<C>", track.Comment.Trim());
-
-        if (directoryName.IndexOf("<U>") > -1)
-          directoryName = directoryName.Replace("<U>", track.Grouping.Trim());
-
-        if (directoryName.IndexOf("<N>") > -1)
-          directoryName = directoryName.Replace("<N>", track.Conductor.Trim());
-
-        if (directoryName.IndexOf("<R>") > -1)
-          directoryName = directoryName.Replace("<R>", track.Composer.Replace(';', '_').Trim());
-
-        if (directoryName.IndexOf("<S>") > -1)
-          directoryName = directoryName.Replace("<S>", track.SubTitle.Trim());
-
-        if (directoryName.IndexOf("<E>") > -1)
-          directoryName = directoryName.Replace("<E>", track.BPM.ToString());
-
-        if (directoryName.IndexOf("<M>") > -1)
-          directoryName = directoryName.Replace("<M>", track.Interpreter.Trim());
-
-        if (directoryName.IndexOf("<I>") > -1)
-          directoryName = directoryName.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
-
-        int index = directoryName.IndexOf("<A:");
-        int last = -1;
-        if (index > -1)
-        {
-          last = directoryName.IndexOf(">", index);
-          string s1 = directoryName.Substring(index, last - index + 1);
-          int strLength = Convert.ToInt32(s1.Substring(3, 1));
-          string s2 = track.Artist.Replace(';', '_').Trim();
-
-          if (s2.Length >= strLength)
-            s2 = s2.Substring(0, strLength);
-
-          directoryName = directoryName.Replace(s1, s2);
-        }
-
-        index = directoryName.IndexOf("<O:");
-        last = -1;
-        if (index > -1)
-        {
-          last = directoryName.IndexOf(">", index);
-          string s1 = directoryName.Substring(index, last - index + 1);
-          int strLength = Convert.ToInt32(s1.Substring(3, 1));
-          string s2 = track.AlbumArtist.Replace(';', '_').Trim();
-
-          if (s2.Length >= strLength)
-            s2 = s2.Substring(0, strLength);
-
-          directoryName = directoryName.Replace(s1, s2);
-        }
-
-        // Empty Values would create invalid folders
-        directoryName = directoryName.Replace(@"\\", @"\_\");
-
-        // If the directory name starts with a backslash, we've got an empty value on the beginning
-        if (directoryName.IndexOf("\\") == 0)
-          directoryName = "_" + directoryName;
-
-        // We might have an empty value on the end of the path, which is indicated by a slash. 
-        // replace it with underscore
-        if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
-          directoryName += "_";
-
-        directoryName = Util.MakeValidFolderName(directoryName);
-        directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
-      }
-      catch (Exception)
-      {
-        return "";
-      }
-      return directoryName;
-    }
-
     private void DeleteSubFolders(string folder)
     {
       string[] subFolders = System.IO.Directory.GetDirectories(folder);
@@ -488,7 +362,7 @@ namespace MPTagThat.Organise
         {
           track = _main.TracksGridView.TrackList[row.Index];
           trackPreview = _previewForm.Tracks[index];
-          trackPreview.NewFullFileName = System.IO.Path.Combine(ReplaceParametersWithValues(parameters), trackPreview.FileName);
+          trackPreview.NewFullFileName = System.IO.Path.Combine(Util.ReplaceParametersWithTrackValues(parameters, track), trackPreview.FileName);
         }
         catch (Exception)
         {
