@@ -342,7 +342,7 @@
     <String id="AddBurner">Zur Brennliste hinzufügen</String>
     <String id="AddConverter">Zur Konvertierungliste hinzufügen</String>
     <String id="AddPlayList">Zur Playlist hinzufügen</String>
-    <String id="ClearPlayList">PlayList löschen</String>
+    <String id="SavePlayList">Als PlayList speichern</String>
     <String id="CreateFolderThumb">Erstelle Ordnervorschau</String>
     <String id="Copy">Kopieren</String>
     <String id="Cut">Ausschneiden</String>
@@ -717,5 +717,10 @@
     <String id="Artist">Interpret</String>
     <String id="Album">Album</String>
     <String id="PlayListButton">PL</String>
+    <String id="PlayListLoad">Laden</String>
+    <String id="PlayListSave">Speichern</String>
+    <String id="ClearPlayList">PlayList löschen</String>
+	<String id="LoadPlayList">PlayList laden</String>
+	<String id="SavePlayList">PlayList speicherm</String>
   </Section>
 </Language>

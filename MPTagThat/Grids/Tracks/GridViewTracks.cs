@@ -1226,7 +1226,8 @@ namespace MPTagThat.GridView
       contextMenu.Items[4].Text = localisation.ToString("contextmenu", "AddBurner");
       contextMenu.Items[5].Text = localisation.ToString("contextmenu", "AddConverter");
       contextMenu.Items[6].Text = localisation.ToString("contextmenu", "AddPlaylist");
-      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
+      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "SavePlaylist");
+      contextMenu.Items[9].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
     }
     #endregion
 
@@ -1631,6 +1632,39 @@ namespace MPTagThat.GridView
         playListItem.Album = track.Album;
         playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
         _main.Player.PlayList.Add(playListItem);
+      }
+    }
+
+    /// <summary>
+    /// Save as Playlist
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    public void tracksGrid_SaveAsPlayList(object o, System.EventArgs e)
+    {
+      SortableBindingList<PlayListData> playList = new SortableBindingList<PlayListData>();
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = bindingList[row.Index];
+        PlayListData playListItem = new PlayListData();
+        playListItem.FileName = track.FullFileName;
+        playListItem.Title = track.Title;
+        playListItem.Artist = track.Artist;
+        playListItem.Album = track.Album;
+        playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
+        playList.Add(playListItem);
+      }
+
+      SaveFileDialog sFD = new SaveFileDialog();
+      sFD.InitialDirectory = _main.CurrentDirectory;
+      sFD.Filter = "M3U Format (*.m3u)|*.m3u|PLS Format (*.pls)|*.pls";
+      if (sFD.ShowDialog() == DialogResult.OK)
+      {
+        IPlayListIO saver = PlayListFactory.CreateIO(sFD.FileName);
+        saver.Save(playList, sFD.FileName);
       }
     }
 

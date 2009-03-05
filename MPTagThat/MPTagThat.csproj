@@ -255,7 +255,11 @@
     <Compile Include="Player\PlayList.Designer.cs">
       <DependentUpon>PlayList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player\PlayListData.cs" />
+    <Compile Include="Player\PlayList\IPlayListIO.cs" />
+    <Compile Include="Player\PlayList\PlayListData.cs" />
+    <Compile Include="Player\PlayList\PlayListFactory.cs" />
+    <Compile Include="Player\PlayList\PlayListM3uIO.cs" />
+    <Compile Include="Player\PlayList\PlayListPLSIO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dialogues\About.resx">

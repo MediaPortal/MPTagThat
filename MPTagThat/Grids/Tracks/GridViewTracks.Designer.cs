@@ -30,7 +30,7 @@ namespace MPTagThat.GridView
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tracksGrid = new System.Windows.Forms.DataGridView();
       this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +42,7 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuSavePlaylist = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.tracksGrid)).BeginInit();
       this.contextMenu.SuspendLayout();
       this.SuspendLayout();
@@ -52,8 +53,8 @@ namespace MPTagThat.GridView
       this.tracksGrid.AllowUserToDeleteRows = false;
       this.tracksGrid.AllowUserToOrderColumns = true;
       this.tracksGrid.AllowUserToResizeRows = false;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.tracksGrid.BackgroundColor = System.Drawing.Color.White;
       this.tracksGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
       this.tracksGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,10 +78,11 @@ namespace MPTagThat.GridView
             this.toolStripMenuItem4,
             this.toolStripMenuItem5,
             this.toolStripMenuItem6,
+            this.menuSavePlaylist,
             this.toolStripSeparator4,
             this.toolStripMenuItem7});
       this.contextMenu.Name = "contextMenuTreeView";
-      this.contextMenu.Size = new System.Drawing.Size(195, 170);
+      this.contextMenu.Size = new System.Drawing.Size(195, 214);
       // 
       // toolStripMenuItem1
       // 
@@ -150,6 +152,13 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem7.Text = "Create Folder Thumb";
       this.toolStripMenuItem7.Click += new System.EventHandler(this.tracksGrid_CreateFolderThumb);
       // 
+      // menuSavePlaylist
+      // 
+      this.menuSavePlaylist.Name = "menuSavePlaylist";
+      this.menuSavePlaylist.Size = new System.Drawing.Size(194, 22);
+      this.menuSavePlaylist.Text = "Save as PlayList";
+      this.menuSavePlaylist.Click += new System.EventHandler(this.tracksGrid_SaveAsPlayList);
+      // 
       // GridViewTracks
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,6 +185,7 @@ namespace MPTagThat.GridView
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+    private System.Windows.Forms.ToolStripMenuItem menuSavePlaylist;
 
   }
 }

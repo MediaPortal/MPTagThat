@@ -342,7 +342,6 @@
     <String id="AddBurner">Legg til i brenner</String>
     <String id="AddConverter">Legg til for Konvertering</String>
     <String id="AddPlayList">Legg til i Spilleliste</String>
-    <String id="ClearPlayList">Tøm Spilleliste</String>
     <String id="CreateFolderThumb">Lag ikon for folder</String>
     <String id="Copy">Kopier</String>
     <String id="Cut">Klipp ut</String>
@@ -717,5 +716,6 @@
     <String id="Artist">Artist</String>
     <String id="Album">Album</String>
     <String id="PlayListButton">PL</String>
+    <String id="ClearPlayList">Tøm Spilleliste</String>
   </Section>
 </Language>

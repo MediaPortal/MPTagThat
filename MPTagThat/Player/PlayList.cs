@@ -58,8 +58,7 @@ namespace MPTagThat.Player
       col.Width = 70;
       playListGrid.Columns.Add(col);
 
-
-      CreateContextMenu();
+      Localisation();
     }
     #endregion
 
@@ -68,15 +67,11 @@ namespace MPTagThat.Player
     /// <summary>
     /// Create Context Menu
     /// </summary>
-    private void CreateContextMenu()
+    private void Localisation()
     {
-      // Build the Context Menu for the Grid
-      MenuItem[] rmitems = new MenuItem[1];
-      rmitems[0] = new MenuItem();
-      rmitems[0].Text = localisation.ToString("contextmenu", "ClearPlayList");
-      rmitems[0].Click += new System.EventHandler(playListGrid_ClearPlayList);
-      rmitems[0].DefaultItem = true;
-      this.playListGrid.ContextMenu = new ContextMenu(rmitems);
+      contextMenu.Items[0].Text = localisation.ToString("player", "ClearPlayList");
+      contextMenu.Items[2].Text = localisation.ToString("player", "LoadPlayList");
+      contextMenu.Items[3].Text = localisation.ToString("player", "SavePlayList");
     }
 
     #endregion
@@ -90,7 +85,7 @@ namespace MPTagThat.Player
     private void playListGrid_MouseClick(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
-        playListGrid.ContextMenu.Show(playListGrid, new Point(e.X, e.Y));
+        contextMenu.Show(playListGrid, new Point(e.X, e.Y));
     }
 
     /// <summary>
@@ -104,6 +99,7 @@ namespace MPTagThat.Player
       _player.Play(index);
     }
 
+    #region Context Menu
     /// <summary>
     /// Clear the Playlist
     /// </summary>
@@ -114,7 +110,38 @@ namespace MPTagThat.Player
       _player.PlayList.Clear();
       _player.Stop();
     }
+    #endregion
 
+    #region Buttons
+    private void btPlaylistLoad_Click(object sender, EventArgs e)
+    {
+      OpenFileDialog oFD = new OpenFileDialog();
+      oFD.Filter = "M3U Format (*.m3u)|*.m3u|Winamp Playlist (*.pls)|*.pls";
+      if (oFD.ShowDialog() == DialogResult.OK)
+      {
+        IPlayListIO loader = PlayListFactory.CreateIO(oFD.FileName);
+        loader.Load(_player.PlayList, oFD.FileName);
+      }
+    }
+
+    private void btPlayListSave_Click(object sender, EventArgs e)
+    {
+      if (_player.PlayList.Count == 0)
+      {
+        return;
+      }
+
+      SaveFileDialog sFD = new SaveFileDialog();
+      sFD.Filter = "M3U Format (*.m3u)|*.m3u|Winamp Playlist (*.pls)|*.pls";
+      if (sFD.ShowDialog() == DialogResult.OK)
+      {
+        IPlayListIO saver = PlayListFactory.CreateIO(sFD.FileName);
+        saver.Save(_player.PlayList, sFD.FileName);
+      }
+    }
+    #endregion
+
+    #region Drag & Drop
     /// <summary>
     /// Tracks are Dropped on the Playlist Grid
     /// </summary>
@@ -150,6 +177,7 @@ namespace MPTagThat.Player
     {
       e.Effect = DragDropEffects.Copy;
     }
+    #endregion
 
     /// <summary>
     /// Handle Key input on the Grid
@@ -196,6 +224,12 @@ namespace MPTagThat.Player
             this.playListGrid.DefaultCellStyle.SelectionForeColor = Color.OrangeRed;
             this.playListGrid.DefaultCellStyle.SelectionBackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
             this.playListGrid.GridColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            break;
+          }
+
+        case "languagechanged":
+          {
+            Localisation();
             break;
           }
       }

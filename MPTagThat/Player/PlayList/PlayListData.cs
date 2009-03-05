@@ -14,6 +14,19 @@ namespace MPTagThat.Player
     private string _fileName;
     #endregion
 
+    #region ctor
+    public PlayListData()
+    {
+    }
+
+    public PlayListData(string songname, string fileName, string duration)
+    {
+      _title = songname;
+      _fileName = fileName;
+      _duration = duration;
+    }
+    #endregion
+
     #region Properties
     public string Artist
     {
@@ -27,10 +40,10 @@ namespace MPTagThat.Player
       set { _album = value; }
     }
 
-    public string Title 
-    { 
-      get { return _title; } 
-      set { _title = value; } 
+    public string Title
+    {
+      get { return _title; }
+      set { _title = value; }
     }
 
     public string Duration

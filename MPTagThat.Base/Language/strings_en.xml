@@ -342,7 +342,7 @@
     <String id="AddBurner">Add Item(s) to Burner</String>
     <String id="AddConverter">Add Item(s) to Converter</String>
     <String id="AddPlayList">Add Item(s) to PlayList</String>
-    <String id="ClearPlayList">Clear PlayList</String>
+    <String id="SavePlayList">Save Item(s) as PlayList</String>
     <String id="CreateFolderThumb">Create Folder Thumb</String>
     <String id="Copy">Copy</String>
     <String id="Cut">Cut</String>
@@ -717,5 +717,10 @@
     <String id="Artist">Artist</String>
     <String id="Album">Album</String>
     <String id="PlayListButton">PL</String>
+    <String id="PlayListLoad">Load</String>
+    <String id="PlayListSave">Save</String>
+	<String id="ClearPlayList">Clear PlayList</String>
+	<String id="LoadPlayList">Load PlayList</String>
+	<String id="SavePlayList">Save PlayList</String>
   </Section>
 </Language>

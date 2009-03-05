@@ -877,6 +877,61 @@ namespace MPTagThat.Core
       }
       return directoryName;
     }
+
+    /// <summary>
+    /// Converts a time string "HH:mm:ss" to seconds
+    /// </summary>
+    /// <param name="durationString"></param>
+    /// <returns></returns>
+    public static int DurationToSeconds(string durationString)
+    {
+      int duration = 0;
+      int index = durationString.LastIndexOf(":");
+      int i = 0;
+      while (index > -1)
+      {
+        if (i == 0)
+        {
+          // We've got seconds
+          duration = Convert.ToInt32(durationString.Substring(index + 1));
+        }
+        else
+        {
+          duration += Convert.ToInt32(durationString.Substring(index + 1)) * (int)Math.Pow(60.0, (double)i);
+        }
+
+        durationString = durationString.Substring(0, index);
+        index = durationString.LastIndexOf(":");
+        i++;
+      }
+      if (durationString.Length > 0)
+      {
+        duration += Convert.ToInt32(durationString) * (int)Math.Pow(60.0, (double)i);
+      }
+      return duration;
+    }
+
+    /// <summary>
+    /// Converts given seconds to HH:mm:ss
+    /// </summary>
+    /// <param name="lSeconds"></param>
+    /// <returns></returns>
+    public static string SecondsToHMSString(string sSeconds)
+    {
+      int lSeconds = Int32.Parse(sSeconds);
+      if (lSeconds < 0) return ("0:00");
+      int hh = lSeconds / 3600;
+      lSeconds = lSeconds % 3600;
+      int mm = lSeconds / 60;
+      int ss = lSeconds % 60;
+
+      string strHMS = "";
+      if (hh >= 1)
+        strHMS = String.Format("{0}:{1:00}:{2:00}", hh, mm, ss);
+      else
+        strHMS = String.Format("{0}:{1:00}", mm, ss);
+      return strHMS;
+    }
     #endregion
   }
 }
