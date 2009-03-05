@@ -1,0 +1,37 @@
+// Title: Convert FileName
+// Description: This script Converts the Filename to Lower Case and replaces spaces by underscores.
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  // We get all selected tracks in a list, so that we can loop through them in one call
+  public bool Invoke(List<TrackData> tracks)
+  {
+    if (tracks == null) return false;
+
+	// Loop through all Music Tracks and perform the necessary action
+	foreach (TrackData track in tracks)
+	{
+		string filename = track.FileName;   		// Get the filename from the current track
+
+		filename = filename.ToLowerInvariant();   	// Convert the filename to all lowercase 
+		filename = filename.Replace(" ", "_");		// Replace all blanks with underscores
+		
+		track.FileName = filename;					// Set the filename to the converted filename
+		track.Changed = true; 						// Indicate that the track has been changed
+	}
+    return true;
+  }
+}

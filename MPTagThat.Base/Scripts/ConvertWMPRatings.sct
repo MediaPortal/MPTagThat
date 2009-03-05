@@ -1,0 +1,69 @@
+// Title: Convert WMP Ratings
+// Description: This script Converts Windows Media Player Ratings to Star Ratings from 1 - 5
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  // We get all selected tracks in a list, so that we can loop through them in one call
+  public bool Invoke(List<TrackData> tracks)
+  {
+    if (tracks == null) return false;
+
+	// Loop through all Music Tracks and perform the necessary action
+	foreach (TrackData track in tracks)
+	{
+		// Get the ID3 V2 Tag
+        TagLib.Id3v2.Tag id3v2tag = track.File.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
+        if (id3v2tag == null)
+        {
+		  // No mp3 file or no id3 V2 tag present, so we fon't have a popm
+		  // Continue with next file
+          continue;
+        }
+
+		// Retrieve the ID3 POPM frame as wriiten by WMP
+        TagLib.Id3v2.PopularimeterFrame popm = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "Windows Media Player 9 Series", false);
+        if (popm == null)
+        {
+		  // This file has no POPM frame written by WMP
+		  // Contnue with next file
+          continue;
+        }
+
+		// Get the rating stored in the WMP POPM frame
+        int rating = popm.Rating;
+        int i = 0;
+        if (rating == 255)
+          i = 5;
+        else if (rating == 196)
+          i = 4;
+        else if (rating == 128)
+          i = 3;
+        else if (rating == 64)
+          i = 2;
+        else if (rating == 1)
+          i = 1;
+
+		// NOTE: if you want to remove the WMP popm frame, uncomment the next line
+        // id3v2tag.RemoveFrame(popm);
+		
+		// Now get or create a popm frame
+        popm = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", true);
+        popm.Rating = Convert.ToByte(i);
+		track.Changed = true; 						// Indicate that the track has been changed
+	}
+    return true;
+  }
+}
