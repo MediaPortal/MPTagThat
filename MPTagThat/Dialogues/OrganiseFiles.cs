@@ -178,12 +178,12 @@ namespace MPTagThat.Organise
 
             if (ckCopyFiles.Checked)
             {
-              FileSystem.CopyFile(track.FullFileName, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
+              FileSystem.CopyFile(track.FullFileName, newFilename, ckOverwriteFiles.Checked);
               row.Cells[1].Value = localisation.ToString("organise", "Copied");
             }
             else
             {
-              FileSystem.MoveFile(track.FullFileName, newFilename, UIOption.AllDialogs, UICancelOption.DoNothing);
+              FileSystem.MoveFile(track.FullFileName, newFilename, ckOverwriteFiles.Checked);
               row.Cells[1].Value = localisation.ToString("organise", "Moved");
             }
           }
