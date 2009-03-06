@@ -349,8 +349,8 @@ namespace MPTagThat
         {
           ribbonComboBoxScripts.SelectedIndex = i;
           ribbonComboBoxScripts.ToolTipText = item[2];
-          i++;
         }
+        i++;
       }
     }
 

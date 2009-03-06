@@ -85,8 +85,15 @@ namespace MPTagThat.Core
 
       try
       {
-        string finalName = String.Format(@"scripts\Compiled\{0}.dll", Path.GetFileNameWithoutExtension(scriptFile));
-        finalName = Path.Combine(_sharedAsemblyDir, finalName);
+        string configDir = Options.ConfigDir.Substring(0, Options.ConfigDir.LastIndexOf("\\"));
+        string compiledScriptsDir = Path.Combine(configDir, @"scripts\compiled");
+        if (!Directory.Exists(compiledScriptsDir))
+        {
+            Directory.CreateDirectory(compiledScriptsDir);
+        }
+
+        string finalName = String.Format(@"{0}.dll", Path.GetFileNameWithoutExtension(scriptFile));
+        finalName = Path.Combine(compiledScriptsDir, finalName);
         string name = String.Format(@"{0}.dll", Path.GetFileNameWithoutExtension(scriptFile));
 
         // The script file could have been deleted while already executing the progrsm
@@ -95,17 +102,15 @@ namespace MPTagThat.Core
 
         DateTime lastwriteSourceFile = File.GetLastWriteTime(scriptFile);
 
-        // LOad the compiled Assembly only, if it is newer than the source file, to get changes done on the file
+        // Load the compiled Assembly only, if it is newer than the source file, to get changes done on the file
         if (File.Exists(finalName) && File.GetLastWriteTime(finalName) > lastwriteSourceFile)
         {
           _assembly = Assembly.LoadFile(finalName);
         }
         else
         {
-          string scriptCopy = Path.Combine(_sharedAsemblyDir, name);
-          File.Copy(scriptFile, scriptCopy, true);
-          _assembly = CSScript.Load(scriptCopy, finalName, true);
-          File.Delete(scriptCopy);
+          _assembly = CSScript.Load(scriptFile, finalName, true);
+
           // And reload the assembly from the compiled dir, so that we may execute it
           Assembly.LoadFile(finalName);
         }
