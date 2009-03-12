@@ -28,91 +28,93 @@
     /// </summary>
     private void InitializeComponent()
     {
-        this.lvSearchResults = new System.Windows.Forms.ListView();
-        this.chAlbum = new System.Windows.Forms.ColumnHeader();
-        this.groupBoxAmazonMultipleAlbums = new MPTagThat.Core.WinControls.MPTGroupBox();
-        this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
-        this.btClose = new MPTagThat.Core.WinControls.MPTButton();
-        this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-        this.groupBoxAmazonMultipleAlbums.SuspendLayout();
-        this.SuspendLayout();
-        // 
-        // lvSearchResults
-        // 
-        this.lvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                    | System.Windows.Forms.AnchorStyles.Left)
-                    | System.Windows.Forms.AnchorStyles.Right)));
-        this.lvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+      this.lvSearchResults = new System.Windows.Forms.ListView();
+      this.chAlbum = new System.Windows.Forms.ColumnHeader();
+      this.groupBoxAmazonMultipleAlbums = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
+      this.btClose = new MPTagThat.Core.WinControls.MPTButton();
+      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
+      this.groupBoxAmazonMultipleAlbums.SuspendLayout();
+      this.SuspendLayout();
+      // 
+      // lvSearchResults
+      // 
+      this.lvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                  | System.Windows.Forms.AnchorStyles.Left)
+                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.lvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chAlbum});
-        this.lvSearchResults.FullRowSelect = true;
-        this.lvSearchResults.Location = new System.Drawing.Point(15, 29);
-        this.lvSearchResults.MultiSelect = false;
-        this.lvSearchResults.Name = "lvSearchResults";
-        this.lvSearchResults.Size = new System.Drawing.Size(575, 493);
-        this.lvSearchResults.TabIndex = 10;
-        this.lvSearchResults.UseCompatibleStateImageBehavior = false;
-        this.lvSearchResults.View = System.Windows.Forms.View.Details;
-        this.lvSearchResults.DoubleClick += new System.EventHandler(this.lvSearchResults_DoubleClick);
-        // 
-        // chAlbum
-        // 
-        this.chAlbum.Text = "Album";
-        this.chAlbum.Width = 520;
-        // 
-        // groupBoxAmazonMultipleAlbums
-        // 
-        this.groupBoxAmazonMultipleAlbums.Controls.Add(this.lvSearchResults);
-        this.groupBoxAmazonMultipleAlbums.Localisation = "GroupBoxResults";
-        this.groupBoxAmazonMultipleAlbums.LocalisationContext = "AmazonAlbumSearch";
-        this.groupBoxAmazonMultipleAlbums.Location = new System.Drawing.Point(12, 12);
-        this.groupBoxAmazonMultipleAlbums.Name = "groupBoxAmazonMultipleAlbums";
-        this.groupBoxAmazonMultipleAlbums.Size = new System.Drawing.Size(607, 538);
-        this.groupBoxAmazonMultipleAlbums.TabIndex = 39;
-        this.groupBoxAmazonMultipleAlbums.TabStop = false;
-        this.groupBoxAmazonMultipleAlbums.Text = "Multiple albums found. Please select: ";
-        // 
-        // btUpdate
-        // 
-        this.btUpdate.Localisation = "Update";
-        this.btUpdate.LocalisationContext = "AmazonAlbumSearch";
-        this.btUpdate.Location = new System.Drawing.Point(396, 556);
-        this.btUpdate.Name = "btUpdate";
-        this.btUpdate.Size = new System.Drawing.Size(100, 23);
-        this.btUpdate.TabIndex = 43;
-        this.btUpdate.Text = "Select";
-        this.btUpdate.UseVisualStyleBackColor = true;
-        this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
-        // 
-        // btClose
-        // 
-        this.btClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-        this.btClose.Localisation = "Close";
-        this.btClose.LocalisationContext = "AmazonAlbumSearch";
-        this.btClose.Location = new System.Drawing.Point(502, 556);
-        this.btClose.Name = "btClose";
-        this.btClose.Size = new System.Drawing.Size(100, 23);
-        this.btClose.TabIndex = 44;
-        this.btClose.Text = "Cancel";
-        this.btClose.UseVisualStyleBackColor = true;
-        this.btClose.Click += new System.EventHandler(this.btClose_Click);
-        // 
-        // AmazonAlbumSearchResults
-        // 
-        this.AcceptButton = this.btUpdate;
-        this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.CancelButton = this.btClose;
-        this.ClientSize = new System.Drawing.Size(631, 591);
-        this.Controls.Add(this.groupBoxAmazonMultipleAlbums);
-        this.Controls.Add(this.btUpdate);
-        this.Controls.Add(this.btClose);
-        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-        this.Name = "AmazonAlbumSearchResults";
-        this.Shape = this.roundRectShape1;
-        this.ShowInTaskbar = false;
-        this.Text = "Internet Search Results";
-        this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
-        this.ResumeLayout(false);
+      this.lvSearchResults.FullRowSelect = true;
+      this.lvSearchResults.Location = new System.Drawing.Point(15, 29);
+      this.lvSearchResults.MultiSelect = false;
+      this.lvSearchResults.Name = "lvSearchResults";
+      this.lvSearchResults.Size = new System.Drawing.Size(575, 493);
+      this.lvSearchResults.TabIndex = 10;
+      this.lvSearchResults.UseCompatibleStateImageBehavior = false;
+      this.lvSearchResults.View = System.Windows.Forms.View.Details;
+      this.lvSearchResults.DoubleClick += new System.EventHandler(this.lvSearchResults_DoubleClick);
+      // 
+      // chAlbum
+      // 
+      this.chAlbum.Text = "Album";
+      this.chAlbum.Width = 520;
+      // 
+      // groupBoxAmazonMultipleAlbums
+      // 
+      this.groupBoxAmazonMultipleAlbums.Controls.Add(this.lvSearchResults);
+      this.groupBoxAmazonMultipleAlbums.Localisation = "GroupBoxResults";
+      this.groupBoxAmazonMultipleAlbums.LocalisationContext = "AmazonAlbumSearch";
+      this.groupBoxAmazonMultipleAlbums.Location = new System.Drawing.Point(12, 12);
+      this.groupBoxAmazonMultipleAlbums.Name = "groupBoxAmazonMultipleAlbums";
+      this.groupBoxAmazonMultipleAlbums.Size = new System.Drawing.Size(607, 538);
+      this.groupBoxAmazonMultipleAlbums.TabIndex = 39;
+      this.groupBoxAmazonMultipleAlbums.TabStop = false;
+      this.groupBoxAmazonMultipleAlbums.Text = "Multiple albums found. Please select: ";
+      // 
+      // btUpdate
+      // 
+      this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btUpdate.Localisation = "Update";
+      this.btUpdate.LocalisationContext = "AmazonAlbumSearch";
+      this.btUpdate.Location = new System.Drawing.Point(396, 556);
+      this.btUpdate.Name = "btUpdate";
+      this.btUpdate.Size = new System.Drawing.Size(100, 23);
+      this.btUpdate.TabIndex = 43;
+      this.btUpdate.Text = "Select";
+      this.btUpdate.UseVisualStyleBackColor = true;
+      this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
+      // 
+      // btClose
+      // 
+      this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.btClose.Localisation = "Close";
+      this.btClose.LocalisationContext = "AmazonAlbumSearch";
+      this.btClose.Location = new System.Drawing.Point(502, 556);
+      this.btClose.Name = "btClose";
+      this.btClose.Size = new System.Drawing.Size(100, 23);
+      this.btClose.TabIndex = 44;
+      this.btClose.Text = "Cancel";
+      this.btClose.UseVisualStyleBackColor = true;
+      this.btClose.Click += new System.EventHandler(this.btClose_Click);
+      // 
+      // AmazonAlbumSearchResults
+      // 
+      this.AcceptButton = this.btUpdate;
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.CancelButton = this.btClose;
+      this.ClientSize = new System.Drawing.Size(631, 591);
+      this.Controls.Add(this.groupBoxAmazonMultipleAlbums);
+      this.Controls.Add(this.btUpdate);
+      this.Controls.Add(this.btClose);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+      this.Name = "AmazonAlbumSearchResults";
+      this.Shape = this.roundRectShape1;
+      this.ShowInTaskbar = false;
+      this.Text = "Internet Search Results";
+      this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
+      this.ResumeLayout(false);
 
     }
 
