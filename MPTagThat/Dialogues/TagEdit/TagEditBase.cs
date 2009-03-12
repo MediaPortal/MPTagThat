@@ -591,6 +591,7 @@ namespace MPTagThat.TagEdit
       if (tbAlbum.Text.Length == 0)
         return;
 
+      this.Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
@@ -607,6 +608,8 @@ namespace MPTagThat.TagEdit
         else
         {
           AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
+          
+          this.Cursor = Cursors.Default;
           if (main.ShowForm(dlgAlbumResults) == DialogResult.OK)
           {
             if (dlgAlbumResults.SelectedListItem > -1)
@@ -632,6 +635,7 @@ namespace MPTagThat.TagEdit
           _pictureIsChanged = true;
         }
       }
+      this.Cursor = Cursors.Default;
     }
     #endregion
 
