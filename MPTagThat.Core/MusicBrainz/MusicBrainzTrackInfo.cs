@@ -32,7 +32,7 @@ namespace MPTagThat.Core.MusicBrainz
     #region Public Methods
     public List<MusicBrainzTrack> GetMusicBrainzTrack(string fileName)
     {
-      log.Debug("Creating Fingerprint");
+      log.Debug("Identify: Creating Fingerprint");
       // Create a Decoding Channel
       int channel = Bass.BASS_StreamCreateFile(fileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
       if (channel == 0)
@@ -90,7 +90,7 @@ namespace MPTagThat.Core.MusicBrainz
         "0",                        // Year,
         "");
 
-      log.Debug("Get MusicBrainz PUID");
+      log.Debug("Identify: Get MusicBrainz PUID");
       string responseXml = Util.GetWebPage(requestString);
       string puid = string.Empty;
 
@@ -117,6 +117,7 @@ namespace MPTagThat.Core.MusicBrainz
     /// <returns></returns>
     private List<MusicBrainzTrack> RetrieveMusicBrainzTrack(string puid)
     {
+      log.Debug("Identify: Get track information for puid: {0}", puid);
       List<MusicBrainzTrack> tracks = new List<MusicBrainzTrack>();
 
       string requestString = musicBrainzUrl + puid;

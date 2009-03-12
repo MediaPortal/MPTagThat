@@ -276,6 +276,7 @@ namespace MPTagThat.GridView
         tracksGrid.Rows[rowIndex].Cells[1].Value = "";
         if (track.Changed)
         {
+          log.Debug("Save: Saving track: {0}", track.FullFileName);
           if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
             track.AlbumArtist = track.Artist;
 
@@ -337,6 +338,7 @@ namespace MPTagThat.GridView
         string ext = System.IO.Path.GetExtension(track.File.Name);
         string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(track.File.Name), String.Format("{0}{1}", System.IO.Path.GetFileNameWithoutExtension(track.FileName), ext));
         System.IO.File.Move(track.File.Name, newFileName);
+        log.Debug("Save: Renaming track: {0} Newname: {1}", track.FullFileName, newFileName);
         return true;
       }
       return false;
@@ -403,13 +405,13 @@ namespace MPTagThat.GridView
 
           using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
           {
-            log.Debug("Processing file: {0}", track.FullFileName);
+            log.Debug("Identify: Processing file: {0}", track.FullFileName);
             dlgProgress.StatusLabel2 = localisation.ToString("progress", "InternetMusicBrainz");
             List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
 
             if (musicBrainzTracks == null)
             {
-              log.Debug("Couldn't identify file");
+              log.Debug("Identify: Couldn't identify file");
               continue;
             }
 
@@ -449,7 +451,10 @@ namespace MPTagThat.GridView
 
               // We didn't get a track
               if (musicBrainzTrack == null)
+              {
+                log.Debug("Identify: No information returned from Musicbrainz");
                 continue;
+              }
 
               // Are we still at the same album?
               // if not, get the album, so that we have the release date
@@ -583,6 +588,7 @@ namespace MPTagThat.GridView
           }
           TrackData track = bindingList[row.Index];
 
+          log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
           // Should we take an existing folder.jpg instead of searching the web
           if (Options.MainSettings.EmbedFolderThumb)
           {
@@ -597,10 +603,17 @@ namespace MPTagThat.GridView
               // Only write a picture if we don't have a picture OR Overwrite Pictures is set
               if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
+                log.Debug("CoverArt: Using existing folder.jpg");
                 // Prepare Picture Array and then add the cover retrieved
                 List<IPicture> pics = new List<IPicture>();
                 pics.Add(folderThumb);
                 track.Pictures = pics.ToArray();
+                
+                SetBackgroundColorChanged(row.Index);
+                track.Changed = true;
+                _itemsChanged = true;
+                row.Cells[1].Value = localisation.ToString("message", "Ok");
+                _main.FillInfoPanel();
               }
             }
             continue;
@@ -644,8 +657,10 @@ namespace MPTagThat.GridView
               }
 
               if (amazonAlbum == null)
+              {
+                log.Debug("CoverArt: No coverart found");
                 continue;
-
+              }
             }
           }
 

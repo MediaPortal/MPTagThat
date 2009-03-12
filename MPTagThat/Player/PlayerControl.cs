@@ -103,6 +103,7 @@ namespace MPTagThat.Player
     /// </summary>
     public void Stop()
     {
+      log.Debug("Player: Stop Playback");
       if (Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING ||
           Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PAUSED)
       {

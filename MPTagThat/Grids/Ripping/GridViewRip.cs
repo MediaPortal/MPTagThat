@@ -214,145 +214,157 @@ namespace MPTagThat.GridView
     private void RippingThread()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      _musicDir = _main.MainRibbon.RipOutputDirectory;
-
-      string encoder = null;
-      List<Item> encoders = (List<Item>)_main.MainRibbon.RipEncoderCombo.DataSource;
-      if (_main.MainRibbon.RipEncoderCombo.SelectedItem != null)
-      {
-        encoder = encoders[_main.MainRibbon.RipEncoderCombo.SelectedIndex].Value;
-        Options.MainSettings.RipEncoder = encoder;
-      }
-      else
-      {
-        encoder = Options.MainSettings.RipEncoder;
-      }
-
-      if (encoder == null)
-        return;
-
       try
       {
-        if (!System.IO.Directory.Exists(_musicDir) && !string.IsNullOrEmpty(_musicDir))
-          System.IO.Directory.CreateDirectory(_musicDir);
-      }
-      catch (Exception ex)
-      {
-        SetStatusLabel(localisation.ToString("Conversion", "ErrorDirectory"));
-        log.Error("Error creating Ripping directory: {0}. {1}", _musicDir, ex.Message);
-        return;
-      }
+        _musicDir = _main.MainRibbon.RipOutputDirectory;
 
-      // Build the Target Directory
-      string targetDir = "";
-      string artistDir = tbAlbumArtist.Text == string.Empty ? "Artist" : tbAlbumArtist.Text;
-      string albumDir = tbAlbum.Text == string.Empty ? "Album" : tbAlbum.Text;
-
-      string outFileFormat = Options.MainSettings.RipFileNameFormat;
-      int index = outFileFormat.LastIndexOf('\\');
-      if (index > -1)
-      {
-        targetDir = outFileFormat.Substring(0, index);
-        targetDir = targetDir.Replace("<A>", artistDir);
-        targetDir = targetDir.Replace("<O>", artistDir);
-        targetDir = targetDir.Replace("<B>", albumDir);
-        targetDir = targetDir.Replace("<G>", tbGenre.Text);
-        targetDir = targetDir.Replace("<Y>", tbYear.Text);
-        outFileFormat = outFileFormat.Substring(index + 1);
-      }
-      else
-        targetDir = string.Format(@"{1}\{2}", artistDir, albumDir);
-
-      targetDir = string.Format(@"{0}\{1}", _musicDir, targetDir);
-
-      try
-      {
-        if (!System.IO.Directory.Exists(targetDir))
-          System.IO.Directory.CreateDirectory(targetDir);
-      }
-      catch (Exception ex)
-      {
-        SetStatusLabel(localisation.ToString("Conversion", "ErrorDirectory"));
-        log.Error("Error creating Ripping directory: {0}. {1}", targetDir, ex.Message);
-        return;
-      }
-
-      // User may change to a different drive while ripping 
-      int selectedDriveID = CurrentDriveID;
-
-      foreach (DataGridViewRow row in dataGridViewRip.Rows)
-      {
-        // Reset the Status field to 0
-        row.Cells[1].Value = 0;
-      }
-
-      _currentRow = -1;
-      foreach (DataGridViewRow row in dataGridViewRip.Rows)
-      {
-        // when checking and unchecking a row, we have the DBNull value
-        if (row.Cells[0].Value == System.DBNull.Value)
-          continue;
-
-        if ((int)row.Cells[0].Value == 0)
-          continue;
-
-        SetStatusLabel(localisation.ToString("Conversion", "Ripping"));
-
-        _currentRow = row.Index;
-
-        CDTrackDetail track = bindingList[selectedDriveID][_currentRow];
-
-        int stream = BassCd.BASS_CD_StreamCreate(selectedDriveID, row.Index, BASSFlag.BASS_STREAM_DECODE);
-        if (stream == 0)
+        string encoder = null;
+        List<Item> encoders = (List<Item>)_main.MainRibbon.RipEncoderCombo.DataSource;
+        if (_main.MainRibbon.RipEncoderCombo.SelectedItem != null)
         {
-          log.Error("Error creating stream for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
-          continue;
+          encoder = encoders[_main.MainRibbon.RipEncoderCombo.SelectedIndex].Value;
+          Options.MainSettings.RipEncoder = encoder;
+        }
+        else
+        {
+          encoder = Options.MainSettings.RipEncoder;
         }
 
-        log.Info("Decoding Audio CD Track{0}", row.Index);
-        _outFile = outFileFormat;
-        _outFile = _outFile.Replace("<O>", artistDir);
-        _outFile = _outFile.Replace("<B>", albumDir);
-        _outFile = _outFile.Replace("<G>", tbGenre.Text);
-        _outFile = _outFile.Replace("<Y>", tbYear.Text);
-        _outFile = _outFile.Replace("<A>", track.Artist);
-        _outFile = _outFile.Replace("<K>", track.Track.ToString().PadLeft(Options.MainSettings.NumberTrackDigits, '0'));
-        _outFile = _outFile.Replace("<T>", track.Title);
-        _outFile = Util.MakeValidFileName(_outFile);
+        if (encoder == null)
+          return;
 
-        _outFile = string.Format(@"{0}\{1}", targetDir, _outFile);
-
-        _outFile = audioEncoder.SetEncoder(encoder, _outFile);
-
-        if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
-        {
-          log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
-        }
-
-        dataGridViewRip.Rows[_currentRow].Cells[1].Value = 100;
-
-        Bass.BASS_StreamFree(stream);
-        log.Info("Finished Decoding Audio CD Track{0}", _currentRow);
+        log.Debug("Rip: Using Encoder: {0}", encoder);
 
         try
         {
-          // Now Tag the encoded File
-          File file = File.Create(_outFile);
-          file.Tag.AlbumArtists = new string[] { tbAlbumArtist.Text };
-          file.Tag.Album = tbAlbum.Text;
-          file.Tag.Genres = new string[] { tbGenre.Text };
-          file.Tag.Year = tbYear.Text == string.Empty ? 0 : Convert.ToUInt32(tbYear.Text);
-          file.Tag.Performers = new string[] { track.Artist };
-          file.Tag.Track = (uint)track.Track;
-          file.Tag.Title = track.Title;
-          file = Util.FormatID3Tag(file);
-          file.Save();
+          if (!System.IO.Directory.Exists(_musicDir) && !string.IsNullOrEmpty(_musicDir))
+            System.IO.Directory.CreateDirectory(_musicDir);
         }
         catch (Exception ex)
         {
-          log.Error("Error tagging encoded file {0}. Error: {1}", _outFile, ex.Message);
+          SetStatusLabel(localisation.ToString("Conversion", "ErrorDirectory"));
+          log.Error("Error creating Ripping directory: {0}. {1}", _musicDir, ex.Message);
+          return;
+        }
+
+        // Build the Target Directory
+        string targetDir = "";
+        string artistDir = tbAlbumArtist.Text == string.Empty ? "Artist" : tbAlbumArtist.Text;
+        string albumDir = tbAlbum.Text == string.Empty ? "Album" : tbAlbum.Text;
+
+        string outFileFormat = Options.MainSettings.RipFileNameFormat;
+        int index = outFileFormat.LastIndexOf('\\');
+        if (index > -1)
+        {
+          targetDir = outFileFormat.Substring(0, index);
+          targetDir = targetDir.Replace("<A>", artistDir);
+          targetDir = targetDir.Replace("<O>", artistDir);
+          targetDir = targetDir.Replace("<B>", albumDir);
+          targetDir = targetDir.Replace("<G>", tbGenre.Text);
+          targetDir = targetDir.Replace("<Y>", tbYear.Text);
+          outFileFormat = outFileFormat.Substring(index + 1);
+        }
+        else
+          targetDir = string.Format(@"{1}\{2}", artistDir, albumDir);
+
+        targetDir = string.Format(@"{0}\{1}", _musicDir, targetDir);
+
+        log.Debug("Rip: Using Target Folder: {0}", targetDir);
+
+        try
+        {
+          if (!System.IO.Directory.Exists(targetDir))
+            System.IO.Directory.CreateDirectory(targetDir);
+        }
+        catch (Exception ex)
+        {
+          SetStatusLabel(localisation.ToString("Conversion", "ErrorDirectory"));
+          log.Error("Error creating Ripping directory: {0}. {1}", targetDir, ex.Message);
+          return;
+        }
+
+        // User may change to a different drive while ripping 
+        int selectedDriveID = CurrentDriveID;
+
+        foreach (DataGridViewRow row in dataGridViewRip.Rows)
+        {
+          // Reset the Status field to 0
+          row.Cells[1].Value = 0;
+        }
+
+        _currentRow = -1;
+        foreach (DataGridViewRow row in dataGridViewRip.Rows)
+        {
+          // when checking and unchecking a row, we have the DBNull value
+          if (row.Cells[0].Value == System.DBNull.Value)
+            continue;
+
+          if ((int)row.Cells[0].Value == 0)
+            continue;
+
+          SetStatusLabel(localisation.ToString("Conversion", "Ripping"));
+
+          _currentRow = row.Index;
+
+          CDTrackDetail track = bindingList[selectedDriveID][_currentRow];
+
+          int stream = BassCd.BASS_CD_StreamCreate(selectedDriveID, row.Index, BASSFlag.BASS_STREAM_DECODE);
+          if (stream == 0)
+          {
+            log.Error("Error creating stream for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
+            continue;
+          }
+
+          log.Info("Decoding Audio CD Track{0}", row.Index);
+          _outFile = outFileFormat;
+          _outFile = _outFile.Replace("<O>", artistDir);
+          _outFile = _outFile.Replace("<B>", albumDir);
+          _outFile = _outFile.Replace("<G>", tbGenre.Text);
+          _outFile = _outFile.Replace("<Y>", tbYear.Text);
+          _outFile = _outFile.Replace("<A>", track.Artist);
+          _outFile = _outFile.Replace("<K>", track.Track.ToString().PadLeft(Options.MainSettings.NumberTrackDigits, '0'));
+          _outFile = _outFile.Replace("<T>", track.Title);
+          _outFile = Util.MakeValidFileName(_outFile);
+
+          _outFile = string.Format(@"{0}\{1}", targetDir, _outFile);
+
+          _outFile = audioEncoder.SetEncoder(encoder, _outFile);
+
+          if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
+          {
+            log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
+          }
+
+          dataGridViewRip.Rows[_currentRow].Cells[1].Value = 100;
+
+          Bass.BASS_StreamFree(stream);
+          log.Info("Finished Decoding Audio CD Track{0}", _currentRow);
+
+          try
+          {
+            // Now Tag the encoded File
+            File file = File.Create(_outFile);
+            file.Tag.AlbumArtists = new string[] { tbAlbumArtist.Text };
+            file.Tag.Album = tbAlbum.Text;
+            file.Tag.Genres = new string[] { tbGenre.Text };
+            file.Tag.Year = tbYear.Text == string.Empty ? 0 : Convert.ToUInt32(tbYear.Text);
+            file.Tag.Performers = new string[] { track.Artist };
+            file.Tag.Track = (uint)track.Track;
+            file.Tag.Title = track.Title;
+            file = Util.FormatID3Tag(file);
+            file.Save();
+          }
+          catch (Exception ex)
+          {
+            log.Error("Error tagging encoded file {0}. Error: {1}", _outFile, ex.Message);
+          }
         }
       }
+      catch (Exception ex)
+      {
+        log.Error("Rip: Exception: {0} {1}", ex.Message, ex.StackTrace);
+      }
+
       _currentRow = -1;
       SetStatusLabel(localisation.ToString("Conversion","RippingFinished"));
       Options.MainSettings.RipTargetFolder = _musicDir;

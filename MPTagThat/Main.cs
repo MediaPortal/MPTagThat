@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 using TagLib;
-using System.Reflection;
 using MPTagThat.GridView;
 using MPTagThat.Core;
 using MPTagThat.Core.MediaChangeMonitor;
@@ -195,6 +195,7 @@ namespace MPTagThat
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation("Starting up ...");
+      log.Debug("Main: Loading Main form");
 
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -207,6 +208,7 @@ namespace MPTagThat
       this.panelTop.Controls.Add(ribbon);
 
       #region Setup Grids
+      log.Debug("Main: Setup Grid");
       _splashScreen.SetInformation("Setting up Grids ...");
       // Add the Grids to the Main Form
       gridViewControl = new MPTagThat.GridView.GridViewTracks();
@@ -270,14 +272,17 @@ namespace MPTagThat
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
 
       // Load BASS
+      log.Debug("Main: Loading Bass");
       _splashScreen.SetInformation("Loading Bass ...");
       LoadBass();
 
       // Load the Settings
+      log.Debug("Main: Loading Settings");
       _splashScreen.SetInformation("Loading Settings ...");
       LoadSettings();
 
       // Localise the Screens
+      log.Debug("Main: Localisation");
       _splashScreen.SetInformation("Localisation ...");
       LocaliseScreen();
 
@@ -321,6 +326,7 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void Main_Close(object sender, FormClosingEventArgs e)
     {
+      log.Debug("Main: Closing Main form");
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
@@ -355,7 +361,7 @@ namespace MPTagThat
         return;
       }
 
-      log.Info("BASS: Loading audio decoder add-ins...");
+      log.Debug("BASS: Loading audio decoder add-ins...");
 
       string appPath = System.Windows.Forms.Application.StartupPath;
       string decoderFolderPath = Path.Combine(appPath, @"bin\Bass");
@@ -423,8 +429,6 @@ namespace MPTagThat
 
 
       this.Location = _formLocation;
-
-      log.Debug("form size: {0}", _formSize.ToString());
 
       if (_formSize.Width > 0)
         this.Size = _formSize;
@@ -546,6 +550,7 @@ namespace MPTagThat
       try // just in case we are lacking sufficent permissions
       {
         dirInfo = new DirectoryInfo(_selectedDirectory);
+        log.Debug("Main: Retrieving files from. {0}", _selectedDirectory);
         GetFiles(_selectedDirectory, ref files, treeViewControl.ScanFolderRecursive);
       }
       catch (Exception)
@@ -569,6 +574,7 @@ namespace MPTagThat
 
       int count = 1;
       int trackCount = files.Count;
+      log.Debug("Main: Found {0} files", trackCount);
       foreach (FileInfo fi in files)
       {
         Application.DoEvents();
@@ -595,7 +601,9 @@ namespace MPTagThat
               log.Warn("Main: Ignoring track {0} - Corrupt File!", fi.FullName);
             }
             catch (UnsupportedFormatException)
-            { }
+            {
+              log.Warn("Main: Ignoring track {0} - Unsupported format!", fi.FullName);
+            }
           }
         }
         catch (PathTooLongException)

@@ -592,8 +592,10 @@ namespace MPTagThat.Core
           }
         }
       }
-      catch (Exception)
-      { }
+      catch (Exception ex)
+      {
+        log.Error("Util: Error retrieving Web Page: {0} {1} {2}", requestString, ex.Message, ex.StackTrace);
+      }
 
       return responseString;
     }
