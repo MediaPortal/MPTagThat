@@ -22,6 +22,7 @@ namespace MPTagThat.Player
     private SortableBindingList<PlayListData> _playList;
     private int _currentStartIndex = -1;
     private int _currentIndexPlaying = -1;
+    private string _currentSongPlaying = "";
     private int _stream = 0;
     private int _syncHandleEnd = 0;
     private Visuals _vis = new Visuals();                     // visuals class instance
@@ -66,9 +67,17 @@ namespace MPTagThat.Player
       get { return _playListForm; }
     }
 
+    /// <summary>
+    /// Returns if the Player is Playing
+    /// </summary>
     public bool IsPlaying
     {
       get { return Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING ? true : false; }
+    }
+
+    public string CurrentSongPlaying
+    {
+      get { return _currentSongPlaying; }
     }
     #endregion
 
@@ -118,6 +127,7 @@ namespace MPTagThat.Player
       pictureBoxPlayPause.Image = _imgPlay;
       playBackSlider.Value = 0;
       playBackSlider.Enabled = false;
+      _currentSongPlaying = "";
     }
 
     /// <summary>
@@ -244,6 +254,8 @@ namespace MPTagThat.Player
         log.Error("Player: Error Creating stream for {0}: {1}", _playList[_currentStartIndex].FileName, Enum.GetName(typeof(BASSError), error));
         return;
       }
+
+      _currentSongPlaying = _playList[_currentStartIndex].FileName;
 
       RegisterPlaybackEvents();
 

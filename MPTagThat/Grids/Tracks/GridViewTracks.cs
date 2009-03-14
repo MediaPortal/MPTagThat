@@ -277,6 +277,14 @@ namespace MPTagThat.GridView
         if (track.Changed)
         {
           log.Debug("Save: Saving track: {0}", track.FullFileName);
+
+          // The track to be saved, may be currently playing. If this is the case stop playnack to free the file
+          if (track.FullFileName == _main.Player.CurrentSongPlaying)
+          {
+            log.Debug("Save: Song is played in Player. Stop playback to free the file");
+            _main.Player.Stop();
+          }
+
           if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
             track.AlbumArtist = track.Artist;
 
