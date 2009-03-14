@@ -1239,11 +1239,12 @@ namespace MPTagThat.GridView
       contextMenu.Items[1].Text = localisation.ToString("contextmenu", "Cut");
       contextMenu.Items[2].Text = localisation.ToString("contextmenu", "Paste");
       contextMenu.Items[3].Text = localisation.ToString("contextmenu", "Delete");
-      contextMenu.Items[5].Text = localisation.ToString("contextmenu", "AddBurner");
-      contextMenu.Items[6].Text = localisation.ToString("contextmenu", "AddConverter");
-      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "AddPlaylist");
-      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "SavePlaylist");
-      contextMenu.Items[10].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
+      contextMenu.Items[5].Text = localisation.ToString("contextmenu", "SelectAll");
+      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "AddBurner");
+      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "AddConverter");
+      contextMenu.Items[9].Text = localisation.ToString("contextmenu", "AddPlaylist");
+      contextMenu.Items[10].Text = localisation.ToString("contextmenu", "SavePlaylist");
+      contextMenu.Items[12].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
     }
     #endregion
 
@@ -1771,6 +1772,11 @@ namespace MPTagThat.GridView
     private void tracksGrid_Delete(object sender, EventArgs e)
     {
       DeleteTracks();
+    }
+
+    private void tracksGrid_SelectAll(object sender, EventArgs e)
+    {
+      tracksGrid.SelectAll();
     }
     #endregion
 

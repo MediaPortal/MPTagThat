@@ -30,7 +30,7 @@ namespace MPTagThat.GridView
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tracksGrid = new System.Windows.Forms.DataGridView();
       this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +44,8 @@ namespace MPTagThat.GridView
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)(this.tracksGrid)).BeginInit();
       this.contextMenu.SuspendLayout();
       this.SuspendLayout();
@@ -54,8 +56,8 @@ namespace MPTagThat.GridView
       this.tracksGrid.AllowUserToDeleteRows = false;
       this.tracksGrid.AllowUserToOrderColumns = true;
       this.tracksGrid.AllowUserToResizeRows = false;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
       this.tracksGrid.BackgroundColor = System.Drawing.Color.White;
       this.tracksGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
       this.tracksGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,6 +79,8 @@ namespace MPTagThat.GridView
             this.toolStripMenuItem3,
             this.toolStripMenuItem8,
             this.toolStripSeparator3,
+            this.toolStripMenuItem9,
+            this.toolStripSeparator1,
             this.toolStripMenuItem4,
             this.toolStripMenuItem5,
             this.toolStripMenuItem6,
@@ -84,7 +88,7 @@ namespace MPTagThat.GridView
             this.toolStripSeparator4,
             this.toolStripMenuItem7});
       this.contextMenu.Name = "contextMenuTreeView";
-      this.contextMenu.Size = new System.Drawing.Size(195, 236);
+      this.contextMenu.Size = new System.Drawing.Size(195, 264);
       // 
       // toolStripMenuItem1
       // 
@@ -169,6 +173,18 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem8.Text = "Delete";
       this.toolStripMenuItem8.Click += new System.EventHandler(this.tracksGrid_Delete);
       // 
+      // toolStripMenuItem9
+      // 
+      this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+      this.toolStripMenuItem9.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem9.Text = "Select All";
+      this.toolStripMenuItem9.Click += new System.EventHandler(this.tracksGrid_SelectAll);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
+      // 
       // GridViewTracks
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,6 +213,8 @@ namespace MPTagThat.GridView
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
     private System.Windows.Forms.ToolStripMenuItem menuSavePlaylist;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
   }
 }

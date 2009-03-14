@@ -349,6 +349,7 @@
     <String id="Paste">Einfügen</String>
     <String id="Delete">Löschen</String>
     <String id="Refresh">Refresh</String>
+    <String id="SelectAll">Alles Auswählen</String>
  </Section>
 
     <!-- File Info Panel on the right side -->
