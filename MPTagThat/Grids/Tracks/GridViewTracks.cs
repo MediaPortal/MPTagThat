@@ -1636,6 +1636,8 @@ namespace MPTagThat.GridView
     /// <param name="e"></param>
     public void tracksGrid_AddToPlayList(object o, System.EventArgs e)
     {
+      // get current playlist count
+      int playlistCount = _main.Player.PlayList.Count;
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1649,6 +1651,17 @@ namespace MPTagThat.GridView
         playListItem.Album = track.Album;
         playListItem.Duration = track.Duration.Substring(3, 5);  // Just get Minutes and seconds
         _main.Player.PlayList.Add(playListItem);
+      }
+
+      // Start playing the songs just added, if player is idle
+      if (!_main.Player.IsPlaying && _main.Player.PlayList.Count > playlistCount)
+      {
+        int index = playlistCount;
+        if (index == -1)
+        {
+          index = 0;
+        }
+        _main.Player.Play(index);
       }
     }
 

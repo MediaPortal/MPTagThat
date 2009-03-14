@@ -65,6 +65,11 @@ namespace MPTagThat.Player
     {
       get { return _playListForm; }
     }
+
+    public bool IsPlaying
+    {
+      get { return Bass.BASS_ChannelIsActive(_stream) == BASSActive.BASS_ACTIVE_PLAYING ? true : false; }
+    }
     #endregion
 
     #region Form Load
