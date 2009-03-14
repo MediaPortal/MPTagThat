@@ -54,7 +54,7 @@
     <String id="AutoNumber">Automatisch nummerieren</String>
     <String id="NumberOnClick">Nummeriern bei Click</String>
     <String id="RemoveCommentPicture">Entfernen:</String>
-    <String id="RemoveComments">Alle Kommentare entferenen</String>
+    <String id="RemoveComments">Alle Kommentare entfernen</String>
     <String id="RemovePictures">Alle Bilder entfernen</String>
     <String id="CaseConversion">Groß-/ Klein-\nschreibung</String>
     <String id="CaseConversionMenu">Groß-/ Kleinschreibung</String>
@@ -341,8 +341,8 @@
   <Section name="contextmenu">
     <String id="AddBurner">Zur Brennliste hinzufügen</String>
     <String id="AddConverter">Zur Konvertierungliste hinzufügen</String>
-    <String id="AddPlayList">Zur Playlist hinzufügen</String>
-    <String id="SavePlayList">Als PlayList speichern</String>
+    <String id="AddPlayList">Zur Abspielliste hinzufügen</String>
+    <String id="SavePlayList">Als Abspielliste speichern</String>
     <String id="CreateFolderThumb">Erstelle Ordnervorschau</String>
     <String id="Copy">Kopieren</String>
     <String id="Cut">Ausschneiden</String>
@@ -719,8 +719,8 @@
     <String id="PlayListButton">PL</String>
     <String id="PlayListLoad">Laden</String>
     <String id="PlayListSave">Speichern</String>
-    <String id="ClearPlayList">PlayList löschen</String>
-	<String id="LoadPlayList">PlayList laden</String>
-	<String id="SavePlayList">PlayList speicherm</String>
+    <String id="ClearPlayList">Abspielliste löschen</String>
+	<String id="LoadPlayList">Abspielliste laden</String>
+	<String id="SavePlayList">Abspielliste speicherm</String>
   </Section>
 </Language>
