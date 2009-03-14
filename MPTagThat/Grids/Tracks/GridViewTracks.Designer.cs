@@ -40,9 +40,10 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuSavePlaylist = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuSavePlaylist = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.tracksGrid)).BeginInit();
       this.contextMenu.SuspendLayout();
       this.SuspendLayout();
@@ -74,6 +75,7 @@ namespace MPTagThat.GridView
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
+            this.toolStripMenuItem8,
             this.toolStripSeparator3,
             this.toolStripMenuItem4,
             this.toolStripMenuItem5,
@@ -82,7 +84,7 @@ namespace MPTagThat.GridView
             this.toolStripSeparator4,
             this.toolStripMenuItem7});
       this.contextMenu.Name = "contextMenuTreeView";
-      this.contextMenu.Size = new System.Drawing.Size(195, 214);
+      this.contextMenu.Size = new System.Drawing.Size(195, 236);
       // 
       // toolStripMenuItem1
       // 
@@ -139,6 +141,13 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem6.Text = "Add To Playlist";
       this.toolStripMenuItem6.Click += new System.EventHandler(this.tracksGrid_AddToPlayList);
       // 
+      // menuSavePlaylist
+      // 
+      this.menuSavePlaylist.Name = "menuSavePlaylist";
+      this.menuSavePlaylist.Size = new System.Drawing.Size(194, 22);
+      this.menuSavePlaylist.Text = "Save as PlayList";
+      this.menuSavePlaylist.Click += new System.EventHandler(this.tracksGrid_SaveAsPlayList);
+      // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -152,12 +161,13 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem7.Text = "Create Folder Thumb";
       this.toolStripMenuItem7.Click += new System.EventHandler(this.tracksGrid_CreateFolderThumb);
       // 
-      // menuSavePlaylist
+      // toolStripMenuItem8
       // 
-      this.menuSavePlaylist.Name = "menuSavePlaylist";
-      this.menuSavePlaylist.Size = new System.Drawing.Size(194, 22);
-      this.menuSavePlaylist.Text = "Save as PlayList";
-      this.menuSavePlaylist.Click += new System.EventHandler(this.tracksGrid_SaveAsPlayList);
+      this.toolStripMenuItem8.Image = global::MPTagThat.Properties.Resources.DeleteHS;
+      this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+      this.toolStripMenuItem8.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem8.Text = "Delete";
+      this.toolStripMenuItem8.Click += new System.EventHandler(this.tracksGrid_Delete);
       // 
       // GridViewTracks
       // 
@@ -186,6 +196,7 @@ namespace MPTagThat.GridView
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
     private System.Windows.Forms.ToolStripMenuItem menuSavePlaylist;
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
 
   }
 }

@@ -608,7 +608,7 @@ namespace MPTagThat.GridView
                 List<IPicture> pics = new List<IPicture>();
                 pics.Add(folderThumb);
                 track.Pictures = pics.ToArray();
-                
+
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
                 _itemsChanged = true;
@@ -1238,11 +1238,12 @@ namespace MPTagThat.GridView
       contextMenu.Items[0].Text = localisation.ToString("contextmenu", "Copy");
       contextMenu.Items[1].Text = localisation.ToString("contextmenu", "Cut");
       contextMenu.Items[2].Text = localisation.ToString("contextmenu", "Paste");
-      contextMenu.Items[4].Text = localisation.ToString("contextmenu", "AddBurner");
-      contextMenu.Items[5].Text = localisation.ToString("contextmenu", "AddConverter");
-      contextMenu.Items[6].Text = localisation.ToString("contextmenu", "AddPlaylist");
-      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "SavePlaylist");
-      contextMenu.Items[9].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
+      contextMenu.Items[3].Text = localisation.ToString("contextmenu", "Delete");
+      contextMenu.Items[5].Text = localisation.ToString("contextmenu", "AddBurner");
+      contextMenu.Items[6].Text = localisation.ToString("contextmenu", "AddConverter");
+      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "AddPlaylist");
+      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "SavePlaylist");
+      contextMenu.Items[10].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
     }
     #endregion
 
@@ -1764,7 +1765,13 @@ namespace MPTagThat.GridView
         }
       }
       _main.RefreshTrackList();
-          }
+    }
+
+
+    private void tracksGrid_Delete(object sender, EventArgs e)
+    {
+      DeleteTracks();
+    }
     #endregion
 
     /// <summary>
