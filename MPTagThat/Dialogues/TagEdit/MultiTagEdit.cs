@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using TagLib;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
+using MPTagThat.Core.ShellLib;
 
 namespace MPTagThat.TagEdit
 {
@@ -34,6 +35,24 @@ namespace MPTagThat.TagEdit
 
       base.OnLoad(sender, e);
 
+      // Hide the Artist / Aöbumartist Textbox as we use a Combo here
+      tbArtist.Visible = false;
+      tbAlbumArtist.Visible = false;
+
+      if (acArtist != null)
+      {
+        // We need to get the Combobox Handle first
+        ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
+        info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+        ShellApi.GetComboBoxInfo(cbArtist.Handle, ref info);
+        acArtist.EditHandle = info.hwndEdit;
+        acArtist.SetAutoComplete(true);
+
+        ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref info);
+        acAlbumArtist.EditHandle = info.hwndEdit;
+        acAlbumArtist.SetAutoComplete(true);
+      }
+
       // Fill in Fields, which are the same in all selected rows
       FillForm();
 
@@ -41,9 +60,9 @@ namespace MPTagThat.TagEdit
       this.tbYear.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.tbTitle.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.tbAlbum.TextChanged += new System.EventHandler(this.OnTextChanged);
-      this.tbArtist.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
       this.tbTrack.TextChanged += new System.EventHandler(this.OnTextChanged);
-      this.tbAlbumArtist.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbAlbumArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
       this.tbNumTracks.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.tbBPM.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.tbNumDiscs.TextChanged += new System.EventHandler(this.OnTextChanged);
@@ -491,8 +510,8 @@ namespace MPTagThat.TagEdit
       else
         options.Genre = null;
 
-      options.Artist = (ckArtist.Checked ? tbArtist.Text : null);
-      options.AlbumArtist = (ckAlbumArtist.Checked ? tbAlbumArtist.Text : null);
+      options.Artist = (ckArtist.Checked ? cbArtist.Text : null);
+      options.AlbumArtist = (ckAlbumArtist.Checked ? cbAlbumArtist.Text : null);
       options.Album = (ckAlbum.Checked ? tbAlbum.Text : null);
       options.Title = (ckTitle.Checked ? tbTitle.Text : null);
 
@@ -624,17 +643,17 @@ namespace MPTagThat.TagEdit
         }
 
         #region Main Tags
-        if (tbArtist.Text.Trim() != track.Artist.Trim())
+        if (cbArtist.Text.Trim() != track.Artist.Trim())
           if (i == 0)
-            tbArtist.Text = track.Artist;
+            cbArtist.Text = track.Artist;
           else
-            tbArtist.Text = "";
+            cbArtist.Text = "";
 
-        if (tbAlbumArtist.Text.Trim() != track.AlbumArtist.Trim())
+        if (cbAlbumArtist.Text.Trim() != track.AlbumArtist.Trim())
           if (i == 0)
-            tbAlbumArtist.Text = track.AlbumArtist;
+            cbAlbumArtist.Text = track.AlbumArtist;
           else
-            tbAlbumArtist.Text = "";
+            cbAlbumArtist.Text = "";
 
         if (tbAlbum.Text.Trim() != track.Album.Trim())
           if (i == 0)
@@ -950,6 +969,41 @@ namespace MPTagThat.TagEdit
         #endregion
         i++;
       }
+
+      // Now see, if we have different values in the Artist and AlbumArtist fields and fill the combo
+      List<string> itemsArtist = new List<string>();
+      List<string> itemsAlbumArtist = new List<string>();
+      string savedArtist = "";
+      string savedAlbumArtist = "";
+      foreach (DataGridViewRow row in main.TracksGridView.View.Rows)
+      {
+        if (!row.Selected)
+          continue;
+
+        TrackData track = main.TracksGridView.TrackList[row.Index];
+
+        if (track.Artist != savedArtist)
+        {
+          itemsArtist.Add(track.Artist);
+          savedArtist = track.Artist;
+        }
+
+        if (track.AlbumArtist != savedAlbumArtist)
+        {
+          itemsAlbumArtist.Add(track.AlbumArtist);
+          savedAlbumArtist = track.AlbumArtist;
+        }
+      }
+
+      if (itemsArtist.Count > 1)
+      {
+        cbArtist.Items.AddRange(itemsArtist.ToArray());
+      }
+
+      if (itemsAlbumArtist.Count > 1)
+      {
+        cbAlbumArtist.Items.Add(itemsAlbumArtist.ToArray());
+      }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
@@ -985,14 +1039,6 @@ namespace MPTagThat.TagEdit
         case "tbDisc":
         case "tbNumDiscs":
           ckDisk.Checked = true;
-          break;
-
-        case "tbArtist":
-          ckArtist.Checked = true;
-          break;
-
-        case "tbAlbumArtist":
-          ckAlbumArtist.Checked = true;
           break;
 
         case "tbAlbum":
@@ -1129,6 +1175,14 @@ namespace MPTagThat.TagEdit
       {
         case "cbMediaType":
           ckMediaType.Checked = true;
+          break;
+
+        case "cbArtist":
+          ckArtist.Checked = true;
+          break;
+
+        case "cbAlbumArtist":
+          ckAlbumArtist.Checked = true;
           break;
       }
     }

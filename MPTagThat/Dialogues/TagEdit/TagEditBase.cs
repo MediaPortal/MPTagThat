@@ -28,6 +28,8 @@ namespace MPTagThat.TagEdit
     protected bool _musicianIsChanged = false;
     protected bool _lyricsIsChanged = false;
     protected bool _ratingIsChanged = false;
+    protected ShellAutoComplete acArtist;
+    protected ShellAutoComplete acAlbumArtist;
 
 
     protected string[] headerText = { "Main Tags",  "Pictures", "Detailed Information", "Original Information", "Involved People",
@@ -110,7 +112,7 @@ namespace MPTagThat.TagEdit
       if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
       {
         // Add Auto Complete Option for Artist
-        ShellAutoComplete acArtist = new ShellAutoComplete();
+        acArtist = new ShellAutoComplete();
 
         acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
         acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
@@ -126,7 +128,7 @@ namespace MPTagThat.TagEdit
         acArtist.SetAutoComplete(true);
 
         // Add Auto Complete Option for AlbumArtist
-        ShellAutoComplete acAlbumArtist = new ShellAutoComplete();
+        acAlbumArtist = new ShellAutoComplete();
 
         acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
         acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
