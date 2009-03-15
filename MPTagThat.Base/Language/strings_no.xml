@@ -349,6 +349,7 @@
     <String id="Paste">Lim Inn</String>
     <String id="Delete">Slett</String>
     <String id="Refresh">Oppdater</String>
+    <String id="SelectAll">Velg Alle</String>
  </Section>
   
     <!-- File Info Panel on the right side -->
