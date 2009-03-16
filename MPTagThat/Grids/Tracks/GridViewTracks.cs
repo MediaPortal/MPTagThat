@@ -653,6 +653,10 @@ namespace MPTagThat.GridView
               else
               {
                 AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
+                dlgAlbumResults.Artist = track.Artist;
+                dlgAlbumResults.Album = track.Album;
+                dlgAlbumResults.FileDetails = track.FullFileName;
+
                 dlgAlbumResults.Owner = _main;
                 if (_main.ShowForm(dlgAlbumResults) == DialogResult.OK)
                 {

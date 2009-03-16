@@ -25,6 +25,21 @@ namespace MPTagThat.Dialogues
     {
       get { return lvSearchResults.SelectedIndices[0]; }
     }
+
+    public string FileDetails
+    {
+      set { lbFileDetails.Text = value; }
+    }
+
+    public string Artist
+    {
+      set { lbArtistDetail.Text = value; }
+    }
+
+    public string Album
+    {
+      set { lbAlbumDetail.Text = value; }
+    }
     #endregion
 
     #region ctor
@@ -36,6 +51,10 @@ namespace MPTagThat.Dialogues
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       LocaliseScreen();
+
+      lbFileDetails.Text = "";
+      lbAlbumDetail.Text = "";
+      lbArtistDetail.Text = "";
 
       this.albums = albums;
       FillResults();
