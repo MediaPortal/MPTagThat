@@ -19,6 +19,8 @@ namespace MPTagThat.TagEdit
     {
       this.main = main;
       InitializeComponent();
+      
+      base.IsMultiTagEdit = true;
     }
     #endregion
 
@@ -38,20 +40,6 @@ namespace MPTagThat.TagEdit
       // Hide the Artist / Aöbumartist Textbox as we use a Combo here
       tbArtist.Visible = false;
       tbAlbumArtist.Visible = false;
-
-      if (acArtist != null)
-      {
-        // We need to get the Combobox Handle first
-        ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
-        info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
-        ShellApi.GetComboBoxInfo(cbArtist.Handle, ref info);
-        acArtist.EditHandle = info.hwndEdit;
-        acArtist.SetAutoComplete(true);
-
-        ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref info);
-        acAlbumArtist.EditHandle = info.hwndEdit;
-        acAlbumArtist.SetAutoComplete(true);
-      }
 
       // Fill in Fields, which are the same in all selected rows
       FillForm();

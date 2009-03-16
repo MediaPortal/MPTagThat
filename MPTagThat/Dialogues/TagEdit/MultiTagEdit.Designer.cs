@@ -29,32 +29,8 @@ namespace MPTagThat.TagEdit
     private void InitializeComponent()
     {
       this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.cbArtist = new System.Windows.Forms.ComboBox();
-      this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
       this.groupBoxMedia.Controls.Add(this.ckTrackLength);
-      this.groupBoxArtist.Controls.Add(this.cbArtist);
-      this.groupBoxArtist.Controls.Add(this.cbAlbumArtist);
 
-      // 
-      // cbArtist
-      // 
-      this.cbArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.cbArtist.FormattingEnabled = true;
-      this.cbArtist.Location = new System.Drawing.Point(150, 12);
-      this.cbArtist.Name = "cbArtist";
-      this.cbArtist.Size = new System.Drawing.Size(515, 22);
-      this.cbArtist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-      this.cbArtist.TabIndex = 0;
-      // 
-      // cbAlbumArtist
-      // 
-      this.cbAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.cbAlbumArtist.FormattingEnabled = true;
-      this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
-      this.cbAlbumArtist.Name = "cbAlbumArtist";
-      this.cbAlbumArtist.Size = new System.Drawing.Size(515, 22);
-      this.cbAlbumArtist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-      this.cbArtist.TabIndex = 1;
       // 
       // ckTrackLength
       // 
@@ -71,7 +47,5 @@ namespace MPTagThat.TagEdit
     #endregion
 
     private MPTagThat.Core.WinControls.MPTCheckBox ckTrackLength;
-    private System.Windows.Forms.ComboBox cbArtist;
-    private System.Windows.Forms.ComboBox cbAlbumArtist;
   }
 }

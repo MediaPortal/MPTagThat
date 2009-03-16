@@ -30,7 +30,7 @@ namespace MPTagThat.TagEdit
     protected bool _ratingIsChanged = false;
     protected ShellAutoComplete acArtist;
     protected ShellAutoComplete acAlbumArtist;
-
+    protected bool IsMultiTagEdit = false;
 
     protected string[] headerText = { "Main Tags",  "Pictures", "Detailed Information", "Original Information", "Involved People",
                                     "Web Information", "Lyrics", "Rating", "User Defined"};
@@ -124,7 +124,18 @@ namespace MPTagThat.TagEdit
         custom.StringList = Options.MediaPortalArtists;
         acArtist.ListSource = custom;
 
-        acArtist.EditHandle = tbArtist.Handle;
+        if (IsMultiTagEdit)
+        {
+          // We need to get the Combobox Handle first
+          ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
+          info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+          ShellApi.GetComboBoxInfo(cbArtist.Handle, ref info);
+          acArtist.EditHandle = info.hwndEdit;
+        }
+        else
+        {
+          acArtist.EditHandle = tbArtist.Handle;
+        }
         acArtist.SetAutoComplete(true);
 
         // Add Auto Complete Option for AlbumArtist
@@ -138,7 +149,18 @@ namespace MPTagThat.TagEdit
 
         acAlbumArtist.ListSource = custom;
 
-        acAlbumArtist.EditHandle = tbAlbumArtist.Handle;
+        if (IsMultiTagEdit)
+        {
+          // We need to get the Combobox Handle first
+          ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
+          info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+          ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref info);
+          acAlbumArtist.EditHandle = info.hwndEdit;
+        }
+        else
+        {
+          acAlbumArtist.EditHandle = tbAlbumArtist.Handle;
+        }
         acAlbumArtist.SetAutoComplete(true);
       }
     }
@@ -593,11 +615,21 @@ namespace MPTagThat.TagEdit
       if (tbAlbum.Text.Length == 0)
         return;
 
+      string searchArtist = "";
+      if (IsMultiTagEdit)
+      {
+        searchArtist = cbArtist.Text.Trim();
+      }
+      else
+      {
+        searchArtist = tbArtist.Text.Trim();
+      }
+
       this.Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
-        albums = amazonInfo.AmazonAlbumSearch(tbArtist.Text, tbAlbum.Text);
+        albums = amazonInfo.AmazonAlbumSearch(searchArtist, tbAlbum.Text);
       }
 
       if (albums.Count > 0)
@@ -610,7 +642,9 @@ namespace MPTagThat.TagEdit
         else
         {
           AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
-          
+          dlgAlbumResults.Artist = tbArtist.Text;
+          dlgAlbumResults.Album = tbAlbum.Text;
+
           this.Cursor = Cursors.Default;
           if (main.ShowForm(dlgAlbumResults) == DialogResult.OK)
           {

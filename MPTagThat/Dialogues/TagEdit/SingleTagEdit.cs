@@ -49,6 +49,10 @@ namespace MPTagThat.TagEdit
 
       base.OnLoad(sender, e);
 
+      // Hide the Combo boxes, which are only available for Multi Tag Edit
+      cbArtist.Visible = false;
+      cbAlbumArtist.Visible = false;
+
       Localisation();
 
       // Load available Scripts

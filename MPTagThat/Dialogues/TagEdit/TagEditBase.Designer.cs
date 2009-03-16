@@ -266,6 +266,8 @@
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
+      this.cbArtist = new System.Windows.Forms.ComboBox();
+      this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -622,6 +624,8 @@
       // 
       // groupBoxArtist
       // 
+      this.groupBoxArtist.Controls.Add(this.cbAlbumArtist);
+      this.groupBoxArtist.Controls.Add(this.cbArtist);
       this.groupBoxArtist.Controls.Add(this.tbNumDiscs);
       this.groupBoxArtist.Controls.Add(this.label2);
       this.groupBoxArtist.Controls.Add(this.ckDisk);
@@ -3131,6 +3135,22 @@
       this.labelHeader.TabIndex = 29;
       this.labelHeader.Text = "Header";
       // 
+      // cbArtist
+      // 
+      this.cbArtist.FormattingEnabled = true;
+      this.cbArtist.Location = new System.Drawing.Point(150, 13);
+      this.cbArtist.Name = "cbArtist";
+      this.cbArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbArtist.TabIndex = 31;
+      // 
+      // cbAlbumArtist
+      // 
+      this.cbAlbumArtist.FormattingEnabled = true;
+      this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
+      this.cbAlbumArtist.Name = "cbAlbumArtist";
+      this.cbAlbumArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbAlbumArtist.TabIndex = 32;
+      // 
       // TagEditBase
       // 
       this.AcceptButton = this.btApply;
@@ -3445,5 +3465,7 @@
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPictureInternet;
     private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.Label labelHeader;
+    protected System.Windows.Forms.ComboBox cbAlbumArtist;
+    protected System.Windows.Forms.ComboBox cbArtist;
   }
 }
