@@ -881,6 +881,10 @@ namespace MPTagThat
           gridViewControl.Save();
           break;
 
+        case Action.ActionType.ACTION_SAVEALL:
+          gridViewControl.SaveAll();
+          break;
+
         case Action.ActionType.ACTION_MULTI_EDIT:
           if (!gridViewControl.CheckSelections(true))
             break;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <keymap>
   <window>
     <id>0</id>
@@ -116,7 +116,7 @@
     <action>
       <id>27</id>
       <key>F11</key>
-      <description>Toggle Splitter</description>
+      <description>Toggle Treeview Splitter</description>
     </action>
     <action>
       <id>28</id>
@@ -127,6 +127,11 @@
       <id>29</id>
       <key>F3</key>
       <description>Remove all Pictures</description>
+    </action>
+    <action>
+      <id>30</id>
+      <key>Ctrl-Shift-S</key>
+      <description>Save All</description>
     </action>
   </window>
   <window>
@@ -156,7 +161,7 @@
       <key>Prior</key>
       <description>Move to previous Page</description>
     </action>
-   <action>
+    <action>
       <id>17</id>
       <key>F8</key>
       <description>Move to next File</description>
@@ -166,7 +171,7 @@
       <key>F7</key>
       <description>Move to previous File</description>
     </action>
-   <action>
+    <action>
       <id>8</id>
       <key>Alt-E</key>
       <description>Execute active script</description>
