@@ -1,25 +1,46 @@
 Changelog
 ---------
 
+Legend:
+-------
++ Added
+- Deleted
+x Fixed
+
+1.0.3364 Build 30786 Date: 18.03.2009 
+-------------------------------------
++ Main: added keyboard Shortcut for "Save All" (Ctrl-Shift-S) 
++ MutlTagEdit: Provide a combo box for different Artists / Album Artists to allow easier selection
++ CoverArt: Display file details on search result screen to better identify the album
++ Player: When adding a Song to the playlist and the player is idle, start playing the song
++ TracksGrid: Added "Select All" to context menu
++ TracksGrid: Added "Delete" to the context menu
++ MultiTagEdit: Provide multiple Artists / AlbumArtists in selected songs in combo boxes for easy selection
+x Rip: Crash, when CD-Rom Drive was not selected in the TReeview before Ripping
+x Player: Free the song in the player, when it is saved. 
+x TagEdit: Added WaitCursor while retrieving Cover Art
+x Added more logging information
+
+
 1.0.3352 Build 17767 Date: 06.03.2009 
 -------------------------------------
-Tagedit: Simplified adding of Pictures. Removed the "Add picture" button.
-Cover Art Search: Option to indicate that exsiting folder.jpg should be embedded on Cover Art Search
-Cover Art Search: Option to indicate if existing cover art should be replaced on automatic tagging
-Lyrics Search: Option to indicate if existing Lyrics should be overwritten on automatic tagging
-General: Added Drag & Drop support from Grid to Treeview, to copy/move files to different FolderScan
-General: Added Cut & Paste Support to Treeview to copy / move complete folders (via context menu)
-General: Added Cut & Paste Support to Grid to copy / move single files between folders (via context menu)
-Conversion: Use the same settings regarding Filename Parameters as set for Ripping in preferences.
-Scripts: Added some sample scripts. (Case conversion in Filenames, Conversion of WMP ratings to MPTagThat ratings)
-Playlist: added support for Loading and Saving Playlist in m3u and pls format
++ Tagedit: Simplified adding of Pictures. Removed the "Add picture" button.
++ Cover Art Search: Option to indicate that exsiting folder.jpg should be embedded on Cover Art Search
++ Cover Art Search: Option to indicate if existing cover art should be replaced on automatic tagging
++ Lyrics Search: Option to indicate if existing Lyrics should be overwritten on automatic tagging
++ General: Added Drag & Drop support from Grid to Treeview, to copy/move files to different FolderScan
++ General: Added Cut & Paste Support to Treeview to copy / move complete folders (via context menu)
++ General: Added Cut & Paste Support to Grid to copy / move single files between folders (via context menu)
++ Conversion: Use the same settings regarding Filename Parameters as set for Ripping in preferences.
++ Scripts: Added some sample scripts. (Case conversion in Filenames, Conversion of WMP ratings to MPTagThat ratings)
++ Playlist: added support for Loading and Saving Playlist in m3u and pls format
 
 1.0.3345 Build 29007 Date: 27.02.2009
 -------------------------------------
-- Labels were not displayed on US English systems
-- Added Preview Dialogs to "Tag From File", Rename and Organise
-- State of "Scan Subfolders" is saved
+x Labels were not displayed on US English systems
++ Added Preview Dialogs to "Tag From File", Rename and Organise
++ State of "Scan Subfolders" is saved
 
 1.0.3344 Build 3400 Date: 26.02.2009
 ------------------------------------
-- Initial Release
++ Initial Release
