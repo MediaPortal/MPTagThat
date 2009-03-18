@@ -283,8 +283,20 @@ namespace MPTagThat.GridView
           return;
         }
 
-        // User may change to a different drive while ripping 
-        int selectedDriveID = CurrentDriveID;
+        log.Debug("Rip: Selected CD Drive: {0}", _selectedCDRomDrive);
+
+        int selectedDriveID = 0;
+        try
+        {
+          // User may change to a different drive while ripping 
+          selectedDriveID = CurrentDriveID;
+          log.Debug("Rip: Selected drive id: {0}", selectedDriveID);
+        }
+        catch (Exception ex)
+        {
+          log.Debug("Rip: Error setting the drive id. Fallback to drive #0");
+          selectedDriveID = 0;
+        }
 
         foreach (DataGridViewRow row in dataGridViewRip.Rows)
         {
@@ -592,7 +604,7 @@ namespace MPTagThat.GridView
       if (driveID > -1)
         bindingList[driveID].Clear();
 
-      QueryFreeDB(Convert.ToChar(driveLetter));
+      SelectedCDRomDrive = driveLetter;
     }
 
     /// <summary>
