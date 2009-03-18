@@ -330,6 +330,13 @@ namespace MPTagThat.Core.Freedb
       System.Uri url = new System.Uri(m_serverURL + "?cmd=" + command + m_idStr);
 
       WebRequest req = WebRequest.Create(url);
+      req.Timeout = 10000;
+      try
+      {
+        // Use the current user in case an NTLM Proxy or similar is used.
+        req.Proxy.Credentials = CredentialCache.DefaultCredentials;
+      }
+      catch (Exception) { }
       StreamReader urlRdr = new StreamReader(new StreamReader(req.GetResponse().GetResponseStream()).BaseStream, Encoding.GetEncoding(0));
 
       return urlRdr;
