@@ -174,7 +174,7 @@
       this.Name = "About";
       this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "About";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).EndInit();
       this.ResumeLayout(false);
