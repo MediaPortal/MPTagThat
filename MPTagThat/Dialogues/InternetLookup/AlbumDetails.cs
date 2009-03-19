@@ -104,6 +104,17 @@ namespace MPTagThat.InternetLookup
       this.chTitle.Text = localisation.ToString("Lookup", "ColTitle");
       this.chFileName.Text = localisation.ToString("Lookup", "ColFileName");
     }
+
+    /// <summary>
+    /// Renumber the list, when the item was moved with the buttons
+    /// </summary>
+    private void Renumber()
+    {
+      for (int i = 0; i < lvDiscTracks.Items.Count; i++)
+      {
+        lvDiscTracks.Items[i].SubItems[0].Text = (i + 1).ToString();
+      }
+    }
     #endregion
 
     #endregion
@@ -125,6 +136,8 @@ namespace MPTagThat.InternetLookup
       lvDiscTracks.Items.RemoveAt(currPos);
       lvDiscTracks.Items.Insert(currPos - 1, lvItem);
       lvDiscTracks.Items[currPos - 1].Selected = true;
+
+      Renumber();
     }
 
     private void btDown_Click(object sender, EventArgs e)
@@ -143,6 +156,8 @@ namespace MPTagThat.InternetLookup
       lvDiscTracks.Items.RemoveAt(currPos);
       lvDiscTracks.Items.Insert(currPos + 1, lvItem);
       lvDiscTracks.Items[currPos + 1].Selected = true;
+
+      Renumber();
     }
     #endregion
   }

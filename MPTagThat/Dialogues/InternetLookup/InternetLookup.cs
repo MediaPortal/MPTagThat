@@ -221,7 +221,8 @@ namespace MPTagThat.InternetLookup
           continue;
 
         TrackData track = main.TracksGridView.TrackList[row.Index];
-        ListViewItem lvItem = new ListViewItem(track.FileName);
+        ListViewItem lvItem = new ListViewItem((row.Index + 1).ToString());
+        lvItem.SubItems.Add(track.FileName);
         lvItem.Tag = row.Index;
         dlgAlbumDetails.DiscTracks.Items.Add(lvItem);
       }
@@ -244,7 +245,7 @@ namespace MPTagThat.InternetLookup
         int discTrackPos = 0;
         foreach (ListViewItem lvDiscItem in dlgAlbumDetails.DiscTracks.Items)
         {
-          if (Util.LongestCommonSubstring(lvAlbumItem.SubItems[1].Text, lvDiscItem.SubItems[0].Text) > 0.75)
+          if (Util.LongestCommonSubstring(lvAlbumItem.SubItems[1].Text, lvDiscItem.SubItems[1].Text) > 0.75)
           {
             lvDiscItem.Checked = true;
             dlgAlbumDetails.DiscTracks.Items.RemoveAt(discTrackPos);
@@ -256,7 +257,7 @@ namespace MPTagThat.InternetLookup
         albumTrackPos++;
       }
 
-      if (dlgAlbumDetails.ShowDialog() == DialogResult.OK)
+      if (main.ShowForm(dlgAlbumDetails) == DialogResult.OK)
       {
         int i = -1;
         foreach (ListViewItem lvItem in dlgAlbumDetails.DiscTracks.Items)
