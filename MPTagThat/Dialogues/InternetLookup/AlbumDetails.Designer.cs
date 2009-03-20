@@ -32,6 +32,7 @@
       this.chTrackNum = new System.Windows.Forms.ColumnHeader();
       this.chTitle = new System.Windows.Forms.ColumnHeader();
       this.lvDiscTracks = new System.Windows.Forms.ListView();
+      this.chNumber = new System.Windows.Forms.ColumnHeader();
       this.chFileName = new System.Windows.Forms.ColumnHeader();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.btContinue = new MPTagThat.Core.WinControls.MPTButton();
@@ -51,7 +52,6 @@
       this.lbYear = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.chNumber = new System.Windows.Forms.ColumnHeader();
       this.GroupBoxAlbumDetails.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
       this.SuspendLayout();
@@ -67,7 +67,7 @@
       this.lvAlbumTracks.Location = new System.Drawing.Point(22, 212);
       this.lvAlbumTracks.MultiSelect = false;
       this.lvAlbumTracks.Name = "lvAlbumTracks";
-      this.lvAlbumTracks.Size = new System.Drawing.Size(272, 298);
+      this.lvAlbumTracks.Size = new System.Drawing.Size(315, 298);
       this.lvAlbumTracks.TabIndex = 10;
       this.lvAlbumTracks.UseCompatibleStateImageBehavior = false;
       this.lvAlbumTracks.View = System.Windows.Forms.View.Details;
@@ -80,7 +80,7 @@
       // chTitle
       // 
       this.chTitle.Text = "Title";
-      this.chTitle.Width = 225;
+      this.chTitle.Width = 231;
       // 
       // lvDiscTracks
       // 
@@ -92,13 +92,17 @@
             this.chNumber,
             this.chFileName});
       this.lvDiscTracks.FullRowSelect = true;
-      this.lvDiscTracks.Location = new System.Drawing.Point(320, 212);
+      this.lvDiscTracks.Location = new System.Drawing.Point(367, 212);
       this.lvDiscTracks.MultiSelect = false;
       this.lvDiscTracks.Name = "lvDiscTracks";
-      this.lvDiscTracks.Size = new System.Drawing.Size(336, 298);
+      this.lvDiscTracks.Size = new System.Drawing.Size(352, 298);
       this.lvDiscTracks.TabIndex = 11;
       this.lvDiscTracks.UseCompatibleStateImageBehavior = false;
       this.lvDiscTracks.View = System.Windows.Forms.View.Details;
+      // 
+      // chNumber
+      // 
+      this.chNumber.Text = "#";
       // 
       // chFileName
       // 
@@ -111,7 +115,7 @@
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "Lookup";
-      this.btCancel.Location = new System.Drawing.Point(601, 520);
+      this.btCancel.Location = new System.Drawing.Point(664, 520);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(100, 23);
       this.btCancel.TabIndex = 6;
@@ -124,7 +128,7 @@
       this.btContinue.DialogResult = System.Windows.Forms.DialogResult.OK;
       this.btContinue.Localisation = "Continue";
       this.btContinue.LocalisationContext = "Lookup";
-      this.btContinue.Location = new System.Drawing.Point(495, 520);
+      this.btContinue.Location = new System.Drawing.Point(558, 520);
       this.btContinue.Name = "btContinue";
       this.btContinue.Size = new System.Drawing.Size(100, 23);
       this.btContinue.TabIndex = 5;
@@ -136,7 +140,7 @@
       this.lbTracksToTag.AutoSize = true;
       this.lbTracksToTag.Localisation = "TracksToTag";
       this.lbTracksToTag.LocalisationContext = "AlbumDetails";
-      this.lbTracksToTag.Location = new System.Drawing.Point(317, 192);
+      this.lbTracksToTag.Location = new System.Drawing.Point(364, 192);
       this.lbTracksToTag.Name = "lbTracksToTag";
       this.lbTracksToTag.Size = new System.Drawing.Size(70, 13);
       this.lbTracksToTag.TabIndex = 9;
@@ -158,7 +162,7 @@
       this.btUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btUp.Localisation = "MoveUp";
       this.btUp.LocalisationContext = "AlbumDetails";
-      this.btUp.Location = new System.Drawing.Point(662, 339);
+      this.btUp.Location = new System.Drawing.Point(725, 339);
       this.btUp.Name = "btUp";
       this.btUp.Size = new System.Drawing.Size(50, 23);
       this.btUp.TabIndex = 7;
@@ -171,7 +175,7 @@
       this.btDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btDown.Localisation = "MoveDown";
       this.btDown.LocalisationContext = "AlbumDetails";
-      this.btDown.Location = new System.Drawing.Point(662, 368);
+      this.btDown.Location = new System.Drawing.Point(725, 368);
       this.btDown.Name = "btDown";
       this.btDown.Size = new System.Drawing.Size(50, 23);
       this.btDown.TabIndex = 8;
@@ -205,7 +209,7 @@
       this.GroupBoxAlbumDetails.Controls.Add(this.lbArtist);
       this.GroupBoxAlbumDetails.Location = new System.Drawing.Point(22, 54);
       this.GroupBoxAlbumDetails.Name = "GroupBoxAlbumDetails";
-      this.GroupBoxAlbumDetails.Size = new System.Drawing.Size(679, 121);
+      this.GroupBoxAlbumDetails.Size = new System.Drawing.Size(742, 121);
       this.GroupBoxAlbumDetails.TabIndex = 24;
       this.GroupBoxAlbumDetails.TabStop = false;
       this.GroupBoxAlbumDetails.Text = "Internet album details";
@@ -214,7 +218,7 @@
       // 
       this.pictureBoxCover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.pictureBoxCover.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-      this.pictureBoxCover.Location = new System.Drawing.Point(571, 13);
+      this.pictureBoxCover.Location = new System.Drawing.Point(634, 13);
       this.pictureBoxCover.Name = "pictureBoxCover";
       this.pictureBoxCover.Size = new System.Drawing.Size(100, 100);
       this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -228,7 +232,7 @@
       this.cbGenre.FormattingEnabled = true;
       this.cbGenre.Location = new System.Drawing.Point(226, 86);
       this.cbGenre.Name = "cbGenre";
-      this.cbGenre.Size = new System.Drawing.Size(327, 21);
+      this.cbGenre.Size = new System.Drawing.Size(390, 21);
       this.cbGenre.TabIndex = 12;
       // 
       // tbYear
@@ -244,7 +248,7 @@
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.tbAlbum.Location = new System.Drawing.Point(71, 54);
       this.tbAlbum.Name = "tbAlbum";
-      this.tbAlbum.Size = new System.Drawing.Size(482, 20);
+      this.tbAlbum.Size = new System.Drawing.Size(545, 20);
       this.tbAlbum.TabIndex = 9;
       // 
       // tbArtist
@@ -253,7 +257,7 @@
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.tbArtist.Location = new System.Drawing.Point(71, 22);
       this.tbArtist.Name = "tbArtist";
-      this.tbArtist.Size = new System.Drawing.Size(482, 20);
+      this.tbArtist.Size = new System.Drawing.Size(545, 20);
       this.tbArtist.TabIndex = 6;
       // 
       // lbGenre
@@ -300,15 +304,11 @@
       this.lbArtist.TabIndex = 5;
       this.lbArtist.Text = "Artist:";
       // 
-      // chNumber
-      // 
-      this.chNumber.Text = "#";
-      // 
       // AlbumDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(724, 555);
+      this.ClientSize = new System.Drawing.Size(787, 555);
       this.Controls.Add(this.GroupBoxAlbumDetails);
       this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.btDown);

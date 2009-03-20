@@ -230,9 +230,10 @@ namespace MPTagThat.InternetLookup
       // if we have less files selected, than in the album, fill the rest with"unassigned"
       if (dlgAlbumDetails.DiscTracks.Items.Count < dlgAlbumDetails.AlbumTracks.Items.Count)
       {
-        for (int i = dlgAlbumDetails.DiscTracks.Items.Count - 1; i < dlgAlbumDetails.AlbumTracks.Items.Count; i++)
+        for (int i = dlgAlbumDetails.DiscTracks.Items.Count - 1; i < dlgAlbumDetails.AlbumTracks.Items.Count - 1; i++)
         {
-          ListViewItem unassignedItem = new ListViewItem(ServiceScope.Get<ILocalisation>().ToString("Lookup", "Unassigned"));
+          ListViewItem unassignedItem = new ListViewItem((i + 2).ToString());
+          unassignedItem.SubItems.Add(ServiceScope.Get<ILocalisation>().ToString("Lookup", "Unassigned"));
           unassignedItem.Tag = -1;
           unassignedItem.Checked = false;
           dlgAlbumDetails.DiscTracks.Items.Add(unassignedItem);
