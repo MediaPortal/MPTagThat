@@ -569,11 +569,44 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       AmazonAlbum amazonAlbum = null;
 
+      bool isMultipleArtistAlbum = false;
       string savedArtist = "";
       string savedAlbum = "";
       string savedFolder = "";
 
       Picture folderThumb = null;
+
+      // Find out, if we deal with a multiple artist album and submit only the album name
+      // If we have different artists, then it is a multiple artist album.
+      // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        row.Cells[1].Value = "";
+
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        TrackData track = bindingList[row.Index];
+        if (savedArtist == "")
+        {
+          savedArtist = track.Artist;
+          savedAlbum = track.Album;
+        }
+        if (savedArtist != track.Artist)
+        {
+          isMultipleArtistAlbum = true;
+        }
+        if (savedAlbum != track.Album)
+        {
+          isMultipleArtistAlbum = false;
+          break;
+        }
+      }
+
+      savedAlbum = "";
+      savedArtist = "";
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -627,12 +660,12 @@ namespace MPTagThat.GridView
             continue;
           }
 
-          // If we don't have an Album or Artist, don't even query
-          if (track.Album == "" || track.Artist == "")
+          // If we don't have an Album don't do any query
+          if (track.Album == "")
             continue;
 
           // Only retrieve the Cover Art, if we don't have it yet
-          if (track.Album != savedAlbum || track.Artist != savedArtist || amazonAlbum == null)
+          if (track.Album != savedAlbum || (track.Artist != savedArtist && !isMultipleArtistAlbum) || amazonAlbum == null)
           {
             savedArtist = track.Artist;
             savedAlbum = track.Album;
@@ -640,7 +673,8 @@ namespace MPTagThat.GridView
             List<AmazonAlbum> albums = new List<AmazonAlbum>();
             using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
             {
-              albums = amazonInfo.AmazonAlbumSearch(track.Artist, track.Album);
+              string searchArtist = isMultipleArtistAlbum ? "" : track.Artist;
+              albums = amazonInfo.AmazonAlbumSearch(searchArtist, track.Album);
             }
 
             amazonAlbum = null;
