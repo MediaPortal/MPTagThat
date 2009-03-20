@@ -605,6 +605,11 @@ namespace MPTagThat.GridView
         }
       }
 
+      if (isMultipleArtistAlbum)
+      {
+        log.Debug("CoverArt: Album contains Multiple Artists, just search for the album");
+      }
+
       savedAlbum = "";
       savedArtist = "";
 
@@ -656,8 +661,8 @@ namespace MPTagThat.GridView
                 row.Cells[1].Value = localisation.ToString("message", "Ok");
                 _main.FillInfoPanel();
               }
+              continue;
             }
-            continue;
           }
 
           // If we don't have an Album don't do any query
@@ -704,9 +709,13 @@ namespace MPTagThat.GridView
 
               if (amazonAlbum == null)
               {
-                log.Debug("CoverArt: No coverart found");
+                log.Debug("CoverArt: Album Selection cancelled");
                 continue;
               }
+            }
+            else
+            {
+              log.Debug("CoverArt: No coverart found");
             }
           }
 
