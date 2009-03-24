@@ -1096,12 +1096,14 @@ namespace MPTagThat.GridView
 
           if (id3v1tag.Comment != null)
           {
+            track.Comment = "";
             id3v1tag.Comment = null;
             commentRemoved = true;
           }
           IEnumerator<TagLib.Id3v2.CommentsFrame> id3v2comments = id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>().GetEnumerator();
           if (id3v2comments.MoveNext())
           {
+            track.Comment = "";
             id3v2tag.RemoveFrames("COMM");
             commentRemoved = true;
           }
