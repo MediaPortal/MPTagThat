@@ -3141,7 +3141,7 @@
       this.cbArtist.Location = new System.Drawing.Point(150, 13);
       this.cbArtist.Name = "cbArtist";
       this.cbArtist.Size = new System.Drawing.Size(515, 24);
-      this.cbArtist.TabIndex = 31;
+      this.cbArtist.TabIndex = 0;
       // 
       // cbAlbumArtist
       // 
@@ -3149,7 +3149,7 @@
       this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
       this.cbAlbumArtist.Name = "cbAlbumArtist";
       this.cbAlbumArtist.Size = new System.Drawing.Size(515, 24);
-      this.cbAlbumArtist.TabIndex = 32;
+      this.cbAlbumArtist.TabIndex = 1;
       // 
       // TagEditBase
       // 
