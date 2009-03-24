@@ -7,6 +7,17 @@ Legend:
 - Deleted
 x Fixed
 
+1.0.3370 Build 21270 Date: 24.03.2009 
+-------------------------------------
+x TagEdit: Comments were not removed correctly, if only an ID3V1 comment existed
+x TagEdit: Fixed Tab Order for Artist and AlbumArtist in Multi TagEdit
+x Lyrics: Special national characters in lyrics were not retrieved correctly
+x Internet Lookup: Fixed crash, when lookup returned more songs then selected
+x CoverArt: Search from Ribbon was not working.
+x CoverArt: Detect, if we have a multiple Artist Album and submit only the Album name for the search
++ Internet Lookup: Number the items in the right listbox, so that they can be better matched to the found items
+
+
 1.0.3364 Build 30786 Date: 18.03.2009 
 -------------------------------------
 + Main: added keyboard Shortcut for "Save All" (Ctrl-Shift-S) 

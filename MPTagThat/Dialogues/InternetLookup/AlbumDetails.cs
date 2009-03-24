@@ -108,7 +108,7 @@ namespace MPTagThat.InternetLookup
     /// <summary>
     /// Renumber the list, when the item was moved with the buttons
     /// </summary>
-    private void Renumber()
+    public void Renumber()
     {
       for (int i = 0; i < lvDiscTracks.Items.Count; i++)
       {

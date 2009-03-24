@@ -258,6 +258,8 @@ namespace MPTagThat.InternetLookup
         albumTrackPos++;
       }
 
+      dlgAlbumDetails.Renumber();
+
       if (main.ShowForm(dlgAlbumDetails) == DialogResult.OK)
       {
         int i = -1;
