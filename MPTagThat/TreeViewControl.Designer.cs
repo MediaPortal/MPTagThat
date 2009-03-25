@@ -33,8 +33,9 @@
       this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
       this.panelLeftBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
+      this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.btnSwitchView = new MPTagThat.Core.WinControls.MPTButton();
       this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.treeViewPanelBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
@@ -98,8 +99,9 @@
       this.optionsPanelLeft.CaptionSize = 24;
       this.optionsPanelLeft.CaptionText = "Options";
       this.optionsPanelLeft.CaptionTextColor = System.Drawing.Color.Black;
-      this.optionsPanelLeft.Controls.Add(this.checkBoxRecursive);
       this.optionsPanelLeft.Controls.Add(this.btnRefreshFolder);
+      this.optionsPanelLeft.Controls.Add(this.checkBoxRecursive);
+      this.optionsPanelLeft.Controls.Add(this.btnSwitchView);
       this.optionsPanelLeft.CornerStyle = Stepi.UI.CornerStyle.Normal;
       this.optionsPanelLeft.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.optionsPanelLeft.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
@@ -109,19 +111,6 @@
       this.optionsPanelLeft.Size = new System.Drawing.Size(180, 141);
       this.optionsPanelLeft.TabIndex = 2;
       // 
-      // checkBoxRecursive
-      // 
-      this.checkBoxRecursive.AutoSize = true;
-      this.checkBoxRecursive.Localisation = "ScanSubfolder";
-      this.checkBoxRecursive.LocalisationContext = "main";
-      this.checkBoxRecursive.Location = new System.Drawing.Point(8, 43);
-      this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
-      this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
-      this.checkBoxRecursive.TabIndex = 3;
-      this.checkBoxRecursive.Text = "Scan all subdirectories";
-      this.checkBoxRecursive.UseVisualStyleBackColor = true;
-      // 
       // btnRefreshFolder
       // 
       this.btnRefreshFolder.AutoSize = true;
@@ -130,7 +119,7 @@
       this.btnRefreshFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.btnRefreshFolder.Localisation = "ButtonRefreshFolder";
       this.btnRefreshFolder.LocalisationContext = "main";
-      this.btnRefreshFolder.Location = new System.Drawing.Point(5, 66);
+      this.btnRefreshFolder.Location = new System.Drawing.Point(13, 98);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
       this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
@@ -139,6 +128,33 @@
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
       this.btnRefreshFolder.UseVisualStyleBackColor = true;
       this.btnRefreshFolder.Click += new System.EventHandler(this.btnRefreshFolder_Click);
+      // 
+      // checkBoxRecursive
+      // 
+      this.checkBoxRecursive.AutoSize = true;
+      this.checkBoxRecursive.Localisation = "ScanSubfolder";
+      this.checkBoxRecursive.LocalisationContext = "main";
+      this.checkBoxRecursive.Location = new System.Drawing.Point(17, 71);
+      this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
+      this.checkBoxRecursive.Name = "checkBoxRecursive";
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
+      this.checkBoxRecursive.TabIndex = 3;
+      this.checkBoxRecursive.Text = "Scan all subdirectories";
+      this.checkBoxRecursive.UseVisualStyleBackColor = true;
+      // 
+      // btnSwitchView
+      // 
+      this.btnSwitchView.AutoSize = true;
+      this.btnSwitchView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.btnSwitchView.Localisation = "SwitchView";
+      this.btnSwitchView.LocalisationContext = "main";
+      this.btnSwitchView.Location = new System.Drawing.Point(17, 37);
+      this.btnSwitchView.Name = "btnSwitchView";
+      this.btnSwitchView.Size = new System.Drawing.Size(75, 23);
+      this.btnSwitchView.TabIndex = 5;
+      this.btnSwitchView.Text = "Switch View";
+      this.btnSwitchView.UseVisualStyleBackColor = true;
+      this.btnSwitchView.Click += new System.EventHandler(this.btnSwitchView_Click);
       // 
       // treeViewPanel
       // 
@@ -189,13 +205,13 @@
             this.toolStripSeparator1,
             this.menuRefresh});
       this.contextMenuTreeView.Name = "contextMenuTreeView";
-      this.contextMenuTreeView.Size = new System.Drawing.Size(153, 142);
+      this.contextMenuTreeView.Size = new System.Drawing.Size(114, 120);
       // 
       // menuCopy
       // 
       this.menuCopy.Image = global::MPTagThat.Properties.Resources.CopyHS;
       this.menuCopy.Name = "menuCopy";
-      this.menuCopy.Size = new System.Drawing.Size(152, 22);
+      this.menuCopy.Size = new System.Drawing.Size(113, 22);
       this.menuCopy.Text = "Copy";
       this.menuCopy.Click += new System.EventHandler(this.contextMenuTreeViewCopy_Click);
       // 
@@ -203,7 +219,7 @@
       // 
       this.menuCut.Image = global::MPTagThat.Properties.Resources.CutHS;
       this.menuCut.Name = "menuCut";
-      this.menuCut.Size = new System.Drawing.Size(152, 22);
+      this.menuCut.Size = new System.Drawing.Size(113, 22);
       this.menuCut.Text = "Cut";
       this.menuCut.Click += new System.EventHandler(this.contextMenuTreeViewCut_Click);
       // 
@@ -212,7 +228,7 @@
       this.menuPaste.Enabled = false;
       this.menuPaste.Image = global::MPTagThat.Properties.Resources.PasteHS;
       this.menuPaste.Name = "menuPaste";
-      this.menuPaste.Size = new System.Drawing.Size(152, 22);
+      this.menuPaste.Size = new System.Drawing.Size(113, 22);
       this.menuPaste.Text = "Paste";
       this.menuPaste.Click += new System.EventHandler(this.contextMenuTreeViewPaste_Click);
       // 
@@ -220,21 +236,21 @@
       // 
       this.menuDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuDelete.Image")));
       this.menuDelete.Name = "menuDelete";
-      this.menuDelete.Size = new System.Drawing.Size(152, 22);
+      this.menuDelete.Size = new System.Drawing.Size(113, 22);
       this.menuDelete.Text = "Delete";
       this.menuDelete.Click += new System.EventHandler(this.contextMenuTreeViewDelete_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(110, 6);
       // 
       // menuRefresh
       // 
       this.menuRefresh.Image = global::MPTagThat.Properties.Resources.RefreshDocViewHS;
       this.menuRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.menuRefresh.Name = "menuRefresh";
-      this.menuRefresh.Size = new System.Drawing.Size(152, 22);
+      this.menuRefresh.Size = new System.Drawing.Size(113, 22);
       this.menuRefresh.Text = "Refresh";
       this.menuRefresh.Click += new System.EventHandler(this.contextMenuTreeViewRefresh_Click);
       // 
@@ -273,5 +289,6 @@
     private System.Windows.Forms.ToolStripMenuItem menuCut;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem menuPaste;
+    private MPTagThat.Core.WinControls.MPTButton btnSwitchView;
   }
 }

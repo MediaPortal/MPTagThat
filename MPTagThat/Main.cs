@@ -35,15 +35,13 @@ namespace MPTagThat
     private bool _treeViewFolderSelected = false;
 
     private TreeViewControl treeViewControl;
+    private FileInfoControl fileInfoControl;
 
     // Grids: Can't have them in Designer, as it will fail loading
     private MPTagThat.GridView.GridViewTracks gridViewControl;
     private MPTagThat.GridView.GridViewBurn gridViewBurn;
     private MPTagThat.GridView.GridViewRip gridViewRip;
     private MPTagThat.GridView.GridViewConvert gridViewConvert;
-
-    // Dialogues
-    private Progress dlgScan;
 
     private string _selectedDirectory;          // The currently selcted Directory
     private bool _treeViewSelected = false;     // Has the user selected the Treeview
@@ -175,11 +173,22 @@ namespace MPTagThat
     public bool FolderScanning
     {
       get { return _folderScanInProgress; }
+      set { _folderScanInProgress = value; }
     }
 
     public TreeViewControl TreeView
     {
       get { return treeViewControl; }
+    }
+
+    public FileInfoControl FileInfoPanel
+    {
+      get { return fileInfoControl; }
+    }
+
+    public ToolStripStatusLabel ToolStripStatusFiles
+    {
+      get { return toolStripStatusLabelFiles; }
     }
     #endregion
 
@@ -268,6 +277,11 @@ namespace MPTagThat
       treeViewControl.Dock = DockStyle.Fill;
       this.panelLeftTop.Controls.Add(treeViewControl);
 
+      // Setup FileInfo Control
+      fileInfoControl = new FileInfoControl(this);
+      fileInfoControl.Dock = DockStyle.Fill;
+      this.panelRight.Controls.Add(fileInfoControl);
+
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
 
@@ -289,10 +303,8 @@ namespace MPTagThat
       // Populate the Treeview with the directories found
       treeViewControl.Init();
       treeViewControl.TreeView.Populate();
+      treeViewControl.TreeView.Nodes[0].Expand();
       treeViewControl.TreeView.ShowFolder(_selectedDirectory);
-
-      // Setup File Info Listeview
-      SetupFileInfo();
 
       // Build the Context Menu for the Error Grid
       MenuItem[] rmitems = new MenuItem[1];
@@ -306,7 +318,9 @@ namespace MPTagThat
 
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty)
-        FolderScan();
+      {
+        gridViewControl.FolderScan();
+      }
 
       // setup various Event Handler needed
       gridViewControl.View.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
@@ -328,9 +342,10 @@ namespace MPTagThat
     {
       log.Debug("Main: Closing Main form");
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
-      CheckForChanges();
+      gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
+      Options.MainSettings.DatabaseMode = treeViewControl.DatabaseMode;
       Options.MainSettings.FormLocation = this.Location;
       Options.MainSettings.FormSize = this.ClientSize;
       Options.MainSettings.LeftPanelSize = this.panelLeft.Width;
@@ -406,9 +421,6 @@ namespace MPTagThat
       Util.EnterMethod(Util.GetCallingMethod());
       this.Text = localisation.ToString("system", "ApplicationName");
 
-      // Extended Panels. Doing it via TTExtendedPanel doesn't work for some reason
-      this.picturePanel.CaptionText = localisation.ToString("main", "PicturePanel");
-      this.fileInfoPanel.CaptionText = localisation.ToString("main", "InformationPanel");
       this.dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
       this.dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");
       Util.LeaveMethod(Util.GetCallingMethod());
@@ -424,6 +436,7 @@ namespace MPTagThat
       Util.EnterMethod(Util.GetCallingMethod());
       _selectedDirectory = Options.MainSettings.LastFolderUsed;
       treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
+      treeViewControl.DatabaseMode = Options.MainSettings.DatabaseMode;
       _formLocation = Options.MainSettings.FormLocation;
       _formSize = Options.MainSettings.FormSize;
 
@@ -457,11 +470,8 @@ namespace MPTagThat
       Util.EnterMethod(Util.GetCallingMethod());
       statusStrip.BackColor = themeManager.CurrentTheme.BackColor;
       statusStrip.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      pictureBoxAlbumArt.BackColor = themeManager.CurrentTheme.BackColor;
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
-      listViewFileInfo.BackColor = themeManager.CurrentTheme.BackColor;
-      listViewFileInfo.ForeColor = themeManager.CurrentTheme.LabelForeColor;
 
       // We want to have our own header color
       gridViewControl.View.EnableHeadersVisualStyles = false;
@@ -518,155 +528,7 @@ namespace MPTagThat
     }
     #endregion
 
-    #region Folder Scanning
-    private void FolderScan()
-    {
-        try
-        {
-            System.Threading.Thread t = new System.Threading.Thread(ScanFoldersAsync);
-            t.Name = "FolderScanner";
-            t.IsBackground = true;
-            t.Start();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Could not launch thread {0}", ex.Message);
-        }
-    }
-
-    private void ScanFoldersAsync()
-    {
-      Util.EnterMethod(Util.GetCallingMethod());
-      TagLib.File file = null;
-      DirectoryInfo dirInfo = null;
-      List<FileInfo> files = new List<FileInfo>();
-
-      if (!Directory.Exists(_selectedDirectory))
-        return;
-
-      _folderScanInProgress = true;
-      toolStripStatusLabelFolder.Text = _selectedDirectory;
-
-      try // just in case we are lacking sufficent permissions
-      {
-        dirInfo = new DirectoryInfo(_selectedDirectory);
-        log.Debug("Main: Retrieving files from. {0}", _selectedDirectory);
-        GetFiles(_selectedDirectory, ref files, treeViewControl.ScanFolderRecursive);
-      }
-      catch (Exception)
-      {
-      }
-
-      dlgScan = new Progress();
-      dlgScan.Header = localisation.ToString("progress", "ScanningHeader");
-      int x = ClientSize.Width / 2 - dlgScan.Width / 2;
-      int y = ClientSize.Height / 2 - dlgScan.Height / 2;
-      Point clientLocation = this.Location;
-      x += clientLocation.X;
-      y += clientLocation.Y;
-      dlgScan.Location = new Point(x, y);
-      dlgScan.Show();
-
-      // The Folder scan should stay on Top
-      dlgScan.TopMost = true;
-
-      string dlgMessage = localisation.ToString("progress", "Scanning");
-
-      int count = 1;
-      int trackCount = files.Count;
-      log.Debug("Main: Found {0} files", trackCount);
-      foreach (FileInfo fi in files)
-      {
-        Application.DoEvents();
-        dlgScan.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, trackCount), count, trackCount, true);
-        if (dlgScan.IsCancelled)
-        {
-          _folderScanInProgress = false;
-          dlgScan.Close();
-          return;
-        }
-        try
-        {
-          if (Util.IsAudio(fi.FullName))
-          {
-            // Read the Tag
-            try
-            {
-              TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-              file = TagLib.File.Create(fi.FullName);
-              gridViewControl.CreateTracksItem(fi.FullName, file);
-            }
-            catch (CorruptFileException)
-            {
-              log.Warn("Main: Ignoring track {0} - Corrupt File!", fi.FullName);
-            }
-            catch (UnsupportedFormatException)
-            {
-              log.Warn("Main: Ignoring track {0} - Unsupported format!", fi.FullName);
-            }
-          }
-        }
-        catch (PathTooLongException)
-        {
-          log.Warn("Main: Ignoring track {0} - path too long!", fi.FullName);
-          continue;
-        }
-        count++;
-      }
-
-      _folderScanInProgress = false;
-      dlgScan.Close();
-
-      // Display Status Information
-      try
-      {
-        toolStripStatusLabelFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
-      }
-      catch (InvalidOperationException) { }
-
-      // unselect the first row, which would be selected automatically by the grid
-      // And set the background color of the rating cell, as it isn#t reset by the grid
-      try
-      {
-          if (gridViewControl.View.Rows.Count > 0)
-          {
-              gridViewControl.View.Rows[0].Selected = false;
-              gridViewControl.View.Rows[0].Cells[10].Style.BackColor = themeManager.CurrentTheme.DefaultBackColor;
-          }
-      }
-      catch (ArgumentOutOfRangeException) { }
-
-      Util.LeaveMethod(Util.GetCallingMethod());
-    }
-
-    /// <summary>
-    /// Read a Folder and return the files
-    /// </summary>
-    /// <param name="folder"></param>
-    /// <param name="foundFiles"></param>
-    void GetFiles(string folder, ref List<FileInfo> foundFiles, bool recursive)
-    {
-      try
-      {
-        if (recursive)
-        {
-          string[] subFolders = Directory.GetDirectories(folder);
-          for (int i = 0; i < subFolders.Length; ++i)
-          {
-            GetFiles(subFolders[i], ref foundFiles, recursive);
-          }
-        }
-
-        FileInfo[] files = new DirectoryInfo(folder).GetFiles();
-        foundFiles.AddRange(files);
-      }
-      catch (Exception ex)
-      {
-        ServiceScope.Get<ILogger>().Error(ex);
-      }
-    }
-    #endregion
-
+    #region Misc Public Methods
     /// <summary>
     /// Shows a Modal Dialogue
     /// </summary>
@@ -690,134 +552,25 @@ namespace MPTagThat
     public void RefreshTrackList()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      CheckForChanges();
+      gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
-        ClearFileInfoPanel();
+        fileInfoControl.ClearFileInfoPanel();
         gridViewControl.View.Rows.Clear();
-        FolderScan();
+        if (TreeView.DatabaseMode)
+        {
+          gridViewControl.DatabaseScan();
+        }
+        else
+        {
+          gridViewControl.FolderScan();
+        }
         toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       dataGridViewError.Rows.Clear();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
-
-    #region File Info Panel
-    /// <summary>
-    /// Sets up the File Info Panel
-    /// </summary>
-    private void SetupFileInfo()
-    {
-      listViewFileInfo.Columns.Add("", 70);
-      listViewFileInfo.Columns.Add("", 200);
-    }
-
-    /// <summary>
-    /// Fills the File Info Panel
-    /// </summary>
-    public void FillInfoPanel()
-    {
-      Image img = null;
-      try
-      {
-        listViewFileInfo.Items.Clear();
-        TrackData track = gridViewControl.SelectedTrack;
-        // Duration
-        TimeSpan ts = track.File.Properties.Duration;
-        DateTime dt = new DateTime(ts.Ticks);
-        string duration = String.Format("{0:HH:mm:ss.fff}", dt);
-
-        // File Length
-        FileInfo fi = new FileInfo(track.File.Name);
-        int fileLength = (int)(fi.Length / 1024);
-
-        AddItemToInfoPanel("Duration", duration);
-        AddItemToInfoPanel("FileSize", fileLength.ToString());
-        AddItemToInfoPanel("Bitrate", track.File.Properties.AudioBitrate.ToString());
-        AddItemToInfoPanel("Samplerate", track.File.Properties.AudioSampleRate.ToString());
-        AddItemToInfoPanel("Channels", track.File.Properties.AudioChannels.ToString());
-        AddItemToInfoPanel("Version", track.File.Properties.Description);
-        AddItemToInfoPanel("Created", String.Format("{0:yyyy-MM-dd HH:mm:ss}", fi.CreationTime));
-        AddItemToInfoPanel("Changed", String.Format("{0:yyyy-MM-dd HH:mm:ss}", fi.LastWriteTime));
-
-        // Set the Picture
-        pictureBoxAlbumArt.Image = null;
-        //if (picturePanel.State == Stepi.UI.ExtendedPanelState.Expanded)
-        //  picturePanel.Collapse();
-        IPicture[] pics = new IPicture[] { };
-        pics = track.File.Tag.Pictures;
-        btnSaveFolderThumb.Enabled = false;
-        if (pics.Length > 0)
-        {
-          using (MemoryStream ms = new MemoryStream(pics[0].Data.Data))
-          {
-            img = Image.FromStream(ms);
-            if (img != null)
-            {
-              pictureBoxAlbumArt.Image = img;
-              btnSaveFolderThumb.Enabled = true;
-            }
-          }
-        }
-      }
-      catch (Exception)
-      { }
-      finally
-      {
-        //if (img != null)
-        //  img.Dispose();
-      }
-    }
-
-    /// <summary>
-    /// Adds an Item to the File Info PAnel
-    /// </summary>
-    /// <param name="label"></param>
-    /// <param name="text"></param>
-    private void AddItemToInfoPanel(string label, string text)
-    {
-      string[] items = new string[2];
-      items[0] = localisation.ToString("file_info", label);
-      items[1] = text;
-      ListViewItem lvi = new ListViewItem(items);
-      listViewFileInfo.Items.Add(lvi);
-    }
-
-    /// <summary>
-    /// Clears the information in the FileInfo Panel
-    /// </summary>
-    public void ClearFileInfoPanel()
-    {
-      pictureBoxAlbumArt.Image = null;
-      listViewFileInfo.Items.Clear();
-    }
-
-    /// <summary>
-    /// Save the currently selected picture as folder.jpg
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void btnSaveFolderThumb_Click(object sender, EventArgs e)
-    {
-      TrackData track = gridViewControl.SelectedTrack;
-      TracksGridView.SavePicture(track);
-    }
     #endregion
-
-    /// <summary>
-    /// Checks for Pending Changes
-    /// </summary>
-    private void CheckForChanges()
-    {
-      if (gridViewControl.Changed)
-      {
-        DialogResult result = MessageBox.Show(localisation.ToString("message", "Save_Changes"), localisation.ToString("message", "Save_Changes_Title"), MessageBoxButtons.YesNo);
-        if (result == DialogResult.Yes)
-          gridViewControl.SaveAll();
-        else
-          gridViewControl.DiscardChanges();
-      }
-    }
 
     #region Event Handler
     #region Key Events
@@ -1044,7 +797,9 @@ namespace MPTagThat
     void DataGridView_SelectionChanged(object sender, EventArgs e)
     {
       if (gridViewControl.View.CurrentRow != null)
-        FillInfoPanel();
+      {
+        fileInfoControl.FillPanel();
+      }
 
       // Update Status Information
       try

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Data.SQLite;
 using System.IO;
 using System.Text;
 using System.Reflection;
@@ -132,7 +133,7 @@ namespace MPTagThat.GridView
     #region Public Methods
     /// <summary>
     /// Set Main Ref to Main
-    /// Can#t do it in constructir due to problems with Designer
+    /// Can't do it in constructir due to problems with Designer
     /// </summary>
     /// <param name="main"></param>
     public void SetMainRef(Main main)
@@ -659,7 +660,7 @@ namespace MPTagThat.GridView
                 track.Changed = true;
                 _itemsChanged = true;
                 row.Cells[1].Value = localisation.ToString("message", "Ok");
-                _main.FillInfoPanel();
+                _main.FileInfoPanel.FillPanel();
               }
               continue;
             }
@@ -760,7 +761,7 @@ namespace MPTagThat.GridView
             track.Changed = true;
             _itemsChanged = true;
             row.Cells[1].Value = localisation.ToString("message", "Ok");
-            _main.FillInfoPanel();
+            _main.FileInfoPanel.FillPanel();
           }
 
         }
@@ -1158,19 +1159,35 @@ namespace MPTagThat.GridView
           _itemsChanged = true;
         }
       }
-      _main.FillInfoPanel();
+      _main.FileInfoPanel.FillPanel();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
 
+    #region Misc Methods
     /// <summary>
     /// Discards any changes
     /// </summary>
     public void DiscardChanges()
     {
       _itemsChanged = false;
+    }
+
+    /// <summary>
+    /// Checks for Pending Changes
+    /// </summary>
+    public void CheckForChanges()
+    {
+      if (Changed)
+      {
+        DialogResult result = MessageBox.Show(localisation.ToString("message", "Save_Changes"), localisation.ToString("message", "Save_Changes_Title"), MessageBoxButtons.YesNo);
+        if (result == DialogResult.Yes)
+          SaveAll();
+        else
+          DiscardChanges();
+      }
     }
 
     /// <summary>
@@ -1219,6 +1236,7 @@ namespace MPTagThat.GridView
 
       _main.ErrorGridView.Rows.Add(file, message);
     }
+    #endregion
 
     #region Script Handling
     /// <summary>
@@ -1273,6 +1291,327 @@ namespace MPTagThat.GridView
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
+
+    #region Folder Scanning
+    public void FolderScan()
+    {
+      try
+      {
+        System.Threading.Thread t = new System.Threading.Thread(ScanFoldersAsync);
+        t.Name = "FolderScanner";
+        t.IsBackground = true;
+        t.Start();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Could not launch thread {0}", ex.Message);
+      }
+    }
+
+    private void ScanFoldersAsync()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      TagLib.File file = null;
+      DirectoryInfo dirInfo = null;
+      List<FileInfo> files = new List<FileInfo>();
+
+      string selectedFolder = _main.CurrentDirectory;
+
+      if (!Directory.Exists(selectedFolder))
+        return;
+
+      _main.FolderScanning = true;
+
+      try // just in case we are lacking sufficent permissions
+      {
+        dirInfo = new DirectoryInfo(selectedFolder);
+        log.Debug("FolderScan: Retrieving files from. {0}", selectedFolder);
+        GetFiles(selectedFolder, ref files, _main.TreeView.ScanFolderRecursive);
+      }
+      catch (Exception)
+      {
+      }
+
+      dlgProgress = new Progress();
+      dlgProgress.Header = localisation.ToString("progress", "ScanningHeader");
+      int x = _main.ClientSize.Width / 2 - dlgProgress.Width / 2;
+      int y = _main.ClientSize.Height / 2 - dlgProgress.Height / 2;
+      Point clientLocation = _main.Location;
+      x += clientLocation.X;
+      y += clientLocation.Y;
+      dlgProgress.Location = new Point(x, y);
+      dlgProgress.Show();
+
+      // The Folder scan should stay on Top
+      dlgProgress.TopMost = true;
+
+      string dlgMessage = localisation.ToString("progress", "Scanning");
+
+      int count = 1;
+      int trackCount = files.Count;
+      log.Debug("FolderScan: Found {0} files", trackCount);
+      foreach (FileInfo fi in files)
+      {
+        Application.DoEvents();
+        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, trackCount), count, trackCount, true);
+        if (dlgProgress.IsCancelled)
+        {
+          _main.FolderScanning = false;
+          dlgProgress.Close();
+          return;
+        }
+        try
+        {
+          if (Util.IsAudio(fi.FullName))
+          {
+            // Read the Tag
+            try
+            {
+              TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+              file = TagLib.File.Create(fi.FullName);
+              CreateTracksItem(fi.FullName, file);
+            }
+            catch (CorruptFileException)
+            {
+              log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", fi.FullName);
+            }
+            catch (UnsupportedFormatException)
+            {
+              log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", fi.FullName);
+            }
+          }
+        }
+        catch (PathTooLongException)
+        {
+          log.Warn("FolderScan: Ignoring track {0} - path too long!", fi.FullName);
+          continue;
+        }
+        count++;
+      }
+
+      _main.FolderScanning = false;
+      dlgProgress.Close();
+
+      // Display Status Information
+      try
+      {
+        _main.ToolStripStatusFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
+      }
+      catch (InvalidOperationException) { }
+
+      // unselect the first row, which would be selected automatically by the grid
+      // And set the background color of the rating cell, as it isn't reset by the grid
+      try
+      {
+        if (tracksGrid.Rows.Count > 0)
+        {
+          tracksGrid.Rows[0].Selected = false;
+          tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+        }
+      }
+      catch (ArgumentOutOfRangeException) { }
+
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Read a Folder and return the files
+    /// </summary>
+    /// <param name="folder"></param>
+    /// <param name="foundFiles"></param>
+    void GetFiles(string folder, ref List<FileInfo> foundFiles, bool recursive)
+    {
+      try
+      {
+        if (recursive)
+        {
+          string[] subFolders = Directory.GetDirectories(folder);
+          for (int i = 0; i < subFolders.Length; ++i)
+          {
+            GetFiles(subFolders[i], ref foundFiles, recursive);
+          }
+        }
+
+        FileInfo[] files = new DirectoryInfo(folder).GetFiles();
+        foundFiles.AddRange(files);
+      }
+      catch (Exception ex)
+      {
+        ServiceScope.Get<ILogger>().Error(ex);
+      }
+    }
+    #endregion
+
+    #region Database Scan
+    public void DatabaseScan()
+    {
+      if (_main.CurrentDirectory == null)
+      {
+        return;
+      }
+
+      string[] searchString = _main.CurrentDirectory.Split('\\');
+
+      // Get out, if we are on the Top Level only
+      if (searchString.GetLength(0) == 1)
+      {
+        return;
+      }
+      
+      List<string> songs = new List<string>();
+      int songCount = 0;
+      string sql = FormatSQL(searchString);
+
+      string connection = string.Format(@"Data Source={0}", MPTagThat.Core.Options.MainSettings.MediaPortalDatabase);
+      try
+      {
+        SQLiteConnection conn = new SQLiteConnection(connection);
+        conn.Open();
+        using (SQLiteCommand cmd = new SQLiteCommand())
+        {
+          cmd.Connection = conn;
+          cmd.CommandType = System.Data.CommandType.Text;
+          cmd.CommandText = sql;
+          log.Debug("Database Scan: Executing sql: {0}", sql);
+          using (SQLiteDataReader reader = cmd.ExecuteReader())
+          {
+            while (reader.Read())
+            {
+              songs.Add(reader.GetString(0));
+              songCount++;
+            }
+          }
+        }
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        log.Error("Database Scan: Error executing sql: {0}", ex.Message);
+      }
+
+      log.Debug("Database Scan: Query returned {0} songs", songCount);
+
+      dlgProgress = new Progress();
+      dlgProgress.Header = localisation.ToString("progress", "ScanningHeader");
+      int x = _main.ClientSize.Width / 2 - dlgProgress.Width / 2;
+      int y = _main.ClientSize.Height / 2 - dlgProgress.Height / 2;
+      Point clientLocation = _main.Location;
+      x += clientLocation.X;
+      y += clientLocation.Y;
+      dlgProgress.Location = new Point(x, y);
+      dlgProgress.Show();
+
+      // The Folder scan should stay on Top
+      dlgProgress.TopMost = true;
+
+      string dlgMessage = localisation.ToString("progress", "Scanning");
+
+      TagLib.File file = null;
+      int count = 1;
+      foreach (string song in songs)
+      {
+        Application.DoEvents();
+        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, songCount), count, songCount, true);
+        if (dlgProgress.IsCancelled)
+        {
+          _main.FolderScanning = false;
+          dlgProgress.Close();
+          return;
+        }
+
+        try
+        {
+          TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+          file = TagLib.File.Create(song);
+          CreateTracksItem(song, file);
+        }
+        catch (CorruptFileException)
+        {
+          log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", song);
+        }
+        catch (UnsupportedFormatException)
+        {
+          log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", song);
+        }
+        count++;
+      }
+      dlgProgress.Close();
+
+      // Display Status Information
+      try
+      {
+        _main.ToolStripStatusFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
+      }
+      catch (InvalidOperationException) { }
+
+      // unselect the first row, which would be selected automatically by the grid
+      // And set the background color of the rating cell, as it isn't reset by the grid
+      try
+      {
+        if (tracksGrid.Rows.Count > 0)
+        {
+          tracksGrid.Rows[0].Selected = false;
+          tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+        }
+      }
+      catch (ArgumentOutOfRangeException) { }
+    }
+
+    private string FormatSQL(string[] searchString)
+    {
+      string sql = "select strPath from tracks where {0} order by {1}";
+
+      string whereClause = "";
+      string orderByClause = "";
+      switch (searchString[0])
+      {
+        case "artist":
+          whereClause = string.Format("strArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          orderByClause = "strAlbum, iTrack";
+          if (searchString.GetLength(0) > 2)
+          {
+            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
+            orderByClause = "iTrack";
+          }
+          break;
+
+        case "albumartist":
+          whereClause = string.Format("strAlbumArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          orderByClause = "strAlbum, iTrack";
+          if (searchString.GetLength(0) > 2)
+          {
+            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
+            orderByClause = "iTrack";
+          }
+          break;
+
+        case "album":
+          whereClause = string.Format("strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[1]));
+          orderByClause = "iTrack";
+          break;
+
+        case "genre":
+          whereClause = string.Format("strGenre like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          orderByClause = "strArtist, strAlbum, iTrack";
+          if (searchString.GetLength(0) > 2)
+          {
+            whereClause += string.Format(" AND strArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[2]));
+            orderByClause = "strAlbum, iTrack";
+          }
+          if (searchString.GetLength(0) > 3)
+          {
+            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[3]));
+            orderByClause = "iTrack";
+          }
+          break;
+      }
+
+      sql = string.Format(sql, whereClause, orderByClause);
+
+      return sql;
+    }
+    #endregion
+
     #endregion
 
     #region Private Methods

@@ -19,6 +19,7 @@
     <String id="PlayerPanel">Player</String>
     <!-- Options Panel -->
     <String id="OptionsPanel">Options</String>
+    <String id="SwitchView">Switch View</String>
     <String id="ScanSubfolder">Scan subfolders</String>
     <String id="ButtonRefreshFolder">Refresh Folder View</String>
     <!-- Error Gridview -->

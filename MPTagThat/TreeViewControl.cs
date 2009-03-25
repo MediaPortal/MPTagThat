@@ -23,6 +23,7 @@ namespace MPTagThat
     private DateTime _savedTime;
     private bool _actionCopy = false;
     private TreeNodePath _nodeToCopyCut = null;
+    private bool _databaseMode = false;
     #endregion
 
     #region Properties
@@ -35,6 +36,12 @@ namespace MPTagThat
     {
       get { return checkBoxRecursive.Checked; }
       set { checkBoxRecursive.Checked = value; }
+    }
+
+    public bool DatabaseMode
+    {
+      get { return _databaseMode; }
+      set { _databaseMode = value; }
     }
     #endregion
 
@@ -57,7 +64,17 @@ namespace MPTagThat
     #region Init
     public void Init()
     {
-      treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
+      if (Options.MainSettings.DatabaseMode && File.Exists(Options.MainSettings.MediaPortalDatabase))
+      {
+        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
+        _databaseMode = true;
+      }
+      else
+      {
+        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
+        _databaseMode = false;
+      }
+      SwitchMode();
       treeViewFolderBrowser.DriveTypes = DriveTypes.LocalDisk | DriveTypes.NetworkDrive | DriveTypes.RemovableDisk | DriveTypes.CompactDisc;
       treeViewFolderBrowser.RootFolder = Environment.SpecialFolder.Desktop;
       treeViewFolderBrowser.CheckboxBehaviorMode = CheckboxBehaviorMode.None;
@@ -82,7 +99,7 @@ namespace MPTagThat
 
         // Clear the tracks
         _main.TracksGridView.TrackList.Clear();
-        _main.ClearFileInfoPanel();
+        _main.FileInfoPanel.ClearFileInfoPanel();
 
         // Now set the Selected directory to the Parent of the delted folder and reread the view
         TreeNodePath parent = node.Parent as TreeNodePath;
@@ -129,6 +146,22 @@ namespace MPTagThat
       }
       _previousHoverNode = node;
 
+    }
+
+    private void SwitchMode()
+    {
+      if (_databaseMode)
+      {
+        treeViewFolderBrowser.AllowDrop = false;
+        checkBoxRecursive.Enabled = false;
+        btnRefreshFolder.Enabled = false;
+      }
+      else
+      {
+        treeViewFolderBrowser.AllowDrop = true;
+        checkBoxRecursive.Enabled = true;
+        btnRefreshFolder.Enabled = true;
+      }
     }
     #endregion
 
@@ -185,7 +218,14 @@ namespace MPTagThat
       TreeNodePath node = e.Node as TreeNodePath;
       if (node != null)
       {
-        _main.CurrentDirectory = node.Path;
+        if (DatabaseMode)
+        {
+          _main.CurrentDirectory = (string)node.Tag; 
+        }
+        else
+        {
+          _main.CurrentDirectory = node.Path;
+        }
         if (node.Text.Contains("CD-ROM Disc ("))
         {
           _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabRip;
@@ -244,7 +284,10 @@ namespace MPTagThat
         if (node != null)
         {
           treeViewFolderBrowser.SelectedNode = node;
-          contextMenuTreeView.Show(treeViewFolderBrowser, p);
+          if (!_databaseMode)
+          {
+            contextMenuTreeView.Show(treeViewFolderBrowser, p);
+          }
         }
       }
     }
@@ -466,7 +509,7 @@ namespace MPTagThat
     }
     #endregion
 
-    #region Butons
+    #region Buttons
     /// <summary>
     /// Refresh the Folder List
     /// </summary>
@@ -475,6 +518,27 @@ namespace MPTagThat
     private void btnRefreshFolder_Click(object sender, EventArgs e)
     {
       RefreshFolders();
+    }
+
+
+    private void btnSwitchView_Click(object sender, EventArgs e)
+    {
+      if (treeViewFolderBrowser.DataSource.GetType() != typeof(TreeViewFolderBrowserDataProvider))
+      {
+        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
+        _databaseMode = false;
+      }
+      else
+      {
+        if (File.Exists(Options.MainSettings.MediaPortalDatabase))
+        {
+          treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
+          _databaseMode = true;
+        }
+      }
+      SwitchMode();
+      treeViewFolderBrowser.Populate();
+      treeViewFolderBrowser.Nodes[0].Expand();
     }
     #endregion
     #endregion

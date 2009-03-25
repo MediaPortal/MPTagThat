@@ -125,6 +125,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProvider.cs" />
+    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderMediaPortal.cs" />
     <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderShell32.cs">
       <SubType>Component</SubType>
     </Compile>

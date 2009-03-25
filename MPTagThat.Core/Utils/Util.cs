@@ -934,6 +934,16 @@ namespace MPTagThat.Core
         strHMS = String.Format("{0}:{1:00}", mm, ss);
       return strHMS;
     }
+
+    /// <summary>
+    /// Changes the Quote to a double Quote, to have correct SQL Syntax
+    /// </summary>
+    /// <param name="strText"></param>
+    /// <returns></returns>
+    public static string RemoveInvalidChars(string strText)
+    {
+      return strText.Replace("'", "''").Trim();
+    }
     #endregion
   }
 }

@@ -49,6 +49,10 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -144,6 +148,12 @@
     </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditBase.designer.cs">
       <DependentUpon>TagEditBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FileInfoControl.Designer.cs">
+      <DependentUpon>FileInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Grids\Tracks\GridViewColumnsLyrics.cs" />
     <Compile Include="Grids\Tracks\LyricsSearch.cs">
@@ -307,6 +317,9 @@
     <EmbeddedResource Include="Dialogues\TagEdit\TagEditBase.resx">
       <DependentUpon>TagEditBase.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileInfoControl.resx">
+      <DependentUpon>FileInfoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Grids\Tracks\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
