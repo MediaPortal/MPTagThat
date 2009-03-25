@@ -245,15 +245,15 @@ namespace MPTagThat.CaseConversion
         strText = textinfo.ToTitleCase(strText);
       }
 
+      if (checkBoxAlwaysUpperCaseFirstLetter.Checked)
+        strText = strText.Substring(0, 1).ToUpperInvariant() + strText.Substring(1);
+
       // Handle the Exceptions
       foreach (string excep in Options.ConversionSettings.CaseConvExceptions)
       {
         strExcep = Regex.Escape(excep);
         strText = Regex.Replace(strText, @"(\W|^)" + strExcep + @"(\W|$)", new MatchEvaluator(RegexReplaceCallback), RegexOptions.Singleline | RegexOptions.IgnoreCase);
       }
-
-      if (checkBoxAlwaysUpperCaseFirstLetter.Checked)
-        strText = strText.Substring(0, 1).ToUpperInvariant() + strText.Substring(1);
 
       return strText;
     }
