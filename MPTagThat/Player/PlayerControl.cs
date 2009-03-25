@@ -248,7 +248,7 @@ namespace MPTagThat.Player
       // Stop the Current Stream
       Stop();
 
-      if ((_stream = Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0, BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE | BASSFlag.BASS_STREAM_PRESCAN)) == 0)
+      if ((_stream = Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0, BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE)) == 0)
       {
         int error = (int)Bass.BASS_ErrorGetCode();
         log.Error("Player: Error Creating stream for {0}: {1}", _playList[_currentStartIndex].FileName, Enum.GetName(typeof(BASSError), error));
