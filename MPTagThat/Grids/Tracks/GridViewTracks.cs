@@ -1299,6 +1299,7 @@ namespace MPTagThat.GridView
     #endregion
 
     #region Folder Scanning
+    /*
     public void FolderScan()
     {
       bindingList = new SortableBindingList<TrackData>();
@@ -1317,10 +1318,16 @@ namespace MPTagThat.GridView
         MessageBox.Show("Could not launch thread {0}", ex.Message);
       }
     }
-
     private void ScanFoldersAsync()
+    */
+
+    public void FolderScan()
     {
       Util.EnterMethod(Util.GetCallingMethod());
+      bindingList = new SortableBindingList<TrackData>();
+      tracksGrid.DataSource = bindingList;
+      GC.Collect();
+
       TagLib.File file = null;
       DirectoryInfo dirInfo = null;
       List<FileInfo> files = new List<FileInfo>();
