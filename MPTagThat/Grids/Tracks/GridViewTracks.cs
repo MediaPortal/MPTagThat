@@ -300,6 +300,13 @@ namespace MPTagThat.GridView
           track.File = Util.FormatID3Tag(track.File);
           track.File.Save();
 
+
+          // If we are in Database mode, we should also update the MediaPortal Database
+          if (_main.TreeView.DatabaseMode)
+          {
+            UpdateMusicDatabase(track);
+          }
+
           if (RenameFile(track))
           {
             // rename was ok, so get the new file into the binding list
@@ -1442,7 +1449,7 @@ namespace MPTagThat.GridView
     }
     #endregion
 
-    #region Database Scan
+    #region Database Scanning / Update
     public void DatabaseScan()
     {
       if (_main.CurrentDirectory == null)
@@ -1457,7 +1464,7 @@ namespace MPTagThat.GridView
       {
         return;
       }
-      
+
       List<string> songs = new List<string>();
       int songCount = 0;
       string sql = FormatSQL(searchString);
@@ -1609,6 +1616,86 @@ namespace MPTagThat.GridView
       sql = string.Format(sql, whereClause, orderByClause);
 
       return sql;
+    }
+
+    private void UpdateMusicDatabase(TrackData track)
+    {
+      string db = MPTagThat.Core.Options.MainSettings.MediaPortalDatabase;
+
+      if (!System.IO.File.Exists(db))
+      {
+        return;
+      }
+
+      string[] tracks = track.Track.Split('/');
+      int trackNumber = 0;
+      if (tracks[0] != "")
+      {
+        trackNumber = Convert.ToInt32(tracks[0]);
+      }
+      int trackTotal = 0;
+      if (tracks.Length > 1)
+      {
+        trackTotal = Convert.ToInt32(tracks[1]);
+      }
+
+      string[] discs = track.Disc.Split('/');
+      int discNumber = 0;
+      if (discs[0] != "")
+      {
+        discNumber = Convert.ToInt32(discs[0]);
+      }
+      int discTotal = 0;
+      if (discs.Length > 1)
+      {
+        discTotal = Convert.ToInt32(discs[1]);
+      }
+
+      string originalFileName = System.IO.Path.GetFileName(track.File.Name);
+      string newFileName = "";
+      if (originalFileName != track.FileName)
+      {
+        string ext = System.IO.Path.GetExtension(track.File.Name);
+        newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(track.File.Name), String.Format("{0}{1}", System.IO.Path.GetFileNameWithoutExtension(track.FileName), ext));
+      }
+      else
+      {
+        newFileName = track.FullFileName;
+      }
+
+
+      string sql = String.Format(
+          @"update tracks 
+              set strArtist = '{0}', strAlbumArtist = '{1}', strAlbum = '{2}', 
+              strGenre = '{3}', strTitle = '{4}', iTrack = {5}, iNumTracks = {6}, 
+              iYear = {7}, iRating = {8}, iDisc = {9}, iNumDisc = {10}, strLyrics = '{11}', strPath = '{12}'
+            where strPath = '{13}'",
+        Util.RemoveInvalidChars(track.Artist), Util.RemoveInvalidChars(track.AlbumArtist), Util.RemoveInvalidChars(track.Album),
+        Util.RemoveInvalidChars(track.Genre), Util.RemoveInvalidChars(track.Title), trackNumber, trackTotal,
+        track.Year, track.Rating, discNumber, discTotal,
+        Util.RemoveInvalidChars(track.Lyrics), Util.RemoveInvalidChars(newFileName),
+        Util.RemoveInvalidChars(track.FullFileName)
+      );
+
+
+      string connection = string.Format(@"Data Source={0}", db);
+      try
+      {
+        SQLiteConnection conn = new SQLiteConnection(connection);
+        conn.Open();
+        using (SQLiteCommand cmd = new SQLiteCommand())
+        {
+          cmd.Connection = conn;
+          cmd.CommandType = System.Data.CommandType.Text;
+          cmd.CommandText = sql;
+          int result = cmd.ExecuteNonQuery();
+        }
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        log.Error("Database Update: Error executing sql: {0}", ex.Message);
+      }
     }
     #endregion
 

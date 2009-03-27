@@ -942,6 +942,10 @@ namespace MPTagThat.Core
     /// <returns></returns>
     public static string RemoveInvalidChars(string strText)
     {
+      if (strText == null)
+      {
+        return "";
+      }
       return strText.Replace("'", "''").Trim();
     }
     #endregion

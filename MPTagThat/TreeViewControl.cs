@@ -150,6 +150,8 @@ namespace MPTagThat
 
     private void SwitchMode()
     {
+      _main.TracksGridView.TrackList.Clear();
+      _main.FileInfoPanel.ClearFileInfoPanel();
       if (_databaseMode)
       {
         treeViewFolderBrowser.AllowDrop = false;
