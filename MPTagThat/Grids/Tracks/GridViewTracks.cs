@@ -942,7 +942,6 @@ namespace MPTagThat.GridView
         {
           log.Error("Error in Lyricssearch: {0}", ex.Message);
         }
-
       }
 
       tracksGrid.Refresh();

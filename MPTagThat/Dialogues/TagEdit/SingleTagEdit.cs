@@ -670,6 +670,11 @@ namespace MPTagThat.TagEdit
       dataGridViewLyrics.Rows.Clear();
       if (track.TagType.ToLower() == "mp3")
       {
+        if ((track.File.TagTypesOnDisk & TagTypes.Ape) == TagTypes.Ape)
+        {
+          AddLyrics("", "", track.Lyrics);
+        }
+
         foreach (TagLib.Id3v2.UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<TagLib.Id3v2.UnsynchronisedLyricsFrame>())
         {
           AddLyrics(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text);
