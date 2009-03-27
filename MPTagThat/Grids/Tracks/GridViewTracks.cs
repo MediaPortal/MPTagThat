@@ -1302,6 +1302,10 @@ namespace MPTagThat.GridView
     #region Folder Scanning
     public void FolderScan()
     {
+      bindingList = new SortableBindingList<TrackData>();
+      tracksGrid.DataSource = bindingList;
+      GC.Collect();
+
       try
       {
         System.Threading.Thread t = new System.Threading.Thread(ScanFoldersAsync);
@@ -1452,6 +1456,10 @@ namespace MPTagThat.GridView
     #region Database Scanning / Update
     public void DatabaseScan()
     {
+      bindingList = new SortableBindingList<TrackData>();
+      tracksGrid.DataSource = bindingList;
+      GC.Collect();
+
       if (_main.CurrentDirectory == null)
       {
         return;
