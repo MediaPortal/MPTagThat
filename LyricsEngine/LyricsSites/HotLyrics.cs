@@ -127,7 +127,7 @@ namespace LyricsEngine.LyricSites
             try
             {
               reply = (Stream)e.Result;
-              sr = new StreamReader(reply, Encoding.UTF8);
+              sr = new StreamReader(reply, Encoding.Default);
 
               string line = "";
 
