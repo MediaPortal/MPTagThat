@@ -23,7 +23,7 @@ namespace LyricsEngine.LyricSites
 
         public HotLyrics(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
         {
-            this.timeLimit = timeLimit;
+            this.timeLimit = timeLimit / 2;
             timer = new System.Timers.Timer();
 
             if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "SeekLyrics(" + artist + ", " + title + ")");
@@ -68,13 +68,13 @@ namespace LyricsEngine.LyricSites
             title = title.Replace(":", "_");
 
             // German letters
-            title = title.Replace("ü", "%FC");
-            title = title.Replace("Ü", "%FC");
-            title = title.Replace("ä", "%E4");
-            title = title.Replace("Ä", "%C4");
-            title = title.Replace("ö", "%F6");
-            title = title.Replace("Ö", "%D6");
-            title = title.Replace("ß", "%DF");
+            artist = artist.Replace("ü", "%FC");
+            artist = artist.Replace("Ü", "%DC");
+            artist = artist.Replace("ä", "%E4");
+            artist = artist.Replace("Ä", "%C4");
+            artist = artist.Replace("ö", "%F6");
+            artist = artist.Replace("Ö", "%D6");
+            artist = artist.Replace("ß", "%DF");
 
             // Danish letters
             title = title.Replace("å", "%E5");
@@ -91,7 +91,7 @@ namespace LyricsEngine.LyricSites
 
             string urlString = "http://www.hotlyrics.net/lyrics/" + firstLetter + "/" + artist + "/" + title + ".html";
 
-            WebClient client = new WebClient();
+            LyricsWebClient client = new LyricsWebClient();
 
             timer.Enabled = true;
             timer.Interval = timeLimit;
@@ -110,7 +110,7 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(300);
                 }
             }
         }
@@ -120,14 +120,14 @@ namespace LyricsEngine.LyricSites
             bool thisMayBeTheCorrectLyric = true;
             StringBuilder lyricTemp = new StringBuilder();
 
-            WebClient client = (WebClient)sender;
+            LyricsWebClient client = (LyricsWebClient)sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
               reply = (Stream)e.Result;
-              sr = new StreamReader(reply, Encoding.Default);
+              sr = new StreamReader(reply, Encoding.UTF8);
 
               string line = "";
 
@@ -177,14 +177,13 @@ namespace LyricsEngine.LyricSites
 
                 lyric = lyricTemp.ToString().Trim();
 
-                // if warning message from Evil Labs' sql-server, then lyric isn't found
                 if (lyric.Contains("<td"))
                 {
                   lyric = "Not found";
                 }
               }
             }
-            catch (Exception)
+            catch
             {
               lyric = "Not found";
             }

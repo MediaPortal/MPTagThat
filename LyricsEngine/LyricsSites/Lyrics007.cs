@@ -24,7 +24,7 @@ namespace LyricsEngine.LyricSites
 
     public Lyrics007(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
     {
-      this.timeLimit = timeLimit;
+            this.timeLimit = timeLimit / 2;
       timer = new System.Timers.Timer();
 
       if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "Lyrics007(" + artist + ", " + title + ")");
@@ -52,13 +52,9 @@ namespace LyricsEngine.LyricSites
 
       while (complete == false)
       {
-        if (m_EventStop_SiteSearches.WaitOne(1, true))
+                if (m_EventStop_SiteSearches.WaitOne(500, true))
         {
           complete = true;
-        }
-        else
-        {
-          System.Threading.Thread.Sleep(100);
         }
       }
     }
@@ -66,14 +62,14 @@ namespace LyricsEngine.LyricSites
 
     private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
     {
-      WebClient client = (WebClient)sender;
+      LyricsWebClient client = (LyricsWebClient)sender;
       Stream reply = null;
       StreamReader sr = null;
 
       try
       {
         reply = (Stream)e.Result;
-        sr = new StreamReader(reply, Encoding.Default);
+        sr = new StreamReader(reply, Encoding.UTF8);
 
         string line = sr.ReadToEnd();
         
@@ -82,7 +78,9 @@ namespace LyricsEngine.LyricSites
         line = line.Replace("\r", "");
         line = line.Replace("\t", "");
 
-        string pat = @"<script\s*type=""text/javascript""\s*src=""http://www2\.ringtonematcher\.com/jsstatic/lyrics007\.js""></script>.*?</div>(.*?)<div.*";
+        //string pat = @"<script\s*type=""text/javascript""\s*src=""http://www2\.ringtonematcher\.com/jsstatic/lyrics007\.js""></script>.*?</div>(.*?)<div.*";
+        //string pat = @"src=""/images/phone2.gif""><br><br><br></div>(.*?)<div align=center>";
+        string pat = @"<br><br><br></div>(.*?)<div.*";
 
         // Compile the regular expression.
         Regex r = new Regex(pat, RegexOptions.IgnoreCase);
@@ -117,7 +115,7 @@ namespace LyricsEngine.LyricSites
         else
           lyric = "Not found";
       }
-      catch (Exception)
+            catch
       {
         lyric = "Not found";
       }

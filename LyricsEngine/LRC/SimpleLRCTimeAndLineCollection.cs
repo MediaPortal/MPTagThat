@@ -19,7 +19,7 @@ namespace LyricsEngine.LRC
 
         public int GetSimpleLRCTimeAndLineIndex(long time)
         {
-            if (time < ((SimpleLRCTimeAndLine)items[0]).Time)
+            if (time <= ((SimpleLRCTimeAndLine)items[0]).Time)
             {
                 return 0;
             }

@@ -532,6 +532,8 @@
     <String id="Lyrics007">Lyrics007</String>
     <String id="HotLyrics">Hot Lyrics</String>
     <String id="LyricWiki">Lyric Wiki</String>
+    <String id="Actionext">Actionext</String>
+    <String id="LyrDB">LyrDB</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
     <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>

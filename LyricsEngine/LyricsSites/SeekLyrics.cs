@@ -100,14 +100,14 @@ namespace LyricsEngine.LyricSites
 
     private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
     {
-      WebClient client = (WebClient)sender;
+            LyricsWebClient client = (LyricsWebClient)sender;
       Stream reply = null;
       StreamReader sr = null;
 
       try
       {
         reply = (Stream)e.Result;
-        sr = new StreamReader(reply, Encoding.Default);
+        sr = new StreamReader(reply, Encoding.UTF8);
 
         string line = sr.ReadToEnd();
 
@@ -149,7 +149,7 @@ namespace LyricsEngine.LyricSites
         else
           lyric = "Not found";
       }
-      catch (System.Reflection.TargetInvocationException)
+            catch
       {
         lyric = "Not found";
       }

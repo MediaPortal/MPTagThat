@@ -97,6 +97,12 @@ namespace MPTagThat.GridView
       if (Options.MainSettings.SearchSeekLyrics)
         sitesToSearch.Add("SeekLyrics");
 
+      if (Options.MainSettings.SearchActionext)
+        sitesToSearch.Add("Actionext");
+
+      if (Options.MainSettings.SearchLyrDB)
+        sitesToSearch.Add("LyrDB");
+
       // initialize delegates
       m_DelegateLyricFound = new DelegateLyricFound(this.lyricFound);
       m_DelegateLyricNotFound = new DelegateLyricNotFound(this.lyricNotFound);
@@ -180,7 +186,7 @@ namespace MPTagThat.GridView
       if (lyricsQueue.Count > 0)
       {
         // start running the lyricController
-        lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), false, false);
+        lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), false, false, "", "");
 
         lc.NoOfLyricsToSearch = lyricsQueue.Count;
         ThreadStart runLyricController = delegate

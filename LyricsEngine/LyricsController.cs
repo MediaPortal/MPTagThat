@@ -38,11 +38,14 @@ namespace LyricsEngine
     ManualResetEvent m_EventStopped_LyricController;
 
     private string[] lyricsSites;
+    private string[] m_findArray;
+    private string[] m_replaceArray;
 
     public LyricsController(ILyricForm mainForm,
                             ManualResetEvent eventStopThread,
                             string[] lyricSites,
-                            bool allowAllToComplete, bool automaticUpdate)
+                                bool allowAllToComplete, bool automaticUpdate,
+                                string find, string replace)
     {
       this.m_Form = mainForm;
       this.m_allowAllToComplete = allowAllToComplete;
@@ -54,17 +57,17 @@ namespace LyricsEngine
       m_noOfLyricsNotFound = 0;
       m_noOfCurrentSearches = 0;
 
-      ArrayList easySitesArrayList = new ArrayList();
+            ArrayList sitesArrayList = new ArrayList();
 
       // If search all, then include all
       foreach (string site in lyricSites)
       {
         if (Setup.IsMember(site))
         {
-          easySitesArrayList.Add(site);
+                    sitesArrayList.Add(site);
         }
       }
-      this.lyricsSites = (string[])easySitesArrayList.ToArray(typeof(string));
+            this.lyricsSites = (string[])sitesArrayList.ToArray(typeof(string));
 
 
       LyricSearch.LyricsSites = lyricsSites;
@@ -73,6 +76,15 @@ namespace LyricsEngine
       m_EventStopped_LyricController = new ManualResetEvent(false);
 
       LyricSearch.Abort = false;
+
+            if (!string.IsNullOrEmpty(find) && !string.IsNullOrEmpty(replace))
+            {
+                if (find != "")
+                {
+                    m_findArray = find.Split(',');
+                    m_replaceArray = replace.Split(',');
+                }
+            }
     }
 
 
@@ -87,7 +99,7 @@ namespace LyricsEngine
         if (m_EventStop_LyricController.WaitOne())
         {
           // clean-up operations may be placed here
-          for (int i = 0; i < threadList.Count; i++)
+                    for (int i=0; i<threadList.Count; i++)
           {
             ((Thread)threadList[i]).Abort();
           }
@@ -190,6 +202,9 @@ namespace LyricsEngine
 
     internal void LyricFound(String lyricStrings, String artist, String title, String site, int row)
     {
+
+            string cleanLyric = LyricUtil.FixLyrics(lyricStrings, m_findArray, m_replaceArray);
+
       --m_noOfCurrentSearches;
 
       if (m_allowAllToComplete || m_StopSearches == false)
@@ -230,8 +245,7 @@ namespace LyricsEngine
     public bool StopSearches
     {
       get { return m_StopSearches; }
-      set
-      {
+      set {
         if (value == true)
         {
           m_StopSearches = true;

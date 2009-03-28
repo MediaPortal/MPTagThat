@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LyricsEngine
 {
@@ -76,6 +77,35 @@ namespace LyricsEngine
             }
 
             return str;
+        }
+
+
+        public static string FixLyrics(string lyrics)
+        {
+            lyrics = Regex.Replace(lyrics, "('){2,}", "'");
+            return lyrics;
+        }
+
+        public static string FixLyrics(string lyrics, string[] find, string[] replace)
+        {
+            lyrics = FixLyrics(lyrics);
+
+            if (find != null)
+            {
+                int valueIndex = 0;
+
+                foreach (string findValue in find)
+                {
+
+                    if (findValue != "")
+                    {
+                        lyrics = lyrics.Replace(findValue, replace[valueIndex]);
+                        valueIndex++;
+                    }
+                }
+            }
+
+            return lyrics;
         }
     }
 }

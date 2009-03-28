@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LyricSiteInfo.cs" />
+    <Compile Include="LyricsSites\Actionext.cs" />
+    <Compile Include="LyricsSites\LyrDB.cs" />
     <Compile Include="LyricsWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,7 +72,6 @@
     <Compile Include="LyricSearch.cs" />
     <Compile Include="LyricDiagnostics.cs" />
     <Compile Include="LyricsSites\HotLyrics.cs" />
-    <Compile Include="LyricsSites\EvilLabs.cs" />
     <Compile Include="LyricsSites\Lyrics007.cs" />
     <Compile Include="LyricsSites\LyricsOnDemand.cs" />
     <Compile Include="LyricsSites\SeekLyrics.cs" />

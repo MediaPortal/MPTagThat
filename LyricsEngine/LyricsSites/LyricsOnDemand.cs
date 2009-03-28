@@ -69,7 +69,7 @@ namespace LyricsEngine.LyricSites
 
             string urlString = "http://www.lyricsondemand.com/" + firstLetter + "/" + artist + "lyrics/" + title + "lyrics.html";
 
-            WebClient client = new WebClient();
+            LyricsWebClient client = new LyricsWebClient();
 
             timer.Enabled = true;
             timer.Interval = timeLimit;
@@ -98,14 +98,14 @@ namespace LyricsEngine.LyricSites
             bool thisMayBeTheCorrectLyric = true;
             StringBuilder lyricTemp = new StringBuilder();
             
-            WebClient client = (WebClient)sender;
+            LyricsWebClient client = (LyricsWebClient)sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
                 reply = (Stream)e.Result;
-                sr = new StreamReader(reply, Encoding.Default);
+                sr = new StreamReader(reply, Encoding.UTF8);
 
                 string line = "";
                 int noOfLinesCount = 0;
@@ -159,14 +159,13 @@ namespace LyricsEngine.LyricSites
 
                     lyric = lyricTemp.ToString().Trim();
 
-                    // if warning message from Evil Labs' sql-server, then lyric isn't found
                     if (lyric.Contains("<td") || lyric.Contains("<IFRAME"))
                     {
                         lyric = "Not found";
                     }
                 }
             }
-            catch (System.Reflection.TargetInvocationException)
+            catch
             {
                 lyric = "Not found";
             }

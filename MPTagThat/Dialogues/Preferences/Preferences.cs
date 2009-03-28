@@ -272,6 +272,8 @@ namespace MPTagThat.Preferences
       ckLyricsOnDemand.Checked = Options.MainSettings.SearchLyricsOnDemand;
       ckLyricWiki.Checked = Options.MainSettings.SearchLyricWiki;
       ckSeekLyrics.Checked = Options.MainSettings.SearchSeekLyrics;
+      ckActionext.Checked = Options.MainSettings.SearchActionext;
+      ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
       #endregion
       Util.LeaveMethod(Util.GetCallingMethod());
@@ -735,6 +737,8 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchLyricsOnDemand = ckLyricsOnDemand.Checked;
       Options.MainSettings.SearchLyricWiki = ckLyricWiki.Checked;
       Options.MainSettings.SearchSeekLyrics = ckSeekLyrics.Checked;
+      Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
+      Options.MainSettings.SearchActionext = ckActionext.Checked;
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       #endregion
 

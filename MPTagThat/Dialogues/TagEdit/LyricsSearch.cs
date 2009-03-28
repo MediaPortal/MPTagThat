@@ -173,7 +173,7 @@ namespace MPTagThat.TagEdit
         sitesToSearch.Add("SeekLyrics");
 
       // If automaticUpdate is set then return after the first positive search
-      lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), true, automaticUpdate);
+      lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), true, automaticUpdate, "", "");
 
       ThreadStart job = delegate
       {

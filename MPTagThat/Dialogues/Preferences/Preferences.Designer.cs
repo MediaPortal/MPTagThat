@@ -72,7 +72,12 @@ namespace MPTagThat.Preferences
       this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageTagsLyricsCover = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckSeekLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -176,11 +181,8 @@ namespace MPTagThat.Preferences
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-      this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -195,6 +197,7 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsID3.SuspendLayout();
       this.groupBoxID3Update.SuspendLayout();
       this.tabPageTagsLyricsCover.SuspendLayout();
+      this.groupBoxPictures.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       this.groupBoxLyricsSites.SuspendLayout();
       this.tabPageRipping.SuspendLayout();
@@ -226,7 +229,6 @@ namespace MPTagThat.Preferences
       this.panelBottom.SuspendLayout();
       this.panelLeft.SuspendLayout();
       this.navPanel.SuspendLayout();
-      this.groupBoxPictures.SuspendLayout();
       this.SuspendLayout();
       // 
       // panelRight
@@ -782,6 +784,56 @@ namespace MPTagThat.Preferences
       this.tabPageTagsLyricsCover.TabIndex = 2;
       this.tabPageTagsLyricsCover.Text = "Lyrics / Cover";
       // 
+      // groupBoxPictures
+      // 
+      this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
+      this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
+      this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
+      this.groupBoxPictures.Localisation = "GroupBoxPictures";
+      this.groupBoxPictures.LocalisationContext = "Settings";
+      this.groupBoxPictures.Location = new System.Drawing.Point(15, 22);
+      this.groupBoxPictures.Name = "groupBoxPictures";
+      this.groupBoxPictures.Size = new System.Drawing.Size(590, 109);
+      this.groupBoxPictures.TabIndex = 3;
+      this.groupBoxPictures.TabStop = false;
+      this.groupBoxPictures.Text = "Pictures";
+      // 
+      // ckUseExistinbgThumb
+      // 
+      this.ckUseExistinbgThumb.AutoSize = true;
+      this.ckUseExistinbgThumb.Localisation = "EmbedExistingThumb";
+      this.ckUseExistinbgThumb.LocalisationContext = "Settings";
+      this.ckUseExistinbgThumb.Location = new System.Drawing.Point(27, 52);
+      this.ckUseExistinbgThumb.Name = "ckUseExistinbgThumb";
+      this.ckUseExistinbgThumb.Size = new System.Drawing.Size(294, 17);
+      this.ckUseExistinbgThumb.TabIndex = 8;
+      this.ckUseExistinbgThumb.Text = "Embed existing folder thumb (folder.jpg)  on Cover search";
+      this.ckUseExistinbgThumb.UseVisualStyleBackColor = true;
+      // 
+      // ckOverwriteExistingCovers
+      // 
+      this.ckOverwriteExistingCovers.AutoSize = true;
+      this.ckOverwriteExistingCovers.Localisation = "OverwriteExistingCover";
+      this.ckOverwriteExistingCovers.LocalisationContext = "Settings";
+      this.ckOverwriteExistingCovers.Location = new System.Drawing.Point(27, 78);
+      this.ckOverwriteExistingCovers.Name = "ckOverwriteExistingCovers";
+      this.ckOverwriteExistingCovers.Size = new System.Drawing.Size(246, 17);
+      this.ckOverwriteExistingCovers.TabIndex = 7;
+      this.ckOverwriteExistingCovers.Text = "Overwrite existing covers on automatic tagging";
+      this.ckOverwriteExistingCovers.UseVisualStyleBackColor = true;
+      // 
+      // ckCreateMissingFolderThumb
+      // 
+      this.ckCreateMissingFolderThumb.AutoSize = true;
+      this.ckCreateMissingFolderThumb.Localisation = "CreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.LocalisationContext = "Settings";
+      this.ckCreateMissingFolderThumb.Location = new System.Drawing.Point(27, 26);
+      this.ckCreateMissingFolderThumb.Name = "ckCreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(248, 17);
+      this.ckCreateMissingFolderThumb.TabIndex = 6;
+      this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on save";
+      this.ckCreateMissingFolderThumb.UseVisualStyleBackColor = true;
+      // 
       // groupBoxLyrics
       // 
       this.groupBoxLyrics.Controls.Add(this.ckOverwriteExistingLyrics);
@@ -795,6 +847,18 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.TabIndex = 2;
       this.groupBoxLyrics.TabStop = false;
       this.groupBoxLyrics.Text = "Lyrics";
+      // 
+      // ckOverwriteExistingLyrics
+      // 
+      this.ckOverwriteExistingLyrics.AutoSize = true;
+      this.ckOverwriteExistingLyrics.Localisation = "OverwriteExistingLyrics";
+      this.ckOverwriteExistingLyrics.LocalisationContext = "Settings";
+      this.ckOverwriteExistingLyrics.Location = new System.Drawing.Point(27, 57);
+      this.ckOverwriteExistingLyrics.Name = "ckOverwriteExistingLyrics";
+      this.ckOverwriteExistingLyrics.Size = new System.Drawing.Size(237, 17);
+      this.ckOverwriteExistingLyrics.TabIndex = 9;
+      this.ckOverwriteExistingLyrics.Text = "Overwrite existing lyrics on automatic tagging";
+      this.ckOverwriteExistingLyrics.UseVisualStyleBackColor = true;
       // 
       // ckSwitchArtist
       // 
@@ -811,6 +875,8 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxLyricsSites
       // 
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyrDB);
+      this.groupBoxLyricsSites.Controls.Add(this.ckActionext);
       this.groupBoxLyricsSites.Controls.Add(this.ckSeekLyrics);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyricsOnDemand);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyrics007);
@@ -2049,67 +2115,33 @@ namespace MPTagThat.Preferences
       this.lbLinkRipping.Text = "Ripping / Conversion";
       this.lbLinkRipping.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNavpageLink_Clicked);
       // 
-      // groupBoxPictures
+      // ckActionext
       // 
-      this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
-      this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
-      this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
-      this.groupBoxPictures.Localisation = "GroupBoxPictures";
-      this.groupBoxPictures.LocalisationContext = "Settings";
-      this.groupBoxPictures.Location = new System.Drawing.Point(15, 22);
-      this.groupBoxPictures.Name = "groupBoxPictures";
-      this.groupBoxPictures.Size = new System.Drawing.Size(590, 109);
-      this.groupBoxPictures.TabIndex = 3;
-      this.groupBoxPictures.TabStop = false;
-      this.groupBoxPictures.Text = "Pictures";
+      this.ckActionext.AutoSize = true;
+      this.ckActionext.Checked = true;
+      this.ckActionext.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckActionext.Localisation = "Actionext";
+      this.ckActionext.LocalisationContext = "Settings";
+      this.ckActionext.Location = new System.Drawing.Point(288, 60);
+      this.ckActionext.Name = "ckActionext";
+      this.ckActionext.Size = new System.Drawing.Size(70, 17);
+      this.ckActionext.TabIndex = 5;
+      this.ckActionext.Text = "Actionext";
+      this.ckActionext.UseVisualStyleBackColor = true;
       // 
-      // ckCreateMissingFolderThumb
+      // ckLyrDB
       // 
-      this.ckCreateMissingFolderThumb.AutoSize = true;
-      this.ckCreateMissingFolderThumb.Localisation = "CreateMissingFolderThumb";
-      this.ckCreateMissingFolderThumb.LocalisationContext = "Settings";
-      this.ckCreateMissingFolderThumb.Location = new System.Drawing.Point(27, 26);
-      this.ckCreateMissingFolderThumb.Name = "ckCreateMissingFolderThumb";
-      this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(248, 17);
-      this.ckCreateMissingFolderThumb.TabIndex = 6;
-      this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on save";
-      this.ckCreateMissingFolderThumb.UseVisualStyleBackColor = true;
-      // 
-      // ckOverwriteExistingCovers
-      // 
-      this.ckOverwriteExistingCovers.AutoSize = true;
-      this.ckOverwriteExistingCovers.Localisation = "OverwriteExistingCover";
-      this.ckOverwriteExistingCovers.LocalisationContext = "Settings";
-      this.ckOverwriteExistingCovers.Location = new System.Drawing.Point(27, 78);
-      this.ckOverwriteExistingCovers.Name = "ckOverwriteExistingCovers";
-      this.ckOverwriteExistingCovers.Size = new System.Drawing.Size(246, 17);
-      this.ckOverwriteExistingCovers.TabIndex = 7;
-      this.ckOverwriteExistingCovers.Text = "Overwrite existing covers on automatic tagging";
-      this.ckOverwriteExistingCovers.UseVisualStyleBackColor = true;
-      // 
-      // ckUseExistinbgThumb
-      // 
-      this.ckUseExistinbgThumb.AutoSize = true;
-      this.ckUseExistinbgThumb.Localisation = "EmbedExistingThumb";
-      this.ckUseExistinbgThumb.LocalisationContext = "Settings";
-      this.ckUseExistinbgThumb.Location = new System.Drawing.Point(27, 52);
-      this.ckUseExistinbgThumb.Name = "ckUseExistinbgThumb";
-      this.ckUseExistinbgThumb.Size = new System.Drawing.Size(294, 17);
-      this.ckUseExistinbgThumb.TabIndex = 8;
-      this.ckUseExistinbgThumb.Text = "Embed existing folder thumb (folder.jpg)  on Cover search";
-      this.ckUseExistinbgThumb.UseVisualStyleBackColor = true;
-      // 
-      // ckOverwriteExistingLyrics
-      // 
-      this.ckOverwriteExistingLyrics.AutoSize = true;
-      this.ckOverwriteExistingLyrics.Localisation = "OverwriteExistingLyrics";
-      this.ckOverwriteExistingLyrics.LocalisationContext = "Settings";
-      this.ckOverwriteExistingLyrics.Location = new System.Drawing.Point(27, 57);
-      this.ckOverwriteExistingLyrics.Name = "ckOverwriteExistingLyrics";
-      this.ckOverwriteExistingLyrics.Size = new System.Drawing.Size(237, 17);
-      this.ckOverwriteExistingLyrics.TabIndex = 9;
-      this.ckOverwriteExistingLyrics.Text = "Overwrite existing lyrics on automatic tagging";
-      this.ckOverwriteExistingLyrics.UseVisualStyleBackColor = true;
+      this.ckLyrDB.AutoSize = true;
+      this.ckLyrDB.Checked = true;
+      this.ckLyrDB.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyrDB.Localisation = "LyrDB";
+      this.ckLyrDB.LocalisationContext = "Settings";
+      this.ckLyrDB.Location = new System.Drawing.Point(432, 28);
+      this.ckLyrDB.Name = "ckLyrDB";
+      this.ckLyrDB.Size = new System.Drawing.Size(55, 17);
+      this.ckLyrDB.TabIndex = 6;
+      this.ckLyrDB.Text = "LyrDB";
+      this.ckLyrDB.UseVisualStyleBackColor = true;
       // 
       // Preferences
       // 
@@ -2149,6 +2181,8 @@ namespace MPTagThat.Preferences
       this.groupBoxID3Update.ResumeLayout(false);
       this.groupBoxID3Update.PerformLayout();
       this.tabPageTagsLyricsCover.ResumeLayout(false);
+      this.groupBoxPictures.ResumeLayout(false);
+      this.groupBoxPictures.PerformLayout();
       this.groupBoxLyrics.ResumeLayout(false);
       this.groupBoxLyrics.PerformLayout();
       this.groupBoxLyricsSites.ResumeLayout(false);
@@ -2199,8 +2233,6 @@ namespace MPTagThat.Preferences
       this.panelLeft.ResumeLayout(false);
       this.navPanel.ResumeLayout(false);
       this.navPanel.PerformLayout();
-      this.groupBoxPictures.ResumeLayout(false);
-      this.groupBoxPictures.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -2360,5 +2392,7 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckCreateMissingFolderThumb;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseExistinbgThumb;
     private MPTagThat.Core.WinControls.MPTCheckBox ckOverwriteExistingLyrics;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckLyrDB;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckActionext;
   }
 }

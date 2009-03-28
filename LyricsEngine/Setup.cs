@@ -6,13 +6,14 @@ namespace LyricsEngine
 {
     public static class Setup
     {
-        public static string[] BatchSearchSites = new string[6]
+        public static string[] BatchSearchSites = new string[7]
         {
             "LyricWiki",
             "Lyrics007",
             "LyricsOnDemand",
             "HotLyrics",
-            "EvilLabs",
+            "Actionext",
+            "LyrDB",
             "SeekLyrics"
         };
 

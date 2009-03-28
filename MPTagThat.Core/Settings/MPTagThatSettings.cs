@@ -251,6 +251,8 @@ namespace MPTagThat.Core
     private bool _searchLyrics007;
     private bool _searchLyricsOnDemand;
     private bool _searchSeekLyrics;
+    private bool _searchActionext;
+    private bool _searchLyrDB;
 
     [Setting(SettingScope.User, "true")]
     public bool SearchLyricWiki
@@ -285,6 +287,20 @@ namespace MPTagThat.Core
     {
       get { return _searchSeekLyrics; }
       set { _searchSeekLyrics = value; }
+    }
+
+    [Setting(SettingScope.User, "true")]
+    public bool SearchActionext
+    {
+      get { return _searchActionext; }
+      set { _searchActionext = value; }
+    }
+
+    [Setting(SettingScope.User, "true")]
+    public bool SearchLyrDB
+    {
+      get { return _searchLyrDB; }
+      set { _searchLyrDB = value; }
     }
 
     [Setting(SettingScope.User, "false")]
