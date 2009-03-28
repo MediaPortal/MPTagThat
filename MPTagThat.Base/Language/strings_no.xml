@@ -532,6 +532,8 @@
     <String id="Lyrics007">Lyrics007</String>
     <String id="HotLyrics">Hot Lyrics</String>
     <String id="LyricWiki">Lyric Wiki</String>
+    <String id="Actionext">Actionext</String>
+    <String id="LyrDB">Lyric DB</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når den er tom</String>
     <String id="CaseConversion">Bruk Bokstav Konvertering når du lagrer</String>
