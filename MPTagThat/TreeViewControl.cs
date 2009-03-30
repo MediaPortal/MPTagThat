@@ -41,7 +41,11 @@ namespace MPTagThat
     public bool DatabaseMode
     {
       get { return _databaseMode; }
-      set { _databaseMode = value; }
+      set 
+      { 
+        _databaseMode = value;
+        SwitchMode();
+      }
     }
     #endregion
 
@@ -154,12 +158,20 @@ namespace MPTagThat
       _main.FileInfoPanel.ClearFileInfoPanel();
       if (_databaseMode)
       {
+        if (_main.SplitterTop.IsCollapsed)
+        {
+          _main.SplitterTop.ToggleState();
+        }
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
         btnRefreshFolder.Enabled = false;
       }
       else
       {
+        if (!_main.SplitterTop.IsCollapsed)
+        {
+          _main.SplitterTop.ToggleState();
+        }
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;
         btnRefreshFolder.Enabled = true;

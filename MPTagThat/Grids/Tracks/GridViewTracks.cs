@@ -2301,6 +2301,11 @@ namespace MPTagThat.GridView
     /// <param name="e"></param>
     void tracksGrid_SelectionChanged(object sender, EventArgs e)
     {
+      if (bindingList.Count == 0)
+      {
+        return;
+      }
+
       for (int i = 0; i < tracksGrid.Rows.Count; i++)
       {
         if (tracksGrid.Rows[i].Selected)

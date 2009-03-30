@@ -43,6 +43,11 @@ namespace MPTagThat
         return;
       }
 
+      if (!_main.TreeView.DatabaseMode)
+      {
+        _main.TreeView.DatabaseMode = true;
+      }
+
       string sql = "select strPath from tracks where {0} order by {1}";
 
       string whereClause = "";
@@ -50,7 +55,7 @@ namespace MPTagThat
 
       if (tbArtist.Text.Trim() != "")
       {
-        whereClause += string.Format("strArtist like '%| {0}%' ", Util.RemoveInvalidChars(tbArtist.Text.Trim()));
+        whereClause += string.Format("strArtist like '%{0}%' ", Util.RemoveInvalidChars(tbArtist.Text.Trim()));
         orderByClause += "strArtist";
       }
 

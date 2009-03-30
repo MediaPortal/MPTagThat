@@ -124,6 +124,14 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// Returns the Top Splitter
+    /// </summary>
+    public NJFLib.Controls.CollapsibleSplitter SplitterTop
+    {
+      get { return splitterTop; }
+    }
+
+    /// <summary>
     /// Returns the Right Splitter
     /// </summary>
     public NJFLib.Controls.CollapsibleSplitter SplitterRight
@@ -326,10 +334,11 @@ namespace MPTagThat
       _splashScreen.Stop();
 
       // Display the files in the last selected Directory
-      if (_selectedDirectory != String.Empty)
+      if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
       {
         gridViewControl.FolderScan();
       }
+
 
       // setup various Event Handler needed
       gridViewControl.View.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
