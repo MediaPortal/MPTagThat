@@ -737,5 +737,6 @@
 	<String id="Search">Suche</String>
 	<String id="NoMusicDB">Um die Datenbanksuche benutzen zu können,\nmuss ein Verweis auf die Musikdatenbank in den Einstellungen eingetragen werden.</String>
 	<String id="NoSearchValues">Bitte mindestens einen Suchwert eingeben.</String>
+	<String id="TooMuchRows">Die Suche ergab zuviele Resultate. Zeige nur die ersten 1000.</String>
   </Section>
 </Language>

@@ -737,5 +737,6 @@
 	<String id="Search">Search</String>
 	<String id="NoMusicDB">To use the Database search function,\nyou must enter the location of the Music Database in the Settings.</String>
 	<String id="NoSearchValues">Please enter at least one Value to search for.</String>
+	<String id="TooMuchRows">Query returned too much rows. Only displaying the first 1000.</String>
   </Section>
 </Language>

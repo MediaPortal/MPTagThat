@@ -89,6 +89,8 @@ namespace MPTagThat
       string connection = string.Format(@"Data Source={0}", MPTagThat.Core.Options.MainSettings.MediaPortalDatabase);
       try
       {
+        this.Cursor = Cursors.WaitCursor;
+        int count = 0;
         SQLiteConnection conn = new SQLiteConnection(connection);
         conn.Open();
         using (SQLiteCommand cmd = new SQLiteCommand())
@@ -102,9 +104,17 @@ namespace MPTagThat
             while (reader.Read())
             {
               songs.Add(reader.GetString(0));
+              count++;
+              if (count > 999)
+              {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show(localisation.ToString("dbsearch", "TooMuchRows"), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                break;
+              }
             }
           }
         }
+        this.Cursor = Cursors.Default;
         conn.Close();
       }
       catch (Exception ex)
