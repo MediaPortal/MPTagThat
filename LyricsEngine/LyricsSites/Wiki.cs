@@ -15,7 +15,7 @@ namespace LyricsEngine.LyricSites
         private string title = "";
         private int noOfTries;
         public static bool Abort;
-        LyricSearch lyricSearch ;
+        LyricSearch lyricSearch;
 
         private string[] commonReplacementsLyricWiki = new string[18] { "<br>", "", "<br/>", "", "<BR>", "", "?d", "'d", "?s", "'s", "?t", "'t", "?v", "'v", "?e", "'e", "?r", "'r" };
         private string[] commonRemoveFromLyricWiki = new string[2] { "[[category", "[[Category" };
@@ -42,6 +42,10 @@ namespace LyricsEngine.LyricSites
                 else if (ar.AsyncWaitHandle.WaitOne(0, true))
                 {
                     lyricsResult = del.EndInvoke(ar);
+                    
+                    string lyric = lyricsResult.lyrics;
+                    Encoding iso8859 = Encoding.GetEncoding("ISO-8859-1");
+                    lyricsResult.lyrics = Encoding.UTF8.GetString(iso8859.GetBytes(lyricsResult.lyrics));
                     break;
                 }
                 else

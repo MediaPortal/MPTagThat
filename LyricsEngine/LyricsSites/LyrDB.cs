@@ -142,6 +142,8 @@ namespace LyricsEngine.LyricSites
 
                 lyric = sr.ReadToEnd().Trim();
 
+                lyric = lyric.Replace("*", "");
+
                 //lyricTemp.Replace("<br>", Environment.NewLine);
                 //lyricTemp.Replace(",<br />", Environment.NewLine);
                 //lyricTemp.Replace("<br />", Environment.NewLine);

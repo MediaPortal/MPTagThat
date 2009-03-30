@@ -54,6 +54,8 @@ namespace LyricsEngine.LyricSites
             title = title.Replace("Æ", "");
             title = title.Replace("Ø", "");
             title = title.Replace("Å", "");
+            title = title.Replace("ö", "");
+            title = title.Replace("Ö", "");
 
             title = title.ToLower();
 
@@ -147,6 +149,7 @@ namespace LyricsEngine.LyricSites
                     lyricTemp.Replace("<p><font size=\"2\" face=\"Verdana\">", " \r\n");
                     lyricTemp.Replace("<i>", "");
                     lyricTemp.Replace("</i>", "");
+                    lyricTemp.Replace("*", "");
                     lyricTemp.Replace("?s", "'s");
                     lyricTemp.Replace("?t", "'t");
                     lyricTemp.Replace("?m", "'m");
