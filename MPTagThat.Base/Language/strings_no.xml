@@ -697,13 +697,13 @@
     <String id="Cancel">Avbryt</String>
     <String id="SavingHeader">Lagrer Spor</String>
     <String id="Saving">Lagrer spor {0}/{1}</String>
-    <String id="InternetHeader">Internett Lookup</String>
+    <String id="InternetHeader">Henter fra Internett</String>
     <String id="Internet">Tar imot informasjon for spor {0}/{1}</String>
     <String id="InternetMusicBrainz">Henter Fingeravtrykk og identifiserer fil</String>
     <String id="InternetAlbum">Henter Album Informasjon</String>
-    <String id="CoverArtHeader">Cover Art Lookup</String>
-    <String id="CoverArt">Tar imot Cover Art for spor {0}/{1}</String>
-    <String id="LyricsHeader">Tekst Lookup</String>
+    <String id="CoverArtHeader">Henter Album Bilde</String>
+    <String id="CoverArt">Tar imot Album Bilde for spor {0}/{1}</String>
+    <String id="LyricsHeader">Henter Tekst</String>
     <String id="Lyrics">Tar imot tekst for spor {0}/{1}</String>
   </Section>
     
