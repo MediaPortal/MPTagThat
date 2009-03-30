@@ -737,5 +737,6 @@
 	<String id="Search">Søk</String>
 	<String id="NoMusicDB">For å bruke Database søke funksjon, \nmå du spesifisere hvor Musikk Databasen er lokaliser i Innstillinger.</String>
 	<String id="NoSearchValues">Vennligst minst en verdi å søke etter.</String>
+	<String id="TooMuchRows">Søket ga for mange rader, viser nå de 1000 første.</String>
   </Section>
 </Language>
