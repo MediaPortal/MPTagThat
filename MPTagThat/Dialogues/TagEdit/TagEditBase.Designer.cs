@@ -57,6 +57,8 @@
       this.cbGenre = new System.Windows.Forms.ComboBox();
       this.ckGenre = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxArtist = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
+      this.cbArtist = new System.Windows.Forms.ComboBox();
       this.tbNumDiscs = new System.Windows.Forms.TextBox();
       this.label2 = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckDisk = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -266,8 +268,6 @@
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
-      this.cbArtist = new System.Windows.Forms.ComboBox();
-      this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -607,6 +607,7 @@
       this.cbGenre.Location = new System.Drawing.Point(150, 13);
       this.cbGenre.Name = "cbGenre";
       this.cbGenre.Size = new System.Drawing.Size(330, 24);
+      this.cbGenre.Sorted = true;
       this.cbGenre.TabIndex = 0;
       // 
       // ckGenre
@@ -662,6 +663,22 @@
       this.groupBoxArtist.Size = new System.Drawing.Size(693, 175);
       this.groupBoxArtist.TabIndex = 0;
       this.groupBoxArtist.TabStop = false;
+      // 
+      // cbAlbumArtist
+      // 
+      this.cbAlbumArtist.FormattingEnabled = true;
+      this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
+      this.cbAlbumArtist.Name = "cbAlbumArtist";
+      this.cbAlbumArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbAlbumArtist.TabIndex = 1;
+      // 
+      // cbArtist
+      // 
+      this.cbArtist.FormattingEnabled = true;
+      this.cbArtist.Location = new System.Drawing.Point(150, 13);
+      this.cbArtist.Name = "cbArtist";
+      this.cbArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbArtist.TabIndex = 0;
       // 
       // tbNumDiscs
       // 
@@ -3134,22 +3151,6 @@
       this.labelHeader.Size = new System.Drawing.Size(62, 20);
       this.labelHeader.TabIndex = 29;
       this.labelHeader.Text = "Header";
-      // 
-      // cbArtist
-      // 
-      this.cbArtist.FormattingEnabled = true;
-      this.cbArtist.Location = new System.Drawing.Point(150, 13);
-      this.cbArtist.Name = "cbArtist";
-      this.cbArtist.Size = new System.Drawing.Size(515, 24);
-      this.cbArtist.TabIndex = 0;
-      // 
-      // cbAlbumArtist
-      // 
-      this.cbAlbumArtist.FormattingEnabled = true;
-      this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
-      this.cbAlbumArtist.Name = "cbAlbumArtist";
-      this.cbAlbumArtist.Size = new System.Drawing.Size(515, 24);
-      this.cbAlbumArtist.TabIndex = 1;
       // 
       // TagEditBase
       // 
