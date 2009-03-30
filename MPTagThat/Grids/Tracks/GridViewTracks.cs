@@ -1462,10 +1462,6 @@ namespace MPTagThat.GridView
     #region Database Scanning / Update
     public void DatabaseScan()
     {
-      bindingList = new SortableBindingList<TrackData>();
-      tracksGrid.DataSource = bindingList;
-      GC.Collect();
-
       if (_main.CurrentDirectory == null)
       {
         return;
@@ -1480,7 +1476,6 @@ namespace MPTagThat.GridView
       }
 
       List<string> songs = new List<string>();
-      int songCount = 0;
       string sql = FormatSQL(searchString);
 
       string connection = string.Format(@"Data Source={0}", MPTagThat.Core.Options.MainSettings.MediaPortalDatabase);
@@ -1499,7 +1494,6 @@ namespace MPTagThat.GridView
             while (reader.Read())
             {
               songs.Add(reader.GetString(0));
-              songCount++;
             }
           }
         }
@@ -1510,7 +1504,16 @@ namespace MPTagThat.GridView
         log.Error("Database Scan: Error executing sql: {0}", ex.Message);
       }
 
-      log.Debug("Database Scan: Query returned {0} songs", songCount);
+      log.Debug("Database Scan: Query returned {0} songs", songs.Count);
+      AddDatabaseSongsToGrid(songs);
+    }
+
+    public void AddDatabaseSongsToGrid(List<string> songs)
+    {
+      // Clear the list and free up resources
+      bindingList = new SortableBindingList<TrackData>();
+      tracksGrid.DataSource = bindingList;
+      GC.Collect();
 
       dlgProgress = new Progress();
       dlgProgress.Header = localisation.ToString("progress", "ScanningHeader");
@@ -1532,7 +1535,7 @@ namespace MPTagThat.GridView
       foreach (string song in songs)
       {
         Application.DoEvents();
-        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, songCount), count, songCount, true);
+        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, songs.Count), count, songs.Count, true);
         if (dlgProgress.IsCancelled)
         {
           _main.FolderScanning = false;
@@ -1556,6 +1559,7 @@ namespace MPTagThat.GridView
         }
         count++;
       }
+
       dlgProgress.Close();
 
       // Display Status Information

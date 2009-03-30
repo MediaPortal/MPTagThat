@@ -133,6 +133,11 @@
       <key>Ctrl-Shift-S</key>
       <description>Save All</description>
     </action>
+    <action>
+      <id>31</id>
+      <key>F9</key>
+      <description>Toggle Database Splitter</description>
+    </action>
   </window>
   <window>
     <id>1</id>

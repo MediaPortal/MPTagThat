@@ -36,6 +36,7 @@ namespace MPTagThat
 
     private TreeViewControl treeViewControl;
     private FileInfoControl fileInfoControl;
+    private DatabaseSearchControl databaseSearchControl;
 
     // Grids: Can't have them in Designer, as it will fail loading
     private MPTagThat.GridView.GridViewTracks gridViewControl;
@@ -272,6 +273,9 @@ namespace MPTagThat
       gridViewControl.SetMainRef(this);
       #endregion
 
+      // Hide the DB Search Panel
+      this.splitterTop.ToggleState();
+
       // Setup Treeview
       treeViewControl = new TreeViewControl(this);
       treeViewControl.Dock = DockStyle.Fill;
@@ -281,6 +285,11 @@ namespace MPTagThat
       fileInfoControl = new FileInfoControl(this);
       fileInfoControl.Dock = DockStyle.Fill;
       this.panelRight.Controls.Add(fileInfoControl);
+
+      // Setup Database Search Control
+      databaseSearchControl = new DatabaseSearchControl(this);
+      databaseSearchControl.Dock = DockStyle.Fill;
+      this.panelMiddleDBSearch.Controls.Add(databaseSearchControl);
 
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
@@ -467,11 +476,11 @@ namespace MPTagThat
     /// </summary>
     private void SetRibbonColorBase()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       statusStrip.BackColor = themeManager.CurrentTheme.BackColor;
       statusStrip.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
+      databaseSearchControl.BackColor = themeManager.CurrentTheme.BackColor;
 
       // We want to have our own header color
       gridViewControl.View.EnableHeadersVisualStyles = false;
@@ -506,7 +515,6 @@ namespace MPTagThat
       dataGridViewError.EnableHeadersVisualStyles = false;
       dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       dataGridViewError.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     /// <summary>
@@ -767,8 +775,12 @@ namespace MPTagThat
           gridViewControl.DeleteTracks();
           break;
 
-        case Action.ActionType.ACTION_TOGGLESPLITTER:
+        case Action.ActionType.ACTION_TOGGLESTREEVIEWSPLITTER:
           this.splitterLeft.ToggleState();
+          break;
+
+        case Action.ActionType.ACTION_TOGGLEDATABASESPLITTER:
+          this.splitterTop.ToggleState();
           break;
 
         case Action.ActionType.ACTION_REMOVECOMMENT:

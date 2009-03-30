@@ -76,6 +76,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseSearchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DatabaseSearchControl.Designer.cs">
+      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogues\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,9 @@
     <Compile Include="Player\PlayList\PlayListPLSIO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DatabaseSearchControl.resx">
+      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\About.resx">
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>

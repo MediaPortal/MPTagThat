@@ -49,6 +49,8 @@ namespace MPTagThat
       this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddleTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
+      this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.TTPanel();
       this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
       this.playerControl = new MPTagThat.Player.PlayerControl();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
@@ -138,9 +140,9 @@ namespace MPTagThat
       // panelFileList
       // 
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(0, 0);
+      this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(642, 403);
+      this.panelFileList.Size = new System.Drawing.Size(642, 315);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterBottom
@@ -260,11 +262,36 @@ namespace MPTagThat
       // panelMiddleTop
       // 
       this.panelMiddleTop.Controls.Add(this.panelFileList);
+      this.panelMiddleTop.Controls.Add(this.splitterTop);
+      this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
       this.panelMiddleTop.Size = new System.Drawing.Size(642, 403);
       this.panelMiddleTop.TabIndex = 11;
+      // 
+      // splitterTop
+      // 
+      this.splitterTop.AnimationDelay = 20;
+      this.splitterTop.AnimationStep = 20;
+      this.splitterTop.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+      this.splitterTop.ControlToHide = this.panelMiddleDBSearch;
+      this.splitterTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.splitterTop.ExpandParentForm = false;
+      this.splitterTop.Location = new System.Drawing.Point(0, 80);
+      this.splitterTop.Name = "splitterTop";
+      this.splitterTop.TabIndex = 11;
+      this.splitterTop.TabStop = false;
+      this.splitterTop.UseAnimations = true;
+      this.splitterTop.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      // 
+      // panelMiddleDBSearch
+      // 
+      this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
+      this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(642, 80);
+      this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // playerPanel
       // 
@@ -339,6 +366,8 @@ namespace MPTagThat
     private MPTagThat.Player.PlayerControl playerControl;
     private MPTagThat.Core.WinControls.TTPanel panelMiddleTop;
     private MPTagThat.Core.WinControls.TTPanel panelMiddleBottom;
+    private NJFLib.Controls.CollapsibleSplitter splitterTop;
+    private MPTagThat.Core.WinControls.TTPanel panelMiddleDBSearch;
   }
 }
 
