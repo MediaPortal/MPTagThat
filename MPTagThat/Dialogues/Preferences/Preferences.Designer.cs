@@ -55,6 +55,7 @@ namespace MPTagThat.Preferences
       this.tabControlTags = new System.Windows.Forms.TabControl();
       this.tabPageTagsGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.buttonMusicDatabaseBrowse = new MPTagThat.Core.WinControls.MPTButton();
       this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
       this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -183,7 +184,6 @@ namespace MPTagThat.Preferences
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-      this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -567,6 +567,18 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsGeneral.TabIndex = 3;
       this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
+      // 
+      // ckAutoFillNumberOfTracks
+      // 
+      this.ckAutoFillNumberOfTracks.AutoSize = true;
+      this.ckAutoFillNumberOfTracks.Localisation = "AutoFillNumberTracks";
+      this.ckAutoFillNumberOfTracks.LocalisationContext = "Settings";
+      this.ckAutoFillNumberOfTracks.Location = new System.Drawing.Point(14, 48);
+      this.ckAutoFillNumberOfTracks.Name = "ckAutoFillNumberOfTracks";
+      this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(244, 17);
+      this.ckAutoFillNumberOfTracks.TabIndex = 5;
+      this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
+      this.ckAutoFillNumberOfTracks.UseVisualStyleBackColor = true;
       // 
       // buttonMusicDatabaseBrowse
       // 
@@ -1066,9 +1078,9 @@ namespace MPTagThat.Preferences
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmArtist);
       this.groupBoxRippingFormatOptions.Localisation = "GroupBoxParm";
       this.groupBoxRippingFormatOptions.LocalisationContext = "TagAndRename";
-      this.groupBoxRippingFormatOptions.Location = new System.Drawing.Point(85, 108);
+      this.groupBoxRippingFormatOptions.Location = new System.Drawing.Point(9, 108);
       this.groupBoxRippingFormatOptions.Name = "groupBoxRippingFormatOptions";
-      this.groupBoxRippingFormatOptions.Size = new System.Drawing.Size(494, 109);
+      this.groupBoxRippingFormatOptions.Size = new System.Drawing.Size(570, 109);
       this.groupBoxRippingFormatOptions.TabIndex = 5;
       this.groupBoxRippingFormatOptions.TabStop = false;
       this.groupBoxRippingFormatOptions.Text = "Format Options (Click to insert)";
@@ -1076,7 +1088,7 @@ namespace MPTagThat.Preferences
       // lblParmFolder
       // 
       this.lblParmFolder.AutoSize = true;
-      this.lblParmFolder.Localisation = "ParmFolder";
+      this.lblParmFolder.Localisation = "Folder";
       this.lblParmFolder.LocalisationContext = "TagAndRename";
       this.lblParmFolder.Location = new System.Drawing.Point(11, 78);
       this.lblParmFolder.Name = "lblParmFolder";
@@ -2144,18 +2156,6 @@ namespace MPTagThat.Preferences
       this.lbLinkRipping.TabIndex = 1;
       this.lbLinkRipping.Text = "Ripping / Conversion";
       this.lbLinkRipping.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNavpageLink_Clicked);
-      // 
-      // ckAutoFillNumberOfTracks
-      // 
-      this.ckAutoFillNumberOfTracks.AutoSize = true;
-      this.ckAutoFillNumberOfTracks.Localisation = "AutoFillNumberTracks";
-      this.ckAutoFillNumberOfTracks.LocalisationContext = "Settings";
-      this.ckAutoFillNumberOfTracks.Location = new System.Drawing.Point(14, 48);
-      this.ckAutoFillNumberOfTracks.Name = "ckAutoFillNumberOfTracks";
-      this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(244, 17);
-      this.ckAutoFillNumberOfTracks.TabIndex = 5;
-      this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
-      this.ckAutoFillNumberOfTracks.UseVisualStyleBackColor = true;
       // 
       // Preferences
       // 
