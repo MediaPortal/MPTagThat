@@ -225,6 +225,7 @@ namespace MPTagThat.Preferences
 
       #region TabPage Tags
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
+      ckAutoFillNumberOfTracks.Checked = Options.MainSettings.AutoFillNumberOfTracks;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
       ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
       ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
@@ -698,6 +699,7 @@ namespace MPTagThat.Preferences
 
       #region Tags
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
+      Options.MainSettings.AutoFillNumberOfTracks = ckAutoFillNumberOfTracks.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
       Options.MainSettings.CreateFolderThumb = ckCreateMissingFolderThumb.Checked;
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;

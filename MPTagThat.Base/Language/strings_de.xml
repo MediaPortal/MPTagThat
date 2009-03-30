@@ -536,6 +536,7 @@
     <String id="LyrDB">LyrDB</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
+    <String id="AutoFillNumberTracks">"Anzahl von Tracks" bei merfach editieren automatisch füllen</String>
     <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
     <String id="CreateMissingFolderThumb">Erstelle fehlende Ordnervorschau (folder.jpg) beim Speichern</String>
     <String id="AutoCompletion">MediaPortal Datenbank für automatisches Vervollständigen der Interpreten verwenden</String>

@@ -60,6 +60,7 @@ namespace MPTagThat.Core
     private bool _tagsOverwriteExitingCovers;
     private bool _tagsOverwriteExitingLyrics;
     private bool _tagsUseMediaPortalDatabase;
+    private bool _tagsAutoFillNumberOfTracks;
     private string _tagsMediaPortalDatabase;
     private int _playerSpectrumIndex;
     #endregion
@@ -241,6 +242,13 @@ namespace MPTagThat.Core
     {
       get { return _tagsMediaPortalDatabase; }
       set { _tagsMediaPortalDatabase = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool AutoFillNumberOfTracks
+    {
+      get { return _tagsAutoFillNumberOfTracks; }
+      set { _tagsAutoFillNumberOfTracks = value; }
     }
     #endregion
 

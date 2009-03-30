@@ -536,6 +536,7 @@
     <String id="LyrDB">LyrDB</String>
     <String id="GroupBoxTagsGeneral">General</String>
     <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
+    <String id="AutoFillNumberTracks">Auto Fill "Number of Tracks" on Multiple Tag Edit</String>
     <String id="CaseConversion">Use case conversion settings on Save</String>
     <String id="CreateMissingFolderThumb">Create missing folder thumb (folder.jpg) on Save</String>
     <String id="AutoCompletion">Use MediaPortal Music Database for Artist auto completion</String>

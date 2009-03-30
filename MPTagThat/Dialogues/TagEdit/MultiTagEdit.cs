@@ -958,6 +958,16 @@ namespace MPTagThat.TagEdit
         i++;
       }
 
+      // Auto fill the Number of Tracks field
+      if (tbNumTracks.Text == "")
+      {
+        tbNumTracks.Text = main.TracksGridView.View.SelectedRows.Count.ToString().PadLeft(2, '0');
+        if (Options.MainSettings.AutoFillNumberOfTracks)
+        {
+          ckTrack.Checked = true;
+        }
+      }
+
       // Now see, if we have different values in the Artist and AlbumArtist fields and fill the combo
       List<string> itemsArtist = new List<string>();
       List<string> itemsAlbumArtist = new List<string>();

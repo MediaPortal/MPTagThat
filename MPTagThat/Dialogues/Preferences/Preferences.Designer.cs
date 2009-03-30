@@ -80,6 +80,8 @@ namespace MPTagThat.Preferences
       this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckSeekLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyricsOnDemand = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyrics007 = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -181,8 +183,7 @@ namespace MPTagThat.Preferences
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
       this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-      this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -552,6 +553,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxTagsGeneral
       // 
+      this.groupBoxTagsGeneral.Controls.Add(this.ckAutoFillNumberOfTracks);
       this.groupBoxTagsGeneral.Controls.Add(this.buttonMusicDatabaseBrowse);
       this.groupBoxTagsGeneral.Controls.Add(this.tbMediaPortalDatabase);
       this.groupBoxTagsGeneral.Controls.Add(this.ckUseMediaPortalDatabase);
@@ -561,7 +563,7 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsGeneral.LocalisationContext = "Settings";
       this.groupBoxTagsGeneral.Location = new System.Drawing.Point(6, 21);
       this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(611, 178);
+      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(611, 201);
       this.groupBoxTagsGeneral.TabIndex = 3;
       this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
@@ -571,7 +573,7 @@ namespace MPTagThat.Preferences
       this.buttonMusicDatabaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
       this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
-      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(545, 114);
+      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(544, 147);
       this.buttonMusicDatabaseBrowse.Name = "buttonMusicDatabaseBrowse";
       this.buttonMusicDatabaseBrowse.Size = new System.Drawing.Size(46, 23);
       this.buttonMusicDatabaseBrowse.TabIndex = 4;
@@ -583,7 +585,7 @@ namespace MPTagThat.Preferences
       // 
       this.tbMediaPortalDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(15, 116);
+      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(14, 149);
       this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
       this.tbMediaPortalDatabase.Size = new System.Drawing.Size(524, 20);
       this.tbMediaPortalDatabase.TabIndex = 3;
@@ -593,7 +595,7 @@ namespace MPTagThat.Preferences
       this.ckUseMediaPortalDatabase.AutoSize = true;
       this.ckUseMediaPortalDatabase.Localisation = "AutoCompletion";
       this.ckUseMediaPortalDatabase.LocalisationContext = "Settings";
-      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(15, 93);
+      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(14, 126);
       this.ckUseMediaPortalDatabase.Name = "ckUseMediaPortalDatabase";
       this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(307, 17);
       this.ckUseMediaPortalDatabase.TabIndex = 2;
@@ -605,7 +607,7 @@ namespace MPTagThat.Preferences
       this.ckUseCaseConversionWhenSaving.AutoSize = true;
       this.ckUseCaseConversionWhenSaving.Localisation = "CaseConversion";
       this.ckUseCaseConversionWhenSaving.LocalisationContext = "Settings";
-      this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(15, 48);
+      this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(14, 73);
       this.ckUseCaseConversionWhenSaving.Name = "ckUseCaseConversionWhenSaving";
       this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(208, 17);
       this.ckUseCaseConversionWhenSaving.TabIndex = 1;
@@ -890,6 +892,34 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.TabIndex = 0;
       this.groupBoxLyricsSites.TabStop = false;
       this.groupBoxLyricsSites.Text = "Sites to Search";
+      // 
+      // ckLyrDB
+      // 
+      this.ckLyrDB.AutoSize = true;
+      this.ckLyrDB.Checked = true;
+      this.ckLyrDB.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyrDB.Localisation = "LyrDB";
+      this.ckLyrDB.LocalisationContext = "Settings";
+      this.ckLyrDB.Location = new System.Drawing.Point(432, 28);
+      this.ckLyrDB.Name = "ckLyrDB";
+      this.ckLyrDB.Size = new System.Drawing.Size(55, 17);
+      this.ckLyrDB.TabIndex = 6;
+      this.ckLyrDB.Text = "LyrDB";
+      this.ckLyrDB.UseVisualStyleBackColor = true;
+      // 
+      // ckActionext
+      // 
+      this.ckActionext.AutoSize = true;
+      this.ckActionext.Checked = true;
+      this.ckActionext.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckActionext.Localisation = "Actionext";
+      this.ckActionext.LocalisationContext = "Settings";
+      this.ckActionext.Location = new System.Drawing.Point(288, 60);
+      this.ckActionext.Name = "ckActionext";
+      this.ckActionext.Size = new System.Drawing.Size(70, 17);
+      this.ckActionext.TabIndex = 5;
+      this.ckActionext.Text = "Actionext";
+      this.ckActionext.UseVisualStyleBackColor = true;
       // 
       // ckSeekLyrics
       // 
@@ -2115,33 +2145,17 @@ namespace MPTagThat.Preferences
       this.lbLinkRipping.Text = "Ripping / Conversion";
       this.lbLinkRipping.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnNavpageLink_Clicked);
       // 
-      // ckActionext
+      // ckAutoFillNumberOfTracks
       // 
-      this.ckActionext.AutoSize = true;
-      this.ckActionext.Checked = true;
-      this.ckActionext.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckActionext.Localisation = "Actionext";
-      this.ckActionext.LocalisationContext = "Settings";
-      this.ckActionext.Location = new System.Drawing.Point(288, 60);
-      this.ckActionext.Name = "ckActionext";
-      this.ckActionext.Size = new System.Drawing.Size(70, 17);
-      this.ckActionext.TabIndex = 5;
-      this.ckActionext.Text = "Actionext";
-      this.ckActionext.UseVisualStyleBackColor = true;
-      // 
-      // ckLyrDB
-      // 
-      this.ckLyrDB.AutoSize = true;
-      this.ckLyrDB.Checked = true;
-      this.ckLyrDB.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyrDB.Localisation = "LyrDB";
-      this.ckLyrDB.LocalisationContext = "Settings";
-      this.ckLyrDB.Location = new System.Drawing.Point(432, 28);
-      this.ckLyrDB.Name = "ckLyrDB";
-      this.ckLyrDB.Size = new System.Drawing.Size(55, 17);
-      this.ckLyrDB.TabIndex = 6;
-      this.ckLyrDB.Text = "LyrDB";
-      this.ckLyrDB.UseVisualStyleBackColor = true;
+      this.ckAutoFillNumberOfTracks.AutoSize = true;
+      this.ckAutoFillNumberOfTracks.Localisation = "AutoFillNumberTracks";
+      this.ckAutoFillNumberOfTracks.LocalisationContext = "Settings";
+      this.ckAutoFillNumberOfTracks.Location = new System.Drawing.Point(14, 48);
+      this.ckAutoFillNumberOfTracks.Name = "ckAutoFillNumberOfTracks";
+      this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(244, 17);
+      this.ckAutoFillNumberOfTracks.TabIndex = 5;
+      this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
+      this.ckAutoFillNumberOfTracks.UseVisualStyleBackColor = true;
       // 
       // Preferences
       // 
@@ -2394,5 +2408,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckOverwriteExistingLyrics;
     private MPTagThat.Core.WinControls.MPTCheckBox ckLyrDB;
     private MPTagThat.Core.WinControls.MPTCheckBox ckActionext;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckAutoFillNumberOfTracks;
   }
 }
