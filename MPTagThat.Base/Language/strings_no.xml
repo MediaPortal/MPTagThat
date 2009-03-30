@@ -536,6 +536,7 @@
     <String id="LyrDB">Lyric DB</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når den er tom</String>
+    <String id="AutoFillNumberTracks">Automatisk Fyll i "Antall Spor" når Flervalgte Tagg er brukt</String>
     <String id="CaseConversion">Bruk Bokstav Konvertering når du lagrer</String>
     <String id="CreateMissingFolderThumb">Lag manglende Folder Ikon (folder.jpg) ved Lagring</String>
     <String id="AutoCompletion">Bruk MediaPortal Musikk Database for Artist auto fullfør</String>
