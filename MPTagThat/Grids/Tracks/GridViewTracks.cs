@@ -1591,7 +1591,7 @@ namespace MPTagThat.GridView
       switch (searchString[0])
       {
         case "artist":
-          whereClause = string.Format("strArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          whereClause = string.Format("strArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
           orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
@@ -1601,7 +1601,7 @@ namespace MPTagThat.GridView
           break;
 
         case "albumartist":
-          whereClause = string.Format("strAlbumArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          whereClause = string.Format("strAlbumArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
           orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
@@ -1616,7 +1616,7 @@ namespace MPTagThat.GridView
           break;
 
         case "genre":
-          whereClause = string.Format("strGenre like '%{0}%'", Util.RemoveInvalidChars(searchString[1]));
+          whereClause = string.Format("strGenre like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
           orderByClause = "strArtist, strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {

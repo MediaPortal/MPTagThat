@@ -38,13 +38,13 @@ namespace Raccoom.Windows.Forms
     private bool isRootFolder = false;
 
     private const string SQL_STMT_ARTIST = "select strArtist from artist order by strArtist";
-    private const string SQL_STMT_ARTISTSEARCH = "select distinct strAlbum from tracks where strArtist like '%{0}%' order by strAlbum";
+    private const string SQL_STMT_ARTISTSEARCH = "select distinct strAlbum from tracks where strArtist like '%| {0} |%' order by strAlbum";
     private const string SQL_STMT_ALBUMARTIST = "select strAlbumArtist from albumartist order by strAlbumArtist";
-    private const string SQL_STMT_ALBUMARTISTSEARCH = "select distinct strAlbum from tracks where strAlbumArtist like '%{0}%' order by strAlbum";
+    private const string SQL_STMT_ALBUMARTISTSEARCH = "select distinct strAlbum from tracks where strAlbumArtist like '%| {0} |%' order by strAlbum";
     private const string SQL_STMT_ALBUM = "select distinct strAlbum from tracks order by strAlbum";
     private const string SQL_STMT_GENRE = "select strGenre from genre order by strGenre";
-    private const string SQL_STMT_GENREARTISTSEARCH = "select distinct ltrim(rtrim(strArtist, ' |'), '| ') from tracks where strGenre like '%{0}%' order by strArtist";
-    private const string SQL_STMT_GENREARTISTALBUMSEARCH = "select distinct strAlbum from tracks where strGenre like '%{0}%' AND strArtist like '%{1}%' order by strAlbum";
+    private const string SQL_STMT_GENREARTISTSEARCH = "select distinct ltrim(rtrim(strArtist, ' |'), '| ') from tracks where strGenre like '%| {0} |%' order by strArtist";
+    private const string SQL_STMT_GENREARTISTALBUMSEARCH = "select distinct strAlbum from tracks where strGenre like '%| {0} |%' AND strArtist like '%| {1} |%' order by strAlbum";
     #endregion
 
     #region ITreeViewFolderBrowserDataProvider Members

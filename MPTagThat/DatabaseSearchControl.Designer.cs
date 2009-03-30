@@ -44,9 +44,9 @@
       this.lbArtist.LocalisationContext = "dbsearch";
       this.lbArtist.Location = new System.Drawing.Point(12, 8);
       this.lbArtist.Name = "lbArtist";
-      this.lbArtist.Size = new System.Drawing.Size(33, 13);
+      this.lbArtist.Size = new System.Drawing.Size(145, 13);
       this.lbArtist.TabIndex = 0;
-      this.lbArtist.Text = "Artist:";
+      this.lbArtist.Text = "Artist / AlbumArtist (contains):";
       // 
       // lbAlbum
       // 
@@ -55,9 +55,9 @@
       this.lbAlbum.LocalisationContext = "dbsearch";
       this.lbAlbum.Location = new System.Drawing.Point(12, 30);
       this.lbAlbum.Name = "lbAlbum";
-      this.lbAlbum.Size = new System.Drawing.Size(39, 13);
+      this.lbAlbum.Size = new System.Drawing.Size(88, 13);
       this.lbAlbum.TabIndex = 1;
-      this.lbAlbum.Text = "Album:";
+      this.lbAlbum.Text = "Album (contains):";
       // 
       // lbTitle
       // 
@@ -66,36 +66,36 @@
       this.lbTitle.LocalisationContext = "dbsearch";
       this.lbTitle.Location = new System.Drawing.Point(12, 52);
       this.lbTitle.Name = "lbTitle";
-      this.lbTitle.Size = new System.Drawing.Size(30, 13);
+      this.lbTitle.Size = new System.Drawing.Size(79, 13);
       this.lbTitle.TabIndex = 2;
-      this.lbTitle.Text = "Title:";
+      this.lbTitle.Text = "Title (contains):";
       // 
       // tbArtist
       // 
-      this.tbArtist.Location = new System.Drawing.Point(142, 4);
+      this.tbArtist.Location = new System.Drawing.Point(264, 5);
       this.tbArtist.Name = "tbArtist";
-      this.tbArtist.Size = new System.Drawing.Size(268, 20);
+      this.tbArtist.Size = new System.Drawing.Size(190, 20);
       this.tbArtist.TabIndex = 0;
       // 
       // tbAlbum
       // 
-      this.tbAlbum.Location = new System.Drawing.Point(142, 27);
+      this.tbAlbum.Location = new System.Drawing.Point(264, 27);
       this.tbAlbum.Name = "tbAlbum";
-      this.tbAlbum.Size = new System.Drawing.Size(268, 20);
+      this.tbAlbum.Size = new System.Drawing.Size(190, 20);
       this.tbAlbum.TabIndex = 1;
       // 
       // tbTitle
       // 
-      this.tbTitle.Location = new System.Drawing.Point(142, 49);
+      this.tbTitle.Location = new System.Drawing.Point(264, 49);
       this.tbTitle.Name = "tbTitle";
-      this.tbTitle.Size = new System.Drawing.Size(268, 20);
+      this.tbTitle.Size = new System.Drawing.Size(190, 20);
       this.tbTitle.TabIndex = 2;
       // 
       // buttonSearch
       // 
       this.buttonSearch.Localisation = "Search";
       this.buttonSearch.LocalisationContext = "dbsearch";
-      this.buttonSearch.Location = new System.Drawing.Point(453, 30);
+      this.buttonSearch.Location = new System.Drawing.Point(469, 30);
       this.buttonSearch.Name = "buttonSearch";
       this.buttonSearch.Size = new System.Drawing.Size(130, 23);
       this.buttonSearch.TabIndex = 3;
@@ -115,7 +115,7 @@
       this.Controls.Add(this.lbAlbum);
       this.Controls.Add(this.lbArtist);
       this.Name = "DatabaseSearchControl";
-      this.Size = new System.Drawing.Size(600, 80);
+      this.Size = new System.Drawing.Size(630, 80);
       this.ResumeLayout(false);
       this.PerformLayout();
 

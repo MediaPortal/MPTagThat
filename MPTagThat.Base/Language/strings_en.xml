@@ -731,9 +731,9 @@
   
     <!-- Database Search -->
   <Section name="dbsearch">
-    <String id="Artist">Artist:</String>
-    <String id="Album">Album:</String>
-    <String id="Title">Title:</String>
+    <String id="Artist">Artist / AlbumArtist (contains):</String>
+    <String id="Album">Album (contains):</String>
+    <String id="Title">Title (contains):</String>
 	<String id="Search">Search</String>
 	<String id="NoMusicDB">To use the Database search function,\nyou must enter the location of the Music Database in the Settings.</String>
 	<String id="NoSearchValues">Please enter at least one Value to search for.</String>

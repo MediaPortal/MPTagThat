@@ -55,7 +55,7 @@ namespace MPTagThat
 
       if (tbArtist.Text.Trim() != "")
       {
-        whereClause += string.Format("strArtist like '%{0}%' ", Util.RemoveInvalidChars(tbArtist.Text.Trim()));
+        whereClause += string.Format("strArtist like '%{0}%' OR strAlbumArtist like '%{0}%'", Util.RemoveInvalidChars(tbArtist.Text.Trim()));
         orderByClause += "strArtist";
       }
 
