@@ -550,6 +550,9 @@
     <String id="ID3Both">ID3V1 og ID3V2</String>
     <String id="ID3V2">ID3V2</String>
     <String id="ID3V1">ID3V1</String>
+    <String id="GroupBoxTagsValidate">MP3 Fil Validering</String>
+    <String id="ValidateMP3">Valider MP3 Filer under skanning av folder / database</String>
+    <String id="AutoFixMP3">Automatisk fiks feil i MP3 filene</String>
     <String id="TabRipping">Ripping</String>
     <String id="TabRippingGeneral">Generelt</String>
     <String id="CustomPath">Egne Baner og Filnavn</String>
@@ -688,6 +691,7 @@
     <String id="DeleteConfirmHeader">Slette Fil(er)</String>
     <String id="DeleteConfirm">Vil du virkelig slette valgte fil(er)?</String>
     <String id="DeleteFolders">For å slette en Folder, bruk Shift+Del</String>
+    <String id="Fixed">Ordnet</String>
   </Section>
     
   <!-- Progress Dialog -->
