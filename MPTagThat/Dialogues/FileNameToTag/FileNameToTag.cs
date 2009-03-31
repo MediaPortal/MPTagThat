@@ -151,7 +151,7 @@ namespace MPTagThat.FileNameToTag
         {
           if ((j == upperBoundDelims) | (delims[j] != ""))
           {
-            if (filePart.IndexOf(delims[j]) == 0)
+            if (filePart.IndexOf(delims[j]) == 0 && j == upperBoundDelims)
             {
               splittedFileValues.Add(filePart);
               break;
