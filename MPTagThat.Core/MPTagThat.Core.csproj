@@ -256,6 +256,7 @@
     <Compile Include="ThemeManager\ThemeManager.cs" />
     <Compile Include="Common\TrackData.cs" />
     <Compile Include="Utils\CallingMethod.cs" />
+    <Compile Include="Utils\MP3Val.cs" />
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>

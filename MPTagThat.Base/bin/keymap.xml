@@ -138,6 +138,16 @@
       <key>F9</key>
       <description>Toggle Database Splitter</description>
     </action>
+	<action>
+      <id>32</id>
+      <key>Alt-V</key>
+      <description>Validate MP3 Files</description>
+    </action>
+	<action>
+      <id>33</id>
+      <key>Alt-F</key>
+      <description>Fix MP3 Files</description>
+    </action>
   </window>
   <window>
     <id>1</id>

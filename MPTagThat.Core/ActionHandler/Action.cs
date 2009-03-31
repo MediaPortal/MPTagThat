@@ -41,6 +41,8 @@ namespace MPTagThat.Core
       ACTION_REMOVEPICTURE = 29,
       ACTION_SAVEALL = 30,
       ACTION_TOGGLEDATABASESPLITTER = 31,
+      ACTION_VALIDATEMP3 = 32,
+      ACTION_FIXMP3 = 33,
     }
     #endregion
 

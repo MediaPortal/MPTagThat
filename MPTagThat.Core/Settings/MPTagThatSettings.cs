@@ -63,6 +63,8 @@ namespace MPTagThat.Core
     private bool _tagsAutoFillNumberOfTracks;
     private string _tagsMediaPortalDatabase;
     private int _playerSpectrumIndex;
+    private bool _mp3Validate;
+    private bool _mp3AutoFix;
     #endregion
 
     #region Properties
@@ -249,6 +251,20 @@ namespace MPTagThat.Core
     {
       get { return _tagsAutoFillNumberOfTracks; }
       set { _tagsAutoFillNumberOfTracks = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool MP3Validate
+    {
+      get { return _mp3Validate; }
+      set { _mp3Validate = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool MP3AutoFix
+    {
+      get { return _mp3AutoFix; }
+      set { _mp3AutoFix = value; }
     }
     #endregion
 

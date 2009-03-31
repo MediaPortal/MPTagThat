@@ -128,6 +128,14 @@ namespace MPTagThat.Core
                 theme.ChangedBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 colorArray = attr.Attributes.GetNamedItem("changedforecolor").Value.Split(',');
                 theme.ChangedForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("fixableerrorbackcolor").Value.Split(',');
+                theme.FixableErrorBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("fixableerrorforecolor").Value.Split(',');
+                theme.FixableErrorForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("nonfixableerrorbackcolor").Value.Split(',');
+                theme.NonFixableErrorBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("nonfixableerrorforecolor").Value.Split(',');
+                theme.NonFixableErrorForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 break;
 
               case "Button":

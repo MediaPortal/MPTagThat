@@ -25,6 +25,11 @@ namespace MPTagThat.Core
     private Color _buttonBackColor;
     private Color _buttonForeColor;
     private Font _buttonFont;
+    private Color _fixableErrorForeColor;
+    private Color _fixableErrorBackColor;
+    private Color _nonfixableErrorForeColor;
+    private Color _nonfixableErrorBackColor;
+
 
     public Font ButtonFont
     {
@@ -134,7 +139,30 @@ namespace MPTagThat.Core
       get { return _backColor; }
       set { _backColor = value; }
     }
-	
+
+    public Color FixableErrorForeColor
+    {
+      get { return _fixableErrorForeColor; }
+      set { _fixableErrorForeColor = value; }
+    }
+
+    public Color FixableErrorBackColor
+    {
+      get { return _fixableErrorBackColor; }
+      set { _fixableErrorBackColor = value; }
+    }
+    
+    public Color NonFixableErrorForeColor
+    {
+      get { return _nonfixableErrorForeColor; }
+      set { _nonfixableErrorForeColor = value; }
+    }
+
+    public Color NonFixableErrorBackColor
+    {
+      get { return _nonfixableErrorBackColor; }
+      set { _nonfixableErrorBackColor = value; }
+    }
 
     #region ctor
     public Theme()

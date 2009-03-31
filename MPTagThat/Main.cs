@@ -333,18 +333,17 @@ namespace MPTagThat
 
       _splashScreen.Stop();
 
+      themeManager.ChangeTheme(Options.Themes[Options.MainSettings.Theme]);
+      ribbon.MainRibbon.ThemeName = Options.Themes[Options.MainSettings.Theme];
+
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
       {
         gridViewControl.FolderScan();
       }
-
-
+      
       // setup various Event Handler needed
       gridViewControl.View.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
-
-      themeManager.ChangeTheme(Options.Themes[Options.MainSettings.Theme]);
-      ribbon.MainRibbon.ThemeName = Options.Themes[Options.MainSettings.Theme];
 
       // Activate the form, will be hidden because of the size change
       this.Activate();
@@ -802,6 +801,19 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.RemovePictures();
+          break;
+
+        case Action.ActionType.ACTION_VALIDATEMP3:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ValidateMP3File();
+          gridViewControl.View.ClearSelection();
+          break;
+
+        case Action.ActionType.ACTION_FIXMP3:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.FixMP3File();
           break;
       } 
 

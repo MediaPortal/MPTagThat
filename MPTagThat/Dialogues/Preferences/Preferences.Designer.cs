@@ -62,6 +62,9 @@ namespace MPTagThat.Preferences
       this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageTagsID3 = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxTagValidate = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckAutoFixMp3 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckValidateMP3 = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
@@ -195,6 +198,7 @@ namespace MPTagThat.Preferences
       this.tabPageTagsGeneral.SuspendLayout();
       this.groupBoxTagsGeneral.SuspendLayout();
       this.tabPageTagsID3.SuspendLayout();
+      this.groupBoxTagValidate.SuspendLayout();
       this.groupBoxTagsID3.SuspendLayout();
       this.groupBoxID3Update.SuspendLayout();
       this.tabPageTagsLyricsCover.SuspendLayout();
@@ -641,6 +645,7 @@ namespace MPTagThat.Preferences
       // tabPageTagsID3
       // 
       this.tabPageTagsID3.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageTagsID3.Controls.Add(this.groupBoxTagValidate);
       this.tabPageTagsID3.Controls.Add(this.groupBoxTagsID3);
       this.tabPageTagsID3.Localisation = "TabTagsID3";
       this.tabPageTagsID3.LocalisationContext = "Settings";
@@ -650,6 +655,43 @@ namespace MPTagThat.Preferences
       this.tabPageTagsID3.Size = new System.Drawing.Size(631, 599);
       this.tabPageTagsID3.TabIndex = 1;
       this.tabPageTagsID3.Text = "ID3";
+      // 
+      // groupBoxTagValidate
+      // 
+      this.groupBoxTagValidate.Controls.Add(this.ckAutoFixMp3);
+      this.groupBoxTagValidate.Controls.Add(this.ckValidateMP3);
+      this.groupBoxTagValidate.Localisation = "GroupBoxTagsValidate";
+      this.groupBoxTagValidate.LocalisationContext = "Settings";
+      this.groupBoxTagValidate.Location = new System.Drawing.Point(6, 191);
+      this.groupBoxTagValidate.Name = "groupBoxTagValidate";
+      this.groupBoxTagValidate.Size = new System.Drawing.Size(611, 87);
+      this.groupBoxTagValidate.TabIndex = 2;
+      this.groupBoxTagValidate.TabStop = false;
+      this.groupBoxTagValidate.Text = "MP3 File Validation";
+      // 
+      // ckAutoFixMp3
+      // 
+      this.ckAutoFixMp3.AutoSize = true;
+      this.ckAutoFixMp3.Localisation = "AutoFixMp3";
+      this.ckAutoFixMp3.LocalisationContext = "Settings";
+      this.ckAutoFixMp3.Location = new System.Drawing.Point(12, 52);
+      this.ckAutoFixMp3.Name = "ckAutoFixMp3";
+      this.ckAutoFixMp3.Size = new System.Drawing.Size(202, 17);
+      this.ckAutoFixMp3.TabIndex = 1;
+      this.ckAutoFixMp3.Text = "Automatically fix errorneous Mp3 Files";
+      this.ckAutoFixMp3.UseVisualStyleBackColor = true;
+      // 
+      // ckValidateMP3
+      // 
+      this.ckValidateMP3.AutoSize = true;
+      this.ckValidateMP3.Localisation = "ValidateMP3";
+      this.ckValidateMP3.LocalisationContext = "Settings";
+      this.ckValidateMP3.Location = new System.Drawing.Point(12, 29);
+      this.ckValidateMP3.Name = "ckValidateMP3";
+      this.ckValidateMP3.Size = new System.Drawing.Size(233, 17);
+      this.ckValidateMP3.TabIndex = 0;
+      this.ckValidateMP3.Text = "Validate MP3 Files while scanning the folder";
+      this.ckValidateMP3.UseVisualStyleBackColor = true;
       // 
       // groupBoxTagsID3
       // 
@@ -2190,6 +2232,8 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsGeneral.ResumeLayout(false);
       this.groupBoxTagsGeneral.PerformLayout();
       this.tabPageTagsID3.ResumeLayout(false);
+      this.groupBoxTagValidate.ResumeLayout(false);
+      this.groupBoxTagValidate.PerformLayout();
       this.groupBoxTagsID3.ResumeLayout(false);
       this.groupBoxTagsID3.PerformLayout();
       this.groupBoxID3Update.ResumeLayout(false);
@@ -2409,5 +2453,8 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckLyrDB;
     private MPTagThat.Core.WinControls.MPTCheckBox ckActionext;
     private MPTagThat.Core.WinControls.MPTCheckBox ckAutoFillNumberOfTracks;
+    private MPTagThat.Core.WinControls.MPTGroupBox groupBoxTagValidate;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckValidateMP3;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckAutoFixMp3;
   }
 }

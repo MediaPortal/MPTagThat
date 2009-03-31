@@ -550,6 +550,9 @@
     <String id="ID3Both">ID3V1 und ID3V2 schreiben</String>
     <String id="ID3V2">ID3 V2</String>
     <String id="ID3V1">ID3 V1</String>
+    <String id="GroupBoxTagsValidate">MP3 Dateiformatprüfung</String>
+    <String id="ValidateMP3">Überprüfe MP3 Dateien beim Einlesen von Verzeichnis / Datenbank</String>
+    <String id="AutoFixMP3">Fehlerhafte MP3 Dateien automatisch korrigieren</String>
     <String id="TabRipping">Rip</String>
     <String id="TabRippingGeneral">Generell</String>
     <String id="CustomPath">Pfad und Dateiname</String>
@@ -688,6 +691,7 @@
     <String id="DeleteConfirmHeader">Datei(en) löschen</String>
     <String id="DeleteConfirm">Wollen Sie die ausgewählten Dateien tatsächlich löschen?</String>
     <String id="DeleteFolders">Zum löschen eines Verzeichnisses, bitte Shift-Del benutzen</String>
+    <String id="Fixed">Fixed</String>
   </Section>
     
   <!-- Progress Dialog -->

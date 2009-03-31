@@ -550,6 +550,9 @@
     <String id="ID3Both">ID3V1 and ID3V2</String>
     <String id="ID3V2">ID3V2</String>
     <String id="ID3V1">ID3V1</String>
+    <String id="GroupBoxTagsValidate">MP3 File Validation</String>
+    <String id="ValidateMP3">Validate Mp3 Files while scanning the folder / database</String>
+    <String id="AutoFixMP3">Automatically fix errorneous Mp3 Files</String>
     <String id="TabRipping">Ripping</String>
     <String id="TabRippingGeneral">General</String>
     <String id="CustomPath">Custom Paths and Filenames</String>
@@ -688,6 +691,7 @@
     <String id="DeleteConfirmHeader">Delete File(s)</String>
     <String id="DeleteConfirm">Do you really want to delete the selected files(s)?</String>
     <String id="DeleteFolders">To delete a Folder, please use Shift-Del</String>
+    <String id="Fixed">Fixed</String>
   </Section>
     
   <!-- Progress Dialog -->

@@ -8,8 +8,19 @@ namespace MPTagThat.Core
 {
   public class TrackData
   {
+    #region Enum
+    public enum MP3Error : int
+    {
+      NoError = 0,
+      Fixable = 1,
+      NonFixable = 2,
+      Fixed = 3
+    }
+    #endregion
+
     #region Variables
     private bool _changed;
+    private MP3Error _mp3ValError;
     private TagLib.File _file;
     private FileInfo _fi;
     private string _fileName;
@@ -23,6 +34,7 @@ namespace MPTagThat.Core
     public TrackData(TagLib.File file)
     {
       _changed = false;
+      _mp3ValError = MP3Error.NoError;
       _file = file;
       _fi = new FileInfo(file.Name);
       _fileName = Path.GetFileName(file.Name);
@@ -88,6 +100,15 @@ namespace MPTagThat.Core
     public int NumPics
     {
       get { return _file.Tag.Pictures.Length; }
+    }
+
+    /// <summary>
+    /// Has the Track fixable errors?
+    /// </summary>
+    public MP3Error MP3ValidationError
+    {
+      get { return _mp3ValError; }
+      set { _mp3ValError = value; }
     }
     #endregion
 

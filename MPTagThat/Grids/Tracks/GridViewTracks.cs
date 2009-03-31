@@ -35,6 +35,7 @@ namespace MPTagThat.GridView
 
     private bool _itemsChanged;
     private List<string> _lyrics = new List<string>();
+    private List<string> _stdOutList = new List<string>();
 
     private SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
 
@@ -139,16 +140,6 @@ namespace MPTagThat.GridView
     public void SetMainRef(Main main)
     {
       _main = main;
-    }
-
-    /// <summary>
-    /// Creates an Item in the grid out of the given File
-    /// </summary>
-    /// <param name="trackPath"></param>
-    /// <param name="file"></param>
-    public void CreateTracksItem(string trackPath, TagLib.File file)
-    {
-      AddTrack(new TrackData(file));
     }
 
     #region Save
@@ -1172,6 +1163,65 @@ namespace MPTagThat.GridView
     }
     #endregion
 
+    #region Validate / Fix MP3 Files
+    /// <summary>
+    /// Validates an MP3 File using mp3val
+    /// </summary>
+    public void ValidateMP3File()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        TrackData track = bindingList[row.Index];
+
+        if (track.TagType.ToLower() == "mp3")
+        {
+          track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName);
+          if (track.MP3ValidationError != TrackData.MP3Error.NoError)
+          {
+            SetColorMP3Errors(row.Index, track.MP3ValidationError);
+          }
+        }
+      }
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Fixes errors in an MP3 file using mp3val
+    /// </summary>
+    public void FixMP3File()
+    {
+      Util.EnterMethod(Util.GetCallingMethod());
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        TrackData track = bindingList[row.Index];
+        if (track.TagType.ToLower() == "mp3")
+        {
+          track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName);
+          if (track.MP3ValidationError != TrackData.MP3Error.NoError)
+          {
+            SetColorMP3Errors(row.Index, track.MP3ValidationError);
+          }
+        }
+      }
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      Util.LeaveMethod(Util.GetCallingMethod());
+    }
+    #endregion
+
     #region Misc Methods
     /// <summary>
     /// Discards any changes
@@ -1217,13 +1267,36 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    /// Sets the Background Color for changed Items
+    /// Sets the Color for changed Items
     /// </summary>
     /// <param name="index"></param>
     public void SetBackgroundColorChanged(int index)
     {
       tracksGrid.Rows[index].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
       tracksGrid.Rows[index].DefaultCellStyle.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
+    }
+
+    /// <summary>
+    /// Sets the Color for Tracks, that contain errors found by mp3val
+    /// </summary>
+    /// <param name="index"></param>
+    public void SetColorMP3Errors(int index, TrackData.MP3Error error)
+    {
+      if (error == TrackData.MP3Error.Fixable || error == TrackData.MP3Error.Fixed) 
+      {
+        tracksGrid.Rows[index].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FixableErrorBackColor;
+        tracksGrid.Rows[index].DefaultCellStyle.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FixableErrorForeColor;
+      }
+      else if (error == TrackData.MP3Error.NonFixable) 
+      {
+        tracksGrid.Rows[index].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.NonFixableErrorBackColor;
+        tracksGrid.Rows[index].DefaultCellStyle.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.NonFixableErrorForeColor;
+      }
+
+      if (error == TrackData.MP3Error.Fixed)
+      {
+        tracksGrid.Rows[index].Cells[1].Value = localisation.ToString("message", "Fixed");
+      }
     }
 
     /// <summary>
@@ -1299,28 +1372,6 @@ namespace MPTagThat.GridView
     #endregion
 
     #region Folder Scanning
-    /*
-    public void FolderScan()
-    {
-      bindingList = new SortableBindingList<TrackData>();
-      tracksGrid.DataSource = bindingList;
-      GC.Collect();
-
-      try
-      {
-        System.Threading.Thread t = new System.Threading.Thread(ScanFoldersAsync);
-        t.Name = "FolderScanner";
-        t.IsBackground = true;
-        t.Start();
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show("Could not launch thread {0}", ex.Message);
-      }
-    }
-    private void ScanFoldersAsync()
-    */
-
     public void FolderScan()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -1386,7 +1437,7 @@ namespace MPTagThat.GridView
             {
               TagLib.ByteVector.UseBrokenLatin1Behavior = true;
               file = TagLib.File.Create(fi.FullName);
-              CreateTracksItem(fi.FullName, file);
+              AddTrack(new TrackData(file));
             }
             catch (CorruptFileException)
             {
@@ -1427,6 +1478,12 @@ namespace MPTagThat.GridView
         }
       }
       catch (ArgumentOutOfRangeException) { }
+
+      // If MP3 Validation is turned on, set the color
+      if (Options.MainSettings.MP3Validate)
+      {
+        ChangeErrorRowColor();
+      }
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -1547,7 +1604,7 @@ namespace MPTagThat.GridView
         {
           TagLib.ByteVector.UseBrokenLatin1Behavior = true;
           file = TagLib.File.Create(song);
-          CreateTracksItem(song, file);
+          AddTrack(new TrackData(file));
         }
         catch (CorruptFileException)
         {
@@ -1580,6 +1637,13 @@ namespace MPTagThat.GridView
         }
       }
       catch (ArgumentOutOfRangeException) { }
+
+
+      // If MP3 Validation is turned on, set the color
+      if (Options.MainSettings.MP3Validate)
+      {
+        ChangeErrorRowColor();
+      }
     }
 
     private string FormatSQL(string[] searchString)
@@ -1811,6 +1875,12 @@ namespace MPTagThat.GridView
         return;
       }
 
+      // Validate the MP3 File
+      if (Options.MainSettings.MP3Validate && track.TagType.ToLower() == "mp3")
+      {
+        track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName);
+      }
+
       bindingList.Add(track);
     }
 
@@ -1823,6 +1893,21 @@ namespace MPTagThat.GridView
       y += clientLocation.Y;
       f.Location = new Point(x, y);
       f.Show();
+    }
+
+    private void ChangeErrorRowColor()
+    {
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        TrackData track = bindingList[row.Index];
+        
+        if (track.MP3ValidationError == TrackData.MP3Error.NoError)
+        {
+          continue;
+        }
+
+        SetColorMP3Errors(row.Index, track.MP3ValidationError);
+      }
     }
     #endregion
 

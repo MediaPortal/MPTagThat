@@ -235,6 +235,9 @@ namespace MPTagThat.Preferences
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
 
+      ckValidateMP3.Checked = Options.MainSettings.MP3Validate;
+      ckAutoFixMp3.Checked = Options.MainSettings.MP3AutoFix;
+
       switch (Options.MainSettings.ID3V2Version)
       {
         case 0:         // APE Tags embedded in mp3
@@ -705,6 +708,8 @@ namespace MPTagThat.Preferences
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
       Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
+      Options.MainSettings.MP3Validate = ckValidateMP3.Checked;
+      Options.MainSettings.MP3AutoFix = ckAutoFixMp3.Checked;
 
       if (ckUseMediaPortalDatabase.Checked && File.Exists(tbMediaPortalDatabase.Text))
       {
