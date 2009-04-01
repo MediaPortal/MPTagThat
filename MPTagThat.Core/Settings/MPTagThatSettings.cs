@@ -65,6 +65,7 @@ namespace MPTagThat.Core
     private int _playerSpectrumIndex;
     private bool _mp3Validate;
     private bool _mp3AutoFix;
+    private string _amazonSite;
     #endregion
 
     #region Properties
@@ -265,6 +266,13 @@ namespace MPTagThat.Core
     {
       get { return _mp3AutoFix; }
       set { _mp3AutoFix = value; }
+    }
+
+    [Setting(SettingScope.User, "US")]
+    public string AmazonSite
+    {
+      get { return _amazonSite; }
+      set { _amazonSite = value; }
     }
     #endregion
 

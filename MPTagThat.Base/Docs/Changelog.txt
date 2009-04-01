@@ -7,8 +7,9 @@ Legend:
 - Deleted
 x Fixed
 
-1.1.3378 Build 33668 Date: 01.04.2009 
+1.1.3378 Build 37156 Date: 01.04.2009 
 -------------------------------------
++ Ability to Select the Amazon Site for Cover and Album Search
 + TreeView: New Database View allows editing of tracks based on the search on the MediaPortal Database
 + Database: Added the ability to build a new Music Database from Folders
 + New function for MP3 Validation using mp3val. Either set the Option in Settings -> Tags -> ID3 to validate and/or fix mp3 files, while scanning the database or Folders (tough this is slow on network shares).

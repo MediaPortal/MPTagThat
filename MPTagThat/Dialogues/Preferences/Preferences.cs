@@ -29,6 +29,7 @@ namespace MPTagThat.Preferences
     private List<Item> presetsMPC = new List<Item>();
     private List<Item> presetsWV = new List<Item>();
     private List<Item> themes = new List<Item>();
+    private List<Item> amazonSites = new List<Item>();
     private List<ActionWindow> mapWindows = new List<ActionWindow>();
 
     int _defaultBitRateIndex = 0;
@@ -279,6 +280,25 @@ namespace MPTagThat.Preferences
       ckActionext.Checked = Options.MainSettings.SearchActionext;
       ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
+
+      amazonSites.Add(new Item("United States (US)", "US", ""));
+      amazonSites.Add(new Item("Deutschland (DE)", "DE", ""));
+      amazonSites.Add(new Item("United Kingdom (UK)", "UK", ""));
+      amazonSites.Add(new Item("Nippon (JP)", "JP", ""));
+      amazonSites.Add(new Item("France (FR)", "FR", ""));
+      amazonSites.Add(new Item("Canada (CA)", "CA", ""));
+      comboBoxAmazonSite.DisplayMember = "Name";
+      comboBoxAmazonSite.ValueMember = "Value";
+      comboBoxAmazonSite.DataSource = amazonSites;
+
+      foreach (Item item in amazonSites)
+      {
+        if (item.Value == Options.MainSettings.AmazonSite)
+        {
+          comboBoxAmazonSite.SelectedItem = item;
+          break;
+        }
+      }
       #endregion
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -747,6 +767,7 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
       Options.MainSettings.SearchActionext = ckActionext.Checked;
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
+      Options.MainSettings.AmazonSite = (comboBoxAmazonSite.SelectedValue as Item).Value;
       #endregion
 
       if (bErrors)

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿	<?xml version="1.0" encoding="utf-8"?>
 <!--  
        Achtung: Bei Änderungen muß die Datei im utf-8 Format abgespeichert werden, da sonst die Umlaute verloren gehen.
        Die Zeichenfolge "\n" in einem Literal stellt einen Zeilenumbruch dar.
@@ -524,6 +524,7 @@
 	<String id="GroupBoxPictures">Bilder</String>
     <String id="OverwriteExistingCover">Existierende Bilder beim automatischen Taggen überschreiben</String>
     <String id="EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</String>
+	<String id="AmazonSite">Amazon Suchseite:</String>
     <String id="GroupBoxLyrics">Liedtexte</String>
     <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>
     <String id="OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</String>

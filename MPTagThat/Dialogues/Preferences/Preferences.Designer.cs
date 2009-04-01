@@ -74,6 +74,8 @@ namespace MPTagThat.Preferences
       this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageTagsLyricsCover = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.comboBoxAmazonSite = new System.Windows.Forms.ComboBox();
+      this.lbAmazonSearchSite = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -817,6 +819,8 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxPictures
       // 
+      this.groupBoxPictures.Controls.Add(this.comboBoxAmazonSite);
+      this.groupBoxPictures.Controls.Add(this.lbAmazonSearchSite);
       this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
       this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
       this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
@@ -824,10 +828,29 @@ namespace MPTagThat.Preferences
       this.groupBoxPictures.LocalisationContext = "Settings";
       this.groupBoxPictures.Location = new System.Drawing.Point(15, 22);
       this.groupBoxPictures.Name = "groupBoxPictures";
-      this.groupBoxPictures.Size = new System.Drawing.Size(590, 109);
+      this.groupBoxPictures.Size = new System.Drawing.Size(590, 180);
       this.groupBoxPictures.TabIndex = 3;
       this.groupBoxPictures.TabStop = false;
       this.groupBoxPictures.Text = "Pictures";
+      // 
+      // comboBoxAmazonSite
+      // 
+      this.comboBoxAmazonSite.FormattingEnabled = true;
+      this.comboBoxAmazonSite.Location = new System.Drawing.Point(219, 108);
+      this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
+      this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
+      this.comboBoxAmazonSite.TabIndex = 10;
+      // 
+      // lbAmazonSearchSite
+      // 
+      this.lbAmazonSearchSite.AutoSize = true;
+      this.lbAmazonSearchSite.Localisation = "AmazonSite";
+      this.lbAmazonSearchSite.LocalisationContext = "Settings";
+      this.lbAmazonSearchSite.Location = new System.Drawing.Point(24, 111);
+      this.lbAmazonSearchSite.Name = "lbAmazonSearchSite";
+      this.lbAmazonSearchSite.Size = new System.Drawing.Size(106, 13);
+      this.lbAmazonSearchSite.TabIndex = 9;
+      this.lbAmazonSearchSite.Text = "Amazon Search Site:";
       // 
       // ckUseExistinbgThumb
       // 
@@ -872,7 +895,7 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
       this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
       this.groupBoxLyrics.LocalisationContext = "Settings";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(15, 147);
+      this.groupBoxLyrics.Location = new System.Drawing.Point(15, 220);
       this.groupBoxLyrics.Name = "groupBoxLyrics";
       this.groupBoxLyrics.Size = new System.Drawing.Size(590, 229);
       this.groupBoxLyrics.TabIndex = 2;
@@ -2579,5 +2602,7 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTLabel lbDBScanStatus;
     private MPTagThat.Core.WinControls.MPTButton buttonDBScanStatus;
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxClearDatabase;
+    private MPTagThat.Core.WinControls.MPTLabel lbAmazonSearchSite;
+    private System.Windows.Forms.ComboBox comboBoxAmazonSite;
   }
 }
