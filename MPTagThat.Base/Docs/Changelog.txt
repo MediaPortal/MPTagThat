@@ -7,6 +7,26 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3378 Build 33668 Date: 01.04.2009 
+-------------------------------------
++ TreeView: New Database View allows editing of tracks based on the search on the MediaPortal Database
++ Database: Added the ability to build a new Music Database from Folders
++ New function for MP3 Validation using mp3val. Either set the Option in Settings -> Tags -> ID3 to validate and/or fix mp3 files, while scanning the database or Folders (tough this is slow on network shares).
+  As an alternative use keyboard shortcuts Alt-V (validate) and Alt-F (fix). Couldn't find the right place for Ribbon Buttons
++ Database: new Database Search facility allows searching for songs in MP Music Database.
++ TagEdit: Update MediaPortal Database, while in Database Mode and a changed file is saved
++ TagEdit: Auto Fill "Number of Tracks" on Multiple Tag Edit
+x Updates to various language files
+x Taglib#: Fixed an error, when a mp3 file contained a corrupted COMM frame
+x FileName2Tag: Some special Parameters e.g. starting with a "(" led to the format not being recognized
+x TagEdit: Make the Genre List sorted
+x Lyrics: Upgraded to new version of LyricsEngine and added 2 new Sites
+x FolderScan: Sometimes a hang was experienced, while reading files
+x Tagedit: Lyrics residing in a mp3 APE tag were not shown
+x Player: Removed Prescan from Player to allow faster playback
+x CaseConversion: Tags from the Exception list got the case conversion rules applied by mistake
+
+
 1.0.3370 Build 21270 Date: 24.03.2009 
 -------------------------------------
 x TagEdit: Comments were not removed correctly, if only an ID3V1 comment existed
