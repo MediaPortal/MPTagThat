@@ -49,13 +49,13 @@ namespace MPTagThat
     private Point _formLocation;
     private Size _formSize;
 
-    private TreeNode _oldSelectNode;            // Store selected node, for context menu
-
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
     private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
 
     private SplashScreen _splashScreen;
+
+    private MusicDatabaseBuild _musicDatabaseBuild = null;
     #endregion
 
     #region Constructor
@@ -358,6 +358,15 @@ namespace MPTagThat
     private void Main_Close(object sender, FormClosingEventArgs e)
     {
       log.Debug("Main: Closing Main form");
+      if (_musicDatabaseBuild != null && _musicDatabaseBuild.ScanActive)
+      {
+        if (MessageBox.Show(localisation.ToString("Settings", "DBSCanActive"), localisation.ToString("Settings", "DBScanTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        {
+          e.Cancel = true;
+          return;
+        }
+        _musicDatabaseBuild.AbortScan = true;
+      }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
@@ -585,6 +594,44 @@ namespace MPTagThat
       }
       dataGridViewError.Rows.Clear();
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Creates a Music Database
+    /// </summary>
+    public void CreateMusicDatabase(string databaseName)
+    {
+      if (_musicDatabaseBuild == null)
+      {
+        _musicDatabaseBuild = new MusicDatabaseBuild();
+      }
+      _musicDatabaseBuild.CreateMusicDatabase(databaseName);
+    }
+
+    /// <summary>
+    /// Starts scanning of the selected folder and fills the Music Database
+    /// </summary>
+    /// <param name="folder"></param>
+    public void FillMusicDatabase(string folder, string databaseName)
+    {
+      if (_musicDatabaseBuild == null)
+      {
+        _musicDatabaseBuild = new MusicDatabaseBuild();
+      }
+      _musicDatabaseBuild.FillMusicDatabase(folder, databaseName);
+    }
+
+    /// <summary>
+    /// Returns the Status of the Database Scan
+    /// </summary>
+    /// <returns></returns>
+    public string DatabaseScanStatus()
+    {
+      if (_musicDatabaseBuild == null)
+      {
+        _musicDatabaseBuild = new MusicDatabaseBuild();
+      }
+      return _musicDatabaseBuild.DatabaseScanStatus();
     }
     #endregion
 

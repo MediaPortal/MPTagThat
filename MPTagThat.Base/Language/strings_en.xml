@@ -520,6 +520,7 @@
     <String id="TabTags">Tags</String>
     <String id="TabTagsID3">ID3</String>
     <String id="TabTagsLyricsCover">Lyrics / Cover</String>
+    <String id="TabTagsDatabase">Database</String>
     <String id="GroupBoxPictures">Pictures</String>
     <String id="OverwriteExistingCover">Overwrite existing Cover(s) on automatic tagging</String>
     <String id="EmbedExistingThumb">Embed existing folder thumb (folder.jpg) on cover search</String>
@@ -553,6 +554,19 @@
     <String id="GroupBoxTagsValidate">MP3 File Validation</String>
     <String id="ValidateMP3">Validate Mp3 Files while scanning the folder / database</String>
     <String id="AutoFixMP3">Automatically fix errorneous Mp3 Files</String>
+	<String id="GroupBoxDatabaseBuild">Music Database Build</String>
+	<String id="DatabaseScanNote">If no MediaPortal Music Database is available, a database may be created, by entering a file name in the above text box.\nThen start the scan.</String>
+	<String id="StartDBScan">Start Scan</String>
+	<String id="DBScanStatus">Scan Status</String>
+	<String id="DBNotExists">The selected database does not exist.\nIf you select "Yes" a new database will be created.\nStart a Scan to fill the database.</String>
+	<String id="ClearDatabase">Clear database content before scanning</String>
+	<String id="SelectMusicFolder">Select the Folder with your Music Files</String>
+	<String id="DBScanIdle">Database Scan not active.</String>
+	<String id="DBScanFinished">Database scan done.\nProcessed {0} tracks in: {1:d2}:{2:d2}:{3:d2}{4}</String>
+	<String id="DBScanTrackSummary"> ({0} seconds per track)</String>
+	<String id="DBScanTitle">Confirm Database Scan abort</String>
+	<String id="DBScanActive">Database Scan is still active.\nAbort the scan and quit the application?</String>
+	<String id="DBScanProgress">Progressing file {0} of {1}</String>
     <String id="TabRipping">Ripping</String>
     <String id="TabRippingGeneral">General</String>
     <String id="CustomPath">Custom Paths and Filenames</String>

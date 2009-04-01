@@ -56,9 +56,6 @@ namespace MPTagThat.Preferences
       this.tabPageTagsGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.buttonMusicDatabaseBrowse = new MPTagThat.Core.WinControls.MPTButton();
-      this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
-      this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageTagsID3 = new MPTagThat.Core.WinControls.MPTTabPage();
@@ -91,6 +88,17 @@ namespace MPTagThat.Preferences
       this.ckLyrics007 = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckHotLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyricWiki = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.tabPageDatabase = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxDatabaseBuild = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.checkBoxClearDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lbDBScanStatus = new MPTagThat.Core.WinControls.MPTLabel();
+      this.buttonDBScanStatus = new MPTagThat.Core.WinControls.MPTButton();
+      this.buttonStartDatabaseScan = new MPTagThat.Core.WinControls.MPTButton();
+      this.lbDatabaseNote = new MPTagThat.Core.WinControls.MPTLabel();
+      this.groubBoxTagsDatabase = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.buttonMusicDatabaseBrowse = new MPTagThat.Core.WinControls.MPTButton();
+      this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
+      this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageRipping = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabControlRipping = new System.Windows.Forms.TabControl();
       this.tabPageRippingGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
@@ -205,6 +213,9 @@ namespace MPTagThat.Preferences
       this.groupBoxPictures.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       this.groupBoxLyricsSites.SuspendLayout();
+      this.tabPageDatabase.SuspendLayout();
+      this.groupBoxDatabaseBuild.SuspendLayout();
+      this.groubBoxTagsDatabase.SuspendLayout();
       this.tabPageRipping.SuspendLayout();
       this.tabControlRipping.SuspendLayout();
       this.tabPageRippingGeneral.SuspendLayout();
@@ -535,6 +546,7 @@ namespace MPTagThat.Preferences
       this.tabControlTags.Controls.Add(this.tabPageTagsGeneral);
       this.tabControlTags.Controls.Add(this.tabPageTagsID3);
       this.tabControlTags.Controls.Add(this.tabPageTagsLyricsCover);
+      this.tabControlTags.Controls.Add(this.tabPageDatabase);
       this.tabControlTags.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTags.Location = new System.Drawing.Point(0, 0);
       this.tabControlTags.Name = "tabControlTags";
@@ -558,16 +570,13 @@ namespace MPTagThat.Preferences
       // groupBoxTagsGeneral
       // 
       this.groupBoxTagsGeneral.Controls.Add(this.ckAutoFillNumberOfTracks);
-      this.groupBoxTagsGeneral.Controls.Add(this.buttonMusicDatabaseBrowse);
-      this.groupBoxTagsGeneral.Controls.Add(this.tbMediaPortalDatabase);
-      this.groupBoxTagsGeneral.Controls.Add(this.ckUseMediaPortalDatabase);
       this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
       this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
       this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
       this.groupBoxTagsGeneral.LocalisationContext = "Settings";
       this.groupBoxTagsGeneral.Location = new System.Drawing.Point(6, 21);
       this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(611, 201);
+      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(611, 117);
       this.groupBoxTagsGeneral.TabIndex = 3;
       this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
@@ -583,40 +592,6 @@ namespace MPTagThat.Preferences
       this.ckAutoFillNumberOfTracks.TabIndex = 5;
       this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
       this.ckAutoFillNumberOfTracks.UseVisualStyleBackColor = true;
-      // 
-      // buttonMusicDatabaseBrowse
-      // 
-      this.buttonMusicDatabaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
-      this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
-      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(544, 147);
-      this.buttonMusicDatabaseBrowse.Name = "buttonMusicDatabaseBrowse";
-      this.buttonMusicDatabaseBrowse.Size = new System.Drawing.Size(46, 23);
-      this.buttonMusicDatabaseBrowse.TabIndex = 4;
-      this.buttonMusicDatabaseBrowse.Text = "...";
-      this.buttonMusicDatabaseBrowse.UseVisualStyleBackColor = true;
-      this.buttonMusicDatabaseBrowse.Click += new System.EventHandler(this.buttonMusicDatabaseBrowse_Click);
-      // 
-      // tbMediaPortalDatabase
-      // 
-      this.tbMediaPortalDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(14, 149);
-      this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
-      this.tbMediaPortalDatabase.Size = new System.Drawing.Size(524, 20);
-      this.tbMediaPortalDatabase.TabIndex = 3;
-      // 
-      // ckUseMediaPortalDatabase
-      // 
-      this.ckUseMediaPortalDatabase.AutoSize = true;
-      this.ckUseMediaPortalDatabase.Localisation = "AutoCompletion";
-      this.ckUseMediaPortalDatabase.LocalisationContext = "Settings";
-      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(14, 126);
-      this.ckUseMediaPortalDatabase.Name = "ckUseMediaPortalDatabase";
-      this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(307, 17);
-      this.ckUseMediaPortalDatabase.TabIndex = 2;
-      this.ckUseMediaPortalDatabase.Text = "Use MediaPortal\'s music database for Artist auto completion";
-      this.ckUseMediaPortalDatabase.UseVisualStyleBackColor = true;
       // 
       // ckUseCaseConversionWhenSaving
       // 
@@ -1044,6 +1019,142 @@ namespace MPTagThat.Preferences
       this.ckLyricWiki.TabIndex = 0;
       this.ckLyricWiki.Text = "Lyric Wiki";
       this.ckLyricWiki.UseVisualStyleBackColor = true;
+      // 
+      // tabPageDatabase
+      // 
+      this.tabPageDatabase.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageDatabase.Controls.Add(this.groupBoxDatabaseBuild);
+      this.tabPageDatabase.Controls.Add(this.groubBoxTagsDatabase);
+      this.tabPageDatabase.Localisation = "TabTagsDatabase";
+      this.tabPageDatabase.LocalisationContext = "Settings";
+      this.tabPageDatabase.Location = new System.Drawing.Point(4, 22);
+      this.tabPageDatabase.Name = "tabPageDatabase";
+      this.tabPageDatabase.Size = new System.Drawing.Size(631, 599);
+      this.tabPageDatabase.TabIndex = 3;
+      this.tabPageDatabase.Text = "Database";
+      // 
+      // groupBoxDatabaseBuild
+      // 
+      this.groupBoxDatabaseBuild.Controls.Add(this.checkBoxClearDatabase);
+      this.groupBoxDatabaseBuild.Controls.Add(this.lbDBScanStatus);
+      this.groupBoxDatabaseBuild.Controls.Add(this.buttonDBScanStatus);
+      this.groupBoxDatabaseBuild.Controls.Add(this.buttonStartDatabaseScan);
+      this.groupBoxDatabaseBuild.Controls.Add(this.lbDatabaseNote);
+      this.groupBoxDatabaseBuild.Localisation = "GroupBoxDatabaseBuild";
+      this.groupBoxDatabaseBuild.LocalisationContext = "Settings";
+      this.groupBoxDatabaseBuild.Location = new System.Drawing.Point(12, 144);
+      this.groupBoxDatabaseBuild.Name = "groupBoxDatabaseBuild";
+      this.groupBoxDatabaseBuild.Size = new System.Drawing.Size(605, 189);
+      this.groupBoxDatabaseBuild.TabIndex = 1;
+      this.groupBoxDatabaseBuild.TabStop = false;
+      this.groupBoxDatabaseBuild.Text = "Music Database Build";
+      // 
+      // checkBoxClearDatabase
+      // 
+      this.checkBoxClearDatabase.AutoSize = true;
+      this.checkBoxClearDatabase.Localisation = "ClearDatabase";
+      this.checkBoxClearDatabase.LocalisationContext = "Settings";
+      this.checkBoxClearDatabase.Location = new System.Drawing.Point(13, 65);
+      this.checkBoxClearDatabase.Name = "checkBoxClearDatabase";
+      this.checkBoxClearDatabase.Size = new System.Drawing.Size(215, 17);
+      this.checkBoxClearDatabase.TabIndex = 4;
+      this.checkBoxClearDatabase.Text = "Clear database content before scanning";
+      this.checkBoxClearDatabase.UseVisualStyleBackColor = true;
+      // 
+      // lbDBScanStatus
+      // 
+      this.lbDBScanStatus.AutoSize = true;
+      this.lbDBScanStatus.Localisation = "mptLabel1";
+      this.lbDBScanStatus.LocalisationContext = "groupBoxDatabaseBuild";
+      this.lbDBScanStatus.Location = new System.Drawing.Point(10, 150);
+      this.lbDBScanStatus.Name = "lbDBScanStatus";
+      this.lbDBScanStatus.Size = new System.Drawing.Size(10, 13);
+      this.lbDBScanStatus.TabIndex = 3;
+      this.lbDBScanStatus.Text = " ";
+      // 
+      // buttonDBScanStatus
+      // 
+      this.buttonDBScanStatus.Localisation = "DBScanStatus";
+      this.buttonDBScanStatus.LocalisationContext = "Settings";
+      this.buttonDBScanStatus.Location = new System.Drawing.Point(298, 95);
+      this.buttonDBScanStatus.Name = "buttonDBScanStatus";
+      this.buttonDBScanStatus.Size = new System.Drawing.Size(170, 36);
+      this.buttonDBScanStatus.TabIndex = 2;
+      this.buttonDBScanStatus.Text = "Scan Status";
+      this.buttonDBScanStatus.UseVisualStyleBackColor = true;
+      this.buttonDBScanStatus.Click += new System.EventHandler(this.buttonDBScanStatus_Click);
+      // 
+      // buttonStartDatabaseScan
+      // 
+      this.buttonStartDatabaseScan.Localisation = "StartDBScan";
+      this.buttonStartDatabaseScan.LocalisationContext = "Settings";
+      this.buttonStartDatabaseScan.Location = new System.Drawing.Point(77, 95);
+      this.buttonStartDatabaseScan.Name = "buttonStartDatabaseScan";
+      this.buttonStartDatabaseScan.Size = new System.Drawing.Size(170, 36);
+      this.buttonStartDatabaseScan.TabIndex = 1;
+      this.buttonStartDatabaseScan.Text = "Start Scan";
+      this.buttonStartDatabaseScan.UseVisualStyleBackColor = true;
+      this.buttonStartDatabaseScan.Click += new System.EventHandler(this.buttonStartDatabaseScan_Click);
+      // 
+      // lbDatabaseNote
+      // 
+      this.lbDatabaseNote.AutoSize = true;
+      this.lbDatabaseNote.Localisation = "DatabaseScanNote";
+      this.lbDatabaseNote.LocalisationContext = "Settings";
+      this.lbDatabaseNote.Location = new System.Drawing.Point(7, 25);
+      this.lbDatabaseNote.Name = "lbDatabaseNote";
+      this.lbDatabaseNote.Size = new System.Drawing.Size(515, 26);
+      this.lbDatabaseNote.TabIndex = 0;
+      this.lbDatabaseNote.Text = "If no Music Database is available, a database may be created, by entering a file " +
+          "name in the above text box.\r\nThen select a folder and start the scan.";
+      // 
+      // groubBoxTagsDatabase
+      // 
+      this.groubBoxTagsDatabase.Controls.Add(this.buttonMusicDatabaseBrowse);
+      this.groubBoxTagsDatabase.Controls.Add(this.tbMediaPortalDatabase);
+      this.groubBoxTagsDatabase.Controls.Add(this.ckUseMediaPortalDatabase);
+      this.groubBoxTagsDatabase.Localisation = "TabTagsDatabase";
+      this.groubBoxTagsDatabase.LocalisationContext = "Settings";
+      this.groubBoxTagsDatabase.Location = new System.Drawing.Point(12, 22);
+      this.groubBoxTagsDatabase.Name = "groubBoxTagsDatabase";
+      this.groubBoxTagsDatabase.Size = new System.Drawing.Size(605, 100);
+      this.groubBoxTagsDatabase.TabIndex = 0;
+      this.groubBoxTagsDatabase.TabStop = false;
+      this.groubBoxTagsDatabase.Text = "Database";
+      // 
+      // buttonMusicDatabaseBrowse
+      // 
+      this.buttonMusicDatabaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
+      this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
+      this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(540, 52);
+      this.buttonMusicDatabaseBrowse.Name = "buttonMusicDatabaseBrowse";
+      this.buttonMusicDatabaseBrowse.Size = new System.Drawing.Size(46, 23);
+      this.buttonMusicDatabaseBrowse.TabIndex = 7;
+      this.buttonMusicDatabaseBrowse.Text = "...";
+      this.buttonMusicDatabaseBrowse.UseVisualStyleBackColor = true;
+      this.buttonMusicDatabaseBrowse.Click += new System.EventHandler(this.buttonMusicDatabaseBrowse_Click);
+      // 
+      // tbMediaPortalDatabase
+      // 
+      this.tbMediaPortalDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbMediaPortalDatabase.Location = new System.Drawing.Point(10, 54);
+      this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
+      this.tbMediaPortalDatabase.Size = new System.Drawing.Size(524, 20);
+      this.tbMediaPortalDatabase.TabIndex = 6;
+      // 
+      // ckUseMediaPortalDatabase
+      // 
+      this.ckUseMediaPortalDatabase.AutoSize = true;
+      this.ckUseMediaPortalDatabase.Localisation = "AutoCompletion";
+      this.ckUseMediaPortalDatabase.LocalisationContext = "Settings";
+      this.ckUseMediaPortalDatabase.Location = new System.Drawing.Point(10, 31);
+      this.ckUseMediaPortalDatabase.Name = "ckUseMediaPortalDatabase";
+      this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(307, 17);
+      this.ckUseMediaPortalDatabase.TabIndex = 5;
+      this.ckUseMediaPortalDatabase.Text = "Use MediaPortal\'s music database for Artist auto completion";
+      this.ckUseMediaPortalDatabase.UseVisualStyleBackColor = true;
       // 
       // tabPageRipping
       // 
@@ -2013,7 +2124,6 @@ namespace MPTagThat.Preferences
       this.lbWVExpertWarning.Size = new System.Drawing.Size(383, 13);
       this.lbWVExpertWarning.TabIndex = 2;
       this.lbWVExpertWarning.Text = "Warning: Preset settings will not be used, when specifying WavPackparameters";
-      this.lbWVExpertWarning.Click += new System.EventHandler(this.lbWVExpertWarning_Click);
       // 
       // textBoxWVParms
       // 
@@ -2245,6 +2355,11 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.PerformLayout();
       this.groupBoxLyricsSites.ResumeLayout(false);
       this.groupBoxLyricsSites.PerformLayout();
+      this.tabPageDatabase.ResumeLayout(false);
+      this.groupBoxDatabaseBuild.ResumeLayout(false);
+      this.groupBoxDatabaseBuild.PerformLayout();
+      this.groubBoxTagsDatabase.ResumeLayout(false);
+      this.groubBoxTagsDatabase.PerformLayout();
       this.tabPageRipping.ResumeLayout(false);
       this.tabControlRipping.ResumeLayout(false);
       this.tabPageRippingGeneral.ResumeLayout(false);
@@ -2436,9 +2551,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxTagsGeneral;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyArtistToAlbumArtist;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseCaseConversionWhenSaving;
-    private MPTagThat.Core.WinControls.MPTButton buttonMusicDatabaseBrowse;
-    private System.Windows.Forms.TextBox tbMediaPortalDatabase;
-    private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
     private MPTagThat.Core.WinControls.MPTRadioButton radioButtonUseApe;
     private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.TabControl tabControlTags;
@@ -2456,5 +2568,16 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxTagValidate;
     private MPTagThat.Core.WinControls.MPTCheckBox ckValidateMP3;
     private MPTagThat.Core.WinControls.MPTCheckBox ckAutoFixMp3;
+    private MPTagThat.Core.WinControls.MPTTabPage tabPageDatabase;
+    private MPTagThat.Core.WinControls.MPTGroupBox groubBoxTagsDatabase;
+    private MPTagThat.Core.WinControls.MPTButton buttonMusicDatabaseBrowse;
+    private System.Windows.Forms.TextBox tbMediaPortalDatabase;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckUseMediaPortalDatabase;
+    private MPTagThat.Core.WinControls.MPTGroupBox groupBoxDatabaseBuild;
+    private MPTagThat.Core.WinControls.MPTLabel lbDatabaseNote;
+    private MPTagThat.Core.WinControls.MPTButton buttonStartDatabaseScan;
+    private MPTagThat.Core.WinControls.MPTLabel lbDBScanStatus;
+    private MPTagThat.Core.WinControls.MPTButton buttonDBScanStatus;
+    private MPTagThat.Core.WinControls.MPTCheckBox checkBoxClearDatabase;
   }
 }

@@ -259,6 +259,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="MusicDatabaseBuild.cs" />
     <Compile Include="Player\PlayerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

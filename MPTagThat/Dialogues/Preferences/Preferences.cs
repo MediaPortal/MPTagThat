@@ -1208,11 +1208,51 @@ namespace MPTagThat.Preferences
     {
       OpenFileDialog oFD = new OpenFileDialog();
       oFD.Multiselect = false;
+      oFD.ValidateNames = true;
+      oFD.CheckFileExists = false;
+      oFD.CheckPathExists = true;
       oFD.Filter = "MediaPortal DB | *.db3";
       if (oFD.ShowDialog() == DialogResult.OK)
       {
         tbMediaPortalDatabase.Text = oFD.FileName;
       }
+
+      if (!File.Exists(oFD.FileName))
+      {
+        // THe selected dababase does not exist. Ask if we create it.
+        if (MessageBox.Show(localisation.ToString("Settings", "DBNotExists"), "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        {
+          main.CreateMusicDatabase(oFD.FileName);
+        }
+      }
+    }
+
+    private void buttonStartDatabaseScan_Click(object sender, EventArgs e)
+    {
+      if (checkBoxClearDatabase.Checked)
+      {
+        if (File.Exists(tbMediaPortalDatabase.Text))
+        {
+          File.Delete(tbMediaPortalDatabase.Text);
+        }
+      }
+
+      if (!File.Exists(tbMediaPortalDatabase.Text))
+      {
+        main.CreateMusicDatabase(tbMediaPortalDatabase.Text);
+      }
+      FolderBrowserDialog oFB = new FolderBrowserDialog();
+      oFB.Description = localisation.ToString("Settings", "SelectMusicFolder");
+      if (oFB.ShowDialog() == DialogResult.OK)
+      {
+        main.FillMusicDatabase(oFB.SelectedPath, tbMediaPortalDatabase.Text);
+      }
+    }
+
+    private void buttonDBScanStatus_Click(object sender, EventArgs e)
+    {
+      lbDBScanStatus.Text = main.DatabaseScanStatus();
+      lbDBScanStatus.Update();
     }
 
     private void radioButtonID3Both_CheckedChanged(object sender, EventArgs e)
@@ -1241,11 +1281,6 @@ namespace MPTagThat.Preferences
 
 
     #endregion
-
-    private void lbWVExpertWarning_Click(object sender, EventArgs e)
-    {
-
-    }
     #endregion
   }
 }
