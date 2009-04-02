@@ -31,14 +31,13 @@
       this.lvSearchResults = new System.Windows.Forms.ListView();
       this.chAlbum = new System.Windows.Forms.ColumnHeader();
       this.groupBoxAmazonMultipleAlbums = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.lbFileDetails = new System.Windows.Forms.Label();
+      this.lbAlbumDetail = new System.Windows.Forms.Label();
+      this.lbArtistDetail = new System.Windows.Forms.Label();
+      this.lblAlbum = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
       this.btClose = new MPTagThat.Core.WinControls.MPTButton();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-      this.lblArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblAlbum = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lbArtistDetail = new System.Windows.Forms.Label();
-      this.lbAlbumDetail = new System.Windows.Forms.Label();
-      this.lbFileDetails = new System.Windows.Forms.Label();
       this.groupBoxAmazonMultipleAlbums.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -81,6 +80,57 @@
       this.groupBoxAmazonMultipleAlbums.TabStop = false;
       this.groupBoxAmazonMultipleAlbums.Text = "Multiple albums found. Please select: ";
       // 
+      // lbFileDetails
+      // 
+      this.lbFileDetails.AutoSize = true;
+      this.lbFileDetails.Location = new System.Drawing.Point(15, 20);
+      this.lbFileDetails.Name = "lbFileDetails";
+      this.lbFileDetails.Size = new System.Drawing.Size(53, 13);
+      this.lbFileDetails.TabIndex = 15;
+      this.lbFileDetails.Text = "file details";
+      // 
+      // lbAlbumDetail
+      // 
+      this.lbAlbumDetail.AutoSize = true;
+      this.lbAlbumDetail.Location = new System.Drawing.Point(118, 62);
+      this.lbAlbumDetail.Name = "lbAlbumDetail";
+      this.lbAlbumDetail.Size = new System.Drawing.Size(35, 13);
+      this.lbAlbumDetail.TabIndex = 14;
+      this.lbAlbumDetail.Text = "album";
+      // 
+      // lbArtistDetail
+      // 
+      this.lbArtistDetail.AutoSize = true;
+      this.lbArtistDetail.Location = new System.Drawing.Point(118, 39);
+      this.lbArtistDetail.Name = "lbArtistDetail";
+      this.lbArtistDetail.Size = new System.Drawing.Size(29, 13);
+      this.lbArtistDetail.TabIndex = 13;
+      this.lbArtistDetail.Text = "artist";
+      // 
+      // lblAlbum
+      // 
+      this.lblAlbum.AutoSize = true;
+      this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblAlbum.Localisation = "Album";
+      this.lblAlbum.LocalisationContext = "TagEdit";
+      this.lblAlbum.Location = new System.Drawing.Point(12, 60);
+      this.lblAlbum.Name = "lblAlbum";
+      this.lblAlbum.Size = new System.Drawing.Size(49, 16);
+      this.lblAlbum.TabIndex = 12;
+      this.lblAlbum.Text = "Album:";
+      // 
+      // lblArtist
+      // 
+      this.lblArtist.AutoSize = true;
+      this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblArtist.Localisation = "Artist";
+      this.lblArtist.LocalisationContext = "TagEdit";
+      this.lblArtist.Location = new System.Drawing.Point(12, 39);
+      this.lblArtist.Name = "lblArtist";
+      this.lblArtist.Size = new System.Drawing.Size(40, 16);
+      this.lblArtist.TabIndex = 11;
+      this.lblArtist.Text = "Artist:";
+      // 
       // btUpdate
       // 
       this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -108,57 +158,6 @@
       this.btClose.UseVisualStyleBackColor = true;
       this.btClose.Click += new System.EventHandler(this.btClose_Click);
       // 
-      // lblArtist
-      // 
-      this.lblArtist.AutoSize = true;
-      this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblArtist.Localisation = "Artist";
-      this.lblArtist.LocalisationContext = "TagEdit";
-      this.lblArtist.Location = new System.Drawing.Point(12, 39);
-      this.lblArtist.Name = "lblArtist";
-      this.lblArtist.Size = new System.Drawing.Size(40, 16);
-      this.lblArtist.TabIndex = 11;
-      this.lblArtist.Text = "Artist:";
-      // 
-      // lblAlbum
-      // 
-      this.lblAlbum.AutoSize = true;
-      this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblAlbum.Localisation = "Album";
-      this.lblAlbum.LocalisationContext = "TagEdit";
-      this.lblAlbum.Location = new System.Drawing.Point(12, 60);
-      this.lblAlbum.Name = "lblAlbum";
-      this.lblAlbum.Size = new System.Drawing.Size(49, 16);
-      this.lblAlbum.TabIndex = 12;
-      this.lblAlbum.Text = "Album:";
-      // 
-      // lbArtistDetail
-      // 
-      this.lbArtistDetail.AutoSize = true;
-      this.lbArtistDetail.Location = new System.Drawing.Point(118, 39);
-      this.lbArtistDetail.Name = "lbArtistDetail";
-      this.lbArtistDetail.Size = new System.Drawing.Size(29, 13);
-      this.lbArtistDetail.TabIndex = 13;
-      this.lbArtistDetail.Text = "artist";
-      // 
-      // lbAlbumDetail
-      // 
-      this.lbAlbumDetail.AutoSize = true;
-      this.lbAlbumDetail.Location = new System.Drawing.Point(118, 62);
-      this.lbAlbumDetail.Name = "lbAlbumDetail";
-      this.lbAlbumDetail.Size = new System.Drawing.Size(35, 13);
-      this.lbAlbumDetail.TabIndex = 14;
-      this.lbAlbumDetail.Text = "album";
-      // 
-      // lbFileDetails
-      // 
-      this.lbFileDetails.AutoSize = true;
-      this.lbFileDetails.Location = new System.Drawing.Point(15, 20);
-      this.lbFileDetails.Name = "lbFileDetails";
-      this.lbFileDetails.Size = new System.Drawing.Size(53, 13);
-      this.lbFileDetails.TabIndex = 15;
-      this.lbFileDetails.Text = "file details";
-      // 
       // AmazonAlbumSearchResults
       // 
       this.AcceptButton = this.btUpdate;
@@ -169,15 +168,15 @@
       this.Controls.Add(this.groupBoxAmazonMultipleAlbums);
       this.Controls.Add(this.btUpdate);
       this.Controls.Add(this.btClose);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "AmazonAlbumSearchResults";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Internet Search Results";
       this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
       this.groupBoxAmazonMultipleAlbums.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -188,7 +187,6 @@
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxAmazonMultipleAlbums;
     private MPTagThat.Core.WinControls.MPTButton btUpdate;
     private MPTagThat.Core.WinControls.MPTButton btClose;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     protected MPTagThat.Core.WinControls.MPTLabel lblArtist;
     protected MPTagThat.Core.WinControls.MPTLabel lblAlbum;
     private System.Windows.Forms.Label lbArtistDetail;

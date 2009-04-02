@@ -37,7 +37,6 @@
       this.lbWikiLink = new System.Windows.Forms.LinkLabel();
       this.lbVersionDetail = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbDate = new MPTagThat.Core.WinControls.MPTLabel();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
       this.lbLinkForum = new System.Windows.Forms.LinkLabel();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
@@ -159,8 +158,10 @@
       this.AcceptButton = this.btOk;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BorderColor = System.Drawing.Color.Silver;
       this.CancelButton = this.btOk;
       this.ClientSize = new System.Drawing.Size(528, 340);
+      this.ControlBox = false;
       this.Controls.Add(this.lbLinkForum);
       this.Controls.Add(this.pictureBoxAbout);
       this.Controls.Add(this.lbDate);
@@ -171,8 +172,8 @@
       this.Controls.Add(this.btOk);
       this.Controls.Add(this.lbDescription);
       this.Controls.Add(this.lbAppTitle);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "About";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "About";
@@ -192,7 +193,6 @@
     private System.Windows.Forms.LinkLabel lbWikiLink;
     private MPTagThat.Core.WinControls.MPTLabel lbVersionDetail;
     private MPTagThat.Core.WinControls.MPTLabel lbDate;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.PictureBox pictureBoxAbout;
     private System.Windows.Forms.LinkLabel lbLinkForum;
   }

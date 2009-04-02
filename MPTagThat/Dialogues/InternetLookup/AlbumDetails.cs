@@ -10,7 +10,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.InternetLookup
 {
-  public partial class AlbumDetails : Telerik.WinControls.UI.ShapedForm
+  public partial class AlbumDetails : ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();

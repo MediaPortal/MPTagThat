@@ -10,7 +10,7 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.TagToFileName
 {
-  public partial class TagToFileName : Telerik.WinControls.UI.ShapedForm
+  public partial class TagToFileName : ShapedForm
   {
     #region Variables
     private Main _main;

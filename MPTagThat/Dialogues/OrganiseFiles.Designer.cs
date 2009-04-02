@@ -56,9 +56,9 @@ namespace MPTagThat.Organise
       this.ckCopyFiles = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyNonMusicFiles = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.cbRootDir = new System.Windows.Forms.ComboBox();
       this.buttonBrowseRootDir = new MPTagThat.Core.WinControls.MPTButton();
       this.lblTargetRootDrectory = new MPTagThat.Core.WinControls.MPTLabel();
@@ -66,7 +66,6 @@ namespace MPTagThat.Organise
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.cbFormat = new System.Windows.Forms.ComboBox();
       this.lblFormat = new MPTagThat.Core.WinControls.MPTLabel();
-      this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.groupBoxParm.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -468,6 +467,18 @@ namespace MPTagThat.Organise
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Selection";
       // 
+      // btReview
+      // 
+      this.btReview.Localisation = "Preview";
+      this.btReview.LocalisationContext = "TagAndRename";
+      this.btReview.Location = new System.Drawing.Point(551, 81);
+      this.btReview.Name = "btReview";
+      this.btReview.Size = new System.Drawing.Size(200, 23);
+      this.btReview.TabIndex = 34;
+      this.btReview.Text = "Preview Changes";
+      this.btReview.UseVisualStyleBackColor = true;
+      this.btReview.Click += new System.EventHandler(this.btReview_Click);
+      // 
       // cbRootDir
       // 
       this.cbRootDir.FormattingEnabled = true;
@@ -546,18 +557,6 @@ namespace MPTagThat.Organise
       this.lblFormat.TabIndex = 29;
       this.lblFormat.Text = "Format:";
       // 
-      // btReview
-      // 
-      this.btReview.Localisation = "Preview";
-      this.btReview.LocalisationContext = "TagAndRename";
-      this.btReview.Location = new System.Drawing.Point(551, 81);
-      this.btReview.Name = "btReview";
-      this.btReview.Size = new System.Drawing.Size(200, 23);
-      this.btReview.TabIndex = 34;
-      this.btReview.Text = "Preview Changes";
-      this.btReview.UseVisualStyleBackColor = true;
-      this.btReview.Click += new System.EventHandler(this.btReview_Click);
-      // 
       // OrganiseFiles
       // 
       this.AcceptButton = this.btApply;
@@ -572,12 +571,12 @@ namespace MPTagThat.Organise
       this.Controls.Add(this.groupBoxParm);
       this.Controls.Add(this.btCancel);
       this.Controls.Add(this.btApply);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MaximumSize = new System.Drawing.Size(810, 504);
       this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(810, 504);
       this.Name = "OrganiseFiles";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Organise Files";
@@ -624,7 +623,6 @@ namespace MPTagThat.Organise
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyFiles;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyNonMusicFiles;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxOptions;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.Label labelHeader;
     private System.Windows.Forms.GroupBox groupBox1;
     private MPTagThat.Core.WinControls.MPTButton buttonBrowseRootDir;

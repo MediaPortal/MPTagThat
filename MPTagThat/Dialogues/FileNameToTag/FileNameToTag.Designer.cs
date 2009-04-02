@@ -56,7 +56,6 @@ namespace MPTagThat.FileNameToTag
       this.btRemoveFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.cbFormat = new System.Windows.Forms.ComboBox();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.groupBoxParm.SuspendLayout();
       this.GroupBoxFormat.SuspendLayout();
       this.SuspendLayout();
@@ -427,6 +426,7 @@ namespace MPTagThat.FileNameToTag
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
+      this.BorderColor = System.Drawing.Color.LightGray;
       this.CancelButton = this.btCancel;
       this.ClientSize = new System.Drawing.Size(780, 375);
       this.ControlBox = false;
@@ -441,7 +441,6 @@ namespace MPTagThat.FileNameToTag
       this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(780, 375);
       this.Name = "FileNameToTag";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "FileNameToTag";
@@ -484,7 +483,6 @@ namespace MPTagThat.FileNameToTag
     private MPTagThat.Core.WinControls.MPTButton btRemoveFormat;
     private MPTagThat.Core.WinControls.MPTButton btAddFormat;
     private System.Windows.Forms.ComboBox cbFormat;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private MPTagThat.Core.WinControls.MPTButton btReview;
   }
 }

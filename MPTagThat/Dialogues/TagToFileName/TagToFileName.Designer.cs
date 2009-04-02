@@ -55,7 +55,6 @@ namespace MPTagThat.TagToFileName
       this.lblParmTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.labelHeader = new System.Windows.Forms.Label();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.GroupBoxFormat = new System.Windows.Forms.GroupBox();
       this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.btRemoveFormat = new MPTagThat.Core.WinControls.MPTButton();
@@ -511,12 +510,12 @@ namespace MPTagThat.TagToFileName
       this.Controls.Add(this.groupBoxParm);
       this.Controls.Add(this.btCancel);
       this.Controls.Add(this.btApply);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MaximumSize = new System.Drawing.Size(780, 410);
       this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(780, 410);
       this.Name = "TagToFileName";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagToFileName";
@@ -561,7 +560,6 @@ namespace MPTagThat.TagToFileName
     private System.Windows.Forms.NumericUpDown numericUpDownStartAt;
     private MPTagThat.Core.WinControls.MPTLabel lblStartAt;
     private System.Windows.Forms.Label labelHeader;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.GroupBox GroupBoxFormat;
     private MPTagThat.Core.WinControls.MPTButton btRemoveFormat;
     private MPTagThat.Core.WinControls.MPTButton btAddFormat;

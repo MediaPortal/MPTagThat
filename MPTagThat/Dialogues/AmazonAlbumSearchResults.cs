@@ -12,7 +12,7 @@ using MPTagThat.Core.Amazon;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class AmazonAlbumSearchResults : Telerik.WinControls.UI.ShapedForm
+  public partial class AmazonAlbumSearchResults : ShapedForm
   {
     #region Variables
     ImageList imagelist = new ImageList();

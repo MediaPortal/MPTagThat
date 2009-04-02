@@ -196,7 +196,6 @@ namespace MPTagThat.Preferences
       this.lbLinkTags = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
       this.tabControlOptions.SuspendLayout();
@@ -2342,11 +2341,10 @@ namespace MPTagThat.Preferences
       this.Controls.Add(this.panelRight);
       this.Controls.Add(this.splitterLeft);
       this.Controls.Add(this.panelLeft);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "Preferences";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Preferences";
@@ -2430,6 +2428,7 @@ namespace MPTagThat.Preferences
       this.navPanel.ResumeLayout(false);
       this.navPanel.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -2575,7 +2574,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyArtistToAlbumArtist;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseCaseConversionWhenSaving;
     private MPTagThat.Core.WinControls.MPTRadioButton radioButtonUseApe;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.TabControl tabControlTags;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageTagsGeneral;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageTagsID3;

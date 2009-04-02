@@ -13,7 +13,7 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.TagEdit
 {
-  public partial class TagEditBase : Telerik.WinControls.UI.ShapedForm
+  public partial class TagEditBase : ShapedForm
   {
     #region Variables
     protected Main main;

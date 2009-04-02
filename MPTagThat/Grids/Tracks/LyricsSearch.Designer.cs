@@ -35,7 +35,6 @@
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.lbStatus = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbFinished = new MPTagThat.Core.WinControls.MPTLabel();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).BeginInit();
       this.SuspendLayout();
       // 
@@ -119,8 +118,9 @@
       this.Controls.Add(this.btUpdate);
       this.Controls.Add(this.dataGridViewLyrics);
       this.DoubleBuffered = true;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "LyricsSearch";
-      this.Shape = this.roundRectShape1;
+      this.Resizeable = true;
       this.ShowInTaskbar = false;
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -139,6 +139,5 @@
     private MPTagThat.Core.WinControls.MPTButton btCancel;
     private MPTagThat.Core.WinControls.MPTLabel lbStatus;
     private MPTagThat.Core.WinControls.MPTLabel lbFinished;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

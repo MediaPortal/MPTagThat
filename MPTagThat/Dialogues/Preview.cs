@@ -10,7 +10,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class Preview : Telerik.WinControls.UI.ShapedForm
+  public partial class Preview : ShapedForm
   {
     #region Variables
     BindingList<TrackDataPreview> _previewTracks = new BindingList<TrackDataPreview>();

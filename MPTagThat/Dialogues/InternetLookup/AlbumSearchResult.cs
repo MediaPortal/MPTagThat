@@ -11,7 +11,7 @@ using MPTagThat.Core.Amazon;
 
 namespace MPTagThat.InternetLookup
 {
-  public partial class AlbumSearchResult : Telerik.WinControls.UI.ShapedForm
+  public partial class AlbumSearchResult : ShapedForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();

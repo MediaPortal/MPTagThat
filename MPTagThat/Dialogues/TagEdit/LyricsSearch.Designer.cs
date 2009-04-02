@@ -45,7 +45,6 @@
       this.lbArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.gbSearchInfo = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btSwitchArtist = new MPTagThat.Core.WinControls.MPTButton();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.gbSearchInfo.SuspendLayout();
@@ -259,8 +258,8 @@
       this.Controls.Add(this.btClose);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.gbSearchInfo);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "LyricsSearch";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.Text = "LyricsSearch";
       this.groupBox1.ResumeLayout(false);
@@ -269,6 +268,7 @@
       this.gbSearchInfo.ResumeLayout(false);
       this.gbSearchInfo.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -291,6 +291,5 @@
     private MPTagThat.Core.WinControls.MPTLabel lbArtist;
     private MPTagThat.Core.WinControls.MPTGroupBox gbSearchInfo;
     private MPTagThat.Core.WinControls.MPTButton btSwitchArtist;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

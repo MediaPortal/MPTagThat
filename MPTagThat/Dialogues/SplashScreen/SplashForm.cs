@@ -10,7 +10,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class SplashForm : Telerik.WinControls.UI.ShapedForm
+  public partial class SplashForm : ShapedForm
   {
     #region ctor
     public SplashForm()

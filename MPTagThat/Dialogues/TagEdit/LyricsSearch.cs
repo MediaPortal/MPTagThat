@@ -12,7 +12,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.TagEdit
 {
-  public partial class LyricsSearch : Telerik.WinControls.UI.ShapedForm, ILyricForm
+  public partial class LyricsSearch : ShapedForm, ILyricForm
   {
     #region Delegates
     public delegate void DelegateStringUpdate(String message, String site);

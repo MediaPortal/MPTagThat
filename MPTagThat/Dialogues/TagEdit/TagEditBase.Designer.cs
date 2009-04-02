@@ -266,7 +266,6 @@
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
@@ -3165,11 +3164,10 @@
       this.Controls.Add(this.panelNavigation);
       this.Controls.Add(this.btCancel);
       this.Controls.Add(this.btApply);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "TagEditBase";
-      this.Shape = this.roundRectShape1;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "TagEditBase";
@@ -3464,7 +3462,6 @@
     protected MPTagThat.Core.WinControls.MPTCheckBox ckRemoveExistingRatings;
     protected MPTagThat.Core.WinControls.MPTButton btGetLyricsFromText;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPictureInternet;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.Label labelHeader;
     protected System.Windows.Forms.ComboBox cbAlbumArtist;
     protected System.Windows.Forms.ComboBox cbArtist;

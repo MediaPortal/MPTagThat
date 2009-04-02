@@ -13,7 +13,7 @@ using Un4seen.Bass.AddOn.Wma;
 
 namespace MPTagThat.Preferences
 {
-  public partial class Preferences : Telerik.WinControls.UI.ShapedForm
+  public partial class Preferences : ShapedForm
   {
     #region Variables
     private Main main;

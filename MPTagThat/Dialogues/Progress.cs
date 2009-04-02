@@ -9,7 +9,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class Progress : Telerik.WinControls.UI.ShapedForm
+  public partial class Progress : ShapedForm
   {
     #region Variables
     private delegate void ThreadSafeProgressUpdateDelegate(ProgressBarStyle style, string formattedMsg, int curCount, int trackCount, bool showProgressBar);

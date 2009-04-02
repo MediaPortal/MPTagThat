@@ -120,6 +120,12 @@
     <Compile Include="Controls\MarqueeLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ShapedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ShapedForm.designer.cs">
+      <DependentUpon>ShapedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TreeviewBrowser\FlagsEditor.cs" />
     <Compile Include="Controls\TreeviewBrowser\TreeViewBrowser.cs">
       <SubType>Component</SubType>

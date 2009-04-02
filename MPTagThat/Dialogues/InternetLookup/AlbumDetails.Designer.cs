@@ -40,7 +40,6 @@
       this.lbAlbumTracks = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUp = new MPTagThat.Core.WinControls.MPTButton();
       this.btDown = new MPTagThat.Core.WinControls.MPTButton();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
       this.GroupBoxAlbumDetails = new System.Windows.Forms.GroupBox();
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
@@ -308,6 +307,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BorderColor = System.Drawing.Color.LightGray;
       this.ClientSize = new System.Drawing.Size(787, 555);
       this.Controls.Add(this.GroupBoxAlbumDetails);
       this.Controls.Add(this.labelHeader);
@@ -319,8 +319,9 @@
       this.Controls.Add(this.lvAlbumTracks);
       this.Controls.Add(this.lbTracksToTag);
       this.Controls.Add(this.lbAlbumTracks);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "AlbumDetails";
-      this.Shape = this.roundRectShape1;
+      this.Resizeable = true;
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "Details on selected Album";
@@ -345,7 +346,6 @@
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private MPTagThat.Core.WinControls.MPTButton btUp;
     private MPTagThat.Core.WinControls.MPTButton btDown;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.Label labelHeader;
     private System.Windows.Forms.GroupBox GroupBoxAlbumDetails;
     private System.Windows.Forms.ComboBox cbGenre;

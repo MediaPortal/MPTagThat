@@ -11,7 +11,7 @@ using LyricsEngine;
 
 namespace MPTagThat.GridView
 {
-  public partial class LyricsSearch : Telerik.WinControls.UI.ShapedForm, ILyricForm
+  public partial class LyricsSearch : ShapedForm, ILyricForm
   {
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();

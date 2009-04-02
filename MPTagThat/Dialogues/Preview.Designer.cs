@@ -28,7 +28,6 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.dataGridViewPreview = new System.Windows.Forms.DataGridView();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPreview)).BeginInit();
       this.SuspendLayout();
@@ -47,16 +46,16 @@
       this.dataGridViewPreview.Size = new System.Drawing.Size(755, 351);
       this.dataGridViewPreview.TabIndex = 0;
       // 
-      // FileNameToTagPreview
+      // Preview
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(780, 375);
       this.Controls.Add(this.dataGridViewPreview);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximumSize = new System.Drawing.Size(780, 375);
       this.MinimumSize = new System.Drawing.Size(780, 375);
-      this.Name = "FileNameToTagPreview";
-      this.Shape = this.roundRectShape1;
+      this.Name = "Preview";
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "FileNameToTagReview";
@@ -64,12 +63,12 @@
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPreview)).EndInit();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
     #endregion
 
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.DataGridView dataGridViewPreview;
   }
 }

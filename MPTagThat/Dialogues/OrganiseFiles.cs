@@ -12,7 +12,7 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.Organise
 {
-  public partial class OrganiseFiles : Telerik.WinControls.UI.ShapedForm
+  public partial class OrganiseFiles : ShapedForm
   {
     #region Variables
     private Main _main;

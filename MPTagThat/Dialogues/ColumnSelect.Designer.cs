@@ -28,88 +28,86 @@ namespace MPTagThat.Dialogues
     /// </summary>
     private void InitializeComponent()
     {
-        this.lblHeading = new MPTagThat.Core.WinControls.MPTLabel();
-        this.btOk = new MPTagThat.Core.WinControls.MPTButton();
-        this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
-        this.lvColumns = new System.Windows.Forms.ListView();
-        this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
-        this.SuspendLayout();
-        // 
-        // lblHeading
-        // 
-        this.lblHeading.AutoSize = true;
-        this.lblHeading.Localisation = "Header";
-        this.lblHeading.LocalisationContext = "ColumnSelect";
-        this.lblHeading.Location = new System.Drawing.Point(12, 18);
-        this.lblHeading.Name = "lblHeading";
-        this.lblHeading.Size = new System.Drawing.Size(146, 13);
-        this.lblHeading.TabIndex = 0;
-        this.lblHeading.Text = "Select the columns to Display";
-        // 
-        // btOk
-        // 
-        this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-        this.btOk.AutoSize = true;
-        this.btOk.Localisation = "Ok";
-        this.btOk.LocalisationContext = "ColumnSelect";
-        this.btOk.Location = new System.Drawing.Point(269, 590);
-        this.btOk.Name = "btOk";
-        this.btOk.Size = new System.Drawing.Size(75, 23);
-        this.btOk.TabIndex = 2;
-        this.btOk.Text = "Ok";
-        this.btOk.UseVisualStyleBackColor = true;
-        this.btOk.Click += new System.EventHandler(this.btOk_Click);
-        // 
-        // btCancel
-        // 
-        this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-        this.btCancel.AutoSize = true;
-        this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-        this.btCancel.Localisation = "Cancel";
-        this.btCancel.LocalisationContext = "ColumnSelect";
-        this.btCancel.Location = new System.Drawing.Point(350, 590);
-        this.btCancel.Name = "btCancel";
-        this.btCancel.Size = new System.Drawing.Size(75, 23);
-        this.btCancel.TabIndex = 3;
-        this.btCancel.Text = "Cancel";
-        this.btCancel.UseVisualStyleBackColor = true;
-        this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
-        // 
-        // lvColumns
-        // 
-        this.lvColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                    | System.Windows.Forms.AnchorStyles.Left)
-                    | System.Windows.Forms.AnchorStyles.Right)));
-        this.lvColumns.CheckBoxes = true;
-        this.lvColumns.Location = new System.Drawing.Point(15, 43);
-        this.lvColumns.Name = "lvColumns";
-        this.lvColumns.Size = new System.Drawing.Size(410, 541);
-        this.lvColumns.TabIndex = 4;
-        this.lvColumns.UseCompatibleStateImageBehavior = false;
-        this.lvColumns.View = System.Windows.Forms.View.List;
-        // 
-        // ColumnSelect
-        // 
-        this.AcceptButton = this.btOk;
-        this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.BackColor = System.Drawing.SystemColors.Control;
-        this.CancelButton = this.btCancel;
-        this.ClientSize = new System.Drawing.Size(437, 625);
-        this.ControlBox = false;
-        this.Controls.Add(this.lvColumns);
-        this.Controls.Add(this.btCancel);
-        this.Controls.Add(this.btOk);
-        this.Controls.Add(this.lblHeading);
-        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-        this.Name = "ColumnSelect";
-        this.Shape = this.roundRectShape1;
-        this.ShowInTaskbar = false;
-        this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-        this.Text = "ColumnSelect";
-        this.Load += new System.EventHandler(this.OnLoad);
-        this.ResumeLayout(false);
-        this.PerformLayout();
+      this.lblHeading = new MPTagThat.Core.WinControls.MPTLabel();
+      this.btOk = new MPTagThat.Core.WinControls.MPTButton();
+      this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
+      this.lvColumns = new System.Windows.Forms.ListView();
+      this.SuspendLayout();
+      // 
+      // lblHeading
+      // 
+      this.lblHeading.AutoSize = true;
+      this.lblHeading.Localisation = "Header";
+      this.lblHeading.LocalisationContext = "ColumnSelect";
+      this.lblHeading.Location = new System.Drawing.Point(12, 18);
+      this.lblHeading.Name = "lblHeading";
+      this.lblHeading.Size = new System.Drawing.Size(146, 13);
+      this.lblHeading.TabIndex = 0;
+      this.lblHeading.Text = "Select the columns to Display";
+      // 
+      // btOk
+      // 
+      this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btOk.AutoSize = true;
+      this.btOk.Localisation = "Ok";
+      this.btOk.LocalisationContext = "ColumnSelect";
+      this.btOk.Location = new System.Drawing.Point(269, 590);
+      this.btOk.Name = "btOk";
+      this.btOk.Size = new System.Drawing.Size(75, 23);
+      this.btOk.TabIndex = 2;
+      this.btOk.Text = "Ok";
+      this.btOk.UseVisualStyleBackColor = true;
+      this.btOk.Click += new System.EventHandler(this.btOk_Click);
+      // 
+      // btCancel
+      // 
+      this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btCancel.AutoSize = true;
+      this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.btCancel.Localisation = "Cancel";
+      this.btCancel.LocalisationContext = "ColumnSelect";
+      this.btCancel.Location = new System.Drawing.Point(350, 590);
+      this.btCancel.Name = "btCancel";
+      this.btCancel.Size = new System.Drawing.Size(75, 23);
+      this.btCancel.TabIndex = 3;
+      this.btCancel.Text = "Cancel";
+      this.btCancel.UseVisualStyleBackColor = true;
+      this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+      // 
+      // lvColumns
+      // 
+      this.lvColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                  | System.Windows.Forms.AnchorStyles.Left)
+                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.lvColumns.CheckBoxes = true;
+      this.lvColumns.Location = new System.Drawing.Point(15, 43);
+      this.lvColumns.Name = "lvColumns";
+      this.lvColumns.Size = new System.Drawing.Size(410, 541);
+      this.lvColumns.TabIndex = 4;
+      this.lvColumns.UseCompatibleStateImageBehavior = false;
+      this.lvColumns.View = System.Windows.Forms.View.List;
+      // 
+      // ColumnSelect
+      // 
+      this.AcceptButton = this.btOk;
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BackColor = System.Drawing.SystemColors.Control;
+      this.CancelButton = this.btCancel;
+      this.ClientSize = new System.Drawing.Size(437, 625);
+      this.ControlBox = false;
+      this.Controls.Add(this.lvColumns);
+      this.Controls.Add(this.btCancel);
+      this.Controls.Add(this.btOk);
+      this.Controls.Add(this.lblHeading);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.Name = "ColumnSelect";
+      this.ShowInTaskbar = false;
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+      this.Text = "ColumnSelect";
+      this.Load += new System.EventHandler(this.OnLoad);
+      this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -119,6 +117,5 @@ namespace MPTagThat.Dialogues
     private MPTagThat.Core.WinControls.MPTButton btOk;
     private MPTagThat.Core.WinControls.MPTButton btCancel;
     private System.Windows.Forms.ListView lvColumns;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

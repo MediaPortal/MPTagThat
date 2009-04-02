@@ -11,7 +11,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.CaseConversion
 {
-  public partial class CaseConversion : Telerik.WinControls.UI.ShapedForm
+  public partial class CaseConversion : ShapedForm
   {
     #region Variables
     private Main _main;
