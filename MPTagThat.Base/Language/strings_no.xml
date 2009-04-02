@@ -523,8 +523,9 @@
     <String id="TabTagsDatabase">Database</String>
     <String id="GroupBoxPictures">Bilder</String>
     <String id="OverwriteExistingCover">Skriv over eksisterende Bilde(r) ved automatisk tagging</String>
-    <String id="GroupBoxLyrics">Tekster</String>
     <String id="EmbedExistingThumb">Legg til eksisterende bilde (folder.jpg) ved bilde søk</String>
+    <String id="AmazonSite">Amazon Søke Side:</String>
+    <String id="GroupBoxLyrics">Tekster</String>  
     <String id="SwitchArtist">Bytt Artist føre utførelse</String>
     <String id="OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</String>
     <String id="GroupBoxLyricsSites">Sider å søke i</String>
