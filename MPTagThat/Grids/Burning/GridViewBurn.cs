@@ -111,27 +111,10 @@ namespace MPTagThat.GridView
 
       CreateContextMenu();
 
-      List<Burner> burners = burnManager.GetDrives();
-      // Try 5 times to get burners. might be a problem with the Burner Service not ready yet
-      int i = 0;
-      while (burners.Count == 0 && i < 4)
-      {
-        burners = burnManager.GetDrives();
-        i++;
-      }
-
-      foreach (Burner burner in burners)
-      {
-        if (burner.DriveFeatures.WriteCDR)
-        {
-          string deviceName = string.Format("{0} {1}", burner.DeviceVendor, burner.DeviceName);
-          Telerik.WinControls.UI.RadComboBoxItem ri = new Telerik.WinControls.UI.RadComboBoxItem(deviceName, burner);
-          main.MainRibbon.BurnerCombo.Items.Add(ri);
-        }
-      }
-
-
       lbBurningStatus.Text = localisation.ToString("Burning", "DragAndDrop"); // "Use Drag & Drop to order the tracks for burning";
+
+      Thread threadGetDrives = new Thread(new ThreadStart(GetDrivesThread));
+      threadGetDrives.Start();
     }
     #endregion
 
@@ -512,6 +495,29 @@ namespace MPTagThat.GridView
     {
       // The size is deliverd in sectors and we have 75 sectors per second of Audio
       return (int)Math.Round((double)size / 75.0 / 60.0);
+    }
+
+    private void GetDrivesThread()
+    {
+      List<Burner> burners = burnManager.GetDrives();
+      // Try 10 times to get burners. might be a problem with the Burner Service not ready yet
+      int i = 0;
+      while (burners.Count == 0 && i < 10)
+      {
+        Thread.Sleep(1000);
+        burners = burnManager.GetDrives();
+        i++;
+      }
+
+      foreach (Burner burner in burners)
+      {
+        if (burner.DriveFeatures.WriteCDR)
+        {
+          string deviceName = string.Format("{0} {1}", burner.DeviceVendor, burner.DeviceName);
+          Telerik.WinControls.UI.RadComboBoxItem ri = new Telerik.WinControls.UI.RadComboBoxItem(deviceName, burner);
+          _main.MainRibbon.BurnerCombo.Items.Add(ri);
+        }
+      }
     }
     #endregion
 
