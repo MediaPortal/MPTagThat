@@ -268,7 +268,7 @@ namespace MPTagThat.Core
       set { _mp3AutoFix = value; }
     }
 
-    [Setting(SettingScope.User, "US")]
+    [Setting(SettingScope.User, "com")]
     public string AmazonSite
     {
       get { return _amazonSite; }

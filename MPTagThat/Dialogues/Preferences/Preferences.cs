@@ -281,12 +281,12 @@ namespace MPTagThat.Preferences
       ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
-      amazonSites.Add(new Item("United States (US)", "US", ""));
-      amazonSites.Add(new Item("Deutschland (DE)", "DE", ""));
-      amazonSites.Add(new Item("United Kingdom (UK)", "UK", ""));
-      amazonSites.Add(new Item("Nippon (JP)", "JP", ""));
-      amazonSites.Add(new Item("France (FR)", "FR", ""));
-      amazonSites.Add(new Item("Canada (CA)", "CA", ""));
+      amazonSites.Add(new Item("United States (US)", "com", ""));
+      amazonSites.Add(new Item("Deutschland (DE)", "de", ""));
+      amazonSites.Add(new Item("United Kingdom (UK)", "co.uk", ""));
+      amazonSites.Add(new Item("Nippon (JP)", "jp", ""));
+      amazonSites.Add(new Item("France (FR)", "fr", ""));
+      amazonSites.Add(new Item("Canada (CA)", "ca", ""));
       comboBoxAmazonSite.DisplayMember = "Name";
       comboBoxAmazonSite.ValueMember = "Value";
       comboBoxAmazonSite.DataSource = amazonSites;
