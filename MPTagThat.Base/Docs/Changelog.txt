@@ -7,6 +7,14 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3394 Build 13585 Date: 17.04.2009 
+-------------------------------------
++ TagEdit: Added support for AIFF (Audio Interchange File Format) used by Apple iTunes
++ Language: First version of Dutch translation
+x CoverArt: Search on Amazon US and UK did not work due to a wrong URL constructed
+x Burner: fixed various errors in Burning module
+
+
 1.1.3378 Build 37156 Date: 01.04.2009 
 -------------------------------------
 + Ability to Select the Amazon Site for Cover and Album Search
