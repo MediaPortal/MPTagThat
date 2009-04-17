@@ -3104,7 +3104,7 @@
       this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagEdit";
-      this.btCancel.Location = new System.Drawing.Point(764, 628);
+      this.btCancel.Location = new System.Drawing.Point(764, 624);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(100, 23);
       this.btCancel.TabIndex = 1;
@@ -3118,7 +3118,7 @@
       this.btApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagEdit";
-      this.btApply.Location = new System.Drawing.Point(658, 628);
+      this.btApply.Location = new System.Drawing.Point(658, 624);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(100, 23);
       this.btApply.TabIndex = 0;
