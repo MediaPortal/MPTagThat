@@ -820,7 +820,7 @@ namespace MPTagThat.GridView
             Image img = Image.FromStream(ms);
             if (img != null)
             {
-              img.Save(fileName);
+              img.Save(fileName, System.Drawing.Imaging.ImageFormat.Jpeg);
               System.IO.File.SetAttributes(fileName, FileAttributes.Hidden);
             }
           }
