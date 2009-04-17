@@ -155,6 +155,8 @@ namespace MPTagThat.Core
 
       switch (ext)
       {
+        case ".aif":
+        case ".aiff":
         case ".ape":
         case ".asf":
         case ".flac":
