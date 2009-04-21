@@ -40,6 +40,7 @@ namespace MPTagThat.TagEdit
       // Hide the Artist / Aöbumartist Textbox as we use a Combo here
       tbArtist.Visible = false;
       tbAlbumArtist.Visible = false;
+      tbAlbum.Visible = false;
 
       // Fill in Fields, which are the same in all selected rows
       FillForm();
@@ -47,7 +48,7 @@ namespace MPTagThat.TagEdit
       // Now Set the Event Handlers to detect changes in the Text Boxes
       this.tbYear.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.tbTitle.TextChanged += new System.EventHandler(this.OnTextChanged);
-      this.tbAlbum.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbAlbum.TextChanged += new System.EventHandler(this.OnComboChanged);
       this.cbArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
       this.tbTrack.TextChanged += new System.EventHandler(this.OnTextChanged);
       this.cbAlbumArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
@@ -500,7 +501,7 @@ namespace MPTagThat.TagEdit
 
       options.Artist = (ckArtist.Checked ? cbArtist.Text : null);
       options.AlbumArtist = (ckAlbumArtist.Checked ? cbAlbumArtist.Text : null);
-      options.Album = (ckAlbum.Checked ? tbAlbum.Text : null);
+      options.Album = (ckAlbum.Checked ? cbAlbum.Text : null);
       options.Title = (ckTitle.Checked ? tbTitle.Text : null);
 
 
@@ -643,11 +644,11 @@ namespace MPTagThat.TagEdit
           else
             cbAlbumArtist.Text = "";
 
-        if (tbAlbum.Text.Trim() != track.Album.Trim())
+        if (cbAlbum.Text.Trim() != track.Album.Trim())
           if (i == 0)
-            tbAlbum.Text = track.Album;
+            cbAlbum.Text = track.Album;
           else
-            tbAlbum.Text = "";
+            cbAlbum.Text = "";
 
         if (tbTitle.Text.Trim() != track.Title.Trim())
           if (i == 0)
@@ -971,8 +972,10 @@ namespace MPTagThat.TagEdit
       // Now see, if we have different values in the Artist and AlbumArtist fields and fill the combo
       List<string> itemsArtist = new List<string>();
       List<string> itemsAlbumArtist = new List<string>();
+      List<string> itemsAlbum = new List<string>();
       string savedArtist = "";
       string savedAlbumArtist = "";
+      string savedAlbum = "";
       foreach (DataGridViewRow row in main.TracksGridView.View.Rows)
       {
         if (!row.Selected)
@@ -980,18 +983,25 @@ namespace MPTagThat.TagEdit
 
         TrackData track = main.TracksGridView.TrackList[row.Index];
 
-        if (track.Artist.ToLowerInvariant() != savedArtist &&
+        if (track.Artist != savedArtist &&
             track.Artist != "")
         {
           itemsArtist.Add(track.Artist);
-          savedArtist = track.Artist.ToLowerInvariant();
+          savedArtist = track.Artist;
         }
 
-        if (track.AlbumArtist.ToLowerInvariant() != savedAlbumArtist &&
+        if (track.AlbumArtist != savedAlbumArtist &&
             track.AlbumArtist != "")
         {
           itemsAlbumArtist.Add(track.AlbumArtist);
-          savedAlbumArtist = track.AlbumArtist.ToLowerInvariant();
+          savedAlbumArtist = track.AlbumArtist;
+        }
+
+        if (track.Album != savedAlbum &&
+            track.AlbumArtist != "")
+        {
+          itemsAlbum.Add(track.Album);
+          savedAlbum = track.Album;
         }
       }
 
@@ -1003,6 +1013,11 @@ namespace MPTagThat.TagEdit
       if (itemsAlbumArtist.Count > 0)
       {
         cbAlbumArtist.Items.AddRange(itemsAlbumArtist.ToArray());
+      }
+
+      if (itemsAlbum.Count > 0)
+      {
+        cbAlbum.Items.AddRange(itemsAlbum.ToArray());
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -1039,10 +1054,6 @@ namespace MPTagThat.TagEdit
         case "tbDisc":
         case "tbNumDiscs":
           ckDisk.Checked = true;
-          break;
-
-        case "tbAlbum":
-          ckAlbum.Checked = true;
           break;
 
         case "tbTitle":
@@ -1183,6 +1194,10 @@ namespace MPTagThat.TagEdit
 
         case "cbAlbumArtist":
           ckAlbumArtist.Checked = true;
+          break;
+
+        case "cbAlbum":
+          ckAlbum.Checked = true;
           break;
       }
     }

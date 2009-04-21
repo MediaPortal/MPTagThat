@@ -267,6 +267,7 @@
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.labelHeader = new System.Windows.Forms.Label();
+      this.cbAlbum = new System.Windows.Forms.ComboBox();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -624,6 +625,7 @@
       // 
       // groupBoxArtist
       // 
+      this.groupBoxArtist.Controls.Add(this.cbAlbum);
       this.groupBoxArtist.Controls.Add(this.cbAlbumArtist);
       this.groupBoxArtist.Controls.Add(this.cbArtist);
       this.groupBoxArtist.Controls.Add(this.tbNumDiscs);
@@ -3151,6 +3153,14 @@
       this.labelHeader.TabIndex = 29;
       this.labelHeader.Text = "Header";
       // 
+      // cbAlbum
+      // 
+      this.cbAlbum.FormattingEnabled = true;
+      this.cbAlbum.Location = new System.Drawing.Point(150, 62);
+      this.cbAlbum.Name = "cbAlbum";
+      this.cbAlbum.Size = new System.Drawing.Size(515, 24);
+      this.cbAlbum.TabIndex = 2;
+      // 
       // TagEditBase
       // 
       this.AcceptButton = this.btApply;
@@ -3465,5 +3475,6 @@
     private System.Windows.Forms.Label labelHeader;
     protected System.Windows.Forms.ComboBox cbAlbumArtist;
     protected System.Windows.Forms.ComboBox cbArtist;
+    protected System.Windows.Forms.ComboBox cbAlbum;
   }
 }
