@@ -980,27 +980,29 @@ namespace MPTagThat.TagEdit
 
         TrackData track = main.TracksGridView.TrackList[row.Index];
 
-        if (track.Artist != savedArtist)
+        if (track.Artist.ToLowerInvariant() != savedArtist &&
+            track.Artist != "")
         {
           itemsArtist.Add(track.Artist);
-          savedArtist = track.Artist;
+          savedArtist = track.Artist.ToLowerInvariant();
         }
 
-        if (track.AlbumArtist != savedAlbumArtist)
+        if (track.AlbumArtist.ToLowerInvariant() != savedAlbumArtist &&
+            track.AlbumArtist != "")
         {
           itemsAlbumArtist.Add(track.AlbumArtist);
-          savedAlbumArtist = track.AlbumArtist;
+          savedAlbumArtist = track.AlbumArtist.ToLowerInvariant();
         }
       }
 
-      if (itemsArtist.Count > 1)
+      if (itemsArtist.Count > 0)
       {
         cbArtist.Items.AddRange(itemsArtist.ToArray());
       }
 
-      if (itemsAlbumArtist.Count > 1)
+      if (itemsAlbumArtist.Count > 0)
       {
-        cbAlbumArtist.Items.Add(itemsAlbumArtist.ToArray());
+        cbAlbumArtist.Items.AddRange(itemsAlbumArtist.ToArray());
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
