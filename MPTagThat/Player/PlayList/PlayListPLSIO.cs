@@ -128,7 +128,7 @@ namespace MPTagThat.Player
               fileName = fileName.Substring(0, fileName.Length - 1);
             }
 
-            string tmp = fileName.ToLower();
+            Util.GetQualifiedFilename(basePath, ref fileName);
             PlayListData newItem = new PlayListData(infoLine, fileName, Util.SecondsToHMSString(duration));
             playlist.Add(newItem);
             fileName = "";
@@ -149,7 +149,7 @@ namespace MPTagThat.Player
       return true;
     }
 
-    public void Save(SortableBindingList<PlayListData> playlist, string fileName)
+    public void Save(SortableBindingList<PlayListData> playlist, string fileName, bool useRelativePath)
     {
       using (StreamWriter writer = new StreamWriter(fileName, false, Encoding.Default))
       {
@@ -157,7 +157,16 @@ namespace MPTagThat.Player
         for (int i = 0; i < playlist.Count; i++)
         {
           PlayListData item = playlist[i];
-          writer.WriteLine("File{0}={1}", i + 1, item.FileName);
+
+          string musicFile = item.FileName;
+          if (useRelativePath)
+          {
+            musicFile =
+              Path.Combine(
+                Util.RelativePathTo(Path.GetDirectoryName(fileName), Path.GetDirectoryName(item.FileName)),
+                Path.GetFileName(item.FileName));
+          }
+          writer.WriteLine("File{0}={1}", i + 1, musicFile);
           writer.WriteLine("Title{0}={1}", i + 1, string.Format("{0} - {1}", item.Artist, item.Title));
           writer.WriteLine("Length{0}={1}", i + 1, Util.DurationToSeconds(item.Duration));
         }

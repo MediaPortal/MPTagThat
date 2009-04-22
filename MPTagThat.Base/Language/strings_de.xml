@@ -748,6 +748,7 @@
     <String id="ClearPlayList">Abspielliste löschen</String>
 	<String id="LoadPlayList">Abspielliste laden</String>
 	<String id="SavePlayList">Abspielliste speicherm</String>
+	<String id="UseRelativePath">Relativen Pfad verwenden</String>
   </Section>
   
   <!-- Database Search -->

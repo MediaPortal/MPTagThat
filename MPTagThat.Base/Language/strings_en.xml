@@ -748,6 +748,7 @@
 	<String id="ClearPlayList">Clear PlayList</String>
 	<String id="LoadPlayList">Load PlayList</String>
 	<String id="SavePlayList">Save PlayList</String>
+	<String id="UseRelativePath">Use relative Path</String>
   </Section>
   
     <!-- Database Search -->

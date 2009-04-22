@@ -136,7 +136,7 @@ namespace MPTagThat.Player
       if (sFD.ShowDialog() == DialogResult.OK)
       {
         IPlayListIO saver = PlayListFactory.CreateIO(sFD.FileName);
-        saver.Save(_player.PlayList, sFD.FileName);
+        saver.Save(_player.PlayList, sFD.FileName, ckUseRelativePath.Checked);
       }
     }
     #endregion

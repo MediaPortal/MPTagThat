@@ -2280,7 +2280,7 @@ namespace MPTagThat.GridView
       if (sFD.ShowDialog() == DialogResult.OK)
       {
         IPlayListIO saver = PlayListFactory.CreateIO(sFD.FileName);
-        saver.Save(playList, sFD.FileName);
+        saver.Save(playList, sFD.FileName, true);
       }
     }
 

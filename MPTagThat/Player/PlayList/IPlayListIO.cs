@@ -30,6 +30,6 @@ namespace MPTagThat.Player
   public interface IPlayListIO
   {
     bool Load(SortableBindingList<PlayListData> playlist, string fileName);
-    void Save(SortableBindingList<PlayListData> playlist, string fileName);
+    void Save(SortableBindingList<PlayListData> playlist, string fileName, bool useRelativePath);
   }
 }

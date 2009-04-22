@@ -128,7 +128,7 @@ namespace MPTagThat.Player
     }
 
 
-    public void Save(SortableBindingList<PlayListData> playlist, string fileName)
+    public void Save(SortableBindingList<PlayListData> playlist, string fileName, bool useRelativePath)
     {
       try
       {
@@ -139,7 +139,16 @@ namespace MPTagThat.Player
           foreach (PlayListData item in playlist)
           {
             writer.WriteLine("{0}:{1},{2}", M3U_INFO_MARKER, Util.DurationToSeconds(item.Duration), string.Format("{0} - {1}", item.Artist, item.Title));
-            writer.WriteLine("{0}", item.FileName);
+
+            string musicFile = item.FileName;
+            if (useRelativePath)
+            {
+              musicFile =
+                Path.Combine(
+                  Util.RelativePathTo(Path.GetDirectoryName(fileName), Path.GetDirectoryName(item.FileName)),
+                  Path.GetFileName(item.FileName));
+            }
+            writer.WriteLine("{0}", musicFile);
           }
         }
       }
@@ -176,6 +185,7 @@ namespace MPTagThat.Player
         return false;
       }
 
+      Util.GetQualifiedFilename(basePath, ref fileName);
       PlayListData newItem = new PlayListData(songName, fileName, duration);
       playlist.Add(newItem);
       return true;
