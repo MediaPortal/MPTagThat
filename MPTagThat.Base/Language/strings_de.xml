@@ -14,6 +14,7 @@
   <!-- Main --> 
   <Section name="main">
     <String id="TreeViewPanel">Verzeichnisse</String>
+    <String id="TreeViewPanelDatabase">Datenbank</String>
     <String id="PicturePanel">Cover Art</String>
     <String id="InformationPanel">Information</String>
     <String id="PlayerPanel">Player</String>

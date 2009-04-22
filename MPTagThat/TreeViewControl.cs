@@ -70,6 +70,7 @@ namespace MPTagThat
     {
       if (Options.MainSettings.DatabaseMode && File.Exists(Options.MainSettings.MediaPortalDatabase))
       {
+        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
         treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
         _databaseMode = true;
       }
@@ -162,6 +163,7 @@ namespace MPTagThat
         {
           _main.SplitterTop.ToggleState();
         }
+        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
         btnRefreshFolder.Enabled = false;
@@ -172,6 +174,7 @@ namespace MPTagThat
         {
           _main.SplitterTop.ToggleState();
         }
+        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;
         btnRefreshFolder.Enabled = true;
