@@ -87,6 +87,14 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// Path of the File
+    /// </summary>
+    public string FilePath
+    {
+      get { return Path.GetDirectoryName(_file.Name); }
+    }
+
+    /// <summary>
     /// The Tag Type
     /// </summary>
     public string TagType

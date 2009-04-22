@@ -204,7 +204,7 @@ namespace MPTagThat.GridView
           catch (Exception e1)
           {
             log.Error("Error creating folder: {0} {1]", directoryName, e1.Message);
-            row.Cells[1].Value = localisation.ToString("message", "Error");
+            row.Cells[0].Value = localisation.ToString("message", "Error");
             AddErrorMessage(directoryName, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message));
             continue; // Process next row
           }

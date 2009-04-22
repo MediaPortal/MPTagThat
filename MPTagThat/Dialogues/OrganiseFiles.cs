@@ -138,7 +138,7 @@ namespace MPTagThat.Organise
             {
               bError = true;
               log.Debug("Error creating folder: {0} {1]", directoryName, e1.Message);
-              row.Cells[1].Value = localisation.ToString("message", "Error");
+              row.Cells[0].Value = localisation.ToString("message", "Error");
               _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, e1.Message));
               continue; // Process next row
             }
@@ -160,7 +160,7 @@ namespace MPTagThat.Organise
               {
                 bError = true;
                 log.Debug("File exists: {0}", newFilename);
-                row.Cells[1].Value = localisation.ToString("organise", "Exists");
+                row.Cells[0].Value = localisation.ToString("organise", "Exists");
                 _main.TracksGridView.AddErrorMessage(newFilename, localisation.ToString("organise", "FileExists"));
                 continue;
               }
@@ -172,7 +172,7 @@ namespace MPTagThat.Organise
             {
               bError = true;
               log.Debug("Old File and New File same: {0}", newFilename);
-              row.Cells[1].Value = localisation.ToString("organise", "Exists");
+              row.Cells[0].Value = localisation.ToString("organise", "Exists");
               _main.TracksGridView.AddErrorMessage(newFilename, localisation.ToString("organise", "SameFile"));
               continue;
             }
@@ -180,19 +180,19 @@ namespace MPTagThat.Organise
             if (ckCopyFiles.Checked)
             {
               FileSystem.CopyFile(track.FullFileName, newFilename, ckOverwriteFiles.Checked);
-              row.Cells[1].Value = localisation.ToString("organise", "Copied");
+              row.Cells[0].Value = localisation.ToString("organise", "Copied");
             }
             else
             {
               FileSystem.MoveFile(track.FullFileName, newFilename, ckOverwriteFiles.Checked);
-              row.Cells[1].Value = localisation.ToString("organise", "Moved");
+              row.Cells[0].Value = localisation.ToString("organise", "Moved");
             }
           }
           catch (Exception e2)
           {
             bError = true;
             log.Error("Error Copy/Move File: {0} {1}", track.FullFileName, e2.Message);
-            row.Cells[1].Value = localisation.ToString("mesage", "Error");
+            row.Cells[0].Value = localisation.ToString("mesage", "Error");
             _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e2.Message));
           }
         }
@@ -200,7 +200,7 @@ namespace MPTagThat.Organise
         {
           bError = true;
           log.Error("Error Organising Files: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, ex.Message));
         }
       }

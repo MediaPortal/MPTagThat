@@ -283,6 +283,7 @@
   <!--  Header of the Grid View showing the Tracks -->
   <Section name="column_header">
     <String id="FileName">Dateiname</String>
+    <String id="FilePath">Pfad</String>
     <String id="NewFileName">Neuer Dateiname</String>
     <String id="Status">Status</String>
     <String id="Track">Track #</String>

@@ -95,7 +95,7 @@ namespace MPTagThat.FileNameToTag
         catch (Exception ex)
         {
           log.Error("Error applying changes from Filename To Tag: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, localisation.ToString("TagAndRename", "InvalidParm"));
           bErrors = true;
         }

@@ -158,7 +158,7 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[1].Value = "";
+        row.Cells[0].Value = "";
 
         if (!row.Selected)
         {
@@ -181,7 +181,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
         }
       }
@@ -265,7 +265,7 @@ namespace MPTagThat.GridView
     {
       try
       {
-        tracksGrid.Rows[rowIndex].Cells[1].Value = "";
+        tracksGrid.Rows[rowIndex].Cells[0].Value = "";
         if (track.Changed)
         {
           log.Debug("Save: Saving track: {0}", track.FullFileName);
@@ -314,7 +314,7 @@ namespace MPTagThat.GridView
             SavePicture(track);
           }
 
-          tracksGrid.Rows[rowIndex].Cells[1].Value = localisation.ToString("message", "Ok");
+          tracksGrid.Rows[rowIndex].Cells[0].Value = localisation.ToString("message", "Ok");
           if (rowIndex % 2 == 0)
             tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
           else
@@ -325,7 +325,7 @@ namespace MPTagThat.GridView
       }
       catch (Exception ex)
       {
-        tracksGrid.Rows[rowIndex].Cells[1].Value = localisation.ToString("message", "Error");
+        tracksGrid.Rows[rowIndex].Cells[0].Value = localisation.ToString("message", "Error");
         AddErrorMessage(track.File.Name, ex.Message);
         return false;
       }
@@ -391,7 +391,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[1].Value = "";
+        row.Cells[0].Value = "";
 
         if (!row.Selected)
         {
@@ -509,13 +509,13 @@ namespace MPTagThat.GridView
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
               _itemsChanged = true;
-              row.Cells[1].Value = localisation.ToString("message", "Ok");
+              row.Cells[0].Value = localisation.ToString("message", "Ok");
             }
           }
         }
         catch (Exception ex)
         {
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
         }
       }
@@ -580,7 +580,7 @@ namespace MPTagThat.GridView
       // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[1].Value = "";
+        row.Cells[0].Value = "";
 
         if (!row.Selected)
         {
@@ -614,7 +614,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[1].Value = "";
+        row.Cells[0].Value = "";
 
         if (!row.Selected)
         {
@@ -657,7 +657,7 @@ namespace MPTagThat.GridView
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
                 _itemsChanged = true;
-                row.Cells[1].Value = localisation.ToString("message", "Ok");
+                row.Cells[0].Value = localisation.ToString("message", "Ok");
                 _main.FileInfoPanel.FillPanel();
               }
               continue;
@@ -758,14 +758,14 @@ namespace MPTagThat.GridView
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;
             _itemsChanged = true;
-            row.Cells[1].Value = localisation.ToString("message", "Ok");
+            row.Cells[0].Value = localisation.ToString("message", "Ok");
             _main.FileInfoPanel.FillPanel();
           }
 
         }
         catch (Exception ex)
         {
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
         }
       }
@@ -1007,7 +1007,7 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error while Removing Tags: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           AddErrorMessage(track.File.Name, ex.Message);
 
         }
@@ -1058,7 +1058,7 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error applying changes from MultiTagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           AddErrorMessage(track.File.Name, ex.Message);
         }
       }
@@ -1295,7 +1295,7 @@ namespace MPTagThat.GridView
 
       if (error == TrackData.MP3Error.Fixed)
       {
-        tracksGrid.Rows[index].Cells[1].Value = localisation.ToString("message", "Fixed");
+        tracksGrid.Rows[index].Cells[0].Value = localisation.ToString("message", "Fixed");
       }
     }
 

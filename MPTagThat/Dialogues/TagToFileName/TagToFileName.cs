@@ -132,7 +132,7 @@ namespace MPTagThat.TagToFileName
           if (fileName.Length > 255)
           {
             log.Debug("Filename too long: {0}", fileName);
-            row.Cells[1].Value = localisation.ToString("TagAndRename", "NameTooLong");
+            row.Cells[0].Value = localisation.ToString("TagAndRename", "NameTooLong");
             _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "NameTooLong"), fileName));
             continue; // Process next row
           }
@@ -144,7 +144,7 @@ namespace MPTagThat.TagToFileName
             if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
             {
               log.Debug("New Filename already exists: {0}", fileName);
-              row.Cells[1].Value = localisation.ToString("TagAndRename", "FileExists");
+              row.Cells[0].Value = localisation.ToString("TagAndRename", "FileExists");
               _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "FileExists"), fileName));
               bErrors = true;
               break;
@@ -169,7 +169,7 @@ namespace MPTagThat.TagToFileName
         catch (Exception ex)
         {
           log.Error("Error Renaming File: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[1].Value = localisation.ToString("message", "Error");
+          row.Cells[0].Value = localisation.ToString("message", "Error");
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "Rename"), fileName));
           bErrors = true;
         }

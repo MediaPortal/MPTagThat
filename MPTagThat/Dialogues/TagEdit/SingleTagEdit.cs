@@ -451,7 +451,7 @@ namespace MPTagThat.TagEdit
       catch (Exception ex)
       {
         log.Error("Error applying changes from Tagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-        main.TracksGridView.View.Rows[_currentRowIndex].Cells[1].Value = localisation.ToString("message", "Error");
+        main.TracksGridView.View.Rows[_currentRowIndex].Cells[0].Value = localisation.ToString("message", "Error");
         main.TracksGridView.AddErrorMessage(main.TracksGridView.TrackList[_currentRowIndex].File.Name, ex.Message);
         bErrors = true;
       }

@@ -11,6 +11,7 @@ namespace MPTagThat.GridView
     #region Variables
     private GridViewSettings _settings;
     private GridViewColumn _filename;
+    private GridViewColumn _filepath;
     private GridViewColumn _status;
     private GridViewColumn _track;
     private GridViewColumn _artist;
@@ -66,8 +67,9 @@ namespace MPTagThat.GridView
     #region Constructor
     public GridViewColumns()
     {
-      _filename = new GridViewColumn("FileName", "text", 200, true, false, true, true);
       _status = new GridViewColumn("Status", "text", 45, true, true, false, true);
+      _filename = new GridViewColumn("FileName", "text", 200, true, false, true, true);
+      _filepath = new GridViewColumn("FilePath", "text", 200, false, true, true, true); // Initially hidden
       _track = new GridViewColumn("Track", "text", 40, true, false, true, false);
       _artist = new GridViewColumn("Artist", "text", 150, true, false, true, false);
       _albumartist = new GridViewColumn("AlbumArtist", "text", 150, true, false, true, false);
@@ -150,6 +152,24 @@ namespace MPTagThat.GridView
         }
         ServiceScope.Get<ISettingsManager>().Save(_settings);
       }
+      else
+      {
+        // Add / Reorder Columns that have been added after Release, so that the settings don't need to be deleted
+
+        // Reorder the Status field
+        if (_settings.Columns[0].Name != "Status")
+        {
+          // We still have an old setting with Status at position 1
+          _settings.Columns.RemoveAt(1);
+          _settings.Columns.Insert(0, _status);
+        }
+
+        // FilePath should be column index #2
+        if (_settings.Columns[2].Name != "FilePath")
+        {
+          _settings.Columns.Insert(2, _filepath);
+        }
+      }
     }
 
     public void SaveSettings()
@@ -169,8 +189,9 @@ namespace MPTagThat.GridView
     private List<GridViewColumn> SetDefaultColumns()
     {
       List<GridViewColumn> columnList = new List<GridViewColumn>();
-      columnList.Add(_filename);
       columnList.Add(_status);
+      columnList.Add(_filename);
+      columnList.Add(_filepath);
       columnList.Add(_track);
       columnList.Add(_artist);
       columnList.Add(_albumartist);
