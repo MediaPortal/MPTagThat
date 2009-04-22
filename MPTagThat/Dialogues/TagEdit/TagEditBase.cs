@@ -612,24 +612,27 @@ namespace MPTagThat.TagEdit
     /// <param name="e"></param>
     private void buttonGetPictureInternet_Click(object sender, EventArgs e)
     {
-      if (tbAlbum.Text.Length == 0)
-        return;
-
       string searchArtist = "";
+      string searchAlbum = "";
       if (IsMultiTagEdit)
       {
         searchArtist = cbArtist.Text.Trim();
+        searchAlbum = cbAlbum.Text.Trim();
       }
       else
       {
         searchArtist = tbArtist.Text.Trim();
+        searchAlbum = tbAlbum.Text.Trim();
       }
+
+      if (searchAlbum.Length == 0)
+        return;
 
       this.Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
-        albums = amazonInfo.AmazonAlbumSearch(searchArtist, tbAlbum.Text);
+        albums = amazonInfo.AmazonAlbumSearch(searchArtist, searchAlbum);
       }
 
       if (albums.Count > 0)
