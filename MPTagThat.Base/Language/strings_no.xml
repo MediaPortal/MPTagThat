@@ -14,6 +14,7 @@
   <!-- Main --> 
   <Section name="main">
     <String id="TreeViewPanel">Mapper</String>
+    <String id="TreeViewPanelDatabase">Database</String>
     <String id="PicturePanel">Bilde</String>
     <String id="InformationPanel">Informasjon</String>
     <String id="PlayerPanel">Spiller</String>
@@ -283,6 +284,7 @@
   <!--  Header of the Grid View showing the Tracks -->
   <Section name="column_header">
     <String id="FileName">Fil Navn</String>
+    <String id="FilePath">Bane</String>
     <String id="NewFileName">Nytt Fil Navn</String>
     <String id="Status">Status</String>
     <String id="Track">Spor</String>
@@ -746,6 +748,7 @@
     <String id="ClearPlayList">Tøm Spilleliste</String>
 	<String id="LoadPlayList">Åpne Spilleliste</String>
 	<String id="SavePlayList">Lagre Spilleliste</String>
+	<String id="UseRelativePath">Bruk relativ Bane</String>
   </Section>
     
     <!-- Database Search -->
