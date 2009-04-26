@@ -823,9 +823,13 @@ namespace MPTagThat
             break;
           }
 
-          // When the Tracks grid is not visible, don't handle the delete key
-          if (!gridViewControl.Visible)
+          // Don't handle the delete key, if the view is not focused
+          // So that delete may be used on other controls as well
+          if (!gridViewControl.View.Focused)
+          {
+            handled = false;
             break;
+          }
 
           gridViewControl.DeleteTracks();
           break;
