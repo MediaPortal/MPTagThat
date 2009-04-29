@@ -13,8 +13,22 @@
 
   <!-- Main --> 
   <Section name="main">
+  <!-- Treeview -->
     <String id="TreeViewPanel">Mapper</String>
     <String id="TreeViewPanelDatabase">Database</String>
+    <String id="TreeViewViews">Visning</String>
+    <String id="TreeViewFilters">Filter</String>
+    <String id="FilterUseTag">Bruk Tagg Filter</String>
+    <String id="FilterHeadingField">Felt</String>
+    <String id="FilterHeadingFilter">Filter</String>
+    <String id="FilterHeadingOperator">Operator</String>
+    <String id="FilterOperatorAnd">og</String>
+    <String id="FilterOperatorOr">eller</String>
+    <String id="FilterFileMask">Masker Fil</String>
+    <String id="FilterAllFiles">Alle fil formater</String>
+    <String id="FilterActive">Taggfilter: Aktivt</String>
+    <String id="FilterInActive">Taggfilter: Inaktivt</String>
+	<!-- Various Panels -->
     <String id="PicturePanel">Bilde</String>
     <String id="InformationPanel">Informasjon</String>
     <String id="PlayerPanel">Spiller</String>
@@ -306,6 +320,7 @@
     <String id="Composer">Komponist</String>
     <String id="Conductor">Dirigent</String>
     <String id="NumPics"># Bilder</String>
+    <String id="Picture">Bilde</String>
     <String id="ArtistSortName">Artist Sorteringsnavn</String>
     <String id="AlbumSortName">Album Sorteringsnavn</String>
     <String id="CommercialInformation">Kommersiell Information</String>
@@ -353,6 +368,8 @@
     <String id="Delete">Slett</String>
     <String id="Refresh">Oppdater</String>
     <String id="SelectAll">Velg Alle</String>
+    <String id="InsertFilter">Sett inn Filter</String>
+    <String id="DeleteFilter">Slett Filter</String>
  </Section>
   
     <!-- File Info Panel on the right side -->
