@@ -24,6 +24,16 @@ namespace MPTagThat
     private bool _actionCopy = false;
     private TreeNodePath _nodeToCopyCut = null;
     private bool _databaseMode = false;
+
+    private TreeViewFilter _filter = null;
+    private List<Item> _fileFormats = new List<Item>();
+
+    private string[] _filterFieldValues = new string[]
+                                       {
+                                         "artist", "albumartist", "album", "title", "year", "genre", "picture",
+                                         "lyrics", "track", "numtracks", "disc", "numdiscs", "rating", "bpm",
+                                         "comment", "composer", "conductor", "bitrate", "samplerate", "channels"
+                                       };
     #endregion
 
     #region Properties
@@ -47,6 +57,11 @@ namespace MPTagThat
         SwitchMode();
       }
     }
+
+    public TreeViewFilter ActiveFilter
+    {
+      get { return _filter; }
+    }
     #endregion
 
     #region ctor
@@ -61,6 +76,8 @@ namespace MPTagThat
       queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       LocaliseScreen();
+
+      LoadSettings();
     }
     #endregion
 
@@ -133,6 +150,139 @@ namespace MPTagThat
       this.contextMenuTreeView.Items[2].Text = localisation.ToString("contextmenu", "Paste");
       this.contextMenuTreeView.Items[3].Text = localisation.ToString("contextmenu", "Delete");
       this.contextMenuTreeView.Items[4].Text = localisation.ToString("contextmenu", "Refresh");
+
+      this.contextMenuStripFilter.Items[0].Text = localisation.ToString("contextmenu", "InsertFilter");
+      this.contextMenuStripFilter.Items[1].Text = localisation.ToString("contextmenu", "DeleteFilter");
+
+      // Filter Grid Headings
+      TagFilterField.HeaderText = localisation.ToString("main", "FilterHeadingField");
+      TagFilterValue.HeaderText = localisation.ToString("main", "FilterHeadingFilter");
+      TagFilterOperator.HeaderText = localisation.ToString("main", "FilterHeadingOperator");
+
+    }
+    #endregion
+
+    #region Settings
+    private void LoadSettings()
+    {
+      // Fill the Filter Field Combo with values
+      //
+      // For some reason assigning a DataSource doesn't work
+      // So i need to keep track of the value members in a separate string array.
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Artist"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "AlbumArtist"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Album"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Title"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Year"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Genre"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Picture"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Lyrics"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Track"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "NumTracks"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Disc"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "NumDisc"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Rating"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "BPM"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Comment"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Composer"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Conductor"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "BitRate"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "SampleRate"));
+      TagFilterField.Items.Add(localisation.ToString("column_header", "Channels"));
+
+      TagFilterOperator.Items.Add(localisation.ToString("main", "FilterOperatorAnd"));
+      TagFilterOperator.Items.Add(localisation.ToString("main", "FilterOperatorOr"));
+
+      // Fill the File Select Combo with values
+      _fileFormats.Add(new Item(localisation.ToString("main", "FilterAllFiles"), "*", ""));
+      _fileFormats.Add(new Item(".mp3 (MPEG Layer-3)", "mp3", ""));
+      _fileFormats.Add(new Item(".ogg (OGG Vorbis)", "ogg", ""));
+      _fileFormats.Add(new Item(".wma (Windows Media Audio)", "wma", ""));
+      _fileFormats.Add(new Item(".flac (Free Lossless Audio Codec)", "flac", ""));
+      _fileFormats.Add(new Item(".ape (Monkey's Audio)", "ape", ""));
+      _fileFormats.Add(new Item(".mpc/.mpp/.mp+ (MusePack)", "mpc|mpp|mp+", ""));
+      _fileFormats.Add(new Item(".mp4/.m4a/.m4p (MPEG-4/AAC)", "mp4|m4a|m4p", ""));
+      _fileFormats.Add(new Item(".wv (Wavpack)", "wv", ""));
+      _fileFormats.Add(new Item(".wav (Wave / RIFF)", "wav", ""));
+      _fileFormats.Add(new Item(".aif|.aiff (Audio Interchange File Format)", "aif|aiff", ""));
+      cbListFormats.DisplayMember = "Name";
+      cbListFormats.ValueMember = "Value";
+      cbListFormats.DataSource = _fileFormats;
+
+
+      if (Options.TreeViewSettings.Filter.Count > 0)
+      {
+        _filter = Options.TreeViewSettings.Filter[0];
+        if (Options.TreeViewSettings.LastUsedFormat != "")
+        {
+          foreach (TreeViewFilter filter in Options.TreeViewSettings.Filter)
+          {
+            if (filter.Name == Options.TreeViewSettings.LastUsedFormat)
+            {
+              _filter = filter;
+              break;
+            }
+          }
+        }
+
+        // Now set the File Formats
+        foreach (Item item in _fileFormats)
+        {
+          if (item.Value == _filter.FileFilter)
+          {
+            cbListFormats.SelectedItem = item;
+            break;
+          }
+        }
+
+        ckUseTagFilter.Checked = _filter.UseTagFilter;
+        ckUseTagFilter_CheckedChanged(ckUseTagFilter, new EventArgs());
+        dataGridViewTagFilter.Enabled = ckUseTagFilter.Checked;
+        int rowIndex = 0;
+        foreach (TreeViewTagFilter tagFilter in _filter.TagFilter)
+        {
+          dataGridViewTagFilter.Rows.Insert(rowIndex, 1);
+
+          int i = 0;
+          foreach (string filterFieldValue in _filterFieldValues)
+          {
+            if (filterFieldValue == tagFilter.Field)
+            {
+              dataGridViewTagFilter.Rows[rowIndex].Cells[0].Value = TagFilterField.Items[i];
+              break;
+            }
+            i++;
+          }
+
+          if (IsSpecialFilterColumn(dataGridViewTagFilter.Rows[rowIndex].Cells[0].Value.ToString()))
+          {
+            DataGridViewCheckBoxCell ckCell = new DataGridViewCheckBoxCell();
+            if (tagFilter.FilterValue == "1")
+            {
+              tagFilter.FilterValue = "true";
+            }
+            ckCell.Value = tagFilter.FilterValue;
+            dataGridViewTagFilter.Rows[rowIndex].Cells[1] = ckCell;
+          }
+          else
+          {
+            dataGridViewTagFilter.Rows[rowIndex].Cells[1].Value = tagFilter.FilterValue;  
+          }
+
+          string op = null;
+          if (tagFilter.FilterOperator == "or")
+          {
+            op = "or";
+          }
+          else if (tagFilter.FilterOperator == "and")
+          {
+            op = "and";
+          }
+          dataGridViewTagFilter.Rows[rowIndex].Cells[2].Value = op;
+          rowIndex++;
+        }
+
+      }
     }
     #endregion
 
@@ -178,6 +328,24 @@ namespace MPTagThat
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;
         btnRefreshFolder.Enabled = true;
+      }
+    }
+
+
+    private bool IsSpecialFilterColumn(string filterField)
+    {
+      string filter = _filterFieldValues[TagFilterField.Items.IndexOf(filterField)];
+
+      switch (filter)
+      {
+        case "picture":
+        case "lyrics":
+          return true;
+          break;
+
+        default:
+          return false;
+          break;
       }
     }
     #endregion
@@ -558,6 +726,237 @@ namespace MPTagThat
       treeViewFolderBrowser.Nodes[0].Expand();
     }
     #endregion
+
+    #region Filter
+
+    /// <summary>
+    /// Handles editing of data columns
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void dataGridViewTagFilter_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+    {
+      // For combo box and check box cells, commit any value change as soon
+      // as it is made rather than waiting for the focus to leave the cell.
+      if (!dataGridViewTagFilter.CurrentCell.GetType().Equals(typeof(DataGridViewTextBoxCell)))
+      {
+        dataGridViewTagFilter.CommitEdit(DataGridViewDataErrorContexts.Commit);
+
+        if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 && IsSpecialFilterColumn(dataGridViewTagFilter.CurrentCell.EditedFormattedValue.ToString()))
+        {
+          DataGridViewCheckBoxCell ckCell = new DataGridViewCheckBoxCell();
+          ckCell.Value = true;
+          dataGridViewTagFilter.CurrentRow.Cells[1] = ckCell;
+        }
+        else
+        {
+          if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 && dataGridViewTagFilter.CurrentRow.Cells[1].GetType().Equals(typeof(DataGridViewCheckBoxCell)))
+          {
+            DataGridViewTextBoxCell tbCell = new DataGridViewTextBoxCell();
+            tbCell.Value = "";
+            dataGridViewTagFilter.CurrentRow.Cells[1] = tbCell;
+          }
+        }
+        RefreshFilter();
+      }
+    }
+
+    /// <summary>
+    ///  Handle Data Error
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void dataGridViewTagFilter_DataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+      e.Cancel = false;
+    }
+
+    /// <summary>
+    /// Capture Key presses in the Filter GridView
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <param name="keyData"></param>
+    /// <returns></returns>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if (dataGridViewTagFilter.Focused)
+      {
+        int curIndex = -1;
+        if (dataGridViewTagFilter.CurrentRow == null)
+        {
+          curIndex = -1;
+        }
+        else
+        {
+          curIndex = dataGridViewTagFilter.CurrentRow.Index; 
+        }
+
+        if (keyData == Keys.Insert)
+        {
+          dataGridViewTagFilter.Rows.Insert(curIndex + 1, 1);
+          return true;
+        }
+        else if (keyData == Keys.Delete)
+        {
+          if (curIndex > -1 && dataGridViewTagFilter.CurrentRow != null)
+          {
+            dataGridViewTagFilter.Rows.RemoveAt(curIndex);
+            return true;
+          }
+        } 
+
+      }
+      return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    /// <summary>
+    /// A New Filter Format has been selected
+    /// Update the filter
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbListFormats_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      Item item = (Item)(sender as ComboBox).SelectedItem;
+      _filter.FileFilter = item.Value;
+    }
+
+    /// <summary>
+    /// The File Mask is changed. Update the filter
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tbFileMask_TextChanged(object sender, EventArgs e)
+    {
+      _filter.FileMask = (string) (sender as TextBox).Text;
+    }
+
+    /// <summary>
+    /// The stats of the Use Tag Fileter Check box has changed
+    /// Set the filter Value
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ckUseTagFilter_CheckedChanged(object sender, EventArgs e)
+    {
+      _filter.UseTagFilter = ckUseTagFilter.Checked;
+      dataGridViewTagFilter.Enabled = ckUseTagFilter.Checked;
+
+      // Set the Status label
+      if (_filter.UseTagFilter)
+      {
+        _main.ToolStripStatusFilter.Text = localisation.ToString("main", "FilterActive");
+      }
+      else
+      {
+        _main.ToolStripStatusFilter.Text = localisation.ToString("main", "FilterInActive");
+      }
+    }
+
+    /// <summary>
+    /// Called when Rows are Deleted / Changed
+    /// Fileter Values need to be updated
+    /// </summary>
+    private void RefreshFilter()
+    {
+      _filter.TagFilter.Clear();
+      foreach (DataGridViewRow row in dataGridViewTagFilter.Rows)
+      {
+        TreeViewTagFilter tagfilter = new TreeViewTagFilter();
+
+        // there's no SelectIndex property for DatagridCellComboBox
+        // and i have also problems using a DataSource, so we need to loop
+        if (row.Cells[0].Value != null)
+        {
+          tagfilter.Field = _filterFieldValues[TagFilterField.Items.IndexOf(row.Cells[0].Value.ToString())];
+        }
+
+        if (row.Cells[1].Value != null)
+        {
+          tagfilter.FilterValue = row.Cells[1].Value.ToString();
+        }
+
+        if (row.Cells[2].Value != null)
+        {
+          string selectedValue = row.Cells[2].Value.ToString();
+          int i = 0;
+          foreach (string item in TagFilterOperator.Items)
+          {
+            if (item == selectedValue)
+            {
+              tagfilter.FilterOperator = i == 0 ? "and" : "or";
+              break;
+            }
+            i++;
+          }
+        }
+        _filter.TagFilter.Add(tagfilter);
+      }
+
+      if (dataGridViewTagFilter.Rows.Count == 0)
+      {
+        ckUseTagFilter.Checked = false;
+      }
+    }
+    
+    /// <summary>
+    /// A Row has been deleted. Refreah Filter
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void dataGridViewTagFilter_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+    {
+      RefreshFilter();
+    }
+
+    /// <summary>
+    /// A Row has been changed. Refreah Filter
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void dataGridViewTagFilter_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+      RefreshFilter();
+    }
+
+    #region Filter Context Menu
+    private void dataGridViewTagFilter_MouseUp(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Right)
+      {
+
+        // Point where the mouse is clicked.
+        Point p = new Point(e.X, e.Y);
+
+        contextMenuStripFilter.Show(dataGridViewTagFilter, p);
+      }
+    }
+    
+    private void menuInsertFilter_Click(object sender, EventArgs e)
+    {
+      int curIndex = -1;
+      if (dataGridViewTagFilter.CurrentRow == null)
+      {
+        curIndex = -1;
+      }
+      else
+      {
+        curIndex = dataGridViewTagFilter.CurrentRow.Index;
+      }
+
+      dataGridViewTagFilter.Rows.Insert(curIndex + 1, 1);
+    }
+
+    private void menuDeleteFilter_Click(object sender, EventArgs e)
+    {
+      int curIndex = dataGridViewTagFilter.CurrentRow.Index; 
+      if (curIndex > -1 && dataGridViewTagFilter.CurrentRow != null)
+      {
+        dataGridViewTagFilter.Rows.RemoveAt(curIndex);
+      }
+    }
+    #endregion
+    #endregion
     #endregion
 
     #region General Message Handling
@@ -575,6 +974,12 @@ namespace MPTagThat
           {
             LocaliseScreen();
             this.Refresh();
+            break;
+          }
+
+        case "themechanged":
+          {
+            dataGridViewTagFilter.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
             break;
           }
       }

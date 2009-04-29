@@ -233,6 +233,7 @@
     <Compile Include="Settings\Options.cs" />
     <Compile Include="Settings\MPTagThatSettings.cs" />
     <Compile Include="Common\SortableBindingList.cs" />
+    <Compile Include="Settings\TreeViewFilterSettings.cs" />
     <Compile Include="ShellLib\ApplicationDesktopToolbar.cs">
       <SubType>Form</SubType>
     </Compile>

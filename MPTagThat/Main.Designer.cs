@@ -52,6 +52,7 @@ namespace MPTagThat
       this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
       this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.TTPanel();
       this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
+      this.toolStripStatusLabelFilter = new System.Windows.Forms.ToolStripStatusLabel();
       this.playerControl = new MPTagThat.Player.PlayerControl();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
       this.statusStrip.SuspendLayout();
@@ -110,7 +111,8 @@ namespace MPTagThat
       this.toolStripStatusLabelFolder.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
       this.toolStripStatusLabelFolder.Name = "toolStripStatusLabelFolder";
       this.toolStripStatusLabelFolder.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(25, 19);
+      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(712, 19);
+      this.toolStripStatusLabelFolder.Spring = true;
       this.toolStripStatusLabelFolder.Text = "   ";
       this.toolStripStatusLabelFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
@@ -118,7 +120,8 @@ namespace MPTagThat
       // 
       this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelFiles,
-            this.toolStripStatusLabelFolder});
+            this.toolStripStatusLabelFolder,
+            this.toolStripStatusLabelFilter});
       this.statusStrip.Location = new System.Drawing.Point(0, 728);
       this.statusStrip.Name = "statusStrip";
       this.statusStrip.Size = new System.Drawing.Size(1008, 24);
@@ -199,7 +202,7 @@ namespace MPTagThat
       this.panelRight.MaximumSize = new System.Drawing.Size(200, 0);
       this.panelRight.MinimumSize = new System.Drawing.Size(170, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(200, 511);
+      this.panelRight.Size = new System.Drawing.Size(200, 0);
       this.panelRight.TabIndex = 3;
       // 
       // splitterLeft
@@ -302,6 +305,11 @@ namespace MPTagThat
       this.playerPanel.Size = new System.Drawing.Size(1008, 68);
       this.playerPanel.TabIndex = 11;
       // 
+      // toolStripStatusLabelFilter
+      // 
+      this.toolStripStatusLabelFilter.Name = "toolStripStatusLabelFilter";
+      this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(0, 19);
+      // 
       // playerControl
       // 
       this.playerControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -368,6 +376,7 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.TTPanel panelMiddleBottom;
     private NJFLib.Controls.CollapsibleSplitter splitterTop;
     private MPTagThat.Core.WinControls.TTPanel panelMiddleDBSearch;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFilter;
   }
 }
 

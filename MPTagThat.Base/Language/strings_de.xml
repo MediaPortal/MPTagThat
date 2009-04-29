@@ -13,8 +13,22 @@
 
   <!-- Main --> 
   <Section name="main">
+	<!-- Treeview -->
     <String id="TreeViewPanel">Verzeichnisse</String>
     <String id="TreeViewPanelDatabase">Datenbank</String>
+    <String id="TreeViewViews">Ansicht</String>
+    <String id="TreeViewFilters">Filter</String>
+    <String id="FilterUseTag">Verwende Tag Filter</String>
+    <String id="FilterHeadingField">Feld</String>
+    <String id="FilterHeadingFilter">Filter</String>
+    <String id="FilterHeadingOperator">Operator</String>
+    <String id="FilterOperatorAnd">und</String>
+    <String id="FilterOperatorOr">oder</String>
+    <String id="FilterFileMask">Datei Maske</String>
+    <String id="FilterAllFiles">Alle unterstützten Formate</String>
+    <String id="FilterActive">Tagfilter: Aktiv</String>
+    <String id="FilterInActive">Tagfilter: Inaktiv</String>
+	<!-- Various Panels -->
     <String id="PicturePanel">Cover Art</String>
     <String id="InformationPanel">Information</String>
     <String id="PlayerPanel">Player</String>
@@ -306,6 +320,7 @@
     <String id="Composer">Komponist</String>
     <String id="Conductor">Dirigent</String>
     <String id="NumPics"># Bilder</String>
+	<String id="Picture">Bilder</String>
     <String id="ArtistSortName">Interpret Sortname</String>
     <String id="AlbumSortName">Album Sortname</String>
     <String id="CommercialInformation">Kommerz. Information</String>
@@ -353,6 +368,8 @@
     <String id="Delete">Löschen</String>
     <String id="Refresh">Refresh</String>
     <String id="SelectAll">Alles Auswählen</String>
+    <String id="InsertFilter">Filter Einfügen</String>
+    <String id="DeleteFilter">Filter Löschen</String>
  </Section>
 
     <!-- File Info Panel on the right side -->

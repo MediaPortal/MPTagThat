@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
@@ -52,6 +52,9 @@ namespace MPTagThat.GridView
 
     private Cursor _numberingCursor = Util.CreateCursorFromResource("CursorNumbering", 0, 0);
     private Cursor _defaultCursor = Cursors.Default;
+
+    private string[] _filterFileExtensions = null;
+    private string _filterFileMask = "*.*";
     #endregion
 
     #region Properties
@@ -1394,6 +1397,11 @@ namespace MPTagThat.GridView
       {
         dirInfo = new DirectoryInfo(selectedFolder);
         log.Debug("FolderScan: Retrieving files from. {0}", selectedFolder);
+
+        // Get File Filter Settings
+        _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
+        _filterFileMask = _main.TreeView.ActiveFilter.FileMask.Trim() == "" ? "*" : _main.TreeView.ActiveFilter.FileMask.Trim();
+
         GetFiles(selectedFolder, ref files, _main.TreeView.ScanFolderRecursive);
       }
       catch (Exception)
@@ -1437,7 +1445,13 @@ namespace MPTagThat.GridView
             {
               TagLib.ByteVector.UseBrokenLatin1Behavior = true;
               file = TagLib.File.Create(fi.FullName);
-              AddTrack(new TrackData(file));
+              
+              // Apply the Tag Filter
+              TrackData track = new TrackData(file);
+              if (ApplyTagFilter(track))
+              {
+                AddTrack(track);
+              }
             }
             catch (CorruptFileException)
             {
@@ -1506,8 +1520,12 @@ namespace MPTagThat.GridView
           }
         }
 
-        FileInfo[] files = new DirectoryInfo(folder).GetFiles();
-        foundFiles.AddRange(files);
+        foreach (string extension in _filterFileExtensions)
+        {
+          string searchFilter = string.Format("{0}.{1}", _filterFileMask, extension);
+          FileInfo[] files = new DirectoryInfo(folder).GetFiles(searchFilter);
+          foundFiles.AddRange(files);          
+        }
       }
       catch (Exception ex)
       {
@@ -1587,6 +1605,10 @@ namespace MPTagThat.GridView
 
       string dlgMessage = localisation.ToString("progress", "Scanning");
 
+      // Get File Filter Settings
+      _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
+      _filterFileMask = _main.TreeView.ActiveFilter.FileMask.Trim() == "" ? "*" : _main.TreeView.ActiveFilter.FileMask.Trim();
+
       TagLib.File file = null;
       int count = 1;
       foreach (string song in songs)
@@ -1602,9 +1624,17 @@ namespace MPTagThat.GridView
 
         try
         {
-          TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-          file = TagLib.File.Create(song);
-          AddTrack(new TrackData(file));
+          if (ApplyFileFilter(song))
+          {
+            TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+            file = TagLib.File.Create(song);
+
+            TrackData track = new TrackData(file);
+            if (ApplyTagFilter(track))
+            {
+              AddTrack(track);
+            }
+          }
         }
         catch (CorruptFileException)
         {
@@ -1813,6 +1843,7 @@ namespace MPTagThat.GridView
     }
     #endregion
 
+    #region Miscellaneous Methods
     /// <summary>
     /// Create the Columns of the Grid based on the users setting
     /// </summary>
@@ -1911,6 +1942,268 @@ namespace MPTagThat.GridView
     }
     #endregion
 
+    #region Filter
+    private bool ApplyFileFilter(string fileName)
+    {
+      foreach (string extension in _filterFileExtensions)
+      {
+        if (extension != "*" && Path.GetExtension(fileName) != extension)
+          continue;
+
+        if (Regex.IsMatch(Path.GetFileNameWithoutExtension(fileName), MakeRegexp(_filterFileMask)))
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    private bool ApplyTagFilter(TrackData track)
+    {
+      if (!_main.TreeView.ActiveFilter.UseTagFilter)
+      {
+        return true;
+      }
+
+      List<TreeViewTagFilter> filter = _main.TreeView.ActiveFilter.TagFilter;
+      List<bool> results = new List<bool>(filter.Count);
+
+
+      bool numericCompare = false;  // For year, bpm, etc.
+      int index = 0;
+      int searchNumber = 0;
+      string searchstring = "";
+      foreach (TreeViewTagFilter tagfilter in filter)
+      {
+        switch (tagfilter.Field)
+        {
+          case "artist":
+            searchstring = track.Artist;
+            break;
+
+          case "albumartist":
+            searchstring = track.AlbumArtist;
+            break;
+
+          case "album":
+            searchstring = track.Album;
+            break;
+
+          case "title":
+            searchstring = track.Title;
+            break;
+
+          case "genre":
+            searchstring = track.Genre;
+            break;
+
+          case "comment":
+            searchstring = track.Comment;
+            break;
+
+          case "composer":
+            searchstring = track.Composer;
+            break;
+
+          case "conductor":
+            searchstring = track.Conductor;
+            break;
+
+          // Tags with are checked for existence or non-existence
+          case "picture":
+            searchstring = track.Pictures.Length > 0 ? "True" : "False";
+            break;
+
+          case "lyrics":
+            searchstring = track.Lyrics != null ? "True" : "False";
+            break;
+
+          // Numeric Tags
+          case "track":
+            numericCompare = true;
+            searchNumber = (int) track.File.Tag.Track;
+            break;
+
+          case "numtracks":
+            numericCompare = true;
+            searchNumber = (int)track.File.Tag.TrackCount;
+            break;
+
+          case "disc":
+            numericCompare = true;
+            searchNumber = (int)track.File.Tag.Disc;
+            break;
+
+          case "numdiscs":
+            numericCompare = true;
+            searchNumber = (int)track.File.Tag.DiscCount;
+            break;
+
+          case "year":
+            numericCompare = true;
+            searchNumber = track.Year;
+            break;
+
+          case "rating":
+            numericCompare = true;
+            searchNumber = track.Rating;
+            break;
+
+          case "bpm":
+            numericCompare = true;
+            searchNumber = track.BPM;
+            break;
+
+          case "bitrate":
+            numericCompare = true;
+            searchNumber = track.File.Properties.AudioBitrate;
+            break;
+
+          case "samplerate":
+            numericCompare = true;
+            searchNumber = track.File.Properties.AudioSampleRate;
+            break;
+
+          case "channels":
+            numericCompare = true;
+            searchNumber = track.File.Properties.AudioChannels;
+            break;
+        }
+
+        // Now check the filter value, if we have a negation
+        string searchValue = tagfilter.FilterValue;
+        bool negation = false;
+        if (searchValue.Length > 0 && searchValue[0] == '!')
+        {
+          searchValue = searchValue.Substring(1);
+          negation = true;
+        }
+
+        bool match = false;
+        if (numericCompare)
+        {
+          try
+          {
+            searchValue = searchValue.Trim();
+            if (searchValue == "")
+              searchValue = "0";
+
+            if (searchValue.StartsWith("<="))
+            {
+              searchValue = searchValue.Substring(2);
+              match = searchNumber <= Int32.Parse(searchValue);
+            }
+            else if (searchValue.StartsWith(">="))
+            {
+              searchValue = searchValue.Substring(2);
+              match = searchNumber >= Int32.Parse(searchValue);
+            }
+            else if (searchValue.StartsWith("<"))
+            {
+              searchValue = searchValue.Substring(1);
+              match = searchNumber < Int32.Parse(searchValue);
+            }
+            else if (searchValue.StartsWith(">"))
+            {
+              searchValue = searchValue.Substring(1);
+              match = searchNumber > Int32.Parse(searchValue);
+            }
+            else if (searchValue.StartsWith("="))
+            {
+              searchValue = searchValue.Substring(1);
+              match = searchNumber == Int32.Parse(searchValue);
+            }
+            else
+            {
+              match = searchNumber == Int32.Parse(searchValue);
+            }
+          }
+          catch (FormatException)
+          {
+            match = false;
+          }
+        }
+        else
+        {
+          match = Regex.IsMatch(searchstring, MakeRegexp(searchValue));
+        }
+
+        if (negation)
+        {
+          match = !match;
+        }
+
+        results.Insert(index, match);
+        index++;
+      }
+
+
+      index = 0;
+      bool ok = false;
+      foreach (bool result in results)
+      {
+        if (index + 1 == results.Count)
+        {
+          if (index == 0)
+          {
+            ok = result;
+          }
+          break;
+        }
+
+        bool nextresult = results[index + 1];
+
+        if (filter[index].FilterOperator == "and")
+        {
+          ok = result && nextresult;
+        }
+        else
+        {
+          ok = result || nextresult;
+        }
+
+        if (!ok)
+        {
+          break;
+        }
+      }
+
+      return ok;
+    }
+
+    private string MakeRegexp(string searchValue)
+    {
+      if (searchValue == "")
+        return "^$";
+
+      // Now replace furter meta chars with their backslashed version
+      searchValue = searchValue.Replace(@"\", @"\\").Replace("|", @"\|").Replace("(", @"\(").Replace(")", @"\)");
+      searchValue = searchValue.Replace(@"{", @"\{").Replace("[", @"\[").Replace("^", @"\^").Replace("$", @"\$");
+      searchValue = searchValue.Replace(@"+", @"\+").Replace("*", @"\*").Replace(".", @"\.");
+      searchValue = searchValue.Replace(@"<", @"\<").Replace(">", @"\<");
+
+      if (searchValue.Substring(0, 2) == @"\*")
+      {
+        searchValue = ".*" + searchValue.Substring(2);
+      }
+      else
+      {
+        searchValue = "^" + searchValue;
+      }
+
+      if (searchValue.Substring(searchValue.Length - 2) == @"\*")
+      {
+        searchValue = searchValue.Substring(0, searchValue.Length - 2) + ".*";
+      }
+
+      // Replace any wildcards that the user inserted by the correct reg exp syntax
+      searchValue = searchValue.Replace("?", ".");
+
+      return searchValue;
+    }
+    #endregion
+    #endregion
+
     #region EventHandler
     /// <summary>
     /// Handle Messages
@@ -2006,7 +2299,7 @@ namespace MPTagThat.GridView
     private void tracksGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
     {
       // When changing the Status or the Header Text, ignore the Cell Changed event
-      if (e.ColumnIndex == 1 || e.RowIndex == -1)
+      if (e.ColumnIndex == 0 || e.RowIndex == -1)
         return;
 
       _itemsChanged = true;

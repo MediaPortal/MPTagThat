@@ -199,6 +199,11 @@ namespace MPTagThat
     {
       get { return toolStripStatusLabelFiles; }
     }
+
+    public ToolStripStatusLabel ToolStripStatusFilter
+    {
+      get { return toolStripStatusLabelFilter; }
+    }
     #endregion
 
     #region Form Open / Close
@@ -340,6 +345,7 @@ namespace MPTagThat
       if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
       {
         gridViewControl.FolderScan();
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       
       // setup various Event Handler needed

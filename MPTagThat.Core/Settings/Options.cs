@@ -19,6 +19,8 @@ namespace MPTagThat.Core
     private static TagToFileNameFormatSettings _tagToFileNameSettings;
     private static List<string> _tagToFileNameSettingsTemp;
 
+    private static TreeViewFilterSettings _treeViewFilterSettings;
+
     private static OrganiseFormatSettings _organiseSettings;
     private static List<string> _organiseSettingsTemp;
 
@@ -209,6 +211,11 @@ namespace MPTagThat.Core
       get { return _organiseSettingsTemp; }
     }
 
+    public static TreeViewFilterSettings TreeViewSettings
+    {
+      get { return _treeViewFilterSettings; }
+    }
+
     public static List<TrackData> CopyPasteBuffer
     {
       get { return _copyPasteBuffer; }
@@ -325,6 +332,19 @@ namespace MPTagThat.Core
 
       _organiseSettingsTemp = new List<string>(_organiseSettings.FormatValues);
 
+      _treeViewFilterSettings = new TreeViewFilterSettings();
+      ServiceScope.Get<ISettingsManager>().Load(_treeViewFilterSettings);
+
+      // Set default values
+      if (_treeViewFilterSettings.Filter.Count == 0)
+      {
+        TreeViewFilter filter = new TreeViewFilter();
+        filter.Name = "";
+        filter.FileMask = "";
+        filter.FileFilter = "*.*";
+        _treeViewFilterSettings.Filter.Add(filter);
+      }
+
       // Load Artists / AlbumArtists for Auto Completion
       if (_MPTagThatSettings.UseMediaPortalDatabase)
       {
@@ -381,6 +401,7 @@ namespace MPTagThat.Core
       ServiceScope.Get<ISettingsManager>().Save(_tagToFileNameSettings);
       ServiceScope.Get<ISettingsManager>().Save(_caseConversionSettings);
       ServiceScope.Get<ISettingsManager>().Save(_organiseSettings);
+      ServiceScope.Get<ISettingsManager>().Save(_treeViewFilterSettings);
     }
     #endregion
   }
