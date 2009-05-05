@@ -7,6 +7,17 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3412 Build 36986 Date: 05.05.2009 
+-------------------------------------
++ TreeView: Ability to specify Filters on FileName and Tags (see Wiki for description)
++ Player: Allow saving of playlists with relative pathes
++ Layout: Added "Path" column to the Tracks grid, which is initialy hidden an can be displayed by right-click on the column header and ticking it
++ TagEdit: Made Album a Combobox in MultiTagEdit to allow easier selection of multiple entries
+x General: Don't handle the Delete key, when the grid track has no focus. this allows the use of delete on other controls as well
+x Layout: Moved Status column to be the first column in the GridViewColumns
+x TagEdit: Combo Box for AlbumArtist was not filled correctly
+x TagEdit: Convert coverart in BMP format to jpg when saving folder thumb (folder.jpg)
+
 1.1.3394 Build 13585 Date: 17.04.2009 
 -------------------------------------
 + TagEdit: Added support for AIFF (Audio Interchange File Format) used by Apple iTunes
