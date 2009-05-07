@@ -834,6 +834,7 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxAmazonSite
       // 
+      this.comboBoxAmazonSite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxAmazonSite.FormattingEnabled = true;
       this.comboBoxAmazonSite.Location = new System.Drawing.Point(219, 108);
       this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
