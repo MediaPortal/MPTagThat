@@ -210,7 +210,7 @@ namespace MPTagThat.Player
         }
       }
 
-      if (Bass.BASS_GetDevice() == -1)
+      if (Bass.BASS_GetDevice() == -1 || Bass.BASS_GetDevice() == 0)
       {
         log.Info("Player: Bass not Initialised. Doing Initialisation");
         if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero, null))
