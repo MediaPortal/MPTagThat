@@ -30,6 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeViewControl));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuCopy = new System.Windows.Forms.ToolStripMenuItem();
       this.menuCut = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,6 +38,9 @@
       this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.menuRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.contextMenuStripFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.menuInsertFilter = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuDeleteFilter = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControlTreeView = new System.Windows.Forms.TabControl();
       this.tabPageViews = new MPTagThat.Core.WinControls.MPTTabPage();
       this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
@@ -45,9 +49,6 @@
       this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.tabPageFilter = new MPTagThat.Core.WinControls.MPTTabPage();
       this.dataGridViewTagFilter = new System.Windows.Forms.DataGridView();
-      this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
-      this.TagFilterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.TagFilterOperator = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.lbFileMask = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbFileMask = new System.Windows.Forms.TextBox();
       this.cbListFormats = new System.Windows.Forms.ComboBox();
@@ -57,10 +58,11 @@
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btnSwitchView = new MPTagThat.Core.WinControls.MPTButton();
-      this.contextMenuStripFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.menuInsertFilter = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuDeleteFilter = new System.Windows.Forms.ToolStripMenuItem();
+      this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
+      this.TagFilterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.TagFilterOperator = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.contextMenuTreeView.SuspendLayout();
+      this.contextMenuStripFilter.SuspendLayout();
       this.tabControlTreeView.SuspendLayout();
       this.tabPageViews.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
@@ -69,7 +71,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).BeginInit();
       this.panelLeftBottom.SuspendLayout();
       this.optionsPanelLeft.SuspendLayout();
-      this.contextMenuStripFilter.SuspendLayout();
       this.SuspendLayout();
       // 
       // contextMenuTreeView
@@ -130,6 +131,28 @@
       this.menuRefresh.Size = new System.Drawing.Size(113, 22);
       this.menuRefresh.Text = "Refresh";
       this.menuRefresh.Click += new System.EventHandler(this.contextMenuTreeViewRefresh_Click);
+      // 
+      // contextMenuStripFilter
+      // 
+      this.contextMenuStripFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuInsertFilter,
+            this.menuDeleteFilter});
+      this.contextMenuStripFilter.Name = "contextMenuStripFilter";
+      this.contextMenuStripFilter.Size = new System.Drawing.Size(137, 48);
+      // 
+      // menuInsertFilter
+      // 
+      this.menuInsertFilter.Name = "menuInsertFilter";
+      this.menuInsertFilter.Size = new System.Drawing.Size(136, 22);
+      this.menuInsertFilter.Text = "Insert Filter";
+      this.menuInsertFilter.Click += new System.EventHandler(this.menuInsertFilter_Click);
+      // 
+      // menuDeleteFilter
+      // 
+      this.menuDeleteFilter.Name = "menuDeleteFilter";
+      this.menuDeleteFilter.Size = new System.Drawing.Size(136, 22);
+      this.menuDeleteFilter.Text = "Delete Filter";
+      this.menuDeleteFilter.Click += new System.EventHandler(this.menuDeleteFilter_Click);
       // 
       // tabControlTreeView
       // 
@@ -264,30 +287,6 @@
       this.dataGridViewTagFilter.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewTagFilter_DataError);
       this.dataGridViewTagFilter.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewTagFilter_RowsRemoved);
       // 
-      // TagFilterField
-      // 
-      this.TagFilterField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-      this.TagFilterField.HeaderText = "Field";
-      this.TagFilterField.MaxDropDownItems = 50;
-      this.TagFilterField.Name = "TagFilterField";
-      this.TagFilterField.Width = 35;
-      // 
-      // TagFilterValue
-      // 
-      this.TagFilterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.TagFilterValue.HeaderText = "Filter";
-      this.TagFilterValue.Name = "TagFilterValue";
-      this.TagFilterValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.TagFilterValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // TagFilterOperator
-      // 
-      this.TagFilterOperator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-      this.TagFilterOperator.FillWeight = 80F;
-      this.TagFilterOperator.HeaderText = "Operator";
-      this.TagFilterOperator.Name = "TagFilterOperator";
-      this.TagFilterOperator.Width = 58;
-      // 
       // lbFileMask
       // 
       this.lbFileMask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -378,7 +377,7 @@
       this.btnRefreshFolder.Location = new System.Drawing.Point(13, 98);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 0);
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -393,7 +392,7 @@
       this.checkBoxRecursive.Location = new System.Drawing.Point(17, 71);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 0);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
@@ -412,27 +411,31 @@
       this.btnSwitchView.UseVisualStyleBackColor = true;
       this.btnSwitchView.Click += new System.EventHandler(this.btnSwitchView_Click);
       // 
-      // contextMenuStripFilter
+      // TagFilterField
       // 
-      this.contextMenuStripFilter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuInsertFilter,
-            this.menuDeleteFilter});
-      this.contextMenuStripFilter.Name = "contextMenuStripFilter";
-      this.contextMenuStripFilter.Size = new System.Drawing.Size(137, 48);
+      this.TagFilterField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+      this.TagFilterField.HeaderText = "Field";
+      this.TagFilterField.MaxDropDownItems = 50;
+      this.TagFilterField.Name = "TagFilterField";
+      this.TagFilterField.Width = 35;
       // 
-      // menuInsertFilter
+      // TagFilterValue
       // 
-      this.menuInsertFilter.Name = "menuInsertFilter";
-      this.menuInsertFilter.Size = new System.Drawing.Size(152, 22);
-      this.menuInsertFilter.Text = "Insert Filter";
-      this.menuInsertFilter.Click += new System.EventHandler(this.menuInsertFilter_Click);
+      this.TagFilterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+      this.TagFilterValue.DefaultCellStyle = dataGridViewCellStyle1;
+      this.TagFilterValue.HeaderText = "Filter";
+      this.TagFilterValue.Name = "TagFilterValue";
+      this.TagFilterValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.TagFilterValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
       // 
-      // menuDeleteFilter
+      // TagFilterOperator
       // 
-      this.menuDeleteFilter.Name = "menuDeleteFilter";
-      this.menuDeleteFilter.Size = new System.Drawing.Size(152, 22);
-      this.menuDeleteFilter.Text = "Delete Filter";
-      this.menuDeleteFilter.Click += new System.EventHandler(this.menuDeleteFilter_Click);
+      this.TagFilterOperator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+      this.TagFilterOperator.FillWeight = 80F;
+      this.TagFilterOperator.HeaderText = "Operator";
+      this.TagFilterOperator.Name = "TagFilterOperator";
+      this.TagFilterOperator.Width = 58;
       // 
       // TreeViewControl
       // 
@@ -443,6 +446,7 @@
       this.Name = "TreeViewControl";
       this.Size = new System.Drawing.Size(218, 676);
       this.contextMenuTreeView.ResumeLayout(false);
+      this.contextMenuStripFilter.ResumeLayout(false);
       this.tabControlTreeView.ResumeLayout(false);
       this.tabPageViews.ResumeLayout(false);
       this.treeViewPanel.ResumeLayout(false);
@@ -453,7 +457,6 @@
       this.panelLeftBottom.ResumeLayout(false);
       this.optionsPanelLeft.ResumeLayout(false);
       this.optionsPanelLeft.PerformLayout();
-      this.contextMenuStripFilter.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -484,11 +487,11 @@
     private System.Windows.Forms.TextBox tbFileMask;
     private MPTagThat.Core.WinControls.MPTLabel lbFileMask;
     private System.Windows.Forms.DataGridView dataGridViewTagFilter;
-    private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterField;
-    private System.Windows.Forms.DataGridViewTextBoxColumn TagFilterValue;
-    private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterOperator;
     private System.Windows.Forms.ContextMenuStrip contextMenuStripFilter;
     private System.Windows.Forms.ToolStripMenuItem menuInsertFilter;
     private System.Windows.Forms.ToolStripMenuItem menuDeleteFilter;
+    private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterField;
+    private System.Windows.Forms.DataGridViewTextBoxColumn TagFilterValue;
+    private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterOperator;
   }
 }
