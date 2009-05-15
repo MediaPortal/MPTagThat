@@ -406,6 +406,7 @@ namespace MPTagThat.TagEdit
           {
             if (track.TagType.ToLower() == "mp3")
             {
+              id3v2tag.RemoveFrames("USLT");
               foreach (Lyric lyric in lyrics)
               {
                 TagLib.Id3v2.UnsynchronisedLyricsFrame lyricsframe = TagLib.Id3v2.UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description, lyric.Language, true);
