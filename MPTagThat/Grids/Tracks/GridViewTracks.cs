@@ -1786,8 +1786,8 @@ namespace MPTagThat.GridView
               strGenre = '{3}', strTitle = '{4}', iTrack = {5}, iNumTracks = {6}, 
               iYear = {7}, iRating = {8}, iDisc = {9}, iNumDisc = {10}, strLyrics = '{11}', strPath = '{12}'
             where strPath = '{13}'",
-        Util.RemoveInvalidChars(track.Artist), Util.RemoveInvalidChars(track.AlbumArtist), Util.RemoveInvalidChars(track.Album),
-        Util.RemoveInvalidChars(track.Genre), Util.RemoveInvalidChars(track.Title), trackNumber, trackTotal,
+        Util.RemoveInvalidChars(FormatMultipleEntry(track.Artist)), Util.RemoveInvalidChars(FormatMultipleEntry(track.AlbumArtist)), Util.RemoveInvalidChars(track.Album),
+        Util.RemoveInvalidChars(FormatMultipleEntry(track.Genre)), Util.RemoveInvalidChars(track.Title), trackNumber, trackTotal,
         track.Year, track.Rating, discNumber, discTotal,
         Util.RemoveInvalidChars(track.Lyrics), Util.RemoveInvalidChars(newFileName),
         Util.RemoveInvalidChars(track.FullFileName)
@@ -1813,6 +1813,25 @@ namespace MPTagThat.GridView
         log.Error("Database Update: Error executing sql: {0}", ex.Message);
       }
     }
+
+    /// <summary>
+    /// Multiple Entry fields need to be formatted to contain a | at the end to be able to search correct
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns>Formatted string</returns>
+    private string FormatMultipleEntry(string str)
+    {
+      string[] strSplit = str.Split(new char[] { ';', '|' });
+      // Can't use a simple String.Join as i need to trim all the elements 
+      string strJoin = "| ";
+      foreach (string strTmp in strSplit)
+      {
+        string s = strTmp.Trim();
+        strJoin += String.Format("{0} | ", s.Trim());
+      }
+      return strJoin;
+    }
+
     #endregion
 
     #endregion
