@@ -1644,6 +1644,10 @@ namespace MPTagThat.GridView
         {
           log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", song);
         }
+        catch (FileNotFoundException)
+        {
+          log.Warn("FolderScan: Ignoring track {0} - Physical file no longer existing!", song);
+        }
         count++;
       }
 
