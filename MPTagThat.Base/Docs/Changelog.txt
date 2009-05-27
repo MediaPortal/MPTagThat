@@ -7,6 +7,13 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3434 Build 16708 Date: 27.05.2009 
+-------------------------------------
+x TagEdit: Saving Tags in Database View, resulted in wrong updates to the Music Database
+x DatabaseScan: Capture Exception, when retrieving files from database and the physical file no longer exists
+x TagEdit: Single Lyrics could not be deleted
+x BASS: Init Bass engine with "No Sound" device, so that Non-player functions, like convert work also on machines without sound card
+
 1.1.3412 Build 36986 Date: 05.05.2009 
 -------------------------------------
 + TreeView: Ability to specify Filters on FileName and Tags (see Wiki for description)
