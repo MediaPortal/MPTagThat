@@ -103,10 +103,11 @@ namespace MPTagThat
       this.ribbonTabConvert = new Telerik.WinControls.UI.TabItem();
       this.radRibbonBarChunkBurn = new Telerik.WinControls.UI.RadRibbonBarChunk();
       this.ribbonButtonBurn = new Telerik.WinControls.UI.RadButtonElement();
-      this.ribbonButtonBurnCancel = new Telerik.WinControls.UI.RadButtonElement();
-      this.ribbonTabBurn = new Telerik.WinControls.UI.TabItem();
+      this.radRibbonBarButtonGroupBurner = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
       this.ribbonComboBoxBurner = new Telerik.WinControls.UI.RadComboBoxElement();
       this.ribbonComboBoxSpeed = new Telerik.WinControls.UI.RadComboBoxElement();
+      this.ribbonButtonBurnCancel = new Telerik.WinControls.UI.RadButtonElement();
+      this.ribbonTabBurn = new Telerik.WinControls.UI.TabItem();
       this.radRibbonBar = new Telerik.WinControls.UI.RadRibbonBar();
       this.quickAccessMenuSave = new Telerik.WinControls.UI.RadButtonElement();
       this.quickAccesMenuRefresh = new Telerik.WinControls.UI.RadButtonElement();
@@ -115,7 +116,6 @@ namespace MPTagThat
       this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
       this.startMenuExit = new Telerik.WinControls.UI.RadMenuItem();
       this.startMenuItemChangeDisplayColumns = new Telerik.WinControls.UI.RadMenuItem();
-      this.radRibbonBarButtonGroupBurner = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
       ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar)).BeginInit();
       this.SuspendLayout();
       // 
@@ -670,7 +670,6 @@ namespace MPTagThat
       this.ribbonComboBoxScripts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
       this.ribbonComboBoxScripts.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxScripts.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxScripts.FormatString = null;
       this.ribbonComboBoxScripts.KeyTip = "";
       this.ribbonComboBoxScripts.MaxLength = 32767;
       this.ribbonComboBoxScripts.MaxSize = new System.Drawing.Size(140, 0);
@@ -833,7 +832,6 @@ namespace MPTagThat
       this.ribbonComboBoxRipEncoder.AutoSize = false;
       this.ribbonComboBoxRipEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxRipEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxRipEncoder.FormatString = null;
       this.ribbonComboBoxRipEncoder.KeyTip = "";
       this.ribbonComboBoxRipEncoder.MaxLength = 32767;
       this.ribbonComboBoxRipEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1032,7 +1030,6 @@ namespace MPTagThat
       this.ribbonComboBoxEncoder.Bounds = new System.Drawing.Rectangle(150, 0, 250, 20);
       this.ribbonComboBoxEncoder.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
       this.ribbonComboBoxEncoder.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxEncoder.FormatString = null;
       this.ribbonComboBoxEncoder.KeyTip = "";
       this.ribbonComboBoxEncoder.MaxLength = 32767;
       this.ribbonComboBoxEncoder.MaxSize = new System.Drawing.Size(140, 0);
@@ -1184,6 +1181,49 @@ namespace MPTagThat
       this.ribbonButtonBurn.ToolTipText = null;
       this.ribbonButtonBurn.Click += new System.EventHandler(this.ribbonButtonBurn_Click);
       // 
+      // radRibbonBarButtonGroupBurner
+      // 
+      this.radRibbonBarButtonGroupBurner.AccessibleDescription = "";
+      this.radRibbonBarButtonGroupBurner.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.ribbonComboBoxBurner,
+            this.ribbonComboBoxSpeed});
+      this.radRibbonBarButtonGroupBurner.KeyTip = "";
+      this.radRibbonBarButtonGroupBurner.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.radRibbonBarButtonGroupBurner.ShowBackColor = true;
+      this.radRibbonBarButtonGroupBurner.ShowBorder = true;
+      this.radRibbonBarButtonGroupBurner.Text = "radRibbonBarButtonGroup4Burner";
+      this.radRibbonBarButtonGroupBurner.ToolTipText = null;
+      // 
+      // ribbonComboBoxBurner
+      // 
+      this.ribbonComboBoxBurner.AccessibleDescription = "";
+      this.ribbonComboBoxBurner.ArrowButtonMinWidth = 16;
+      this.ribbonComboBoxBurner.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+      this.ribbonComboBoxBurner.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
+      this.ribbonComboBoxBurner.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxBurner.FormatString = null;
+      this.ribbonComboBoxBurner.KeyTip = "";
+      this.ribbonComboBoxBurner.MaxLength = 32767;
+      this.ribbonComboBoxBurner.MaxSize = new System.Drawing.Size(140, 0);
+      this.ribbonComboBoxBurner.MinSize = new System.Drawing.Size(140, 0);
+      this.ribbonComboBoxBurner.ToolTipText = null;
+      this.ribbonComboBoxBurner.SelectedIndexChanged += new System.EventHandler(this.ribbonComboBoxBurner_SelectedIndexChanged);
+      // 
+      // ribbonComboBoxSpeed
+      // 
+      this.ribbonComboBoxSpeed.AccessibleDescription = "";
+      this.ribbonComboBoxSpeed.ArrowButtonMinWidth = 16;
+      this.ribbonComboBoxSpeed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+      this.ribbonComboBoxSpeed.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
+      this.ribbonComboBoxSpeed.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+      this.ribbonComboBoxSpeed.FormatString = null;
+      this.ribbonComboBoxSpeed.KeyTip = "";
+      this.ribbonComboBoxSpeed.MaxLength = 32767;
+      this.ribbonComboBoxSpeed.MaxSize = new System.Drawing.Size(140, 0);
+      this.ribbonComboBoxSpeed.MinSize = new System.Drawing.Size(140, 0);
+      this.ribbonComboBoxSpeed.ToolTipText = null;
+      this.ribbonComboBoxSpeed.SelectedIndexChanged += new System.EventHandler(this.ribbonComboBoxSpeed_SelectedIndexChanged);
+      // 
       // ribbonButtonBurnCancel
       // 
       this.ribbonButtonBurnCancel.AccessibleDescription = "";
@@ -1217,36 +1257,6 @@ namespace MPTagThat
       this.ribbonTabBurn.Text = "Burn";
       this.ribbonTabBurn.ToolTipText = null;
       this.ribbonTabBurn.Click += new System.EventHandler(this.ribbonTabItem_click);
-      // 
-      // ribbonComboBoxBurner
-      // 
-      this.ribbonComboBoxBurner.AccessibleDescription = "";
-      this.ribbonComboBoxBurner.ArrowButtonMinWidth = 16;
-      this.ribbonComboBoxBurner.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-      this.ribbonComboBoxBurner.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-      this.ribbonComboBoxBurner.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxBurner.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxBurner.KeyTip = "";
-      this.ribbonComboBoxBurner.MaxLength = 32767;
-      this.ribbonComboBoxBurner.MaxSize = new System.Drawing.Size(140, 0);
-      this.ribbonComboBoxBurner.MinSize = new System.Drawing.Size(140, 0);
-      this.ribbonComboBoxBurner.ToolTipText = null;
-      this.ribbonComboBoxBurner.SelectedIndexChanged += new System.EventHandler(this.ribbonComboBoxBurner_SelectedIndexChanged);
-      // 
-      // ribbonComboBoxSpeed
-      // 
-      this.ribbonComboBoxSpeed.AccessibleDescription = "";
-      this.ribbonComboBoxSpeed.ArrowButtonMinWidth = 16;
-      this.ribbonComboBoxSpeed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-      this.ribbonComboBoxSpeed.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.FitToAvailableSize;
-      this.ribbonComboBoxSpeed.DropDownSizingMode = ((Telerik.WinControls.UI.SizingMode)((Telerik.WinControls.UI.SizingMode.RightBottom | Telerik.WinControls.UI.SizingMode.UpDown)));
-      this.ribbonComboBoxSpeed.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-      this.ribbonComboBoxSpeed.KeyTip = "";
-      this.ribbonComboBoxSpeed.MaxLength = 32767;
-      this.ribbonComboBoxSpeed.MaxSize = new System.Drawing.Size(140, 0);
-      this.ribbonComboBoxSpeed.MinSize = new System.Drawing.Size(140, 0);
-      this.ribbonComboBoxSpeed.ToolTipText = null;
-      this.ribbonComboBoxSpeed.SelectedIndexChanged += new System.EventHandler(this.ribbonComboBoxSpeed_SelectedIndexChanged);
       // 
       // radRibbonBar
       // 
@@ -1405,19 +1415,6 @@ namespace MPTagThat
       this.startMenuItemChangeDisplayColumns.ToggleState = Telerik.WinControls.Enumerations.ToggleState.Off;
       this.startMenuItemChangeDisplayColumns.ToolTipText = null;
       this.startMenuItemChangeDisplayColumns.Click += new System.EventHandler(this.startMenuItemChangeDisplayColumns_Click);
-      // 
-      // radRibbonBarButtonGroupBurner
-      // 
-      this.radRibbonBarButtonGroupBurner.AccessibleDescription = "";
-      this.radRibbonBarButtonGroupBurner.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.ribbonComboBoxBurner,
-            this.ribbonComboBoxSpeed});
-      this.radRibbonBarButtonGroupBurner.KeyTip = "";
-      this.radRibbonBarButtonGroupBurner.Orientation = System.Windows.Forms.Orientation.Horizontal;
-      this.radRibbonBarButtonGroupBurner.ShowBackColor = true;
-      this.radRibbonBarButtonGroupBurner.ShowBorder = true;
-      this.radRibbonBarButtonGroupBurner.Text = "radRibbonBarButtonGroup4Burner";
-      this.radRibbonBarButtonGroupBurner.ToolTipText = null;
       // 
       // RibbonBar
       // 
