@@ -254,6 +254,12 @@ namespace MPTagThat
             i++;
           }
 
+          if (dataGridViewTagFilter.Rows[rowIndex].Cells[0].Value == null)
+          {
+            rowIndex++;
+            continue;
+          }
+
           if (IsSpecialFilterColumn(dataGridViewTagFilter.Rows[rowIndex].Cells[0].Value.ToString()))
           {
             DataGridViewCheckBoxCell ckCell = new DataGridViewCheckBoxCell();
