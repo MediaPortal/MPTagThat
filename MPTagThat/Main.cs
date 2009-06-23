@@ -401,7 +401,7 @@ namespace MPTagThat
     private void LoadBassAsync()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero, null))
+      if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
         log.Error("Error Init Bass: {0}", Enum.GetName(typeof(BASSError), error));

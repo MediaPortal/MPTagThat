@@ -23,6 +23,7 @@ namespace MPTagThat.Player
     private int _currentStartIndex = -1;
     private int _currentIndexPlaying = -1;
     private string _currentSongPlaying = "";
+    private int _defaultSoundDevice = -1;
     private int _stream = 0;
     private int _syncHandleEnd = 0;
     private Visuals _vis = new Visuals();                     // visuals class instance
@@ -47,6 +48,18 @@ namespace MPTagThat.Player
 
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
       queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
+
+      // Retrieve the default Sound device
+      BASS_DEVICEINFO info;
+      for (int i = 0; (info = Bass.BASS_GetDeviceInfo(i)) != null; i++)
+      {
+        if (info.IsDefault)
+        {
+          _defaultSoundDevice = i;
+          break;
+        }
+      }
+
     }
     #endregion
 
@@ -210,13 +223,15 @@ namespace MPTagThat.Player
         }
       }
 
-      if (Bass.BASS_GetDevice() == -1 || Bass.BASS_GetDevice() == 0)
+      if (Bass.BASS_GetDevice() == 0)
       {
+        // Using the play function for the first time
         log.Info("Player: Bass not Initialised. Doing Initialisation");
-        if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero, null))
+        Bass.BASS_Free();
+        if (!Bass.BASS_Init(_defaultSoundDevice, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
         {
           int error = (int)Bass.BASS_ErrorGetCode();
-          log.Error("Player: Error Init Bass: {0}", Enum.GetName(typeof(BASSError), error));
+          log.Error("Player: Error Init Bass: {0}", Enum.GetName(typeof (BASSError), error));
           return;
         }
       }
