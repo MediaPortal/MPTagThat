@@ -1461,6 +1461,10 @@ namespace MPTagThat.GridView
             {
               log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", fi.FullName);
             }
+            catch (Exception ex)
+            {
+              log.Error("FolderScan: Error processing file: {0} {1}", fi.FullName, ex.Message);
+            }
           }
         }
         catch (PathTooLongException)
@@ -1638,15 +1642,19 @@ namespace MPTagThat.GridView
         }
         catch (CorruptFileException)
         {
-          log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", song);
+          log.Warn("DatabaseScan: Ignoring track {0} - Corrupt File!", song);
         }
         catch (UnsupportedFormatException)
         {
-          log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", song);
+          log.Warn("DatabaseScan: Ignoring track {0} - Unsupported format!", song);
         }
         catch (FileNotFoundException)
         {
-          log.Warn("FolderScan: Ignoring track {0} - Physical file no longer existing!", song);
+          log.Warn("DatabaseScan: Ignoring track {0} - Physical file no longer existing!", song);
+        }
+        catch (Exception ex)
+        {
+          log.Error("DatabaseScan: Error processing file: {0} {1}", song, ex.Message);
         }
         count++;
       }
