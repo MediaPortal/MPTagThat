@@ -6,7 +6,6 @@ using System.Data.SQLite;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;

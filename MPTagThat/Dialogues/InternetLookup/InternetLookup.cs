@@ -13,13 +13,10 @@ namespace MPTagThat.InternetLookup
   {
     #region Variables
     private Main main;
-    private Thread _asyncThread = null;
 
     private bool _askForAlbum = false;   
     private string _selectedArtist = "";
     private string _selectedAlbum = "";
-
-    private List<ListViewItem> _fileList = null;
     DataGridView _tracksGrid = null;
 
     // Dialogs

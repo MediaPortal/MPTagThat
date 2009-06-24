@@ -292,7 +292,7 @@ namespace MPTagThat.GridView
           selectedDriveID = CurrentDriveID;
           log.Debug("Rip: Selected drive id: {0}", selectedDriveID);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
           log.Debug("Rip: Error setting the drive id. Fallback to drive #0");
           selectedDriveID = 0;

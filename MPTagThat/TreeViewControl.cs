@@ -347,11 +347,9 @@ namespace MPTagThat
         case "picture":
         case "lyrics":
           return true;
-          break;
 
         default:
           return false;
-          break;
       }
     }
     #endregion
