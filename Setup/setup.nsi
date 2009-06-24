@@ -55,14 +55,21 @@ SetCompressor /SOLID lzma
 
 # Included files
 !include Sections.nsh
-!include MUI.nsh
+!include MUI2.nsh
+!include LogicLib.nsh
+!include InstallOptions.nsh
 
 # Variables
 Var StartMenuGroup
+Var CreateStartMenu
+Var CreateDeskTopShortCut
+Var CreateExplorerMenu
 
 # Installer pages
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
+Page custom Options OptionsValidate
+!define MUI_PAGE_CUSTOMFUNCTION_PRE StartMenu_Pre
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuGroup
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
@@ -133,12 +140,17 @@ Section -post SEC0001
     SetOutPath $INSTDIR
     WriteUninstaller $INSTDIR\uninstall.exe
     
-    CreateShortCut "$DESKTOP\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe"   0 "" "" "MPTagThat"
-    
-    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe" 0 "" "" "MPTagThat" 
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" "$INSTDIR\uninstall.exe"
-    !insertmacro MUI_STARTMENU_WRITE_END
+	${IF} $CreateDeskTopShortCut == 1
+		CreateShortCut "$DESKTOP\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe"   0 "" "" "MPTagThat"
+    ${ENDIF}
+	
+	${IF} $CreateStartMenu == 1
+		!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+		CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe" 0 "" "" "MPTagThat" 
+		CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" "$INSTDIR\uninstall.exe"
+		!insertmacro MUI_STARTMENU_WRITE_END
+	${ENDIF}
+	
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${VERSION}"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" Publisher "${COMPANY}"
@@ -147,6 +159,12 @@ Section -post SEC0001
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
+	
+	# Folder Context Menu
+	${IF} $CreateExplorerMenu == 1
+		WriteRegStr HKCR "Folder\shell\Open folder in MPTagThat\command" "" '"$INSTDIR\MPTagThat.exe" "/folder=%L"'
+	${ENDIF}
+	
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -178,6 +196,7 @@ Section /o -un.Main UNSEC0000
     rmDir /REBOOTOK $INSTDIR
     
     DeleteRegValue HKLM "${REGKEY}\Components" Main
+	DeleteRegKey HKCR "Folder\shell\Open folder in MPTagThat"
 SectionEnd
 
 Section -un.post UNSEC0001
@@ -196,7 +215,35 @@ SectionEnd
 
 # Installer functions
 Function .onInit
+
     InitPluginsDir
+	;Extract InstallOptions files
+	File /oname=$PLUGINSDIR\options.ini "options.ini"
+
+FunctionEnd
+
+Function StartMenu_Pre
+
+	${IF} $CreateStartMenu == 0
+		Abort
+	${ENDIF}
+
+FunctionEnd
+
+# Custom Page showing the installer options
+Function Options
+ 
+  !insertmacro MUI_HEADER_TEXT "Installation Options" "Select installation options ..." 
+  InstallOptions::dialog "$PLUGINSDIR\options.ini"
+ 
+FunctionEnd
+
+Function OptionsValidate
+
+  ReadINIStr $CreateStartMenu "$PLUGINSDIR\options.ini" "Field 1" "State"
+  ReadINIStr $CreateDeskTopShortCut "$PLUGINSDIR\options.ini" "Field 2" "State"
+  ReadINIStr $CreateExplorerMenu "$PLUGINSDIR\options.ini" "Field 3" "State"
+ 
 FunctionEnd
 
 # Uninstaller functions
