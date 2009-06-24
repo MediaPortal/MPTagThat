@@ -44,7 +44,7 @@ namespace MPTagThat
     private MPTagThat.GridView.GridViewRip gridViewRip;
     private MPTagThat.GridView.GridViewConvert gridViewConvert;
 
-    private string _selectedDirectory;          // The currently selcted Directory
+    private string _selectedDirectory = "";          // The currently selcted Directory
     private bool _treeViewSelected = false;     // Has the user selected the Treeview
     private Point _formLocation;
     private Size _formSize;
@@ -466,7 +466,12 @@ namespace MPTagThat
     private void LoadSettings()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      _selectedDirectory = Options.MainSettings.LastFolderUsed;
+
+      // We might have received a folder via startup argument
+      if (_selectedDirectory == string.Empty)
+      {
+        _selectedDirectory = Options.MainSettings.LastFolderUsed;
+      }
       treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
       treeViewControl.DatabaseMode = Options.MainSettings.DatabaseMode;
       _formLocation = Options.MainSettings.FormLocation;

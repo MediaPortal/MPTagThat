@@ -20,21 +20,41 @@ namespace MPTagThat
     #endregion
 
     #region Variables
-    static int _portable;
+    private static int _portable;
+    private static string _startupFolder;
     #endregion
 
     /// <summary>
     /// The main entry point for the application.
     /// </summary>
+    /// <param name="/folder=">A startup folder. used when executing via Explorer Context Menu</param>
+    /// <param name="/portable">Run in Portable mode</param>
     [STAThread]
-    static void Main()
+    static void Main(string[] args)
     {
+      // Need to reset the Working directory, since when we called via the Explorer Context menu, it'll be different
+      Directory.SetCurrentDirectory(Application.StartupPath);
+
       // Add our Bin and Bin\Bass Directory to the Path
       SetEnvironmentVariable("Path", System.IO.Path.Combine(Application.StartupPath, "Bin"));
       SetEnvironmentVariable("Path", System.IO.Path.Combine(Application.StartupPath, @"Bin\Bass"));
 
-      // Read the Config File
       _portable = 0;
+      _startupFolder = "";
+      // Process Command line Arguments
+      foreach (string arg in args)
+      {
+        if (arg.ToLower().StartsWith("/folder="))
+        {
+          _startupFolder = arg.Substring(8);
+        }
+        else if (arg.ToLower() == "/portable")
+        {
+          _portable = 1;
+        }
+      }
+
+      // Read the Config file
       ReadConfig();
 
       // Register Bass
@@ -82,7 +102,11 @@ namespace MPTagThat
 
         try
         {
-          Application.Run(new Main());
+          Main main = new Main();
+
+          // Set the Startup Folder we might have received via an argument, before invoking the form
+          main.CurrentDirectory = _startupFolder;
+          Application.Run(main);
         }
         catch (Exception ex)
         {
@@ -112,7 +136,11 @@ namespace MPTagThat
         XmlNode portableNode = doc.DocumentElement.SelectSingleNode("/config/portable");
         if (portableNode != null)
         {
-          _portable = Convert.ToInt32(portableNode.InnerText);
+          if (_portable == 0)
+          {
+            // Only use the value from Config, if not overriden by an argument
+            _portable = Convert.ToInt32(portableNode.InnerText);
+          }
         }
       }
       catch (Exception)
