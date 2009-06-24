@@ -30,7 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeViewControl));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuCopy = new System.Windows.Forms.ToolStripMenuItem();
       this.menuCut = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +49,9 @@
       this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.tabPageFilter = new MPTagThat.Core.WinControls.MPTTabPage();
       this.dataGridViewTagFilter = new System.Windows.Forms.DataGridView();
+      this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
+      this.TagFilterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.TagFilterOperator = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.lbFileMask = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbFileMask = new System.Windows.Forms.TextBox();
       this.cbListFormats = new System.Windows.Forms.ComboBox();
@@ -58,9 +61,6 @@
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btnSwitchView = new MPTagThat.Core.WinControls.MPTButton();
-      this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
-      this.TagFilterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.TagFilterOperator = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.contextMenuTreeView.SuspendLayout();
       this.contextMenuStripFilter.SuspendLayout();
       this.tabControlTreeView.SuspendLayout();
@@ -220,11 +220,13 @@
                   | Raccoom.Windows.Forms.DriveTypes.LocalDisk)
                   | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
       this.treeViewFolderBrowser.HideSelection = false;
+      this.treeViewFolderBrowser.LabelEdit = true;
       this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
       this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
       this.treeViewFolderBrowser.Size = new System.Drawing.Size(204, 479);
       this.treeViewFolderBrowser.TabIndex = 1;
+      this.treeViewFolderBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewFolderBrowser_AfterLabelEdit);
       this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
       this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
       this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
@@ -286,6 +288,32 @@
       this.dataGridViewTagFilter.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridViewTagFilter_CurrentCellDirtyStateChanged);
       this.dataGridViewTagFilter.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewTagFilter_DataError);
       this.dataGridViewTagFilter.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewTagFilter_RowsRemoved);
+      // 
+      // TagFilterField
+      // 
+      this.TagFilterField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+      this.TagFilterField.HeaderText = "Field";
+      this.TagFilterField.MaxDropDownItems = 50;
+      this.TagFilterField.Name = "TagFilterField";
+      this.TagFilterField.Width = 35;
+      // 
+      // TagFilterValue
+      // 
+      this.TagFilterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+      this.TagFilterValue.DefaultCellStyle = dataGridViewCellStyle2;
+      this.TagFilterValue.HeaderText = "Filter";
+      this.TagFilterValue.Name = "TagFilterValue";
+      this.TagFilterValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.TagFilterValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      // 
+      // TagFilterOperator
+      // 
+      this.TagFilterOperator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+      this.TagFilterOperator.FillWeight = 80F;
+      this.TagFilterOperator.HeaderText = "Operator";
+      this.TagFilterOperator.Name = "TagFilterOperator";
+      this.TagFilterOperator.Width = 58;
       // 
       // lbFileMask
       // 
@@ -377,7 +405,7 @@
       this.btnRefreshFolder.Location = new System.Drawing.Point(13, 98);
       this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 0);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -392,7 +420,7 @@
       this.checkBoxRecursive.Location = new System.Drawing.Point(17, 71);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 0);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
@@ -410,32 +438,6 @@
       this.btnSwitchView.Text = "Switch View";
       this.btnSwitchView.UseVisualStyleBackColor = true;
       this.btnSwitchView.Click += new System.EventHandler(this.btnSwitchView_Click);
-      // 
-      // TagFilterField
-      // 
-      this.TagFilterField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-      this.TagFilterField.HeaderText = "Field";
-      this.TagFilterField.MaxDropDownItems = 50;
-      this.TagFilterField.Name = "TagFilterField";
-      this.TagFilterField.Width = 35;
-      // 
-      // TagFilterValue
-      // 
-      this.TagFilterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-      this.TagFilterValue.DefaultCellStyle = dataGridViewCellStyle1;
-      this.TagFilterValue.HeaderText = "Filter";
-      this.TagFilterValue.Name = "TagFilterValue";
-      this.TagFilterValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.TagFilterValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-      // 
-      // TagFilterOperator
-      // 
-      this.TagFilterOperator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-      this.TagFilterOperator.FillWeight = 80F;
-      this.TagFilterOperator.HeaderText = "Operator";
-      this.TagFilterOperator.Name = "TagFilterOperator";
-      this.TagFilterOperator.Width = 58;
       // 
       // TreeViewControl
       // 

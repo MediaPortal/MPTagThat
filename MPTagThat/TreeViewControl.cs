@@ -458,6 +458,50 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// THe user edited (renamed) a folder
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void treeViewFolderBrowser_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+    {
+      if (e.Label == null)
+      {
+        return;
+      }
+
+      TreeNodePath node = e.Node as TreeNodePath;
+      
+      string sourcePath = node.Path;
+      string targetPath = Path.Combine(Path.GetDirectoryName(node.Path), e.Label);
+      if (Directory.Exists(targetPath))
+      {
+        
+      }
+
+      bool bError = false;
+      try
+      {
+        log.Debug("TreeView: Renaming folder {0} to {1}", sourcePath, targetPath);
+        FileSystem.RenameDirectory(sourcePath, e.Label);
+      }
+      catch (Exception ex)
+      {
+        e.CancelEdit = true;
+        bError = true;
+        log.Error("TreeView: Error renaming folder {0}. {1}", sourcePath, ex.Message);
+      }
+      if (!bError)
+      {
+        e.CancelEdit = false;
+        node.Path = targetPath;
+        node.Text = e.Label;
+        _main.CurrentDirectory = targetPath;
+        treeViewFolderBrowser.Sort();
+        _main.RefreshTrackList();
+      }
+    }
+
+    /// <summary>
     /// Show the Treview Context Menu on Right Mouse Click
     /// </summary>
     /// <param name="sender"></param>
