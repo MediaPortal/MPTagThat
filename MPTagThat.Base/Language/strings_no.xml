@@ -592,6 +592,9 @@
     <String id="CustomPath">Egne Baner og Filnavn</String>
     <String id="Format">Format:</String>
     <String id="TargetFolder">Mål Mappe:</String>
+    <String id="RipOptions">Egenskaper for Ripping</String>
+    <String id="EjectCD">Løs Ut CD etter Ripping</String>
+    <String id="ActivateTargetFolder">Aktiver Mappe etter Ripping</String>
     <String id="GroupBoxEncoding">Encoding Format</String>
     <String id="EncodingFormat">Velg format du ønsker å encode til:</String>
     <String id="TabRippingMP3">MP3</String>
