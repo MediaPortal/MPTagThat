@@ -98,6 +98,8 @@ namespace MPTagThat.Preferences
       #region TabPage Ripping
       #region General
       tbTargetFolder.Text = Options.MainSettings.RipTargetFolder == "" ? Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) : Options.MainSettings.RipTargetFolder;
+      ckRipEjectCD.Checked = Options.MainSettings.RipEjectCD;
+      ckActivateTargetFolder.Checked = Options.MainSettings.RipActivateTargetFolder;
       encoders.Add(new Item(localisation.ToString("Settings", "EncoderMP3"), "mp3", ""));
       encoders.Add(new Item(localisation.ToString("Settings", "EncoderOgg"), "ogg", ""));
       encoders.Add(new Item(localisation.ToString("Settings", "EncoderFlac"), "flac", ""));
@@ -673,6 +675,8 @@ namespace MPTagThat.Preferences
       #region Ripping
       Options.MainSettings.RipEncoder = (comboBoxEncoder.SelectedValue as Item).Value;
       Options.MainSettings.RipTargetFolder = tbTargetFolder.Text;
+      Options.MainSettings.RipEjectCD = ckRipEjectCD.Checked;
+      Options.MainSettings.RipActivateTargetFolder = ckActivateTargetFolder.Checked;
 
       if (!Util.CheckParameterFormat(textBoxRippingFilenameFormat.Text, Options.ParameterFormat.RipFileName))
       {

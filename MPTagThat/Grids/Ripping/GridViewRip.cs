@@ -23,6 +23,7 @@ namespace MPTagThat.GridView
   public partial class GridViewRip : UserControl
   {
     #region Variables
+    private delegate void ThreadSafeGridDelegate();
     private delegate void ThreadSafeRippingStatusDelegate(string text);
     private delegate void ThreadSafeMediaInsertedDelegate(string DriveLetter);
     private delegate void ThreadSafeMediaRemovedDelegate(string DriveLetter);
@@ -66,9 +67,17 @@ namespace MPTagThat.GridView
           // Change the Datasource of the grid to the correct bindinglist
           if (CurrentDriveID > -1)
           {
+            // Activate the Rip Grid
+            _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabRip;
+            _main.BurnGridView.Hide();
+            _main.TracksGridView.Hide();
+            _main.RipGridView.Show();
+            if (!_main.SplitterRight.IsCollapsed)
+            {
+              _main.SplitterRight.ToggleState();
+            }
             QueryFreeDB(Convert.ToChar(_selectedCDRomDrive));
             dataGridViewRip.DataSource = bindingList[CurrentDriveID];
-            CheckRows(false);
           }
         }
       }
@@ -175,6 +184,7 @@ namespace MPTagThat.GridView
         SetStatusLabel("Rip aborted");
         threadRip.Abort();
         _currentRow = -1;
+        BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_UNLOCK);
       }
     }
     #endregion
@@ -213,12 +223,21 @@ namespace MPTagThat.GridView
     #region Ripping
     private void RippingThread()
     {
+      if (_main.TreeView.InvokeRequired)
+      {
+        ThreadSafeGridDelegate d = new ThreadSafeGridDelegate(RippingThread);
+        _main.TreeView.Invoke(d, new object[] { });
+        return;
+
+      }
+
       Util.EnterMethod(Util.GetCallingMethod());
+      string targetDir = "";
+      string encoder = null;
       try
       {
         _musicDir = _main.MainRibbon.RipOutputDirectory;
 
-        string encoder = null;
         List<Item> encoders = (List<Item>)_main.MainRibbon.RipEncoderCombo.DataSource;
         if (_main.MainRibbon.RipEncoderCombo.SelectedItem != null)
         {
@@ -248,7 +267,6 @@ namespace MPTagThat.GridView
         }
 
         // Build the Target Directory
-        string targetDir = "";
         string artistDir = tbAlbumArtist.Text == string.Empty ? "Artist" : tbAlbumArtist.Text;
         string albumDir = tbAlbum.Text == string.Empty ? "Album" : tbAlbum.Text;
 
@@ -297,6 +315,9 @@ namespace MPTagThat.GridView
           log.Debug("Rip: Error setting the drive id. Fallback to drive #0");
           selectedDriveID = 0;
         }
+
+        // Lock the Door
+        BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_LOCK);
 
         foreach (DataGridViewRow row in dataGridViewRip.Rows)
         {
@@ -380,6 +401,28 @@ namespace MPTagThat.GridView
       _currentRow = -1;
       SetStatusLabel(localisation.ToString("Conversion","RippingFinished"));
       Options.MainSettings.RipTargetFolder = _musicDir;
+      Options.MainSettings.RipEncoder = encoder;
+
+      // Unlock the Drive and open the door, if selected
+      BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_UNLOCK);
+      if (Options.MainSettings.RipEjectCD)
+      {
+        BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_OPEN);
+      }
+
+      // Activate the target Folder, if selected
+      if (Options.MainSettings.RipActivateTargetFolder)
+      {
+        _main.CurrentDirectory = targetDir;
+        _main.TreeView.RefreshFolders();
+        _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabTag;
+        _main.TracksGridView.Show();
+        if (_main.SplitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
+        {
+          _main.SplitterRight.ToggleState();
+        }
+        _main.RefreshTrackList();
+      }
 
       Util.LeaveMethod(Util.GetCallingMethod());
 
@@ -390,8 +433,7 @@ namespace MPTagThat.GridView
     /// <summary>
     /// Queries FreeDB for the Audio CD inserted
     /// </summary>
-    /// <param name="folder"></param>
-    /// <param name="items"></param>
+    /// <param name="drive"></param>
     private void QueryFreeDB(char drive)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -412,6 +454,7 @@ namespace MPTagThat.GridView
         CDInfo[] cds = freedb.GetDiscInfo(drive);
         if (cds != null)
         {
+          log.Debug("FreeDB: Found {0} matching discs.", cds.Length);
           if (cds.Length == 1)
           {
             MusicCD = freedb.GetDiscDetails(cds[0].Category, cds[0].DiscId);
@@ -434,12 +477,16 @@ namespace MPTagThat.GridView
           }
         }
         else
+        {
+          log.Debug("FreeDB: Disc could not be located in FreeDB.");
           MusicCD = null;
+        }
 
         freedb.Disconnect();
       }
-      catch (Exception)
+      catch (Exception ex)
       {
+        log.Error("FreeDB: Exception querying Disc. {0} {1}", ex.Message, ex.StackTrace);
         MusicCD = null;
       }
 
@@ -551,7 +598,6 @@ namespace MPTagThat.GridView
       if (!dataGridViewRip.CurrentCell.OwningColumn.GetType().Equals(typeof(DataGridViewTextBoxColumn)))
       {
         dataGridViewRip.CommitEdit(DataGridViewDataErrorContexts.Commit);
-
       }
     }
     /// <summary>
@@ -635,6 +681,7 @@ namespace MPTagThat.GridView
 
       double percentComplete = (double)message.MessageData["progress"];
       dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
+      dataGridViewRip.Update();
     }
 
     /// <summary>

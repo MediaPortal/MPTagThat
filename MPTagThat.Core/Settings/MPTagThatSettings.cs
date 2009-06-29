@@ -66,6 +66,8 @@ namespace MPTagThat.Core
     private bool _mp3Validate;
     private bool _mp3AutoFix;
     private string _amazonSite;
+    private bool _ripEjectCD;
+    private bool _ripActivateTargetFolder;
     #endregion
 
     #region Properties
@@ -379,6 +381,20 @@ namespace MPTagThat.Core
     {
       get { return _ripFileNameFormat; }
       set { _ripFileNameFormat = value; }
+    }
+
+    [Setting(SettingScope.User, "true")]
+    public bool RipEjectCD
+    {
+      get { return _ripEjectCD; }
+      set { _ripEjectCD = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool RipActivateTargetFolder
+    {
+      get { return _ripActivateTargetFolder; }
+      set { _ripActivateTargetFolder = value; }
     }
 
     #region MP3

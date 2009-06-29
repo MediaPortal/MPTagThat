@@ -104,6 +104,9 @@ namespace MPTagThat.Preferences
       this.tabPageRipping = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabControlRipping = new System.Windows.Forms.TabControl();
       this.tabPageRippingGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxRippingOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckActivateTargetFolder = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckRipEjectCD = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxCustomPath = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.groupBoxRippingFormatOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lblParmFolder = new MPTagThat.Core.WinControls.MPTLabel();
@@ -220,6 +223,7 @@ namespace MPTagThat.Preferences
       this.tabPageRipping.SuspendLayout();
       this.tabControlRipping.SuspendLayout();
       this.tabPageRippingGeneral.SuspendLayout();
+      this.groupBoxRippingOptions.SuspendLayout();
       this.groupBoxCustomPath.SuspendLayout();
       this.groupBoxRippingFormatOptions.SuspendLayout();
       this.groupBoxEncoding.SuspendLayout();
@@ -1212,6 +1216,7 @@ namespace MPTagThat.Preferences
       // tabPageRippingGeneral
       // 
       this.tabPageRippingGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageRippingGeneral.Controls.Add(this.groupBoxRippingOptions);
       this.tabPageRippingGeneral.Controls.Add(this.groupBoxCustomPath);
       this.tabPageRippingGeneral.Controls.Add(this.groupBoxEncoding);
       this.tabPageRippingGeneral.Localisation = "TabRippingGeneral";
@@ -1223,6 +1228,45 @@ namespace MPTagThat.Preferences
       this.tabPageRippingGeneral.TabIndex = 0;
       this.tabPageRippingGeneral.Text = "General";
       // 
+      // groupBoxRippingOptions
+      // 
+      this.groupBoxRippingOptions.Controls.Add(this.ckActivateTargetFolder);
+      this.groupBoxRippingOptions.Controls.Add(this.ckRipEjectCD);
+      this.groupBoxRippingOptions.Localisation = "RipOptions";
+      this.groupBoxRippingOptions.LocalisationContext = "Settings";
+      this.groupBoxRippingOptions.Location = new System.Drawing.Point(18, 364);
+      this.groupBoxRippingOptions.Name = "groupBoxRippingOptions";
+      this.groupBoxRippingOptions.Size = new System.Drawing.Size(596, 90);
+      this.groupBoxRippingOptions.TabIndex = 4;
+      this.groupBoxRippingOptions.TabStop = false;
+      this.groupBoxRippingOptions.Text = "Ripping OPtions";
+      // 
+      // ckActivateTargetFolder
+      // 
+      this.ckActivateTargetFolder.AutoSize = true;
+      this.ckActivateTargetFolder.Localisation = "ActivateTargetFolder";
+      this.ckActivateTargetFolder.LocalisationContext = "Settings";
+      this.ckActivateTargetFolder.Location = new System.Drawing.Point(19, 47);
+      this.ckActivateTargetFolder.Name = "ckActivateTargetFolder";
+      this.ckActivateTargetFolder.Size = new System.Drawing.Size(194, 17);
+      this.ckActivateTargetFolder.TabIndex = 1;
+      this.ckActivateTargetFolder.Text = "Activate Target Folder after Ripping";
+      this.ckActivateTargetFolder.UseVisualStyleBackColor = true;
+      // 
+      // ckRipEjectCD
+      // 
+      this.ckRipEjectCD.AutoSize = true;
+      this.ckRipEjectCD.Checked = true;
+      this.ckRipEjectCD.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckRipEjectCD.Localisation = "EjectCD";
+      this.ckRipEjectCD.LocalisationContext = "Settings";
+      this.ckRipEjectCD.Location = new System.Drawing.Point(19, 23);
+      this.ckRipEjectCD.Name = "ckRipEjectCD";
+      this.ckRipEjectCD.Size = new System.Drawing.Size(131, 17);
+      this.ckRipEjectCD.TabIndex = 0;
+      this.ckRipEjectCD.Text = "Eject CD after Ripping";
+      this.ckRipEjectCD.UseVisualStyleBackColor = true;
+      // 
       // groupBoxCustomPath
       // 
       this.groupBoxCustomPath.Controls.Add(this.groupBoxRippingFormatOptions);
@@ -1233,7 +1277,7 @@ namespace MPTagThat.Preferences
       this.groupBoxCustomPath.Controls.Add(this.lbTargetFolder);
       this.groupBoxCustomPath.Localisation = "CustomPath";
       this.groupBoxCustomPath.LocalisationContext = "Settings";
-      this.groupBoxCustomPath.Location = new System.Drawing.Point(18, 133);
+      this.groupBoxCustomPath.Location = new System.Drawing.Point(18, 122);
       this.groupBoxCustomPath.Name = "groupBoxCustomPath";
       this.groupBoxCustomPath.Size = new System.Drawing.Size(596, 235);
       this.groupBoxCustomPath.TabIndex = 2;
@@ -2385,6 +2429,8 @@ namespace MPTagThat.Preferences
       this.tabPageRipping.ResumeLayout(false);
       this.tabControlRipping.ResumeLayout(false);
       this.tabPageRippingGeneral.ResumeLayout(false);
+      this.groupBoxRippingOptions.ResumeLayout(false);
+      this.groupBoxRippingOptions.PerformLayout();
       this.groupBoxCustomPath.ResumeLayout(false);
       this.groupBoxCustomPath.PerformLayout();
       this.groupBoxRippingFormatOptions.ResumeLayout(false);
@@ -2603,5 +2649,8 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxClearDatabase;
     private MPTagThat.Core.WinControls.MPTLabel lbAmazonSearchSite;
     private System.Windows.Forms.ComboBox comboBoxAmazonSite;
+    private MPTagThat.Core.WinControls.MPTGroupBox groupBoxRippingOptions;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckActivateTargetFolder;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckRipEjectCD;
   }
 }
