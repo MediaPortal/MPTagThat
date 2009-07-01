@@ -479,7 +479,6 @@
     <String id="EncoderFlac">Flac Encoder</String>
     <String id="EncoderAAC">AAC Encoder</String>
     <String id="EncoderWMA">WMA Encoder</String>
-    <String id="EncoderWMA">WMA Encoder</String>
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
