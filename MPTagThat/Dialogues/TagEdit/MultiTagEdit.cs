@@ -973,9 +973,6 @@ namespace MPTagThat.TagEdit
       List<string> itemsArtist = new List<string>();
       List<string> itemsAlbumArtist = new List<string>();
       List<string> itemsAlbum = new List<string>();
-      string savedArtist = "";
-      string savedAlbumArtist = "";
-      string savedAlbum = "";
       foreach (DataGridViewRow row in main.TracksGridView.View.Rows)
       {
         if (!row.Selected)
@@ -983,25 +980,49 @@ namespace MPTagThat.TagEdit
 
         TrackData track = main.TracksGridView.TrackList[row.Index];
 
-        if (track.Artist != savedArtist &&
-            track.Artist != "")
+        bool found = false;
+        foreach (string item in itemsArtist)
+        {
+          if (item == track.Artist)
+          {
+            found = true;
+            break;
+          }
+        }
+
+        if (!found)
         {
           itemsArtist.Add(track.Artist);
-          savedArtist = track.Artist;
         }
 
-        if (track.AlbumArtist != savedAlbumArtist &&
-            track.AlbumArtist != "")
+        found = false;
+        foreach (string item in itemsAlbumArtist)
+        {
+          if (item == track.AlbumArtist)
+          {
+            found = true;
+            break;
+          }
+        }
+
+        if (!found)
         {
           itemsAlbumArtist.Add(track.AlbumArtist);
-          savedAlbumArtist = track.AlbumArtist;
         }
 
-        if (track.Album != savedAlbum &&
-            track.AlbumArtist != "")
+        found = false;
+        foreach (string item in itemsAlbum)
+        {
+          if (item == track.Album)
+          {
+            found = true;
+            break;
+          }
+        }
+
+        if (!found)
         {
           itemsAlbum.Add(track.Album);
-          savedAlbum = track.Album;
         }
       }
 
