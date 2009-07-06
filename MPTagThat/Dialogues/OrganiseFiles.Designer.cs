@@ -303,7 +303,7 @@ namespace MPTagThat.Organise
       // lblParmDisc
       // 
       this.lblParmDisc.AutoSize = true;
-      this.lblParmDisc.Localisation = "lblParmDisc";
+      this.lblParmDisc.Localisation = "Disc";
       this.lblParmDisc.LocalisationContext = "TagAndRename";
       this.lblParmDisc.Location = new System.Drawing.Point(6, 97);
       this.lblParmDisc.Name = "lblParmDisc";
