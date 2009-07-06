@@ -26,10 +26,8 @@ namespace LyricsEngine.LyricSites
             this.timeLimit = timeLimit / 2;
             timer = new System.Timers.Timer();
 
-            if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "SeekLyrics(" + artist + ", " + title + ")");
 
             artist = LyricUtil.RemoveFeatComment(artist);
-            artist = LyricUtil.TrimForParenthesis(artist);
             artist = LyricUtil.CapatalizeString(artist);
 
             artist = artist.Replace(" ", "_");
@@ -48,7 +46,6 @@ namespace LyricsEngine.LyricSites
             // French letters
             artist = artist.Replace("é", "%E9");
 
-            title = LyricUtil.RemoveFeatComment(title);
             title = LyricUtil.TrimForParenthesis(title);
             title = LyricUtil.CapatalizeString(title);
 
@@ -85,9 +82,11 @@ namespace LyricsEngine.LyricSites
             // French letters
             title = title.Replace("é", "%E9");
 
-            string firstLetter = "";
-            if (artist.Length > 0)
-                firstLetter = artist[0].ToString();
+            if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(title))
+            {
+                return;
+            }
+            string firstLetter = artist[0].ToString();
 
             string urlString = "http://www.hotlyrics.net/lyrics/" + firstLetter + "/" + artist + "/" + title + ".html";
 

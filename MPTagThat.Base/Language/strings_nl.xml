@@ -535,6 +535,7 @@
     <String id="LyricWiki">Liedtekst Wiki</String>
     <String id="Actionext">Actionext</String>
     <String id="LyrDB">LyrDB</String>
+    <String id="LrcFinder">Lrc Finder</String>
     <String id="GroupBoxTagsGeneral">Algemeen</String>
     <String id="CopyArtist">Kopie Artiest naar AlbumArtiest wanneer leeg</String>
     <String id="AutoFillNumberTracks">Bij bewerken van meer dan één nummer automatisch nummering toevoegen aan de nummers</String>

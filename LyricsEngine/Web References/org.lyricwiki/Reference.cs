@@ -47,11 +47,15 @@ namespace LyricsEngine.org.lyricwiki {
         
         private System.Threading.SendOrPostCallback getAlbumOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getHometownOperationCompleted;
+        
         private System.Threading.SendOrPostCallback postArtistOperationCompleted;
         
         private System.Threading.SendOrPostCallback postAlbumOperationCompleted;
         
         private System.Threading.SendOrPostCallback postSongOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback postSong_flagsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -119,6 +123,9 @@ namespace LyricsEngine.org.lyricwiki {
         public event getAlbumCompletedEventHandler getAlbumCompleted;
         
         /// <remarks/>
+        public event getHometownCompletedEventHandler getHometownCompleted;
+        
+        /// <remarks/>
         public event postArtistCompletedEventHandler postArtistCompleted;
         
         /// <remarks/>
@@ -126,6 +133,9 @@ namespace LyricsEngine.org.lyricwiki {
         
         /// <remarks/>
         public event postSongCompletedEventHandler postSongCompleted;
+        
+        /// <remarks/>
+        public event postSong_flagsCompletedEventHandler postSong_flagsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:LyricWiki#checkSongExists", RequestNamespace="urn:LyricWiki", ResponseNamespace="urn:LyricWiki")]
@@ -417,6 +427,38 @@ namespace LyricsEngine.org.lyricwiki {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:LyricWiki#getHometown", RequestNamespace="urn:LyricWiki", ResponseNamespace="urn:LyricWiki")]
+        [return: System.Xml.Serialization.SoapElementAttribute("country")]
+        public string getHometown(string artist, out string state, out string hometown) {
+            object[] results = this.Invoke("getHometown", new object[] {
+                        artist});
+            state = ((string)(results[1]));
+            hometown = ((string)(results[2]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getHometownAsync(string artist) {
+            this.getHometownAsync(artist, null);
+        }
+        
+        /// <remarks/>
+        public void getHometownAsync(string artist, object userState) {
+            if ((this.getHometownOperationCompleted == null)) {
+                this.getHometownOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetHometownOperationCompleted);
+            }
+            this.InvokeAsync("getHometown", new object[] {
+                        artist}, this.getHometownOperationCompleted, userState);
+        }
+        
+        private void OngetHometownOperationCompleted(object arg) {
+            if ((this.getHometownCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getHometownCompleted(this, new getHometownCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:LyricWiki#postArtist", RequestNamespace="urn:LyricWiki", ResponseNamespace="urn:LyricWiki")]
         [return: System.Xml.Serialization.SoapElementAttribute("dataUsed")]
         public bool postArtist(bool overwriteIfExists, ref string artist, string[] albums, out string message) {
@@ -538,6 +580,49 @@ namespace LyricsEngine.org.lyricwiki {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:LyricWiki#postSong_flags", RequestNamespace="urn:LyricWiki", ResponseNamespace="urn:LyricWiki")]
+        [return: System.Xml.Serialization.SoapElementAttribute("dataUsed")]
+        public bool postSong_flags(bool overwriteIfExists, ref string artist, ref string song, string lyrics, string[] onAlbums, string flags, out string message) {
+            object[] results = this.Invoke("postSong_flags", new object[] {
+                        overwriteIfExists,
+                        artist,
+                        song,
+                        lyrics,
+                        onAlbums,
+                        flags});
+            artist = ((string)(results[1]));
+            song = ((string)(results[2]));
+            message = ((string)(results[3]));
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void postSong_flagsAsync(bool overwriteIfExists, string artist, string song, string lyrics, string[] onAlbums, string flags) {
+            this.postSong_flagsAsync(overwriteIfExists, artist, song, lyrics, onAlbums, flags, null);
+        }
+        
+        /// <remarks/>
+        public void postSong_flagsAsync(bool overwriteIfExists, string artist, string song, string lyrics, string[] onAlbums, string flags, object userState) {
+            if ((this.postSong_flagsOperationCompleted == null)) {
+                this.postSong_flagsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnpostSong_flagsOperationCompleted);
+            }
+            this.InvokeAsync("postSong_flags", new object[] {
+                        overwriteIfExists,
+                        artist,
+                        song,
+                        lyrics,
+                        onAlbums,
+                        flags}, this.postSong_flagsOperationCompleted, userState);
+        }
+        
+        private void OnpostSong_flagsOperationCompleted(object arg) {
+            if ((this.postSong_flagsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.postSong_flagsCompleted(this, new postSong_flagsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -603,6 +688,8 @@ namespace LyricsEngine.org.lyricwiki {
         
         private string lyricsField;
         
+        private string urlField;
+        
         /// <remarks/>
         public string artist {
             get {
@@ -630,6 +717,16 @@ namespace LyricsEngine.org.lyricwiki {
             }
             set {
                 this.lyricsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string url {
+            get {
+                return this.urlField;
+            }
+            set {
+                this.urlField = value;
             }
         }
     }
@@ -979,6 +1076,48 @@ namespace LyricsEngine.org.lyricwiki {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
+    public delegate void getHometownCompletedEventHandler(object sender, getHometownCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getHometownCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getHometownCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string state {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string hometown {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
     public delegate void postArtistCompletedEventHandler(object sender, postArtistCompletedEventArgs e);
     
     /// <remarks/>
@@ -1090,6 +1229,56 @@ namespace LyricsEngine.org.lyricwiki {
         private object[] results;
         
         internal postSongCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string artist {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string song {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+        
+        /// <remarks/>
+        public string message {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[3]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
+    public delegate void postSong_flagsCompletedEventHandler(object sender, postSong_flagsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.1434")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class postSong_flagsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal postSong_flagsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

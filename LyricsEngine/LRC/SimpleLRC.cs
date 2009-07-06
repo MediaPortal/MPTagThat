@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Collections;
 
 namespace LyricsEngine.LRC
 {
@@ -9,14 +10,22 @@ namespace LyricsEngine.LRC
     {
         string artist;
         string title;
+        string offset;
         string album;
         string lyric;
         bool isValid;
 
-        System.Collections.ArrayList lyricLines;
-        System.Collections.ArrayList simpleLRCTimeAndLineArray;
+        ArrayList lyricLines;
+        private ArrayList simpleLRCTimeAndLineArray;
+        private ArrayList simpleLRCTimeAndLineArrayWithOffset;
         SimpleLRCTimeAndLineCollection simpleLRCTimeAndLineCollection;
+        SimpleLRCTimeAndLineCollection simpleLRCTimeAndLineCollectionWithOffset;
 
+
+        /// <summary>
+        /// Constructor used in the MyLyrics configuration
+        /// </summary>
+        /// <param name="file"></param>
         public SimpleLRC(string file)
         {
             FileInfo fileInfo = new FileInfo(file);
@@ -52,7 +61,7 @@ namespace LyricsEngine.LRC
             this.artist = artist;
             this.title = title;
 
-            string[] separators = new string[1]{"\n"};
+            string[] separators = new string[1] { "\n" };
             string[] lines = lyric.Split(separators, StringSplitOptions.None);
             string line = "";
             lyricLines = new System.Collections.ArrayList();
@@ -74,6 +83,24 @@ namespace LyricsEngine.LRC
             {
                 simpleLRCTimeAndLineCollection = new SimpleLRCTimeAndLineCollection((SimpleLRCTimeAndLine[])simpleLRCTimeAndLineArray.ToArray(typeof(SimpleLRCTimeAndLine)));
                 isValid = true;
+            }
+
+            simpleLRCTimeAndLineArrayWithOffset = new System.Collections.ArrayList();
+
+            int offsetInt = 0;
+
+            if (int.TryParse(offset, out offsetInt))
+            {
+                for (int i = 0; i < simpleLRCTimeAndLineArray.Count; i++)
+                {
+                    simpleLRCTimeAndLineArrayWithOffset.Add(((SimpleLRCTimeAndLine)simpleLRCTimeAndLineArray[i]).IncludeOffset(offsetInt));
+                }
+
+                simpleLRCTimeAndLineCollectionWithOffset = new SimpleLRCTimeAndLineCollection((SimpleLRCTimeAndLine[])simpleLRCTimeAndLineArrayWithOffset.ToArray(typeof(SimpleLRCTimeAndLine)));
+            }
+            else
+            {
+                simpleLRCTimeAndLineCollectionWithOffset = simpleLRCTimeAndLineCollection;
             }
         }
 
@@ -107,28 +134,28 @@ namespace LyricsEngine.LRC
 
                 int NEXT = 1;
                 int minStart, minLength, secStart, secLength, msecStart, msecLength = 0;
-                long min, sec, msec = 0;
+                int min, sec, msec = 0;
                 sec = 0;
 
                 minStart = NEXT;
                 minLength = m.Value.IndexOf(":") - minStart;
-                min = long.Parse(m.Value.Substring(minStart, minLength));
+                min = int.Parse(m.Value.Substring(minStart, minLength));
 
                 secStart = minStart + minLength + NEXT;
 
                 if (m.Value.IndexOf(".") != -1 && m.Value.IndexOf(".") < m.Value.IndexOf("]"))
                 {
                     secLength = m.Value.IndexOf(".") - secStart;
-                    sec = long.Parse(m.Value.Substring(secStart, secLength));
+                    sec = int.Parse(m.Value.Substring(secStart, secLength));
 
                     msecStart = secStart + secLength + NEXT;
                     msecLength = m.Value.IndexOf("]") - msecStart;
-                    msec = long.Parse(m.Value.Substring(msecStart, msecLength));
+                    msec = int.Parse(m.Value.Substring(msecStart, msecLength));
                 }
                 else
                 {
                     secLength = m.Value.IndexOf("]") - secStart;
-                    sec = long.Parse(m.Value.Substring(secStart, secLength));
+                    sec = int.Parse(m.Value.Substring(secStart, secLength));
                 }
 
                 string lineTemp = lineWithNewLine;
@@ -165,6 +192,13 @@ namespace LyricsEngine.LRC
                 album = LyricsEngine.LyricUtil.CapatalizeString((album.Substring(0, album.LastIndexOf("]"))));
                 return true;
             }
+
+            else if ((m = LRC.SimpleLRCFormat.OffsetLineStartRegex.Match(line)).Success)
+            {
+                offset = line.Substring(m.Index + m.Length);
+                offset = LyricsEngine.LyricUtil.CapatalizeString((offset.Substring(0, offset.LastIndexOf("]"))));
+                return true;
+            }
             else
             {
                 return true;
@@ -187,6 +221,11 @@ namespace LyricsEngine.LRC
             get { return album; }
         }
 
+        public string Offset
+        {
+            get { return offset; }
+        }
+
         public string Lyric
         {
             get { return lyric; }
@@ -197,9 +236,9 @@ namespace LyricsEngine.LRC
             get { return isValid; }
         }
 
-        public SimpleLRCTimeAndLineCollection SimpleLRCTimeAndLineCollection
+        public SimpleLRCTimeAndLineCollection SimpleLRCTimeAndLineCollectionWithOffset
         {
-            get { return simpleLRCTimeAndLineCollection; }
+            get { return simpleLRCTimeAndLineCollectionWithOffset; }
         }
         #endregion
     }

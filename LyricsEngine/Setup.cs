@@ -6,8 +6,9 @@ namespace LyricsEngine
 {
     public static class Setup
     {
-        public static string[] BatchSearchSites = new string[7]
+        public static string[] BatchSearchSites = new string[8]
         {
+            "LrcFinder",
             "LyricWiki",
             "Lyrics007",
             "LyricsOnDemand",

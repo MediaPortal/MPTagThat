@@ -281,6 +281,7 @@ namespace MPTagThat.Preferences
       ckSeekLyrics.Checked = Options.MainSettings.SearchSeekLyrics;
       ckActionext.Checked = Options.MainSettings.SearchActionext;
       ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
+      ckLRCFinder.Checked = Options.MainSettings.SearchLRCFinder;
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
       amazonSites.Add(new Item("United States (US)", "com", ""));
@@ -769,6 +770,7 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchLyricWiki = ckLyricWiki.Checked;
       Options.MainSettings.SearchSeekLyrics = ckSeekLyrics.Checked;
       Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
+      Options.MainSettings.SearchLRCFinder = ckLRCFinder.Checked;
       Options.MainSettings.SearchActionext = ckActionext.Checked;
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (comboBoxAmazonSite.SelectedValue as Item).Value;

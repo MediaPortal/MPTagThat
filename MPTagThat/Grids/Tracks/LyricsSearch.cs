@@ -103,6 +103,9 @@ namespace MPTagThat.GridView
       if (Options.MainSettings.SearchLyrDB)
         sitesToSearch.Add("LyrDB");
 
+      if (Options.MainSettings.SearchLRCFinder)
+        sitesToSearch.Add("LrcFinder");
+
       // initialize delegates
       m_DelegateLyricFound = new DelegateLyricFound(this.lyricFound);
       m_DelegateLyricNotFound = new DelegateLyricNotFound(this.lyricNotFound);

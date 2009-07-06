@@ -50,5 +50,15 @@ namespace LyricsEngine.Properties {
                 return ((string)(this["MyLyrics_Google_GoogleSearchService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lrcfinder.profiler.nl/LrcFinder.asmx")]
+        public string LyricsEngine_lrcfinder1_LrcFinder {
+            get {
+                return ((string)(this["LyricsEngine_lrcfinder1_LrcFinder"]));
+            }
+        }
     }
 }

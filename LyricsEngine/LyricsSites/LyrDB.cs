@@ -29,11 +29,7 @@ namespace LyricsEngine.LyricSites
 
             m_EventStop_SiteSearches = eventStop_SiteSearches;
 
-            if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "LyrDB(" + artist + ", " + title + ")");
-
             artist = LyricUtil.RemoveFeatComment(artist);
-            artist = LyricUtil.TrimForParenthesis(artist);
-            title = LyricUtil.RemoveFeatComment(title);
             title = LyricUtil.TrimForParenthesis(title);
             //string urlString = string.Format("http://www.lyrdb.com/lookup.php?q={0}|{1}&for=match", artist, title);
             string urlString = string.Format("http://webservices.lyrdb.com/lookup.php?q={0}%7c{1}&for=match", artist, title);

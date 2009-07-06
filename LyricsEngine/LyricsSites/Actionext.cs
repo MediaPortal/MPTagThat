@@ -26,17 +26,15 @@ namespace LyricsEngine.LyricSites
       this.timeLimit = timeLimit;
       timer = new System.Timers.Timer();
 
-      if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "Actionext(" + artist + ", " + title + ")");
-
-      if (artist == "")
-        artist = " ";
-
       artist = LyricUtil.RemoveFeatComment(artist);
-      artist = LyricUtil.TrimForParenthesis(artist);
       artist = artist.Replace(" ", "_");
-      title = LyricUtil.RemoveFeatComment(title);
       title = LyricUtil.TrimForParenthesis(title);
       title = title.Replace(" ", "_");
+
+            if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(title))
+            {
+                return;
+            }
 
       string urlString = "http://www.actionext.com/names_" + artist[0] + "/" + artist + "_lyrics/" + title + ".html";
       urlString = urlString.ToLower();

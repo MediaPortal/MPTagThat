@@ -606,6 +606,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="Actionext">Actionext</String>
     <String id="LyrDB">LyrDB</String>
+    <String id="LrcFinder">Lrc Finder</String>
     <String id="GroupBoxTagsGeneral">General</String>
     <String id="CopyArtist">Copiar Artista a ÁlbumArtista cuando esté vacío</String>
     <String id="AutoFillNumberTracks">Auto rellenar "Número de Pistas" en Edición Múltiple de Etiquetas</String>

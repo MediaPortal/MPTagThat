@@ -83,6 +83,7 @@ namespace MPTagThat.Preferences
       this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckLRCFinder = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckSeekLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -933,6 +934,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxLyricsSites
       // 
+      this.groupBoxLyricsSites.Controls.Add(this.ckLRCFinder);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyrDB);
       this.groupBoxLyricsSites.Controls.Add(this.ckActionext);
       this.groupBoxLyricsSites.Controls.Add(this.ckSeekLyrics);
@@ -948,6 +950,20 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.TabIndex = 0;
       this.groupBoxLyricsSites.TabStop = false;
       this.groupBoxLyricsSites.Text = "Sites to Search";
+      // 
+      // ckLRCFinder
+      // 
+      this.ckLRCFinder.AutoSize = true;
+      this.ckLRCFinder.Checked = true;
+      this.ckLRCFinder.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLRCFinder.Localisation = "LrcFimder";
+      this.ckLRCFinder.LocalisationContext = "Settings";
+      this.ckLRCFinder.Location = new System.Drawing.Point(432, 60);
+      this.ckLRCFinder.Name = "ckLRCFinder";
+      this.ckLRCFinder.Size = new System.Drawing.Size(76, 17);
+      this.ckLRCFinder.TabIndex = 7;
+      this.ckLRCFinder.Text = "LRCFinder";
+      this.ckLRCFinder.UseVisualStyleBackColor = true;
       // 
       // ckLyrDB
       // 
@@ -2652,5 +2668,6 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxRippingOptions;
     private MPTagThat.Core.WinControls.MPTCheckBox ckActivateTargetFolder;
     private MPTagThat.Core.WinControls.MPTCheckBox ckRipEjectCD;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckLRCFinder;
   }
 }

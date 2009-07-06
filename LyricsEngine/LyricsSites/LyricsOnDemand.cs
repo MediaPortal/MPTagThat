@@ -26,10 +26,8 @@ namespace LyricsEngine.LyricSites
             this.timeLimit = timeLimit;
             timer = new System.Timers.Timer();
 
-            if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "LyricsOnDemand(" + artist + ", " + title + ")");
 
             artist = LyricUtil.RemoveFeatComment(artist);
-            artist = LyricUtil.TrimForParenthesis(artist);
             artist = LyricUtil.DeleteSpecificChars(artist);
             artist = artist.Replace(" ", "");
             artist = artist.Replace("The ", "");
@@ -40,7 +38,6 @@ namespace LyricsEngine.LyricSites
 
             // Cannot find lyrics contaning non-English letters!
 
-            title = LyricUtil.RemoveFeatComment(title);
             title = LyricUtil.TrimForParenthesis(title);
             title = LyricUtil.DeleteSpecificChars(title);
             title = title.Replace(" ", "");
@@ -59,9 +56,11 @@ namespace LyricsEngine.LyricSites
 
             title = title.ToLower();
 
-            string firstLetter = "";
-            if (artist.Length > 0)
-                firstLetter = artist[0].ToString();
+            if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(title))
+            {
+                return;
+            }
+            string firstLetter = artist[0].ToString();
 
             int firstNumber = 0;
             if (int.TryParse(firstLetter, out firstNumber))

@@ -17,6 +17,9 @@ namespace LyricsEngine
 
         public static void OpenLog(string url)
         {
+            try
+            {
+
             logFileName = url;
 
             if (ts == null)
@@ -39,6 +42,9 @@ namespace LyricsEngine
                 ts.Listeners.Add(objTraceListener);
                 StartTimer();
             }
+        }
+            catch (Exception e)
+            { ;}
         }
 
         public static void Dispose()
@@ -86,11 +92,16 @@ namespace LyricsEngine
 
         private static void StopTimer()
         {
+            if (stopWatch != null)
+            {
             stopWatch.Stop();
+        }
         }
 
         public static string ElapsedTimeString()
         {
+            if (stopWatch != null)
+            {
             long time = stopWatch.ElapsedMilliseconds;
             long sec = time / 1000;
             long ms = (time / 100) - (sec * 10);
@@ -99,6 +110,11 @@ namespace LyricsEngine
             str += (sec < 10) ? "0" : "";
             str += sec.ToString() + "." + ms.ToString();
             return str + ": ";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }

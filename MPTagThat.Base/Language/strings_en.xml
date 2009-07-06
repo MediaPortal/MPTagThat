@@ -554,6 +554,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="Actionext">Actionext</String>
     <String id="LyrDB">LyrDB</String>
+    <String id="LrcFinder">Lrc Finder</String>
     <String id="GroupBoxTagsGeneral">General</String>
     <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
     <String id="AutoFillNumberTracks">Auto Fill "Number of Tracks" on Multiple Tag Edit</String>

@@ -554,6 +554,7 @@
     <String id="LyricWiki">Lyric Wiki</String>
     <String id="Actionext">Actionext</String>
     <String id="LyrDB">Lyric DB</String>
+    <String id="LrcFinder">Lrc Finder</String>
     <String id="GroupBoxTagsGeneral">Generell</String>
     <String id="CopyArtist">Kopier Artist til AlbumArtist når denne er tom</String>
     <String id="AutoFillNumberTracks">Automatisk Fyll i "Antall Spor" når Flervalgte Tagg blir brukt</String>

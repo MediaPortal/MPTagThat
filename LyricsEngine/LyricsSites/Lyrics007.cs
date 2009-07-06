@@ -27,12 +27,8 @@ namespace LyricsEngine.LyricSites
             this.timeLimit = timeLimit / 2;
       timer = new System.Timers.Timer();
 
-      if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "Lyrics007(" + artist + ", " + title + ")");
-
       artist = LyricUtil.RemoveFeatComment(artist);
-      artist = LyricUtil.TrimForParenthesis(artist);
       artist = artist.Replace("#", "");
-      title = LyricUtil.RemoveFeatComment(title);
       title = LyricUtil.TrimForParenthesis(title);
       title = title.Replace("#", "");
 

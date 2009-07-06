@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="LyricSiteInfo.cs" />
     <Compile Include="LyricsSites\Actionext.cs" />
+    <Compile Include="LyricsSites\LrcFinder.cs" />
     <Compile Include="LyricsSites\LyrDB.cs" />
     <Compile Include="LyricsWebClient.cs">
       <SubType>Component</SubType>
@@ -115,6 +116,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Setup.cs" />
+    <Compile Include="Web References\lrcfinder\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\org.lyricwiki\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,6 +132,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://lrcfinder.profiler.nl/LrcFinder.asmx%3fop=FindLRC">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\lrcfinder\</RelPath>
+      <UpdateFromURL>http://lrcfinder.profiler.nl/LrcFinder.asmx%3fop=FindLRC</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LyricsEngine_lrcfinder1_LrcFinder</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://lyricwiki.org/server.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.lyricwiki\</RelPath>
@@ -164,6 +181,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\lrcfinder\LrcFinder.disco" />
+    <None Include="Web References\lrcfinder\LrcFinder.wsdl" />
+    <None Include="Web References\lrcfinder\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

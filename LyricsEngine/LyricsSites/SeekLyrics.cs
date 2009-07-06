@@ -27,10 +27,7 @@ namespace LyricsEngine.LyricSites
       this.timeLimit = timeLimit;
       timer = new System.Timers.Timer();
 
-      if (LyricDiagnostics.TraceSource != null) LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.ElapsedTimeString() + "SeekLyrics(" + artist + ", " + title + ")");
-
       artist = LyricUtil.RemoveFeatComment(artist);
-      artist = LyricUtil.TrimForParenthesis(artist);
       artist = artist.Replace(" ", "-");
       artist = artist.Replace("'", "-");
       artist = artist.Replace("(", "");
@@ -50,7 +47,6 @@ namespace LyricsEngine.LyricSites
       // French letters
       artist = artist.Replace("é", "%E9");
 
-      title = LyricUtil.RemoveFeatComment(title);
       title = LyricUtil.TrimForParenthesis(title);
       title = title.Replace(" ", "-");
       title = title.Replace("'", "-");

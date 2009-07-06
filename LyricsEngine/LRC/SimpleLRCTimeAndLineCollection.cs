@@ -11,6 +11,11 @@ namespace LyricsEngine.LRC
 
         private object[] items;
 
+        public SimpleLRCTimeAndLineCollection()
+        {
+
+        }
+
         public SimpleLRCTimeAndLineCollection(object[] array)
         {
             items = array;

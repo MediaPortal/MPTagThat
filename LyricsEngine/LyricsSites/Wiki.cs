@@ -79,8 +79,10 @@ namespace LyricsEngine.LyricSites
                 {
                     return MakeLyricFit(lyricsResult.lyrics);
                 }
-
+                else
+                {
                 return "Not found";
+            }
             }
             catch (Exception)
             {
@@ -99,7 +101,6 @@ namespace LyricsEngine.LyricSites
 
         private void OptimizeString(ref string artist, ref string title)
         {
-            artist = LyricUtil.TrimForParenthesis(artist);
             title = LyricUtil.TrimForParenthesis(title);
         }
 
