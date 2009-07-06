@@ -72,10 +72,6 @@ namespace Raccoom.Windows.Forms
 
       foreach (DirectoryInfo dir in dirInfo)
       {
-        if ((dir.Attributes & System.IO.FileAttributes.System) == System.IO.FileAttributes.System)
-        {
-          continue;
-        }
         if ((dir.Attributes & System.IO.FileAttributes.Hidden) == System.IO.FileAttributes.Hidden)
         {
           continue;
