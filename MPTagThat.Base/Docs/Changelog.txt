@@ -7,6 +7,29 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3489 Build 33914 Date: 21.07.2009 
+-------------------------------------
++ Language: Added Language Tool in the hope to get more translations
++ Language: added Spanish  translation
++ General: MPT can be now invoked from the Explorer Context menu and will read all files of the selected folder
++ Setup: Options to select creation of startup menu, Desktop Shortcut and Explorer Context Menu
++ General: Added new startupparms "/folder=<startupfolder>" and "/portable"
++ Riping: Added Option to Eject CD when finished with Riping
++ Riping: Added Option to select the Target Folder after Riping
++ TreeView: Folders can be renamed by editing the label of the node in the TreeView
+x Language: Added bitrate range to the description of the Lame presets
+x Lyrics: Upgrade of Lyrics Engine
+x TreeView: Folders with the System attribute set to on, where omitted
+x Organise: Translation for "Disc Number" was not used
+x Tagedit: Selection combos for Artist, AlbumArtist and Album where not filled correctly
+x Riping: When a CD is inserted, the Riping View should be displayed automatically
+x Riping: When a CD is inserted, all tracks on the CD should be selected in the Rip View
+x Keys: Changed the default Key map for "Remove all Comments" from F2 to F4, so that F2 can be used for invoking edit within the grid
+x FolderScan. Capture errors reading a file and log the filename
+x Database Search: Searching for multiple fields, e.g. Artist and Title / Album was not working
+x Player: Playback was stopping after the first song of the playlist finished
+x TreeView: Prevent nullref, when filter is added, with no column selected
+
 1.1.3434 Build 16708 Date: 27.05.2009 
 -------------------------------------
 x TagEdit: Saving Tags in Database View, resulted in wrong updates to the Music Database
