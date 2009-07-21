@@ -518,9 +518,9 @@
     <String id="Cbr">Konstante Bitrate</String>
     <String id="Vbr">Variable Bitrate</String>
     <String id="InvalidParm">Falsches Parameter Format für Rip Dateiname. Bitte ändern.</String>
-    <String id="DescPrefMedium">Diese Einstellung sollte für die meisten Musikarten transparent für den Hörer sein.</String>
-    <String id="DescPrefStandard">Diese Einstellung sollte für die meisten Musikarten transparent für den Hörer sein und bietet bereits eine hohe Qualität.</String>
-    <String id="DescPrefExtreme">Wenn Sie über sehr gute Höreigenschaften verfügen und entsprechendes Equipment verfügbar ist, dann erreichen Sie mit dieser Einstellung eine etwas bessere Qualität als im "Standard" modus.</String>
+    <String id="DescPrefMedium">Diese Einstellung sollte für die meisten Musikarten transparent für den Hörer sein. (Bitrate Bereich 140-185)</String>
+    <String id="DescPrefStandard">Diese Einstellung sollte für die meisten Musikarten transparent für den Hörer sein und bietet bereits eine hohe Qualität. (Bitrate Bereich 170-210)</String>
+    <String id="DescPrefExtreme">Wenn Sie über sehr gute Höreigenschaften verfügen und entsprechendes Equipment verfügbar ist, dann erreichen Sie mit dieser Einstellung eine etwas bessere Qualität als im "Standard" modus. (Bitrate Bereich 220-260)</String>
     <String id="DescPrefInsane">Konatsnte Bitrate von 320 kbps. Diese Einstallung ist für die meisten Benutzer nicht notwendig. Wenn Sie aber die absolut höchste Qualität, ohne Berücksichtigung der Dateigröße, benötigen, dann sollten Sie diese Einstellung verwenden.</String>
     <String id="DescPrefABR">ABR Modus (Hohe Qualität für die angebene Bitrate, aber nicht so hoch wie bei VBR). Die Verwendung dieser Einstallung garantiert eine gute Qualität für die angegebene Bitrate.\n\nAusgehend von der gewähöten Bitrate wird die optimale Einstellung gewählt. Während dieser Ansatz generell funktioniert, ist er nicht so flexibel als die Verwendung von VBR und erreicht normalerweise nicht dieselbel Qualitätsstufe wie VBR.</String>
     <String id="TabGeneral">Generell</String>
