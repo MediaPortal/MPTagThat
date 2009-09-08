@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using BassRegistration;
 using MPTagThat.Core;
 
 namespace MPTagThat.Core.Amazon
@@ -10,7 +11,7 @@ namespace MPTagThat.Core.Amazon
   {
 
     #region Private Constants
-    private const string amazonUrl = "http://ecs.amazonaws.{0}/onca/xml?Service=AWSECommerceService&SubscriptionId=0XCDYPB7YGRYE8T6G302";
+    private const string amazonUrl = "Service=AWSECommerceService&Version=2009-03-31";
     private const string itemLookup = "&Operation=ItemLookup&ItemId={0}&ResponseGroup=Images,ItemAttributes,Tracks";
     private const string itemSearch = "&Operation=ItemSearch&Artist={0}&Title={1}&SearchIndex=Music&ResponseGroup=Images,ItemAttributes,Tracks";
 
@@ -28,7 +29,8 @@ namespace MPTagThat.Core.Amazon
     {
       AmazonAlbum album = new AmazonAlbum();
 
-      string requestString = string.Format(amazonUrl, Options.MainSettings.AmazonSite) + string.Format(itemLookup, albumID);
+      BassRegistration.SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
+      string requestString = helper.Sign(string.Format(itemLookup, albumID));
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
         return album;
@@ -36,7 +38,7 @@ namespace MPTagThat.Core.Amazon
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
       XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2005-10-05");
+      nsMgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2009-03-31");
 
       XmlNodeList nodes = xml.SelectNodes("/ns:ItemLookupResponse/ns:Items/ns:Item", nsMgr);
       if (nodes.Count > 0)
@@ -57,7 +59,8 @@ namespace MPTagThat.Core.Amazon
       log.Debug("Amazon: Searching Amazon Webservices");
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
 
-      string requestString = string.Format(amazonUrl, Options.MainSettings.AmazonSite) + string.Format(itemSearch, System.Web.HttpUtility.UrlEncode(artist), System.Web.HttpUtility.UrlEncode(albumTitle));
+      BassRegistration.SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
+      string requestString = helper.Sign(string.Format(itemSearch, System.Web.HttpUtility.UrlEncode(artist), System.Web.HttpUtility.UrlEncode(albumTitle)));
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
       {
