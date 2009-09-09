@@ -7,6 +7,11 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3539 Build 36477 Date: 09.09.2009 
+-------------------------------------
++ Scripts can be used on Organise to override target folder
+x Tagging: Requests to Amazon are now signed to comply with the new API
+
 1.1.3489 Build 33914 Date: 21.07.2009 
 -------------------------------------
 + Language: Added Language Tool in the hope to get more translations
