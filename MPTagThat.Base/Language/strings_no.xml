@@ -518,9 +518,9 @@
     <String id="Cbr">CBR</String>
     <String id="Vbr">VBR</String>
     <String id="InvalidParm">Ugyldig Parameter brukt i Formatet for Rippet Filnavn. Vennligst korriger.</String>
-    <String id="DescPrefMedium">Denne innstillingen burde være mest vanlig for de fleste.</String>
-    <String id="DescPrefStandard">Denne innstillingen burde være bra for de fleste siden kvaliteten er ganske høy.</String>
-    <String id="DescPrefExtreme">Hvis du har ekstremt god hørsel og like godt avspillingsutstyr, vil denne innstillingen gi noe høyere kvalitet en ”standard” innstillingen.</String>
+    <String id="DescPrefMedium">Denne innstillingen burde være mest vanlig for de fleste. (Bitrate mellom 140-185)</String>
+    <String id="DescPrefStandard">Denne innstillingen burde være bra for de fleste siden kvaliteten er ganske høy. (Bitrate mellom 170-210)</String>
+    <String id="DescPrefExtreme">Hvis du har ekstremt god hørsel og like godt avspillingsutstyr, vil denne innstillingen gi noe høyere kvalitet en ”standard” innstillingen. (Bitrate mellom 220-260)</String>
     <String id="DescPrefInsane">CBR 320. Denne innstillingen vil være I overkant for de fleste I de fleste situasjoner, men hvis du må ha høyest mulig kvalitet uten å tenke på filstørrelse, er dette veien å gå..</String>
     <String id="DescPrefABR">ABR modellen (høy kvalitet/bitrate men ikke så høy som VBR).\r\nVed bruk av denne innstillingen vil vanligvis gi god kvalitet ved en gitt bitrate. \r\nMen denne innstillingen er ikke like fleksibel som VBR og vil som regel ikke gi bedre kvalitet en VBR ved høyere bitrater.</String>
     <String id="TabGeneral">Generelt</String>
