@@ -471,6 +471,7 @@
   <Section name="organise">
     <String id="Heading">Dateien organisieren</String>
     <String id="TargetRootDrectory">Ziel-Pfad:</String>
+	<String id="TargetRootDrectoryOverride">Ziel-Pfad durch Skript bestimmen:</String>
     <String id="BrowseRootDir">Durchsuchen</String>
     <String id="OverWriteFiles">Existierende Dateien überschreiben</String>
     <String id="CopyFiles">Dateien kopieren statt zu verschieben</String>

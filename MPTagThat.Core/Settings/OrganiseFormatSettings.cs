@@ -9,6 +9,7 @@ namespace MPTagThat.Core
     #region Variable
     private List<string> _lastUsedFolders = new List<string>();
     private int _lastUsedFolderIndex = -1;
+    private string _lastUsedScript;
     private bool _overWriteFiles;
     private bool _copyFiles;
     private bool _copyNonMusicFiles;
@@ -48,6 +49,13 @@ namespace MPTagThat.Core
     {
       get { return _copyNonMusicFiles; }
       set { _copyNonMusicFiles = value; }
+    }
+
+    [Setting(SettingScope.User, "")]
+    public string LastUsedScript
+    {
+      get { return _lastUsedScript; }
+      set { _lastUsedScript = value; }
     }
     #endregion
 

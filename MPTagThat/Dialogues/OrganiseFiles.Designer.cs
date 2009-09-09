@@ -56,6 +56,8 @@ namespace MPTagThat.Organise
       this.ckCopyFiles = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyNonMusicFiles = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.cbScripts = new System.Windows.Forms.ComboBox();
+      this.lblOverrideTargetRootDir = new MPTagThat.Core.WinControls.MPTLabel();
       this.labelHeader = new System.Windows.Forms.Label();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.btReview = new MPTagThat.Core.WinControls.MPTButton();
@@ -76,7 +78,7 @@ namespace MPTagThat.Organise
       this.btApply.Anchor = System.Windows.Forms.AnchorStyles.Right;
       this.btApply.Localisation = "ButtonOrganise";
       this.btApply.LocalisationContext = "Organise";
-      this.btApply.Location = new System.Drawing.Point(583, 451);
+      this.btApply.Location = new System.Drawing.Point(583, 480);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(100, 23);
       this.btApply.TabIndex = 3;
@@ -90,7 +92,7 @@ namespace MPTagThat.Organise
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagAndRename";
-      this.btCancel.Location = new System.Drawing.Point(690, 451);
+      this.btCancel.Location = new System.Drawing.Point(690, 480);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(100, 23);
       this.btCancel.TabIndex = 4;
@@ -403,7 +405,7 @@ namespace MPTagThat.Organise
       this.ckCopyFiles.AutoSize = true;
       this.ckCopyFiles.Localisation = "CopyFiles";
       this.ckCopyFiles.LocalisationContext = "Organise";
-      this.ckCopyFiles.Location = new System.Drawing.Point(274, 28);
+      this.ckCopyFiles.Location = new System.Drawing.Point(9, 65);
       this.ckCopyFiles.Name = "ckCopyFiles";
       this.ckCopyFiles.Size = new System.Drawing.Size(183, 17);
       this.ckCopyFiles.TabIndex = 27;
@@ -415,7 +417,7 @@ namespace MPTagThat.Organise
       this.ckCopyNonMusicFiles.AutoSize = true;
       this.ckCopyNonMusicFiles.Localisation = "CopyNonMusicFiles";
       this.ckCopyNonMusicFiles.LocalisationContext = "Organise";
-      this.ckCopyNonMusicFiles.Location = new System.Drawing.Point(536, 28);
+      this.ckCopyNonMusicFiles.Location = new System.Drawing.Point(321, 65);
       this.ckCopyNonMusicFiles.Name = "ckCopyNonMusicFiles";
       this.ckCopyNonMusicFiles.Size = new System.Drawing.Size(208, 17);
       this.ckCopyNonMusicFiles.TabIndex = 28;
@@ -425,17 +427,39 @@ namespace MPTagThat.Organise
       // groupBoxOptions
       // 
       this.groupBoxOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBoxOptions.Controls.Add(this.cbScripts);
       this.groupBoxOptions.Controls.Add(this.ckOverwriteFiles);
+      this.groupBoxOptions.Controls.Add(this.lblOverrideTargetRootDir);
       this.groupBoxOptions.Controls.Add(this.ckCopyNonMusicFiles);
       this.groupBoxOptions.Controls.Add(this.ckCopyFiles);
       this.groupBoxOptions.Localisation = "GroupBoxOptions";
       this.groupBoxOptions.LocalisationContext = "OrganiseFiles";
       this.groupBoxOptions.Location = new System.Drawing.Point(16, 346);
       this.groupBoxOptions.Name = "groupBoxOptions";
-      this.groupBoxOptions.Size = new System.Drawing.Size(774, 86);
+      this.groupBoxOptions.Size = new System.Drawing.Size(774, 113);
       this.groupBoxOptions.TabIndex = 29;
       this.groupBoxOptions.TabStop = false;
       this.groupBoxOptions.Text = "Options";
+      // 
+      // cbScripts
+      // 
+      this.cbScripts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbScripts.FormattingEnabled = true;
+      this.cbScripts.Location = new System.Drawing.Point(610, 26);
+      this.cbScripts.Name = "cbScripts";
+      this.cbScripts.Size = new System.Drawing.Size(157, 21);
+      this.cbScripts.TabIndex = 36;
+      // 
+      // lblOverrideTargetRootDir
+      // 
+      this.lblOverrideTargetRootDir.AutoSize = true;
+      this.lblOverrideTargetRootDir.Localisation = "TargetRootDrectoryOverride";
+      this.lblOverrideTargetRootDir.LocalisationContext = "Organise";
+      this.lblOverrideTargetRootDir.Location = new System.Drawing.Point(318, 32);
+      this.lblOverrideTargetRootDir.Name = "lblOverrideTargetRootDir";
+      this.lblOverrideTargetRootDir.Size = new System.Drawing.Size(213, 13);
+      this.lblOverrideTargetRootDir.TabIndex = 35;
+      this.lblOverrideTargetRootDir.Text = "Override Target Root Directory using Script:";
       // 
       // labelHeader
       // 
@@ -484,7 +508,7 @@ namespace MPTagThat.Organise
       this.cbRootDir.FormattingEnabled = true;
       this.cbRootDir.Location = new System.Drawing.Point(133, 22);
       this.cbRootDir.Name = "cbRootDir";
-      this.cbRootDir.Size = new System.Drawing.Size(538, 21);
+      this.cbRootDir.Size = new System.Drawing.Size(544, 21);
       this.cbRootDir.TabIndex = 33;
       this.cbRootDir.SelectedIndexChanged += new System.EventHandler(this.cbRootDir_SelectedIndexChanged);
       this.cbRootDir.Leave += new System.EventHandler(this.cbRootDir_Leave);
@@ -494,7 +518,7 @@ namespace MPTagThat.Organise
       // 
       this.buttonBrowseRootDir.Localisation = "BrowseRootDir";
       this.buttonBrowseRootDir.LocalisationContext = "TagAndRename";
-      this.buttonBrowseRootDir.Location = new System.Drawing.Point(679, 20);
+      this.buttonBrowseRootDir.Location = new System.Drawing.Point(683, 22);
       this.buttonBrowseRootDir.Name = "buttonBrowseRootDir";
       this.buttonBrowseRootDir.Size = new System.Drawing.Size(68, 23);
       this.buttonBrowseRootDir.TabIndex = 32;
@@ -542,7 +566,7 @@ namespace MPTagThat.Organise
       this.cbFormat.FormattingEnabled = true;
       this.cbFormat.Location = new System.Drawing.Point(133, 54);
       this.cbFormat.Name = "cbFormat";
-      this.cbFormat.Size = new System.Drawing.Size(618, 21);
+      this.cbFormat.Size = new System.Drawing.Size(544, 21);
       this.cbFormat.TabIndex = 26;
       this.cbFormat.TextChanged += new System.EventHandler(this.cbFormat_TextChanged);
       // 
@@ -564,7 +588,7 @@ namespace MPTagThat.Organise
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
       this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(810, 504);
+      this.ClientSize = new System.Drawing.Size(810, 554);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.groupBoxOptions);
@@ -573,9 +597,9 @@ namespace MPTagThat.Organise
       this.Controls.Add(this.btApply);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
-      this.MaximumSize = new System.Drawing.Size(810, 504);
+      this.MaximumSize = new System.Drawing.Size(810, 554);
       this.MinimizeBox = false;
-      this.MinimumSize = new System.Drawing.Size(810, 504);
+      this.MinimumSize = new System.Drawing.Size(810, 554);
       this.Name = "OrganiseFiles";
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -633,5 +657,7 @@ namespace MPTagThat.Organise
     private MPTagThat.Core.WinControls.MPTLabel lblFormat;
     private System.Windows.Forms.ComboBox cbRootDir;
     private MPTagThat.Core.WinControls.MPTButton btReview;
+    private MPTagThat.Core.WinControls.MPTLabel lblOverrideTargetRootDir;
+    private System.Windows.Forms.ComboBox cbScripts;
   }
 }

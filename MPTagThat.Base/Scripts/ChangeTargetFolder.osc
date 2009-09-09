@@ -1,0 +1,49 @@
+// Title: Change Target Folder
+// Description: Change the Target Folder for the Organise function based on Tag Values
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  // Change the folders to your Values
+  private const string targetFolder1 = @"D:\Music1";
+  private const string targetFolder2 = @"D:\Music2";
+
+  // Change the charactre, where to split at
+  private char charToSplit = 'L';
+  
+  public string Invoke(TrackData track)
+  {
+    if (track == null) return "";
+	
+	// Get the First letter of the Artist
+	// change to AlbumArtist, if you want to split on AlbumArtist 
+	char firstChar = Char.ToUpperInvariant(track.Artist[0]);
+	
+	
+	string targetFolder = targetFolder1;
+	if (firstChar > charToSplit)
+	{
+	   targetFolder = targetFolder2;
+	}
+	
+	return targetFolder;
+  }
+
+  // Not used for this script
+  public bool Invoke(List<TrackData> tracks)
+  {
+    return false;
+  }  
+}

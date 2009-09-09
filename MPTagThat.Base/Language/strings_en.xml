@@ -471,6 +471,7 @@
   <Section name="organise">
     <String id="Heading">Organise Files</String>
     <String id="TargetRootDrectory">Target Root Directory:</String>
+    <String id="TargetRootDrectoryOverride">Override Target Root Directory using Script:</String>
     <String id="BrowseRootDir">Browse</String>
     <String id="OverWriteFiles">Overwrite existing files</String>
     <String id="CopyFiles">Copy Files instead of Moving them</String>

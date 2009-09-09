@@ -66,4 +66,9 @@ public class Script : IScript
 	}
     return true;
   }
+  
+  public string Invoke(TrackData track)
+  {
+	return "";
+  }
 }

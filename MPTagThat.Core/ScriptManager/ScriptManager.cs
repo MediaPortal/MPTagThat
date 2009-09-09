@@ -10,24 +10,36 @@ namespace MPTagThat.Core
 {
   public class ScriptManager : IScriptManager
   {
-
+    #region Variables
     private string _sharedAsemblyDir;
     private Assembly _assembly;
     private ArrayList _tagScripts = new ArrayList();
+    private ArrayList _organiseScripts = new ArrayList();
+    #endregion
 
-
+    #region ctor
     public ScriptManager()
     {
       //script (to be compiled) must be in the same folder with Core (MPTagThat.Core.dll) 
       _sharedAsemblyDir = Path.GetDirectoryName(GetLoadedAssemblyLocation("MPTagThat.core"));
       LoadAvailableScripts();
     }
+    #endregion
 
-    #region Initialisation
+    #region Properties
     public ArrayList GetScripts()
     {
       return _tagScripts;
     }
+
+    public ArrayList GetOrganiseScripts()
+    {
+      return _organiseScripts;
+    }
+
+    #endregion
+
+    #region Initialisation
 
     private void LoadAvailableScripts()
     {
@@ -44,7 +56,13 @@ namespace MPTagThat.Core
           desc[1] = Path.GetFileNameWithoutExtension(file.Name); // Use the Filename as Title            
 
         if (ext == ".sct")
+        {
           _tagScripts.Add(desc);
+        }
+        else if (ext == ".osc")
+        {
+          _organiseScripts.Add(desc);
+        }
       }
     }
 

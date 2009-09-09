@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
@@ -23,6 +25,7 @@ namespace MPTagThat.Organise
     private Preview _previewForm = null;
     private TrackData track = null;
     private TrackDataPreview trackPreview = null;
+    private Assembly _scriptAssembly = null;
     #endregion
 
     #region ctor
@@ -62,6 +65,7 @@ namespace MPTagThat.Organise
       ckOverwriteFiles.Checked = Options.OrganiseSettings.OverWriteFiles;
       ckCopyNonMusicFiles.Checked = Options.OrganiseSettings.CopyNonMusicFiles;
 
+      // Get Last Used Folders
       foreach (string item in Options.OrganiseSettings.LastUsedFolders)
       {
         cbRootDir.Items.Add(new Item(item, item, ""));
@@ -86,6 +90,7 @@ namespace MPTagThat.Organise
         }
       }
 
+      // Get Format Settings
       foreach (string item in Options.OrganiseSettings.FormatValues)
       {
         cbFormat.Items.Add(new Item(item, item, ""));
@@ -96,6 +101,24 @@ namespace MPTagThat.Organise
       else
         cbFormat.SelectedIndex = Options.OrganiseSettings.LastUsedFormat;
 
+      // Get Scripts
+      ArrayList scripts = ServiceScope.Get<IScriptManager>().GetOrganiseScripts();
+      cbScripts.Items.Add(new Item("", "", "")); // Empty item first in the list
+      foreach (string[] script in scripts)
+      {
+        cbScripts.Items.Add(new Item(script[1], script[0], script[2]));
+      }
+      int i = 0;
+      foreach (Item item in cbScripts.Items)
+      {
+        if (item.Name == Options.OrganiseSettings.LastUsedScript)
+        {
+          cbScripts.SelectedIndex = i;
+          break;
+        }
+        i++;
+      }
+
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
@@ -104,7 +127,7 @@ namespace MPTagThat.Organise
     /// <summary>
     /// Organise Files
     /// </summary>
-    /// <param name="parameters"></param>
+    /// <param name="parameter"></param>
     private void Organise(string parameter)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -123,7 +146,27 @@ namespace MPTagThat.Organise
 
         track = _main.TracksGridView.TrackList[row.Index];
         string directoryName = Util.ReplaceParametersWithTrackValues(parameter, track);
-        directoryName = System.IO.Path.Combine(cbRootDir.Text, directoryName);
+
+        string targetFolder = cbRootDir.Text;
+        if (_scriptAssembly != null)  // Do we have a script selected
+        {
+          try
+          {
+            IScript script = (IScript)_scriptAssembly.CreateInstance("Script");
+            targetFolder = script.Invoke(track);
+            if (targetFolder == "")
+            {
+              // Fall back to standard folder, if something happened in the script
+              targetFolder = cbRootDir.Text;
+            }
+          }
+          catch (Exception ex)
+          {
+            log.Error("Script Execution failed: {0}", ex.Message);
+          }  
+        }
+
+        directoryName = System.IO.Path.Combine(targetFolder, directoryName);
 
         try
         {
@@ -388,6 +431,7 @@ namespace MPTagThat.Organise
       Options.OrganiseSettings.CopyFiles = ckCopyFiles.Checked;
       Options.OrganiseSettings.OverWriteFiles = ckOverwriteFiles.Checked;
       Options.OrganiseSettings.CopyNonMusicFiles = ckCopyNonMusicFiles.Checked;
+      Options.OrganiseSettings.LastUsedScript = cbScripts.Text;
     }
 
     /// <summary>
@@ -484,6 +528,13 @@ namespace MPTagThat.Organise
         MessageBox.Show(localisation.ToString("tag2filename", "InvalidParm"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
       else
       {
+        // See, if we have a script selected
+        if (cbScripts.SelectedIndex > 0)
+        {
+          string scriptName = (cbScripts.SelectedItem as Item).Value;
+          _scriptAssembly = ServiceScope.Get<IScriptManager>().Load(scriptName);
+        }
+
         Organise(cbFormat.Text);
 
         // Did we get a new Format in the list, then store it temporarily

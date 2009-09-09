@@ -10,5 +10,6 @@ namespace MPTagThat.Core
   {
     Assembly Load(string scriptFile);
     ArrayList GetScripts();
+    ArrayList GetOrganiseScripts();
   }
 }
