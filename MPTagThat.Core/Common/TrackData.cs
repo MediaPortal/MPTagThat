@@ -225,6 +225,31 @@ namespace MPTagThat.Core
       set { SetText("WCOM", value); }
     }
 
+    public bool Compilation
+    {
+      get
+      {
+        if (TagType != "mp3")
+          return false;
+
+        if (id3v2tag == null)
+          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+
+        return id3v2tag.IsCompilation;
+      }
+
+      set
+      {
+        if (TagType != "mp3")
+          return;
+
+        if (id3v2tag == null)
+          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+
+        id3v2tag.IsCompilation = value;
+      }
+    }
+
     /// <summary>
     /// Composert Tag
     /// ID3: TCOM

@@ -14,6 +14,7 @@ namespace MPTagThat.TagEdit
     private string _artist = null;
     private string _albumArtist = null;
     private string _album = null;
+    private bool _compilation = false;
     private string _title = null;
     private int _year = -1;
     private string _genre = null;
@@ -102,6 +103,12 @@ namespace MPTagThat.TagEdit
     {
       get { return _album; }
       set { _album = value; }
+    }
+
+    public bool Compilation
+    {
+      get { return _compilation; }
+      set { _compilation = value; }
     }
 
     public string Title

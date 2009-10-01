@@ -137,6 +137,7 @@
     <String id="Year">Year:</String>
     <String id="Title">Title:</String>
     <String id="Album">Album:</String>
+    <String id="PartOfCompilation">Part of a Compilation</String>
     <String id="GroupBoxComment">Comment</String>
     <String id="RemoveExistingComments">Remove Comments First</String>
     <String id="MoveTop">Move to Top</String>

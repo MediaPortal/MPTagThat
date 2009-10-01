@@ -120,6 +120,8 @@ namespace MPTagThat.TagEdit
           }
 
           #region Main Tags
+
+          track.Compilation = options.Compilation;
           if (options.Track > -1 || options.NumTracks > -1)
             track.Track = string.Format("{0}/{1}", options.Track.ToString(), options.NumTracks.ToString());
 
@@ -502,6 +504,7 @@ namespace MPTagThat.TagEdit
       options.Artist = (ckArtist.Checked ? cbArtist.Text : null);
       options.AlbumArtist = (ckAlbumArtist.Checked ? cbAlbumArtist.Text : null);
       options.Album = (ckAlbum.Checked ? cbAlbum.Text : null);
+      options.Compilation = checkBoxCompilation.Checked;
       options.Title = (ckTitle.Checked ? tbTitle.Text : null);
 
 
@@ -649,6 +652,12 @@ namespace MPTagThat.TagEdit
             cbAlbum.Text = track.Album;
           else
             cbAlbum.Text = "";
+
+        if (checkBoxCompilation.Checked != track.Compilation)
+          if (i == 0)
+            checkBoxCompilation.Checked = track.Compilation;
+          else
+            checkBoxCompilation.Checked = false;
 
         if (tbTitle.Text.Trim() != track.Title.Trim())
           if (i == 0)

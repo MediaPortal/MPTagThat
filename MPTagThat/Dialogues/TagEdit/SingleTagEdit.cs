@@ -243,6 +243,7 @@ namespace MPTagThat.TagEdit
         track.Artist = tbArtist.Text.Trim();
         track.AlbumArtist = tbAlbumArtist.Text.Trim();
         track.Album = tbAlbum.Text.Trim();
+        track.Compilation = checkBoxCompilation.Checked;
         track.Title = tbTitle.Text.Trim();
 
         string genre = "";
@@ -506,6 +507,7 @@ namespace MPTagThat.TagEdit
       tbArtist.Text = track.Artist;
       tbAlbumArtist.Text = track.AlbumArtist;
       tbAlbum.Text = track.Album;
+      checkBoxCompilation.Checked = track.Compilation;
       tbTitle.Text = track.Title;
       tbYear.Text = track.Year.ToString();
       tbBPM.Text = track.BPM.ToString();
@@ -710,6 +712,7 @@ namespace MPTagThat.TagEdit
       if (tbArtist.Text != track.Artist) _trackIsChanged = true;
       if (tbAlbumArtist.Text != track.AlbumArtist) _trackIsChanged = true;
       if (tbAlbum.Text != track.Album) _trackIsChanged = true;
+      if (checkBoxCompilation.Checked != track.Compilation) _trackIsChanged = true;
       if (tbTitle.Text != track.Title) _trackIsChanged = true;
       if (tbYear.Text != track.Year.ToString()) _trackIsChanged = true;
       if (tbBPM.Text != track.BPM.ToString()) _trackIsChanged = true;

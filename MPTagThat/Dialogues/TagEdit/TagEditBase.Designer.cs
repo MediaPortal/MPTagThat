@@ -57,6 +57,7 @@
       this.cbGenre = new System.Windows.Forms.ComboBox();
       this.ckGenre = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxArtist = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.cbAlbum = new System.Windows.Forms.ComboBox();
       this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
       this.cbArtist = new System.Windows.Forms.ComboBox();
       this.tbNumDiscs = new System.Windows.Forms.TextBox();
@@ -267,7 +268,7 @@
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.labelHeader = new System.Windows.Forms.Label();
-      this.cbAlbum = new System.Windows.Forms.ComboBox();
+      this.checkBoxCompilation = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -365,9 +366,9 @@
       this.groupBoxComment.Controls.Add(this.cbCommentDescriptor);
       this.groupBoxComment.Localisation = "GroupBoxComment";
       this.groupBoxComment.LocalisationContext = "TagEdit";
-      this.groupBoxComment.Location = new System.Drawing.Point(7, 304);
+      this.groupBoxComment.Location = new System.Drawing.Point(7, 288);
       this.groupBoxComment.Name = "groupBoxComment";
-      this.groupBoxComment.Size = new System.Drawing.Size(693, 219);
+      this.groupBoxComment.Size = new System.Drawing.Size(693, 235);
       this.groupBoxComment.TabIndex = 2;
       this.groupBoxComment.TabStop = false;
       this.groupBoxComment.Text = "Comment";
@@ -437,7 +438,7 @@
       this.dataGridViewComment.ReadOnly = true;
       this.dataGridViewComment.RowHeadersVisible = false;
       this.dataGridViewComment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewComment.Size = new System.Drawing.Size(526, 93);
+      this.dataGridViewComment.Size = new System.Drawing.Size(526, 109);
       this.dataGridViewComment.TabIndex = 6;
       this.dataGridViewComment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewComment_CellClick);
       // 
@@ -536,7 +537,7 @@
       this.groupBoxGenre.Controls.Add(this.ckGenre);
       this.groupBoxGenre.Localisation = "groupBoxGenre";
       this.groupBoxGenre.LocalisationContext = "TagEdit";
-      this.groupBoxGenre.Location = new System.Drawing.Point(7, 180);
+      this.groupBoxGenre.Location = new System.Drawing.Point(7, 164);
       this.groupBoxGenre.Name = "groupBoxGenre";
       this.groupBoxGenre.Size = new System.Drawing.Size(693, 118);
       this.groupBoxGenre.TabIndex = 1;
@@ -625,6 +626,7 @@
       // 
       // groupBoxArtist
       // 
+      this.groupBoxArtist.Controls.Add(this.checkBoxCompilation);
       this.groupBoxArtist.Controls.Add(this.cbAlbum);
       this.groupBoxArtist.Controls.Add(this.cbAlbumArtist);
       this.groupBoxArtist.Controls.Add(this.cbArtist);
@@ -661,30 +663,38 @@
       this.groupBoxArtist.LocalisationContext = "TagEdit";
       this.groupBoxArtist.Location = new System.Drawing.Point(7, -1);
       this.groupBoxArtist.Name = "groupBoxArtist";
-      this.groupBoxArtist.Size = new System.Drawing.Size(693, 175);
+      this.groupBoxArtist.Size = new System.Drawing.Size(693, 165);
       this.groupBoxArtist.TabIndex = 0;
       this.groupBoxArtist.TabStop = false;
+      // 
+      // cbAlbum
+      // 
+      this.cbAlbum.FormattingEnabled = true;
+      this.cbAlbum.Location = new System.Drawing.Point(101, 42);
+      this.cbAlbum.Name = "cbAlbum";
+      this.cbAlbum.Size = new System.Drawing.Size(201, 24);
+      this.cbAlbum.TabIndex = 2;
       // 
       // cbAlbumArtist
       // 
       this.cbAlbumArtist.FormattingEnabled = true;
-      this.cbAlbumArtist.Location = new System.Drawing.Point(150, 37);
+      this.cbAlbumArtist.Location = new System.Drawing.Point(461, 15);
       this.cbAlbumArtist.Name = "cbAlbumArtist";
-      this.cbAlbumArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbAlbumArtist.Size = new System.Drawing.Size(201, 24);
       this.cbAlbumArtist.TabIndex = 1;
       // 
       // cbArtist
       // 
       this.cbArtist.FormattingEnabled = true;
-      this.cbArtist.Location = new System.Drawing.Point(150, 13);
+      this.cbArtist.Location = new System.Drawing.Point(101, 13);
       this.cbArtist.Name = "cbArtist";
-      this.cbArtist.Size = new System.Drawing.Size(515, 24);
+      this.cbArtist.Size = new System.Drawing.Size(201, 24);
       this.cbArtist.TabIndex = 0;
       // 
       // tbNumDiscs
       // 
       this.tbNumDiscs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbNumDiscs.Location = new System.Drawing.Point(620, 140);
+      this.tbNumDiscs.Location = new System.Drawing.Point(620, 131);
       this.tbNumDiscs.Name = "tbNumDiscs";
       this.tbNumDiscs.Size = new System.Drawing.Size(45, 22);
       this.tbNumDiscs.TabIndex = 9;
@@ -695,7 +705,7 @@
       this.label2.AutoSize = true;
       this.label2.Localisation = "label2";
       this.label2.LocalisationContext = "TagEdit";
-      this.label2.Location = new System.Drawing.Point(592, 143);
+      this.label2.Location = new System.Drawing.Point(592, 134);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(12, 16);
       this.label2.TabIndex = 8;
@@ -707,7 +717,7 @@
       this.ckDisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckDisk.Localisation = "ckDisk";
       this.ckDisk.LocalisationContext = "TagEdit";
-      this.ckDisk.Location = new System.Drawing.Point(673, 145);
+      this.ckDisk.Location = new System.Drawing.Point(673, 136);
       this.ckDisk.Name = "ckDisk";
       this.ckDisk.Size = new System.Drawing.Size(15, 14);
       this.ckDisk.TabIndex = 10;
@@ -719,7 +729,7 @@
       this.lblDisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblDisc.Localisation = "Disc";
       this.lblDisc.LocalisationContext = "TagEdit";
-      this.lblDisc.Location = new System.Drawing.Point(423, 143);
+      this.lblDisc.Location = new System.Drawing.Point(423, 134);
       this.lblDisc.Name = "lblDisc";
       this.lblDisc.Size = new System.Drawing.Size(103, 16);
       this.lblDisc.TabIndex = 30;
@@ -729,7 +739,7 @@
       // tbDisc
       // 
       this.tbDisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbDisc.Location = new System.Drawing.Point(532, 140);
+      this.tbDisc.Location = new System.Drawing.Point(532, 131);
       this.tbDisc.Name = "tbDisc";
       this.tbDisc.Size = new System.Drawing.Size(45, 22);
       this.tbDisc.TabIndex = 8;
@@ -741,7 +751,7 @@
       this.ckBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckBPM.Localisation = "ckBPM";
       this.ckBPM.LocalisationContext = "TagEdit";
-      this.ckBPM.Location = new System.Drawing.Point(673, 118);
+      this.ckBPM.Location = new System.Drawing.Point(673, 107);
       this.ckBPM.Name = "ckBPM";
       this.ckBPM.Size = new System.Drawing.Size(15, 14);
       this.ckBPM.TabIndex = 10;
@@ -754,7 +764,7 @@
       this.lblBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblBPM.Localisation = "BPM";
       this.lblBPM.LocalisationContext = "TagEdit";
-      this.lblBPM.Location = new System.Drawing.Point(488, 116);
+      this.lblBPM.Location = new System.Drawing.Point(488, 105);
       this.lblBPM.Name = "lblBPM";
       this.lblBPM.Size = new System.Drawing.Size(40, 16);
       this.lblBPM.TabIndex = 27;
@@ -763,7 +773,7 @@
       // tbBPM
       // 
       this.tbBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbBPM.Location = new System.Drawing.Point(532, 113);
+      this.tbBPM.Location = new System.Drawing.Point(532, 102);
       this.tbBPM.Name = "tbBPM";
       this.tbBPM.Size = new System.Drawing.Size(133, 22);
       this.tbBPM.TabIndex = 5;
@@ -771,7 +781,7 @@
       // tbNumTracks
       // 
       this.tbNumTracks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbNumTracks.Location = new System.Drawing.Point(237, 140);
+      this.tbNumTracks.Location = new System.Drawing.Point(184, 131);
       this.tbNumTracks.Name = "tbNumTracks";
       this.tbNumTracks.Size = new System.Drawing.Size(45, 22);
       this.tbNumTracks.TabIndex = 7;
@@ -782,7 +792,7 @@
       this.label1.AutoSize = true;
       this.label1.Localisation = "label1";
       this.label1.LocalisationContext = "TagEdit";
-      this.label1.Location = new System.Drawing.Point(210, 143);
+      this.label1.Location = new System.Drawing.Point(159, 134);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(12, 16);
       this.label1.TabIndex = 0;
@@ -791,9 +801,9 @@
       // tbArtist
       // 
       this.tbArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbArtist.Location = new System.Drawing.Point(150, 12);
+      this.tbArtist.Location = new System.Drawing.Point(101, 14);
       this.tbArtist.Name = "tbArtist";
-      this.tbArtist.Size = new System.Drawing.Size(515, 22);
+      this.tbArtist.Size = new System.Drawing.Size(201, 22);
       this.tbArtist.TabIndex = 0;
       // 
       // ckYear
@@ -802,7 +812,7 @@
       this.ckYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckYear.Localisation = "ckYear";
       this.ckYear.LocalisationContext = "TagEdit";
-      this.ckYear.Location = new System.Drawing.Point(288, 118);
+      this.ckYear.Location = new System.Drawing.Point(240, 107);
       this.ckYear.Name = "ckYear";
       this.ckYear.Size = new System.Drawing.Size(15, 14);
       this.ckYear.TabIndex = 10;
@@ -815,7 +825,7 @@
       this.ckTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckTrack.Localisation = "ckTrack";
       this.ckTrack.LocalisationContext = "TagEdit";
-      this.ckTrack.Location = new System.Drawing.Point(288, 145);
+      this.ckTrack.Location = new System.Drawing.Point(240, 136);
       this.ckTrack.Name = "ckTrack";
       this.ckTrack.Size = new System.Drawing.Size(15, 14);
       this.ckTrack.TabIndex = 10;
@@ -828,7 +838,7 @@
       this.lblAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblAlbumArtist.Localisation = "AlbumArtist";
       this.lblAlbumArtist.LocalisationContext = "TagEdit";
-      this.lblAlbumArtist.Location = new System.Drawing.Point(8, 40);
+      this.lblAlbumArtist.Location = new System.Drawing.Point(326, 17);
       this.lblAlbumArtist.Name = "lblAlbumArtist";
       this.lblAlbumArtist.Size = new System.Drawing.Size(78, 16);
       this.lblAlbumArtist.TabIndex = 22;
@@ -840,7 +850,7 @@
       this.ckArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckArtist.Localisation = "ckArtist";
       this.ckArtist.LocalisationContext = "TagEdit";
-      this.ckArtist.Location = new System.Drawing.Point(673, 16);
+      this.ckArtist.Location = new System.Drawing.Point(308, 19);
       this.ckArtist.Name = "ckArtist";
       this.ckArtist.Size = new System.Drawing.Size(15, 14);
       this.ckArtist.TabIndex = 10;
@@ -853,7 +863,7 @@
       this.lblTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTrack.Localisation = "Track";
       this.lblTrack.LocalisationContext = "TagEdit";
-      this.lblTrack.Location = new System.Drawing.Point(8, 143);
+      this.lblTrack.Location = new System.Drawing.Point(8, 134);
       this.lblTrack.Name = "lblTrack";
       this.lblTrack.Size = new System.Drawing.Size(46, 16);
       this.lblTrack.TabIndex = 0;
@@ -862,7 +872,7 @@
       // tbTrack
       // 
       this.tbTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTrack.Location = new System.Drawing.Point(150, 140);
+      this.tbTrack.Location = new System.Drawing.Point(102, 131);
       this.tbTrack.Name = "tbTrack";
       this.tbTrack.Size = new System.Drawing.Size(45, 22);
       this.tbTrack.TabIndex = 6;
@@ -874,7 +884,7 @@
       this.ckAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckAlbumArtist.Localisation = "ckAlbumArtist";
       this.ckAlbumArtist.LocalisationContext = "TagEdit";
-      this.ckAlbumArtist.Location = new System.Drawing.Point(673, 41);
+      this.ckAlbumArtist.Location = new System.Drawing.Point(673, 20);
       this.ckAlbumArtist.Name = "ckAlbumArtist";
       this.ckAlbumArtist.Size = new System.Drawing.Size(15, 14);
       this.ckAlbumArtist.TabIndex = 10;
@@ -887,7 +897,7 @@
       this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblArtist.Localisation = "Artist";
       this.lblArtist.LocalisationContext = "TagEdit";
-      this.lblArtist.Location = new System.Drawing.Point(8, 15);
+      this.lblArtist.Location = new System.Drawing.Point(9, 18);
       this.lblArtist.Name = "lblArtist";
       this.lblArtist.Size = new System.Drawing.Size(40, 16);
       this.lblArtist.TabIndex = 1;
@@ -896,17 +906,17 @@
       // tbAlbumArtist
       // 
       this.tbAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbAlbumArtist.Location = new System.Drawing.Point(150, 37);
+      this.tbAlbumArtist.Location = new System.Drawing.Point(461, 14);
       this.tbAlbumArtist.Name = "tbAlbumArtist";
-      this.tbAlbumArtist.Size = new System.Drawing.Size(515, 22);
+      this.tbAlbumArtist.Size = new System.Drawing.Size(201, 22);
       this.tbAlbumArtist.TabIndex = 1;
       // 
       // tbAlbum
       // 
       this.tbAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbAlbum.Location = new System.Drawing.Point(150, 62);
+      this.tbAlbum.Location = new System.Drawing.Point(101, 44);
       this.tbAlbum.Name = "tbAlbum";
-      this.tbAlbum.Size = new System.Drawing.Size(515, 22);
+      this.tbAlbum.Size = new System.Drawing.Size(201, 22);
       this.tbAlbum.TabIndex = 2;
       // 
       // ckAlbum
@@ -915,7 +925,7 @@
       this.ckAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckAlbum.Localisation = "ckAlbum";
       this.ckAlbum.LocalisationContext = "TagEdit";
-      this.ckAlbum.Location = new System.Drawing.Point(673, 66);
+      this.ckAlbum.Location = new System.Drawing.Point(308, 49);
       this.ckAlbum.Name = "ckAlbum";
       this.ckAlbum.Size = new System.Drawing.Size(15, 14);
       this.ckAlbum.TabIndex = 10;
@@ -928,7 +938,7 @@
       this.lblYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblYear.Localisation = "Year";
       this.lblYear.LocalisationContext = "TagEdit";
-      this.lblYear.Location = new System.Drawing.Point(8, 120);
+      this.lblYear.Location = new System.Drawing.Point(8, 109);
       this.lblYear.Name = "lblYear";
       this.lblYear.Size = new System.Drawing.Size(40, 16);
       this.lblYear.TabIndex = 4;
@@ -937,7 +947,7 @@
       // tbYear
       // 
       this.tbYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbYear.Location = new System.Drawing.Point(150, 113);
+      this.tbYear.Location = new System.Drawing.Point(102, 102);
       this.tbYear.Name = "tbYear";
       this.tbYear.Size = new System.Drawing.Size(132, 22);
       this.tbYear.TabIndex = 4;
@@ -948,7 +958,7 @@
       this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTitle.Localisation = "Title";
       this.lblTitle.LocalisationContext = "TagEdit";
-      this.lblTitle.Location = new System.Drawing.Point(8, 90);
+      this.lblTitle.Location = new System.Drawing.Point(8, 80);
       this.lblTitle.Name = "lblTitle";
       this.lblTitle.Size = new System.Drawing.Size(37, 16);
       this.lblTitle.TabIndex = 3;
@@ -960,7 +970,7 @@
       this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblAlbum.Localisation = "Album";
       this.lblAlbum.LocalisationContext = "TagEdit";
-      this.lblAlbum.Location = new System.Drawing.Point(8, 65);
+      this.lblAlbum.Location = new System.Drawing.Point(8, 50);
       this.lblAlbum.Name = "lblAlbum";
       this.lblAlbum.Size = new System.Drawing.Size(49, 16);
       this.lblAlbum.TabIndex = 2;
@@ -972,7 +982,7 @@
       this.ckTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ckTitle.Localisation = "ckTitle";
       this.ckTitle.LocalisationContext = "TagEdit";
-      this.ckTitle.Location = new System.Drawing.Point(673, 91);
+      this.ckTitle.Location = new System.Drawing.Point(673, 78);
       this.ckTitle.Name = "ckTitle";
       this.ckTitle.Size = new System.Drawing.Size(15, 14);
       this.ckTitle.TabIndex = 10;
@@ -982,9 +992,9 @@
       // tbTitle
       // 
       this.tbTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTitle.Location = new System.Drawing.Point(150, 87);
+      this.tbTitle.Location = new System.Drawing.Point(101, 73);
       this.tbTitle.Name = "tbTitle";
-      this.tbTitle.Size = new System.Drawing.Size(515, 22);
+      this.tbTitle.Size = new System.Drawing.Size(566, 22);
       this.tbTitle.TabIndex = 3;
       // 
       // tabPagePictures
@@ -3153,13 +3163,17 @@
       this.labelHeader.TabIndex = 29;
       this.labelHeader.Text = "Header";
       // 
-      // cbAlbum
+      // checkBoxCompilation
       // 
-      this.cbAlbum.FormattingEnabled = true;
-      this.cbAlbum.Location = new System.Drawing.Point(150, 62);
-      this.cbAlbum.Name = "cbAlbum";
-      this.cbAlbum.Size = new System.Drawing.Size(515, 24);
-      this.cbAlbum.TabIndex = 2;
+      this.checkBoxCompilation.AutoSize = true;
+      this.checkBoxCompilation.Localisation = "PartOfCompilation";
+      this.checkBoxCompilation.LocalisationContext = "TagEdit";
+      this.checkBoxCompilation.Location = new System.Drawing.Point(461, 47);
+      this.checkBoxCompilation.Name = "checkBoxCompilation";
+      this.checkBoxCompilation.Size = new System.Drawing.Size(150, 20);
+      this.checkBoxCompilation.TabIndex = 3;
+      this.checkBoxCompilation.Text = "Part of a Compilation";
+      this.checkBoxCompilation.UseVisualStyleBackColor = true;
       // 
       // TagEditBase
       // 
@@ -3476,5 +3490,6 @@
     protected System.Windows.Forms.ComboBox cbAlbumArtist;
     protected System.Windows.Forms.ComboBox cbArtist;
     protected System.Windows.Forms.ComboBox cbAlbum;
+    protected MPTagThat.Core.WinControls.MPTCheckBox checkBoxCompilation;
   }
 }
