@@ -94,8 +94,8 @@ namespace MPTagThat.GridView
       if (Options.MainSettings.SearchLyricsOnDemand)
         sitesToSearch.Add("LyricsOnDemand");
 
-      if (Options.MainSettings.SearchSeekLyrics)
-        sitesToSearch.Add("SeekLyrics");
+      if (Options.MainSettings.SearchLyricsPlugin)
+        sitesToSearch.Add("LyricsPluginSite");
 
       if (Options.MainSettings.SearchActionext)
         sitesToSearch.Add("Actionext");

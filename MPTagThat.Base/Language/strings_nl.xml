@@ -528,7 +528,7 @@
     <String id="SwitchArtist">Wissel Artiest voor doorvoeren aapassing</String>
     <String id="OverwriteExistingLyrics">Overschrijf bestaande liedtekst(en) bij automatisch Taggen</String>
     <String id="GroupBoxLyricsSites">Locaties afzoeken</String>
-    <String id="SeekLyrics">Zoek liedteksten</String>
+    <String id="LyricsPlugin">LyricsPlugin</String>
     <String id="LyricsOnDemand">Liedteksten op aanvraag</String>
     <String id="Lyrics007">Liedteksten007</String>
     <String id="HotLyrics">Populaire liedteksten</String>

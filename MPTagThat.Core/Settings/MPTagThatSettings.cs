@@ -284,7 +284,7 @@ namespace MPTagThat.Core
     private bool _searchHotLyrics;
     private bool _searchLyrics007;
     private bool _searchLyricsOnDemand;
-    private bool _searchSeekLyrics;
+    private bool _searchLyricsPlugin;
     private bool _searchActionext;
     private bool _searchLyrDB;
     private bool _searchLRCFinder;
@@ -318,10 +318,10 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchSeekLyrics
+    public bool SearchLyricsPlugin
     {
-      get { return _searchSeekLyrics; }
-      set { _searchSeekLyrics = value; }
+      get { return _searchLyricsPlugin; }
+      set { _searchLyricsPlugin = value; }
     }
 
     [Setting(SettingScope.User, "true")]

@@ -75,8 +75,6 @@ namespace LyricsEngine
       m_EventStop_LyricController = eventStopThread;
       m_EventStopped_LyricController = new ManualResetEvent(false);
 
-      LyricSearch.Abort = false;
-
             if (!string.IsNullOrEmpty(find) && !string.IsNullOrEmpty(replace))
             {
                 if (find != "")
@@ -155,23 +153,28 @@ namespace LyricsEngine
 
     public void AddNewLyricSearch(string artist, string title, string strippedArtistName, int row)
     {
-      ++m_noOfCurrentSearches;
-
-      if (lyricsSites.Length > 0)
+	  if (lyricsSites.Length > 0 && !string.IsNullOrEmpty(artist) && !string.IsNullOrEmpty(title))
       {
-        // create worker thread instance
-        ThreadStart threadInstance = delegate
-        {
-          LyricSearch lyricSearch = new LyricSearch(this, artist, title, strippedArtistName, row, m_allowAllToComplete, m_automaticUpdate);
-          lyricSearch.Run();
-        };
+		  ++m_noOfCurrentSearches;
 
-        Thread lyricSearchThread = new Thread(threadInstance);
-        lyricSearchThread.Name = "BasicSearch for " + artist + " - " + title;	// looks nice in Output window
-        lyricSearchThread.IsBackground = true;
-        lyricSearchThread.Start();
-        threadList.Add(lyricSearchThread);
+		// create worker thread instance
+		ThreadStart threadInstance = delegate
+		{
+		  LyricSearch lyricSearch = new LyricSearch(this, artist, title, strippedArtistName, row, m_allowAllToComplete, m_automaticUpdate);
+		  lyricSearch.Run();
+		};
+
+		Thread lyricSearchThread = new Thread(threadInstance);
+		lyricSearchThread.Name = "BasicSearch for " + artist + " - " + title;	// looks nice in Output window
+		lyricSearchThread.IsBackground = true;
+		lyricSearchThread.Start();
+		threadList.Add(lyricSearchThread);
+	  }
+      else
+      {
+            return;
       }
+
     }
 
 
@@ -183,7 +186,6 @@ namespace LyricsEngine
 
     internal void StatusUpdate(string artist, string title, string site, bool lyricFound)
     {
-      //LyricDiagnostics.TraceSource.TraceEvent(TraceEventType.Information, 0, LyricDiagnostics.elapsedTimeString() + artist + " - " + title + " - " + site + " - " +lyricFound.ToString() );
       if (lyricFound)
         ++m_noOfLyricsFound;
       else
@@ -249,13 +251,11 @@ namespace LyricsEngine
         if (value == true)
         {
           m_StopSearches = true;
-          LyricSearch.Abort = true;
           //StopTheSearchAndAbort.Invoke(this, EventArgs.Empty);
         }
         else
         {
           m_StopSearches = false;
-          LyricSearch.Abort = false;
         }
       }
     }

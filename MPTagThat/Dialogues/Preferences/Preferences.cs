@@ -278,7 +278,7 @@ namespace MPTagThat.Preferences
       ckLyrics007.Checked = Options.MainSettings.SearchLyrics007;
       ckLyricsOnDemand.Checked = Options.MainSettings.SearchLyricsOnDemand;
       ckLyricWiki.Checked = Options.MainSettings.SearchLyricWiki;
-      ckSeekLyrics.Checked = Options.MainSettings.SearchSeekLyrics;
+      ckLyricsPlugin.Checked = Options.MainSettings.SearchLyricsPlugin;
       ckActionext.Checked = Options.MainSettings.SearchActionext;
       ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
       ckLRCFinder.Checked = Options.MainSettings.SearchLRCFinder;
@@ -768,7 +768,7 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchLyrics007 = ckLyrics007.Checked;
       Options.MainSettings.SearchLyricsOnDemand = ckLyricsOnDemand.Checked;
       Options.MainSettings.SearchLyricWiki = ckLyricWiki.Checked;
-      Options.MainSettings.SearchSeekLyrics = ckSeekLyrics.Checked;
+      Options.MainSettings.SearchLyricsPlugin = ckLyricsPlugin.Checked;
       Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
       Options.MainSettings.SearchLRCFinder = ckLRCFinder.Checked;
       Options.MainSettings.SearchActionext = ckActionext.Checked;

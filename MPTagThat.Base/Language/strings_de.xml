@@ -549,7 +549,7 @@
     <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>
     <String id="OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</String>
     <String id="GroupBoxLyricsSites">Durchsuchen der Lyricsseiten</String>
-    <String id="SeekLyrics">Seek Lyrics</String>
+    <String id="LyricsPlugin">LyricsPlugin</String>    <String id="LyricsPlugin">LyricsPlugin</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>
     <String id="Lyrics007">Lyrics007</String>
     <String id="HotLyrics">Hot Lyrics</String>

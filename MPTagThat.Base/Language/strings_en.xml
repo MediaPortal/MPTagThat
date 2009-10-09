@@ -549,7 +549,7 @@
     <String id="SwitchArtist">Switch Artist before submit</String>
     <String id="OverwriteExistingLyrics">Overwrite existing lyrics on automatic tagging</String>
     <String id="GroupBoxLyricsSites">Sites to Search</String>
-    <String id="SeekLyrics">Seek Lyrics</String>
+    <String id="LyricsPlugin">LyricsPlugin</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>
     <String id="Lyrics007">Lyrics007</String>
     <String id="HotLyrics">Hot Lyrics</String>
@@ -782,5 +782,13 @@
 	<String id="NoMusicDB">To use the Database search function,\nyou must enter the location of the Music Database in the Settings.</String>
 	<String id="NoSearchValues">Please enter at least one Value to search for.</String>
 	<String id="TooMuchRows">Query returned too much rows. Only displaying the first 1000.</String>
+  </Section>
+  
+  <!-- Find / Replace -->
+  <Section name="findreplace">
+    <String id="HeaderFind">Find</String>
+    <String id="HeaderReplace">Replace</String>
+    <String id="NotFound">Search string not found</String>
+    <String id="NoMoreOccurencesFound">No more occurences of search string found</String>
   </Section>
 </Language>

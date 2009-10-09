@@ -86,7 +86,7 @@ namespace MPTagThat.Preferences
       this.ckLRCFinder = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckSeekLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyricsPlugin = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyricsOnDemand = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckLyrics007 = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckHotLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -937,7 +937,7 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.Controls.Add(this.ckLRCFinder);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyrDB);
       this.groupBoxLyricsSites.Controls.Add(this.ckActionext);
-      this.groupBoxLyricsSites.Controls.Add(this.ckSeekLyrics);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyricsPlugin);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyricsOnDemand);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyrics007);
       this.groupBoxLyricsSites.Controls.Add(this.ckHotLyrics);
@@ -993,19 +993,19 @@ namespace MPTagThat.Preferences
       this.ckActionext.Text = "Actionext";
       this.ckActionext.UseVisualStyleBackColor = true;
       // 
-      // ckSeekLyrics
+      // ckLyricsPlugin
       // 
-      this.ckSeekLyrics.AutoSize = true;
-      this.ckSeekLyrics.Checked = true;
-      this.ckSeekLyrics.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckSeekLyrics.Localisation = "SeekLyrics";
-      this.ckSeekLyrics.LocalisationContext = "Settings";
-      this.ckSeekLyrics.Location = new System.Drawing.Point(145, 60);
-      this.ckSeekLyrics.Name = "ckSeekLyrics";
-      this.ckSeekLyrics.Size = new System.Drawing.Size(81, 17);
-      this.ckSeekLyrics.TabIndex = 4;
-      this.ckSeekLyrics.Text = "Seek Lyrics";
-      this.ckSeekLyrics.UseVisualStyleBackColor = true;
+      this.ckLyricsPlugin.AutoSize = true;
+      this.ckLyricsPlugin.Checked = true;
+      this.ckLyricsPlugin.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyricsPlugin.Localisation = "LyricsPlugin";
+      this.ckLyricsPlugin.LocalisationContext = "Settings";
+      this.ckLyricsPlugin.Location = new System.Drawing.Point(145, 60);
+      this.ckLyricsPlugin.Name = "ckLyricsPlugin";
+      this.ckLyricsPlugin.Size = new System.Drawing.Size(82, 17);
+      this.ckLyricsPlugin.TabIndex = 4;
+      this.ckLyricsPlugin.Text = "LyricsPlugin";
+      this.ckLyricsPlugin.UseVisualStyleBackColor = true;
       // 
       // ckLyricsOnDemand
       // 
@@ -2629,7 +2629,7 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckHotLyrics;
     private MPTagThat.Core.WinControls.MPTCheckBox ckLyrics007;
     private MPTagThat.Core.WinControls.MPTCheckBox ckLyricsOnDemand;
-    private MPTagThat.Core.WinControls.MPTCheckBox ckSeekLyrics;
+    private MPTagThat.Core.WinControls.MPTCheckBox ckLyricsPlugin;
     private MPTagThat.Core.WinControls.MPTCheckBox ckSwitchArtist;
     private MPTagThat.Core.WinControls.MPTLabel lbDebugLevel;
     private System.Windows.Forms.ComboBox comboBoxDebugLevel;

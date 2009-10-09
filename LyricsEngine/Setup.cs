@@ -15,7 +15,7 @@ namespace LyricsEngine
             "HotLyrics",
             "Actionext",
             "LyrDB",
-            "SeekLyrics"
+            "LyricsPluginSite"
         };
 
 

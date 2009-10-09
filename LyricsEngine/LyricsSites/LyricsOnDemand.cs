@@ -129,7 +129,7 @@ namespace LyricsEngine.LyricSites
                     lyricTemp = new StringBuilder();
                     line = sr.ReadLine().Trim();
 
-                    while (line.IndexOf("<BR><BR>") == -1)
+                    while (line.Contains("<p>") == false)
                     {
                         lyricTemp.Append(line);
                         if (sr.EndOfStream || ++noOfLinesCount > 300)

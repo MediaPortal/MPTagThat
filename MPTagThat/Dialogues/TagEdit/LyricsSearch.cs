@@ -169,8 +169,8 @@ namespace MPTagThat.TagEdit
       if (Options.MainSettings.SearchLyricsOnDemand)
         sitesToSearch.Add("LyricsOnDemand");
 
-      if (Options.MainSettings.SearchSeekLyrics)
-        sitesToSearch.Add("SeekLyrics");
+      if (Options.MainSettings.SearchLyricsPlugin)
+        sitesToSearch.Add("LyricsPluginSite");
 
       // If automaticUpdate is set then return after the first positive search
       lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), true, automaticUpdate, "", "");

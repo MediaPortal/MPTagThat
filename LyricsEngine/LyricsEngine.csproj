@@ -63,6 +63,8 @@
     <Compile Include="LyricsSites\Actionext.cs" />
     <Compile Include="LyricsSites\LrcFinder.cs" />
     <Compile Include="LyricsSites\LyrDB.cs" />
+    <Compile Include="LyricsSites\LyricsPluginSite.cs" />
+    <Compile Include="LyricsSites\LyricWiki.cs" />
     <Compile Include="LyricsWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -75,7 +77,6 @@
     <Compile Include="LyricsSites\HotLyrics.cs" />
     <Compile Include="LyricsSites\Lyrics007.cs" />
     <Compile Include="LyricsSites\LyricsOnDemand.cs" />
-    <Compile Include="LyricsSites\SeekLyrics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ILyricForm.cs" />
@@ -96,20 +97,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\org.lyricwiki\LyricsResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\org.lyricwiki\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\org.lyricwiki\server.wsdl" />
-    <None Include="Web References\org.lyricwiki\SongResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\org.lyricwiki\SOTDResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -121,12 +108,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\org.lyricwiki\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="LyricsSites\Wiki.cs" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
@@ -142,17 +123,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>LyricsEngine_lrcfinder1_LrcFinder</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://lyricwiki.org/server.php%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\org.lyricwiki\</RelPath>
-      <UpdateFromURL>http://lyricwiki.org/server.php%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>LyricsEngine_org_lyricwiki_LyricWiki</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

@@ -547,7 +547,7 @@
     <String id="SwitchArtist">Bytt Artist føre utførelse</String>
     <String id="OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</String>
     <String id="GroupBoxLyricsSites">Sider å søke i</String>
-    <String id="SeekLyrics">Søk etter Tekster</String>
+    <String id="LyricsPlugin">LyricsPlugin</String>
     <String id="LyricsOnDemand">Lyrics On Demand</String>
     <String id="Lyrics007">Lyrics007</String>
     <String id="HotLyrics">Hot Lyrics</String>
