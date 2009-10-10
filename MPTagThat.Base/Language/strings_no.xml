@@ -137,6 +137,7 @@
     <String id="Year">År:</String>
     <String id="Title">Tittel:</String>
     <String id="Album">Album:</String>
+    <String id="PartOfCompilation">Del av en samling</String>
     <String id="GroupBoxComment">Kommentar</String>
     <String id="RemoveExistingComments">Fjern Kommentarer Først</String>
     <String id="MoveTop">Til Toppen</String>
