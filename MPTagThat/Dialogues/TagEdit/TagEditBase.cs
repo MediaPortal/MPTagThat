@@ -649,7 +649,7 @@ namespace MPTagThat.TagEdit
           dlgAlbumResults.Album = tbAlbum.Text;
 
           this.Cursor = Cursors.Default;
-          if (main.ShowForm(dlgAlbumResults) == DialogResult.OK)
+          if (main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
           {
             if (dlgAlbumResults.SelectedListItem > -1)
               amazonalbum = albums[dlgAlbumResults.SelectedListItem];

@@ -94,7 +94,7 @@ namespace MPTagThat.InternetLookup
       dlgAlbumArtist.Artist = _selectedArtist;
       dlgAlbumArtist.Album = _selectedAlbum;
 
-      if (main.ShowForm(dlgAlbumArtist) != DialogResult.OK)
+      if (main.ShowModalDialog(dlgAlbumArtist) != DialogResult.OK)
       {
         dlgAlbumArtist.Dispose();
         return false;
@@ -156,7 +156,7 @@ namespace MPTagThat.InternetLookup
             _askForAlbum = true;
           else
           {
-            if (main.ShowForm(dlgSearchResult) == DialogResult.OK)
+            if (main.ShowModalDialog(dlgSearchResult) == DialogResult.OK)
             {
               if (dlgSearchResult.ResultView.SelectedIndices[0] > -1)
                 amazonAlbum = albums[dlgSearchResult.ResultView.SelectedIndices[0]];
@@ -257,7 +257,7 @@ namespace MPTagThat.InternetLookup
 
       dlgAlbumDetails.Renumber();
 
-      if (main.ShowForm(dlgAlbumDetails) == DialogResult.OK)
+      if (main.ShowModalDialog(dlgAlbumDetails) == DialogResult.OK)
       {
         int i = -1;
         foreach (ListViewItem lvItem in dlgAlbumDetails.DiscTracks.Items)

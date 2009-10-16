@@ -40,6 +40,7 @@ namespace MPTagThat.GridView
 
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
+    private IThemeManager theme = ServiceScope.Get<IThemeManager>();
 
     private Progress dlgProgress;
 
@@ -54,6 +55,9 @@ namespace MPTagThat.GridView
 
     private string[] _filterFileExtensions = null;
     private string _filterFileMask = "*.*";
+
+    private FindResult _findResult = null;
+
     #endregion
 
     #region Properties
@@ -89,6 +93,11 @@ namespace MPTagThat.GridView
     {
       get { return bindingList; }
     }
+
+    public FindResult ResultFind
+    {
+      set { _findResult = value; }
+    }
     #endregion
 
     #region Constructor
@@ -114,6 +123,7 @@ namespace MPTagThat.GridView
       tracksGrid.DataError += new DataGridViewDataErrorEventHandler(tracksGrid_DataError);
       tracksGrid.CellEndEdit += new DataGridViewCellEventHandler(tracksGrid_CellEndEdit);
       tracksGrid.CellValueChanged += new DataGridViewCellEventHandler(tracksGrid_CellValueChanged);
+      tracksGrid.CellPainting +=new DataGridViewCellPaintingEventHandler(tracksGrid_CellPainting);
       tracksGrid.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(tracksGrid_EditingControlShowing);
       tracksGrid.Sorted += new EventHandler(tracksGrid_Sorted);
       tracksGrid.ColumnHeaderMouseClick += new DataGridViewCellMouseEventHandler(tracksGrid_ColumnHeaderMouseClick);
@@ -447,7 +457,7 @@ namespace MPTagThat.GridView
                 {
                   MusicBrainzAlbumResults dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
                   dlgAlbumResults.Owner = _main;
-                  if (_main.ShowForm(dlgAlbumResults) == DialogResult.OK)
+                  if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
                   {
                     if (dlgAlbumResults.SelectedListItem > -1)
                       musicBrainzTrack = musicBrainzTracks[dlgAlbumResults.SelectedListItem];
@@ -698,7 +708,7 @@ namespace MPTagThat.GridView
                 dlgAlbumResults.FileDetails = track.FullFileName;
 
                 dlgAlbumResults.Owner = _main;
-                if (_main.ShowForm(dlgAlbumResults) == DialogResult.OK)
+                if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
                 {
                   if (dlgAlbumResults.SelectedListItem > -1)
                     amazonAlbum = albums[dlgAlbumResults.SelectedListItem];
@@ -904,7 +914,7 @@ namespace MPTagThat.GridView
         {
           LyricsSearch lyricssearch = new LyricsSearch(tracks);
           lyricssearch.Owner = _main;
-          if (_main.ShowForm(lyricssearch) == DialogResult.OK)
+          if (_main.ShowModalDialog(lyricssearch) == DialogResult.OK)
           {
             DataGridView lyricsResult = lyricssearch.GridView;
             foreach (DataGridViewRow lyricsRow in lyricsResult.Rows)
@@ -2733,6 +2743,81 @@ namespace MPTagThat.GridView
           }
         }
       }
+    }
+
+    private void tracksGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+    {
+      if (_findResult == null)
+      {
+        e.Handled = false;
+        return;
+      }
+
+      if ((e.ColumnIndex == _findResult.Column) && (e.RowIndex == _findResult.Row))
+      {
+        // Draw Merged Cell
+        Graphics g = e.Graphics;
+        bool selected = ((e.State & DataGridViewElementStates.Selected) == DataGridViewElementStates.Selected);
+        Color fcolor = (selected ? e.CellStyle.SelectionForeColor : e.CellStyle.ForeColor);
+        Color bcolor = (selected ? e.CellStyle.SelectionBackColor : e.CellStyle.BackColor);
+        Font font = e.CellStyle.Font;
+
+        // Split up the cell content into 3 pieces
+        string cellContent = e.Value == null ? "" : e.Value.ToString();;
+        string[] results = new string[3];
+        results[0] = cellContent.Substring(0, _findResult.StartPos);
+        results[1] = cellContent.Substring(_findResult.StartPos, _findResult.Length);
+        results[2] = cellContent.Substring(_findResult.StartPos + _findResult.Length);
+
+        int x = e.CellBounds.Left + e.CellStyle.Padding.Left;
+        int y = e.CellBounds.Top + e.CellStyle.Padding.Top + 4;
+        
+        for (int i=0; i<3; i++)
+        {
+          Size proposedSize = new Size(int.MaxValue, int.MaxValue);        
+
+          int width;
+          Size size;
+          Color color;
+          Color backColor;
+          TextFormatFlags textFlags;
+          if (i == 0)
+          {
+            size = TextRenderer.MeasureText(e.Graphics, results[i], font, proposedSize);
+            width = size.Width - e.CellStyle.Padding.Left;
+            color = fcolor;
+            backColor = bcolor;
+            textFlags = TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis;
+          }
+          else if (i == 1)
+          {
+            size = TextRenderer.MeasureText(e.Graphics, results[i], font, proposedSize, TextFormatFlags.NoPadding);
+            width = size.Width;
+            color = theme.CurrentTheme.FindReplaceForeColor;
+            backColor = theme.CurrentTheme.FindReplaceBackColor;
+            textFlags = TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.NoPadding;
+          }
+          else
+          {
+            size = TextRenderer.MeasureText(e.Graphics, results[i], font, proposedSize);
+            width = size.Width - e.CellStyle.Padding.Right;
+            color = fcolor;
+            backColor = bcolor;
+            textFlags = TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.EndEllipsis;
+          }
+
+          int height = size.Height + (e.CellStyle.Padding.Top + e.CellStyle.Padding.Bottom);
+          Rectangle rect = new Rectangle(x, y - 4, width, e.CellBounds.Height - 2);
+          g.FillRectangle(new SolidBrush(backColor), rect);
+          TextRenderer.DrawText(e.Graphics, results[i], font, new Rectangle(x, y, width, height), color,
+                                  textFlags);
+          x += width;
+        }
+
+        e.Handled = true;
+        return;
+      }
+      e.Handled = false;
     }
 
     #region Drag & Drop

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SQLite;
@@ -25,6 +26,8 @@ namespace MPTagThat.Core
     private static List<string> _organiseSettingsTemp;
 
     private static List<TrackData> _copyPasteBuffer;
+    private static ArrayList _findBuffer = null;
+    private static ArrayList _replaceBuffer = null;
 
     private static string _configDir;
     private static string[] availableThemes = new string[] { "ControlDefault", "Office2007Silver", "Office2007Black" };
@@ -219,6 +222,18 @@ namespace MPTagThat.Core
     public static List<TrackData> CopyPasteBuffer
     {
       get { return _copyPasteBuffer; }
+    }
+
+    public static ArrayList FindBuffer
+    {
+      get { return _findBuffer; }
+      set { _findBuffer = value; }
+    }
+
+    public static ArrayList ReplaceBuffer
+    {
+      get { return _replaceBuffer; }
+      set { _replaceBuffer = value; }
     }
     #endregion
 

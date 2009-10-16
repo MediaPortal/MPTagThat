@@ -790,5 +790,18 @@
     <String id="HeaderReplace">Replace</String>
     <String id="NotFound">Search string not found</String>
     <String id="NoMoreOccurencesFound">No more occurences of search string found</String>
+    <String id="TabFind">Find</String>
+    <String id="FindWhat">Find what:</String>
+    <String id="MatchCase">Match Case</String>
+    <String id="MatchWords">Match whole words only</String>
+    <String id="GroupBoxSearch">Search Mode</String>
+    <String id="SearchNormal">Normal</String>
+    <String id="SearchRegex">Regular Expression</String>
+    <String id="FindNext">Find Next</String>
+    <String id="Cancel">Close</String>
+    <String id="TabReplace">Replace</String>
+    <String id="ReplaceWith">Replace with:</String>
+    <String id="ReplaceBtn">Replace</String>
+    <String id="ReplaceAllBtn">Replace All</String>
   </Section>
 </Language>

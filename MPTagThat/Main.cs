@@ -569,7 +569,7 @@ namespace MPTagThat
     /// Shows a Modal Dialogue
     /// </summary>
     /// <param name="dlg"></param>
-    public DialogResult ShowForm(object dlg)
+    public DialogResult ShowModalDialog(object dlg)
     {
       Form f = (Form)dlg;
       int x = (ClientSize.Width / 2) - (f.Width / 2);
@@ -580,6 +580,23 @@ namespace MPTagThat
 
       f.Location = new Point(x, y);
       return f.ShowDialog();
+    }
+
+    /// <summary>
+    /// Shows a Form Centered
+    /// </summary>
+    /// <param name="form"></param>
+    public void ShowCenteredForm(object form)
+    {
+      Form f = (Form)form;
+      int x = (ClientSize.Width / 2) - (f.Width / 2);
+      int y = (ClientSize.Height / 2) - (f.Height / 2);
+      Point clientLocation = this.Location;
+      x += clientLocation.X;
+      y += clientLocation.Y;
+
+      f.Location = new Point(x, y);
+      f.Show();
     }
 
     /// <summary>
@@ -659,7 +676,7 @@ namespace MPTagThat
 
       // We can show the dialog from the OnKeydown only here. oterwise we hear the annoying bell.
       if (_showForm && _dialog != null)
-        ShowForm(_dialog);
+        ShowModalDialog(_dialog);
 
       _showForm = false;
       _dialog = null;
@@ -776,7 +793,7 @@ namespace MPTagThat
 
         case Action.ActionType.ACTION_OPTIONS:
           _dialog = new MPTagThat.Preferences.Preferences(this);
-          ShowForm(_dialog);
+          ShowModalDialog(_dialog);
           break;
 
         case Action.ActionType.ACTION_SELECTALL:
@@ -812,7 +829,7 @@ namespace MPTagThat
             break;
 
           _dialog = new MPTagThat.CaseConversion.CaseConversion(this);
-          ShowForm(_dialog);
+          ShowModalDialog(_dialog);
           break;
 
         case Action.ActionType.ACTION_REFRESH:
@@ -876,6 +893,20 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.FixMP3File();
+          break;
+
+        case Action.ActionType.ACTION_FIND:
+          _dialog = new FindReplace(this);
+          (_dialog as FindReplace).Replace = false;
+          ShowCenteredForm(_dialog);
+          _showForm = false;  // Don't show the dialog in the Keypress event
+          break;
+
+        case Action.ActionType.ACTION_REPLACE:
+          _dialog = new FindReplace(this);
+          (_dialog as FindReplace).Replace = true;
+          ShowCenteredForm(_dialog);
+          _showForm = false;  // Don't show the dialog in the Keypress event
           break;
       } 
 

@@ -43,6 +43,8 @@ namespace MPTagThat.Core
       ACTION_TOGGLEDATABASESPLITTER = 31,
       ACTION_VALIDATEMP3 = 32,
       ACTION_FIXMP3 = 33,
+      ACTION_FIND = 34,
+      ACTION_REPLACE = 35,
     }
     #endregion
 

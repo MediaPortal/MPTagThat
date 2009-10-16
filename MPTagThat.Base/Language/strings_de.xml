@@ -783,4 +783,25 @@
 	<String id="NoSearchValues">Bitte mindestens einen Suchwert eingeben.</String>
 	<String id="TooMuchRows">Die Suche ergab zuviele Resultate. Zeige nur die ersten 1000.</String>
   </Section>
+  
+  <!-- Find / Replace -->
+  <Section name="findreplace">
+    <String id="HeaderFind">Suchen</String>
+    <String id="HeaderReplace">Ersetzen</String>
+    <String id="NotFound">Suchzeichenfolge nicht gefunden</String>
+    <String id="NoMoreOccurencesFound">Keine weiteren Treffer für die Suchzeichenfolge</String>
+    <String id="TabFind">Suche</String>
+    <String id="FindWhat">Suchen nach:</String>
+    <String id="MatchCase">Groß- / Kleinschreibung</String>
+    <String id="MatchWords">Ganze Wörter</String>
+    <String id="GroupBoxSearch">Suchmodus</String>
+    <String id="SearchNormal">Normal</String>
+    <String id="SearchRegex">Regular Expression</String>
+    <String id="FindNext">Nächster</String>
+    <String id="Cancel">Schließen</String>
+    <String id="TabReplace">Ersetzen</String>
+    <String id="ReplaceWith">Ersetzen durch:</String>
+    <String id="ReplaceBtn">Ersetzen</String>
+    <String id="ReplaceAllBtn">Alle ersetzen</String>
+  </Section>
 </Language>

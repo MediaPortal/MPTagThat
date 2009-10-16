@@ -455,7 +455,7 @@ namespace MPTagThat
     private void quickAccessMenuOptions_Click(object sender, EventArgs e)
     {
       MPTagThat.Preferences.Preferences dlgPreferences = new MPTagThat.Preferences.Preferences(main);
-      main.ShowForm(dlgPreferences);
+      main.ShowModalDialog(dlgPreferences);
     }
 
     private void quickAccesMenuRefresh_Click(object sender, EventArgs e)
@@ -477,7 +477,7 @@ namespace MPTagThat
     private void startMenuItemChangeDisplayColumns_Click(object sender, EventArgs e)
     {
       Form dlg = new MPTagThat.Dialogues.ColumnSelect(main.TracksGridView);
-      main.ShowForm(dlg);
+      main.ShowModalDialog(dlg);
     }
 
     private void startMenuExit_Click(object sender, EventArgs e)
@@ -502,22 +502,22 @@ namespace MPTagThat
       if (rb == ribbonButtonTagFromFile)
       {
         MPTagThat.FileNameToTag.FileNameToTag dlgFileNameToTag = new MPTagThat.FileNameToTag.FileNameToTag(main);
-        main.ShowForm(dlgFileNameToTag);
+        main.ShowModalDialog(dlgFileNameToTag);
       }
       else if (rb == ribbonButtonMultiEdit)
       {
         MPTagThat.TagEdit.MultiTagEdit dlgMultiTagEdit = new MPTagThat.TagEdit.MultiTagEdit(main);
-        main.ShowForm(dlgMultiTagEdit);
+        main.ShowModalDialog(dlgMultiTagEdit);
       }
       else if (rb == ribbonButtonSingleEdit)
       {
         MPTagThat.TagEdit.SingleTagEdit dlgSingleTagEdit = new MPTagThat.TagEdit.SingleTagEdit(main);
-        main.ShowForm(dlgSingleTagEdit);
+        main.ShowModalDialog(dlgSingleTagEdit);
       }
       else if (rb == ribbonButtonOrganise)
       {
         MPTagThat.Organise.OrganiseFiles dlgOrganise = new MPTagThat.Organise.OrganiseFiles(main);
-        main.ShowForm(dlgOrganise);
+        main.ShowModalDialog(dlgOrganise);
       }
       else if (rb == ribbonButtonTagIdentify)
       {
@@ -554,7 +554,7 @@ namespace MPTagThat
     private void ribbonButtonRenameFileOptions_Click(object sender, EventArgs e)
     {
       MPTagThat.TagToFileName.TagToFileName dlgTagToFile = new MPTagThat.TagToFileName.TagToFileName(main, false);
-      main.ShowForm(dlgTagToFile);
+      main.ShowModalDialog(dlgTagToFile);
     }
 
     /// <summary>
@@ -576,7 +576,7 @@ namespace MPTagThat
     private void ribbonButtonCaseConversionOptions_Click(object sender, EventArgs e)
     {
       MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main);
-      main.ShowForm(dlgCaseConversion);
+      main.ShowModalDialog(dlgCaseConversion);
     }
 
     /// <summary>
@@ -780,7 +780,7 @@ namespace MPTagThat
     void helpButton_Click(object sender, EventArgs e)
     {
       MPTagThat.Dialogues.About dlgAbout = new MPTagThat.Dialogues.About();
-      main.ShowForm(dlgAbout);
+      main.ShowModalDialog(dlgAbout);
     }
     #endregion
 

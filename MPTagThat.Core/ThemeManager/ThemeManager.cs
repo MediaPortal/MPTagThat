@@ -136,6 +136,10 @@ namespace MPTagThat.Core
                 theme.NonFixableErrorBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 colorArray = attr.Attributes.GetNamedItem("nonfixableerrorforecolor").Value.Split(',');
                 theme.NonFixableErrorForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("findreplacebackcolor").Value.Split(',');
+                theme.FindReplaceBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                colorArray = attr.Attributes.GetNamedItem("findreplaceforecolor").Value.Split(',');
+                theme.FindReplaceForeColor= Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]), Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
                 break;
 
               case "Button":

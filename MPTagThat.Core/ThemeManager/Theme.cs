@@ -29,7 +29,8 @@ namespace MPTagThat.Core
     private Color _fixableErrorBackColor;
     private Color _nonfixableErrorForeColor;
     private Color _nonfixableErrorBackColor;
-
+    private Color _findReplaceForeColor;
+    private Color _findReplaceBackColor;
 
     public Font ButtonFont
     {
@@ -162,6 +163,18 @@ namespace MPTagThat.Core
     {
       get { return _nonfixableErrorBackColor; }
       set { _nonfixableErrorBackColor = value; }
+    }
+
+    public Color FindReplaceForeColor
+    {
+      get { return _findReplaceForeColor; }
+      set { _findReplaceForeColor = value; }
+    }
+
+    public Color FindReplaceBackColor
+    {
+      get { return _findReplaceBackColor; }
+      set { _findReplaceBackColor = value; }
     }
 
     #region ctor
