@@ -472,6 +472,7 @@
   <Section name="organise">
     <String id="Heading">Organiser Filer</String>
     <String id="TargetRootDrectory">Mål Mappe for Filer:</String>
+    <String id="TargetRootDrectoryOverride">Overstyr Mål Mappe ved bruk av Skript:</String>
     <String id="BrowseRootDir">Utforsk</String>
     <String id="OverWriteFiles">Overskriv eksisterende filer</String>
     <String id="CopyFiles">Kopier filer i stedenfor å flytte dem</String>
@@ -781,5 +782,26 @@
 	<String id="NoMusicDB">For å bruke Database søke funksjon, \nmå du spesifisere hvor Musikk Databasen er lokaliser i Innstillinger.</String>
 	<String id="NoSearchValues">Vennligst minst en verdi å søke etter.</String>
 	<String id="TooMuchRows">Søket ga for mange rader, viser nå de 1000 første.</String>
+  </Section>
+    
+  <!-- Find / Replace -->
+  <Section name="findreplace">
+    <String id="HeaderFind">Finn</String>
+    <String id="HeaderReplace">Erstatt</String>
+    <String id="NotFound">Søke streng ikke funnet</String>
+    <String id="NoMoreOccurencesFound">Ingen flere tilfeller av søke streng funnet</String>
+    <String id="TabFind">Finn</String>
+    <String id="FindWhat">Hva skal finnes:</String>
+    <String id="MatchCase">Match Settning</String>
+    <String id="MatchWords">Match bare hele ord</String>
+    <String id="GroupBoxSearch">Søke Modus</String>
+    <String id="SearchNormal">Normal</String>
+    <String id="SearchRegex">Regular Expression</String>
+    <String id="FindNext">Finn Neste</String>
+    <String id="Cancel">Lukk</String>
+    <String id="TabReplace">Erstat</String>
+    <String id="ReplaceWith">Erstatt med:</String>
+    <String id="ReplaceBtn">Erstatt</String>
+    <String id="ReplaceAllBtn">Erstatt alle</String>
   </Section>
 </Language>
