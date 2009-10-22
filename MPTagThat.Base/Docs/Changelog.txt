@@ -7,6 +7,15 @@ Legend:
 - Deleted
 x Fixed
 
+1.1.3582 Build 27754 Date: 22.10.2009 
+-------------------------------------
++ Added support for Network folders View. Views are selectable via Combo Box
++ New Find / Replace function. Reachable via (Ctrl + Alt + F and Ctrl + H). icons still to be done
++ Added support for "Compilation". useful for iTunes / iPod users
+x Update of Lame encoder
+x Upgraded cdrtools to new version
+x Update of Lyricsengine to latest version. Seeklyrics no longer supported, LyricsPlugin site added instead
+
 1.1.3539 Build 36477 Date: 09.09.2009 
 -------------------------------------
 + Scripts can be used on Organise to override target folder
