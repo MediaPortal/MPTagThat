@@ -10,6 +10,7 @@
 // website http://raccoom.sytes.net, email microweb@bluewin.ch, msn chrisdarebell@msn.com
  
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -132,7 +133,7 @@ namespace Raccoom.Windows.Forms
 		{		
 			if(!parent.IsSpecialFolder) return;
 			//
-			Shell32.FolderItem folderItem = ((Shell32.FolderItem)parent.Tag);
+			Shell32.FolderItem2 folderItem = ((Shell32.FolderItem2)parent.Tag);
 			//
 			if(_shell.Shell.NameSpace(Shell32.ShellSpecialFolderConstants.ssfDRIVES).Title==folderItem.Name)
 			{
@@ -140,14 +141,25 @@ namespace Raccoom.Windows.Forms
 			} 
 			else
 			{
-				foreach(Shell32.FolderItem fi in ((Shell32.Folder)folderItem.GetFolder).Items())
+        List<TreeNodePath> nodes = new List<TreeNodePath>();
+				foreach(Shell32.FolderItem2 fi in ((Shell32.Folder2)folderItem.GetFolder).Items())
 				{						
 					if(!_showAllShellObjects && !fi.IsFileSystem || !fi.IsFolder) continue;
 					//						
 					TreeNodePath node = CreateTreeNode(helper, fi.Name, fi.Path,IsFolderWithChilds(fi), false,true);
 					node.Tag = fi;
-					parent.Nodes.Add( node );						
+          nodes.Add(node);
 				}
+
+        // Sort the Directories, as Samba might return unsorted
+			  TreeNodePath[] nodesArray = nodes.ToArray();
+        Array.Sort<TreeNodePath>(nodesArray,
+          new Comparison<TreeNodePath>(delegate(TreeNodePath p1, TreeNodePath p2)
+        {
+          return string.Compare(p1.Text, p2.Text);
+        }));
+
+        parent.Nodes.AddRange(nodesArray);
 			}		
 		}
 		public override  TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper)

@@ -43,6 +43,7 @@ namespace MPTagThat
     private MPTagThat.GridView.GridViewBurn gridViewBurn;
     private MPTagThat.GridView.GridViewRip gridViewRip;
     private MPTagThat.GridView.GridViewConvert gridViewConvert;
+    private MPTagThat.Player.PlayerControl playerControl;
 
     private string _selectedDirectory = "";          // The currently selcted Directory
     private bool _treeViewSelected = false;     // Has the user selected the Treeview
@@ -238,6 +239,7 @@ namespace MPTagThat
       gridViewBurn = new MPTagThat.GridView.GridViewBurn(this);
       gridViewRip = new MPTagThat.GridView.GridViewRip(this);
       gridViewConvert = new GridViewConvert(this);
+      playerControl = new Player.PlayerControl();
 
       // 
       // gridViewControl
@@ -276,11 +278,20 @@ namespace MPTagThat
       this.gridViewConvert.Size = new System.Drawing.Size(676, 470);
       this.gridViewConvert.TabIndex = 9;
       this.gridViewConvert.Visible = false;
+      // 
+      // playerControl
+      // 
+      this.playerControl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.playerControl.Location = new System.Drawing.Point(0, 0);
+      this.playerControl.Name = "playerControl";
+      this.playerControl.Size = new System.Drawing.Size(1008, 68);
+      this.playerControl.TabIndex = 0;
 
       this.panelFileList.Controls.Add(this.gridViewControl);
       this.panelFileList.Controls.Add(this.gridViewBurn);
       this.panelFileList.Controls.Add(this.gridViewRip);
       this.panelFileList.Controls.Add(this.gridViewConvert);
+      this.playerPanel.Controls.Add(this.playerControl);
 
       // Set reference to Main, so that we may use the ErrorGrid
       gridViewControl.SetMainRef(this);
@@ -377,7 +388,6 @@ namespace MPTagThat
       gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
-      Options.MainSettings.DatabaseMode = treeViewControl.DatabaseMode;
       Options.MainSettings.FormLocation = this.Location;
       Options.MainSettings.FormSize = this.ClientSize;
       Options.MainSettings.LeftPanelSize = this.panelLeft.Width;
@@ -473,7 +483,7 @@ namespace MPTagThat
         _selectedDirectory = Options.MainSettings.LastFolderUsed;
       }
       treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
-      treeViewControl.DatabaseMode = Options.MainSettings.DatabaseMode;
+      treeViewControl.DatabaseMode = Options.MainSettings.DataProvider == 3;
       _formLocation = Options.MainSettings.FormLocation;
       _formSize = Options.MainSettings.FormSize;
 
@@ -1001,7 +1011,10 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void Main_Resize(object sender, EventArgs e)
     {
-      playerControl.MovePlayList();
+      if (playerControl != null)
+      {
+        playerControl.MovePlayList();
+      }
     }
 
     /// <summary>
@@ -1011,7 +1024,10 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void Main_Move(object sender, EventArgs e)
     {
-      playerControl.MovePlayList();
+      if (playerControl != null)
+      {
+        playerControl.MovePlayList();
+      }
     }
     #endregion
     #endregion

@@ -34,7 +34,9 @@
     <String id="PlayerPanel">Player</String>
     <!-- Options Panel -->
     <String id="OptionsPanel">Optionen</String>
-    <String id="SwitchView">Ansicht ändern</String>
+    <String id="FolderView">Verzeichnis Ansicht</String>
+    <String id="DBView">Datenbank Ansicht</String>
+    <String id="NetworkView">Netzwerk Verzeichnis Ansicht</String>
     <String id="ScanSubfolder">Inkl. Unterverzeichnisse</String>
     <String id="ButtonRefreshFolder">Verzeichnisse einlesen</String>
     <!-- Error Gridview -->

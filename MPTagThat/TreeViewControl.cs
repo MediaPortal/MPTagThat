@@ -85,22 +85,20 @@ namespace MPTagThat
     #region Init
     public void Init()
     {
-      if (Options.MainSettings.DatabaseMode && File.Exists(Options.MainSettings.MediaPortalDatabase))
+      _databaseMode = false;
+      cbDataProvider.SelectedIndex = Options.MainSettings.DataProvider;
+      //  Add the event Handler here to prevent it from firing, when setting the selected item
+      cbDataProvider.SelectedIndexChanged += new EventHandler(cbDataProvider_SelectedIndexChanged);
+      if (Options.MainSettings.DataProvider == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
       {
-        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
-        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
         _databaseMode = true;
       }
-      else
-      {
-        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
-        _databaseMode = false;
-      }
-      SwitchMode();
       treeViewFolderBrowser.DriveTypes = DriveTypes.LocalDisk | DriveTypes.NetworkDrive | DriveTypes.RemovableDisk | DriveTypes.CompactDisc;
       treeViewFolderBrowser.RootFolder = Environment.SpecialFolder.Desktop;
       treeViewFolderBrowser.CheckboxBehaviorMode = CheckboxBehaviorMode.None;
+      SwitchMode();
     }
+
 
     /// <summary>
     /// Refreshes the Foldrs
@@ -159,6 +157,11 @@ namespace MPTagThat
       TagFilterValue.HeaderText = localisation.ToString("main", "FilterHeadingFilter");
       TagFilterOperator.HeaderText = localisation.ToString("main", "FilterHeadingOperator");
 
+      // Data Provider Combo
+      cbDataProvider.Items.Clear();
+      cbDataProvider.Items.Add(localisation.ToString("main", "FolderView"));
+      cbDataProvider.Items.Add(localisation.ToString("main", "NetworkView"));
+      cbDataProvider.Items.Add(localisation.ToString("main", "DBView"));
     }
     #endregion
 
@@ -313,8 +316,10 @@ namespace MPTagThat
     {
       _main.TracksGridView.TrackList.Clear();
       _main.FileInfoPanel.ClearFileInfoPanel();
+
       if (_databaseMode)
       {
+        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
         if (_main.SplitterTop.IsCollapsed)
         {
           _main.SplitterTop.ToggleState();
@@ -323,9 +328,21 @@ namespace MPTagThat
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
         btnRefreshFolder.Enabled = false;
+        _databaseMode = true;
       }
       else
       {
+        if (Options.MainSettings.DataProvider == 0)
+        {
+          treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
+        }
+        else
+        {
+          TreeViewFolderBrowserDataProviderShell32 shell32Provider = new TreeViewFolderBrowserDataProviderShell32();
+          shell32Provider.ShowAllShellObjects = true;
+          treeViewFolderBrowser.DataSource = shell32Provider;          
+        }
+
         if (!_main.SplitterTop.IsCollapsed)
         {
           _main.SplitterTop.ToggleState();
@@ -334,6 +351,7 @@ namespace MPTagThat
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;
         btnRefreshFolder.Enabled = true;
+        _databaseMode = false;
       }
     }
 
@@ -742,7 +760,7 @@ namespace MPTagThat
     }
     #endregion
 
-    #region Buttons
+    #region Buttons / Combo
     /// <summary>
     /// Refresh the Folder List
     /// </summary>
@@ -753,21 +771,16 @@ namespace MPTagThat
       RefreshFolders();
     }
 
-
-    private void btnSwitchView_Click(object sender, EventArgs e)
+    void cbDataProvider_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (treeViewFolderBrowser.DataSource.GetType() != typeof(TreeViewFolderBrowserDataProvider))
+      Options.MainSettings.DataProvider = cbDataProvider.SelectedIndex;
+      if (cbDataProvider.SelectedIndex == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
       {
-        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProvider();
-        _databaseMode = false;
+        _databaseMode = true;
       }
       else
       {
-        if (File.Exists(Options.MainSettings.MediaPortalDatabase))
-        {
-          treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
-          _databaseMode = true;
-        }
+        _databaseMode = false;
       }
       SwitchMode();
       treeViewFolderBrowser.Populate();

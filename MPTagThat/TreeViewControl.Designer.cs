@@ -59,8 +59,8 @@
       this.panelLeftBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
+      this.cbDataProvider = new System.Windows.Forms.ComboBox();
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.btnSwitchView = new MPTagThat.Core.WinControls.MPTButton();
       this.contextMenuTreeView.SuspendLayout();
       this.contextMenuStripFilter.SuspendLayout();
       this.tabControlTreeView.SuspendLayout();
@@ -383,8 +383,8 @@
       this.optionsPanelLeft.CaptionText = "Options";
       this.optionsPanelLeft.CaptionTextColor = System.Drawing.Color.Black;
       this.optionsPanelLeft.Controls.Add(this.btnRefreshFolder);
+      this.optionsPanelLeft.Controls.Add(this.cbDataProvider);
       this.optionsPanelLeft.Controls.Add(this.checkBoxRecursive);
-      this.optionsPanelLeft.Controls.Add(this.btnSwitchView);
       this.optionsPanelLeft.CornerStyle = Stepi.UI.CornerStyle.Normal;
       this.optionsPanelLeft.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.optionsPanelLeft.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
@@ -412,6 +412,15 @@
       this.btnRefreshFolder.UseVisualStyleBackColor = true;
       this.btnRefreshFolder.Click += new System.EventHandler(this.btnRefreshFolder_Click);
       // 
+      // cbDataProvider
+      // 
+      this.cbDataProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbDataProvider.FormattingEnabled = true;
+      this.cbDataProvider.Location = new System.Drawing.Point(17, 34);
+      this.cbDataProvider.Name = "cbDataProvider";
+      this.cbDataProvider.Size = new System.Drawing.Size(180, 21);
+      this.cbDataProvider.TabIndex = 5;
+      // 
       // checkBoxRecursive
       // 
       this.checkBoxRecursive.AutoSize = true;
@@ -424,20 +433,6 @@
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
       this.checkBoxRecursive.UseVisualStyleBackColor = true;
-      // 
-      // btnSwitchView
-      // 
-      this.btnSwitchView.AutoSize = true;
-      this.btnSwitchView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.btnSwitchView.Localisation = "SwitchView";
-      this.btnSwitchView.LocalisationContext = "main";
-      this.btnSwitchView.Location = new System.Drawing.Point(17, 37);
-      this.btnSwitchView.Name = "btnSwitchView";
-      this.btnSwitchView.Size = new System.Drawing.Size(75, 23);
-      this.btnSwitchView.TabIndex = 5;
-      this.btnSwitchView.Text = "Switch View";
-      this.btnSwitchView.UseVisualStyleBackColor = true;
-      this.btnSwitchView.Click += new System.EventHandler(this.btnSwitchView_Click);
       // 
       // TreeViewControl
       // 
@@ -480,7 +475,6 @@
     private System.Windows.Forms.ToolStripMenuItem menuCut;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem menuPaste;
-    private MPTagThat.Core.WinControls.MPTButton btnSwitchView;
     private System.Windows.Forms.TabControl tabControlTreeView;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageViews;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageFilter;
@@ -495,5 +489,6 @@
     private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterField;
     private System.Windows.Forms.DataGridViewTextBoxColumn TagFilterValue;
     private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterOperator;
+    private System.Windows.Forms.ComboBox cbDataProvider;
   }
 }

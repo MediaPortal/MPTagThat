@@ -188,7 +188,7 @@ namespace Raccoom.Win32
 			SHGFI_SMALLICON = 0x1,             // get small icon 
 			SHGFI_OPENICON = 0x2,              // get open icon 
 			SHGFI_SHELLICONSIZE = 0x4,         // get shell size icon 
-			//SHGFI_PIDL = 0x8,                  // pszPath is a pidl 
+			SHGFI_PIDL = 0x8,                  // pszPath is a pidl 
 			SHGFI_USEFILEATTRIBUTES = 0x10,    // use passed dwFileAttribute 
 			SHGFI_ADDOVERLAYS = 0x000000020,   // apply the appropriate overlays
 			SHGFI_OVERLAYINDEX = 0x000000040   // Get the index of the overlay
@@ -312,7 +312,18 @@ namespace Raccoom.Win32
 		#endregion
 
 		#region Implementation
-		
+    [DllImport("shell32.dll")]
+    private static extern Int32 SHParseDisplayName(
+      [MarshalAs(UnmanagedType.LPWStr)]
+      String pszName,                // Pointer to a zero-terminated wide string that
+                                     // contains the display name  to parse. 
+      IntPtr pbc,                    // Optional bind context that controls the parsing
+                                     // operation. This parameter is normally set to NULL.
+      out IntPtr ppidl,              // Address of a pointer to a variable of type
+                                     // ITEMIDLIST that receives the item  identifier list for the object.
+      UInt32 sfgaoIn,                // ULONG value that specifies the attributes to query.
+      out UInt32 psfgaoOut);         // Pointer to a ULONG. On return, those attributes
+                                     // that are true for the  object and were requested in sfgaoIn will be set. 
 		[DllImport("shell32")]
 		private static extern IntPtr SHGetFileInfo (
 			string pszPath, 
@@ -320,6 +331,14 @@ namespace Raccoom.Win32
 			ref SHFILEINFO psfi, 
 			uint cbFileInfo, 
 			uint uFlags);
+
+    [DllImport("shell32")]
+    private static extern IntPtr SHGetFileInfo(
+      IntPtr pidl,
+      int dwFileAttributes,
+      ref SHFILEINFO psfi,
+      uint cbFileInfo,
+      uint uFlags);
 
 		[DllImport("user32.dll")]
 		private static extern int DestroyIcon(IntPtr hIcon);
@@ -740,7 +759,7 @@ namespace Raccoom.Win32
 			ShellIconStateConstants iconState
 			)
 		{
-			SHGetFileInfoConstants dwFlags = SHGetFileInfoConstants.SHGFI_SYSICONINDEX;
+      SHGetFileInfoConstants dwFlags = SHGetFileInfoConstants.SHGFI_SYSICONINDEX | SHGetFileInfoConstants.SHGFI_DISPLAYNAME | SHGetFileInfoConstants.SHGFI_TYPENAME;
 			int dwAttr = 0;
 			if (size == SystemImageListSize.SmallIcons)
 			{
@@ -769,14 +788,28 @@ namespace Raccoom.Win32
 				fileName, dwAttr, ref shfi, shfiSize, 
 				((uint)(dwFlags) | (uint)iconState));
 
-			if (retVal.Equals(IntPtr.Zero))
+			if (retVal == IntPtr.Zero)
 			{
-				return 0;
+        // Seems to be a special folder, so we need to try with the PIDL
+        dwFlags |= SHGetFileInfoConstants.SHGFI_PIDL;
+        IntPtr pidl = IntPtr.Zero;
+        uint iAttribute;
+
+        // Convert the folder name to the PIDL and get it's icon
+        SHParseDisplayName(fileName, IntPtr.Zero, out pidl, 0,out iAttribute);
+        if (pidl == IntPtr.Zero)
+        {
+          return 0;
+        }
+        retVal = SHGetFileInfo(pidl, dwAttr, ref shfi, shfiSize, ((uint)(dwFlags) | (uint)iconState));
+        Marshal.FreeCoTaskMem(pidl);
+        if (retVal != IntPtr.Zero)
+		  	{
+          return shfi.iIcon; 
+        }
+			  return 0;
 			}
-			else
-			{
-				return shfi.iIcon;
-			}
+		  return shfi.iIcon;
 		}
 
 		/// <summary>

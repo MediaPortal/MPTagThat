@@ -53,7 +53,6 @@ namespace MPTagThat
       this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.TTPanel();
       this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
       this.toolStripStatusLabelFilter = new System.Windows.Forms.ToolStripStatusLabel();
-      this.playerControl = new MPTagThat.Player.PlayerControl();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
       this.statusStrip.SuspendLayout();
       this.panelMiddleBottom.SuspendLayout();
@@ -298,7 +297,6 @@ namespace MPTagThat
       // 
       // playerPanel
       // 
-      this.playerPanel.Controls.Add(this.playerControl);
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.playerPanel.Location = new System.Drawing.Point(0, 660);
       this.playerPanel.Name = "playerPanel";
@@ -309,14 +307,6 @@ namespace MPTagThat
       // 
       this.toolStripStatusLabelFilter.Name = "toolStripStatusLabelFilter";
       this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(0, 19);
-      // 
-      // playerControl
-      // 
-      this.playerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.playerControl.Location = new System.Drawing.Point(0, 0);
-      this.playerControl.Name = "playerControl";
-      this.playerControl.Size = new System.Drawing.Size(1008, 68);
-      this.playerControl.TabIndex = 0;
       // 
       // Main
       // 
@@ -371,7 +361,6 @@ namespace MPTagThat
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     private MPTagThat.Core.WinControls.TTPanel panelMiddle;
     private MPTagThat.Core.WinControls.TTPanel playerPanel;
-    private MPTagThat.Player.PlayerControl playerControl;
     private MPTagThat.Core.WinControls.TTPanel panelMiddleTop;
     private MPTagThat.Core.WinControls.TTPanel panelMiddleBottom;
     private NJFLib.Controls.CollapsibleSplitter splitterTop;

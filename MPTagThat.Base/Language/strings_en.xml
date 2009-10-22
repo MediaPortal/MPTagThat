@@ -34,7 +34,9 @@
     <String id="PlayerPanel">Player</String>
     <!-- Options Panel -->
     <String id="OptionsPanel">Options</String>
-    <String id="SwitchView">Switch View</String>
+    <String id="FolderView">Folder View</String>
+    <String id="DBView">Database View</String>
+    <String id="NetworkView">Network Folder View</String>
     <String id="ScanSubfolder">Scan subfolders</String>
     <String id="ButtonRefreshFolder">Refresh Folder View</String>
     <!-- Error Gridview -->

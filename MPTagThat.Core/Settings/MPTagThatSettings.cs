@@ -11,7 +11,7 @@ namespace MPTagThat.Core
     private int _debugLevel;
     private string _lastFolderUsed = "";
     private bool _scanSubFolders = false;
-    private bool _databaseMode = false;
+    private int _dataProvider = 0;
     private Point _formLocation;
     private Size _formSize = new Size(1200, 1024);
     private int _leftPanelSize;
@@ -86,11 +86,11 @@ namespace MPTagThat.Core
       set { _scanSubFolders = value; }
     }
 
-    [Setting(SettingScope.User, "false")]
-    public bool DatabaseMode
+    [Setting(SettingScope.User, "0")]
+    public int DataProvider
     {
-      get { return _databaseMode; }
-      set { _databaseMode = value; }
+      get { return _dataProvider; }
+      set { _dataProvider = value; }
     }
 
     [Setting(SettingScope.User, "")]
