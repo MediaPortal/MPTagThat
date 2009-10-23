@@ -34,7 +34,9 @@
     <String id="PlayerPanel">Spiller</String>
     <!-- Options Panel -->
     <String id="OptionsPanel">Valg</String>
-    <String id="SwitchView">Bytt Visning</String>
+    <String id="FolderView">Mappe Visning</String>
+    <String id="DBView">Database Visning</String>
+    <String id="NetworkView">Netverks Visning</String>
     <String id="ScanSubfolder">Skann Under Mapper</String>
     <String id="ButtonRefreshFolder">Oppfrisk Mappe Visning</String>
     <!-- Error Gridview -->
