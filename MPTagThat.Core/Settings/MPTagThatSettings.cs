@@ -18,6 +18,7 @@ namespace MPTagThat.Core
     private int _rightPanelSize;
     private bool _rightPanelCollapsed;
     private bool _errorPanelCollapsed;
+    private bool _playerPanelCollapsed;
     private string _activeScript = "";
     private int _numTrackDigits = 2;
     private string _ripTargetFolder;
@@ -134,6 +135,13 @@ namespace MPTagThat.Core
     {
       get { return _errorPanelCollapsed; }
       set { _errorPanelCollapsed = value; }
+    }
+
+    [Setting(SettingScope.User, "false")]
+    public bool PlayerPanelCollapsed
+    {
+      get { return _playerPanelCollapsed; }
+      set { _playerPanelCollapsed = value; }
     }
     #endregion
 

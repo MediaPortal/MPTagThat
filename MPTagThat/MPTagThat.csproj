@@ -266,6 +266,12 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="MiscInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MiscInfoControl.Designer.cs">
+      <DependentUpon>MiscInfoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MusicDatabaseBuild.cs" />
     <Compile Include="Player\PlayerControl.cs">
       <SubType>UserControl</SubType>
@@ -397,6 +403,9 @@
     <EmbeddedResource Include="Main.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MiscInfoControl.resx">
+      <DependentUpon>MiscInfoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Player\PlayerControl.resx">
       <DependentUpon>PlayerControl.cs</DependentUpon>

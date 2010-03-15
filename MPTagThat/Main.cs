@@ -36,6 +36,7 @@ namespace MPTagThat
 
     private TreeViewControl treeViewControl;
     private FileInfoControl fileInfoControl;
+    private MiscInfoControl miscInfoControl;
     private DatabaseSearchControl databaseSearchControl;
 
     // Grids: Can't have them in Designer, as it will fail loading
@@ -105,7 +106,7 @@ namespace MPTagThat
     /// </summary>
     public DataGridView ErrorGridView
     {
-      get { return this.dataGridViewError; }
+      get { return this.miscInfoControl.ErrorGridView; }
     }
 
     /// <summary>
@@ -315,6 +316,11 @@ namespace MPTagThat
       databaseSearchControl.Dock = DockStyle.Fill;
       this.panelMiddleDBSearch.Controls.Add(databaseSearchControl);
 
+      // Setup Misc Info Control
+      miscInfoControl = new MiscInfoControl();
+      miscInfoControl.Dock = DockStyle.Fill;
+      this.panelMiddleBottom.Controls.Add(miscInfoControl);
+
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
 
@@ -338,14 +344,6 @@ namespace MPTagThat
       treeViewControl.TreeView.Populate();
       treeViewControl.TreeView.Nodes[0].Expand();
       treeViewControl.TreeView.ShowFolder(_selectedDirectory);
-
-      // Build the Context Menu for the Error Grid
-      MenuItem[] rmitems = new MenuItem[1];
-      rmitems[0] = new MenuItem();
-      rmitems[0].Text = "Clear List";
-      rmitems[0].Click += new System.EventHandler(dataGridViewError_ClearList);
-      rmitems[0].DefaultItem = true;
-      this.dataGridViewError.ContextMenu = new ContextMenu(rmitems);
 
       _splashScreen.Stop();
 
@@ -394,6 +392,7 @@ namespace MPTagThat
       Options.MainSettings.RightPanelSize = this.panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
       Options.MainSettings.ErrorPanelCollapsed = this.splitterBottom.IsCollapsed;
+      Options.MainSettings.PlayerPanelCollapsed = this.splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ribbon.ScriptsCombo.Text;
       Options.SaveAllSettings();
     }
@@ -462,9 +461,6 @@ namespace MPTagThat
     {
       Util.EnterMethod(Util.GetCallingMethod());
       this.Text = localisation.ToString("system", "ApplicationName");
-
-      this.dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
-      this.dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
@@ -498,6 +494,9 @@ namespace MPTagThat
 
       if (Options.MainSettings.ErrorPanelCollapsed)
         splitterBottom.ToggleState();
+
+      if (Options.MainSettings.PlayerPanelCollapsed)
+        splitterPlayer.ToggleState();
 
       if (Options.MainSettings.RightPanelSize > -1)
         this.panelRight.Width = Options.MainSettings.RightPanelSize;
@@ -549,10 +548,6 @@ namespace MPTagThat
       gridViewConvert.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      // We want to have our own header color
-      dataGridViewError.EnableHeadersVisualStyles = false;
-      dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      dataGridViewError.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
     }
 
     /// <summary>
@@ -630,7 +625,7 @@ namespace MPTagThat
         }
         toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
-      dataGridViewError.Rows.Clear();
+      miscInfoControl.ErrorGridView.Rows.Clear();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
@@ -944,27 +939,6 @@ namespace MPTagThat
       }
       catch (InvalidOperationException)  // we might get a Cross-thread Exception on startup
       { }
-    }
-
-    /// <summary>
-    /// Handle Right Mouse Click to open the context Menu in the Error DataGrid
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void datagridViewError_MouseClick(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Right)
-        this.dataGridViewError.ContextMenu.Show(dataGridViewError, new Point(e.X, e.Y));
-    }
-
-    /// <summary>
-    /// Context Menu entry has been selected
-    /// </summary>
-    /// <param name="o"></param>
-    /// <param name="e"></param>
-    private void dataGridViewError_ClearList(object o, System.EventArgs e)
-    {
-      dataGridViewError.Rows.Clear();
     }
     #endregion
 
