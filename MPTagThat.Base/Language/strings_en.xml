@@ -39,6 +39,9 @@
     <String id="NetworkView">Network Folder View</String>
     <String id="ScanSubfolder">Scan subfolders</String>
     <String id="ButtonRefreshFolder">Refresh Folder View</String>
+    <!-- Misc. TabControl -->
+    <String id="TabPageMessages">Messages</String>
+    <String id="TabPageNonMusicFiles">Non Music Files</String>
     <!-- Error Gridview -->
     <String id="ErrorHeaderFile">File</String>
     <String id="ErrorHeaderMessage">Message</String>
