@@ -68,6 +68,7 @@ namespace MPTagThat.Core
     private string _amazonSite;
     private bool _ripEjectCD;
     private bool _ripActivateTargetFolder;
+    private string _singleEditLastUsedScript;
     #endregion
 
     #region Properties
@@ -155,6 +156,13 @@ namespace MPTagThat.Core
     {
       get { return _playerSpectrumIndex; }
       set { _playerSpectrumIndex = value; }
+    }
+
+    [Setting(SettingScope.User, "")]
+    public string SingleEditLastUsedScript
+    {
+      get { return _singleEditLastUsedScript; }
+      set { _singleEditLastUsedScript = value; }
     }
 
     #region Tags

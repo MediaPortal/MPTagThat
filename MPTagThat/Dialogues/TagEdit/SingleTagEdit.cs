@@ -59,13 +59,20 @@ namespace MPTagThat.TagEdit
       // Load available Scripts
       System.Collections.ArrayList scripts = null;
       scripts = ServiceScope.Get<IScriptManager>().GetScripts();
+      Item usedScript = null;
       foreach (string[] script in scripts)
       {
         Item item = new Item(script[1], script[0], script[2]);
+        if (item.Value == Options.MainSettings.SingleEditLastUsedScript)
+        {
+          usedScript = item;
+        }
         comboBoxScripts.Items.Add(item);
       }
-      if (comboBoxScripts.Items.Count > 0)
-        comboBoxScripts.SelectedIndex = 0;
+      if (comboBoxScripts.Items.Count > 0 && usedScript != null)
+      {
+        comboBoxScripts.SelectedItem = usedScript;
+      }
 
       // Fill in Fields, which are the same in all selected rows
       if (main.TracksGridView.TrackList.Count > 0)
@@ -118,6 +125,25 @@ namespace MPTagThat.TagEdit
       checkBoxRemoveExistingPictures.Visible = false;
 
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Called when closing the dislog
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnClosed(EventArgs e)
+    {
+      // Save the script used
+      if (comboBoxScripts.Items.Count > 0)
+      {
+        Item item = comboBoxScripts.SelectedItem as Item;
+        if (item != null)
+        {
+          Options.MainSettings.SingleEditLastUsedScript = item.Value;
+        }
+      }
+
+      base.OnClosed(e);
     }
 
     private void Localisation()
