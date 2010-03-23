@@ -35,6 +35,7 @@ namespace MPTagThat
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabelFilter = new System.Windows.Forms.ToolStripStatusLabel();
       this.panelBottom = new System.Windows.Forms.Panel();
+      this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
       this.panelMiddleTop = new MPTagThat.Core.WinControls.TTPanel();
       this.panelFileList = new MPTagThat.Core.WinControls.TTPanel();
@@ -48,7 +49,6 @@ namespace MPTagThat
       this.splitterBottom = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
       this.panelMiddleBottom = new MPTagThat.Core.WinControls.TTPanel();
       this.splitterPlayer = new NJFLib.Controls.CollapsibleSplitter();
-      this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
       this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +105,14 @@ namespace MPTagThat
       this.panelBottom.Size = new System.Drawing.Size(1008, 72);
       this.panelBottom.TabIndex = 12;
       // 
+      // playerPanel
+      // 
+      this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.playerPanel.Location = new System.Drawing.Point(0, 0);
+      this.playerPanel.Name = "playerPanel";
+      this.playerPanel.Size = new System.Drawing.Size(1008, 72);
+      this.playerPanel.TabIndex = 11;
+      // 
       // panelMiddle
       // 
       this.panelMiddle.Controls.Add(this.panelMiddleTop);
@@ -128,7 +136,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(642, 391);
+      this.panelMiddleTop.Size = new System.Drawing.Size(642, 350);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -136,7 +144,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(642, 303);
+      this.panelFileList.Size = new System.Drawing.Size(642, 262);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -237,7 +245,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 391);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 350);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -247,9 +255,9 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 399);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 358);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(658, 100);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(658, 141);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -266,14 +274,6 @@ namespace MPTagThat
       this.splitterPlayer.TabStop = false;
       this.splitterPlayer.UseAnimations = true;
       this.splitterPlayer.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      // 
-      // playerPanel
-      // 
-      this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.playerPanel.Location = new System.Drawing.Point(0, 0);
-      this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1008, 72);
-      this.playerPanel.TabIndex = 11;
       // 
       // panelTop
       // 

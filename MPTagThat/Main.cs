@@ -206,6 +206,11 @@ namespace MPTagThat
     {
       get { return toolStripStatusLabelFilter; }
     }
+
+    public MiscInfoControl MiscInfoPanel
+    {
+      get { return miscInfoControl; }
+    }
     #endregion
 
     #region Form Open / Close

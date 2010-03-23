@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
+using MPTagThat.Core.ShellLib;
 
 namespace MPTagThat
 {
@@ -14,6 +17,12 @@ namespace MPTagThat
     #region Variables
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
+    private ILogger log = ServiceScope.Get<ILogger>();
+
+    private bool _inLabeledit = false;
+    private string _savedLabelValue = "";
+
+    private ImageList _imgList = new ImageList();
     #endregion
 
 
@@ -36,6 +45,14 @@ namespace MPTagThat
       rmitems[0].Click += new System.EventHandler(dataGridViewError_ClearList);
       rmitems[0].DefaultItem = true;
       this.dataGridViewError.ContextMenu = new ContextMenu(rmitems);
+
+      // Setup Non-Music ListView
+      listViewNonMusicFiles.View = View.LargeIcon;
+      listViewNonMusicFiles.ShowItemToolTips = true;
+      listViewNonMusicFiles.LabelEdit = true;
+      listViewNonMusicFiles.FullRowSelect = true;
+      listViewNonMusicFiles.GridLines = true;
+      listViewNonMusicFiles.Sorting = SortOrder.Ascending;
     }
     #endregion
 
@@ -69,6 +86,92 @@ namespace MPTagThat
     }
     #endregion
 
+    #region Public Methods
+    /// <summary>
+    /// Clear the Non Music Files View
+    /// </summary>
+    public void ClearNonMusicFiles()
+    {
+      listViewNonMusicFiles.Items.Clear();
+    }
+
+    /// <summary>
+    /// Add Non Music Files to the List View
+    /// </summary>
+    /// <param name="files"></param>
+    public void AddNonMusicFiles(List<FileInfo> files)
+    {
+      listViewNonMusicFiles.Items.Clear();
+      _imgList = new ImageList();
+
+      int i = 0;
+      foreach (FileInfo fi in files)
+      {
+        ListViewItem item = new ListViewItem(fi.FullName);
+        item.ToolTipText = string.Format("{0} | {1} {2} | {3}kb", fi.Name, fi.LastWriteTime.ToShortDateString(), fi.LastWriteTime.ToShortTimeString(), fi.Length / 1024);
+        
+        // Create Image
+        bool imgFailure = false;
+        bool nonPicFile = true;
+        if (Util.IsPicture(fi.Name))
+        {
+          nonPicFile = false;
+          try
+          {
+            Image img = Image.FromFile(fi.FullName);
+            if (img != null)
+            {
+              _imgList.Images.Add(img);
+            }
+            else
+            {
+              imgFailure = true;
+            }
+          }
+          catch (Exception)
+          {
+            imgFailure = true;
+          }
+        }
+        if (nonPicFile || imgFailure)
+        {
+          // For a non Picture file or if we had troubles creating the thumb, see if we have a file specific icon
+          string defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
+          if (File.Exists(defaultName))
+          {
+            Image img = Image.FromFile(defaultName);
+            if (img != null)
+            {
+              _imgList.Images.Add(img);
+            }
+          }
+        }
+
+        item.ImageIndex = i;
+        listViewNonMusicFiles.Items.Add(item);
+        i++;
+      }
+      _imgList.ImageSize = new Size(64, 64);
+      listViewNonMusicFiles.LargeImageList = _imgList;
+    }
+
+    /// <summary>
+    /// Activate the Error Tab
+    /// </summary>
+    public void ActivateErrorTab()
+    {
+      tabControlMisc.SelectedIndex = 0;
+    }
+
+    /// <summary>
+    /// Activate the Non Music Files Tab
+    /// </summary>
+    public void ActivateNonMusicTab()
+    {
+      tabControlMisc.SelectedIndex = 1;
+    }
+    #endregion
+
     #region Events
     #region Error Grid
     /// <summary>
@@ -93,7 +196,92 @@ namespace MPTagThat
     }
     #endregion
 
+    #region Non Music File Grid
+    /// <summary>
+    /// Save the Old file Name and set indicator that we are in label edit,
+    /// so that the delete key can be used while editing.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void listViewNonMusicFiles_BeforeLabelEdit(object sender, LabelEditEventArgs e)
+    {
+      _inLabeledit = true;
+      _savedLabelValue = listViewNonMusicFiles.Items[e.Item].Text;
+    }
 
+    /// <summary>
+    /// Rename the file, if the name has changed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void listViewNonMusicFiles_AfterLabelEdit(object sender, LabelEditEventArgs e)
+    {
+      _inLabeledit = false;
+      if (_savedLabelValue != e.Label)
+      {
+        try
+        {
+          FileSystem.MoveFile(_savedLabelValue, e.Label, UIOption.AllDialogs, UICancelOption.DoNothing);
+        }
+        catch (Exception ex)
+        {
+          listViewNonMusicFiles.Items[e.Item].Text = _savedLabelValue;
+          log.Error("Error renaming file: {0} to {1} Exception: {2}", _savedLabelValue, e.Label, ex.Message);
+        }
+      }
+    }
+
+    /// <summary>
+    /// Capture the delete key in the list view.
+    /// Will delete the selected item
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <param name="keyData"></param>
+    /// <returns></returns>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if (keyData == Keys.Delete)
+      {
+        if (tabControlMisc.SelectedIndex == 1 && listViewNonMusicFiles.SelectedItems.Count > 0 && !_inLabeledit)
+        {
+          foreach (ListViewItem item in listViewNonMusicFiles.SelectedItems)
+          {
+            try
+            {
+              FileSystem.DeleteFile(item.Text, UIOption.AllDialogs, RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+              listViewNonMusicFiles.Items[item.Index].Remove();
+            }
+            catch (Exception ex)
+            {
+              log.Error("Error deleting file: {0} Exception: {1}", item.Text, ex.Message);
+            }
+          }
+        }
+      }
+      return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    /// <summary>
+    /// A double click occured´in the list view
+    /// If an item was selected, open it with the default program
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void listViewNonMusicFiles_DoubleClick(object sender, EventArgs e)
+    {
+      ListViewHitTestInfo hitInfo = listViewNonMusicFiles.HitTest(listViewNonMusicFiles.PointToClient(MousePosition));
+      if (listViewNonMusicFiles.SelectedItems.Count > 0)
+      {
+        ListViewItem item = listViewNonMusicFiles.SelectedItems[0];
+        if (item == hitInfo.Item)
+        {
+          ShellExecute shell = new ShellExecute();
+          shell.Path = item.Text;
+          shell.Execute();
+        }
+      }
+    }
+    #endregion
     #endregion
 
     #region General Message Handling
@@ -122,5 +310,6 @@ namespace MPTagThat
       }
     }
     #endregion
+
   }
 }

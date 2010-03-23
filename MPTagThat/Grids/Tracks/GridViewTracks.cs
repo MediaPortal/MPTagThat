@@ -57,7 +57,7 @@ namespace MPTagThat.GridView
     private string _filterFileMask = "*.*";
 
     private FindResult _findResult = null;
-
+    private List<FileInfo> _nonMusicFiles = null;
     #endregion
 
     #region Properties
@@ -1326,6 +1326,7 @@ namespace MPTagThat.GridView
       }
 
       _main.ErrorGridView.Rows.Add(file, message);
+      _main.MiscInfoPanel.ActivateErrorTab();
     }
     #endregion
 
@@ -1389,6 +1390,8 @@ namespace MPTagThat.GridView
       Util.EnterMethod(Util.GetCallingMethod());
       bindingList = new SortableBindingList<TrackData>();
       tracksGrid.DataSource = bindingList;
+      _nonMusicFiles = new List<FileInfo>();
+      _main.MiscInfoPanel.ActivateNonMusicTab();
       GC.Collect();
 
       TagLib.File file = null;
@@ -1475,6 +1478,10 @@ namespace MPTagThat.GridView
               log.Error("FolderScan: Error processing file: {0} {1}", fi.FullName, ex.Message);
             }
           }
+          else
+          {
+            _nonMusicFiles.Add(fi);
+          }
         }
         catch (PathTooLongException)
         {
@@ -1484,6 +1491,7 @@ namespace MPTagThat.GridView
         count++;
       }
 
+      _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
       _main.FolderScanning = false;
       dlgProgress.Close();
 

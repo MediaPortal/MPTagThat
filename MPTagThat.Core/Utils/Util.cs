@@ -177,6 +177,25 @@ namespace MPTagThat.Core
       return false;
     }
 
+    /// <summary>
+    /// Is this a Picture file, which can be shown in Listview
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    public static bool IsPicture(string fileName)
+    {
+      string ext = Path.GetExtension(fileName).ToLower();
+
+      switch (ext)
+      {
+        case ".bmp":
+        case ".gif":
+        case ".jpg":
+        case ".png":
+          return true;
+      }
+      return false;
+    }
 
     /// <summary>
     /// Check the Parameter Format for validity

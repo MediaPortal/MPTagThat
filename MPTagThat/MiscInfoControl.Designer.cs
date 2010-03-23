@@ -33,9 +33,11 @@
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.tabPageMessages = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageNonMusicFiles = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.listViewNonMusicFiles = new System.Windows.Forms.ListView();
       this.tabControlMisc = new System.Windows.Forms.TabControl();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).BeginInit();
       this.tabPageMessages.SuspendLayout();
+      this.tabPageNonMusicFiles.SuspendLayout();
       this.tabControlMisc.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -87,6 +89,7 @@
       // 
       // tabPageNonMusicFiles
       // 
+      this.tabPageNonMusicFiles.Controls.Add(this.listViewNonMusicFiles);
       this.tabPageNonMusicFiles.Localisation = "TabPageNonMusicFiles";
       this.tabPageNonMusicFiles.LocalisationContext = "main";
       this.tabPageNonMusicFiles.Location = new System.Drawing.Point(4, 4);
@@ -97,6 +100,19 @@
       this.tabPageNonMusicFiles.Text = "Non Music Files";
       this.tabPageNonMusicFiles.UseVisualStyleBackColor = true;
       this.tabPageNonMusicFiles.Visible = false;
+      // 
+      // listViewNonMusicFiles
+      // 
+      this.listViewNonMusicFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.listViewNonMusicFiles.Location = new System.Drawing.Point(3, 3);
+      this.listViewNonMusicFiles.Name = "listViewNonMusicFiles";
+      this.listViewNonMusicFiles.Size = new System.Drawing.Size(665, 79);
+      this.listViewNonMusicFiles.TabIndex = 0;
+      this.listViewNonMusicFiles.UseCompatibleStateImageBehavior = false;
+      this.listViewNonMusicFiles.View = System.Windows.Forms.View.List;
+      this.listViewNonMusicFiles.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listViewNonMusicFiles_AfterLabelEdit);
+      this.listViewNonMusicFiles.DoubleClick += new System.EventHandler(this.listViewNonMusicFiles_DoubleClick);
+      this.listViewNonMusicFiles.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listViewNonMusicFiles_BeforeLabelEdit);
       // 
       // tabControlMisc
       // 
@@ -119,6 +135,7 @@
       this.Size = new System.Drawing.Size(679, 111);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewError)).EndInit();
       this.tabPageMessages.ResumeLayout(false);
+      this.tabPageNonMusicFiles.ResumeLayout(false);
       this.tabControlMisc.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -132,5 +149,6 @@
     private MPTagThat.Core.WinControls.MPTTabPage tabPageMessages;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageNonMusicFiles;
     private System.Windows.Forms.TabControl tabControlMisc;
+    private System.Windows.Forms.ListView listViewNonMusicFiles;
   }
 }
