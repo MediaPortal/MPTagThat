@@ -45,6 +45,9 @@
     <!-- Error Gridview -->
     <String id="ErrorHeaderFile">Datei</String>
     <String id="ErrorHeaderMessage">Meldung</String>
+    <String id="ErrorContextMenuClear">Liste löschen</String>
+	<!-- Non Music File Listview -->
+	<String id="NonMusicContextMenuRenameToFolderJpg">Umbenennen zu "folder.jpg"</String>
     <!-- Toolstrip -->
     <String id="toolStripLabelFiles">Dateien: {0} (Ausgewählt: {1})</String>
     <String id="toolStripLabelPlay">Abspiel-Status: Spielen</String>

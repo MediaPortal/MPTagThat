@@ -45,6 +45,9 @@
     <!-- Error Gridview -->
     <String id="ErrorHeaderFile">File</String>
     <String id="ErrorHeaderMessage">Message</String>
+    <String id="ErrorContextMenuClear">Clear List</String>
+	<!-- Non Music File Listview -->
+	<String id="NonMusicContextMenuRenameToFolderJpg">Rename to "folder.jpg"</String>
     <!-- Toolstrip -->
     <String id="toolStripLabelFiles">Files: {0} (Selected: {1})</String>
     <String id="toolStripLabelPlay">Player Status: Playing</String>

@@ -15,6 +15,7 @@ namespace MPTagThat
   public partial class MiscInfoControl : UserControl
   {
     #region Variables
+
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
     private ILogger log = ServiceScope.Get<ILogger>();
@@ -23,10 +24,11 @@ namespace MPTagThat
     private string _savedLabelValue = "";
 
     private ImageList _imgList = new ImageList();
+
     #endregion
 
-
     #region ctor
+
     public MiscInfoControl()
     {
       InitializeComponent();
@@ -41,7 +43,7 @@ namespace MPTagThat
       // Build the Context Menu for the Error Grid
       MenuItem[] rmitems = new MenuItem[1];
       rmitems[0] = new MenuItem();
-      rmitems[0].Text = "Clear List";
+      rmitems[0].Text = localisation.ToString("main", "ErrorContextMenuClear");
       rmitems[0].Click += new System.EventHandler(dataGridViewError_ClearList);
       rmitems[0].DefaultItem = true;
       this.dataGridViewError.ContextMenu = new ContextMenu(rmitems);
@@ -53,10 +55,20 @@ namespace MPTagThat
       listViewNonMusicFiles.FullRowSelect = true;
       listViewNonMusicFiles.GridLines = true;
       listViewNonMusicFiles.Sorting = SortOrder.Ascending;
+
+      // Build the Context Menu for the Non Music Files Listview
+      MenuItem[] nonMusicMenuitems = new MenuItem[1];
+      nonMusicMenuitems[0] = new MenuItem();
+      nonMusicMenuitems[0].Text = localisation.ToString("main", "NonMusicContextMenuRenameToFolderJpg");
+      nonMusicMenuitems[0].Click += new System.EventHandler(listViewNonMusicFiles_RenameToFolderJpg);
+      nonMusicMenuitems[0].DefaultItem = true;
+      listViewNonMusicFiles.ContextMenu = new ContextMenu(nonMusicMenuitems);
     }
+
     #endregion
 
     #region Localisation
+
     /// <summary>
     /// Localise the Screen
     /// </summary>
@@ -74,9 +86,11 @@ namespace MPTagThat
       dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       dataGridViewError.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
     }
+
     #endregion
 
     #region Properties
+
     /// <summary>
     /// Returns the Error Gridview
     /// </summary>
@@ -84,9 +98,11 @@ namespace MPTagThat
     {
       get { return this.dataGridViewError; }
     }
+
     #endregion
 
     #region Public Methods
+
     /// <summary>
     /// Clear the Non Music Files View
     /// </summary>
@@ -108,8 +124,9 @@ namespace MPTagThat
       foreach (FileInfo fi in files)
       {
         ListViewItem item = new ListViewItem(fi.FullName);
-        item.ToolTipText = string.Format("{0} | {1} {2} | {3}kb", fi.Name, fi.LastWriteTime.ToShortDateString(), fi.LastWriteTime.ToShortTimeString(), fi.Length / 1024);
-        
+        item.ToolTipText = string.Format("{0} | {1} {2} | {3}kb", fi.Name, fi.LastWriteTime.ToShortDateString(),
+                                         fi.LastWriteTime.ToShortTimeString(), fi.Length/1024);
+
         // Create Image
         bool imgFailure = false;
         bool nonPicFile = true;
@@ -170,10 +187,13 @@ namespace MPTagThat
     {
       tabControlMisc.SelectedIndex = 1;
     }
+
     #endregion
 
     #region Events
+
     #region Error Grid
+
     /// <summary>
     /// Handle Right Mouse Click to open the context Menu in the Error DataGrid
     /// </summary>
@@ -194,9 +214,11 @@ namespace MPTagThat
     {
       dataGridViewError.Rows.Clear();
     }
+
     #endregion
 
     #region Non Music File Grid
+
     /// <summary>
     /// Save the Old file Name and set indicator that we are in label edit,
     /// so that the delete key can be used while editing.
@@ -248,7 +270,8 @@ namespace MPTagThat
           {
             try
             {
-              FileSystem.DeleteFile(item.Text, UIOption.AllDialogs, RecycleOption.SendToRecycleBin, UICancelOption.DoNothing);
+              FileSystem.DeleteFile(item.Text, UIOption.AllDialogs, RecycleOption.SendToRecycleBin,
+                                    UICancelOption.DoNothing);
               listViewNonMusicFiles.Items[item.Index].Remove();
             }
             catch (Exception ex)
@@ -281,10 +304,46 @@ namespace MPTagThat
         }
       }
     }
+
+    /// <summary>
+    /// Context Menu entry has been selected
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void listViewNonMusicFiles_RenameToFolderJpg(object o, System.EventArgs e)
+    {
+      ListViewItem item = null;
+      if (listViewNonMusicFiles.SelectedItems.Count > 0)
+      {
+        item = listViewNonMusicFiles.SelectedItems[0];
+      }
+      else if (listViewNonMusicFiles.Items.Count > 0)
+      {
+        item = listViewNonMusicFiles.Items[0];
+      }
+
+      if (item != null)
+      {
+        string path = Path.GetDirectoryName(item.Text);
+        string newName = Path.Combine(path, "folder.jpg");
+        try
+        {
+          FileSystem.MoveFile(item.Text, newName, UIOption.OnlyErrorDialogs, UICancelOption.DoNothing);
+          item.Text = newName;
+        }
+        catch (Exception ex)
+        {
+          log.Error("Error renaming file: {0} to {1} Exception: {2}", item.Text, newName, ex.Message);
+        }
+      }
+    }
+
     #endregion
+
     #endregion
 
     #region General Message Handling
+
     /// <summary>
     /// Handle Messages
     /// </summary>
@@ -309,7 +368,7 @@ namespace MPTagThat
           }
       }
     }
-    #endregion
 
+    #endregion
   }
 }
