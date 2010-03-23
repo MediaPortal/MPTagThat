@@ -111,6 +111,11 @@ Section -Main SEC0000
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
 	File /r /x .svn ..\MPTagThat.Base\Docs\*
+
+    # FileIcons
+    SetOutPath $INSTDIR\FileIcons
+    File /r /x .svn ..\MPTagThat.Base\FileIcons\*
+
 	
     # Language Dir
     SetOutPath $INSTDIR\Language
