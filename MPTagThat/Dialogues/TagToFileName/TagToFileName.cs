@@ -193,94 +193,13 @@ namespace MPTagThat.TagToFileName
     /// Replace the parameter with the REAL values of the file
     /// </summary>
     /// <param name="parameter">The Parameter Vlue</param>
-    /// <param name="track">The Track Data</param>
-    /// <param name="preView">Is it a Preview only</param>
     /// <returns></returns>
     private string ReplaceParametersWithValues(string parameter)
     {
       string fileName = "";
       try
       {
-        if (parameter.IndexOf("<A>") > -1)
-          parameter = parameter.Replace("<A>", track.Artist.Replace(';', '_').Trim());
-
-        if (parameter.IndexOf("<T>") > -1)
-          parameter = parameter.Replace("<T>", track.Title.Trim());
-
-        if (parameter.IndexOf("<B>") > -1)
-          parameter = parameter.Replace("<B>", track.Album.Trim());
-
-        if (parameter.IndexOf("<Y>") > -1)
-          parameter = parameter.Replace("<Y>", track.Year.ToString().Trim());
-
-        if (parameter.IndexOf("<K>") > -1)
-        {
-          string[] str = track.Track.Split('/');
-          parameter = parameter.Replace("<K>", str[0]);
-        }
-
-        if (parameter.IndexOf("<k>") > -1)
-        {
-          string[] str = track.Track.Split('/');
-          if (str.Length > 1)
-          {
-            parameter = parameter.Replace("<k>", str[1]);
-          }
-          else
-          {
-            parameter = parameter.Replace("<k>", "");
-          }
-        }
-
-        if (parameter.IndexOf("<D>") > -1)
-        {
-          string[] str = track.Disc.Split('/');
-          parameter = parameter.Replace("<D>", str[0]);
-        }
-
-        if (parameter.IndexOf("<d>") > -1)
-        {
-          string[] str = track.Disc.Split('/');
-          if (str.Length > 1)
-          {
-            parameter = parameter.Replace("<d>", str[1]);
-          }
-          else
-          {
-            parameter = parameter.Replace("<d>", "");
-          }
-        }
-
-        if (parameter.IndexOf("<G>") > -1)
-        {
-          string[] str = track.Genre.Split(';');
-          parameter = parameter.Replace("<G>", str[0].Trim());
-        }
-
-        if (parameter.IndexOf("<O>") > -1)
-          parameter = parameter.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
-
-        if (parameter.IndexOf("<C>") > -1)
-          parameter = parameter.Replace("<C>", track.Comment.Trim());
-
-        if (parameter.IndexOf("<U>") > -1)
-          parameter = parameter.Replace("<U>", track.Grouping.Trim());
-
-        if (parameter.IndexOf("<N>") > -1)
-          parameter = parameter.Replace("<N>", track.Conductor.Trim());
-
-        if (parameter.IndexOf("<R>") > -1)
-          parameter = parameter.Replace("<R>", track.Composer.Replace(';', '_').Trim());
-
-        if (parameter.IndexOf("<S>") > -1)
-          parameter = parameter.Replace("<S>", track.SubTitle.Trim());
-
-        if (parameter.IndexOf("<E>") > -1)
-          parameter = parameter.Replace("<E>", track.BPM.ToString());
-
-        if (parameter.IndexOf("<M>") > -1)
-          parameter = parameter.Replace("<M>", track.Interpreter.Trim());
-
+        // FilenameToTag Special Variables
         if (parameter.IndexOf("<F>") > -1)
           parameter = parameter.Replace("<F>", System.IO.Path.GetFileNameWithoutExtension(track.FileName));
 
@@ -290,7 +209,7 @@ namespace MPTagThat.TagToFileName
             enumerateStartValue++;
         }
 
-        fileName = Util.MakeValidFileName(parameter);
+        fileName = Util.ReplaceParametersWithTrackValues(parameter, track);
       }
       catch (Exception ex)
       {

@@ -236,6 +236,30 @@ namespace MPTagThat.Core
       {
         str = str.Replace("<F>", "\x0001"); // FileName      
         str = str.Replace("<#>", "\x0001"); // Enumerate in File
+
+        int index = str.IndexOf("<K:");     // Track Number with a given length of digits
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
+        {
+          return false;
+        }
+
+        index = str.IndexOf("<k:");     // Total Number Tracks with a given length of digits
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
+        {
+          return false;
+        }
+
+        index = str.IndexOf("<D:");     // Disc Number with a given length of digits
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
+        {
+          return false;
+        }
+
+        index = str.IndexOf("<d:");     // Total Number Discs with a given length of digits
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
+        {
+          return false;
+        }
       }
 
       if (formattype == Options.ParameterFormat.Organise)
@@ -243,37 +267,15 @@ namespace MPTagThat.Core
         str = str.Replace("<I>", "\x0001"); // Bitrate      
 
         int index = str.IndexOf("<A:");
-        int last = -1;
-        if (index > -1)
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
         {
-          last = str.IndexOf(">", index);
-          string s1 = str.Substring(index, last - index + 1);
-
-          char c = s1[3];
-          if (!Char.IsDigit(c))
-            return false;
-
-          if (s1.Length > 5)
-            return false;
-
-          str = str.Replace(s1, "\x0001");
+          return false;
         }
 
         index = str.IndexOf("<O:");
-        last = -1;
-        if (index > -1)
+        if (index > -1 && !CheckParmWithLengthIndicator(index, str, out str))
         {
-          last = str.IndexOf(">", index);
-          string s1 = str.Substring(index, last - index + 1);
-
-          char c = s1[3];
-          if (!Char.IsDigit(c))
-            return false;
-
-          if (s1.Length > 5)
-            return false;
-
-          str = str.Replace(s1, "\x0001");
+          return false;
         }
       }
 
@@ -287,6 +289,32 @@ namespace MPTagThat.Core
 
       return true;
     }
+
+    /// <summary>
+    /// Check a Parameter with a given Length Indicator for correctness
+    /// </summary>
+    /// <param name="startIndex"></param>
+    /// <param name="str"></param>
+    /// <param name="parmString"></param>
+    /// <returns></returns>
+    private static bool CheckParmWithLengthIndicator(int startIndex, string str, out string parmString)
+    {
+      bool retVal = true;
+      int last = -1;
+      last = str.IndexOf(">", startIndex);
+      string s1 = str.Substring(startIndex, last - startIndex + 1);
+
+      char c = s1[3];
+      if (!Char.IsDigit(c))
+        retVal = false;
+
+      if (s1.Length > 5)
+        retVal = false;
+
+      parmString = str.Replace(s1, "\x0001");
+      return retVal;
+    }
+
 
     /// <summary>
     /// Make a Valid Filename out of a given String
@@ -778,129 +806,169 @@ namespace MPTagThat.Core
     /// <returns></returns>
     public static string ReplaceParametersWithTrackValues(string parameter, TrackData track)
     {
-      string directoryName = parameter.Trim(new char[] { '\\' });
+      string replacedString = parameter.Trim(new char[] { '\\' });
 
       try
       {
-        if (directoryName.IndexOf("<A>") > -1)
-          directoryName = directoryName.Replace("<A>", track.Artist.Replace(';', '_').Trim());
+        if (replacedString.IndexOf("<A>") > -1)
+          replacedString = replacedString.Replace("<A>", track.Artist.Replace(';', '_').Trim());
 
-        if (directoryName.IndexOf("<T>") > -1)
-          directoryName = directoryName.Replace("<T>", track.Title.Trim());
+        if (replacedString.IndexOf("<T>") > -1)
+          replacedString = replacedString.Replace("<T>", track.Title.Trim());
 
-        if (directoryName.IndexOf("<B>") > -1)
-          directoryName = directoryName.Replace("<B>", track.Album.Trim());
+        if (replacedString.IndexOf("<B>") > -1)
+          replacedString = replacedString.Replace("<B>", track.Album.Trim());
 
-        if (directoryName.IndexOf("<Y>") > -1)
-          directoryName = directoryName.Replace("<Y>", track.Year.ToString().Trim());
+        if (replacedString.IndexOf("<Y>") > -1)
+          replacedString = replacedString.Replace("<Y>", track.Year.ToString().Trim());
 
-        if (directoryName.IndexOf("<K>") > -1)
+        if (replacedString.IndexOf("<K>") > -1)
         {
           string[] str = track.Track.Split('/');
-          directoryName = directoryName.Replace("<K>", str[0]);
+          replacedString = replacedString.Replace("<K>", str[0]);
         }
 
-        if (directoryName.IndexOf("<k>") > -1)
+        if (replacedString.IndexOf("<k>") > -1)
         {
           string[] str = track.Track.Split('/');
-          directoryName = directoryName.Replace("<k>", str[1]);
+          replacedString = replacedString.Replace("<k>", str[1]);
         }
 
-        if (directoryName.IndexOf("<D>") > -1)
+        if (replacedString.IndexOf("<D>") > -1)
         {
           string[] str = track.Disc.Split('/');
-          directoryName = directoryName.Replace("<D>", str[0]);
+          replacedString = replacedString.Replace("<D>", str[0]);
         }
 
-        if (directoryName.IndexOf("<d>") > -1)
+        if (replacedString.IndexOf("<d>") > -1)
         {
           string[] str = track.Disc.Split('/');
-          directoryName = directoryName.Replace("<d>", str[1]);
+          replacedString = replacedString.Replace("<d>", str[1]);
         }
 
-        if (directoryName.IndexOf("<G>") > -1)
+        if (replacedString.IndexOf("<G>") > -1)
         {
           string[] str = track.Genre.Split(';');
-          directoryName = directoryName.Replace("<G>", str[0].Trim());
+          replacedString = replacedString.Replace("<G>", str[0].Trim());
         }
 
-        if (directoryName.IndexOf("<O>") > -1)
-          directoryName = directoryName.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
+        if (replacedString.IndexOf("<O>") > -1)
+          replacedString = replacedString.Replace("<O>", track.AlbumArtist.Replace(';', '_').Trim());
 
-        if (directoryName.IndexOf("<C>") > -1)
-          directoryName = directoryName.Replace("<C>", track.Comment.Trim());
+        if (replacedString.IndexOf("<C>") > -1)
+          replacedString = replacedString.Replace("<C>", track.Comment.Trim());
 
-        if (directoryName.IndexOf("<U>") > -1)
-          directoryName = directoryName.Replace("<U>", track.Grouping.Trim());
+        if (replacedString.IndexOf("<U>") > -1)
+          replacedString = replacedString.Replace("<U>", track.Grouping.Trim());
 
-        if (directoryName.IndexOf("<N>") > -1)
-          directoryName = directoryName.Replace("<N>", track.Conductor.Trim());
+        if (replacedString.IndexOf("<N>") > -1)
+          replacedString = replacedString.Replace("<N>", track.Conductor.Trim());
 
-        if (directoryName.IndexOf("<R>") > -1)
-          directoryName = directoryName.Replace("<R>", track.Composer.Replace(';', '_').Trim());
+        if (replacedString.IndexOf("<R>") > -1)
+          replacedString = replacedString.Replace("<R>", track.Composer.Replace(';', '_').Trim());
 
-        if (directoryName.IndexOf("<S>") > -1)
-          directoryName = directoryName.Replace("<S>", track.SubTitle.Trim());
+        if (replacedString.IndexOf("<S>") > -1)
+          replacedString = replacedString.Replace("<S>", track.SubTitle.Trim());
 
-        if (directoryName.IndexOf("<E>") > -1)
-          directoryName = directoryName.Replace("<E>", track.BPM.ToString());
+        if (replacedString.IndexOf("<E>") > -1)
+          replacedString = replacedString.Replace("<E>", track.BPM.ToString());
 
-        if (directoryName.IndexOf("<M>") > -1)
-          directoryName = directoryName.Replace("<M>", track.Interpreter.Trim());
+        if (replacedString.IndexOf("<M>") > -1)
+          replacedString = replacedString.Replace("<M>", track.Interpreter.Trim());
 
-        if (directoryName.IndexOf("<I>") > -1)
-          directoryName = directoryName.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
+        if (replacedString.IndexOf("<I>") > -1)
+          replacedString = replacedString.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
 
-        int index = directoryName.IndexOf("<A:");
-        int last = -1;
+        int index = replacedString.IndexOf("<A:");
         if (index > -1)
         {
-          last = directoryName.IndexOf(">", index);
-          string s1 = directoryName.Substring(index, last - index + 1);
-          int strLength = Convert.ToInt32(s1.Substring(3, 1));
-          string s2 = track.Artist.Replace(';', '_').Trim();
-
-          if (s2.Length >= strLength)
-            s2 = s2.Substring(0, strLength);
-
-          directoryName = directoryName.Replace(s1, s2);
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, track.Artist.Replace(';', '_').Trim());
         }
 
-        index = directoryName.IndexOf("<O:");
-        last = -1;
+        index = replacedString.IndexOf("<O:");
         if (index > -1)
         {
-          last = directoryName.IndexOf(">", index);
-          string s1 = directoryName.Substring(index, last - index + 1);
-          int strLength = Convert.ToInt32(s1.Substring(3, 1));
-          string s2 = track.AlbumArtist.Replace(';', '_').Trim();
-
-          if (s2.Length >= strLength)
-            s2 = s2.Substring(0, strLength);
-
-          directoryName = directoryName.Replace(s1, s2);
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, track.AlbumArtist.Replace(';', '_').Trim());
         }
 
+        index = replacedString.IndexOf("<K:");
+        if (index > -1)
+        {
+          string[] str = track.Track.Split('/');
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, str[0]);
+        }
+
+        index = replacedString.IndexOf("<k:");
+        if (index > -1)
+        {
+          string[] str = track.Track.Split('/');
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, str[1]);
+        }
+
+        index = replacedString.IndexOf("<D:");
+        if (index > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, str[0]);
+        }
+
+        index = replacedString.IndexOf("<d:");
+        if (index > -1)
+        {
+          string[] str = track.Disc.Split('/');
+          replacedString = ReplaceStringWithLengthIndicator(index, replacedString, str[1]);
+        }
+        
         // Empty Values would create invalid folders
-        directoryName = directoryName.Replace(@"\\", @"\_\");
+        replacedString = replacedString.Replace(@"\\", @"\_\");
 
         // If the directory name starts with a backslash, we've got an empty value on the beginning
-        if (directoryName.IndexOf("\\") == 0)
-          directoryName = "_" + directoryName;
+        if (replacedString.IndexOf("\\") == 0)
+          replacedString = "_" + replacedString;
 
         // We might have an empty value on the end of the path, which is indicated by a slash. 
         // replace it with underscore
-        if (directoryName.LastIndexOf("\\") == directoryName.Length - 1)
-          directoryName += "_";
+        if (replacedString.LastIndexOf("\\") == replacedString.Length - 1)
+          replacedString += "_";
 
-        directoryName = MakeValidFolderName(directoryName);
+        replacedString = MakeValidFolderName(replacedString);
       }
       catch (Exception)
       {
         return "";
       }
-      return directoryName;
+      return replacedString;
     }
+
+    private static string ReplaceStringWithLengthIndicator(int startIndex, string replaceString, string replaceValue)
+    {
+      // Check if we have a numeric Parameter as replace value
+      bool isNumericParm = (replaceString.Substring(1, 1).IndexOfAny(new char[] {'K', 'k', 'D', 'd'}) > -1);
+      int last = -1;
+      last = replaceString.IndexOf(">", startIndex);
+      string s1 = replaceString.Substring(startIndex, last - startIndex + 1);
+      int strLength = Convert.ToInt32(s1.Substring(3, 1));
+
+      if (replaceValue.Length >= strLength)
+      {
+        if (isNumericParm)
+        {
+          replaceValue = replaceValue.Substring(replaceValue.Length - strLength);
+        }
+        else
+        {
+          replaceValue = replaceValue.Substring(0, strLength);
+        }
+      }
+      else if (isNumericParm && replaceValue.Length < strLength)
+      {
+        // Do Pad numeric values with zeroes
+        replaceValue = replaceValue.PadLeft(strLength, '0');
+      }
+
+      return replaceString.Replace(s1, replaceValue);
+    }
+
 
     /// <summary>
     /// Converts a time string "HH:mm:ss" to seconds
