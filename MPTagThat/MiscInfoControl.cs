@@ -135,7 +135,7 @@ namespace MPTagThat
           nonPicFile = false;
           try
           {
-            Image img = Image.FromFile(fi.FullName);
+            Image img = GetImageFromFile(fi.FullName);
             if (img != null)
             {
               _imgList.Images.Add(img);
@@ -156,7 +156,7 @@ namespace MPTagThat
           string defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
           if (File.Exists(defaultName))
           {
-            Image img = Image.FromFile(defaultName);
+            Image img = GetImageFromFile(defaultName);
             if (img != null)
             {
               _imgList.Images.Add(img);
@@ -170,6 +170,19 @@ namespace MPTagThat
       }
       _imgList.ImageSize = new Size(64, 64);
       listViewNonMusicFiles.LargeImageList = _imgList;
+    }
+
+    /// <summary>
+    /// Return an image from a given filename
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    private Image GetImageFromFile(string fileName)
+    {
+      FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+      Image img = Image.FromStream(fs);
+      fs.Close();
+      return img;
     }
 
     /// <summary>
