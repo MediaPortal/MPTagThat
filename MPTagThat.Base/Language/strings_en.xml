@@ -48,6 +48,9 @@
     <String id="ErrorContextMenuClear">Clear List</String>
 	<!-- Non Music File Listview -->
 	<String id="NonMusicContextMenuRenameToFolderJpg">Rename to "folder.jpg"</String>
+	<String id="NonMusicContextMenuDeleteFiles">Delete selected file(s)"</String>
+	<String id="NonMusicDeleteFilesHeader">Delete multiple items</String>
+	<String id="NonMusicDeleteFilesMessage">Are you sure you want to move these {0} items to the Recycle bin?</String>
     <!-- Toolstrip -->
     <String id="toolStripLabelFiles">Files: {0} (Selected: {1})</String>
     <String id="toolStripLabelPlay">Player Status: Playing</String>

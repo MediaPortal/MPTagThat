@@ -48,6 +48,9 @@
     <String id="ErrorContextMenuClear">Liste löschen</String>
 	<!-- Non Music File Listview -->
 	<String id="NonMusicContextMenuRenameToFolderJpg">Umbenennen zu "folder.jpg"</String>
+	<String id="NonMusicContextMenuDeleteFiles">Markierte Datei(en) löschen"</String>
+	<String id="NonMusicDeleteFilesHeader">Löschen von mehreren Dateien</String>
+	<String id="NonMusicDeleteFilesMessage">Wollen Sie die {0} Dateien in den Papierkorb verschieben?</String>
     <!-- Toolstrip -->
     <String id="toolStripLabelFiles">Dateien: {0} (Ausgewählt: {1})</String>
     <String id="toolStripLabelPlay">Abspiel-Status: Spielen</String>

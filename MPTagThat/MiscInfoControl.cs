@@ -57,11 +57,14 @@ namespace MPTagThat
       listViewNonMusicFiles.Sorting = SortOrder.Ascending;
 
       // Build the Context Menu for the Non Music Files Listview
-      MenuItem[] nonMusicMenuitems = new MenuItem[1];
+      MenuItem[] nonMusicMenuitems = new MenuItem[2];
       nonMusicMenuitems[0] = new MenuItem();
       nonMusicMenuitems[0].Text = localisation.ToString("main", "NonMusicContextMenuRenameToFolderJpg");
       nonMusicMenuitems[0].Click += new System.EventHandler(listViewNonMusicFiles_RenameToFolderJpg);
       nonMusicMenuitems[0].DefaultItem = true;
+      nonMusicMenuitems[1] = new MenuItem();
+      nonMusicMenuitems[1].Text = localisation.ToString("main", "NonMusicContextMenuDeleteFiles");
+      nonMusicMenuitems[1].Click += new System.EventHandler(listViewNonMusicFiles_DeleteFiles);
       listViewNonMusicFiles.ContextMenu = new ContextMenu(nonMusicMenuitems);
     }
 
@@ -279,14 +282,28 @@ namespace MPTagThat
       {
         if (tabControlMisc.SelectedIndex == 1 && listViewNonMusicFiles.SelectedItems.Count > 0 && !_inLabeledit)
         {
+          UIOption dialogOption = UIOption.AllDialogs;
+          if (listViewNonMusicFiles.SelectedItems.Count > 1)
+          {
+            // Don't display the "do you want to delete..." for multiple files
+            dialogOption = UIOption.OnlyErrorDialogs;
+            string dialogMsg = string.Format(localisation.ToString("main", "NonMusicDeleteFilesMessage"),
+                                       listViewNonMusicFiles.SelectedItems.Count);
+            if (MessageBox.Show(dialogMsg, localisation.ToString("main", "NonMusicDeleteFilesHeader"), MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+              return false;
+            }
+          }
           foreach (ListViewItem item in listViewNonMusicFiles.SelectedItems)
           {
             try
             {
-              FileSystem.DeleteFile(item.Text, UIOption.AllDialogs, RecycleOption.SendToRecycleBin,
-                                    UICancelOption.DoNothing);
+              FileSystem.DeleteFile(item.Text, dialogOption, RecycleOption.SendToRecycleBin,
+                                    UICancelOption.ThrowException);
               listViewNonMusicFiles.Items[item.Index].Remove();
             }
+            catch (System.OperationCanceledException) // User pressed No on delete. Do nothing
+            { }
             catch (Exception ex)
             {
               log.Error("Error deleting file: {0} Exception: {1}", item.Text, ex.Message);
@@ -319,7 +336,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Context Menu entry has been selected
+    /// Rename Context Menu entry has been selected
     /// </summary>
     /// <param name="o"></param>
     /// <param name="e"></param>
@@ -351,6 +368,18 @@ namespace MPTagThat
       }
     }
 
+    /// <summary>
+    /// Deelete Context Menu entry has been selected
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void listViewNonMusicFiles_DeleteFiles(object o, System.EventArgs e)
+    {
+      // Invoke the Process Key method
+      Keys key = Keys.Delete;
+      Message msg = new Message();
+      ProcessCmdKey(ref msg, key);
+    }
     #endregion
 
     #endregion
