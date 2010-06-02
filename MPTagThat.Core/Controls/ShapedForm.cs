@@ -11,8 +11,8 @@ namespace MPTagThat.Core
   public partial class ShapedForm : Form
   {
     #region Variables
-    private Color _borderColor = Color.LightGray;
-    private int _borderWidth = 2;
+    private Color _borderColor = Color.DarkGray;
+    private int _borderWidth = 3;
     private bool _formDrag = false;
     private bool _resizeable = false;
 
