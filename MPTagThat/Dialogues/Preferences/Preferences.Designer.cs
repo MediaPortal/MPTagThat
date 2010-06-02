@@ -289,7 +289,7 @@ namespace MPTagThat.Preferences
       // 
       // tabPageGeneral
       // 
-      this.tabPageGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageGeneral.BackColor = System.Drawing.SystemColors.Control;
       this.tabPageGeneral.Controls.Add(this.groupBoxKeys);
       this.tabPageGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageGeneral.Localisation = "TabGeneral";
@@ -303,6 +303,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxKeys
       // 
+      this.groupBoxKeys.BackColor = System.Drawing.SystemColors.Control;
       this.groupBoxKeys.Controls.Add(this.buttonChangeKey);
       this.groupBoxKeys.Controls.Add(this.tbKeyValue);
       this.groupBoxKeys.Controls.Add(this.ttLabel1);
@@ -453,6 +454,7 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxGeneral
       // 
+      this.groupBoxGeneral.BackColor = System.Drawing.SystemColors.Control;
       this.groupBoxGeneral.Controls.Add(this.comboBoxDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbTheme);
@@ -2267,7 +2269,7 @@ namespace MPTagThat.Preferences
       // 
       // panelBottom
       // 
-      this.panelBottom.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.panelBottom.BackColor = System.Drawing.SystemColors.Control;
       this.panelBottom.Controls.Add(this.buttonCancel);
       this.panelBottom.Controls.Add(this.buttonApply);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -2307,7 +2309,7 @@ namespace MPTagThat.Preferences
       // 
       this.splitterLeft.AnimationDelay = 20;
       this.splitterLeft.AnimationStep = 20;
-      this.splitterLeft.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.splitterLeft.BackColor = System.Drawing.SystemColors.Control;
       this.splitterLeft.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
       this.splitterLeft.ControlToHide = this.panelLeft;
       this.splitterLeft.ExpandParentForm = false;
@@ -2333,6 +2335,7 @@ namespace MPTagThat.Preferences
       // navPanel
       // 
       this.navPanel.AnimationStep = 30;
+      this.navPanel.BackColor = System.Drawing.SystemColors.Control;
       this.navPanel.BorderColor = System.Drawing.Color.Transparent;
       this.navPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
       this.navPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
@@ -2399,16 +2402,16 @@ namespace MPTagThat.Preferences
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.buttonCancel;
       this.ClientSize = new System.Drawing.Size(855, 690);
+      this.ControlBox = false;
       this.Controls.Add(this.panelRight);
       this.Controls.Add(this.splitterLeft);
       this.Controls.Add(this.panelLeft);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "Preferences";
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-      this.Text = "Preferences";
       this.Load += new System.EventHandler(this.OnLoad);
       this.panelRight.ResumeLayout(false);
       this.panelOptions.ResumeLayout(false);
@@ -2491,7 +2494,6 @@ namespace MPTagThat.Preferences
       this.navPanel.ResumeLayout(false);
       this.navPanel.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 

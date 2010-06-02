@@ -13,7 +13,7 @@ using Un4seen.Bass.AddOn.Wma;
 
 namespace MPTagThat.Preferences
 {
-  public partial class Preferences : ShapedForm
+  public partial class Preferences : Form
   {
     #region Variables
     private Main main;
