@@ -231,7 +231,7 @@ namespace MPTagThat
         // Now set the File Formats
         foreach (Item item in _fileFormats)
         {
-          if (item.Value == _filter.FileFilter)
+          if ((string)item.Value == _filter.FileFilter)
           {
             cbListFormats.SelectedItem = item;
             break;

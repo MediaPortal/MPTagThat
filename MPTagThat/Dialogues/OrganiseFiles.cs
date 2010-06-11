@@ -475,7 +475,7 @@ namespace MPTagThat.Organise
       bool found = false;
       foreach (Item item in cbRootDir.Items)
       {
-        if (item.Value == selectedFolder)
+        if ((string)item.Value == selectedFolder)
         {
           found = true;
           break;

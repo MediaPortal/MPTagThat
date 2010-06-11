@@ -114,7 +114,7 @@ namespace MPTagThat.Preferences
 
       foreach (Item item in encoders)
       {
-        if (item.Value == Options.MainSettings.RipEncoder)
+        if ((string)item.Value == Options.MainSettings.RipEncoder)
         {
           comboBoxEncoder.SelectedItem = item;
           break;
@@ -133,7 +133,7 @@ namespace MPTagThat.Preferences
       int selectedIndex = 0;
       foreach (Item item in encodersAAC)
       {
-        if (item.Value == Options.MainSettings.RipEncoderAAC)
+        if ((string)item.Value == Options.MainSettings.RipEncoderAAC)
         {
           comboBoxAACEncoder.SelectedItem = item;
           // Set the selected index and fire the selected index events for filling the bitrate and channel combo boxes
@@ -156,7 +156,7 @@ namespace MPTagThat.Preferences
       selectedIndex = 0;
       foreach (Item item in encodersWMA)
       {
-        if (item.Value == Options.MainSettings.RipEncoderWMA)
+        if ((string)item.Value == Options.MainSettings.RipEncoderWMA)
         {
           comboBoxWMAEncoderFormat.SelectedItem = item;
           // Set the selected index and fire the selected index events for filling the bitrate and channel combo boxes
@@ -179,7 +179,7 @@ namespace MPTagThat.Preferences
 
       foreach (Item item in presetsMPC)
       {
-        if (item.Value == Options.MainSettings.RipEncoderMPCPreset)
+        if ((string)item.Value == Options.MainSettings.RipEncoderMPCPreset)
         {
           comboBoxMPCPresets.SelectedItem = item;
           break;
@@ -197,7 +197,7 @@ namespace MPTagThat.Preferences
 
       foreach (Item item in presetsWV)
       {
-        if (item.Value == Options.MainSettings.RipEncoderWVPreset)
+        if ((string)item.Value == Options.MainSettings.RipEncoderWVPreset)
         {
           comboBoxWVPresets.SelectedItem = item;
           break;
@@ -296,7 +296,7 @@ namespace MPTagThat.Preferences
 
       foreach (Item item in amazonSites)
       {
-        if (item.Value == Options.MainSettings.AmazonSite)
+        if ((string)item.Value == Options.MainSettings.AmazonSite)
         {
           comboBoxAmazonSite.SelectedItem = item;
           break;
@@ -1121,7 +1121,7 @@ namespace MPTagThat.Preferences
       bool found = false;
       foreach (Item item in comboBoxWMASampleFormat.Items)
       {
-        if (item.Value == Options.MainSettings.RipEncoderWMASample)
+        if ((string)item.Value == Options.MainSettings.RipEncoderWMASample)
         {
           comboBoxWMASampleFormat.SelectedItem = item;
           found = true;

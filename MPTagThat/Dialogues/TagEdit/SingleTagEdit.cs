@@ -63,7 +63,7 @@ namespace MPTagThat.TagEdit
       foreach (string[] script in scripts)
       {
         Item item = new Item(script[1], script[0], script[2]);
-        if (item.Value == Options.MainSettings.SingleEditLastUsedScript)
+        if ((string)item.Value == Options.MainSettings.SingleEditLastUsedScript)
         {
           usedScript = item;
         }

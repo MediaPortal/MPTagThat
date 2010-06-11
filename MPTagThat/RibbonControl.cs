@@ -210,12 +210,12 @@ namespace MPTagThat
       int i = 0;
       foreach (Item item in encoders)
       {
-        if (item.Value == Options.MainSettings.LastConversionEncoderUsed)
+        if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
         {
           comboBoxConvertEncoder.SelectedIndex = i;
         }
 
-        if (item.Value == Options.MainSettings.RipEncoder)
+        if ((string)item.Value == Options.MainSettings.RipEncoder)
         {
           comboBoxRipEncoder.SelectedIndex = i;
         }
