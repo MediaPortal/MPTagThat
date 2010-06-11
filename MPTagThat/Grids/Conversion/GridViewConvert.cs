@@ -158,7 +158,7 @@ namespace MPTagThat.GridView
       List<Item> encoders = (List<Item>)_main.MainRibbon.EncoderCombo.DataSource;
       if (_main.MainRibbon.EncoderCombo.SelectedItem != null)
       {
-        encoder = encoders[_main.MainRibbon.EncoderCombo.SelectedIndex].Value;
+        encoder = (string)encoders[_main.MainRibbon.EncoderCombo.SelectedIndex].Value;
       }
 
       if (encoder == null)

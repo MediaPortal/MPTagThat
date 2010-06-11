@@ -139,7 +139,7 @@ namespace MPTagThat.TagEdit
         Item item = comboBoxScripts.SelectedItem as Item;
         if (item != null)
         {
-          Options.MainSettings.SingleEditLastUsedScript = item.Value;
+          Options.MainSettings.SingleEditLastUsedScript = (string)item.Value;
         }
       }
 
@@ -954,7 +954,7 @@ namespace MPTagThat.TagEdit
           if (comboBoxScripts.SelectedIndex > -1)
           {
             Item item = (Item)comboBoxScripts.SelectedItem;
-            System.Reflection.Assembly assembly = ServiceScope.Get<IScriptManager>().Load(item.Value);
+            System.Reflection.Assembly assembly = ServiceScope.Get<IScriptManager>().Load((string)item.Value);
 
             try
             {

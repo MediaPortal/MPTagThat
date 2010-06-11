@@ -59,14 +59,14 @@
 
     <!-- Tags Tab-->
     <String id="TagTab">Tagg</String>
-    <String id="TagFromFile">Tagg Fra\nFilnavn</String>
-    <String id="RenameFile">Nytt Navn\ntil Fil</String>
+    <String id="TagFromFile">Tagg Fra Filnavn</String>
+    <String id="RenameFile">Nytt Navn til Fil</String>
     <String id="RenameFileMenu">Nytt Navn til Fil</String>
     <String id="RenameFileOptions">Innstillinger for Nytt Navn til Fil</String>
-    <String id="IdentifyFile">Identifiser\nFil</String>
-    <String id="TagFromInternet">Tagg fra\nInternett</String>
-    <String id="SingleTagEdit">Enkel\nTagg</String>
-    <String id="MultiTagEdit">Flervalgte\nTagger</String>
+    <String id="IdentifyFile">Identifiser Fil</String>
+    <String id="TagFromInternet">Tagg fra Internett</String>
+    <String id="SingleTagEdit">Enkel Tagg</String>
+    <String id="MultiTagEdit">Flervalgte Tagger</String>
     <String id="GetCoverArt">Finn Bilde</String>
     <String id="GetLyrics">Finn Tekster</String>
     <String id="AutoNumber">Auto Nummerering</String>
@@ -74,10 +74,10 @@
     <String id="RemoveCommentPicture">Fjern:</String>
     <String id="RemoveComments">Fjern kommentarer</String>
     <String id="RemovePictures">Fjern bilder</String>
-    <String id="CaseConversion">Konverter\nBokstaver</String>
+    <String id="CaseConversion">Konverter Bokstaver</String>
     <String id="CaseConversionMenu">Konverter Bokstaver</String>
     <String id="CaseConversionOption">Innstillinger for Bokstav Konvertering</String>
-    <String id="DeleteTags">Slette\nTagger</String>
+    <String id="DeleteTags">Slette Tagger</String>
     <String id="DeleteAllTags">Slette Alle Tagger</String>
     <String id="DeleteID3V1Tags">Slette Bare ID3 V1 Tagger</String>
     <String id="DeleteID3V2Tags">Slette Bare ID3 V2 Tagger</String>
@@ -85,35 +85,35 @@
     <String id="RetrieveTags">Finn Tagger</String>
     <String id="OrganiseFiles">Organiser</String>
     
-    <String id="ExecuteScript">Kjør\nScript</String>
+    <String id="ExecuteScript">Kjør Script</String>
     <String id="Scripts">Scripts</String>
     
-    <String id="Organise">Organiser\nFiler</String>
-    <String id="AddBurner">Legg til i\nBrenner</String>
-    <String id="AddConvert">Legg til i\nKonvertering</String>
-    <String id="AddPlaylist">Legg til i\nSpilleliste</String>
+    <String id="Organise">Organiser Filer</String>
+    <String id="AddBurner">Legg til i Brenner</String>
+    <String id="AddConvert">Legg til i Konvertering</String>
+    <String id="AddPlaylist">Legg til i Spilleliste</String>
     <String id="Other">Andre</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Ripp</String>
-    <String id="RipButton">Start\nRipping</String>
+    <String id="RipButton">Start Ripping</String>
     <String id="RipEncoder">Velg Encoder:</String>
     <String id="RipFolder">Til Mappe:</String>
-    <String id="RipCancel">Avbryt\nRipping</String>
+    <String id="RipCancel">Avbryt Ripping</String>
     <String id="RipOptions">Innstillinger for Ripp</String>
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Konverter</String>
-    <String id="ConvertButton">Start\nKonvertering</String>
+    <String id="ConvertButton">Start Konvertering</String>
     <String id="ConvertEncoder">Velg Encoder:</String>
     <String id="ConvertFolder">Til Mappe:</String>
-    <String id="ConvertCancel">Avbryt\nKonvertering</String>
+    <String id="ConvertCancel">Avbryt Konvertering</String>
     <String id="ConvertOptions">Innstillinger for Konvertering</String>
 
     <!-- Burn Tab-->
     <String id="BurnTab">Brenn</String>
-    <String id="Burn">Start\nBrenner</String>
-    <String id="BurnCancel">Avbryt\nBrenner</String>
+    <String id="Burn">Start Brenner</String>
+    <String id="BurnCancel">Avbryt Brenner</String>
     <String id="BurnOptions">Innstillinger for Brenner</String>
 
   </Section>

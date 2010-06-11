@@ -46,6 +46,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Elegant.Ui.Common, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Elegant.Ui.Ribbon, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Ribbon.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -76,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationCommands.cs" />
     <Compile Include="DatabaseSearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -423,6 +432,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>RibbonBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RibbonControl.resx">
+      <DependentUpon>RibbonControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TreeViewControl.resx">
       <DependentUpon>TreeViewControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -447,6 +459,12 @@
     </Compile>
     <Compile Include="RibbonBar.Designer.cs">
       <DependentUpon>RibbonBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RibbonControl.Designer.cs">
+      <DependentUpon>RibbonControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeViewControl.cs">
       <SubType>UserControl</SubType>

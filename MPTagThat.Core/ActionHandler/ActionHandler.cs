@@ -102,7 +102,7 @@ namespace MPTagThat.Core
     /// </summary>
     /// <param name="map">The windowmap that needs to be filled in.</param>
     /// <param name="nodeId">The id of the action</param>
-    /// <param name="nodeGamepad">The key corresponding to the mapping.</param>
+    /// <param name="nodeKey">The key corresponding to the mapping.</param>
     private void MapAction(ref WindowMap map, XmlNode nodeId, XmlNode nodeKey)
     {
       if (null == nodeId) return;

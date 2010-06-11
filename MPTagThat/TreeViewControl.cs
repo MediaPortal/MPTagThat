@@ -435,7 +435,7 @@ namespace MPTagThat
         }
         if (node.Text.Contains("CD-ROM Disc ("))
         {
-          _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabRip;
+          _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabRip;
           _main.BurnGridView.Hide();
           _main.RipGridView.Show();
           _main.TracksGridView.Hide();
@@ -448,9 +448,9 @@ namespace MPTagThat
         else
         {
           // If we selected a folder, while being in the Burn or Rip View, go to the TagTab
-          if (_main.MainRibbon.TabBurn.IsSelected || _main.MainRibbon.TabRip.IsSelected || _main.MainRibbon.TabConvert.IsSelected)
+          if (_main.MainRibbon.ribbon.CurrentTabPage != _main.MainRibbon.TabTag)
           {
-            _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabTag;
+            _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabTag;
             _main.BurnGridView.Hide();
             _main.RipGridView.Hide();
             _main.TracksGridView.Show();
@@ -879,7 +879,7 @@ namespace MPTagThat
     private void cbListFormats_SelectedIndexChanged(object sender, EventArgs e)
     {
       Item item = (Item)(sender as ComboBox).SelectedItem;
-      _filter.FileFilter = item.Value;
+      _filter.FileFilter = (string)item.Value;
     }
 
     /// <summary>

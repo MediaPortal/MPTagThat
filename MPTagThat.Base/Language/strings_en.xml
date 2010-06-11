@@ -68,14 +68,14 @@
 
     <!-- Tags Tab-->
     <String id="TagTab">Tags</String>
-    <String id="TagFromFile">Tag from\nFilename</String>
-    <String id="RenameFile">Rename\nFile</String>
+    <String id="TagFromFile">Tag from Filename</String>
+    <String id="RenameFile">Rename File</String>
     <String id="RenameFileMenu">Rename File</String>
     <String id="RenameFileOptions">Rename File Options</String>
-    <String id="IdentifyFile">Identify\nFile</String>
-    <String id="TagFromInternet">Tag from\nInternet</String>
-    <String id="SingleTagEdit">Single Tag\nEdit</String>
-    <String id="MultiTagEdit">Multiple Tag\nEdit</String>
+    <String id="IdentifyFile">Identify File</String>
+    <String id="TagFromInternet">Tag from Internet</String>
+    <String id="SingleTagEdit">Single Tag Edit</String>
+    <String id="MultiTagEdit">Multiple Tag Edit</String>
     <String id="GetCoverArt">Get Cover Art</String>
     <String id="GetLyrics">Get Lyrics</String>
     <String id="AutoNumber">Auto Number</String>
@@ -83,10 +83,10 @@
     <String id="RemoveCommentPicture">Remove:</String>
     <String id="RemoveComments">Remove all comments</String>
     <String id="RemovePictures">Remove all pictures</String>
-    <String id="CaseConversion">Case\nConversion</String>
+    <String id="CaseConversion">Case Conversion</String>
     <String id="CaseConversionMenu">Case Conversion</String>
     <String id="CaseConversionOption">Case Conversion Options</String>
-    <String id="DeleteTags">Delete\nTags</String>
+    <String id="DeleteTags">Delete Tags</String>
     <String id="DeleteAllTags">Delete All Tags</String>
     <String id="DeleteID3V1Tags">Delete ID3 V1 Tags only</String>
     <String id="DeleteID3V2Tags">Delete ID3 V2 Tags only</String>
@@ -94,36 +94,38 @@
     <String id="RetrieveTags">Retrieve Tags</String>
 	<String id="OrganiseFiles">Organise</String>
     
-    <String id="ExecuteScript">Execute\nScript</String>
+    <String id="ExecuteScript">Execute Script</String>
     <String id="Scripts">Scripts</String>
     
-    <String id="Organise">Organise\nFiles</String>
-    <String id="AddBurner">Add to\nBurner</String>
-    <String id="AddConvert">Add to\nConversion</String>
-    <String id="AddPlaylist">Add to\nPlaylist</String>
+    <String id="Organise">Organise Files</String>
+    <String id="AddBurner">Add to Burner</String>
+    <String id="AddConvert">Add to Conversion</String>
+    <String id="AddPlaylist">Add to Playlist</String>
     <String id="Other">Other</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Rip</String>
-    <String id="RipButton">Start\nRip</String>
+    <String id="RipButton">Start Rip</String>
     <String id="RipEncoder">Select Encoder:</String>
     <String id="RipFolder">Output Folder:</String>
-    <String id="RipCancel">Cancel\nRip</String>
+    <String id="RipCancel">Cancel Rip</String>
     <String id="RipOptions">Rip Options</String>
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Convert</String>
-    <String id="ConvertButton">Start\nConvert</String>
+    <String id="ConvertButton">Start Convert</String>
     <String id="ConvertEncoder">Select Encoder:</String>
     <String id="ConvertFolder">Output Folder:</String>
-    <String id="ConvertCancel">Cancel\nConvert</String>
+    <String id="ConvertCancel">Cancel Convert</String>
     <String id="ConvertOptions">Convert Options</String>
 
     <!-- Burn Tab-->
     <String id="BurnTab">Burn</String>
     <String id="Burn">Burn</String>
-    <String id="BurnCancel">Cancel\nBurn</String>
+    <String id="BurnCancel">Cancel Burn</String>
     <String id="BurnOptions">Burn Options</String>
+    <String id="Burner">Select Burner:</String>
+    <String id="BurnerSpeed">Burnerspeed:</String>
 
   </Section>
   

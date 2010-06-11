@@ -606,7 +606,7 @@ namespace MPTagThat
         return;
 
       Item tag = (Item)(ribbonComboBoxScripts.SelectedItem as RadComboBoxItem).Value;
-      main.TracksGridView.ExecuteScript(tag.Value);
+      main.TracksGridView.ExecuteScript((string)tag.Value);
     }
 
     /// <summary>

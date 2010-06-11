@@ -627,7 +627,7 @@ namespace MPTagThat.Preferences
     /// <param name="e"></param>
     private void comboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
     {
-      main.MainRibbon.MainRibbon.ThemeName = themes[comboBoxThemes.SelectedIndex].Value;
+      main.MainRibbon.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
     }
 
     /// <summary>
@@ -674,7 +674,7 @@ namespace MPTagThat.Preferences
       #endregion
 
       #region Ripping
-      Options.MainSettings.RipEncoder = (comboBoxEncoder.SelectedValue as Item).Value;
+      Options.MainSettings.RipEncoder = (string)(comboBoxEncoder.SelectedValue as Item).Value;
       Options.MainSettings.RipTargetFolder = tbTargetFolder.Text;
       Options.MainSettings.RipEjectCD = ckRipEjectCD.Checked;
       Options.MainSettings.RipActivateTargetFolder = ckActivateTargetFolder.Checked;
@@ -706,22 +706,22 @@ namespace MPTagThat.Preferences
       Options.MainSettings.RipFlacExpert = textBoxFlacParms.Text.Trim();
 
       // AAC Encoder Settings
-      Options.MainSettings.RipEncoderAAC = (comboBoxAACEncoder.SelectedValue as Item).Value;
+      Options.MainSettings.RipEncoderAAC = (string)(comboBoxAACEncoder.SelectedValue as Item).Value;
       Options.MainSettings.RipEncoderAACBitRate = comboBoxAACBitrates.SelectedItem != null ? comboBoxAACBitrates.SelectedItem.ToString() : "";
-      Options.MainSettings.RipEncoderAACChannelMode = comboBoxAACChannelModes.SelectedItem != null ? (comboBoxAACChannelModes.SelectedItem as Item).Value : "";
+      Options.MainSettings.RipEncoderAACChannelMode = comboBoxAACChannelModes.SelectedItem != null ? (string)(comboBoxAACChannelModes.SelectedItem as Item).Value : "";
 
       // WMA Encoder Settings
-      Options.MainSettings.RipEncoderWMA = (comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
-      Options.MainSettings.RipEncoderWMASample = (comboBoxWMASampleFormat.SelectedItem as Item).Value;
-      Options.MainSettings.RipEncoderWMACbrVbr = (comboBoxWMACbrVbr.SelectedItem as Item).Value;
+      Options.MainSettings.RipEncoderWMA = (string)(comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
+      Options.MainSettings.RipEncoderWMASample = (string)(comboBoxWMASampleFormat.SelectedItem as Item).Value;
+      Options.MainSettings.RipEncoderWMACbrVbr = (string)(comboBoxWMACbrVbr.SelectedItem as Item).Value;
       Options.MainSettings.RipEncoderWMABitRate = comboBoxWMABitRate.SelectedItem.ToString();
 
       // MPC Encoder Settings
-      Options.MainSettings.RipEncoderMPCPreset = (comboBoxMPCPresets.SelectedItem as Item).Value;
+      Options.MainSettings.RipEncoderMPCPreset = (string)(comboBoxMPCPresets.SelectedItem as Item).Value;
       Options.MainSettings.RipEncoderMPCExpert = textBoxMPCParms.Text.Trim();
 
       // WV Encoder Settings
-      Options.MainSettings.RipEncoderWVPreset = (comboBoxWVPresets.SelectedItem as Item).Value;
+      Options.MainSettings.RipEncoderWVPreset = (string)(comboBoxWVPresets.SelectedItem as Item).Value;
       Options.MainSettings.RipEncoderWVExpert = textBoxWVParms.Text.Trim();
       #endregion
 
@@ -773,7 +773,7 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchLRCFinder = ckLRCFinder.Checked;
       Options.MainSettings.SearchActionext = ckActionext.Checked;
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
-      Options.MainSettings.AmazonSite = (comboBoxAmazonSite.SelectedValue as Item).Value;
+      Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedValue as Item).Value;
       #endregion
 
       if (bErrors)
@@ -993,7 +993,7 @@ namespace MPTagThat.Preferences
     {
       foreach (Item item in comboBoxAACChannelModes.Items)
       {
-        if (item.Value.StartsWith(Options.MainSettings.RipEncoderAACChannelMode))
+        if ((item.Value as string).StartsWith(Options.MainSettings.RipEncoderAACChannelMode))
         {
           comboBoxAACChannelModes.SelectedItem = item;
           break;
@@ -1038,7 +1038,7 @@ namespace MPTagThat.Preferences
     {
       foreach (Item item in comboBoxWMACbrVbr.Items)
       {
-        if (item.Value.StartsWith(Options.MainSettings.RipEncoderWMACbrVbr))
+        if ((item.Value as string).StartsWith(Options.MainSettings.RipEncoderWMACbrVbr))
         {
           comboBoxWMACbrVbr.SelectedItem = item;
           break;
@@ -1075,8 +1075,8 @@ namespace MPTagThat.Preferences
     {
       Item[] modeTab = null;
       int defaultValue = 0;
-      string vbrcbr = (comboBoxWMACbrVbr.SelectedItem as Item).Value;
-      string encoder = (comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
+      string vbrcbr = (string)(comboBoxWMACbrVbr.SelectedItem as Item).Value;
+      string encoder = (string)(comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
 
       if (encoder == "wma")
       {
@@ -1142,17 +1142,17 @@ namespace MPTagThat.Preferences
       if (comboBoxWMACbrVbr.SelectedItem == null)
         vbrcbr = Options.MainSettings.RipEncoderWMACbrVbr;
       else
-        vbrcbr = (comboBoxWMACbrVbr.SelectedItem as Item).Value;
+        vbrcbr = (string)(comboBoxWMACbrVbr.SelectedItem as Item).Value;
 
       string[] sampleFormat;
       if (comboBoxWMASampleFormat.SelectedItem == null)
         sampleFormat = Options.MainSettings.RipEncoderWMASample.Split(',');
       else
-        sampleFormat = (comboBoxWMASampleFormat.SelectedItem as Item).Value.Split(',');
+        sampleFormat = ((comboBoxWMASampleFormat.SelectedItem as Item).Value as string).Split(',');
 
       BASSWMAEncode encodeFlags = BASSWMAEncode.BASS_WMA_ENCODE_DEFAULT;
 
-      string encoder = (comboBoxWMAEncoderFormat.SelectedValue as Item).Value;
+      string encoder = (string)(comboBoxWMAEncoderFormat.SelectedValue as Item).Value;
       if (encoder == "wmapro" || encoder == "wmalossless")
         encodeFlags = encodeFlags | BASSWMAEncode.BASS_WMA_ENCODE_PRO;
       else

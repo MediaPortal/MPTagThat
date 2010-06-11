@@ -7,10 +7,18 @@ namespace MPTagThat.Core
   public class Item
   {
     public string Name;
-    public string Value;
+    public object Value;
     public string ToolTip;
 
-    public Item(string name, string value, string tooltip)
+    public Item(string name, object value)
+    {
+      Name = name;
+      Value = value;
+      ToolTip = "";
+    }
+
+
+    public Item(string name, object value, string tooltip)
     {
       Name = name;
       Value = value;

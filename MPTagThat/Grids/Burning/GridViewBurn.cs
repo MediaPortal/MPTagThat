@@ -122,8 +122,7 @@ namespace MPTagThat.GridView
     /// <summary>
     /// Adds a Track to the Burn Gridview
     /// </summary>
-    /// <param name="trackPath"></param>
-    /// <param name="file"></param>
+    /// <param name="track"></param>
     public void AddToBurner(TrackData track)
     {
       AddTrack(track);
@@ -189,7 +188,6 @@ namespace MPTagThat.GridView
     /// <summary>
     /// Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name="language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
@@ -514,9 +512,14 @@ namespace MPTagThat.GridView
         if (burner.DriveFeatures.WriteCDR)
         {
           string deviceName = string.Format("{0} {1}", burner.DeviceVendor, burner.DeviceName);
-          Telerik.WinControls.UI.RadComboBoxItem ri = new Telerik.WinControls.UI.RadComboBoxItem(deviceName, burner);
-          _main.MainRibbon.BurnerCombo.Items.Add(ri);
+          Item item = new Item(deviceName, burner, "");
+          _main.MainRibbon.BurnerCombo.Items.Add(item);
         }
+      }
+
+      if (_main.MainRibbon.BurnerCombo.Items.Count > 0)
+      {
+        _main.MainRibbon.BurnerCombo.SelectedIndex = 0;
       }
     }
     #endregion

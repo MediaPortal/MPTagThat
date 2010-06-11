@@ -68,7 +68,7 @@ namespace MPTagThat.GridView
           if (CurrentDriveID > -1)
           {
             // Activate the Rip Grid
-            _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabRip;
+            _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabRip;
             _main.BurnGridView.Hide();
             _main.TracksGridView.Hide();
             _main.RipGridView.Show();
@@ -241,7 +241,7 @@ namespace MPTagThat.GridView
         List<Item> encoders = (List<Item>)_main.MainRibbon.RipEncoderCombo.DataSource;
         if (_main.MainRibbon.RipEncoderCombo.SelectedItem != null)
         {
-          encoder = encoders[_main.MainRibbon.RipEncoderCombo.SelectedIndex].Value;
+          encoder = (string)encoders[_main.MainRibbon.RipEncoderCombo.SelectedIndex].Value;
           Options.MainSettings.RipEncoder = encoder;
         }
         else
@@ -415,7 +415,7 @@ namespace MPTagThat.GridView
       {
         _main.CurrentDirectory = targetDir;
         _main.TreeView.RefreshFolders();
-        _main.MainRibbon.MainRibbon.RibbonBarElement.TabStripElement.SelectedTab = _main.MainRibbon.TabTag;
+        _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabTag;
         _main.TracksGridView.Show();
         if (_main.SplitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
         {

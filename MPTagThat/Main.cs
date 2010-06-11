@@ -26,7 +26,7 @@ namespace MPTagThat
   public partial class Main : Form
   {
     #region Variables
-    private RibbonBar ribbon;
+    private RibbonControl ribbonControl;
     private bool _keyHandled = false;
     private bool _showForm = false;
     private object _dialog = null;
@@ -114,7 +114,14 @@ namespace MPTagThat
     /// </summary>
     public bool Burning
     {
-      get { return gridViewBurn.Burning; }
+      get
+      {
+        if (gridViewBurn == null)
+        {
+          return false;          
+        }
+        return gridViewBurn.Burning;
+      }
     }
 
     /// <summary>
@@ -122,7 +129,14 @@ namespace MPTagThat
     /// </summary>
     public bool Ripping
     {
-      get { return gridViewRip.Ripping; }
+      get
+      {
+        if (gridViewRip == null)
+        {
+          return false;
+        }
+        return gridViewRip.Ripping;
+      }
     }
 
     /// <summary>
@@ -152,9 +166,9 @@ namespace MPTagThat
     /// <summary>
     /// return the MAIN Ribbon
     /// </summary>
-    public RibbonBar MainRibbon
+    public RibbonControl MainRibbon
     {
-      get { return ribbon; }
+      get { return ribbonControl; }
     }
 
     /// <summary>
@@ -197,12 +211,12 @@ namespace MPTagThat
       get { return fileInfoControl; }
     }
 
-    public ToolStripStatusLabel ToolStripStatusFiles
+    public Elegant.Ui.Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
     }
 
-    public ToolStripStatusLabel ToolStripStatusFilter
+    public Elegant.Ui.Label ToolStripStatusFilter
     {
       get { return toolStripStatusLabelFilter; }
     }
@@ -222,6 +236,7 @@ namespace MPTagThat
     private void Main_Load(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
+
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation("Starting up ...");
@@ -233,9 +248,14 @@ namespace MPTagThat
 
       /// Add the Ribbon Control to the Top Panel
       _splashScreen.SetInformation("Adding Ribbon ...");
-      ribbon = new RibbonBar(this);
-      ribbon.Dock = DockStyle.Fill;
-      this.panelTop.Controls.Add(ribbon);
+
+      ribbonControl = new RibbonControl(this);
+      ribbonControl.Dock = DockStyle.Fill;
+      ribbonControl.ribbon.CustomTitleBarEnabled = true; // Indicating we have the ribbon placed in a user container
+      panelTop.AutoSize = true;
+      panelTop.Controls.Add(ribbonControl);
+
+      ribbonControl.Initialising = true;
 
       #region Setup Grids
       log.Debug("Main: Setup Grid");
@@ -352,8 +372,7 @@ namespace MPTagThat
 
       _splashScreen.Stop();
 
-      themeManager.ChangeTheme(Options.Themes[Options.MainSettings.Theme]);
-      ribbon.MainRibbon.ThemeName = Options.Themes[Options.MainSettings.Theme];
+      ribbonControl.Theme = Options.Themes[Options.MainSettings.Theme];
 
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
@@ -364,6 +383,8 @@ namespace MPTagThat
       
       // setup various Event Handler needed
       gridViewControl.View.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
+
+      ribbonControl.Initialising = false;
 
       // Activate the form, will be hidden because of the size change
       this.Activate();
@@ -398,7 +419,7 @@ namespace MPTagThat
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
       Options.MainSettings.ErrorPanelCollapsed = this.splitterBottom.IsCollapsed;
       Options.MainSettings.PlayerPanelCollapsed = this.splitterPlayer.IsCollapsed;
-      Options.MainSettings.ActiveScript = ribbon.ScriptsCombo.Text;
+      Options.MainSettings.ActiveScript = ribbonControl.ScriptsCombo.Text;
       Options.SaveAllSettings();
     }
     #endregion
@@ -518,8 +539,6 @@ namespace MPTagThat
     /// </summary>
     private void SetRibbonColorBase()
     {
-      statusStrip.BackColor = themeManager.CurrentTheme.BackColor;
-      statusStrip.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
       databaseSearchControl.BackColor = themeManager.CurrentTheme.BackColor;
@@ -553,24 +572,6 @@ namespace MPTagThat
       gridViewConvert.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-    }
-
-    /// <summary>
-    /// Remove the Windows Caption from the form.
-    /// We need to do it here, otherwise no name would appear in the Task Bar
-    /// </summary>
-    protected override CreateParams CreateParams
-    {
-      get
-      {
-        int WS_BORDER = 0x00800000; //window with border
-        int WS_DLGFRAME = 0x00400000; //window with double border but no title
-        int WS_CAPTION = WS_BORDER | WS_DLGFRAME; //window with a title bar 
-
-        System.Windows.Forms.CreateParams showText = base.CreateParams;
-        showText.Style = showText.Style & ~WS_CAPTION;
-        return showText;
-      }
     }
     #endregion
 
@@ -675,42 +676,25 @@ namespace MPTagThat
 
     #region Event Handler
     #region Key Events
-    /// <summary>
-    /// Handle the OnKeypress, otherwise we get the "Bell", when using shortcuts, with the Treeview active
-    /// </summary>
-    /// <param name="e"></param>
-    protected override void OnKeyPress(KeyPressEventArgs e)
-    {
-      e.Handled = _keyHandled;
-      base.OnKeyPress(e);
 
-      // We can show the dialog from the OnKeydown only here. oterwise we hear the annoying bell.
-      if (_showForm && _dialog != null)
-        ShowModalDialog(_dialog);
-
-      _showForm = false;
-      _dialog = null;
-    }
-
-
-    /// <summary>
-    /// A Key has been pressed
-    /// </summary>
-    /// <param name="e"></param>
-    protected override void OnKeyDown(KeyEventArgs e)
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
       _keyHandled = false;
       Action newaction = new Action();
-      if (ServiceScope.Get<IActionHandler>().GetAction(0, e.KeyData, ref newaction))
+      if (ServiceScope.Get<IActionHandler>().GetAction(0, keyData, ref newaction))
       {
         if (OnAction(newaction))
-          e.Handled = _keyHandled = true;
+        {
+          _keyHandled = true;
 
-        newaction = null;
-        return;
+          if (_showForm && _dialog != null)
+            ShowModalDialog(_dialog);
+
+          _showForm = false;
+          _dialog = null;
+        }
       }
-      newaction = null;
-      base.OnKeyDown(e);
+      return _keyHandled;
     }
 
     bool OnAction(Action action)
@@ -820,7 +804,8 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_SCRIPTEXECUTE:
-          ribbon.ribbonButtonScriptExecute_Click(this, new EventArgs());
+          ApplicationCommands.ScriptExecute.Execute();
+          //ribbon.ribbonButtonScriptExecute_Click(this, new EventArgs());
           break;
 
         case Action.ActionType.ACTION_TREEREFRESH:

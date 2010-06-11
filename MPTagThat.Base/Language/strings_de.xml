@@ -68,14 +68,14 @@
 
     <!-- Tags Tab-->
     <String id="TagTab">Tags</String>
-    <String id="TagFromFile">Tag von\nDateiname</String>
-    <String id="RenameFile">Datei\numbenennen</String>
+    <String id="TagFromFile">Tag von Dateiname</String>
+    <String id="RenameFile">Datei umbenennen</String>
     <String id="RenameFileMenu">Datei umbenennen</String>
     <String id="RenameFileOptions">Datei umbenennen Einstellungen</String>
-    <String id="IdentifyFile">Datei\nIdentifizieren</String>
-	<String id="TagFromInternet">Tag von\nInternet</String>
-	<String id="SingleTagEdit">Einzeln\neditieren</String>
-    <String id="MultiTagEdit">Mehrfach\neditieren</String>
+    <String id="IdentifyFile">Datei Identifizieren</String>
+	<String id="TagFromInternet">Tag von Internet</String>
+	<String id="SingleTagEdit">Einzeln editieren</String>
+    <String id="MultiTagEdit">Mehrfach editieren</String>
     <String id="GetCoverArt">Cover Art holen</String>
     <String id="GetLyrics">Liedtext holen</String>
     <String id="AutoNumber">Automatisch nummerieren</String>
@@ -83,10 +83,10 @@
     <String id="RemoveCommentPicture">Entfernen:</String>
     <String id="RemoveComments">Alle Kommentare entfernen</String>
     <String id="RemovePictures">Alle Bilder entfernen</String>
-    <String id="CaseConversion">Groß-/ Klein-\nschreibung</String>
+    <String id="CaseConversion">Groß-/ Kleinschreibung</String>
     <String id="CaseConversionMenu">Groß-/ Kleinschreibung</String>
     <String id="CaseConversionOption">Groß-/ Kleinschreibung Einstellungen</String>
-    <String id="DeleteTags">Tags\nlöschen</String>
+    <String id="DeleteTags">Tags löschen</String>
     <String id="DeleteAllTags">Alle Tags löschen</String>
     <String id="DeleteID3V1Tags">Nur ID3 V1 Tags löschen</String>
     <String id="DeleteID3V2Tags">Nur ID3 V2 Tags löschen</String>
@@ -94,37 +94,39 @@
 	<String id="RetrieveTags">Tags holen</String>
 	<String id="OrganiseFiles">Organisieren</String>
     
-    <String id="ExecuteScript">Script\nausführen</String>
+    <String id="ExecuteScript">Script ausführen</String>
     <String id="Scripts">Scripts</String>
     
-    <String id="Organise">Dateien\norganisieren</String>
-    <String id="AddBurner">Zur\nBrennliste</String>
-    <String id="AddConvert">Zur\nKonvertierliste</String>
-    <String id="AddPlaylist">Zur\nAbspielliste</String>
+    <String id="Organise">Dateien organisieren</String>
+    <String id="AddBurner">Zur Brennliste</String>
+    <String id="AddConvert">Zur Konvertierliste</String>
+    <String id="AddPlaylist">Zur Abspielliste</String>
     <String id="Other">Verschiedenes</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Rip</String>
-	<String id="RipButton">Rip\nstarten</String>
+	<String id="RipButton">Rip starten</String>
     <String id="RipEncoder">Encoder auswählen:</String>
     <String id="RipFolder">Ausgabe in Verzeichnis:</String>
-    <String id="RipCancel">Rip\nabbrechen</String>
+    <String id="RipCancel">Rip abbrechen</String>
     <String id="RipOptions">Rip Optionen</String>
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Konvertieren</String>
-    <String id="ConvertButton">Konvertieren\nstarten</String>
+    <String id="ConvertButton">Konvertieren starten</String>
     <String id="ConvertEncoder">Encoder auswählen:</String>
     <String id="ConvertFolder">Ausgabe in Verzeichnis:</String>
-    <String id="ConvertCancel">Konvertierung\nabbrechen</String>
+    <String id="ConvertCancel">Konvertierung abbrechen</String>
     <String id="ConvertOptions">Konvertierungs Optionen</String>
 
     <!-- Burn Tab-->
     <String id="BurnTab">Brenner</String>
     <String id="Burn">Brennen</String>
-    <String id="BurnCancel">Brennen\nabbrechen</String>
+    <String id="BurnCancel">Brennen abbrechen</String>
     <String id="BurnOptions">Brenn-Optionen</String>
-
+    <String id="Burner">Brenner auswählen:</String>
+    <String id="BurnerSpeed">Geschwindigkeit:</String>
+	
   </Section>
   
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 

@@ -458,7 +458,7 @@ namespace MPTagThat.Organise
     /// <param name="e"></param>
     private void cbRootDir_SelectedIndexChanged(object sender, EventArgs e)
     {
-      cbRootDir.Text = (cbRootDir.Items[cbRootDir.SelectedIndex] as Item).Value;
+      cbRootDir.Text = (string)(cbRootDir.Items[cbRootDir.SelectedIndex] as Item).Value;
     }
 
     /// <summary>
@@ -531,7 +531,7 @@ namespace MPTagThat.Organise
         // See, if we have a script selected
         if (cbScripts.SelectedIndex > 0)
         {
-          string scriptName = (cbScripts.SelectedItem as Item).Value;
+          string scriptName = (string)(cbScripts.SelectedItem as Item).Value;
           _scriptAssembly = ServiceScope.Get<IScriptManager>().Load(scriptName);
         }
 

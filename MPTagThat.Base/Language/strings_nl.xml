@@ -43,14 +43,14 @@
 
     <!-- Tags Tab-->
     <String id="TagTab">Tags</String>
-    <String id="TagFromFile">Tag van\nBetandsnaam</String>
-    <String id="RenameFile">Hernoem\nBestand</String>
+    <String id="TagFromFile">Tag van Betandsnaam</String>
+    <String id="RenameFile">Hernoem Bestand</String>
     <String id="RenameFileMenu">Hernoem Bestand</String>
     <String id="RenameFileOptions">Hernoem Bestand Opties</String>
-    <String id="IdentifyFile">Identificeer\nBestand</String>
-    <String id="TagFromInternet">Tag van\nInternet</String>
-    <String id="SingleTagEdit">Enkele Tag\nBewerk</String>
-    <String id="MultiTagEdit">Meerdere Tags\nBewerk</String>
+    <String id="IdentifyFile">Identificeer Bestand</String>
+    <String id="TagFromInternet">Tag van Internet</String>
+    <String id="SingleTagEdit">Enkele Tag Bewerk</String>
+    <String id="MultiTagEdit">Meerdere Tags Bewerk</String>
     <String id="GetCoverArt">Verkrijg Cover Art</String>
     <String id="GetLyrics">Verkrijg Lyrics</String>
     <String id="AutoNumber">Auto Nummering</String>
@@ -58,10 +58,10 @@
     <String id="RemoveCommentPicture">Verwijder:</String>
     <String id="RemoveComments">Verwijder alle commentaar</String>
     <String id="RemovePictures">Verwijder alle afbeeldingen</String>
-    <String id="CaseConversion">Kapitaal\nOmzetting</String>
+    <String id="CaseConversion">Kapitaal Omzetting</String>
     <String id="CaseConversionMenu">Kapitaal omzetting</String>
     <String id="CaseConversionOption">Kapitaal omzettings opties</String>
-    <String id="DeleteTags">Verwijder\nTags</String>
+    <String id="DeleteTags">Verwijder Tags</String>
     <String id="DeleteAllTags">Verwijder alle Tags</String>
     <String id="DeleteID3V1Tags">Verwijder alleen ID3 V1 Tags</String>
     <String id="DeleteID3V2Tags">Verwijder alleen ID3 V2 Tags</String>
@@ -69,35 +69,35 @@
     <String id="RetrieveTags">Tags ophalen</String>
 	<String id="OrganiseFiles">Organiseer</String>
     
-    <String id="ExecuteScript">Uitvoeren\nScript</String>
+    <String id="ExecuteScript">Uitvoeren Script</String>
     <String id="Scripts">Scripts</String>
     
-    <String id="Organise">Organiseer\nbestanden</String>
-    <String id="AddBurner">Toevoegen aan\nBrander</String>
-    <String id="AddConvert">Toevoegen aan\nOmzetting</String>
-    <String id="AddPlaylist">Toevoegen aan\nAfspeellijst</String>
+    <String id="Organise">Organiseer bestanden</String>
+    <String id="AddBurner">Toevoegen aan Brander</String>
+    <String id="AddConvert">Toevoegen aan Omzetting</String>
+    <String id="AddPlaylist">Toevoegen aan Afspeellijst</String>
     <String id="Other">Andere</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Rippen</String>
-    <String id="RipButton">Start\nRippen</String>
+    <String id="RipButton">Start Rippen</String>
     <String id="RipEncoder">Selecteer Encoder:</String>
     <String id="RipFolder">Resultaatmap:</String>
-    <String id="RipCancel">Rip\nStoppen</String>
+    <String id="RipCancel">Rip Stoppen</String>
     <String id="RipOptions">Rip Opties</String>
 
     <!-- Convert Tab-->
     <String id="ConvertTab">Omzetten</String>
-    <String id="ConvertButton">Start\nOmzetten</String>
+    <String id="ConvertButton">Start Omzetten</String>
     <String id="ConvertEncoder">Select Encoder:</String>
     <String id="ConvertFolder">Resultaatmap:</String>
-    <String id="ConvertCancel">Omzetting\nStoppen</String>
+    <String id="ConvertCancel">Omzetting Stoppen</String>
     <String id="ConvertOptions">Omzettings Opties</String>
 
     <!-- Burn Tab-->
     <String id="BurnTab">Branden</String>
     <String id="Burn">Branden</String>
-    <String id="BurnCancel">Stop\nBranden</String>
+    <String id="BurnCancel">Stop Branden</String>
     <String id="BurnOptions">Brand Opties</String>
 
   </Section>
