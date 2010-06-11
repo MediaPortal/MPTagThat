@@ -57,7 +57,6 @@ namespace MPTagThat.CaseConversion
       this.buttonConvert = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.labelHeader = new System.Windows.Forms.Label();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.tabControlConversion.SuspendLayout();
       this.tabPageSettings.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
@@ -512,6 +511,5 @@ namespace MPTagThat.CaseConversion
     private MPTagThat.Core.WinControls.MPTButton buttonConvert;
     private MPTagThat.Core.WinControls.MPTButton buttonCancel;
     private System.Windows.Forms.Label labelHeader;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
   }
 }

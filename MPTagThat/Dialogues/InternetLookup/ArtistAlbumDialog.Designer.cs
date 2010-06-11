@@ -34,7 +34,6 @@
       this.textBoxAlbum = new System.Windows.Forms.TextBox();
       this.btContinue = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
-      this.roundRectShape1 = new Telerik.WinControls.RoundRectShape();
       this.labelHeader = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
@@ -147,7 +146,6 @@
     private System.Windows.Forms.TextBox textBoxAlbum;
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private MPTagThat.Core.WinControls.MPTButton btCancel;
-    private Telerik.WinControls.RoundRectShape roundRectShape1;
     private System.Windows.Forms.Label labelHeader;
   }
 }

@@ -70,18 +70,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\taglib-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.WinControls, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\Telerik.WinControls.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.WinControls.UI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\Telerik.WinControls.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="TelerikCommon, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\TelerikCommon.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
@@ -428,10 +416,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RibbonBar.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RibbonBar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RibbonControl.resx">
       <DependentUpon>RibbonControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -453,12 +437,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="RibbonBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="RibbonBar.Designer.cs">
-      <DependentUpon>RibbonBar.cs</DependentUpon>
     </Compile>
     <Compile Include="RibbonControl.cs">
       <SubType>UserControl</SubType>
