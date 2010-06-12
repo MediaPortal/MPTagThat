@@ -42,7 +42,7 @@ namespace MPTagThat.GridView
     private ILogger log = ServiceScope.Get<ILogger>();
     private IThemeManager theme = ServiceScope.Get<IThemeManager>();
 
-    private Progress dlgProgress;
+    private bool _progressCancelled = false;
 
     private Rectangle _dragBoxFromMouseDown;
     private Point _screenOffset;
@@ -140,6 +140,9 @@ namespace MPTagThat.GridView
       CreateColumns();
 
       LocaliseScreen();
+
+      // Register for Command Cancel
+      ApplicationCommands.ProgressCancel.Executed += new Elegant.Ui.CommandExecutedEventHandler(ProgressCancel_Executed);
     }
     #endregion
 
@@ -161,10 +164,9 @@ namespace MPTagThat.GridView
     public void Save()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      dlgProgress = new Progress();
-      dlgProgress.Owner = _main;
-      dlgProgress.Header = localisation.ToString("progress", "SavingHeader");
-      ShowForm(dlgProgress);
+      _main.progressBar1.Maximum = tracksGrid.SelectedRows.Count;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
@@ -181,10 +183,10 @@ namespace MPTagThat.GridView
         try
         {
           Application.DoEvents();
-          dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Saving"), count, trackCount), count, trackCount, true);
-          if (dlgProgress.IsCancelled)
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
           {
-            dlgProgress.Close();
+            _main.progressBar1.Value = 0;
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -198,7 +200,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      dlgProgress.Close();
+      _main.progressBar1.Value = 0;
 
       _itemsChanged = false;
       // check, if we still have changed items in the list
@@ -233,10 +235,9 @@ namespace MPTagThat.GridView
 
       if (showProgressDialog)
       {
-        dlgProgress = new Progress();
-        dlgProgress.Owner = _main;
-        dlgProgress.Header = localisation.ToString("progress", "SavingHeader");
-        ShowForm(dlgProgress);
+        _main.progressBar1.Maximum = tracksGrid.SelectedRows.Count;
+        _main.progressBar1.Value = 0;
+        _progressCancelled = false;
       }
 
       int trackCount = bindingList.Count;
@@ -246,10 +247,10 @@ namespace MPTagThat.GridView
 
         if (showProgressDialog)
         {
-          dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Saving"), i + 1, trackCount), i + 1, trackCount, true);
-          if (dlgProgress.IsCancelled)
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
           {
-            dlgProgress.Close();
+            _main.progressBar1.Value = 0;
             return;
           }
         }
@@ -261,7 +262,9 @@ namespace MPTagThat.GridView
       }
 
       if (showProgressDialog)
-        dlgProgress.Close();
+      {
+        _main.progressBar1.Value = 0;
+      }
       _itemsChanged = bErrors;
 
       Util.LeaveMethod(Util.GetCallingMethod());
@@ -392,13 +395,13 @@ namespace MPTagThat.GridView
         return;
       }
 
-      dlgProgress = new Progress();
-      dlgProgress.Owner = _main;
-      dlgProgress.Header = localisation.ToString("progress", "InternetHeader");
-      ShowForm(dlgProgress);
-
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
+
+      _main.progressBar1.Maximum = trackCount;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+
       MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -414,10 +417,10 @@ namespace MPTagThat.GridView
         try
         {
           Application.DoEvents();
-          dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Internet"), count, trackCount), count, trackCount, true);
-          if (dlgProgress.IsCancelled)
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
           {
-            dlgProgress.Close();
+            _main.progressBar1.Value = 0;
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -425,7 +428,6 @@ namespace MPTagThat.GridView
           using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
           {
             log.Debug("Identify: Processing file: {0}", track.FullFileName);
-            dlgProgress.StatusLabel2 = localisation.ToString("progress", "InternetMusicBrainz");
             List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
 
             if (musicBrainzTracks == null)
@@ -481,11 +483,10 @@ namespace MPTagThat.GridView
               {
                 using (MusicBrainzAlbumInfo albumInfo = new MusicBrainzAlbumInfo())
                 {
-                  dlgProgress.StatusLabel2 = localisation.ToString("progress", "InternetAlbum");
                   Application.DoEvents();
-                  if (dlgProgress.IsCancelled)
+                  if (_progressCancelled)
                   {
-                    dlgProgress.Close();
+                    _main.progressBar1.Value = 0;
                     return;
                   }
                   musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumID.ToString());
@@ -535,7 +536,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      dlgProgress.Close();
+      _main.progressBar1.Value = 0;
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -571,13 +572,13 @@ namespace MPTagThat.GridView
         return;
       }
 
-      dlgProgress = new Progress();
-      dlgProgress.Owner = _main;
-      dlgProgress.Header = localisation.ToString("progress", "CoverArtHeader");
-      ShowForm(dlgProgress);
-
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
+
+      _main.progressBar1.Maximum = trackCount;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+
       AmazonAlbum amazonAlbum = null;
 
       bool isMultipleArtistAlbum = false;
@@ -637,10 +638,10 @@ namespace MPTagThat.GridView
         try
         {
           Application.DoEvents();
-          dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "CoverArt"), count, trackCount), count, trackCount, true);
-          if (dlgProgress.IsCancelled)
+          _main.progressBar1.Value += 1;          
+          if (_progressCancelled)
           {
-            dlgProgress.Close();
+            _main.progressBar1.Value = 0;
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -785,7 +786,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      dlgProgress.Close();
+      _main.progressBar1.Value = 0;
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -875,13 +876,12 @@ namespace MPTagThat.GridView
         return;
       }
 
-      dlgProgress = new Progress();
-      dlgProgress.Owner = _main;
-      dlgProgress.Header = localisation.ToString("progress", "LyricsHeader");
-      ShowForm(dlgProgress);
-
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
+
+      _main.progressBar1.Maximum = trackCount;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
 
       List<TrackData> tracks = new List<TrackData>();
       foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -893,10 +893,10 @@ namespace MPTagThat.GridView
 
         count++;
         Application.DoEvents();
-        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(localisation.ToString("progress", "Lyrics"), count, trackCount), count, trackCount, true);
-        if (dlgProgress.IsCancelled)
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
         {
-          dlgProgress.Close();
+          _main.progressBar1.Value = 0;
           return;
         }
         TrackData track = bindingList[row.Index];
@@ -906,7 +906,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      dlgProgress.Close();
+      _main.progressBar1.Value = 0;
 
       if (tracks.Count > 0)
       {
@@ -1420,33 +1420,21 @@ namespace MPTagThat.GridView
       {
       }
 
-      dlgProgress = new Progress();
-      dlgProgress.Header = localisation.ToString("progress", "ScanningHeader");
-      int x = _main.ClientSize.Width / 2 - dlgProgress.Width / 2;
-      int y = _main.ClientSize.Height / 2 - dlgProgress.Height / 2;
-      Point clientLocation = _main.Location;
-      x += clientLocation.X;
-      y += clientLocation.Y;
-      dlgProgress.Location = new Point(x, y);
-      dlgProgress.Show();
-
-      // The Folder scan should stay on Top
-      dlgProgress.TopMost = true;
-
-      string dlgMessage = localisation.ToString("progress", "Scanning");
-
+      _main.progressBar1.Maximum = files.Count;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+     
       int count = 1;
       int trackCount = files.Count;
       log.Debug("FolderScan: Found {0} files", trackCount);
       foreach (FileInfo fi in files)
       {
         Application.DoEvents();
-        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, trackCount), count, trackCount, true);
-        if (dlgProgress.IsCancelled)
+        _main.progressBar1.Value += 1;
+
+        if (_progressCancelled)
         {
-          _main.FolderScanning = false;
-          dlgProgress.Close();
-          return;
+          break;
         }
         try
         {
@@ -1493,7 +1481,8 @@ namespace MPTagThat.GridView
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
       _main.FolderScanning = false;
-      dlgProgress.Close();
+
+      _main.progressBar1.Value = 0;
 
       // Display Status Information
       try
@@ -1611,20 +1600,9 @@ namespace MPTagThat.GridView
       tracksGrid.DataSource = bindingList;
       GC.Collect();
 
-      dlgProgress = new Progress();
-      dlgProgress.Header = localisation.ToString("progress", "ScanningHeader");
-      int x = _main.ClientSize.Width / 2 - dlgProgress.Width / 2;
-      int y = _main.ClientSize.Height / 2 - dlgProgress.Height / 2;
-      Point clientLocation = _main.Location;
-      x += clientLocation.X;
-      y += clientLocation.Y;
-      dlgProgress.Location = new Point(x, y);
-      dlgProgress.Show();
-
-      // The Folder scan should stay on Top
-      dlgProgress.TopMost = true;
-
-      string dlgMessage = localisation.ToString("progress", "Scanning");
+      _main.progressBar1.Maximum = songs.Count;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
 
       // Get File Filter Settings
       _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
@@ -1635,12 +1613,10 @@ namespace MPTagThat.GridView
       foreach (string song in songs)
       {
         Application.DoEvents();
-        dlgProgress.UpdateProgress(ProgressBarStyle.Blocks, string.Format(dlgMessage, count, songs.Count), count, songs.Count, true);
-        if (dlgProgress.IsCancelled)
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
         {
-          _main.FolderScanning = false;
-          dlgProgress.Close();
-          return;
+          break;
         }
 
         try
@@ -1676,7 +1652,7 @@ namespace MPTagThat.GridView
         count++;
       }
 
-      dlgProgress.Close();
+      _main.FolderScanning = false;
 
       // Display Status Information
       try
@@ -2826,6 +2802,16 @@ namespace MPTagThat.GridView
         return;
       }
       e.Handled = false;
+    }
+
+    /// <summary>
+    /// The Progress Cancel has been fired from the Statusbar Button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void ProgressCancel_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    {
+      _progressCancelled = true;
     }
 
     #region Drag & Drop

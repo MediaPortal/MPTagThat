@@ -203,12 +203,6 @@
     <Compile Include="Dialogues\Preferences\Preferences.Designer.cs">
       <DependentUpon>Preferences.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogues\Progress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogues\Progress.Designer.cs">
-      <DependentUpon>Progress.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\OrganiseFiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,10 +358,6 @@
     <EmbeddedResource Include="Dialogues\Preferences\Preferences.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Preferences.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\Progress.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>Progress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\OrganiseFiles.resx">
       <DependentUpon>OrganiseFiles.cs</DependentUpon>

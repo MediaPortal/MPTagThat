@@ -994,6 +994,11 @@ namespace MPTagThat
       }
     }
     #endregion
+
+    private void statusBar_Click(object sender, EventArgs e)
+    {
+
+    }
     #endregion
   }
 }
