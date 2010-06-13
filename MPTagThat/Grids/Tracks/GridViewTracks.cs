@@ -164,12 +164,11 @@ namespace MPTagThat.GridView
     public void Save()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      _main.progressBar1.Maximum = tracksGrid.SelectedRows.Count;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         row.Cells[0].Value = "";
@@ -186,7 +185,7 @@ namespace MPTagThat.GridView
           _main.progressBar1.Value += 1;
           if (_progressCancelled)
           {
-            _main.progressBar1.Value = 0;
+            ResetProgressBar();
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -200,7 +199,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      _main.progressBar1.Value = 0;
+      ResetProgressBar();
 
       _itemsChanged = false;
       // check, if we still have changed items in the list
@@ -235,9 +234,7 @@ namespace MPTagThat.GridView
 
       if (showProgressDialog)
       {
-        _main.progressBar1.Maximum = tracksGrid.SelectedRows.Count;
-        _main.progressBar1.Value = 0;
-        _progressCancelled = false;
+        SetProgressBar(tracksGrid.SelectedRows.Count);
       }
 
       int trackCount = bindingList.Count;
@@ -250,7 +247,7 @@ namespace MPTagThat.GridView
           _main.progressBar1.Value += 1;
           if (_progressCancelled)
           {
-            _main.progressBar1.Value = 0;
+            ResetProgressBar();
             return;
           }
         }
@@ -263,7 +260,7 @@ namespace MPTagThat.GridView
 
       if (showProgressDialog)
       {
-        _main.progressBar1.Value = 0;
+        ResetProgressBar();
       }
       _itemsChanged = bErrors;
 
@@ -397,10 +394,7 @@ namespace MPTagThat.GridView
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
-
-      _main.progressBar1.Maximum = trackCount;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
+      SetProgressBar(trackCount);
 
       MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
 
@@ -420,7 +414,7 @@ namespace MPTagThat.GridView
           _main.progressBar1.Value += 1;
           if (_progressCancelled)
           {
-            _main.progressBar1.Value = 0;
+            ResetProgressBar();
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -486,7 +480,7 @@ namespace MPTagThat.GridView
                   Application.DoEvents();
                   if (_progressCancelled)
                   {
-                    _main.progressBar1.Value = 0;
+                    ResetProgressBar();
                     return;
                   }
                   musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumID.ToString());
@@ -536,7 +530,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      _main.progressBar1.Value = 0;
+      ResetProgressBar();
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -574,10 +568,7 @@ namespace MPTagThat.GridView
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
-
-      _main.progressBar1.Maximum = trackCount;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
+      SetProgressBar(trackCount);
 
       AmazonAlbum amazonAlbum = null;
 
@@ -641,7 +632,7 @@ namespace MPTagThat.GridView
           _main.progressBar1.Value += 1;          
           if (_progressCancelled)
           {
-            _main.progressBar1.Value = 0;
+            ResetProgressBar();
             return;
           }
           TrackData track = bindingList[row.Index];
@@ -786,7 +777,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      _main.progressBar1.Value = 0;
+      ResetProgressBar();
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
@@ -878,10 +869,7 @@ namespace MPTagThat.GridView
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
-
-      _main.progressBar1.Maximum = trackCount;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
+      SetProgressBar(trackCount);
 
       List<TrackData> tracks = new List<TrackData>();
       foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -896,7 +884,7 @@ namespace MPTagThat.GridView
         _main.progressBar1.Value += 1;
         if (_progressCancelled)
         {
-          _main.progressBar1.Value = 0;
+          ResetProgressBar();
           return;
         }
         TrackData track = bindingList[row.Index];
@@ -906,7 +894,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      _main.progressBar1.Value = 0;
+      ResetProgressBar();
 
       if (tracks.Count > 0)
       {
@@ -1420,9 +1408,7 @@ namespace MPTagThat.GridView
       {
       }
 
-      _main.progressBar1.Maximum = files.Count;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
+      SetProgressBar(files.Count);
      
       int count = 1;
       int trackCount = files.Count;
@@ -1482,7 +1468,7 @@ namespace MPTagThat.GridView
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
       _main.FolderScanning = false;
 
-      _main.progressBar1.Value = 0;
+      ResetProgressBar();
 
       // Display Status Information
       try
@@ -1600,9 +1586,7 @@ namespace MPTagThat.GridView
       tracksGrid.DataSource = bindingList;
       GC.Collect();
 
-      _main.progressBar1.Maximum = songs.Count;
-      _main.progressBar1.Value = 0;
-      _progressCancelled = false;
+      SetProgressBar(songs.Count);
 
       // Get File Filter Settings
       _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
@@ -1963,6 +1947,26 @@ namespace MPTagThat.GridView
 
         SetColorMP3Errors(row.Index, track.MP3ValidationError);
       }
+    }
+
+    /// <summary>
+    /// Sets the mximum value of Progressbar
+    /// </summary>
+    /// <param name="maxCount"></param>
+    private void SetProgressBar(int maxCount)
+    {
+      _main.progressBar1.Maximum = maxCount == 0 ? 100 : maxCount;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+    }
+
+    /// <summary>
+    /// Reset the Progressbar to Initiaövfalue
+    /// </summary>
+    private void ResetProgressBar()
+    {
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
     }
     #endregion
 
