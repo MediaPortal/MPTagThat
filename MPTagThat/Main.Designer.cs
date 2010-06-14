@@ -282,7 +282,6 @@ namespace MPTagThat
       this.statusBar.Size = new System.Drawing.Size(1008, 22);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
-      this.statusBar.Click += new System.EventHandler(this.statusBar_Click);
       // 
       // statusBarNotificationsArea1
       // 

@@ -30,6 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       this.PanelBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.ckUseRelativePath = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btPlayListSave = new MPTagThat.Core.WinControls.MPTButton();
       this.btPlaylistLoad = new MPTagThat.Core.WinControls.MPTButton();
       this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
@@ -39,7 +40,6 @@
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.menuLoad = new System.Windows.Forms.ToolStripMenuItem();
       this.menuSave = new System.Windows.Forms.ToolStripMenuItem();
-      this.ckUseRelativePath = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.PanelBottom.SuspendLayout();
       this.panelTop.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.playListGrid)).BeginInit();
@@ -52,10 +52,24 @@
       this.PanelBottom.Controls.Add(this.btPlayListSave);
       this.PanelBottom.Controls.Add(this.btPlaylistLoad);
       this.PanelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.PanelBottom.Location = new System.Drawing.Point(0, 511);
+      this.PanelBottom.Location = new System.Drawing.Point(0, 507);
       this.PanelBottom.Name = "PanelBottom";
-      this.PanelBottom.Size = new System.Drawing.Size(182, 61);
+      this.PanelBottom.Size = new System.Drawing.Size(178, 61);
       this.PanelBottom.TabIndex = 10;
+      // 
+      // ckUseRelativePath
+      // 
+      this.ckUseRelativePath.AutoSize = true;
+      this.ckUseRelativePath.Checked = true;
+      this.ckUseRelativePath.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckUseRelativePath.Localisation = "UseRelativePath";
+      this.ckUseRelativePath.LocalisationContext = "player";
+      this.ckUseRelativePath.Location = new System.Drawing.Point(5, 41);
+      this.ckUseRelativePath.Name = "ckUseRelativePath";
+      this.ckUseRelativePath.Size = new System.Drawing.Size(106, 17);
+      this.ckUseRelativePath.TabIndex = 2;
+      this.ckUseRelativePath.Text = "Use relative path";
+      this.ckUseRelativePath.UseVisualStyleBackColor = true;
       // 
       // btPlayListSave
       // 
@@ -87,7 +101,7 @@
       this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelTop.Location = new System.Drawing.Point(0, 0);
       this.panelTop.Name = "panelTop";
-      this.panelTop.Size = new System.Drawing.Size(182, 572);
+      this.panelTop.Size = new System.Drawing.Size(178, 568);
       this.panelTop.TabIndex = 9;
       // 
       // playListGrid
@@ -106,7 +120,7 @@
       this.playListGrid.RowHeadersVisible = false;
       this.playListGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
       this.playListGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.playListGrid.Size = new System.Drawing.Size(182, 572);
+      this.playListGrid.Size = new System.Drawing.Size(178, 568);
       this.playListGrid.TabIndex = 8;
       this.playListGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.playListGrid_MouseClick);
       this.playListGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playListGrid_MouseDoubleClick);
@@ -149,25 +163,11 @@
       this.menuSave.Text = "Save Playlist";
       this.menuSave.Click += new System.EventHandler(this.btPlayListSave_Click);
       // 
-      // ckUseRelativePath
-      // 
-      this.ckUseRelativePath.AutoSize = true;
-      this.ckUseRelativePath.Checked = true;
-      this.ckUseRelativePath.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckUseRelativePath.Localisation = "UseRelativePath";
-      this.ckUseRelativePath.LocalisationContext = "player";
-      this.ckUseRelativePath.Location = new System.Drawing.Point(5, 41);
-      this.ckUseRelativePath.Name = "ckUseRelativePath";
-      this.ckUseRelativePath.Size = new System.Drawing.Size(106, 17);
-      this.ckUseRelativePath.TabIndex = 2;
-      this.ckUseRelativePath.Text = "Use relative path";
-      this.ckUseRelativePath.UseVisualStyleBackColor = true;
-      // 
       // PlayList
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(182, 572);
+      this.ClientSize = new System.Drawing.Size(178, 568);
       this.ControlBox = false;
       this.Controls.Add(this.PanelBottom);
       this.Controls.Add(this.panelTop);

@@ -150,8 +150,8 @@ namespace MPTagThat.Player
     {
       if (_playListOpen)
       {
-        _playListForm.Height = this.Parent.Parent.Height;
-        _playListForm.Location = new Point(this.Parent.Parent.Location.X + this.Parent.Parent.Width, this.Parent.Parent.Location.Y);
+        _playListForm.Height = this.Parent.Parent.Parent.Height;
+        _playListForm.Location = new Point(this.Parent.Parent.Parent.Location.X + this.Parent.Parent.Parent.Width, this.Parent.Parent.Parent.Location.Y);
       }
     }
     #endregion
@@ -370,14 +370,14 @@ namespace MPTagThat.Player
       {
         // Set the height of the Playlist equals to the height of the main Window
         // Decrease the width of the main window and set the playlist to the right
-        _mainFormWidth = this.Parent.Parent.Width;
-        _playListForm.Height = this.Parent.Parent.Height;
+        _mainFormWidth = this.Parent.Parent.Parent.Width;
+        _playListForm.Height = this.Parent.Parent.Parent.Height;
 
-        if ((_mainFormWidth + _playListForm.Width + this.Parent.Parent.Location.X) > Screen.PrimaryScreen.Bounds.Width)
+        if ((_mainFormWidth + _playListForm.Width + this.Parent.Parent.Parent.Location.X) > Screen.PrimaryScreen.Bounds.Width)
         {
-          this.Parent.Parent.Width -= _playListForm.Width;
+          this.Parent.Parent.Parent.Width -= _playListForm.Width;
         }
-        _playListForm.Location = new Point(this.Parent.Parent.Location.X + this.Parent.Parent.Width, this.Parent.Parent.Location.Y);
+        _playListForm.Location = new Point(this.Parent.Parent.Parent.Location.X + this.Parent.Parent.Parent.Width, this.Parent.Parent.Parent.Location.Y);
 
         _playListOpen = true;
         _playListForm.Show();
