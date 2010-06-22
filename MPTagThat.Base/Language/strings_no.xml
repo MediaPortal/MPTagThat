@@ -8,12 +8,12 @@
 <Language>
   <Section name="system">
     <String id="NotFound">### Ikke funnet ###</String>
-        <String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
+	<String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
   </Section>
 
   <!-- Main --> 
   <Section name="main">
-  <!-- Treeview -->
+  	<!-- Treeview -->
     <String id="TreeViewPanel">Mapper</String>
     <String id="TreeViewPanelDatabase">Database</String>
     <String id="TreeViewViews">Visning</String>
@@ -39,9 +39,18 @@
     <String id="NetworkView">Netverks Visning</String>
     <String id="ScanSubfolder">Skann Under Mapper</String>
     <String id="ButtonRefreshFolder">Oppfrisk Mappe Visning</String>
+    <!-- Misc. TabControl -->
+    <String id="TabPageMessages">Meldinger</String>
+    <String id="TabPageNonMusicFiles">Ikke Musikk Filer</String>
     <!-- Error Gridview -->
     <String id="ErrorHeaderFile">Fil</String>
     <String id="ErrorHeaderMessage">Beskjed</String>
+	<String id="ErrorContextMenuClear">Slett Liste</String>
+	<!-- Non Music File Listview -->
+	<String id="NonMusicContextMenuRenameToFolderJpg">Sett navn til "folder.jpg"</String>
+	<String id="NonMusicContextMenuDeleteFiles">Slett valgte fil(er)"</String>
+	<String id="NonMusicDeleteFilesHeader">Slett de valgte filene</String>
+	<String id="NonMusicDeleteFilesMessage">Er du sikker på at du vil flytte disse {0} filene til Papirkurven?</String>
     <!-- Toolstrip -->
     <String id="toolStripLabelFiles">Filer: {0} (Valgt: {1})</String>
     <String id="toolStripLabelPlay">Spiller Status: Spiller</String>
@@ -115,6 +124,8 @@
     <String id="Burn">Start Brenner</String>
     <String id="BurnCancel">Avbryt Brenner</String>
     <String id="BurnOptions">Innstillinger for Brenner</String>
+	<String id="Burner">Velg Brenner:</String>
+    <String id="BurnerSpeed">Brennerhastighet:</String>
 
   </Section>
   
@@ -692,7 +703,7 @@
     <String id="Cancel">Avbryt</String>
   </Section>
  
-   <!--  Internet Lookup -->
+  <!--  Internet Lookup -->
   <Section name="Lookup">
     <!--  Dialog to specify Artist / Album for the searchg -->
     <String id="HeaderArtistAlbum">Hent på Internett - Spesifiser Artist / Album</String>
