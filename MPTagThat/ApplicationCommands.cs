@@ -90,5 +90,7 @@ public class ApplicationCommands
   public static Elegant.Ui.Command ChangeDisplayColumns = new Elegant.Ui.Command("ChangeDisplayColumns");
   [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
   public static Elegant.Ui.Command ProgressCancel = new Elegant.Ui.Command("ProgressCancel");
+  [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+  public static Elegant.Ui.Command SaveAsThumb = new Elegant.Ui.Command("SaveAsThumb");
 }
 }

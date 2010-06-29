@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Elegant.Ui;
@@ -19,8 +20,10 @@ namespace MPTagThat
     private Main main;
     private List<Item> encoders = new List<Item>();
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
     private bool _numberingOnClick;
     private bool _initialising = true;
+    private PictureControl picControl;
     #endregion
 
     #region Properties
@@ -170,6 +173,14 @@ namespace MPTagThat
     {
       get { return _numberingOnClick; }
     }
+
+    /// <summary>
+    /// Returns the Picture Gallery
+    /// </summary>
+    public Gallery PictureGallery
+    {
+      get { return galleryPicture; }
+    }
     #endregion
 
     #region ctor
@@ -181,6 +192,9 @@ namespace MPTagThat
 
       // Register the Ribbon Button Events
       RegisterCommands();
+
+      // Register Ribbon KeyTips
+      RegisterKeyTips();
 
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -266,8 +280,37 @@ namespace MPTagThat
       ApplicationCommands.ScriptExecute.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
       ApplicationCommands.SingleTagEdit.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
       ApplicationCommands.TagFromInternet.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
+      ApplicationCommands.SaveAsThumb.Executed += new CommandExecutedEventHandler(SaveAsThumb_Executed);
+
+      ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
     }
 
+    /// <summary>
+    /// Register the Keytips to be displayed in the menu, when pressing Alt or F10
+    /// </summary>
+    private void RegisterKeyTips()
+    {
+      // Start Menu
+      startMenuSave.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
+      startMenuRefresh.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
+      applicationMenu1.OptionsButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_OPTIONS);
+      applicationMenu1.ExitButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EXIT);
+
+      // Tags Tab
+      buttonTagFromFile.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
+      buttonTagIdentifyFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_IDENTIFYFILE);
+      buttonTagFromInternet.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAGFROMINTERNET);
+
+      buttonSingleTagEdit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EDIT);
+      buttonMultiTagEdit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_MULTI_EDIT);
+      buttonGetCoverArt.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETCOVERART);
+      buttonGetLyrics.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETLYRICS);
+      buttonRemoveComment.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REMOVECOMMENT);
+      buttonCaseConversion.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_CASECONVERSION);
+
+      buttonRenameFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAG2FILENAME);
+      buttonOrganiseFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_ORGANISE);
+    }
     #endregion
 
     #region Localisation
@@ -287,7 +330,10 @@ namespace MPTagThat
 
       // Tags Tab
       ribbonTabPageTag.Text = localisation.ToString("ribbon", "TagTab");
+
       buttonTagFromFile.Text = localisation.ToString("ribbon", "TagFromFile");
+      buttonTagFromFile.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
+      
       buttonTagIdentifyFiles.Text = localisation.ToString("ribbon", "IdentifyFile");
       buttonTagFromInternet.Text = localisation.ToString("ribbon", "TagFromInternet");
       ribbonGroupTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");
@@ -295,6 +341,7 @@ namespace MPTagThat
       buttonSingleTagEdit.Text = localisation.ToString("ribbon", "SingleTagEdit");
       buttonMultiTagEdit.Text = localisation.ToString("ribbon", "MultiTagEdit");
       buttonGetCoverArt.ScreenTip.Text = localisation.ToString("ribbon", "GetCoverArt");
+      buttonSaveAsThumb.ScreenTip.Text = localisation.ToString("ribbon", "SaveFolderThumb");
       buttonGetLyrics.ScreenTip.Text = localisation.ToString("ribbon", "GetLyrics");
       buttonAutoNumber.ScreenTip.Text = localisation.ToString("ribbon", "AutoNumber");
       buttonNumberOnClick.ScreenTip.Text = localisation.ToString("ribbon", "NumberOnClick");
@@ -314,7 +361,7 @@ namespace MPTagThat
       ribbonGroupOrganise.Text = localisation.ToString("ribbon", "OrganiseFiles");
 
       buttonScriptExecute.Text = localisation.ToString("ribbon", "ExecuteScript");
-      ribbonGroupScripts.Text = localisation.ToString("ribbon", "Scripts");
+      ribbonGroupPicture.Text = localisation.ToString("ribbon", "Picture");
 
       buttonAddToBurner.Text = localisation.ToString("ribbon", "AddBurner");
       buttonAddToConversion.Text = localisation.ToString("ribbon", "AddConvert");
@@ -344,7 +391,7 @@ namespace MPTagThat
       ribbonGroupBurnOptions.Text = localisation.ToString("ribbon", "BurnOptions");
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");
-
+      
       Util.LeaveMethod(Util.GetCallingMethod());
     }
     #endregion
@@ -369,6 +416,50 @@ namespace MPTagThat
         }
         i++;
       }
+    }
+    #endregion
+
+    #region Public Methods
+    /// <summary>
+    /// Get the Coverart out of the selected TRack item and fill the Ribbon Gallery
+    /// </summary>
+    public void SetGalleryItem()
+    {
+      Image img = null;
+      ClearGallery();
+      try
+      {
+        TrackData track = main.TracksGridView.SelectedTrack;
+        IPicture[] pics = new IPicture[] { };
+        pics = track.File.Tag.Pictures;
+        ApplicationCommands.SaveAsThumb.Enabled = false;
+        if (pics.Length > 0)
+        {
+          using (MemoryStream ms = new MemoryStream(pics[0].Data.Data))
+          {
+            img = Image.FromStream(ms);
+            if (img != null)
+            {
+
+              GalleryItem galleryItem = new GalleryItem();
+              galleryItem.Image = img;
+              this.galleryPicture.Items.Add(galleryItem);
+              ApplicationCommands.SaveAsThumb.Enabled = true;              
+            }
+          }
+        }
+      }
+      catch (Exception)
+      {
+      }
+    }
+
+    /// <summary>
+    /// Clear the Ribbon Gallery
+    /// </summary>
+    public void ClearGallery()
+    {
+      this.galleryPicture.Items.Clear();
     }
     #endregion
 
@@ -698,6 +789,16 @@ namespace MPTagThat
       }
     }
 
+    /// <summary>
+    /// Save the selected Picture as Folder THumb
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void SaveAsThumb_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      TrackData track = main.TracksGridView.SelectedTrack;
+      main.TracksGridView.SavePicture(track);
+    }
     #endregion
 
     #region Rip Tab
@@ -812,6 +913,31 @@ namespace MPTagThat
     }
     #endregion
 
+    #region Gallery
+    private void galleryPicture_HoveredItemChanged(object sender, GalleryHoveredItemChangedEventArgs e)
+    {
+      if (sender == null)
+      {
+        return;
+      }
+
+      if (e.NewValue != null)
+      {
+        if (picControl != null && picControl.Text != "")
+        {
+          picControl.Close();
+        }
+        picControl = new PictureControl((GalleryItem)e.NewValue, (sender as Gallery).PopupOwnerBounds.Location);
+      }
+      else
+      {
+        if (picControl != null)
+        {
+          picControl.Close();
+        }
+      }
+    }
+    #endregion
     #endregion
 
     #region General Events
@@ -831,5 +957,6 @@ namespace MPTagThat
       }
     }
     #endregion
+
   }
 }

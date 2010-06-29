@@ -8,6 +8,7 @@ namespace MPTagThat.Core
   public interface IActionHandler
   {
     bool GetAction(int iWindow, Keys key, ref Action action);
+    string GetKeyCode(Action.ActionType action);
     bool LoadKeyMap();
   }
 }

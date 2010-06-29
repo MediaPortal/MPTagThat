@@ -42,6 +42,18 @@ namespace MPTagThat.Core
       return true;
     }
 
+    public string GetKeyCode(Action.ActionType action)
+    {
+      foreach (Button but in mapWindows[0].Buttons)
+      {
+        if (but.ActionType == action)
+        {
+          return Convert.ToString((char) but.KeyCode);
+        }
+      }
+      return "";
+    }
+
     /// <summary>
     /// Loads the keymap file and creates the mapping.
     /// </summary>

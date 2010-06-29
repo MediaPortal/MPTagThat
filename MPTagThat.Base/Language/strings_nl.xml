@@ -68,6 +68,7 @@
     <String id="EditTags">Bewerk Tags</String>
     <String id="RetrieveTags">Tags ophalen</String>
 	<String id="OrganiseFiles">Organiseer</String>
+	<String id="SaveFolderThumb">Opslaan als map miniatuur</String>
     
     <String id="ExecuteScript">Uitvoeren Script</String>
     <String id="Scripts">Scripts</String>
@@ -354,19 +355,6 @@
     <String id="SelectAll">Alles Selecteren</String>
 </Section>
   
-    <!-- File Info Panel on the right side -->
-  <Section name="file_info">
-    <String id="SaveFolderThumb">Opslaan als map miniatuur</String>
-    <String id="Duration">Duur</String>
-    <String id="FileSize">Bestandsgrootte</String>
-    <String id="Bitrate">Bitrate</String>
-    <String id="Channels">Kanalen</String>
-    <String id="Samplerate">Samplerate</String>
-    <String id="Version">Codec</String>
-    <String id="Created">Gemaakt</String>
-    <String id="Changed">Aangepast</String>
-  </Section>
-    
   <!-- Tag from Filename  / Rename File --> 
   <Section name="TagAndRename">
     <String id="HeadingTag">Tag van Bestandsnaam</String>

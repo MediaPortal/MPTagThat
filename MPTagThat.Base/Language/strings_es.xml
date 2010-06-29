@@ -73,6 +73,7 @@
     <String id="ExecuteScript">Ejecutar Script</String>
     <String id="Scripts">Scripts</String>
     <String id="Organise">Organizar Archivos</String>
+    <String id="SaveFolderThumb">Guardar como Miniatura\nde Carpeta</String>
     <String id="AddBurner">Añadir a Grabador</String>
     <String id="AddConvert">Añadir a Conversión</String>
     <String id="AddPlaylist">Añadir a Lista</String>
@@ -331,17 +332,6 @@
     <String id="SelectAll">Seleccionar Todo</String>
     <String id="InsertFilter">Insertar Filtro</String>
     <String id="DeleteFilter">Borrar Filtro</String>
-  </Section>
-  <Section name="file_info">
-    <String id="SaveFolderThumb">Guardar como Miniatura\nde Carpeta</String>
-    <String id="Duration">Duración</String>
-    <String id="FileSize">Tamaño de Archivo</String>
-    <String id="Bitrate">Bitrate</String>
-    <String id="Channels">Canales</String>
-    <String id="Samplerate">Muestreo</String>
-    <String id="Version">Codec</String>
-    <String id="Created">Creado</String>
-    <String id="Changed">Cambiado</String>
   </Section>
   <Section name="TagAndRename">
     <String id="HeadingTag">Etiquetar desde Nombre de Archivo</String>

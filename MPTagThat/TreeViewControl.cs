@@ -119,7 +119,7 @@ namespace MPTagThat
 
         // Clear the tracks
         _main.TracksGridView.TrackList.Clear();
-        _main.FileInfoPanel.ClearFileInfoPanel();
+        _main.MainRibbon.ClearGallery();
 
         // Now set the Selected directory to the Parent of the delted folder and reread the view
         TreeNodePath parent = node.Parent as TreeNodePath;
@@ -315,7 +315,7 @@ namespace MPTagThat
     private void SwitchMode()
     {
       _main.TracksGridView.TrackList.Clear();
-      _main.FileInfoPanel.ClearFileInfoPanel();
+      _main.MainRibbon.ClearGallery();
 
       if (_databaseMode)
       {

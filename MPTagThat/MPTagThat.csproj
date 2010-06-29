@@ -158,12 +158,6 @@
     <Compile Include="Dialogues\TagEdit\TagEditBase.designer.cs">
       <DependentUpon>TagEditBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileInfoControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FileInfoControl.Designer.cs">
-      <DependentUpon>FileInfoControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Grids\Tracks\FindResult.cs" />
     <Compile Include="Grids\Tracks\GridViewColumnsLyrics.cs" />
     <Compile Include="Grids\Tracks\LyricsSearch.cs">
@@ -264,6 +258,12 @@
       <DependentUpon>MiscInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicDatabaseBuild.cs" />
+    <Compile Include="PictureControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PictureControl.designer.cs">
+      <DependentUpon>PictureControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player\PlayerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,9 +336,6 @@
       <DependentUpon>TagEditBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileInfoControl.resx">
-      <DependentUpon>FileInfoControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Grids\Tracks\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -393,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MiscInfoControl.resx">
       <DependentUpon>MiscInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PictureControl.resx">
+      <DependentUpon>PictureControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Player\PlayerControl.resx">
       <DependentUpon>PlayerControl.cs</DependentUpon>

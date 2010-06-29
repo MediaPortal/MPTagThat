@@ -662,7 +662,7 @@ namespace MPTagThat.GridView
                 track.Changed = true;
                 _itemsChanged = true;
                 row.Cells[0].Value = localisation.ToString("message", "Ok");
-                _main.FileInfoPanel.FillPanel();
+                _main.MainRibbon.SetGalleryItem();
               }
               continue;
             }
@@ -763,7 +763,7 @@ namespace MPTagThat.GridView
             track.Changed = true;
             _itemsChanged = true;
             row.Cells[0].Value = localisation.ToString("message", "Ok");
-            _main.FileInfoPanel.FillPanel();
+            _main.MainRibbon.SetGalleryItem();
           }
 
         }
@@ -1156,7 +1156,7 @@ namespace MPTagThat.GridView
           _itemsChanged = true;
         }
       }
-      _main.FileInfoPanel.FillPanel();
+      _main.MainRibbon.SetGalleryItem();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());

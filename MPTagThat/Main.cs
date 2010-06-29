@@ -35,7 +35,6 @@ namespace MPTagThat
     private bool _treeViewFolderSelected = false;
 
     private TreeViewControl treeViewControl;
-    private FileInfoControl fileInfoControl;
     private MiscInfoControl miscInfoControl;
     private DatabaseSearchControl databaseSearchControl;
 
@@ -206,11 +205,6 @@ namespace MPTagThat
       get { return treeViewControl; }
     }
 
-    public FileInfoControl FileInfoPanel
-    {
-      get { return fileInfoControl; }
-    }
-
     public Elegant.Ui.Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
@@ -330,11 +324,6 @@ namespace MPTagThat
       treeViewControl = new TreeViewControl(this);
       treeViewControl.Dock = DockStyle.Fill;
       this.panelLeftTop.Controls.Add(treeViewControl);
-
-      // Setup FileInfo Control
-      fileInfoControl = new FileInfoControl(this);
-      fileInfoControl.Dock = DockStyle.Fill;
-      this.panelRight.Controls.Add(fileInfoControl);
 
       // Setup Database Search Control
       databaseSearchControl = new DatabaseSearchControl(this);
@@ -619,7 +608,7 @@ namespace MPTagThat
       gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
-        fileInfoControl.ClearFileInfoPanel();
+        ribbonControl.ClearGallery();
         gridViewControl.View.Rows.Clear();
         if (TreeView.DatabaseMode)
         {
@@ -919,7 +908,7 @@ namespace MPTagThat
     {
       if (gridViewControl.View.CurrentRow != null)
       {
-        fileInfoControl.FillPanel();
+        ribbonControl.SetGalleryItem();
       }
 
       // Update Status Information

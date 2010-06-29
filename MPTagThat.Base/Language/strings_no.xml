@@ -93,6 +93,7 @@
     <String id="EditTags">Tag Endring</String>
     <String id="RetrieveTags">Finn Tagger</String>
     <String id="OrganiseFiles">Organiser</String>
+    <String id="SaveFolderThumb">Lagre som Folder Ikon</String>
     
     <String id="ExecuteScript">Kjør Script</String>
     <String id="Scripts">Scripts</String>
@@ -386,19 +387,6 @@
     <String id="DeleteFilter">Slett Filter</String>
  </Section>
   
-    <!-- File Info Panel on the right side -->
-  <Section name="file_info">
-    <String id="SaveFolderThumb">Lagre som Folder Ikon</String>
-    <String id="Duration">Lengde</String>
-    <String id="FileSize">Filstørrelse</String>
-    <String id="Bitrate">Bitrate</String>
-    <String id="Channels">Kanaler</String>
-    <String id="Samplerate">Samplingsrate</String>
-    <String id="Version">Codec</String>
-    <String id="Created">Opprettet</String>
-    <String id="Changed">Forandret</String>
-  </Section>
-    
   <!-- Tag from Filename  / Rename File --> 
   <Section name="TagAndRename">
     <String id="HeadingTag">Tag fra Filnavn</String>

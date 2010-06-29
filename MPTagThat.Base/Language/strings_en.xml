@@ -93,9 +93,11 @@
     <String id="EditTags">Edit Tags</String>
     <String id="RetrieveTags">Retrieve Tags</String>
 	<String id="OrganiseFiles">Organise</String>
+	<String id="OrganiseFiles">Organise</String>
+	<String id="SaveFolderThumb">Save as Folder Thumb</String>
     
     <String id="ExecuteScript">Execute Script</String>
-    <String id="Scripts">Scripts</String>
+    <String id="Picture">Coverart</String>
     
     <String id="Organise">Organise Files</String>
     <String id="AddBurner">Add to Burner</String>
@@ -385,20 +387,7 @@
     <String id="InsertFilter">Insert Filter</String>
     <String id="DeleteFilter">Delete Filter</String>
  </Section>
-  
-    <!-- File Info Panel on the right side -->
-  <Section name="file_info">
-    <String id="SaveFolderThumb">Save as Folder Thumb</String>
-    <String id="Duration">Duration</String>
-    <String id="FileSize">File Size</String>
-    <String id="Bitrate">Bitrate</String>
-    <String id="Channels">Channels</String>
-    <String id="Samplerate">Samplerate</String>
-    <String id="Version">Codec</String>
-    <String id="Created">Created</String>
-    <String id="Changed">Changed</String>
-  </Section>
-    
+      
   <!-- Tag from Filename  / Rename File --> 
   <Section name="TagAndRename">
     <String id="HeadingTag">Tag from FileName</String>
