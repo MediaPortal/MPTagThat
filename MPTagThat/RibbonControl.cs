@@ -332,8 +332,6 @@ namespace MPTagThat
       ribbonTabPageTag.Text = localisation.ToString("ribbon", "TagTab");
 
       buttonTagFromFile.Text = localisation.ToString("ribbon", "TagFromFile");
-      buttonTagFromFile.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
-      
       buttonTagIdentifyFiles.Text = localisation.ToString("ribbon", "IdentifyFile");
       buttonTagFromInternet.Text = localisation.ToString("ribbon", "TagFromInternet");
       ribbonGroupTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");

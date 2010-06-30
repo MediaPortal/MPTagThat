@@ -447,8 +447,8 @@
       // buttonGroup3
       // 
       this.buttonGroup3.AutoSize = true;
-      this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.buttonNumberOnClick);
+      this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.textBoxNumber);
       this.buttonGroup3.Id = "79080c7a-df4a-4d54-92f9-55baa9e29877";
       this.buttonGroup3.Location = new System.Drawing.Point(222, 9);
