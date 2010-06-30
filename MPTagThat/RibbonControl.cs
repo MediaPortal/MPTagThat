@@ -194,7 +194,7 @@ namespace MPTagThat
       RegisterCommands();
 
       // Register Ribbon KeyTips
-      RegisterKeyTips();
+      //RegisterKeyTips();
 
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
