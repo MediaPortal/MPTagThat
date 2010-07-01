@@ -2715,19 +2715,19 @@ namespace MPTagThat.GridView
       for (int i = 0; i < tracksGrid.Rows.Count; i++)
       {
         if (tracksGrid.Rows[i].Selected)
-          tracksGrid.Rows[i].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+          tracksGrid.Rows[i].Cells[11].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
         else
         {
           if (bindingList[i].Changed)
           {
-            tracksGrid.Rows[i].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
+            tracksGrid.Rows[i].Cells[11].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
           }
           else
           {
             if (i % 2 == 0)
-              tracksGrid.Rows[i].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+              tracksGrid.Rows[i].Cells[11].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
             else
-              tracksGrid.Rows[i].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+              tracksGrid.Rows[i].Cells[11].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
           }
         }
       }
