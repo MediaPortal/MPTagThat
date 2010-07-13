@@ -370,49 +370,56 @@ namespace MPTagThat.TagEdit
     /// <param name="e"></param>
     private void OnNavpageLink_Clicked(object sender, MouseEventArgs e)
     {
-      tabPageMain.Hide();
-      tabPagePictures.Hide();
+      int selectedIndex = -1;
 
       Label label = sender as Label;
       switch (label.Name)
       {
         case "lbLinkMainTags":
-          tabControlTagEdit.SelectedIndex = 0;
+          selectedIndex = 0;
           break;
 
         case "lbLinkPictures":
-          tabControlTagEdit.SelectedIndex = 1;
+          selectedIndex = 1;
           break;
 
         case "lbLinkDetails":
-          tabControlTagEdit.SelectedIndex = 2;
+          selectedIndex = 2;
           break;
 
         case "lbLinkOriginal":
-          tabControlTagEdit.SelectedIndex = 3;
+          selectedIndex = 3;
           break;
 
         case "lbLinkInvolvedPeople":
-          tabControlTagEdit.SelectedIndex = 4;
+          selectedIndex = 4;
           break;
 
         case "lbLinkWebInformation":
-          tabControlTagEdit.SelectedIndex = 5;
+          selectedIndex = 5;
           break;
 
         case "lbLinkLyrics":
-          tabControlTagEdit.SelectedIndex = 6;
+          selectedIndex = 6;
           break;
 
         case "lbLinkRating":
-          tabControlTagEdit.SelectedIndex = 7;
+          selectedIndex = 7;
           break;
 
         case "lbLinkUserDefined":
-          tabControlTagEdit.SelectedIndex = 8;
+          selectedIndex = 8;
           break;
-
       }
+
+      if (tabControlTagEdit.SelectedIndex == selectedIndex)
+      {
+        return; // Don't do anything, of we are already on the selected page
+      }
+
+      tabPageMain.Hide();
+      tabPagePictures.Hide();
+      tabControlTagEdit.SelectedIndex = selectedIndex;
     }
 
     /// <summary>
