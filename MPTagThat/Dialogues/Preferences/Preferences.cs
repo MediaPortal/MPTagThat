@@ -32,6 +32,8 @@ namespace MPTagThat.Preferences
     private List<Item> amazonSites = new List<Item>();
     private List<ActionWindow> mapWindows = new List<ActionWindow>();
 
+    private Theme prevTheme = null;
+
     int _defaultBitRateIndex = 0;
     int[] modesTable = null;
 
@@ -627,6 +629,7 @@ namespace MPTagThat.Preferences
     /// <param name="e"></param>
     private void comboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
     {
+      prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
       main.MainRibbon.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
     }
 
@@ -792,6 +795,10 @@ namespace MPTagThat.Preferences
     /// <param name="e"></param>
     private void buttonCancel_Click(object sender, EventArgs e)
     {
+      if (prevTheme != null)
+      {
+        main.MainRibbon.Theme = prevTheme.ThemeName;
+      }
       this.Close();
     }
     #endregion
