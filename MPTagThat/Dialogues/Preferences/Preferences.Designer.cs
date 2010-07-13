@@ -289,7 +289,7 @@ namespace MPTagThat.Preferences
       // 
       // tabPageGeneral
       // 
-      this.tabPageGeneral.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPageGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageGeneral.Controls.Add(this.groupBoxKeys);
       this.tabPageGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageGeneral.Localisation = "TabGeneral";
@@ -303,7 +303,6 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxKeys
       // 
-      this.groupBoxKeys.BackColor = System.Drawing.SystemColors.Control;
       this.groupBoxKeys.Controls.Add(this.buttonChangeKey);
       this.groupBoxKeys.Controls.Add(this.tbKeyValue);
       this.groupBoxKeys.Controls.Add(this.ttLabel1);
@@ -454,7 +453,6 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxGeneral
       // 
-      this.groupBoxGeneral.BackColor = System.Drawing.SystemColors.Control;
       this.groupBoxGeneral.Controls.Add(this.comboBoxDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbTheme);
