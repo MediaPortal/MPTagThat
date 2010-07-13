@@ -1975,7 +1975,7 @@ namespace MPTagThat.GridView
     {
       foreach (string extension in _filterFileExtensions)
       {
-        if (extension != "*" && Path.GetExtension(fileName) != extension)
+        if (extension != "*.*" && Path.GetExtension(fileName) != extension)
           continue;
 
         if (Regex.IsMatch(Path.GetFileNameWithoutExtension(fileName), MakeRegexp(_filterFileMask)))
