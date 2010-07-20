@@ -231,6 +231,8 @@ namespace MPTagThat
     {
       Util.EnterMethod(Util.GetCallingMethod());
 
+      FindRibbonWin();
+      
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation("Starting up ...");
@@ -376,7 +378,10 @@ namespace MPTagThat
       ribbonControl.Initialising = false;
 
       // Activate the form, will be hidden because of the size change
-      this.Activate();
+      this.TopMost = true;
+      this.Focus();
+      this.BringToFront();
+      this.TopMost = false;
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
@@ -413,6 +418,35 @@ namespace MPTagThat
     }
     #endregion
 
+    #region Ribbon Win Close
+    private void FindRibbonWin()
+    {
+      System.Threading.ThreadStart ts = new System.Threading.ThreadStart(FindRibbonWinAsync);
+      System.Threading.Thread FindRibbonWinThread = new System.Threading.Thread(ts);
+      FindRibbonWinThread.Name = "FindRibbonWin";
+      FindRibbonWinThread.Start();
+    }
+    
+    [DllImport("user32.dll", EntryPoint="FindWindow", SetLastError = true)]
+    static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+    [DllImport("user32.dll")]
+    static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
+            
+    const int WM_SYSCOMMAND = 0x0112;
+    const int SC_CLOSE = 0xF060;
+      
+    private void FindRibbonWinAsync()
+    {
+      IntPtr hWnd = FindWindowByCaption(IntPtr.Zero, "Elegant UI");
+      while (hWnd == IntPtr.Zero)
+      {
+        System.Threading.Thread.Sleep(100);
+        hWnd = FindWindowByCaption(IntPtr.Zero, "Elegant UI");
+      }
+      SendMessage((int)hWnd, WM_SYSCOMMAND, SC_CLOSE, 0);
+    }
+    #endregion
+    
     #region BASS
     private void LoadBass()
     {
