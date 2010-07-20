@@ -495,14 +495,25 @@ namespace MPTagThat
       }
       treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
       treeViewControl.DatabaseMode = Options.MainSettings.DataProvider == 3;
+      
       _formLocation = Options.MainSettings.FormLocation;
-      _formSize = Options.MainSettings.FormSize;
-
-
+      // Check, if we are out of screen bounds
+      if (_formLocation.X < 0 || _formLocation.Y < 0 ||
+          _formLocation.X > Screen.PrimaryScreen.Bounds.Width || _formLocation.Y > Screen.PrimaryScreen.Bounds.Height)
+      {
+        _formLocation.X = 10;
+        _formLocation.Y = 10;
+      }
       this.Location = _formLocation;
 
-      if (_formSize.Width > 0)
-        this.Size = _formSize;
+      _formSize = Options.MainSettings.FormSize;
+      if (_formSize.Width < 0 || _formSize.Height < 0 ||
+          _formSize.Width > Screen.PrimaryScreen.Bounds.Width || _formSize.Height > Screen.PrimaryScreen.Bounds.Height)
+      { 
+        _formSize.Width = 1024;
+        _formSize.Height = 768;
+      }
+      this.Size = _formSize;
 
       if (Options.MainSettings.LeftPanelSize > -1)
         this.panelLeft.Width = Options.MainSettings.LeftPanelSize;
