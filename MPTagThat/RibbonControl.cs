@@ -403,6 +403,11 @@ namespace MPTagThat
       comboBoxScripts.Items.Clear();
       ArrayList scripts = null;
 
+      if (Options.MainSettings.ActiveScript == "")
+      {
+        Options.MainSettings.ActiveScript = "Switch Artist";
+      }
+      
       scripts = ServiceScope.Get<IScriptManager>().GetScripts();
       int i = 0;
       foreach (string[] item in scripts)
