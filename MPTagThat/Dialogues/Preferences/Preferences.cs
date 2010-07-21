@@ -384,6 +384,10 @@ namespace MPTagThat.Preferences
                 writer.WriteString(action.Modifiers + action.KeyCode);
                 writer.WriteEndElement();
 
+                writer.WriteStartElement("ribbon");
+                writer.WriteString(action.RibbonKeyCode);
+                writer.WriteEndElement();
+
                 writer.WriteStartElement("description");
                 writer.WriteString(action.Description);
                 writer.WriteEndElement();
@@ -445,8 +449,9 @@ namespace MPTagThat.Preferences
             {
               XmlNode nodeId = node.SelectSingleNode("id");
               XmlNode nodeKey = node.SelectSingleNode("key");
+              XmlNode nodeRibbonKey = node.SelectSingleNode("ribbon");
               XmlNode nodeDesc = node.SelectSingleNode("description");
-              MapAction(ref map, nodeId, nodeKey, nodeDesc);
+              MapAction(ref map, nodeId, nodeKey, nodeRibbonKey, nodeDesc);
             }
             if (map.Buttons.Count > 0)
             {
@@ -463,7 +468,7 @@ namespace MPTagThat.Preferences
       return true;
     }
 
-    private void MapAction(ref ActionWindow map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeDesc)
+    private void MapAction(ref ActionWindow map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeRibbonKey, XmlNode nodeDesc)
     {
       if (null == nodeId) return;
       KeyAction but = new KeyAction();
@@ -487,6 +492,11 @@ namespace MPTagThat.Preferences
         but.KeyCode = buttons[buttons.Length - 1];
       }
 
+      if (nodeRibbonKey != null)
+      {
+        but.RibbonKeyCode = nodeRibbonKey.InnerText;
+      }
+
       map.Buttons.Add(but);
     }
 
@@ -503,6 +513,7 @@ namespace MPTagThat.Preferences
         KeyAction action = (KeyAction)tag;
         tbAction.Text = Enum.GetName(typeof(Action.ActionType), action.ActionType);
         tbKeyDescription.Text = action.Description;
+        tbRibbonKeyValue.Text = action.RibbonKeyCode;
         tbKeyValue.Text = action.KeyCode;
         if (action.Modifiers != null)
         {
@@ -534,6 +545,20 @@ namespace MPTagThat.Preferences
       return base.ProcessCmdKey(ref msg, keyData);
     }
 
+    /// <summary>
+    /// Handle entry into Textbox for Ribbon Keys
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tbRibbonKeyValue_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      const char Delete = (char)8;
+      e.Handled = !Char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != Delete;
+      if (!e.Handled)
+      {
+        tbRibbonKeyValue.Text = Convert.ToChar(e.KeyChar).ToString().ToUpperInvariant();
+      }
+    }
 
     private void buttonChangeKey_Click(object sender, EventArgs e)
     {
@@ -550,6 +575,7 @@ namespace MPTagThat.Preferences
           action.Modifiers += "Shift-";
 
         action.KeyCode = tbKeyValue.Text;
+        action.RibbonKeyCode = tbRibbonKeyValue.Text;
         action.Description = tbKeyDescription.Text;
         _selectedNode.Text = string.Format("{0} ({1}) = {2}{3}", action.Description, action.ActionType, action.Modifiers, action.KeyCode);
       }
@@ -561,6 +587,7 @@ namespace MPTagThat.Preferences
       #region Variables
       private string eKeyModifier;
       private string eKeyCode;
+      private string eRibbonKeyCode;
       private Action.ActionType eAction;
       private string eDescription;
       #endregion
@@ -576,6 +603,12 @@ namespace MPTagThat.Preferences
       {
         get { return eKeyCode; }
         set { eKeyCode = value; }
+      }
+
+      public string RibbonKeyCode
+      {
+        get { return eRibbonKeyCode; }
+        set { eRibbonKeyCode = value; }
       }
 
       public Action.ActionType ActionType
@@ -1317,6 +1350,7 @@ namespace MPTagThat.Preferences
 
 
     #endregion
+
     #endregion
   }
 }

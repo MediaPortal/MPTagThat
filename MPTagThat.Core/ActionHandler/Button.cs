@@ -10,6 +10,7 @@ namespace MPTagThat.Core
     #region Variables
     private Keys eKeyModifier;
     private int eKeyCode;
+    private string eRibbonKeyCode;
     private Action.ActionType eAction;
     private string eDescription;
     #endregion
@@ -25,6 +26,12 @@ namespace MPTagThat.Core
     {
       get { return eKeyCode; }
       set { eKeyCode = value; }
+    }
+
+    public string RibbonKeyCode
+    {
+      get { return eRibbonKeyCode; }
+      set { eRibbonKeyCode = value; }
     }
 
     public Action.ActionType ActionType

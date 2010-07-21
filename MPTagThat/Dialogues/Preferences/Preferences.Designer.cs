@@ -33,6 +33,9 @@ namespace MPTagThat.Preferences
       this.tabControlOptions = new System.Windows.Forms.TabControl();
       this.tabPageGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxKeys = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.tbRibbonKeyValue = new System.Windows.Forms.TextBox();
+      this.lblRibbonShortCut = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblKeyShortCut = new MPTagThat.Core.WinControls.MPTLabel();
       this.buttonChangeKey = new MPTagThat.Core.WinControls.MPTButton();
       this.tbKeyValue = new System.Windows.Forms.TextBox();
       this.ttLabel1 = new MPTagThat.Core.WinControls.MPTLabel();
@@ -303,6 +306,9 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxKeys
       // 
+      this.groupBoxKeys.Controls.Add(this.tbRibbonKeyValue);
+      this.groupBoxKeys.Controls.Add(this.lblRibbonShortCut);
+      this.groupBoxKeys.Controls.Add(this.lblKeyShortCut);
       this.groupBoxKeys.Controls.Add(this.buttonChangeKey);
       this.groupBoxKeys.Controls.Add(this.tbKeyValue);
       this.groupBoxKeys.Controls.Add(this.ttLabel1);
@@ -323,6 +329,41 @@ namespace MPTagThat.Preferences
       this.groupBoxKeys.TabStop = false;
       this.groupBoxKeys.Text = "Keyboard Shortcuts";
       // 
+      // tbRibbonKeyValue
+      // 
+      this.tbRibbonKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbRibbonKeyValue.Location = new System.Drawing.Point(196, 432);
+      this.tbRibbonKeyValue.MaxLength = 1;
+      this.tbRibbonKeyValue.Name = "tbRibbonKeyValue";
+      this.tbRibbonKeyValue.Size = new System.Drawing.Size(50, 20);
+      this.tbRibbonKeyValue.TabIndex = 13;
+      this.tbRibbonKeyValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbRibbonKeyValue_KeyPress);
+      // 
+      // lblRibbonShortCut
+      // 
+      this.lblRibbonShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lblRibbonShortCut.AutoSize = true;
+      this.lblRibbonShortCut.Localisation = "RibbonShortCut";
+      this.lblRibbonShortCut.LocalisationContext = "Settings";
+      this.lblRibbonShortCut.Location = new System.Drawing.Point(22, 435);
+      this.lblRibbonShortCut.Name = "lblRibbonShortCut";
+      this.lblRibbonShortCut.Size = new System.Drawing.Size(87, 13);
+      this.lblRibbonShortCut.TabIndex = 12;
+      this.lblRibbonShortCut.Text = "Ribbon Shortcut:";
+      // 
+      // lblKeyShortCut
+      // 
+      this.lblKeyShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lblKeyShortCut.AutoSize = true;
+      this.lblKeyShortCut.Localisation = "KeyShortCut";
+      this.lblKeyShortCut.LocalisationContext = "Settings";
+      this.lblKeyShortCut.Location = new System.Drawing.Point(22, 406);
+      this.lblKeyShortCut.Name = "lblKeyShortCut";
+      this.lblKeyShortCut.Size = new System.Drawing.Size(71, 13);
+      this.lblKeyShortCut.TabIndex = 11;
+      this.lblKeyShortCut.Text = "Key Shortcut:";
+      // 
       // buttonChangeKey
       // 
       this.buttonChangeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -340,9 +381,9 @@ namespace MPTagThat.Preferences
       // 
       this.tbKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbKeyValue.Location = new System.Drawing.Point(302, 437);
+      this.tbKeyValue.Location = new System.Drawing.Point(449, 393);
       this.tbKeyValue.Name = "tbKeyValue";
-      this.tbKeyValue.Size = new System.Drawing.Size(178, 20);
+      this.tbKeyValue.Size = new System.Drawing.Size(142, 20);
       this.tbKeyValue.TabIndex = 9;
       // 
       // ttLabel1
@@ -351,7 +392,7 @@ namespace MPTagThat.Preferences
       this.ttLabel1.AutoSize = true;
       this.ttLabel1.Localisation = "ttLabel1";
       this.ttLabel1.LocalisationContext = "Settings";
-      this.ttLabel1.Location = new System.Drawing.Point(283, 440);
+      this.ttLabel1.Location = new System.Drawing.Point(430, 397);
       this.ttLabel1.Name = "ttLabel1";
       this.ttLabel1.Size = new System.Drawing.Size(13, 13);
       this.ttLabel1.TabIndex = 8;
@@ -363,7 +404,7 @@ namespace MPTagThat.Preferences
       this.ckShift.AutoSize = true;
       this.ckShift.Localisation = "Shift";
       this.ckShift.LocalisationContext = "Settings";
-      this.ckShift.Location = new System.Drawing.Point(230, 439);
+      this.ckShift.Location = new System.Drawing.Point(305, 402);
       this.ckShift.Name = "ckShift";
       this.ckShift.Size = new System.Drawing.Size(47, 17);
       this.ckShift.TabIndex = 7;
@@ -376,7 +417,7 @@ namespace MPTagThat.Preferences
       this.ckCtrl.AutoSize = true;
       this.ckCtrl.Localisation = "Ctrl";
       this.ckCtrl.LocalisationContext = "Settings";
-      this.ckCtrl.Location = new System.Drawing.Point(183, 439);
+      this.ckCtrl.Location = new System.Drawing.Point(250, 402);
       this.ckCtrl.Name = "ckCtrl";
       this.ckCtrl.Size = new System.Drawing.Size(41, 17);
       this.ckCtrl.TabIndex = 6;
@@ -389,7 +430,7 @@ namespace MPTagThat.Preferences
       this.ckAlt.AutoSize = true;
       this.ckAlt.Localisation = "Alt";
       this.ckAlt.LocalisationContext = "Settings";
-      this.ckAlt.Location = new System.Drawing.Point(139, 439);
+      this.ckAlt.Location = new System.Drawing.Point(196, 402);
       this.ckAlt.Name = "ckAlt";
       this.ckAlt.Size = new System.Drawing.Size(38, 17);
       this.ckAlt.TabIndex = 5;
@@ -400,9 +441,9 @@ namespace MPTagThat.Preferences
       // 
       this.tbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbKeyDescription.Location = new System.Drawing.Point(137, 399);
+      this.tbKeyDescription.Location = new System.Drawing.Point(194, 357);
       this.tbKeyDescription.Name = "tbKeyDescription";
-      this.tbKeyDescription.Size = new System.Drawing.Size(343, 20);
+      this.tbKeyDescription.Size = new System.Drawing.Size(397, 20);
       this.tbKeyDescription.TabIndex = 1;
       // 
       // lbKeyDescription
@@ -411,7 +452,7 @@ namespace MPTagThat.Preferences
       this.lbKeyDescription.AutoSize = true;
       this.lbKeyDescription.Localisation = "KeyDescription";
       this.lbKeyDescription.LocalisationContext = "Settings";
-      this.lbKeyDescription.Location = new System.Drawing.Point(22, 399);
+      this.lbKeyDescription.Location = new System.Drawing.Point(22, 357);
       this.lbKeyDescription.Name = "lbKeyDescription";
       this.lbKeyDescription.Size = new System.Drawing.Size(63, 13);
       this.lbKeyDescription.TabIndex = 3;
@@ -422,10 +463,10 @@ namespace MPTagThat.Preferences
       this.tbAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.tbAction.Enabled = false;
-      this.tbAction.Location = new System.Drawing.Point(137, 370);
+      this.tbAction.Location = new System.Drawing.Point(194, 328);
       this.tbAction.Name = "tbAction";
       this.tbAction.ReadOnly = true;
-      this.tbAction.Size = new System.Drawing.Size(343, 20);
+      this.tbAction.Size = new System.Drawing.Size(397, 20);
       this.tbAction.TabIndex = 0;
       // 
       // lbKeyAction
@@ -434,7 +475,7 @@ namespace MPTagThat.Preferences
       this.lbKeyAction.AutoSize = true;
       this.lbKeyAction.Localisation = "KeyAction";
       this.lbKeyAction.LocalisationContext = "Settings";
-      this.lbKeyAction.Location = new System.Drawing.Point(22, 373);
+      this.lbKeyAction.Location = new System.Drawing.Point(22, 331);
       this.lbKeyAction.Name = "lbKeyAction";
       this.lbKeyAction.Size = new System.Drawing.Size(40, 13);
       this.lbKeyAction.TabIndex = 1;
@@ -447,7 +488,7 @@ namespace MPTagThat.Preferences
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.treeViewKeys.Location = new System.Drawing.Point(19, 31);
       this.treeViewKeys.Name = "treeViewKeys";
-      this.treeViewKeys.Size = new System.Drawing.Size(572, 325);
+      this.treeViewKeys.Size = new System.Drawing.Size(572, 284);
       this.treeViewKeys.TabIndex = 0;
       this.treeViewKeys.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewKeys_AfterSelect);
       // 
@@ -474,9 +515,9 @@ namespace MPTagThat.Preferences
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxDebugLevel.FormattingEnabled = true;
-      this.comboBoxDebugLevel.Location = new System.Drawing.Point(101, 80);
+      this.comboBoxDebugLevel.Location = new System.Drawing.Point(156, 80);
       this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
-      this.comboBoxDebugLevel.Size = new System.Drawing.Size(490, 21);
+      this.comboBoxDebugLevel.Size = new System.Drawing.Size(435, 21);
       this.comboBoxDebugLevel.TabIndex = 2;
       // 
       // lbDebugLevel
@@ -507,9 +548,9 @@ namespace MPTagThat.Preferences
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxThemes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxThemes.FormattingEnabled = true;
-      this.comboBoxThemes.Location = new System.Drawing.Point(101, 49);
+      this.comboBoxThemes.Location = new System.Drawing.Point(156, 49);
       this.comboBoxThemes.Name = "comboBoxThemes";
-      this.comboBoxThemes.Size = new System.Drawing.Size(490, 21);
+      this.comboBoxThemes.Size = new System.Drawing.Size(435, 21);
       this.comboBoxThemes.TabIndex = 1;
       this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
@@ -519,9 +560,9 @@ namespace MPTagThat.Preferences
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxLanguage.FormattingEnabled = true;
-      this.comboBoxLanguage.Location = new System.Drawing.Point(101, 17);
+      this.comboBoxLanguage.Location = new System.Drawing.Point(156, 17);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
-      this.comboBoxLanguage.Size = new System.Drawing.Size(490, 21);
+      this.comboBoxLanguage.Size = new System.Drawing.Size(435, 21);
       this.comboBoxLanguage.TabIndex = 0;
       // 
       // lbLanguage
@@ -2669,5 +2710,8 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckActivateTargetFolder;
     private MPTagThat.Core.WinControls.MPTCheckBox ckRipEjectCD;
     private MPTagThat.Core.WinControls.MPTCheckBox ckLRCFinder;
+    private System.Windows.Forms.TextBox tbRibbonKeyValue;
+    private MPTagThat.Core.WinControls.MPTLabel lblRibbonShortCut;
+    private MPTagThat.Core.WinControls.MPTLabel lblKeyShortCut;
   }
 }

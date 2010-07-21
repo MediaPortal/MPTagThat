@@ -6,156 +6,187 @@
     <action>
       <id>1</id>
       <key>Ctrl-S</key>
+      <ribbon>S</ribbon>
       <description>Save the selected files</description>
     </action>
     <action>
       <id>2</id>
       <key>Ctrl-M</key>
+	  <ribbon>M</ribbon>
       <description>Multiple Files Tag Edit</description>
     </action>
     <action>
       <id>19</id>
       <key>Ctrl-E</key>
+	  <ribbon>E</ribbon>
       <description>Single File Tag Edit</description>
     </action>
     <action>
       <id>3</id>
       <key>Ctrl-F</key>
+	  <ribbon>F</ribbon>
       <description>Filename to Tag</description>
     </action>
     <action>
       <id>4</id>
       <key>Ctrl-R</key>
+	  <ribbon>R</ribbon>
       <description>Rename File Based on Tag</description>
     </action>
     <action>
       <id>5</id>
       <key>Ctrl-A</key>
+	  <ribbon></ribbon>
       <description>Select All</description>
     </action>
     <action>
       <id>6</id>
       <key>Ctrl-C</key>
+	  <ribbon></ribbon>
       <description>Copy Cell Content</description>
     </action>
     <action>
       <id>7</id>
       <key>Ctrl-P</key>
+	  <ribbon></ribbon>
       <description>Paste Cell Content</description>
     </action>
     <action>
       <id>8</id>
-      <key>Ctrl-Shift-E</key>
+      <key>Ctrl-X</key>
+	  <ribbon>X</ribbon>
       <description>Execute active script</description>
     </action>
     <action>
       <id>9</id>
       <key>Ctrl-F5</key>
+	  <ribbon></ribbon>
       <description>Refresh Treeview</description>
     </action>
     <action>
       <id>10</id>
       <key>Shift-Delete</key>
+	  <ribbon></ribbon>
       <description>Delete Folder</description>
     </action>
     <action>
       <id>11</id>
       <key>F6</key>
+	  <ribbon>C</ribbon>
       <description>Case Conversion</description>
     </action>
     <action>
       <id>12</id>
       <key>F5</key>
+	  <ribbon></ribbon>
       <description>Refresh</description>
     </action>
     <action>
       <id>13</id>
       <key>F12</key>
+	  <ribbon></ribbon>
       <description>Options dialogue</description>
     </action>
     <action>
       <id>14</id>
       <key>Delete</key>
+	  <ribbon></ribbon>
       <description>Delete selected file</description>
     </action>
     <action>
       <id>20</id>
       <key>Ctrl-O</key>
+	  <ribbon>O</ribbon>
       <description>Organise Files</description>
     </action>
     <action>
       <id>21</id>
       <key>Ctrl-I</key>
+	  <ribbon>I</ribbon>
       <description>Identify Files</description>
     </action>
     <action>
       <id>22</id>
       <key>Ctrl-B</key>
+	  <ribbon>B</ribbon>
       <description>Get Coverart</description>
     </action>
     <action>
       <id>23</id>
       <key>Ctrl-L</key>
+	  <ribbon>L</ribbon>
       <description>Get Lyrics</description>
     </action>
     <action>
       <id>24</id>
       <key>Alt-F4</key>
+	  <ribbon></ribbon>
       <description>Exit</description>
     </action>
     <action>
       <id>25</id>
       <key>F1</key>
+	  <ribbon></ribbon>
       <description>Help</description>
     </action>
     <action>
       <id>26</id>
       <key>Ctrl-K</key>
+	  <ribbon>K</ribbon>
       <description>Internet Lookup</description>
     </action>
     <action>
       <id>27</id>
       <key>F11</key>
+	  <ribbon></ribbon>
       <description>Toggle Treeview Splitter</description>
     </action>
     <action>
       <id>28</id>
       <key>F4</key>
+	  <ribbon></ribbon>
       <description>Remove all Comments</description>
     </action>
     <action>
       <id>29</id>
       <key>F3</key>
+	  <ribbon></ribbon>
       <description>Remove all Pictures</description>
     </action>
     <action>
       <id>30</id>
       <key>Ctrl-Shift-S</key>
+	  <ribbon></ribbon>
       <description>Save All</description>
     </action>
     <action>
       <id>31</id>
       <key>F9</key>
+	  <ribbon></ribbon>
       <description>Toggle Database Splitter</description>
     </action>
 	<action>
       <id>32</id>
       <key>Ctrl-Shift-V</key>
+	  <ribbon></ribbon>
       <description>Validate MP3 Files</description>
     </action>
 	<action>
       <id>33</id>
       <key>Ctrl-Shift-F</key>
+	  <ribbon></ribbon>
       <description>Fix MP3 Files</description>
     </action>
 	<action>
       <id>34</id>
       <key>Ctrl-Alt-F</key>
+	  <ribbon></ribbon>
       <description>Find</description>
     </action>
 	<action>
       <id>35</id>
       <key>Ctrl-H</key>
+	  <ribbon></ribbon>
       <description>Replace</description>
     </action>
   </window>
@@ -165,11 +196,13 @@
     <action>
       <id>15</id>
       <key>PageDown</key>
+	  <ribbon></ribbon>
       <description>Move to next Page</description>
     </action>
     <action>
       <id>16</id>
       <key>Prior</key>
+	  <ribbon></ribbon>
       <description>Move to previous Page</description>
     </action>
   </window>

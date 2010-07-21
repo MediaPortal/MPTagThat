@@ -535,6 +535,8 @@
     <String id="Alt">Alt</String>
     <String id="KeyDescription">Description:</String>
     <String id="KeyAction">Action:</String>
+    <String id="KeyShortCut">Key Shortcut:</String>
+    <String id="RibbonShortCut">Ribbon Shortcut:</String>
     <String id="GroupBoxGeneral">General Settings</String>
     <String id="DebugLevel">Debug Level:</String>
     <String id="Theme">Theme:</String>

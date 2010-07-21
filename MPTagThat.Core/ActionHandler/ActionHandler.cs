@@ -48,7 +48,7 @@ namespace MPTagThat.Core
       {
         if (but.ActionType == action)
         {
-          return Convert.ToString((char) but.KeyCode);
+          return but.RibbonKeyCode;
         }
       }
       return "";
@@ -90,7 +90,8 @@ namespace MPTagThat.Core
             {
               XmlNode nodeId = node.SelectSingleNode("id");
               XmlNode nodeKey = node.SelectSingleNode("key");
-              MapAction(ref map, nodeId, nodeKey);
+              XmlNode nodeRibbonKey = node.SelectSingleNode("ribbon");
+              MapAction(ref map, nodeId, nodeKey, nodeRibbonKey);
             }
             if (map.Buttons.Count > 0)
             {
@@ -115,11 +116,16 @@ namespace MPTagThat.Core
     /// <param name="map">The windowmap that needs to be filled in.</param>
     /// <param name="nodeId">The id of the action</param>
     /// <param name="nodeKey">The key corresponding to the mapping.</param>
-    private void MapAction(ref WindowMap map, XmlNode nodeId, XmlNode nodeKey)
+    private void MapAction(ref WindowMap map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeRibbonKey)
     {
       if (null == nodeId) return;
       Button but = new Button();
       but.ActionType = (Action.ActionType)System.Int32.Parse(nodeId.InnerText);
+
+      if (nodeRibbonKey != null)
+      {
+        but.RibbonKeyCode = nodeRibbonKey.InnerText;
+      }
 
       if (nodeKey != null)
       {

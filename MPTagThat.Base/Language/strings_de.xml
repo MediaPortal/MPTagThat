@@ -534,6 +534,8 @@
     <String id="Alt">Alt</String>
     <String id="KeyDescription">Beschreibung:</String>
     <String id="KeyAction">Funktion:</String>
+	<String id="KeyShortCut">Tastaturkurzbefehl:</String>
+	<String id="RibbonShortCut">Ribbonkurzbefehl:</String>
     <String id="GroupBoxGeneral">Generelle Einstellungen</String>
     <String id="DebugLevel">Debug Stufe:</String>
     <String id="Theme">Farbschema:</String>
