@@ -45,7 +45,7 @@
     </action>
     <action>
       <id>8</id>
-      <key>Alt-E</key>
+      <key>Ctrl-Shift-E</key>
       <description>Execute active script</description>
     </action>
     <action>
@@ -140,12 +140,12 @@
     </action>
 	<action>
       <id>32</id>
-      <key>Alt-V</key>
+      <key>Ctrl-Shift-V</key>
       <description>Validate MP3 Files</description>
     </action>
 	<action>
       <id>33</id>
-      <key>Alt-F</key>
+      <key>Ctrl-Shift-F</key>
       <description>Fix MP3 Files</description>
     </action>
 	<action>
@@ -198,7 +198,7 @@
     </action>
     <action>
       <id>8</id>
-      <key>Alt-E</key>
+      <key>Ctrl-Shift-E</key>
       <description>Execute active script</description>
     </action>
   </window>
