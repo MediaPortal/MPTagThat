@@ -83,6 +83,9 @@ namespace MPTagThat.Preferences
       comboBoxThemes.DataSource = themes;
       comboBoxThemes.SelectedIndex = Options.MainSettings.Theme;
 
+      // Save the currently used theme, in case the user presses Cancel.
+      prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
+
       // Debug Level
       comboBoxDebugLevel.Items.Add("None");
       comboBoxDebugLevel.Items.Add("Critical");
@@ -629,7 +632,6 @@ namespace MPTagThat.Preferences
     /// <param name="e"></param>
     private void comboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
     {
-      prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
       main.MainRibbon.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
     }
 
@@ -795,7 +797,7 @@ namespace MPTagThat.Preferences
     /// <param name="e"></param>
     private void buttonCancel_Click(object sender, EventArgs e)
     {
-      if (prevTheme != null)
+      if (prevTheme.ThemeName != ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName)
       {
         main.MainRibbon.Theme = prevTheme.ThemeName;
       }
