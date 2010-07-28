@@ -535,6 +535,8 @@
     <String id="KeyDescription">Beskrivelse:</String>
     <String id="KeyAction">Hendelse:</String>
     <String id="GroupBoxGeneral">Generelle Innstillinger</String>
+    <String id="KeyShortCut">Snarvei på tastaturet:</String>
+    <String id="RibbonShortCut">Snarvei for knapp:</String>
     <String id="DebugLevel">Debug Nivå:</String>
     <String id="Theme">Tema:</String>
     <String id="Language">Språk:</String>
