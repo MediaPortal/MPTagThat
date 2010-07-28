@@ -62,6 +62,8 @@ namespace MPTagThat
     #region Constructor
     public Main()
     {
+      Elegant.Ui.SkinManager.LoadEmbeddedTheme(Elegant.Ui.EmbeddedTheme.Office2007Silver, Elegant.Ui.Product.Common);
+      Elegant.Ui.SkinManager.LoadEmbeddedTheme(Elegant.Ui.EmbeddedTheme.Office2007Silver, Elegant.Ui.Product.Ribbon);
       InitializeComponent();
     }
     #endregion
