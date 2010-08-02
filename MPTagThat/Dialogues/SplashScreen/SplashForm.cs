@@ -21,8 +21,10 @@ namespace MPTagThat.Dialogues
 
       Assembly assembly = Assembly.GetExecutingAssembly();
       AssemblyName assemblyName = assembly.GetName();
+      label1.Text = ServiceScope.Get<ILocalisation>().ToString("splash", "Version");
       Version version = assemblyName.Version;
       lbVersion.Text = version.ToString();
+      label2.Text = ServiceScope.Get<ILocalisation>().ToString("splash", "BuildDate");
       DateTime lastWrite = System.IO.File.GetLastWriteTime(assembly.Location);
       lbDate.Text = string.Format("{0} {1}", lastWrite.ToShortDateString(), lastWrite.ToShortTimeString());
     }

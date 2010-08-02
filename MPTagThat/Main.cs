@@ -237,7 +237,7 @@ namespace MPTagThat
       
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
-      _splashScreen.SetInformation("Starting up ...");
+      _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
       log.Debug("Main: Loading Main form");
 
       // Listen to Messages
@@ -245,7 +245,7 @@ namespace MPTagThat
       queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       /// Add the Ribbon Control to the Top Panel
-      _splashScreen.SetInformation("Adding Ribbon ...");
+      _splashScreen.SetInformation(localisation.ToString("splash", "AddRibbon"));
 
       ribbonControl = new RibbonControl(this);
       ribbonControl.Dock = DockStyle.Fill;
@@ -257,7 +257,7 @@ namespace MPTagThat
 
       #region Setup Grids
       log.Debug("Main: Setup Grid");
-      _splashScreen.SetInformation("Setting up Grids ...");
+      _splashScreen.SetInformation(localisation.ToString("splash", "AddGrids"));
       // Add the Grids to the Main Form
       gridViewControl = new MPTagThat.GridView.GridViewTracks();
       gridViewBurn = new MPTagThat.GridView.GridViewBurn(this);
@@ -344,17 +344,16 @@ namespace MPTagThat
 
       // Load BASS
       log.Debug("Main: Loading Bass");
-      _splashScreen.SetInformation("Loading Bass ...");
       LoadBass();
 
       // Load the Settings
       log.Debug("Main: Loading Settings");
-      _splashScreen.SetInformation("Loading Settings ...");
+      _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
       LoadSettings();
 
       // Localise the Screens
       log.Debug("Main: Localisation");
-      _splashScreen.SetInformation("Localisation ...");
+      _splashScreen.SetInformation(localisation.ToString("splash", "Localisation"));
       LocaliseScreen();
 
       // Populate the Treeview with the directories found

@@ -43,9 +43,10 @@
       // pictureBoxAbout
       // 
       this.pictureBoxAbout.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAbout.Image")));
-      this.pictureBoxAbout.Location = new System.Drawing.Point(12, 35);
+      this.pictureBoxAbout.Location = new System.Drawing.Point(16, 43);
+      this.pictureBoxAbout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.pictureBoxAbout.Name = "pictureBoxAbout";
-      this.pictureBoxAbout.Size = new System.Drawing.Size(163, 162);
+      this.pictureBoxAbout.Size = new System.Drawing.Size(217, 199);
       this.pictureBoxAbout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
       this.pictureBoxAbout.TabIndex = 9;
       this.pictureBoxAbout.TabStop = false;
@@ -53,9 +54,10 @@
       // pictureBox1
       // 
       this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-      this.pictureBox1.Location = new System.Drawing.Point(196, 35);
+      this.pictureBox1.Location = new System.Drawing.Point(261, 43);
+      this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(308, 50);
+      this.pictureBox1.Size = new System.Drawing.Size(411, 62);
       this.pictureBox1.TabIndex = 10;
       this.pictureBox1.TabStop = false;
       // 
@@ -63,9 +65,10 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(196, 111);
+      this.label1.Location = new System.Drawing.Point(261, 137);
+      this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(57, 16);
+      this.label1.Size = new System.Drawing.Size(71, 20);
       this.label1.TabIndex = 11;
       this.label1.Text = "Version:";
       // 
@@ -73,9 +76,10 @@
       // 
       this.label2.AutoSize = true;
       this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.Location = new System.Drawing.Point(196, 138);
+      this.label2.Location = new System.Drawing.Point(261, 170);
+      this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(73, 16);
+      this.label2.Size = new System.Drawing.Size(93, 20);
       this.label2.TabIndex = 12;
       this.label2.Text = "Build Date:";
       // 
@@ -83,9 +87,10 @@
       // 
       this.lbVersion.AutoSize = true;
       this.lbVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbVersion.Location = new System.Drawing.Point(318, 111);
+      this.lbVersion.Location = new System.Drawing.Point(487, 137);
+      this.lbVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lbVersion.Name = "lbVersion";
-      this.lbVersion.Size = new System.Drawing.Size(45, 16);
+      this.lbVersion.Size = new System.Drawing.Size(57, 20);
       this.lbVersion.TabIndex = 13;
       this.lbVersion.Text = "1.0.0.0";
       // 
@@ -93,9 +98,10 @@
       // 
       this.lbDate.AutoSize = true;
       this.lbDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbDate.Location = new System.Drawing.Point(318, 138);
+      this.lbDate.Location = new System.Drawing.Point(487, 170);
+      this.lbDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lbDate.Name = "lbDate";
-      this.lbDate.Size = new System.Drawing.Size(72, 16);
+      this.lbDate.Size = new System.Drawing.Size(93, 20);
       this.lbDate.TabIndex = 14;
       this.lbDate.Text = "2009-01-01";
       // 
@@ -103,18 +109,19 @@
       // 
       this.lbStatus.AutoSize = true;
       this.lbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lbStatus.Location = new System.Drawing.Point(196, 181);
+      this.lbStatus.Location = new System.Drawing.Point(261, 223);
+      this.lbStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lbStatus.Name = "lbStatus";
-      this.lbStatus.Size = new System.Drawing.Size(93, 16);
+      this.lbStatus.Size = new System.Drawing.Size(119, 20);
       this.lbStatus.TabIndex = 15;
       this.lbStatus.Text = ".....  Loading ....";
       // 
       // SplashForm
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(538, 238);
+      this.ClientSize = new System.Drawing.Size(717, 293);
       this.Controls.Add(this.lbStatus);
       this.Controls.Add(this.lbDate);
       this.Controls.Add(this.lbVersion);
@@ -123,6 +130,7 @@
       this.Controls.Add(this.pictureBox1);
       this.Controls.Add(this.pictureBoxAbout);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.Name = "SplashForm";
       this.Opacity = 0.75;
       this.ShowInTaskbar = false;

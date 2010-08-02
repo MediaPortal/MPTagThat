@@ -11,6 +11,16 @@
     <String id="ApplicationName">MPTagThat der MediaPortal Tag Editor</String>
   </Section>
 
+  <Section name="splash">
+    <String id="Version">Version:</String>
+    <String id="BuildDate">Erstellungs Datum:</String>
+    <String id="Startup">Starte Applikation ...</String>
+    <String id="AddRibbon">Hinzufügen Ribbon ...</String>
+    <String id="AddGrids">Erstelle Tabellen ...</String>
+    <String id="LoadSettings">Lade Einstellungen ...</String>
+    <String id="Localisation">Spracheinstellungen ...</String>
+  </Section>
+  
   <!-- Main --> 
   <Section name="main">
 	<!-- Treeview -->
