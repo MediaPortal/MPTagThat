@@ -11,6 +11,16 @@
 	<String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
   </Section>
 
+  <Section name="splash">
+    <String id="Version">Versjon:</String>
+    <String id="BuildDate">Bygget dato:</String>
+    <String id="Startup">Starter opp ...</String>
+    <String id="AddRibbon">Legger til knapper ...</String>
+    <String id="AddGrids">Setter opp rutenett ...</String>
+    <String id="LoadSettings">Laster innstillinger ...</String>
+    <String id="Localisation">Lokaliserer ...</String>
+  </Section>
+
   <!-- Main --> 
   <Section name="main">
   	<!-- Treeview -->
