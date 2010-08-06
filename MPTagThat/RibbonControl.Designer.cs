@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RibbonControl));
+      Elegant.Ui.ThemeSelector themeSelector;
       this.ribbon = new Elegant.Ui.Ribbon();
       this.applicationMenu1 = new Elegant.Ui.ApplicationMenu();
       this.startMenuSave = new Elegant.Ui.Button();
@@ -96,6 +97,7 @@
       this.ribbonGroupBurnOptions = new Elegant.Ui.RibbonGroup();
       this.comboBoxBurner = new Elegant.Ui.ComboBox();
       this.comboBoxBurnerSpeed = new Elegant.Ui.ComboBox();
+      themeSelector = new Elegant.Ui.ThemeSelector();
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonTabPageTag)).BeginInit();
@@ -166,7 +168,7 @@
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
       this.ribbon.QuickAccessToolbarPlacementMode = Elegant.Ui.QuickAccessToolbarPlacementMode.AboveRibbon;
-      this.ribbon.Size = new System.Drawing.Size(1555, 173);
+      this.ribbon.Size = new System.Drawing.Size(1555, 176);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -245,7 +247,7 @@
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1555, 113);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1555, 115);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -257,7 +259,7 @@
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromInternet);
       this.ribbonGroupTagsRetrieve.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
       this.ribbonGroupTagsRetrieve.Id = "b9de8d94-0b07-46e3-afb5-5a8869005e45";
-      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(1, 1);
+      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupTagsRetrieve.Name = "ribbonGroupTagsRetrieve";
       this.ribbonGroupTagsRetrieve.Size = new System.Drawing.Size(196, 108);
       this.ribbonGroupTagsRetrieve.TabIndex = 1;
@@ -318,7 +320,7 @@
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
       this.ribbonGroupTagsEdit.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
       this.ribbonGroupTagsEdit.Id = "c30c270e-1783-4a38-814f-7d1425df6b68";
-      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(197, 1);
+      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(202, 3);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
       this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(411, 108);
       this.ribbonGroupTagsEdit.TabIndex = 2;
@@ -577,7 +579,7 @@
       this.ribbonGroupPicture.Controls.Add(this.buttonSaveAsThumb);
       this.ribbonGroupPicture.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
       this.ribbonGroupPicture.Id = "4e3e0701-7730-41ec-aa67-913b03b52b54";
-      this.ribbonGroupPicture.Location = new System.Drawing.Point(608, 1);
+      this.ribbonGroupPicture.Location = new System.Drawing.Point(615, 3);
       this.ribbonGroupPicture.Name = "ribbonGroupPicture";
       this.ribbonGroupPicture.Size = new System.Drawing.Size(247, 108);
       this.ribbonGroupPicture.TabIndex = 6;
@@ -651,7 +653,7 @@
       this.ribbonGroupOrganise.Controls.Add(this.buttonOrganiseFiles);
       this.ribbonGroupOrganise.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
       this.ribbonGroupOrganise.Id = "2a6d0dd7-d35d-4a33-b667-2b2eb3896582";
-      this.ribbonGroupOrganise.Location = new System.Drawing.Point(855, 1);
+      this.ribbonGroupOrganise.Location = new System.Drawing.Point(864, 3);
       this.ribbonGroupOrganise.Name = "ribbonGroupOrganise";
       this.ribbonGroupOrganise.Size = new System.Drawing.Size(134, 108);
       this.ribbonGroupOrganise.TabIndex = 3;
@@ -710,7 +712,7 @@
       this.ribbonGroupOther.Controls.Add(this.buttonAddToPlaylist);
       this.ribbonGroupOther.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
       this.ribbonGroupOther.Id = "f4a76008-92b5-470b-bf40-cceebe109c8e";
-      this.ribbonGroupOther.Location = new System.Drawing.Point(989, 1);
+      this.ribbonGroupOther.Location = new System.Drawing.Point(1000, 3);
       this.ribbonGroupOther.Name = "ribbonGroupOther";
       this.ribbonGroupOther.Size = new System.Drawing.Size(157, 108);
       this.ribbonGroupOther.TabIndex = 5;

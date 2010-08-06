@@ -406,6 +406,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuickEditControl.resx">
+      <DependentUpon>QuickEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RibbonControl.resx">
       <DependentUpon>RibbonControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -427,6 +430,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="QuickEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuickEditControl.Designer.cs">
+      <DependentUpon>QuickEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="RibbonControl.cs">
       <SubType>UserControl</SubType>

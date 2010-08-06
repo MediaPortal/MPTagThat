@@ -266,7 +266,7 @@
     <String id="LinkPictures">Bilder</String>
     <!--  General Buttons -->
     <String id="Cancel">Abbrechen</String>
-    <String id="Apply">Ok</String>
+    <String id="Apply">Übernehmen</String>
 
     <!--  Single Tag Edit Commands -->
     <String id="Previous">Vorherige Datei</String>

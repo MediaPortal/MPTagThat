@@ -30,3 +30,4 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 [assembly: AssemblyVersion("1.1.*")]
+[assembly: Elegant.Ui.DefaultThemeAttribute(Elegant.Ui.EmbeddedTheme.Office2007Blue)]

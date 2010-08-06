@@ -35,6 +35,7 @@ namespace MPTagThat
     private bool _treeViewFolderSelected = false;
 
     private TreeViewControl treeViewControl;
+    private QuickEditControl quickEditControl;
     private MiscInfoControl miscInfoControl;
     private DatabaseSearchControl databaseSearchControl;
 
@@ -207,6 +208,11 @@ namespace MPTagThat
       get { return treeViewControl; }
     }
 
+    public QuickEditControl QuickEdit
+    {
+      get { return quickEditControl; }
+    }
+
     public Elegant.Ui.Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
@@ -328,6 +334,11 @@ namespace MPTagThat
       treeViewControl = new TreeViewControl(this);
       treeViewControl.Dock = DockStyle.Fill;
       this.panelLeftTop.Controls.Add(treeViewControl);
+
+      // Setup Quickedit
+      quickEditControl = new QuickEditControl(this);
+      quickEditControl.Dock = DockStyle.Fill;
+      this.panelRight.Controls.Add(quickEditControl);
 
       // Setup Database Search Control
       databaseSearchControl = new DatabaseSearchControl(this);
@@ -667,6 +678,7 @@ namespace MPTagThat
         toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       miscInfoControl.ErrorGridView.Rows.Clear();
+      quickEditControl.ClearForm();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
@@ -946,7 +958,7 @@ namespace MPTagThat
 
     #region GridView events
     /// <summary>
-    /// A new Row has been selected in the Grid. Fill the Info Panel
+    /// A new Row has been selected in the Grid. Fill the Quickedit Panel and update the picture in the gallery
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -954,6 +966,7 @@ namespace MPTagThat
     {
       if (gridViewControl.View.CurrentRow != null)
       {
+        quickEditControl.FillForm(gridViewControl.SelectedTrack);
         ribbonControl.SetGalleryItem();
       }
 
