@@ -139,7 +139,7 @@
       <id>27</id>
       <key>F11</key>
 	  <ribbon></ribbon>
-      <description>Toggle Treeview Splitter</description>
+      <description>Toggle Treeview Panel</description>
     </action>
     <action>
       <id>28</id>
@@ -163,7 +163,7 @@
       <id>31</id>
       <key>F9</key>
 	  <ribbon></ribbon>
-      <description>Toggle Database Splitter</description>
+      <description>Toggle Database Panel</description>
     </action>
 	<action>
       <id>32</id>
@@ -188,6 +188,12 @@
       <key>Ctrl-H</key>
 	  <ribbon></ribbon>
       <description>Replace</description>
+    </action>
+	<action>
+      <id>36</id>
+      <key>Ctrl-F11</key>
+	  <ribbon></ribbon>
+      <description>Toggle Quickedit Panel</description>
     </action>
   </window>
   <window>

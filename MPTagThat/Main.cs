@@ -912,6 +912,10 @@ namespace MPTagThat
           this.splitterTop.ToggleState();
           break;
 
+        case Action.ActionType.ACTION_TOGGLEQUICKEDIT:
+          this.splitterRight.ToggleState();
+          break;
+
         case Action.ActionType.ACTION_REMOVECOMMENT:
           if (!gridViewControl.CheckSelections(true))
             break;

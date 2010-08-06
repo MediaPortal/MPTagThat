@@ -45,6 +45,7 @@ namespace MPTagThat.Core
       ACTION_FIXMP3 = 33,
       ACTION_FIND = 34,
       ACTION_REPLACE = 35,
+      ACTION_TOGGLEQUICKEDIT = 36,
     }
     #endregion
 
