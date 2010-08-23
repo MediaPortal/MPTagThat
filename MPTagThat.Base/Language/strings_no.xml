@@ -140,6 +140,78 @@
 
   </Section>
   
+    <!-- Ribbon Screen Tip --> 
+  <Section name="screentip">
+    <!-- Start Menu -->
+    <String id="Refresh">Oppfrisk</String>
+    <String id="RefreshText">Innholdet i mappen vil bli lest på nytt.\nHvis forandringer er gjort vil du få spørsmål om å lagre først.</String>
+    <String id="Save">Lagre forandringer</String>
+    <String id="SaveText">Lagrer forandringer som er gjort, ved å forandre tagg innholdet i de valgte filene.</String>
+	<String id="ColumnsSelect">Kolonner vist i rutenettet</String>
+	<String id="ColumnsSelectText">Velg kolonne(r), som skal vises i den detaljerte visningen for spor.</String>
+
+    <!-- Tags Tab-->
+    <String id="TagFromFile">Tagg fra Filnavn</String>
+    <String id="TagFromFileText">Ved bruk av gitte parametere i innstillingene, for tagger som "Track #", "Artist", "Title" kan informasjonen hentes fra Filnavnet.</String>
+	<String id="IdentifyFile">Identifiser Fil</String>
+	<String id="IdentifyFileText">En "hash" blir bygget av de første 30 sekunder av filen. Denne brukes da for identifikasjon av filen ved MusicBrainz.\nTaggene blir deretter hentet fra MusicBrainz for deretter å bli skrevet til filen.</String>
+    <String id="TagFromInternet">Tagg fra Internettt</String>
+    <String id="TagFromInternetText">Det gitte Artist og Album navnet blir brukt ved søk hos Amazon for å finne lignende filnavn som listen fra Amazon.</String>
+	<String id="SingleTagEdit">Enkel Tagg Redigering</String>
+	<String id="SingleTagEditText">Et eget skjema for å redigere taggene til den enkelte fil.</String>
+	<String id="MultiTagEdit">Flervalgte Tagg Redigering</String>
+	<String id="MultiTagEditText">Her redigeres alle taggene for de valgte filene.</String>
+	<String id="GetCoverArt">Hent Album bilde</String>
+	<String id="GetCoverArtText">Artist og Album navn blir brukt for å søke opp riktig bilde fra Amazon. Skulle flere alternativer dukke opp, kommer det opp et eget vindu for dette, hvor du deretter kan velge.</String>
+	<String id="SaveFolderThumb">Lagre som mappe bilde</String>
+	<String id="SaveFolderThumbText">Album bilde blir lagret som folder.jpg i folderen hvor de valgte filene er.</String>
+	<String id="GetLyrics">Hent Tekster</String>
+	<String id="GetLyricsText">Sang tekster blir henter for de valgte filene fra det stedet som er satt i innstillinger for Lyrikk.</String>
+	<String id="AutoNumber">Auto Nummerer</String>
+	<String id="AutoNumberText">Auto nummereringer bruker det valgte tallet i boksen som startnummer.</String>
+	<String id="NumberOnClick">Nummerer ved klikk</String>
+	<String id="NumberOnClickText">Når denne er valgt, foregår nummerering ved hjelp av at du klikker på en fil.</String>
+	<String id="RemoveComments">Fjern alle Kommentarer</String>
+	<String id="RemoveCommentsText">Alle kommentarer i kommentar feltene fjernes ved et klikk.</String>
+	<String id="RemovePictures">Fjern alle Bilder</String>
+	<String id="RemovePicturesText">All bilde informasjon vil bli slettet.</String>
+	<String id="CaseConversion">Konverter Bokstaver</String>
+	<String id="CaseConversionText">Konverterer bokstaver i henhold til instillingene for valgte filer.</String>
+	<String id="DeleteTags">Slett Tagger</String>
+	<String id="DeleteTagsText">Alle tagger vil bli fjernet fra valgte filer.</String>
+	<String id="RenameFile">Gi Filene nytt navn</String>
+	<String id="RenameFileText">Filene vil få nytt navn etter de valgte instillinger i feltet.</String>
+    <String id="Organise">Organiser Filer</String>
+    <String id="OrganiseText">Filene vil bli kopiert/flyttet til et nytt sted bassert på tagg parameterene.</String>
+    <String id="ExecuteScript">Utfør Skript</String>
+    <String id="ExecuteScriptText">Utfører kommandoer bassert på skript, for de valgte filene.</String>      
+    <String id="AddBurner">Legg til for Brenning</String>
+    <String id="AddBurnerText">Legger de valgte filene til listen over filer som skal brennes til CD.</String>
+    <String id="AddConvert">Legg til for Konvertering</String>
+    <String id="AddConvertText">Legger de valgte filene til listen over filer som skal konverteres til et annet format.</String>
+    <String id="AddPlaylist">Legg til i Spillelisten</String>
+    <String id="AddPlaylistText">Legger de valgte filene til i spillerlisten, og starter avspilling av den første på listen hvis den ikke er i bruk allerede.</String>
+
+    <!-- Rip Tab-->
+    <String id="RipButton">Start Ripping</String>
+    <String id="RipButtonText">Starter Ripping av de valgte filene</String>
+    <String id="RipCancel">Avbryt Ripping</String>
+    <String id="RipCancelText">Avbryt Rippe prosessen.</String>
+
+    <!-- Convert Tab-->
+    <String id="ConvertButton">Start Konvertering</String>
+    <String id="ConvertButtonText">Start Conversion of the files in the list to the selected format</String>
+    <String id="ConvertCancel">Avbryt Konvertering</String>
+    <String id="ConvertCancelText">Avbryt Konverterings prosessen</String>
+
+    <!-- Burn Tab-->
+    <String id="Burn">Brenn CD</String>
+    <String id="BurnText">Starter brenning av filer som finnes i listen til CD.</String>
+    <String id="BurnCancel">Avbryt Brenning</String>
+    <String id="BurnCancelText">Avbryt brenner prosessen</String>
+
+  </Section>
+   
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
   <Section name="TagEdit">
     <!--  Title / Headers -->
