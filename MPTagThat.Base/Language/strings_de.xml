@@ -139,6 +139,78 @@
     <String id="BurnerSpeed">Geschwindigkeit:</String>
 	
   </Section>
+
+    <!-- Ribbon Screen Tip --> 
+  <Section name="screentip">
+    <!-- Start Menu -->
+    <String id="Refresh">Refresh</String>
+    <String id="RefreshText">Der Inhalt des momentan ausgewählten Verzeichnisses wird neu eingelesen.\nWenn Änderungen ausstehend sind, fordert das System zum Speichern auf.</String>
+    <String id="Save">Änderungen abspeichern.</String>
+    <String id="SaveText">Ausstehende Änderungen an Dateien werden auf die disk zurückgeschrieben.</String>
+	<String id="ColumnsSelect">Angezeigte Spalten in der Tabelle</String>
+	<String id="ColumnsSelectText">Auswahl der Spalten, die in der Detailtabelle angezeigt werden sollen.</String>
+
+    <!-- Tags Tab-->
+    <String id="TagFromFile">Tag von Dateiname</String>
+    <String id="TagFromFileText">Unter Verwendung der Parameter aus dem Dialog werden die verschiedenen tags wie z.B. "Track #", "Interpret", "Titel", etc. aus dem Dateinamen extrahiert.</String>
+	<String id="IdentifyFile">Dateien Identifizieren</String>
+	<String id="IdentifyFileText">Über die ersten 30 Sekunden der Datei wird eine Prüfsumme gebildete. Diese wird dann verwendet, um das Musikstück in MusicBrainz zu finden.\nDie Tags werden dann von Musicbrainz geladen un in die Datei geschrieben.</String>
+    <String id="TagFromInternet">Tag von Internet</String>
+    <String id="TagFromInternetText">Der Interpret und Album Name werden für eine Suche bei Amazon verwendet. Es wird versucht einen Bezug zwischen dem Dateinamen und der Titelliste des Albums herzustellen.</String>
+	<String id="SingleTagEdit">Einzeln editieren</String>
+	<String id="SingleTagEditText">Der angezeigte Dialog ermöglicht das einzeln editieren von Tags.</String>
+	<String id="MultiTagEdit">Mehrfach editieren</String>
+	<String id="MultiTagEditText">Die Tags, welche im angezeigten Dialog verändert werden, werden auf alle ausgewählten Dateien angewendet.</String>
+	<String id="GetCoverArt">Cover Art holen</String>
+	<String id="GetCoverArtText">Der Interpret und Album Name werden für eine Suche bei Amazon verwendet. Falls mehrere Alben dem Suchkriterium entsprechen, wird ein Auswahldialog angezeigt.</String>
+	<String id="SaveFolderThumb">Als Ordnervorschau speichern</String>
+	<String id="SaveFolderThumbText">Das ausgewählte Bild wird als folder.jpg im Verzeichnis der selektierten Datei abgespeichert.</String>
+	<String id="GetLyrics">Liedtext holen</String>
+	<String id="GetLyricsText">In den, in den Einstellungen ausgewählten, Quellen wird nach den Liedtexten gesucht.</String>
+	<String id="AutoNumber">Automatisch nummerieren</String>
+	<String id="AutoNumberText">Die Track Nummer der ausgewählten Dateien wird automatisch nummeriert.</String>
+	<String id="NumberOnClick">Nummeriern bei Click</String>
+	<String id="NumberOnClickText">Während die Schaltfläche aktiv ist, wird bei einem click auf den Titel, die Track Nummer gesetzt.</String>
+	<String id="RemoveComments">Alle Kommentare entfernen</String>
+	<String id="RemoveCommentsText">Alle Kommentare in den selektierten Dateien werden entfernt.</String>
+	<String id="RemovePictures">Alle Bilder entfernen</String>
+	<String id="RemovePicturesText">Alle Bilder in den selektierten Dateien werden entfernt.</String>
+	<String id="CaseConversion">Groß-/ Kleinschreibung</String>
+	<String id="CaseConversionText">Groß-/ Kleinschreibung Regeln, wie sie in den Optionen gesetzt wurden, werden auf die ausgewählten Datein angewendet.</String>
+	<String id="DeleteTags">Tags löschen</String>
+	<String id="DeleteTagsText">Alle Tags in den selektierten Dateien werden gelöscht.</String>
+	<String id="RenameFile">Datei umbenennen</String>
+	<String id="RenameFileText">Die Dateien werden basierend auf den Dialogparametern umbenannt.</String>
+    <String id="Organise">Dateien organisieren</String>
+    <String id="OrganiseText">Die Dateien werden nach ihren Tag Werten an eine neue Lokation kopiert/verschoben.</String>
+    <String id="ExecuteScript">Script ausführen</String>
+    <String id="ExecuteScriptText">Das Script, welches in der Combo Box ausgewählt wurde, wird auf die selektierten Dateien angewendet.</String>      
+    <String id="AddBurner">Zur Brennliste hinzufügen</String>
+    <String id="AddBurnerText">Fügt die ausgewählten Dateien zur Liste der Dateien hinzu, die für das Brennen auf CD vorgemerkt sind.</String>
+    <String id="AddConvert">Zur Konvertierungsliste hinzufügen</String>
+    <String id="AddConvertText">Fügt die ausgewählten Dateien zur Konvertierungsliste, um sie in ein anderes Format zu konvertieren.</String>
+    <String id="AddPlaylist">Zur Abspielliste hinzufügen</String>
+    <String id="AddPlaylistText">Fügt die ausgewählten Dateien zur Abspielliste und startet mit dem Abspielen falls der Player inaktiv ist.</String>
+
+    <!-- Rip Tab-->
+    <String id="RipButton">Rip starten</String>
+    <String id="RipButtonText">Startet das Rippen der ausgewählten Dateien.</String>
+    <String id="RipCancel">Rip Abbrechen</String>
+    <String id="RipCancelText">Beendet das Rippen.</String>
+
+    <!-- Convert Tab-->
+    <String id="ConvertButton">Starte Konvertierung</String>
+    <String id="ConvertButtonText">Startet die Konvertierung der Dateien in der Liste in das ausgewählte Format.</String>
+    <String id="ConvertCancel">Konvertierung abbrechen</String>
+    <String id="ConvertCancelText">Beendet die aktive Konvertierung.</String>
+
+    <!-- Burn Tab-->
+    <String id="Burn">CD Brennen</String>
+    <String id="BurnText">Startet das Brennen der Dateien in der Brennliste.</String>
+    <String id="BurnCancel">Brennen abbrechen</String>
+    <String id="BurnCancelText">Beendet das Brennen der CD</String>
+
+  </Section>
   
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
   <Section name="TagEdit">

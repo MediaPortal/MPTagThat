@@ -324,8 +324,17 @@ namespace MPTagThat
 
       // Start Menu
       startMenuSave.Text = localisation.ToString("ribbon", "Save");
+      startMenuSave.ScreenTip.Caption = localisation.ToString("screentip", "Save");
+      startMenuSave.ScreenTip.Text = localisation.ToString("screentip", "SaveText");
+
       startMenuRefresh.Text = localisation.ToString("ribbon", "Refresh");
+      startMenuRefresh.ScreenTip.Caption = localisation.ToString("screentip", "Refresh");
+      startMenuRefresh.ScreenTip.Text = localisation.ToString("screentip", "RefreshText");
+
       startMenuChangeDisplayColumns.Text = localisation.ToString("ribbon", "ColumnsSelect");
+      startMenuChangeDisplayColumns.ScreenTip.Caption = localisation.ToString("screentip", "ColumnsSelect");
+      startMenuChangeDisplayColumns.ScreenTip.Text = localisation.ToString("screentip", "ColumnsSelectText");
+
       applicationMenu1.OptionsButtonText = localisation.ToString("ribbon", "Settings");
       applicationMenu1.ExitButtonText = localisation.ToString("ribbon", "Exit");
 
@@ -333,60 +342,124 @@ namespace MPTagThat
       ribbonTabPageTag.Text = localisation.ToString("ribbon", "TagTab");
 
       buttonTagFromFile.Text = localisation.ToString("ribbon", "TagFromFile");
+      buttonTagFromFile.ScreenTip.Caption = localisation.ToString("screentip", "TagFromFile");
+      buttonTagFromFile.ScreenTip.Text = localisation.ToString("screentip", "TagFromFileText");
+      
       buttonTagIdentifyFiles.Text = localisation.ToString("ribbon", "IdentifyFile");
+      buttonTagIdentifyFiles.ScreenTip.Caption = localisation.ToString("screentip", "IdentifyFile");
+      buttonTagIdentifyFiles.ScreenTip.Text = localisation.ToString("screentip", "IdentifyFileText");
+
       buttonTagFromInternet.Text = localisation.ToString("ribbon", "TagFromInternet");
+      buttonTagFromInternet.ScreenTip.Caption = localisation.ToString("screentip", "TagFromInternet");
+      buttonTagFromInternet.ScreenTip.Text = localisation.ToString("screentip", "TagFromInternetText");
+
       ribbonGroupTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");
 
       buttonSingleTagEdit.Text = localisation.ToString("ribbon", "SingleTagEdit");
+      buttonSingleTagEdit.ScreenTip.Caption = localisation.ToString("screentip", "SingleTagEdit");
+      buttonSingleTagEdit.ScreenTip.Text = localisation.ToString("screentip", "SingleTagEditText");
+
       buttonMultiTagEdit.Text = localisation.ToString("ribbon", "MultiTagEdit");
-      buttonGetCoverArt.ScreenTip.Text = localisation.ToString("ribbon", "GetCoverArt");
-      buttonSaveAsThumb.ScreenTip.Text = localisation.ToString("ribbon", "SaveFolderThumb");
-      buttonGetLyrics.ScreenTip.Text = localisation.ToString("ribbon", "GetLyrics");
-      buttonAutoNumber.ScreenTip.Text = localisation.ToString("ribbon", "AutoNumber");
-      buttonNumberOnClick.ScreenTip.Text = localisation.ToString("ribbon", "NumberOnClick");
-      buttonRemoveComment.ScreenTip.Text = localisation.ToString("ribbon", "RemoveComments");
-      buttonRemoveCoverArt.ScreenTip.Text = localisation.ToString("ribbon", "RemovePictures");
+      buttonMultiTagEdit.ScreenTip.Caption = localisation.ToString("screentip", "MultiTagEdit");
+      buttonMultiTagEdit.ScreenTip.Text = localisation.ToString("screentip", "MultiTagEditText");
+
+      buttonGetCoverArt.ScreenTip.Caption = localisation.ToString("screentip", "GetCoverArt");
+      buttonGetCoverArt.ScreenTip.Text = localisation.ToString("screentip", "GetCoverArtText");
+
+      buttonSaveAsThumb.ScreenTip.Caption = localisation.ToString("screentip", "SaveFolderThumb");
+      buttonSaveAsThumb.ScreenTip.Text = localisation.ToString("screentip", "SaveFolderThumbText");
+
+      buttonGetLyrics.ScreenTip.Caption = localisation.ToString("screentip", "GetLyrics");
+      buttonGetLyrics.ScreenTip.Text = localisation.ToString("screentip", "GetLyricsText");
+
+      buttonAutoNumber.ScreenTip.Caption = localisation.ToString("screentip", "AutoNumber");
+      buttonAutoNumber.ScreenTip.Text = localisation.ToString("screentip", "AutoNumberText");
+
+      buttonNumberOnClick.ScreenTip.Caption = localisation.ToString("screentip", "NumberOnClick");
+      buttonNumberOnClick.ScreenTip.Text = localisation.ToString("screentip", "NumberOnClickText");
+
+      buttonRemoveComment.ScreenTip.Caption = localisation.ToString("screentip", "RemoveComments");
+      buttonRemoveComment.ScreenTip.Text = localisation.ToString("screentip", "RemoveCommentsText");
+
+      buttonRemoveCoverArt.ScreenTip.Caption = localisation.ToString("screentip", "RemovePictures");
+      buttonRemoveCoverArt.ScreenTip.Text = localisation.ToString("screentip", "RemovePicturesText");
+
       buttonCaseConversion.Text = localisation.ToString("ribbon", "CaseConversion");
+      buttonCaseConversion.ButtonScreenTip.Caption = localisation.ToString("screentip", "CaseConversion");
+      buttonCaseConversion.ButtonScreenTip.Text = localisation.ToString("screentip", "CaseConversionText");
       buttonCaseConversionOptions.Text = localisation.ToString("ribbon", "CaseConversionOption");
+
       buttonDeleteTag.Text = localisation.ToString("ribbon", "DeleteTags");
+      buttonDeleteTag.ButtonScreenTip.Caption = localisation.ToString("screentip", "DeleteTags");
+      buttonDeleteTag.ButtonScreenTip.Text = localisation.ToString("screentip", "DeleteTagsText");
       buttonDeleteAllTags.Text = localisation.ToString("ribbon", "DeleteAllTags");
       buttonDeleteID3v1.Text = localisation.ToString("ribbon", "DeleteID3V1Tags");
       buttonDeleteID3v2.Text = localisation.ToString("ribbon", "DeleteID3V2Tags");
       ribbonGroupTagsEdit.Text = localisation.ToString("ribbon", "EditTags");
 
       buttonRenameFiles.Text = localisation.ToString("ribbon", "RenameFile");
+      buttonRenameFiles.ButtonScreenTip.Caption = localisation.ToString("screentip", "RenameFile");
+      buttonRenameFiles.ButtonScreenTip.Text = localisation.ToString("screentip", "RenameFileText");
       buttonRenameFilesOptions.Text = localisation.ToString("ribbon", "RenameFileOptions");
+      
       buttonOrganiseFiles.Text = localisation.ToString("ribbon", "Organise");
+      buttonOrganiseFiles.ScreenTip.Caption = localisation.ToString("screentip", "Organise");
+      buttonOrganiseFiles.ScreenTip.Text = localisation.ToString("screentip", "OrganiseText");
+
       ribbonGroupOrganise.Text = localisation.ToString("ribbon", "OrganiseFiles");
 
       buttonScriptExecute.Text = localisation.ToString("ribbon", "ExecuteScript");
+      buttonScriptExecute.ScreenTip.Caption = localisation.ToString("screentip", "ExecuteScript");
+      buttonScriptExecute.ScreenTip.Text = localisation.ToString("screentip", "ExecuteScriptText");
+
       ribbonGroupPicture.Text = localisation.ToString("ribbon", "Picture");
 
       buttonAddToBurner.Text = localisation.ToString("ribbon", "AddBurner");
+      buttonAddToBurner.ScreenTip.Caption = localisation.ToString("screentip", "AddBurner");
+      buttonAddToBurner.ScreenTip.Text = localisation.ToString("screentip", "AddBurnerText");
+
       buttonAddToConversion.Text = localisation.ToString("ribbon", "AddConvert");
+      buttonAddToConversion.ScreenTip.Caption = localisation.ToString("screentip", "AddConvert");
+      buttonAddToConversion.ScreenTip.Text = localisation.ToString("screentip", "AddConvertText");
+
       buttonAddToPlaylist.Text = localisation.ToString("ribbon", "AddPlaylist");
+      buttonAddToPlaylist.ScreenTip.Caption = localisation.ToString("screentip", "AddPlaylist");
+      buttonAddToPlaylist.ScreenTip.Text = localisation.ToString("screentip", "AddPlaylistText");
+
       ribbonGroupOther.Text = localisation.ToString("ribbon", "Other");
 
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
       buttonRipStart.Text = localisation.ToString("ribbon", "RipButton");
+      buttonRipStart.ScreenTip.Caption = localisation.ToString("screentip", "RipButton");
+      buttonRipStart.ScreenTip.Text = localisation.ToString("screentip", "RipButtonText");
       comboBoxRipEncoder.LabelText = localisation.ToString("ribbon", "RipEncoder");
       textBoxRipOutputFolder.LabelText = localisation.ToString("ribbon", "RipFolder");
       buttonRipCancel.Text = localisation.ToString("ribbon", "RipCancel");
+      buttonRipCancel.ScreenTip.Caption = localisation.ToString("screentip", "RipCancel");
+      buttonRipCancel.ScreenTip.Text = localisation.ToString("screentip", "RipCancelText");
       ribbonGroupRipOptions.Text = localisation.ToString("ribbon", "RipOptions");
 
       // Convert Tab
       ribbonTabPageConvert.Text = localisation.ToString("ribbon", "ConvertTab");
       buttonConvertStart.Text = localisation.ToString("ribbon", "ConvertButton");
+      buttonConvertStart.ScreenTip.Caption = localisation.ToString("screentip", "ConvertButton");
+      buttonConvertStart.ScreenTip.Text = localisation.ToString("screentip", "ConvertButtonText");
       comboBoxConvertEncoder.LabelText = localisation.ToString("ribbon", "ConvertEncoder");
       textBoxConvertOutputFolder.LabelText = localisation.ToString("ribbon", "ConvertFolder");
       buttonConvertCancel.Text = localisation.ToString("ribbon", "ConvertCancel");
+      buttonConvertCancel.ScreenTip.Caption = localisation.ToString("screentip", "ConvertCancel");
+      buttonConvertCancel.ScreenTip.Text = localisation.ToString("screentip", "ConvertCancelText");
       ribbonGroupConvertOptions.Text = localisation.ToString("ribbon", "ConvertOptions");
 
       // Burn Tab
       ribbonTabPageBurn.Text = localisation.ToString("ribbon", "BurnTab");
       buttonBurnStart.Text = localisation.ToString("ribbon", "Burn");
+      buttonBurnStart.ScreenTip.Caption = localisation.ToString("screentip", "Burn");
+      buttonBurnStart.ScreenTip.Text = localisation.ToString("screentip", "BurnText");
       buttonBurnCancel.Text = localisation.ToString("ribbon", "BurnCancel");
+      buttonBurnCancel.ScreenTip.Caption = localisation.ToString("screentip", "BurnCancel");
+      buttonBurnCancel.ScreenTip.Text = localisation.ToString("screentip", "BurnCancelText");
       ribbonGroupBurnOptions.Text = localisation.ToString("ribbon", "BurnOptions");
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");

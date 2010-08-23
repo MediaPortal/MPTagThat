@@ -141,6 +141,78 @@
 
   </Section>
   
+    <!-- Ribbon Screen Tip --> 
+  <Section name="screentip">
+    <!-- Start Menu -->
+    <String id="Refresh">Refresh</String>
+    <String id="RefreshText">The content of the currently selected folder is reread.\nIf changes are pending, the system asks if the changes should be saved first.</String>
+    <String id="Save">Save Changes</String>
+    <String id="SaveText">Saves pending changes to disk, by changing the tags of all selected files.</String>
+	<String id="ColumnsSelect">Columns Displayed in Grid</String>
+	<String id="ColumnsSelectText">Select the columns, which should be displayed in the Track Details Grid.</String>
+
+    <!-- Tags Tab-->
+    <String id="TagFromFile">Tag from Filename</String>
+    <String id="TagFromFileText">Using specific parameters given in the dialog, the various tags like "Track #", "Artist", "Title", etc. are extracted out of the filename.</String>
+	<String id="IdentifyFile">Identify File</String>
+	<String id="IdentifyFileText">A hash is built over the first 30 seconds of the file. This hash is then used to identify the file on MusicBrainz.\nThe tags are then retrieved from MusicBrainz and written to the file.</String>
+    <String id="TagFromInternet">Tag from Internet</String>
+    <String id="TagFromInternetText">The given Artist and Album Name are used for a lookup at Amazon trying to match the filenames to the list retrieved from Amazon.</String>
+	<String id="SingleTagEdit">Single Tag Edit</String>
+	<String id="SingleTagEditText">A dialog allows editing all the tags of single files.</String>
+	<String id="MultiTagEdit">Multiple Tag Edit</String>
+	<String id="MultiTagEditText">The tags modified in the dialog are applied on all selected files.</String>
+	<String id="GetCoverArt">Get Cover Art</String>
+	<String id="GetCoverArtText">The Artist and Album Name are used to lookup the album cover art on Amazon. If multiple matches are found a selection dialog is displayed.</String>
+	<String id="SaveFolderThumb">Save as Folder Thumb</String>
+	<String id="SaveFolderThumbText">The album cover art shown is saved as folder.jpg in the folder of the selected file.</String>
+	<String id="GetLyrics">Get Lyrics</String>
+	<String id="GetLyricsText">The Lyricsengine retrieves the lyrics for the selected files from the Lyrics sources checked in the preferences.</String>
+	<String id="AutoNumber">Auto Number</String>
+	<String id="AutoNumberText">The track number of the selected files is set using the value in the text box as the start number.</String>
+	<String id="NumberOnClick">Number on Click</String>
+	<String id="NumberOnClickText">While the button is toggled on, a click on a file sets the track number.</String>
+	<String id="RemoveComments">Remove all comments</String>
+	<String id="RemoveCommentsText">All comments found in the selected files are removed.</String>
+	<String id="RemovePictures">Remove all pictures</String>
+	<String id="RemovePicturesText">All cover art information stored in the selected files is removed.</String>
+	<String id="CaseConversion">Case Conversion</String>
+	<String id="CaseConversionText">Case Conversion Rules, as set in the Options are applied on all selected files.</String>
+	<String id="DeleteTags">Delete Tags</String>
+	<String id="DeleteTagsText">All tags are removed from the selected files.</String>
+	<String id="RenameFile">Rename File</String>
+	<String id="RenameFileText">The files are renamed according to the parameters specified in the dialog.</String>
+    <String id="Organise">Organise Files</String>
+    <String id="OrganiseText">The files are copied/moved to a new location based on their tag values as specified in the dialog parameters.</String>
+    <String id="ExecuteScript">Execute Script</String>
+    <String id="ExecuteScriptText">Applies the script in the combo box to the selected files.</String>      
+    <String id="AddBurner">Add to Burner</String>
+    <String id="AddBurnerText">Adds the selected files to the list of files ready for burning on CD.</String>
+    <String id="AddConvert">Add to Conversion</String>
+    <String id="AddConvertText">Adds the selected files to the list of files to be converted to a different format.</String>
+    <String id="AddPlaylist">Add to Playlist</String>
+    <String id="AddPlaylistText">Adds the selected files to the Playlist, starting playback with the first file if the player is idle.</String>
+
+    <!-- Rip Tab-->
+    <String id="RipButton">Start Rip</String>
+    <String id="RipButtonText">Start Ripping of the selected files</String>
+    <String id="RipCancel">Cancel Rip</String>
+    <String id="RipCancelText">Terminates the ripping.</String>
+
+    <!-- Convert Tab-->
+    <String id="ConvertButton">Start Convert</String>
+    <String id="ConvertButtonText">Start Conversion of the files in the list to the selected format</String>
+    <String id="ConvertCancel">Cancel Convert</String>
+    <String id="ConvertCancelText">Terminates the Conversion process</String>
+
+    <!-- Burn Tab-->
+    <String id="Burn">Burn CD</String>
+    <String id="BurnText">Starts burning of files found in the burn list.</String>
+    <String id="BurnCancel">Cancel Burning</String>
+    <String id="BurnCancelText">Terminates the burning process</String>
+
+  </Section>
+  
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
   <Section name="TagEdit">
     <!--  Title / Headers -->
