@@ -239,7 +239,7 @@ namespace MPTagThat
     {
       Util.EnterMethod(Util.GetCallingMethod());
 
-      FindRibbonWin();
+      //FindRibbonWin();
       
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
