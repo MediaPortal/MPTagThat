@@ -31,6 +31,7 @@ namespace MPTagThat.GridView
     private Main _main;
 
     private bool _actionCopy = false;
+    private bool _waitCursorActive = false;
 
     private bool _itemsChanged;
     private List<string> _lyrics = new List<string>();
@@ -51,7 +52,6 @@ namespace MPTagThat.GridView
     private BackgroundWorker _bgWorker = null;
 
     private Cursor _numberingCursor = Util.CreateCursorFromResource("CursorNumbering", 0, 0);
-    private Cursor _defaultCursor = Cursors.Default;
 
     private string[] _filterFileExtensions = null;
     private string _filterFileMask = "*.*";
@@ -1950,7 +1950,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    /// Sets the mximum value of Progressbar
+    /// Sets the maximum value of Progressbar
     /// </summary>
     /// <param name="maxCount"></param>
     private void SetProgressBar(int maxCount)
@@ -1958,6 +1958,7 @@ namespace MPTagThat.GridView
       _main.progressBar1.Maximum = maxCount == 0 ? 100 : maxCount;
       _main.progressBar1.Value = 0;
       _progressCancelled = false;
+      SetWaitCursor();
     }
 
     /// <summary>
@@ -1967,6 +1968,27 @@ namespace MPTagThat.GridView
     {
       _main.progressBar1.Value = 0;
       _progressCancelled = false;
+      ResetWaitCursor();
+    }
+
+    /// <summary>
+    /// Sets the WaitCursor during various operations
+    /// </summary>
+    private void SetWaitCursor()
+    {
+      _main.Cursor = Cursors.WaitCursor;
+      tracksGrid.Cursor = Cursors.WaitCursor;
+      _waitCursorActive = true;
+    }
+
+    /// <summary>
+    /// Resets the WaitCursor to the default
+    /// </summary>
+    private void ResetWaitCursor()
+    {
+      _main.Cursor = Cursors.Default;
+      tracksGrid.Cursor = Cursors.Default;
+      _waitCursorActive = false;
     }
     #endregion
 
@@ -2496,9 +2518,18 @@ namespace MPTagThat.GridView
     {
       // Numbering on Click enabled
       if (_main.MainRibbon.NumberingOnClick)
-        this.tracksGrid.Cursor = _numberingCursor;
+        tracksGrid.Cursor = _numberingCursor;
       else
-        this.tracksGrid.Cursor = _defaultCursor;
+      {
+        if (_waitCursorActive)
+        {
+          tracksGrid.Cursor = Cursors.WaitCursor;
+        }
+        else
+        {
+          tracksGrid.Cursor = Cursors.Default;  
+        }
+      }
     }
 
     #region Context Menu Handler
@@ -2816,6 +2847,30 @@ namespace MPTagThat.GridView
     void ProgressCancel_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
     {
       _progressCancelled = true;
+      ResetWaitCursor();
+    }
+
+    /// <summary>
+    /// We're hovering over the Progress Cancel button.
+    /// If the Wait Cursor is active, change it to Default
+    /// </summary>
+    public void ProgressCancel_Hover()
+    {
+      if (_waitCursorActive)
+      {
+        _main.Cursor = Cursors.Default;
+      }
+    }
+
+    /// <summary>
+    /// We are leaving the Button again. If WaitCursor is active, we should set it back again
+    /// </summary>
+    public void ProgressCancel_Leave()
+    {
+      if (_waitCursorActive)
+      {
+        _main.Cursor = Cursors.WaitCursor;
+      }
     }
 
     #region Drag & Drop

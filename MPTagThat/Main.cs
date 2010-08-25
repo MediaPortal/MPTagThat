@@ -1046,6 +1046,30 @@ namespace MPTagThat
       }
     }
     #endregion
+
+    #region Statusbar Events
+
+    /// <summary>
+    /// We're hovering over the Cancel Button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void buttonProgressCancel_MouseEnter(object sender, System.EventArgs e)
+    {
+      TracksGridView.ProgressCancel_Hover();
+    }
+
+    /// <summary>
+    /// We're leaving the Cancel Button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void buttonProgressCancel_MouseLeave(object sender, System.EventArgs e)
+    {
+      TracksGridView.ProgressCancel_Leave();
+    }
+
+    #endregion
     #endregion
   }
 }
