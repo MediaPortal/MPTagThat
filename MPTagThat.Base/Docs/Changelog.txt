@@ -7,6 +7,33 @@ Legend:
 - Deleted
 x Fixed
 
+2.0.3890 Build 30591 Date: 26.08.2010 
+-------------------------------------
++ Implementation of new Ribbon Component
++ Added Context Menu to the Non-Music File Listview, which allows easy renaming of graphic files to folder.jpg
++ Show Non-Music Files when selecting a folder. Allows Renaming / Deleting / opening the non-music file
++ Show WaitCursor for long running actions
++ Added Screentips to the various Buttons in the ribbon
++ Quickedit Control on right Panel side for changing quickly the most used tags
++ Ctrl-F11 toggles the Quickedit Panel
++ Localisation of Splashscreen
++ Added support for KeyTips. i.e. Pressing "Alt" shows the Keytips on the Ribbon Button. Due to a bug in the ribbon component, tghose are not shown for spli buttons
++ Moved Coverart Display / Handling to Ribbon. FileInfo Panel removed.
++ Removed Progress Popup. Progressbar is now in Status Bar
++ Allow 1-digit Disc/Track Numnber on Rename / Organise 
++ Ability to hide the Player, which gives more editing space
+x Changed some default keystrokes so that they will not collide with the "Alt+<key>" shortcut supplied by the ribbon
+x Bring Form to front after startup
+x Check for valid screen position and screen size before setting it from Config. Sometimes the screen wasn't shown because of invalid coordinates
+x On first use the Scripts Combo Box was not populated. Use standard script for switching artists.
+x Database Search: Wrong default Filter being used
+x TagEdit: Clicking on the same link in the Navigation pane of the Single / Multi Tagedit Dialog causes the Detail page to be hidden
+x Preferences: Changing a Theme and cancelling out of the dialog should restire the old theme
+x Preferences: Theme was not applied correctly to Group Boxes
+x Background color of Rating cell in Tracks grid was not shown correctly.
+x Remember Last Used Script for Single Tag Edit Dialog
+x Various Translations. Thanks to Roy for testing and the norwegian language file
+
 1.1.3582 Build 27754 Date: 22.10.2009 
 -------------------------------------
 + Added support for Network folders View. Views are selectable via Combo Box
