@@ -198,14 +198,14 @@
       // 
       // startMenuSave
       // 
-      this.startMenuSave.CommandName = "Refresh";
+      this.startMenuSave.CommandName = "Save";
       this.startMenuSave.Id = "38bad7fd-3fad-4393-8d19-7cad0ef3854b";
       this.startMenuSave.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("startMenuSave.LargeImages.Images"))))});
       this.startMenuSave.Location = new System.Drawing.Point(0, 0);
       this.startMenuSave.Name = "startMenuSave";
       this.startMenuSave.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("startMenuSave.ScreenTip.Image")));
-      this.startMenuSave.Size = new System.Drawing.Size(236, 28);
+      this.startMenuSave.Size = new System.Drawing.Size(195, 23);
       this.startMenuSave.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("startMenuSave.SmallImages.Images"))))});
       this.startMenuSave.TabIndex = 2;
@@ -218,10 +218,10 @@
       this.startMenuRefresh.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("startMenuRefresh.LargeImages.Images")))),
             new Elegant.Ui.ControlImage("Default", null)});
-      this.startMenuRefresh.Location = new System.Drawing.Point(0, 28);
+      this.startMenuRefresh.Location = new System.Drawing.Point(0, 23);
       this.startMenuRefresh.Name = "startMenuRefresh";
       this.startMenuRefresh.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("startMenuRefresh.ScreenTip.Image")));
-      this.startMenuRefresh.Size = new System.Drawing.Size(236, 28);
+      this.startMenuRefresh.Size = new System.Drawing.Size(195, 23);
       this.startMenuRefresh.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("startMenuRefresh.SmallImages.Images"))))});
       this.startMenuRefresh.TabIndex = 4;
@@ -231,9 +231,9 @@
       // 
       this.startMenuChangeDisplayColumns.CommandName = "ChangeDisplayColumns";
       this.startMenuChangeDisplayColumns.Id = "828301a3-b6be-4264-a635-2f4a9cebe179";
-      this.startMenuChangeDisplayColumns.Location = new System.Drawing.Point(0, 56);
+      this.startMenuChangeDisplayColumns.Location = new System.Drawing.Point(0, 46);
       this.startMenuChangeDisplayColumns.Name = "startMenuChangeDisplayColumns";
-      this.startMenuChangeDisplayColumns.Size = new System.Drawing.Size(236, 28);
+      this.startMenuChangeDisplayColumns.Size = new System.Drawing.Size(195, 23);
       this.startMenuChangeDisplayColumns.TabIndex = 3;
       this.startMenuChangeDisplayColumns.Text = "Select Columns Displayed";
       // 
