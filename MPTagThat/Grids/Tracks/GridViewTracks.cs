@@ -234,7 +234,7 @@ namespace MPTagThat.GridView
 
       if (showProgressDialog)
       {
-        SetProgressBar(tracksGrid.SelectedRows.Count);
+        SetProgressBar(tracksGrid.Rows.Count);
       }
 
       int trackCount = bindingList.Count;
