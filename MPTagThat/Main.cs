@@ -58,6 +58,8 @@ namespace MPTagThat
     private SplashScreen _splashScreen;
 
     private MusicDatabaseBuild _musicDatabaseBuild = null;
+
+    private delegate void ThreadSafeFolderScan();
     #endregion
 
     #region Constructor
@@ -380,7 +382,11 @@ namespace MPTagThat
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
       {
-        gridViewControl.FolderScan();
+        System.Threading.ThreadStart ts = new System.Threading.ThreadStart(FolderScanAsync);
+        System.Threading.Thread FolderScanAsyncThread = new System.Threading.Thread(ts);
+        FolderScanAsyncThread.Name = "FolderScanAsyncThread";
+        FolderScanAsyncThread.Start();
+
         toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       
@@ -395,6 +401,22 @@ namespace MPTagThat
       this.BringToFront();
       this.TopMost = false;
       Util.LeaveMethod(Util.GetCallingMethod());
+    }
+
+    /// <summary>
+    /// Thread to populate the Treeview async during startup
+    /// </summary>
+    private void FolderScanAsync()
+    {
+      if (gridViewControl.InvokeRequired)
+      {
+        ThreadSafeFolderScan d = new ThreadSafeFolderScan(FolderScanAsync);
+        gridViewControl.Invoke(d, new object[] { });
+        return;
+      }
+
+      gridViewControl.FolderScan();
+
     }
 
     /// <summary>

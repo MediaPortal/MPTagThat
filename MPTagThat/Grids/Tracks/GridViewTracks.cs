@@ -1379,6 +1379,7 @@ namespace MPTagThat.GridView
       bindingList = new SortableBindingList<TrackData>();
       tracksGrid.DataSource = bindingList;
       _nonMusicFiles = new List<FileInfo>();
+      _main.MiscInfoPanel.ClearNonMusicFiles();
       _main.MiscInfoPanel.ActivateNonMusicTab();
       GC.Collect();
 
