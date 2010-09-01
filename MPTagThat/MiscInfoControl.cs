@@ -156,7 +156,11 @@ namespace MPTagThat
         if (nonPicFile || imgFailure)
         {
           // For a non Picture file or if we had troubles creating the thumb, see if we have a file specific icon
-          string defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
+          string defaultName = "";
+          if (fi.Extension.Length > 0)
+          {
+            defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
+          }
           if (File.Exists(defaultName))
           {
             Image img = GetImageFromFile(defaultName);
