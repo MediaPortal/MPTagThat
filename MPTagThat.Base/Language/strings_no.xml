@@ -65,6 +65,7 @@
     <String id="toolStripLabelFiles">Filer: {0} (Valgt: {1})</String>
     <String id="toolStripLabelPlay">Spiller Status: Spiller</String>
     <String id="toolStripLabelPause">Spiller Status: Pauset</String>
+    <String id="toolStripLabelScan">Bearbeider fil: {0}</String>
   </Section>
 
   <!-- Ribbon --> 
@@ -110,7 +111,7 @@
     
     <String id="Organise">Organiser Filer</String>
     <String id="AddBurner">Legg til i Brenner</String>
-    <String id="AddConvert">Legg til i Konvertering</String>
+    <String id="AddConvert">Legg til for Konvertering</String>
     <String id="AddPlaylist">Legg til i Spilleliste</String>
     <String id="Other">Andre</String>
 
@@ -185,7 +186,7 @@
     <String id="OrganiseText">Filene vil bli kopiert/flyttet til et nytt sted bassert på tagg parameterene.</String>
     <String id="ExecuteScript">Utfør Skript</String>
     <String id="ExecuteScriptText">Utfører kommandoer bassert på skript, for de valgte filene.</String>      
-    <String id="AddBurner">Legg til for Brenning</String>
+    <String id="AddBurner">Legg til i Brenner</String>
     <String id="AddBurnerText">Legger de valgte filene til listen over filer som skal brennes til CD.</String>
     <String id="AddConvert">Legg til for Konvertering</String>
     <String id="AddConvertText">Legger de valgte filene til listen over filer som skal konverteres til et annet format.</String>
