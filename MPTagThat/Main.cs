@@ -225,6 +225,11 @@ namespace MPTagThat
       get { return toolStripStatusLabelFilter; }
     }
 
+    public Elegant.Ui.Label ToolStripStatusScan
+    {
+      get { return toolStripStatusLabelScanProgress; }
+    }
+
     public MiscInfoControl MiscInfoPanel
     {
       get { return miscInfoControl; }
@@ -382,12 +387,12 @@ namespace MPTagThat
       // Display the files in the last selected Directory
       if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
       {
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
+
         System.Threading.ThreadStart ts = new System.Threading.ThreadStart(FolderScanAsync);
         System.Threading.Thread FolderScanAsyncThread = new System.Threading.Thread(ts);
         FolderScanAsyncThread.Name = "FolderScanAsyncThread";
         FolderScanAsyncThread.Start();
-
-        toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       
       // setup various Event Handler needed
@@ -689,6 +694,7 @@ namespace MPTagThat
       {
         ribbonControl.ClearGallery();
         gridViewControl.View.Rows.Clear();
+        toolStripStatusLabelFolder.Text = _selectedDirectory;
         if (TreeView.DatabaseMode)
         {
           gridViewControl.DatabaseScan();
@@ -697,7 +703,6 @@ namespace MPTagThat
         {
           gridViewControl.FolderScan();
         }
-        toolStripStatusLabelFolder.Text = _selectedDirectory;
       }
       miscInfoControl.ErrorGridView.Rows.Clear();
       quickEditControl.ClearForm();

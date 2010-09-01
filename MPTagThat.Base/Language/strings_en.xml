@@ -65,6 +65,7 @@
     <String id="toolStripLabelFiles">Files: {0} (Selected: {1})</String>
     <String id="toolStripLabelPlay">Player Status: Playing</String>
     <String id="toolStripLabelPause">Player Status: Paused</String>
+    <String id="toolStripLabelScan">Processing file: {0}</String>
   </Section>
 
   <!-- Ribbon --> 

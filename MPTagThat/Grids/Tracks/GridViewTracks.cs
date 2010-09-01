@@ -1384,40 +1384,27 @@ namespace MPTagThat.GridView
       GC.Collect();
 
       TagLib.File file = null;
-      DirectoryInfo dirInfo = null;
-      List<FileInfo> files = new List<FileInfo>();
 
       string selectedFolder = _main.CurrentDirectory;
-
       if (!Directory.Exists(selectedFolder))
         return;
 
       _main.FolderScanning = true;
 
-      try // just in case we are lacking sufficent permissions
-      {
-        dirInfo = new DirectoryInfo(selectedFolder);
-        log.Debug("FolderScan: Retrieving files from. {0}", selectedFolder);
+      // Get File Filter Settings
+      _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
+      _filterFileMask = _main.TreeView.ActiveFilter.FileMask.Trim() == "" ? "*" : _main.TreeView.ActiveFilter.FileMask.Trim();
 
-        // Get File Filter Settings
-        _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
-        _filterFileMask = _main.TreeView.ActiveFilter.FileMask.Trim() == "" ? "*" : _main.TreeView.ActiveFilter.FileMask.Trim();
+      SetProgressBar(1);
 
-        GetFiles(selectedFolder, ref files, _main.TreeView.ScanFolderRecursive);
-      }
-      catch (Exception)
-      {
-      }
-
-      SetProgressBar(files.Count);
+      // Change the style to Marquee, since we really don't know how much files we will get
+      _main.progressBar1.Style = ProgressBarStyle.Marquee;
+      _main.progressBar1.MarqueeAnimationSpeed = 10;
      
       int count = 1;
-      int trackCount = files.Count;
-      log.Debug("FolderScan: Found {0} files", trackCount);
-      foreach (FileInfo fi in files)
+      foreach (FileInfo fi in GetFiles(new DirectoryInfo(selectedFolder), _main.TreeView.ScanFolderRecursive))
       {
         Application.DoEvents();
-        _main.progressBar1.Value += 1;
 
         if (_progressCancelled)
         {
@@ -1464,12 +1451,17 @@ namespace MPTagThat.GridView
           continue;
         }
         count++;
+        _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
       }
+      log.Info("FolderScan: Found {0} files", count);
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
+
+      _main.ToolStripStatusScan.Text = "";
       _main.FolderScanning = false;
 
       ResetProgressBar();
+      _main.progressBar1.Style = ProgressBarStyle.Continuous;
 
       // Display Status Information
       try
@@ -1504,29 +1496,47 @@ namespace MPTagThat.GridView
     /// </summary>
     /// <param name="folder"></param>
     /// <param name="foundFiles"></param>
-    void GetFiles(string folder, ref List<FileInfo> foundFiles, bool recursive)
+    private IEnumerable<FileInfo> GetFiles(DirectoryInfo dirInfo, bool recursive)
     {
-      try
+      Queue<DirectoryInfo> directories = new Queue<DirectoryInfo>();
+      directories.Enqueue(dirInfo);
+      Queue<FileInfo> files = new Queue<FileInfo>();
+      while (files.Count > 0 || directories.Count > 0)
       {
-        if (recursive)
+        if (files.Count > 0)
         {
-          string[] subFolders = Directory.GetDirectories(folder);
-          for (int i = 0; i < subFolders.Length; ++i)
+          yield return files.Dequeue();
+        }
+        try
+        {
+          if (directories.Count > 0)
           {
-            GetFiles(subFolders[i], ref foundFiles, recursive);
+            DirectoryInfo dir = directories.Dequeue();
+
+            if (recursive)
+            {
+              DirectoryInfo[] newDirectories = dir.GetDirectories();
+              foreach (DirectoryInfo di in newDirectories)
+              {
+                directories.Enqueue(di);
+              }
+            }
+
+            foreach (string extension in _filterFileExtensions)
+            {
+              string searchFilter = string.Format("{0}.{1}", _filterFileMask, extension);
+              FileInfo[] newFiles = dir.GetFiles(searchFilter);
+              foreach (FileInfo file in newFiles)
+              {
+                files.Enqueue(file);
+              }  
+            }
           }
         }
-
-        foreach (string extension in _filterFileExtensions)
+        catch (UnauthorizedAccessException ex)
         {
-          string searchFilter = string.Format("{0}.{1}", _filterFileMask, extension);
-          FileInfo[] files = new DirectoryInfo(folder).GetFiles(searchFilter);
-          foundFiles.AddRange(files);          
+          ServiceScope.Get<ILogger>().Error(ex);
         }
-      }
-      catch (Exception ex)
-      {
-        ServiceScope.Get<ILogger>().Error(ex);
       }
     }
     #endregion
