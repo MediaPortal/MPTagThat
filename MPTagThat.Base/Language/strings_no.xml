@@ -817,6 +817,8 @@
     <String id="DeleteConfirm">Vil du virkelig slette valgte fil(er)?</String>
     <String id="DeleteFolders">For å slette en Folder, bruk Shift+Del</String>
     <String id="Fixed">Ordnet</String>
+    <String id="FatalError">Fatal feil oppstått. MPTagThat vil bli avsluttet\r\nVennligst se i loggen for beskrivelse av grunnen.</String>
+    <String id="OutOfMemory">For mange filer skannet.\r\nAvslutter skanning.</String>
   </Section>
     
   <!-- Progress Dialog -->
