@@ -108,10 +108,15 @@ namespace MPTagThat
           main.CurrentDirectory = _startupFolder;
           Application.Run(main);
         }
+        catch (OutOfMemoryException)
+        {
+          GC.Collect();
+          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "OutOfMemory"), ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
+          logger.Error("Running out of memory. Scanning aborted.");
+        }
         catch (Exception ex)
         {
-          string message = "Fatal Exception. MPTagThat will be terminated\r\nPlease look at log for the reason of termination";
-          MessageBox.Show(message, "Error", MessageBoxButtons.OK);
+          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "FatalError"), ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
           logger.Error("Fatal Exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
         }
       }

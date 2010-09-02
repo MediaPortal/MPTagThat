@@ -817,6 +817,8 @@
     <String id="DeleteConfirm">Wollen Sie die ausgewählten Dateien tatsächlich löschen?</String>
     <String id="DeleteFolders">Zum löschen eines Verzeichnisses, bitte Shift-Del benutzen</String>
     <String id="Fixed">Fixed</String>
+    <String id="FatalError">Schwerer Ausnahmefehler. MPTagThat wird beendet.\r\nDie entsprechende Fehlermeldung ist im Log zu finden.</String>
+    <String id="OutOfMemory">Zuviele Dateien gefunden. Kein weiterer Speicher verfügbar.\r\nDie Verarbeitung wird abgebrochen.</String>
   </Section>
     
   <!-- Progress Dialog -->

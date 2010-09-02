@@ -1402,56 +1402,65 @@ namespace MPTagThat.GridView
       _main.progressBar1.MarqueeAnimationSpeed = 10;
      
       int count = 1;
-      foreach (FileInfo fi in GetFiles(new DirectoryInfo(selectedFolder), _main.TreeView.ScanFolderRecursive))
+      try
       {
-        Application.DoEvents();
+        foreach (FileInfo fi in GetFiles(new DirectoryInfo(selectedFolder), _main.TreeView.ScanFolderRecursive))
+        {
+          Application.DoEvents();
 
-        if (_progressCancelled)
-        {
-          break;
-        }
-        try
-        {
-          if (Util.IsAudio(fi.FullName))
+          if (_progressCancelled)
           {
-            // Read the Tag
-            try
+            break;
+          }
+          try
+          {
+            if (Util.IsAudio(fi.FullName))
             {
-              TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-              file = TagLib.File.Create(fi.FullName);
-              
-              // Apply the Tag Filter
-              TrackData track = new TrackData(file);
-              if (ApplyTagFilter(track))
+              // Read the Tag
+              try
               {
-                AddTrack(track);
+                TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+                file = TagLib.File.Create(fi.FullName);
+
+                // Apply the Tag Filter
+                TrackData track = new TrackData(file);
+                if (ApplyTagFilter(track))
+                {
+                  AddTrack(track);
+                }
+              }
+              catch (CorruptFileException)
+              {
+                log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", fi.FullName);
+              }
+              catch (UnsupportedFormatException)
+              {
+                log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", fi.FullName);
+              }
+              catch (Exception ex)
+              {
+                log.Error("FolderScan: Error processing file: {0} {1}", fi.FullName, ex.Message);
               }
             }
-            catch (CorruptFileException)
+            else
             {
-              log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", fi.FullName);
-            }
-            catch (UnsupportedFormatException)
-            {
-              log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", fi.FullName);
-            }
-            catch (Exception ex)
-            {
-              log.Error("FolderScan: Error processing file: {0} {1}", fi.FullName, ex.Message);
+              _nonMusicFiles.Add(fi);
             }
           }
-          else
+          catch (PathTooLongException)
           {
-            _nonMusicFiles.Add(fi);
+            log.Warn("FolderScan: Ignoring track {0} - path too long!", fi.FullName);
+            continue;
           }
+          count++;
+          _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
         }
-        catch (PathTooLongException)
-        {
-          log.Warn("FolderScan: Ignoring track {0} - path too long!", fi.FullName);
-          continue;
-        }
-        count++;
-        _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
+      }
+      catch (OutOfMemoryException)
+      {
+        GC.Collect();
+        MessageBox.Show(localisation.ToString("message", "OutOfMemory"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
+        log.Error("Folderscan: Running out of memory. Scanning aborted.");
       }
       log.Info("FolderScan: Found {0} files", count);
 
