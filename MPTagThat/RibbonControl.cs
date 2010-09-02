@@ -537,6 +537,7 @@ namespace MPTagThat
     public void ClearGallery()
     {
       this.galleryPicture.Items.Clear();
+      this.galleryPicture.Invalidate();
     }
     #endregion
 
