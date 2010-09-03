@@ -1,79 +1,141 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
+﻿#region Copyright (C) 2007-2008 Team MediaPortal
 
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+/*
+    Copyright (C) 2007-2008 Team MediaPortal
+    http://www.team-mediaportal.com
+ 
+    This file is part of MediaPortal II
+
+    MediaPortal II is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    MediaPortal II is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #endregion
-
-#region
 
 using System;
-
-#endregion
+using System.Collections.Generic;
+using System.Text;
 
 namespace MPTagThat.Core.Burning
 {
   public class DriveFeatures
   {
-    private string fMaxReadSpeed;
-    private string fMaxWriteSpeed;
+    bool fReadsCDR;
+    bool fWriteCDR;
+    bool fReadsCDRW;
+    bool fWriteCDRW;
+    bool fReadsDVDRom;
+    bool fReadsDVDR;
+    bool fWriteDVDR;
+    bool fReadsDVDRam;
+    bool fWriteDVDRam;
+    bool fReadsBRRom;    
 
-    public DriveFeatures(bool aReadsCDR, bool aWriteCDR, bool aReadsCDRW, bool aWriteCDRW, bool aReadsDVDRom,
-                         bool aReadsDVDR, bool aWriteDVDR, bool aReadsDVDRam, bool aWriteDVDRam, bool aReadsBRRom,
-                         bool aAllowsDummyWrite, bool aSupportsBurnFree, string aMaxReadSpeed, string aMaxWriteSpeed)
+    bool fAllowsDummyWrite;
+    bool fSupportsBurnFree;
+
+    string fMaxReadSpeed;
+    string fMaxWriteSpeed;
+
+    public DriveFeatures(bool aReadsCDR, bool aWriteCDR, bool aReadsCDRW, bool aWriteCDRW, bool aReadsDVDRom, bool aReadsDVDR, bool aWriteDVDR, bool aReadsDVDRam, bool aWriteDVDRam, bool aReadsBRRom, bool aAllowsDummyWrite, bool aSupportsBurnFree, string aMaxReadSpeed, string aMaxWriteSpeed)
     {
-      ReadsCDR = aReadsCDR;
-      WriteCDR = aWriteCDR;
-      ReadsCDRW = aReadsCDRW;
-      WriteCDRW = aWriteCDRW;
-      ReadsDVDRom = aReadsDVDRom;
-      ReadsDVDR = aReadsDVDR;
-      WriteDVDR = aWriteDVDR;
-      ReadsDVDRam = aReadsDVDRam;
-      WriteDVDRam = aWriteDVDRam;
-      ReadsBRRom = aReadsBRRom;
-      AllowsDummyWrite = aAllowsDummyWrite;
-      SupportsBurnFree = aSupportsBurnFree;
+      fReadsCDR = aReadsCDR;
+      fWriteCDR = aWriteCDR;
+      fReadsCDRW = aReadsCDRW;
+      fWriteCDRW = aWriteCDRW;
+      fReadsDVDRom = aReadsDVDRom;
+      fReadsDVDR = aReadsDVDR;
+      fWriteDVDR = aWriteDVDR;
+      fReadsDVDRam = aReadsDVDRam;
+      fWriteDVDRam = aWriteDVDRam;
+      fReadsBRRom = aReadsBRRom;
+      fAllowsDummyWrite = aAllowsDummyWrite;
+      fSupportsBurnFree = aSupportsBurnFree;
       fMaxReadSpeed = aMaxReadSpeed;
       fMaxWriteSpeed = aMaxWriteSpeed;
+    }  
+
+    public bool ReadsCDR
+    {
+      get { return fReadsCDR; }
+      set { fReadsCDR = value; }
     }
 
-    public bool ReadsCDR { get; set; }
+    public bool WriteCDR
+    {
+      get { return fWriteCDR; }
+      set { fWriteCDR = value; }
+    }
 
-    public bool WriteCDR { get; set; }
+    public bool ReadsCDRW
+    {
+      get { return fReadsCDRW; }
+      set { fReadsCDRW = value; }
+    }
 
-    public bool ReadsCDRW { get; set; }
+    public bool WriteCDRW
+    {
+      get { return fWriteCDRW; }
+      set { fWriteCDRW = value; }
+    }
 
-    public bool WriteCDRW { get; set; }
+    public bool ReadsDVDRom
+    {
+      get { return fReadsDVDRom; }
+      set { fReadsDVDRom = value; }
+    }
 
-    public bool ReadsDVDRom { get; set; }
+    public bool ReadsDVDR
+    {
+      get { return fReadsDVDR; }
+      set { fReadsDVDR = value; }
+    }
 
-    public bool ReadsDVDR { get; set; }
+    public bool WriteDVDR
+    {
+      get { return fWriteDVDR; }
+      set { fWriteDVDR = value; }
+    }
 
-    public bool WriteDVDR { get; set; }
+    public bool ReadsDVDRam
+    {
+      get { return fReadsDVDRam; }
+      set { fReadsDVDRam = value; }
+    }
 
-    public bool ReadsDVDRam { get; set; }
+    public bool WriteDVDRam
+    {
+      get { return fWriteDVDRam; }
+      set { fWriteDVDRam = value; }
+    }
 
-    public bool WriteDVDRam { get; set; }
+    public bool ReadsBRRom
+    {
+      get { return fReadsBRRom; }
+      set { fReadsBRRom = value; }
+    }
 
-    public bool ReadsBRRom { get; set; }
+    public bool AllowsDummyWrite
+    {
+      get { return fAllowsDummyWrite; }
+      set { fAllowsDummyWrite = value; }
+    }
 
-    public bool AllowsDummyWrite { get; set; }
-
-    public bool SupportsBurnFree { get; set; }
+    public bool SupportsBurnFree
+    {
+      get { return fSupportsBurnFree; }
+      set { fSupportsBurnFree = value; }
+    }
 
     public string MaxReadSpeed
     {
@@ -89,12 +151,18 @@ namespace MPTagThat.Core.Burning
 
     public int MaxReadSpeedInt
     {
-      get { return ParseSpeed(fMaxReadSpeed); }
+      get
+      {
+        return ParseSpeed(fMaxReadSpeed);
+      }
     }
 
     public int MaxWriteSpeedInt
     {
-      get { return ParseSpeed(fMaxWriteSpeed); }
+      get
+      {
+        return ParseSpeed(fMaxWriteSpeed);
+      }
     }
 
 
@@ -112,8 +180,11 @@ namespace MPTagThat.Core.Burning
           aSpeedStdOutLine = aSpeedStdOutLine.Remove(parsePos - 1).Trim();
           resultNumber = Convert.ToInt32(aSpeedStdOutLine);
         }
+
       }
-      catch (Exception) {}
+      catch (Exception)
+      {
+      }
       return resultNumber;
     }
 

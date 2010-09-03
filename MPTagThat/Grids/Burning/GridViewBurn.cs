@@ -1,120 +1,61 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
+using System.Data;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+
 using MPTagThat.Core;
 using MPTagThat.Core.Burning;
 using MPTagThat.Core.MediaChangeMonitor;
+
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Enc;
-
-#endregion
 
 namespace MPTagThat.GridView
 {
   public partial class GridViewBurn : UserControl
   {
     #region Variables
+    private delegate void ThreadSafeAddTracksDelegate(TrackData track);
+    private delegate void ThreadSafeAddMediaInfoDelegate();
+    private delegate void ThreadSafeBurnAudioDelegate(BurnStatus eBurnStatus, int eTrack, int ePercentage);
+    private delegate void ThreadSafeBurnStatusDelegate(string message);
+    private delegate void ThreadSafeBurnAudioFailedDelegate(BurnResult eBurnResult, ProjectType eProjectType);
+    private delegate void ThreadSafeMediaInsertedDelegate(string DriveLetter);
+    private delegate void ThreadSafeMediaRemovedDelegate(string DriveLetter);
 
-    private readonly Main _main;
+    private Thread threadBurn = null;
+    private Thread threadMediaInfo = null;
 
-    private readonly SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
-    private readonly IBurnManager burnManager;
-    private readonly GridViewColumnsBurn gridColumns;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
+    private Main _main;
 
-    private readonly IMediaChangeMonitor mediaChangeMonitor;
+    private SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log;
 
-    private readonly string tmpBurnDirectory = String.Format(@"{0}\MPTagThat\TmpBurn",
-                                                             Environment.GetFolderPath(
-                                                               Environment.SpecialFolder.LocalApplicationData));
+    private GridViewColumnsBurn gridColumns;
+    private string tmpBurnDirectory = String.Format(@"{0}\MPTagThat\TmpBurn", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+    private IBurnManager burnManager;
+    private MediaInfo mediainfo = null;
 
-    private int DragDropCurrentIndex = -1;
+    private IMediaChangeMonitor mediaChangeMonitor;
 
     private Rectangle DragDropRectangle;
     private int DragDropSourceIndex;
+    private int DragDropCurrentIndex = -1;
     private int DragDropTargetIndex;
-    private MediaInfo mediainfo;
-    private Thread threadBurn;
-    private Thread threadMediaInfo;
-
-    #region Nested type: ThreadSafeAddMediaInfoDelegate
-
-    private delegate void ThreadSafeAddMediaInfoDelegate();
-
-    #endregion
-
-    #region Nested type: ThreadSafeAddTracksDelegate
-
-    private delegate void ThreadSafeAddTracksDelegate(TrackData track);
-
-    #endregion
-
-    #region Nested type: ThreadSafeBurnAudioDelegate
-
-    private delegate void ThreadSafeBurnAudioDelegate(BurnStatus eBurnStatus, int eTrack, int ePercentage);
-
-    #endregion
-
-    #region Nested type: ThreadSafeBurnAudioFailedDelegate
-
-    private delegate void ThreadSafeBurnAudioFailedDelegate(BurnResult eBurnResult, ProjectType eProjectType);
-
-    #endregion
-
-    #region Nested type: ThreadSafeBurnStatusDelegate
-
-    private delegate void ThreadSafeBurnStatusDelegate(string message);
-
-    #endregion
-
-    #region Nested type: ThreadSafeMediaInsertedDelegate
-
-    private delegate void ThreadSafeMediaInsertedDelegate(string DriveLetter);
-
-    #endregion
-
-    #region Nested type: ThreadSafeMediaRemovedDelegate
-
-    private delegate void ThreadSafeMediaRemovedDelegate(string DriveLetter);
-
-    #endregion
-
     #endregion
 
     #region Properties
-
     public Color BackGroundColor
     {
       set
       {
-        BackColor = value;
-        panelTop.BackColor = value;
+        this.BackColor = value;
+        this.panelTop.BackColor = value;
       }
     }
 
@@ -136,30 +77,28 @@ namespace MPTagThat.GridView
     {
       get { return dataGridViewBurn; }
     }
-
     #endregion
 
     #region ctor
-
     public GridViewBurn(Main main)
     {
       _main = main;
 
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       InitializeComponent();
 
       log = ServiceScope.Get<ILogger>();
       burnManager = ServiceScope.Get<IBurnManager>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
-      mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
-      mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
+      mediaChangeMonitor.MediaInserted += new MediaInsertedEvent(mediaChangeMonitor_MediaInserted);
+      mediaChangeMonitor.MediaRemoved += new MediaRemovedEvent(mediaChangeMonitor_MediaRemoved);
 
       // Create the Temp Directory for the burner
-      if (!Directory.Exists(tmpBurnDirectory))
-        Directory.CreateDirectory(tmpBurnDirectory);
+      if (!System.IO.Directory.Exists(tmpBurnDirectory))
+        System.IO.Directory.CreateDirectory(tmpBurnDirectory);
 
       // Load the Settings
       gridColumns = new GridViewColumnsBurn();
@@ -172,54 +111,49 @@ namespace MPTagThat.GridView
 
       CreateContextMenu();
 
-      lbBurningStatus.Text = localisation.ToString("Burning", "DragAndDrop");
-        // "Use Drag & Drop to order the tracks for burning";
+      lbBurningStatus.Text = localisation.ToString("Burning", "DragAndDrop"); // "Use Drag & Drop to order the tracks for burning";
 
-      Thread threadGetDrives = new Thread(GetDrivesThread);
+      Thread threadGetDrives = new Thread(new ThreadStart(GetDrivesThread));
       threadGetDrives.Start();
     }
-
     #endregion
 
     #region Public Methods
-
     /// <summary>
-    ///   Adds a Track to the Burn Gridview
+    /// Adds a Track to the Burn Gridview
     /// </summary>
-    /// <param name = "track"></param>
+    /// <param name="track"></param>
     public void AddToBurner(TrackData track)
     {
       AddTrack(track);
     }
 
     /// <summary>
-    ///   Burns the files in the Grid to an Audio CD
+    /// Burns the files in the Grid to an Audio CD
     /// </summary>
     public void BurnAudioCD()
     {
-      lbBurningStatus.Text = localisation.ToString("Burning", "Decoding");
-      ;
+      lbBurningStatus.Text = localisation.ToString("Burning", "Decoding"); ;
 
       if (threadBurn == null)
       {
-        threadBurn = new Thread(BurningThread);
+        threadBurn = new Thread(new ThreadStart(BurningThread));
         threadBurn.Name = "Burning";
       }
 
       if (threadBurn.ThreadState != ThreadState.Running)
       {
-        threadBurn = new Thread(BurningThread);
+        threadBurn = new Thread(new ThreadStart(BurningThread));
         threadBurn.Start();
       }
     }
 
     /// <summary>
-    ///   Cancel the Burning Process
+    /// Cancel the Burning Process
     /// </summary>
     public void BurnAudioCDCancel()
     {
-      lbBurningStatus.Text = localisation.ToString("Burning", "Cancelled");
-      ;
+      lbBurningStatus.Text = localisation.ToString("Burning", "Cancelled"); ;
 
       if (threadBurn != null)
       {
@@ -231,13 +165,13 @@ namespace MPTagThat.GridView
     {
       if (threadMediaInfo == null)
       {
-        threadMediaInfo = new Thread(SetMediaInfoThread);
+        threadMediaInfo = new Thread(new ThreadStart(SetMediaInfoThread));
         threadMediaInfo.Name = "MediaInfo";
       }
 
       if (threadMediaInfo.ThreadState != ThreadState.Running)
       {
-        threadMediaInfo = new Thread(SetMediaInfoThread);
+        threadMediaInfo = new Thread(new ThreadStart(SetMediaInfoThread));
         threadMediaInfo.Start();
       }
     }
@@ -247,15 +181,12 @@ namespace MPTagThat.GridView
       burnManager.SetActiveBurner(burner);
       SetMediaInfo();
     }
-
     #endregion
 
     #region Private Methods
-
     #region Localisation
-
     /// <summary>
-    ///   Language Change event has been fired. Apply the new language
+    /// Language Change event has been fired. Apply the new language
     /// </summary>
     private void LanguageChanged()
     {
@@ -270,11 +201,9 @@ namespace MPTagThat.GridView
         col.HeaderText = localisation.ToString("column_header", col.Name);
       }
     }
-
     #endregion
 
     #region Decoding / Burning
-
     private void BurningThread()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -284,8 +213,7 @@ namespace MPTagThat.GridView
       foreach (DataGridViewRow row in dataGridViewBurn.Rows)
       {
         TrackData track = bindingList[row.Index];
-        string outFile = String.Format(@"{0}\{1}.wav", tmpBurnDirectory,
-                                       Path.GetFileNameWithoutExtension(track.FullFileName));
+        string outFile = String.Format(@"{0}\{1}.wav", tmpBurnDirectory, System.IO.Path.GetFileNameWithoutExtension(track.FullFileName));
         int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
         if (stream == 0)
         {
@@ -306,7 +234,7 @@ namespace MPTagThat.GridView
           // getting sample data will automatically feed the encoder
           int len = Bass.BASS_ChannelGetData(stream, encBuffer, encBuffer.Length);
           pos = Bass.BASS_ChannelGetPosition(stream);
-          double percentComplete = pos / (double)chanLength * 100.0;
+          double percentComplete = (double)pos / (double)chanLength * 100.0;
           dataGridViewBurn.Rows[row.Index].Cells[0].Value = (int)percentComplete;
         }
         outFiles.Add(outFile);
@@ -315,8 +243,8 @@ namespace MPTagThat.GridView
         Bass.BASS_StreamFree(stream);
       }
 
-      burnManager.BurningFailed += burnManager_BurningFailed;
-      burnManager.BurnProgressUpdate += burnManager_BurnProgressUpdate;
+      burnManager.BurningFailed += new BurningError(burnManager_BurningFailed);
+      burnManager.BurnProgressUpdate += new BurnProgress(burnManager_BurnProgressUpdate);
       if (!bError && MediaAllowsBurning())
       {
         foreach (DataGridViewRow row in dataGridViewBurn.Rows)
@@ -336,12 +264,12 @@ namespace MPTagThat.GridView
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
-    private void burnManager_BurnProgressUpdate(BurnStatus eBurnStatus, int eTrack, int ePercentage)
+    void burnManager_BurnProgressUpdate(BurnStatus eBurnStatus, int eTrack, int ePercentage)
     {
       if (lbBurningStatus.InvokeRequired)
       {
-        ThreadSafeBurnAudioDelegate d = burnManager_BurnProgressUpdate;
-        lbBurningStatus.Invoke(d, new object[] {eBurnStatus, eTrack, ePercentage});
+        ThreadSafeBurnAudioDelegate d = new ThreadSafeBurnAudioDelegate(burnManager_BurnProgressUpdate);
+        lbBurningStatus.Invoke(d, new object[] { eBurnStatus, eTrack, ePercentage });
         return;
       }
 
@@ -360,16 +288,16 @@ namespace MPTagThat.GridView
             break;
 
           case BurnStatus.Blanking:
-            lbBurningStatus.Text = localisation.ToString("Burning", "Erasing");
+            lbBurningStatus.Text = localisation.ToString("Burning", "Erasing"); 
             break;
 
           case BurnStatus.LeadIn:
-            lbBurningStatus.Text = localisation.ToString("Burning", "Leaadin");
+            lbBurningStatus.Text = localisation.ToString("Burning", "Leaadin"); 
             break;
 
           case BurnStatus.LeadOut:
             dataGridViewBurn.Rows[dataGridViewBurn.Rows.Count - 1].Cells[0].Value = 100;
-            lbBurningStatus.Text = localisation.ToString("Burning", "Leadout");
+            lbBurningStatus.Text = localisation.ToString("Burning", "Leadout"); 
             break;
 
           case BurnStatus.Burning:
@@ -379,26 +307,26 @@ namespace MPTagThat.GridView
           case BurnStatus.Finished:
             lbBurningStatus.Text = localisation.ToString("Burning", "Finished");
             break;
+
         }
       }
     }
 
-    private void burnManager_BurningFailed(BurnResult eBurnResult, ProjectType eProjectType)
+    void burnManager_BurningFailed(BurnResult eBurnResult, ProjectType eProjectType)
     {
       if (lbBurningStatus.InvokeRequired)
       {
-        ThreadSafeBurnAudioFailedDelegate d = burnManager_BurningFailed;
-        lbBurningStatus.Invoke(d, new object[] {eBurnResult, eProjectType});
+        ThreadSafeBurnAudioFailedDelegate d = new ThreadSafeBurnAudioFailedDelegate(burnManager_BurningFailed);
+        lbBurningStatus.Invoke(d, new object[] { eBurnResult, eProjectType });
         return;
       }
 
-      lbBurningStatus.Text = string.Format(localisation.ToString("Burning", "Failed"),
-                                           Enum.GetName(typeof (BurnResult), eBurnResult));
-      log.Error("Burning Failed: {0}", Enum.GetName(typeof (BurnResult), eBurnResult));
+      lbBurningStatus.Text = string.Format(localisation.ToString("Burning", "Failed"), Enum.GetName(typeof(BurnResult), eBurnResult));
+      log.Error("Burning Failed: {0}", Enum.GetName(typeof(BurnResult), eBurnResult));
     }
 
     /// <summary>
-    ///   Handle the Changing of Media, before burning starts
+    /// Handle the Changing of Media, before burning starts
     /// </summary>
     private bool MediaAllowsBurning()
     {
@@ -421,8 +349,8 @@ namespace MPTagThat.GridView
     {
       if (lbBurningStatus.InvokeRequired)
       {
-        ThreadSafeBurnStatusDelegate d = SetBurningStatus;
-        lbBurningStatus.Invoke(d, new object[] {message});
+        ThreadSafeBurnStatusDelegate d = new ThreadSafeBurnStatusDelegate(SetBurningStatus);
+        lbBurningStatus.Invoke(d, new object[] { message });
         return;
       }
 
@@ -430,26 +358,27 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Cleanup of the directory
+    /// Cleanup of the directory
     /// </summary>
     private void CleanupBurnDirectory()
     {
       try
       {
-        Directory.Delete(tmpBurnDirectory, true);
+        System.IO.Directory.Delete(tmpBurnDirectory, true);
       }
-      catch (Exception) {}
+      catch (Exception)
+      { }
     }
-
     #endregion
 
     #region Gridlayout
-
     /// <summary>
-    ///   Create the Columns of the Grid based on the users setting
+    /// Create the Columns of the Grid based on the users setting
     /// </summary>
     private void CreateColumns()
     {
+
+
       // Now create the columns 
       foreach (GridViewColumn column in gridColumns.Settings.Columns)
       {
@@ -468,7 +397,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Save the settings
+    /// Save the settings
     /// </summary>
     private void SaveSettings()
     {
@@ -487,7 +416,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Create Context Menu
+    /// Create Context Menu
     /// </summary>
     private void CreateContextMenu()
     {
@@ -495,21 +424,21 @@ namespace MPTagThat.GridView
       MenuItem[] rmitems = new MenuItem[1];
       rmitems[0] = new MenuItem();
       rmitems[0].Text = localisation.ToString("Burning", "ClearList");
-      rmitems[0].Click += dataGridViewBurn_ClearList;
+      rmitems[0].Click += new System.EventHandler(dataGridViewBurn_ClearList);
       rmitems[0].DefaultItem = true;
-      dataGridViewBurn.ContextMenu = new ContextMenu(rmitems);
+      this.dataGridViewBurn.ContextMenu = new ContextMenu(rmitems);
     }
-
     #endregion
 
+
     /// <summary>
-    ///   Retrieve media info in a Thread
+    /// Retrieve media info in a Thread
     /// </summary>
     private void SetMediaInfoThread()
     {
       if (lbMediaInfo.InvokeRequired)
       {
-        ThreadSafeAddMediaInfoDelegate d = SetMediaInfoThread;
+        ThreadSafeAddMediaInfoDelegate d = new ThreadSafeAddMediaInfoDelegate(SetMediaInfoThread);
         lbMediaInfo.Invoke(d);
         return;
       }
@@ -518,16 +447,15 @@ namespace MPTagThat.GridView
 
       mediainfo = burnManager.GetMediaInfo();
       if (mediainfo != null)
-        lbMediaInfo.Text = String.Format(localisation.ToString("Burning", "MediaInfo"), mediainfo.HumanMediaString,
-                                         ConvertSizeToMinute(mediainfo.Size), mediainfo.DiskStatus);
+        lbMediaInfo.Text = String.Format(localisation.ToString("Burning", "MediaInfo"), mediainfo.HumanMediaString, ConvertSizeToMinute(mediainfo.Size), mediainfo.DiskStatus);
 
       CalculateTotalTime();
     }
 
     /// <summary>
-    ///   Adds a Track to the data grid
+    /// Adds a Track to the data grid
     /// </summary>
-    /// <param name = "track"></param>
+    /// <param name="track"></param>
     private void AddTrack(TrackData track)
     {
       if (track == null)
@@ -536,8 +464,8 @@ namespace MPTagThat.GridView
 
       if (dataGridViewBurn.InvokeRequired)
       {
-        ThreadSafeAddTracksDelegate d = AddTrack;
-        dataGridViewBurn.Invoke(d, new object[] {track});
+        ThreadSafeAddTracksDelegate d = new ThreadSafeAddTracksDelegate(AddTrack);
+        dataGridViewBurn.Invoke(d, new object[] { track });
         return;
       }
 
@@ -553,8 +481,7 @@ namespace MPTagThat.GridView
       }
       DateTime dt = new DateTime(totalTime);
       int minutes = dt.Hour * 60 + dt.Minute;
-      lbUsed.Text = String.Format(localisation.ToString("Burning", "Used"), minutes.ToString().PadLeft(2, '0'),
-                                  dt.Second.ToString().PadLeft(2, '0'), bindingList.Count);
+      lbUsed.Text = String.Format(localisation.ToString("Burning", "Used"), minutes.ToString().PadLeft(2, '0'), dt.Second.ToString().PadLeft(2, '0'), bindingList.Count);
       if (mediainfo != null)
       {
         if (minutes > ConvertSizeToMinute(mediainfo.Size))
@@ -565,7 +492,7 @@ namespace MPTagThat.GridView
     private int ConvertSizeToMinute(long size)
     {
       // The size is deliverd in sectors and we have 75 sectors per second of Audio
-      return (int)Math.Round(size / 75.0 / 60.0);
+      return (int)Math.Round((double)size / 75.0 / 60.0);
     }
 
     private void GetDrivesThread()
@@ -595,15 +522,13 @@ namespace MPTagThat.GridView
         _main.MainRibbon.BurnerCombo.SelectedIndex = 0;
       }
     }
-
     #endregion
 
     #region Event Handler
-
     /// <summary>
-    ///   Handle Messages
+    /// Handle Messages
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -612,7 +537,7 @@ namespace MPTagThat.GridView
       {
         case "languagechanged":
           LanguageChanged();
-          Refresh();
+          this.Refresh();
           break;
       }
     }
@@ -627,12 +552,12 @@ namespace MPTagThat.GridView
       CalculateTotalTime();
     }
 
-    private void mediaChangeMonitor_MediaRemoved(string eDriveLetter)
+    void mediaChangeMonitor_MediaRemoved(string eDriveLetter)
     {
       if (lbMediaInfo.InvokeRequired)
       {
-        ThreadSafeMediaRemovedDelegate d = mediaChangeMonitor_MediaRemoved;
-        lbMediaInfo.Invoke(d, new object[] {eDriveLetter});
+        ThreadSafeMediaRemovedDelegate d = new ThreadSafeMediaRemovedDelegate(mediaChangeMonitor_MediaRemoved);
+        lbMediaInfo.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
@@ -640,53 +565,19 @@ namespace MPTagThat.GridView
       lbMediaInfo.Text = localisation.ToString("Burning", "NoMedia");
     }
 
-    private void mediaChangeMonitor_MediaInserted(string eDriveLetter)
+    void mediaChangeMonitor_MediaInserted(string eDriveLetter)
     {
       if (lbMediaInfo.InvokeRequired)
       {
-        ThreadSafeMediaInsertedDelegate d = mediaChangeMonitor_MediaInserted;
-        lbMediaInfo.Invoke(d, new object[] {eDriveLetter});
+        ThreadSafeMediaInsertedDelegate d = new ThreadSafeMediaInsertedDelegate(mediaChangeMonitor_MediaInserted);
+        lbMediaInfo.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
       SetMediaInfo();
     }
 
-    /// <summary>
-    ///   Handle Key input on the Grid
-    /// </summary>
-    /// <param name = "msg"></param>
-    /// <param name = "keyData"></param>
-    /// <returns></returns>
-    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-    {
-      switch (keyData)
-      {
-        case Keys.Delete:
-          for (int i = dataGridViewBurn.Rows.Count - 1; i > -1; i--)
-          {
-            if (!dataGridViewBurn.Rows[i].Selected)
-              continue;
-
-            bindingList.RemoveAt(i);
-          }
-          return true;
-      }
-      return base.ProcessCmdKey(ref msg, keyData);
-    }
-
-    /// <summary>
-    ///   Context Menu entry has been selected
-    /// </summary>
-    /// <param name = "o"></param>
-    /// <param name = "e"></param>
-    private void dataGridViewBurn_ClearList(object o, EventArgs e)
-    {
-      dataGridViewBurn.Rows.Clear();
-    }
-
     #region Drag & Drop
-
     private void OnMouseDown(object sender, MouseEventArgs e)
     {
       //stores values for drag/drop operations if necessary
@@ -707,7 +598,7 @@ namespace MPTagThat.GridView
 
       // Show Context Menu on Right Mouse Click
       if (e.Button == MouseButtons.Right)
-        dataGridViewBurn.ContextMenu.Show(dataGridViewBurn, new Point(e.X, e.Y));
+        this.dataGridViewBurn.ContextMenu.Show(dataGridViewBurn, new Point(e.X, e.Y));
 
       base.OnMouseDown(e);
     }
@@ -720,8 +611,7 @@ namespace MPTagThat.GridView
         {
           if (DragDropRectangle != Rectangle.Empty && !DragDropRectangle.Contains(e.X, e.Y))
           {
-            DragDropEffects DropEffect = dataGridViewBurn.DoDragDrop(dataGridViewBurn.Rows[DragDropSourceIndex],
-                                                                     DragDropEffects.Move);
+            DragDropEffects DropEffect = dataGridViewBurn.DoDragDrop(dataGridViewBurn.Rows[DragDropSourceIndex], DragDropEffects.Move);
           }
         }
       }
@@ -734,9 +624,7 @@ namespace MPTagThat.GridView
       if (dataGridViewBurn.AllowDrop)
       {
         e.Effect = DragDropEffects.Move;
-        int CurRow =
-          dataGridViewBurn.HitTest(dataGridViewBurn.PointToClient(new Point(e.X, e.Y)).X,
-                                   dataGridViewBurn.PointToClient(new Point(e.X, e.Y)).Y).RowIndex;
+        int CurRow = dataGridViewBurn.HitTest(dataGridViewBurn.PointToClient(new Point(e.X, e.Y)).X, dataGridViewBurn.PointToClient(new Point(e.X, e.Y)).Y).RowIndex;
         if (DragDropCurrentIndex != CurRow)
         {
           DragDropCurrentIndex = CurRow;
@@ -787,9 +675,41 @@ namespace MPTagThat.GridView
         }
       }
     }
-
     #endregion
 
+    /// <summary>
+    /// Handle Key input on the Grid
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <param name="keyData"></param>
+    /// <returns></returns>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      switch (keyData)
+      {
+        case Keys.Delete:
+          for (int i = dataGridViewBurn.Rows.Count - 1; i > -1; i--)
+          {
+            if (!dataGridViewBurn.Rows[i].Selected)
+              continue;
+
+            bindingList.RemoveAt(i);
+          }
+          return true;
+      }
+      return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    /// <summary>
+    /// Context Menu entry has been selected
+    /// </summary>
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void dataGridViewBurn_ClearList(object o, System.EventArgs e)
+    {
+      dataGridViewBurn.Rows.Clear();
+    }
     #endregion
+
   }
 }

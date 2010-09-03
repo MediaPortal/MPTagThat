@@ -1,24 +1,4 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
+#region Using directives
 
 using System;
 
@@ -26,30 +6,56 @@ using System;
 
 namespace Stepi.UI
 {
-  public class CaptionDraggingEventArgs : EventArgs
-  {
-    #region Members
-
-    #endregion
-
-    #region ctor
-
-    public CaptionDraggingEventArgs() {}
-
-    public CaptionDraggingEventArgs(int width, int height)
+    public class CaptionDraggingEventArgs :EventArgs
     {
-      this.Width = width;
-      this.Height = height;
+        #region Members
+        /// <summary>
+        /// Instance of the width change
+        /// </summary>
+        private int width = 0;
+
+        /// <summary>
+        /// Instance of the height change
+        /// </summary>
+        private int height = 0;
+        #endregion
+
+        #region ctor
+        public CaptionDraggingEventArgs()
+        { }
+
+        public CaptionDraggingEventArgs(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
+        #endregion
+
+        #region Properties
+
+        public int Width
+        {
+            get
+            {
+                return width;
+            }
+            set
+            {
+                width = value;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                height = value;
+            }
+        }
+        #endregion
     }
-
-    #endregion
-
-    #region Properties
-
-    public int Width { get; set; }
-
-    public int Height { get; set; }
-
-    #endregion
-  }
 }

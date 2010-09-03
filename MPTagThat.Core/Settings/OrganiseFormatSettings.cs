@@ -1,42 +1,21 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
+﻿using System;
 using System.Collections.Generic;
-
-#endregion
+using System.Text;
 
 namespace MPTagThat.Core
 {
   public class OrganiseFormatSettings : ParameterFormat
   {
     #region Variable
-
-    private int _lastUsedFolderIndex = -1;
     private List<string> _lastUsedFolders = new List<string>();
-
+    private int _lastUsedFolderIndex = -1;
+    private string _lastUsedScript;
+    private bool _overWriteFiles;
+    private bool _copyFiles;
+    private bool _copyNonMusicFiles;
     #endregion
 
     #region Properties
-
     [Setting(SettingScope.User, "")]
     public List<string> LastUsedFolders
     {
@@ -52,26 +31,39 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "false")]
-    public bool CopyFiles { get; set; }
+    public bool CopyFiles
+    {
+      get { return _copyFiles; }
+      set { _copyFiles = value; }
+    }
 
     [Setting(SettingScope.User, "true")]
-    public bool OverWriteFiles { get; set; }
+    public bool OverWriteFiles
+    {
+      get { return _overWriteFiles; }
+      set { _overWriteFiles = value; }
+    }
 
     [Setting(SettingScope.User, "false")]
-    public bool CopyNonMusicFiles { get; set; }
+    public bool CopyNonMusicFiles
+    {
+      get { return _copyNonMusicFiles; }
+      set { _copyNonMusicFiles = value; }
+    }
 
     [Setting(SettingScope.User, "")]
-    public string LastUsedScript { get; set; }
-
+    public string LastUsedScript
+    {
+      get { return _lastUsedScript; }
+      set { _lastUsedScript = value; }
+    }
     #endregion
 
     #region Public Methods
-
     public void Save()
     {
       ServiceScope.Get<ISettingsManager>().Save(this);
     }
-
     #endregion
   }
 }

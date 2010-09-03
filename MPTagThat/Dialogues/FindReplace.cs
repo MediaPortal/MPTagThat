@@ -1,56 +1,36 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.GridView;
-
-#endregion
 
 namespace MPTagThat.Dialogues
 {
   public partial class FindReplace : ShapedForm
   {
     #region Variables
-
-    private readonly Main _main;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly Theme theme = ServiceScope.Get<IThemeManager>().CurrentTheme;
-
-    private int _curCell;
-    private int _curCellFindPos;
-    private int _curRow;
-
-    private FindResult _findResult;
-    private bool _replace;
-    private bool _searchStringFound;
+    private Main _main;
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private ILogger log = ServiceScope.Get<ILogger>();
+    private Theme theme = ServiceScope.Get<IThemeManager>().CurrentTheme;
 
+    private bool _replace = false;
+    private bool _searchStringFound = false;
+    private int _curRow = 0;
+    private int _curCell = 0;
+    private int _curCellFindPos = 0;
+
+    private FindResult _findResult = null;
     #endregion
 
     #region Properties
-
     public bool Replace
     {
       get { return _replace; }
@@ -64,18 +44,16 @@ namespace MPTagThat.Dialogues
         }
       }
     }
-
     #endregion
 
     #region ctor
-
     public FindReplace(Main main)
     {
       _main = main;
       InitializeComponent();
 
-      labelHeader.ForeColor = theme.FormHeaderForeColor;
-      labelHeader.Font = theme.FormHeaderFont;
+      this.labelHeader.ForeColor = theme.FormHeaderForeColor;
+      this.labelHeader.Font = theme.FormHeaderFont;
 
       if (Options.FindBuffer != null)
       {
@@ -89,15 +67,13 @@ namespace MPTagThat.Dialogues
 
       LocaliseScreen();
     }
-
     #endregion
 
     #region Methods
 
     #region Localisation
-
     /// <summary>
-    ///   Localise the Screen
+    /// Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
@@ -110,7 +86,6 @@ namespace MPTagThat.Dialogues
         labelHeader.Text = localisation.ToString("FindReplace", "HeaderFind");
       }
     }
-
     #endregion
 
     private bool FindString()
@@ -121,12 +96,12 @@ namespace MPTagThat.Dialogues
         searchString = searchString.ToLowerInvariant();
       }
 
-      for (int i = _curRow; i < _main.TracksGridView.View.Rows.Count; i++)
+      for (int i = _curRow; i < _main.TracksGridView.View.Rows.Count; i++ )
       {
         DataGridViewRow row = _main.TracksGridView.View.Rows[i];
         for (int j = _curCell; j < row.Cells.Count; j++)
         {
-          if (!(_main.TracksGridView.View.Columns[j]).Visible)
+          if (!(_main.TracksGridView.View.Columns[j] as DataGridViewColumn).Visible)
           {
             continue;
           }
@@ -149,7 +124,7 @@ namespace MPTagThat.Dialogues
             _findResult.StartPos = findPos;
             _findResult.Length = searchString.Length;
             _main.TracksGridView.ResultFind = _findResult;
-
+            
             // Position Cell and deselect row, so that we have our find color
             _main.TracksGridView.View.CurrentCell = _main.TracksGridView.View[j, i];
             _main.TracksGridView.View.Rows[i].Selected = false;
@@ -216,7 +191,6 @@ namespace MPTagThat.Dialogues
         }
       }
     }
-
     #endregion
 
     #region Events
@@ -272,7 +246,6 @@ namespace MPTagThat.Dialogues
       }
       MaintainFindReplaceBuffer();
     }
-
     #endregion
   }
 }

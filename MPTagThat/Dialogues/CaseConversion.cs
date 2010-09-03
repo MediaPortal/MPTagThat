@@ -1,53 +1,29 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Globalization;
-using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using MPTagThat.Core;
-
-#endregion
 
 namespace MPTagThat.CaseConversion
 {
   public partial class CaseConversion : ShapedForm
   {
     #region Variables
+    private Main _main;
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log = ServiceScope.Get<ILogger>();
 
-    private readonly Main _main;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
-
-    private readonly TextInfo textinfo = Thread.CurrentThread.CurrentCulture.TextInfo;
+    private TextInfo textinfo = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo;
 
     private string strExcep;
-
     #endregion
 
     #region ctor
-
     public CaseConversion(Main main)
     {
       _main = main;
@@ -59,26 +35,24 @@ namespace MPTagThat.CaseConversion
       _main = main;
       InitForm(batchMode);
     }
-
     #endregion
 
     #region Methods
-
     /// <summary>
-    ///   The form is used in Batch Mode, when saving tags
+    /// The form is used in Batch Mode, when saving tags
     /// </summary>
-    /// <param name = "batchMode"></param>
+    /// <param name="batchMode"></param>
     private void InitForm(bool batchMode)
     {
       InitializeComponent();
 
       if (!batchMode)
       {
-        BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+        this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
         ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-        labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
-        labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+        this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+        this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
         LocaliseScreen();
       }
@@ -105,28 +79,35 @@ namespace MPTagThat.CaseConversion
       checkBoxAlwaysUpperCaseFirstLetter.Checked = Options.ConversionSettings.ConvertAllWaysFirstUpper;
     }
 
+    #region Localisation
     /// <summary>
-    ///   Do Case Conversion for the given track.
-    ///   Called internally by the Convert button and by the Save clause, if set in Preferences
+    /// Localise the Screen
     /// </summary>
-    /// <param name = "track"></param>
+    private void LocaliseScreen()
+    {
+      this.labelHeader.Text = localisation.ToString("CaseConversion", "Header");
+    }
+    #endregion
+
+    /// <summary>
+    /// Do Case Conversion for the given track.
+    /// Called internally by the Convert button and by the Save clause, if set in Preferences
+    /// </summary>
+    /// <param name="track"></param>
     public void CaseConvert(TrackData track, int rowIndex)
     {
       bool bErrors = false;
       // Convert the Filename
       if (checkBoxConvertFileName.Checked)
       {
-        string fileName = ConvertCase(Path.GetFileNameWithoutExtension(track.FileName));
+        string fileName = ConvertCase(System.IO.Path.GetFileNameWithoutExtension(track.FileName));
 
         // Now check the length of the filename
         if (fileName.Length > 255)
         {
           log.Debug("Filename too long: {0}", fileName);
           _main.TracksGridView.View.Rows[rowIndex].Cells[0].Value = localisation.ToString("tag2filename", "NameTooLong");
-          _main.TracksGridView.AddErrorMessage(track.File.Name,
-                                               String.Format("{0}: {1}",
-                                                             localisation.ToString("tag2filename", "NameTooLong"),
-                                                             fileName));
+          _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "NameTooLong"), fileName));
           bErrors = true;
         }
 
@@ -142,10 +123,7 @@ namespace MPTagThat.CaseConversion
           {
             log.Debug("New Filename already exists: {0}", fileName);
             _main.TracksGridView.View.Rows[rowIndex].Cells[0].Value = localisation.ToString("tag2filename", "FileExists");
-            _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[rowIndex].File.Name,
-                                                 String.Format("{0}: {1}",
-                                                               localisation.ToString("tag2filename", "FileExists"),
-                                                               fileName));
+            _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[rowIndex].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "FileExists"), fileName));
             bErrors = true;
             break;
           }
@@ -153,7 +131,7 @@ namespace MPTagThat.CaseConversion
         if (!bErrors)
         {
           // Now that we have a correct Filename and no duplicates accept the changes
-          track.FileName = string.Format("{0}{1}", fileName, Path.GetExtension(track.FileName));
+          track.FileName = string.Format("{0}{1}", fileName, System.IO.Path.GetExtension(track.FileName));
           track.Changed = true;
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(rowIndex);
@@ -274,45 +252,30 @@ namespace MPTagThat.CaseConversion
       foreach (string excep in Options.ConversionSettings.CaseConvExceptions)
       {
         strExcep = Regex.Escape(excep);
-        strText = Regex.Replace(strText, @"(\W|^)" + strExcep + @"(\W|$)", new MatchEvaluator(RegexReplaceCallback),
-                                RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        strText = Regex.Replace(strText, @"(\W|^)" + strExcep + @"(\W|$)", new MatchEvaluator(RegexReplaceCallback), RegexOptions.Singleline | RegexOptions.IgnoreCase);
       }
 
       return strText;
     }
 
     /// <summary>
-    ///   Callback Method for every Match of the Regex
+    /// Callback Method for every Match of the Regex
     /// </summary>
-    /// <param name = "Match"></param>
+    /// <param name="Match"></param>
     /// <returns></returns>
     private string RegexReplaceCallback(Match Match)
     {
       strExcep = strExcep.Replace(@"\\", "\x0001").Replace(@"\", "").Replace("\x0001", @"\");
       return Util.ReplaceEx(Match.Value, strExcep, strExcep);
     }
-
-    #region Localisation
-
-    /// <summary>
-    ///   Localise the Screen
-    /// </summary>
-    private void LocaliseScreen()
-    {
-      labelHeader.Text = localisation.ToString("CaseConversion", "Header");
-    }
-
-    #endregion
-
     #endregion
 
     #region Event Handler
-
     /// <summary>
-    ///   Do the Conversion
+    /// Do the Conversion
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonConvert_Click(object sender, EventArgs e)
     {
       CaseConvertSelectedTracks();
@@ -335,24 +298,24 @@ namespace MPTagThat.CaseConversion
       Options.ConversionSettings.ReplaceUnderscoreBySpace = checkBoxReplaceUnderscoreBySpace.Checked;
       Options.ConversionSettings.ConvertAllWaysFirstUpper = checkBoxAlwaysUpperCaseFirstLetter.Checked;
 
-      Close();
+      this.Close();
     }
 
     /// <summary>
-    ///   Cancel Has been pressed. Close Form
+    /// Cancel Has been pressed. Close Form
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonCancel_Click(object sender, EventArgs e)
     {
-      Close();
+      this.Close();
     }
 
     /// <summary>
-    ///   Add the Exception to the List
+    /// Add the Exception to the List
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonAddException_Click(object sender, EventArgs e)
     {
       foreach (string exc in Options.ConversionSettings.CaseConvExceptions)
@@ -370,10 +333,10 @@ namespace MPTagThat.CaseConversion
     }
 
     /// <summary>
-    ///   Remove the selected Exception from the List
+    /// Remove the selected Exception from the List
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonRemoveException_Click(object sender, EventArgs e)
     {
       int index = listBoxExceptions.SelectedIndex;
@@ -387,7 +350,6 @@ namespace MPTagThat.CaseConversion
         listBoxExceptions.Refresh();
       }
     }
-
     #endregion
   }
 }

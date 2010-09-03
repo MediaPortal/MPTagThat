@@ -1,33 +1,10 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Data;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
-using MPTagThat.Core.Properties;
-
-#endregion
 
 namespace MPTagThat.Core
 {
@@ -35,58 +12,44 @@ namespace MPTagThat.Core
   {
     public DataGridViewRatingColumn()
     {
-      CellTemplate = new RatingCell();
-      DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      ValueType = typeof (int);
+      this.CellTemplate = new RatingCell();
+      this.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+      this.ValueType = typeof(int);
     }
   }
 
   public class RatingCell : DataGridViewImageCell
   {
     #region Variables
-
-    private const int IMAGEWIDTH = 58;
-    private static readonly Image[] starImages;
-    private static readonly Image[] starHotImages;
-
+    static Image[] starImages;
+    static Image[] starHotImages;
+    const int IMAGEWIDTH = 58;
     #endregion
 
+    // setup star images
     #region ctor
-
     static RatingCell()
     {
       starImages = new Image[6];
       starHotImages = new Image[6];
       // load normal stars
       for (int i = 0; i <= 5; i++)
-        starImages[i] = (Image)Resources.ResourceManager.GetObject("star" + i);
+        starImages[i] = (Image)MPTagThat.Core.Properties.Resources.ResourceManager.GetObject("star" + i.ToString());
 
       // load hot normal stars
       for (int i = 0; i <= 5; i++)
-        starHotImages[i] = (Image)Resources.ResourceManager.GetObject("starhot" + i);
+        starHotImages[i] = (Image)MPTagThat.Core.Properties.Resources.ResourceManager.GetObject("starhot" + i.ToString());
     }
 
     public RatingCell()
     {
       // Value type is an integer.
       // Formatted value type is an image since we derive from the ImageCell
-      ValueType = typeof (int);
+      this.ValueType = typeof(int);
     }
-
     #endregion
 
-    // setup star images
-
-    public override object DefaultNewRowValue
-    {
-      // default new row to 0 stars
-      get { return 0; }
-    }
-
-    protected override object GetFormattedValue(object value, int rowIndex, ref DataGridViewCellStyle cellStyle,
-                                                TypeConverter valueTypeConverter,
-                                                TypeConverter formattedValueTypeConverter,
-                                                DataGridViewDataErrorContexts context)
+    protected override object GetFormattedValue(object value, int rowIndex, ref DataGridViewCellStyle cellStyle, TypeConverter valueTypeConverter, TypeConverter formattedValueTypeConverter, DataGridViewDataErrorContexts context)
     {
       // Check for a valid range
       if ((int)value < 0 || (int)value > 5)
@@ -96,50 +59,47 @@ namespace MPTagThat.Core
       return starImages[(int)value];
     }
 
-    protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex,
-                                  DataGridViewElementStates elementState, object value, object formattedValue,
-                                  string errorText, DataGridViewCellStyle cellStyle,
-                                  DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+    public override object DefaultNewRowValue
+    {
+      // default new row to 0 stars
+      get { return 0; }
+    }
+
+    protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
     {
       Image cellImage = (Image)formattedValue;
 
-      int starNumber = GetStarFromMouse(cellBounds, DataGridView.PointToClient(Control.MousePosition));
+      int starNumber = GetStarFromMouse(cellBounds, this.DataGridView.PointToClient(Control.MousePosition));
 
       if (starNumber != -1)
         cellImage = starHotImages[starNumber];
 
       // surpress painting of selection
-      base.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, cellImage, errorText, cellStyle,
-                 advancedBorderStyle, (paintParts & ~DataGridViewPaintParts.SelectionBackground));
+      base.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, cellImage, errorText, cellStyle, advancedBorderStyle, (paintParts & ~DataGridViewPaintParts.SelectionBackground));
     }
 
     // Update cell's value when the user clicks on a star
     protected override void OnContentClick(DataGridViewCellEventArgs e)
     {
       base.OnContentClick(e);
-      int starNumber =
-        GetStarFromMouse(
-          DataGridView.GetCellDisplayRectangle(DataGridView.CurrentCellAddress.X, DataGridView.CurrentCellAddress.Y,
-                                               false), DataGridView.PointToClient(Control.MousePosition));
+      int starNumber = GetStarFromMouse(this.DataGridView.GetCellDisplayRectangle(this.DataGridView.CurrentCellAddress.X, this.DataGridView.CurrentCellAddress.Y, false), this.DataGridView.PointToClient(Control.MousePosition));
 
       if (starNumber != -1)
-        Value = starNumber;
+        this.Value = starNumber;
     }
 
     #region Invalidate cells when mouse moves or leaves the cell
-
     protected override void OnMouseLeave(int rowIndex)
     {
       base.OnMouseLeave(rowIndex);
-      DataGridView.InvalidateCell(this);
+      this.DataGridView.InvalidateCell(this);
     }
 
     protected override void OnMouseMove(DataGridViewCellMouseEventArgs e)
     {
       base.OnMouseMove(e);
-      DataGridView.InvalidateCell(this);
+      this.DataGridView.InvalidateCell(this);
     }
-
     #endregion
 
     #region Private Implementation
@@ -148,24 +108,22 @@ namespace MPTagThat.Core
     {
       if (cellBounds.Contains(mouseLocation))
       {
+
         int mouseXRelativeToCell = (mouseLocation.X - cellBounds.X);
         int imageXArea = (cellBounds.Width / 2) - (IMAGEWIDTH / 2);
         if (((mouseXRelativeToCell + 4) < imageXArea) || (mouseXRelativeToCell >= (imageXArea + IMAGEWIDTH)))
           return -1;
         else
         {
-          int oo =
-            (int)
-            Math.Round((((mouseXRelativeToCell - imageXArea + 5) / (float)IMAGEWIDTH) * 5f),
-                       MidpointRounding.AwayFromZero);
-          if (oo > 5 || oo < 0) Debugger.Break();
+          int oo = (int)Math.Round((((float)(mouseXRelativeToCell - imageXArea + 5) / (float)IMAGEWIDTH) * 5f), MidpointRounding.AwayFromZero);
+          if (oo > 5 || oo < 0) System.Diagnostics.Debugger.Break();
           return oo;
         }
       }
       else
         return -1;
     }
-
     #endregion
+
   }
 }

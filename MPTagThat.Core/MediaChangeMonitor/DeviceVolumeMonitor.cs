@@ -1,145 +1,123 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
+#region Copyright (C) 2007-2008 Team MediaPortal
 
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+/*
+    Copyright (C) 2007-2008 Team MediaPortal
+    http://www.team-mediaportal.com
+ 
+    This file is part of MediaPortal II
+
+    MediaPortal II is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    MediaPortal II is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #endregion
-
-#region
 
 using System;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-
-#endregion
-
+using System.Runtime.InteropServices;
 #pragma warning disable 649
 #pragma warning disable 169
 
 namespace MPTagThat.Core.MediaChangeMonitor
 {
+
   /// <summary>
-  ///   Delegate used to implement the class events
+  /// Delegate used to implement the class events
   /// </summary>
   public delegate void DeviceVolumeAction(int aMask);
 
   /// <summary>
-  ///   Custom exception
+  /// Custom exception
   /// </summary>
   public class DeviceVolumeMonitorException : ApplicationException
   {
-    public DeviceVolumeMonitorException(string aMessage) : base(aMessage) {}
+    public DeviceVolumeMonitorException(string aMessage) : base(aMessage) { }
   }
 
   internal class _DeviceVolumeMonitor : NativeWindow
   {
     /// <summary>
-    ///   Private fields
+    /// Private fields
     /// </summary>
-    private readonly DeviceVolumeMonitor fMonitor;
+    DeviceVolumeMonitor fMonitor;
 
     #region API constants and structures
-
-    #region DeviceEvent enum
+    /// <summary>
+    /// Constant defined for the WM_DEVICECHANGE message in WinUser.h
+    /// </summary>
+    const int WM_DEVICECHANGE = 0x0219;
 
     /// <summary>
-    ///   Constants and structs defined in DBT.h
+    /// Constants and structs defined in DBT.h
     /// </summary>
-    public enum DeviceEvent
+    public enum DeviceEvent : int
     {
-      Arrival = 0x8000, //DBT_DEVICEARRIVAL
-      QueryRemove = 0x8001, //DBT_DEVICEQUERYREMOVE
+      Arrival = 0x8000,           //DBT_DEVICEARRIVAL
+      QueryRemove = 0x8001,       //DBT_DEVICEQUERYREMOVE
       QueryRemoveFailed = 0x8002, //DBT_DEVICEQUERYREMOVEFAILED
-      RemovePending = 0x8003, //DBT_DEVICEREMOVEPENDING
-      RemoveComplete = 0x8004, //DBT_DEVICEREMOVECOMPLETE
-      Specific = 0x8005, //DBT_DEVICEREMOVECOMPLETE
-      Custom = 0x8006 //DBT_CUSTOMEVENT
+      RemovePending = 0x8003,     //DBT_DEVICEREMOVEPENDING
+      RemoveComplete = 0x8004,    //DBT_DEVICEREMOVECOMPLETE
+      Specific = 0x8005,          //DBT_DEVICEREMOVECOMPLETE
+      Custom = 0x8006             //DBT_CUSTOMEVENT
     }
 
-    #endregion
-
-    #region DeviceType enum
-
-    public enum DeviceType
+    public enum DeviceType : int
     {
-      OEM = 0x00000000, //DBT_DEVTYP_OEM
-      DeviceNode = 0x00000001, //DBT_DEVTYP_DEVNODE
-      Volume = 0x00000002, //DBT_DEVTYP_VOLUME
-      Port = 0x00000003, //DBT_DEVTYP_PORT
-      Net = 0x00000004 //DBT_DEVTYP_NET
+      OEM = 0x00000000,           //DBT_DEVTYP_OEM
+      DeviceNode = 0x00000001,    //DBT_DEVTYP_DEVNODE
+      Volume = 0x00000002,        //DBT_DEVTYP_VOLUME
+      Port = 0x00000003,          //DBT_DEVTYP_PORT
+      Net = 0x00000004            //DBT_DEVTYP_NET
     }
 
-    #endregion
-
-    #region VolumeFlags enum
-
-    public enum VolumeFlags
+    public enum VolumeFlags : int
     {
-      Media = 0x0001, //DBTF_MEDIA
-      Net = 0x0002 //DBTF_NET
+      Media = 0x0001,             //DBTF_MEDIA
+      Net = 0x0002                //DBTF_NET
     }
 
+    public struct BroadcastHeader   //_DEV_BROADCAST_HDR 
+    {
+      public int Size;            //dbch_size
+      public DeviceType Type;     //dbch_devicetype
+      private int Reserved;       //dbch_reserved
+    }
+
+    public struct Volume            //_DEV_BROADCAST_VOLUME 
+    {
+      public int Size;            //dbcv_size
+      public DeviceType Type;     //dbcv_devicetype
+      private int Reserved;       //dbcv_reserved
+      public int Mask;            //dbcv_unitmask
+      public int Flags;           //dbcv_flags
+    }
     #endregion
 
     /// <summary>
-    ///   Constant defined for the WM_DEVICECHANGE message in WinUser.h
+    /// Constructor
     /// </summary>
-    private const int WM_DEVICECHANGE = 0x0219;
-
-    #region Nested type: BroadcastHeader
-
-    public struct BroadcastHeader //_DEV_BROADCAST_HDR 
-    {
-      private int Reserved; //dbch_reserved
-      public int Size; //dbch_size
-      public DeviceType Type; //dbch_devicetype
-    }
-
-    #endregion
-
-    #region Nested type: Volume
-
-    public struct Volume //_DEV_BROADCAST_VOLUME 
-    {
-      public int Flags; //dbcv_flags
-      public int Mask; //dbcv_unitmask
-      private int Reserved; //dbcv_reserved
-      public int Size; //dbcv_size
-      public DeviceType Type; //dbcv_devicetype
-    }
-
-    #endregion
-
-    #endregion
-
-    /// <summary>
-    ///   Constructor
-    /// </summary>
-    /// <param name = "aMonitor">A DeviceVolumeMonitor instance that ownes the object</param>
-    /// <param name = "aHandle">The Windows handle to be used</param>
+    /// <param name="aMonitor">A DeviceVolumeMonitor instance that ownes the object</param>
+    /// <param name="aHandle">The Windows handle to be used</param>
     public _DeviceVolumeMonitor(DeviceVolumeMonitor aMonitor)
     {
       fMonitor = aMonitor;
     }
 
     /// <summary>
-    ///   WndProc method that traps all messages sent to the Handle
+    /// WndProc method that traps all messages sent to the Handle
     /// </summary>
-    /// <param name = "aMessage">A Windows message</param>
+    /// <param name="aMessage">A Windows message</param>
     protected override void WndProc(ref Message aMessage)
     {
       BroadcastHeader lBroadcastHeader;
@@ -152,10 +130,10 @@ namespace MPTagThat.Core.MediaChangeMonitor
         lEvent = (DeviceEvent)aMessage.WParam.ToInt32();
         if (lEvent == DeviceEvent.Arrival || lEvent == DeviceEvent.RemoveComplete)
         {
-          lBroadcastHeader = (BroadcastHeader)Marshal.PtrToStructure(aMessage.LParam, typeof (BroadcastHeader));
+          lBroadcastHeader = (BroadcastHeader)Marshal.PtrToStructure(aMessage.LParam, typeof(BroadcastHeader));
           if (lBroadcastHeader.Type == DeviceType.Volume)
           {
-            lVolume = (Volume)Marshal.PtrToStructure(aMessage.LParam, typeof (Volume));
+            lVolume = (Volume)Marshal.PtrToStructure(aMessage.LParam, typeof(Volume));
             if ((lVolume.Flags & (int)VolumeFlags.Media) != 0)
             {
               fMonitor.TriggerEvents(lEvent == DeviceEvent.Arrival, lVolume.Mask);
@@ -167,41 +145,31 @@ namespace MPTagThat.Core.MediaChangeMonitor
   }
 
   /// <summary>
-  ///   DeviceVolumeMonitor class
-  ///   Derived from NativeWindow and implements IDisposable
-  ///   Built to monitor volume insertion and removal from devices which implement software ejection fro removable media
+  /// DeviceVolumeMonitor class
+  /// Derived from NativeWindow and implements IDisposable
+  /// Built to monitor volume insertion and removal from devices which implement software ejection fro removable media
   /// </summary>
   public class DeviceVolumeMonitor : IDisposable
   {
-    private readonly IntPtr fHandle;
-    private bool fAsync;
-    private bool fDisposed;
-    private bool fEnabled;
 
     /// <summary>
-    ///   Private fields
+    /// Private fields
     /// </summary>
-    private _DeviceVolumeMonitor fInternal;
+    _DeviceVolumeMonitor fInternal;
+    IntPtr fHandle;
+    bool fDisposed;
+    bool fEnabled;
+    bool fAsync;
 
     /// <summary>
-    ///   Preferred constructor, accepts a Window Handle as single parameter
+    /// Events
+    /// These events are invoked on Volume insertion an removal
     /// </summary>
-    /// <param name = "aHandle">Window handle to be captured</param>
-    public DeviceVolumeMonitor(IntPtr aHandle)
-    {
-      if (aHandle != IntPtr.Zero)
-      {
-        fHandle = aHandle;
-      }
-      else
-      {
-        throw new DeviceVolumeMonitorException("Invalid handle!");
-      }
-      Initialize();
-    }
+    public event DeviceVolumeAction OnVolumeInserted;
+    public event DeviceVolumeAction OnVolumeRemoved;
 
     /// <summary>
-    ///   Enables or disables message trapping
+    /// Enables or disables message trapping
     /// </summary>
     public bool Enabled
     {
@@ -210,25 +178,19 @@ namespace MPTagThat.Core.MediaChangeMonitor
       {
         if (!fEnabled && value)
         {
-          if (fInternal.Handle == IntPtr.Zero)
-          {
-            fInternal.AssignHandle(fHandle);
-          }
+          if (fInternal.Handle == IntPtr.Zero) { fInternal.AssignHandle(fHandle); }
           fEnabled = true;
         }
         if (fEnabled && !value)
         {
-          if (fInternal.Handle != IntPtr.Zero)
-          {
-            fInternal.ReleaseHandle();
-          }
+          if (fInternal.Handle != IntPtr.Zero) { fInternal.ReleaseHandle(); }
           fEnabled = false;
         }
       }
     }
 
     /// <summary>
-    ///   Enables or disables asynchronous event calls
+    /// Enables or disables asynchronous event calls
     /// </summary>
     public bool AsynchronousEvents
     {
@@ -236,30 +198,20 @@ namespace MPTagThat.Core.MediaChangeMonitor
       set { fAsync = value; }
     }
 
-    #region IDisposable Members
-
     /// <summary>
-    ///   IDisposable implementation acording to the preferred design pattern
+    /// Preferred constructor, accepts a Window Handle as single parameter
     /// </summary>
-    public void Dispose()
+    /// <param name="aHandle">Window handle to be captured</param>
+    public DeviceVolumeMonitor(IntPtr aHandle)
     {
-      Dispose(true);
-      GC.SuppressFinalize(this);
+      if (aHandle != IntPtr.Zero) { fHandle = aHandle; }
+      else { throw new DeviceVolumeMonitorException("Invalid handle!"); }
+      Initialize();
     }
 
-    #endregion
-
     /// <summary>
-    ///   Events
-    ///   These events are invoked on Volume insertion an removal
-    /// </summary>
-    public event DeviceVolumeAction OnVolumeInserted;
-
-    public event DeviceVolumeAction OnVolumeRemoved;
-
-    /// <summary>
-    ///   Internal initialize method
-    ///   Sets all the private fields initial values and enables message trapping
+    /// Internal initialize method
+    /// Sets all the private fields initial values and enables message trapping
     /// </summary>
     private void Initialize()
     {
@@ -271,48 +223,36 @@ namespace MPTagThat.Core.MediaChangeMonitor
     }
 
     /// <summary>
-    ///   Internal method used by _DeviceVolumeMonitor
+    /// Internal method used by _DeviceVolumeMonitor
     /// </summary>
-    /// <param name = "aInserted">Flag set if volume inserted</param>
-    /// <param name = "aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
+    /// <param name="aInserted">Flag set if volume inserted</param>
+    /// <param name="aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
     internal void TriggerEvents(bool aInserted, int aMask)
     {
       if (AsynchronousEvents)
       {
-        if (aInserted)
-        {
-          OnVolumeInserted.BeginInvoke(aMask, null, null);
-        }
-        else
-        {
-          OnVolumeRemoved.BeginInvoke(aMask, null, null);
-        }
+        if (aInserted) { OnVolumeInserted.BeginInvoke(aMask, null, null); }
+        else { OnVolumeRemoved.BeginInvoke(aMask, null, null); }
       }
       else
       {
-        if (aInserted)
-        {
-          OnVolumeInserted(aMask);
-        }
-        else
-        {
-          OnVolumeRemoved(aMask);
-        }
+        if (aInserted) { OnVolumeInserted(aMask); }
+        else { OnVolumeRemoved(aMask); }
       }
     }
 
     /// <summary>
-    ///   Platform invoke the API function QueryDosDevice
-    ///   Fills aPath with the device path mapped to a DOS drive letter or device name in aName
-    ///   Returns the device path count (NOTE: used to retrieve a single device path)
+    /// Platform invoke the API function QueryDosDevice
+    /// Fills aPath with the device path mapped to a DOS drive letter or device name in aName
+    /// Returns the device path count (NOTE: used to retrieve a single device path)
     /// </summary>
     [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
     private static extern int QueryDosDevice(string aName, [Out] StringBuilder aPath, int aCapacity);
 
     /// <summary>
-    ///   Returns a comma delimited string with all the drive letters in the bit vector parameter
+    /// Returns a comma delimited string with all the drive letters in the bit vector parameter
     /// </summary>
-    /// <param name = "aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
+    /// <param name="aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
     /// <returns></returns>
     public string MaskToLogicalPaths(int aMask)
     {
@@ -345,9 +285,9 @@ namespace MPTagThat.Core.MediaChangeMonitor
     }
 
     /// <summary>
-    ///   Returns a comma delimited string with all the device paths in the bit vector parameter
+    /// Returns a comma delimited string with all the device paths in the bit vector parameter
     /// </summary>
-    /// <param name = "aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
+    /// <param name="aMask">bit vector returned by the field dbcv_unitmask in the _DEV_BROADCAST_VOLUME structure</param>
     /// <returns></returns>
     public string MaskToDevicePaths(int aMask)
     {
@@ -377,9 +317,18 @@ namespace MPTagThat.Core.MediaChangeMonitor
       }
     }
 
+    /// <summary>
+    /// IDisposable implementation acording to the preferred design pattern
+    /// </summary>
+    public void Dispose()
+    {
+      Dispose(true);
+      GC.SuppressFinalize(this);
+    }
+
     protected virtual void Dispose(bool aDisposing)
     {
-      if (!fDisposed)
+      if (!this.fDisposed)
       {
         if (fInternal.Handle != IntPtr.Zero)
         {

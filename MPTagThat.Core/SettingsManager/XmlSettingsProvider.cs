@@ -1,44 +1,23 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
 
 using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Text;
 using System.Xml;
-
-#endregion
+using System.IO;
+using System.IO.IsolatedStorage;
 
 namespace MPTagThat.Core
 {
   public class XmlSettingsProvider
   {
-    private readonly XmlDocument document;
-    private readonly string filename;
-    private bool modified;
+    XmlDocument document = null;
+    bool modified = false;
+    string filename = null;
 
     public XmlSettingsProvider(string xmlfilename)
     {
       filename = xmlfilename;
-      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, xmlfilename);
-      ;
+      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, xmlfilename); ;
       document = new XmlDocument();
       if (File.Exists(fullFileName))
       {
@@ -52,6 +31,7 @@ namespace MPTagThat.Core
       }
       if (document == null)
         document = new XmlDocument();
+
     }
 
     public string FileName
@@ -66,14 +46,8 @@ namespace MPTagThat.Core
       XmlElement root = document.DocumentElement;
       if (root == null) return null;
       XmlNode entryNode;
-      if (scope == SettingScope.User)
-        entryNode =
-          root.SelectSingleNode(GetSectionPath(section) + "/" + GetScopePath(scope.ToString()) + "/" +
-                                GetUserPath(Environment.UserName) + "/" + GetEntryPath(entry));
-      else
-        entryNode =
-          root.SelectSingleNode(GetSectionPath(section) + "/" + GetScopePath(scope.ToString()) + "/" +
-                                GetEntryPath(entry));
+      if (scope == SettingScope.User) entryNode = root.SelectSingleNode(GetSectionPath(section) + "/" + GetScopePath(scope.ToString()) + "/" + GetUserPath(Environment.UserName) + "/" + GetEntryPath(entry));
+      else entryNode = root.SelectSingleNode(GetSectionPath(section) + "/" + GetScopePath(scope.ToString()) + "/" + GetEntryPath(entry));
       if (entryNode == null) return null;
       return entryNode.InnerText;
     }
@@ -98,7 +72,7 @@ namespace MPTagThat.Core
         if (File.Exists(fullFilename)) File.Move(fullFilename, fullFilename + ".bak");
       }
 
-      catch (Exception) {}
+      catch (Exception) { }
 
       using (StreamWriter stream = new StreamWriter(fullFilename, false))
       {
@@ -118,7 +92,7 @@ namespace MPTagThat.Core
         return;
       }
 
-      string valueString = value;
+      string valueString = value.ToString();
 
       if (document.DocumentElement == null)
       {
@@ -137,7 +111,7 @@ namespace MPTagThat.Core
         sectionNode = root.AppendChild(element);
       }
       // Get the section element and add it if it's not there
-      XmlNode scopeSectionNode = sectionNode.SelectSingleNode("Scope[@value=\"" + scope + "\"]");
+      XmlNode scopeSectionNode = sectionNode.SelectSingleNode("Scope[@value=\"" + scope.ToString() + "\"]");
       if (scopeSectionNode == null)
       {
         XmlElement element = document.CreateElement("Scope");
@@ -193,17 +167,14 @@ namespace MPTagThat.Core
     {
       return "Section[@name=\"" + section + "\"]";
     }
-
     private string GetEntryPath(string entry)
     {
       return "Setting[@name=\"" + entry + "\"]";
     }
-
     private string GetScopePath(string scope)
     {
       return "Scope[@value=\"" + scope + "\"]";
     }
-
     private string GetUserPath(string user)
     {
       return "User[@name=\"" + Environment.UserName + "\"]";

@@ -1,99 +1,58 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
+using System.Data;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
 using MPTagThat.Core.Freedb;
 using MPTagThat.Core.MediaChangeMonitor;
+
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Cd;
-using File = TagLib.File;
 
-#endregion
+using TagLib;
 
 namespace MPTagThat.GridView
 {
   public partial class GridViewRip : UserControl
   {
     #region Variables
+    private delegate void ThreadSafeGridDelegate();
+    private delegate void ThreadSafeRippingStatusDelegate(string text);
+    private delegate void ThreadSafeMediaInsertedDelegate(string DriveLetter);
+    private delegate void ThreadSafeMediaRemovedDelegate(string DriveLetter);
 
-    private readonly Main _main;
-    private readonly IAudioEncoder audioEncoder;
+    private Main _main;
+    private Thread threadRip = null;
+    private IAudioEncoder audioEncoder;
 
-    private readonly List<SortableBindingList<CDTrackDetail>> bindingList =
-      new List<SortableBindingList<CDTrackDetail>>();
+    private List<SortableBindingList<CDTrackDetail>> bindingList = new List<SortableBindingList<CDTrackDetail>>();
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log;
+    private IMediaChangeMonitor mediaChangeMonitor;
 
-    private readonly GridViewColumnsRip gridColumns;
-
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
-    private readonly IMediaChangeMonitor mediaChangeMonitor;
-    private int _currentRow = -1;
+    private GridViewColumnsRip gridColumns;
+    private string _selectedCDRomDrive = "";
 
     private string _musicDir;
     private string _outFile;
-    private string _selectedCDRomDrive = "";
-    private Thread threadRip;
 
-    #region Nested type: ThreadSafeGridDelegate
-
-    private delegate void ThreadSafeGridDelegate();
-
-    #endregion
-
-    #region Nested type: ThreadSafeMediaInsertedDelegate
-
-    private delegate void ThreadSafeMediaInsertedDelegate(string DriveLetter);
-
-    #endregion
-
-    #region Nested type: ThreadSafeMediaRemovedDelegate
-
-    private delegate void ThreadSafeMediaRemovedDelegate(string DriveLetter);
-
-    #endregion
-
-    #region Nested type: ThreadSafeRippingStatusDelegate
-
-    private delegate void ThreadSafeRippingStatusDelegate(string text);
-
-    #endregion
-
+    private int _currentRow = -1;
     #endregion
 
     #region Properties
-
     public Color BackGroundColor
     {
       set
       {
-        BackColor = value;
-        panelTop.BackColor = value;
+        this.BackColor = value;
+        this.panelTop.BackColor = value;
       }
     }
 
@@ -147,37 +106,35 @@ namespace MPTagThat.GridView
     {
       get { return dataGridViewRip; }
     }
-
     #endregion
 
     #region ctor
-
     public GridViewRip(Main main)
     {
       _main = main;
 
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       InitializeComponent();
 
-      dataGridViewRip.CurrentCellDirtyStateChanged += dataGridViewRip_CurrentCellDirtyStateChanged;
+      dataGridViewRip.CurrentCellDirtyStateChanged += new EventHandler(dataGridViewRip_CurrentCellDirtyStateChanged);
 
       // Listen to Messages
       IMessageQueue queueMessageEncoding = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
-      queueMessageEncoding.OnMessageReceive += OnMessageReceiveEncoding;
+      queueMessageEncoding.OnMessageReceive += new MessageReceivedHandler(OnMessageReceiveEncoding);
 
       log = ServiceScope.Get<ILogger>();
       audioEncoder = ServiceScope.Get<IAudioEncoder>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
-      mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
-      mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
+      mediaChangeMonitor.MediaInserted += new MediaInsertedEvent(mediaChangeMonitor_MediaInserted);
+      mediaChangeMonitor.MediaRemoved += new MediaRemovedEvent(mediaChangeMonitor_MediaRemoved);
 
       // Get number of CD Drives found and initialise a Bindinglist for every drove
       int driveCount = BassCd.BASS_CD_GetDriveCount();
       if (driveCount == 0)
-        bindingList.Add(new SortableBindingList<CDTrackDetail>()); // In case of no CD, we want a Dummy List
+        bindingList.Add(new SortableBindingList<CDTrackDetail>());  // In case of no CD, we want a Dummy List
 
       for (int i = 0; i < driveCount; i++)
       {
@@ -194,13 +151,11 @@ namespace MPTagThat.GridView
 
       SetStatusLabel("");
     }
-
     #endregion
 
     #region Public Methods
-
     /// <summary>
-    ///   Rips the selected files in the Grid
+    /// Rips the selected files in the Grid
     /// </summary>
     public void RipAudioCD()
     {
@@ -208,19 +163,19 @@ namespace MPTagThat.GridView
 
       if (threadRip == null)
       {
-        threadRip = new Thread(RippingThread);
+        threadRip = new Thread(new ThreadStart(RippingThread));
         threadRip.Name = "Ripping";
       }
 
       if (threadRip.ThreadState != ThreadState.Running)
       {
-        threadRip = new Thread(RippingThread);
+        threadRip = new Thread(new ThreadStart(RippingThread));
         threadRip.Start();
       }
     }
 
     /// <summary>
-    ///   Cancel the Ripping Process
+    /// Cancel the Ripping Process
     /// </summary>
     public void RipAudioCDCancel()
     {
@@ -232,27 +187,24 @@ namespace MPTagThat.GridView
         BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_UNLOCK);
       }
     }
-
     #endregion
 
     #region Private Methods
-
     private void SetStatusLabel(string text)
     {
       if (lbRippingStatus.InvokeRequired)
       {
-        ThreadSafeRippingStatusDelegate d = SetStatusLabel;
-        lbRippingStatus.Invoke(d, new object[] {text});
+        ThreadSafeRippingStatusDelegate d = new ThreadSafeRippingStatusDelegate(SetStatusLabel);
+        lbRippingStatus.Invoke(d, new object[] { text });
       }
       lbRippingStatus.Text = text;
     }
 
     #region Localisation
-
     /// <summary>
-    ///   Language Change event has been fired. Apply the new language
+    /// Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name = "language"></param>
+    /// <param name="language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
@@ -266,18 +218,17 @@ namespace MPTagThat.GridView
         col.HeaderText = localisation.ToString("column_header", col.Name);
       }
     }
-
     #endregion
 
     #region Ripping
-
     private void RippingThread()
     {
       if (_main.TreeView.InvokeRequired)
       {
-        ThreadSafeGridDelegate d = RippingThread;
-        _main.TreeView.Invoke(d, new object[] {});
+        ThreadSafeGridDelegate d = new ThreadSafeGridDelegate(RippingThread);
+        _main.TreeView.Invoke(d, new object[] { });
         return;
+
       }
 
       Util.EnterMethod(Util.GetCallingMethod());
@@ -305,8 +256,8 @@ namespace MPTagThat.GridView
 
         try
         {
-          if (!Directory.Exists(_musicDir) && !string.IsNullOrEmpty(_musicDir))
-            Directory.CreateDirectory(_musicDir);
+          if (!System.IO.Directory.Exists(_musicDir) && !string.IsNullOrEmpty(_musicDir))
+            System.IO.Directory.CreateDirectory(_musicDir);
         }
         catch (Exception ex)
         {
@@ -340,8 +291,8 @@ namespace MPTagThat.GridView
 
         try
         {
-          if (!Directory.Exists(targetDir))
-            Directory.CreateDirectory(targetDir);
+          if (!System.IO.Directory.Exists(targetDir))
+            System.IO.Directory.CreateDirectory(targetDir);
         }
         catch (Exception ex)
         {
@@ -378,7 +329,7 @@ namespace MPTagThat.GridView
         foreach (DataGridViewRow row in dataGridViewRip.Rows)
         {
           // when checking and unchecking a row, we have the DBNull value
-          if (row.Cells[0].Value == DBNull.Value)
+          if (row.Cells[0].Value == System.DBNull.Value)
             continue;
 
           if ((int)row.Cells[0].Value == 0)
@@ -393,8 +344,7 @@ namespace MPTagThat.GridView
           int stream = BassCd.BASS_CD_StreamCreate(selectedDriveID, row.Index, BASSFlag.BASS_STREAM_DECODE);
           if (stream == 0)
           {
-            log.Error("Error creating stream for Audio Track {0}. Error: {1}", _currentRow,
-                      Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+            log.Error("Error creating stream for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
             continue;
           }
 
@@ -415,8 +365,7 @@ namespace MPTagThat.GridView
 
           if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
           {
-            log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow,
-                      Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+            log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
           }
 
           dataGridViewRip.Rows[_currentRow].Cells[1].Value = 100;
@@ -428,11 +377,11 @@ namespace MPTagThat.GridView
           {
             // Now Tag the encoded File
             File file = File.Create(_outFile);
-            file.Tag.AlbumArtists = new[] {tbAlbumArtist.Text};
+            file.Tag.AlbumArtists = new string[] { tbAlbumArtist.Text };
             file.Tag.Album = tbAlbum.Text;
-            file.Tag.Genres = new[] {tbGenre.Text};
+            file.Tag.Genres = new string[] { tbGenre.Text };
             file.Tag.Year = tbYear.Text == string.Empty ? 0 : Convert.ToUInt32(tbYear.Text);
-            file.Tag.Performers = new[] {track.Artist};
+            file.Tag.Performers = new string[] { track.Artist };
             file.Tag.Track = (uint)track.Track;
             file.Tag.Title = track.Title;
             file = Util.FormatID3Tag(file);
@@ -450,7 +399,7 @@ namespace MPTagThat.GridView
       }
 
       _currentRow = -1;
-      SetStatusLabel(localisation.ToString("Conversion", "RippingFinished"));
+      SetStatusLabel(localisation.ToString("Conversion","RippingFinished"));
       Options.MainSettings.RipTargetFolder = _musicDir;
       Options.MainSettings.RipEncoder = encoder;
 
@@ -476,20 +425,19 @@ namespace MPTagThat.GridView
       }
 
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
 
+    }
     #endregion
 
     #region FreedDB
-
     /// <summary>
-    ///   Queries FreeDB for the Audio CD inserted
+    /// Queries FreeDB for the Audio CD inserted
     /// </summary>
-    /// <param name = "drive"></param>
+    /// <param name="drive"></param>
     private void QueryFreeDB(char drive)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      SetStatusLabel(localisation.ToString("Conversion", "FreeDBAccess"));
+      SetStatusLabel(localisation.ToString("Conversion","FreeDBAccess"));
       string discId = string.Empty;
       CDInfoDetail MusicCD = new CDInfoDetail();
       int driveID = Util.Drive2BassID(drive);
@@ -573,14 +521,13 @@ namespace MPTagThat.GridView
       SetStatusLabel("");
 
       Util.LeaveMethod(Util.GetCallingMethod());
-    }
 
+    }
     #endregion
 
     #region Gridlayout
-
     /// <summary>
-    ///   Create the Columns of the Grid based on the users setting
+    /// Create the Columns of the Grid based on the users setting
     /// </summary>
     private void CreateColumns()
     {
@@ -592,7 +539,7 @@ namespace MPTagThat.GridView
 
       // Set the Header of the Checkbox Column
       DatagridViewCheckBoxHeaderCell chkBoxHdr = new DatagridViewCheckBoxHeaderCell();
-      chkBoxHdr.OnCheckBoxClicked += chkBoxHdr_OnCheckBoxClicked;
+      chkBoxHdr.OnCheckBoxClicked += new CheckBoxClickedHandler(chkBoxHdr_OnCheckBoxClicked);
       dataGridViewRip.Columns[0].HeaderCell = chkBoxHdr;
 
       // Add a dummy column and set the property of the last column to fill
@@ -607,7 +554,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Save the settings
+    /// Save the settings
     /// </summary>
     private void SaveSettings()
     {
@@ -626,52 +573,48 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Checks or unchecks the checkbox columns
+    /// Checks or unchecks the checkbox columns
     /// </summary>
-    /// <param name = "check"></param>
+    /// <param name="check"></param>
     private void CheckRows(bool check)
     {
       foreach (DataGridViewRow row in dataGridViewRip.Rows)
       {
-        row.Cells[0].Value = check ? 1 : 0;
+        row.Cells[0].Value = check == true ? 1 : 0;
       }
     }
-
     #endregion
-
     #endregion
 
     #region Event Handler
-
     /// <summary>
-    ///   For combo box and check box cells, commit any value change as soon
-    ///   as it is made rather than waiting for the focus to leave the cell.
+    /// For combo box and check box cells, commit any value change as soon
+    /// as it is made rather than waiting for the focus to leave the cell.
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void dataGridViewRip_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void dataGridViewRip_CurrentCellDirtyStateChanged(object sender, EventArgs e)
     {
-      if (!dataGridViewRip.CurrentCell.OwningColumn.GetType().Equals(typeof (DataGridViewTextBoxColumn)))
+      if (!dataGridViewRip.CurrentCell.OwningColumn.GetType().Equals(typeof(DataGridViewTextBoxColumn)))
       {
         dataGridViewRip.CommitEdit(DataGridViewDataErrorContexts.Commit);
       }
     }
-
     /// <summary>
-    ///   The Checkbox Header has been checked. Set the state of all rows
+    /// The Checkbox Header has been checked. Set the state of all rows
     /// </summary>
-    /// <param name = "state"></param>
-    private void chkBoxHdr_OnCheckBoxClicked(bool state)
+    /// <param name="state"></param>
+    void chkBoxHdr_OnCheckBoxClicked(bool state)
     {
       CheckRows(state);
     }
 
-    private void mediaChangeMonitor_MediaRemoved(string eDriveLetter)
+    void mediaChangeMonitor_MediaRemoved(string eDriveLetter)
     {
       if (dataGridViewRip.InvokeRequired)
       {
-        ThreadSafeMediaRemovedDelegate d = mediaChangeMonitor_MediaRemoved;
-        dataGridViewRip.Invoke(d, new object[] {eDriveLetter});
+        ThreadSafeMediaRemovedDelegate d = new ThreadSafeMediaRemovedDelegate(mediaChangeMonitor_MediaRemoved);
+        dataGridViewRip.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
@@ -692,12 +635,12 @@ namespace MPTagThat.GridView
       SetStatusLabel("");
     }
 
-    private void mediaChangeMonitor_MediaInserted(string eDriveLetter)
+    void mediaChangeMonitor_MediaInserted(string eDriveLetter)
     {
       if (dataGridViewRip.InvokeRequired)
       {
-        ThreadSafeMediaInsertedDelegate d = mediaChangeMonitor_MediaInserted;
-        dataGridViewRip.Invoke(d, new object[] {eDriveLetter});
+        ThreadSafeMediaInsertedDelegate d = new ThreadSafeMediaInsertedDelegate(mediaChangeMonitor_MediaInserted);
+        dataGridViewRip.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
@@ -711,10 +654,10 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Handle Key input on the Grid
+    /// Handle Key input on the Grid
     /// </summary>
-    /// <param name = "msg"></param>
-    /// <param name = "keyData"></param>
+    /// <param name="msg"></param>
+    /// <param name="keyData"></param>
     /// <returns></returns>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
@@ -728,9 +671,9 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Handle Messages from the Audio Encoder
+    /// Handle Messages from the Audio Encoder
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceiveEncoding(QueueMessage message)
     {
       if (_currentRow < 0)
@@ -742,9 +685,9 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Handle Messages
+    /// Handle Messages
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -753,11 +696,10 @@ namespace MPTagThat.GridView
       {
         case "languagechanged":
           LanguageChanged();
-          Refresh();
+          this.Refresh();
           break;
       }
     }
-
     #endregion
   }
 }

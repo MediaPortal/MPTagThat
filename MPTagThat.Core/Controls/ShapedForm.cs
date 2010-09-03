@@ -1,55 +1,31 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text;
 using System.Windows.Forms;
-
-#endregion
 
 namespace MPTagThat.Core
 {
   public partial class ShapedForm : Form
   {
     #region Variables
+    private Color _borderColor = Color.DarkGray;
+    private int _borderWidth = 3;
+    private bool _formDrag = false;
+    private bool _resizeable = false;
+
+    private bool _sizing = false;
+    private Point _sizeOffset = Point.Empty;
 
     private const int WM_NCLBUTTONDOWN = 0xA1;
     private const int HT_CAPTION = 0x2;
-    private Color _borderColor = Color.DarkGray;
-    private int _borderWidth = 3;
-    private bool _formDrag;
-    private bool _resizeable;
-
-    private Point _sizeOffset = Point.Empty;
-    private bool _sizing;
-
     #endregion
 
     #region Properties
-
     /// <summary>
-    ///   Gets  / Sets the Border Color
+    /// Gets  / Sets the Border Color
     /// </summary>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Browsable(true)]
@@ -61,7 +37,7 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Gets / Sets the Border Width
+    /// Gets / Sets the Border Width
     /// </summary>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Browsable(true)]
@@ -73,7 +49,7 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Gets / Sets the Resizeable Atribute of the form
+    /// Gets / Sets the Resizeable Atribute of the form
     /// </summary>
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Browsable(true)]
@@ -83,11 +59,9 @@ namespace MPTagThat.Core
       get { return _resizeable; }
       set { _resizeable = value; }
     }
-
     #endregion
 
     #region Private Methods
-
     private GraphicsPath FormShape
     {
       get
@@ -110,11 +84,9 @@ namespace MPTagThat.Core
     {
       get { return new Region(new Rectangle(0, 0, Width, 26)); }
     }
-
     #endregion
 
     #region Overrides
-
     protected override void OnLoad(EventArgs e)
     {
       InitializeComponent();
@@ -123,22 +95,22 @@ namespace MPTagThat.Core
       {
         if (_resizeable)
         {
-          labelResize.MouseDown += labelResize_MouseDown;
-          labelResize.MouseMove += labelResize_MouseMove;
-          labelResize.MouseUp += labelResize_MouseUp;
-          labelResize.Location = new Point(ClientSize.Width - 21, ClientSize.Height - 18);
-          labelResize.Visible = true;
+          this.labelResize.MouseDown += new MouseEventHandler(labelResize_MouseDown);
+          this.labelResize.MouseMove += new MouseEventHandler(labelResize_MouseMove);
+          this.labelResize.MouseUp += new MouseEventHandler(labelResize_MouseUp);
+          this.labelResize.Location = new Point(ClientSize.Width - 21, ClientSize.Height - 18);
+          this.labelResize.Visible = true;
         }
         else
         {
-          labelResize.Visible = false;
+          this.labelResize.Visible = false;
         }
-        Region = new Region(FormShape);
+        this.Region = new Region(FormShape);
         base.OnLoad(e);
       }
       else
       {
-        labelResize.Visible = false;
+        this.labelResize.Visible = false;
       }
     }
 
@@ -159,27 +131,28 @@ namespace MPTagThat.Core
 
       if (_formDrag)
       {
-        Capture = false;
+        this.Capture = false;
         Message msg = Message.Create(Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, IntPtr.Zero);
         WndProc(ref msg);
       }
 
       Invalidate();
+
     }
 
     protected override void OnResize(EventArgs e)
     {
-      Region = new Region(FormShape);
+      this.Region = new Region(FormShape);
     }
 
-    private void labelResize_MouseDown(object sender, MouseEventArgs e)
+    private void labelResize_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
     {
       _sizing = true;
-      _sizeOffset = new Point(Right - Cursor.Position.X, Bottom - Cursor.Position.Y);
+      _sizeOffset = new Point(this.Right - Cursor.Position.X, this.Bottom - Cursor.Position.Y);
     }
 
 
-    private void labelResize_MouseMove(object sender, MouseEventArgs e)
+    private void labelResize_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
     {
       if (_sizing)
       {
@@ -187,20 +160,17 @@ namespace MPTagThat.Core
         Rectangle ClipRectangle = RectangleToScreen(new Rectangle(100, 100, Width, Height));
         ClipRectangle.Offset(_sizeOffset);
         Cursor.Clip = ClipRectangle;
-        ClientSize = new Size(Cursor.Position.X + _sizeOffset.X - Location.X,
-                              Cursor.Position.Y + _sizeOffset.Y - Location.Y);
-        labelResize.Location = new Point(Cursor.Position.X + _sizeOffset.X - Location.X - 21,
-                                         Cursor.Position.Y + _sizeOffset.Y - Location.Y - 18);
+        this.ClientSize = new Size(Cursor.Position.X + _sizeOffset.X - Location.X, Cursor.Position.Y + _sizeOffset.Y - Location.Y);
+        this.labelResize.Location = new Point(Cursor.Position.X + _sizeOffset.X - Location.X - 21, Cursor.Position.Y + _sizeOffset.Y - Location.Y - 18);
         Invalidate();
       }
     }
 
-    private void labelResize_MouseUp(object sender, MouseEventArgs e)
+    void labelResize_MouseUp(object sender, MouseEventArgs e)
     {
       _sizing = false;
       Cursor.Clip = Screen.PrimaryScreen.Bounds;
     }
-
     #endregion
   }
 }

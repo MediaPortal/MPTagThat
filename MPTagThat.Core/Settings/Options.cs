@@ -1,42 +1,16 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+using System.Text;
 using System.Data.SQLite;
-using System.IO;
 using System.Windows.Forms;
-
-#endregion
 
 namespace MPTagThat.Core
 {
   public sealed class Options
   {
     #region private Variables
-
-    private static readonly Options instance = new Options();
+    static readonly Options instance = new Options();
 
     private static MPTagThatSettings _MPTagThatSettings;
     private static CaseConversionSettings _caseConversionSettings;
@@ -52,143 +26,119 @@ namespace MPTagThat.Core
     private static List<string> _organiseSettingsTemp;
 
     private static List<TrackData> _copyPasteBuffer;
+    private static ArrayList _findBuffer = null;
+    private static ArrayList _replaceBuffer = null;
 
     private static string _configDir;
-    private static readonly string[] availableThemes = new[] {"ControlDefault", "Office2007Silver", "Office2007Black"};
-    private static string[] _mediaPortalArtists; // String array filled with database content to be available in tagedit
-
+    private static string[] availableThemes = new string[] { "ControlDefault", "Office2007Silver", "Office2007Black" };
+    private static string[] _mediaPortalArtists;      // String array filled with database content to be available in tagedit
     #endregion
 
     #region public Variables
-
     public static string HelpLocation = "http://www.team-mediaportal.com/manual/MediaPortalTools/MPTagThat";
     public static string ForumLocation = "http://forum.team-mediaportal.com/mptagthat-310";
 
-    public static Item[] WmaStandardSampleVBR = new[]
-                                                  {
-                                                    new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
-                                                    new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
-                                                  };
+    public static Item[] WmaStandardSampleVBR = new Item[] { new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
+                                                       new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
+                                                     };
 
-    public static Item[] WmaStandardSampleCBR = new[]
-                                                  {
-                                                    new Item("16 bits, mono, 8000 Hz", "16,1,8000", ""),
-                                                    new Item("16 bits, stereo, 8000 Hz", "16,2,8000", ""),
-                                                    new Item("16 bits, mono, 11025 Hz", "16,1,11025", ""),
-                                                    new Item("16 bits, mono, 16000 Hz", "16,1,16000", ""),
-                                                    new Item("16 bits, stereo, 16000 Hz", "16,2,16000", ""),
-                                                    new Item("16 bits, mono, 22050 Hz", "16,1,22050", ""),
-                                                    new Item("16 bits, stereo, 22050 Hz", "16,2,22050", ""),
-                                                    new Item("16 bits, mono, 32000 Hz", "16,1,32000", ""),
-                                                    new Item("16 bits, stereo, 32000 Hz", "16,2,32000", ""),
-                                                    new Item("16 bits, mono, 44100 Hz", "16,1,44100", ""),
-                                                    new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
-                                                    new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
-                                                  };
+    public static Item[] WmaStandardSampleCBR = new Item[] { new Item("16 bits, mono, 8000 Hz", "16,1,8000", ""),
+                                                       new Item("16 bits, stereo, 8000 Hz", "16,2,8000", ""),
+                                                       new Item("16 bits, mono, 11025 Hz", "16,1,11025", ""),
+                                                       new Item("16 bits, mono, 16000 Hz", "16,1,16000", ""),
+                                                       new Item("16 bits, stereo, 16000 Hz", "16,2,16000", ""),
+                                                       new Item("16 bits, mono, 22050 Hz", "16,1,22050", ""),
+                                                       new Item("16 bits, stereo, 22050 Hz", "16,2,22050", ""),
+                                                       new Item("16 bits, mono, 32000 Hz", "16,1,32000", ""),
+                                                       new Item("16 bits, stereo, 32000 Hz", "16,2,32000", ""),
+                                                       new Item("16 bits, mono, 44100 Hz", "16,1,44100", ""),
+                                                       new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
+                                                       new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
+                                                     };
 
-    public static Item[] WmaLosslessSampleVBR = new[]
-                                                  {
-                                                    new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
-                                                    new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
-                                                    new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
-                                                    new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
-                                                    new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
-                                                    new Item("24 bits, 6 Channels, 88200 Hz", "24,6,88200", ""),
-                                                    new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
-                                                    new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
-                                                  };
+    public static Item[] WmaLosslessSampleVBR = new Item[] { new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
+                                                       new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
+                                                       new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
+                                                       new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
+                                                       new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
+                                                       new Item("24 bits, 6 Channels, 88200 Hz", "24,6,88200", ""),
+                                                       new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
+                                                       new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
+                                                     };
 
 
-    public static Item[] WmaProSampleCBR = new[]
-                                             {
-                                               new Item("16 bits, stereo, 32000 Hz", "16,2,32000", ""),
-                                               new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
-                                               new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
-                                               new Item("24 bits, 6 Channels, 44100 Hz", "24,6,44100", ""),
-                                               new Item("16 bits, 6 Channels, 44100 Hz", "16,6,44100", ""),
-                                               new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
-                                               new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
-                                               new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
-                                               new Item("16 bits, 6 Channels, 48000 Hz", "16,6,48000", ""),
-                                               new Item("24 bits, 8 Channels, 48000 Hz", "24,8,48000", ""),
-                                               new Item("16 bits, 8 Channels, 48000 Hz", "16,8,48000", ""),
-                                               new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
-                                               new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
-                                               new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
-                                               new Item("24 bits, 8 Channels, 96000 Hz", "24,8,96000", ""),
-                                             };
+    public static Item[] WmaProSampleCBR = new Item[] { new Item("16 bits, stereo, 32000 Hz", "16,2,32000", ""),
+                                                       new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
+                                                       new Item("16 bits, stereo, 44100 Hz", "16,2,44100", ""),
+                                                       new Item("24 bits, 6 Channels, 44100 Hz", "24,6,44100", ""),
+                                                       new Item("16 bits, 6 Channels, 44100 Hz", "16,6,44100", ""),
+                                                       new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
+                                                       new Item("16 bits, stereo, 48000 Hz", "16,2,48000", ""),
+                                                       new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
+                                                       new Item("16 bits, 6 Channels, 48000 Hz", "16,6,48000", ""),
+                                                       new Item("24 bits, 8 Channels, 48000 Hz", "24,8,48000", ""),
+                                                       new Item("16 bits, 8 Channels, 48000 Hz", "16,8,48000", ""),
+                                                       new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
+                                                       new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
+                                                       new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
+                                                       new Item("24 bits, 8 Channels, 96000 Hz", "24,8,96000", ""),
+                                                     };
 
-    public static Item[] WmaProSampleVBR = new[]
-                                             {
-                                               new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
-                                               new Item("16 bits, 6 Channels, 44100 Hz", "16,6,44100", ""),
-                                               new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
-                                               new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
-                                               new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
-                                               new Item("24 bits, 6 Channels, 88200 Hz", "24,6,88200", ""),
-                                               new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
-                                               new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
-                                             };
+    public static Item[] WmaProSampleVBR = new Item[] { new Item("24 bits, stereo, 44100 Hz", "24,2,44100", ""),
+                                                       new Item("16 bits, 6 Channels, 44100 Hz", "16,6,44100", ""),
+                                                       new Item("24 bits, stereo, 48000 Hz", "24,2,48000", ""),
+                                                       new Item("24 bits, 6 Channels, 48000 Hz", "24,6,48000", ""),
+                                                       new Item("24 bits, stereo, 88200 Hz", "24,2,88200", ""),
+                                                       new Item("24 bits, 6 Channels, 88200 Hz", "24,6,88200", ""),
+                                                       new Item("24 bits, stereo, 96000 Hz", "24,2,96000", ""),
+                                                       new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
+                                                     };
 
-    public static string[] BitRatesAACPlus = new[]
-                                               {
-                                                 "128 kbps", "112 kbps", "96 kbps", "80 kbps",
-                                                 "64 kbps", "56 kbps", "48 kbps", "40 kbps",
-                                                 "32 kbps", "28 kbps", "24 kbps", "20 kbps",
-                                                 "16 kbps", "12 kbps", "10 kbps", "8 kbps"
-                                               };
+    public static string[] BitRatesAACPlus = new string[] { "128 kbps", "112 kbps", "96 kbps", "80 kbps",  
+                                                      "64 kbps", "56 kbps", "48 kbps", "40 kbps",
+                                                      "32 kbps", "28 kbps", "24 kbps", "20 kbps",
+                                                      "16 kbps", "12 kbps", "10 kbps", "8 kbps"};
 
     // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesAACPlus = new[]
-                                         {
-                                           0, 0, 0, 0,
-                                           2, 3, 3, 3,
-                                           3, 3, 3, 3,
-                                           3, 4, 1, 1
-                                         };
+    public static int[] ModesAACPlus = new int[] { 0, 0, 0, 0,  
+                                             2, 3, 3, 3,
+                                             3, 3, 3, 3,
+                                             3, 4, 1, 1};
 
-    public static string[] BitRatesAACPlusHigh = new[]
-                                                   {
-                                                     "256 kbps", "224 kbps", "192 kbps", "160 kbps",
-                                                     "128 kbps", "112 kbps", "96 kbps", "80 kbps",
-                                                     "64 kbps"
-                                                   };
+    public static string[] BitRatesAACPlusHigh = new string[] { "256 kbps", "224 kbps", "192 kbps", "160 kbps",  
+                                                          "128 kbps", "112 kbps", "96 kbps", "80 kbps",
+                                                          "64 kbps"};
 
     // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesPlusHigh = new[]
-                                          {
-                                            0, 0, 0, 2,
-                                            2, 2, 2, 1,
-                                            1
-                                          };
+    public static int[] ModesPlusHigh = new int[] { 0, 0, 0, 2,  
+                                              2, 2, 2, 1,
+                                              1};
 
 
-    public static string[] BitRatesLCAAC = new[]
-                                             {
-                                               "320 kbps", "288 kbps", "256 kbps", "224 kbps",
-                                               "192 kbps", "160 kbps", "128 kbps", "112 kbps",
-                                               "96 kbps", "80 kbps", "64 kbps", "56 kbps",
-                                               "48 kbps", "40 kbps", "32 kbps", "28 kbps",
-                                               "24 kbps", "20 kbps", "16 kbps", "12 kbps",
-                                               "10 kbps", "8 kbps"
-                                             };
+    public static string[] BitRatesLCAAC = new string[] { "320 kbps", "288 kbps", "256 kbps", "224 kbps",  
+                                                    "192 kbps", "160 kbps", "128 kbps", "112 kbps",
+                                                    "96 kbps", "80 kbps", "64 kbps", "56 kbps",
+                                                    "48 kbps", "40 kbps", "32 kbps", "28 kbps",
+                                                    "24 kbps", "20 kbps", "16 kbps", "12 kbps",
+                                                    "10 kbps", "8 kbps" };
 
     // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesLCAAC = new[]
-                                       {
-                                         0, 0, 0, 0,
-                                         0, 2, 2, 2,
-                                         2, 2, 2, 2,
-                                         2, 2, 2, 2,
-                                         2, 2, 2, 1,
-                                         1, 1
-                                       };
-
+    public static int[] ModesLCAAC = new int[] { 0, 0, 0, 0,  
+                                           0, 2, 2, 2,
+                                           2, 2, 2, 2,
+                                           2, 2, 2, 2,
+                                           2, 2, 2, 1,
+                                           1, 1};
     #endregion
 
     #region Enums
-
-    #region LamePreset enum
+    public enum ParameterFormat
+    {
+      FileNameToTag = 1,
+      TagToFileName = 2,
+      RipFileName = 3,
+      Organise = 4
+    }
 
     public enum LamePreset
     {
@@ -198,28 +148,15 @@ namespace MPTagThat.Core
       Insane = 3,
       ABR = 4
     }
-
-    #endregion
-
-    #region ParameterFormat enum
-
-    public enum ParameterFormat
-    {
-      FileNameToTag = 1,
-      TagToFileName = 2,
-      RipFileName = 3,
-      Organise = 4
-    }
-
-    #endregion
-
     #endregion
 
     #region Properties
-
     public static Options Instance
     {
-      get { return instance; }
+      get
+      {
+        return instance;
+      }
     }
 
     public static string[] MediaPortalArtists
@@ -287,22 +224,29 @@ namespace MPTagThat.Core
       get { return _copyPasteBuffer; }
     }
 
-    public static ArrayList FindBuffer { get; set; }
+    public static ArrayList FindBuffer
+    {
+      get { return _findBuffer; }
+      set { _findBuffer = value; }
+    }
 
-    public static ArrayList ReplaceBuffer { get; set; }
-
+    public static ArrayList ReplaceBuffer
+    {
+      get { return _replaceBuffer; }
+      set { _replaceBuffer = value; }
+    }
     #endregion
 
     #region Constructor
-
     // Singleton Constructor.
+    static Options()
+    { }
 
     public Options()
     {
       int portable = ServiceScope.Get<ISettingsManager>().GetPortable();
       if (portable == 0)
-        _configDir = String.Format(@"{0}\MPTagThat\Config",
-                                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+        _configDir = String.Format(@"{0}\MPTagThat\Config", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
       else
         _configDir = String.Format(@"{0}\Config", Application.StartupPath);
 
@@ -424,14 +368,12 @@ namespace MPTagThat.Core
 
       _copyPasteBuffer = new List<TrackData>();
     }
-
     #endregion
 
     #region Private Methods
-
     private void ReadArtistDatabase()
     {
-      if (!File.Exists(_MPTagThatSettings.MediaPortalDatabase))
+      if (!System.IO.File.Exists(_MPTagThatSettings.MediaPortalDatabase))
         return;
 
       string connection = string.Format(@"Data Source={0}", _MPTagThatSettings.MediaPortalDatabase);
@@ -442,9 +384,8 @@ namespace MPTagThat.Core
         using (SQLiteCommand cmd = new SQLiteCommand())
         {
           cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText =
-            "select distinct strartist from artist union select stralbumartist from albumartist order by 1";
+          cmd.CommandType = System.Data.CommandType.Text;
+          cmd.CommandText = "select distinct strartist from artist union select stralbumartist from albumartist order by 1";
           using (SQLiteDataReader reader = cmd.ExecuteReader())
           {
             List<string> rows = new List<string>();
@@ -465,11 +406,9 @@ namespace MPTagThat.Core
         ServiceScope.Get<ILogger>().Error("Error reading Music Database: {0}", ex.Message);
       }
     }
-
     #endregion
 
     #region Public Methods
-
     public static void SaveAllSettings()
     {
       ServiceScope.Get<ISettingsManager>().Save(_MPTagThatSettings);
@@ -479,7 +418,6 @@ namespace MPTagThat.Core
       ServiceScope.Get<ISettingsManager>().Save(_organiseSettings);
       ServiceScope.Get<ISettingsManager>().Save(_treeViewFilterSettings);
     }
-
     #endregion
   }
 }

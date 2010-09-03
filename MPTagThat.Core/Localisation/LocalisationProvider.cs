@@ -1,53 +1,53 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
+#region Copyright (C) 2005-2007 Team MediaPortal
 
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+/* 
+ *	Copyright (C) 2005-2007 Team MediaPortal
+ *	http://www.team-mediaportal.com
+ *
+ *  This Program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2, or (at your option)
+ *  any later version.
+ *   
+ *  This Program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *   
+ *  You should have received a copy of the GNU General Public License
+ *  along with GNU Make; see the file COPYING.  If not, write to
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *  http://www.gnu.org/copyleft/gpl.html
+ *
+ */
 
 #endregion
-
-#region
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+using System.Collections;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
-
-#endregion
+using System.IO;
+using System.Globalization;
 
 namespace MPTagThat.Core
 {
   public class LocalisationProvider
   {
     #region Variables
-
-    private readonly List<string> _languageDirectories;
-    private readonly Dictionary<string, Dictionary<string, StringLocalised>> _languageStrings;
-    private readonly string _systemDirectory;
-    private readonly string _userDirectory;
-    private Dictionary<string, CultureInfo> _availableLanguages;
-    private int _characters;
-    private CultureInfo _currentLanguage;
-    private bool _userLanguage;
-
+    Dictionary<string, Dictionary<string, StringLocalised>> _languageStrings;
+    Dictionary<string, CultureInfo> _availableLanguages;
+    List<string> _languageDirectories;
+    CultureInfo _currentLanguage;
+    string _systemDirectory;
+    string _userDirectory;
+    int _characters;
+    bool _userLanguage;
     #endregion
 
     #region Constructors/Destructors
-
     public LocalisationProvider(string systemDirectory, string userDirectory, string cultureName)
     {
       // Base strings directory
@@ -76,17 +76,17 @@ namespace MPTagThat.Core
     }
 
     public LocalisationProvider(string directory, string cultureName)
-      : this(directory, directory, cultureName) {}
+      : this(directory, directory, cultureName)
+    {
+    }
 
     public void Dispose()
     {
       Clear();
     }
-
     #endregion
 
     #region Properties
-
     public CultureInfo CurrentCulture
     {
       get { return _currentLanguage; }
@@ -96,11 +96,9 @@ namespace MPTagThat.Core
     {
       get { return _characters; }
     }
-
     #endregion
 
     #region Public Methods
-
     public void AddDirectory(string directory)
     {
       // Add directory to list, to enable reloading/changing language
@@ -134,7 +132,8 @@ namespace MPTagThat.Core
         if (_languageStrings.ContainsKey(section) && _languageStrings[section].ContainsKey(id))
           return _languageStrings[section][id].text;
       }
-      catch (KeyNotFoundException) {}
+      catch (KeyNotFoundException)
+      { }
 
       return null;
     }
@@ -153,7 +152,7 @@ namespace MPTagThat.Core
       {
         return String.Format(translation, parameters);
       }
-      catch (FormatException)
+      catch (System.FormatException)
       {
         //Log.Error("Error formatting translation with id {0}", dwCode);
         //Log.Error("Unformatted translation: {0}", translation);
@@ -194,7 +193,7 @@ namespace MPTagThat.Core
 
       // Try Language Parent if it has one
       if (!CultureInfo.CurrentCulture.IsNeutralCulture &&
-          _availableLanguages.ContainsKey(CultureInfo.CurrentCulture.Parent.Name))
+        _availableLanguages.ContainsKey(CultureInfo.CurrentCulture.Parent.Name))
         return CultureInfo.CurrentCulture.Parent;
 
       // default to English
@@ -203,11 +202,9 @@ namespace MPTagThat.Core
 
       return null;
     }
-
     #endregion
 
     #region Private Methods
-
     private void LoadUserStrings()
     {
       // Load User Custom strings
@@ -276,6 +273,7 @@ namespace MPTagThat.Core
         {
           // Log file error?
         }
+
       }
     }
 
@@ -290,7 +288,7 @@ namespace MPTagThat.Core
         StringFile strings;
         try
         {
-          XmlSerializer s = new XmlSerializer(typeof (StringFile));
+          XmlSerializer s = new XmlSerializer(typeof(StringFile));
           TextReader r = new StreamReader(path);
           strings = (StringFile)s.Deserialize(r);
         }
@@ -337,7 +335,6 @@ namespace MPTagThat.Core
         }
       }
     }
-
     #endregion
   }
 }

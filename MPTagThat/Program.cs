@@ -1,70 +1,43 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using System.Xml;
+
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
 using MPTagThat.Core.Burning;
 using MPTagThat.Core.MediaChangeMonitor;
 
-#endregion
-
 namespace MPTagThat
 {
-  internal static class Program
+  static class Program
   {
     #region Imports
-
-    [DllImport("kernel32.dll", EntryPoint = "SetEnvironmentVariableA", ExactSpelling = true, CharSet = CharSet.Ansi,
-      SetLastError = true)]
+    [DllImport("kernel32.dll", EntryPoint = "SetEnvironmentVariableA", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern int SetEnvironmentVariable(string lpName, string lpValue);
-
     #endregion
 
     #region Variables
-
     private static int _portable;
     private static string _startupFolder;
-
     #endregion
 
     /// <summary>
-    ///   The main entry point for the application.
+    /// The main entry point for the application.
     /// </summary>
-    /// <param name = "/folder=">A startup folder. used when executing via Explorer Context Menu</param>
-    /// <param name = "/portable">Run in Portable mode</param>
+    /// <param name="/folder=">A startup folder. used when executing via Explorer Context Menu</param>
+    /// <param name="/portable">Run in Portable mode</param>
     [STAThread]
-    private static void Main(string[] args)
+    static void Main(string[] args)
     {
       // Need to reset the Working directory, since when we called via the Explorer Context menu, it'll be different
       Directory.SetCurrentDirectory(Application.StartupPath);
 
       // Add our Bin and Bin\Bass Directory to the Path
-      SetEnvironmentVariable("Path", Path.Combine(Application.StartupPath, "Bin"));
-      SetEnvironmentVariable("Path", Path.Combine(Application.StartupPath, @"Bin\Bass"));
+      SetEnvironmentVariable("Path", System.IO.Path.Combine(Application.StartupPath, "Bin"));
+      SetEnvironmentVariable("Path", System.IO.Path.Combine(Application.StartupPath, @"Bin\Bass"));
 
       _portable = 0;
       _startupFolder = "";
@@ -138,20 +111,18 @@ namespace MPTagThat
         catch (OutOfMemoryException)
         {
           GC.Collect();
-          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "OutOfMemory"),
-                          ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
+          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "OutOfMemory"), ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
           logger.Error("Running out of memory. Scanning aborted.");
         }
         catch (Exception ex)
         {
-          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "FatalError"),
-                          ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
+          MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "FatalError"), ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
           logger.Error("Fatal Exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
         }
       }
     }
 
-    private static void ReadConfig()
+    static void ReadConfig()
     {
       string configFile = Path.Combine(Application.StartupPath, "Config.xml");
       if (!File.Exists(configFile))
@@ -177,7 +148,9 @@ namespace MPTagThat
           }
         }
       }
-      catch (Exception) {}
+      catch (Exception)
+      {
+      }
     }
   }
 }

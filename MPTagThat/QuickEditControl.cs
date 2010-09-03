@@ -1,33 +1,13 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.ShellLib;
 using TagLib;
-
-#endregion
 
 namespace MPTagThat
 {
@@ -35,38 +15,34 @@ namespace MPTagThat
   {
     #region Variables
 
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
-    private readonly Main main;
+    private Main main;
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log = ServiceScope.Get<ILogger>();
 
-    private ShellAutoComplete _acAlbumArtist;
     private ShellAutoComplete _acArtist;
+    private ShellAutoComplete _acAlbumArtist;
 
-    private bool _multiSelect;
-
+    private bool _multiSelect = false;
     #endregion
 
     #region ctor
-
     public QuickEditControl(Main main)
     {
       this.main = main;
       InitializeComponent();
     }
-
     #endregion
 
     #region FormLoad
-
     /// <summary>
-    ///   Do some init work, when control gets loaded
+    /// Do some init work, when control gets loaded
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void QuickEditControl_Load(object sender, EventArgs e)
     {
       // Fill the Genre Combo Box
-      cbGenre.Items.AddRange(Genres.Audio);
+      cbGenre.Items.AddRange(TagLib.Genres.Audio);
 
       if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
       {
@@ -85,7 +61,7 @@ namespace MPTagThat
 
         // We need to get the Combobox Handle first
         ShellApi.ComboBoxInfo cbInfoArtist = new ShellApi.ComboBoxInfo();
-        cbInfoArtist.cbSize = Marshal.SizeOf(cbInfoArtist);
+        cbInfoArtist.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(cbInfoArtist);
         ShellApi.GetComboBoxInfo(cbArtist.Handle, ref cbInfoArtist);
         _acArtist.EditHandle = cbInfoArtist.hwndEdit;
         _acArtist.SetAutoComplete(true);
@@ -102,21 +78,20 @@ namespace MPTagThat
 
         // We need to get the Combobox Handle first
         ShellApi.ComboBoxInfo cbInfoAlbumArtist = new ShellApi.ComboBoxInfo();
-        cbInfoAlbumArtist.cbSize = Marshal.SizeOf(cbInfoAlbumArtist);
+        cbInfoAlbumArtist.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(cbInfoAlbumArtist);
         ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref cbInfoAlbumArtist);
         _acAlbumArtist.EditHandle = cbInfoAlbumArtist.hwndEdit;
         _acAlbumArtist.SetAutoComplete(true);
       }
     }
-
     #endregion
 
     #region Public Methods
 
     /// <summary>
-    ///   Whenever a track is selected in the Gridview, fill the Quickedit panel with data
+    /// Whenever a track is selected in the Gridview, fill the Quickedit panel with data
     /// </summary>
-    /// <param name = "track"></param>
+    /// <param name="track"></param>
     public void FillForm(TrackData track)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -146,7 +121,7 @@ namespace MPTagThat
         tbTitle.Text = track.Title;
         tbTitle.Enabled = true;
       }
-
+      
       cbGenre.Text = track.Genre;
       tbYear.Text = track.Year.ToString();
 
@@ -174,7 +149,7 @@ namespace MPTagThat
         tbTrack.Text = tracks[0];
         tbTrack.Enabled = true;
       }
-
+      
       if (tracks.Length > 1)
       {
         tbNumTracks.Text = tracks[1];
@@ -200,17 +175,15 @@ namespace MPTagThat
       tbDisc.Text = "";
       tbNumTracks.Text = "";
     }
-
     #endregion
 
     #region Events
-
     /// <summary>
-    ///   The Apply button has been clicked.
-    ///   Apply all changes to the selected row
+    /// The Apply button has been clicked.
+    /// Apply all changes to the selected row
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btApply_Click(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -288,25 +261,29 @@ namespace MPTagThat
           {
             tracknumber = Int32.Parse(tbTrack.Text.Trim());
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           try
           {
             numbertracks = Int32.Parse(tbNumTracks.Text.Trim());
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
 
           try
           {
             oritracknumber = Int32.Parse(tracks[0]);
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           try
           {
             orinumbertracks = Int32.Parse(tracks[1]);
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           string trackNumber = string.Format("{0}/{1}", tracknumber, numbertracks);
-
+          
           if (!_multiSelect && tracknumber != oritracknumber)
           {
             track.Track = trackNumber;
@@ -324,7 +301,7 @@ namespace MPTagThat
               }
               track.Track = trackNumber;
               trackChanged = true;
-            }
+            } 
           }
 
           int discnumber = 0;
@@ -335,24 +312,28 @@ namespace MPTagThat
           {
             discnumber = Int32.Parse(tbDisc.Text.Trim());
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           try
           {
             numberdiscs = Int32.Parse(tbNumDiscs.Text.Trim());
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
 
           string[] discs = track.Disc.Split('/');
           try
           {
             oridiscnumber = Int32.Parse(discs[0]);
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           try
           {
             orinumberdiscs = Int32.Parse(discs[1]);
           }
-          catch (Exception) {}
+          catch (Exception)
+          { }
           string discNumber = string.Format("{0}/{1}", discnumber, numberdiscs);
 
           if (discnumber != oridiscnumber)

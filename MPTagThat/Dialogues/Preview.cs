@@ -1,56 +1,31 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
-using MPTagThat.Core;
 
-#endregion
+using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
   public partial class Preview : ShapedForm
   {
     #region Variables
-
-    private readonly BindingList<TrackDataPreview> _previewTracks = new BindingList<TrackDataPreview>();
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
-
+    BindingList<TrackDataPreview> _previewTracks = new BindingList<TrackDataPreview>();
+    private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     #endregion
 
     #region Properties
-
     public BindingList<TrackDataPreview> Tracks
     {
       get { return _previewTracks; }
     }
-
     #endregion
 
     #region ctor
-
     public Preview()
     {
       InitializeComponent();
@@ -58,20 +33,18 @@ namespace MPTagThat.Dialogues
       // Insert the first Column
       AddGridColumn(0, "FileName", localisation.ToString("column_header", "FileName"), 250);
     }
-
     #endregion
 
     #region Form Load
-
     /// <summary>
-    ///   The form is loaded to some initial work
+    /// The form is loaded to some initial work
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnLoad(object sender, EventArgs e)
     {
-      BackColor = themeManager.CurrentTheme.BackColor;
-      dataGridViewPreview.BackgroundColor = themeManager.CurrentTheme.BackColor;
+      this.BackColor = themeManager.CurrentTheme.BackColor;
+      this.dataGridViewPreview.BackgroundColor = themeManager.CurrentTheme.BackColor;
 
       dataGridViewPreview.EnableHeadersVisualStyles = false;
       dataGridViewPreview.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -81,14 +54,12 @@ namespace MPTagThat.Dialogues
       dataGridViewPreview.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       dataGridViewPreview.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
 
-      dataGridViewPreview.AutoGenerateColumns = false;
-      dataGridViewPreview.DataSource = _previewTracks;
+      this.dataGridViewPreview.AutoGenerateColumns = false;
+      this.dataGridViewPreview.DataSource = _previewTracks;
     }
-
     #endregion
 
     #region Public Methods
-
     public void AddRemoveColumn(int position, string parm)
     {
       DataGridViewColumn column;
@@ -173,7 +144,7 @@ namespace MPTagThat.Dialogues
           {
             RemoveGridColumn(position);
             AddGridColumn(position, "Genre", localisation.ToString("column_header", "Genre"), 100);
-          }
+          }          	
           break;
 
         case "<O>":
@@ -247,12 +218,12 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    ///   Adds a Grid Column using the selected name to the choosen position
+    /// Adds a Grid Column using the selected name to the choosen position
     /// </summary>
-    /// <param name = "position"></param>
-    /// <param name = "name"></param>
-    /// <param name = "header"></param>
-    /// <param name = "width"></param>
+    /// <param name="position"></param>
+    /// <param name="name"></param>
+    /// <param name="header"></param>
+    /// <param name="width"></param>
     public void AddGridColumn(int position, string name, string header, int width)
     {
       DataGridViewColumn column = new DataGridViewTextBoxColumn();
@@ -264,9 +235,9 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    ///   Removes the column at the given position
+    /// Removes the column at the given position
     /// </summary>
-    /// <param name = "position"></param>
+    /// <param name="position"></param>
     public void RemoveGridColumn(int position)
     {
       if (dataGridViewPreview.Columns.Count > position)
@@ -276,9 +247,9 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    ///   Remove redundant Columns, which may be there because of previous format changes
+    /// Remove redundant Columns, which may be there because of previous format changes
     /// </summary>
-    /// <param name = "startPosition"></param>
+    /// <param name="startPosition"></param>
     public void RemoveRedundantColumns(int startPosition)
     {
       int colCount = dataGridViewPreview.Columns.Count;
@@ -289,9 +260,9 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    ///   Now Add /remove / Columns based on the value set in the Parameter
+    /// Now Add /remove / Columns based on the value set in the Parameter
     /// </summary>
-    /// <param name = "parameters"></param>
+    /// <param name="parameters"></param>
     public void BuildPreviewGrid(string parameters)
     {
       List<string> parms = new List<string>();
@@ -303,7 +274,7 @@ namespace MPTagThat.Dialogues
         parameters = parameters.Substring(index + 3);
       }
 
-      index = 0; // Index 0 is the filename, so we should start processing at index 1 then
+      index = 0;  // Index 0 is the filename, so we should start processing at index 1 then
       foreach (string parm in parms)
       {
         index++;
@@ -311,7 +282,6 @@ namespace MPTagThat.Dialogues
       }
       RemoveRedundantColumns(index++);
     }
-
     #endregion
   }
 }

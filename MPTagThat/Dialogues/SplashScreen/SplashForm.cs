@@ -1,43 +1,23 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
 using MPTagThat.Core;
-
-#endregion
 
 namespace MPTagThat.Dialogues
 {
   public partial class SplashForm : ShapedForm
   {
     #region ctor
-
     public SplashForm()
     {
       InitializeComponent();
 
-      Text = ServiceScope.Get<ILocalisation>().ToString("system", "ApplicationName");
+      this.Text = ServiceScope.Get<ILocalisation>().ToString("system", "ApplicationName");
 
       Assembly assembly = Assembly.GetExecutingAssembly();
       AssemblyName assemblyName = assembly.GetName();
@@ -45,20 +25,17 @@ namespace MPTagThat.Dialogues
       Version version = assemblyName.Version;
       lbVersion.Text = version.ToString();
       label2.Text = ServiceScope.Get<ILocalisation>().ToString("splash", "BuildDate");
-      DateTime lastWrite = File.GetLastWriteTime(assembly.Location);
+      DateTime lastWrite = System.IO.File.GetLastWriteTime(assembly.Location);
       lbDate.Text = string.Format("{0} {1}", lastWrite.ToShortDateString(), lastWrite.ToShortTimeString());
     }
-
     #endregion
 
     #region Private Methods
-
     public void SetInformation(string information)
     {
       lbStatus.Text = information;
       Update();
     }
-
     #endregion
   }
 }

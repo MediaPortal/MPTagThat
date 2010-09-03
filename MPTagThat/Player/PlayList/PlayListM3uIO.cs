@@ -1,58 +1,54 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
+#region Copyright (C) 2005-2009 Team MediaPortal
 
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+/* 
+ *	Copyright (C) 2005-2009 Team MediaPortal
+ *	http://www.team-mediaportal.com
+ *
+ *  This Program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2, or (at your option)
+ *  any later version.
+ *   
+ *  This Program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *   
+ *  You should have received a copy of the GNU General Public License
+ *  along with GNU Make; see the file COPYING.  If not, write to
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *  http://www.gnu.org/copyleft/gpl.html
+ *
+ */
 
 #endregion
-
-#region
 
 using System;
 using System.IO;
 using System.Text;
 using MPTagThat.Core;
 
-#endregion
-
 namespace MPTagThat.Player
 {
   public class PlayListM3uIO : IPlayListIO
   {
     #region Variables
-
     private const string M3U_START_MARKER = "#EXTM3U";
     private const string M3U_INFO_MARKER = "#EXTINF";
-    private readonly ILogger log;
-    private string basePath;
-    private StreamReader file;
     private SortableBindingList<PlayListData> playlist;
-
+    private StreamReader file;
+    private string basePath;
+    private ILogger log;
     #endregion
 
     #region ctor
-
     public PlayListM3uIO()
     {
       log = ServiceScope.Get<ILogger>();
     }
-
     #endregion
 
     #region Public Methods
-
     public bool Load(SortableBindingList<PlayListData> incomingPlaylist, string playlistFileName)
     {
       if (playlistFileName == null)
@@ -142,8 +138,7 @@ namespace MPTagThat.Player
 
           foreach (PlayListData item in playlist)
           {
-            writer.WriteLine("{0}:{1},{2}", M3U_INFO_MARKER, Util.DurationToSeconds(item.Duration),
-                             string.Format("{0} - {1}", item.Artist, item.Title));
+            writer.WriteLine("{0}:{1},{2}", M3U_INFO_MARKER, Util.DurationToSeconds(item.Duration), string.Format("{0} - {1}", item.Artist, item.Title));
 
             string musicFile = item.FileName;
             if (useRelativePath)
@@ -162,16 +157,14 @@ namespace MPTagThat.Player
         log.Error("failed to save a playlist {0}. err: {1} stack: {2}", fileName, e.Message, e.StackTrace);
       }
     }
-
     #endregion
 
     #region Private Methods
-
     private static bool ExtractM3uInfo(string trimmedLine, ref string songName, ref string lDuration)
     {
       //bool successfull;
-      int iColon = trimmedLine.IndexOf(":");
-      int iComma = trimmedLine.IndexOf(",");
+      int iColon = (int) trimmedLine.IndexOf(":");
+      int iComma = (int) trimmedLine.IndexOf(",");
       if (iColon >= 0 && iComma >= 0 && iComma > iColon)
       {
         iColon++;
@@ -197,7 +190,6 @@ namespace MPTagThat.Player
       playlist.Add(newItem);
       return true;
     }
-
     #endregion
   }
 }

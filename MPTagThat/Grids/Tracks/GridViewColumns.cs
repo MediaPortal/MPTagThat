@@ -1,95 +1,70 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
-
-#endregion
 
 namespace MPTagThat.GridView
 {
   public class GridViewColumns
   {
     #region Variables
-
-    private readonly GridViewColumn _OriginalAlbum;
-    private readonly GridViewColumn _album;
-    private readonly GridViewColumn _albumSortName;
-    private readonly GridViewColumn _albumartist;
-    private readonly GridViewColumn _artist;
-    private readonly GridViewColumn _artistSortName;
-    private readonly GridViewColumn _bitrate;
-    private readonly GridViewColumn _bpm;
-    private readonly GridViewColumn _channels;
-    private readonly GridViewColumn _comment;
-    private readonly GridViewColumn _commercialInformation;
-    private readonly GridViewColumn _composer;
-    private readonly GridViewColumn _conductor;
-    private readonly GridViewColumn _copyright;
-    private readonly GridViewColumn _copyrightInformation;
-    private readonly GridViewColumn _creationtime;
-    private readonly GridViewColumn _disc;
-    private readonly GridViewColumn _duration;
-    private readonly GridViewColumn _encodedBy;
-    private readonly GridViewColumn _filename;
-    private readonly GridViewColumn _filepath;
-    private readonly GridViewColumn _filesize;
-    private readonly GridViewColumn _genre;
-    private readonly GridViewColumn _grouping;
-    private readonly GridViewColumn _interpreter;
-    private readonly GridViewColumn _lastwritetime;
-    private readonly GridViewColumn _lyrics;
-    private readonly GridViewColumn _mediaType;
-    private readonly GridViewColumn _numpics;
-    private readonly GridViewColumn _officialArtistInformation;
-    private readonly GridViewColumn _officialAudioFileInformation;
-    private readonly GridViewColumn _officialAudioSourceInformation;
-    private readonly GridViewColumn _officialInternetRadioInformation;
-    private readonly GridViewColumn _officialPaymentInformation;
-    private readonly GridViewColumn _officialPublisherInformation;
-    private readonly GridViewColumn _originalArtist;
-    private readonly GridViewColumn _originalFileName;
-    private readonly GridViewColumn _originalLyricsWriter;
-    private readonly GridViewColumn _originalOwner;
-    private readonly GridViewColumn _originalRelease;
-    private readonly GridViewColumn _publisher;
-    private readonly GridViewColumn _rating;
-    private readonly GridViewColumn _samplerate;
-    private readonly GridViewColumn _status;
-    private readonly GridViewColumn _subTitle;
-    private readonly GridViewColumn _tagtype;
-    private readonly GridViewColumn _textWriter;
-    private readonly GridViewColumn _title;
-    private readonly GridViewColumn _titleSortName;
-    private readonly GridViewColumn _track;
-    private readonly GridViewColumn _version;
-    private readonly GridViewColumn _year;
     private GridViewSettings _settings;
-
+    private GridViewColumn _filename;
+    private GridViewColumn _filepath;
+    private GridViewColumn _status;
+    private GridViewColumn _track;
+    private GridViewColumn _artist;
+    private GridViewColumn _albumartist;
+    private GridViewColumn _album;
+    private GridViewColumn _title;
+    private GridViewColumn _year;
+    private GridViewColumn _genre;
+    private GridViewColumn _creationtime;
+    private GridViewColumn _lastwritetime;
+    private GridViewColumn _tagtype;
+    private GridViewColumn _disc;
+    private GridViewColumn _rating;
+    private GridViewColumn _comment;
+    private GridViewColumn _composer;
+    private GridViewColumn _conductor;
+    private GridViewColumn _numpics;
+    private GridViewColumn _duration;
+    private GridViewColumn _filesize;
+    private GridViewColumn _bitrate;
+    private GridViewColumn _bpm;
+    private GridViewColumn _samplerate;
+    private GridViewColumn _channels;
+    private GridViewColumn _version;
+    private GridViewColumn _artistSortName;
+    private GridViewColumn _albumSortName;
+    private GridViewColumn _commercialInformation;
+    private GridViewColumn _copyright;
+    private GridViewColumn _copyrightInformation;
+    private GridViewColumn _encodedBy;
+    private GridViewColumn _interpreter;
+    private GridViewColumn _grouping;
+    private GridViewColumn _lyrics;
+    private GridViewColumn _mediaType;
+    private GridViewColumn _officialAudioFileInformation;
+    private GridViewColumn _officialArtistInformation;
+    private GridViewColumn _officialAudioSourceInformation;
+    private GridViewColumn _officialInternetRadioInformation;
+    private GridViewColumn _officialPaymentInformation;
+    private GridViewColumn _officialPublisherInformation;
+    private GridViewColumn _OriginalAlbum;
+    private GridViewColumn _originalFileName;
+    private GridViewColumn _originalLyricsWriter;
+    private GridViewColumn _originalArtist;
+    private GridViewColumn _originalOwner;
+    private GridViewColumn _originalRelease;
+    private GridViewColumn _publisher;
+    private GridViewColumn _subTitle;
+    private GridViewColumn _textWriter;
+    private GridViewColumn _titleSortName;
     #endregion
 
     #region Constructor
-
     public GridViewColumns()
     {
       _status = new GridViewColumn("Status", "text", 45, true, true, false, true);
@@ -130,18 +105,12 @@ namespace MPTagThat.GridView
       _grouping = new GridViewColumn("Grouping", "text", 100, false, false, true, false);
       _lyrics = new GridViewColumn("Lyrics", "text", 100, false, false, true, false);
       _mediaType = new GridViewColumn("MediaType", "text", 100, false, false, true, false);
-      _officialAudioFileInformation = new GridViewColumn("OfficialAudioFileInformation", "text", 100, false, false, true,
-                                                         false);
-      _officialArtistInformation = new GridViewColumn("OfficialArtistInformation", "text", 100, false, false, true,
-                                                      false);
-      _officialAudioSourceInformation = new GridViewColumn("OfficialAudioSourceInformation", "text", 100, false, false,
-                                                           true, false);
-      _officialInternetRadioInformation = new GridViewColumn("OfficialInternetRadioInformation", "text", 100, false,
-                                                             false, true, false);
-      _officialPaymentInformation = new GridViewColumn("OfficialPaymentInformation", "text", 100, false, false, true,
-                                                       false);
-      _officialPublisherInformation = new GridViewColumn("OfficialPublisherInformation", "text", 100, false, false, true,
-                                                         false);
+      _officialAudioFileInformation = new GridViewColumn("OfficialAudioFileInformation", "text", 100, false, false, true, false);
+      _officialArtistInformation = new GridViewColumn("OfficialArtistInformation", "text", 100, false, false, true, false);
+      _officialAudioSourceInformation = new GridViewColumn("OfficialAudioSourceInformation", "text", 100, false, false, true, false);
+      _officialInternetRadioInformation = new GridViewColumn("OfficialInternetRadioInformation", "text", 100, false, false, true, false);
+      _officialPaymentInformation = new GridViewColumn("OfficialPaymentInformation", "text", 100, false, false, true, false);
+      _officialPublisherInformation = new GridViewColumn("OfficialPublisherInformation", "text", 100, false, false, true, false);
       _OriginalAlbum = new GridViewColumn("OriginalAlbum", "text", 100, false, false, true, false);
       _originalFileName = new GridViewColumn("OriginalFileName", "text", 100, false, false, true, false);
       _originalLyricsWriter = new GridViewColumn("OriginalLyricsWriter", "text", 100, false, false, true, false);
@@ -155,20 +124,17 @@ namespace MPTagThat.GridView
 
       LoadSettings();
     }
-
     #endregion
 
-    #region Properties
 
+    #region Properties
     public GridViewSettings Settings
     {
       get { return _settings; }
     }
-
     #endregion
 
     #region Private Methods
-
     private void LoadSettings()
     {
       _settings = new GridViewSettings();
@@ -280,7 +246,6 @@ namespace MPTagThat.GridView
 
       return columnList;
     }
-
     #endregion
   }
 }

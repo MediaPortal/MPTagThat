@@ -1,42 +1,46 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
+﻿#region Copyright (C) 2007-2008 Team MediaPortal
 
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+/*
+    Copyright (C) 2007-2008 Team MediaPortal
+    http://www.team-mediaportal.com
+ 
+    This file is part of MediaPortal II
+
+    MediaPortal II is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    MediaPortal II is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #endregion
-
-#region
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-#endregion
+using MPTagThat.Core;
 
 namespace MPTagThat.Core.Burning
 {
   public class EventHelper : IDisposable
   {
-    private readonly IBurnManager burnManager = ServiceScope.Get<IBurnManager>();
-    private readonly ILogger logger = ServiceScope.Get<ILogger>();
+    IBurnManager burnManager = ServiceScope.Get<IBurnManager>();
+    ILogger logger = ServiceScope.Get<ILogger>();
 
     #region static methods
 
     private static EventHelper fEventHelper;
 
     /// <summary>
-    ///   Init class.
+    /// Init class.
     /// </summary>
     public static void Init()
     {
@@ -64,15 +68,15 @@ namespace MPTagThat.Core.Burning
     #region private functions
 
     private void RegisterEvents()
-    {
-      burnManager.BurningFailed += burnManager_BurningFailed;
-      burnManager.BurnProgressUpdate += burnManager_BurnProgressUpdate;
+    {      
+      burnManager.BurningFailed +=new BurningError(burnManager_BurningFailed);
+      burnManager.BurnProgressUpdate += new BurnProgress(burnManager_BurnProgressUpdate);
     }
 
     private void DeregisterEvents()
-    {
-      burnManager.BurningFailed -= burnManager_BurningFailed;
-      burnManager.BurnProgressUpdate -= burnManager_BurnProgressUpdate;
+    {     
+      burnManager.BurningFailed -= new BurningError(burnManager_BurningFailed);
+      burnManager.BurnProgressUpdate -= new BurnProgress(burnManager_BurnProgressUpdate);
     }
 
     private void burnManager_BurnProgressUpdate(BurnStatus eBurnStatus, int eTrack, int ePercentage)

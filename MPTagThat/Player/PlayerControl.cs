@@ -1,79 +1,53 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
+using System.Data;
+using System.Text;
 using System.Windows.Forms;
+
 using MPTagThat.Core;
-using MPTagThat.Core.WinControls;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-
-#endregion
 
 namespace MPTagThat.Player
 {
   public partial class PlayerControl : UserControl
   {
     #region Variables
-
-    private readonly int _defaultSoundDevice = -1;
-    private readonly Visuals _vis = new Visuals(); // visuals class instance
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
-    private SYNCPROC PlaybackEndProcDelegate; // SyncProc called to indicate the song has ended
+    private delegate void ThreadSafeSetText(MPTagThat.Core.WinControls.MPTLabel label, string text);
+    private SYNCPROC PlaybackEndProcDelegate = null;          // SyncProc called to indicate the song has ended
+    private ILogger log = ServiceScope.Get<ILogger>();
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private SortableBindingList<PlayListData> _playList;
+    private int _currentStartIndex = -1;
     private int _currentIndexPlaying = -1;
     private string _currentSongPlaying = "";
-    private int _currentStartIndex = -1;
-    private string _currentTheme = "";
-    private Image _imgPause;
-    private Image _imgPlay;
-    private int _mainFormWidth;
-    private SortableBindingList<PlayListData> _playList;
-    private PlayList _playListForm;
-    private bool _playListOpen;
-    private double _songLength;
+    private int _defaultSoundDevice = -1;
+    private int _stream = 0;
+    private int _syncHandleEnd = 0;
+    private Visuals _vis = new Visuals();                     // visuals class instance
+    private int _updateInterval = 50;                         // 50ms
+    private int _tickCounter = 0;
+    private BASSTimer _updateTimer = null;
     private int _specIdx = 15;
-    private int _stream;
-    private int _syncHandleEnd;
-    private int _tickCounter;
-    private int _updateInterval = 50; // 50ms
-    private BASSTimer _updateTimer;
-    private int _voicePrintIdx;
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-
-    private delegate void ThreadSafeSetText(MPTLabel label, string text);
-
+    private int _voicePrintIdx = 0;
+    private string _currentTheme = "";
+    private Image _imgPlay = null;
+    private Image _imgPause = null;
+    private double _songLength = 0.0;
+    private PlayList _playListForm = null;
+    private bool _playListOpen = false;
+    private int _mainFormWidth = 0;
     #endregion
 
     #region ctor
-
     public PlayerControl()
     {
       InitializeComponent();
 
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       // Retrieve the default Sound device
       BASS_DEVICEINFO info;
@@ -85,14 +59,13 @@ namespace MPTagThat.Player
           break;
         }
       }
-    }
 
+    }
     #endregion
 
     #region Properties
-
-    /// <summary>
-    ///   Returns the Playlist
+     /// <summary>
+    /// Returns the Playlist
     /// </summary>
     public SortableBindingList<PlayListData> PlayList
     {
@@ -100,7 +73,7 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Returns the PlayList Form
+    /// Returns the PlayList Form
     /// </summary>
     public PlayList PlayListForm
     {
@@ -108,7 +81,7 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Returns if the Player is Playing
+    /// Returns if the Player is Playing
     /// </summary>
     public bool IsPlaying
     {
@@ -119,11 +92,9 @@ namespace MPTagThat.Player
     {
       get { return _currentSongPlaying; }
     }
-
     #endregion
 
     #region Form Load
-
     private void OnLoad(object sender, EventArgs e)
     {
       _playListForm = new PlayList(this);
@@ -139,17 +110,15 @@ namespace MPTagThat.Player
 
       // create a secure timer
       _updateTimer = new BASSTimer(_updateInterval);
-      _updateTimer.Tick += timerUpdate_Tick;
+      _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
     }
-
     #endregion
 
     #region Public Methods
-
     /// <summary>
-    ///   Starts Playback of the given PlayList Index
+    /// Starts Playback of the given PlayList Index
     /// </summary>
-    /// <param name = "index"></param>
+    /// <param name="index"></param>
     public void Play(int index)
     {
       _currentStartIndex = index;
@@ -157,7 +126,7 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Stop Playback of Stream
+    /// Stop Playback of Stream
     /// </summary>
     public void Stop()
     {
@@ -175,23 +144,20 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Moves the Playlist panel, when it is docked and the mainform is resized
+    /// Moves the Playlist panel, when it is docked and the mainform is resized
     /// </summary>
     public void MovePlayList()
     {
       if (_playListOpen)
       {
-        _playListForm.Height = Parent.Parent.Parent.Height;
-        _playListForm.Location = new Point(Parent.Parent.Parent.Location.X + Parent.Parent.Parent.Width,
-                                           Parent.Parent.Parent.Location.Y);
+        _playListForm.Height = this.Parent.Parent.Parent.Height;
+        _playListForm.Location = new Point(this.Parent.Parent.Parent.Location.X + this.Parent.Parent.Parent.Width, this.Parent.Parent.Parent.Location.Y);
       }
     }
-
     #endregion
 
     #region Private Methods
-
-    private void timerUpdate_Tick(object sender, EventArgs e)
+    private void timerUpdate_Tick(object sender, System.EventArgs e)
     {
       // here we gather info about the stream, when it is playing...
       if (Bass.BASS_ChannelIsActive(_stream) != BASSActive.BASS_ACTIVE_PLAYING &&
@@ -200,7 +166,7 @@ namespace MPTagThat.Player
         // the stream is NOT playing anymore...
         _updateTimer.Stop();
         playBackSlider.Value = 0;
-        pictureBoxSpectrum.Image = null;
+        this.pictureBoxSpectrum.Image = null;
         return;
       }
 
@@ -211,33 +177,31 @@ namespace MPTagThat.Player
       {
         // display the position every 250ms (since timer is 50ms)
         _tickCounter = 0;
-        double elapsedtime = Bass.BASS_ChannelBytes2Seconds(_stream, Bass.BASS_ChannelGetPosition(_stream));
-          // the elapsed time length
+        double elapsedtime = Bass.BASS_ChannelBytes2Seconds(_stream, Bass.BASS_ChannelGetPosition(_stream)); // the elapsed time length
         string timeFormatted = String.Format("{0:#0:00}", Utils.FixTimespan(elapsedtime, "MMSS"));
 
         // Move the PlaybackSlider
         playBackSlider.Value = (int)(Math.Round((elapsedtime / _songLength), 2) * 100.0);
 
         // Now Paint the time to the Picturebox
-        Graphics g = Graphics.FromHwnd(pictureBoxTime.Handle);
-        g.SmoothingMode = SmoothingMode.AntiAlias;
+        Graphics g = Graphics.FromHwnd(this.pictureBoxTime.Handle);
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         g.Clear(Color.Black);
         g.DrawString(timeFormatted, new Font("Verdana", 18), new SolidBrush(Color.CornflowerBlue), 0, 0);
         g.Dispose();
+
       }
 
       // update spectrum
       DrawSpectrum();
     }
-
     #endregion
 
     #region Events
-
     private void buttonPlay_Click(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-
+      
       _updateTimer.Stop();
 
       // Are we still on the same file, then it is a Play / Pause situation
@@ -299,15 +263,10 @@ namespace MPTagThat.Player
       // Stop the Current Stream
       Stop();
 
-      if (
-        (_stream =
-         Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0,
-                                    BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE)) ==
-        0)
+      if ((_stream = Bass.BASS_StreamCreateFile(_playList[_currentStartIndex].FileName, 0, 0, BASSFlag.BASS_DEFAULT | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_AUTOFREE)) == 0)
       {
         int error = (int)Bass.BASS_ErrorGetCode();
-        log.Error("Player: Error Creating stream for {0}: {1}", _playList[_currentStartIndex].FileName,
-                  Enum.GetName(typeof (BASSError), error));
+        log.Error("Player: Error Creating stream for {0}: {1}", _playList[_currentStartIndex].FileName, Enum.GetName(typeof(BASSError), error));
         return;
       }
 
@@ -319,8 +278,7 @@ namespace MPTagThat.Player
       if (!Bass.BASS_ChannelPlay(_stream, true))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
-        log.Error("Player: Error Playing File {0}: {1}", _playList[_currentStartIndex].FileName,
-                  Enum.GetName(typeof (BASSError), error));
+        log.Error("Player: Error Playing File {0}: {1}", _playList[_currentStartIndex].FileName, Enum.GetName(typeof(BASSError), error));
         return;
       }
 
@@ -335,19 +293,18 @@ namespace MPTagThat.Player
 
       pictureBoxPlayPause.Image = _imgPause;
       _updateTimer.Start();
-      SetText(lbTitleText,
-              string.Format("{0} ({1})", _playList[_currentStartIndex].Title, _playList[_currentStartIndex].Duration));
-      SetText(lbArtistText, _playList[_currentStartIndex].Artist);
-      SetText(lbAlbumText, _playList[_currentStartIndex].Album);
+      SetText(this.lbTitleText,string.Format("{0} ({1})",_playList[_currentStartIndex].Title, _playList[_currentStartIndex].Duration));
+      SetText(this.lbArtistText, _playList[_currentStartIndex].Artist);
+      SetText(this.lbAlbumText, _playList[_currentStartIndex].Album);
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     /// <summary>
-    ///   Play Previous file
+    /// Play Previous file
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonPrev_Click(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -357,10 +314,10 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Play Next file
+    /// Play Next file
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonNext_Click(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -370,42 +327,42 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   The slider was scrolled. Position within the file
+    /// The slider was scrolled. Position within the file
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void playBackSlider_Scroll(object sender, ScrollEventArgs e)
     {
-      double newPos = _songLength * playBackSlider.Value / 100.00;
+      double newPos = _songLength * (double)playBackSlider.Value / 100.00;
       Bass.BASS_ChannelSetPosition(_stream, newPos);
     }
 
     /// <summary>
-    ///   Sets the Text of a label
+    /// Sets the Text of a label
     /// </summary>
-    /// <param name = "label"></param>
-    private void SetText(MPTLabel label, string text)
+    /// <param name="label"></param>
+    private void SetText(MPTagThat.Core.WinControls.MPTLabel label, string text)
     {
-      if (InvokeRequired)
+      if (this.InvokeRequired)
       {
-        ThreadSafeSetText d = SetText;
-        Invoke(d, new object[] {label, text});
+        ThreadSafeSetText d = new ThreadSafeSetText(SetText);
+        this.Invoke(d, new object[] { label, text});
         return;
       }
       label.Text = text;
     }
 
     /// <summary>
-    ///   Show / Hide PlayList Panel
+    /// Show / Hide PlayList Panel
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btnPlayList_Click(object sender, EventArgs e)
     {
       if (_playListOpen)
       {
         // Enlarge the Main Form to it's original size
-        Parent.Parent.Width = _mainFormWidth;
+        this.Parent.Parent.Width = _mainFormWidth;
         _playListOpen = false;
         _playListForm.Hide();
       }
@@ -413,15 +370,14 @@ namespace MPTagThat.Player
       {
         // Set the height of the Playlist equals to the height of the main Window
         // Decrease the width of the main window and set the playlist to the right
-        _mainFormWidth = Parent.Parent.Parent.Width;
-        _playListForm.Height = Parent.Parent.Parent.Height;
+        _mainFormWidth = this.Parent.Parent.Parent.Width;
+        _playListForm.Height = this.Parent.Parent.Parent.Height;
 
-        if ((_mainFormWidth + _playListForm.Width + Parent.Parent.Parent.Location.X) > Screen.PrimaryScreen.Bounds.Width)
+        if ((_mainFormWidth + _playListForm.Width + this.Parent.Parent.Parent.Location.X) > Screen.PrimaryScreen.Bounds.Width)
         {
-          Parent.Parent.Parent.Width -= _playListForm.Width;
+          this.Parent.Parent.Parent.Width -= _playListForm.Width;
         }
-        _playListForm.Location = new Point(Parent.Parent.Parent.Location.X + Parent.Parent.Parent.Width,
-                                           Parent.Parent.Parent.Location.Y);
+        _playListForm.Location = new Point(this.Parent.Parent.Parent.Location.X + this.Parent.Parent.Parent.Width, this.Parent.Parent.Parent.Location.Y);
 
         _playListOpen = true;
         _playListForm.Show();
@@ -434,13 +390,11 @@ namespace MPTagThat.Player
         }
       }
     }
-
     #endregion
 
     #region SyncProcs
-
     /// <summary>
-    ///   Register the Playback Events
+    /// Register the Playback Events
     /// </summary>
     private void RegisterPlaybackEvents()
     {
@@ -453,16 +407,16 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Register the Playback end Event
+    /// Register the Playback end Event
     /// </summary>
     private int RegisterPlaybackEndEvent()
     {
       int syncHandle = 0;
 
       syncHandle = Bass.BASS_ChannelSetSync(_stream,
-                                            BASSSync.BASS_SYNC_END,
-                                            0, PlaybackEndProcDelegate,
-                                            IntPtr.Zero);
+            BASSSync.BASS_SYNC_END,
+            0, PlaybackEndProcDelegate,
+            IntPtr.Zero);
 
       if (syncHandle == 0)
       {
@@ -474,7 +428,7 @@ namespace MPTagThat.Player
     }
 
     /// <summary>
-    ///   Playback end Procedure
+    /// Playback end Procedure
     /// </summary>
     private void PlaybackEndProc(int syncHandle, int channel, int data, IntPtr user)
     {
@@ -484,11 +438,9 @@ namespace MPTagThat.Player
       _currentStartIndex++;
       buttonPlay_Click(null, new EventArgs());
     }
-
     #endregion
 
     #region Spectrum
-
     private void pictureBoxSpectrum_MouseDown(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Left)
@@ -502,7 +454,7 @@ namespace MPTagThat.Player
         _specIdx = 15;
 
       Options.MainSettings.PlayerSpectrumIndex = _specIdx;
-      pictureBoxSpectrum.Image = null;
+      this.pictureBoxSpectrum.Image = null;
       _vis.ClearPeaks();
     }
 
@@ -510,131 +462,99 @@ namespace MPTagThat.Player
     {
       switch (_specIdx)
       {
-          // normal spectrum (width = resolution)
+        // normal spectrum (width = resolution)
         case 0:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrum(_stream, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height,
-                                                         Color.Lime, Color.Red, Color.Black, false, false, false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrum(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Lime, Color.Red, Color.Black, false, false, false);
           break;
-          // normal spectrum (full resolution)
+        // normal spectrum (full resolution)
         case 1:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrum(_stream, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height,
-                                                         Color.SteelBlue, Color.Pink, Color.Black, false, true, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrum(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink, Color.Black, false, true, true);
           break;
-          // line spectrum (width = resolution)
+        // line spectrum (width = resolution)
         case 2:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumLine(_stream, pictureBoxSpectrum.Width,
-                                                             pictureBoxSpectrum.Height, Color.Lime, Color.Red,
-                                                             Color.Black, 2, 2, false, false, false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumLine(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Lime, Color.Red, Color.Black, 2, 2, false, false, false);
           break;
-          // line spectrum (full resolution)
+        // line spectrum (full resolution)
         case 3:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumLine(_stream, pictureBoxSpectrum.Width,
-                                                             pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink,
-                                                             Color.Black, 16, 4, false, true, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumLine(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink, Color.Black, 16, 4, false, true, true);
           break;
-          // ellipse spectrum (width = resolution)
+        // ellipse spectrum (width = resolution)
         case 4:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumEllipse(_stream, pictureBoxSpectrum.Width,
-                                                                pictureBoxSpectrum.Height, Color.Lime, Color.Red,
-                                                                Color.Black, 1, 2, false, false, false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumEllipse(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Lime, Color.Red, Color.Black, 1, 2, false, false, false);
           break;
-          // ellipse spectrum (full resolution)
+        // ellipse spectrum (full resolution)
         case 5:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumEllipse(_stream, pictureBoxSpectrum.Width,
-                                                                pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink,
-                                                                Color.Black, 2, 4, false, true, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumEllipse(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink, Color.Black, 2, 4, false, true, true);
           break;
-          // dot spectrum (width = resolution)
+        // dot spectrum (width = resolution)
         case 6:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumDot(_stream, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height,
-                                                            Color.Lime, Color.Red, Color.Black, 1, 0, false, false,
-                                                            false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumDot(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Lime, Color.Red, Color.Black, 1, 0, false, false, false);
           break;
-          // dot spectrum (full resolution)
+        // dot spectrum (full resolution)
         case 7:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumDot(_stream, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height,
-                                                            Color.SteelBlue, Color.Pink, Color.Black, 2, 1, false, false,
-                                                            true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumDot(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.SteelBlue, Color.Pink, Color.Black, 2, 1, false, false, true);
           break;
-          // peak spectrum (width = resolution)
+        // peak spectrum (width = resolution)
         case 8:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumLinePeak(_stream, pictureBoxSpectrum.Width,
-                                                                 pictureBoxSpectrum.Height, Color.SeaGreen,
-                                                                 Color.LightGreen, Color.Orange, Color.Black, 2, 1, 2,
-                                                                 10, false, false, false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumLinePeak(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.SeaGreen, Color.LightGreen, Color.Orange, Color.Black, 2, 1, 2, 10, false, false, false);
           break;
-          // peak spectrum (full resolution)
+        // peak spectrum (full resolution)
         case 9:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumLinePeak(_stream, pictureBoxSpectrum.Width,
-                                                                 pictureBoxSpectrum.Height, Color.GreenYellow,
-                                                                 Color.RoyalBlue, Color.DarkOrange, Color.Black, 23, 5,
-                                                                 3, 5, false, true, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumLinePeak(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.GreenYellow, Color.RoyalBlue, Color.DarkOrange, Color.Black, 23, 5, 3, 5, false, true, true);
           break;
-          // wave spectrum (width = resolution)
+        // wave spectrum (width = resolution)
         case 10:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumWave(_stream, pictureBoxSpectrum.Width,
-                                                             pictureBoxSpectrum.Height, Color.Yellow, Color.Orange,
-                                                             Color.Black, 1, false, false, false);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumWave(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Yellow, Color.Orange, Color.Black, 1, false, false, false);
           break;
-          // dancing beans spectrum (width = resolution)
+        // dancing beans spectrum (width = resolution)
         case 11:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumBean(_stream, pictureBoxSpectrum.Width,
-                                                             pictureBoxSpectrum.Height, Color.Chocolate,
-                                                             Color.DarkGoldenrod, Color.Black, 4, false, false, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumBean(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Chocolate, Color.DarkGoldenrod, Color.Black, 4, false, false, true);
           break;
-          // dancing text spectrum (width = resolution)
+        // dancing text spectrum (width = resolution)
         case 12:
-          pictureBoxSpectrum.Image = _vis.CreateSpectrumText(_stream, pictureBoxSpectrum.Width,
-                                                             pictureBoxSpectrum.Height, Color.White, Color.Tomato,
-                                                             Color.Black, "MPTagThat is Great", false, false, true);
+          this.pictureBoxSpectrum.Image = _vis.CreateSpectrumText(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.White, Color.Tomato, Color.Black, "MPTagThat is Great", false, false, true);
           break;
-          // frequency detection
+        // frequency detection
         case 13:
           float amp = _vis.DetectFrequency(_stream, 10, 500, true);
           if (amp > 0.3)
-            pictureBoxSpectrum.BackColor = Color.Red;
+            this.pictureBoxSpectrum.BackColor = Color.Red;
           else
-            pictureBoxSpectrum.BackColor = Color.Black;
+            this.pictureBoxSpectrum.BackColor = Color.Black;
           break;
-          // 3D voice print
+        // 3D voice print
         case 14:
           // we need to draw directly directly on the picture box...
           // normally you would encapsulate this in your own custom control
-          Graphics g = Graphics.FromHwnd(pictureBoxSpectrum.Handle);
-          g.SmoothingMode = SmoothingMode.AntiAlias;
-          _vis.CreateSpectrum3DVoicePrint(_stream, g,
-                                          new Rectangle(0, 0, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height),
-                                          Color.Black, Color.White, _voicePrintIdx, false, false);
+          Graphics g = Graphics.FromHwnd(this.pictureBoxSpectrum.Handle);
+          g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+          _vis.CreateSpectrum3DVoicePrint(_stream, g, new Rectangle(0, 0, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height), Color.Black, Color.White, _voicePrintIdx, false, false);
           g.Dispose();
           // next call will be at the next pos
           _voicePrintIdx++;
-          if (_voicePrintIdx > pictureBoxSpectrum.Width - 1)
+          if (_voicePrintIdx > this.pictureBoxSpectrum.Width - 1)
             _voicePrintIdx = 0;
           break;
-          // WaveForm
+        // WaveForm
         case 15:
-          pictureBoxSpectrum.Image = _vis.CreateWaveForm(_stream, pictureBoxSpectrum.Width, pictureBoxSpectrum.Height,
-                                                         Color.Green, Color.Red, Color.Gray, Color.Black, 1, true, false,
-                                                         true);
+          this.pictureBoxSpectrum.Image = _vis.CreateWaveForm(_stream, this.pictureBoxSpectrum.Width, this.pictureBoxSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, true, false, true);
           break;
       }
     }
-
     #endregion
 
     #region Message Handling
-
     /// <summary>
-    ///   Handle Messages
+    /// Handle Messages
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
+        // Message sent, when a Theme is changing
         case "themechanged":
           {
             if (ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName == _currentTheme)
@@ -643,14 +563,13 @@ namespace MPTagThat.Player
             }
 
             _currentTheme = ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName;
-            string imageDir = Path.Combine(Application.StartupPath, "Themes\\" + _currentTheme);
-            _imgPlay = Image.FromFile(Path.Combine(imageDir, "Play_btn.png"));
-            _imgPause = Image.FromFile(Path.Combine(imageDir, "Pause_btn.png"));
+            string imageDir = System.IO.Path.Combine(Application.StartupPath, "Themes\\" + _currentTheme); 
+            _imgPlay = Image.FromFile(System.IO.Path.Combine(imageDir, "Play_btn.png"));
+            _imgPause = Image.FromFile(System.IO.Path.Combine(imageDir, "Pause_btn.png"));
             break;
           }
       }
     }
-
     #endregion
   }
 }

@@ -1,49 +1,26 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.IO;
+using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
 
-#endregion
 
 namespace MPTagThat.Dialogues
 {
   public partial class AmazonAlbumSearchResults : ShapedForm
   {
     #region Variables
-
-    private readonly List<AmazonAlbum> albums;
-    private readonly ImageList imagelist = new ImageList();
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-
+    ImageList imagelist = new ImageList();
+    List<AmazonAlbum> albums = null;
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     #endregion
 
     #region Properties
-
     public int SelectedListItem
     {
       get { return lvSearchResults.SelectedIndices[0]; }
@@ -63,16 +40,14 @@ namespace MPTagThat.Dialogues
     {
       set { lbAlbumDetail.Text = value; }
     }
-
     #endregion
 
     #region ctor
-
     public AmazonAlbumSearchResults(List<AmazonAlbum> albums)
     {
       InitializeComponent();
 
-      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       LocaliseScreen();
@@ -86,24 +61,21 @@ namespace MPTagThat.Dialogues
 
       lvSearchResults.View = View.LargeIcon;
       imagelist.ImageSize = new Size(128, 128);
-      lvSearchResults.LargeImageList = imagelist;
-    }
+      lvSearchResults.LargeImageList = this.imagelist;
 
+    }
     #endregion
 
     #region Methods
-
     #region Localisation
-
     /// <summary>
-    ///   Localise the Screen
+    /// Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
-      Text = localisation.ToString("AmazonAlbumSearch", "Header");
-      chAlbum.Text = localisation.ToString("AmazonAlbumSearch", "Albums");
+      this.Text = localisation.ToString("AmazonAlbumSearch", "Header");
+      this.chAlbum.Text = localisation.ToString("AmazonAlbumSearch", "Albums");
     }
-
     #endregion
 
     private void FillResults()
@@ -125,7 +97,7 @@ namespace MPTagThat.Dialogues
       if (album.AlbumImage == null)
         return;
 
-      using (MemoryStream ms = new MemoryStream(album.AlbumImage.Data))
+      using (System.IO.MemoryStream ms = new System.IO.MemoryStream(album.AlbumImage.Data))
       {
         Image img = Image.FromStream(ms);
         if (img != null)
@@ -134,28 +106,25 @@ namespace MPTagThat.Dialogues
         }
       }
     }
-
     #endregion
 
     #region Events
-
     private void btClose_Click(object sender, EventArgs e)
     {
-      DialogResult = DialogResult.Cancel;
-      Close();
+      this.DialogResult = DialogResult.Cancel;
+      this.Close();
     }
 
     private void btUpdate_Click(object sender, EventArgs e)
     {
-      DialogResult = DialogResult.OK;
-      Close();
+      this.DialogResult = DialogResult.OK;
+      this.Close();
     }
 
     private void lvSearchResults_DoubleClick(object sender, EventArgs e)
     {
       btUpdate.PerformClick();
     }
-
     #endregion
   }
 }

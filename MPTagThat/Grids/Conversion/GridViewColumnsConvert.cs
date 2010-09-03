@@ -1,46 +1,21 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
-
-#endregion
 
 namespace MPTagThat.GridView
 {
   public class GridViewColumnsConvert
   {
     #region Variables
-
-    private readonly GridViewColumn _filename;
-    private readonly GridViewColumn _newfilename;
-    private readonly GridViewColumn _status;
     private GridViewSettings _settings;
-
+    private GridViewColumn _filename;
+    private GridViewColumn _newfilename;
+    private GridViewColumn _status;
     #endregion
 
     #region Constructor
-
     public GridViewColumnsConvert()
     {
       _status = new GridViewColumn("Status", "process", 100, true, true, false, true);
@@ -48,20 +23,17 @@ namespace MPTagThat.GridView
       _newfilename = new GridViewColumn("NewFileName", "text", 350, true, true, true, true);
       LoadSettings();
     }
-
     #endregion
 
-    #region Properties
 
+    #region Properties
     public GridViewSettings Settings
     {
       get { return _settings; }
     }
-
     #endregion
 
     #region Private Methods
-
     private void LoadSettings()
     {
       _settings = new GridViewSettings();
@@ -104,7 +76,6 @@ namespace MPTagThat.GridView
       columnList.Add(_newfilename);
       return columnList;
     }
-
     #endregion
   }
 }

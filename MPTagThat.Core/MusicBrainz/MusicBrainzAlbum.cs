@@ -1,64 +1,71 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using MPTagThat.Core.Amazon;
-
-#endregion
 
 namespace MPTagThat.Core.MusicBrainz
 {
   public class MusicBrainzAlbum
   {
     #region Private Fields
-
+    private Guid id;
+    private string asin;
+    private string title;
+    private string artist;
+    private string year;
+    private AmazonAlbum amazonAlbum;
+    private List<MusicBrainzTrack> tracks;
     #endregion
 
     #region ctor
-
     public MusicBrainzAlbum()
     {
-      Tracks = new List<MusicBrainzTrack>();
+      tracks = new List<MusicBrainzTrack>();
     }
-
     #endregion
 
     #region Properties
+    public Guid Id
+    {
+      get { return id; }
+      set { id = value; }
+    }
 
-    public Guid Id { get; set; }
+    public string Asin
+    {
+      get { return asin; }
+      set { asin = value; }
+    }
 
-    public string Asin { get; set; }
+    public string Title
+    {
+      get { return title; }
+      set { title = value; }
+    }
 
-    public string Title { get; set; }
+    public string Artist
+    {
+      get { return artist; }
+      set { artist = value; }
+    }
 
-    public string Artist { get; set; }
+    public string Year
+    {
+      get { return year; }
+      set { year = value; }
+    }
 
-    public string Year { get; set; }
+    public List<MusicBrainzTrack> Tracks
+    {
+      get { return tracks; }
+      set { tracks = value; }
+    }
 
-    public List<MusicBrainzTrack> Tracks { get; set; }
-
-    public AmazonAlbum Amazon { get; set; }
-
+    public AmazonAlbum Amazon
+    {
+      get { return amazonAlbum; }
+      set { amazonAlbum = value; }
+    }
     #endregion
   }
 }

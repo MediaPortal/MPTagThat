@@ -1,32 +1,19 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace MPTagThat.Core
 {
   public class GridViewColumn
   {
-    private bool _bound = true;
     private string _columnName;
     private bool _display = true;
-    private string _type = "text";
+    private bool _readonly = false;
     private int _width = 100;
+    private bool _bound = true;
+    private bool _frozen = false;
+    private string _type = "text";
+    private int _displayIndex = 0;
 
 
     public GridViewColumn(string name, string type, int width, bool display, bool readOnly, bool bound, bool frozen)
@@ -35,12 +22,15 @@ namespace MPTagThat.Core
       _type = type;
       _width = width;
       _display = display;
-      Readonly = readOnly;
+      _readonly = readOnly;
       _bound = bound;
-      Frozen = frozen;
+      _frozen = frozen;
     }
 
-    public GridViewColumn() {}
+    public GridViewColumn()
+    {
+
+    }
 
     public string Name
     {
@@ -65,9 +55,17 @@ namespace MPTagThat.Core
       set { _bound = value; }
     }
 
-    public bool Readonly { get; set; }
+    public bool Readonly
+    {
+      get { return _readonly; }
+      set { _readonly = value; }
+    }
 
-    public bool Frozen { get; set; }
+    public bool Frozen
+    {
+      get { return _frozen; }
+      set { _frozen = value; }
+    }
 
     public int Width
     {
@@ -81,6 +79,10 @@ namespace MPTagThat.Core
       set { _type = value; }
     }
 
-    public int DisplayIndex { get; set; }
+    public int DisplayIndex
+    {
+      get { return _displayIndex; }
+      set { _displayIndex = value; }
+    }
   }
 }

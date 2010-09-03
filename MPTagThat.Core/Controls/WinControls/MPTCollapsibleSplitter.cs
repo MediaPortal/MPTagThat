@@ -1,64 +1,38 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
+using System;
 using System.ComponentModel;
-using NJFLib.Controls;
-
-#endregion
+using System.Drawing;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTCollapsibleSplitter : CollapsibleSplitter
+  public class MPTCollapsibleSplitter : NJFLib.Controls.CollapsibleSplitter
   {
     #region Variables
-
-    private readonly IThemeManager themeManager;
     private string _localisation;
     private string _localisationContext;
-
+    private IThemeManager themeManager;
     #endregion
 
     #region Properties
-
     /// <summary>
-    ///   The string to do the locilisation for
+    /// The string to do the locilisation for
     /// </summary>
     [Bindable(true), Category("MPTagThat Options"), DefaultValue(""),
-     Description("The string that the system will look for in the localisation file")]
+    Description("The string that the system will look for in the localisation file")]
     public string Localisation
     {
-      get { return _localisation; }
-      set { _localisation = value; }
+      get { return this._localisation; }
+      set { this._localisation = value; }
     }
 
     /// <summary>
-    ///   The Localisation Context
+    /// The Localisation Context
     /// </summary>
     [Bindable(true), Category("MPTagThat Options"), DefaultValue(""),
-     Description("The context to search for localisation. Default is the parent Context.")]
+    Description("The context to search for localisation. Default is the parent Context.")]
     public string LocalisationContext
     {
-      get { return _localisationContext; }
-      set { _localisationContext = value; }
+      get { return this._localisationContext; }
+      set { this._localisationContext = value; }
     }
 
     public override string Text
@@ -70,10 +44,10 @@ namespace MPTagThat.Core.WinControls
 
         if (_localisationContext == null || _localisationContext == "")
         {
-          if (Parent != null)
-            _localisationContext = Parent.Name;
+          if (this.Parent != null)
+            _localisationContext = this.Parent.Name;
           else
-            _localisationContext = "";
+           _localisationContext = "";
         }
 
         string localisedText = null;
@@ -87,42 +61,37 @@ namespace MPTagThat.Core.WinControls
           return localisedText;
       }
     }
-
     #endregion
 
     #region ctor
-
     public MPTCollapsibleSplitter()
     {
       themeManager = ServiceScope.Get<IThemeManager>();
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
     }
-
     #endregion
 
     #region Private Methods
-
     /// <summary>
-    ///   Handle Messages
+    /// Handle Messages
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
+        // Message sent, when a Theme is changing
         case "themechanged":
           {
-            BackColor = themeManager.CurrentTheme.BackColor;
+            this.BackColor = themeManager.CurrentTheme.BackColor;
             break;
           }
       }
     }
-
     #endregion
   }
 }

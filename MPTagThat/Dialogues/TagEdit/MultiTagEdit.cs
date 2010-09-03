@@ -1,60 +1,36 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
-using MPTagThat.Core;
 using TagLib;
-using TagLib.Id3v2;
-using Tag = TagLib.Id3v1.Tag;
-
-#endregion
+using MPTagThat.Core;
+using MPTagThat.Core.Amazon;
+using MPTagThat.Core.ShellLib;
 
 namespace MPTagThat.TagEdit
 {
   public partial class MultiTagEdit : TagEditBase
   {
     #region ctor
-
     public MultiTagEdit(Main main)
     {
       this.main = main;
       InitializeComponent();
-
+      
       base.IsMultiTagEdit = true;
     }
-
     #endregion
 
     #region Methods
-
     #region Form Opening
-
     /// <summary>
-    ///   Called when loading the Dialoue
+    /// Called when loading the Dialoue
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected override void OnLoad(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -70,37 +46,37 @@ namespace MPTagThat.TagEdit
       FillForm();
 
       // Now Set the Event Handlers to detect changes in the Text Boxes
-      tbYear.TextChanged += OnTextChanged;
-      tbTitle.TextChanged += OnTextChanged;
-      cbAlbum.TextChanged += OnComboChanged;
-      cbArtist.TextChanged += OnComboChanged;
-      tbTrack.TextChanged += OnTextChanged;
-      cbAlbumArtist.TextChanged += OnComboChanged;
-      tbNumTracks.TextChanged += OnTextChanged;
-      tbBPM.TextChanged += OnTextChanged;
-      tbNumDiscs.TextChanged += OnTextChanged;
-      tbDisc.TextChanged += OnTextChanged;
-      tbConductor.TextChanged += OnTextChanged;
-      tbComposer.TextChanged += OnTextChanged;
-      tbInterpretedBy.TextChanged += OnTextChanged;
-      tbTextWriter.TextChanged += OnTextChanged;
-      tbPublisher.TextChanged += OnTextChanged;
-      tbEncodedBy.TextChanged += OnTextChanged;
-      tbCopyright.TextChanged += OnTextChanged;
-      tbContentGroup.TextChanged += OnTextChanged;
-      tbSubTitle.TextChanged += OnTextChanged;
-      tbArtistSort.TextChanged += OnTextChanged;
-      tbAlbumSort.TextChanged += OnTextChanged;
-      tbTitleSort.TextChanged += OnTextChanged;
-      cbMediaType.TextChanged += OnComboChanged;
-      tbOfficialArtistUrl.TextChanged += OnTextChanged;
-      tbOfficialAudioFileUrl.TextChanged += OnTextChanged;
-      tbOfficialAudioSourceUrl.TextChanged += OnTextChanged;
-      tbOfficialInternetRadioUrl.TextChanged += OnTextChanged;
-      tbOfficialPaymentUrl.TextChanged += OnTextChanged;
-      tbOfficialPublisherUrl.TextChanged += OnTextChanged;
-      tbCommercialInformationUrl.TextChanged += OnTextChanged;
-      tbCopyrightUrl.TextChanged += OnTextChanged;
+      this.tbYear.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbTitle.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbAlbum.TextChanged += new System.EventHandler(this.OnComboChanged);
+      this.cbArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
+      this.tbTrack.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbAlbumArtist.TextChanged += new System.EventHandler(this.OnComboChanged);
+      this.tbNumTracks.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbBPM.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbNumDiscs.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbDisc.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbConductor.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbComposer.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbInterpretedBy.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbTextWriter.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbPublisher.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbEncodedBy.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbCopyright.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbContentGroup.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbSubTitle.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbArtistSort.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbAlbumSort.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbTitleSort.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.cbMediaType.TextChanged += new System.EventHandler(this.OnComboChanged);
+      this.tbOfficialArtistUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbOfficialAudioFileUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbOfficialAudioSourceUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbOfficialInternetRadioUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbOfficialPaymentUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbOfficialPublisherUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbCommercialInformationUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
+      this.tbCopyrightUrl.TextChanged += new System.EventHandler(this.OnTextChanged);
 
       Localisation();
       Util.LeaveMethod(Util.GetCallingMethod());
@@ -110,13 +86,12 @@ namespace MPTagThat.TagEdit
     {
       base.Header = localisation.ToString("TagEdit", "MultiHeading");
     }
-
     #endregion
 
     /// <summary>
-    ///   Apply the changes from the Multi Tag edit
+    /// Apply the changes from the Multi Tag edit
     /// </summary>
-    /// <param name = "options"></param>
+    /// <param name="options"></param>
     private void MultiTagEditApply(MultiTagEditOptions options)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -136,11 +111,11 @@ namespace MPTagThat.TagEdit
           track.Changed = true;
 
           // Get the ID3 Frame for ID3 specifc frame handling
-          Tag id3v1tag = null;
+          TagLib.Id3v1.Tag id3v1tag = null;
           TagLib.Id3v2.Tag id3v2tag = null;
           if (track.TagType.ToLower() == "mp3")
           {
-            id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as Tag;
+            id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
             id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
           }
 
@@ -148,10 +123,10 @@ namespace MPTagThat.TagEdit
 
           track.Compilation = options.Compilation;
           if (options.Track > -1 || options.NumTracks > -1)
-            track.Track = string.Format("{0}/{1}", options.Track, options.NumTracks);
+            track.Track = string.Format("{0}/{1}", options.Track.ToString(), options.NumTracks.ToString());
 
           if (options.Disc > -1 || options.NumDiscs > -1)
-            track.Disc = string.Format("{0}/{1}", options.Disc, options.NumDiscs);
+            track.Disc = string.Format("{0}/{1}", options.Disc.ToString(), options.NumDiscs.ToString());
 
           if (options.BPM > -1)
             track.File.Tag.BeatsPerMinute = (uint)options.BPM;
@@ -198,23 +173,22 @@ namespace MPTagThat.TagEdit
 
           if (options.Comments.Count > 0)
           {
+
             if (track.TagType.ToLower() == "mp3")
             {
               id3v1tag.Comment = options.Comments[0].Text;
               foreach (Comment comment in options.Comments)
               {
-                CommentsFrame commentsframe = CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
+                TagLib.Id3v2.CommentsFrame commentsframe = TagLib.Id3v2.CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
                 commentsframe.Text = comment.Text;
               }
             }
             else
               track.Comment = options.Comments[0].Text;
           }
-
           #endregion
 
           #region Detailed Information
-
           if (options.Conductor != null)
             track.Conductor = options.Conductor;
 
@@ -264,11 +238,9 @@ namespace MPTagThat.TagEdit
                 track.TitleSortName = options.TitleSortName;
             }
           }
-
           #endregion
 
           #region Original Information
-
           if (track.TagType.ToLower() == "mp3" && id3v2tag != null)
           {
             if (options.OriginalAlbum != null)
@@ -289,11 +261,9 @@ namespace MPTagThat.TagEdit
             if (options.OriginalRelease != null)
               track.OriginalRelease = options.OriginalRelease;
           }
-
           #endregion
 
           #region Pictures
-
           if (options.Pictures.Count > 0 || options.RemoveExistingPictures)
           {
             List<IPicture> pics = new List<IPicture>();
@@ -307,11 +277,9 @@ namespace MPTagThat.TagEdit
 
             track.Pictures = pics.ToArray();
           }
-
           #endregion
 
           #region Involved People
-
           // The following values are only ID3 V2 specific
           if (track.TagType.ToLower() == "mp3" && id3v2tag != null)
           {
@@ -331,13 +299,11 @@ namespace MPTagThat.TagEdit
                 track.MusicCreditList = options.MusicCreditList;
             }
             else
-              id3v2tag.RemoveFrames("TMCL"); // remove the frame, when 2.3. 
+              id3v2tag.RemoveFrames("TMCL");  // remove the frame, when 2.3. 
           }
-
           #endregion
 
           #region Web Information
-
           if (track.TagType.ToLower() == "mp3" && id3v2tag != null)
           {
             if (options.CopyrightInformation != null)
@@ -364,11 +330,9 @@ namespace MPTagThat.TagEdit
             if (options.CommercialInformation != null)
               track.CommercialInformation = options.CommercialInformation;
           }
-
           #endregion
 
           #region Lyrics
-
           if (options.RemoveExistingLyrics)
             track.Lyrics = "";
 
@@ -378,19 +342,17 @@ namespace MPTagThat.TagEdit
             {
               foreach (Lyric lyric in options.Lyrics)
               {
-                UnsynchronisedLyricsFrame lyricsframe = UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description,
-                                                                                      lyric.Language, true);
+                TagLib.Id3v2.UnsynchronisedLyricsFrame lyricsframe = TagLib.Id3v2.UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description, lyric.Language, true);
                 lyricsframe.Text = lyric.Text;
               }
             }
             else
               track.Lyrics = options.Lyrics[0].Text;
-          }
 
+          }
           #endregion
 
           #region Rating
-
           // The following values are only ID3 V2 specific
           if (track.TagType.ToLower() == "mp3" && id3v2tag != null)
           {
@@ -401,13 +363,12 @@ namespace MPTagThat.TagEdit
             {
               foreach (Rating rating in options.Rating)
               {
-                PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, rating.User, true);
+                TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, rating.User, true);
                 popmFrame.Rating = Convert.ToByte(rating.RatingValue);
                 popmFrame.PlayCount = Convert.ToUInt32(rating.PlayCounter);
               }
             }
           }
-
           #endregion
         }
         catch (Exception ex)
@@ -433,16 +394,14 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    ///   Set the options selected in the Form
+    /// Set the options selected in the Form
     /// </summary>
     /// <returns></returns>
     private MultiTagEditOptions SetOptions()
     {
       Util.EnterMethod(Util.GetCallingMethod());
       MultiTagEditOptions options = new MultiTagEditOptions();
-
       #region Main Tags
-
       if (ckTrack.Checked)
       {
         try
@@ -552,17 +511,14 @@ namespace MPTagThat.TagEdit
       List<Comment> comments = new List<Comment>();
       foreach (DataGridViewRow row in dataGridViewComment.Rows)
       {
-        Comment comment = new Comment(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(),
-                                      row.Cells[2].Value.ToString());
+        Comment comment = new Comment(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
         comments.Add(comment);
       }
       options.Comments = comments;
       options.RemoveExistingComments = checkBoxRemoveComments.Checked;
-
       #endregion
 
       #region Detailed Information
-
       options.Conductor = (ckConductor.Checked ? tbConductor.Text : null);
       options.Composer = (ckComposer.Checked ? tbComposer.Text : null);
       options.Copyright = (ckCopyright.Checked ? tbCopyright.Text : null);
@@ -577,51 +533,43 @@ namespace MPTagThat.TagEdit
       options.TitleSortName = (ckTitleSort.Checked ? tbTitleSort.Text : null);
       options.MediaType = (ckMediaType.Checked ? cbMediaType.SelectedText : null);
       options.SetTrackLength = ckTrackLength.Checked;
-
       #endregion
 
       #region Original Information
-
       options.OriginalAlbum = (ckOriginalAlbum.Checked ? tbOriginalAlbum.Text : null);
       options.OriginalArtist = (ckOriginalArtist.Checked ? tbOriginalArtist.Text : null);
       options.OriginalFileName = (ckOriginalFileName.Checked ? tbOriginalFileName.Text : null);
       options.OriginalLyricsWriter = (ckOriginalLyricsWriter.Checked ? tbOriginalLyricsWriter.Text : null);
       options.OriginalOwner = (ckOriginalOwner.Checked ? tbOriginalOwner.Text : null);
       options.OriginalRelease = (ckOriginalRelease.Checked ? tbOriginalRelease.Text : null);
-
       #endregion
 
       #region Pictures
-
       options.Pictures = _pictures;
       options.RemoveExistingPictures = checkBoxRemoveExistingPictures.Checked;
-
       #endregion
 
       #region Involved People
-
-      char[] d = new char[1] {'\0'};
+      char[] d = new char[1] { '\0' };
       string delim = new string(d);
       foreach (DataGridViewRow row in dataGridViewInvolvedPeople.Rows)
       {
-        options.InvolvedPeople += string.Format(@"{0}{1}{2}{3}", row.Cells[0].Value, delim, row.Cells[1].Value, delim);
+        options.InvolvedPeople += string.Format(@"{0}{1}{2}{3}", row.Cells[0].Value.ToString(), delim, row.Cells[1].Value.ToString(), delim);
       }
 
       if (options.InvolvedPeople != null)
-        options.InvolvedPeople.Trim(new[] {'\0'});
+        options.InvolvedPeople.Trim(new char[] { '\0' });
 
       foreach (DataGridViewRow row in dataGridViewMusician.Rows)
       {
-        options.MusicCreditList += string.Format(@"{0}{1}{2}{3}", row.Cells[0].Value, delim, row.Cells[1].Value, delim);
+        options.MusicCreditList += string.Format(@"{0}{1}{2}{3}", row.Cells[0].Value.ToString(), delim, row.Cells[1].Value.ToString(), delim);
       }
 
       if (options.MusicCreditList != null)
-        options.MusicCreditList.Trim(new[] {'\0'});
-
+        options.MusicCreditList.Trim(new char[] { '\0' });
       #endregion
 
       #region Web Information
-
       options.CopyrightInformation = (ckCopyrightUrl.Checked ? tbCopyrightUrl.Text : null);
       options.OfficialAudioFileUrl = (ckOfficialAudioFileUrl.Checked ? tbOfficialAudioFileUrl.Text : null);
       options.OfficialArtistUrl = (ckOfficialArtistUrl.Checked ? tbOfficialArtistUrl.Text : null);
@@ -630,35 +578,28 @@ namespace MPTagThat.TagEdit
       options.OfficialPaymentUrl = (ckOfficialPaymentUrl.Checked ? tbOfficialPaymentUrl.Text : null);
       options.OfficialPublisherUrl = (ckOfficialPublisherUrl.Checked ? tbOfficialPublisherUrl.Text : null);
       options.CommercialInformation = (ckCommercialInformationUrl.Checked ? tbCommercialInformationUrl.Text : null);
-
       #endregion
 
       #region Lyrics
-
       List<Lyric> lyrics = new List<Lyric>();
       foreach (DataGridViewRow row in dataGridViewLyrics.Rows)
       {
-        Lyric lyric = new Lyric(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(),
-                                row.Cells[2].Value.ToString());
+        Lyric lyric = new Lyric(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
         lyrics.Add(lyric);
       }
       options.Lyrics = lyrics;
       options.RemoveExistingLyrics = ckRemoveLyrics.Checked;
-
       #endregion
 
       #region Ratings
-
       List<Rating> ratings = new List<Rating>();
       foreach (DataGridViewRow row in dataGridViewRating.Rows)
       {
-        Rating rating = new Rating(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(),
-                                   row.Cells[2].Value.ToString());
+        Rating rating = new Rating(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
         ratings.Add(rating);
       }
       options.Rating = ratings;
       options.RemoveExistingRating = ckRemoveExistingRatings.Checked;
-
       #endregion
 
       Util.LeaveMethod(Util.GetCallingMethod());
@@ -666,7 +607,7 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    ///   Fill the fields in the Form with Values which are the same in all selected rows
+    /// Fill the fields in the Form with Values which are the same in all selected rows
     /// </summary>
     private void FillForm()
     {
@@ -685,16 +626,15 @@ namespace MPTagThat.TagEdit
         TrackData track = main.TracksGridView.TrackList[row.Index];
 
         // Get the ID3 Frame for ID3 specifc frame handling
-        Tag id3v1tag = null;
+        TagLib.Id3v1.Tag id3v1tag = null;
         TagLib.Id3v2.Tag id3v2tag = null;
         if (track.TagType.ToLower() == "mp3")
         {
-          id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as Tag;
+          id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
           id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
         }
 
         #region Main Tags
-
         if (cbArtist.Text.Trim() != track.Artist.Trim())
           if (i == 0)
             cbArtist.Text = track.Artist;
@@ -784,7 +724,7 @@ namespace MPTagThat.TagEdit
         if (track.TagType.ToLower() == "mp3")
         {
           sComment += id3v1tag.Comment;
-          foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
+          foreach (TagLib.Id3v2.CommentsFrame commentsframe in id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>())
           {
             sComment += commentsframe.Text;
           }
@@ -800,7 +740,7 @@ namespace MPTagThat.TagEdit
             if (track.TagType.ToLower() == "mp3")
             {
               AddComment("", "", id3v1tag.Comment);
-              foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
+              foreach (TagLib.Id3v2.CommentsFrame commentsframe in id3v2tag.GetFrames<TagLib.Id3v2.CommentsFrame>())
               {
                 AddComment(commentsframe.Description, commentsframe.Language, commentsframe.Text);
               }
@@ -811,11 +751,9 @@ namespace MPTagThat.TagEdit
           else
             dataGridViewComment.Rows.Clear();
         }
-
         #endregion
 
         #region Detailed Information
-
         if (tbConductor.Text.Trim() != track.Conductor.Trim())
           if (i == 0)
             tbConductor.Text = track.Conductor;
@@ -891,11 +829,9 @@ namespace MPTagThat.TagEdit
             else
               tbTitleSort.Text = "";
         }
-
         #endregion
 
         #region Original Information
-
         // The following values are only ID3 V2 specific
         if (track.TagType.ToLower() == "mp3")
         {
@@ -935,24 +871,23 @@ namespace MPTagThat.TagEdit
             else
               tbOriginalRelease.Text = "";
         }
-
         #endregion
 
         #region Involved People
-
         // The following values are only ID3 V2 specific
         if (track.TagType.ToLower() == "mp3")
         {
+
           if (strInvoledPeopleTemp != track.InvolvedPeople)
           {
             if (i == 0)
             {
               // A IPLS is delimited with "\0"
               // A TIPL is delimited with ";"
-              string[] ipls = track.InvolvedPeople.Split(new[] {'\0', ';'});
+              string[] ipls = track.InvolvedPeople.Split(new char[] { '\0', ';' });
               for (int j = 0; j < ipls.Length - 1; j += 2)
               {
-                dataGridViewInvolvedPeople.Rows.Add(new object[] {ipls[j].Trim(), ipls[j + 1].Trim()});
+                dataGridViewInvolvedPeople.Rows.Add(new object[] { ipls[j].Trim(), ipls[j + 1].Trim() });
               }
               strInvoledPeopleTemp = track.InvolvedPeople;
             }
@@ -967,7 +902,7 @@ namespace MPTagThat.TagEdit
               string[] mcl = track.MusicCreditList.Split(';');
               for (int j = 0; j < mcl.Length - 1; j += 2)
               {
-                dataGridViewMusician.Rows.Add(new object[] {mcl[j].Trim(), mcl[j + 1].Trim()});
+                dataGridViewMusician.Rows.Add(new object[] { mcl[j].Trim(), mcl[j + 1].Trim() });
               }
               strMusicianCreditList = track.MusicCreditList;
             }
@@ -975,11 +910,9 @@ namespace MPTagThat.TagEdit
               dataGridViewMusician.Rows.Clear();
           }
         }
-
         #endregion
 
         #region Web Information
-
         // The following values are only ID3 V2 specific
         if (track.TagType.ToLower() == "mp3")
         {
@@ -1031,9 +964,7 @@ namespace MPTagThat.TagEdit
             else
               tbCommercialInformationUrl.Text = "";
         }
-
         #endregion
-
         i++;
       }
 
@@ -1120,28 +1051,26 @@ namespace MPTagThat.TagEdit
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
-
     #endregion
 
     #region Event Handler
-
     /// <summary>
-    ///   Apply the Changes
+    /// Apply the Changes
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected override void btApply_Click(object sender, EventArgs e)
     {
       MultiTagEditOptions options = SetOptions();
       MultiTagEditApply(options);
-      Close();
+      this.Close();
     }
 
     /// <summary>
-    ///   When the Textbox has been edited, the Check Box should be selected automatically
+    /// When the Textbox has been edited, the Check Box should be selected automatically
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected override void OnTextChanged(object sender, EventArgs e)
     {
       TextBox tb = sender as TextBox;
@@ -1276,10 +1205,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    ///   A text in the Combo has been selected. Mark the Check Box
+    /// A text in the Combo has been selected. Mark the Check Box
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected override void OnComboChanged(object sender, EventArgs e)
     {
       ComboBox cb = sender as ComboBox;
@@ -1302,7 +1231,6 @@ namespace MPTagThat.TagEdit
           break;
       }
     }
-
     #endregion
   }
 }

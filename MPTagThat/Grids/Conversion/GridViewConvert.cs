@@ -1,73 +1,47 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.IO;
+using System.Data;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
-using Un4seen.Bass;
-using File = TagLib.File;
+using MPTagThat.Core.Burning;
+using MPTagThat.Core.MediaChangeMonitor;
 
-#endregion
+using Un4seen.Bass;
+using TagLib;
 
 namespace MPTagThat.GridView
 {
   public partial class GridViewConvert : UserControl
   {
     #region Variables
-
-    private readonly Main _main;
-    private readonly IAudioEncoder audioEncoder;
-
-    private readonly SortableBindingList<ConversionData> bindingList = new SortableBindingList<ConversionData>();
-    private readonly GridViewColumnsConvert gridColumns;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
-    private int _currentRow = -1;
-    private Thread threadConvert;
-
-    #region Nested type: ThreadSafeAddErrorDelegate
-
-    private delegate void ThreadSafeAddErrorDelegate(string file, string message);
-
-    #endregion
-
-    #region Nested type: ThreadSafeRefreshDelegate
-
     private delegate void ThreadSafeRefreshDelegate(string fileName);
+    private delegate void ThreadSafeAddErrorDelegate(string file, string message);
+    private Thread threadConvert = null;
 
-    #endregion
+    private Main _main;
+    private int _currentRow = -1;
 
+    private SortableBindingList<ConversionData> bindingList = new SortableBindingList<ConversionData>();
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log;
+    private IAudioEncoder audioEncoder;
+
+    private GridViewColumnsConvert gridColumns;
     #endregion
 
     #region Properties
-
     public Color BackGroundColor
     {
-      set { BackColor = value; }
+      set
+      {
+        this.BackColor = value;
+      }
     }
 
     public bool Converting
@@ -88,11 +62,9 @@ namespace MPTagThat.GridView
     {
       get { return dataGridViewConvert; }
     }
-
     #endregion
 
     #region ctor
-
     public GridViewConvert(Main main)
     {
       _main = main;
@@ -102,10 +74,10 @@ namespace MPTagThat.GridView
       // Listen to Messages
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
+      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
 
       IMessageQueue queueMessageEncoding = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
-      queueMessageEncoding.OnMessageReceive += OnMessageReceiveEncoding;
+      queueMessageEncoding.OnMessageReceive += new MessageReceivedHandler(OnMessageReceiveEncoding);
 
       log = ServiceScope.Get<ILogger>();
       audioEncoder = ServiceScope.Get<IAudioEncoder>();
@@ -121,31 +93,29 @@ namespace MPTagThat.GridView
 
       CreateContextMenu();
     }
-
     #endregion
 
     #region Public Methods
-
     /// <summary>
-    ///   Converts the selected files in the Grid
+    /// Converts the selected files in the Grid
     /// </summary>
     public void ConvertFiles()
     {
       if (threadConvert == null)
       {
-        threadConvert = new Thread(ConversionThread);
+        threadConvert = new Thread(new ThreadStart(ConversionThread));
         threadConvert.Name = "Ripping";
       }
 
       if (threadConvert.ThreadState != ThreadState.Running)
       {
-        threadConvert = new Thread(ConversionThread);
+        threadConvert = new Thread(new ThreadStart(ConversionThread));
         threadConvert.Start();
       }
     }
 
     /// <summary>
-    ///   Cancel the Ripping Process
+    /// Cancel the Ripping Process
     /// </summary>
     public void ConvertFilesCancel()
     {
@@ -157,9 +127,9 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Add the Track to the Conversion Grid
+    /// Add the Track to the Conversion Grid
     /// </summary>
-    /// <param name = "track"></param>
+    /// <param name="track"></param>
     public void AddToConvert(TrackData track)
     {
       if (track == null)
@@ -170,13 +140,10 @@ namespace MPTagThat.GridView
 
       bindingList.Add(convdata);
     }
-
     #endregion
 
     #region Private Methods
-
     #region Conversion
-
     private void ConversionThread()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -199,12 +166,12 @@ namespace MPTagThat.GridView
 
       try
       {
-        if (!Directory.Exists(rootFolder) && !string.IsNullOrEmpty(rootFolder))
-          Directory.CreateDirectory(rootFolder);
+        if (!System.IO.Directory.Exists(rootFolder) && !string.IsNullOrEmpty(rootFolder))
+          System.IO.Directory.CreateDirectory(rootFolder);
       }
       catch (Exception ex)
       {
-        _main.ErrorGridView.Rows.Add("", localisation.ToString("Conversion", "ErrorDirectory"));
+        _main.ErrorGridView.Rows.Add("", localisation.ToString("Conversion","ErrorDirectory"));
         log.Error("Error creating Conversion output directory: {0}. {1}", rootFolder, ex.Message);
         return;
       }
@@ -220,26 +187,25 @@ namespace MPTagThat.GridView
       {
         _currentRow = row.Index;
 
-        ConversionData track = bindingList[_currentRow];
+        ConversionData track = (ConversionData)bindingList[_currentRow];
 
         string inputFile = track.Track.FullFileName;
         string outFile = Util.ReplaceParametersWithTrackValues(Options.MainSettings.RipFileNameFormat, track.Track);
-        outFile = Path.Combine(rootFolder, outFile);
-        string directoryName = Path.GetDirectoryName(outFile);
+        outFile = System.IO.Path.Combine(rootFolder, outFile);
+        string directoryName = System.IO.Path.GetDirectoryName(outFile);
 
         // Now check the validity of the directory
-        if (!Directory.Exists(directoryName))
+        if (!System.IO.Directory.Exists(directoryName))
         {
           try
           {
-            Directory.CreateDirectory(directoryName);
+            System.IO.Directory.CreateDirectory(directoryName);
           }
           catch (Exception e1)
           {
             log.Error("Error creating folder: {0} {1]", directoryName, e1.Message);
             row.Cells[0].Value = localisation.ToString("message", "Error");
-            AddErrorMessage(directoryName,
-                            String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message));
+            AddErrorMessage(directoryName, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message));
             continue; // Process next row
           }
         }
@@ -258,8 +224,7 @@ namespace MPTagThat.GridView
         if (stream == 0)
         {
           AddErrorMessage(inputFile, localisation.ToString("Conversion", "OpenFileError"));
-          log.Error("Error creating stream for file {0}. Error: {1}", inputFile,
-                    Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+          log.Error("Error creating stream for file {0}. Error: {1}", inputFile, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
           continue;
         }
 
@@ -268,8 +233,7 @@ namespace MPTagThat.GridView
         if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
         {
           AddErrorMessage(inputFile, localisation.ToString("Conversion", "EncodingFileError"));
-          log.Error("Error starting Encoder for File {0}. Error: {1}", inputFile,
-                    Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+          log.Error("Error starting Encoder for File {0}. Error: {1}", inputFile, Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
           Bass.BASS_StreamFree(stream);
           continue;
         }
@@ -317,8 +281,8 @@ namespace MPTagThat.GridView
     {
       if (dataGridViewConvert.InvokeRequired)
       {
-        ThreadSafeRefreshDelegate d = UpdateNewFileName;
-        dataGridViewConvert.Invoke(d, new object[] {fileName});
+        ThreadSafeRefreshDelegate d = new ThreadSafeRefreshDelegate(UpdateNewFileName);
+        dataGridViewConvert.Invoke(d, new object[] { fileName });
         return;
       }
 
@@ -327,31 +291,31 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Adds an Error Message to the Message Grid
+    /// Adds an Error Message to the Message Grid
     /// </summary>
-    /// <param name = "file"></param>
-    /// <param name = "message"></param>
+    /// <param name="file"></param>
+    /// <param name="message"></param>
     public void AddErrorMessage(string file, string message)
     {
       if (_main.ErrorGridView.InvokeRequired)
       {
-        ThreadSafeAddErrorDelegate d = AddErrorMessage;
-        _main.ErrorGridView.Invoke(d, new object[] {file, message});
+        ThreadSafeAddErrorDelegate d = new ThreadSafeAddErrorDelegate(AddErrorMessage);
+        _main.ErrorGridView.Invoke(d, new object[] { file, message });
         return;
       }
 
       _main.ErrorGridView.Rows.Add(file, message);
     }
-
     #endregion
 
     #region Gridlayout
-
     /// <summary>
-    ///   Create the Columns of the Grid based on the users setting
+    /// Create the Columns of the Grid based on the users setting
     /// </summary>
     private void CreateColumns()
     {
+
+
       // Now create the columns 
       foreach (GridViewColumn column in gridColumns.Settings.Columns)
       {
@@ -366,12 +330,11 @@ namespace MPTagThat.GridView
       col.Visible = true;
       col.Width = 5;
       dataGridViewConvert.Columns.Add(col);
-      dataGridViewConvert.Columns[dataGridViewConvert.Columns.Count - 1].AutoSizeMode =
-        DataGridViewAutoSizeColumnMode.Fill;
+      dataGridViewConvert.Columns[dataGridViewConvert.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
     }
 
     /// <summary>
-    ///   Save the settings
+    /// Save the settings
     /// </summary>
     private void SaveSettings()
     {
@@ -390,7 +353,7 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Create Context Menu
+    /// Create Context Menu
     /// </summary>
     private void CreateContextMenu()
     {
@@ -398,19 +361,17 @@ namespace MPTagThat.GridView
       MenuItem[] rmitems = new MenuItem[1];
       rmitems[0] = new MenuItem();
       rmitems[0].Text = "Clear List";
-      rmitems[0].Click += dataGridViewConvert_ClearList;
+      rmitems[0].Click += new System.EventHandler(dataGridViewConvert_ClearList);
       rmitems[0].DefaultItem = true;
-      dataGridViewConvert.ContextMenu = new ContextMenu(rmitems);
+      this.dataGridViewConvert.ContextMenu = new ContextMenu(rmitems);
     }
-
     #endregion
 
     #region Localisation
-
     /// <summary>
-    ///   Language Change event has been fired. Apply the new language
+    /// Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name = "language"></param>
+    /// <param name="language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
@@ -424,17 +385,14 @@ namespace MPTagThat.GridView
         col.HeaderText = localisation.ToString("column_header", col.Name);
       }
     }
-
     #endregion
-
     #endregion
 
     #region Event Handler
-
     /// <summary>
-    ///   Handle Messages from the Audio Encoder
+    /// Handle Messages from the Audio Encoder
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceiveEncoding(QueueMessage message)
     {
       if (_currentRow < 0)
@@ -445,9 +403,9 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Handle Messages
+    /// Handle Messages
     /// </summary>
-    /// <param name = "message"></param>
+    /// <param name="message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -456,32 +414,31 @@ namespace MPTagThat.GridView
       {
         case "languagechanged":
           LanguageChanged();
-          Refresh();
+          this.Refresh();
           break;
       }
     }
 
     /// <summary>
-    ///   Handle Right Mouse Click to open the context Menu in the Grid
+    /// Handle Right Mouse Click to open the context Menu in the Grid
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void dataGridViewConvert_MouseClick(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
-        dataGridViewConvert.ContextMenu.Show(dataGridViewConvert, new Point(e.X, e.Y));
+        this.dataGridViewConvert.ContextMenu.Show(dataGridViewConvert, new Point(e.X, e.Y));
     }
 
     /// <summary>
-    ///   Context Menu entry has been selected
+    /// Context Menu entry has been selected
     /// </summary>
-    /// <param name = "o"></param>
-    /// <param name = "e"></param>
-    private void dataGridViewConvert_ClearList(object o, EventArgs e)
+    /// <param name="o"></param>
+    /// <param name="e"></param>
+    private void dataGridViewConvert_ClearList(object o, System.EventArgs e)
     {
       dataGridViewConvert.Rows.Clear();
     }
-
     #endregion
   }
 }

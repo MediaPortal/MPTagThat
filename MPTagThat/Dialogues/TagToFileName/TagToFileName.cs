@@ -1,58 +1,35 @@
-#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MPTagThat is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MPTagThat is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-#region
-
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Dialogues;
-
-#endregion
 
 namespace MPTagThat.TagToFileName
 {
   public partial class TagToFileName : ShapedForm
   {
     #region Variables
-
-    private readonly Main _main;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
-    private bool _isPreviewOpen;
-    private Preview _previewForm;
-    private int enumerateNumberDigits;
-    private int enumerateStartValue;
-    private TrackData track;
-    private TrackDataPreview trackPreview;
-
+    private Main _main;
+    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private ILogger log = ServiceScope.Get<ILogger>();
+    private int enumerateStartValue = 0;
+    private int enumerateNumberDigits = 0;
+    private bool _isPreviewOpen = false;
+    private Preview _previewForm = null;
+    private TrackData track = null;
+    private TrackDataPreview trackPreview = null;
     #endregion
 
     #region ctor
-
     public TagToFileName(Main main)
     {
       _main = main;
       InitForm(false);
+
     }
 
     public TagToFileName(Main main, bool batchMode)
@@ -60,15 +37,13 @@ namespace MPTagThat.TagToFileName
       _main = main;
       InitForm(batchMode);
     }
-
     #endregion
 
     #region Methods
-
     /// <summary>
-    ///   The form is used in Batch Mode, when using the default button on the ribbon
+    /// The form is used in Batch Mode, when using the default button on the ribbon
     /// </summary>
-    /// <param name = "batchMode"></param>
+    /// <param name="batchMode"></param>
     private void InitForm(bool batchMode)
     {
       InitializeComponent();
@@ -76,11 +51,11 @@ namespace MPTagThat.TagToFileName
 
       if (!batchMode)
       {
-        BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+        this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
         ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-        labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
-        labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+        this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+        this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
         LocaliseScreen();
       }
@@ -88,13 +63,13 @@ namespace MPTagThat.TagToFileName
       {
         if (cbFormat.Text == "")
         {
-          BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+          this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
           ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
           LocaliseScreen();
 
           // We don't have a valid parameter. Show dialog
-          ShowDialog();
+          this.ShowDialog();
         }
         else
         {
@@ -102,6 +77,16 @@ namespace MPTagThat.TagToFileName
         }
       }
     }
+
+    #region Localisation
+    /// <summary>
+    /// Localise the Screen
+    /// </summary>
+    private void LocaliseScreen()
+    {
+      this.labelHeader.Text = localisation.ToString("TagAndRename", "HeadingRename");
+    }
+    #endregion
 
     private void LoadSettings()
     {
@@ -118,11 +103,10 @@ namespace MPTagThat.TagToFileName
     }
 
     #region Tag2FileName
-
     /// <summary>
-    ///   Convert File Name to Tag
+    /// Convert File Name to Tag
     /// </summary>
-    /// <param name = "parameters"></param>
+    /// <param name="parameters"></param>
     private void Tag2FileName(string parameter)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -141,6 +125,7 @@ namespace MPTagThat.TagToFileName
 
         try
         {
+
           fileName = ReplaceParametersWithValues(parameter);
 
           // Now check the length of the filename
@@ -148,10 +133,7 @@ namespace MPTagThat.TagToFileName
           {
             log.Debug("Filename too long: {0}", fileName);
             row.Cells[0].Value = localisation.ToString("TagAndRename", "NameTooLong");
-            _main.TracksGridView.AddErrorMessage(track.File.Name,
-                                                 String.Format("{0}: {1}",
-                                                               localisation.ToString("tag2filename", "NameTooLong"),
-                                                               fileName));
+            _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "NameTooLong"), fileName));
             continue; // Process next row
           }
 
@@ -163,10 +145,7 @@ namespace MPTagThat.TagToFileName
             {
               log.Debug("New Filename already exists: {0}", fileName);
               row.Cells[0].Value = localisation.ToString("TagAndRename", "FileExists");
-              _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name,
-                                                   String.Format("{0}: {1}",
-                                                                 localisation.ToString("tag2filename", "FileExists"),
-                                                                 fileName));
+              _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "FileExists"), fileName));
               bErrors = true;
               break;
             }
@@ -178,7 +157,7 @@ namespace MPTagThat.TagToFileName
             continue;
           }
 
-          string ext = Path.GetExtension(track.FileName);
+          string ext = System.IO.Path.GetExtension(track.FileName);
 
           // Now that we have a correct Filename and no duplicates accept the changes
           track.FileName = string.Format("{0}{1}", fileName, ext);
@@ -191,9 +170,7 @@ namespace MPTagThat.TagToFileName
         {
           log.Error("Error Renaming File: {0} stack: {1}", ex.Message, ex.StackTrace);
           row.Cells[0].Value = localisation.ToString("message", "Error");
-          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name,
-                                               String.Format("{0}: {1}", localisation.ToString("tag2filename", "Rename"),
-                                                             fileName));
+          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1}", localisation.ToString("tag2filename", "Rename"), fileName));
           bErrors = true;
         }
       }
@@ -213,9 +190,9 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   Replace the parameter with the REAL values of the file
+    /// Replace the parameter with the REAL values of the file
     /// </summary>
-    /// <param name = "parameter">The Parameter Vlue</param>
+    /// <param name="parameter">The Parameter Vlue</param>
     /// <returns></returns>
     private string ReplaceParametersWithValues(string parameter)
     {
@@ -224,12 +201,12 @@ namespace MPTagThat.TagToFileName
       {
         // FilenameToTag Special Variables
         if (parameter.IndexOf("<F>") > -1)
-          parameter = parameter.Replace("<F>", Path.GetFileNameWithoutExtension(track.FileName));
+          parameter = parameter.Replace("<F>", System.IO.Path.GetFileNameWithoutExtension(track.FileName));
 
         if (parameter.IndexOf("<#>") > -1)
         {
-          parameter = parameter.Replace("<#>", enumerateStartValue.ToString().PadLeft(enumerateNumberDigits, '0'));
-          enumerateStartValue++;
+            parameter = parameter.Replace("<#>", enumerateStartValue.ToString().PadLeft(enumerateNumberDigits, '0'));
+            enumerateStartValue++;
         }
 
         fileName = Util.ReplaceParametersWithTrackValues(parameter, track);
@@ -240,13 +217,11 @@ namespace MPTagThat.TagToFileName
       }
       return fileName;
     }
-
     #endregion
 
     #region Preview Handling
-
     /// <summary>
-    ///   Fill the Preview Grid with the selected rows
+    /// Fill the Preview Grid with the selected rows
     /// </summary>
     private void FillPreview()
     {
@@ -264,13 +239,13 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   Loop through all the selected rows and set the Preview
+    /// Loop through all the selected rows and set the Preview
     /// </summary>
-    /// <param name = "parameters"></param>
+    /// <param name="parameters"></param>
     private void Tag2FileNamePreview(string parameters)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-
+      
       enumerateStartValue = (int)numericUpDownStartAt.Value;
       enumerateNumberDigits = (int)numericUpDownNumberDigits.Value;
       int index = -1;
@@ -279,7 +254,7 @@ namespace MPTagThat.TagToFileName
       {
         if (!row.Selected)
           continue;
-
+        
         index++;
         try
         {
@@ -287,51 +262,37 @@ namespace MPTagThat.TagToFileName
           trackPreview = _previewForm.Tracks[index];
           trackPreview.NewFileName = ReplaceParametersWithValues(parameters);
         }
-        catch (Exception) {}
+        catch (Exception)
+        {
+        }
       }
 
       _previewForm.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
-
     #endregion
-
-    #region Localisation
-
-    /// <summary>
-    ///   Localise the Screen
-    /// </summary>
-    private void LocaliseScreen()
-    {
-      labelHeader.Text = localisation.ToString("TagAndRename", "HeadingRename");
-    }
-
-    #endregion
-
     #endregion
 
     #region Event Handlers
-
     /// <summary>
-    ///   Form is Closed. Save Settings
+    /// Form is Closed. Save Settings
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnClose(object sender, FormClosedEventArgs e)
     {
       Options.TagToFileNameSettings.LastUsedFormat = cbFormat.SelectedIndex;
     }
 
     /// <summary>
-    ///   Apply the changes to the selected files.
+    /// Apply the changes to the selected files.
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btApply_Click(object sender, EventArgs e)
     {
       if (!Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.TagToFileName))
-        MessageBox.Show(localisation.ToString("TagAndRename", "InvalidParm"),
-                        localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
+        MessageBox.Show(localisation.ToString("TagAndRename", "InvalidParm"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
       else
       {
         Tag2FileName(cbFormat.Text);
@@ -352,28 +313,28 @@ namespace MPTagThat.TagToFileName
         if (_isPreviewOpen)
           _previewForm.Close();
 
-        Close();
+        this.Close();
       }
     }
 
     /// <summary>
-    ///   Handle the Cancel button. Close Form without applying any changes
+    /// Handle the Cancel button. Close Form without applying any changes
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
         _previewForm.Close();
 
-      Close();
+      this.Close();
     }
 
     /// <summary>
-    ///   Text in the Combo is been changed, Update the Preview Value
+    /// Text in the Combo is been changed, Update the Preview Value
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void cbFormat_TextChanged(object sender, EventArgs e)
     {
       if (!_isPreviewOpen)
@@ -386,10 +347,10 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   User clicked on a parameter label. Update combo box with value.
+    /// User clicked on a parameter label. Update combo box with value.
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void lblParm_Click(object sender, EventArgs e)
     {
       Label label = (Label)sender;
@@ -407,10 +368,10 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   Adds the current Format to the list
+    /// Adds the current Format to the list
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btAddFormat_Click(object sender, EventArgs e)
     {
       bool found = false;
@@ -434,10 +395,10 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   Removes the current selected format from the list
+    /// Removes the current selected format from the list
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btRemoveFormat_Click(object sender, EventArgs e)
     {
       for (int i = 0; i < Options.TagToFileNameSettings.FormatValues.Count; i++)
@@ -454,10 +415,10 @@ namespace MPTagThat.TagToFileName
     }
 
     /// <summary>
-    ///   Toggle the Review window display
+    /// Toggle the Review window display
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btReview_Click(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
@@ -475,30 +436,31 @@ namespace MPTagThat.TagToFileName
           _previewForm.AddGridColumn(1, "NewFileName", localisation.ToString("column_header", "NewFileName"), 350);
           FillPreview();
         }
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
         cbFormat_TextChanged(null, new EventArgs());
         _previewForm.Show();
+
       }
     }
 
     /// <summary>
-    ///   The form is moved. Move the Preview Window as well
+    /// The form is moved. Move the Preview Window as well
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void TagToFileName_Move(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
       {
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
+        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
       }
     }
 
     /// <summary>
-    ///   Don't allow invalid characters to be entered into the Format Field
+    /// Don't allow invalid characters to be entered into the Format Field
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void cbFormat_Keypress(object sender, KeyPressEventArgs e)
     {
       switch (e.KeyChar)
@@ -514,7 +476,6 @@ namespace MPTagThat.TagToFileName
           break;
       }
     }
-
     #endregion
   }
 }
