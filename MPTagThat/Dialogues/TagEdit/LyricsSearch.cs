@@ -1,74 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Threading;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Forms;
 using LyricsEngine;
 using MPTagThat.Core;
+
+#endregion
 
 namespace MPTagThat.TagEdit
 {
   public partial class LyricsSearch : ShapedForm, ILyricForm
   {
     #region Delegates
-    public delegate void DelegateStringUpdate(String message, String site);
-    public DelegateStringUpdate m_DelegateStringUpdate;
-    public delegate void DelegateStatusUpdate(Int32 noOfLyricsToSearch, Int32 noOfLyricsSearched, Int32 noOfLyricsFound, Int32 noOfLyricsNotFound);
-    public DelegateStatusUpdate m_DelegateStatusUpdate;
+
     public delegate void DelegateLyricFound(String s, String artist, String track, String site, int row);
-    public DelegateLyricFound m_DelegateLyricFound;
+
     public delegate void DelegateLyricNotFound(String artist, String title, String message, String site, int row);
-    public DelegateLyricNotFound m_DelegateLyricNotFound;
-    public delegate void DelegateThreadFinished(String arist, String title, String message, String site);
-    public DelegateThreadFinished m_DelegateThreadFinished;
+
+    public delegate void DelegateStatusUpdate(
+      Int32 noOfLyricsToSearch, Int32 noOfLyricsSearched, Int32 noOfLyricsFound, Int32 noOfLyricsNotFound);
+
+    public delegate void DelegateStringUpdate(String message, String site);
+
     public delegate void DelegateThreadException(Object o);
-    public DelegateThreadException m_DelegateThreadException;
+
+    public delegate void DelegateThreadFinished(String arist, String title, String message, String site);
+
     #endregion
 
-    #region Variables
-    LyricsController lc;
+    public DelegateLyricFound m_DelegateLyricFound;
+    public DelegateLyricNotFound m_DelegateLyricNotFound;
+    public DelegateStatusUpdate m_DelegateStatusUpdate;
+    public DelegateStringUpdate m_DelegateStringUpdate;
 
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    public DelegateThreadException m_DelegateThreadException;
+    public DelegateThreadFinished m_DelegateThreadFinished;
+
+    #region Variables
+
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
 
     // worker thread
-    Thread m_LyricControllerThread;
 
-    ManualResetEvent m_EventStopThread;
+    private readonly ManualResetEvent m_EventStopThread;
+    private readonly bool m_automaticUpdate;
 
-    string originalArtist;
-    string originalTitle;
-    int counter;
-    bool m_automaticFetch = true;
-    bool m_automaticUpdate = false;
+    private readonly string[] m_strippedPrefixStrings = {"the", "les"};
 
-    string[] m_strippedPrefixStrings = { "the", "les" };
+    private readonly string originalArtist;
+    private readonly string originalTitle;
+    private readonly object parent;
+    private int counter;
+    private LyricsController lc;
+    private Thread m_LyricControllerThread;
+    private bool m_automaticFetch = true;
 
-    List<string> sitesToSearch;
-    object parent = null;
+    private List<string> sitesToSearch;
+
     #endregion
 
     #region ctor
+
     public LyricsSearch(object parent, string artist, string title, bool automaticUpdate)
     {
       InitializeComponent();
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       this.parent = parent;
       m_automaticUpdate = automaticUpdate;
 
       // initialize delegates
-      m_DelegateStringUpdate = new DelegateStringUpdate(this.updateStringMethod);
-      m_DelegateStatusUpdate = new DelegateStatusUpdate(this.updateStatusMethod);
-      m_DelegateLyricFound = new DelegateLyricFound(this.lyricFoundMethod);
-      m_DelegateLyricNotFound = new DelegateLyricNotFound(this.lyricNotFoundMethod);
-      m_DelegateThreadFinished = new DelegateThreadFinished(this.ThreadFinishedMethod);
-      m_DelegateThreadException = new DelegateThreadException(this.ThreadExceptionMethod);
+      m_DelegateStringUpdate = new DelegateStringUpdate(updateStringMethod);
+      m_DelegateStatusUpdate = new DelegateStatusUpdate(updateStatusMethod);
+      m_DelegateLyricFound = new DelegateLyricFound(lyricFoundMethod);
+      m_DelegateLyricNotFound = new DelegateLyricNotFound(lyricNotFoundMethod);
+      m_DelegateThreadFinished = new DelegateThreadFinished(ThreadFinishedMethod);
+      m_DelegateThreadException = new DelegateThreadException(ThreadExceptionMethod);
 
       // initialize events
       m_EventStopThread = new ManualResetEvent(false);
@@ -77,7 +108,7 @@ namespace MPTagThat.TagEdit
       tbTitle.Text = title;
 
       if (Options.MainSettings.SwitchArtist)
-        btSwitchArtist_Click(this.btSwitchArtist, new EventArgs());
+        btSwitchArtist_Click(btSwitchArtist, new EventArgs());
 
       originalArtist = tbArtist.Text;
       originalTitle = title;
@@ -86,24 +117,28 @@ namespace MPTagThat.TagEdit
 
       BeginSearchIfPossible(artist, title);
 
-      this.ShowDialog();
+      ShowDialog();
     }
+
     #endregion
 
     #region Methods
+
     #region Localisation
+
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = String.Format(localisation.ToString("LyricsSearch", "Header"), tbArtist.Text, tbTitle.Text);
-      this.chSite.Text = localisation.ToString("LyricsSearch", "Site");
-      this.chResult.Text = localisation.ToString("LyricsSearch", "Result");
-      this.chLyric.Text = localisation.ToString("LyricsSearch", "Lyric");
+      Text = String.Format(localisation.ToString("LyricsSearch", "Header"), tbArtist.Text, tbTitle.Text);
+      chSite.Text = localisation.ToString("LyricsSearch", "Site");
+      chResult.Text = localisation.ToString("LyricsSearch", "Result");
+      chLyric.Text = localisation.ToString("LyricsSearch", "Lyric");
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     internal void BeginSearchIfPossible(string artist, string title)
@@ -173,15 +208,12 @@ namespace MPTagThat.TagEdit
         sitesToSearch.Add("LyricsPluginSite");
 
       // If automaticUpdate is set then return after the first positive search
-      lc = new LyricsController(this, m_EventStopThread, (string[])sitesToSearch.ToArray(), true, automaticUpdate, "", "");
+      lc = new LyricsController(this, m_EventStopThread, sitesToSearch.ToArray(), true, automaticUpdate, "", "");
 
-      ThreadStart job = delegate
-      {
-        lc.Run();
-      };
+      ThreadStart job = delegate { lc.Run(); };
 
       m_LyricControllerThread = new Thread(job);
-      m_LyricControllerThread.Name = "lyricSearch Thread";	// looks nice in Output window
+      m_LyricControllerThread.Name = "lyricSearch Thread"; // looks nice in Output window
       m_LyricControllerThread.Start();
 
       lc.AddNewLyricSearch(artist, title, GetStrippedPrefixArtist(artist, m_strippedPrefixStrings));
@@ -227,9 +259,11 @@ namespace MPTagThat.TagEdit
         Monitor.Exit(this);
       }
     }
+
     #endregion
 
     #region Events
+
     private void btFind_Click(object sender, EventArgs e)
     {
       string artist = tbArtist.Text.Trim();
@@ -252,14 +286,14 @@ namespace MPTagThat.TagEdit
     private void btClose_Click(object sender, EventArgs e)
     {
       stopSearch();
-      this.Close();
+      Close();
     }
 
     private void lvSearchResults_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (lvSearchResults.SelectedItems.Count > 0)
       {
-        tbLyrics.Text = LyricsEngine.LyricUtil.ReturnEnvironmentNewLine(lvSearchResults.SelectedItems[0].SubItems[2].Text);
+        tbLyrics.Text = LyricUtil.ReturnEnvironmentNewLine(lvSearchResults.SelectedItems[0].SubItems[2].Text);
         if (tbLyrics.Text.Length != 0)
         {
           btUpdate.Enabled = true;
@@ -278,7 +312,7 @@ namespace MPTagThat.TagEdit
     private void btUpdate_Click(object sender, EventArgs e)
     {
       UpdateSong();
-      this.Close();
+      Close();
     }
 
     private void lvSearchResults_DoubleClick(object sender, EventArgs e)
@@ -302,18 +336,17 @@ namespace MPTagThat.TagEdit
         tbArtist.Text = String.Format("{0} {1}", artist.Substring(iPos + 2), artist.Substring(0, iPos));
       }
     }
+
     #endregion
 
     #region delegate called methods
-    // Called from worker thread using delegate and Control.Invoke
-    private void updateStringMethod(String message, String site)
-    {
-    }
 
     // Called from worker thread using delegate and Control.Invoke
-    private void updateStatusMethod(Int32 noOfLyricsToSearch, Int32 noOfLyricsSearched, Int32 noOfLyricsFound, Int32 noOfLyricsNotFound)
-    {
-    }
+    private void updateStringMethod(String message, String site) {}
+
+    // Called from worker thread using delegate and Control.Invoke
+    private void updateStatusMethod(Int32 noOfLyricsToSearch, Int32 noOfLyricsSearched, Int32 noOfLyricsFound,
+                                    Int32 noOfLyricsNotFound) {}
 
     private void lyricFoundMethod(String lyricStrings, String artist, String title, String site, int row)
     {
@@ -327,7 +360,7 @@ namespace MPTagThat.TagEdit
       {
         stopSearch();
         UpdateSong();
-        this.Close();
+        Close();
       }
       else if (++counter == sitesToSearch.Count)
       {
@@ -355,9 +388,10 @@ namespace MPTagThat.TagEdit
     {
       if (lvSearchResults.SelectedItems.Count > 0)
       {
-        if (parent.GetType() == typeof(MPTagThat.TagEdit.SingleTagEdit))
+        if (parent.GetType() == typeof (SingleTagEdit))
         {
-          (parent as SingleTagEdit).LyricsText = LyricsEngine.LyricUtil.ReturnEnvironmentNewLine(lvSearchResults.SelectedItems[0].SubItems[2].Text);
+          (parent as SingleTagEdit).LyricsText =
+            LyricUtil.ReturnEnvironmentNewLine(lvSearchResults.SelectedItems[0].SubItems[2].Text);
         }
       }
     }
@@ -365,27 +399,25 @@ namespace MPTagThat.TagEdit
 
     // Set initial state of controls.
     // Called from worker thread using delegate and Control.Invoke
-    private void ThreadFinishedMethod(string artist, string title, string message, string site)
-    {
-    }
+    private void ThreadFinishedMethod(string artist, string title, string message, string site) {}
 
-    private void ThreadExceptionMethod(Object o)
-    {
-    }
+    private void ThreadExceptionMethod(Object o) {}
 
     #endregion
 
     #region DelegateCalls
+
     public Object[] UpdateString
     {
       set
       {
-        if (this.IsDisposed == false)
+        if (IsDisposed == false)
         {
-          this.Invoke(m_DelegateStringUpdate, value);
+          Invoke(m_DelegateStringUpdate, value);
         }
       }
     }
+
     public Object[] UpdateStatus
     {
       set
@@ -396,45 +428,51 @@ namespace MPTagThat.TagEdit
         //}
       }
     }
+
     public Object[] LyricFound
     {
       set
       {
-        if (this.IsDisposed == false)
+        if (IsDisposed == false)
         {
           try
           {
-            this.Invoke(m_DelegateLyricFound, value);
+            Invoke(m_DelegateLyricFound, value);
           }
-          catch (System.InvalidOperationException) { };
+          catch (InvalidOperationException) {}
+          ;
         }
       }
     }
+
     public Object[] LyricNotFound
     {
       set
       {
-        if (this.IsDisposed == false)
+        if (IsDisposed == false)
         {
           try
           {
-            this.Invoke(m_DelegateLyricNotFound, value);
+            Invoke(m_DelegateLyricNotFound, value);
           }
-          catch (System.InvalidOperationException) { };
+          catch (InvalidOperationException) {}
+          ;
         }
       }
     }
+
     public Object[] ThreadFinished
     {
       set
       {
-        if (this.IsDisposed == false)
+        if (IsDisposed == false)
         {
           try
           {
-            this.Invoke(m_DelegateThreadFinished, value);
+            Invoke(m_DelegateThreadFinished, value);
           }
-          catch (System.InvalidOperationException) { };
+          catch (InvalidOperationException) {}
+          ;
         }
       }
     }
@@ -443,16 +481,18 @@ namespace MPTagThat.TagEdit
     {
       set
       {
-        if (this.IsDisposed == false)
+        if (IsDisposed == false)
         {
           try
           {
-            this.Invoke(m_DelegateThreadException);
+            Invoke(m_DelegateThreadException);
           }
-          catch (System.InvalidOperationException) { };
+          catch (InvalidOperationException) {}
+          ;
         }
       }
     }
+
     #endregion
   }
 }

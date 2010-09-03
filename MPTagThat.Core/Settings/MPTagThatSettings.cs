@@ -1,79 +1,47 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Drawing;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   public class MPTagThatSettings
   {
     #region Variables
-    private int _theme;
-    private int _debugLevel;
-    private string _lastFolderUsed = "";
-    private bool _scanSubFolders = false;
-    private int _dataProvider = 0;
-    private Point _formLocation;
-    private Size _formSize = new Size(1200, 1024);
-    private int _leftPanelSize;
-    private int _rightPanelSize;
-    private bool _rightPanelCollapsed;
-    private bool _errorPanelCollapsed;
-    private bool _playerPanelCollapsed;
+
     private string _activeScript = "";
+    private Size _formSize = new Size(1200, 1024);
+    private string _lastFolderUsed = "";
+
     private int _numTrackDigits = 2;
-    private string _ripTargetFolder;
-    private string _ripEncoder;
-    private string _ripEncoderAAC;
-    private string _ripEncoderAACBitRate;
-    private string _ripEncoderAACChannelMode;
-    private string _ripEncoderWMA;
-    private string _ripEncoderWMABitRate;
-    private string _ripEncoderWMASample;
-    private string _ripEncoderWMACbrVbr;
-    private string _ripFileNameFormat;
-    private string _ripEncoderMPCPreset;
-    private string _ripEncoderMPCExpert;
-    private string _ripEncoderWVPreset;
-    private string _ripEncoderWVExpert;
 
-    private string _lastConversionEncoderUsed;
-    private string _lastRipEncoderUsed;
-
-    private int _lamePreset;
-    private int _lameABRBitrate;
-    private string _lameExpert;
-
-    private int _oggQuality;
-    private string _oggExpert;
-
-    private int _flacQuality;
-    private string _flacExpert;
-
-    private int _tagsID3V2Version;
-    private int _tagsID3Version;
-    private bool _tagsRemoveID3V1;
-    private bool _tagsRemoveID3V2;
-
-    private bool _tagsCopyArtist;
-    private bool _tagsUseCaseConversion;
-    private bool _tagsCreateFolderThumb;
-    private bool _tagsEmbedFolderThumb;
-    private bool _tagsOverwriteExitingCovers;
-    private bool _tagsOverwriteExitingLyrics;
-    private bool _tagsUseMediaPortalDatabase;
-    private bool _tagsAutoFillNumberOfTracks;
-    private string _tagsMediaPortalDatabase;
-    private int _playerSpectrumIndex;
-    private bool _mp3Validate;
-    private bool _mp3AutoFix;
-    private string _amazonSite;
-    private bool _ripEjectCD;
-    private bool _ripActivateTargetFolder;
-    private string _singleEditLastUsedScript;
     #endregion
 
     #region Properties
+
     #region Layout
+
     [Setting(SettingScope.User, "")]
     public string LastFolderUsed
     {
@@ -82,25 +50,13 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "false")]
-    public bool ScanSubFolders
-    {
-      get { return _scanSubFolders; }
-      set { _scanSubFolders = value; }
-    }
+    public bool ScanSubFolders { get; set; }
 
     [Setting(SettingScope.User, "0")]
-    public int DataProvider
-    {
-      get { return _dataProvider; }
-      set { _dataProvider = value; }
-    }
+    public int DataProvider { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public Point FormLocation
-    {
-      get { return _formLocation; }
-      set { _formLocation = value; }
-    }
+    public Point FormLocation { get; set; }
 
     [Setting(SettingScope.User, "")]
     public Size FormSize
@@ -110,39 +66,20 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "-1")]
-    public int LeftPanelSize
-    {
-      get { return _leftPanelSize; }
-      set { _leftPanelSize = value; }
-    }
+    public int LeftPanelSize { get; set; }
 
     [Setting(SettingScope.User, "-1")]
-    public int RightPanelSize
-    {
-      get { return _rightPanelSize; }
-      set { _rightPanelSize = value; }
-    }
+    public int RightPanelSize { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool RightPanelCollapsed
-    {
-      get { return _rightPanelCollapsed; }
-      set { _rightPanelCollapsed = value; }
-    }
+    public bool RightPanelCollapsed { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ErrorPanelCollapsed
-    {
-      get { return _errorPanelCollapsed; }
-      set { _errorPanelCollapsed = value; }
-    }
+    public bool ErrorPanelCollapsed { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool PlayerPanelCollapsed
-    {
-      get { return _playerPanelCollapsed; }
-      set { _playerPanelCollapsed = value; }
-    }
+    public bool PlayerPanelCollapsed { get; set; }
+
     #endregion
 
     [Setting(SettingScope.User, "")]
@@ -153,27 +90,16 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "mp3")]
-    public string LastConversionEncoderUsed
-    {
-      get { return _lastConversionEncoderUsed; }
-      set { _lastConversionEncoderUsed = value; }
-    }
+    public string LastConversionEncoderUsed { get; set; }
 
     [Setting(SettingScope.User, "0")]
-    public int PlayerSpectrumIndex
-    {
-      get { return _playerSpectrumIndex; }
-      set { _playerSpectrumIndex = value; }
-    }
+    public int PlayerSpectrumIndex { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string SingleEditLastUsedScript
-    {
-      get { return _singleEditLastUsedScript; }
-      set { _singleEditLastUsedScript = value; }
-    }
+    public string SingleEditLastUsedScript { get; set; }
 
     #region Tags
+
     [Setting(SettingScope.User, "2")]
     public int NumberTrackDigits
     {
@@ -182,385 +108,197 @@ namespace MPTagThat.Core
     }
 
     [Setting(SettingScope.User, "3")]
-    public int ID3V2Version
-    {
-      get { return _tagsID3V2Version; }
-      set { _tagsID3V2Version = value; }
-    }
+    public int ID3V2Version { get; set; }
 
     [Setting(SettingScope.User, "3")]
-    public int ID3Version
-    {
-      get { return _tagsID3Version; }
-      set { _tagsID3Version = value; }
-    }
+    public int ID3Version { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool RemoveID3V1
-    {
-      get { return _tagsRemoveID3V1; }
-      set { _tagsRemoveID3V1 = value; }
-    }
+    public bool RemoveID3V1 { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool RemoveID3V2
-    {
-      get { return _tagsRemoveID3V2; }
-      set { _tagsRemoveID3V2 = value; }
-    }
+    public bool RemoveID3V2 { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool CopyArtist
-    {
-      get { return _tagsCopyArtist; }
-      set { _tagsCopyArtist = value; }
-    }
+    public bool CopyArtist { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool UseCaseConversion
-    {
-      get { return _tagsUseCaseConversion; }
-      set { _tagsUseCaseConversion = value; }
-    }
+    public bool UseCaseConversion { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool CreateFolderThumb
-    {
-      get { return _tagsCreateFolderThumb; }
-      set { _tagsCreateFolderThumb = value; }
-    }
+    public bool CreateFolderThumb { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool EmbedFolderThumb
-    {
-      get { return _tagsEmbedFolderThumb; }
-      set { _tagsEmbedFolderThumb = value; }
-    }
+    public bool EmbedFolderThumb { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool OverwriteExistingCovers
-    {
-      get { return _tagsOverwriteExitingCovers; }
-      set { _tagsOverwriteExitingCovers = value; }
-    }
+    public bool OverwriteExistingCovers { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool OverwriteExistingLyrics
-    {
-      get { return _tagsOverwriteExitingLyrics; }
-      set { _tagsOverwriteExitingLyrics = value; }
-    }
+    public bool OverwriteExistingLyrics { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool UseMediaPortalDatabase
-    {
-      get { return _tagsUseMediaPortalDatabase; }
-      set { _tagsUseMediaPortalDatabase = value; }
-    }
+    public bool UseMediaPortalDatabase { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string MediaPortalDatabase
-    {
-      get { return _tagsMediaPortalDatabase; }
-      set { _tagsMediaPortalDatabase = value; }
-    }
+    public string MediaPortalDatabase { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool AutoFillNumberOfTracks
-    {
-      get { return _tagsAutoFillNumberOfTracks; }
-      set { _tagsAutoFillNumberOfTracks = value; }
-    }
+    public bool AutoFillNumberOfTracks { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool MP3Validate
-    {
-      get { return _mp3Validate; }
-      set { _mp3Validate = value; }
-    }
+    public bool MP3Validate { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool MP3AutoFix
-    {
-      get { return _mp3AutoFix; }
-      set { _mp3AutoFix = value; }
-    }
+    public bool MP3AutoFix { get; set; }
 
     [Setting(SettingScope.User, "com")]
-    public string AmazonSite
-    {
-      get { return _amazonSite; }
-      set { _amazonSite = value; }
-    }
+    public string AmazonSite { get; set; }
+
     #endregion
 
     #region Lyrics
-    private bool _switchArtist;
-    private bool _searchLyricWiki;
-    private bool _searchHotLyrics;
-    private bool _searchLyrics007;
-    private bool _searchLyricsOnDemand;
-    private bool _searchLyricsPlugin;
-    private bool _searchActionext;
-    private bool _searchLyrDB;
-    private bool _searchLRCFinder;
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLyricWiki
-    {
-      get { return _searchLyricWiki; }
-      set { _searchLyricWiki = value; }
-    }
+    public bool SearchLyricWiki { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchHotLyrics
-    {
-      get { return _searchHotLyrics; }
-      set { _searchHotLyrics = value; }
-    }
+    public bool SearchHotLyrics { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLyrics007
-    {
-      get { return _searchLyrics007; }
-      set { _searchLyrics007 = value; }
-    }
+    public bool SearchLyrics007 { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLyricsOnDemand
-    {
-      get { return _searchLyricsOnDemand; }
-      set { _searchLyricsOnDemand = value; }
-    }
+    public bool SearchLyricsOnDemand { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLyricsPlugin
-    {
-      get { return _searchLyricsPlugin; }
-      set { _searchLyricsPlugin = value; }
-    }
+    public bool SearchLyricsPlugin { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchActionext
-    {
-      get { return _searchActionext; }
-      set { _searchActionext = value; }
-    }
+    public bool SearchActionext { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLyrDB
-    {
-      get { return _searchLyrDB; }
-      set { _searchLyrDB = value; }
-    }
+    public bool SearchLyrDB { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool SearchLRCFinder
-    {
-      get { return _searchLRCFinder; }
-      set { _searchLRCFinder = value; }
-    }
+    public bool SearchLRCFinder { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool SwitchArtist
-    {
-      get { return _switchArtist; }
-      set { _switchArtist = value; }
-    }
+    public bool SwitchArtist { get; set; }
+
     #endregion
 
     #region General
+
     [Setting(SettingScope.User, "1")]
-    public int Theme
-    {
-      get { return _theme; }
-      set { _theme = value; }
-    }
+    public int Theme { get; set; }
 
     [Setting(SettingScope.User, "5")]
-    public int DebugLevel
-    {
-      get { return _debugLevel; }
-      set { _debugLevel = value; }
-    }
+    public int DebugLevel { get; set; }
+
     #endregion
 
     #region Ripping
+
     [Setting(SettingScope.User, "")]
-    public string RipTargetFolder
-    {
-      get { return _ripTargetFolder; }
-      set { _ripTargetFolder = value; }
-    }
+    public string RipTargetFolder { get; set; }
 
     [Setting(SettingScope.User, "mp3")]
-    public string RipEncoder
-    {
-      get { return _ripEncoder; }
-      set { _ripEncoder = value; }
-    }
+    public string RipEncoder { get; set; }
 
     [Setting(SettingScope.User, "<A>\\<B>\\<K> - <T>")]
-    public string RipFileNameFormat
-    {
-      get { return _ripFileNameFormat; }
-      set { _ripFileNameFormat = value; }
-    }
+    public string RipFileNameFormat { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool RipEjectCD
-    {
-      get { return _ripEjectCD; }
-      set { _ripEjectCD = value; }
-    }
+    public bool RipEjectCD { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool RipActivateTargetFolder
-    {
-      get { return _ripActivateTargetFolder; }
-      set { _ripActivateTargetFolder = value; }
-    }
+    public bool RipActivateTargetFolder { get; set; }
 
     #region MP3
-    [Setting(SettingScope.User, "0")]
-    public int RipLamePreset
-    {
-      get { return _lamePreset; }
-      set { _lamePreset = value; }
-    }
 
     [Setting(SettingScope.User, "0")]
-    public int RipLameABRBitRate
-    {
-      get { return _lameABRBitrate; }
-      set { _lameABRBitrate = value; }
-    }
+    public int RipLamePreset { get; set; }
+
+    [Setting(SettingScope.User, "0")]
+    public int RipLameABRBitRate { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string RipLameExpert
-    {
-      get { return _lameExpert; }
-      set { _lameExpert = value; }
-    }
+    public string RipLameExpert { get; set; }
+
     #endregion
 
     #region Ogg
+
     [Setting(SettingScope.User, "3")]
-    public int RipOggQuality
-    {
-      get { return _oggQuality; }
-      set { _oggQuality = value; }
-    }
+    public int RipOggQuality { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string RipOggExpert
-    {
-      get { return _oggExpert; }
-      set { _oggExpert = value; }
-    }
+    public string RipOggExpert { get; set; }
+
     #endregion
 
     #region FLAC
+
     [Setting(SettingScope.User, "4")]
-    public int RipFlacQuality
-    {
-      get { return _flacQuality; }
-      set { _flacQuality = value; }
-    }
+    public int RipFlacQuality { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string RipFlacExpert
-    {
-      get { return _flacExpert; }
-      set { _flacExpert = value; }
-    }
+    public string RipFlacExpert { get; set; }
+
     #endregion
 
     #region AAC
+
     [Setting(SettingScope.User, "aac")]
-    public string RipEncoderAAC
-    {
-      get { return _ripEncoderAAC; }
-      set { _ripEncoderAAC = value; }
-    }
+    public string RipEncoderAAC { get; set; }
 
     [Setting(SettingScope.User, "128")]
-    public string RipEncoderAACBitRate
-    {
-      get { return _ripEncoderAACBitRate; }
-      set { _ripEncoderAACBitRate = value; }
-    }
+    public string RipEncoderAACBitRate { get; set; }
 
     [Setting(SettingScope.User, "Stereo")]
-    public string RipEncoderAACChannelMode
-    {
-      get { return _ripEncoderAACChannelMode; }
-      set { _ripEncoderAACChannelMode = value; }
-    }
+    public string RipEncoderAACChannelMode { get; set; }
+
     #endregion
 
     #region WMA
+
     [Setting(SettingScope.User, "wma")]
-    public string RipEncoderWMA
-    {
-      get { return _ripEncoderWMA; }
-      set { _ripEncoderWMA = value; }
-    }
+    public string RipEncoderWMA { get; set; }
 
     [Setting(SettingScope.User, "16,2,44100")]
-    public string RipEncoderWMASample
-    {
-      get { return _ripEncoderWMASample; }
-      set { _ripEncoderWMASample = value; }
-    }
+    public string RipEncoderWMASample { get; set; }
 
     [Setting(SettingScope.User, "50")]
-    public string RipEncoderWMABitRate
-    {
-      get { return _ripEncoderWMABitRate; }
-      set { _ripEncoderWMABitRate = value; }
-    }
+    public string RipEncoderWMABitRate { get; set; }
 
     [Setting(SettingScope.User, "Vbr")]
-    public string RipEncoderWMACbrVbr
-    {
-      get { return _ripEncoderWMACbrVbr; }
-      set { _ripEncoderWMACbrVbr = value; }
-    }
+    public string RipEncoderWMACbrVbr { get; set; }
+
     #endregion
 
     #region MPC
+
     [Setting(SettingScope.User, "standard")]
-    public string RipEncoderMPCPreset
-    {
-      get { return _ripEncoderMPCPreset; }
-      set { _ripEncoderMPCPreset = value; }
-    }
+    public string RipEncoderMPCPreset { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string RipEncoderMPCExpert
-    {
-      get { return _ripEncoderMPCExpert; }
-      set { _ripEncoderMPCExpert = value; }
-    }
+    public string RipEncoderMPCExpert { get; set; }
+
     #endregion
 
     #region WV
+
     [Setting(SettingScope.User, "-h")]
-    public string RipEncoderWVPreset
-    {
-      get { return _ripEncoderWVPreset; }
-      set { _ripEncoderWVPreset = value; }
-    }
+    public string RipEncoderWVPreset { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public string RipEncoderWVExpert
-    {
-      get { return _ripEncoderWVExpert; }
-      set { _ripEncoderWVExpert = value; }
-    }
+    public string RipEncoderWVExpert { get; set; }
+
     #endregion
+
     #endregion
+
     #endregion
   }
 }

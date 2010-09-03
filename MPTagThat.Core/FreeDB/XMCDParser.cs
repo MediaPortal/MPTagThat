@@ -1,60 +1,58 @@
-#region Copyright (C) 2007-2008 Team MediaPortal
+#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
+#region
+
 using System;
+using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections;
+
+#endregion
 
 namespace MPTagThat.Core.Freedb
 {
   /// <summary>
-  /// Summary description for XMCDParser.
+  ///   Summary description for XMCDParser.
   /// </summary>
   public class XMCDParser
   {
-    const string APPNAME = "MediaPortalII";
-    const string APPVERSION = "1.0";
-    private string m_content = null;
-    private char[] m_seps = { '\r', '\n' };
+    private const string APPNAME = "MediaPortalII";
+    private const string APPVERSION = "1.0";
+    private readonly char[] m_seps = {'\r', '\n'};
 
     // store all the data
-    private int[] m_offsets = null;
-    private int m_length = 0; // in seconds
-    private int[] m_trackDurations = null;
-    private string m_discid = null;
-    private string m_artist = null;
-    private string m_title = null;
-    private int m_year = 0;
-    private string m_genre = null;
-    private string m_extd = null;
-    private int[] m_playorder = null;
-    private CDTrackDetail[] m_cdTrackDetail = null;
+    private string m_artist;
+    private CDTrackDetail[] m_cdTrackDetail;
+    private string m_content;
+    private string m_discid;
+    private string m_extd;
+    private string m_genre;
+    private int m_length; // in seconds
+    private int[] m_offsets;
+    private int[] m_playorder;
+    private string m_title;
+    private int[] m_trackDurations;
+    private int m_year;
 
-    public XMCDParser()
-    {
-    }
+    public XMCDParser() {}
 
     public XMCDParser(string xmcdContent)
     {
@@ -111,8 +109,8 @@ namespace MPTagThat.Core.Freedb
       ArrayList offsets = new ArrayList();
       Hashtable comments = new Hashtable();
       Hashtable fields = new Hashtable();
-      char[] commentSep = { ':' };
-      char[] fieldSep = { '=' };
+      char[] commentSep = {':'};
+      char[] fieldSep = {'='};
       //string[] tokens = m_content.Split(m_seps);
 
       for (int i = 0; i < content.Length; i++)
@@ -161,7 +159,10 @@ namespace MPTagThat.Core.Freedb
               if (thisOne > lastOne) // just to avoid adding unexpected commented numbers as offsets
                 offsets.Add(Convert.ToInt32(curcomment[0]));
             }
-            catch { ;}
+            catch
+            {
+              ;
+            }
           }
         }
         else
@@ -206,7 +207,7 @@ namespace MPTagThat.Core.Freedb
     private void InitVariables(ArrayList offsets, Hashtable comments, Hashtable fields)
     {
       // all the song offsets
-      m_offsets = (int[])offsets.ToArray(typeof(int));
+      m_offsets = (int[])offsets.ToArray(typeof (int));
       m_cdTrackDetail = new CDTrackDetail[m_offsets.Length];
 
       foreach (DictionaryEntry dict in comments)
@@ -216,7 +217,7 @@ namespace MPTagThat.Core.Freedb
         switch (key)
         {
           case "Disc length":
-            m_length = Convert.ToInt32(val.Split(new char[] { ' ' })[0].Trim());
+            m_length = Convert.ToInt32(val.Split(new[] {' '})[0].Trim());
             m_trackDurations = calculateDurations(m_offsets, m_length);
             break;
           case "Revision":
@@ -235,7 +236,7 @@ namespace MPTagThat.Core.Freedb
         string key = (string)dict.Key;
         string val = (string)dict.Value;
 
-        if (key.StartsWith("TTITLE") || key.StartsWith("EXTT"))  // a track
+        if (key.StartsWith("TTITLE") || key.StartsWith("EXTT")) // a track
         {
           continue;
         }
@@ -287,9 +288,10 @@ namespace MPTagThat.Core.Freedb
               m_extd = val;
               break;
             case "PLAYORDER":
-              { // restricting scope...
+              {
+                // restricting scope...
                 int[] ai;
-                char[] seps = { ',', '\n', '\r', '\t' };
+                char[] seps = {',', '\n', '\r', '\t'};
 
                 string[] tokens = val.Split(seps);
                 if (tokens.Length == 1 && tokens[0].Trim().Length == 0)
@@ -301,8 +303,7 @@ namespace MPTagThat.Core.Freedb
                   for (int i = 0; i < ai.Length; i++)
                     ai[i] = Convert.ToInt32(tokens[i]);
                 }
-                catch
-                { }
+                catch {}
                 m_playorder = ai;
               }
               break;
@@ -336,7 +337,9 @@ namespace MPTagThat.Core.Freedb
       */
       //isALegitimateCompilation if the CD Artist is either not set or equals "Various", "Various Artists", etc...
       Regex artistTagIsSetToVarious = new Regex(@"^(([Vv]arious)|([Aa]ssorted))( [Aa]rtist[s]?)?$");
-      bool isALegitimateCompilation = (m_artist == string.Empty || artistTagIsSetToVarious.Match(m_artist).Success) ? true : false;
+      bool isALegitimateCompilation = (m_artist == string.Empty || artistTagIsSetToVarious.Match(m_artist).Success)
+                                        ? true
+                                        : false;
 
       for (int i = 0; i < offsets.Count; i++)
       {
@@ -351,7 +354,6 @@ namespace MPTagThat.Core.Freedb
         m_cdTrackDetail[i].DurationInt = m_trackDurations[i];
         m_cdTrackDetail[i].EXTT = extt;
         m_cdTrackDetail[i].Track = i + 1;
-
       }
     }
 
@@ -386,10 +388,9 @@ namespace MPTagThat.Core.Freedb
             break;
         }
       }
-      catch
-      { }
+      catch {}
 
-      return (int[])list.ToArray(typeof(int));
+      return (int[])list.ToArray(typeof (int));
     }
 
     private int parseLength()
@@ -400,9 +401,7 @@ namespace MPTagThat.Core.Freedb
       {
         return Convert.ToInt32(val);
       }
-      catch
-      {
-      }
+      catch {}
       return 0;
     }
 
@@ -414,11 +413,8 @@ namespace MPTagThat.Core.Freedb
       {
         return Convert.ToInt32(val);
       }
-      catch
-      {
-      }
+      catch {}
       return 0;
-
     }
 
     private string readSubmitter()
@@ -473,8 +469,7 @@ namespace MPTagThat.Core.Freedb
       {
         retval = Convert.ToInt32(parseTag(@"\s*DYEAR\s*=\s*(.*)\s*\n"));
       }
-      catch
-      { }
+      catch {}
 
       return retval;
     }
@@ -498,8 +493,8 @@ namespace MPTagThat.Core.Freedb
       {
         return title.Substring(j + 3);
       }
-      //If we're sure that the CD is a real compilation then we can use this workaround:
-      //A lot of annotators don't use the standard " / " to split the Artist name from the Title name, instead they rely on the unconventional " - " delimiter
+        //If we're sure that the CD is a real compilation then we can use this workaround:
+        //A lot of annotators don't use the standard " / " to split the Artist name from the Title name, instead they rely on the unconventional " - " delimiter
       else if (isALegitimateCompilation)
       {
         j = title.IndexOf(" - ");
@@ -516,8 +511,8 @@ namespace MPTagThat.Core.Freedb
       {
         return title.Substring(0, j);
       }
-      //If we're sure that the CD is a real compilation then we can use this workaround:
-      //A lot of annotators don't use the standard " / " to split the Artist name from the Title name, instead they rely on the unconventional " - " delimiter
+        //If we're sure that the CD is a real compilation then we can use this workaround:
+        //A lot of annotators don't use the standard " / " to split the Artist name from the Title name, instead they rely on the unconventional " - " delimiter
       else if (isALegitimateCompilation)
       {
         j = title.IndexOf(" - ");
@@ -565,7 +560,7 @@ namespace MPTagThat.Core.Freedb
     private int[] parsePlayOrder()
     {
       int[] ai;
-      char[] seps = { ',', '\n', '\r', '\t' };
+      char[] seps = {',', '\n', '\r', '\t'};
 
       string[] tokens = parseTag(@"\s*PLAYORDER\s*=\s*(.*)\s*\n").Split(seps);
       ai = new int[tokens.Length];
@@ -574,8 +569,7 @@ namespace MPTagThat.Core.Freedb
         for (int i = 0; i < ai.Length; i++)
           ai[i] = Convert.ToInt32(tokens[i]);
       }
-      catch
-      { }
+      catch {}
       return ai;
     }
 
@@ -599,7 +593,7 @@ namespace MPTagThat.Core.Freedb
       return translate(s2.Trim());
     }
 
-    string translate(string str)
+    private string translate(string str)
     {
       str = str.Replace("\\n", "\n");
       str = str.Replace("\\t", "\t");
@@ -624,7 +618,7 @@ namespace MPTagThat.Core.Freedb
         list.Add(m.Groups[1].ToString().Trim());
       }
 
-      return (string[])list.ToArray(typeof(string));
+      return (string[])list.ToArray(typeof (string));
     }
 
     private string parseTag(string pattern)

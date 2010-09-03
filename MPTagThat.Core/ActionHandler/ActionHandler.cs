@@ -1,19 +1,46 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   public class ActionHandler : IActionHandler
   {
     #region Variables
-    private ILogger Log;
-    private List<WindowMap> mapWindows;
+
+    private readonly ILogger Log;
+    private readonly List<WindowMap> mapWindows;
+
     #endregion
 
     #region ctor
+
     public ActionHandler()
     {
       Log = ServiceScope.Get<ILogger>();
@@ -21,15 +48,17 @@ namespace MPTagThat.Core
 
       LoadKeyMap();
     }
+
     #endregion
 
     #region IActionHandler Members
+
     /// <summary>
-    /// Get the Assigned action for the pressed Key
+    ///   Get the Assigned action for the pressed Key
     /// </summary>
-    /// <param name="iWindow"></param>
-    /// <param name="key"></param>
-    /// <param name="action"></param>
+    /// <param name = "iWindow"></param>
+    /// <param name = "key"></param>
+    /// <param name = "action"></param>
     /// <returns></returns>
     public bool GetAction(int iWindow, Keys key, ref Action action)
     {
@@ -55,14 +84,14 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Loads the keymap file and creates the mapping.
+    ///   Loads the keymap file and creates the mapping.
     /// </summary>
     /// <returns>True if the load was successfull, false if it failed.</returns>
     public bool LoadKeyMap()
     {
       mapWindows.Clear();
       string strFilename = String.Format(@"{0}\{1}", Options.ConfigDir, "keymap.xml");
-      if (!System.IO.File.Exists(strFilename))
+      if (!File.Exists(strFilename))
         strFilename = String.Format(@"{0}\bin\{1}", Application.StartupPath, "keymap.xml");
       Log.Info("  Load key mapping from {0}", strFilename);
       try
@@ -83,7 +112,7 @@ namespace MPTagThat.Core
           if (null != nodeWindowId)
           {
             WindowMap map = new WindowMap();
-            map.Window = System.Int32.Parse(nodeWindowId.InnerText);
+            map.Window = Int32.Parse(nodeWindowId.InnerText);
             XmlNodeList listNodes = nodeWindow.SelectNodes("action");
             // Create a list of key/actiontype mappings
             foreach (XmlNode node in listNodes)
@@ -106,21 +135,22 @@ namespace MPTagThat.Core
       }
       return false;
     }
+
     #endregion
 
     #region Private Methods
 
     /// <summary>
-    /// Map an action in a windowmap based on the id and key xml nodes. 
+    ///   Map an action in a windowmap based on the id and key xml nodes.
     /// </summary>
-    /// <param name="map">The windowmap that needs to be filled in.</param>
-    /// <param name="nodeId">The id of the action</param>
-    /// <param name="nodeKey">The key corresponding to the mapping.</param>
+    /// <param name = "map">The windowmap that needs to be filled in.</param>
+    /// <param name = "nodeId">The id of the action</param>
+    /// <param name = "nodeKey">The key corresponding to the mapping.</param>
     private void MapAction(ref WindowMap map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeRibbonKey)
     {
       if (null == nodeId) return;
       Button but = new Button();
-      but.ActionType = (Action.ActionType)System.Int32.Parse(nodeId.InnerText);
+      but.ActionType = (Action.ActionType)Int32.Parse(nodeId.InnerText);
 
       if (nodeRibbonKey != null)
       {
@@ -145,7 +175,7 @@ namespace MPTagThat.Core
         try
         {
           if (strButton != "")
-            but.KeyCode = (int)Enum.Parse(typeof(Keys), strButton);
+            but.KeyCode = (int)Enum.Parse(typeof (Keys), strButton);
         }
         catch (ArgumentException)
         {
@@ -157,10 +187,10 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Gets the action based on a window key combination
+    ///   Gets the action based on a window key combination
     /// </summary>
-    /// <param name="wWindow">The window id.</param>
-    /// <param name="key">The key.</param>
+    /// <param name = "wWindow">The window id.</param>
+    /// <param name = "key">The key.</param>
     /// <returns>The action if it is found in the map, 0 if not.</returns>
     private int GetActionCode(int wWindow, Keys key)
     {
@@ -178,6 +208,7 @@ namespace MPTagThat.Core
       }
       return 0;
     }
+
     #endregion
   }
 }

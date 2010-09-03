@@ -1,109 +1,40 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
-using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
+#endregion
 
 namespace MPTagThat.Core.ShellLib
 {
-
   public class ApplicationDesktopToolbar : Form
   {
     #region Enums
-    public enum AppBarMessages
-    {
-      /// <summary>
-      /// Registers a new appbar and specifies the message identifier
-      /// that the system should use to send notification messages to 
-      /// the appbar. 
-      /// </summary>
-      New = 0x00000000,
-      /// <summary>
-      /// Unregisters an appbar, removing the bar from the system's 
-      /// internal list.
-      /// </summary>
-      Remove = 0x00000001,
-      /// <summary>
-      /// Requests a size and screen position for an appbar.
-      /// </summary>
-      QueryPos = 0x00000002,
-      /// <summary>
-      /// Sets the size and screen position of an appbar. 
-      /// </summary>
-      SetPos = 0x00000003,
-      /// <summary>
-      /// Retrieves the autohide and always-on-top states of the 
-      /// Microsoft® Windows® taskbar. 
-      /// </summary>
-      GetState = 0x00000004,
-      /// <summary>
-      /// Retrieves the bounding rectangle of the Windows taskbar. 
-      /// </summary>
-      GetTaskBarPos = 0x00000005,
-      /// <summary>
-      /// Notifies the system that an appbar has been activated. 
-      /// </summary>
-      Activate = 0x00000006,
-      /// <summary>
-      /// Retrieves the handle to the autohide appbar associated with
-      /// a particular edge of the screen. 
-      /// </summary>
-      GetAutoHideBar = 0x00000007,
-      /// <summary>
-      /// Registers or unregisters an autohide appbar for an edge of 
-      /// the screen. 
-      /// </summary>
-      SetAutoHideBar = 0x00000008,
-      /// <summary>
-      /// Notifies the system when an appbar's position has changed. 
-      /// </summary>
-      WindowPosChanged = 0x00000009,
-      /// <summary>
-      /// Sets the state of the appbar's autohide and always-on-top 
-      /// attributes.
-      /// </summary>
-      SetState = 0x0000000a
-    }
 
-
-    public enum AppBarNotifications
-    {
-      /// <summary>
-      /// Notifies an appbar that the taskbar's autohide or 
-      /// always-on-top state has changed—that is, the user has selected 
-      /// or cleared the "Always on top" or "Auto hide" check box on the
-      /// taskbar's property sheet. 
-      /// </summary>
-      StateChange = 0x00000000,
-      /// <summary>
-      /// Notifies an appbar when an event has occurred that may affect 
-      /// the appbar's size and position. Events include changes in the
-      /// taskbar's size, position, and visibility state, as well as the
-      /// addition, removal, or resizing of another appbar on the same 
-      /// side of the screen.
-      /// </summary>
-      PosChanged = 0x00000001,
-      /// <summary>
-      /// Notifies an appbar when a full-screen application is opening or
-      /// closing. This notification is sent in the form of an 
-      /// application-defined message that is set by the ABM_NEW message. 
-      /// </summary>
-      FullScreenApp = 0x00000002,
-      /// <summary>
-      /// Notifies an appbar that the user has selected the Cascade, 
-      /// Tile Horizontally, or Tile Vertically command from the 
-      /// taskbar's shortcut menu.
-      /// </summary>
-      WindowArrange = 0x00000003
-    }
-
-    [Flags]
-    public enum AppBarStates
-    {
-      AutoHide = 0x00000001,
-      AlwaysOnTop = 0x00000002
-    }
-
+    #region AppBarEdges enum
 
     public enum AppBarEdges
     {
@@ -114,13 +45,114 @@ namespace MPTagThat.Core.ShellLib
       Float = 4
     }
 
-    // Window Messages		
-    public enum WM
+    #endregion
+
+    #region AppBarMessages enum
+
+    public enum AppBarMessages
     {
-      ACTIVATE = 0x0006,
-      WINDOWPOSCHANGED = 0x0047,
-      NCHITTEST = 0x0084
+      /// <summary>
+      ///   Registers a new appbar and specifies the message identifier
+      ///   that the system should use to send notification messages to 
+      ///   the appbar.
+      /// </summary>
+      New = 0x00000000,
+      /// <summary>
+      ///   Unregisters an appbar, removing the bar from the system's 
+      ///   internal list.
+      /// </summary>
+      Remove = 0x00000001,
+      /// <summary>
+      ///   Requests a size and screen position for an appbar.
+      /// </summary>
+      QueryPos = 0x00000002,
+      /// <summary>
+      ///   Sets the size and screen position of an appbar.
+      /// </summary>
+      SetPos = 0x00000003,
+      /// <summary>
+      ///   Retrieves the autohide and always-on-top states of the 
+      ///   Microsoft® Windows® taskbar.
+      /// </summary>
+      GetState = 0x00000004,
+      /// <summary>
+      ///   Retrieves the bounding rectangle of the Windows taskbar.
+      /// </summary>
+      GetTaskBarPos = 0x00000005,
+      /// <summary>
+      ///   Notifies the system that an appbar has been activated.
+      /// </summary>
+      Activate = 0x00000006,
+      /// <summary>
+      ///   Retrieves the handle to the autohide appbar associated with
+      ///   a particular edge of the screen.
+      /// </summary>
+      GetAutoHideBar = 0x00000007,
+      /// <summary>
+      ///   Registers or unregisters an autohide appbar for an edge of 
+      ///   the screen.
+      /// </summary>
+      SetAutoHideBar = 0x00000008,
+      /// <summary>
+      ///   Notifies the system when an appbar's position has changed.
+      /// </summary>
+      WindowPosChanged = 0x00000009,
+      /// <summary>
+      ///   Sets the state of the appbar's autohide and always-on-top 
+      ///   attributes.
+      /// </summary>
+      SetState = 0x0000000a
     }
+
+    #endregion
+
+    #region AppBarNotifications enum
+
+    public enum AppBarNotifications
+    {
+      /// <summary>
+      ///   Notifies an appbar that the taskbar's autohide or 
+      ///   always-on-top state has changed—that is, the user has selected 
+      ///   or cleared the "Always on top" or "Auto hide" check box on the
+      ///   taskbar's property sheet.
+      /// </summary>
+      StateChange = 0x00000000,
+      /// <summary>
+      ///   Notifies an appbar when an event has occurred that may affect 
+      ///   the appbar's size and position. Events include changes in the
+      ///   taskbar's size, position, and visibility state, as well as the
+      ///   addition, removal, or resizing of another appbar on the same 
+      ///   side of the screen.
+      /// </summary>
+      PosChanged = 0x00000001,
+      /// <summary>
+      ///   Notifies an appbar when a full-screen application is opening or
+      ///   closing. This notification is sent in the form of an 
+      ///   application-defined message that is set by the ABM_NEW message.
+      /// </summary>
+      FullScreenApp = 0x00000002,
+      /// <summary>
+      ///   Notifies an appbar that the user has selected the Cascade, 
+      ///   Tile Horizontally, or Tile Vertically command from the 
+      ///   taskbar's shortcut menu.
+      /// </summary>
+      WindowArrange = 0x00000003
+    }
+
+    #endregion
+
+    #region AppBarStates enum
+
+    [Flags]
+    public enum AppBarStates
+    {
+      AutoHide = 0x00000001,
+      AlwaysOnTop = 0x00000002
+    }
+
+    #endregion
+
+    #region MousePositionCodes enum
 
     public enum MousePositionCodes
     {
@@ -154,6 +186,19 @@ namespace MPTagThat.Core.ShellLib
       HTCLOSE = 20,
       HTHELP = 21
     }
+
+    #endregion
+
+    #region WM enum
+
+    public enum WM
+    {
+      ACTIVATE = 0x0006,
+      WINDOWPOSCHANGED = 0x0047,
+      NCHITTEST = 0x0084
+    }
+
+    #endregion
 
     #endregion Enums
 
@@ -317,17 +362,17 @@ namespace MPTagThat.Core.ShellLib
     #region Private Variables
 
     // saves the current edge
-    private AppBarEdges m_Edge = AppBarEdges.Float;
 
     // saves the callback message id
-    private UInt32 CallbackMessageID = 0;
+    private readonly UInt32 CallbackMessageID;
 
     // are we in dock mode?
-    private Boolean IsAppbarMode = false;
+    private Boolean IsAppbarMode;
+    private AppBarEdges m_Edge = AppBarEdges.Float;
 
     // save the floating size and location
-    private Size m_PrevSize;
     private Point m_PrevLocation;
+    private Size m_PrevSize;
 
     #endregion Private Variables
 
@@ -341,6 +386,22 @@ namespace MPTagThat.Core.ShellLib
         throw new Exception("RegisterCallbackMessage failed");
     }
 
+    public AppBarEdges Edge
+    {
+      get { return m_Edge; }
+      set
+      {
+        m_Edge = value;
+        if (value == AppBarEdges.Float)
+          AppbarRemove();
+        else
+          AppbarNew();
+
+        if (IsAppbarMode)
+          SizeAppBar();
+      }
+    }
+
     private UInt32 RegisterCallbackMessage()
     {
       String uniqueMessageString = Guid.NewGuid().ToString();
@@ -352,7 +413,7 @@ namespace MPTagThat.Core.ShellLib
       ShellApi.RECT rt = new ShellApi.RECT();
 
       if ((m_Edge == AppBarEdges.Left) ||
-        (m_Edge == AppBarEdges.Right))
+          (m_Edge == AppBarEdges.Right))
       {
         rt.top = 0;
         rt.bottom = SystemInformation.PrimaryMonitorSize.Height;
@@ -405,10 +466,37 @@ namespace MPTagThat.Core.ShellLib
       Size = new Size(rt.right - rt.left, rt.bottom - rt.top);
     }
 
+    protected override void OnLoad(EventArgs e)
+    {
+      m_PrevSize = Size;
+      m_PrevLocation = Location;
+      base.OnLoad(e);
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+      AppbarRemove();
+      base.OnClosing(e);
+    }
+
+    protected override void OnSizeChanged(EventArgs e)
+    {
+      if (IsAppbarMode)
+      {
+        if (m_Edge == AppBarEdges.Top || m_Edge == AppBarEdges.Bottom)
+          m_PrevSize.Height = Size.Height;
+        else
+          m_PrevSize.Width = Size.Width;
+
+        SizeAppBar();
+      }
+
+      base.OnSizeChanged(e);
+    }
 
     #region Message Handlers
 
-    void OnAppbarNotification(ref Message msg)
+    private void OnAppbarNotification(ref Message msg)
     {
       AppBarStates state;
       AppBarNotifications msgType = (AppBarNotifications)(Int32)msg.WParam;
@@ -457,16 +545,16 @@ namespace MPTagThat.Core.ShellLib
           break;
 
         case AppBarNotifications.WindowArrange:
-          if ((int)msg.LParam != 0)	// before
+          if ((int)msg.LParam != 0) // before
             Visible = false;
-          else						// after
+          else // after
             Visible = true;
 
           break;
       }
     }
 
-    void OnNcHitTest(ref Message msg)
+    private void OnNcHitTest(ref Message msg)
     {
       DefWndProc(ref msg);
       if ((m_Edge == AppBarEdges.Top) && ((int)msg.Result == (int)MousePositionCodes.HTBOTTOM))
@@ -486,7 +574,6 @@ namespace MPTagThat.Core.ShellLib
       }
       base.WndProc(ref msg);
     }
-
 
     #endregion Message Handlers
 
@@ -519,54 +606,5 @@ namespace MPTagThat.Core.ShellLib
     }
 
     #endregion Window Procedure
-
-    protected override void OnLoad(EventArgs e)
-    {
-      m_PrevSize = Size;
-      m_PrevLocation = Location;
-      base.OnLoad(e);
-    }
-
-    protected override void OnClosing(CancelEventArgs e)
-    {
-      AppbarRemove();
-      base.OnClosing(e);
-    }
-
-    protected override void OnSizeChanged(EventArgs e)
-    {
-      if (IsAppbarMode)
-      {
-        if (m_Edge == AppBarEdges.Top || m_Edge == AppBarEdges.Bottom)
-          m_PrevSize.Height = Size.Height;
-        else
-          m_PrevSize.Width = Size.Width;
-
-        SizeAppBar();
-      }
-
-      base.OnSizeChanged(e);
-    }
-
-
-    public AppBarEdges Edge
-    {
-      get
-      {
-        return m_Edge;
-      }
-      set
-      {
-        m_Edge = value;
-        if (value == AppBarEdges.Float)
-          AppbarRemove();
-        else
-          AppbarNew();
-
-        if (IsAppbarMode)
-          SizeAppBar();
-
-      }
-    }
   }
 }

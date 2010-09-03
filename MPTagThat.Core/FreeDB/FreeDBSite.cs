@@ -1,151 +1,66 @@
-#region Copyright (C) 2007-2008 Team MediaPortal
+#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-using System;
-
 namespace MPTagThat.Core.Freedb
 {
-	/// <summary>
-	/// Contains Information about a FreeDB Site
-	/// </summary>
-	public class FreeDBSite
-	{
-    public enum FreeDBProtocol {CDDB, HTTP};
+  /// <summary>
+  ///   Contains Information about a FreeDB Site
+  /// </summary>
+  public class FreeDBSite
+  {
+    #region FreeDBProtocol enum
 
-    /// <summary>The hostname of the server. </summary>
-    private string m_host;
-    /// <summary>The protocol used by the server. </summary>
-    private FreeDBProtocol m_proto;
-    /// <summary>The port used by the server. </summary>
-    private int m_port;
-    /// <summary>The URI porting of the cgi if it is http; otherwise, "-". </summary>
-    private string m_uri;
-    /// <summary>The latitude of the server. </summary>
-    private string m_latitude;
-    /// <summary>The longitude of the server. </summary>
-    private string m_longitude;
-    /// <summary>The description of the the server's location. </summary>
-    private string m_location;
+    public enum FreeDBProtocol
+    {
+      CDDB,
+      HTTP
+    } ;
 
-    public FreeDBSite()
-		{
-		}
+    #endregion
+
+    public FreeDBSite() {}
 
     public FreeDBSite(string host, FreeDBProtocol proto, int port, string uri,
                       string latitude, string longitude, string location)
     {
-      m_host = host;
-      m_proto = proto;
-      m_port = port;
-      m_uri = uri;
-      m_latitude = latitude;
-      m_longitude = longitude;
-      m_location = location;
+      Host = host;
+      Protocol = proto;
+      Port = port;
+      URI = uri;
+      Latitude = latitude;
+      Longitude = longitude;
+      Location = location;
     }
 
-    public string Host
-    {
-      get
-      {
-        return m_host;
-      }
-      set
-      {
-        m_host = value;
-      }
-    }
+    public string Host { get; set; }
 
-    public FreeDBProtocol Protocol
-    {
-      get
-      {
-        return m_proto;
-      }
-      set
-      {
-        m_proto = value;
-      }
-    }
+    public FreeDBProtocol Protocol { get; set; }
 
-    public int Port
-    {
-      get
-      {
-        return m_port;
-      }
-      set
-      {
-        m_port = value;
-      }
-    }
-    
-    public string URI
-    {
-      get
-      {
-        return m_uri;
-      }
-      set
-      {
-        m_uri = value;
-      }
-    }
+    public int Port { get; set; }
 
-    public string Latitude
-    {
-      get
-      {
-        return m_latitude;
-      }
-      set
-      {
-        m_latitude = value;
-      }
-    }
+    public string URI { get; set; }
 
-    public string Longitude
-    {
-      get
-      {
-        return m_longitude;
-      }
-      set
-      {
-        m_longitude = value;
-      }
-    }
+    public string Latitude { get; set; }
 
-    public string Location
-    {
-      get
-      {
-        return m_location;
-      }
-      set
-      {
-        m_location = value;
-      }
-    }
-	}
+    public string Longitude { get; set; }
+
+    public string Location { get; set; }
+  }
 }

@@ -1,46 +1,44 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
 
 namespace MPTagThat.TagEdit
 {
   public class Rating
   {
     #region Variables
-    private string _ratingUser;
-    private string _rating;
-    private string _ratingPlayCounter;
 
-    public Rating()
-    {
-
-    }
+    public Rating() {}
 
     public Rating(string user, string rating, string playcount)
     {
-      _ratingUser = user;
-      _rating = rating;
-      _ratingPlayCounter = playcount;
+      User = user;
+      RatingValue = rating;
+      PlayCounter = playcount;
     }
 
-    public string User
-    {
-      get { return _ratingUser; }
-      set { _ratingUser = value; }
-    }
+    public string User { get; set; }
 
-    public string RatingValue
-    {
-      get { return _rating; }
-      set { _rating = value; }
+    public string RatingValue { get; set; }
 
-    }
+    public string PlayCounter { get; set; }
 
-    public string PlayCounter
-    {
-      get { return _ratingPlayCounter; }
-      set { _ratingPlayCounter = value; }
-    }
     #endregion
   }
 }

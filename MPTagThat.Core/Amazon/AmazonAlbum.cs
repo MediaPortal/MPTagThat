@@ -1,75 +1,70 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Net;
+using TagLib;
+
+#endregion
 
 namespace MPTagThat.Core.Amazon
 {
   public class AmazonAlbum
   {
     #region Private Fields
-    private string _asin;
-    private string _title;
-    private string _artist;
-    private string _year;
-    private string _smallImage;
-    private string _mediumImage;
-    private string _largeImage;
-    private List<List<AmazonAlbumTrack>> _discs;
-    private string _binding;
-    private string _label;
-    private string _coverWidth = "";
+
     private string _coverHeight = "";
+    private string _coverWidth = "";
+    private string _largeImage;
+    private string _mediumImage;
+    private string _smallImage;
+
     #endregion
 
     #region ctor
+
     public AmazonAlbum()
     {
-      _discs = new List<List<AmazonAlbumTrack>>();
+      Discs = new List<List<AmazonAlbumTrack>>();
     }
+
     #endregion
 
     #region Properties
-    public string Asin
-    {
-      get { return _asin; }
-      set { _asin = value; }
-    }
 
-    public string Title
-    {
-      get { return _title; }
-      set { _title = value; }
-    }
+    public string Asin { get; set; }
 
-    public string Artist
-    {
-      get { return _artist; }
-      set { _artist = value; }
-    }
+    public string Title { get; set; }
 
-    public string Binding
-    {
-      get { return _binding; }
-      set { _binding = value; }
-    }
+    public string Artist { get; set; }
 
-    public string Label
-    {
-      get { return _label; }
-      set { _label = value; }
-    }
+    public string Binding { get; set; }
 
-    public string Year
-    {
-      get { return _year; }
-      set { _year = value; }
-    }
+    public string Label { get; set; }
 
-    public List<List<AmazonAlbumTrack>> Discs
-    {
-      get { return _discs; }
-      set { _discs = value; }
-    }
+    public string Year { get; set; }
+
+    public List<List<AmazonAlbumTrack>> Discs { get; set; }
 
     public string SmallImageUrl
     {
@@ -101,11 +96,11 @@ namespace MPTagThat.Core.Amazon
       set { _coverHeight = value; }
     }
 
-    public TagLib.ByteVector AlbumImage
+    public ByteVector AlbumImage
     {
       get
       {
-        TagLib.ByteVector vector = new TagLib.ByteVector();
+        ByteVector vector = new ByteVector();
 
         string sURL = _largeImage;
         if (sURL == null)
@@ -120,21 +115,20 @@ namespace MPTagThat.Core.Amazon
 
         try
         {
-          System.Net.WebRequest webReq = null;
-          webReq = System.Net.WebRequest.Create(sURL);
-          System.Net.WebResponse webResp = webReq.GetResponse();
-          System.IO.Stream stream =  webResp.GetResponseStream();
+          WebRequest webReq = null;
+          webReq = WebRequest.Create(sURL);
+          WebResponse webResp = webReq.GetResponse();
+          Stream stream = webResp.GetResponseStream();
 
           byte[] data = Util.ReadFullStream(stream, 32768);
           if (data.Length > 0)
             vector.Add(data);
         }
-        catch
-        {
-        }
+        catch {}
         return vector;
       }
     }
+
     #endregion
   }
 }

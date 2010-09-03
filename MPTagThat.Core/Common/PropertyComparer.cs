@@ -1,18 +1,38 @@
-#region Using directives
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
 #endregion
 
 namespace MPTagThat.Core
 {
-  public class PropertyComparer<T> : System.Collections.Generic.IComparer<T> 
+  public class PropertyComparer<T> : IComparer<T>
   {
-    private PropertyDescriptor _property;
-    private ListSortDirection _direction;
+    private readonly ListSortDirection _direction;
+    private readonly PropertyDescriptor _property;
 
     public PropertyComparer(PropertyDescriptor property, ListSortDirection direction)
     {
@@ -61,12 +81,12 @@ namespace MPTagThat.Core
       {
         result = ((IComparable)xValue).CompareTo(yValue);
       }
-      // If values don't implement IComparer but are equivalent
+        // If values don't implement IComparer but are equivalent
       else if (xValue.Equals(yValue))
       {
         result = 0;
       }
-      // Values don't implement IComparer and are not equivalent, so compare as string values
+        // Values don't implement IComparer and are not equivalent, so compare as string values
       else result = xValue.ToString().CompareTo(yValue.ToString());
 
       // Return result

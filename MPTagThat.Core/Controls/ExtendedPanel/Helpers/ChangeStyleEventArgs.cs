@@ -1,64 +1,58 @@
-#region Using directives
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
-using System.Text;
+
 #endregion
 
 namespace Stepi.UI
 {
-    /// <summary>
-    /// Class used to send the data to the event raised as a consequence of the "expanding/collapsing" button being hit
-    /// </summary>
-    public class ChangeStyleEventArgs : EventArgs
+  /// <summary>
+  ///   Class used to send the data to the event raised as a consequence of the "expanding/collapsing" button being hit
+  /// </summary>
+  public class ChangeStyleEventArgs : EventArgs
+  {
+    #region Members
+
+    #endregion
+
+    #region ctor
+
+    public ChangeStyleEventArgs() {}
+
+    public ChangeStyleEventArgs(DirectionStyle oldStyle, DirectionStyle newStyle)
     {
-        #region Members
-        /// <summary>
-        /// Old direction
-        /// </summary>
-        private DirectionStyle oldStyle;
-        /// <summary>
-        /// New direction
-        /// </summary>
-        private DirectionStyle newStyle;
-        #endregion
-
-        #region ctor
-        public ChangeStyleEventArgs()
-        { }
-
-        public ChangeStyleEventArgs(DirectionStyle oldStyle, DirectionStyle newStyle)
-        {
-            this.oldStyle = oldStyle;
-            this.newStyle = newStyle;
-        }
-
-        #endregion
-
-        #region Properties
-        public DirectionStyle Old
-        {
-            get
-            {
-                return oldStyle;
-            }
-            set
-            {
-                oldStyle = value;
-            }
-        }
-
-        public DirectionStyle New
-        {
-            get
-            {
-                return newStyle;
-            }
-
-            set
-            {
-                newStyle = value;
-            }
-        }
-        #endregion
-
+      this.Old = oldStyle;
+      this.New = newStyle;
     }
+
+    #endregion
+
+    #region Properties
+
+    public DirectionStyle Old { get; set; }
+
+    public DirectionStyle New { get; set; }
+
+    #endregion
+  }
 }

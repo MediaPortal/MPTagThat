@@ -1,48 +1,48 @@
-#region Copyright (C) 2007-2008 Team MediaPortal
+#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
+#region
+
 using System;
+using System.Collections;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Collections;
 using Un4seen.Bass.AddOn.Cd;
+
+#endregion
 
 namespace MPTagThat.Core.Freedb
 {
   /// <summary>
-  /// This Class Establishes a connection to a FreeDB Site and retrieves the information for the Audio CD inserted
+  ///   This Class Establishes a connection to a FreeDB Site and retrieves the information for the Audio CD inserted
   /// </summary>
   public class FreeDBQuery
   {
-    const string APPNAME = "MediaPortalII";
-    const string APPVERSION = "1.0";
-    private FreeDBSite m_server = null;
-    private string m_serverURL = null;
-    private string m_idStr = null;
-    private string m_message = null;
-    private int m_code = 0;
+    private const string APPNAME = "MediaPortalII";
+    private const string APPVERSION = "1.0";
+    private readonly string m_idStr;
+    private int m_code;
+    private string m_message;
+    private FreeDBSite m_server;
+    private string m_serverURL;
 
     public FreeDBQuery()
     {
@@ -88,8 +88,8 @@ namespace MPTagThat.Core.Freedb
       StreamReader urlRdr = GetStreamFromSite("sites");
       m_message = urlRdr.ReadLine();
       int code = GetCode(m_message);
-      m_message = m_message.Substring(4);  // remove the code...
-      char[] sep = { ' ' };
+      m_message = m_message.Substring(4); // remove the code...
+      char[] sep = {' '};
 
       switch (code)
       {
@@ -105,7 +105,8 @@ namespace MPTagThat.Core.Freedb
             string[] siteInfo = site.Split(sep);
             retval[index] = new FreeDBSite();
             retval[index].Host = siteInfo[0];
-            retval[index].Protocol = (FreeDBSite.FreeDBProtocol)Enum.Parse(typeof(FreeDBSite.FreeDBProtocol), siteInfo[1], true);
+            retval[index].Protocol =
+              (FreeDBSite.FreeDBProtocol)Enum.Parse(typeof (FreeDBSite.FreeDBProtocol), siteInfo[1], true);
             retval[index].Port = Convert.ToInt32(siteInfo[2]);
             retval[index].URI = siteInfo[3];
             retval[index].Latitude = siteInfo[4];
@@ -118,7 +119,8 @@ namespace MPTagThat.Core.Freedb
           }
           break;
         case 401: // No Site Information Available.
-          break; ;
+          break;
+          ;
         default:
           break;
       }
@@ -181,9 +183,9 @@ namespace MPTagThat.Core.Freedb
       StreamReader urlRdr = GetStreamFromSite(command);
       m_message = urlRdr.ReadLine();
       int code = GetCode(m_message);
-      m_message = m_message.Substring(4);  // remove the code...
+      m_message = m_message.Substring(4); // remove the code...
 
-      char[] sep = { ' ' };
+      char[] sep = {' '};
       string title = "";
       int index = 0;
       string[] match;
@@ -241,9 +243,9 @@ namespace MPTagThat.Core.Freedb
       StreamReader urlRdr = GetStreamFromSite(command);
       m_message = urlRdr.ReadLine();
       int code = GetCode(m_message);
-      m_message = m_message.Substring(4);  // remove the code...
+      m_message = m_message.Substring(4); // remove the code...
 
-      char[] sep = { ' ' };
+      char[] sep = {' '};
       string title = "";
       int index = 0;
       string[] match;
@@ -305,7 +307,7 @@ namespace MPTagThat.Core.Freedb
       StreamReader urlRdr = GetStreamFromSite(command);
       m_message = urlRdr.ReadLine();
       int code = GetCode(m_message);
-      m_message = m_message.Substring(4);  // remove the code...
+      m_message = m_message.Substring(4); // remove the code...
 
       switch (code / 100)
       {
@@ -327,7 +329,7 @@ namespace MPTagThat.Core.Freedb
 
     private StreamReader GetStreamFromSite(string command)
     {
-      System.Uri url = new System.Uri(m_serverURL + "?cmd=" + command + m_idStr);
+      Uri url = new Uri(m_serverURL + "?cmd=" + command + m_idStr);
 
       WebRequest req = WebRequest.Create(url);
       req.Timeout = 10000;
@@ -336,8 +338,9 @@ namespace MPTagThat.Core.Freedb
         // Use the current user in case an NTLM Proxy or similar is used.
         req.Proxy.Credentials = CredentialCache.DefaultCredentials;
       }
-      catch (Exception) { }
-      StreamReader urlRdr = new StreamReader(new StreamReader(req.GetResponse().GetResponseStream()).BaseStream, Encoding.GetEncoding(0));
+      catch (Exception) {}
+      StreamReader urlRdr = new StreamReader(new StreamReader(req.GetResponse().GetResponseStream()).BaseStream,
+                                             Encoding.GetEncoding(0));
 
       return urlRdr;
     }
@@ -364,7 +367,7 @@ namespace MPTagThat.Core.Freedb
         if (curLine.Trim().Length > 0 && !curLine.Trim().Equals("."))
           strarray.Add(curLine);
       }
-      return (string[])strarray.ToArray(typeof(string));
+      return (string[])strarray.ToArray(typeof (string));
     }
 
     public string GetCDDBDiscIDInfo(char driveLetter, char separator)

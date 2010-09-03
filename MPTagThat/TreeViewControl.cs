@@ -1,45 +1,72 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
-
-using Raccoom.Windows.Forms;
 using MPTagThat.Core;
+using Raccoom.Windows.Forms;
+
+#endregion
 
 namespace MPTagThat
 {
   public partial class TreeViewControl : UserControl
   {
     #region Variables
-    private Main _main;
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private ILogger log = ServiceScope.Get<ILogger>();
-    private TreeNode _previousHoverNode = null;
+
+    private readonly List<Item> _fileFormats = new List<Item>();
+
+    private readonly string[] _filterFieldValues = new[]
+                                                     {
+                                                       "artist", "albumartist", "album", "title", "year", "genre",
+                                                       "picture",
+                                                       "lyrics", "track", "numtracks", "disc", "numdiscs", "rating",
+                                                       "bpm",
+                                                       "comment", "composer", "conductor", "bitrate", "samplerate",
+                                                       "channels"
+                                                     };
+
+    private readonly Main _main;
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private bool _actionCopy;
+    private bool _databaseMode;
+
+    private TreeViewFilter _filter;
+    private TreeNodePath _nodeToCopyCut;
+    private TreeNode _previousHoverNode;
     private DateTime _savedTime;
-    private bool _actionCopy = false;
-    private TreeNodePath _nodeToCopyCut = null;
-    private bool _databaseMode = false;
 
-    private TreeViewFilter _filter = null;
-    private List<Item> _fileFormats = new List<Item>();
-
-    private string[] _filterFieldValues = new string[]
-                                       {
-                                         "artist", "albumartist", "album", "title", "year", "genre", "picture",
-                                         "lyrics", "track", "numtracks", "disc", "numdiscs", "rating", "bpm",
-                                         "comment", "composer", "conductor", "bitrate", "samplerate", "channels"
-                                       };
     #endregion
 
     #region Properties
+
     public TreeViewFolderBrowser TreeView
     {
-      get { return this.treeViewFolderBrowser; }
+      get { return treeViewFolderBrowser; }
     }
 
     public bool ScanFolderRecursive
@@ -51,8 +78,8 @@ namespace MPTagThat
     public bool DatabaseMode
     {
       get { return _databaseMode; }
-      set 
-      { 
+      set
+      {
         _databaseMode = value;
         SwitchMode();
       }
@@ -62,9 +89,11 @@ namespace MPTagThat
     {
       get { return _filter; }
     }
+
     #endregion
 
     #region ctor
+
     public TreeViewControl(Main main)
     {
       _main = main;
@@ -73,27 +102,31 @@ namespace MPTagThat
 
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
+      queueMessage.OnMessageReceive += OnMessageReceive;
 
       LocaliseScreen();
 
       LoadSettings();
     }
+
     #endregion
 
     #region Public Methods
+
     #region Init
+
     public void Init()
     {
       _databaseMode = false;
       cbDataProvider.SelectedIndex = Options.MainSettings.DataProvider;
       //  Add the event Handler here to prevent it from firing, when setting the selected item
-      cbDataProvider.SelectedIndexChanged += new EventHandler(cbDataProvider_SelectedIndexChanged);
+      cbDataProvider.SelectedIndexChanged += cbDataProvider_SelectedIndexChanged;
       if (Options.MainSettings.DataProvider == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
       {
         _databaseMode = true;
       }
-      treeViewFolderBrowser.DriveTypes = DriveTypes.LocalDisk | DriveTypes.NetworkDrive | DriveTypes.RemovableDisk | DriveTypes.CompactDisc;
+      treeViewFolderBrowser.DriveTypes = DriveTypes.LocalDisk | DriveTypes.NetworkDrive | DriveTypes.RemovableDisk |
+                                         DriveTypes.CompactDisc;
       treeViewFolderBrowser.RootFolder = Environment.SpecialFolder.Desktop;
       treeViewFolderBrowser.CheckboxBehaviorMode = CheckboxBehaviorMode.None;
       SwitchMode();
@@ -101,7 +134,7 @@ namespace MPTagThat
 
 
     /// <summary>
-    /// Refreshes the Foldrs
+    ///   Refreshes the Foldrs
     /// </summary>
     public void RefreshFolders()
     {
@@ -131,26 +164,29 @@ namespace MPTagThat
     }
 
     #endregion
+
     #endregion
 
     #region Private Methids
+
     #region Localisation
+
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
       // Extended Panels. Doing it via TTExtendedPanel doesn't work for some reason
-      this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
-      this.optionsPanelLeft.CaptionText = localisation.ToString("main", "OptionsPanel");
-      this.contextMenuTreeView.Items[0].Text = localisation.ToString("contextmenu", "Copy");
-      this.contextMenuTreeView.Items[1].Text = localisation.ToString("contextmenu", "Cut");
-      this.contextMenuTreeView.Items[2].Text = localisation.ToString("contextmenu", "Paste");
-      this.contextMenuTreeView.Items[3].Text = localisation.ToString("contextmenu", "Delete");
-      this.contextMenuTreeView.Items[4].Text = localisation.ToString("contextmenu", "Refresh");
+      treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
+      optionsPanelLeft.CaptionText = localisation.ToString("main", "OptionsPanel");
+      contextMenuTreeView.Items[0].Text = localisation.ToString("contextmenu", "Copy");
+      contextMenuTreeView.Items[1].Text = localisation.ToString("contextmenu", "Cut");
+      contextMenuTreeView.Items[2].Text = localisation.ToString("contextmenu", "Paste");
+      contextMenuTreeView.Items[3].Text = localisation.ToString("contextmenu", "Delete");
+      contextMenuTreeView.Items[4].Text = localisation.ToString("contextmenu", "Refresh");
 
-      this.contextMenuStripFilter.Items[0].Text = localisation.ToString("contextmenu", "InsertFilter");
-      this.contextMenuStripFilter.Items[1].Text = localisation.ToString("contextmenu", "DeleteFilter");
+      contextMenuStripFilter.Items[0].Text = localisation.ToString("contextmenu", "InsertFilter");
+      contextMenuStripFilter.Items[1].Text = localisation.ToString("contextmenu", "DeleteFilter");
 
       // Filter Grid Headings
       TagFilterField.HeaderText = localisation.ToString("main", "FilterHeadingField");
@@ -163,9 +199,11 @@ namespace MPTagThat
       cbDataProvider.Items.Add(localisation.ToString("main", "NetworkView"));
       cbDataProvider.Items.Add(localisation.ToString("main", "DBView"));
     }
+
     #endregion
 
     #region Settings
+
     private void LoadSettings()
     {
       // Fill the Filter Field Combo with values
@@ -275,7 +313,7 @@ namespace MPTagThat
           }
           else
           {
-            dataGridViewTagFilter.Rows[rowIndex].Cells[1].Value = tagFilter.FilterValue;  
+            dataGridViewTagFilter.Rows[rowIndex].Cells[1].Value = tagFilter.FilterValue;
           }
 
           string op = null;
@@ -290,9 +328,9 @@ namespace MPTagThat
           dataGridViewTagFilter.Rows[rowIndex].Cells[2].Value = op;
           rowIndex++;
         }
-
       }
     }
+
     #endregion
 
     private void SetNodeHoverColor(TreeNode node)
@@ -309,7 +347,6 @@ namespace MPTagThat
         _previousHoverNode.BackColor = Color.White;
       }
       _previousHoverNode = node;
-
     }
 
     private void SwitchMode()
@@ -324,7 +361,7 @@ namespace MPTagThat
         {
           _main.SplitterTop.ToggleState();
         }
-        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
+        treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
         btnRefreshFolder.Enabled = false;
@@ -340,14 +377,14 @@ namespace MPTagThat
         {
           TreeViewFolderBrowserDataProviderShell32 shell32Provider = new TreeViewFolderBrowserDataProviderShell32();
           shell32Provider.ShowAllShellObjects = true;
-          treeViewFolderBrowser.DataSource = shell32Provider;          
+          treeViewFolderBrowser.DataSource = shell32Provider;
         }
 
         if (!_main.SplitterTop.IsCollapsed)
         {
           _main.SplitterTop.ToggleState();
         }
-        this.treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
+        treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;
         btnRefreshFolder.Enabled = true;
@@ -370,36 +407,39 @@ namespace MPTagThat
           return false;
       }
     }
+
     #endregion
 
     #region Events
+
     #region Treeview
+
     /// <summary>
-    /// The Treeview Control is the active control
+    ///   The Treeview Control is the active control
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_Enter(object sender, EventArgs e)
     {
       _main.TreeViewSelected = true;
     }
 
     /// <summary>
-    /// The Treeview Control is no longer the active Control
+    ///   The Treeview Control is no longer the active Control
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_Leave(object sender, EventArgs e)
     {
       _main.TreeViewSelected = false;
     }
 
     /// <summary>
-    /// A new Folder has been selected
-    /// Only allow navigation, if no folder scanning is active
+    ///   A new Folder has been selected
+    ///   Only allow navigation, if no folder scanning is active
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_BeforeSelect(object sender, TreeViewCancelEventArgs e)
     {
       if (_main.FolderScanning)
@@ -407,10 +447,10 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// A Folder has been selected in the TreeView. Read the content
+    ///   A Folder has been selected in the TreeView. Read the content
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_AfterSelect(object sender, TreeViewEventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -427,7 +467,7 @@ namespace MPTagThat
       {
         if (DatabaseMode)
         {
-          _main.CurrentDirectory = (string)node.Tag; 
+          _main.CurrentDirectory = (string)node.Tag;
         }
         else
         {
@@ -464,20 +504,20 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The User selected the Treeview
+    ///   The User selected the Treeview
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_Click(object sender, EventArgs e)
     {
       _main.TreeViewSelected = true;
     }
 
     /// <summary>
-    /// THe user edited (renamed) a folder
+    ///   THe user edited (renamed) a folder
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
     {
       if (e.Label == null)
@@ -486,13 +526,10 @@ namespace MPTagThat
       }
 
       TreeNodePath node = e.Node as TreeNodePath;
-      
+
       string sourcePath = node.Path;
       string targetPath = Path.Combine(Path.GetDirectoryName(node.Path), e.Label);
-      if (Directory.Exists(targetPath))
-      {
-        
-      }
+      if (Directory.Exists(targetPath)) {}
 
       bool bError = false;
       try
@@ -518,15 +555,14 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Show the Treview Context Menu on Right Mouse Click
+    ///   Show the Treview Context Menu on Right Mouse Click
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_MouseUp(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
-
         // Point where the mouse is clicked.
         Point p = new Point(e.X, e.Y);
 
@@ -544,43 +580,46 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The user hoevrs with the mouse over a node. 
+    ///   The user hoevrs with the mouse over a node.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
     {
       SetNodeHoverColor(e.Node);
     }
 
     /// <summary>
-    /// Gets the treenode, where the cursor currently points to
+    ///   Gets the treenode, where the cursor currently points to
     /// </summary>
-    /// <param name="point"></param>
+    /// <param name = "point"></param>
     /// <returns></returns>
     private TreeNode GetNode(Point point)
     {
       // We need to tranlate the coordinates to the position within the Main form
-      Point pt = this.Parent.Parent.PointToClient(this.Parent.PointToScreen(this.PointToScreen(treeViewFolderBrowser.Location)));
+      Point pt = Parent.Parent.PointToClient(Parent.PointToScreen(PointToScreen(treeViewFolderBrowser.Location)));
       TreeViewHitTestInfo hitTestInfo = treeViewFolderBrowser.HitTest(point.X - pt.X, point.Y - pt.Y - 20);
       return hitTestInfo.Node;
     }
+
     #endregion
 
     #region Drag & Drop
+
     /// <summary>
-    /// Some files are dragged over the Treeview
+    ///   Some files are dragged over the Treeview
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_DragOver(object sender, DragEventArgs e)
     {
-      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
+      if (!e.Data.GetDataPresent(typeof (List<TrackData>)))
       {
         return;
       }
 
-      if (e.KeyState == 9 && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy) // The Ctrl Key + LMB was pressed
+      if (e.KeyState == 9 && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
+        // The Ctrl Key + LMB was pressed
       {
         e.Effect = DragDropEffects.Copy;
       }
@@ -607,14 +646,14 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The drag and drop is completed. do the actual move / copy
+    ///   The drag and drop is completed. do the actual move / copy
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void treeViewFolderBrowser_DragDrop(object sender, DragEventArgs e)
     {
       bool bMove = true;
-      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
+      if (!e.Data.GetDataPresent(typeof (List<TrackData>)))
       {
         return;
       }
@@ -630,7 +669,8 @@ namespace MPTagThat
 
       try
       {
-        TreeNodePath node = GetNode(new Point(e.X, e.Y)) as TreeNodePath; ;
+        TreeNodePath node = GetNode(new Point(e.X, e.Y)) as TreeNodePath;
+        ;
         if (node == null)
         {
           log.Debug("TreeView: Files are not dragged to a node. Abort processing");
@@ -642,10 +682,10 @@ namespace MPTagThat
           return;
         }
 
-        List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof(List<TrackData>));
+        List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof (List<TrackData>));
         foreach (TrackData track in selectedRows)
         {
-          string targetFile = System.IO.Path.Combine(node.Path, track.FileName);
+          string targetFile = Path.Combine(node.Path, track.FileName);
           if (bMove)
           {
             log.Debug("TreeView: Moving file {0} to {1}", track.FullFileName, targetFile);
@@ -663,61 +703,63 @@ namespace MPTagThat
         log.Debug("TreeView: Exception while copying moving file {0} to {1}", ex.Message, ex.StackTrace);
       }
     }
+
     #endregion
 
     #region Context Menu
+
     /// <summary>
-    /// Refresh Button on Treeview Context Menu has been clicked
+    ///   Refresh Button on Treeview Context Menu has been clicked
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void contextMenuTreeViewRefresh_Click(object sender, EventArgs e)
     {
       RefreshFolders();
     }
 
     /// <summary>
-    /// Delete Button on Treeview Context Menu has been clicked
+    ///   Delete Button on Treeview Context Menu has been clicked
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void contextMenuTreeViewDelete_Click(object sender, EventArgs e)
     {
       DeleteFolder();
     }
 
     /// <summary>
-    /// Copy Button has been selected in Context Menu
+    ///   Copy Button has been selected in Context Menu
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void contextMenuTreeViewCopy_Click(object sender, EventArgs e)
     {
-      contextMenuTreeView.Items[2].Enabled = true;  // Enable the Paste Menu item
+      contextMenuTreeView.Items[2].Enabled = true; // Enable the Paste Menu item
       _actionCopy = true;
       _nodeToCopyCut = treeViewFolderBrowser.SelectedNode as TreeNodePath;
     }
 
     /// <summary>
-    /// Cut Button has been selected in Context Menu
+    ///   Cut Button has been selected in Context Menu
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void contextMenuTreeViewCut_Click(object sender, EventArgs e)
     {
-      contextMenuTreeView.Items[2].Enabled = true;  // Enable the Paste Menu item
-      _actionCopy = false;  // we do a move
+      contextMenuTreeView.Items[2].Enabled = true; // Enable the Paste Menu item
+      _actionCopy = false; // we do a move
       _nodeToCopyCut = treeViewFolderBrowser.SelectedNode as TreeNodePath;
     }
 
     /// <summary>
-    /// Paste Button has been selected in Context Menu
+    ///   Paste Button has been selected in Context Menu
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void contextMenuTreeViewPaste_Click(object sender, EventArgs e)
     {
-      contextMenuTreeView.Items[2].Enabled = false;  // Disable the Paste Menu item
+      contextMenuTreeView.Items[2].Enabled = false; // Disable the Paste Menu item
       string targetPath = Path.Combine((treeViewFolderBrowser.SelectedNode as TreeNodePath).Path, _nodeToCopyCut.Text);
       try
       {
@@ -758,20 +800,22 @@ namespace MPTagThat
         _main.RefreshTrackList();
       }
     }
+
     #endregion
 
     #region Buttons / Combo
+
     /// <summary>
-    /// Refresh the Folder List
+    ///   Refresh the Folder List
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btnRefreshFolder_Click(object sender, EventArgs e)
     {
       RefreshFolders();
     }
 
-    void cbDataProvider_SelectedIndexChanged(object sender, EventArgs e)
+    private void cbDataProvider_SelectedIndexChanged(object sender, EventArgs e)
     {
       Options.MainSettings.DataProvider = cbDataProvider.SelectedIndex;
       if (cbDataProvider.SelectedIndex == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
@@ -786,24 +830,26 @@ namespace MPTagThat
       treeViewFolderBrowser.Populate();
       treeViewFolderBrowser.Nodes[0].Expand();
     }
+
     #endregion
 
     #region Filter
 
     /// <summary>
-    /// Handles editing of data columns
+    ///   Handles editing of data columns
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void dataGridViewTagFilter_CurrentCellDirtyStateChanged(object sender, EventArgs e)
     {
       // For combo box and check box cells, commit any value change as soon
       // as it is made rather than waiting for the focus to leave the cell.
-      if (!dataGridViewTagFilter.CurrentCell.GetType().Equals(typeof(DataGridViewTextBoxCell)))
+      if (!dataGridViewTagFilter.CurrentCell.GetType().Equals(typeof (DataGridViewTextBoxCell)))
       {
         dataGridViewTagFilter.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-        if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 && IsSpecialFilterColumn(dataGridViewTagFilter.CurrentCell.EditedFormattedValue.ToString()))
+        if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 &&
+            IsSpecialFilterColumn(dataGridViewTagFilter.CurrentCell.EditedFormattedValue.ToString()))
         {
           DataGridViewCheckBoxCell ckCell = new DataGridViewCheckBoxCell();
           ckCell.Value = true;
@@ -811,7 +857,8 @@ namespace MPTagThat
         }
         else
         {
-          if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 && dataGridViewTagFilter.CurrentRow.Cells[1].GetType().Equals(typeof(DataGridViewCheckBoxCell)))
+          if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 &&
+              dataGridViewTagFilter.CurrentRow.Cells[1].GetType().Equals(typeof (DataGridViewCheckBoxCell)))
           {
             DataGridViewTextBoxCell tbCell = new DataGridViewTextBoxCell();
             tbCell.Value = "";
@@ -823,20 +870,20 @@ namespace MPTagThat
     }
 
     /// <summary>
-    ///  Handle Data Error
+    ///   Handle Data Error
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void dataGridViewTagFilter_DataError(object sender, DataGridViewDataErrorEventArgs e)
     {
       e.Cancel = false;
     }
 
     /// <summary>
-    /// Capture Key presses in the Filter GridView
+    ///   Capture Key presses in the Filter GridView
     /// </summary>
-    /// <param name="msg"></param>
-    /// <param name="keyData"></param>
+    /// <param name = "msg"></param>
+    /// <param name = "keyData"></param>
     /// <returns></returns>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
@@ -849,7 +896,7 @@ namespace MPTagThat
         }
         else
         {
-          curIndex = dataGridViewTagFilter.CurrentRow.Index; 
+          curIndex = dataGridViewTagFilter.CurrentRow.Index;
         }
 
         if (keyData == Keys.Insert)
@@ -864,18 +911,17 @@ namespace MPTagThat
             dataGridViewTagFilter.Rows.RemoveAt(curIndex);
             return true;
           }
-        } 
-
+        }
       }
       return base.ProcessCmdKey(ref msg, keyData);
     }
 
     /// <summary>
-    /// A New Filter Format has been selected
-    /// Update the filter
+    ///   A New Filter Format has been selected
+    ///   Update the filter
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbListFormats_SelectedIndexChanged(object sender, EventArgs e)
     {
       Item item = (Item)(sender as ComboBox).SelectedItem;
@@ -883,21 +929,21 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The File Mask is changed. Update the filter
+    ///   The File Mask is changed. Update the filter
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void tbFileMask_TextChanged(object sender, EventArgs e)
     {
-      _filter.FileMask = (string) (sender as TextBox).Text;
+      _filter.FileMask = (sender as TextBox).Text;
     }
 
     /// <summary>
-    /// The stats of the Use Tag Fileter Check box has changed
-    /// Set the filter Value
+    ///   The stats of the Use Tag Fileter Check box has changed
+    ///   Set the filter Value
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void ckUseTagFilter_CheckedChanged(object sender, EventArgs e)
     {
       _filter.UseTagFilter = ckUseTagFilter.Checked;
@@ -915,8 +961,8 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Called when Rows are Deleted / Changed
-    /// Fileter Values need to be updated
+    ///   Called when Rows are Deleted / Changed
+    ///   Fileter Values need to be updated
     /// </summary>
     private void RefreshFilter()
     {
@@ -959,40 +1005,40 @@ namespace MPTagThat
         ckUseTagFilter.Checked = false;
       }
     }
-    
+
     /// <summary>
-    /// A Row has been deleted. Refreah Filter
+    ///   A Row has been deleted. Refreah Filter
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void dataGridViewTagFilter_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
     {
       RefreshFilter();
     }
 
     /// <summary>
-    /// A Row has been changed. Refreah Filter
+    ///   A Row has been changed. Refreah Filter
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void dataGridViewTagFilter_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
       RefreshFilter();
     }
 
     #region Filter Context Menu
+
     private void dataGridViewTagFilter_MouseUp(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
       {
-
         // Point where the mouse is clicked.
         Point p = new Point(e.X, e.Y);
 
         contextMenuStripFilter.Show(dataGridViewTagFilter, p);
       }
     }
-    
+
     private void menuInsertFilter_Click(object sender, EventArgs e)
     {
       int curIndex = -1;
@@ -1010,21 +1056,25 @@ namespace MPTagThat
 
     private void menuDeleteFilter_Click(object sender, EventArgs e)
     {
-      int curIndex = dataGridViewTagFilter.CurrentRow.Index; 
+      int curIndex = dataGridViewTagFilter.CurrentRow.Index;
       if (curIndex > -1 && dataGridViewTagFilter.CurrentRow != null)
       {
         dataGridViewTagFilter.Rows.RemoveAt(curIndex);
       }
     }
+
     #endregion
+
     #endregion
+
     #endregion
 
     #region General Message Handling
+
     /// <summary>
-    /// Handle Messages
+    ///   Handle Messages
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name = "message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -1034,7 +1084,7 @@ namespace MPTagThat
         case "languagechanged":
           {
             LocaliseScreen();
-            this.Refresh();
+            Refresh();
             break;
           }
 
@@ -1045,6 +1095,7 @@ namespace MPTagThat
           }
       }
     }
+
     #endregion
   }
 }

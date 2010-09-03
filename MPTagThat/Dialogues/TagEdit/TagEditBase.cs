@@ -1,81 +1,116 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using TagLib;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
 using MPTagThat.Core.ShellLib;
 using MPTagThat.Dialogues;
+using TagLib;
+using File = System.IO.File;
+
+#endregion
 
 namespace MPTagThat.TagEdit
 {
   public partial class TagEditBase : ShapedForm
   {
     #region Variables
-    protected Main main;
+
+    protected bool IsMultiTagEdit;
+    protected bool _commentIsChanged;
+    protected bool _involvedPeopleIsChanged;
+    protected bool _lyricsIsChanged;
+    protected bool _musicianIsChanged;
+    protected Picture _pic;
+    protected bool _pictureIsChanged;
+    protected List<Picture> _pictures = new List<Picture>();
+    protected bool _ratingIsChanged;
+    protected int _selectedPictureGridRow = -1;
+    protected ShellAutoComplete acAlbumArtist;
+    protected ShellAutoComplete acArtist;
+
+    protected string[] headerText = {
+                                      "Main Tags", "Pictures", "Detailed Information", "Original Information",
+                                      "Involved People",
+                                      "Web Information", "Lyrics", "Rating", "User Defined"
+                                    };
+
     protected ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     protected ILogger log = ServiceScope.Get<ILogger>();
-    protected List<Picture> _pictures = new List<Picture>();
-    protected Picture _pic = null;
-    protected int _selectedPictureGridRow = -1;
-    protected bool _pictureIsChanged = false;
-    protected bool _commentIsChanged = false;
-    protected bool _involvedPeopleIsChanged = false;
-    protected bool _musicianIsChanged = false;
-    protected bool _lyricsIsChanged = false;
-    protected bool _ratingIsChanged = false;
-    protected ShellAutoComplete acArtist;
-    protected ShellAutoComplete acAlbumArtist;
-    protected bool IsMultiTagEdit = false;
+    protected Main main;
 
-    protected string[] headerText = { "Main Tags",  "Pictures", "Detailed Information", "Original Information", "Involved People",
-                                    "Web Information", "Lyrics", "Rating", "User Defined"};
     #endregion
 
     #region Properties
+
     public string Header
     {
-      set { this.labelHeader.Text = value; }
+      set { labelHeader.Text = value; }
     }
+
     #endregion
 
     #region ctor
+
     public TagEditBase()
     {
       InitializeComponent();
     }
+
     #endregion
 
     #region Form Opening
+
     /// <summary>
-    /// Called when loading the Dialoue
+    ///   Called when loading the Dialoue
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     protected virtual void OnLoad(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
-      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+      labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
       // Set the region for the Tabcontrol to hide the tabs
-      this.tabControlTagEdit.Region = new Region(new RectangleF(this.tabPageMain.Left,
-                                                                     this.tabPageMain.Top,
-                                                                     this.tabPageMain.Width,
-                                                                     this.tabPageMain.Height));
+      tabControlTagEdit.Region = new Region(new RectangleF(tabPageMain.Left,
+                                                           tabPageMain.Top,
+                                                           tabPageMain.Width,
+                                                           tabPageMain.Height));
 
       // Fill the Genre Combo Box
-      cbGenre.Items.AddRange(TagLib.Genres.Audio);
+      cbGenre.Items.AddRange(Genres.Audio);
 
       // Fill the Picture Type Box
-      Type picTypes = typeof(TagLib.PictureType);
+      Type picTypes = typeof (PictureType);
       foreach (string type in Enum.GetNames(picTypes))
         cbPicType.Items.Add(type);
 
@@ -107,7 +142,7 @@ namespace MPTagThat.TagEdit
 
       Localisation();
 
-      this.tabControlTagEdit.SelectedIndex = 0;
+      tabControlTagEdit.SelectedIndex = 0;
 
       if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
       {
@@ -128,7 +163,7 @@ namespace MPTagThat.TagEdit
         {
           // We need to get the Combobox Handle first
           ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
-          info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+          info.cbSize = Marshal.SizeOf(info);
           ShellApi.GetComboBoxInfo(cbArtist.Handle, ref info);
           acArtist.EditHandle = info.hwndEdit;
         }
@@ -153,7 +188,7 @@ namespace MPTagThat.TagEdit
         {
           // We need to get the Combobox Handle first
           ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
-          info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+          info.cbSize = Marshal.SizeOf(info);
           ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref info);
           acAlbumArtist.EditHandle = info.hwndEdit;
         }
@@ -168,17 +203,17 @@ namespace MPTagThat.TagEdit
     private void Localisation()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      this.Descriptor.HeaderText = localisation.ToString("TagEdit", "CommentHeaderDescriptor");
-      this.Language.HeaderText = localisation.ToString("TagEdit", "CommentHeaderLanguage");
-      this.Comment.HeaderText = localisation.ToString("TagEdit", "CommentHeaderComment");
-      this.PictureType.HeaderText = localisation.ToString("TagEdit", "PictureHeaderType");
-      this.dataGridViewTextBoxColumn4.HeaderText = localisation.ToString("TagEdit", "MusicianHeaderInstrument");
-      this.dataGridViewTextBoxColumn6.HeaderText = localisation.ToString("TagEdit", "MusicianHeaderName");
-      this.dataGridViewTextBoxColumn3.HeaderText = localisation.ToString("TagEdit", "PersonHeaderName");
-      this.dataGridViewTextBoxColumn5.HeaderText = localisation.ToString("TagEdit", "PersonHeaderFunction");
-      this.dataGridViewTextBoxColumn7.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderDescriptor");
-      this.dataGridViewTextBoxColumn8.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLanguage");
-      this.dataGridViewTextBoxColumn9.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLyrics");
+      Descriptor.HeaderText = localisation.ToString("TagEdit", "CommentHeaderDescriptor");
+      Language.HeaderText = localisation.ToString("TagEdit", "CommentHeaderLanguage");
+      Comment.HeaderText = localisation.ToString("TagEdit", "CommentHeaderComment");
+      PictureType.HeaderText = localisation.ToString("TagEdit", "PictureHeaderType");
+      dataGridViewTextBoxColumn4.HeaderText = localisation.ToString("TagEdit", "MusicianHeaderInstrument");
+      dataGridViewTextBoxColumn6.HeaderText = localisation.ToString("TagEdit", "MusicianHeaderName");
+      dataGridViewTextBoxColumn3.HeaderText = localisation.ToString("TagEdit", "PersonHeaderName");
+      dataGridViewTextBoxColumn5.HeaderText = localisation.ToString("TagEdit", "PersonHeaderFunction");
+      dataGridViewTextBoxColumn7.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderDescriptor");
+      dataGridViewTextBoxColumn8.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLanguage");
+      dataGridViewTextBoxColumn9.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLyrics");
 
       headerText[0] = localisation.ToString("TagEdit", "HeaderMainTags");
       headerText[1] = localisation.ToString("TagEdit", "HeaderPictures");
@@ -191,9 +226,11 @@ namespace MPTagThat.TagEdit
       headerText[8] = localisation.ToString("TagEdit", "HeaderUser");
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Methods
+
     protected void AddComment(string desc, string lang, string text)
     {
       if (text == null)
@@ -219,11 +256,11 @@ namespace MPTagThat.TagEdit
       }
 
       if (!found)
-        dataGridViewComment.Rows.Add(new object[] { desc, lang, text });
+        dataGridViewComment.Rows.Add(new object[] {desc, lang, text});
     }
 
     /// <summary>
-    /// Add a picture to the Picture box
+    ///   Add a picture to the Picture box
     /// </summary>
     private void AddPictureToPictureBox()
     {
@@ -231,7 +268,7 @@ namespace MPTagThat.TagEdit
       {
         if (_pic != null)
         {
-          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(_pic.Data.Data))
+          using (MemoryStream ms = new MemoryStream(_pic.Data.Data))
           {
             Image img = Image.FromStream(ms);
             if (img != null)
@@ -248,18 +285,21 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Add the currently selected Picture to the collection
+    ///   Add the currently selected Picture to the collection
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void AddPictureToList()
     {
       if (_pic != null)
       {
         _pic.Description = tbPicDesc.Text;
-        _pic.Type = (PictureType)Enum.Parse(typeof(TagLib.PictureType), cbPicType.SelectedItem != null ? cbPicType.SelectedItem.ToString() : "FrontCover");
+        _pic.Type =
+          (PictureType)
+          Enum.Parse(typeof (PictureType),
+                     cbPicType.SelectedItem != null ? cbPicType.SelectedItem.ToString() : "FrontCover");
 
-        dataGridViewPicture.Rows.Add(new object[] { _pic.Description, Enum.Format(typeof(TagLib.PictureType), _pic.Type, "G") });
+        dataGridViewPicture.Rows.Add(new object[] {_pic.Description, Enum.Format(typeof (PictureType), _pic.Type, "G")});
 
         _pictures.Add(_pic);
         pictureBoxCover.Image = null;
@@ -282,7 +322,7 @@ namespace MPTagThat.TagEdit
       }
 
       if (!found)
-        dataGridViewRating.Rows.Add(new object[] { user, rating, playcount });
+        dataGridViewRating.Rows.Add(new object[] {user, rating, playcount});
     }
 
     protected void AddLyrics(string desc, string lang, string text)
@@ -306,68 +346,68 @@ namespace MPTagThat.TagEdit
       }
 
       if (!found)
-        dataGridViewLyrics.Rows.Add(new object[] { desc, lang, text });
+        dataGridViewLyrics.Rows.Add(new object[] {desc, lang, text});
     }
+
     #endregion
 
     #region Event Handler
+
     /// <summary>
-    /// Hide the Tabcontrol Tabs, as we navigate via Nav Bar
+    ///   Hide the Tabcontrol Tabs, as we navigate via Nav Bar
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void panelTabPage_Paint(object sender, PaintEventArgs e)
     {
       Graphics g = e.Graphics;
-      Rectangle rect = new Rectangle(tabControlTagEdit.Location.X + 4, tabControlTagEdit.Location.Y + 3, tabPageMain.Width - 1, 22);
+      Rectangle rect = new Rectangle(tabControlTagEdit.Location.X + 4, tabControlTagEdit.Location.Y + 3,
+                                     tabPageMain.Width - 1, 22);
       g.FillRectangle(new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor), rect);
       g.DrawRectangle(new Pen(Color.LightSteelBlue), rect);
-      g.DrawString(headerText[tabControlTagEdit.SelectedIndex], new Font(new FontFamily("Arial"), 12f, FontStyle.Bold), new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor), new PointF(tabControlTagEdit.Location.X + 8, tabControlTagEdit.Location.Y + 6));
+      g.DrawString(headerText[tabControlTagEdit.SelectedIndex], new Font(new FontFamily("Arial"), 12f, FontStyle.Bold),
+                   new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor),
+                   new PointF(tabControlTagEdit.Location.X + 8, tabControlTagEdit.Location.Y + 6));
     }
 
     /// <summary>
-    /// Apply the Changes
+    ///   Apply the Changes
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected virtual void btApply_Click(object sender, EventArgs e)
-    {
-    }
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    protected virtual void btApply_Click(object sender, EventArgs e) {}
 
     /// <summary>
-    /// Close the form discarding the changes
+    ///   Close the form discarding the changes
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
-      this.Close();
+      Close();
     }
 
     /// <summary>
-    /// When the Textbox has been edited, the Check Box should be selected automatically
+    ///   When the Textbox has been edited, the Check Box should be selected automatically
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected virtual void OnTextChanged(object sender, EventArgs e)
-    {
-    }
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    protected virtual void OnTextChanged(object sender, EventArgs e) {}
 
     /// <summary>
-    /// A text in the Combo has been selected. Mark the Check Box
+    ///   A text in the Combo has been selected. Mark the Check Box
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected virtual void OnComboChanged(object sender, EventArgs e)
-    {
-    }
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    protected virtual void OnComboChanged(object sender, EventArgs e) {}
 
     #region Navigation Page
+
     /// <summary>
-    /// User selected a link in the navbar
+    ///   User selected a link in the navbar
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void OnNavpageLink_Clicked(object sender, MouseEventArgs e)
     {
       int selectedIndex = -1;
@@ -423,22 +463,24 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// A new Tab has been selected. Either by clicking the link or PageUp / Down
+    ///   A new Tab has been selected. Either by clicking the link or PageUp / Down
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void tabControlTagEdit_SelectedIndexChanged(object sender, EventArgs e)
     {
-      this.panelTabPage_Paint(panelTabPage, new PaintEventArgs(panelTabPage.CreateGraphics(), panelTabPage.ClientRectangle));
+      panelTabPage_Paint(panelTabPage, new PaintEventArgs(panelTabPage.CreateGraphics(), panelTabPage.ClientRectangle));
     }
+
     #endregion
 
     #region Genre
+
     /// <summary>
-    /// Add the selected Genre to the List of Genres
+    ///   Add the selected Genre to the List of Genres
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btAddGenre_Click(object sender, EventArgs e)
     {
       if (cbGenre.Text != "")
@@ -455,10 +497,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Remove the selected Genre from the List
+    ///   Remove the selected Genre from the List
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btRemoveGenre_Click(object sender, EventArgs e)
     {
       if (listBoxGenre.SelectedIndex > -1)
@@ -469,10 +511,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Move Selected Genre to Top
+    ///   Move Selected Genre to Top
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btGenreToTop_Click(object sender, EventArgs e)
     {
       if (listBoxGenre.SelectedIndex > -1)
@@ -485,24 +527,26 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Double Click on Genre. 
-    /// Remove the selected Genre
+    ///   Double Click on Genre. 
+    ///   Remove the selected Genre
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void listBoxGenre_DoubleClick(object sender, EventArgs e)
     {
       ckGenre.Checked = true;
       listBoxGenre.Items.Remove(listBoxGenre.SelectedItem);
     }
+
     #endregion
 
     #region Picture
+
     /// <summary>
-    /// Load a new picture from a file
+    ///   Load a new picture from a file
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonGetPicture_Click(object sender, EventArgs e)
     {
       OpenFileDialog oFD = new OpenFileDialog();
@@ -526,10 +570,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Remove the selected picture
+    ///   Remove the selected picture
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonRemovePicture_Click(object sender, EventArgs e)
     {
       if (_selectedPictureGridRow > -1)
@@ -544,10 +588,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Export the selected picture
+    ///   Export the selected picture
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonExportPicture_Click(object sender, EventArgs e)
     {
       SaveFileDialog sFD = new SaveFileDialog();
@@ -560,12 +604,14 @@ namespace MPTagThat.TagEdit
         {
           try
           {
-            string extension = _pictures[_selectedPictureGridRow].MimeType.Substring(_pictures[_selectedPictureGridRow].MimeType.IndexOf("/") + 1);
+            string extension =
+              _pictures[_selectedPictureGridRow].MimeType.Substring(
+                _pictures[_selectedPictureGridRow].MimeType.IndexOf("/") + 1);
             if (extension == "jpeg")
               extension = "jpg";
 
             string fileName = String.Format("{0}.{1}", sFD.FileName, extension);
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(_pictures[_selectedPictureGridRow].Data.Data))
+            using (MemoryStream ms = new MemoryStream(_pictures[_selectedPictureGridRow].Data.Data))
             {
               Image img = Image.FromStream(ms);
               if (img != null)
@@ -583,17 +629,17 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// A picture has been selected
+    ///   A picture has been selected
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     protected void dataGridViewPicture_CellClick(object sender, DataGridViewCellEventArgs e)
     {
       if (e.RowIndex > -1)
       {
         try
         {
-          using (System.IO.MemoryStream ms = new System.IO.MemoryStream(_pictures[e.RowIndex].Data.Data))
+          using (MemoryStream ms = new MemoryStream(_pictures[e.RowIndex].Data.Data))
           {
             Image img = Image.FromStream(ms);
             if (img != null)
@@ -602,7 +648,7 @@ namespace MPTagThat.TagEdit
             }
           }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
           log.Error("TagEdit: Error creating Picture: {0}.", ex.Message);
         }
@@ -613,10 +659,10 @@ namespace MPTagThat.TagEdit
     }
 
     /// <summary>
-    /// Get the Cover Image from Amazon
+    ///   Get the Cover Image from Amazon
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonGetPictureInternet_Click(object sender, EventArgs e)
     {
       string searchArtist = "";
@@ -635,7 +681,7 @@ namespace MPTagThat.TagEdit
       if (searchAlbum.Length == 0)
         return;
 
-      this.Cursor = Cursors.WaitCursor;
+      Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
@@ -655,7 +701,7 @@ namespace MPTagThat.TagEdit
           dlgAlbumResults.Artist = tbArtist.Text;
           dlgAlbumResults.Album = tbAlbum.Text;
 
-          this.Cursor = Cursors.Default;
+          Cursor = Cursors.Default;
           if (main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
           {
             if (dlgAlbumResults.SelectedListItem > -1)
@@ -681,11 +727,13 @@ namespace MPTagThat.TagEdit
           _pictureIsChanged = true;
         }
       }
-      this.Cursor = Cursors.Default;
+      Cursor = Cursors.Default;
     }
+
     #endregion
 
     #region Comments
+
     private void buttonAddComment_Click(object sender, EventArgs e)
     {
       if (textBoxComment.Text.Trim().Length > 0)
@@ -706,7 +754,7 @@ namespace MPTagThat.TagEdit
           // Now row - 1 is selected unselect it
           if (i > 0)
             dataGridViewComment.Rows[i - 1].Selected = false;
-           
+
           _commentIsChanged = true;
         }
       }
@@ -733,14 +781,16 @@ namespace MPTagThat.TagEdit
       cbCommentLanguage.Text = dataGridViewComment.Rows[e.RowIndex].Cells[1].Value.ToString();
       textBoxComment.Text = dataGridViewComment.Rows[e.RowIndex].Cells[2].Value.ToString();
     }
+
     #endregion
 
     #region Involved People
+
     private void buttonAddInvolvedPerson_Click(object sender, EventArgs e)
     {
       if (tbInvolvedPersonFunction.Text.Trim().Length > 0 || tbInvolvedPersonName.Text.Trim().Length > 0)
       {
-        dataGridViewInvolvedPeople.Rows.Add(new object[] { tbInvolvedPersonFunction.Text, tbInvolvedPersonName.Text });
+        dataGridViewInvolvedPeople.Rows.Add(new object[] {tbInvolvedPersonFunction.Text, tbInvolvedPersonName.Text});
         tbInvolvedPersonFunction.Text = "";
         tbInvolvedPersonName.Text = "";
         ckInvolvedPerson.Checked = true;
@@ -768,7 +818,7 @@ namespace MPTagThat.TagEdit
     {
       if (tbMusicianInstrument.Text.Trim().Length > 0 || tbMusicianName.Text.Trim().Length > 0)
       {
-        dataGridViewMusician.Rows.Add(new object[] { tbMusicianInstrument.Text, tbMusicianName.Text });
+        dataGridViewMusician.Rows.Add(new object[] {tbMusicianInstrument.Text, tbMusicianName.Text});
         tbMusicianInstrument.Text = "";
         tbMusicianName.Text = "";
         ckInvolvedMusician.Checked = true;
@@ -791,9 +841,11 @@ namespace MPTagThat.TagEdit
         }
       }
     }
+
     #endregion
 
     #region Lyrics
+
     private void btAddLyrics_Click(object sender, EventArgs e)
     {
       if (tbLyrics.Text.Trim().Length > 0)
@@ -848,7 +900,7 @@ namespace MPTagThat.TagEdit
       OpenFileDialog oFD = new OpenFileDialog();
       if (oFD.ShowDialog() == DialogResult.OK)
       {
-        System.IO.StreamReader stream = System.IO.File.OpenText(oFD.FileName);
+        StreamReader stream = File.OpenText(oFD.FileName);
         string input = null;
         while ((input = stream.ReadLine()) != null)
         {
@@ -858,9 +910,11 @@ namespace MPTagThat.TagEdit
         stream.Close();
       }
     }
+
     #endregion
 
     #region Rating
+
     private void btAddRating_Click(object sender, EventArgs e)
     {
       if (tbRatingUser.Text.Trim().Length > 0)
@@ -911,14 +965,17 @@ namespace MPTagThat.TagEdit
       numericUpDownRating.Value = Convert.ToDecimal(dataGridViewRating.Rows[e.RowIndex].Cells[1].Value);
       numericUpDownPlayCounter.Value = Convert.ToDecimal(dataGridViewRating.Rows[e.RowIndex].Cells[2].Value);
     }
+
     #endregion
+
     #endregion
 
     #region Key Events
+
     /// <summary>
-    /// A Key has been pressed
+    ///   A Key has been pressed
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name = "e"></param>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
       Action newaction = new Action();
@@ -926,7 +983,6 @@ namespace MPTagThat.TagEdit
       {
         if (OnAction(newaction))
         {
-
           newaction = null;
           return true;
         }
@@ -935,7 +991,7 @@ namespace MPTagThat.TagEdit
       return base.ProcessCmdKey(ref msg, keyData);
     }
 
-    bool OnAction(Action action)
+    private bool OnAction(Action action)
     {
       if (action == null)
         return false;
@@ -956,10 +1012,10 @@ namespace MPTagThat.TagEdit
           else
             tabControlTagEdit.SelectedIndex = tabControlTagEdit.SelectedIndex - 1;
           break;
-
       }
       return handled;
     }
+
     #endregion
   }
 }

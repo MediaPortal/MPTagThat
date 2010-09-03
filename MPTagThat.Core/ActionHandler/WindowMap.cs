@@ -1,41 +1,54 @@
-using System;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Collections.Generic;
-using System.Text;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   public class WindowMap
   {
     #region Variales
-    private int iWindow;
-    private string description;
-    private List<Button> mapButtons = new List<Button>();
+
+    private readonly List<Button> mapButtons = new List<Button>();
+
     #endregion
 
-
     #region Properties
-    public int Window
-    {
-      get { return iWindow; }
-      set { iWindow = value; }
-    }
+
+    public int Window { get; set; }
 
     public List<Button> Buttons
     {
       get { return mapButtons; }
     }
 
-    public string Description
-    {
-      get { return description; }
-      set { description = value; }
-    }
+    public string Description { get; set; }
+
     #endregion
 
     #region ctor
-    public WindowMap()
-    {
-    }
+
     #endregion
   }
 }

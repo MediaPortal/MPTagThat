@@ -1,143 +1,88 @@
-using System;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Collections.Generic;
-using System.Text;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   public class CaseConversionSettings
   {
     #region Variables
+
     private List<string> _caseConvExceptions = new List<string>();
-    private bool _convertFileName;
-    private bool _convertTags;
-    private bool _convertArtist;
-    private bool _convertAlbumArtist;
-    private bool _convertAlbum;
-    private bool _convertTitle;
-    private bool _convertComment;
-    private bool _convertAllLower;
-    private bool _convertAllUpper;
-    private bool _convertFirstUpper;
-    private bool _convertAllFirstUpper;
-    private bool _replace20BySpace;
-    private bool _replaceSpaceBy20;
-    private bool _replaceUnderscoreBySpace;
-    private bool _replaceSpaceByUnderscore;
-    private bool _convertAllwaysFirstUpper;
+
     #endregion
 
     #region Properties
-    [Setting(SettingScope.User, "true")]
-    public bool ConvertFileName
-    {
-      get { return _convertFileName; }
-      set { _convertFileName = value; }
-    }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertTags
-    {
-      get { return _convertTags; }
-      set { _convertTags = value; }
-    }
+    public bool ConvertFileName { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertArtist
-    {
-      get { return _convertArtist; }
-      set { _convertArtist = value; }
-    }
+    public bool ConvertTags { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertAlbumArtist
-    {
-      get { return _convertAlbumArtist; }
-      set { _convertAlbumArtist = value; }
-    }
+    public bool ConvertArtist { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertAlbum
-    {
-      get { return _convertAlbum; }
-      set { _convertAlbum = value; }
-    }
+    public bool ConvertAlbumArtist { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertTitle
-    {
-      get { return _convertTitle; }
-      set { _convertTitle = value; }
-    }
+    public bool ConvertAlbum { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertComment
-    {
-      get { return _convertComment; }
-      set { _convertComment = value; }
-    }
+    public bool ConvertTitle { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertAllWaysFirstUpper
-    {
-      get { return _convertAllwaysFirstUpper; }
-      set { _convertAllwaysFirstUpper = value; }
-    }
+    public bool ConvertComment { get; set; }
+
+    [Setting(SettingScope.User, "true")]
+    public bool ConvertAllWaysFirstUpper { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ConvertAllLower
-    {
-      get { return _convertAllLower; }
-      set { _convertAllLower = value; }
-    }
+    public bool ConvertAllLower { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ConvertAllUpper
-    {
-      get { return _convertAllUpper; }
-      set { _convertAllUpper = value; }
-    }
+    public bool ConvertAllUpper { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ConvertFirstUpper
-    {
-      get { return _convertFirstUpper; }
-      set { _convertFirstUpper = value; }
-    }
+    public bool ConvertFirstUpper { get; set; }
 
     [Setting(SettingScope.User, "true")]
-    public bool ConvertAllFirstUpper
-    {
-      get { return _convertAllFirstUpper; }
-      set { _convertAllFirstUpper = value; }
-    }
+    public bool ConvertAllFirstUpper { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool Replace20BySpace
-    {
-      get { return _replace20BySpace; }
-      set { _replace20BySpace = value; }
-    }
+    public bool Replace20BySpace { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ReplaceSpaceBy20
-    {
-      get { return _replaceSpaceBy20; }
-      set { _replaceSpaceBy20 = value; }
-    }
+    public bool ReplaceSpaceBy20 { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ReplaceUnderscoreBySpace
-    {
-      get { return _replaceUnderscoreBySpace; }
-      set { _replaceUnderscoreBySpace = value; }
-    }
+    public bool ReplaceUnderscoreBySpace { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool ReplaceSpaceByUnderscore
-    {
-      get { return _replaceSpaceByUnderscore; }
-      set { _replaceSpaceByUnderscore = value; }
-    }
+    public bool ReplaceSpaceByUnderscore { get; set; }
 
     [Setting(SettingScope.User, "")]
     public List<string> CaseConvExceptions
@@ -145,6 +90,7 @@ namespace MPTagThat.Core
       get { return _caseConvExceptions; }
       set { _caseConvExceptions = value; }
     }
+
     #endregion
   }
 }

@@ -1,35 +1,62 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Web;
 using System.Xml;
 using BassRegistration;
-using MPTagThat.Core;
+
+#endregion
 
 namespace MPTagThat.Core.Amazon
 {
   public class AmazonAlbumInfo : IDisposable
   {
-
     #region Private Constants
+
     private const string amazonUrl = "Service=AWSECommerceService&Version=2009-03-31";
     private const string itemLookup = "&Operation=ItemLookup&ItemId={0}&ResponseGroup=Images,ItemAttributes,Tracks";
-    private const string itemSearch = "&Operation=ItemSearch&Artist={0}&Title={1}&SearchIndex=Music&ResponseGroup=Images,ItemAttributes,Tracks";
 
-    private ILogger log = ServiceScope.Get<ILogger>();
+    private const string itemSearch =
+      "&Operation=ItemSearch&Artist={0}&Title={1}&SearchIndex=Music&ResponseGroup=Images,ItemAttributes,Tracks";
+
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+
     #endregion
 
     #region Public methods
+
     /// <summary>
-    /// Lookup an Amazon Album, for which the ASIN is known.
-    /// Should find one exact match.
+    ///   Lookup an Amazon Album, for which the ASIN is known.
+    ///   Should find one exact match.
     /// </summary>
-    /// <param name="albumID"></param>
+    /// <param name = "albumID"></param>
     /// <returns></returns>
     public AmazonAlbum AmazonAlbumLookup(string albumID)
     {
       AmazonAlbum album = new AmazonAlbum();
 
-      BassRegistration.SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
+      SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
       string requestString = helper.Sign(string.Format(itemLookup, albumID));
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
@@ -49,18 +76,19 @@ namespace MPTagThat.Core.Amazon
     }
 
     /// <summary>
-    /// Search on Amazon for an albums of a specific artist
+    ///   Search on Amazon for an albums of a specific artist
     /// </summary>
-    /// <param name="artist"></param>
-    /// <param name="albumTitle"></param>
+    /// <param name = "artist"></param>
+    /// <param name = "albumTitle"></param>
     /// <returns></returns>
     public List<AmazonAlbum> AmazonAlbumSearch(string artist, string albumTitle)
     {
       log.Debug("Amazon: Searching Amazon Webservices");
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
 
-      BassRegistration.SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
-      string requestString = helper.Sign(string.Format(itemSearch, System.Web.HttpUtility.UrlEncode(artist), System.Web.HttpUtility.UrlEncode(albumTitle)));
+      SignedRequestHelper helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
+      string requestString =
+        helper.Sign(string.Format(itemSearch, HttpUtility.UrlEncode(artist), HttpUtility.UrlEncode(albumTitle)));
       string responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
       {
@@ -100,9 +128,11 @@ namespace MPTagThat.Core.Amazon
       }
       return albums;
     }
+
     #endregion
 
     #region Private Methods
+
     private AmazonAlbum FillAlbum(XmlNode node)
     {
       AmazonAlbum album = new AmazonAlbum();
@@ -179,9 +209,9 @@ namespace MPTagThat.Core.Amazon
     }
 
     /// <summary>
-    /// Get the Url node
+    ///   Get the Url node
     /// </summary>
-    /// <param name="node"></param>
+    /// <param name = "node"></param>
     /// <returns></returns>
     private string GetNode(XmlNode node, string nodeString)
     {
@@ -192,12 +222,13 @@ namespace MPTagThat.Core.Amazon
       }
       return "";
     }
+
     #endregion
 
     #region IDisposable Members
-    public void Dispose()
-    {
-    }
+
+    public void Dispose() {}
+
     #endregion
   }
 }

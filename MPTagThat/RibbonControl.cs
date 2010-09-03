@@ -1,34 +1,62 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using Elegant.Ui;
 using MPTagThat.Core;
 using MPTagThat.Core.Burning;
+using MPTagThat.Dialogues;
+using MPTagThat.Organise;
+using MPTagThat.TagEdit;
 using TagLib;
+using ComboBox = Elegant.Ui.ComboBox;
+
+#endregion
 
 namespace MPTagThat
 {
   public partial class RibbonControl : UserControl
   {
     #region Variables
-    private Main main;
-    private List<Item> encoders = new List<Item>();
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
-    private bool _numberingOnClick;
+
+    private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
+    private readonly List<Item> encoders = new List<Item>();
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly Main main;
     private bool _initialising = true;
+    private bool _numberingOnClick;
     private PictureControl picControl;
+
     #endregion
 
     #region Properties
+
     /// <summary>
-    /// Inidicates state of Applikation / Riobbon Initialising
+    ///   Inidicates state of Applikation / Riobbon Initialising
     /// </summary>
     public bool Initialising
     {
@@ -37,7 +65,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Set the Theme of the Ribbon
+    ///   Set the Theme of the Ribbon
     /// </summary>
     public string Theme
     {
@@ -65,7 +93,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Tag Tab
+    ///   Returns the Tag Tab
     /// </summary>
     public RibbonTabPage TabTag
     {
@@ -73,7 +101,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Burn Tab
+    ///   Returns the Burn Tab
     /// </summary>
     public RibbonTabPage TabBurn
     {
@@ -81,7 +109,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Rip Tab
+    ///   Returns the Rip Tab
     /// </summary>
     public RibbonTabPage TabRip
     {
@@ -89,30 +117,31 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Convert Tab
+    ///   Returns the Convert Tab
     /// </summary>
     public RibbonTabPage TabConvert
     {
       get { return ribbonTabPageConvert; }
     }
+
     /// <summary>
-    /// Returns the Scripts Combo Box
+    ///   Returns the Scripts Combo Box
     /// </summary>
-    public Elegant.Ui.ComboBox ScriptsCombo
+    public ComboBox ScriptsCombo
     {
       get { return comboBoxScripts; }
     }
 
     /// <summary>
-    /// Returns the Conversion Encoder Combo Box
+    ///   Returns the Conversion Encoder Combo Box
     /// </summary>
-    public Elegant.Ui.ComboBox EncoderCombo
+    public ComboBox EncoderCombo
     {
       get { return comboBoxConvertEncoder; }
     }
 
     /// <summary>
-    /// Returns the selected output Directory
+    ///   Returns the selected output Directory
     /// </summary>
     public string EncoderOutputDirectory
     {
@@ -120,15 +149,15 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Rip Encoder Combo Box
+    ///   Returns the Rip Encoder Combo Box
     /// </summary>
-    public Elegant.Ui.ComboBox RipEncoderCombo
+    public ComboBox RipEncoderCombo
     {
       get { return comboBoxRipEncoder; }
     }
 
     /// <summary>
-    /// Returns the selected output Directory
+    ///   Returns the selected output Directory
     /// </summary>
     public string RipOutputDirectory
     {
@@ -136,15 +165,15 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Burner Combo Box
+    ///   Returns the Burner Combo Box
     /// </summary>
-    public Elegant.Ui.ComboBox BurnerCombo
+    public ComboBox BurnerCombo
     {
       get { return comboBoxBurner; }
     }
 
     /// <summary>
-    /// Get / Set Auto Numbering
+    ///   Get / Set Auto Numbering
     /// </summary>
     public int AutoNumber
     {
@@ -160,14 +189,11 @@ namespace MPTagThat
         }
       }
 
-      set
-      {
-        textBoxNumber.Text = value.ToString();
-      }
+      set { textBoxNumber.Text = value.ToString(); }
     }
 
     /// <summary>
-    /// Return Numbering On Click
+    ///   Return Numbering On Click
     /// </summary>
     public bool NumberingOnClick
     {
@@ -175,15 +201,17 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Picture Gallery
+    ///   Returns the Picture Gallery
     /// </summary>
     public Gallery PictureGallery
     {
       get { return galleryPicture; }
     }
+
     #endregion
 
     #region ctor
+
     public RibbonControl(Main main)
     {
       this.main = main;
@@ -198,7 +226,7 @@ namespace MPTagThat
 
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
+      queueMessage.OnMessageReceive += OnMessageReceive;
 
       LocaliseScreen();
 
@@ -241,52 +269,52 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Register Ribbon Commands to be executed when a button is pressed.
+    ///   Register Ribbon Commands to be executed when a button is pressed.
     /// </summary>
     private void RegisterCommands()
     {
-      ApplicationCommands.AddToBurner.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.AddToConversion.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.AddToPlaylist.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.AutoNumber.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.BurnCancel.Executed += new Elegant.Ui.CommandExecutedEventHandler(BurnCancel_Executed);
-      ApplicationCommands.BurnStart.Executed += new Elegant.Ui.CommandExecutedEventHandler(BurnStart_Executed);
-      ApplicationCommands.CaseConversion.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.CaseConversionOptions.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.ChangeDisplayColumns.Executed += new Elegant.Ui.CommandExecutedEventHandler(ChangeDisplayColumns_Executed);
-      ApplicationCommands.ConvertCancel.Executed += new Elegant.Ui.CommandExecutedEventHandler(ConvertCancel_Executed);
-      ApplicationCommands.ConvertStart.Executed += new Elegant.Ui.CommandExecutedEventHandler(ConvertStart_Executed);
-      ApplicationCommands.DeleteAllTags.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.DeleteID3v1.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.DeleteID3v2.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.Exit.Executed += new Elegant.Ui.CommandExecutedEventHandler(Exit_Executed);
-      ApplicationCommands.FileNameToTag.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.FolderSelect.Executed += new Elegant.Ui.CommandExecutedEventHandler(FolderSelect_Executed);
-      ApplicationCommands.GetCoverArt.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.GetLyrics.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.Help.Executed += new Elegant.Ui.CommandExecutedEventHandler(Help_Executed);
-      ApplicationCommands.IdentifyFiles.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.MultiTagEdit.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.Options.Executed += new Elegant.Ui.CommandExecutedEventHandler(Options_Executed);
-      ApplicationCommands.OrganiseFiles.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.Refresh.Executed += new Elegant.Ui.CommandExecutedEventHandler(Refresh_Executed);
-      ApplicationCommands.RemoveComment.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.RemoveCoverArt.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.RenameFileOptions.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.RenameFiles.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.RipCancel.Executed += new Elegant.Ui.CommandExecutedEventHandler(RipCancel_Executed);
-      ApplicationCommands.RipStart.Executed += new Elegant.Ui.CommandExecutedEventHandler(RipStart_Executed);
-      ApplicationCommands.Save.Executed += new Elegant.Ui.CommandExecutedEventHandler(Save_Executed);
-      ApplicationCommands.ScriptExecute.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.SingleTagEdit.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.TagFromInternet.Executed += new Elegant.Ui.CommandExecutedEventHandler(TagsTabButton_Executed);
-      ApplicationCommands.SaveAsThumb.Executed += new CommandExecutedEventHandler(SaveAsThumb_Executed);
+      ApplicationCommands.AddToBurner.Executed += TagsTabButton_Executed;
+      ApplicationCommands.AddToConversion.Executed += TagsTabButton_Executed;
+      ApplicationCommands.AddToPlaylist.Executed += TagsTabButton_Executed;
+      ApplicationCommands.AutoNumber.Executed += TagsTabButton_Executed;
+      ApplicationCommands.BurnCancel.Executed += BurnCancel_Executed;
+      ApplicationCommands.BurnStart.Executed += BurnStart_Executed;
+      ApplicationCommands.CaseConversion.Executed += TagsTabButton_Executed;
+      ApplicationCommands.CaseConversionOptions.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ChangeDisplayColumns.Executed += ChangeDisplayColumns_Executed;
+      ApplicationCommands.ConvertCancel.Executed += ConvertCancel_Executed;
+      ApplicationCommands.ConvertStart.Executed += ConvertStart_Executed;
+      ApplicationCommands.DeleteAllTags.Executed += TagsTabButton_Executed;
+      ApplicationCommands.DeleteID3v1.Executed += TagsTabButton_Executed;
+      ApplicationCommands.DeleteID3v2.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Exit.Executed += Exit_Executed;
+      ApplicationCommands.FileNameToTag.Executed += TagsTabButton_Executed;
+      ApplicationCommands.FolderSelect.Executed += FolderSelect_Executed;
+      ApplicationCommands.GetCoverArt.Executed += TagsTabButton_Executed;
+      ApplicationCommands.GetLyrics.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Help.Executed += Help_Executed;
+      ApplicationCommands.IdentifyFiles.Executed += TagsTabButton_Executed;
+      ApplicationCommands.MultiTagEdit.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Options.Executed += Options_Executed;
+      ApplicationCommands.OrganiseFiles.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Refresh.Executed += Refresh_Executed;
+      ApplicationCommands.RemoveComment.Executed += TagsTabButton_Executed;
+      ApplicationCommands.RemoveCoverArt.Executed += TagsTabButton_Executed;
+      ApplicationCommands.RenameFileOptions.Executed += TagsTabButton_Executed;
+      ApplicationCommands.RenameFiles.Executed += TagsTabButton_Executed;
+      ApplicationCommands.RipCancel.Executed += RipCancel_Executed;
+      ApplicationCommands.RipStart.Executed += RipStart_Executed;
+      ApplicationCommands.Save.Executed += Save_Executed;
+      ApplicationCommands.ScriptExecute.Executed += TagsTabButton_Executed;
+      ApplicationCommands.SingleTagEdit.Executed += TagsTabButton_Executed;
+      ApplicationCommands.TagFromInternet.Executed += TagsTabButton_Executed;
+      ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
     }
 
     /// <summary>
-    /// Register the Keytips to be displayed in the menu, when pressing Alt or F10
+    ///   Register the Keytips to be displayed in the menu, when pressing Alt or F10
     /// </summary>
     private void RegisterKeyTips()
     {
@@ -312,11 +340,13 @@ namespace MPTagThat
       buttonRenameFiles.ButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAG2FILENAME);
       buttonOrganiseFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_ORGANISE);
     }
+
     #endregion
 
     #region Localisation
+
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
@@ -344,7 +374,7 @@ namespace MPTagThat
       buttonTagFromFile.Text = localisation.ToString("ribbon", "TagFromFile");
       buttonTagFromFile.ScreenTip.Caption = localisation.ToString("screentip", "TagFromFile");
       buttonTagFromFile.ScreenTip.Text = localisation.ToString("screentip", "TagFromFileText");
-      
+
       buttonTagIdentifyFiles.Text = localisation.ToString("ribbon", "IdentifyFile");
       buttonTagIdentifyFiles.ScreenTip.Caption = localisation.ToString("screentip", "IdentifyFile");
       buttonTagIdentifyFiles.ScreenTip.Text = localisation.ToString("screentip", "IdentifyFileText");
@@ -401,7 +431,7 @@ namespace MPTagThat
       buttonRenameFiles.ButtonScreenTip.Caption = localisation.ToString("screentip", "RenameFile");
       buttonRenameFiles.ButtonScreenTip.Text = localisation.ToString("screentip", "RenameFileText");
       buttonRenameFilesOptions.Text = localisation.ToString("ribbon", "RenameFileOptions");
-      
+
       buttonOrganiseFiles.Text = localisation.ToString("ribbon", "Organise");
       buttonOrganiseFiles.ScreenTip.Caption = localisation.ToString("screentip", "Organise");
       buttonOrganiseFiles.ScreenTip.Text = localisation.ToString("screentip", "OrganiseText");
@@ -463,14 +493,16 @@ namespace MPTagThat
       ribbonGroupBurnOptions.Text = localisation.ToString("ribbon", "BurnOptions");
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");
-      
+
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Private Methods
+
     /// <summary>
-    /// Fill the Script Combo  Box with all scripts found
+    ///   Fill the Script Combo  Box with all scripts found
     /// </summary>
     private void PopulateScriptsCombo()
     {
@@ -481,7 +513,7 @@ namespace MPTagThat
       {
         Options.MainSettings.ActiveScript = "Switch Artist";
       }
-      
+
       scripts = ServiceScope.Get<IScriptManager>().GetScripts();
       int i = 0;
       foreach (string[] item in scripts)
@@ -494,11 +526,13 @@ namespace MPTagThat
         i++;
       }
     }
+
     #endregion
 
     #region Public Methods
+
     /// <summary>
-    /// Get the Coverart out of the selected TRack item and fill the Ribbon Gallery
+    ///   Get the Coverart out of the selected TRack item and fill the Ribbon Gallery
     /// </summary>
     public void SetGalleryItem()
     {
@@ -507,7 +541,7 @@ namespace MPTagThat
       try
       {
         TrackData track = main.TracksGridView.SelectedTrack;
-        IPicture[] pics = new IPicture[] { };
+        IPicture[] pics = new IPicture[] {};
         pics = track.File.Tag.Pictures;
         ApplicationCommands.SaveAsThumb.Enabled = false;
         if (pics.Length > 0)
@@ -517,39 +551,38 @@ namespace MPTagThat
             img = Image.FromStream(ms);
             if (img != null)
             {
-
               GalleryItem galleryItem = new GalleryItem();
               galleryItem.Image = img;
-              this.galleryPicture.Items.Add(galleryItem);
-              ApplicationCommands.SaveAsThumb.Enabled = true;              
+              galleryPicture.Items.Add(galleryItem);
+              ApplicationCommands.SaveAsThumb.Enabled = true;
             }
           }
         }
       }
-      catch (Exception)
-      {
-      }
+      catch (Exception) {}
     }
 
     /// <summary>
-    /// Clear the Ribbon Gallery
+    ///   Clear the Ribbon Gallery
     /// </summary>
     public void ClearGallery()
     {
-      this.galleryPicture.Items.Clear();
-      this.galleryPicture.Invalidate();
+      galleryPicture.Items.Clear();
+      galleryPicture.Invalidate();
     }
+
     #endregion
 
     #region Ribbon Events
 
     #region General Events
+
     /// <summary>
-    /// Display a Folder Select Dialog and update the Textbox, based on the button being pressed
+    ///   Display a Folder Select Dialog and update the Textbox, based on the button being pressed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void FolderSelect_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void FolderSelect_Executed(object sender, CommandExecutedEventArgs e)
     {
       FolderBrowserDialog oFD = new FolderBrowserDialog();
       if (oFD.ShowDialog() == DialogResult.OK)
@@ -564,14 +597,16 @@ namespace MPTagThat
         }
       }
     }
+
     #endregion
 
     #region TabPage Clicks
+
     /// <summary>
-    /// Tab Page has changed. Show the correct grid
+    ///   Tab Page has changed. Show the correct grid
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void ribbon_CurrentTabPageChanged(object sender, EventArgs e)
     {
       //Don't do anything, if we are just initialising
@@ -580,7 +615,7 @@ namespace MPTagThat
         return;
       }
 
-      string tabPage = (sender as Elegant.Ui.Ribbon).CurrentTabPage.Tag as string;
+      string tabPage = (sender as Ribbon).CurrentTabPage.Tag as string;
 
       switch (tabPage)
       {
@@ -668,77 +703,80 @@ namespace MPTagThat
     #endregion
 
     #region Application Menu & Quick Access Bar Clicks
+
     /// <summary>
-    /// Exit the Application
+    ///   Exit the Application
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void Exit_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void Exit_Executed(object sender, CommandExecutedEventArgs e)
     {
       Application.Exit();
     }
-    
+
     /// <summary>
-    /// The Save button was pressed
+    ///   The Save button was pressed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void Save_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void Save_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.TracksGridView.Save();
     }
 
     /// <summary>
-    /// Show the Options Panel
+    ///   Show the Options Panel
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void Options_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void Options_Executed(object sender, CommandExecutedEventArgs e)
     {
-      MPTagThat.Preferences.Preferences dlgPreferences = new MPTagThat.Preferences.Preferences(main);
+      Preferences.Preferences dlgPreferences = new Preferences.Preferences(main);
       main.ShowModalDialog(dlgPreferences);
     }
 
     /// <summary>
-    /// Refresh the Tracksgrid
+    ///   Refresh the Tracksgrid
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void Refresh_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void Refresh_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.RefreshTrackList();
     }
 
     /// <summary>
-    /// Change Display Columns
+    ///   Change Display Columns
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void ChangeDisplayColumns_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void ChangeDisplayColumns_Executed(object sender, CommandExecutedEventArgs e)
     {
-      Form dlg = new MPTagThat.Dialogues.ColumnSelect(main.TracksGridView);
+      Form dlg = new ColumnSelect(main.TracksGridView);
       main.ShowModalDialog(dlg);
     }
 
     /// <summary>
-    /// Help Button has been pressed
+    ///   Help Button has been pressed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void Help_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void Help_Executed(object sender, CommandExecutedEventArgs e)
     {
-      MPTagThat.Dialogues.About dlgAbout = new MPTagThat.Dialogues.About();
+      About dlgAbout = new About();
       main.ShowModalDialog(dlgAbout);
     }
+
     #endregion
 
     #region Tags Tab
+
     /// <summary>
-    /// Handle various button click events
+    ///   Handle various button click events
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void TagsTabButton_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void TagsTabButton_Executed(object sender, CommandExecutedEventArgs e)
     {
       // If no Rows are selected, select ALL of them and do the necessary action
       if (!main.TracksGridView.CheckSelections(true))
@@ -749,7 +787,7 @@ namespace MPTagThat
       switch (e.Command.Name)
       {
         case "FileNameToTag":
-          MPTagThat.FileNameToTag.FileNameToTag dlgFileNameToTag = new MPTagThat.FileNameToTag.FileNameToTag(main);
+          FileNameToTag.FileNameToTag dlgFileNameToTag = new FileNameToTag.FileNameToTag(main);
           main.ShowModalDialog(dlgFileNameToTag);
           break;
 
@@ -757,18 +795,18 @@ namespace MPTagThat
           main.TracksGridView.IdentifyFiles();
           break;
 
-          case "TagFromInternet":
-          MPTagThat.InternetLookup.InternetLookup lookup = new MPTagThat.InternetLookup.InternetLookup(main);
+        case "TagFromInternet":
+          InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(main);
           lookup.SearchForAlbumInformation();
           break;
 
         case "SingleTagEdit":
-          MPTagThat.TagEdit.SingleTagEdit dlgSingleTagEdit = new MPTagThat.TagEdit.SingleTagEdit(main);
+          SingleTagEdit dlgSingleTagEdit = new SingleTagEdit(main);
           main.ShowModalDialog(dlgSingleTagEdit);
           break;
 
-          case "MultiTagEdit":
-          MPTagThat.TagEdit.MultiTagEdit dlgMultiTagEdit = new MPTagThat.TagEdit.MultiTagEdit(main);
+        case "MultiTagEdit":
+          MultiTagEdit dlgMultiTagEdit = new MultiTagEdit(main);
           main.ShowModalDialog(dlgMultiTagEdit);
           break;
 
@@ -793,26 +831,26 @@ namespace MPTagThat
           break;
 
         case "OrganiseFiles":
-          MPTagThat.Organise.OrganiseFiles dlgOrganise = new MPTagThat.Organise.OrganiseFiles(main);
+          OrganiseFiles dlgOrganise = new OrganiseFiles(main);
           main.ShowModalDialog(dlgOrganise);
           break;
 
         case "RenameFiles":
-          MPTagThat.TagToFileName.TagToFileName dlgTagToFile = new MPTagThat.TagToFileName.TagToFileName(main, true);
+          TagToFileName.TagToFileName dlgTagToFile = new TagToFileName.TagToFileName(main, true);
           break;
 
         case "RenameFileOptions":
-          MPTagThat.TagToFileName.TagToFileName dlgTagToFileOptions = new MPTagThat.TagToFileName.TagToFileName(main, false);
+          TagToFileName.TagToFileName dlgTagToFileOptions = new TagToFileName.TagToFileName(main, false);
           main.ShowModalDialog(dlgTagToFileOptions);
           break;
 
         case "CaseConversion":
-          MPTagThat.CaseConversion.CaseConversion dlgCaseConversion = new MPTagThat.CaseConversion.CaseConversion(main, true);
+          CaseConversion.CaseConversion dlgCaseConversion = new CaseConversion.CaseConversion(main, true);
           dlgCaseConversion.CaseConvertSelectedTracks();
           break;
 
         case "CaseConversionOptions":
-          MPTagThat.CaseConversion.CaseConversion dlgCaseConversionOptions = new MPTagThat.CaseConversion.CaseConversion(main);
+          CaseConversion.CaseConversion dlgCaseConversionOptions = new CaseConversion.CaseConversion(main);
           main.ShowModalDialog(dlgCaseConversionOptions);
           break;
 
@@ -832,7 +870,7 @@ namespace MPTagThat
           if (comboBoxScripts.SelectedIndex < 0)
             return;
 
-          Item tag = (Item) comboBoxScripts.SelectedItem;
+          Item tag = (Item)comboBoxScripts.SelectedItem;
           main.TracksGridView.ExecuteScript((string)tag.Value);
           break;
 
@@ -851,10 +889,10 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The NumberOnClick ToggleButton has been pressed
+    ///   The NumberOnClick ToggleButton has been pressed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonNumberOnClick_PressedChanged(object sender, EventArgs e)
     {
       if (buttonNumberOnClick.Pressed)
@@ -868,68 +906,72 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Save the selected Picture as Folder THumb
+    ///   Save the selected Picture as Folder THumb
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void SaveAsThumb_Executed(object sender, CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void SaveAsThumb_Executed(object sender, CommandExecutedEventArgs e)
     {
       TrackData track = main.TracksGridView.SelectedTrack;
       main.TracksGridView.SavePicture(track);
     }
+
     #endregion
 
     #region Rip Tab
+
     /// <summary>
-    /// Start Ripping
+    ///   Start Ripping
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void RipStart_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void RipStart_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.RipGridView.RipAudioCD();
     }
 
-    void RipCancel_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    private void RipCancel_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.RipGridView.RipAudioCDCancel();
     }
+
     #endregion
 
     #region Burn Tab
+
     /// <summary>
-    /// Burn the selected Tracks to CD
+    ///   Burn the selected Tracks to CD
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void BurnStart_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void BurnStart_Executed(object sender, CommandExecutedEventArgs e)
     {
       Burner burner = null;
       if (comboBoxBurner.SelectedIndex < 0)
-        burner = (Burner) (comboBoxBurner.Items[0] as Item).Value;
+        burner = (Burner)(comboBoxBurner.Items[0] as Item).Value;
       else
-        burner = (Burner) (comboBoxBurner.SelectedItem as Item).Value;
+        burner = (Burner)(comboBoxBurner.SelectedItem as Item).Value;
 
       main.BurnGridView.SetActiveBurner(burner);
       main.BurnGridView.BurnAudioCD();
     }
 
     /// <summary>
-    ///  Cancel burning
+    ///   Cancel burning
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void BurnCancel_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void BurnCancel_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.BurnGridView.BurnAudioCDCancel();
     }
 
 
     /// <summary>
-    /// A Burner has been selected. Set it as active Burner
+    ///   A Burner has been selected. Set it as active Burner
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxBurner_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (comboBoxBurner.Items.Count == 0)
@@ -943,12 +985,12 @@ namespace MPTagThat
       List<string> speeds = burner.SupportedDriveSpeed;
       if (speeds.Count > 0)
       {
-        Item item = new Item("Maximum", Convert.ToInt32(speeds[0].Trim(new char[] { 'x' })));
+        Item item = new Item("Maximum", Convert.ToInt32(speeds[0].Trim(new[] {'x'})));
         comboBoxBurnerSpeed.Items.Add(item);
         burner.SelectedWriteSpeed = (int)item.Value;
         foreach (string speed in speeds)
         {
-          item = new Item(speed, Convert.ToInt32(speed.Trim(new char[] { 'x' })));
+          item = new Item(speed, Convert.ToInt32(speed.Trim(new[] {'x'})));
           comboBoxBurnerSpeed.Items.Add(item);
         }
       }
@@ -958,14 +1000,13 @@ namespace MPTagThat
       }
 
       main.BurnGridView.SetActiveBurner(burner);
-
     }
 
     /// <summary>
-    /// The Speed has been selected. Set it for the active Burner
+    ///   The Speed has been selected. Set it for the active Burner
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxBurnerSpeed_SelectedIndexChanged(object sender, EventArgs e)
     {
       if (comboBoxBurner.Items.Count == 0 || comboBoxBurnerSpeed.Items.Count == 0)
@@ -980,18 +1021,21 @@ namespace MPTagThat
     #endregion
 
     #region Convert Tab
-    void ConvertStart_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+
+    private void ConvertStart_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.ConvertGridView.ConvertFiles();
     }
 
-    void ConvertCancel_Executed(object sender, Elegant.Ui.CommandExecutedEventArgs e)
+    private void ConvertCancel_Executed(object sender, CommandExecutedEventArgs e)
     {
       main.ConvertGridView.ConvertFilesCancel();
     }
+
     #endregion
 
     #region Gallery
+
     private void galleryPicture_HoveredItemChanged(object sender, GalleryHoveredItemChangedEventArgs e)
     {
       if (sender == null)
@@ -1015,14 +1059,17 @@ namespace MPTagThat
         }
       }
     }
+
     #endregion
+
     #endregion
 
     #region General Events
+
     /// <summary>
-    /// Handle Messages
+    ///   Handle Messages
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name = "message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -1034,7 +1081,7 @@ namespace MPTagThat
           break;
       }
     }
-    #endregion
 
+    #endregion
   }
 }

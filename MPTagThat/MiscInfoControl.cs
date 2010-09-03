@@ -1,14 +1,35 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
 using MPTagThat.Core.ShellLib;
+
+#endregion
 
 namespace MPTagThat
 {
@@ -16,14 +37,13 @@ namespace MPTagThat
   {
     #region Variables
 
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
-    private ILogger log = ServiceScope.Get<ILogger>();
-
-    private bool _inLabeledit = false;
-    private string _savedLabelValue = "";
-
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
     private ImageList _imgList = new ImageList();
+
+    private bool _inLabeledit;
+    private string _savedLabelValue = "";
 
     #endregion
 
@@ -35,7 +55,7 @@ namespace MPTagThat
 
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
+      queueMessage.OnMessageReceive += OnMessageReceive;
 
       LocaliseScreen();
       SetColorBase();
@@ -44,9 +64,9 @@ namespace MPTagThat
       MenuItem[] rmitems = new MenuItem[1];
       rmitems[0] = new MenuItem();
       rmitems[0].Text = localisation.ToString("main", "ErrorContextMenuClear");
-      rmitems[0].Click += new System.EventHandler(dataGridViewError_ClearList);
+      rmitems[0].Click += dataGridViewError_ClearList;
       rmitems[0].DefaultItem = true;
-      this.dataGridViewError.ContextMenu = new ContextMenu(rmitems);
+      dataGridViewError.ContextMenu = new ContextMenu(rmitems);
 
       // Setup Non-Music ListView
       listViewNonMusicFiles.View = View.LargeIcon;
@@ -60,11 +80,11 @@ namespace MPTagThat
       MenuItem[] nonMusicMenuitems = new MenuItem[2];
       nonMusicMenuitems[0] = new MenuItem();
       nonMusicMenuitems[0].Text = localisation.ToString("main", "NonMusicContextMenuRenameToFolderJpg");
-      nonMusicMenuitems[0].Click += new System.EventHandler(listViewNonMusicFiles_RenameToFolderJpg);
+      nonMusicMenuitems[0].Click += listViewNonMusicFiles_RenameToFolderJpg;
       nonMusicMenuitems[0].DefaultItem = true;
       nonMusicMenuitems[1] = new MenuItem();
       nonMusicMenuitems[1].Text = localisation.ToString("main", "NonMusicContextMenuDeleteFiles");
-      nonMusicMenuitems[1].Click += new System.EventHandler(listViewNonMusicFiles_DeleteFiles);
+      nonMusicMenuitems[1].Click += listViewNonMusicFiles_DeleteFiles;
       listViewNonMusicFiles.ContextMenu = new ContextMenu(nonMusicMenuitems);
     }
 
@@ -73,17 +93,17 @@ namespace MPTagThat
     #region Localisation
 
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
-      this.dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
-      this.dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");
+      dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
+      dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");
     }
 
     private void SetColorBase()
     {
-      this.BackColor = themeManager.CurrentTheme.BackColor;
+      BackColor = themeManager.CurrentTheme.BackColor;
       // We want to have our own header color
       dataGridViewError.EnableHeadersVisualStyles = false;
       dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -95,11 +115,11 @@ namespace MPTagThat
     #region Properties
 
     /// <summary>
-    /// Returns the Error Gridview
+    ///   Returns the Error Gridview
     /// </summary>
     public DataGridView ErrorGridView
     {
-      get { return this.dataGridViewError; }
+      get { return dataGridViewError; }
     }
 
     #endregion
@@ -107,7 +127,7 @@ namespace MPTagThat
     #region Public Methods
 
     /// <summary>
-    /// Clear the Non Music Files View
+    ///   Clear the Non Music Files View
     /// </summary>
     public void ClearNonMusicFiles()
     {
@@ -115,9 +135,9 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Add Non Music Files to the List View
+    ///   Add Non Music Files to the List View
     /// </summary>
-    /// <param name="files"></param>
+    /// <param name = "files"></param>
     public void AddNonMusicFiles(List<FileInfo> files)
     {
       listViewNonMusicFiles.Items.Clear();
@@ -128,7 +148,7 @@ namespace MPTagThat
       {
         ListViewItem item = new ListViewItem(fi.FullName);
         item.ToolTipText = string.Format("{0} | {1} {2} | {3}kb", fi.Name, fi.LastWriteTime.ToShortDateString(),
-                                         fi.LastWriteTime.ToShortTimeString(), fi.Length/1024);
+                                         fi.LastWriteTime.ToShortTimeString(), fi.Length / 1024);
 
         // Create Image
         bool imgFailure = false;
@@ -180,9 +200,9 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Return an image from a given filename
+    ///   Return an image from a given filename
     /// </summary>
-    /// <param name="fileName"></param>
+    /// <param name = "fileName"></param>
     /// <returns></returns>
     private Image GetImageFromFile(string fileName)
     {
@@ -193,7 +213,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Activate the Error Tab
+    ///   Activate the Error Tab
     /// </summary>
     public void ActivateErrorTab()
     {
@@ -201,7 +221,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Activate the Non Music Files Tab
+    ///   Activate the Non Music Files Tab
     /// </summary>
     public void ActivateNonMusicTab()
     {
@@ -215,22 +235,22 @@ namespace MPTagThat
     #region Error Grid
 
     /// <summary>
-    /// Handle Right Mouse Click to open the context Menu in the Error DataGrid
+    ///   Handle Right Mouse Click to open the context Menu in the Error DataGrid
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void datagridViewError_MouseClick(object sender, MouseEventArgs e)
     {
       if (e.Button == MouseButtons.Right)
-        this.dataGridViewError.ContextMenu.Show(dataGridViewError, new Point(e.X, e.Y));
+        dataGridViewError.ContextMenu.Show(dataGridViewError, new Point(e.X, e.Y));
     }
 
     /// <summary>
-    /// Context Menu entry has been selected
+    ///   Context Menu entry has been selected
     /// </summary>
-    /// <param name="o"></param>
-    /// <param name="e"></param>
-    private void dataGridViewError_ClearList(object o, System.EventArgs e)
+    /// <param name = "o"></param>
+    /// <param name = "e"></param>
+    private void dataGridViewError_ClearList(object o, EventArgs e)
     {
       dataGridViewError.Rows.Clear();
     }
@@ -240,11 +260,11 @@ namespace MPTagThat
     #region Non Music File Grid
 
     /// <summary>
-    /// Save the Old file Name and set indicator that we are in label edit,
-    /// so that the delete key can be used while editing.
+    ///   Save the Old file Name and set indicator that we are in label edit,
+    ///   so that the delete key can be used while editing.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void listViewNonMusicFiles_BeforeLabelEdit(object sender, LabelEditEventArgs e)
     {
       _inLabeledit = true;
@@ -252,10 +272,10 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Rename the file, if the name has changed
+    ///   Rename the file, if the name has changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void listViewNonMusicFiles_AfterLabelEdit(object sender, LabelEditEventArgs e)
     {
       _inLabeledit = false;
@@ -274,11 +294,11 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Capture the delete key in the list view.
-    /// Will delete the selected item
+    ///   Capture the delete key in the list view.
+    ///   Will delete the selected item
     /// </summary>
-    /// <param name="msg"></param>
-    /// <param name="keyData"></param>
+    /// <param name = "msg"></param>
+    /// <param name = "keyData"></param>
     /// <returns></returns>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
@@ -292,8 +312,10 @@ namespace MPTagThat
             // Don't display the "do you want to delete..." for multiple files
             dialogOption = UIOption.OnlyErrorDialogs;
             string dialogMsg = string.Format(localisation.ToString("main", "NonMusicDeleteFilesMessage"),
-                                       listViewNonMusicFiles.SelectedItems.Count);
-            if (MessageBox.Show(dialogMsg, localisation.ToString("main", "NonMusicDeleteFilesHeader"), MessageBoxButtons.YesNo) == DialogResult.No)
+                                             listViewNonMusicFiles.SelectedItems.Count);
+            if (
+              MessageBox.Show(dialogMsg, localisation.ToString("main", "NonMusicDeleteFilesHeader"),
+                              MessageBoxButtons.YesNo) == DialogResult.No)
             {
               return false;
             }
@@ -306,8 +328,8 @@ namespace MPTagThat
                                     UICancelOption.ThrowException);
               listViewNonMusicFiles.Items[item.Index].Remove();
             }
-            catch (System.OperationCanceledException) // User pressed No on delete. Do nothing
-            { }
+            catch (OperationCanceledException) // User pressed No on delete. Do nothing
+            {}
             catch (Exception ex)
             {
               log.Error("Error deleting file: {0} Exception: {1}", item.Text, ex.Message);
@@ -319,11 +341,11 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// A double click occured´in the list view
-    /// If an item was selected, open it with the default program
+    ///   A double click occured´in the list view
+    ///   If an item was selected, open it with the default program
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void listViewNonMusicFiles_DoubleClick(object sender, EventArgs e)
     {
       ListViewHitTestInfo hitInfo = listViewNonMusicFiles.HitTest(listViewNonMusicFiles.PointToClient(MousePosition));
@@ -340,11 +362,11 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Rename Context Menu entry has been selected
+    ///   Rename Context Menu entry has been selected
     /// </summary>
-    /// <param name="o"></param>
-    /// <param name="e"></param>
-    private void listViewNonMusicFiles_RenameToFolderJpg(object o, System.EventArgs e)
+    /// <param name = "o"></param>
+    /// <param name = "e"></param>
+    private void listViewNonMusicFiles_RenameToFolderJpg(object o, EventArgs e)
     {
       ListViewItem item = null;
       if (listViewNonMusicFiles.SelectedItems.Count > 0)
@@ -373,17 +395,18 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Deelete Context Menu entry has been selected
+    ///   Deelete Context Menu entry has been selected
     /// </summary>
-    /// <param name="o"></param>
-    /// <param name="e"></param>
-    private void listViewNonMusicFiles_DeleteFiles(object o, System.EventArgs e)
+    /// <param name = "o"></param>
+    /// <param name = "e"></param>
+    private void listViewNonMusicFiles_DeleteFiles(object o, EventArgs e)
     {
       // Invoke the Process Key method
       Keys key = Keys.Delete;
       Message msg = new Message();
       ProcessCmdKey(ref msg, key);
     }
+
     #endregion
 
     #endregion
@@ -391,9 +414,9 @@ namespace MPTagThat
     #region General Message Handling
 
     /// <summary>
-    /// Handle Messages
+    ///   Handle Messages
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name = "message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
@@ -409,7 +432,7 @@ namespace MPTagThat
         case "languagechanged":
           {
             LocaliseScreen();
-            this.Refresh();
+            Refresh();
             break;
           }
       }

@@ -1,34 +1,28 @@
-﻿#region Copyright (C) 2007-2008 Team MediaPortal
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace MPTagThat.Core.Burning
 {
+
   #region enums
+
   public enum BlankStatus
   {
     empty = 0,
@@ -40,49 +34,54 @@ namespace MPTagThat.Core.Burning
   {
     none = 0,
   }
+
   #endregion
 
   /// <summary>
-  /// The MediaInfo contains information about the type (like CD-R, DVD+RW, etc.), Sessions and Blank-Status
+  ///   The MediaInfo contains information about the type (like CD-R, DVD+RW, etc.), Sessions and Blank-Status
   /// </summary>
   public class MediaInfo
   {
     #region fields
-    MediaType fCurrentMediaType = MediaType.None;
-    bool fIsErasable = false;
-    string fDataType = "standard";
-    BlankStatus fDiskStatus = BlankStatus.empty;
-    BlankStatus fSessionStatus = BlankStatus.empty;
-    FormatStatus fBgFormatStatus = FormatStatus.none;
-    int fFirstTrack = 1;
-    int fTotalSessions = 1;
-    bool fIsRestricted = false;
-    long fSize = 0;
+
+    private FormatStatus fBgFormatStatus = FormatStatus.none;
+    private MediaType fCurrentMediaType = MediaType.None;
+    private string fDataType = "standard";
+    private BlankStatus fDiskStatus = BlankStatus.empty;
+    private int fFirstTrack = 1;
+    private BlankStatus fSessionStatus = BlankStatus.empty;
+    private int fTotalSessions = 1;
+
     #endregion
 
     #region constructor
-    public MediaInfo(MediaType aMediaType, bool aIsErasable, string aDataType, BlankStatus aDiskStatus, BlankStatus aSessionStatus, FormatStatus aBgFormatStatus, int aFirstTrack, int aTotalSessions, bool aIsRestricted, long aSize)
+
+    public MediaInfo(MediaType aMediaType, bool aIsErasable, string aDataType, BlankStatus aDiskStatus,
+                     BlankStatus aSessionStatus, FormatStatus aBgFormatStatus, int aFirstTrack, int aTotalSessions,
+                     bool aIsRestricted, long aSize)
     {
       fCurrentMediaType = aMediaType;
-      fIsErasable = aIsErasable;
+      IsErasable = aIsErasable;
       fDataType = aDataType;
       fDiskStatus = aDiskStatus;
       fSessionStatus = aSessionStatus;
       fBgFormatStatus = aBgFormatStatus;
       fFirstTrack = aFirstTrack;
       fTotalSessions = aTotalSessions;
-      fIsRestricted = aIsRestricted;
-      fSize = aSize;
+      IsRestricted = aIsRestricted;
+      Size = aSize;
     }
+
     #endregion
 
     #region getters and setters
+
     /// <summary>
-    /// This will output the media type like you see it on the box
+    ///   This will output the media type like you see it on the box
     /// </summary>
     public string HumanMediaString
     {
-      get 
+      get
       {
         switch (fCurrentMediaType)
         {
@@ -115,9 +114,9 @@ namespace MPTagThat.Core.Burning
           case MediaType.DlDVDRam:
             return "Double Layer DVD-RAM";
           default:
-            return "Unknown!";            
-        }        
-      }      
+            return "Unknown!";
+        }
+      }
     }
 
     public MediaType CurrentMediaType
@@ -166,11 +165,7 @@ namespace MPTagThat.Core.Burning
       }
     }
 
-    public bool IsErasable
-    {
-      get { return fIsErasable; }
-      set { fIsErasable = value; }
-    }
+    public bool IsErasable { get; set; }
 
     public string DataType
     {
@@ -208,17 +203,10 @@ namespace MPTagThat.Core.Burning
       set { fTotalSessions = value; }
     }
 
-    public bool IsRestricted
-    {
-      get { return fIsRestricted; }
-      set { fIsRestricted = value; }
-    }
+    public bool IsRestricted { get; set; }
 
-    public long Size
-    {
-      get { return fSize; }
-      set { fSize = value; }
-    }
+    public long Size { get; set; }
+
     #endregion
 
     /*
