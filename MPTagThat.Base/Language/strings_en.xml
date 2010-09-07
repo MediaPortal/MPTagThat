@@ -76,6 +76,7 @@
     <String id="Save">Save</String>
     <String id="ColumnsSelect">Select Columns Displayed</String>
     <String id="Exit">Exit</String>
+    <String id="RecentFolders">Recent Folders</String>
 
     <!-- Tags Tab-->
     <String id="TagTab">Tags</String>

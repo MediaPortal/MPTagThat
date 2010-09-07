@@ -70,6 +70,7 @@ namespace MPTagThat.Core
     private bool _ripEjectCD;
     private bool _ripActivateTargetFolder;
     private string _singleEditLastUsedScript;
+    private List<string> _recentFolders = new List<string>();
     #endregion
 
     #region Properties
@@ -171,6 +172,13 @@ namespace MPTagThat.Core
     {
       get { return _singleEditLastUsedScript; }
       set { _singleEditLastUsedScript = value; }
+    }
+
+    [Setting(SettingScope.User, "")]
+    public List<string> RecentFolders
+    {
+      get { return _recentFolders; }
+      set { _recentFolders = value; }
     }
 
     #region Tags

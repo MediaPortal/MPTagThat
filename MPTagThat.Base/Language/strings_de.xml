@@ -76,6 +76,7 @@
     <String id="Save">Abspeichern</String>
     <String id="ColumnsSelect">Spaltenauswahl</String>
     <String id="Exit">Beenden</String>
+	<String id="RecentFolders">Zuletzt verwendete Verzeichnisse</String>
 
     <!-- Tags Tab-->
     <String id="TagTab">Tags</String>

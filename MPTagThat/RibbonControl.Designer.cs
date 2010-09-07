@@ -194,7 +194,8 @@
       this.applicationMenu1.OptionsButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("applicationMenu1.OptionsButtonImages.Images"))))});
       this.applicationMenu1.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
-      this.applicationMenu1.Size = new System.Drawing.Size(100, 100);
+      this.applicationMenu1.Size = new System.Drawing.Size(100, 310);
+      this.applicationMenu1.SizeToContentMode = Elegant.Ui.SizeToContentMode.Width;
       // 
       // startMenuSave
       // 
@@ -801,7 +802,7 @@
       this.ribbonGroupRip.Id = "654696db-d983-463e-ac1a-0455c9ed52f5";
       this.ribbonGroupRip.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupRip.Name = "ribbonGroupRip";
-      this.ribbonGroupRip.Size = new System.Drawing.Size(99, 108);
+      this.ribbonGroupRip.Size = new System.Drawing.Size(99, 0);
       this.ribbonGroupRip.TabIndex = 1;
       // 
       // buttonRipStart
@@ -810,7 +811,7 @@
       this.buttonRipStart.Id = "d001a4be-1aa7-4920-93da-c0dc3ec51e31";
       this.buttonRipStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipStart.LargeImages.Images"))))});
-      this.buttonRipStart.Location = new System.Drawing.Point(18, 2);
+      this.buttonRipStart.Location = new System.Drawing.Point(5, 2);
       this.buttonRipStart.Name = "buttonRipStart";
       this.buttonRipStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRipStart.ScreenTip.Image")));
       this.buttonRipStart.Size = new System.Drawing.Size(25, 0);
@@ -825,7 +826,7 @@
       this.buttonRipCancel.Id = "dd9e5847-c68c-44a1-9a44-246f6ae71cd5";
       this.buttonRipCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipCancel.LargeImages.Images"))))});
-      this.buttonRipCancel.Location = new System.Drawing.Point(18, 2);
+      this.buttonRipCancel.Location = new System.Drawing.Point(32, 2);
       this.buttonRipCancel.Name = "buttonRipCancel";
       this.buttonRipCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRipCancel.ScreenTip.Image")));
       this.buttonRipCancel.Size = new System.Drawing.Size(61, 0);
@@ -843,7 +844,7 @@
       this.ribbonGroupRipOptions.Id = "afadd097-90ff-4137-bac0-8254851314f6";
       this.ribbonGroupRipOptions.Location = new System.Drawing.Point(105, 3);
       this.ribbonGroupRipOptions.Name = "ribbonGroupRipOptions";
-      this.ribbonGroupRipOptions.Size = new System.Drawing.Size(536, 108);
+      this.ribbonGroupRipOptions.Size = new System.Drawing.Size(536, 0);
       this.ribbonGroupRipOptions.TabIndex = 0;
       this.ribbonGroupRipOptions.Text = "Rip Options";
       // 
@@ -852,7 +853,7 @@
       this.textBoxRipOutputFolder.Id = "232a5cbf-0ce0-4aff-b9bf-1c7640ed1c28";
       this.textBoxRipOutputFolder.LabelAreaWidthTemplate = "Select Encoder:                      ";
       this.textBoxRipOutputFolder.LabelText = "Output Folder:";
-      this.textBoxRipOutputFolder.Location = new System.Drawing.Point(27, 2);
+      this.textBoxRipOutputFolder.Location = new System.Drawing.Point(4, 2);
       this.textBoxRipOutputFolder.Name = "textBoxRipOutputFolder";
       this.textBoxRipOutputFolder.Size = new System.Drawing.Size(473, 19);
       this.textBoxRipOutputFolder.TabIndex = 3;
@@ -870,7 +871,7 @@
       this.comboBoxRipEncoder.Id = "c8d5a621-31b2-4a30-81c4-ff37571165dc";
       this.comboBoxRipEncoder.LabelAreaWidthTemplate = "Select Encoder:                      ";
       this.comboBoxRipEncoder.LabelText = "Select Encoder:";
-      this.comboBoxRipEncoder.Location = new System.Drawing.Point(27, 21);
+      this.comboBoxRipEncoder.Location = new System.Drawing.Point(479, 2);
       this.comboBoxRipEncoder.Name = "comboBoxRipEncoder";
       this.comboBoxRipEncoder.Size = new System.Drawing.Size(473, 19);
       this.comboBoxRipEncoder.Sorted = false;
@@ -882,7 +883,7 @@
       this.buttonRipFolderSelect.CommandName = "FolderSelect";
       this.buttonRipFolderSelect.Id = "ea53cc78-57ab-4d19-91e8-afe6a1d99e7a";
       this.buttonRipFolderSelect.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
-      this.buttonRipFolderSelect.Location = new System.Drawing.Point(502, 2);
+      this.buttonRipFolderSelect.Location = new System.Drawing.Point(954, 2);
       this.buttonRipFolderSelect.Name = "buttonRipFolderSelect";
       this.buttonRipFolderSelect.Size = new System.Drawing.Size(6, 0);
       this.buttonRipFolderSelect.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
@@ -911,7 +912,7 @@
       this.ribbonGroupConvert.Id = "05e69783-9b37-4e26-9d38-91a4622f5e43";
       this.ribbonGroupConvert.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupConvert.Name = "ribbonGroupConvert";
-      this.ribbonGroupConvert.Size = new System.Drawing.Size(155, 108);
+      this.ribbonGroupConvert.Size = new System.Drawing.Size(155, 0);
       this.ribbonGroupConvert.TabIndex = 0;
       // 
       // buttonConvertStart
@@ -920,7 +921,7 @@
       this.buttonConvertStart.Id = "44c3e83e-aab8-4d1f-a1af-8986db19a11c";
       this.buttonConvertStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonConvertStart.LargeImages.Images"))))});
-      this.buttonConvertStart.Location = new System.Drawing.Point(28, 2);
+      this.buttonConvertStart.Location = new System.Drawing.Point(4, 2);
       this.buttonConvertStart.Name = "buttonConvertStart";
       this.buttonConvertStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonConvertStart.ScreenTip.Image")));
       this.buttonConvertStart.Size = new System.Drawing.Size(87, 0);
@@ -935,7 +936,7 @@
       this.buttonConvertCancel.Id = "45c66776-33b0-4832-b771-490f19f60493";
       this.buttonConvertCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonConvertCancel.LargeImages.Images"))))});
-      this.buttonConvertCancel.Location = new System.Drawing.Point(28, 2);
+      this.buttonConvertCancel.Location = new System.Drawing.Point(93, 2);
       this.buttonConvertCancel.Name = "buttonConvertCancel";
       this.buttonConvertCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonConvertCancel.ScreenTip.Image")));
       this.buttonConvertCancel.Size = new System.Drawing.Size(98, 0);
@@ -953,7 +954,7 @@
       this.ribbonGroupConvertOptions.Id = "ac4b029e-f779-4f9a-a174-dc64e69df190";
       this.ribbonGroupConvertOptions.Location = new System.Drawing.Point(161, 3);
       this.ribbonGroupConvertOptions.Name = "ribbonGroupConvertOptions";
-      this.ribbonGroupConvertOptions.Size = new System.Drawing.Size(535, 108);
+      this.ribbonGroupConvertOptions.Size = new System.Drawing.Size(535, 0);
       this.ribbonGroupConvertOptions.TabIndex = 1;
       this.ribbonGroupConvertOptions.Text = "Conversion Options";
       // 
@@ -962,7 +963,7 @@
       this.textBoxConvertOutputFolder.Id = "73b761e2-6141-479c-b192-9e0bb04c70d1";
       this.textBoxConvertOutputFolder.LabelAreaWidthTemplate = "Select Encoder:                      ";
       this.textBoxConvertOutputFolder.LabelText = "Output Folder:";
-      this.textBoxConvertOutputFolder.Location = new System.Drawing.Point(27, 2);
+      this.textBoxConvertOutputFolder.Location = new System.Drawing.Point(4, 2);
       this.textBoxConvertOutputFolder.Name = "textBoxConvertOutputFolder";
       this.textBoxConvertOutputFolder.Size = new System.Drawing.Size(472, 19);
       this.textBoxConvertOutputFolder.TabIndex = 4;
@@ -980,7 +981,7 @@
       this.comboBoxConvertEncoder.Id = "c76d2510-fde1-4b0d-b3b6-23f77f4a44af";
       this.comboBoxConvertEncoder.LabelAreaWidthTemplate = "Select Encoder:                      ";
       this.comboBoxConvertEncoder.LabelText = "Select Encoder:";
-      this.comboBoxConvertEncoder.Location = new System.Drawing.Point(27, 21);
+      this.comboBoxConvertEncoder.Location = new System.Drawing.Point(478, 2);
       this.comboBoxConvertEncoder.Name = "comboBoxConvertEncoder";
       this.comboBoxConvertEncoder.Size = new System.Drawing.Size(472, 19);
       this.comboBoxConvertEncoder.Sorted = false;
@@ -992,7 +993,7 @@
       this.buttonConvertFolderSelect.CommandName = "FolderSelect";
       this.buttonConvertFolderSelect.Id = "afb2c267-778d-4d4a-9b2e-37116c167693";
       this.buttonConvertFolderSelect.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
-      this.buttonConvertFolderSelect.Location = new System.Drawing.Point(501, 2);
+      this.buttonConvertFolderSelect.Location = new System.Drawing.Point(952, 2);
       this.buttonConvertFolderSelect.Name = "buttonConvertFolderSelect";
       this.buttonConvertFolderSelect.Size = new System.Drawing.Size(6, 0);
       this.buttonConvertFolderSelect.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
@@ -1021,7 +1022,7 @@
       this.ribbonGroupBurn.Id = "33e025c9-2f59-4294-9d0f-6dd39499b1b2";
       this.ribbonGroupBurn.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupBurn.Name = "ribbonGroupBurn";
-      this.ribbonGroupBurn.Size = new System.Drawing.Size(95, 94);
+      this.ribbonGroupBurn.Size = new System.Drawing.Size(95, 0);
       this.ribbonGroupBurn.TabIndex = 0;
       // 
       // buttonBurnStart
@@ -1030,7 +1031,7 @@
       this.buttonBurnStart.Id = "a741c025-7b86-4b1b-bf57-132c84317d09";
       this.buttonBurnStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonBurnStart.LargeImages.Images"))))});
-      this.buttonBurnStart.Location = new System.Drawing.Point(13, 2);
+      this.buttonBurnStart.Location = new System.Drawing.Point(4, 2);
       this.buttonBurnStart.Name = "buttonBurnStart";
       this.buttonBurnStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonBurnStart.ScreenTip.Image")));
       this.buttonBurnStart.Size = new System.Drawing.Size(56, 0);
@@ -1045,7 +1046,7 @@
       this.buttonBurnCancel.Id = "227f00e7-f669-417b-8c6f-505d30d342a0";
       this.buttonBurnCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonBurnCancel.LargeImages.Images"))))});
-      this.buttonBurnCancel.Location = new System.Drawing.Point(13, 2);
+      this.buttonBurnCancel.Location = new System.Drawing.Point(62, 2);
       this.buttonBurnCancel.Name = "buttonBurnCancel";
       this.buttonBurnCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonBurnCancel.ScreenTip.Image")));
       this.buttonBurnCancel.Size = new System.Drawing.Size(67, 0);
@@ -1062,7 +1063,7 @@
       this.ribbonGroupBurnOptions.Id = "db421cde-b391-471a-820a-a37b5b394b37";
       this.ribbonGroupBurnOptions.Location = new System.Drawing.Point(101, 3);
       this.ribbonGroupBurnOptions.Name = "ribbonGroupBurnOptions";
-      this.ribbonGroupBurnOptions.Size = new System.Drawing.Size(357, 94);
+      this.ribbonGroupBurnOptions.Size = new System.Drawing.Size(357, 0);
       this.ribbonGroupBurnOptions.TabIndex = 1;
       this.ribbonGroupBurnOptions.Text = "Burner Options";
       // 
@@ -1096,7 +1097,7 @@
       this.comboBoxBurnerSpeed.Id = "f13f2b7f-bee8-4078-8614-0efe27832435";
       this.comboBoxBurnerSpeed.LabelAreaWidthTemplate = "Burner Speed:                          ";
       this.comboBoxBurnerSpeed.LabelText = "Burner Speed:";
-      this.comboBoxBurnerSpeed.Location = new System.Drawing.Point(4, 21);
+      this.comboBoxBurnerSpeed.Location = new System.Drawing.Point(354, 2);
       this.comboBoxBurnerSpeed.Name = "comboBoxBurnerSpeed";
       this.comboBoxBurnerSpeed.Size = new System.Drawing.Size(268, 19);
       this.comboBoxBurnerSpeed.Sorted = false;

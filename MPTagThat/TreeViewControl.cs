@@ -457,6 +457,7 @@ namespace MPTagThat
             if (_main.SplitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
               _main.SplitterRight.ToggleState();
           }
+          _main.MainRibbon.SetRecentFolder(_main.CurrentDirectory);
           _main.RefreshTrackList();
         }
       }

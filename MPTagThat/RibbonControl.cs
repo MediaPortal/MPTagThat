@@ -11,6 +11,7 @@ using Elegant.Ui;
 using MPTagThat.Core;
 using MPTagThat.Core.Burning;
 using TagLib;
+using File = System.IO.File;
 
 namespace MPTagThat
 {
@@ -24,6 +25,7 @@ namespace MPTagThat
     private bool _numberingOnClick;
     private bool _initialising = true;
     private PictureControl picControl;
+    private RecentDocumentsControl recentFolders = new RecentDocumentsControl();
     #endregion
 
     #region Properties
@@ -202,6 +204,12 @@ namespace MPTagThat
 
       LocaliseScreen();
 
+      // Load Recent Folders
+      recentFolders.Items.AddRange(Options.MainSettings.RecentFolders.ToArray());
+      applicationMenu1.RightPaneControl = recentFolders;
+      applicationMenu1.VisibleChanged += applicationMenu1_VisibleChanged;
+      recentFolders.ItemClick += recentFolders_ItemClick;
+
       // Load the available Scripts
       PopulateScriptsCombo();
 
@@ -337,6 +345,8 @@ namespace MPTagThat
 
       applicationMenu1.OptionsButtonText = localisation.ToString("ribbon", "Settings");
       applicationMenu1.ExitButtonText = localisation.ToString("ribbon", "Exit");
+
+      recentFolders.Caption = localisation.ToString("ribbon", "RecentFolders");
 
       // Tags Tab
       ribbonTabPageTag.Text = localisation.ToString("ribbon", "TagTab");
@@ -539,6 +549,39 @@ namespace MPTagThat
       this.galleryPicture.Items.Clear();
       this.galleryPicture.Invalidate();
     }
+
+    /// <summary>
+    /// Set the Recent Folder, when a new folder has been selected
+    /// </summary>
+    /// <param name="newFolder"></param>
+    public void SetRecentFolder(string newFolder)
+    {
+      try
+      {
+        recentFolders.Items.Remove(newFolder);
+      }
+      catch (System.ArgumentException)
+      {
+      }
+
+      // Due to an error in the ribbon, we can't insert at position 0
+      // So we loop through the list and re-add the items again
+      Options.MainSettings.RecentFolders.Clear();
+
+      int i = 0;
+      foreach (string item in recentFolders.Items)
+      {
+        Options.MainSettings.RecentFolders.Add(item);
+        i++;
+        if (i > 8) // Keep a maximum of 10 entries in the list
+        {
+          break;
+        }
+      }
+      Options.MainSettings.RecentFolders.Insert(0, newFolder);
+      recentFolders.Items.Clear();
+      recentFolders.Items.AddRange(Options.MainSettings.RecentFolders.ToArray());
+    }
     #endregion
 
     #region Ribbon Events
@@ -729,6 +772,37 @@ namespace MPTagThat
     {
       MPTagThat.Dialogues.About dlgAbout = new MPTagThat.Dialogues.About();
       main.ShowModalDialog(dlgAbout);
+    }
+
+    /// <summary>
+    /// Refresh the Recent Folder Menu, when we get a change
+    /// Seems to be a bug in version 3.7
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void applicationMenu1_VisibleChanged(object sender, EventArgs e)
+    {
+      applicationMenu1.RightPaneControl.Control.Controls[0].PerformLayout();
+    }
+
+    /// <summary>
+    /// An Item has been selected in the Recent Folder List
+    /// Change to that folder.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void recentFolders_ItemClick(object sender, RecentDocumentsControlItemClickEventArgs e)
+    {
+      string folder = (string)e.Item;
+      if (!Directory.Exists(folder))
+      {
+        recentFolders.Items.Remove(folder);
+        return;
+      }
+      main.CurrentDirectory = folder;
+      main.TreeView.TreeView.ShowFolder(folder);
+      SetRecentFolder(folder);
+      main.RefreshTrackList();
     }
     #endregion
 
