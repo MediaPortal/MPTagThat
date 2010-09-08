@@ -338,8 +338,8 @@ namespace MPTagThat.Core.Burning
                 Logger.Info("Devicehelper: Buffer status: {0}", bufferMsg);
               }
             }
-            //else // <-- activate for all debug output
-              //Logger.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
+            else // <-- activate for all debug output
+              Logger.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
       }
     }
 
