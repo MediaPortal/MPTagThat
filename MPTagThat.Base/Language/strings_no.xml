@@ -76,6 +76,7 @@
     <String id="Save">Lagre</String>
     <String id="ColumnsSelect">Velg Kolonner for Visning</String>
     <String id="Exit">Avslutt</String>
+    <String id="RecentFolders">Nylig brukte mapper</String>
 
     <!-- Tags Tab-->
     <String id="TagTab">Tagg</String>
