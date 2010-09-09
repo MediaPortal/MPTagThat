@@ -13,6 +13,7 @@ using MPTagThat.Core.MediaChangeMonitor;
 
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Enc;
+using Un4seen.Bass.AddOn.Mix;
 
 namespace MPTagThat.GridView
 {
@@ -214,6 +215,7 @@ namespace MPTagThat.GridView
       {
         TrackData track = bindingList[row.Index];
         string outFile = String.Format(@"{0}\{1}.wav", tmpBurnDirectory, System.IO.Path.GetFileNameWithoutExtension(track.FullFileName));
+
         int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
         if (stream == 0)
         {
@@ -222,8 +224,22 @@ namespace MPTagThat.GridView
           continue;
         }
 
+        // In order to burn a file to CD, it must be stereo and 44kz
+        // To make sure that we have that, we create a mixer channel and add our stream to it
+        // The mixer will do the resampling
+        int mixer = BassMix.BASS_Mixer_StreamCreate(44100, 2, BASSFlag.BASS_STREAM_DECODE);
+        if (mixer == 0)
+        {
+          bError = true;
+          log.Error("Error creating mixer for {0}.", track.FullFileName);
+          continue;
+        }
+
+        // Now add the stream to the mixer
+        BassMix.BASS_Mixer_StreamAddChannel(mixer, stream, 0);
+
         log.Info("Decoding to WAV: {0}", track.FullFileName);
-        BassEnc.BASS_Encode_Start(stream, outFile, BASSEncode.BASS_ENCODE_PCM, null, IntPtr.Zero);
+        BassEnc.BASS_Encode_Start(mixer, outFile, BASSEncode.BASS_ENCODE_PCM, null, IntPtr.Zero);
 
         long pos = 0;
         long chanLength = Bass.BASS_ChannelGetLength(stream);
@@ -232,15 +248,16 @@ namespace MPTagThat.GridView
         while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
         {
           // getting sample data will automatically feed the encoder
-          int len = Bass.BASS_ChannelGetData(stream, encBuffer, encBuffer.Length);
-          pos = Bass.BASS_ChannelGetPosition(stream);
+          int len = Bass.BASS_ChannelGetData(mixer, encBuffer, encBuffer.Length);
+          pos = Bass.BASS_ChannelGetPosition(mixer);
           double percentComplete = (double)pos / (double)chanLength * 100.0;
           dataGridViewBurn.Rows[row.Index].Cells[0].Value = (int)percentComplete;
         }
         outFiles.Add(outFile);
         dataGridViewBurn.Rows[row.Index].Cells[0].Value = 100;
-        BassEnc.BASS_Encode_Stop(stream);
+        BassEnc.BASS_Encode_Stop(mixer);
         Bass.BASS_StreamFree(stream);
+        Bass.BASS_StreamFree(mixer);
       }
 
       burnManager.BurningFailed += new BurningError(burnManager_BurningFailed);
