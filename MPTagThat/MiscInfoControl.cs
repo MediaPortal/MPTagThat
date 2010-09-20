@@ -159,7 +159,12 @@ namespace MPTagThat
           string defaultName = "";
           if (fi.Extension.Length > 0)
           {
-            defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
+            try
+            {
+              defaultName = string.Format("Fileicons\\{0}.png", fi.Extension.Substring(1));
+            }
+            catch (Exception)
+            {}
           }
           if (File.Exists(defaultName))
           {
