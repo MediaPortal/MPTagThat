@@ -1,50 +1,43 @@
-﻿#region Copyright (C) 2007-2008 Team MediaPortal
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MPTagThat.Core.Burning
 {
   public class MediaTypeSupport
   {
-    bool fWriteDlDVDRam;
-    bool fWriteDVDRam;
+    private bool fWriteCDR;
+    private bool fWriteCDRW;
+    private bool fWriteDVDRam;
+    private bool fWriteDVDminusR;
+    private bool fWriteDVDminusRW;
 
-    bool fWriteDlDVDplusR;
-    bool fWriteDVDplusR;
-    bool fWriteDVDplusRW;
+    private bool fWriteDVDplusR;
+    private bool fWriteDVDplusRW;
+    private bool fWriteDlDVDRam;
 
-    bool fWriteDlDVDminusR;
-    bool fWriteDVDminusRW;
-    bool fWriteDVDminusR;
+    private bool fWriteDlDVDminusR;
+    private bool fWriteDlDVDplusR;
 
-    bool fWriteCDRW;
-    bool fWriteCDR;
-
-    public MediaTypeSupport(bool aWriteDlDVDRam, bool aWriteDVDRam, bool aWriteDlDVDplusR, bool aWriteDVDplusR, bool aWriteDVDplusRW, bool aWriteDlDVDminusR, bool aWriteDVDminusRW, bool aWriteDVDminusR, bool aWriteCDRW, bool aWriteCDR)
+    public MediaTypeSupport(bool aWriteDlDVDRam, bool aWriteDVDRam, bool aWriteDlDVDplusR, bool aWriteDVDplusR,
+                            bool aWriteDVDplusRW, bool aWriteDlDVDminusR, bool aWriteDVDminusRW, bool aWriteDVDminusR,
+                            bool aWriteCDRW, bool aWriteCDR)
     {
       fWriteDlDVDRam = aWriteDlDVDRam;
       fWriteDVDRam = aWriteDVDRam;
@@ -122,7 +115,7 @@ namespace MPTagThat.Core.Burning
     {
       switch (aMedia)
       {
-        // set to false here so validity checks will fail if no disc is inserted
+          // set to false here so validity checks will fail if no disc is inserted
         case MediaType.None:
           return false;
         case MediaType.ReadOnly:
@@ -190,10 +183,10 @@ namespace MPTagThat.Core.Burning
     }
 
     /// <summary>
-    /// Checks whether the needed Drive is present
+    ///   Checks whether the needed Drive is present
     /// </summary>
-    /// <param name="aProjectType">The ProjectType like Audio-CD, Video-DVD, etc.</param>
-    /// <param name="aSelectedBurner">The drive to check</param>
+    /// <param name = "aProjectType">The ProjectType like Audio-CD, Video-DVD, etc.</param>
+    /// <param name = "aSelectedBurner">The drive to check</param>
     /// <returns>Whether the given drive could handle the project's files</returns>
     public static bool CheckBurnerRequirements(ProjectType aProjectType, Burner aSelectedBurner)
     {
@@ -288,7 +281,8 @@ namespace MPTagThat.Core.Burning
             return 0;
           else
           {
-            if (aCurrentDrive.MediaFeatures.WriteDlDVDplusR || aCurrentDrive.MediaFeatures.WriteDlDVDminusR || aCurrentDrive.MediaFeatures.WriteDlDVDRam)
+            if (aCurrentDrive.MediaFeatures.WriteDlDVDplusR || aCurrentDrive.MediaFeatures.WriteDlDVDminusR ||
+                aCurrentDrive.MediaFeatures.WriteDlDVDRam)
               return 8964;
             if (aCurrentDrive.MediaFeatures.WriteDVDplusR || aCurrentDrive.MediaFeatures.WriteDVDminusR)
               return 4482;
@@ -301,7 +295,5 @@ namespace MPTagThat.Core.Burning
     }
 
     #endregion
-
-
   }
 }

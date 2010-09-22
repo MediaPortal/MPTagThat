@@ -1,22 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+using System.Windows.Forms;
 using MPTagThat.Core;
+using TagLib;
+
+#endregion
 
 namespace MPTagThat.InternetLookup
 {
   public partial class AlbumDetails : ShapedForm
   {
     #region Variables
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+
     #endregion
 
     #region Properties
+
     public string Artist
     {
       get { return tbArtist.Text.Trim(); }
@@ -42,7 +64,7 @@ namespace MPTagThat.InternetLookup
       set
       {
         string strYear = value;
-        if (strYear == null) 
+        if (strYear == null)
           strYear = "";
 
         if (strYear.Length > 4)
@@ -72,41 +94,46 @@ namespace MPTagThat.InternetLookup
     {
       get { return lvDiscTracks; }
     }
+
     #endregion
 
     #region ctor
+
     public AlbumDetails()
     {
       InitializeComponent();
 
       // Fill the Genre Combo Box
-      cbGenre.Items.AddRange(TagLib.Genres.Audio);
+      cbGenre.Items.AddRange(Genres.Audio);
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
-      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+      labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
       LocaliseScreen();
     }
+
     #endregion
 
     #region Methods
+
     #region Localisation
+
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
-      this.labelHeader.Text = localisation.ToString("Lookup", "HeaderDetails");
-      this.chTrackNum.Text = localisation.ToString("Lookup", "ColTrackNum");
-      this.chTitle.Text = localisation.ToString("Lookup", "ColTitle");
-      this.chFileName.Text = localisation.ToString("Lookup", "ColFileName");
+      labelHeader.Text = localisation.ToString("Lookup", "HeaderDetails");
+      chTrackNum.Text = localisation.ToString("Lookup", "ColTrackNum");
+      chTitle.Text = localisation.ToString("Lookup", "ColTitle");
+      chFileName.Text = localisation.ToString("Lookup", "ColFileName");
     }
 
     /// <summary>
-    /// Renumber the list, when the item was moved with the buttons
+    ///   Renumber the list, when the item was moved with the buttons
     /// </summary>
     public void Renumber()
     {
@@ -115,11 +142,13 @@ namespace MPTagThat.InternetLookup
         lvDiscTracks.Items[i].SubItems[0].Text = (i + 1).ToString();
       }
     }
+
     #endregion
 
     #endregion
 
     #region Button Events
+
     private void btUp_Click(object sender, EventArgs e)
     {
       // Set focus back on Listview
@@ -159,6 +188,7 @@ namespace MPTagThat.InternetLookup
 
       Renumber();
     }
+
     #endregion
   }
 }

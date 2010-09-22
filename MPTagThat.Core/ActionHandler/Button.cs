@@ -1,50 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Windows.Forms;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   public class Button
   {
     #region Variables
-    private Keys eKeyModifier;
-    private int eKeyCode;
-    private string eRibbonKeyCode;
-    private Action.ActionType eAction;
-    private string eDescription;
+
     #endregion
 
     #region Properties
-    public Keys Modifiers
-    {
-      get { return eKeyModifier; }
-      set { eKeyModifier = value; }
-    }
 
-    public int KeyCode
-    {
-      get { return eKeyCode; }
-      set { eKeyCode = value; }
-    }
+    public Keys Modifiers { get; set; }
 
-    public string RibbonKeyCode
-    {
-      get { return eRibbonKeyCode; }
-      set { eRibbonKeyCode = value; }
-    }
+    public int KeyCode { get; set; }
 
-    public Action.ActionType ActionType
-    {
-      get { return eAction; }
-      set { eAction = value; }
-    }
+    public string RibbonKeyCode { get; set; }
 
-    public string Description
-    {
-      get { return eDescription; }
-      set { eDescription = value; }
-    }
+    public Action.ActionType ActionType { get; set; }
+
+    public string Description { get; set; }
+
     #endregion
   }
 }

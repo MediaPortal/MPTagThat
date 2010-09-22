@@ -1,26 +1,48 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.GridView;
+
+#endregion
 
 namespace MPTagThat.Dialogues
 {
   public partial class ColumnSelect : ShapedForm
   {
     #region Variables
-    MPTagThat.GridView.GridViewTracks grid;
+
+    private readonly GridViewTracks grid;
+
     #endregion
 
-    public ColumnSelect(MPTagThat.GridView.GridViewTracks grid)
+    public ColumnSelect(GridViewTracks grid)
     {
       InitializeComponent();
       this.grid = grid;
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
     }
 
@@ -54,12 +76,12 @@ namespace MPTagThat.Dialogues
           grid.View.Columns[i + 2].Visible = false;
       }
       grid.Refresh();
-      this.Close();
+      Close();
     }
 
     private void btCancel_Click(object sender, EventArgs e)
     {
-      this.Close();
+      Close();
     }
   }
 }

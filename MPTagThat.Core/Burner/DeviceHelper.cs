@@ -1,35 +1,34 @@
-﻿#region Copyright (C) 2007-2008 Team MediaPortal
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
-/*
-    Copyright (C) 2007-2008 Team MediaPortal
-    http://www.team-mediaportal.com
- 
-    This file is part of MediaPortal II
-
-    MediaPortal II is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    MediaPortal II is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with MediaPortal II.  If not, see <http://www.gnu.org/licenses/>.
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
+
+#region
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
-using MPTagThat.Core;
-
+#endregion
 
 namespace MPTagThat.Core.Burning
 {
@@ -37,7 +36,12 @@ namespace MPTagThat.Core.Burning
   {
     #region events
 
+    #region Delegates
+
     public delegate void DeviceProgress(BurnStatus eBurnStatus, int eTrack, int ePercentage);
+
+    #endregion
+
     public static event DeviceProgress DeviceProgressUpdate;
 
     #endregion
@@ -47,14 +51,14 @@ namespace MPTagThat.Core.Burning
     private static DeviceHelper fDeviceHelper;
     private static ILogger Logger;
     private static List<string> StdOutList;
-    private static int fIsoSizeMB = 0;
+    private static int fIsoSizeMB;
 
     #endregion
 
     #region static methods
 
     /// <summary>
-    /// Init class.
+    ///   Init class.
     /// </summary>
     public static void Init()
     {
@@ -62,41 +66,25 @@ namespace MPTagThat.Core.Burning
         fDeviceHelper = new DeviceHelper();
     }
 
-    #region fields
-
     /// <summary>
-    /// This points to the path were cdrtools are located
+    ///   Build all medium independent arguments to apply for each burning action
     /// </summary>
-    public static string BurnToolPath
-    {
-      get { return Path.Combine(System.Windows.Forms.Application.StartupPath, @"Bin\Burner"); }
-    }
-
-    public static int IsoSizeMB
-    {
-      get { return fIsoSizeMB; }
-    }
-
-    #endregion
-
-    /// <summary>
-    /// Build all medium independent arguments to apply for each burning action
-    /// </summary>
-    /// <param name="aDevice">The device to use (may need some specific params)</param>
+    /// <param name = "aDevice">The device to use (may need some specific params)</param>
     /// <returns>All trimmed arguments concatenated and ready to pass them to cdrecord</returns>
     public static string GetCommonParamsForDevice(Burner aDevice)
     {
       StringBuilder sb = new StringBuilder();
       sb.Append(" dev=");
-      sb.Append(aDevice.BusId);            // how to address the device
-      sb.Append(" gracetime=2");           // wait this many seconds until finally the process is started
-      sb.Append(" fs=8m");                 // set fifo buffer to 8 MB (should be at least the size of the drive's cache)
+      sb.Append(aDevice.BusId); // how to address the device
+      sb.Append(" gracetime=2"); // wait this many seconds until finally the process is started
+      sb.Append(" fs=8m"); // set fifo buffer to 8 MB (should be at least the size of the drive's cache)
       if (aDevice.DriveFeatures.SupportsBurnFree)
         sb.Append(" driveropts=burnfree"); // enable Buffer-Underrun-Technology
-      sb.Append(" -v");                    // be a little verbose
-      sb.Append(" -overburn");             // allow overburning just in case we calculate wrong by a few KiB
-      sb.Append(" -dao");                  // overburning usually requires disc-at-once mode                                                             
-      sb.Append(" -eject");                // Open Tray when finished
+      sb.Append(" -v"); // be a little verbose
+      sb.Append(" -overburn"); // allow overburning just in case we calculate wrong by a few KiB
+      sb.Append(" -dao");
+        // overburning usually requires disc-at-once mode                                                             
+      sb.Append(" -eject"); // Open Tray when finished
       // sb.Append(" -clone");                // Write disk in clone mode
       // sb.Append(" -dummy");                // only simulate for debugging purposes
 
@@ -104,21 +92,21 @@ namespace MPTagThat.Core.Burning
     }
 
     /// <summary>
-    /// Build all common params needed by mkisofs
+    ///   Build all common params needed by mkisofs
     /// </summary>
-    /// <param name="aDiskLabel">How should the disk be named</param>
-    /// <param name="aTargetFilename">Where should the ISO be stored</param>
+    /// <param name = "aDiskLabel">How should the disk be named</param>
+    /// <param name = "aTargetFilename">Where should the ISO be stored</param>
     /// <returns>Trimmed, concatenated params</returns>
     public static string GetCommonParamsForIsocreation(string aDiskLabel, string aTargetFilename)
     {
       StringBuilder sb = new StringBuilder();
       sb.Append(" -V ");
-      sb.Append(aDiskLabel);      
-      sb.Append(" -l");                // allow long filenames
-      sb.Append(" -allow-lowercase");  // ISO9660 would not allow lower chars by default
+      sb.Append(aDiskLabel);
+      sb.Append(" -l"); // allow long filenames
+      sb.Append(" -allow-lowercase"); // ISO9660 would not allow lower chars by default
       sb.Append(" -relaxed-filenames");
       sb.Append(" -input-charset=");
-      sb.Append(Encoding.GetEncoding(0).BodyName);  // get the current system encoding
+      sb.Append(Encoding.GetEncoding(0).BodyName); // get the current system encoding
       sb.Append(" -output-charset=");
       sb.Append(Encoding.GetEncoding(0).BodyName);
       sb.Append(" -preparer \"MediaPortal-II\"");
@@ -132,9 +120,9 @@ namespace MPTagThat.Core.Burning
     }
 
     /// <summary>
-    /// Build all media related params needed by mkisofs
+    ///   Build all media related params needed by mkisofs
     /// </summary>
-    /// <param name="aProjectType">What should be burned</param>
+    /// <param name = "aProjectType">What should be burned</param>
     /// <returns>Trimmed, concatenated params</returns>
     public static string GetParamsByMedia(ProjectType aProjectType)
     {
@@ -142,39 +130,39 @@ namespace MPTagThat.Core.Burning
 
       switch (aProjectType)
       {
-        case ProjectType.Autoselect:     // UDF will suit 99% of all cases
+        case ProjectType.Autoselect: // UDF will suit 99% of all cases
           goto case ProjectType.LargeDataDVD;
         case ProjectType.DataCD:
-          sb.Append(" -iso-level 4");    // use most recent deprecated standard
+          sb.Append(" -iso-level 4"); // use most recent deprecated standard
           sb.Append(" -J -joliet-long"); // add Joliet extension for Windows
-          sb.Append(" -R ");             // add Rock Ridge extension for Linux < 2.6
+          sb.Append(" -R "); // add Rock Ridge extension for Linux < 2.6
           break;
-        case ProjectType.AudioCD:        // these are directly written do disk
+        case ProjectType.AudioCD: // these are directly written do disk
           break;
-        case ProjectType.PhotoCD:        // need to read about that..          
+        case ProjectType.PhotoCD: // need to read about that..          
           break;
-        case ProjectType.IsoCD:          // already done
+        case ProjectType.IsoCD: // already done
           break;
         case ProjectType.DataDVD:
           goto case ProjectType.LargeDataDVD;
-        case ProjectType.VideoDVD:       // will use DataDVD from dvdauthor here
+        case ProjectType.VideoDVD: // will use DataDVD from dvdauthor here
           goto case ProjectType.LargeDataDVD;
-        case ProjectType.IsoDVD:         // already done
+        case ProjectType.IsoDVD: // already done
           break;
         case ProjectType.LargeDataDVD:
-          sb.Append(" -UDF ");           // create UDF file system (not supported by Win95 but does allow for files > 2 GB)
+          sb.Append(" -UDF "); // create UDF file system (not supported by Win95 but does allow for files > 2 GB)
           break;
-        case ProjectType.LargeIsoDVD:    // already done     
+        case ProjectType.LargeIsoDVD: // already done     
           break;
         default:
-          break;          
+          break;
       }
 
       return sb.ToString();
     }
 
     /// <summary>
-    /// Scan the bus for suitable burning devices
+    ///   Scan the bus for suitable burning devices
     /// </summary>
     /// <returns>All burning enabled drives</returns>
     public static List<Burner> QueryBurners()
@@ -188,7 +176,7 @@ namespace MPTagThat.Core.Burning
     }
 
     /// <summary>
-    /// Kill external processes inmediately e.g. for proper shutdown.
+    ///   Kill external processes inmediately e.g. for proper shutdown.
     /// </summary>
     public static void AbortOperations()
     {
@@ -215,11 +203,11 @@ namespace MPTagThat.Core.Burning
     }
 
     /// <summary>
-    /// Executes commandline processes and parses their output
+    ///   Executes commandline processes and parses their output
     /// </summary>
-    /// <param name="aAppName">The burn tool to launch (e.g. cdrecord.exe or mkisofs.exe)</param>
-    /// <param name="aArguments">The arguments to supply for the given process</param>
-    /// <param name="aExpectedTimeoutMs">How long the function will wait until the tool's execution will be aborted</param>
+    /// <param name = "aAppName">The burn tool to launch (e.g. cdrecord.exe or mkisofs.exe)</param>
+    /// <param name = "aArguments">The arguments to supply for the given process</param>
+    /// <param name = "aExpectedTimeoutMs">How long the function will wait until the tool's execution will be aborted</param>
     /// <returns>A list containing the redirected StdOut line by line</returns>
     public static List<string> ExecuteProcReturnStdOut(string aAppName, string aArguments, int aExpectedTimeoutMs)
     {
@@ -230,18 +218,18 @@ namespace MPTagThat.Core.Burning
         Process CdrProc = new Process();
         ProcessStartInfo ProcOptions = new ProcessStartInfo(Path.Combine(BurnToolPath, aAppName), aArguments);
 
-        ProcOptions.UseShellExecute = false;                                       // Important for WorkingDirectory behaviour
-        ProcOptions.RedirectStandardError = true;                                  // .NET bug? Some stdout reader abort to early without that!
-        ProcOptions.RedirectStandardOutput = true;                                 // The precious data we're after
-        ProcOptions.StandardOutputEncoding = Encoding.GetEncoding("ISO-8859-1");  // the output contains "Umlaute", etc.
+        ProcOptions.UseShellExecute = false; // Important for WorkingDirectory behaviour
+        ProcOptions.RedirectStandardError = true; // .NET bug? Some stdout reader abort to early without that!
+        ProcOptions.RedirectStandardOutput = true; // The precious data we're after
+        ProcOptions.StandardOutputEncoding = Encoding.GetEncoding("ISO-8859-1"); // the output contains "Umlaute", etc.
         ProcOptions.StandardErrorEncoding = Encoding.GetEncoding("ISO-8859-1");
-        ProcOptions.WorkingDirectory = BurnToolPath;                               // set the dir because the binary might depend on cygwin.dll
-        ProcOptions.CreateNoWindow = true;                                         // Do not spawn a "Dos-Box"      
-        ProcOptions.ErrorDialog = false;                                           // Do not open an error box on failure        
+        ProcOptions.WorkingDirectory = BurnToolPath; // set the dir because the binary might depend on cygwin.dll
+        ProcOptions.CreateNoWindow = true; // Do not spawn a "Dos-Box"      
+        ProcOptions.ErrorDialog = false; // Do not open an error box on failure        
 
-        CdrProc.OutputDataReceived += new DataReceivedEventHandler(StdOutDataReceived);
-        CdrProc.ErrorDataReceived += new DataReceivedEventHandler(StdErrDataReceived);
-        CdrProc.EnableRaisingEvents = true;                                        // We want to know when and why the process died        
+        CdrProc.OutputDataReceived += StdOutDataReceived;
+        CdrProc.ErrorDataReceived += StdErrDataReceived;
+        CdrProc.EnableRaisingEvents = true; // We want to know when and why the process died        
         CdrProc.StartInfo = ProcOptions;
         if (File.Exists(ProcOptions.FileName))
         {
@@ -261,7 +249,7 @@ namespace MPTagThat.Core.Burning
             // wait this many seconds until crdtools has to be finished
             CdrProc.WaitForExit(aExpectedTimeoutMs);
             if (CdrProc.HasExited && CdrProc.ExitCode != 0)
-              ProcessErrorHandler(aAppName, aArguments, CdrProc.ExitCode);              
+              ProcessErrorHandler(aAppName, aArguments, CdrProc.ExitCode);
           }
           catch (Exception ex)
           {
@@ -281,17 +269,19 @@ namespace MPTagThat.Core.Burning
       {
         case "cdrecord.exe":
           if (!aArguments.Contains(@"-minfo"))
-            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName, aArguments, aExitcode);
+            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
+                        aArguments, aExitcode);
           break;
         case "mkisofs.exe":
           if (aExitcode == 253)
             Logger.Error("Devicehelper: ISO creation failed. Possible error: The source files did change.");
           else
-            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName, aArguments, aExitcode);
+            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
+                        aArguments, aExitcode);
           break;
       }
     }
-    
+
     #region output handler
 
     private static void StdErrDataReceived(object sendingProc, DataReceivedEventArgs errLine)
@@ -305,41 +295,37 @@ namespace MPTagThat.Core.Burning
           try
           {
             percentage = errLine.Data.Remove(6); //  10.81% done, estimate finish Tue Nov  6 03:23:12 2007
-            convert = Convert.ToDouble(percentage, System.Globalization.CultureInfo.InvariantCulture);
+            convert = Convert.ToDouble(percentage, CultureInfo.InvariantCulture);
           }
-          catch (Exception)
-          {
-          }
+          catch (Exception) {}
           fDeviceHelper.ReportProgress(BurnStatus.Converting, (int)convert);
         }
-        else
-          if (errLine.Data.Contains(@"extents written"))
+        else if (errLine.Data.Contains(@"extents written"))
+        {
+          int pos = errLine.Data.IndexOf('(') + 1;
+          if (pos > 0)
           {
-            int pos = errLine.Data.IndexOf('(') + 1;
+            string isoSize = errLine.Data.Substring(pos);
+            pos = isoSize.IndexOf("MB");
             if (pos > 0)
             {
-              string isoSize = errLine.Data.Substring(pos);
-              pos = isoSize.IndexOf("MB");
-              if (pos > 0)
-              {
-                isoSize = isoSize.Remove(pos).Trim();
-                fIsoSizeMB = Convert.ToInt16(isoSize);
-                Logger.Info("Devicehelper: Created ISO has a size of {0} MB", isoSize);
-              }
+              isoSize = isoSize.Remove(pos).Trim();
+              fIsoSizeMB = Convert.ToInt16(isoSize);
+              Logger.Info("Devicehelper: Created ISO has a size of {0} MB", isoSize);
             }
           }
-          else
-            if (errLine.Data.Contains(@"times empty"))
-            {
-              int pos = errLine.Data.IndexOf("fifo");
-              if (pos >= 0)
-              {
-                string bufferMsg = errLine.Data.Substring(pos);
-                Logger.Info("Devicehelper: Buffer status: {0}", bufferMsg);
-              }
-            }
-            // else // <-- activate for all debug output
-            //  Logger.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
+        }
+        else if (errLine.Data.Contains(@"times empty"))
+        {
+          int pos = errLine.Data.IndexOf("fifo");
+          if (pos >= 0)
+          {
+            string bufferMsg = errLine.Data.Substring(pos);
+            Logger.Info("Devicehelper: Buffer status: {0}", bufferMsg);
+          }
+        }
+        // else // <-- activate for all debug output
+        //  Logger.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
       }
     }
 
@@ -350,7 +336,8 @@ namespace MPTagThat.Core.Burning
         StdOutList.Add(e.Data);
 
         if (e.Data.Contains("written"))
-        { // "Track 02:    1 of  451 MB written (fifo  94%) [buf  60%]   0.1x."
+        {
+          // "Track 02:    1 of  451 MB written (fifo  94%) [buf  60%]   0.1x."
           // "Writing  time:  123.891s"
           // "Average write speed   2.3x."
           // "Min drive buffer fill was 96%"
@@ -374,26 +361,40 @@ namespace MPTagThat.Core.Burning
               if (MyIsoSize > 0)
               {
                 progress = progress.Remove(pos).Trim();
-                int percentage = (int)((Convert.ToInt16(progress) * 100) / MyIsoSize);
+                int percentage = ((Convert.ToInt16(progress) * 100) / MyIsoSize);
                 fDeviceHelper.ReportProgress(BurnStatus.Burning, track, percentage);
               }
             }
           }
         }
+        else if (e.Data.Contains("Average write speed"))
+          Logger.Info("DeviceHelper: {0}", e.Data);
+        else if (e.Data.Contains("Fixating.."))
+          fDeviceHelper.ReportProgress(BurnStatus.LeadOut, 0);
         else
-          if (e.Data.Contains("Average write speed"))
-            Logger.Info("DeviceHelper: {0}", e.Data);
-          else
-            if (e.Data.Contains("Fixating.."))
-              fDeviceHelper.ReportProgress(BurnStatus.LeadOut, 0);
-            else
-              // Fixating time:    2.015s
-              if (e.Data.Contains("Fixating time"))
-                fDeviceHelper.ReportProgress(BurnStatus.Finished, 0);
-              //else
-                //Logger.Debug("Devicehelper: StdOut received unclassified message: {0}", e.Data);
-
+          // Fixating time:    2.015s
+          if (e.Data.Contains("Fixating time"))
+            fDeviceHelper.ReportProgress(BurnStatus.Finished, 0);
+        //else
+        //Logger.Debug("Devicehelper: StdOut received unclassified message: {0}", e.Data);
       }
+    }
+
+    #endregion
+
+    #region fields
+
+    /// <summary>
+    ///   This points to the path were cdrtools are located
+    /// </summary>
+    public static string BurnToolPath
+    {
+      get { return Path.Combine(Application.StartupPath, @"Bin\Burner"); }
+    }
+
+    public static int IsoSizeMB
+    {
+      get { return fIsoSizeMB; }
     }
 
     #endregion
@@ -428,7 +429,7 @@ namespace MPTagThat.Core.Burning
         {
           FoundDrives.Add(new Burner(devstr));
           // let pending job finish
-          System.Windows.Forms.Application.DoEvents();
+          Application.DoEvents();
         }
 
         return FoundDrives;
@@ -443,11 +444,11 @@ namespace MPTagThat.Core.Burning
     private List<string> ParsePossibleDevices(List<string> aOutPutData)
     {
       List<string> devLines = new List<string>(5);
-      
+
       foreach (string scanLine in aOutPutData)
       {
         if (scanLine.EndsWith(@"Removable CD-ROM"))
-          devLines.Add(scanLine.Substring(1,5));
+          devLines.Add(scanLine.Substring(1, 5));
       }
 
       return devLines;
@@ -464,6 +465,7 @@ namespace MPTagThat.Core.Burning
       if (DeviceProgressUpdate != null)
         DeviceProgressUpdate(aBurnStatus, aTrack, aPercentage);
     }
+
     #endregion
   }
 }

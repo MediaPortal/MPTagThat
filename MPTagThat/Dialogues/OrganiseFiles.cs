@@ -1,63 +1,92 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.FileIO;
-
 using MPTagThat.Core;
 using MPTagThat.Dialogues;
+
+#endregion
 
 namespace MPTagThat.Organise
 {
   public partial class OrganiseFiles : ShapedForm
   {
     #region Variables
-    private Main _main;
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private ILogger log = ServiceScope.Get<ILogger>();
-    private Dictionary<string, string> _directories = null;
-    private bool _isPreviewOpen = false;
-    private Preview _previewForm = null;
-    private TrackData track = null;
-    private TrackDataPreview trackPreview = null;
-    private Assembly _scriptAssembly = null;
+
+    private readonly Main _main;
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private Dictionary<string, string> _directories;
+    private bool _isPreviewOpen;
+    private Preview _previewForm;
+    private Assembly _scriptAssembly;
+    private TrackData track;
+    private TrackDataPreview trackPreview;
+
     #endregion
 
     #region ctor
+
     public OrganiseFiles(Main main)
     {
-      this._main = main;
+      _main = main;
       InitializeComponent();
 
       LoadSettings();
 
       LocaliseScreen();
 
-      this.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
-      this.labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
-      this.labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+      labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
+      labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
     }
+
     #endregion
 
     #region Methods
+
     #region Localisation
+
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
-      this.labelHeader.Text = localisation.ToString("organise", "Heading");
+      labelHeader.Text = localisation.ToString("organise", "Heading");
     }
+
     #endregion
 
     #region Settings
+
     private void LoadSettings()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -121,13 +150,15 @@ namespace MPTagThat.Organise
 
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Organise
+
     /// <summary>
-    /// Organise Files
+    ///   Organise Files
     /// </summary>
-    /// <param name="parameter"></param>
+    /// <param name = "parameter"></param>
     private void Organise(string parameter)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -148,7 +179,7 @@ namespace MPTagThat.Organise
         string directoryName = Util.ReplaceParametersWithTrackValues(parameter, track);
 
         string targetFolder = cbRootDir.Text;
-        if (_scriptAssembly != null)  // Do we have a script selected
+        if (_scriptAssembly != null) // Do we have a script selected
         {
           try
           {
@@ -163,43 +194,46 @@ namespace MPTagThat.Organise
           catch (Exception ex)
           {
             log.Error("Script Execution failed: {0}", ex.Message);
-          }  
+          }
         }
 
-        directoryName = System.IO.Path.Combine(targetFolder, directoryName);
+        directoryName = Path.Combine(targetFolder, directoryName);
 
         try
         {
           // Now check the validity of the directory
-          if (!System.IO.Directory.Exists(directoryName))
+          if (!Directory.Exists(directoryName))
           {
             try
             {
-              System.IO.Directory.CreateDirectory(directoryName);
+              Directory.CreateDirectory(directoryName);
             }
             catch (Exception e1)
             {
               bError = true;
               log.Debug("Error creating folder: {0} {1]", directoryName, e1.Message);
               row.Cells[0].Value = localisation.ToString("message", "Error");
-              _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, e1.Message));
+              _main.TracksGridView.AddErrorMessage(track.File.Name,
+                                                   String.Format("{0}: {1} {2}",
+                                                                 localisation.ToString("message", "Error"),
+                                                                 directoryName, e1.Message));
               continue; // Process next row
             }
           }
 
           // Store the directory of the current file in the dictionary, so that we may copy later all non-music files
-          string dir = System.IO.Path.GetDirectoryName(track.FullFileName);
+          string dir = Path.GetDirectoryName(track.FullFileName);
           if (!_directories.ContainsKey(dir))
           {
             _directories.Add(dir, directoryName);
           }
 
-          string newFilename = System.IO.Path.Combine(directoryName, track.FileName);
+          string newFilename = Path.Combine(directoryName, track.FileName);
           try
           {
             if (!ckOverwriteFiles.Checked)
             {
-              if (System.IO.File.Exists(newFilename))
+              if (File.Exists(newFilename))
               {
                 bError = true;
                 log.Debug("File exists: {0}", newFilename);
@@ -236,7 +270,9 @@ namespace MPTagThat.Organise
             bError = true;
             log.Error("Error Copy/Move File: {0} {1}", track.FullFileName, e2.Message);
             row.Cells[0].Value = localisation.ToString("mesage", "Error");
-            _main.TracksGridView.AddErrorMessage(track.File.Name, String.Format("{0}: {1}", localisation.ToString("message", "Error"), e2.Message));
+            _main.TracksGridView.AddErrorMessage(track.File.Name,
+                                                 String.Format("{0}: {1}", localisation.ToString("message", "Error"),
+                                                               e2.Message));
           }
         }
         catch (Exception ex)
@@ -244,7 +280,9 @@ namespace MPTagThat.Organise
           bError = true;
           log.Error("Error Organising Files: {0} stack: {1}", ex.Message, ex.StackTrace);
           row.Cells[0].Value = localisation.ToString("message", "Error");
-          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name, String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"), directoryName, ex.Message));
+          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name,
+                                               String.Format("{0}: {1} {2}", localisation.ToString("message", "Error"),
+                                                             directoryName, ex.Message));
         }
       }
 
@@ -253,19 +291,19 @@ namespace MPTagThat.Organise
       {
         foreach (string dir in _directories.Keys)
         {
-          string[] files = System.IO.Directory.GetFiles(dir);
+          string[] files = Directory.GetFiles(dir);
           foreach (string file in files)
           {
             // ignore audio files, we've processed them before
             if (Util.IsAudio(file))
               continue;
 
-            string newFilename = System.IO.Path.Combine(_directories[dir], System.IO.Path.GetFileName(file));
+            string newFilename = Path.Combine(_directories[dir], Path.GetFileName(file));
             try
             {
               if (!ckOverwriteFiles.Checked)
               {
-                if (System.IO.File.Exists(newFilename))
+                if (File.Exists(newFilename))
                 {
                   log.Debug("File exists: {0}", newFilename);
                   continue;
@@ -303,7 +341,7 @@ namespace MPTagThat.Organise
         int i = 0;
         while (i < 10)
         {
-          if (System.IO.Directory.Exists(currentSelectedFolder))
+          if (Directory.Exists(currentSelectedFolder))
             break;
 
           currentSelectedFolder = currentSelectedFolder.Substring(0, currentSelectedFolder.LastIndexOf("\\"));
@@ -322,13 +360,13 @@ namespace MPTagThat.Organise
 
     private void DeleteSubFolders(string folder)
     {
-      string[] subFolders = System.IO.Directory.GetDirectories(folder);
+      string[] subFolders = Directory.GetDirectories(folder);
       for (int i = 0; i < subFolders.Length; ++i)
       {
         DeleteSubFolders(subFolders[i]);
       }
-      string[] files = System.IO.Directory.GetFiles(folder);
-      string[] subDirs = System.IO.Directory.GetDirectories(folder);
+      string[] files = Directory.GetFiles(folder);
+      string[] subDirs = Directory.GetDirectories(folder);
       // Do we still have files or folders then skip the delete
       if (files.Length == 0 && subDirs.Length == 0)
         DeleteFolder(folder);
@@ -342,33 +380,34 @@ namespace MPTagThat.Organise
       while (lastSlash > -1)
       {
         parentFolder = parentFolder.Substring(0, lastSlash);
-        string[] files = System.IO.Directory.GetFiles(parentFolder);
-        string[] subDirs = System.IO.Directory.GetDirectories(parentFolder);
+        string[] files = Directory.GetFiles(parentFolder);
+        string[] subDirs = Directory.GetDirectories(parentFolder);
         // Do we still have files or folders then skip the delete
         if (files.Length == 0 && subDirs.Length == 0)
           DeleteFolder(parentFolder);
 
         lastSlash = parentFolder.LastIndexOf("\\");
       }
-
     }
 
     private void DeleteFolder(string folder)
     {
       try
       {
-        System.IO.Directory.Delete(folder);
+        Directory.Delete(folder);
       }
       catch (Exception ex)
       {
         log.Error("Error Deleting Folder: {0} {1}", folder, ex.Message);
       }
     }
+
     #endregion
 
     #region Preview Handling
+
     /// <summary>
-    /// Fill the Preview Grid with the selected rows
+    ///   Fill the Preview Grid with the selected rows
     /// </summary>
     private void FillPreview()
     {
@@ -386,9 +425,9 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Loop through all the selected rows and set the Preview
+    ///   Loop through all the selected rows and set the Preview
     /// </summary>
-    /// <param name="parameters"></param>
+    /// <param name = "parameters"></param>
     private void OrganiseFilesPreview(string parameters)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -405,25 +444,27 @@ namespace MPTagThat.Organise
         {
           track = _main.TracksGridView.TrackList[row.Index];
           trackPreview = _previewForm.Tracks[index];
-          trackPreview.NewFullFileName = System.IO.Path.Combine(Util.ReplaceParametersWithTrackValues(parameters, track), trackPreview.FileName);
+          trackPreview.NewFullFileName = Path.Combine(Util.ReplaceParametersWithTrackValues(parameters, track),
+                                                      trackPreview.FileName);
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) {}
       }
 
       _previewForm.Refresh();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
+
     #endregion
 
     #region Event Handlers
+
     /// <summary>
-    /// Form is Closed. Save Settings
+    ///   Form is Closed. Save Settings
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void OnClose(object sender, FormClosedEventArgs e)
     {
       Options.OrganiseSettings.LastUsedFormat = cbFormat.SelectedIndex;
@@ -435,10 +476,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Open a folder browser dialog
+    ///   Open a folder browser dialog
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonBrowseRootDir_Click(object sender, EventArgs e)
     {
       FolderBrowserDialog oFD = new FolderBrowserDialog();
@@ -452,20 +493,20 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// A folder has been selected from the combo box, set the text
+    ///   A folder has been selected from the combo box, set the text
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbRootDir_SelectedIndexChanged(object sender, EventArgs e)
     {
       cbRootDir.Text = (string)(cbRootDir.Items[cbRootDir.SelectedIndex] as Item).Value;
     }
 
     /// <summary>
-    /// The user has left the Control, now let's see, if there's a new folder in the combo and add it to the list 
+    ///   The user has left the Control, now let's see, if there's a new folder in the combo and add it to the list
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbRootDir_Leave(object sender, EventArgs e)
     {
       string selectedFolder = cbRootDir.Text.Trim();
@@ -490,10 +531,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Check for the Delete Key pressed, while the Combo is dropped down and delete the selected folder
+    ///   Check for the Delete Key pressed, while the Combo is dropped down and delete the selected folder
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbRootDir_KeyDown(object sender, KeyEventArgs e)
     {
       if (e.KeyCode == Keys.Delete)
@@ -518,14 +559,15 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Apply the changes to the selected files.
+    ///   Apply the changes to the selected files.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btApply_Click(object sender, EventArgs e)
     {
       if (!Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.Organise))
-        MessageBox.Show(localisation.ToString("tag2filename", "InvalidParm"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
+        MessageBox.Show(localisation.ToString("tag2filename", "InvalidParm"),
+                        localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
       else
       {
         // See, if we have a script selected
@@ -553,28 +595,28 @@ namespace MPTagThat.Organise
         if (_isPreviewOpen)
           _previewForm.Close();
 
-        this.Close();
+        Close();
       }
     }
 
     /// <summary>
-    /// Handle the Cancel button. Close Form without applying any changes
+    ///   Handle the Cancel button. Close Form without applying any changes
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
         _previewForm.Close();
 
-      this.Close();
+      Close();
     }
 
     /// <summary>
-    /// Text in the Combo is been changed, Update the Preview Value
+    ///   Text in the Combo is been changed, Update the Preview Value
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbFormat_TextChanged(object sender, EventArgs e)
     {
       if (!_isPreviewOpen)
@@ -587,10 +629,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// User clicked on a parameter label. Update combo box with value.
+    ///   User clicked on a parameter label. Update combo box with value.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void lblParm_Click(object sender, EventArgs e)
     {
       Label label = (Label)sender;
@@ -608,10 +650,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Adds the current Format to the list
+    ///   Adds the current Format to the list
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btAddFormat_Click(object sender, EventArgs e)
     {
       bool found = false;
@@ -635,10 +677,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Removes the current selected format from the list
+    ///   Removes the current selected format from the list
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btRemoveFormat_Click(object sender, EventArgs e)
     {
       for (int i = 0; i < Options.OrganiseSettings.FormatValues.Count; i++)
@@ -655,10 +697,10 @@ namespace MPTagThat.Organise
     }
 
     /// <summary>
-    /// Toggle the Review window display
+    ///   Toggle the Review window display
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void btReview_Click(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
@@ -676,33 +718,32 @@ namespace MPTagThat.Organise
           _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFileName"), 480);
           FillPreview();
         }
-        _previewForm.MaximumSize = new Size(this.Width, _previewForm.Height);
-        _previewForm.Size = new Size(this.Width + 50, _previewForm.Height);
-        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+        _previewForm.MaximumSize = new Size(Width, _previewForm.Height);
+        _previewForm.Size = new Size(Width + 50, _previewForm.Height);
+        _previewForm.Location = new Point(Location.X, Location.Y + Height);
         cbFormat_TextChanged(null, new EventArgs());
         _previewForm.Show();
-
       }
     }
 
     /// <summary>
-    /// The form is moved. Move the Preview Window as well
+    ///   The form is moved. Move the Preview Window as well
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void OrganiseFiles_Move(object sender, EventArgs e)
     {
       if (_isPreviewOpen)
       {
-        _previewForm.Location = new Point(this.Location.X, this.Location.Y + this.Height);
+        _previewForm.Location = new Point(Location.X, Location.Y + Height);
       }
     }
 
     /// <summary>
-    /// Don't allow invalid characters to be entered into the Format Field
+    ///   Don't allow invalid characters to be entered into the Format Field
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void cbFormat_Keypress(object sender, KeyPressEventArgs e)
     {
       switch (e.KeyChar)
@@ -717,6 +758,7 @@ namespace MPTagThat.Organise
           break;
       }
     }
+
     #endregion
   }
 }

@@ -1,72 +1,96 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Globalization;
 using System.Xml;
 using MPTagThat.Core;
 using Un4seen.Bass.AddOn.Wma;
+
+#endregion
 
 namespace MPTagThat.Preferences
 {
   public partial class Preferences : Form
   {
     #region Variables
-    private Main main;
 
+    private readonly List<Item> amazonSites = new List<Item>();
+    private readonly List<Item> encoders = new List<Item>();
+    private readonly List<Item> encodersAAC = new List<Item>();
+    private readonly List<Item> encodersWMA = new List<Item>();
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly Main main;
+    private readonly List<ActionWindow> mapWindows = new List<ActionWindow>();
+    private readonly List<Item> presetsMPC = new List<Item>();
+    private readonly List<Item> presetsWV = new List<Item>();
+    private readonly List<Item> themes = new List<Item>();
+
+    private int _defaultBitRateIndex;
+    private bool _keysChanged;
+    private TreeNode _selectedNode;
     private string headerText = "General";
-
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private ILogger log = ServiceScope.Get<ILogger>();
-
-    private List<Item> encoders = new List<Item>();
-    private List<Item> encodersAAC = new List<Item>();
-    private List<Item> encodersWMA = new List<Item>();
-    private List<Item> presetsMPC = new List<Item>();
-    private List<Item> presetsWV = new List<Item>();
-    private List<Item> themes = new List<Item>();
-    private List<Item> amazonSites = new List<Item>();
-    private List<ActionWindow> mapWindows = new List<ActionWindow>();
-
-    private Theme prevTheme = null;
-
-    int _defaultBitRateIndex = 0;
-    int[] modesTable = null;
+    private int[] modesTable;
+    private Theme prevTheme;
 
     private TreeNode windowsNode;
-    private TreeNode _selectedNode;
-    private bool _keysChanged = false;
+
     #endregion
 
     #region ctor
+
     public Preferences(Main main)
     {
       this.main = main;
       InitializeComponent();
       LocaliseScreen();
     }
+
     #endregion
 
     #region Methods
+
     #region Form Load
+
     private void OnLoad(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      this.textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      this.textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
 
       // Set the region for the Tabcontrol to hide the tabs
-      this.tabControlOptions.Region = new Region(new RectangleF(this.tabPageGeneral.Left,
-                                                                this.tabPageGeneral.Top,
-                                                                this.tabPageGeneral.Width,
-                                                                this.tabPageGeneral.Height));
-
+      tabControlOptions.Region = new Region(new RectangleF(tabPageGeneral.Left,
+                                                           tabPageGeneral.Top,
+                                                           tabPageGeneral.Width,
+                                                           tabPageGeneral.Height));
 
       #region TabPage General
+
       // Get available languages
       CultureInfo[] availLanguages = localisation.AvailableLanguages();
       comboBoxLanguage.DisplayMember = "DisplayName";
@@ -98,11 +122,16 @@ namespace MPTagThat.Preferences
       // Load the keymap file into the treeview
       if (LoadKeyMap())
         PopulateKeyTreeView();
+
       #endregion
 
       #region TabPage Ripping
+
       #region General
-      tbTargetFolder.Text = Options.MainSettings.RipTargetFolder == "" ? Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) : Options.MainSettings.RipTargetFolder;
+
+      tbTargetFolder.Text = Options.MainSettings.RipTargetFolder == ""
+                              ? Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
+                              : Options.MainSettings.RipTargetFolder;
       ckRipEjectCD.Checked = Options.MainSettings.RipEjectCD;
       ckActivateTargetFolder.Checked = Options.MainSettings.RipActivateTargetFolder;
       encoders.Add(new Item(localisation.ToString("Settings", "EncoderMP3"), "mp3", ""));
@@ -125,9 +154,11 @@ namespace MPTagThat.Preferences
           break;
         }
       }
+
       #endregion
 
       #region AAC
+
       encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4"), "mp4", ""));
       encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4High"), "mp4High", ""));
       encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4LC"), "mp4LC", ""));
@@ -148,9 +179,11 @@ namespace MPTagThat.Preferences
         }
         selectedIndex++;
       }
+
       #endregion
 
       #region WMA
+
       encodersWMA.Add(new Item(localisation.ToString("Settings", "EncoderWmaStandard"), "wma", ""));
       encodersWMA.Add(new Item(localisation.ToString("Settings", "EncoderWmaPro"), "wmapro", ""));
       encodersWMA.Add(new Item(localisation.ToString("Settings", "EncoderWmaLossless"), "wmalossless", ""));
@@ -171,9 +204,11 @@ namespace MPTagThat.Preferences
         }
         selectedIndex++;
       }
+
       #endregion
 
       #region MPC
+
       presetsMPC.Add(new Item(localisation.ToString("Settings", "EncoderMPCStandard"), "standard", ""));
       presetsMPC.Add(new Item(localisation.ToString("Settings", "EncoderMPCxtreme"), "xtreme", ""));
       presetsMPC.Add(new Item(localisation.ToString("Settings", "EncoderMPCinsane"), "insane", ""));
@@ -191,9 +226,11 @@ namespace MPTagThat.Preferences
         }
       }
       textBoxMPCParms.Text = Options.MainSettings.RipEncoderMPCExpert;
+
       #endregion
 
       #region WV
+
       presetsWV.Add(new Item(localisation.ToString("Settings", "EncoderWVFast"), "-f", ""));
       presetsWV.Add(new Item(localisation.ToString("Settings", "EncoderWVHigh"), "-h", ""));
       comboBoxWVPresets.DisplayMember = "Name";
@@ -209,29 +246,40 @@ namespace MPTagThat.Preferences
         }
       }
       textBoxWVParms.Text = Options.MainSettings.RipEncoderWVExpert;
+
       #endregion
 
       #region MP3
+
       textBoxRippingFilenameFormat.Text = Options.MainSettings.RipFileNameFormat;
       comboBoxLamePresets.SelectedIndex = Options.MainSettings.RipLamePreset;
-      textBoxABRBitrate.Text = Options.MainSettings.RipLameABRBitRate == 0 ? "" : Options.MainSettings.RipLameABRBitRate.ToString();
+      textBoxABRBitrate.Text = Options.MainSettings.RipLameABRBitRate == 0
+                                 ? ""
+                                 : Options.MainSettings.RipLameABRBitRate.ToString();
       textBoxLameParms.Text = Options.MainSettings.RipLameExpert;
+
       #endregion
 
       #region Ogg
+
       hScrollBarOggEncodingQuality.Value = Options.MainSettings.RipOggQuality;
       lbOggQualitySelected.Text = hScrollBarOggEncodingQuality.Value.ToString();
       textBoxOggParms.Text = Options.MainSettings.RipOggExpert;
+
       #endregion
 
       #region FLAC
+
       hScrollBarFlacEncodingQuality.Value = Options.MainSettings.RipFlacQuality;
       lbFlacQualitySelected.Text = hScrollBarFlacEncodingQuality.Value.ToString();
       textBoxFlacParms.Text = Options.MainSettings.RipFlacExpert;
+
       #endregion
+
       #endregion
 
       #region TabPage Tags
+
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckAutoFillNumberOfTracks.Checked = Options.MainSettings.AutoFillNumberOfTracks;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
@@ -248,7 +296,7 @@ namespace MPTagThat.Preferences
 
       switch (Options.MainSettings.ID3V2Version)
       {
-        case 0:         // APE Tags embedded in mp3
+        case 0: // APE Tags embedded in mp3
           radioButtonUseApe.Checked = true;
           break;
 
@@ -307,12 +355,16 @@ namespace MPTagThat.Preferences
           break;
         }
       }
+
       #endregion
+
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Keys
+
     private void PopulateKeyTreeView()
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -329,7 +381,8 @@ namespace MPTagThat.Preferences
           if (modifier == null)
             modifier = "";
 
-          string nodeText = string.Format("{0} ({1}) = {2}{3}", action.Description, action.ActionType, modifier, action.KeyCode);
+          string nodeText = string.Format("{0} ({1}) = {2}{3}", action.Description, action.ActionType, modifier,
+                                          action.KeyCode);
           TreeNode actionNode = new TreeNode(nodeText);
           actionNode.Tag = action;
           windownode.Nodes.Add(actionNode);
@@ -412,14 +465,14 @@ namespace MPTagThat.Preferences
 
 
     /// <summary>
-    /// Loads the keymap file and creates the mapping.
+    ///   Loads the keymap file and creates the mapping.
     /// </summary>
     /// <returns>True if the load was successfull, false if it failed.</returns>
     private bool LoadKeyMap()
     {
       mapWindows.Clear();
       string strFilename = String.Format(@"{0}\{1}", Options.ConfigDir, "keymap.xml");
-      if (!System.IO.File.Exists(strFilename))
+      if (!File.Exists(strFilename))
         strFilename = String.Format(@"{0}\bin\{1}", Application.StartupPath, "keymap.xml");
       log.Info("Load key mapping from {0}", strFilename);
       try
@@ -441,7 +494,7 @@ namespace MPTagThat.Preferences
           if (null != nodeWindowId)
           {
             ActionWindow map = new ActionWindow();
-            map.Window = System.Int32.Parse(nodeWindowId.InnerText);
+            map.Window = Int32.Parse(nodeWindowId.InnerText);
             map.Description = nodeWindowDesc.InnerText;
             XmlNodeList listNodes = nodeWindow.SelectNodes("action");
             // Create a list of key/actiontype mappings
@@ -468,11 +521,12 @@ namespace MPTagThat.Preferences
       return true;
     }
 
-    private void MapAction(ref ActionWindow map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeRibbonKey, XmlNode nodeDesc)
+    private void MapAction(ref ActionWindow map, XmlNode nodeId, XmlNode nodeKey, XmlNode nodeRibbonKey,
+                           XmlNode nodeDesc)
     {
       if (null == nodeId) return;
       KeyAction but = new KeyAction();
-      but.ActionType = (Action.ActionType)System.Int32.Parse(nodeId.InnerText);
+      but.ActionType = (Action.ActionType)Int32.Parse(nodeId.InnerText);
 
       if (nodeDesc != null)
         but.Description = nodeDesc.InnerText;
@@ -511,7 +565,7 @@ namespace MPTagThat.Preferences
         ckAlt.Checked = false;
         ckShift.Checked = false;
         KeyAction action = (KeyAction)tag;
-        tbAction.Text = Enum.GetName(typeof(Action.ActionType), action.ActionType);
+        tbAction.Text = Enum.GetName(typeof (Action.ActionType), action.ActionType);
         tbKeyDescription.Text = action.Description;
         tbRibbonKeyValue.Text = action.RibbonKeyCode;
         tbKeyValue.Text = action.KeyCode;
@@ -530,15 +584,15 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// A Key has been pressed
+    ///   A Key has been pressed
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name = "e"></param>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
       // Only handle the key press, if the keyvalue field is focused
       if (tbKeyValue.Focused)
       {
-        tbKeyValue.Text = Enum.GetName(typeof(Keys), keyData);
+        tbKeyValue.Text = Enum.GetName(typeof (Keys), keyData);
         return true;
       }
 
@@ -546,10 +600,10 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// Handle entry into Textbox for Ribbon Keys
+    ///   Handle entry into Textbox for Ribbon Keys
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void tbRibbonKeyValue_KeyPress(object sender, KeyPressEventArgs e)
     {
       const char Delete = (char)8;
@@ -577,117 +631,103 @@ namespace MPTagThat.Preferences
         action.KeyCode = tbKeyValue.Text;
         action.RibbonKeyCode = tbRibbonKeyValue.Text;
         action.Description = tbKeyDescription.Text;
-        _selectedNode.Text = string.Format("{0} ({1}) = {2}{3}", action.Description, action.ActionType, action.Modifiers, action.KeyCode);
+        _selectedNode.Text = string.Format("{0} ({1}) = {2}{3}", action.Description, action.ActionType, action.Modifiers,
+                                           action.KeyCode);
       }
     }
 
+    #region Nested type: ActionWindow
 
-    class KeyAction
-    {
-      #region Variables
-      private string eKeyModifier;
-      private string eKeyCode;
-      private string eRibbonKeyCode;
-      private Action.ActionType eAction;
-      private string eDescription;
-      #endregion
-
-      #region Properties
-      public string Modifiers
-      {
-        get { return eKeyModifier; }
-        set { eKeyModifier = value; }
-      }
-
-      public string KeyCode
-      {
-        get { return eKeyCode; }
-        set { eKeyCode = value; }
-      }
-
-      public string RibbonKeyCode
-      {
-        get { return eRibbonKeyCode; }
-        set { eRibbonKeyCode = value; }
-      }
-
-      public Action.ActionType ActionType
-      {
-        get { return eAction; }
-        set { eAction = value; }
-      }
-
-      public string Description
-      {
-        get { return eDescription; }
-        set { eDescription = value; }
-      }
-      #endregion
-    }
-
-    class ActionWindow
+    private class ActionWindow
     {
       #region Variales
-      private int iWindow;
-      private string description;
-      private List<KeyAction> mapButtons = new List<KeyAction>();
+
+      private readonly List<KeyAction> mapButtons = new List<KeyAction>();
+
       #endregion
 
-
       #region Properties
-      public int Window
-      {
-        get { return iWindow; }
-        set { iWindow = value; }
-      }
+
+      public int Window { get; set; }
 
       public List<KeyAction> Buttons
       {
         get { return mapButtons; }
       }
 
-      public string Description
-      {
-        get { return description; }
-        set { description = value; }
-      }
+      public string Description { get; set; }
+
       #endregion
     }
+
     #endregion
+
+    #region Nested type: KeyAction
+
+    private class KeyAction
+    {
+      #region Variables
+
+      #endregion
+
+      #region Properties
+
+      public string Modifiers { get; set; }
+
+      public string KeyCode { get; set; }
+
+      public string RibbonKeyCode { get; set; }
+
+      public Action.ActionType ActionType { get; set; }
+
+      public string Description { get; set; }
+
+      #endregion
+    }
+
+    #endregion
+
+    #endregion
+
     #endregion
 
     #region Event Handler
+
     #region General
+
     /// <summary>
-    /// A Theme has been changed
+    ///   A Theme has been changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
     {
       main.MainRibbon.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
     }
 
     /// <summary>
-    /// Hide the Tabcontrol Tabs, as we navigate via Nav Bar
+    ///   Hide the Tabcontrol Tabs, as we navigate via Nav Bar
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void panelOptions_Paint(object sender, PaintEventArgs e)
     {
       Graphics g = e.Graphics;
-      Rectangle rect = new Rectangle(tabControlOptions.Location.X + 4, tabControlOptions.Location.Y + 3, tabPageGeneral.Width - 1, 22);
+      Rectangle rect = new Rectangle(tabControlOptions.Location.X + 4, tabControlOptions.Location.Y + 3,
+                                     tabPageGeneral.Width - 1, 22);
       g.FillRectangle(new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor), rect);
       g.DrawRectangle(new Pen(Color.LightSteelBlue), rect);
-      g.DrawString(headerText, new Font(new FontFamily("Arial"), 12f, FontStyle.Bold), new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor), new PointF(tabControlOptions.Location.X + 8, tabControlOptions.Location.Y + 6));
+      g.DrawString(headerText, new Font(new FontFamily("Arial"), 12f, FontStyle.Bold),
+                   new SolidBrush(ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor),
+                   new PointF(tabControlOptions.Location.X + 8, tabControlOptions.Location.Y + 6));
     }
 
 
     /// <summary>
-    /// Apply the Changes to the Options
+    ///   Apply the Changes to the Options
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonApply_Click(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
@@ -695,6 +735,7 @@ namespace MPTagThat.Preferences
       string message = "";
 
       #region General
+
       string currentLanguage = ServiceScope.Get<ILocalisation>().CurrentCulture.Name;
       string selectedLanguage = (string)comboBoxLanguage.SelectedValue;
 
@@ -712,6 +753,7 @@ namespace MPTagThat.Preferences
       #endregion
 
       #region Ripping
+
       Options.MainSettings.RipEncoder = (string)(comboBoxEncoder.SelectedValue as Item).Value;
       Options.MainSettings.RipTargetFolder = tbTargetFolder.Text;
       Options.MainSettings.RipEjectCD = ckRipEjectCD.Checked;
@@ -729,10 +771,11 @@ namespace MPTagThat.Preferences
       Options.MainSettings.RipLamePreset = comboBoxLamePresets.SelectedIndex;
       try
       {
-        Options.MainSettings.RipLameABRBitRate = comboBoxLamePresets.SelectedIndex == 4 ? Convert.ToInt32(textBoxABRBitrate.Text) : 0;
+        Options.MainSettings.RipLameABRBitRate = comboBoxLamePresets.SelectedIndex == 4
+                                                   ? Convert.ToInt32(textBoxABRBitrate.Text)
+                                                   : 0;
       }
-      catch (System.FormatException)
-      { }
+      catch (FormatException) {}
       Options.MainSettings.RipLameExpert = textBoxLameParms.Text.Trim();
 
       // Ogg Encoder Settings
@@ -745,8 +788,12 @@ namespace MPTagThat.Preferences
 
       // AAC Encoder Settings
       Options.MainSettings.RipEncoderAAC = (string)(comboBoxAACEncoder.SelectedValue as Item).Value;
-      Options.MainSettings.RipEncoderAACBitRate = comboBoxAACBitrates.SelectedItem != null ? comboBoxAACBitrates.SelectedItem.ToString() : "";
-      Options.MainSettings.RipEncoderAACChannelMode = comboBoxAACChannelModes.SelectedItem != null ? (string)(comboBoxAACChannelModes.SelectedItem as Item).Value : "";
+      Options.MainSettings.RipEncoderAACBitRate = comboBoxAACBitrates.SelectedItem != null
+                                                    ? comboBoxAACBitrates.SelectedItem.ToString()
+                                                    : "";
+      Options.MainSettings.RipEncoderAACChannelMode = comboBoxAACChannelModes.SelectedItem != null
+                                                        ? (string)(comboBoxAACChannelModes.SelectedItem as Item).Value
+                                                        : "";
 
       // WMA Encoder Settings
       Options.MainSettings.RipEncoderWMA = (string)(comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
@@ -761,9 +808,11 @@ namespace MPTagThat.Preferences
       // WV Encoder Settings
       Options.MainSettings.RipEncoderWVPreset = (string)(comboBoxWVPresets.SelectedItem as Item).Value;
       Options.MainSettings.RipEncoderWVExpert = textBoxWVParms.Text.Trim();
+
       #endregion
 
       #region Tags
+
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.AutoFillNumberOfTracks = ckAutoFillNumberOfTracks.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
@@ -790,7 +839,7 @@ namespace MPTagThat.Preferences
       else if (radioButtonUseV4.Checked)
         Options.MainSettings.ID3V2Version = 4;
       else
-        Options.MainSettings.ID3V2Version = 0;  // APE Support
+        Options.MainSettings.ID3V2Version = 0; // APE Support
 
       if (radioButtonID3V1.Checked)
         Options.MainSettings.ID3Version = 1;
@@ -812,6 +861,7 @@ namespace MPTagThat.Preferences
       Options.MainSettings.SearchActionext = ckActionext.Checked;
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedValue as Item).Value;
+
       #endregion
 
       if (bErrors)
@@ -819,39 +869,43 @@ namespace MPTagThat.Preferences
         MessageBox.Show(message, localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
       }
       else
-        this.Close();
+        Close();
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     /// <summary>
-    /// Cancel changes
+    ///   Cancel changes
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonCancel_Click(object sender, EventArgs e)
     {
       if (prevTheme.ThemeName != ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName)
       {
         main.MainRibbon.Theme = prevTheme.ThemeName;
       }
-      this.Close();
+      Close();
     }
+
     #endregion
 
     #region Localisation
+
     private void LocaliseScreen()
     {
-      this.Text = localisation.ToString("Settings", "Header");
-      this.navPanel.CaptionText = localisation.ToString("Settings", "NavigationPanel");
+      Text = localisation.ToString("Settings", "Header");
+      navPanel.CaptionText = localisation.ToString("Settings", "NavigationPanel");
     }
+
     #endregion
 
     #region TabPage Ripping
+
     /// <summary>
-    /// Show directory browser
+    ///   Show directory browser
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonTargetFolderBrowse_Click(object sender, EventArgs e)
     {
       FolderBrowserDialog oFD = new FolderBrowserDialog();
@@ -863,10 +917,10 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// User clicked on a parameter label. Update combo box with value.
+    ///   User clicked on a parameter label. Update combo box with value.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void lblParm_Click(object sender, EventArgs e)
     {
       Label label = (Label)sender;
@@ -889,11 +943,12 @@ namespace MPTagThat.Preferences
     }
 
     #region MP3
+
     /// <summary>
-    /// A Preset has been selected from the Combo Box. Set the narrative
+    ///   A Preset has been selected from the Combo Box. Set the narrative
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxPreset_SelectedIndexChanged(object sender, EventArgs e)
     {
       textBoxABRBitrate.Enabled = false;
@@ -921,50 +976,56 @@ namespace MPTagThat.Preferences
           break;
       }
     }
+
     #endregion
 
     #region Ogg
+
     private void hScrollBarOggEncodingQuality_Scroll(object sender, ScrollEventArgs e)
     {
       lbOggQualitySelected.Text = hScrollBarOggEncodingQuality.Value.ToString();
     }
+
     #endregion
 
     #region Flac
+
     private void hScrollBarFlacEncodingQuality_Scroll(object sender, ScrollEventArgs e)
     {
       lbFlacQualitySelected.Text = hScrollBarFlacEncodingQuality.Value.ToString();
     }
+
     #endregion
 
     #region AAC
+
     /// <summary>
-    /// Encoder has changed. Set the correct Bitrate Table
+    ///   Encoder has changed. Set the correct Bitrate Table
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxAACEncoder_SelectedIndexChanged(object sender, EventArgs e)
     {
       switch (comboBoxAACEncoder.SelectedIndex)
       {
-        case 0:         // aacPlus  
-        case 2:         // MP4/aacplus
+        case 0: // aacPlus  
+        case 2: // MP4/aacplus
           comboBoxAACBitrates.Items.Clear();
           comboBoxAACBitrates.Items.AddRange(Options.BitRatesAACPlus);
           modesTable = Options.ModesAACPlus;
           SetBitRate();
           break;
 
-        case 1:         // aacPlus High
-        case 3:         // MP4/aacplus High
+        case 1: // aacPlus High
+        case 3: // MP4/aacplus High
           comboBoxAACBitrates.Items.Clear();
           comboBoxAACBitrates.Items.AddRange(Options.BitRatesAACPlusHigh);
           modesTable = Options.ModesPlusHigh;
           SetBitRate();
           break;
 
-        case 4:         // LC-AAC  
-        case 5:         // MP4/LC-AAc
+        case 4: // LC-AAC  
+        case 5: // MP4/LC-AAc
           comboBoxAACBitrates.Items.Clear();
           comboBoxAACBitrates.Items.AddRange(Options.BitRatesLCAAC);
           modesTable = Options.ModesLCAAC;
@@ -975,7 +1036,7 @@ namespace MPTagThat.Preferences
 
 
     /// <summary>
-    /// Sets the Bitrate according to the Settings / Selection
+    ///   Sets the Bitrate according to the Settings / Selection
     /// </summary>
     private void SetBitRate()
     {
@@ -990,10 +1051,10 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// Bitrate has changed. set the correct channel Mode Table
+    ///   Bitrate has changed. set the correct channel Mode Table
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxAACBitrates_SelectedIndexChanged(object sender, EventArgs e)
     {
       comboBoxAACChannelModes.Items.Clear();
@@ -1002,34 +1063,49 @@ namespace MPTagThat.Preferences
       switch (mode)
       {
         case 0:
-          comboBoxAACChannelModes.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Stereo"), "Stereo", "") });
+          comboBoxAACChannelModes.Items.AddRange(new[]
+                                                   {new Item(localisation.ToString("settings", "Stereo"), "Stereo", "")});
           SetChannelMode();
           break;
 
         case 1:
-          comboBoxAACChannelModes.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Mono"), "Mono", "") });
+          comboBoxAACChannelModes.Items.AddRange(new[] {new Item(localisation.ToString("settings", "Mono"), "Mono", "")});
           SetChannelMode();
           break;
 
         case 2:
-          comboBoxAACChannelModes.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Stereo"), "Stereo", ""), new Item(localisation.ToString("settings", "Mono"), "Mono", "") });
+          comboBoxAACChannelModes.Items.AddRange(new[]
+                                                   {
+                                                     new Item(localisation.ToString("settings", "Stereo"), "Stereo", ""),
+                                                     new Item(localisation.ToString("settings", "Mono"), "Mono", "")
+                                                   });
           SetChannelMode();
           break;
 
         case 3:
-          comboBoxAACChannelModes.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "ParametricStereo"), "Parametricstereo", ""), new Item(localisation.ToString("settings", "Stereo"), "Stereo", ""), new Item(localisation.ToString("settings", "Mono"), "Mono", "") });
+          comboBoxAACChannelModes.Items.AddRange(new[]
+                                                   {
+                                                     new Item(localisation.ToString("settings", "ParametricStereo"),
+                                                              "Parametricstereo", ""),
+                                                     new Item(localisation.ToString("settings", "Stereo"), "Stereo", "")
+                                                     , new Item(localisation.ToString("settings", "Mono"), "Mono", "")
+                                                   });
           SetChannelMode();
           break;
 
         case 4:
-          comboBoxAACChannelModes.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "ParametricStereo"), "Parametricstereo", ""), new Item("Mono", "Mono", "") });
+          comboBoxAACChannelModes.Items.AddRange(new[]
+                                                   {
+                                                     new Item(localisation.ToString("settings", "ParametricStereo"),
+                                                              "Parametricstereo", ""), new Item("Mono", "Mono", "")
+                                                   });
           SetChannelMode();
           break;
       }
     }
 
     /// <summary>
-    /// Sets the Mode according to the Settings / Selection
+    ///   Sets the Mode according to the Settings / Selection
     /// </summary>
     private void SetChannelMode()
     {
@@ -1046,35 +1122,44 @@ namespace MPTagThat.Preferences
     #endregion
 
     #region WMA
+
     /// <summary>
-    /// Encoder Format has changed set the available Sample Format
+    ///   Encoder Format has changed set the available Sample Format
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxWMAEncoderFormat_SelectedIndexChanged(object sender, EventArgs e)
     {
       comboBoxWMACbrVbr.Items.Clear();
       switch (comboBoxWMAEncoderFormat.SelectedIndex)
       {
-        case 0:   // WMA Standard
-          comboBoxWMACbrVbr.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Cbr"), "Cbr", ""), new Item(localisation.ToString("settings", "Vbr"), "Vbr", "") });
+        case 0: // WMA Standard
+          comboBoxWMACbrVbr.Items.AddRange(new[]
+                                             {
+                                               new Item(localisation.ToString("settings", "Cbr"), "Cbr", ""),
+                                               new Item(localisation.ToString("settings", "Vbr"), "Vbr", "")
+                                             });
           SetWMACbrVbr();
           break;
 
-        case 1:   // WMA Pro
-          comboBoxWMACbrVbr.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Cbr"), "Cbr", ""), new Item(localisation.ToString("settings", "Vbr"), "Vbr", "") });
+        case 1: // WMA Pro
+          comboBoxWMACbrVbr.Items.AddRange(new[]
+                                             {
+                                               new Item(localisation.ToString("settings", "Cbr"), "Cbr", ""),
+                                               new Item(localisation.ToString("settings", "Vbr"), "Vbr", "")
+                                             });
           SetWMACbrVbr();
           break;
 
-        case 2:   // WMA LossLess
-          comboBoxWMACbrVbr.Items.AddRange(new Item[] { new Item(localisation.ToString("settings", "Vbr"), "Vbr", "") });
+        case 2: // WMA LossLess
+          comboBoxWMACbrVbr.Items.AddRange(new[] {new Item(localisation.ToString("settings", "Vbr"), "Vbr", "")});
           comboBoxWMACbrVbr.SelectedIndex = 0;
           break;
       }
     }
 
     /// <summary>
-    /// Sets the Mode according to the Settings / Selection
+    ///   Sets the Mode according to the Settings / Selection
     /// </summary>
     private void SetWMACbrVbr()
     {
@@ -1089,10 +1174,10 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// Get the available Bitrates
+    ///   Get the available Bitrates
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxWMACbrVbr_SelectedIndexChanged(object sender, EventArgs e)
     {
       SetWMASampleCombo();
@@ -1100,10 +1185,10 @@ namespace MPTagThat.Preferences
 
 
     /// <summary>
-    /// The Sample Format has been changed 
+    ///   The Sample Format has been changed
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void comboBoxWMASampleFormat_SelectedIndexChanged(object sender, EventArgs e)
     {
       SetWMABitRateCombo();
@@ -1111,7 +1196,7 @@ namespace MPTagThat.Preferences
 
 
     /// <summary>
-    /// Fills the Sample Format Combo box 
+    ///   Fills the Sample Format Combo box
     /// </summary>
     private void SetWMASampleCombo()
     {
@@ -1176,7 +1261,7 @@ namespace MPTagThat.Preferences
     }
 
     /// <summary>
-    /// Fillls the Bitrate combo, according to the selection in the Sample and CbrVbr Combo
+    ///   Fillls the Bitrate combo, according to the selection in the Sample and CbrVbr Combo
     /// </summary>
     private void SetWMABitRateCombo()
     {
@@ -1216,7 +1301,8 @@ namespace MPTagThat.Preferences
       }
       else
       {
-        int[] bitRates = BassWma.BASS_WMA_EncodeGetRates(Convert.ToInt32(sampleFormat[2]), Convert.ToInt32(sampleFormat[1]), encodeFlags);
+        int[] bitRates = BassWma.BASS_WMA_EncodeGetRates(Convert.ToInt32(sampleFormat[2]),
+                                                         Convert.ToInt32(sampleFormat[1]), encodeFlags);
         for (int i = 0; i < bitRates.Length; i++)
           comboBoxWMABitRate.Items.Add(bitRates[i]);
 
@@ -1230,15 +1316,18 @@ namespace MPTagThat.Preferences
         }
       }
     }
+
     #endregion
+
     #endregion
 
     #region Navigation Page
+
     /// <summary>
-    /// User selected a link in the navbar
+    ///   User selected a link in the navbar
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void OnNavpageLink_Clicked(object sender, MouseEventArgs e)
     {
       tabPageGeneral.Hide();
@@ -1263,16 +1352,18 @@ namespace MPTagThat.Preferences
           tabPageRipping.Show();
           break;
       }
-      this.panelOptions_Paint(panelOptions, new PaintEventArgs(panelOptions.CreateGraphics(), panelOptions.ClientRectangle));
+      panelOptions_Paint(panelOptions, new PaintEventArgs(panelOptions.CreateGraphics(), panelOptions.ClientRectangle));
     }
+
     #endregion
 
     #region TabPage Tags
+
     /// <summary>
-    /// Offers a File Selection Duialogue to select the MediaPortal Music Database
+    ///   Offers a File Selection Duialogue to select the MediaPortal Music Database
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void buttonMusicDatabaseBrowse_Click(object sender, EventArgs e)
     {
       OpenFileDialog oFD = new OpenFileDialog();
@@ -1289,7 +1380,8 @@ namespace MPTagThat.Preferences
       if (!File.Exists(oFD.FileName))
       {
         // THe selected dababase does not exist. Ask if we create it.
-        if (MessageBox.Show(localisation.ToString("Settings", "DBNotExists"), "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        if (MessageBox.Show(localisation.ToString("Settings", "DBNotExists"), "", MessageBoxButtons.YesNo) ==
+            DialogResult.Yes)
         {
           main.CreateMusicDatabase(oFD.FileName);
         }
@@ -1347,7 +1439,6 @@ namespace MPTagThat.Preferences
       checkBoxRemoveID3V1.Enabled = true;
       checkBoxRemoveID3V2.Enabled = false;
     }
-
 
     #endregion
 

@@ -1,39 +1,64 @@
-﻿using System;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Text;
 using System.Threading;
-using TagLib;
-
 using MPTagThat.Core;
+using TagLib;
+using File = TagLib.File;
+
+#endregion
 
 namespace MPTagThat
 {
   public class MusicDatabaseBuild
   {
     #region Variables
-    private ILogger log = ServiceScope.Get<ILogger>();
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private bool _abortScan;
+    private int _audioFiles;
     private string _databaseName;
-    private SQLiteConnection conn = null;
-
-    private Thread fileThread = null;
-    private Thread scanThread = null;
-
-    List<FileInfo> files = new List<FileInfo>();
     private string _folder;
-    private int _processCount = 0;
-    private int _audioFiles = 0;
-    private bool _scanHasRun = false;
-    private bool _abortScan = false;
-
-    private TimeSpan _ts;
+    private int _processCount;
+    private bool _scanHasRun;
     private DateTime _startTime;
     private string _trackPerSecSummary = "";
+    private TimeSpan _ts;
+    private SQLiteConnection conn;
+
+    private Thread fileThread;
+    private List<FileInfo> files = new List<FileInfo>();
+    private Thread scanThread;
+
     #endregion
 
     #region Properties
+
     public bool ScanActive
     {
       get
@@ -52,10 +77,13 @@ namespace MPTagThat
     {
       set { _abortScan = value; }
     }
+
     #endregion
 
     #region Public Methods
+
     #region Database Create
+
     public void CreateMusicDatabase(string databaseName)
     {
       _databaseName = databaseName;
@@ -63,20 +91,20 @@ namespace MPTagThat
       OpenConnection();
 
       string sql = @"CREATE TABLE tracks ( " +
-        // Unique id Autoincremented
-          "idTrack integer primary key autoincrement, " +
-        // Full Path of the file. 
-          "strPath text, " +
-        // Artist
-          "strArtist text, strAlbumArtist text, " +
-        // Album (How to handle Various Artist Albums)
-          "strAlbum text, " +
-        // Genre (multiple genres)
-          "strGenre text, " +
-        // Song
-          "strTitle text, iTrack integer, iNumTracks integer, iYear integer, " +
-          "iRating integer, iDisc integer, iNumDisc integer, " +
-          "strLyrics text)";
+                   // Unique id Autoincremented
+                   "idTrack integer primary key autoincrement, " +
+                   // Full Path of the file. 
+                   "strPath text, " +
+                   // Artist
+                   "strArtist text, strAlbumArtist text, " +
+                   // Album (How to handle Various Artist Albums)
+                   "strAlbum text, " +
+                   // Genre (multiple genres)
+                   "strGenre text, " +
+                   // Song
+                   "strTitle text, iTrack integer, iNumTracks integer, iYear integer, " +
+                   "iRating integer, iDisc integer, iNumDisc integer, " +
+                   "strLyrics text)";
 
       ExecuteDirectSQL(sql);
 
@@ -115,13 +143,15 @@ namespace MPTagThat
 
       CloseConnection();
     }
+
     #endregion
 
     #region Database build
+
     /// <summary>
-    /// Start the threads to fill the music database
+    ///   Start the threads to fill the music database
     /// </summary>
-    /// <param name="folder"></param>
+    /// <param name = "folder"></param>
     public void FillMusicDatabase(string folder, string databaseName)
     {
       _folder = folder;
@@ -129,31 +159,31 @@ namespace MPTagThat
 
       if (fileThread == null)
       {
-        fileThread = new Thread(new ThreadStart(GetFilesThread));
+        fileThread = new Thread(GetFilesThread);
         fileThread.Name = "Files";
       }
 
       if (fileThread.ThreadState != ThreadState.Running)
       {
-        fileThread = new Thread(new ThreadStart(GetFilesThread));
+        fileThread = new Thread(GetFilesThread);
         fileThread.Start();
       }
 
       if (scanThread == null)
       {
-        scanThread = new Thread(new ThreadStart(UpdateDBThread));
+        scanThread = new Thread(UpdateDBThread);
         scanThread.Name = "Scan";
       }
 
       if (scanThread.ThreadState != ThreadState.Running)
       {
-        scanThread = new Thread(new ThreadStart(UpdateDBThread));
+        scanThread = new Thread(UpdateDBThread);
         scanThread.Start();
       }
     }
 
     /// <summary>
-    /// Get Files
+    ///   Get Files
     /// </summary>
     private void GetFilesThread()
     {
@@ -165,12 +195,12 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Retrieve the folder recursive
+    ///   Retrieve the folder recursive
     /// </summary>
-    /// <param name="folder"></param>
-    /// <param name="foundFiles"></param>
-    /// <param name="recursive"></param>
-    void GetFiles(string folder, ref List<FileInfo> foundFiles, bool recursive)
+    /// <param name = "folder"></param>
+    /// <param name = "foundFiles"></param>
+    /// <param name = "recursive"></param>
+    private void GetFiles(string folder, ref List<FileInfo> foundFiles, bool recursive)
     {
       try
       {
@@ -212,8 +242,8 @@ namespace MPTagThat
           _audioFiles++;
           try
           {
-            TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-            TagLib.File file = TagLib.File.Create(fileName);
+            ByteVector.UseBrokenLatin1Behavior = true;
+            File file = File.Create(fileName);
             AddSong(file);
           }
           catch (CorruptFileException)
@@ -233,7 +263,7 @@ namespace MPTagThat
 
       DateTime stopTime = DateTime.Now;
       _ts = stopTime - _startTime;
-      float fSecsPerTrack = ((float)_ts.TotalSeconds / (float)files.Count);
+      float fSecsPerTrack = ((float)_ts.TotalSeconds / files.Count);
 
       _trackPerSecSummary = "";
       if (files.Count > 0)
@@ -249,10 +279,10 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Adds the song to the database
+    ///   Adds the song to the database
     /// </summary>
-    /// <param name="file"></param>
-    private void AddSong(TagLib.File file)
+    /// <param name = "file"></param>
+    private void AddSong(File file)
     {
       string artist = "";
       string[] artists = file.Tag.Performers;
@@ -279,12 +309,13 @@ namespace MPTagThat
 
 
       string sql =
-          String.Format(
-            @"insert into tracks (strPath, strArtist, strAlbumArtist, strAlbum, strGenre, strTitle, iTrack, iNumTracks, iYear, iRating, iDisc, iNumDisc, strLyrics) 
+        String.Format(
+          @"insert into tracks (strPath, strArtist, strAlbumArtist, strAlbum, strGenre, strTitle, iTrack, iNumTracks, iYear, iRating, iDisc, iNumDisc, strLyrics) 
                           values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, {10}, {11}, '{12}' )",
-            Util.RemoveInvalidChars(file.Name), Util.RemoveInvalidChars(artist), Util.RemoveInvalidChars(albumartist), Util.RemoveInvalidChars(file.Tag.Album), Util.RemoveInvalidChars(genre), Util.RemoveInvalidChars(title),
-            file.Tag.Track, file.Tag.TrackCount, file.Tag.Year, 0,
-            file.Tag.Disc, file.Tag.DiscCount, "");
+          Util.RemoveInvalidChars(file.Name), Util.RemoveInvalidChars(artist), Util.RemoveInvalidChars(albumartist),
+          Util.RemoveInvalidChars(file.Tag.Album), Util.RemoveInvalidChars(genre), Util.RemoveInvalidChars(title),
+          file.Tag.Track, file.Tag.TrackCount, file.Tag.Year, 0,
+          file.Tag.Disc, file.Tag.DiscCount, "");
 
       ExecuteDirectSQL(sql);
 
@@ -294,16 +325,16 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Add the artist to the Artist table, to allow us having mutiple artists per song
+    ///   Add the artist to the Artist table, to allow us having mutiple artists per song
     /// </summary>
-    /// <param name="strArtist"></param>
+    /// <param name = "strArtist"></param>
     /// <returns></returns>
     private void AddArtist(string strArtist)
     {
       string strSQL;
 
       // split up the artist, in case we've got multiple artists
-      string[] artists = strArtist.Split(new char[] { ';', '|' });
+      string[] artists = strArtist.Split(new[] {';', '|'});
       foreach (string artist in artists)
       {
         if (artist.Trim() == string.Empty)
@@ -323,16 +354,16 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Add the albumartist to the AlbumArtist table, to allow us having mutiple artists per song
+    ///   Add the albumartist to the AlbumArtist table, to allow us having mutiple artists per song
     /// </summary>
-    /// <param name="strArtist"></param>
+    /// <param name = "strArtist"></param>
     /// <returns></returns>
     private void AddAlbumArtist(string strAlbumArtist)
     {
       string strSQL;
 
       // split up the albumartist, in case we've got multiple albumartists
-      string[] artists = strAlbumArtist.Split(new char[] { ';', '|' });
+      string[] artists = strAlbumArtist.Split(new[] {';', '|'});
       foreach (string artist in artists)
       {
         if (artist.Trim() == string.Empty)
@@ -352,15 +383,15 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Add the genre to the Genre Table, to allow maultiple Genres per song
+    ///   Add the genre to the Genre Table, to allow maultiple Genres per song
     /// </summary>
-    /// <param name="strGenre"></param>
+    /// <param name = "strGenre"></param>
     private void AddGenre(string strGenre)
     {
       string strSQL;
 
       // split up the artist, in case we've got multiple artists
-      string[] genres = strGenre.Split(new char[] { ';', '|' });
+      string[] genres = strGenre.Split(new[] {';', '|'});
       foreach (string genre in genres)
       {
         if (genre.Trim() == string.Empty)
@@ -380,14 +411,14 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Multiple Entry fields need to be formatted to contain a | at the end to be able to search correct
+    ///   Multiple Entry fields need to be formatted to contain a | at the end to be able to search correct
     /// </summary>
-    /// <param name="str"></param>
-    /// <param name="strip"></param>
+    /// <param name = "str"></param>
+    /// <param name = "strip"></param>
     /// <returns></returns>
     private string FormatMultipleEntry(string str)
     {
-      string[] strSplit = str.Split(new char[] { ';', '|' });
+      string[] strSplit = str.Split(new[] {';', '|'});
       // Can't use a simple String.Join as i need to trim all the elements 
       string strJoin = "| ";
       foreach (string strTmp in strSplit)
@@ -396,9 +427,11 @@ namespace MPTagThat
       }
       return strJoin;
     }
+
     #endregion
 
     #region Database Scan Status
+
     public string DatabaseScanStatus()
     {
       if (scanThread == null)
@@ -410,19 +443,24 @@ namespace MPTagThat
       {
         if (_scanHasRun)
         {
-          return string.Format(localisation.ToString("Settings", "DBScanFinished"), _audioFiles, _ts.Hours, _ts.Minutes, _ts.Seconds, _trackPerSecSummary);
+          return string.Format(localisation.ToString("Settings", "DBScanFinished"), _audioFiles, _ts.Hours, _ts.Minutes,
+                               _ts.Seconds, _trackPerSecSummary);
         }
         else
           return localisation.ToString("Settings", "DBScanIdle");
       }
 
-      string returnString = string.Format(localisation.ToString("Settings", "DBScanProgress"), _processCount, files.Count);
+      string returnString = string.Format(localisation.ToString("Settings", "DBScanProgress"), _processCount,
+                                          files.Count);
       return returnString;
     }
+
     #endregion
+
     #endregion
 
     #region Private Methods
+
     private void OpenConnection()
     {
       try
@@ -451,13 +489,12 @@ namespace MPTagThat
 
     private bool ExecuteDirectSQL(string sql)
     {
-
       try
       {
         using (SQLiteCommand cmd = new SQLiteCommand())
         {
           cmd.Connection = conn;
-          cmd.CommandType = System.Data.CommandType.Text;
+          cmd.CommandType = CommandType.Text;
           cmd.CommandText = sql;
           int result = cmd.ExecuteNonQuery();
         }
@@ -472,13 +509,12 @@ namespace MPTagThat
 
     private bool ExistsItem(string sql)
     {
-
       try
       {
         using (SQLiteCommand cmd = new SQLiteCommand())
         {
           cmd.Connection = conn;
-          cmd.CommandType = System.Data.CommandType.Text;
+          cmd.CommandType = CommandType.Text;
           cmd.CommandText = sql;
           object result = cmd.ExecuteScalar();
           if (result == null)
@@ -493,6 +529,7 @@ namespace MPTagThat
         return false;
       }
     }
+
     #endregion
   }
 }

@@ -1,39 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
 
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
+using TagLib;
+
+#endregion
 
 namespace MPTagThat.InternetLookup
 {
   public class InternetLookup
   {
     #region Variables
-    private Main main;
 
-    private bool _askForAlbum = false;   
-    private string _selectedArtist = "";
+    private readonly DataGridView _tracksGrid;
+    private readonly Main main;
+
+    private bool _askForAlbum;
     private string _selectedAlbum = "";
-    DataGridView _tracksGrid = null;
+    private string _selectedArtist = "";
 
     // Dialogs
-    private ArtistAlbumDialog dlgAlbumArtist = null;
-    private AlbumSearchResult dlgSearchResult = null;
-    private AlbumDetails dlgAlbumDetails = null;
+    private ArtistAlbumDialog dlgAlbumArtist;
+    private AlbumDetails dlgAlbumDetails;
+    private AlbumSearchResult dlgSearchResult;
+
     #endregion
 
     #region ctor
+
     public InternetLookup(Main main)
     {
       this.main = main;
       _tracksGrid = main.TracksGridView.View;
     }
+
     #endregion
 
     #region Methods
+
     public void SearchForAlbumInformation()
     {
       // Loop through the selected rows and see, if we got an Artist and/or Album set
@@ -67,14 +96,15 @@ namespace MPTagThat.InternetLookup
         }
 
         AmazonAlbum album = GetAlbumInformation();
-        
+
         // It may happen that an album doesn't return Track Information
         // Inform the uer to make a new selection
         if (album == null || album.Discs.Count == 0)
         {
           if (_askForAlbum)
           {
-            MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("Lookup", "NoAlbumFound"), ServiceScope.Get<ILocalisation>().ToString("message", "Error"), MessageBoxButtons.OK);
+            MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("Lookup", "NoAlbumFound"),
+                            ServiceScope.Get<ILocalisation>().ToString("message", "Error"), MessageBoxButtons.OK);
             continue;
           }
           else
@@ -189,16 +219,16 @@ namespace MPTagThat.InternetLookup
 
       try
       {
-        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(album.AlbumImage.Data))
+        using (MemoryStream ms = new MemoryStream(album.AlbumImage.Data))
         {
-          System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
+          Image img = Image.FromStream(ms);
           if (img != null)
           {
             dlgAlbumDetails.Cover.Image = img;
           }
         }
       }
-      catch { }
+      catch {}
 
       // Add Tracks of the selected album
       foreach (List<AmazonAlbumTrack> disc in album.Discs)
@@ -279,18 +309,17 @@ namespace MPTagThat.InternetLookup
           {
             year = Convert.ToInt32(strYear);
           }
-          catch (Exception)
-          { }
+          catch (Exception) {}
           if (year > 0 && track.Year == 0)
             track.Year = year;
 
           // Add the picture
-          TagLib.ByteVector vector = album.AlbumImage;
+          ByteVector vector = album.AlbumImage;
           if (vector != null)
           {
             // Prepare Picture Array and then add the cover retrieved
-            List<TagLib.IPicture> pics = new List<TagLib.IPicture>();
-            TagLib.Picture pic = new TagLib.Picture(vector);
+            List<IPicture> pics = new List<IPicture>();
+            Picture pic = new Picture(vector);
             pics.Add(pic);
             track.Pictures = pics.ToArray();
           }
@@ -302,11 +331,13 @@ namespace MPTagThat.InternetLookup
           main.TracksGridView.SetBackgroundColorChanged(index);
           track.Changed = true;
           main.TracksGridView.Changed = true;
-          main.TracksGridView.View.Rows[index].Cells[0].Value = ServiceScope.Get<ILocalisation>().ToString("message", "Ok");
+          main.TracksGridView.View.Rows[index].Cells[0].Value = ServiceScope.Get<ILocalisation>().ToString("message",
+                                                                                                           "Ok");
         }
       }
       dlgAlbumDetails.Dispose();
     }
+
     #endregion
   }
 }

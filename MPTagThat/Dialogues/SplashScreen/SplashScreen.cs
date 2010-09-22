@@ -1,38 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Threading;
+
+#endregion
 
 namespace MPTagThat.Dialogues
 {
-  class SplashScreen
+  internal class SplashScreen
   {
     #region Variables
-    private bool _stopRequested = false;
+
     private SplashForm _frm;
     private string _info;
+    private bool _stopRequested;
+
     #endregion
 
     #region ctor
-    public SplashScreen()
-    {
 
-    }
     #endregion
 
     #region Public Methods
+
     /// <summary>
-    /// Starts the splash screen.
+    ///   Starts the splash screen.
     /// </summary>
     public void Run()
     {
-      Thread thread = new Thread(new ThreadStart(DoRun));
+      Thread thread = new Thread(DoRun);
       thread.Name = "ConfigSplashscreen";
       thread.Start();
     }
 
     /// <summary>
-    /// Stops the splash screen.
+    ///   Stops the splash screen.
     /// </summary>
     public void Stop()
     {
@@ -40,7 +61,7 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    /// Stops the splash screen after given wait time
+    ///   Stops the splash screen after given wait time
     /// </summary>
     public void Stop(int aWaitTime)
     {
@@ -49,7 +70,7 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    /// Determine if the Splash has been closed
+    ///   Determine if the Splash has been closed
     /// </summary>
     public bool isStopped()
     {
@@ -57,21 +78,24 @@ namespace MPTagThat.Dialogues
     }
 
     /// <summary>
-    /// Set the contents of the information label of the splash screen
+    ///   Set the contents of the information label of the splash screen
     /// </summary>
-    /// <param name="information">the information to set</param>
+    /// <param name = "information">the information to set</param>
     public void SetInformation(string information)
     {
       _info = information;
     }
+
     #endregion
 
     #region Private Methods
+
     /// <summary>
-    /// Starts the actual splash screen.
+    ///   Starts the actual splash screen.
     /// </summary>
     /// <remarks>
-    /// This method is started in a background thread by the <see cref="Run"/> method.</remarks>
+    ///   This method is started in a background thread by the <see cref = "Run" /> method.
+    /// </remarks>
     private void DoRun()
     {
       string oldInfo = null;
@@ -83,7 +107,7 @@ namespace MPTagThat.Dialogues
       {
         _frm.TopMost = true;
         _frm.BringToFront();
-        
+
         if (oldInfo != _info)
         {
           _frm.SetInformation(_info);

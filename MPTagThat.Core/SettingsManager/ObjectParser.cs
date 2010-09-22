@@ -1,47 +1,66 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
-using System.Collections;
+using System.Reflection;
+using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
+
+#endregion
 
 namespace MPTagThat.Core
 {
   /// <summary>
-  /// Static Class used to store or retrieve settings classes
+  ///   Static Class used to store or retrieve settings classes
   /// </summary>
-  class ObjectParser
+  internal class ObjectParser
   {
-    static ObjectParser() 
-    { 
-    }
-
     /// <summary>
-    /// Serialize public properties of a Settings object to a given xml file
+    ///   Serialize public properties of a Settings object to a given xml file
     /// </summary>
-    /// <param name="obj">Setting Object to serialize</param>
-    /// <param name="fileName">Xml file name</param>
+    /// <param name = "obj">Setting Object to serialize</param>
+    /// <param name = "fileName">Xml file name</param>
     public static void Serialize(object obj)
     {
-      string fileName="";
+      string fileName = "";
       INamedSettings namedSettings = obj as INamedSettings;
       if (namedSettings != null)
       {
-        fileName = obj.ToString() + "." + namedSettings.Name + ".xml";
+        fileName = obj + "." + namedSettings.Name + ".xml";
       }
       else
       {
-        fileName = obj.ToString() + ".xml";
+        fileName = obj + ".xml";
       }
       ILogger log = ServiceScope.Get<ILogger>();
       log.Debug("Serialize({0},{1})", obj.ToString(), fileName);
       Dictionary<string, string> globalSettingsList = new Dictionary<string, string>();
       Dictionary<string, string> userSettingsList = new Dictionary<string, string>();
       XmlSettingsProvider xmlWriter = new XmlSettingsProvider(fileName);
-      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, fileName); ;
+      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, fileName);
+      ;
 
       bool isFirstSave = (!File.Exists(fullFileName));
       foreach (PropertyInfo property in obj.GetType().GetProperties())
@@ -50,9 +69,10 @@ namespace MPTagThat.Core
         string defaultval = "";
 
         #region CLR Typed property
+
         if (isCLRType(thisType))
         {
-          object[] attributes = property.GetCustomAttributes(typeof(SettingAttribute), false);
+          object[] attributes = property.GetCustomAttributes(typeof (SettingAttribute), false);
           SettingScope scope = SettingScope.Global;
           if (attributes.Length != 0)
           {
@@ -87,25 +107,25 @@ namespace MPTagThat.Core
             if (scope == SettingScope.Global) globalSettingsList.Add(property.Name, value);
             if (scope == SettingScope.User) userSettingsList.Add(property.Name, value);
           }
-            
         }
-        #endregion
+          #endregion
 
-        #region not CLR Typed property
+          #region not CLR Typed property
+
         else
         {
           XmlSerializer xmlSerial = new XmlSerializer(thisType);
           StringBuilder sb = new StringBuilder();
           StringWriter strWriter = new StringWriter(sb);
           XmlTextWriter writer = new XmlNoNamespaceWriter(strWriter);
-          writer.Formatting = System.Xml.Formatting.Indented;
+          writer.Formatting = Formatting.Indented;
           object propertyValue = obj.GetType().GetProperty(property.Name).GetValue(obj, null);
           xmlSerial.Serialize(writer, propertyValue);
           strWriter.Close();
           strWriter.Dispose();
           // remove unneeded encoding tag
           sb.Remove(0, 41);
-          object[] attributes = property.GetCustomAttributes(typeof(SettingAttribute), false);
+          object[] attributes = property.GetCustomAttributes(typeof (SettingAttribute), false);
           SettingScope scope = SettingScope.Global;
           if (attributes.Length != 0)
           {
@@ -130,11 +150,12 @@ namespace MPTagThat.Core
             globalSettingsList.Add(property.Name, value);
           }
         }
-        #endregion
 
+        #endregion
       }
 
       #region write Settings
+
       // write settings to xml
       foreach (KeyValuePair<string, string> pair in globalSettingsList)
       {
@@ -145,32 +166,33 @@ namespace MPTagThat.Core
         xmlWriter.SetValue(obj.ToString(), pair.Key, pair.Value, SettingScope.User);
       }
       xmlWriter.Save();
-      #endregion
 
+      #endregion
     }
 
     /// <summary>
-    /// De-serialize public properties of a Settings object from a given xml file
+    ///   De-serialize public properties of a Settings object from a given xml file
     /// </summary>
-    /// <param name="obj">Setting Object to retrieve</param>
-    /// <param name="fileName">Xml file name</param>
+    /// <param name = "obj">Setting Object to retrieve</param>
+    /// <param name = "fileName">Xml file name</param>
     public static void Deserialize(object obj)
     {
       string fileName = "";
       INamedSettings namedSettings = obj as INamedSettings;
-      if (namedSettings!=null)
+      if (namedSettings != null)
       {
-        fileName = obj.ToString() + "." + namedSettings.Name + ".xml";
+        fileName = obj + "." + namedSettings.Name + ".xml";
       }
       else
       {
-        fileName = obj.ToString() + ".xml";
+        fileName = obj + ".xml";
       }
       XmlSettingsProvider xmlreader = new XmlSettingsProvider(fileName);
       ILogger log = ServiceScope.Get<ILogger>();
       log.Debug("Deserialize({0},{1})", obj.ToString(), fileName);
       // if xml file doesn't exist yet then create it
-      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, fileName); ;
+      string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, fileName);
+      ;
       if (!File.Exists(fullFileName)) Serialize(obj);
 
       foreach (PropertyInfo property in obj.GetType().GetProperties())
@@ -178,8 +200,9 @@ namespace MPTagThat.Core
         Type thisType = property.PropertyType;
 
         #region get scope
+
         SettingScope scope = SettingScope.Global;
-        object[] attributes = property.GetCustomAttributes(typeof(SettingAttribute), false);
+        object[] attributes = property.GetCustomAttributes(typeof (SettingAttribute), false);
         string defaultval = "";
         if (attributes.Length != 0)
         {
@@ -192,48 +215,50 @@ namespace MPTagThat.Core
           scope = SettingScope.Global;
           defaultval = "";
         }
+
         #endregion
 
         if (isCLRType(thisType))
-        #region CLR Typed property
+
+          #region CLR Typed property
+
         {
           try
           {
             string value = xmlreader.GetValue(obj.ToString(), property.Name, scope);
             if (value == null || value == string.Empty) value = defaultval;
-            if (thisType == typeof(string)) property.SetValue(obj, value, null);
-            if (thisType == typeof(bool)) property.SetValue(obj, bool.Parse(value), null);
-            if (thisType == typeof(Int16)) property.SetValue(obj, Int16.Parse(value), null);
-            if (thisType == typeof(Int32)) property.SetValue(obj, Int32.Parse(value), null);
-            if (thisType == typeof(Int64)) property.SetValue(obj, Int64.Parse(value), null);
-            if (thisType == typeof(UInt16)) property.SetValue(obj, UInt16.Parse(value), null);
-            if (thisType == typeof(UInt32)) property.SetValue(obj, UInt32.Parse(value), null);
-            if (thisType == typeof(UInt64)) property.SetValue(obj, UInt64.Parse(value), null);
-            if (thisType == typeof(float)) property.SetValue(obj, float.Parse(value), null);
-            if (thisType == typeof(double)) property.SetValue(obj, double.Parse(value), null);
-            if (thisType == typeof(Int16)) property.SetValue(obj, Int16.Parse(value), null);
-            if (thisType == typeof(Int32)) property.SetValue(obj, Int32.Parse(value), null);
-            if (thisType == typeof(DateTime)) property.SetValue(obj, DateTime.Parse(value), null);
-            if (thisType == typeof(bool?)) property.SetValue(obj, bool.Parse(value), null);
-            if (thisType == typeof(Int16?)) property.SetValue(obj, Int16.Parse(value), null);
-            if (thisType == typeof(Int32?)) property.SetValue(obj, Int32.Parse(value), null);
-            if (thisType == typeof(Int64?)) property.SetValue(obj, Int64.Parse(value), null);
-            if (thisType == typeof(UInt16?)) property.SetValue(obj, UInt16.Parse(value), null);
-            if (thisType == typeof(UInt32?)) property.SetValue(obj, UInt32.Parse(value), null);
-            if (thisType == typeof(UInt64?)) property.SetValue(obj, UInt64.Parse(value), null);
-            if (thisType == typeof(float?)) property.SetValue(obj, float.Parse(value), null);
-            if (thisType == typeof(double?)) property.SetValue(obj, double.Parse(value), null);
-            if (thisType == typeof(Int16?)) property.SetValue(obj, Int16.Parse(value), null);
-            if (thisType == typeof(Int32?)) property.SetValue(obj, Int32.Parse(value), null);
+            if (thisType == typeof (string)) property.SetValue(obj, value, null);
+            if (thisType == typeof (bool)) property.SetValue(obj, bool.Parse(value), null);
+            if (thisType == typeof (Int16)) property.SetValue(obj, Int16.Parse(value), null);
+            if (thisType == typeof (Int32)) property.SetValue(obj, Int32.Parse(value), null);
+            if (thisType == typeof (Int64)) property.SetValue(obj, Int64.Parse(value), null);
+            if (thisType == typeof (UInt16)) property.SetValue(obj, UInt16.Parse(value), null);
+            if (thisType == typeof (UInt32)) property.SetValue(obj, UInt32.Parse(value), null);
+            if (thisType == typeof (UInt64)) property.SetValue(obj, UInt64.Parse(value), null);
+            if (thisType == typeof (float)) property.SetValue(obj, float.Parse(value), null);
+            if (thisType == typeof (double)) property.SetValue(obj, double.Parse(value), null);
+            if (thisType == typeof (Int16)) property.SetValue(obj, Int16.Parse(value), null);
+            if (thisType == typeof (Int32)) property.SetValue(obj, Int32.Parse(value), null);
+            if (thisType == typeof (DateTime)) property.SetValue(obj, DateTime.Parse(value), null);
+            if (thisType == typeof (bool?)) property.SetValue(obj, bool.Parse(value), null);
+            if (thisType == typeof (Int16?)) property.SetValue(obj, Int16.Parse(value), null);
+            if (thisType == typeof (Int32?)) property.SetValue(obj, Int32.Parse(value), null);
+            if (thisType == typeof (Int64?)) property.SetValue(obj, Int64.Parse(value), null);
+            if (thisType == typeof (UInt16?)) property.SetValue(obj, UInt16.Parse(value), null);
+            if (thisType == typeof (UInt32?)) property.SetValue(obj, UInt32.Parse(value), null);
+            if (thisType == typeof (UInt64?)) property.SetValue(obj, UInt64.Parse(value), null);
+            if (thisType == typeof (float?)) property.SetValue(obj, float.Parse(value), null);
+            if (thisType == typeof (double?)) property.SetValue(obj, double.Parse(value), null);
+            if (thisType == typeof (Int16?)) property.SetValue(obj, Int16.Parse(value), null);
+            if (thisType == typeof (Int32?)) property.SetValue(obj, Int32.Parse(value), null);
           }
-          catch (Exception)
-          {
-          }
+          catch (Exception) {}
         }
-        #endregion
+          #endregion
 
         else
-        #region not CLR Typed property
+          #region not CLR Typed property
+
         {
           XmlSerializer xmlSerial = new XmlSerializer(thisType);
 
@@ -245,48 +270,44 @@ namespace MPTagThat.Core
             {
               property.SetValue(obj, xmlSerial.Deserialize(reader), null);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) {}
           }
-
         }
-        #endregion
 
+        #endregion
       }
     }
 
     /// <summary>
-    /// Detects if the current property type is or not a CLR type
+    ///   Detects if the current property type is or not a CLR type
     /// </summary>
-    /// <param name="aType">property type</param>
+    /// <param name = "aType">property type</param>
     /// <returns>true: CLR Type , false: guess what</returns>
     public static bool isCLRType(Type aType)
     {
-      if ((aType == typeof(int))
-           || (aType == typeof(string))
-           || (aType == typeof(bool))
-           || (aType == typeof(float))
-           || (aType == typeof(double))
-           || (aType == typeof(UInt32))
-           || (aType == typeof(UInt64))
-           || (aType == typeof(UInt16))
-           || (aType == typeof(System.DateTime))
-           //|| (aType == typeof(string?))
-           || (aType == typeof(bool?))
-           || (aType == typeof(float?))
-           || (aType == typeof(double?))
-           || (aType == typeof(UInt32?))
-           || (aType == typeof(UInt64?))
-           || (aType == typeof(UInt16?))
-           || (aType == typeof(Int32?))
-           || (aType == typeof(Int64?))
-           || (aType == typeof(Int16?)))
+      if ((aType == typeof (int))
+          || (aType == typeof (string))
+          || (aType == typeof (bool))
+          || (aType == typeof (float))
+          || (aType == typeof (double))
+          || (aType == typeof (UInt32))
+          || (aType == typeof (UInt64))
+          || (aType == typeof (UInt16))
+          || (aType == typeof (DateTime))
+          //|| (aType == typeof(string?))
+          || (aType == typeof (bool?))
+          || (aType == typeof (float?))
+          || (aType == typeof (double?))
+          || (aType == typeof (UInt32?))
+          || (aType == typeof (UInt64?))
+          || (aType == typeof (UInt16?))
+          || (aType == typeof (Int32?))
+          || (aType == typeof (Int64?))
+          || (aType == typeof (Int16?)))
       {
         return true;
       }
       return false;
     }
-
   }
 }

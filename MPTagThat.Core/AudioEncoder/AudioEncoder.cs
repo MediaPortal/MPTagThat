@@ -1,37 +1,66 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Windows.Forms;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
+
+#endregion
 
 namespace MPTagThat.Core.AudioEncoder
 {
   public class AudioEncoder : IAudioEncoder
   {
     #region Variables
-    private string _pathToEncoders = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "bin\\Encoder\\");
-    private string _outFile;
+
+    private readonly string _pathToEncoders = Path.Combine(Application.StartupPath, "bin\\Encoder\\");
+    private readonly QueueMessage msg;
+    private readonly IMessageQueue queue;
     private string _encoder;
+    private string _outFile;
     private ILogger log;
-    private QueueMessage msg;
-    IMessageQueue queue;
+
     #endregion
 
     #region ctor
+
     public AudioEncoder()
     {
       log = ServiceScope.Get<ILogger>();
       queue = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
       msg = new QueueMessage();
     }
+
     #endregion
 
     #region IAudioEncoder Members
+
     /// <summary>
-    /// Sets the Encoder and the Outfile Name
+    ///   Sets the Encoder and the Outfile Name
     /// </summary>
-    /// <param name="encoder"></param>
-    /// <param name="outFile"></param>
+    /// <param name = "encoder"></param>
+    /// <param name = "outFile"></param>
     /// <returns>Formatted Outfile with Extension</returns>
     public string SetEncoder(string encoder, string outFile)
     {
@@ -41,17 +70,16 @@ namespace MPTagThat.Core.AudioEncoder
     }
 
     /// <summary>
-    /// Starts encoding using the given Parameters
+    ///   Starts encoding using the given Parameters
     /// </summary>
-    /// <param name="stream"></param>
-    /// <param name="encoderParms"></param>
-    /// 
+    /// <param name = "stream"></param>
+    /// <param name = "encoderParms"></param>
     public BASSError StartEncoding(int stream)
     {
       BaseEncoder encoder = SetEncoderSettings(stream);
       encoder.EncoderDirectory = _pathToEncoders;
       encoder.OutputFile = _outFile;
-      encoder.InputFile = null;    // Use stdin
+      encoder.InputFile = null; // Use stdin
 
       bool encoderHandle = encoder.Start(null, IntPtr.Zero, false);
       if (!encoderHandle)
@@ -68,19 +96,21 @@ namespace MPTagThat.Core.AudioEncoder
         // getting sample data will automatically feed the encoder
         int len = Bass.BASS_ChannelGetData(stream, encBuffer, encBuffer.Length);
         pos = Bass.BASS_ChannelGetPosition(stream);
-        double percentComplete = (double)pos / (double)chanLength * 100.0;
+        double percentComplete = pos / (double)chanLength * 100.0;
 
         // Send the message
-        msg.MessageData["progress"] = percentComplete;       
+        msg.MessageData["progress"] = percentComplete;
         queue.Send(msg);
       }
 
       encoder.Stop();
       return BASSError.BASS_OK;
     }
+
     #endregion
 
     #region Private Methods
+
     private string SetOutFileExtension(string outFile)
     {
       string outFileName = outFile;
@@ -138,7 +168,8 @@ namespace MPTagThat.Core.AudioEncoder
             if (Options.MainSettings.RipLamePreset == (int)Options.LamePreset.ABR)
               encLame.LAME_PresetName = Options.MainSettings.RipLameABRBitRate.ToString();
             else
-              encLame.LAME_PresetName = Enum.GetName(typeof(Options.LamePreset), Options.MainSettings.RipLamePreset).ToLower();
+              encLame.LAME_PresetName =
+                Enum.GetName(typeof (Options.LamePreset), Options.MainSettings.RipLamePreset).ToLower();
           }
           encoder = encLame;
           break;
@@ -152,7 +183,7 @@ namespace MPTagThat.Core.AudioEncoder
           }
           else
           {
-            encOgg.OGG_Quality = (float)Convert.ToInt32(Options.MainSettings.RipOggQuality);
+            encOgg.OGG_Quality = Convert.ToInt32(Options.MainSettings.RipOggQuality);
           }
           encoder = encOgg;
           break;
@@ -176,8 +207,11 @@ namespace MPTagThat.Core.AudioEncoder
         case "m4a":
           EncoderWinampAACplus encAAC = new EncoderWinampAACplus(stream);
           encAAC.AACPlus_Mp4Box = true;
-          
-          int bitrate = Convert.ToInt32(Options.MainSettings.RipEncoderAACBitRate.Substring(0, Options.MainSettings.RipEncoderAACBitRate.IndexOf(' ')));
+
+          int bitrate =
+            Convert.ToInt32(Options.MainSettings.RipEncoderAACBitRate.Substring(0,
+                                                                                Options.MainSettings.
+                                                                                  RipEncoderAACBitRate.IndexOf(' ')));
           encAAC.AACPlus_Bitrate = bitrate;
 
           if (Options.MainSettings.RipEncoderAAC.Contains("High"))
@@ -229,7 +263,8 @@ namespace MPTagThat.Core.AudioEncoder
           }
           else
           {
-            encMpc.MPC_Preset = (EncoderMPC.MPCPreset)Enum.Parse(typeof(EncoderMPC.MPCPreset), Options.MainSettings.RipEncoderMPCPreset);
+            encMpc.MPC_Preset =
+              (EncoderMPC.MPCPreset)Enum.Parse(typeof (EncoderMPC.MPCPreset), Options.MainSettings.RipEncoderMPCPreset);
           }
           encoder = encMpc;
           break;
@@ -254,6 +289,7 @@ namespace MPTagThat.Core.AudioEncoder
 
       return encoder;
     }
+
     #endregion
   }
 }

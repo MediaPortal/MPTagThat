@@ -1,28 +1,55 @@
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
+#endregion
+
 namespace MPTagThat.Core
 {
   /// <summary>
-  /// An <see cref="ILogger"/> implementation that writes messages to a text file.
+  ///   An <see cref = "ILogger" /> implementation that writes messages to a text file.
   /// </summary>
-  /// <remarks>If the text file exists it will be truncated.</remarks>
+  /// <remarks>
+  ///   If the text file exists it will be truncated.
+  /// </remarks>
   public class FileLogger : ILogger
   {
+    private static readonly object syncObject = new object();
+    private readonly string fileName; //holds the file to write to.
     private LogLevel level; //holds the treshold for the log level.
-    private string fileName; //holds the file to write to.
-    private static object syncObject = new object();
 
     /// <summary>
-    /// Creates a new <see cref="FileLogger"/> instance and initializes it with the given filename and <see cref="LogLevel"/>.
+    ///   Creates a new <see cref = "FileLogger" /> instance and initializes it with the given filename and <see cref = "LogLevel" />.
     /// </summary>
-    /// <param name="fileName">The full path of the file to write the messages to.</param>
-    /// <param name="level">The minimum level messages must have to be written to the file.</param>
+    /// <param name = "fileName">The full path of the file to write the messages to.</param>
+    /// <param name = "level">The minimum level messages must have to be written to the file.</param>
     public FileLogger(string fileName, LogLevel level, int portable)
     {
-      string logPath = String.Format(@"{0}\MPTagThat\Log", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      string logPath = String.Format(@"{0}\MPTagThat\Log",
+                                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
       if (portable == 1)
         logPath = String.Format(@"{0}\Log", Application.StartupPath);
 
@@ -37,18 +64,19 @@ namespace MPTagThat.Core
           File.Copy(this.fileName, String.Format("{0}.bak", this.fileName), true);
           File.Delete(this.fileName);
         }
-        catch (UnauthorizedAccessException)
-        { }
+        catch (UnauthorizedAccessException) {}
       }
 
       this.level = level;
     }
 
+    #region ILogger Members
+
     /// <summary>
-    /// Gets or sets the log level.
+    ///   Gets or sets the log level.
     /// </summary>
-    /// <value>A <see cref="LogLevel"/> value that indicates the minimum level messages must have to be 
-    /// written to the file.</value>
+    /// <value>A <see cref = "LogLevel" /> value that indicates the minimum level messages must have to be 
+    ///   written to the file.</value>
     public LogLevel Level
     {
       get { return level; }
@@ -56,51 +84,51 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Writes an informational message to the log.
+    ///   Writes an informational message to the log.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Info(string format, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Information);
     }
 
     /// <summary>
-    /// Writes a warning to the log.
+    ///   Writes a warning to the log.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Warn(string format, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Warning);
     }
 
     /// <summary>
-    /// Writes a debug message to the log.
+    ///   Writes a debug message to the log.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Debug(string format, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Debug);
     }
 
     /// <summary>
-    /// Writes an error message to the log.
+    ///   Writes an error message to the log.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Error(string format, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Error);
     }
 
     /// <summary>
-    /// Writes an error message to the log, passing the original <see cref="Exception"/>.
+    ///   Writes an error message to the log, passing the original <see cref = "Exception" />.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="ex">The <see cref="Exception"/> that caused the message.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "ex">The <see cref = "Exception" /> that caused the message.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Error(string format, Exception ex, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Error);
@@ -108,9 +136,9 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Writes an <see cref="Exception"/> to the log.
+    ///   Writes an <see cref = "Exception" /> to the log.
     /// </summary>
-    /// <param name="ex">The <see cref="Exception"/> to write.</param>
+    /// <param name = "ex">The <see cref = "Exception" /> to write.</param>
     public void Error(Exception ex)
     {
       if (level >= LogLevel.Error)
@@ -120,19 +148,21 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Writes a critical system message to the log.
+    ///   Writes a critical system message to the log.
     /// </summary>
-    /// <param name="format">A composite format string.</param>
-    /// <param name="args">An array of objects to write using format.</param>
+    /// <param name = "format">A composite format string.</param>
+    /// <param name = "args">An array of objects to write using format.</param>
     public void Critical(string format, params object[] args)
     {
       Write(string.Format(format, args), LogLevel.Critical);
     }
 
+    #endregion
+
     /// <summary>
-    /// Does the actual writing of the message to the file.
+    ///   Does the actual writing of the message to the file.
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name = "message"></param>
     private void Write(string message)
     {
       Monitor.Enter(syncObject);
@@ -150,10 +180,10 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Does the actual writing of the message to the file.
+    ///   Does the actual writing of the message to the file.
     /// </summary>
-    /// <param name="message">The message to write</param>
-    /// <param name="messageLevel">The <see cref="LogLevel"/> of the message to write</param>
+    /// <param name = "message">The message to write</param>
+    /// <param name = "messageLevel">The <see cref = "LogLevel" /> of the message to write</param>
     private void Write(string message, LogLevel messageLevel)
     {
       if (messageLevel > level)
@@ -180,9 +210,9 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Writes an <see cref="Exception"/> instance to the file.
+    ///   Writes an <see cref = "Exception" /> instance to the file.
     /// </summary>
-    /// <param name="ex">The <see cref="Exception"/> to write.</param>
+    /// <param name = "ex">The <see cref = "Exception" /> to write.</param>
     private void WriteException(Exception ex)
     {
       Write("Exception: " + ex);
@@ -199,9 +229,9 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Writes any existing inner exceptions to the file.
+    ///   Writes any existing inner exceptions to the file.
     /// </summary>
-    /// <param name="exception"></param>
+    /// <param name = "exception"></param>
     private void WriteInnerException(Exception exception)
     {
       if (exception == null)

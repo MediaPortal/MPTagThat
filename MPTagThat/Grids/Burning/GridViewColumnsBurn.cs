@@ -1,24 +1,49 @@
-using System;
+#region Copyright (C) 2009-2010 Team MediaPortal
+
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using MPTagThat.Core;
+
+#endregion
 
 namespace MPTagThat.GridView
 {
   public class GridViewColumnsBurn
   {
     #region Variables
+
+    private readonly GridViewColumn _artist;
+    private readonly GridViewColumn _duration;
+    private readonly GridViewColumn _filename;
+    private readonly GridViewColumn _status;
+    private readonly GridViewColumn _title;
+    private readonly GridViewColumn _track;
     private GridViewSettings _settings;
-    private GridViewColumn _filename;
-    private GridViewColumn _status;
-    private GridViewColumn _track;
-    private GridViewColumn _artist;
-    private GridViewColumn _title;
-    private GridViewColumn _duration;
+
     #endregion
 
     #region Constructor
+
     public GridViewColumnsBurn()
     {
       _status = new GridViewColumn("Status", "process", 100, true, true, false, true);
@@ -29,17 +54,20 @@ namespace MPTagThat.GridView
       _filename = new GridViewColumn("FullFileName", "text", 350, true, false, true, false);
       LoadSettings();
     }
+
     #endregion
 
-
     #region Properties
+
     public GridViewSettings Settings
     {
       get { return _settings; }
     }
+
     #endregion
 
     #region Private Methods
+
     private void LoadSettings()
     {
       _settings = new GridViewSettings();
@@ -76,7 +104,7 @@ namespace MPTagThat.GridView
 
     private List<GridViewColumn> SetDefaultColumns()
     {
-      List<GridViewColumn> columnList = new List<GridViewColumn>();   
+      List<GridViewColumn> columnList = new List<GridViewColumn>();
       columnList.Add(_status);
       columnList.Add(_track);
       columnList.Add(_artist);
@@ -85,6 +113,7 @@ namespace MPTagThat.GridView
       columnList.Add(_filename);
       return columnList;
     }
+
     #endregion
   }
 }

@@ -1,53 +1,41 @@
-#region Copyright
-/*
+#region Copyright (C) 2009-2010 Team MediaPortal
 
-	Windows Forms Collapsible Splitter Control for .Net
-	(c)Copyright 2002-2003 NJF (furty74@yahoo.com). All rights reserved.
-	
-	Assembly Build Dependencies:
-	CollapsibleSplitter.bmp
-	
-	Version 1.1 Changes:
-	OnPaint is now overridden instead of being a handled event, and the entire splitter is now painted rather than just the collpaser control
-	The splitter rectangle is now correctly defined
-	The Collapsed property was renamed to IsCollapsed, and the code changed so that no value needs to be set
-	New visual styles added: Win9x, XP, DoubleDots and Lines
-	
-	Version 1.11 Changes:
-	The OnMouseMove event handler was updated to address a flickering issue discovered by John O'Byrne
-	
-	Version 1.2 Changes:
-	Added support for horizontal splitters
-	
-	Version 1.21 Changes:
-	Added support for inclusion as a VS.Net ToolBox control
-	Added a ToolBox bitmap
-	Removed extraneous overrides
-	Added summaries
-	
-	Version 1.22 Changes:
-	Removed the ParentFolder from public properties - this is now set automatically in the OnHandleCreated event
-	*Added expand/collapse animation code
-	
-	Version 1.3 Changes:
-	Added an optional 3D border
-	General code and comment cleaning
-	Flagged assembly with the CLSCompliant attribute
-	Added a simple designer class to filter unwanted properties
-	
-*/
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
+
 #endregion
 
 namespace NJFLib.Controls
 {
-  using System;
-  using System.ComponentModel;
-  using System.Drawing;
-  using System.Windows.Forms;
 
   #region Enums
+
   /// <summary>
-  /// Enumeration to sepcify the visual style to be applied to the CollapsibleSplitter control
+  ///   Enumeration to sepcify the visual style to be applied to the CollapsibleSplitter control
   /// </summary>
   public enum VisualStyles
   {
@@ -59,7 +47,7 @@ namespace NJFLib.Controls
   }
 
   /// <summary>
-  /// Enumeration to specify the current animation state of the control.
+  ///   Enumeration to specify the current animation state of the control.
   /// </summary>
   public enum SplitterState
   {
@@ -72,139 +60,141 @@ namespace NJFLib.Controls
   #endregion
 
   /// <summary>
-  /// A custom collapsible splitter that can resize, hide and show associated form controls
+  ///   A custom collapsible splitter that can resize, hide and show associated form controls
   /// </summary>
-  [ToolboxBitmap(typeof(CollapsibleSplitter))]
-  [DesignerAttribute(typeof(CollapsibleSplitterDesigner))]
-  public class CollapsibleSplitter : System.Windows.Forms.Splitter
+  [ToolboxBitmap(typeof (CollapsibleSplitter))]
+  [Designer(typeof (CollapsibleSplitterDesigner))]
+  public class CollapsibleSplitter : Splitter
   {
     #region Private Properties
 
     // declare and define some base properties
-    private bool hot;
-    private System.Drawing.Color hotColor = CalculateColor(SystemColors.Highlight, SystemColors.Window, 70);
-    private System.Windows.Forms.Control controlToHide;
-    private System.Drawing.Rectangle rr;
-    private System.Windows.Forms.Form parentForm;
-    private bool expandParentForm;
-    private VisualStyles visualStyle;
-
-    // Border added in version 1.3
-    private System.Windows.Forms.Border3DStyle borderStyle = System.Windows.Forms.Border3DStyle.Flat;
-
-    // animation controls introduced in version 1.22
-    private System.Windows.Forms.Timer animationTimer;
-    private int controlWidth;
-    private int controlHeight;
-    private int parentFormWidth;
-    private int parentFormHeight;
-    private SplitterState currentState;
+    private readonly Timer animationTimer;
+    private readonly Color hotColor = CalculateColor(SystemColors.Highlight, SystemColors.Window, 70);
     private int animationDelay = 20;
     private int animationStep = 20;
+
+    // Border added in version 1.3
+    private Border3DStyle borderStyle = Border3DStyle.Flat;
+
+    // animation controls introduced in version 1.22
+    private int controlHeight;
+    private Control controlToHide;
+    private int controlWidth;
+    private SplitterState currentState;
+    private bool expandParentForm;
+    private bool hot;
+    private Form parentForm;
+    private int parentFormHeight;
+    private int parentFormWidth;
+    private Rectangle rr;
     private bool useAnimations;
+    private VisualStyles visualStyle;
 
     #endregion
 
     #region Public Properties
 
     /// <summary>
-    /// The initial state of the Splitter. Set to True if the control to hide is not visible by default
+    ///   The initial state of the Splitter. Set to True if the control to hide is not visible by default
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("False"),
-    Description("The initial state of the Splitter. Set to True if the control to hide is not visible by default")]
+     Description("The initial state of the Splitter. Set to True if the control to hide is not visible by default")]
     public bool IsCollapsed
     {
       get
       {
-        if (this.controlToHide != null)
-          return !this.controlToHide.Visible;
+        if (controlToHide != null)
+          return !controlToHide.Visible;
         else
           return true;
       }
     }
 
     /// <summary>
-    /// The System.Windows.Forms.Control that the splitter will collapse
+    ///   The System.Windows.Forms.Control that the splitter will collapse
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue(""),
-    Description("The System.Windows.Forms.Control that the splitter will collapse")]
-    public System.Windows.Forms.Control ControlToHide
+     Description("The System.Windows.Forms.Control that the splitter will collapse")]
+    public Control ControlToHide
     {
-      get { return this.controlToHide; }
-      set { this.controlToHide = value; }
+      get { return controlToHide; }
+      set { controlToHide = value; }
     }
 
     /// <summary>
-    /// Determines if the collapse and expanding actions will be animated
+    ///   Determines if the collapse and expanding actions will be animated
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("True"),
-    Description("Determines if the collapse and expanding actions will be animated")]
+     Description("Determines if the collapse and expanding actions will be animated")]
     public bool UseAnimations
     {
-      get { return this.useAnimations; }
-      set { this.useAnimations = value; }
+      get { return useAnimations; }
+      set { useAnimations = value; }
     }
 
     /// <summary>
-    /// The delay in millisenconds between animation steps
+    ///   The delay in millisenconds between animation steps
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("20"),
-    Description("The delay in millisenconds between animation steps")]
+     Description("The delay in millisenconds between animation steps")]
     public int AnimationDelay
     {
-      get { return this.animationDelay; }
-      set { this.animationDelay = value; }
+      get { return animationDelay; }
+      set { animationDelay = value; }
     }
 
     /// <summary>
-    /// The amount of pixels moved in each animation step
+    ///   The amount of pixels moved in each animation step
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("20"),
-    Description("The amount of pixels moved in each animation step")]
+     Description("The amount of pixels moved in each animation step")]
     public int AnimationStep
     {
-      get { return this.animationStep; }
-      set { this.animationStep = value; }
+      get { return animationStep; }
+      set { animationStep = value; }
     }
 
     /// <summary>
-    /// When true the entire parent form will be expanded and collapsed, otherwise just the contol to expand will be changed
+    ///   When true the entire parent form will be expanded and collapsed, otherwise just the contol to expand will be changed
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("False"),
-    Description("When true the entire parent form will be expanded and collapsed, otherwise just the contol to expand will be changed")]
+     Description(
+       "When true the entire parent form will be expanded and collapsed, otherwise just the contol to expand will be changed"
+       )]
     public bool ExpandParentForm
     {
-      get { return this.expandParentForm; }
-      set { this.expandParentForm = value; }
+      get { return expandParentForm; }
+      set { expandParentForm = value; }
     }
 
     /// <summary>
-    /// The visual style that will be painted on the control
+    ///   The visual style that will be painted on the control
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("VisualStyles.XP"),
-    Description("The visual style that will be painted on the control")]
+     Description("The visual style that will be painted on the control")]
     public VisualStyles VisualStyle
     {
-      get { return this.visualStyle; }
+      get { return visualStyle; }
       set
       {
-        this.visualStyle = value;
-        this.Invalidate();
+        visualStyle = value;
+        Invalidate();
       }
     }
 
     /// <summary>
-    /// An optional border style to paint on the control. Set to Flat for no border
+    ///   An optional border style to paint on the control. Set to Flat for no border
     /// </summary>
     [Bindable(true), Category("Collapsing Options"), DefaultValue("System.Windows.Forms.Border3DStyle.Flat"),
-    Description("An optional border style to paint on the control. Set to Flat for no border")]
-    public System.Windows.Forms.Border3DStyle BorderStyle3D
+     Description("An optional border style to paint on the control. Set to Flat for no border")]
+    public Border3DStyle BorderStyle3D
     {
-      get { return this.borderStyle; }
+      get { return borderStyle; }
       set
       {
-        this.borderStyle = value;
-        this.Invalidate();
+        borderStyle = value;
+        Invalidate();
       }
     }
 
@@ -214,7 +204,7 @@ namespace NJFLib.Controls
 
     public void ToggleState()
     {
-      this.ToggleSplitter();
+      ToggleSplitter();
     }
 
     #endregion
@@ -224,15 +214,15 @@ namespace NJFLib.Controls
     public CollapsibleSplitter()
     {
       // Register mouse events
-      this.Click += new System.EventHandler(OnClick);
-      this.Resize += new System.EventHandler(OnResize);
-      this.MouseLeave += new System.EventHandler(OnMouseLeave);
-      this.MouseMove += new MouseEventHandler(OnMouseMove);
+      Click += OnClick;
+      Resize += OnResize;
+      MouseLeave += OnMouseLeave;
+      MouseMove += OnMouseMove;
 
       // Setup the animation timer control
-      this.animationTimer = new System.Windows.Forms.Timer();
-      this.animationTimer.Interval = animationDelay;
-      this.animationTimer.Tick += new System.EventHandler(this.animationTimerTick);
+      animationTimer = new Timer();
+      animationTimer.Interval = animationDelay;
+      animationTimer.Tick += animationTimerTick;
     }
 
     #endregion
@@ -242,26 +232,26 @@ namespace NJFLib.Controls
     protected override void OnHandleCreated(EventArgs e)
     {
       base.OnHandleCreated(e);
-      this.parentForm = this.FindForm();
+      parentForm = FindForm();
 
       // set the current state
-      if (this.controlToHide != null)
+      if (controlToHide != null)
       {
-        if (this.controlToHide.Visible)
+        if (controlToHide.Visible)
         {
-          this.currentState = SplitterState.Expanded;
+          currentState = SplitterState.Expanded;
         }
         else
         {
-          this.currentState = SplitterState.Collapsed;
+          currentState = SplitterState.Collapsed;
         }
       }
     }
 
-    protected override void OnEnabledChanged(System.EventArgs e)
+    protected override void OnEnabledChanged(EventArgs e)
     {
       base.OnEnabledChanged(e);
-      this.Invalidate();
+      Invalidate();
     }
 
     #endregion
@@ -271,75 +261,77 @@ namespace NJFLib.Controls
     protected override void OnMouseDown(MouseEventArgs e)
     {
       // if the hider control isn't hot, let the base resize action occur
-      if (this.controlToHide != null)
+      if (controlToHide != null)
       {
-        if (!this.hot && this.controlToHide.Visible)
+        if (!hot && controlToHide.Visible)
         {
           base.OnMouseDown(e);
         }
       }
     }
 
-    private void OnResize(object sender, System.EventArgs e)
+    private void OnResize(object sender, EventArgs e)
     {
-      this.Invalidate();
+      Invalidate();
     }
 
     // this method was updated in version 1.11 to fix a flickering problem
     // discovered by John O'Byrne
-    private void OnMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+    private void OnMouseMove(object sender, MouseEventArgs e)
     {
       // check to see if the mouse cursor position is within the bounds of our control
       if (e.X >= rr.X && e.X <= rr.X + rr.Width && e.Y >= rr.Y && e.Y <= rr.Y + rr.Height)
       {
-        if (!this.hot)
+        if (!hot)
         {
-          this.hot = true;
-          this.Cursor = Cursors.Hand;
-          this.Invalidate();
+          hot = true;
+          Cursor = Cursors.Hand;
+          Invalidate();
         }
       }
       else
       {
-        if (this.hot)
+        if (hot)
         {
-          this.hot = false;
-          this.Invalidate(); ;
+          hot = false;
+          Invalidate();
+          ;
         }
 
-        this.Cursor = Cursors.Default;
+        Cursor = Cursors.Default;
 
         if (controlToHide != null)
         {
           if (!controlToHide.Visible)
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
           else // Changed in v1.2 to support Horizontal Splitters
           {
-            if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+            if (Dock == DockStyle.Left || Dock == DockStyle.Right)
             {
-              this.Cursor = Cursors.VSplit;
+              Cursor = Cursors.VSplit;
             }
             else
             {
-              this.Cursor = Cursors.HSplit;
+              Cursor = Cursors.HSplit;
             }
           }
         }
       }
     }
 
-    private void OnMouseLeave(object sender, System.EventArgs e)
+    private void OnMouseLeave(object sender, EventArgs e)
     {
       // ensure that the hot state is removed
-      this.hot = false;
-      this.Invalidate(); ;
+      hot = false;
+      Invalidate();
+      ;
     }
 
-    private void OnClick(object sender, System.EventArgs e)
+    private void OnClick(object sender, EventArgs e)
     {
       if (controlToHide != null && hot &&
-        currentState != SplitterState.Collapsing &&
-        currentState != SplitterState.Expanding)
+          currentState != SplitterState.Collapsing &&
+          currentState != SplitterState.Expanding)
       {
         ToggleSplitter();
       }
@@ -347,7 +339,6 @@ namespace NJFLib.Controls
 
     private void ToggleSplitter()
     {
-
       // if an animation is currently in progress for this control, drop out
       if (currentState == SplitterState.Collapsing || currentState == SplitterState.Expanding)
         return;
@@ -363,7 +354,7 @@ namespace NJFLib.Controls
 
           if (parentForm != null)
           {
-            if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+            if (Dock == DockStyle.Left || Dock == DockStyle.Right)
             {
               parentFormWidth = parentForm.Width - controlWidth;
             }
@@ -373,7 +364,7 @@ namespace NJFLib.Controls
             }
           }
 
-          this.animationTimer.Enabled = true;
+          animationTimer.Enabled = true;
         }
         else
         {
@@ -382,7 +373,7 @@ namespace NJFLib.Controls
           controlToHide.Visible = false;
           if (expandParentForm && parentForm != null)
           {
-            if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+            if (Dock == DockStyle.Left || Dock == DockStyle.Right)
             {
               parentForm.Width -= controlToHide.Width;
             }
@@ -400,14 +391,13 @@ namespace NJFLib.Controls
         {
           currentState = SplitterState.Expanding;
 
-          if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+          if (Dock == DockStyle.Left || Dock == DockStyle.Right)
           {
             if (parentForm != null)
             {
               parentFormWidth = parentForm.Width + controlWidth;
             }
             controlToHide.Width = 0;
-
           }
           else
           {
@@ -418,7 +408,7 @@ namespace NJFLib.Controls
             controlToHide.Height = 0;
           }
           controlToHide.Visible = true;
-          this.animationTimer.Enabled = true;
+          animationTimer.Enabled = true;
         }
         else
         {
@@ -427,7 +417,7 @@ namespace NJFLib.Controls
           controlToHide.Visible = true;
           if (expandParentForm && parentForm != null)
           {
-            if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+            if (Dock == DockStyle.Left || Dock == DockStyle.Right)
             {
               parentForm.Width += controlToHide.Width;
             }
@@ -438,7 +428,6 @@ namespace NJFLib.Controls
           }
         }
       }
-
     }
 
     #endregion
@@ -447,19 +436,19 @@ namespace NJFLib.Controls
 
     #region Animation Timer Tick
 
-    private void animationTimerTick(object sender, System.EventArgs e)
+    private void animationTimerTick(object sender, EventArgs e)
     {
       switch (currentState)
       {
         case SplitterState.Collapsing:
 
-          if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+          if (Dock == DockStyle.Left || Dock == DockStyle.Right)
           {
             // vertical splitter
             if (controlToHide.Width > animationStep)
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Width -= animationStep;
               }
@@ -468,7 +457,7 @@ namespace NJFLib.Controls
             else
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Width = parentFormWidth;
               }
@@ -476,7 +465,7 @@ namespace NJFLib.Controls
               animationTimer.Enabled = false;
               controlToHide.Width = controlWidth;
               currentState = SplitterState.Collapsed;
-              this.Invalidate();
+              Invalidate();
             }
           }
           else
@@ -485,7 +474,7 @@ namespace NJFLib.Controls
             if (controlToHide.Height > animationStep)
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Height -= animationStep;
               }
@@ -494,7 +483,7 @@ namespace NJFLib.Controls
             else
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Height = parentFormHeight;
               }
@@ -502,20 +491,20 @@ namespace NJFLib.Controls
               animationTimer.Enabled = false;
               controlToHide.Height = controlHeight;
               currentState = SplitterState.Collapsed;
-              this.Invalidate();
+              Invalidate();
             }
           }
           break;
 
         case SplitterState.Expanding:
 
-          if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+          if (Dock == DockStyle.Left || Dock == DockStyle.Right)
           {
             // vertical splitter
             if (controlToHide.Width < (controlWidth - animationStep))
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Width += animationStep;
               }
@@ -524,7 +513,7 @@ namespace NJFLib.Controls
             else
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Width = parentFormWidth;
               }
@@ -532,7 +521,7 @@ namespace NJFLib.Controls
               controlToHide.Visible = true;
               animationTimer.Enabled = false;
               currentState = SplitterState.Expanded;
-              this.Invalidate();
+              Invalidate();
             }
           }
           else
@@ -541,7 +530,7 @@ namespace NJFLib.Controls
             if (controlToHide.Height < (controlHeight - animationStep))
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Height += animationStep;
               }
@@ -550,7 +539,7 @@ namespace NJFLib.Controls
             else
             {
               if (expandParentForm && parentForm.WindowState != FormWindowState.Maximized
-                && parentForm != null)
+                  && parentForm != null)
               {
                 parentForm.Height = parentFormHeight;
               }
@@ -558,9 +547,8 @@ namespace NJFLib.Controls
               controlToHide.Visible = true;
               animationTimer.Enabled = false;
               currentState = SplitterState.Expanded;
-              this.Invalidate();
+              Invalidate();
             }
-
           }
           break;
       }
@@ -577,17 +565,18 @@ namespace NJFLib.Controls
       Graphics g = e.Graphics;
 
       // find the rectangle for the splitter and paint it
-      Rectangle r = this.ClientRectangle; // fixed in version 1.1
-      g.FillRectangle(new SolidBrush(this.BackColor), r);
+      Rectangle r = ClientRectangle; // fixed in version 1.1
+      g.FillRectangle(new SolidBrush(BackColor), r);
 
       #region Vertical Splitter
+
       // Check the docking style and create the control rectangle accordingly
-      if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
+      if (Dock == DockStyle.Left || Dock == DockStyle.Right)
       {
         // create a new rectangle in the vertical center of the splitter for our collapse control button
-        rr = new Rectangle(r.X, (int)r.Y + ((r.Height - 115) / 2), 8, 115);
+        rr = new Rectangle(r.X, r.Y + ((r.Height - 115) / 2), 8, 115);
         // force the width to 8px so that everything always draws correctly
-        this.Width = 8;
+        Width = 8;
 
         // draw the background color for our control image
         if (hot)
@@ -596,14 +585,15 @@ namespace NJFLib.Controls
         }
         else
         {
-          g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(rr.X + 1, rr.Y, 6, 115));
+          g.FillRectangle(new SolidBrush(BackColor), new Rectangle(rr.X + 1, rr.Y, 6, 115));
         }
 
         // draw the top & bottom lines for our control image
         g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X + 1, rr.Y, rr.X + rr.Width - 2, rr.Y);
-        g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X + 1, rr.Y + rr.Height, rr.X + rr.Width - 2, rr.Y + rr.Height);
+        g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X + 1, rr.Y + rr.Height, rr.X + rr.Width - 2,
+                   rr.Y + rr.Height);
 
-        if (this.Enabled)
+        if (Enabled)
         {
           // draw the arrows for our control image
           // the ArrowPointArray is a point array that defines an arrow shaped polygon
@@ -633,7 +623,7 @@ namespace NJFLib.Controls
               }
               else
               {
-                g.DrawLine(new Pen(this.BackColor), x + 2, y + 1 + (i * 3), x + 2, y + 2 + (i * 3));
+                g.DrawLine(new Pen(BackColor), x + 2, y + 1 + (i * 3), x + 2, y + 2 + (i * 3));
               }
             }
             break;
@@ -688,26 +678,26 @@ namespace NJFLib.Controls
         }
 
         // Added in version 1.3
-        if (this.borderStyle != System.Windows.Forms.Border3DStyle.Flat)
+        if (borderStyle != Border3DStyle.Flat)
         {
           // Paint the control border
-          ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, this.borderStyle, Border3DSide.Left);
-          ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, this.borderStyle, Border3DSide.Right);
+          ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, borderStyle, Border3DSide.Left);
+          ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, borderStyle, Border3DSide.Right);
         }
       }
 
-      #endregion
+        #endregion
 
-      // Horizontal Splitter support added in v1.2
+        // Horizontal Splitter support added in v1.2
 
-      #region Horizontal Splitter
+        #region Horizontal Splitter
 
-      else if (this.Dock == DockStyle.Top || this.Dock == DockStyle.Bottom)
+      else if (Dock == DockStyle.Top || Dock == DockStyle.Bottom)
       {
         // create a new rectangle in the horizontal center of the splitter for our collapse control button
-        rr = new Rectangle((int)r.X + ((r.Width - 115) / 2), r.Y, 115, 8);
+        rr = new Rectangle(r.X + ((r.Width - 115) / 2), r.Y, 115, 8);
         // force the height to 8px
-        this.Height = 8;
+        Height = 8;
 
         // draw the background color for our control image
         if (hot)
@@ -716,14 +706,15 @@ namespace NJFLib.Controls
         }
         else
         {
-          g.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(rr.X, rr.Y + 1, 115, 6));
+          g.FillRectangle(new SolidBrush(BackColor), new Rectangle(rr.X, rr.Y + 1, 115, 6));
         }
 
         // draw the left & right lines for our control image
         g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X, rr.Y + 1, rr.X, rr.Y + rr.Height - 2);
-        g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X + rr.Width, rr.Y + 1, rr.X + rr.Width, rr.Y + rr.Height - 2);
+        g.DrawLine(new Pen(SystemColors.ControlDark, 1), rr.X + rr.Width, rr.Y + 1, rr.X + rr.Width,
+                   rr.Y + rr.Height - 2);
 
-        if (this.Enabled)
+        if (Enabled)
         {
           // draw the arrows for our control image
           // the ArrowPointArray is a point array that defines an arrow shaped polygon
@@ -753,7 +744,7 @@ namespace NJFLib.Controls
               }
               else
               {
-                g.DrawLine(new Pen(this.BackColor), x + 1 + (i * 3), y + 2, x + 2 + (i * 3), y + 2);
+                g.DrawLine(new Pen(BackColor), x + 1 + (i * 3), y + 2, x + 2 + (i * 3), y + 2);
               }
             }
             break;
@@ -809,15 +800,15 @@ namespace NJFLib.Controls
         }
 
         // Added in version 1.3
-        if (this.borderStyle != System.Windows.Forms.Border3DStyle.Flat)
+        if (borderStyle != Border3DStyle.Flat)
         {
           // Paint the control border
-          ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, this.borderStyle, Border3DSide.Top);
-          ControlPaint.DrawBorder3D(e.Graphics, this.ClientRectangle, this.borderStyle, Border3DSide.Bottom);
+          ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, borderStyle, Border3DSide.Top);
+          ControlPaint.DrawBorder3D(e.Graphics, ClientRectangle, borderStyle, Border3DSide.Bottom);
         }
       }
 
-      #endregion
+        #endregion
 
       else
       {
@@ -825,10 +816,10 @@ namespace NJFLib.Controls
       }
 
 
-
       // dispose the Graphics object
       g.Dispose();
     }
+
     #endregion
 
     #region Arrow Polygon Array
@@ -842,8 +833,8 @@ namespace NJFLib.Controls
       {
         // decide which direction the arrow will point
         if (
-          (this.Dock == DockStyle.Right && controlToHide.Visible)
-          || (this.Dock == DockStyle.Left && !controlToHide.Visible)
+          (Dock == DockStyle.Right && controlToHide.Visible)
+          || (Dock == DockStyle.Left && !controlToHide.Visible)
           )
         {
           // right arrow
@@ -852,8 +843,8 @@ namespace NJFLib.Controls
           point[2] = new Point(x, y + 6);
         }
         else if (
-          (this.Dock == DockStyle.Right && !controlToHide.Visible)
-          || (this.Dock == DockStyle.Left && controlToHide.Visible)
+          (Dock == DockStyle.Right && !controlToHide.Visible)
+          || (Dock == DockStyle.Left && controlToHide.Visible)
           )
         {
           // left arrow
@@ -865,8 +856,8 @@ namespace NJFLib.Controls
           // Up/Down arrows added in v1.2
 
         else if (
-          (this.Dock == DockStyle.Top && controlToHide.Visible)
-          || (this.Dock == DockStyle.Bottom && !controlToHide.Visible)
+          (Dock == DockStyle.Top && controlToHide.Visible)
+          || (Dock == DockStyle.Bottom && !controlToHide.Visible)
           )
         {
           // up arrow
@@ -875,8 +866,8 @@ namespace NJFLib.Controls
           point[2] = new Point(x, y + 4);
         }
         else if (
-          (this.Dock == DockStyle.Top && !controlToHide.Visible)
-          || (this.Dock == DockStyle.Bottom && controlToHide.Visible)
+          (Dock == DockStyle.Top && !controlToHide.Visible)
+          || (Dock == DockStyle.Bottom && controlToHide.Visible)
           )
         {
           // down arrow
@@ -924,16 +915,12 @@ namespace NJFLib.Controls
   }
 
   /// <summary>
-  /// A simple designer class for the CollapsibleSplitter control to remove 
-  /// unwanted properties at design time.
+  ///   A simple designer class for the CollapsibleSplitter control to remove 
+  ///   unwanted properties at design time.
   /// </summary>
-  public class CollapsibleSplitterDesigner : System.Windows.Forms.Design.ControlDesigner
+  public class CollapsibleSplitterDesigner : ControlDesigner
   {
-    public CollapsibleSplitterDesigner()
-    {
-    }
-
-    protected override void PreFilterProperties(System.Collections.IDictionary properties)
+    protected override void PreFilterProperties(IDictionary properties)
     {
       properties.Remove("IsCollapsed");
       properties.Remove("BorderStyle");
@@ -941,4 +928,3 @@ namespace NJFLib.Controls
     }
   }
 }
-

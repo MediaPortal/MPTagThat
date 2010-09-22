@@ -1,120 +1,144 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Reflection;
-using System.Text;
-using System.IO;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
+#region Copyright (C) 2009-2010 Team MediaPortal
 
-using TagLib;
-using MPTagThat.GridView;
+// Copyright (C) 2009-2010 Team MediaPortal
+// http://www.team-mediaportal.com
+// 
+// MPTagThat is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MPTagThat is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
+
+#endregion
+
+#region
+
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+using Elegant.Ui;
 using MPTagThat.Core;
 using MPTagThat.Core.MediaChangeMonitor;
-using MPTagThat.Core.Burning;
 using MPTagThat.Dialogues;
+using MPTagThat.GridView;
+using MPTagThat.Organise;
+using MPTagThat.Player;
 using MPTagThat.TagEdit;
-using MPTagThat.FileNameToTag;
-
+using NJFLib.Controls;
+using Raccoom.Windows.Forms;
 using Un4seen.Bass;
+using Label = Elegant.Ui.Label;
+using MessageBox = System.Windows.Forms.MessageBox;
+using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
+using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
+
+#endregion
 
 namespace MPTagThat
 {
   public partial class Main : Form
   {
     #region Variables
-    private RibbonControl ribbonControl;
-    private bool _keyHandled = false;
-    private bool _showForm = false;
-    private object _dialog = null;
-    private bool _rightPanelCollapsed = false;
-    private bool _folderScanInProgress = false;
-    private bool _treeViewFolderSelected = false;
 
-    private TreeViewControl treeViewControl;
-    private QuickEditControl quickEditControl;
-    private MiscInfoControl miscInfoControl;
+    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
+    private object _dialog;
+    private Point _formLocation;
+    private Size _formSize;
+    private bool _keyHandled;
+    private MusicDatabaseBuild _musicDatabaseBuild;
+    private bool _rightPanelCollapsed;
+    private string _selectedDirectory = ""; // The currently selcted Directory
+    private bool _showForm;
+    private SplashScreen _splashScreen;
+    private bool _treeViewFolderSelected;
+    private bool _treeViewSelected; // Has the user selected the Treeview
+
     private DatabaseSearchControl databaseSearchControl;
 
     // Grids: Can't have them in Designer, as it will fail loading
-    private MPTagThat.GridView.GridViewTracks gridViewControl;
-    private MPTagThat.GridView.GridViewBurn gridViewBurn;
-    private MPTagThat.GridView.GridViewRip gridViewRip;
-    private MPTagThat.GridView.GridViewConvert gridViewConvert;
-    private MPTagThat.Player.PlayerControl playerControl;
-
-    private string _selectedDirectory = "";          // The currently selcted Directory
-    private bool _treeViewSelected = false;     // Has the user selected the Treeview
-    private Point _formLocation;
-    private Size _formSize;
-
-    private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private ILogger log = ServiceScope.Get<ILogger>();
-    private IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
-
-    private SplashScreen _splashScreen;
-
-    private MusicDatabaseBuild _musicDatabaseBuild = null;
+    private GridViewBurn gridViewBurn;
+    private GridViewTracks gridViewControl;
+    private GridViewConvert gridViewConvert;
+    private GridViewRip gridViewRip;
+    private MiscInfoControl miscInfoControl;
+    private PlayerControl playerControl;
+    private QuickEditControl quickEditControl;
+    private RibbonControl ribbonControl;
+    private TreeViewControl treeViewControl;
 
     private delegate void ThreadSafeFolderScan();
+
     #endregion
 
     #region Constructor
+
     public Main()
     {
-      Elegant.Ui.SkinManager.LoadEmbeddedTheme(Elegant.Ui.EmbeddedTheme.Office2007Silver, Elegant.Ui.Product.Common);
-      Elegant.Ui.SkinManager.LoadEmbeddedTheme(Elegant.Ui.EmbeddedTheme.Office2007Silver, Elegant.Ui.Product.Ribbon);
+      SkinManager.LoadEmbeddedTheme(EmbeddedTheme.Office2007Silver, Product.Common);
+      SkinManager.LoadEmbeddedTheme(EmbeddedTheme.Office2007Silver, Product.Ribbon);
       InitializeComponent();
     }
+
     #endregion
 
     #region Properties
+
     /// <summary>
-    /// Returns the Gridview containing the Tracks
+    ///   Returns the Gridview containing the Tracks
     /// </summary>
     public GridViewTracks TracksGridView
     {
-      get { return this.gridViewControl; }
+      get { return gridViewControl; }
     }
 
     /// <summary>
-    /// Returns the Burning Gridview
+    ///   Returns the Burning Gridview
     /// </summary>
     public GridViewBurn BurnGridView
     {
-      get { return this.gridViewBurn; }
+      get { return gridViewBurn; }
     }
 
     /// <summary>
-    /// Returns the Rip Gridview
+    ///   Returns the Rip Gridview
     /// </summary>
     public GridViewRip RipGridView
     {
-      get { return this.gridViewRip; }
+      get { return gridViewRip; }
     }
 
     /// <summary>
-    /// Returns the Convert Gridview
+    ///   Returns the Convert Gridview
     /// </summary>
     public GridViewConvert ConvertGridView
     {
-      get { return this.gridViewConvert; }
+      get { return gridViewConvert; }
     }
 
 
     /// <summary>
-    /// Returns the Error Gridview
+    ///   Returns the Error Gridview
     /// </summary>
     public DataGridView ErrorGridView
     {
-      get { return this.miscInfoControl.ErrorGridView; }
+      get { return miscInfoControl.ErrorGridView; }
     }
 
     /// <summary>
-    /// Is Burning Active?
+    ///   Is Burning Active?
     /// </summary>
     public bool Burning
     {
@@ -122,14 +146,14 @@ namespace MPTagThat
       {
         if (gridViewBurn == null)
         {
-          return false;          
+          return false;
         }
         return gridViewBurn.Burning;
       }
     }
 
     /// <summary>
-    /// Is Ripping active?
+    ///   Is Ripping active?
     /// </summary>
     public bool Ripping
     {
@@ -144,23 +168,23 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Top Splitter
+    ///   Returns the Top Splitter
     /// </summary>
-    public NJFLib.Controls.CollapsibleSplitter SplitterTop
+    public CollapsibleSplitter SplitterTop
     {
       get { return splitterTop; }
     }
 
     /// <summary>
-    /// Returns the Right Splitter
+    ///   Returns the Right Splitter
     /// </summary>
-    public NJFLib.Controls.CollapsibleSplitter SplitterRight
+    public CollapsibleSplitter SplitterRight
     {
       get { return splitterRight; }
     }
 
     /// <summary>
-    /// Returns the Status of the Right Splitter
+    ///   Returns the Status of the Right Splitter
     /// </summary>
     public bool RightSplitterStatus
     {
@@ -168,7 +192,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// return the MAIN Ribbon
+    ///   return the MAIN Ribbon
     /// </summary>
     public RibbonControl MainRibbon
     {
@@ -176,7 +200,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Gets / Sets the Current Selected Directory in the Treeview
+    ///   Gets / Sets the Current Selected Directory in the Treeview
     /// </summary>
     public string CurrentDirectory
     {
@@ -185,9 +209,9 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Player Control
+    ///   Returns the Player Control
     /// </summary>
-    public MPTagThat.Player.PlayerControl Player
+    public PlayerControl Player
     {
       get { return playerControl; }
     }
@@ -196,14 +220,9 @@ namespace MPTagThat
     {
       get { return _treeViewFolderSelected; }
       set { _treeViewFolderSelected = value; }
-
     }
 
-    public bool FolderScanning
-    {
-      get { return _folderScanInProgress; }
-      set { _folderScanInProgress = value; }
-    }
+    public bool FolderScanning { get; set; }
 
     public TreeViewControl TreeView
     {
@@ -215,17 +234,17 @@ namespace MPTagThat
       get { return quickEditControl; }
     }
 
-    public Elegant.Ui.Label ToolStripStatusFiles
+    public Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
     }
 
-    public Elegant.Ui.Label ToolStripStatusFilter
+    public Label ToolStripStatusFilter
     {
       get { return toolStripStatusLabelFilter; }
     }
 
-    public Elegant.Ui.Label ToolStripStatusScan
+    public Label ToolStripStatusScan
     {
       get { return toolStripStatusLabelScanProgress; }
     }
@@ -234,20 +253,22 @@ namespace MPTagThat
     {
       get { return miscInfoControl; }
     }
+
     #endregion
 
     #region Form Open / Close
+
     /// <summary>
-    /// The form is loaded. Do some init work.
+    ///   The form is loaded. Do some init work.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void Main_Load(object sender, EventArgs e)
     {
       Util.EnterMethod(Util.GetCallingMethod());
 
       //FindRibbonWin();
-      
+
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
@@ -255,7 +276,7 @@ namespace MPTagThat
 
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += new MessageReceivedHandler(OnMessageReceive);
+      queueMessage.OnMessageReceive += OnMessageReceive;
 
       /// Add the Ribbon Control to the Top Panel
       _splashScreen.SetInformation(localisation.ToString("splash", "AddRibbon"));
@@ -269,96 +290,98 @@ namespace MPTagThat
       ribbonControl.Initialising = true;
 
       #region Setup Grids
+
       log.Debug("Main: Setup Grid");
       _splashScreen.SetInformation(localisation.ToString("splash", "AddGrids"));
       // Add the Grids to the Main Form
-      gridViewControl = new MPTagThat.GridView.GridViewTracks();
-      gridViewBurn = new MPTagThat.GridView.GridViewBurn(this);
-      gridViewRip = new MPTagThat.GridView.GridViewRip(this);
+      gridViewControl = new GridViewTracks();
+      gridViewBurn = new GridViewBurn(this);
+      gridViewRip = new GridViewRip(this);
       gridViewConvert = new GridViewConvert(this);
-      playerControl = new Player.PlayerControl();
+      playerControl = new PlayerControl();
 
       // 
       // gridViewControl
       // 
-      this.gridViewControl.AutoScroll = true;
-      this.gridViewControl.Changed = false;
-      this.gridViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridViewControl.Location = new System.Drawing.Point(0, 0);
-      this.gridViewControl.Name = "gridViewControl";
-      this.gridViewControl.Size = new System.Drawing.Size(676, 470);
-      this.gridViewControl.TabIndex = 8;
+      gridViewControl.AutoScroll = true;
+      gridViewControl.Changed = false;
+      gridViewControl.Dock = DockStyle.Fill;
+      gridViewControl.Location = new Point(0, 0);
+      gridViewControl.Name = "gridViewControl";
+      gridViewControl.Size = new Size(676, 470);
+      gridViewControl.TabIndex = 8;
       // 
       // gridViewBurn
       // 
-      this.gridViewBurn.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridViewBurn.Location = new System.Drawing.Point(0, 0);
-      this.gridViewBurn.Name = "gridViewBurn";
-      this.gridViewBurn.Size = new System.Drawing.Size(676, 470);
-      this.gridViewBurn.TabIndex = 9;
-      this.gridViewBurn.Visible = false;
+      gridViewBurn.Dock = DockStyle.Fill;
+      gridViewBurn.Location = new Point(0, 0);
+      gridViewBurn.Name = "gridViewBurn";
+      gridViewBurn.Size = new Size(676, 470);
+      gridViewBurn.TabIndex = 9;
+      gridViewBurn.Visible = false;
       //
       // gridViewRip
       // 
-      this.gridViewRip.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridViewRip.Location = new System.Drawing.Point(0, 0);
-      this.gridViewRip.Name = "gridViewRip";
-      this.gridViewRip.Size = new System.Drawing.Size(676, 470);
-      this.gridViewRip.TabIndex = 9;
-      this.gridViewRip.Visible = false;
+      gridViewRip.Dock = DockStyle.Fill;
+      gridViewRip.Location = new Point(0, 0);
+      gridViewRip.Name = "gridViewRip";
+      gridViewRip.Size = new Size(676, 470);
+      gridViewRip.TabIndex = 9;
+      gridViewRip.Visible = false;
       //
       // gridViewConvert
       // 
-      this.gridViewConvert.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridViewConvert.Location = new System.Drawing.Point(0, 0);
-      this.gridViewConvert.Name = "gridViewConvert";
-      this.gridViewConvert.Size = new System.Drawing.Size(676, 470);
-      this.gridViewConvert.TabIndex = 9;
-      this.gridViewConvert.Visible = false;
+      gridViewConvert.Dock = DockStyle.Fill;
+      gridViewConvert.Location = new Point(0, 0);
+      gridViewConvert.Name = "gridViewConvert";
+      gridViewConvert.Size = new Size(676, 470);
+      gridViewConvert.TabIndex = 9;
+      gridViewConvert.Visible = false;
       // 
       // playerControl
       // 
-      this.playerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.playerControl.Location = new System.Drawing.Point(0, 0);
-      this.playerControl.Name = "playerControl";
-      this.playerControl.Size = new System.Drawing.Size(1008, 68);
-      this.playerControl.TabIndex = 0;
+      playerControl.Dock = DockStyle.Fill;
+      playerControl.Location = new Point(0, 0);
+      playerControl.Name = "playerControl";
+      playerControl.Size = new Size(1008, 68);
+      playerControl.TabIndex = 0;
 
-      this.panelFileList.Controls.Add(this.gridViewControl);
-      this.panelFileList.Controls.Add(this.gridViewBurn);
-      this.panelFileList.Controls.Add(this.gridViewRip);
-      this.panelFileList.Controls.Add(this.gridViewConvert);
-      this.playerPanel.Controls.Add(this.playerControl);
+      panelFileList.Controls.Add(gridViewControl);
+      panelFileList.Controls.Add(gridViewBurn);
+      panelFileList.Controls.Add(gridViewRip);
+      panelFileList.Controls.Add(gridViewConvert);
+      playerPanel.Controls.Add(playerControl);
 
       // Set reference to Main, so that we may use the ErrorGrid
       gridViewControl.SetMainRef(this);
+
       #endregion
 
       // Hide the DB Search Panel
-      this.splitterTop.ToggleState();
+      splitterTop.ToggleState();
 
       // Setup Treeview
       treeViewControl = new TreeViewControl(this);
       treeViewControl.Dock = DockStyle.Fill;
-      this.panelLeftTop.Controls.Add(treeViewControl);
+      panelLeftTop.Controls.Add(treeViewControl);
 
       // Setup Quickedit
       quickEditControl = new QuickEditControl(this);
       quickEditControl.Dock = DockStyle.Fill;
-      this.panelRight.Controls.Add(quickEditControl);
+      panelRight.Controls.Add(quickEditControl);
 
       // Setup Database Search Control
       databaseSearchControl = new DatabaseSearchControl(this);
       databaseSearchControl.Dock = DockStyle.Fill;
-      this.panelMiddleDBSearch.Controls.Add(databaseSearchControl);
+      panelMiddleDBSearch.Controls.Add(databaseSearchControl);
 
       // Setup Misc Info Control
       miscInfoControl = new MiscInfoControl();
       miscInfoControl.Dock = DockStyle.Fill;
-      this.panelMiddleBottom.Controls.Add(miscInfoControl);
+      panelMiddleBottom.Controls.Add(miscInfoControl);
 
       // Start Listening for Media Changes
-      ServiceScope.Get<IMediaChangeMonitor>().StartListening(this.Handle);
+      ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
 
       // Load BASS
       log.Debug("Main: Loading Bass");
@@ -389,52 +412,54 @@ namespace MPTagThat
       {
         toolStripStatusLabelFolder.Text = _selectedDirectory;
 
-        System.Threading.ThreadStart ts = new System.Threading.ThreadStart(FolderScanAsync);
-        System.Threading.Thread FolderScanAsyncThread = new System.Threading.Thread(ts);
+        ThreadStart ts = FolderScanAsync;
+        Thread FolderScanAsyncThread = new Thread(ts);
         FolderScanAsyncThread.Name = "FolderScanAsyncThread";
         FolderScanAsyncThread.Start();
       }
-      
+
       // setup various Event Handler needed
-      gridViewControl.View.SelectionChanged += new EventHandler(DataGridView_SelectionChanged);
+      gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
 
       ribbonControl.Initialising = false;
 
       // Activate the form, will be hidden because of the size change
-      this.TopMost = true;
-      this.Focus();
-      this.BringToFront();
-      this.TopMost = false;
+      TopMost = true;
+      Focus();
+      BringToFront();
+      TopMost = false;
       Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     /// <summary>
-    /// Thread to populate the Treeview async during startup
+    ///   Thread to populate the Treeview async during startup
     /// </summary>
     private void FolderScanAsync()
     {
       if (gridViewControl.InvokeRequired)
       {
-        ThreadSafeFolderScan d = new ThreadSafeFolderScan(FolderScanAsync);
-        gridViewControl.Invoke(d, new object[] { });
+        ThreadSafeFolderScan d = FolderScanAsync;
+        gridViewControl.Invoke(d, new object[] {});
         return;
       }
 
       gridViewControl.FolderScan();
-
     }
 
     /// <summary>
-    /// The form gets closed. Do cleanup
+    ///   The form gets closed. Do cleanup
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void Main_Close(object sender, FormClosingEventArgs e)
     {
       log.Debug("Main: Closing Main form");
       if (_musicDatabaseBuild != null && _musicDatabaseBuild.ScanActive)
       {
-        if (MessageBox.Show(localisation.ToString("Settings", "DBSCanActive"), localisation.ToString("Settings", "DBScanTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        if (
+          MessageBox.Show(localisation.ToString("Settings", "DBSCanActive"),
+                          localisation.ToString("Settings", "DBScanTitle"), MessageBoxButtons.YesNo,
+                          MessageBoxIcon.Question) == DialogResult.No)
         {
           e.Cancel = true;
           return;
@@ -445,52 +470,57 @@ namespace MPTagThat
       gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
-      Options.MainSettings.FormLocation = this.Location;
-      Options.MainSettings.FormSize = this.ClientSize;
-      Options.MainSettings.LeftPanelSize = this.panelLeft.Width;
-      Options.MainSettings.RightPanelSize = this.panelRight.Width;
+      Options.MainSettings.FormLocation = Location;
+      Options.MainSettings.FormSize = ClientSize;
+      Options.MainSettings.LeftPanelSize = panelLeft.Width;
+      Options.MainSettings.RightPanelSize = panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
-      Options.MainSettings.ErrorPanelCollapsed = this.splitterBottom.IsCollapsed;
-      Options.MainSettings.PlayerPanelCollapsed = this.splitterPlayer.IsCollapsed;
+      Options.MainSettings.ErrorPanelCollapsed = splitterBottom.IsCollapsed;
+      Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ribbonControl.ScriptsCombo.Text;
       Options.SaveAllSettings();
     }
+
     #endregion
 
     #region Ribbon Win Close
+
+    private const int WM_SYSCOMMAND = 0x0112;
+    private const int SC_CLOSE = 0xF060;
+
     private void FindRibbonWin()
     {
-      System.Threading.ThreadStart ts = new System.Threading.ThreadStart(FindRibbonWinAsync);
-      System.Threading.Thread FindRibbonWinThread = new System.Threading.Thread(ts);
+      ThreadStart ts = FindRibbonWinAsync;
+      Thread FindRibbonWinThread = new Thread(ts);
       FindRibbonWinThread.Name = "FindRibbonWin";
       FindRibbonWinThread.Start();
     }
-    
-    [DllImport("user32.dll", EntryPoint="FindWindow", SetLastError = true)]
-    static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
+    [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
+    private static extern IntPtr FindWindowByCaption(IntPtr ZeroOnly, string lpWindowName);
+
     [DllImport("user32.dll")]
-    static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
-            
-    const int WM_SYSCOMMAND = 0x0112;
-    const int SC_CLOSE = 0xF060;
-      
+    private static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
+
     private void FindRibbonWinAsync()
     {
       IntPtr hWnd = FindWindowByCaption(IntPtr.Zero, "Elegant UI");
       while (hWnd == IntPtr.Zero)
       {
-        System.Threading.Thread.Sleep(100);
+        Thread.Sleep(100);
         hWnd = FindWindowByCaption(IntPtr.Zero, "Elegant UI");
       }
       SendMessage((int)hWnd, WM_SYSCOMMAND, SC_CLOSE, 0);
     }
+
     #endregion
-    
+
     #region BASS
+
     private void LoadBass()
     {
-      System.Threading.ThreadStart ts = new System.Threading.ThreadStart(LoadBassAsync);
-      System.Threading.Thread BassAsyncLoadThread = new System.Threading.Thread(ts);
+      ThreadStart ts = LoadBassAsync;
+      Thread BassAsyncLoadThread = new Thread(ts);
       BassAsyncLoadThread.Name = "BassAudio";
       BassAsyncLoadThread.Start();
     }
@@ -501,13 +531,13 @@ namespace MPTagThat
       if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
-        log.Error("Error Init Bass: {0}", Enum.GetName(typeof(BASSError), error));
+        log.Error("Error Init Bass: {0}", Enum.GetName(typeof (BASSError), error));
         return;
       }
 
       log.Debug("BASS: Loading audio decoder add-ins...");
 
-      string appPath = System.Windows.Forms.Application.StartupPath;
+      string appPath = Application.StartupPath;
       string decoderFolderPath = Path.Combine(appPath, @"bin\Bass");
 
       if (!Directory.Exists(decoderFolderPath))
@@ -530,32 +560,36 @@ namespace MPTagThat
       }
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Localisation
+
     /// <summary>
-    /// Language Change event has been fired. Apply the new language
+    ///   Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name="language"></param>
+    /// <param name = "language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
     }
 
     /// <summary>
-    /// Localise the Screen
+    ///   Localise the Screen
     /// </summary>
     private void LocaliseScreen()
     {
       Util.EnterMethod(Util.GetCallingMethod());
-      this.Text = localisation.ToString("system", "ApplicationName");
+      Text = localisation.ToString("system", "ApplicationName");
       Util.LeaveMethod(Util.GetCallingMethod());
     }
+
     #endregion
 
     #region Settings / Layout
+
     /// <summary>
-    /// Load the Settings
+    ///   Load the Settings
     /// </summary>
     private void LoadSettings()
     {
@@ -568,7 +602,7 @@ namespace MPTagThat
       }
       treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
       treeViewControl.DatabaseMode = Options.MainSettings.DataProvider == 3;
-      
+
       _formLocation = Options.MainSettings.FormLocation;
       // Check, if we are out of screen bounds
       if (_formLocation.X < 0 || _formLocation.Y < 0 ||
@@ -577,19 +611,19 @@ namespace MPTagThat
         _formLocation.X = 10;
         _formLocation.Y = 10;
       }
-      this.Location = _formLocation;
+      Location = _formLocation;
 
       _formSize = Options.MainSettings.FormSize;
       if (_formSize.Width < 0 || _formSize.Height < 0 ||
           _formSize.Width > Screen.PrimaryScreen.Bounds.Width || _formSize.Height > Screen.PrimaryScreen.Bounds.Height)
-      { 
+      {
         _formSize.Width = 1024;
         _formSize.Height = 768;
       }
-      this.Size = _formSize;
+      Size = _formSize;
 
       if (Options.MainSettings.LeftPanelSize > -1)
-        this.panelLeft.Width = Options.MainSettings.LeftPanelSize;
+        panelLeft.Width = Options.MainSettings.LeftPanelSize;
 
       if (Options.MainSettings.ErrorPanelCollapsed)
         splitterBottom.ToggleState();
@@ -598,7 +632,7 @@ namespace MPTagThat
         splitterPlayer.ToggleState();
 
       if (Options.MainSettings.RightPanelSize > -1)
-        this.panelRight.Width = Options.MainSettings.RightPanelSize;
+        panelRight.Width = Options.MainSettings.RightPanelSize;
 
       _rightPanelCollapsed = Options.MainSettings.RightPanelCollapsed;
       if (Options.MainSettings.RightPanelCollapsed)
@@ -608,7 +642,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Set the Color of the Elements, based on the selected Theme Background Color
+    ///   Set the Color of the Elements, based on the selected Theme Background Color
     /// </summary>
     private void SetRibbonColorBase()
     {
@@ -646,19 +680,21 @@ namespace MPTagThat
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
     }
+
     #endregion
 
     #region Misc Public Methods
+
     /// <summary>
-    /// Shows a Modal Dialogue
+    ///   Shows a Modal Dialogue
     /// </summary>
-    /// <param name="dlg"></param>
+    /// <param name = "dlg"></param>
     public DialogResult ShowModalDialog(object dlg)
     {
       Form f = (Form)dlg;
       int x = (ClientSize.Width / 2) - (f.Width / 2);
       int y = (ClientSize.Height / 2) - (f.Height / 2);
-      Point clientLocation = this.Location;
+      Point clientLocation = Location;
       x += clientLocation.X;
       y += clientLocation.Y;
 
@@ -667,15 +703,15 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Shows a Form Centered
+    ///   Shows a Form Centered
     /// </summary>
-    /// <param name="form"></param>
+    /// <param name = "form"></param>
     public void ShowCenteredForm(object form)
     {
       Form f = (Form)form;
       int x = (ClientSize.Width / 2) - (f.Width / 2);
       int y = (ClientSize.Height / 2) - (f.Height / 2);
-      Point clientLocation = this.Location;
+      Point clientLocation = Location;
       x += clientLocation.X;
       y += clientLocation.Y;
 
@@ -684,7 +720,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Refreshes the Track List
+    ///   Refreshes the Track List
     /// </summary>
     public void RefreshTrackList()
     {
@@ -710,7 +746,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Creates a Music Database
+    ///   Creates a Music Database
     /// </summary>
     public void CreateMusicDatabase(string databaseName)
     {
@@ -722,9 +758,9 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Starts scanning of the selected folder and fills the Music Database
+    ///   Starts scanning of the selected folder and fills the Music Database
     /// </summary>
-    /// <param name="folder"></param>
+    /// <param name = "folder"></param>
     public void FillMusicDatabase(string folder, string databaseName)
     {
       if (_musicDatabaseBuild == null)
@@ -735,7 +771,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Returns the Status of the Database Scan
+    ///   Returns the Status of the Database Scan
     /// </summary>
     /// <returns></returns>
     public string DatabaseScanStatus()
@@ -746,9 +782,11 @@ namespace MPTagThat
       }
       return _musicDatabaseBuild.DatabaseScanStatus();
     }
+
     #endregion
 
     #region Event Handler
+
     #region Key Events
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -771,7 +809,7 @@ namespace MPTagThat
       return _keyHandled;
     }
 
-    bool OnAction(Action action)
+    private bool OnAction(Action action)
     {
       if (action == null)
         return false;
@@ -782,7 +820,7 @@ namespace MPTagThat
       switch (action.ID)
       {
         case Action.ActionType.ACTION_HELP:
-          System.Diagnostics.Process.Start(Options.HelpLocation);
+          Process.Start(Options.HelpLocation);
           break;
 
         case Action.ActionType.ACTION_EXIT:
@@ -801,12 +839,12 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new MPTagThat.TagEdit.MultiTagEdit(this);
+          _dialog = new MultiTagEdit(this);
           _showForm = true;
           break;
 
         case Action.ActionType.ACTION_EDIT:
-          _dialog = new MPTagThat.TagEdit.SingleTagEdit(this);
+          _dialog = new SingleTagEdit(this);
           _showForm = true;
           break;
 
@@ -814,7 +852,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new MPTagThat.FileNameToTag.FileNameToTag(this);
+          _dialog = new FileNameToTag.FileNameToTag(this);
           _showForm = true;
           break;
 
@@ -822,7 +860,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new MPTagThat.TagToFileName.TagToFileName(this);
+          _dialog = new TagToFileName.TagToFileName(this);
           _showForm = true;
           break;
 
@@ -837,7 +875,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          MPTagThat.InternetLookup.InternetLookup lookup = new MPTagThat.InternetLookup.InternetLookup(this);
+          InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(this);
           lookup.SearchForAlbumInformation();
           break;
 
@@ -845,7 +883,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new MPTagThat.Organise.OrganiseFiles(this);
+          _dialog = new OrganiseFiles(this);
           _showForm = true;
           break;
 
@@ -860,12 +898,12 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_OPTIONS:
-          _dialog = new MPTagThat.Preferences.Preferences(this);
+          _dialog = new Preferences.Preferences(this);
           ShowModalDialog(_dialog);
           break;
 
         case Action.ActionType.ACTION_SELECTALL:
-          Raccoom.Windows.Forms.TreeNodePath node = treeViewControl.TreeView.SelectedNode as Raccoom.Windows.Forms.TreeNodePath;
+          TreeNodePath node = treeViewControl.TreeView.SelectedNode as TreeNodePath;
           if (node != null)
             gridViewControl.View.SelectAll();
           break;
@@ -897,7 +935,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new MPTagThat.CaseConversion.CaseConversion(this);
+          _dialog = new CaseConversion.CaseConversion(this);
           ShowModalDialog(_dialog);
           break;
 
@@ -916,7 +954,8 @@ namespace MPTagThat
 
           if (_treeViewFolderSelected)
           {
-            MessageBox.Show(localisation.ToString("message", "DeleteFolders"), "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(localisation.ToString("message", "DeleteFolders"), "", MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
             break;
           }
 
@@ -932,15 +971,15 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TOGGLESTREEVIEWSPLITTER:
-          this.splitterLeft.ToggleState();
+          splitterLeft.ToggleState();
           break;
 
         case Action.ActionType.ACTION_TOGGLEDATABASESPLITTER:
-          this.splitterTop.ToggleState();
+          splitterTop.ToggleState();
           break;
 
         case Action.ActionType.ACTION_TOGGLEQUICKEDIT:
-          this.splitterRight.ToggleState();
+          splitterRight.ToggleState();
           break;
 
         case Action.ActionType.ACTION_REMOVECOMMENT:
@@ -972,28 +1011,30 @@ namespace MPTagThat
           _dialog = new FindReplace(this);
           (_dialog as FindReplace).Replace = false;
           ShowCenteredForm(_dialog);
-          _showForm = false;  // Don't show the dialog in the Keypress event
+          _showForm = false; // Don't show the dialog in the Keypress event
           break;
 
         case Action.ActionType.ACTION_REPLACE:
           _dialog = new FindReplace(this);
           (_dialog as FindReplace).Replace = true;
           ShowCenteredForm(_dialog);
-          _showForm = false;  // Don't show the dialog in the Keypress event
+          _showForm = false; // Don't show the dialog in the Keypress event
           break;
-      } 
+      }
 
       return handled;
     }
+
     #endregion
 
     #region GridView events
+
     /// <summary>
-    /// A new Row has been selected in the Grid. Fill the Quickedit Panel and update the picture in the gallery
+    ///   A new Row has been selected in the Grid. Fill the Quickedit Panel and update the picture in the gallery
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void DataGridView_SelectionChanged(object sender, EventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void DataGridView_SelectionChanged(object sender, EventArgs e)
     {
       if (gridViewControl.View.CurrentRow != null)
       {
@@ -1004,25 +1045,29 @@ namespace MPTagThat
       // Update Status Information
       try
       {
-        toolStripStatusLabelFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), gridViewControl.View.Rows.Count, gridViewControl.View.SelectedRows.Count);
+        toolStripStatusLabelFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"),
+                                                       gridViewControl.View.Rows.Count,
+                                                       gridViewControl.View.SelectedRows.Count);
       }
-      catch (InvalidOperationException)  // we might get a Cross-thread Exception on startup
-      { }
+      catch (InvalidOperationException) // we might get a Cross-thread Exception on startup
+      {}
     }
+
     #endregion
 
     #region General Message Handling
+
     /// <summary>
-    /// Handle Messages
+    ///   Handle Messages
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name = "message"></param>
     private void OnMessageReceive(QueueMessage message)
     {
       string action = message.MessageData["action"] as string;
 
       switch (action.ToLower())
       {
-        // Message sent, when a Theme is changing
+          // Message sent, when a Theme is changing
         case "themechanged":
           {
             SetRibbonColorBase();
@@ -1032,26 +1077,30 @@ namespace MPTagThat
         case "languagechanged":
           {
             LanguageChanged();
-            this.Refresh();
+            Refresh();
             break;
           }
       }
     }
+
     #endregion
 
     #region Splitter Events
+
     private void splitterRight_Click(object sender, EventArgs e)
     {
       _rightPanelCollapsed = splitterRight.IsCollapsed;
     }
+
     #endregion
 
     #region Form Resize / Move events
+
     /// <summary>
-    /// The Form is resized, if Playlist is docked, move it as well
+    ///   The Form is resized, if Playlist is docked, move it as well
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void Main_Resize(object sender, EventArgs e)
     {
       if (playerControl != null)
@@ -1061,10 +1110,10 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// The Form is resized, if Playlist is docked, move it as well
+    ///   The Form is resized, if Playlist is docked, move it as well
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
     private void Main_Move(object sender, EventArgs e)
     {
       if (playerControl != null)
@@ -1072,31 +1121,33 @@ namespace MPTagThat
         playerControl.MovePlayList();
       }
     }
+
     #endregion
 
     #region Statusbar Events
 
     /// <summary>
-    /// We're hovering over the Cancel Button
+    ///   We're hovering over the Cancel Button
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void buttonProgressCancel_MouseEnter(object sender, System.EventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void buttonProgressCancel_MouseEnter(object sender, EventArgs e)
     {
       TracksGridView.ProgressCancel_Hover();
     }
 
     /// <summary>
-    /// We're leaving the Cancel Button
+    ///   We're leaving the Cancel Button
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void buttonProgressCancel_MouseLeave(object sender, System.EventArgs e)
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void buttonProgressCancel_MouseLeave(object sender, EventArgs e)
     {
       TracksGridView.ProgressCancel_Leave();
     }
 
     #endregion
+
     #endregion
   }
 }
