@@ -50,7 +50,7 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${REGKEY}"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Team MediaPortal\MPTagThat"
-!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\classic-uninstall.ico"
+!define MUI_UNICON "MPTagThat.ico"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -190,6 +190,7 @@ done${UNSECTION_ID}:
 Section /o -un.Main UNSEC0000
     RmDir /r /REBOOTOK $INSTDIR\bin
     RmDir /r /REBOOTOK $INSTDIR\Docs
+    RmDir /r /REBOOTOK $INSTDIR\FileIcons
     RmDir /r /REBOOTOK $INSTDIR\Language
     RmDir /r /REBOOTOK $INSTDIR\Scripts
     RmDir /r /REBOOTOK $INSTDIR\Themes
@@ -199,6 +200,7 @@ Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\MPTagThat.exe
     Delete /REBOOTOK $INSTDIR\MPTagThat.exe.config
     Delete /REBOOTOK $INSTDIR\MPTagThat.Core.dll
+    Delete /REBOOTOK $INSTDIR\MPLanguageTool.exe
     rmDir /REBOOTOK $INSTDIR
     
     DeleteRegValue HKLM "${REGKEY}\Components" Main
