@@ -36,7 +36,9 @@ namespace MPTagThat.Core
   {
     #region private Variables
 
-    private static readonly Options instance = new Options();
+    // Will be assigned in the static Contructor
+    // Resharper was removing an empty constructor causing troubles
+    private static Options instance = null;
 
     private static MPTagThatSettings _MPTagThatSettings;
     private static CaseConversionSettings _caseConversionSettings;
@@ -296,6 +298,10 @@ namespace MPTagThat.Core
     #region Constructor
 
     // Singleton Constructor.
+    static Options()
+    {
+      instance = new Options();
+    }
 
     public Options()
     {
