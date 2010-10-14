@@ -1755,6 +1755,7 @@ namespace MPTagThat.GridView
       }
 
       _main.FolderScanning = false;
+      ResetProgressBar();
 
       // Display Status Information
       try
