@@ -216,7 +216,7 @@ namespace MPTagThat.Core.Burning
                     break;
 
                   default:
-                    ServiceScope.Get<ILogger>().Debug("Burner: Could not recognize media type: {0}", mounted);
+                    ServiceScope.Get<ILogger>().GetLogger.Debug("Burner: Could not recognize media type: {0}", mounted);
                     aMediaInfo.CurrentMediaType = MediaType.None;
                     fHasMedia = false;
                     break;

@@ -52,7 +52,7 @@ namespace MPTagThat
     #region Variables
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
     private object _dialog;
     private Point _formLocation;
@@ -265,7 +265,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Main_Load(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       //FindRibbonWin();
 
@@ -428,7 +428,7 @@ namespace MPTagThat
       Focus();
       BringToFront();
       TopMost = false;
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -527,7 +527,7 @@ namespace MPTagThat
 
     private void LoadBassAsync()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
@@ -558,7 +558,7 @@ namespace MPTagThat
 
         pluginHandle = Bass.BASS_PluginLoad(file.FullName);
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -579,9 +579,9 @@ namespace MPTagThat
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       Text = localisation.ToString("system", "ApplicationName");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -593,7 +593,7 @@ namespace MPTagThat
     /// </summary>
     private void LoadSettings()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       // We might have received a folder via startup argument
       if (_selectedDirectory == string.Empty)
@@ -638,7 +638,7 @@ namespace MPTagThat
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -724,7 +724,7 @@ namespace MPTagThat
     /// </summary>
     public void RefreshTrackList()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
@@ -742,7 +742,7 @@ namespace MPTagThat
       }
       miscInfoControl.ErrorGridView.Rows.Clear();
       quickEditControl.ClearForm();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>

@@ -44,7 +44,7 @@ namespace MPTagThat.Core.Burning
 
     #region Variables
 
-    private readonly ILogger Logger;
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private List<Burner> AvailableDrives;
     private Burner CurrentDrive;
     private BurnStatus CurrentStatus = BurnStatus.Unknown;
@@ -60,7 +60,6 @@ namespace MPTagThat.Core.Burning
     public BurnManager()
     {
       AvailableDrives = new List<Burner>(1);
-      Logger = ServiceScope.Get<ILogger>();
       // Making sure the singleton constructor is called.
       DeviceHelper.Init();
       DeviceHelper.DeviceProgressUpdate += DeviceHelper_ProgressUpdate;
@@ -179,7 +178,7 @@ namespace MPTagThat.Core.Burning
       ReportProgress(BurnStatus.Blanking, 0);
       string MyFastArg = aUseFastMode ? "blank=fast" : "blank=all";
       string MyBlankArgs = string.Format("dev={0} {1} {2}", CurrentDrive.BusId, MyFastArg, "-v -force");
-      Logger.Info("BurnManager: Blanking inserted disk...");
+      log.Info("BurnManager: Blanking inserted disk...");
       DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", MyBlankArgs, 900000); // assume 15 minutes max for blanking
 
       if (CurrentDrive.HasMedia) // to refresh the media status
@@ -231,7 +230,7 @@ namespace MPTagThat.Core.Burning
       IsoBuildArgs += DeviceHelper.GetParamsByMedia(aProjectType);
       IsoBuildArgs += unixFilename;
 
-      Logger.Info("BurnManager: Creating ISO of folder: {0} as {1}", fullPathname, cacheFile);
+      log.Info("BurnManager: Creating ISO of folder: {0} as {1}", fullPathname, cacheFile);
       DeviceHelper.ExecuteProcReturnStdOut("mkisofs.exe", IsoBuildArgs, 1800000);
         // assume 30 minutes max to create a 4,7 GB Iso
 
@@ -259,7 +258,7 @@ namespace MPTagThat.Core.Burning
       string burnCdArgs = DeviceHelper.GetCommonParamsForDevice(CurrentDrive);
       burnCdArgs += string.Format(" -speed={0}", CurrentDrive.SelectedWriteSpeed);
       burnCdArgs += " -pad -audio " + audioFiles;
-      Logger.Info("BurnManager: Start Burning of Audio CD");
+      log.Info("BurnManager: Start Burning of Audio CD");
       ReportProgress(BurnStatus.Burning, 0);
 
       MyCommandOutput = DeviceHelper.ExecuteProcReturnStdOut("cdrecord.exe", burnCdArgs, 3600000);
@@ -289,7 +288,7 @@ namespace MPTagThat.Core.Burning
       string cacheFile = Path.Combine(Path.GetTempPath(), "MP2-temp.iso");
       string readCdArgs = "dev=" + CurrentDrive.BusId + " retries=128 -v -clone -nocorr -notrunc f=\"" + cacheFile +
                           "\"";
-      Logger.Info("BurnManager: Creating clone of inserted disk as {0}", cacheFile);
+      log.Info("BurnManager: Creating clone of inserted disk as {0}", cacheFile);
       ReportProgress(BurnStatus.Caching, 0);
       DeviceHelper.ExecuteProcReturnStdOut("readcd.exe", readCdArgs, 900000); // assume 15 minutes max for cloning
 
@@ -331,7 +330,7 @@ namespace MPTagThat.Core.Burning
       }
       if (!CheckInsertedMediaCapacity(CurrentDrive, isoSize))
       {
-        Logger.Warn("BurnManager: Could not burn ISO file {0} because it doesn't fit on the medium", aIsoToBurn);
+        log.Warn("BurnManager: Could not burn ISO file {0} because it doesn't fit on the medium", aIsoToBurn);
         return BurnResult.NotEnoughSpace;
       }
       string unixFilename = aIsoToBurn.Replace('\\', '/');
@@ -355,12 +354,12 @@ namespace MPTagThat.Core.Burning
     {
       try
       {
-        Logger.Debug("BurnManager: Deleting cached file {0}", unixFilename);
+        log.Debug("BurnManager: Deleting cached file {0}", unixFilename);
         File.Delete(unixFilename);
       }
       catch (Exception ex)
       {
-        Logger.Warn("BurnManager: Could not delete cached file {0}, Error: {1}", unixFilename, ex.Message);
+        log.Warn("BurnManager: Could not delete cached file {0}, Error: {1}", unixFilename, ex.Message);
       }
     }
 
@@ -425,7 +424,7 @@ namespace MPTagThat.Core.Burning
       int availableSpace = MediaTypeSupport.GetMaxMediaSizeMbByProjectType(aProjectType, CurrentDrive);
       int neededSpace = GetTotalMbForPath(fullPathname);
 
-      Logger.Debug(
+      log.Debug(
         "BurnManager: Project {0} of {1} needs a media with an estimated size of at least {2} MB - available: {3} MB",
         aProjectType.ToString(), fullPathname, Convert.ToString(neededSpace), Convert.ToString(availableSpace));
       return (availableSpace >= neededSpace);
@@ -445,7 +444,7 @@ namespace MPTagThat.Core.Burning
       }
       catch (Exception ex)
       {
-        Logger.Debug("BurnManager: Checking file size failed for {0} - {1}", aPathInfo.FullName, ex.Message);
+        log.Debug("BurnManager: Checking file size failed for {0} - {1}", aPathInfo.FullName, ex.Message);
       }
 
       try
@@ -459,7 +458,7 @@ namespace MPTagThat.Core.Burning
       }
       catch (Exception)
       {
-        //Logger.Debug("BurnManager: Checking subdirectory size failed for {0} - {1}", aPathInfo.FullName, ex2.Message);
+        //log.Debug("BurnManager: Checking subdirectory size failed for {0} - {1}", aPathInfo.FullName, ex2.Message);
       }
 
       return (Size);
@@ -487,10 +486,10 @@ namespace MPTagThat.Core.Burning
       }
       if (CurrentDrive != null)
       {
-        Logger.Info("BurnManager: Drive {0}-{1} will be used as preferred burner.", CurrentDrive.DeviceVendor,
+        log.Info("BurnManager: Drive {0}-{1} will be used as preferred burner.", CurrentDrive.DeviceVendor,
                     CurrentDrive.DeviceName);
         if (CurrentDrive.HasMedia)
-          Logger.Info("BurnManager: The drive is equipped with a {0} medium ({1}).",
+          log.Info("BurnManager: The drive is equipped with a {0} medium ({1}).",
                       CurrentDrive.CurrentMediaInfo.HumanMediaString,
                       CurrentDrive.CurrentMediaInfo.DiskStatus.ToString());
       }
@@ -553,17 +552,17 @@ namespace MPTagThat.Core.Burning
         foreach (Burner opticalDrive in AvailableDrives)
         {
           if (opticalDrive.DriveFeatures.WriteCDR && !opticalDrive.DriveFeatures.WriteDVDR)
-            Logger.Info(
+            log.Info(
               "BurnManager: Drive {0} available for CD burning. Supporting Dummymode: {1}, BurnFree: {2}, MaxWriteSpeed: {3}",
               opticalDrive.DeviceName, opticalDrive.DriveFeatures.AllowsDummyWrite.ToString(),
               opticalDrive.DriveFeatures.SupportsBurnFree.ToString(), opticalDrive.DriveFeatures.MaxWriteSpeed);
           else if (opticalDrive.DriveFeatures.WriteDVDR)
-            Logger.Info(
+            log.Info(
               "BurnManager: Drive {0} available for DVD burning. Supporting Dummymode: {1}, BurnFree: {2}, MaxWriteSpeed: {3}",
               opticalDrive.DeviceName, opticalDrive.DriveFeatures.AllowsDummyWrite.ToString(),
               opticalDrive.DriveFeatures.SupportsBurnFree.ToString(), opticalDrive.DriveFeatures.MaxWriteSpeed);
           else
-            Logger.Info(
+            log.Info(
               "BurnManager: Drive {0} available for reading only. Supporting CD: {1}, DVD: {2}, DVD-RAM: {3}, BD-ROM: {4}, MaxReadSpeed: {5}",
               opticalDrive.DeviceName, opticalDrive.DriveFeatures.ReadsCDR.ToString(),
               opticalDrive.DriveFeatures.ReadsDVDR.ToString(), opticalDrive.DriveFeatures.ReadsDVDRam.ToString(),
@@ -573,7 +572,7 @@ namespace MPTagThat.Core.Burning
         SetPreferredDrive(AvailableDrives);
       }
       else
-        Logger.Info("BurnManager: No useable devices found");
+        log.Info("BurnManager: No useable devices found");
 
       return result;
     }

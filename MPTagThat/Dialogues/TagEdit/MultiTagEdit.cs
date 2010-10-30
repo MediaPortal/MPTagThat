@@ -57,7 +57,7 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     protected override void OnLoad(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       base.OnLoad(sender, e);
 
@@ -103,7 +103,7 @@ namespace MPTagThat.TagEdit
       tbCopyrightUrl.TextChanged += OnTextChanged;
 
       Localisation();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void Localisation()
@@ -119,7 +119,7 @@ namespace MPTagThat.TagEdit
     /// <param name = "options"></param>
     private void MultiTagEditApply(MultiTagEditOptions options)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       bool bErrors = false;
       DataGridView tracksGrid = main.TracksGridView.View;
 
@@ -429,7 +429,7 @@ namespace MPTagThat.TagEdit
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -438,7 +438,7 @@ namespace MPTagThat.TagEdit
     /// <returns></returns>
     private MultiTagEditOptions SetOptions()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       MultiTagEditOptions options = new MultiTagEditOptions();
 
       #region Main Tags
@@ -661,7 +661,7 @@ namespace MPTagThat.TagEdit
 
       #endregion
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
       return options;
     }
 
@@ -670,7 +670,7 @@ namespace MPTagThat.TagEdit
     /// </summary>
     private void FillForm()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       int i = 0;
       string strGenreTemp = "";
       string strCommentTemp = "";
@@ -1118,7 +1118,7 @@ namespace MPTagThat.TagEdit
       {
         cbAlbum.Items.AddRange(itemsAlbum.ToArray());
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

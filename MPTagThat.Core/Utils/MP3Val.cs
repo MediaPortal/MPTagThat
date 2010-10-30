@@ -36,8 +36,7 @@ namespace MPTagThat.Core
     #region Variables
 
     private static List<string> StdOutList;
-    private static readonly ILogger log = ServiceScope.Get<ILogger>();
-
+    private static readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     #endregion
 
     #region File Validation

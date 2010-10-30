@@ -35,7 +35,7 @@ namespace MPTagThat.Player
 
     private const string M3U_START_MARKER = "#EXTM3U";
     private const string M3U_INFO_MARKER = "#EXTINF";
-    private readonly ILogger log;
+    private readonly NLog.Logger log;
     private string basePath;
     private StreamReader file;
     private SortableBindingList<PlayListData> playlist;
@@ -46,7 +46,7 @@ namespace MPTagThat.Player
 
     public PlayListM3uIO()
     {
-      log = ServiceScope.Get<ILogger>();
+      log = ServiceScope.Get<ILogger>().GetLogger;
     }
 
     #endregion

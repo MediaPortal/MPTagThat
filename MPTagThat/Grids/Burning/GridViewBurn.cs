@@ -47,7 +47,7 @@ namespace MPTagThat.GridView
     private readonly IBurnManager burnManager;
     private readonly GridViewColumnsBurn gridColumns;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     private readonly IMediaChangeMonitor mediaChangeMonitor;
 
@@ -152,7 +152,6 @@ namespace MPTagThat.GridView
 
       InitializeComponent();
 
-      log = ServiceScope.Get<ILogger>();
       burnManager = ServiceScope.Get<IBurnManager>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
       mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
@@ -278,7 +277,7 @@ namespace MPTagThat.GridView
 
     private void BurningThread()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       List<string> outFiles = new List<string>();
       bool bError = false;
 
@@ -350,7 +349,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void burnManager_BurnProgressUpdate(BurnStatus eBurnStatus, int eTrack, int ePercentage)

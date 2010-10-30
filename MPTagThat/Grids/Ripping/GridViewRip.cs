@@ -51,7 +51,7 @@ namespace MPTagThat.GridView
     private readonly GridViewColumnsRip gridColumns;
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IMediaChangeMonitor mediaChangeMonitor;
     private int _currentRow = -1;
 
@@ -168,7 +168,6 @@ namespace MPTagThat.GridView
       IMessageQueue queueMessageEncoding = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
       queueMessageEncoding.OnMessageReceive += OnMessageReceiveEncoding;
 
-      log = ServiceScope.Get<ILogger>();
       audioEncoder = ServiceScope.Get<IAudioEncoder>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
       mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
@@ -280,7 +279,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       string targetDir = "";
       string encoder = null;
       try
@@ -475,7 +474,7 @@ namespace MPTagThat.GridView
         _main.RefreshTrackList();
       }
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -488,7 +487,7 @@ namespace MPTagThat.GridView
     /// <param name = "drive"></param>
     private void QueryFreeDB(char drive)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       SetStatusLabel(localisation.ToString("Conversion", "FreeDBAccess"));
       string discId = string.Empty;
       CDInfoDetail MusicCD = new CDInfoDetail();
@@ -572,7 +571,7 @@ namespace MPTagThat.GridView
       (dataGridViewRip.Columns[0].HeaderCell as DatagridViewCheckBoxHeaderCell).Checked = true;
       SetStatusLabel("");
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

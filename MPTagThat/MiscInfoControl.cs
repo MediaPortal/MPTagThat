@@ -38,7 +38,7 @@ namespace MPTagThat
     #region Variables
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IThemeManager themeManager = ServiceScope.Get<IThemeManager>();
     private ImageList _imgList = new ImageList();
 

@@ -41,7 +41,7 @@ namespace MPTagThat.Organise
 
     private readonly Main _main;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private Dictionary<string, string> _directories;
     private bool _isPreviewOpen;
     private Preview _previewForm;
@@ -89,7 +89,7 @@ namespace MPTagThat.Organise
 
     private void LoadSettings()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       ckCopyFiles.Checked = Options.OrganiseSettings.CopyFiles;
       ckOverwriteFiles.Checked = Options.OrganiseSettings.OverWriteFiles;
       ckCopyNonMusicFiles.Checked = Options.OrganiseSettings.CopyNonMusicFiles;
@@ -148,7 +148,7 @@ namespace MPTagThat.Organise
         i++;
       }
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -161,7 +161,7 @@ namespace MPTagThat.Organise
     /// <param name = "parameter"></param>
     private void Organise(string parameter)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       DataGridView tracksGrid = _main.TracksGridView.View;
       _directories = new Dictionary<string, string>();
 
@@ -355,7 +355,7 @@ namespace MPTagThat.Organise
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void DeleteSubFolders(string folder)
@@ -411,7 +411,7 @@ namespace MPTagThat.Organise
     /// </summary>
     private void FillPreview()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       _previewForm.Tracks.Clear();
       foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
       {
@@ -421,7 +421,7 @@ namespace MPTagThat.Organise
         TrackData track = _main.TracksGridView.TrackList[row.Index];
         _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -430,7 +430,7 @@ namespace MPTagThat.Organise
     /// <param name = "parameters"></param>
     private void OrganiseFilesPreview(string parameters)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       int index = -1;
 
@@ -451,7 +451,7 @@ namespace MPTagThat.Organise
       }
 
       _previewForm.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

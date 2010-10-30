@@ -49,7 +49,7 @@ namespace MPTagThat.Core.Burning
     #region variables
 
     private static DeviceHelper fDeviceHelper;
-    private static ILogger Logger;
+    private static NLog.Logger log;
     private static List<string> StdOutList;
     private static int fIsoSizeMB;
 
@@ -191,12 +191,12 @@ namespace MPTagThat.Core.Burning
         {
           try
           {
-            Logger.Error("Devicehelper: Killing process: {0}", termProc.ProcessName);
+            log.Error("Devicehelper: Killing process: {0}", termProc.ProcessName);
             termProc.Kill();
           }
           catch (Exception ex)
           {
-            Logger.Error("Devicehelper: Could not kill {0} - {1}", termProc.ProcessName, ex.Message);
+            log.Error("Devicehelper: Could not kill {0} - {1}", termProc.ProcessName, ex.Message);
           }
         }
       }
@@ -244,7 +244,7 @@ namespace MPTagThat.Core.Burning
             }
             catch (Exception ex2)
             {
-              Logger.Error("Devicehelper: Error setting process priority for {0}: {1}", aAppName, ex2.Message);
+              log.Error("Devicehelper: Error setting process priority for {0}: {1}", aAppName, ex2.Message);
             }
             // wait this many seconds until crdtools has to be finished
             CdrProc.WaitForExit(aExpectedTimeoutMs);
@@ -253,11 +253,11 @@ namespace MPTagThat.Core.Burning
           }
           catch (Exception ex)
           {
-            Logger.Error("Devicehelper: Error executing {0}: {1}", ex.Message);
+            log.Error("Devicehelper: Error executing {0}: {1}", ex.Message);
           }
         }
         else
-          Logger.Warn("Devicehelper: Could not start {0} because it doesn't exist!", ProcOptions.FileName);
+          log.Warn("Devicehelper: Could not start {0} because it doesn't exist!", ProcOptions.FileName);
 
         return StdOutList;
       }
@@ -269,14 +269,14 @@ namespace MPTagThat.Core.Burning
       {
         case "cdrecord.exe":
           if (!aArguments.Contains(@"-minfo"))
-            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
+            log.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
                         aArguments, aExitcode);
           break;
         case "mkisofs.exe":
           if (aExitcode == 253)
-            Logger.Error("Devicehelper: ISO creation failed. Possible error: The source files did change.");
+            log.Error("Devicehelper: ISO creation failed. Possible error: The source files did change.");
           else
-            Logger.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
+            log.Warn("Devicehelper: {0} did not exit properly with arguments: {1}, exitcode: {2}", aAppName,
                         aArguments, aExitcode);
           break;
       }
@@ -311,7 +311,7 @@ namespace MPTagThat.Core.Burning
             {
               isoSize = isoSize.Remove(pos).Trim();
               fIsoSizeMB = Convert.ToInt16(isoSize);
-              Logger.Info("Devicehelper: Created ISO has a size of {0} MB", isoSize);
+              log.Info("Devicehelper: Created ISO has a size of {0} MB", isoSize);
             }
           }
         }
@@ -321,11 +321,11 @@ namespace MPTagThat.Core.Burning
           if (pos >= 0)
           {
             string bufferMsg = errLine.Data.Substring(pos);
-            Logger.Info("Devicehelper: Buffer status: {0}", bufferMsg);
+            log.Info("Devicehelper: Buffer status: {0}", bufferMsg);
           }
         }
         // else // <-- activate for all debug output
-        //  Logger.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
+        //  log.Debug("Devicehelper: StdErr received unclassified message: {0}", errLine.Data);
       }
     }
 
@@ -368,7 +368,7 @@ namespace MPTagThat.Core.Burning
           }
         }
         else if (e.Data.Contains("Average write speed"))
-          Logger.Info("DeviceHelper: {0}", e.Data);
+          log.Info("DeviceHelper: {0}", e.Data);
         else if (e.Data.Contains("Fixating.."))
           fDeviceHelper.ReportProgress(BurnStatus.LeadOut, 0);
         else
@@ -376,7 +376,7 @@ namespace MPTagThat.Core.Burning
           if (e.Data.Contains("Fixating time"))
             fDeviceHelper.ReportProgress(BurnStatus.Finished, 0);
         //else
-        //Logger.Debug("Devicehelper: StdOut received unclassified message: {0}", e.Data);
+        //log.Debug("Devicehelper: StdOut received unclassified message: {0}", e.Data);
       }
     }
 
@@ -405,7 +405,7 @@ namespace MPTagThat.Core.Burning
 
     public DeviceHelper()
     {
-      Logger = ServiceScope.Get<ILogger>();
+      log = ServiceScope.Get<ILogger>().GetLogger;
       StdOutList = new List<string>(80);
     }
 
@@ -436,7 +436,7 @@ namespace MPTagThat.Core.Burning
       }
       catch (Exception)
       {
-        Logger.Error("BurnManager: Error scanning SCSI bus for devices");
+        log.Error("BurnManager: Error scanning SCSI bus for devices");
         return null;
       }
     }

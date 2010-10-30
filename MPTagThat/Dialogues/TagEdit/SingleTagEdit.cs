@@ -76,7 +76,7 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     protected override void OnLoad(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       base.OnLoad(sender, e);
 
@@ -155,7 +155,7 @@ namespace MPTagThat.TagEdit
       checkBoxRemoveComments.Visible = false;
       checkBoxRemoveExistingPictures.Visible = false;
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -191,7 +191,7 @@ namespace MPTagThat.TagEdit
     /// </summary>
     private void SingleTagEditApply()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       // if we don't have any rows in the griddon't do any action
       if (main.TracksGridView.TrackList.Count == 0)
@@ -542,7 +542,7 @@ namespace MPTagThat.TagEdit
 
       main.TracksGridView.View.Refresh();
       main.TracksGridView.View.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -550,7 +550,7 @@ namespace MPTagThat.TagEdit
     /// </summary>
     private void FillForm()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       _trackIsChanged = false;
       _commentIsChanged = false;
       _involvedPeopleIsChanged = false;
@@ -794,7 +794,7 @@ namespace MPTagThat.TagEdit
 
       #endregion
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void CheckForChanges()

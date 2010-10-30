@@ -282,7 +282,7 @@ namespace MPTagThat.Core
     private void LoadStrings(string directory, string language, bool log)
     {
       string filename = "strings_" + language + ".xml";
-      ServiceScope.Get<ILogger>().Info("    Loading strings file: {0}", filename);
+      ServiceScope.Get<ILogger>().GetLogger.Info("Loading strings file: {0}", filename);
 
       string path = Path.Combine(directory, filename);
       if (File.Exists(path))
@@ -296,7 +296,7 @@ namespace MPTagThat.Core
         }
         catch (Exception ex)
         {
-          ServiceScope.Get<ILogger>().Error("Error loading strings file: {0}", ex.Message);
+          ServiceScope.Get<ILogger>().GetLogger.Error("Error loading strings file: {0}", ex.Message);
           return;
         }
 
@@ -328,7 +328,7 @@ namespace MPTagThat.Core
               languageString.language = language;
               newSection.Add(languageString.id, languageString);
               if (log)
-                ServiceScope.Get<ILogger>().Info("    String not found, using English: {0}", languageString.ToString());
+                ServiceScope.Get<ILogger>().GetLogger.Info("    String not found, using English: {0}", languageString.ToString());
             }
           }
 

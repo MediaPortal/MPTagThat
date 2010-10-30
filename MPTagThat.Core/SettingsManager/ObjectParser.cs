@@ -54,8 +54,8 @@ namespace MPTagThat.Core
       {
         fileName = obj + ".xml";
       }
-      ILogger log = ServiceScope.Get<ILogger>();
-      log.Debug("Serialize({0},{1})", obj.ToString(), fileName);
+      NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
+      log.Trace("Serialize({0},{1})", obj.ToString(), fileName);
       Dictionary<string, string> globalSettingsList = new Dictionary<string, string>();
       Dictionary<string, string> userSettingsList = new Dictionary<string, string>();
       XmlSettingsProvider xmlWriter = new XmlSettingsProvider(fileName);
@@ -188,8 +188,8 @@ namespace MPTagThat.Core
         fileName = obj + ".xml";
       }
       XmlSettingsProvider xmlreader = new XmlSettingsProvider(fileName);
-      ILogger log = ServiceScope.Get<ILogger>();
-      log.Debug("Deserialize({0},{1})", obj.ToString(), fileName);
+      NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
+      log.Trace("Deserialize({0},{1})", obj.ToString(), fileName);
       // if xml file doesn't exist yet then create it
       string fullFileName = String.Format(@"{0}\{1}", Options.ConfigDir, fileName);
       ;

@@ -46,7 +46,7 @@ namespace MPTagThat.GridView
     private BackgroundWorker bgWorkerLyrics;
     private GridViewColumnsLyrics gridColumns;
     private LyricsController lc;
-    private ILogger log = ServiceScope.Get<ILogger>();
+    private NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private Queue lyricsQueue;
     private ManualResetEvent m_EventStopThread;
     private Thread m_LyricControllerThread;
@@ -100,7 +100,7 @@ namespace MPTagThat.GridView
 
     private void OnLoad(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
@@ -167,7 +167,7 @@ namespace MPTagThat.GridView
         lyricsQueue.Enqueue(lyricId);
       }
       bgWorkerLyrics.RunWorkerAsync();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void Localisation()

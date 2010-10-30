@@ -40,7 +40,7 @@ namespace MPTagThat.Core.Amazon
     private const string itemSearch =
       "&Operation=ItemSearch&Artist={0}&Title={1}&SearchIndex=Music&ResponseGroup=Images,ItemAttributes,Tracks";
 
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     #endregion
 

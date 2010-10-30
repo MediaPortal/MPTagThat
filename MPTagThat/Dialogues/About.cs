@@ -72,9 +72,7 @@ namespace MPTagThat.Dialogues
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
       Text = localisation.ToString("About", "Header");
-      Util.LeaveMethod(Util.GetCallingMethod());
     }
 
     #endregion

@@ -38,7 +38,7 @@ namespace MPTagThat.CaseConversion
 
     private readonly Main _main;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     private readonly TextInfo textinfo = Thread.CurrentThread.CurrentCulture.TextInfo;
 

@@ -62,7 +62,7 @@ namespace MPTagThat.GridView
     private readonly GridViewColumns gridColumns;
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IThemeManager theme = ServiceScope.Get<IThemeManager>();
     private bool _actionCopy;
 
@@ -219,7 +219,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void Save()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
@@ -264,7 +264,7 @@ namespace MPTagThat.GridView
           _itemsChanged = true;
       }
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -281,7 +281,7 @@ namespace MPTagThat.GridView
     /// <param name = "showProgressDialog">Show / Hide the progress dialogue</param>
     public void SaveAll(bool showProgressDialog)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       bool bErrors = false;
       int i = 0;
@@ -318,7 +318,7 @@ namespace MPTagThat.GridView
       }
       _itemsChanged = bErrors;
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
 
@@ -446,7 +446,7 @@ namespace MPTagThat.GridView
     /// </summary>
     private void IdentifyFilesThread(object sender, DoWorkEventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
@@ -595,7 +595,7 @@ namespace MPTagThat.GridView
 
       ResetProgressBar();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -622,7 +622,7 @@ namespace MPTagThat.GridView
     /// </summary>
     private void GetCoverArtThread()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
@@ -843,7 +843,7 @@ namespace MPTagThat.GridView
 
       ResetProgressBar();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -923,7 +923,7 @@ namespace MPTagThat.GridView
     /// </summary>
     private void GetLyricsThread()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
@@ -1003,7 +1003,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1012,7 +1012,7 @@ namespace MPTagThat.GridView
 
     public void AutoNumber()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       int numberValue = _main.MainRibbon.AutoNumber;
       if (numberValue == -1)
         return;
@@ -1043,7 +1043,7 @@ namespace MPTagThat.GridView
       _main.MainRibbon.AutoNumber = numberValue;
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1056,7 +1056,7 @@ namespace MPTagThat.GridView
     /// <param name = "type"></param>
     public void DeleteTags(TagTypes type)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1084,7 +1084,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -1092,7 +1092,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void DeleteTracks()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       if (tracksGrid.SelectedRows.Count > 0)
       {
@@ -1101,7 +1101,7 @@ namespace MPTagThat.GridView
                                               MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
         if (result == DialogResult.Cancel)
         {
-          Util.LeaveMethod(Util.GetCallingMethod());
+          log.Trace("<<<");
           return;
         }
       }
@@ -1136,7 +1136,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1148,7 +1148,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void RemoveComments()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1196,7 +1196,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -1204,7 +1204,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void RemovePictures()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1231,7 +1231,7 @@ namespace MPTagThat.GridView
       _main.MainRibbon.SetGalleryItem();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1243,7 +1243,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void ValidateMP3File()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1264,7 +1264,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -1272,7 +1272,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public void FixMP3File()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1292,7 +1292,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1413,7 +1413,7 @@ namespace MPTagThat.GridView
     /// <param name = "scriptFile"></param>
     public void ExecuteScript(string scriptFile)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       Assembly assembly = ServiceScope.Get<IScriptManager>().Load(scriptFile);
 
       try
@@ -1457,7 +1457,7 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -1466,7 +1466,7 @@ namespace MPTagThat.GridView
 
     public void FolderScan()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       bindingList = new SortableBindingList<TrackData>();
       tracksGrid.DataSource = bindingList;
       _nonMusicFiles = new List<FileInfo>();
@@ -1591,7 +1591,7 @@ namespace MPTagThat.GridView
         ChangeErrorRowColor();
       }
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -1638,7 +1638,7 @@ namespace MPTagThat.GridView
         }
         catch (UnauthorizedAccessException ex)
         {
-          ServiceScope.Get<ILogger>().Error(ex);
+          log.ErrorException(ex.Message, ex);
         }
       }
     }
@@ -1983,7 +1983,7 @@ namespace MPTagThat.GridView
     /// </summary>
     private void CreateColumns()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       // Now create the columns 
       foreach (GridViewColumn column in gridColumns.Settings.Columns)
@@ -2001,7 +2001,7 @@ namespace MPTagThat.GridView
       tracksGrid.Columns.Add(col);
       tracksGrid.Columns[tracksGrid.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>

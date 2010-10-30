@@ -40,7 +40,7 @@ namespace MPTagThat.Player
 
     private readonly int _defaultSoundDevice = -1;
     private readonly Visuals _vis = new Visuals(); // visuals class instance
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private SYNCPROC PlaybackEndProcDelegate; // SyncProc called to indicate the song has ended
     private int _currentIndexPlaying = -1;
     private string _currentSongPlaying = "";
@@ -236,7 +236,7 @@ namespace MPTagThat.Player
 
     private void buttonPlay_Click(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       _updateTimer.Stop();
 
@@ -340,7 +340,7 @@ namespace MPTagThat.Player
       SetText(lbArtistText, _playList[_currentStartIndex].Artist);
       SetText(lbAlbumText, _playList[_currentStartIndex].Album);
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -350,10 +350,10 @@ namespace MPTagThat.Player
     /// <param name = "e"></param>
     private void buttonPrev_Click(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       _currentStartIndex--;
       buttonPlay_Click(null, new EventArgs());
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -363,10 +363,10 @@ namespace MPTagThat.Player
     /// <param name = "e"></param>
     private void buttonNext_Click(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       _currentStartIndex++;
       buttonPlay_Click(null, new EventArgs());
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>

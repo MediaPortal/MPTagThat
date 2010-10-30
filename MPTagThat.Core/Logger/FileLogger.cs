@@ -24,6 +24,9 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 #endregion
 
@@ -40,6 +43,8 @@ namespace MPTagThat.Core
     private static readonly object syncObject = new object();
     private readonly string fileName; //holds the file to write to.
     private LogLevel level; //holds the treshold for the log level.
+    private Logger _logger = null;
+    private const int MAXARCHIVES = 10;
 
     /// <summary>
     ///   Creates a new <see cref = "FileLogger" /> instance and initializes it with the given filename and <see cref = "LogLevel" />.
@@ -57,192 +62,109 @@ namespace MPTagThat.Core
         Directory.CreateDirectory(logPath);
 
       this.fileName = String.Format(@"{0}\{1}", logPath, fileName);
-      if (File.Exists(this.fileName))
+
+      string ext = Path.GetExtension(this.fileName);
+      string fileNamePattern = Path.ChangeExtension(this.fileName, ".{#}" + ext);
+      ArchiveLogs(this.fileName, fileNamePattern, 0);
+      this.level = level;
+
+      // Now configure the NLOG File Target looger
+      LoggingConfiguration config = new LoggingConfiguration();
+      FileTarget fileTarget = new FileTarget();
+      fileTarget.FileName = this.fileName;
+
+      fileTarget.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ffffff} " +
+                          "[${level:fixedLength=true:padding=5}]" +
+                          "[${threadid:padding=3}]" +
+                          "[${stacktrace:format=Flat:topFrames=1:separator=\":\":fixedLength=true:padding=-30}]: " +
+                          "${message} " +
+                          "${exception:format=tostring}";
+
+      config.AddTarget("file", fileTarget);
+
+      level = LogLevel.Debug;
+
+      LoggingRule rule = new LoggingRule("*", level, fileTarget);
+      config.LoggingRules.Add(rule);
+
+      LogManager.Configuration = config;
+
+      _logger = LogManager.GetLogger("MPTagThat");
+    }
+
+    private void ArchiveLogs(string fileName, string pattern, int archiveNumber)
+    {
+      if (archiveNumber >= MAXARCHIVES)
       {
-        try
-        {
-          File.Copy(this.fileName, String.Format("{0}.bak", this.fileName), true);
-          File.Delete(this.fileName);
-        }
-        catch (UnauthorizedAccessException) {}
+        File.Delete(fileName);
+        return;
       }
 
-      this.level = level;
+      if (!File.Exists(fileName))
+      {
+        return;
+      }
+
+      string newFileName = ReplaceNumber(pattern, archiveNumber);
+      if (File.Exists(fileName))
+      {
+        ArchiveLogs(newFileName, pattern, archiveNumber + 1);
+      }
+
+      try
+      {
+        File.Move(fileName, newFileName);
+      }
+      catch (IOException) {}
+      catch (UnauthorizedAccessException) {}
+    }
+
+    private static string ReplaceNumber(string pattern, int value)
+    {
+      int firstPart = pattern.IndexOf("{#", StringComparison.Ordinal);
+      int lastPart = pattern.IndexOf("#}", StringComparison.Ordinal) + 2;
+      int numDigits = lastPart - firstPart - 2;
+
+      return pattern.Substring(0, firstPart) + Convert.ToString(value, 10).PadLeft(numDigits, '0') + pattern.Substring(lastPart);
     }
 
     #region ILogger Members
+
+    /// <summary>
+    /// Returns the defined Logger
+    /// </summary>
+    public Logger GetLogger
+    {
+      get { return _logger; }
+    }
 
     /// <summary>
     ///   Gets or sets the log level.
     /// </summary>
     /// <value>A <see cref = "LogLevel" /> value that indicates the minimum level messages must have to be 
     ///   written to the file.</value>
-    public LogLevel Level
+    public NLog.LogLevel Level
     {
       get { return level; }
-      set { level = value; }
-    }
-
-    /// <summary>
-    ///   Writes an informational message to the log.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Info(string format, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Information);
-    }
-
-    /// <summary>
-    ///   Writes a warning to the log.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Warn(string format, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Warning);
-    }
-
-    /// <summary>
-    ///   Writes a debug message to the log.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Debug(string format, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Debug);
-    }
-
-    /// <summary>
-    ///   Writes an error message to the log.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Error(string format, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Error);
-    }
-
-    /// <summary>
-    ///   Writes an error message to the log, passing the original <see cref = "Exception" />.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "ex">The <see cref = "Exception" /> that caused the message.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Error(string format, Exception ex, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Error);
-      Error(ex);
-    }
-
-    /// <summary>
-    ///   Writes an <see cref = "Exception" /> to the log.
-    /// </summary>
-    /// <param name = "ex">The <see cref = "Exception" /> to write.</param>
-    public void Error(Exception ex)
-    {
-      if (level >= LogLevel.Error)
+      set
       {
-        WriteException(ex);
+        level = value;
+        LoggingConfiguration config = LogManager.Configuration;
+        for (int i = 0; i < 6; ++i)
+        {
+          if (LogLevel.FromOrdinal(i) < level)
+          {
+            config.LoggingRules[0].DisableLoggingForLevel(LogLevel.FromOrdinal(i));
+          }
+          else
+          {
+            config.LoggingRules[0].EnableLoggingForLevel(LogLevel.FromOrdinal(i));
+          }
+        }
+        LogManager.Configuration = config;
       }
-    }
-
-    /// <summary>
-    ///   Writes a critical system message to the log.
-    /// </summary>
-    /// <param name = "format">A composite format string.</param>
-    /// <param name = "args">An array of objects to write using format.</param>
-    public void Critical(string format, params object[] args)
-    {
-      Write(string.Format(format, args), LogLevel.Critical);
     }
 
     #endregion
-
-    /// <summary>
-    ///   Does the actual writing of the message to the file.
-    /// </summary>
-    /// <param name = "message"></param>
-    private void Write(string message)
-    {
-      Monitor.Enter(syncObject);
-      try
-      {
-        using (StreamWriter writer = new StreamWriter(fileName, true))
-        {
-          writer.WriteLine(message);
-        }
-      }
-      finally
-      {
-        Monitor.Exit(syncObject);
-      }
-    }
-
-    /// <summary>
-    ///   Does the actual writing of the message to the file.
-    /// </summary>
-    /// <param name = "message">The message to write</param>
-    /// <param name = "messageLevel">The <see cref = "LogLevel" /> of the message to write</param>
-    private void Write(string message, LogLevel messageLevel)
-    {
-      if (messageLevel > level)
-      {
-        return;
-      }
-      Monitor.Enter(syncObject);
-      try
-      {
-        using (StreamWriter writer = new StreamWriter(fileName, true))
-        {
-          string thread = Thread.CurrentThread.Name;
-          if (thread == null)
-          {
-            thread = Thread.CurrentThread.ManagedThreadId.ToString();
-          }
-          writer.WriteLine("{0:yyyy-MM-dd HH:mm:ss.ffffff} [{1}][{2}]: {3}", DateTime.Now, messageLevel, thread, message);
-        }
-      }
-      finally
-      {
-        Monitor.Exit(syncObject);
-      }
-    }
-
-    /// <summary>
-    ///   Writes an <see cref = "Exception" /> instance to the file.
-    /// </summary>
-    /// <param name = "ex">The <see cref = "Exception" /> to write.</param>
-    private void WriteException(Exception ex)
-    {
-      Write("Exception: " + ex);
-      Write("  Message: " + ex.Message);
-      Write("  Site   : " + ex.TargetSite);
-      Write("  Source : " + ex.Source);
-      if (ex.InnerException != null)
-      {
-        Write("Inner Exception(s):");
-        WriteInnerException(ex.InnerException);
-      }
-      Write("Stack Trace:");
-      Write(ex.StackTrace);
-    }
-
-    /// <summary>
-    ///   Writes any existing inner exceptions to the file.
-    /// </summary>
-    /// <param name = "exception"></param>
-    private void WriteInnerException(Exception exception)
-    {
-      if (exception == null)
-      {
-        throw new ArgumentNullException("exception");
-      }
-      Write(exception.Message);
-      if (exception.InnerException != null)
-      {
-        WriteInnerException(exception);
-      }
-    }
-  }
+ }
 }

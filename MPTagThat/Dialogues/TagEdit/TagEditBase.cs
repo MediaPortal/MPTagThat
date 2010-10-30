@@ -61,7 +61,7 @@ namespace MPTagThat.TagEdit
                                     };
 
     protected ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    protected ILogger log = ServiceScope.Get<ILogger>();
+    protected NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     protected Main main;
 
     #endregion
@@ -93,7 +93,7 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     protected virtual void OnLoad(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
@@ -202,7 +202,7 @@ namespace MPTagThat.TagEdit
 
     private void Localisation()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       Descriptor.HeaderText = localisation.ToString("TagEdit", "CommentHeaderDescriptor");
       Language.HeaderText = localisation.ToString("TagEdit", "CommentHeaderLanguage");
       Comment.HeaderText = localisation.ToString("TagEdit", "CommentHeaderComment");
@@ -224,7 +224,7 @@ namespace MPTagThat.TagEdit
       headerText[6] = localisation.ToString("TagEdit", "HeaderLyrics");
       headerText[7] = localisation.ToString("TagEdit", "HeaderRating");
       headerText[8] = localisation.ToString("TagEdit", "HeaderUser");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

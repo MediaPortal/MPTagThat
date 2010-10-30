@@ -61,6 +61,7 @@ namespace MPTagThat.TagEdit
     #region Variables
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     // worker thread
 
@@ -131,19 +132,19 @@ namespace MPTagThat.TagEdit
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       Text = String.Format(localisation.ToString("LyricsSearch", "Header"), tbArtist.Text, tbTitle.Text);
       chSite.Text = localisation.ToString("LyricsSearch", "Site");
       chResult.Text = localisation.ToString("LyricsSearch", "Result");
       chLyric.Text = localisation.ToString("LyricsSearch", "Lyric");
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
 
     internal void BeginSearchIfPossible(string artist, string title)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       if (artist.Length != 0 && title.Length != 0)
       {
         if (m_automaticFetch)
@@ -164,7 +165,7 @@ namespace MPTagThat.TagEdit
       {
         tbArtist.Focus();
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void lockGUI()
@@ -183,7 +184,7 @@ namespace MPTagThat.TagEdit
 
     private void fetchLyric(string artist, string title, bool automaticUpdate)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       lockGUI();
       tbLyrics.Text = "";
       lvSearchResults.Items.Clear();
@@ -217,7 +218,7 @@ namespace MPTagThat.TagEdit
       m_LyricControllerThread.Start();
 
       lc.AddNewLyricSearch(artist, title, GetStrippedPrefixArtist(artist, m_strippedPrefixStrings));
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private string GetStrippedPrefixArtist(string artist, string[] strippedPrefixStringArray)

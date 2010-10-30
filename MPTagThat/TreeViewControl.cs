@@ -51,7 +51,7 @@ namespace MPTagThat
 
     private readonly Main _main;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private bool _actionCopy;
     private bool _databaseMode;
 
@@ -144,7 +144,7 @@ namespace MPTagThat
 
     public void DeleteFolder()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       TreeNodePath node = treeViewFolderBrowser.SelectedNode as TreeNodePath;
       if (node != null)
       {
@@ -160,7 +160,7 @@ namespace MPTagThat
         treeViewFolderBrowser.Populate();
         treeViewFolderBrowser.ShowFolder(_main.CurrentDirectory);
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -453,7 +453,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void treeViewFolderBrowser_AfterSelect(object sender, TreeViewEventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       if (e.Action == TreeViewAction.Unknown)
         // Called on startup of the program and can be ignored
         return;
@@ -501,7 +501,7 @@ namespace MPTagThat
           _main.RefreshTrackList();
         }
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>

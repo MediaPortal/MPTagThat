@@ -38,7 +38,7 @@ namespace MPTagThat.FileNameToTag
 
     private readonly Main _main;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private bool _isPreviewOpen;
     private Preview _previewForm;
     private TrackData track;
@@ -84,7 +84,7 @@ namespace MPTagThat.FileNameToTag
 
     private void LoadSettings()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       foreach (string item in Options.FileNameToTagSettingsTemp)
         cbFormat.Items.Add(new Item(item, item, ""));
 
@@ -92,7 +92,7 @@ namespace MPTagThat.FileNameToTag
         cbFormat.SelectedIndex = -1;
       else
         cbFormat.SelectedIndex = Options.FileNameToTagSettings.LastUsedFormat;
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -105,7 +105,7 @@ namespace MPTagThat.FileNameToTag
     /// <param name = "parameters"></param>
     private void FileName2Tag(List<ParameterPart> parameters)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       bool bErrors = false;
       DataGridView tracksGrid = _main.TracksGridView.View;
 
@@ -143,7 +143,7 @@ namespace MPTagThat.FileNameToTag
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void ReplaceParametersWithValues(List<ParameterPart> parameters, bool preview)
@@ -347,7 +347,7 @@ namespace MPTagThat.FileNameToTag
     /// </summary>
     private void FillPreview()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       _previewForm.Tracks.Clear();
       foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
       {
@@ -357,7 +357,7 @@ namespace MPTagThat.FileNameToTag
         TrackData track = _main.TracksGridView.TrackList[row.Index];
         _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -366,7 +366,7 @@ namespace MPTagThat.FileNameToTag
     /// <param name = "parameters"></param>
     private void FileName2TagPreview(List<ParameterPart> parameters)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       _previewForm.BuildPreviewGrid(cbFormat.Text);
 
@@ -381,7 +381,7 @@ namespace MPTagThat.FileNameToTag
       }
 
       _previewForm.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

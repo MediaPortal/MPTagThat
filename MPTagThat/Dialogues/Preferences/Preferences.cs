@@ -44,7 +44,7 @@ namespace MPTagThat.Preferences
     private readonly List<Item> encodersAAC = new List<Item>();
     private readonly List<Item> encodersWMA = new List<Item>();
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly Main main;
     private readonly List<ActionWindow> mapWindows = new List<ActionWindow>();
     private readonly List<Item> presetsMPC = new List<Item>();
@@ -79,7 +79,7 @@ namespace MPTagThat.Preferences
 
     private void OnLoad(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
 
@@ -111,13 +111,14 @@ namespace MPTagThat.Preferences
       prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
 
       // Debug Level
-      comboBoxDebugLevel.Items.Add("None");
-      comboBoxDebugLevel.Items.Add("Critical");
+      comboBoxDebugLevel.Items.Add("Off");
+      comboBoxDebugLevel.Items.Add("Fatal");
       comboBoxDebugLevel.Items.Add("Error");
-      comboBoxDebugLevel.Items.Add("Warning");
-      comboBoxDebugLevel.Items.Add("Information");
+      comboBoxDebugLevel.Items.Add("Warn");
+      comboBoxDebugLevel.Items.Add("Info");
       comboBoxDebugLevel.Items.Add("Debug");
-      comboBoxDebugLevel.SelectedIndex = Options.MainSettings.DebugLevel;
+      comboBoxDebugLevel.Items.Add("Trace");
+      comboBoxDebugLevel.Text = Options.MainSettings.DebugLevel;
 
       // Load the keymap file into the treeview
       if (LoadKeyMap())
@@ -358,7 +359,7 @@ namespace MPTagThat.Preferences
 
       #endregion
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion
@@ -367,7 +368,7 @@ namespace MPTagThat.Preferences
 
     private void PopulateKeyTreeView()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       windowsNode = new TreeNode("Windows");
       treeViewKeys.Nodes.Add(windowsNode);
 
@@ -389,12 +390,12 @@ namespace MPTagThat.Preferences
         }
         windowsNode.Nodes.Add(windownode);
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private bool SaveKeyMap()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       if (!_keysChanged)
         return false;
 
@@ -459,7 +460,7 @@ namespace MPTagThat.Preferences
         log.Error("Error writing Keymap.xml - {0}", ex.Message);
         return false;
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
       return true;
     }
 
@@ -730,7 +731,7 @@ namespace MPTagThat.Preferences
     /// <param name = "e"></param>
     private void buttonApply_Click(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       bool bErrors = false;
       string message = "";
 
@@ -744,8 +745,8 @@ namespace MPTagThat.Preferences
         ServiceScope.Get<ILocalisation>().ChangeLanguage(selectedLanguage);
 
       Options.MainSettings.Theme = comboBoxThemes.SelectedIndex;
-      Options.MainSettings.DebugLevel = comboBoxDebugLevel.SelectedIndex;
-      log.Level = (LogLevel)Options.MainSettings.DebugLevel;
+      Options.MainSettings.DebugLevel = comboBoxDebugLevel.Text;
+      ServiceScope.Get<ILogger>().Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
 
       if (SaveKeyMap())
         ServiceScope.Get<IActionHandler>().LoadKeyMap();
@@ -870,7 +871,7 @@ namespace MPTagThat.Preferences
       }
       else
         Close();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     /// <summary>

@@ -36,7 +36,7 @@ namespace MPTagThat
     #region Variables
 
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly Main main;
 
     private ShellAutoComplete _acAlbumArtist;
@@ -119,7 +119,7 @@ namespace MPTagThat
     /// <param name = "track"></param>
     public void FillForm(TrackData track)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       if (main.TracksGridView.View.SelectedRows.Count > 1)
       {
@@ -183,7 +183,7 @@ namespace MPTagThat
       {
         tbNumTracks.Text = "";
       }
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     public void ClearForm()
@@ -213,7 +213,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void btApply_Click(object sender, EventArgs e)
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       bool bErrors = false;
       DataGridView tracksGrid = main.TracksGridView.View;
 
@@ -396,7 +396,7 @@ namespace MPTagThat
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

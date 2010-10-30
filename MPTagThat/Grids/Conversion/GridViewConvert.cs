@@ -45,7 +45,7 @@ namespace MPTagThat.GridView
     private readonly SortableBindingList<ConversionData> bindingList = new SortableBindingList<ConversionData>();
     private readonly GridViewColumnsConvert gridColumns;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly ILogger log;
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private int _currentRow = -1;
     private Thread threadConvert;
 
@@ -107,7 +107,6 @@ namespace MPTagThat.GridView
       IMessageQueue queueMessageEncoding = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
       queueMessageEncoding.OnMessageReceive += OnMessageReceiveEncoding;
 
-      log = ServiceScope.Get<ILogger>();
       audioEncoder = ServiceScope.Get<IAudioEncoder>();
 
       // Load the Settings
@@ -179,7 +178,7 @@ namespace MPTagThat.GridView
 
     private void ConversionThread()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
       string rootFolder = _main.MainRibbon.EncoderOutputDirectory;
       if (string.IsNullOrEmpty(rootFolder))
       {
@@ -310,7 +309,7 @@ namespace MPTagThat.GridView
       Options.MainSettings.LastConversionEncoderUsed = encoder;
       _currentRow = -1;
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     private void UpdateNewFileName(string fileName)

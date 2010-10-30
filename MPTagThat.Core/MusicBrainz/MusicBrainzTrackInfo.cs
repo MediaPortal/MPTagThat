@@ -34,7 +34,7 @@ namespace MPTagThat.Core.MusicBrainz
   {
     #region Private Fields
 
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private string fingerprint = string.Empty;
     private long lengthInMS;
     private string puid = string.Empty;

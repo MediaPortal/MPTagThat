@@ -37,7 +37,7 @@ namespace MPTagThat.Core.MediaChangeMonitor
 
     #region Variables
 
-    private readonly ILogger Logger;
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private DeviceVolumeMonitor _deviceMonitor;
 
     #endregion
@@ -46,7 +46,6 @@ namespace MPTagThat.Core.MediaChangeMonitor
 
     public MediaChangeMonitor()
     {
-      Logger = ServiceScope.Get<ILogger>();
     }
 
     ~MediaChangeMonitor()
@@ -71,11 +70,11 @@ namespace MPTagThat.Core.MediaChangeMonitor
         _deviceMonitor.AsynchronousEvents = true;
         _deviceMonitor.Enabled = true;
 
-        Logger.Info("MediaChangeMonitor: Monitoring System for Media Changes");
+        log.Info("MediaChangeMonitor: Monitoring System for Media Changes");
       }
       catch (DeviceVolumeMonitorException ex)
       {
-        Logger.Error("MediaChangeMonitor: Error enabling MediaChangeMonitor Service. {0}", ex.Message);
+        log.Error("MediaChangeMonitor: Error enabling MediaChangeMonitor Service. {0}", ex.Message);
       }
     }
 
@@ -97,7 +96,7 @@ namespace MPTagThat.Core.MediaChangeMonitor
     private void VolumeInserted(int bitMask)
     {
       string driveLetter = _deviceMonitor.MaskToLogicalPaths(bitMask);
-      Logger.Info("MediaChangeMonitor: Media inserted in drive {0}", driveLetter);
+      log.Info("MediaChangeMonitor: Media inserted in drive {0}", driveLetter);
 
       if (MediaInserted != null)
         MediaInserted(driveLetter);
@@ -109,7 +108,7 @@ namespace MPTagThat.Core.MediaChangeMonitor
     private void VolumeRemoved(int bitMask)
     {
       string driveLetter = _deviceMonitor.MaskToLogicalPaths(bitMask);
-      Logger.Info("MediaChangeMonitor: Media removed from drive {0}", driveLetter);
+      log.Info("MediaChangeMonitor: Media removed from drive {0}", driveLetter);
 
       if (MediaRemoved != null)
         MediaRemoved(driveLetter);

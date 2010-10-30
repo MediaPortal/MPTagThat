@@ -34,7 +34,7 @@ namespace MPTagThat.Core
   {
     #region Variables
 
-    private readonly ILogger Log;
+    private readonly NLog.Logger log;
     private readonly List<WindowMap> mapWindows;
 
     #endregion
@@ -43,7 +43,7 @@ namespace MPTagThat.Core
 
     public ActionHandler()
     {
-      Log = ServiceScope.Get<ILogger>();
+      log = ServiceScope.Get<ILogger>().GetLogger;
       mapWindows = new List<WindowMap>();
 
       LoadKeyMap();
@@ -93,7 +93,7 @@ namespace MPTagThat.Core
       string strFilename = String.Format(@"{0}\{1}", Options.ConfigDir, "keymap.xml");
       if (!File.Exists(strFilename))
         strFilename = String.Format(@"{0}\bin\{1}", Application.StartupPath, "keymap.xml");
-      Log.Info("  Load key mapping from {0}", strFilename);
+      log.Info("Load key mapping from {0}", strFilename);
       try
       {
         // Load the XML file
@@ -131,7 +131,7 @@ namespace MPTagThat.Core
       }
       catch (Exception ex)
       {
-        Log.Error("exception loading keymap {0} err:{1} stack:{2}", strFilename, ex.Message, ex.StackTrace);
+        log.Error("exception loading keymap {0} err:{1} stack:{2}", strFilename, ex.Message, ex.StackTrace);
       }
       return false;
     }
@@ -179,7 +179,7 @@ namespace MPTagThat.Core
         }
         catch (ArgumentException)
         {
-          Log.Error("Invalid buttons for action {0}", nodeId.InnerText);
+          log.Error("Invalid buttons for action {0}", nodeId.InnerText);
         }
       }
 

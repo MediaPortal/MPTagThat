@@ -46,6 +46,7 @@ namespace MPTagThat
     private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
     private readonly List<Item> encoders = new List<Item>();
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly Main main;
     private readonly RecentDocumentsControl recentFolders = new RecentDocumentsControl();
     private bool _initialising = true;
@@ -357,7 +358,7 @@ namespace MPTagThat
     /// </summary>
     private void LocaliseScreen()
     {
-      Util.EnterMethod(Util.GetCallingMethod());
+      log.Trace(">>>");
 
       // Start Menu
       startMenuSave.Text = localisation.ToString("ribbon", "Save");
@@ -503,7 +504,7 @@ namespace MPTagThat
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");
 
-      Util.LeaveMethod(Util.GetCallingMethod());
+      log.Trace("<<<");
     }
 
     #endregion

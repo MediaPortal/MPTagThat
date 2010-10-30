@@ -80,14 +80,14 @@ namespace MPTagThat.Core
 
     public void Save()
     {
-      ILogger log = ServiceScope.Get<ILogger>();
-      log.Debug("Saving({0},{1})", filename, modified.ToString());
+      NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
+      log.Trace("Saving({0},{1})", filename, modified.ToString());
       if (!modified) return;
       if (!Directory.Exists(Options.ConfigDir))
         Directory.CreateDirectory(Options.ConfigDir);
 
       string fullFilename = String.Format(@"{0}\{1}", Options.ConfigDir, filename);
-      log.Debug("Saving {0}", fullFilename);
+      log.Trace("Saving {0}", fullFilename);
       if (document == null) return;
       if (document.DocumentElement == null) return;
       if (document.ChildNodes.Count == 0) return;

@@ -204,8 +204,8 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "1")]
     public int Theme { get; set; }
 
-    [Setting(SettingScope.User, "5")]
-    public int DebugLevel { get; set; }
+    [Setting(SettingScope.User, "Debug")]
+    public string DebugLevel { get; set; }
 
     #endregion
 

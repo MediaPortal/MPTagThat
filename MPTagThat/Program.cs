@@ -89,39 +89,50 @@ namespace MPTagThat
 
       using (new ServiceScope(true))
       {
-        ILogger logger = new FileLogger("MPTagThat.log", LogLevel.Debug, _portable);
+        ILogger logger = new FileLogger("MPTagThat.log", NLog.LogLevel.Debug, _portable);
         ServiceScope.Add(logger);
-        logger.Info("MPTagThat is starting...");
+        
+        NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
+        
+        log.Info("MPTagThat is starting...");
 
-        logger.Info("Registering Settings Manager");
+        log.Info("Registering Settings Manager");
         ServiceScope.Add<ISettingsManager>(new SettingsManager());
         // Set the portable Indicator
         ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
 
-        logger.Level = (LogLevel)Options.MainSettings.DebugLevel;
+        try
+        {
+          logger.Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
+        }
+        catch (ArgumentException)
+        {
+          Options.MainSettings.DebugLevel = "Info";
+          logger.Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
+        }
 
-        logger.Info("Registering Localisation Services");
+        log.Info("Registering Localisation Services");
         ServiceScope.Add<ILocalisation>(new StringManager());
 
-        logger.Debug("Registering Message Broker");
+        log.Debug("Registering Message Broker");
         ServiceScope.Add<IMessageBroker>(new MessageBroker());
 
-        logger.Info("Registering Script Manager");
+        log.Info("Registering Script Manager");
         ServiceScope.Add<IScriptManager>(new ScriptManager());
 
-        logger.Info("Registering Burn Manager");
+        log.Info("Registering Burn Manager");
         ServiceScope.Add<IBurnManager>(new BurnManager());
 
-        logger.Info("Registering Audio Encoder");
+        log.Info("Registering Audio Encoder");
         ServiceScope.Add<IAudioEncoder>(new AudioEncoder());
 
-        logger.Info("Registering Media Change Monitor");
+        log.Info("Registering Media Change Monitor");
         ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
 
-        logger.Info("Registering Theme Manager");
+        log.Info("Registering Theme Manager");
         ServiceScope.Add<IThemeManager>(new ThemeManager());
 
-        logger.Info("Registering Action Handöer");
+        log.Info("Registering Action Handöer");
         ServiceScope.Add<IActionHandler>(new ActionHandler());
 
         Application.EnableVisualStyles();
@@ -140,13 +151,13 @@ namespace MPTagThat
           GC.Collect();
           MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "OutOfMemory"),
                           ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
-          logger.Error("Running out of memory. Scanning aborted.");
+          log.Error("Running out of memory. Scanning aborted.");
         }
         catch (Exception ex)
         {
           MessageBox.Show(ServiceScope.Get<ILocalisation>().ToString("message", "FatalError"),
                           ServiceScope.Get<ILocalisation>().ToString("message", "Error_Title"), MessageBoxButtons.OK);
-          logger.Error("Fatal Exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
+          log.Error("Fatal Exception: {0}\r\n{1}", ex.Message, ex.StackTrace);
         }
       }
     }

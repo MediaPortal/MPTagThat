@@ -79,7 +79,7 @@ namespace MPTagThat.Core
     #region Variables
 
     private static Util instance = new Util();
-    private static ILogger log;
+    private static NLog.Logger log;
     private static readonly object padlock = new object();
 
     private static char[] _invalidFilenameChars;
@@ -292,7 +292,7 @@ namespace MPTagThat.Core
 
     private Util()
     {
-      log = ServiceScope.Get<ILogger>();
+      log = ServiceScope.Get<ILogger>().GetLogger;
       _invalidFilenameChars = Path.GetInvalidFileNameChars();
       _invalidFoldernameChars = Path.GetInvalidPathChars();
 

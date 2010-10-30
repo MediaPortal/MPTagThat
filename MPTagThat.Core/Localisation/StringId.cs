@@ -54,7 +54,7 @@ namespace MPTagThat.Core
       }
       else
       {
-        ServiceScope.Get<ILogger>().Error("String Manager - Invalid string Id: {0}", skinLabel);
+        ServiceScope.Get<ILogger>().GetLogger.Error("String Manager - Invalid string Id: {0}", skinLabel);
         _section = "system";
         _id = "NotFound";
       }

@@ -29,7 +29,7 @@ namespace MPTagThat.Core.Burning
   public class EventHelper : IDisposable
   {
     private readonly IBurnManager burnManager = ServiceScope.Get<IBurnManager>();
-    private readonly ILogger logger = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     #region static methods
 
@@ -77,12 +77,12 @@ namespace MPTagThat.Core.Burning
 
     private void burnManager_BurnProgressUpdate(BurnStatus eBurnStatus, int eTrack, int ePercentage)
     {
-      logger.Info("BurnEvent: Status: {0} ({1})", eBurnStatus.ToString(), Convert.ToString(ePercentage));
+      log.Info("BurnEvent: Status: {0} ({1})", eBurnStatus.ToString(), Convert.ToString(ePercentage));
     }
 
     private void burnManager_BurningFailed(BurnResult eBurnResult, ProjectType eProjectType)
     {
-      logger.Info("BurnEvent: Burning of {0} failed with result: {1}", eProjectType.ToString(), eBurnResult.ToString());
+      log.Info("BurnEvent: Burning of {0} failed with result: {1}", eProjectType.ToString(), eBurnResult.ToString());
     }
 
     #endregion

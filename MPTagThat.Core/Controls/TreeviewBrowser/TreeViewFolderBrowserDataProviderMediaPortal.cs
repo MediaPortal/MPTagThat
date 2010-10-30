@@ -74,7 +74,7 @@ namespace Raccoom.Windows.Forms
     private const string SQL_STMT_GENREARTISTALBUMSEARCH =
       "select distinct strAlbum from tracks where strGenre like '%| {0} |%' AND strArtist like '%| {1} |%' order by strAlbum";
 
-    private readonly ILogger log = ServiceScope.Get<ILogger>();
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     /// <summary>
     ///   last CheckboxMode used to fill the tree view, saved to know about changes

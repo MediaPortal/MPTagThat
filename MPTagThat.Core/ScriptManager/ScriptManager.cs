@@ -165,7 +165,7 @@ namespace MPTagThat.Core
       }
       catch (Exception ex)
       {
-        ServiceScope.Get<ILogger>().Error("Error loading script: {0} {1}", scriptFile, ex.Message);
+        ServiceScope.Get<ILogger>().GetLogger.Error("Error loading script: {0} {1}", scriptFile, ex.Message);
         return null;
       }
     }

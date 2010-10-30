@@ -468,7 +468,7 @@ namespace MPTagThat.Core
       }
       catch (Exception ex)
       {
-        ServiceScope.Get<ILogger>().Error("Error reading Music Database: {0}", ex.Message);
+        ServiceScope.Get<ILogger>().GetLogger.Error("Error reading Music Database: {0}", ex.Message);
       }
     }
 
