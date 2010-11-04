@@ -473,7 +473,16 @@ namespace MPTagThat
         {
           _main.CurrentDirectory = node.Path;
         }
-        if (node.Text.Contains("CD-ROM Disc ("))
+
+        // Check, if the user selected a CD/DVD drive
+        bool isCDDrive = false;
+        string driveLetter = "";
+        if (node.Path.Length == 3)
+        {
+          driveLetter = node.Path.Substring(0, 1);
+          isCDDrive = Util.IsCDDrive(driveLetter);
+        }
+        if (isCDDrive)
         {
           _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabRip;
           _main.BurnGridView.Hide();
@@ -483,7 +492,7 @@ namespace MPTagThat
           {
             _main.SplitterRight.ToggleState();
           }
-          _main.RipGridView.SelectedCDRomDrive = node.Text.Substring("CD-ROM Disc (".Length, 1);
+          _main.RipGridView.SelectedCDRomDrive = driveLetter;
         }
         else
         {

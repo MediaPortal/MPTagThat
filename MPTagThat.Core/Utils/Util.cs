@@ -85,6 +85,8 @@ namespace MPTagThat.Core
     private static char[] _invalidFilenameChars;
     private static char[] _invalidFoldernameChars;
 
+    private static string _cdDriveLetters; // Contains the Drive letters of all available CD Drives
+
     private static readonly string[] _iso_languages = {
                                                         "aar - Afar", "abk - Abkhazian", "ace - Achinese", "ach - Acoli"
                                                         , "ada - Adangme", "ady - Adyghe; Adygei",
@@ -304,6 +306,17 @@ namespace MPTagThat.Core
       sb.Append('*');
       sb.Append('/');
       _invalidFoldernameChars = sb.ToString().ToCharArray();
+
+      // Get the drive letters of available CD/DVD drives
+      int driveCount = BassCd.BASS_CD_GetDriveCount();
+      StringBuilder builderDriveLetter = new StringBuilder();
+      // Get Drive letters assigned
+      for (int i = 0; i < driveCount; i++)
+      {
+        builderDriveLetter.Append(BassCd.BASS_CD_GetInfo(i).DriveLetter);
+        BassCd.BASS_CD_Release(i);
+      }
+      _cdDriveLetters = builderDriveLetter.ToString();
     }
 
     #endregion
@@ -739,6 +752,20 @@ namespace MPTagThat.Core
         }
       }
       return -1;
+    }
+
+    /// <summary>
+    /// Checks if the given Drive Letter is a CD/DVD Drive
+    /// </summary>
+    /// <param name="driveLetter"></param>
+    /// <returns></returns>
+    public static bool IsCDDrive(string driveLetter)
+    {
+      if (_cdDriveLetters.Contains(driveLetter))
+      {
+        return true;
+      }
+      return false;
     }
 
     /// <summary>
