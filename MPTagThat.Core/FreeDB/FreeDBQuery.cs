@@ -179,7 +179,12 @@ namespace MPTagThat.Core.Freedb
     public CDInfo[] GetDiscInfo(char driveLetter)
     {
       CDInfo[] retval = null;
-      string command = "cddb+query+" + GetCDDBDiscIDInfo(driveLetter, '+');
+      string discID = GetCDDBDiscIDInfo(driveLetter, '+');
+      if (discID == null)
+      {
+        return null;
+      }
+      string command = "cddb+query+" + discID;
       StreamReader urlRdr = GetStreamFromSite(command);
       m_message = urlRdr.ReadLine();
       int code = GetCode(m_message);
@@ -377,6 +382,10 @@ namespace MPTagThat.Core.Freedb
       if (drive > -1)
       {
         string id = BassCd.BASS_CD_GetID(drive, BASSCDId.BASS_CDID_CDDB);
+        if (id == null)
+        {
+          return retval;
+        }
         retval = id.Replace(' ', separator);
         BassCd.BASS_CD_Release(drive);
       }
