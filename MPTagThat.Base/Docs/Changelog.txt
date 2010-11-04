@@ -7,6 +7,26 @@ Legend:
 - Deleted
 x Fixed
 
+2.0.3960 Build 40336 Date: 04.11.2010 
+-------------------------------------
++ Changed Logging to NLog. This allows to keep the last 10 log files available amongst other comfortable logging methods.
++ Display progress count besides the progress bar
++ Updated Norwegian strings - Thanks again Roy
++ Ribbon: Update "Recent Folders" List in the ribbon Application menu on a folder change
+x Selecting a CD/DVD drive in Treeview with no media inserted resulted in an error in the log
+x CD/DVD Drive was not detected correctly. This caused Rip to fail
+x Waitcursor not reset after a Database Scan finished
+x Wong version displayed on setup
+x Some files and folders have been left over on an uninstall
+x Fixed possiblle exception when reading non-music files
+x Burner: Burning files, which don't conform the CD Specs (44khz, stereo), failed
+x Cover Art in Ribbon was not always cleared correctly on folder change.
+x Fixed crash on OutOfMemoryException, when scanning a very large amount of files with subfolders included
+x The non-music Files area was not always cleared on folder change
+x Fixed crash when processing a non-music file, which has no extension.
+x The SaveAll function got an exception, if not all rows were selected.
+x Ribbon: Save Button had wrong action assigned, causing a dialog to pop up instead of saving changes
+
 2.0.3890 Build 30591 Date: 26.08.2010 
 -------------------------------------
 + Implementation of new Ribbon Component
