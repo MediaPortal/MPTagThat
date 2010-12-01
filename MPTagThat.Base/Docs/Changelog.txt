@@ -7,6 +7,10 @@ Legend:
 - Deleted
 x Fixed
 
+2.0.3987 Build 39202 Date: 01.12.2010 
+-------------------------------------
+x New version of BASS libs. Should fix problems, some user have
+
 2.0.3960 Build 40336 Date: 04.11.2010 
 -------------------------------------
 + Changed Logging to NLog. This allows to keep the last 10 log files available amongst other comfortable logging methods.
