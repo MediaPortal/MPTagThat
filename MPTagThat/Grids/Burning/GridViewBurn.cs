@@ -798,7 +798,7 @@ namespace MPTagThat.GridView
         if (e.RowIndex == DragDropCurrentIndex && DragDropCurrentIndex < dataGridViewBurn.RowCount - 1)
         {
           //if this cell is in the same row as the mouse cursor
-          Pen p = new Pen(Color.Red, 1);
+          Pen p = new Pen(Color.Red, 3);
           e.Graphics.DrawLine(p, e.CellBounds.Left, e.CellBounds.Top - 1, e.CellBounds.Right, e.CellBounds.Top - 1);
         }
       }

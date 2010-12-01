@@ -206,7 +206,6 @@ namespace MPTagThat.Core.AudioEncoder
 
         case "m4a":
           EncoderWinampAACplus encAAC = new EncoderWinampAACplus(stream);
-          encAAC.AACPlus_Mp4Box = true;
 
           int bitrate =
             Convert.ToInt32(Options.MainSettings.RipEncoderAACBitRate.Substring(0,
