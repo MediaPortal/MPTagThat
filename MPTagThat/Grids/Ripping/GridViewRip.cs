@@ -192,6 +192,8 @@ namespace MPTagThat.GridView
       CreateColumns();
 
       SetStatusLabel("");
+
+      _main.MainRibbon.RipButtonsEnabled = false;
     }
 
     #endregion
@@ -674,6 +676,8 @@ namespace MPTagThat.GridView
         return;
       }
 
+      _main.MainRibbon.RipButtonsEnabled = false;
+
       // Clear the Header fields
       tbAlbumArtist.Text = "";
       tbAlbum.Text = "";
@@ -707,6 +711,8 @@ namespace MPTagThat.GridView
         bindingList[driveID].Clear();
 
       SelectedCDRomDrive = driveLetter;
+
+      _main.MainRibbon.RipButtonsEnabled = true;
     }
 
     /// <summary>

@@ -33,6 +33,7 @@ using MPTagThat.Dialogues;
 using MPTagThat.Organise;
 using MPTagThat.TagEdit;
 using TagLib;
+using Button = Elegant.Ui.Button;
 using ComboBox = Elegant.Ui.ComboBox;
 
 #endregion
@@ -208,6 +209,46 @@ namespace MPTagThat
     public Gallery PictureGallery
     {
       get { return galleryPicture; }
+    }
+
+    /// <summary>
+    /// Enable or disable the RIP Buttons, when a media is inserted / removed
+    /// </summary>
+    public bool RipButtonsEnabled
+    {
+      set
+      {
+        if (value)
+        {
+          buttonRipStart.Enabled = true;
+          buttonRipCancel.Enabled = true;
+        }
+        else
+        {
+          buttonRipStart.Enabled = false;
+          buttonRipCancel.Enabled = false;
+        }
+      }
+    }
+
+    /// <summary>
+    /// Enable or disable the Burn Buttons, when a media is inserted / removed
+    /// </summary>
+    public bool BurnButtonsEnabled
+    {
+      set
+      {
+        if (value)
+        {
+          buttonBurnStart.Enabled = true;
+          buttonBurnCancel.Enabled = true;
+        }
+        else
+        {
+          buttonBurnStart.Enabled = false;
+          buttonBurnCancel.Enabled = false;
+        }
+      }
     }
 
     #endregion

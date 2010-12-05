@@ -152,6 +152,8 @@ namespace MPTagThat.GridView
 
       InitializeComponent();
 
+      _main.MainRibbon.BurnButtonsEnabled = false;
+
       burnManager = ServiceScope.Get<IBurnManager>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
       mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
@@ -652,6 +654,8 @@ namespace MPTagThat.GridView
         return;
       }
 
+      _main.MainRibbon.BurnButtonsEnabled = false;
+
       mediainfo = null;
       lbMediaInfo.Text = localisation.ToString("Burning", "NoMedia");
     }
@@ -666,6 +670,8 @@ namespace MPTagThat.GridView
       }
 
       SetMediaInfo();
+
+      _main.MainRibbon.BurnButtonsEnabled = true;
     }
 
     /// <summary>

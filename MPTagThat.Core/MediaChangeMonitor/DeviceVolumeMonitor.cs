@@ -102,24 +102,26 @@ namespace MPTagThat.Core.MediaChangeMonitor
 
     #region Nested type: BroadcastHeader
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct BroadcastHeader //_DEV_BROADCAST_HDR 
     {
-      private int Reserved; //dbch_reserved
       public int Size; //dbch_size
       public DeviceType Type; //dbch_devicetype
+      private int Reserved; //dbch_reserved
     }
 
     #endregion
 
     #region Nested type: Volume
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct Volume //_DEV_BROADCAST_VOLUME 
     {
-      public int Flags; //dbcv_flags
-      public int Mask; //dbcv_unitmask
-      private int Reserved; //dbcv_reserved
       public int Size; //dbcv_size
       public DeviceType Type; //dbcv_devicetype
+      private int Reserved; //dbcv_reserved
+      public int Mask; //dbcv_unitmask
+      public int Flags; //dbcv_flags
     }
 
     #endregion
