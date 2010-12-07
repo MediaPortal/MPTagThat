@@ -155,6 +155,9 @@
     <Compile Include="Controls\WinControls\MPTCollapsibleSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\WinControls\MPTComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\WinControls\MPTExtendedPanel.cs">
       <SubType>Component</SubType>
     </Compile>

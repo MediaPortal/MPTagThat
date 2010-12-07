@@ -632,6 +632,12 @@ namespace MPTagThat.GridView
           LanguageChanged();
           Refresh();
           break;
+
+        case "themechanged":
+          {
+            dataGridViewBurn.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            break;
+          }
       }
     }
 

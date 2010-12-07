@@ -69,6 +69,10 @@ namespace MPTagThat.Preferences
       this.main = main;
       InitializeComponent();
       LocaliseScreen();
+
+      // Setup message queue for receiving Messages
+      IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      queueMessage.OnMessageReceive += OnMessageReceive;
     }
 
     #endregion
@@ -80,8 +84,10 @@ namespace MPTagThat.Preferences
     private void OnLoad(object sender, EventArgs e)
     {
       log.Trace(">>>");
-      textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      //textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      //textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      //treeViewKeys.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      //treeViewKeys.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
 
       // Set the region for the Tabcontrol to hide the tabs
       tabControlOptions.Region = new Region(new RectangleF(tabPageGeneral.Left,
@@ -390,6 +396,8 @@ namespace MPTagThat.Preferences
         }
         windowsNode.Nodes.Add(windownode);
       }
+
+      treeViewKeys.Sort();
       log.Trace("<<<");
     }
 
@@ -888,6 +896,27 @@ namespace MPTagThat.Preferences
       Close();
     }
 
+    /// <summary>
+    ///   Handle Messages
+    /// </summary>
+    /// <param name = "message"></param>
+    private void OnMessageReceive(QueueMessage message)
+    {
+      string action = message.MessageData["action"] as string;
+
+      switch (action.ToLower())
+      {
+        // Message sent, when a Theme is changing
+        case "themechanged":
+          {
+            textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+            treeViewKeys.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            treeViewKeys.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+            break;
+         }
+      }
+    }
     #endregion
 
     #region Localisation

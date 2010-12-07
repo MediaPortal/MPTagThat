@@ -1101,6 +1101,8 @@ namespace MPTagThat
         case "themechanged":
           {
             dataGridViewTagFilter.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            treeViewFolderBrowser.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+            treeViewFolderBrowser.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
             break;
           }
       }

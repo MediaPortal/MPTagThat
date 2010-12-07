@@ -58,7 +58,7 @@ namespace MPTagThat
       queueMessage.OnMessageReceive += OnMessageReceive;
 
       LocaliseScreen();
-      SetColorBase();
+      //SetColorBase();
 
       // Build the Context Menu for the Error Grid
       MenuItem[] rmitems = new MenuItem[1];
@@ -108,6 +108,11 @@ namespace MPTagThat
       dataGridViewError.EnableHeadersVisualStyles = false;
       dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       dataGridViewError.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+
+      dataGridViewError.BackgroundColor = themeManager.CurrentTheme.BackColor;
+      dataGridViewError.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+      listViewNonMusicFiles.BackColor = themeManager.CurrentTheme.BackColor;
+      listViewNonMusicFiles.ForeColor = themeManager.CurrentTheme.LabelForeColor;
     }
 
     #endregion
