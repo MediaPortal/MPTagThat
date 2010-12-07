@@ -30,7 +30,7 @@ namespace MPTagThat.GridView
     private void InitializeComponent()
     {
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.lbRippingStatus = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbYear = new System.Windows.Forms.TextBox();
       this.tbGenre = new System.Windows.Forms.TextBox();
@@ -40,7 +40,7 @@ namespace MPTagThat.GridView
       this.tbAlbumArtist = new System.Windows.Forms.TextBox();
       this.lbAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbAlbumArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
       this.dataGridViewRip = new System.Windows.Forms.DataGridView();
       this.panelTop.SuspendLayout();
       this.panelMiddle.SuspendLayout();
@@ -207,8 +207,8 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    private MPTagThat.Core.WinControls.TTPanel panelTop;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddle;
+    private MPTagThat.Core.WinControls.MPTPanel panelTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddle;
     private System.Windows.Forms.DataGridView dataGridViewRip;
     private MPTagThat.Core.WinControls.MPTLabel lbAlbum;
     private MPTagThat.Core.WinControls.MPTLabel lbAlbumArtist;

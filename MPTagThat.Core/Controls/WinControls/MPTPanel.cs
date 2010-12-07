@@ -26,19 +26,17 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class TTPanel : Panel
+  public class MPTPanel : Panel
   {
     #region Variables
 
     private readonly IThemeManager themeManager;
-    private string _localisation;
-    private string _localisationContext;
 
     #endregion
 
     #region ctor
 
-    public TTPanel()
+    public MPTPanel()
     {
       themeManager = ServiceScope.Get<IThemeManager>();
       // Setup message queue for receiving Messages

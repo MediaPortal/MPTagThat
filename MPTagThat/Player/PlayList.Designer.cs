@@ -29,11 +29,11 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      this.PanelBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.PanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.ckUseRelativePath = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btPlayListSave = new MPTagThat.Core.WinControls.MPTButton();
       this.btPlaylistLoad = new MPTagThat.Core.WinControls.MPTButton();
-      this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.playListGrid = new System.Windows.Forms.DataGridView();
       this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuClear = new System.Windows.Forms.ToolStripMenuItem();
@@ -192,8 +192,8 @@
     #endregion
 
     private System.Windows.Forms.DataGridView playListGrid;
-    private MPTagThat.Core.WinControls.TTPanel panelTop;
-    private MPTagThat.Core.WinControls.TTPanel PanelBottom;
+    private MPTagThat.Core.WinControls.MPTPanel panelTop;
+    private MPTagThat.Core.WinControls.MPTPanel PanelBottom;
     private MPTagThat.Core.WinControls.MPTButton btPlayListSave;
     private MPTagThat.Core.WinControls.MPTButton btPlaylistLoad;
     private System.Windows.Forms.ContextMenuStrip contextMenu;

@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlayerControl));
-      this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
       this.lbAlbumText = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbArtistText = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbTitleText = new MPTagThat.Core.WinControls.MPTLabel();
@@ -38,15 +38,15 @@
       this.lbTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.pictureBoxSpectrum = new System.Windows.Forms.PictureBox();
       this.pictureBoxTime = new System.Windows.Forms.PictureBox();
-      this.panelRight = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
       this.btnPlayList = new MPTagThat.Core.WinControls.MPTButton();
-      this.panelLeft = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
       this.pictureBoxPlayPause = new System.Windows.Forms.PictureBox();
       this.buttonPrev = new System.Windows.Forms.Button();
       this.buttonNext = new System.Windows.Forms.Button();
-      this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.playBackSlider = new MPTagThat.Core.ColorSlider();
-      this.panelBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.panelMiddle.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpectrum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTime)).BeginInit();
@@ -298,9 +298,9 @@
     private System.Windows.Forms.PictureBox pictureBoxSpectrum;
     private System.Windows.Forms.Button buttonPrev;
     private System.Windows.Forms.Button buttonNext;
-    private MPTagThat.Core.WinControls.TTPanel panelLeft;
-    private MPTagThat.Core.WinControls.TTPanel panelRight;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddle;
+    private MPTagThat.Core.WinControls.MPTPanel panelLeft;
+    private MPTagThat.Core.WinControls.MPTPanel panelRight;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddle;
     private System.Windows.Forms.PictureBox pictureBoxPlayPause;
     private MPTagThat.Core.WinControls.MPTLabel lbTitle;
     private MPTagThat.Core.WinControls.MPTLabel lbAlbum;
@@ -308,8 +308,8 @@
     private MPTagThat.Core.WinControls.MPTLabel lbAlbumText;
     private MPTagThat.Core.WinControls.MPTLabel lbArtistText;
     private MPTagThat.Core.WinControls.MPTLabel lbTitleText;
-    private MPTagThat.Core.WinControls.TTPanel panelTop;
-    private MPTagThat.Core.WinControls.TTPanel panelBottom;
+    private MPTagThat.Core.WinControls.MPTPanel panelTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelBottom;
     private MPTagThat.Core.ColorSlider playBackSlider;
     private MPTagThat.Core.WinControls.MPTButton btnPlayList;
   }

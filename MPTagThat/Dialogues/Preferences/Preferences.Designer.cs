@@ -28,8 +28,8 @@ namespace MPTagThat.Preferences
     /// </summary>
     private void InitializeComponent()
     {
-      this.panelRight = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelOptions = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelOptions = new MPTagThat.Core.WinControls.MPTPanel();
       this.tabControlOptions = new System.Windows.Forms.TabControl();
       this.tabPageGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxKeys = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -194,11 +194,11 @@ namespace MPTagThat.Preferences
       this.groupBoxWVPresets = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.comboBoxWVPresets = new MPTagThat.Core.WinControls.MPTComboBox();
       this.lbWVPreset = new MPTagThat.Core.WinControls.MPTLabel();
-      this.panelBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.buttonCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonApply = new MPTagThat.Core.WinControls.MPTButton();
       this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelLeft = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
       this.navPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.lbLinkTags = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkGeneral = new MPTagThat.Core.WinControls.MPTLabel();
@@ -2538,13 +2538,13 @@ namespace MPTagThat.Preferences
 
     #endregion
 
-    private MPTagThat.Core.WinControls.TTPanel panelLeft;
+    private MPTagThat.Core.WinControls.MPTPanel panelLeft;
     private MPTagThat.Core.WinControls.TTExtendedPanel navPanel;
     private MPTagThat.Core.WinControls.MPTLabel lbLinkGeneral;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterLeft;
-    private MPTagThat.Core.WinControls.TTPanel panelRight;
-    private MPTagThat.Core.WinControls.TTPanel panelOptions;
-    private MPTagThat.Core.WinControls.TTPanel panelBottom;
+    private MPTagThat.Core.WinControls.MPTPanel panelRight;
+    private MPTagThat.Core.WinControls.MPTPanel panelOptions;
+    private MPTagThat.Core.WinControls.MPTPanel panelBottom;
     private System.Windows.Forms.TabControl tabControlOptions;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageGeneral;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRipping;

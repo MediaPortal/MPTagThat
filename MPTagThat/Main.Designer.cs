@@ -34,19 +34,19 @@ namespace MPTagThat
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       this.panelBottom = new System.Windows.Forms.Panel();
-      this.playerPanel = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelMiddleTop = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelFileList = new MPTagThat.Core.WinControls.TTPanel();
+      this.playerPanel = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelMiddleTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelFileList = new MPTagThat.Core.WinControls.MPTPanel();
       this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
-      this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.MPTPanel();
       this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelLeft = new MPTagThat.Core.WinControls.TTPanel();
-      this.panelLeftTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelLeftTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.splitterRight = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelRight = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
       this.splitterBottom = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelMiddleBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddleBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.splitterPlayer = new NJFLib.Controls.CollapsibleSplitter();
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +63,7 @@ namespace MPTagThat
       this.statusBarPane1 = new Elegant.Ui.StatusBarPane();
       this.progressBar1 = new Elegant.Ui.ProgressBar();
       this.buttonProgressCancel = new Elegant.Ui.Button();
-      this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.toolStripStatusLabelScanProgress = new Elegant.Ui.Label();
       this.panelBottom.SuspendLayout();
       this.panelMiddle.SuspendLayout();
@@ -479,22 +479,22 @@ namespace MPTagThat
 
     #endregion
 
-    private MPTagThat.Core.WinControls.TTPanel panelLeft;
+    private MPTagThat.Core.WinControls.MPTPanel panelLeft;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterLeft;
-    private MPTagThat.Core.WinControls.TTPanel panelRight;
+    private MPTagThat.Core.WinControls.MPTPanel panelRight;
     private System.Windows.Forms.ToolTip toolTip;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterRight;
-    private MPTagThat.Core.WinControls.TTPanel panelLeftTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelLeftTop;
     private MPTagThat.Core.WinControls.MPTCollapsibleSplitter splitterBottom;
-    private MPTagThat.Core.WinControls.TTPanel panelFileList;
+    private MPTagThat.Core.WinControls.MPTPanel panelFileList;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddle;
-    private MPTagThat.Core.WinControls.TTPanel playerPanel;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddleTop;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddleBottom;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddle;
+    private MPTagThat.Core.WinControls.MPTPanel playerPanel;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddleTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddleBottom;
     private NJFLib.Controls.CollapsibleSplitter splitterTop;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddleDBSearch;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddleDBSearch;
     private System.Windows.Forms.Panel panelBottom;
     private NJFLib.Controls.CollapsibleSplitter splitterPlayer;
     private Elegant.Ui.FormFrameSkinner formFrameSkinner;
@@ -506,7 +506,7 @@ namespace MPTagThat
     private Elegant.Ui.Label toolStripStatusLabelFolder;
     private Elegant.Ui.Label toolStripStatusLabelFiles;
     private Elegant.Ui.Label toolStripStatusLabelFilter;
-    private MPTagThat.Core.WinControls.TTPanel panelTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelTop;
     private Elegant.Ui.StatusBarPane statusBarPane1;
     internal Elegant.Ui.ProgressBar progressBar1;
     private Elegant.Ui.Button buttonProgressCancel;

@@ -32,11 +32,11 @@ namespace MPTagThat.GridView
     {
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      this.panelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.lbMediaInfo = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbUsed = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbBurningStatus = new MPTagThat.Core.WinControls.MPTLabel();
-      this.panelMiddle = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
       this.dataGridViewBurn = new System.Windows.Forms.DataGridView();
       this.panelTop.SuspendLayout();
       this.panelMiddle.SuspendLayout();
@@ -157,8 +157,8 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    private MPTagThat.Core.WinControls.TTPanel panelTop;
-    private MPTagThat.Core.WinControls.TTPanel panelMiddle;
+    private MPTagThat.Core.WinControls.MPTPanel panelTop;
+    private MPTagThat.Core.WinControls.MPTPanel panelMiddle;
     private System.Windows.Forms.DataGridView dataGridViewBurn;
     private MPTagThat.Core.WinControls.MPTLabel lbBurningStatus;
     private MPTagThat.Core.WinControls.MPTLabel lbMediaInfo;

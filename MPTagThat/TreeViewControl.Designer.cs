@@ -44,9 +44,9 @@
       this.tabControlTreeView = new System.Windows.Forms.TabControl();
       this.tabPageViews = new MPTagThat.Core.WinControls.MPTTabPage();
       this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.treeViewPanelBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.treeViewPanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
-      this.treeViewPanelTop = new MPTagThat.Core.WinControls.TTPanel();
+      this.treeViewPanelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.tabPageFilter = new MPTagThat.Core.WinControls.MPTTabPage();
       this.dataGridViewTagFilter = new System.Windows.Forms.DataGridView();
       this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -56,7 +56,7 @@
       this.tbFileMask = new System.Windows.Forms.TextBox();
       this.cbListFormats = new System.Windows.Forms.ComboBox();
       this.ckUseTagFilter = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.panelLeftBottom = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelLeftBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.cbDataProvider = new System.Windows.Forms.ComboBox();
@@ -461,13 +461,13 @@
     #endregion
 
     private Raccoom.Windows.Forms.TreeViewFolderBrowser treeViewFolderBrowser;
-    private MPTagThat.Core.WinControls.TTPanel panelLeftBottom;
+    private MPTagThat.Core.WinControls.MPTPanel panelLeftBottom;
     private MPTagThat.Core.WinControls.TTExtendedPanel optionsPanelLeft;
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxRecursive;
     private MPTagThat.Core.WinControls.MPTButton btnRefreshFolder;
     private MPTagThat.Core.WinControls.TTExtendedPanel treeViewPanel;
-    private MPTagThat.Core.WinControls.TTPanel treeViewPanelBottom;
-    private MPTagThat.Core.WinControls.TTPanel treeViewPanelTop;
+    private MPTagThat.Core.WinControls.MPTPanel treeViewPanelBottom;
+    private MPTagThat.Core.WinControls.MPTPanel treeViewPanelTop;
     private System.Windows.Forms.ContextMenuStrip contextMenuTreeView;
     private System.Windows.Forms.ToolStripMenuItem menuRefresh;
     private System.Windows.Forms.ToolStripMenuItem menuDelete;

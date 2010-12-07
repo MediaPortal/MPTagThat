@@ -30,7 +30,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditBase));
-      this.panelTabPage = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelTabPage = new MPTagThat.Core.WinControls.MPTPanel();
       this.tabControlTagEdit = new System.Windows.Forms.TabControl();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -252,7 +252,7 @@
       this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.panelNavigation = new MPTagThat.Core.WinControls.TTPanel();
+      this.panelNavigation = new MPTagThat.Core.WinControls.MPTPanel();
       this.tagPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.lbLinkUserDefined = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbLinkRating = new MPTagThat.Core.WinControls.MPTLabel();
@@ -3307,8 +3307,8 @@
     protected System.Windows.Forms.DataGridViewTextBoxColumn Description;
     protected System.Windows.Forms.DataGridViewTextBoxColumn PictureType;
     protected MPTagThat.Core.WinControls.MPTCheckBox checkBoxRemoveExistingPictures;
-    protected MPTagThat.Core.WinControls.TTPanel panelNavigation;
-    protected MPTagThat.Core.WinControls.TTPanel panelTabPage;
+    protected MPTagThat.Core.WinControls.MPTPanel panelNavigation;
+    protected MPTagThat.Core.WinControls.MPTPanel panelTabPage;
     protected MPTagThat.Core.WinControls.TTExtendedPanel tagPanel;
     protected MPTagThat.Core.WinControls.MPTLabel lbLinkMainTags;
     protected MPTagThat.Core.WinControls.MPTLabel lbLinkPictures;
