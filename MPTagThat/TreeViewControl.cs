@@ -344,7 +344,7 @@ namespace MPTagThat
       node.BackColor = Color.LightSkyBlue;
       if (_previousHoverNode != null)
       {
-        _previousHoverNode.BackColor = Color.White;
+        _previousHoverNode.BackColor = treeViewFolderBrowser.BackColor;
       }
       _previousHoverNode = node;
     }
