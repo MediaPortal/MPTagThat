@@ -27,46 +27,21 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTComboBox : ComboBox
+  public class MPTComboBox : Elegant.Ui.ComboBox
   {
     #region Variables
 
-    private readonly IThemeManager themeManager;
+    public System.Windows.Forms.ComboBoxStyle DropDownStyle;
 
     #endregion
 
     #region ctor
 
     public MPTComboBox()
+      : base()
     {
-      themeManager = ServiceScope.Get<IThemeManager>();
-      // Setup message queue for receiving Messages
-      IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
-    }
-
-    #endregion
-
-    #region Private Methods
-
-    /// <summary>
-    ///   Handle Messages
-    /// </summary>
-    /// <param name = "message"></param>
-    private void OnMessageReceive(QueueMessage message)
-    {
-      string action = message.MessageData["action"] as string;
-
-      switch (action.ToLower())
-      {
-          // Message sent, when a Theme is changing
-        case "themechanged":
-          {
-            BackColor = themeManager.CurrentTheme.BackColor;
-			      ForeColor = themeManager.CurrentTheme.LabelForeColor;
-            break;
-          }
-      }
+      this.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+      this.AutoCompleteSource = AutoCompleteSource.ListItems;
     }
 
     #endregion

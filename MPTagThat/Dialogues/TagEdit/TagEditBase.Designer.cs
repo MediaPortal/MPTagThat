@@ -46,20 +46,21 @@
       this.textBoxComment = new System.Windows.Forms.TextBox();
       this.lbCommentLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbCommentDescriptor = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbCommentLanguage = new System.Windows.Forms.ComboBox();
-      this.cbCommentDescriptor = new System.Windows.Forms.ComboBox();
+      this.cbCommentLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.cbCommentDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
       this.groupBoxGenre = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btGenreToTop = new MPTagThat.Core.WinControls.MPTButton();
       this.btRemoveGenre = new MPTagThat.Core.WinControls.MPTButton();
       this.btAddGenre = new MPTagThat.Core.WinControls.MPTButton();
       this.listBoxGenre = new System.Windows.Forms.ListBox();
       this.lblGenre = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbGenre = new System.Windows.Forms.ComboBox();
+      this.cbGenre = new MPTagThat.Core.WinControls.MPTComboBox();
       this.ckGenre = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxArtist = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.cbAlbum = new System.Windows.Forms.ComboBox();
-      this.cbAlbumArtist = new System.Windows.Forms.ComboBox();
-      this.cbArtist = new System.Windows.Forms.ComboBox();
+      this.checkBoxCompilation = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.cbAlbum = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.cbAlbumArtist = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.cbArtist = new MPTagThat.Core.WinControls.MPTComboBox();
       this.tbNumDiscs = new System.Windows.Forms.TextBox();
       this.label2 = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckDisk = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -99,7 +100,7 @@
       this.buttonRemovePicture = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonGetPicture = new MPTagThat.Core.WinControls.MPTButton();
       this.lblPicType = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbPicType = new System.Windows.Forms.ComboBox();
+      this.cbPicType = new MPTagThat.Core.WinControls.MPTComboBox();
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
       this.tbPicDesc = new System.Windows.Forms.TextBox();
       this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
@@ -107,7 +108,7 @@
       this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lblTRackLength = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckMediaType = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.cbMediaType = new System.Windows.Forms.ComboBox();
+      this.cbMediaType = new MPTagThat.Core.WinControls.MPTComboBox();
       this.lblMediaType = new MPTagThat.Core.WinControls.MPTLabel();
       this.groupBoxSort = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbTitleSort = new System.Windows.Forms.TextBox();
@@ -232,8 +233,8 @@
       this.tbLyrics = new System.Windows.Forms.TextBox();
       this.lblLyricsLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblLyricsDescriptor = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbLyricsLanguage = new System.Windows.Forms.ComboBox();
-      this.cbLyricsDescriptor = new System.Windows.Forms.ComboBox();
+      this.cbLyricsLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.cbLyricsDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
       this.tabPageRating = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxRating = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckRemoveExistingRatings = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -268,7 +269,6 @@
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.labelHeader = new System.Windows.Forms.Label();
-      this.checkBoxCompilation = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -387,6 +387,7 @@
       // 
       // buttonMoveTop
       // 
+      this.buttonMoveTop.Id = "823e4c3e-c8fa-49b1-ad9f-99351dcd4cff";
       this.buttonMoveTop.Localisation = "MoveTop";
       this.buttonMoveTop.LocalisationContext = "TagEdit";
       this.buttonMoveTop.Location = new System.Drawing.Point(491, 68);
@@ -399,6 +400,7 @@
       // 
       // buttonRemoveComment
       // 
+      this.buttonRemoveComment.Id = "d960b3c8-4354-4c25-ab2f-0818ae8de62d";
       this.buttonRemoveComment.Localisation = "RemoveComment";
       this.buttonRemoveComment.LocalisationContext = "TagEdit";
       this.buttonRemoveComment.Location = new System.Drawing.Point(491, 42);
@@ -411,6 +413,7 @@
       // 
       // buttonAddComment
       // 
+      this.buttonAddComment.Id = "482bdf83-e00e-45f7-abc5-de1015149019";
       this.buttonAddComment.Localisation = "AddComment";
       this.buttonAddComment.LocalisationContext = "TagEdit";
       this.buttonAddComment.Location = new System.Drawing.Point(491, 15);
@@ -509,8 +512,11 @@
       // 
       // cbCommentLanguage
       // 
-      this.cbCommentLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbCommentLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbCommentLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbCommentLanguage.Editable = false;
       this.cbCommentLanguage.FormattingEnabled = true;
+      this.cbCommentLanguage.Id = "303c8363-5701-4259-b172-5eaad4c0d3ce";
       this.cbCommentLanguage.Location = new System.Drawing.Point(150, 46);
       this.cbCommentLanguage.Name = "cbCommentLanguage";
       this.cbCommentLanguage.Size = new System.Drawing.Size(330, 24);
@@ -519,7 +525,11 @@
       // 
       // cbCommentDescriptor
       // 
+      this.cbCommentDescriptor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbCommentDescriptor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbCommentDescriptor.Editable = false;
       this.cbCommentDescriptor.FormattingEnabled = true;
+      this.cbCommentDescriptor.Id = "c07e7646-2b92-4da7-a90f-dd12be7f7ba0";
       this.cbCommentDescriptor.Location = new System.Drawing.Point(150, 15);
       this.cbCommentDescriptor.Name = "cbCommentDescriptor";
       this.cbCommentDescriptor.Size = new System.Drawing.Size(330, 24);
@@ -545,6 +555,7 @@
       // 
       // btGenreToTop
       // 
+      this.btGenreToTop.Id = "3284f3d2-f8f8-4c19-a5be-816418370dd8";
       this.btGenreToTop.Localisation = "MoveTop";
       this.btGenreToTop.LocalisationContext = "TagEdit";
       this.btGenreToTop.Location = new System.Drawing.Point(491, 71);
@@ -557,6 +568,7 @@
       // 
       // btRemoveGenre
       // 
+      this.btRemoveGenre.Id = "dda95e1a-d03f-48bb-8bde-b55a1128cd6a";
       this.btRemoveGenre.Localisation = "RemoveGenre";
       this.btRemoveGenre.LocalisationContext = "TagEdit";
       this.btRemoveGenre.Location = new System.Drawing.Point(491, 43);
@@ -569,6 +581,7 @@
       // 
       // btAddGenre
       // 
+      this.btAddGenre.Id = "645c4066-bf9a-4b0a-a180-f6e1bad03367";
       this.btAddGenre.Localisation = "AddGenre";
       this.btAddGenre.LocalisationContext = "TagEdit";
       this.btAddGenre.Location = new System.Drawing.Point(491, 15);
@@ -603,8 +616,11 @@
       // 
       // cbGenre
       // 
+      this.cbGenre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbGenre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.cbGenre.FormattingEnabled = true;
+      this.cbGenre.Id = "3e6788fe-148c-4648-bcf5-50a86037794d";
       this.cbGenre.Location = new System.Drawing.Point(150, 13);
       this.cbGenre.Name = "cbGenre";
       this.cbGenre.Size = new System.Drawing.Size(330, 24);
@@ -667,9 +683,24 @@
       this.groupBoxArtist.TabIndex = 0;
       this.groupBoxArtist.TabStop = false;
       // 
+      // checkBoxCompilation
+      // 
+      this.checkBoxCompilation.AutoSize = true;
+      this.checkBoxCompilation.Localisation = "PartOfCompilation";
+      this.checkBoxCompilation.LocalisationContext = "TagEdit";
+      this.checkBoxCompilation.Location = new System.Drawing.Point(461, 47);
+      this.checkBoxCompilation.Name = "checkBoxCompilation";
+      this.checkBoxCompilation.Size = new System.Drawing.Size(150, 20);
+      this.checkBoxCompilation.TabIndex = 3;
+      this.checkBoxCompilation.Text = "Part of a Compilation";
+      this.checkBoxCompilation.UseVisualStyleBackColor = true;
+      // 
       // cbAlbum
       // 
+      this.cbAlbum.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbAlbum.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbAlbum.FormattingEnabled = true;
+      this.cbAlbum.Id = "03b9ef61-b8a2-4508-8967-832ae4376c09";
       this.cbAlbum.Location = new System.Drawing.Point(101, 42);
       this.cbAlbum.Name = "cbAlbum";
       this.cbAlbum.Size = new System.Drawing.Size(201, 24);
@@ -677,7 +708,10 @@
       // 
       // cbAlbumArtist
       // 
+      this.cbAlbumArtist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbAlbumArtist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbAlbumArtist.FormattingEnabled = true;
+      this.cbAlbumArtist.Id = "e354a566-c5a1-4e65-8876-da89d38dd86d";
       this.cbAlbumArtist.Location = new System.Drawing.Point(461, 15);
       this.cbAlbumArtist.Name = "cbAlbumArtist";
       this.cbAlbumArtist.Size = new System.Drawing.Size(201, 24);
@@ -685,7 +719,10 @@
       // 
       // cbArtist
       // 
+      this.cbArtist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbArtist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbArtist.FormattingEnabled = true;
+      this.cbArtist.Id = "87dedd71-9ddd-4360-a960-6701af8bb1bb";
       this.cbArtist.Location = new System.Drawing.Point(101, 13);
       this.cbArtist.Name = "cbArtist";
       this.cbArtist.Size = new System.Drawing.Size(201, 24);
@@ -1035,6 +1072,7 @@
       // 
       // buttonGetPictureInternet
       // 
+      this.buttonGetPictureInternet.Id = "f8535ccb-f1f0-4355-9402-23b754afe70f";
       this.buttonGetPictureInternet.Localisation = "GetPictureInternet";
       this.buttonGetPictureInternet.LocalisationContext = "TagEdit";
       this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 133);
@@ -1096,6 +1134,7 @@
       // buttonExportPicture
       // 
       this.buttonExportPicture.Enabled = false;
+      this.buttonExportPicture.Id = "568598be-ec92-43f0-bd06-d407fba870f1";
       this.buttonExportPicture.Localisation = "ExportPicture";
       this.buttonExportPicture.LocalisationContext = "TagEdit";
       this.buttonExportPicture.Location = new System.Drawing.Point(9, 239);
@@ -1109,6 +1148,7 @@
       // buttonRemovePicture
       // 
       this.buttonRemovePicture.Enabled = false;
+      this.buttonRemovePicture.Id = "7b103570-4acf-4682-860b-4e2ef2395acb";
       this.buttonRemovePicture.Localisation = "RemovePicture";
       this.buttonRemovePicture.LocalisationContext = "TagEdit";
       this.buttonRemovePicture.Location = new System.Drawing.Point(9, 186);
@@ -1121,6 +1161,7 @@
       // 
       // buttonGetPicture
       // 
+      this.buttonGetPicture.Id = "8f013ba1-dc3f-4961-9950-d3bef6484c3b";
       this.buttonGetPicture.Localisation = "GetPicture";
       this.buttonGetPicture.LocalisationContext = "TagEdit";
       this.buttonGetPicture.Location = new System.Drawing.Point(9, 80);
@@ -1145,11 +1186,16 @@
       // 
       // cbPicType
       // 
+      this.cbPicType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbPicType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbPicType.Editable = false;
       this.cbPicType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.cbPicType.FormattingEnabled = true;
+      this.cbPicType.Id = "345ca37b-75a8-4fce-b3c5-6f1892c26b42";
       this.cbPicType.Location = new System.Drawing.Point(150, 45);
       this.cbPicType.Name = "cbPicType";
       this.cbPicType.Size = new System.Drawing.Size(330, 24);
+      this.cbPicType.Sorted = true;
       this.cbPicType.TabIndex = 7;
       // 
       // pictureBoxCover
@@ -1238,8 +1284,11 @@
       // 
       // cbMediaType
       // 
-      this.cbMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbMediaType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbMediaType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbMediaType.Editable = false;
       this.cbMediaType.FormattingEnabled = true;
+      this.cbMediaType.Id = "6c5738a2-b818-4680-a643-87816d98904b";
       this.cbMediaType.Location = new System.Drawing.Point(205, 15);
       this.cbMediaType.Name = "cbMediaType";
       this.cbMediaType.Size = new System.Drawing.Size(303, 24);
@@ -2016,6 +2065,7 @@
       // 
       // buttonRemoveMusician
       // 
+      this.buttonRemoveMusician.Id = "42ab35c9-d8d9-4f69-9e4c-9622f0f43af5";
       this.buttonRemoveMusician.Localisation = "RemoveMusician";
       this.buttonRemoveMusician.LocalisationContext = "TagEdit";
       this.buttonRemoveMusician.Location = new System.Drawing.Point(497, 50);
@@ -2028,6 +2078,7 @@
       // 
       // buttonAddMusician
       // 
+      this.buttonAddMusician.Id = "9de41898-20bd-4b4b-9147-4e0e9b9e4da1";
       this.buttonAddMusician.Localisation = "AddMusician";
       this.buttonAddMusician.LocalisationContext = "TagEdit";
       this.buttonAddMusician.Location = new System.Drawing.Point(498, 19);
@@ -2147,6 +2198,7 @@
       // 
       // buttonRemovePerson
       // 
+      this.buttonRemovePerson.Id = "2fd22942-26d6-4695-8979-217522d10749";
       this.buttonRemovePerson.Localisation = "RemovePerson";
       this.buttonRemovePerson.LocalisationContext = "TagEdit";
       this.buttonRemovePerson.Location = new System.Drawing.Point(497, 50);
@@ -2159,6 +2211,7 @@
       // 
       // buttonAddInvolvedPerson
       // 
+      this.buttonAddInvolvedPerson.Id = "c96a72b8-e4c8-4042-af63-ce6e49288e76";
       this.buttonAddInvolvedPerson.Localisation = "AddPerson";
       this.buttonAddInvolvedPerson.LocalisationContext = "TagEdit";
       this.buttonAddInvolvedPerson.Location = new System.Drawing.Point(498, 19);
@@ -2590,6 +2643,7 @@
       // 
       // btGetLyricsFromText
       // 
+      this.btGetLyricsFromText.Id = "53d715fc-daa6-44e1-b822-da7aa24593d8";
       this.btGetLyricsFromText.Localisation = "GetLyricsFromText";
       this.btGetLyricsFromText.LocalisationContext = "TagEdit";
       this.btGetLyricsFromText.Location = new System.Drawing.Point(26, 246);
@@ -2614,6 +2668,7 @@
       // 
       // lblLyricsMoveTop
       // 
+      this.lblLyricsMoveTop.Id = "cd1133c5-609c-4a77-a103-747081813ea2";
       this.lblLyricsMoveTop.Localisation = "MoveTop";
       this.lblLyricsMoveTop.LocalisationContext = "TagEdit";
       this.lblLyricsMoveTop.Location = new System.Drawing.Point(477, 275);
@@ -2626,6 +2681,7 @@
       // 
       // btRemoveLyrics
       // 
+      this.btRemoveLyrics.Id = "8f0f8a07-d135-4505-b655-c22dd9fdfff8";
       this.btRemoveLyrics.Localisation = "RemoveLyrics";
       this.btRemoveLyrics.LocalisationContext = "TagEdit";
       this.btRemoveLyrics.Location = new System.Drawing.Point(252, 275);
@@ -2638,6 +2694,7 @@
       // 
       // btAddLyrics
       // 
+      this.btAddLyrics.Id = "d4eb84d2-3df9-4f46-b8c5-768ca919a0af";
       this.btAddLyrics.Localisation = "AddLyrics";
       this.btAddLyrics.LocalisationContext = "TagEdit";
       this.btAddLyrics.Location = new System.Drawing.Point(26, 275);
@@ -2726,8 +2783,11 @@
       // 
       // cbLyricsLanguage
       // 
-      this.cbLyricsLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbLyricsLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbLyricsLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbLyricsLanguage.Editable = false;
       this.cbLyricsLanguage.FormattingEnabled = true;
+      this.cbLyricsLanguage.Id = "6fcef490-4fdb-4c31-808f-3e8bfc64f32a";
       this.cbLyricsLanguage.Location = new System.Drawing.Point(200, 46);
       this.cbLyricsLanguage.Name = "cbLyricsLanguage";
       this.cbLyricsLanguage.Size = new System.Drawing.Size(280, 24);
@@ -2735,7 +2795,11 @@
       // 
       // cbLyricsDescriptor
       // 
+      this.cbLyricsDescriptor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbLyricsDescriptor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbLyricsDescriptor.Editable = false;
       this.cbLyricsDescriptor.FormattingEnabled = true;
+      this.cbLyricsDescriptor.Id = "0d3bfb48-da77-4ddf-baf6-499a2d9a59c8";
       this.cbLyricsDescriptor.Location = new System.Drawing.Point(200, 15);
       this.cbLyricsDescriptor.Name = "cbLyricsDescriptor";
       this.cbLyricsDescriptor.Size = new System.Drawing.Size(280, 24);
@@ -2843,6 +2907,7 @@
       // 
       // btRatingMoveTop
       // 
+      this.btRatingMoveTop.Id = "9c49b83b-f603-46ac-a414-3c449ba4537d";
       this.btRatingMoveTop.Localisation = "MoveTop";
       this.btRatingMoveTop.LocalisationContext = "TagEdit";
       this.btRatingMoveTop.Location = new System.Drawing.Point(528, 125);
@@ -2855,6 +2920,7 @@
       // 
       // btRemoveRating
       // 
+      this.btRemoveRating.Id = "ee44c2aa-dabb-41d2-ac13-e7e1be9d1022";
       this.btRemoveRating.Localisation = "RemoveRating";
       this.btRemoveRating.LocalisationContext = "TagEdit";
       this.btRemoveRating.Location = new System.Drawing.Point(350, 125);
@@ -2867,6 +2933,7 @@
       // 
       // btAddRating
       // 
+      this.btAddRating.Id = "29449fca-a3c1-4a72-9728-8b53dd60e5ee";
       this.btAddRating.Localisation = "AddRating";
       this.btAddRating.LocalisationContext = "TagEdit";
       this.btAddRating.Location = new System.Drawing.Point(200, 125);
@@ -3114,6 +3181,7 @@
       this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btCancel.Id = "7e92981e-498e-4ac0-b01e-0f28624d06ec";
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagEdit";
       this.btCancel.Location = new System.Drawing.Point(764, 624);
@@ -3128,6 +3196,7 @@
       // 
       this.btApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btApply.Id = "3967df36-2b74-4edd-864c-3101b5533699";
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagEdit";
       this.btApply.Location = new System.Drawing.Point(658, 624);
@@ -3162,18 +3231,6 @@
       this.labelHeader.Size = new System.Drawing.Size(62, 20);
       this.labelHeader.TabIndex = 29;
       this.labelHeader.Text = "Header";
-      // 
-      // checkBoxCompilation
-      // 
-      this.checkBoxCompilation.AutoSize = true;
-      this.checkBoxCompilation.Localisation = "PartOfCompilation";
-      this.checkBoxCompilation.LocalisationContext = "TagEdit";
-      this.checkBoxCompilation.Location = new System.Drawing.Point(461, 47);
-      this.checkBoxCompilation.Name = "checkBoxCompilation";
-      this.checkBoxCompilation.Size = new System.Drawing.Size(150, 20);
-      this.checkBoxCompilation.TabIndex = 3;
-      this.checkBoxCompilation.Text = "Part of a Compilation";
-      this.checkBoxCompilation.UseVisualStyleBackColor = true;
       // 
       // TagEditBase
       // 
@@ -3269,7 +3326,7 @@
     protected MPTagThat.Core.WinControls.MPTCheckBox ckArtist;
     protected System.Windows.Forms.TextBox tbTrack;
     protected MPTagThat.Core.WinControls.MPTCheckBox ckTrack;
-    protected System.Windows.Forms.ComboBox cbGenre;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbGenre;
     protected MPTagThat.Core.WinControls.MPTButton btApply;
     protected MPTagThat.Core.WinControls.MPTButton btCancel;
     protected MPTagThat.Core.WinControls.MPTLabel lblAlbumArtist;
@@ -3299,7 +3356,7 @@
     protected System.Windows.Forms.TextBox tbPicDesc;
     protected MPTagThat.Core.WinControls.MPTLabel lblPicDesc;
     protected MPTagThat.Core.WinControls.MPTLabel lblPicType;
-    protected System.Windows.Forms.ComboBox cbPicType;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbPicType;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPicture;
     protected MPTagThat.Core.WinControls.MPTButton buttonExportPicture;
     protected MPTagThat.Core.WinControls.MPTButton buttonRemovePicture;
@@ -3324,8 +3381,8 @@
     protected System.Windows.Forms.TextBox textBoxComment;
     protected MPTagThat.Core.WinControls.MPTLabel lbCommentLanguage;
     protected MPTagThat.Core.WinControls.MPTLabel lbCommentDescriptor;
-    protected System.Windows.Forms.ComboBox cbCommentLanguage;
-    protected System.Windows.Forms.ComboBox cbCommentDescriptor;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbCommentLanguage;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbCommentDescriptor;
     protected System.Windows.Forms.DataGridViewTextBoxColumn Descriptor;
     protected System.Windows.Forms.DataGridViewTextBoxColumn Language;
     protected System.Windows.Forms.DataGridViewTextBoxColumn Comment;
@@ -3374,7 +3431,7 @@
     protected MPTagThat.Core.WinControls.MPTLabel lblTitleSort;
     protected MPTagThat.Core.WinControls.MPTLabel lblTRackLength;
     protected MPTagThat.Core.WinControls.MPTCheckBox ckMediaType;
-    protected System.Windows.Forms.ComboBox cbMediaType;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbMediaType;
     protected MPTagThat.Core.WinControls.MPTLabel lbLinkOriginal;
     protected MPTagThat.Core.WinControls.MPTTabPage tabPageOriginal;
     protected MPTagThat.Core.WinControls.MPTTabPage tabPageInvolvedPeople;
@@ -3463,8 +3520,8 @@
     protected System.Windows.Forms.TextBox tbLyrics;
     protected MPTagThat.Core.WinControls.MPTLabel lblLyricsLanguage;
     protected MPTagThat.Core.WinControls.MPTLabel lblLyricsDescriptor;
-    protected System.Windows.Forms.ComboBox cbLyricsLanguage;
-    protected System.Windows.Forms.ComboBox cbLyricsDescriptor;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbLyricsLanguage;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbLyricsDescriptor;
     protected System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     protected System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     protected System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
@@ -3487,9 +3544,9 @@
     protected MPTagThat.Core.WinControls.MPTButton btGetLyricsFromText;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPictureInternet;
     private System.Windows.Forms.Label labelHeader;
-    protected System.Windows.Forms.ComboBox cbAlbumArtist;
-    protected System.Windows.Forms.ComboBox cbArtist;
-    protected System.Windows.Forms.ComboBox cbAlbum;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbAlbumArtist;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbArtist;
+    protected MPTagThat.Core.WinControls.MPTComboBox cbAlbum;
     protected MPTagThat.Core.WinControls.MPTCheckBox checkBoxCompilation;
   }
 }

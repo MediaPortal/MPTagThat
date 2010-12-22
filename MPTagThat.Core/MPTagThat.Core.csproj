@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Elegant.Ui.Common, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.Shell32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\Interop.Shell32.dll</HintPath>
@@ -156,7 +160,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTComboBox.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTExtendedPanel.cs">
       <SubType>Component</SubType>
@@ -174,7 +177,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTButton.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTGroupBox.cs">
       <SubType>Component</SubType>
@@ -336,6 +338,7 @@
     <None Include="Resources\starhot3.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Resources\starhot4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

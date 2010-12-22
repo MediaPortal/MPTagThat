@@ -26,13 +26,14 @@ using System.ComponentModel;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTButton : System.Windows.Forms.Button
+  public class MPTButton : Elegant.Ui.Button
   {
     #region Variables
 
     private readonly IThemeManager themeManager;
     private string _localisation;
     private string _localisationContext;
+    private bool _useVisualStyleBackColor;
 
     #endregion
 
@@ -87,6 +88,11 @@ namespace MPTagThat.Core.WinControls
       }
     }
 
+    public bool UseVisualStyleBackColor
+    {
+      get { return _useVisualStyleBackColor; }
+      set { _useVisualStyleBackColor = value; }
+    }
     #endregion
 
     #region ctor
@@ -97,6 +103,8 @@ namespace MPTagThat.Core.WinControls
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
       queueMessage.OnMessageReceive += OnMessageReceive;
+
+      UseVisualStyleBackColor = true;
     }
 
     #endregion
@@ -113,14 +121,6 @@ namespace MPTagThat.Core.WinControls
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
-        case "themechanged":
-          {
-            BackColor = themeManager.CurrentTheme.ButtonBackColor;
-            ForeColor = themeManager.CurrentTheme.ButtonForeColor;
-            Font = themeManager.CurrentTheme.ButtonFont;
-            break;
-          }
 
         case "languagechanged":
           Text = MPTWinControlsCommon.Localise(_localisationContext, _localisation);

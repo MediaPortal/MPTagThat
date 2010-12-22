@@ -602,8 +602,7 @@ namespace MPTagThat
             img = Image.FromStream(ms);
             if (img != null)
             {
-              GalleryItem galleryItem = new GalleryItem();
-              galleryItem.Image = img;
+              GalleryItem galleryItem = new GalleryItem(img, "", "");
               galleryPicture.Items.Add(galleryItem);
               ApplicationCommands.SaveAsThumb.Enabled = true;
             }
@@ -857,7 +856,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void applicationMenu1_VisibleChanged(object sender, EventArgs e)
     {
-      applicationMenu1.RightPaneControl.Control.Controls[0].PerformLayout();
+      applicationMenu1.RightPaneControl.Controls[0].PerformLayout();
     }
 
     /// <summary>

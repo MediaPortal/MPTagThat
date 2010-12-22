@@ -147,56 +147,34 @@ namespace MPTagThat.TagEdit
       if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
       {
         // Add Auto Complete Option for Artist
-        acArtist = new ShellAutoComplete();
-
-        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
-        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
-        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UpDownKeyDropsList;
-        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.FilterPreFixes;
-        acArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UseTab;
-
-        SourceCustomList custom = new SourceCustomList();
-        custom.StringList = Options.MediaPortalArtists;
-        acArtist.ListSource = custom;
-
+        AutoCompleteStringCollection customSource = new AutoCompleteStringCollection();
+        customSource.AddRange(Options.MediaPortalArtists);
+        
         if (IsMultiTagEdit)
         {
-          // We need to get the Combobox Handle first
-          ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
-          info.cbSize = Marshal.SizeOf(info);
-          ShellApi.GetComboBoxInfo(cbArtist.Handle, ref info);
-          acArtist.EditHandle = info.hwndEdit;
+          cbArtist.AutoCompleteCustomSource = customSource;
+          cbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
+          cbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
         else
         {
-          acArtist.EditHandle = tbArtist.Handle;
+          tbArtist.AutoCompleteCustomSource = customSource;
+          tbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
+          tbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
-        acArtist.SetAutoComplete(true);
-
-        // Add Auto Complete Option for AlbumArtist
-        acAlbumArtist = new ShellAutoComplete();
-
-        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoSuggest;
-        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.AutoAppend;
-        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UpDownKeyDropsList;
-        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.FilterPreFixes;
-        acAlbumArtist.ACOptions |= ShellAutoComplete.AutoCompleteOptions.UseTab;
-
-        acAlbumArtist.ListSource = custom;
 
         if (IsMultiTagEdit)
         {
-          // We need to get the Combobox Handle first
-          ShellApi.ComboBoxInfo info = new ShellApi.ComboBoxInfo();
-          info.cbSize = Marshal.SizeOf(info);
-          ShellApi.GetComboBoxInfo(cbAlbumArtist.Handle, ref info);
-          acAlbumArtist.EditHandle = info.hwndEdit;
+          cbAlbumArtist.AutoCompleteCustomSource = customSource;
+          cbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
+          cbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
         else
         {
-          acAlbumArtist.EditHandle = tbAlbumArtist.Handle;
+          tbAlbumArtist.AutoCompleteCustomSource = customSource;
+          tbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
+          tbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
-        acAlbumArtist.SetAutoComplete(true);
       }
     }
 
@@ -392,14 +370,14 @@ namespace MPTagThat.TagEdit
     /// </summary>
     /// <param name = "sender"></param>
     /// <param name = "e"></param>
-    protected virtual void OnTextChanged(object sender, EventArgs e) {}
+    protected virtual void OnTextChanged(object sender, EventArgs e) { }
 
     /// <summary>
-    ///   A text in the Combo has been selected. Mark the Check Box
+    ///   When the ComboBox has been edited, the Check Box should be selected automatically
     /// </summary>
     /// <param name = "sender"></param>
     /// <param name = "e"></param>
-    protected virtual void OnComboChanged(object sender, EventArgs e) {}
+    protected virtual void OnComboChanged(object sender, EventArgs e) { }
 
     #region Navigation Page
 

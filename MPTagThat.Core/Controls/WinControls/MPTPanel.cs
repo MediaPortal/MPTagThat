@@ -31,7 +31,6 @@ namespace MPTagThat.Core.WinControls
     #region Variables
 
     private readonly IThemeManager themeManager;
-
     #endregion
 
     #region ctor

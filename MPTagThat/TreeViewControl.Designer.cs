@@ -30,7 +30,7 @@
     {
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeViewControl));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuCopy = new System.Windows.Forms.ToolStripMenuItem();
       this.menuCut = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +54,12 @@
       this.TagFilterOperator = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.lbFileMask = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbFileMask = new System.Windows.Forms.TextBox();
-      this.cbListFormats = new System.Windows.Forms.ComboBox();
+      this.cbListFormats = new MPTagThat.Core.WinControls.MPTComboBox();
       this.ckUseTagFilter = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.panelLeftBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
-      this.cbDataProvider = new System.Windows.Forms.ComboBox();
+      this.cbDataProvider = new MPTagThat.Core.WinControls.MPTComboBox();
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.contextMenuTreeView.SuspendLayout();
       this.contextMenuStripFilter.SuspendLayout();
@@ -300,8 +300,8 @@
       // TagFilterValue
       // 
       this.TagFilterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-      this.TagFilterValue.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+      this.TagFilterValue.DefaultCellStyle = dataGridViewCellStyle1;
       this.TagFilterValue.HeaderText = "Filter";
       this.TagFilterValue.Name = "TagFilterValue";
       this.TagFilterValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -341,11 +341,17 @@
       // 
       this.cbListFormats.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.cbListFormats.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbListFormats.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.cbListFormats.DroppedDown = false;
+      this.cbListFormats.Editable = false;
+      this.cbListFormats.FormatInfo = null;
+      this.cbListFormats.FormatString = "";
       this.cbListFormats.FormattingEnabled = true;
+      this.cbListFormats.Id = "7e083ceb-b5c5-420b-b12a-6c8239e676c9";
       this.cbListFormats.Location = new System.Drawing.Point(6, 427);
       this.cbListFormats.Name = "cbListFormats";
       this.cbListFormats.Size = new System.Drawing.Size(195, 21);
+      this.cbListFormats.Sorted = false;
       this.cbListFormats.TabIndex = 1;
       this.cbListFormats.SelectedIndexChanged += new System.EventHandler(this.cbListFormats_SelectedIndexChanged);
       // 
@@ -396,16 +402,16 @@
       // 
       // btnRefreshFolder
       // 
-      this.btnRefreshFolder.AutoSize = true;
-      this.btnRefreshFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.btnRefreshFolder.Image = global::MPTagThat.Properties.Resources.RefreshDocViewHS;
+      this.btnRefreshFolder.Id = "2c274489-4997-4f22-abf7-cd1182404d55";
       this.btnRefreshFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.btnRefreshFolder.Localisation = "ButtonRefreshFolder";
       this.btnRefreshFolder.LocalisationContext = "main";
       this.btnRefreshFolder.Location = new System.Drawing.Point(13, 98);
-      this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 0);
+      this.btnRefreshFolder.MaximumSize = new System.Drawing.Size(220, 20);
       this.btnRefreshFolder.Name = "btnRefreshFolder";
-      this.btnRefreshFolder.Size = new System.Drawing.Size(128, 23);
+      this.btnRefreshFolder.Size = new System.Drawing.Size(184, 20);
+      this.btnRefreshFolder.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.RefreshDocViewHS)});
       this.btnRefreshFolder.TabIndex = 4;
       this.btnRefreshFolder.Text = "Refresh Folder View";
       this.btnRefreshFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -414,11 +420,17 @@
       // 
       // cbDataProvider
       // 
-      this.cbDataProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cbDataProvider.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.cbDataProvider.DroppedDown = false;
+      this.cbDataProvider.Editable = false;
+      this.cbDataProvider.FormatInfo = null;
+      this.cbDataProvider.FormatString = "";
       this.cbDataProvider.FormattingEnabled = true;
+      this.cbDataProvider.Id = "2c9ad13d-d9c5-490c-ad67-bcc11a584c96";
       this.cbDataProvider.Location = new System.Drawing.Point(17, 34);
       this.cbDataProvider.Name = "cbDataProvider";
       this.cbDataProvider.Size = new System.Drawing.Size(180, 21);
+      this.cbDataProvider.Sorted = false;
       this.cbDataProvider.TabIndex = 5;
       // 
       // checkBoxRecursive
@@ -478,7 +490,7 @@
     private System.Windows.Forms.TabControl tabControlTreeView;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageViews;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageFilter;
-    private System.Windows.Forms.ComboBox cbListFormats;
+    private MPTagThat.Core.WinControls.MPTComboBox cbListFormats;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseTagFilter;
     private System.Windows.Forms.TextBox tbFileMask;
     private MPTagThat.Core.WinControls.MPTLabel lbFileMask;
@@ -489,6 +501,6 @@
     private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterField;
     private System.Windows.Forms.DataGridViewTextBoxColumn TagFilterValue;
     private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterOperator;
-    private System.Windows.Forms.ComboBox cbDataProvider;
+    private MPTagThat.Core.WinControls.MPTComboBox cbDataProvider;
   }
 }

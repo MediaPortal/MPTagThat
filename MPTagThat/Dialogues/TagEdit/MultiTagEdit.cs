@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.Core.WinControls;
 using TagLib;
 using TagLib.Id3v2;
 using Tag = TagLib.Id3v1.Tag;
@@ -1282,7 +1283,7 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     protected override void OnComboChanged(object sender, EventArgs e)
     {
-      ComboBox cb = sender as ComboBox;
+      MPTComboBox cb = sender as MPTComboBox;
       switch (cb.Name)
       {
         case "cbMediaType":

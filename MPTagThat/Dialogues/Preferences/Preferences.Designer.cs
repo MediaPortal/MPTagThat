@@ -513,11 +513,17 @@ namespace MPTagThat.Preferences
       // 
       this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxDebugLevel.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxDebugLevel.DroppedDown = false;
+      this.comboBoxDebugLevel.Editable = false;
+      this.comboBoxDebugLevel.FormatInfo = null;
+      this.comboBoxDebugLevel.FormatString = "";
       this.comboBoxDebugLevel.FormattingEnabled = true;
+      this.comboBoxDebugLevel.Id = "35ea4dfa-282e-4448-9d8f-eba2fd42ea51";
       this.comboBoxDebugLevel.Location = new System.Drawing.Point(156, 80);
       this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
       this.comboBoxDebugLevel.Size = new System.Drawing.Size(435, 21);
+      this.comboBoxDebugLevel.Sorted = false;
       this.comboBoxDebugLevel.TabIndex = 2;
       // 
       // lbDebugLevel
@@ -546,11 +552,17 @@ namespace MPTagThat.Preferences
       // 
       this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxThemes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxThemes.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxThemes.DroppedDown = false;
+      this.comboBoxThemes.Editable = false;
+      this.comboBoxThemes.FormatInfo = null;
+      this.comboBoxThemes.FormatString = "";
       this.comboBoxThemes.FormattingEnabled = true;
+      this.comboBoxThemes.Id = "f49db0d3-a424-42d2-840b-66c4cb04b316";
       this.comboBoxThemes.Location = new System.Drawing.Point(156, 49);
       this.comboBoxThemes.Name = "comboBoxThemes";
       this.comboBoxThemes.Size = new System.Drawing.Size(435, 21);
+      this.comboBoxThemes.Sorted = false;
       this.comboBoxThemes.TabIndex = 1;
       this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
@@ -558,11 +570,17 @@ namespace MPTagThat.Preferences
       // 
       this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxLanguage.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxLanguage.DroppedDown = false;
+      this.comboBoxLanguage.Editable = false;
+      this.comboBoxLanguage.FormatInfo = null;
+      this.comboBoxLanguage.FormatString = "";
       this.comboBoxLanguage.FormattingEnabled = true;
+      this.comboBoxLanguage.Id = "3559fd52-85c2-4687-815e-c91454d51151";
       this.comboBoxLanguage.Location = new System.Drawing.Point(156, 17);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
       this.comboBoxLanguage.Size = new System.Drawing.Size(435, 21);
+      this.comboBoxLanguage.Sorted = false;
       this.comboBoxLanguage.TabIndex = 0;
       // 
       // lbLanguage
@@ -880,11 +898,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxAmazonSite
       // 
-      this.comboBoxAmazonSite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxAmazonSite.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxAmazonSite.DroppedDown = false;
+      this.comboBoxAmazonSite.Editable = false;
+      this.comboBoxAmazonSite.FormatInfo = null;
+      this.comboBoxAmazonSite.FormatString = "";
       this.comboBoxAmazonSite.FormattingEnabled = true;
+      this.comboBoxAmazonSite.Id = "aa136bfd-de97-43ab-bbfd-18ebe6590a9e";
       this.comboBoxAmazonSite.Location = new System.Drawing.Point(219, 108);
       this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
       this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
+      this.comboBoxAmazonSite.Sorted = false;
       this.comboBoxAmazonSite.TabIndex = 10;
       // 
       // lbAmazonSearchSite
@@ -1527,11 +1551,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxEncoder
       // 
-      this.comboBoxEncoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxEncoder.DroppedDown = false;
+      this.comboBoxEncoder.Editable = false;
+      this.comboBoxEncoder.FormatInfo = null;
+      this.comboBoxEncoder.FormatString = "";
       this.comboBoxEncoder.FormattingEnabled = true;
+      this.comboBoxEncoder.Id = "0485bd48-dddd-420f-a85f-493be2c1952a";
       this.comboBoxEncoder.Location = new System.Drawing.Point(9, 41);
       this.comboBoxEncoder.Name = "comboBoxEncoder";
       this.comboBoxEncoder.Size = new System.Drawing.Size(275, 21);
+      this.comboBoxEncoder.Sorted = false;
       this.comboBoxEncoder.TabIndex = 1;
       // 
       // lbEncodingFormat
@@ -1649,8 +1679,13 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxLamePresets
       // 
-      this.comboBoxLamePresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxLamePresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxLamePresets.DroppedDown = false;
+      this.comboBoxLamePresets.Editable = false;
+      this.comboBoxLamePresets.FormatInfo = null;
+      this.comboBoxLamePresets.FormatString = "";
       this.comboBoxLamePresets.FormattingEnabled = true;
+      this.comboBoxLamePresets.Id = "1d84ef73-ff19-44d9-8da3-27c615bf4db0";
       this.comboBoxLamePresets.Items.AddRange(new object[] {
             "Medium",
             "Standard",
@@ -1660,6 +1695,7 @@ namespace MPTagThat.Preferences
       this.comboBoxLamePresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxLamePresets.Name = "comboBoxLamePresets";
       this.comboBoxLamePresets.Size = new System.Drawing.Size(154, 21);
+      this.comboBoxLamePresets.Sorted = false;
       this.comboBoxLamePresets.TabIndex = 1;
       this.comboBoxLamePresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxPreset_SelectedIndexChanged);
       // 
@@ -1953,11 +1989,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxAACChannelModes
       // 
-      this.comboBoxAACChannelModes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxAACChannelModes.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxAACChannelModes.DroppedDown = false;
+      this.comboBoxAACChannelModes.Editable = false;
+      this.comboBoxAACChannelModes.FormatInfo = null;
+      this.comboBoxAACChannelModes.FormatString = "";
       this.comboBoxAACChannelModes.FormattingEnabled = true;
+      this.comboBoxAACChannelModes.Id = "97cb4a9c-abb0-4e98-8d0d-400d9925a947";
       this.comboBoxAACChannelModes.Location = new System.Drawing.Point(156, 112);
       this.comboBoxAACChannelModes.Name = "comboBoxAACChannelModes";
       this.comboBoxAACChannelModes.Size = new System.Drawing.Size(97, 21);
+      this.comboBoxAACChannelModes.Sorted = false;
       this.comboBoxAACChannelModes.TabIndex = 5;
       // 
       // labelChannelModes
@@ -1973,11 +2015,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxAACBitrates
       // 
-      this.comboBoxAACBitrates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxAACBitrates.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxAACBitrates.DroppedDown = false;
+      this.comboBoxAACBitrates.Editable = false;
+      this.comboBoxAACBitrates.FormatInfo = null;
+      this.comboBoxAACBitrates.FormatString = "";
       this.comboBoxAACBitrates.FormattingEnabled = true;
+      this.comboBoxAACBitrates.Id = "73b2d7e2-440a-463b-b13a-eec8e7f55424";
       this.comboBoxAACBitrates.Location = new System.Drawing.Point(156, 72);
       this.comboBoxAACBitrates.Name = "comboBoxAACBitrates";
       this.comboBoxAACBitrates.Size = new System.Drawing.Size(97, 21);
+      this.comboBoxAACBitrates.Sorted = false;
       this.comboBoxAACBitrates.TabIndex = 3;
       this.comboBoxAACBitrates.SelectedIndexChanged += new System.EventHandler(this.comboBoxAACBitrates_SelectedIndexChanged);
       // 
@@ -1994,11 +2042,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxAACEncoder
       // 
-      this.comboBoxAACEncoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxAACEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxAACEncoder.DroppedDown = false;
+      this.comboBoxAACEncoder.Editable = false;
+      this.comboBoxAACEncoder.FormatInfo = null;
+      this.comboBoxAACEncoder.FormatString = "";
       this.comboBoxAACEncoder.FormattingEnabled = true;
+      this.comboBoxAACEncoder.Id = "8e58374c-a678-4ec7-b25c-7e47f9b9bd61";
       this.comboBoxAACEncoder.Location = new System.Drawing.Point(156, 32);
       this.comboBoxAACEncoder.Name = "comboBoxAACEncoder";
       this.comboBoxAACEncoder.Size = new System.Drawing.Size(246, 21);
+      this.comboBoxAACEncoder.Sorted = false;
       this.comboBoxAACEncoder.TabIndex = 1;
       this.comboBoxAACEncoder.SelectedIndexChanged += new System.EventHandler(this.comboBoxAACEncoder_SelectedIndexChanged);
       // 
@@ -2046,20 +2100,32 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWMABitRate
       // 
-      this.comboBoxWMABitRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxWMABitRate.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxWMABitRate.DroppedDown = false;
+      this.comboBoxWMABitRate.Editable = false;
+      this.comboBoxWMABitRate.FormatInfo = null;
+      this.comboBoxWMABitRate.FormatString = "";
       this.comboBoxWMABitRate.FormattingEnabled = true;
+      this.comboBoxWMABitRate.Id = "f8cc222a-5c5e-4e7d-b956-78bb21567751";
       this.comboBoxWMABitRate.Location = new System.Drawing.Point(294, 112);
       this.comboBoxWMABitRate.Name = "comboBoxWMABitRate";
       this.comboBoxWMABitRate.Size = new System.Drawing.Size(108, 21);
+      this.comboBoxWMABitRate.Sorted = false;
       this.comboBoxWMABitRate.TabIndex = 6;
       // 
       // comboBoxWMACbrVbr
       // 
-      this.comboBoxWMACbrVbr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxWMACbrVbr.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxWMACbrVbr.DroppedDown = false;
+      this.comboBoxWMACbrVbr.Editable = false;
+      this.comboBoxWMACbrVbr.FormatInfo = null;
+      this.comboBoxWMACbrVbr.FormatString = "";
       this.comboBoxWMACbrVbr.FormattingEnabled = true;
+      this.comboBoxWMACbrVbr.Id = "adaac684-6abe-4bb5-ac67-d8e0aac62c9e";
       this.comboBoxWMACbrVbr.Location = new System.Drawing.Point(156, 112);
       this.comboBoxWMACbrVbr.Name = "comboBoxWMACbrVbr";
       this.comboBoxWMACbrVbr.Size = new System.Drawing.Size(110, 21);
+      this.comboBoxWMACbrVbr.Sorted = false;
       this.comboBoxWMACbrVbr.TabIndex = 5;
       this.comboBoxWMACbrVbr.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMACbrVbr_SelectedIndexChanged);
       // 
@@ -2076,11 +2142,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWMASampleFormat
       // 
-      this.comboBoxWMASampleFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxWMASampleFormat.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxWMASampleFormat.DroppedDown = false;
+      this.comboBoxWMASampleFormat.Editable = false;
+      this.comboBoxWMASampleFormat.FormatInfo = null;
+      this.comboBoxWMASampleFormat.FormatString = "";
       this.comboBoxWMASampleFormat.FormattingEnabled = true;
+      this.comboBoxWMASampleFormat.Id = "2f6ea721-50fb-4723-9def-33deddd14491";
       this.comboBoxWMASampleFormat.Location = new System.Drawing.Point(156, 72);
       this.comboBoxWMASampleFormat.Name = "comboBoxWMASampleFormat";
       this.comboBoxWMASampleFormat.Size = new System.Drawing.Size(246, 21);
+      this.comboBoxWMASampleFormat.Sorted = false;
       this.comboBoxWMASampleFormat.TabIndex = 3;
       this.comboBoxWMASampleFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMASampleFormat_SelectedIndexChanged);
       // 
@@ -2097,11 +2169,17 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWMAEncoderFormat
       // 
-      this.comboBoxWMAEncoderFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxWMAEncoderFormat.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxWMAEncoderFormat.DroppedDown = false;
+      this.comboBoxWMAEncoderFormat.Editable = false;
+      this.comboBoxWMAEncoderFormat.FormatInfo = null;
+      this.comboBoxWMAEncoderFormat.FormatString = "";
       this.comboBoxWMAEncoderFormat.FormattingEnabled = true;
+      this.comboBoxWMAEncoderFormat.Id = "e0ee3c82-f1ee-4352-89d4-4edf4d4ced40";
       this.comboBoxWMAEncoderFormat.Location = new System.Drawing.Point(156, 32);
       this.comboBoxWMAEncoderFormat.Name = "comboBoxWMAEncoderFormat";
       this.comboBoxWMAEncoderFormat.Size = new System.Drawing.Size(246, 21);
+      this.comboBoxWMAEncoderFormat.Sorted = false;
       this.comboBoxWMAEncoderFormat.TabIndex = 1;
       this.comboBoxWMAEncoderFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMAEncoderFormat_SelectedIndexChanged);
       // 
@@ -2187,8 +2265,13 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxMPCPresets
       // 
-      this.comboBoxMPCPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxMPCPresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxMPCPresets.DroppedDown = false;
+      this.comboBoxMPCPresets.Editable = false;
+      this.comboBoxMPCPresets.FormatInfo = null;
+      this.comboBoxMPCPresets.FormatString = "";
       this.comboBoxMPCPresets.FormattingEnabled = true;
+      this.comboBoxMPCPresets.Id = "cf6b798a-aa0c-4232-b1e6-43843f88dc4f";
       this.comboBoxMPCPresets.Items.AddRange(new object[] {
             "Medium",
             "Standard",
@@ -2198,6 +2281,7 @@ namespace MPTagThat.Preferences
       this.comboBoxMPCPresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxMPCPresets.Name = "comboBoxMPCPresets";
       this.comboBoxMPCPresets.Size = new System.Drawing.Size(505, 21);
+      this.comboBoxMPCPresets.Sorted = false;
       this.comboBoxMPCPresets.TabIndex = 1;
       // 
       // lbMPCPresets
@@ -2282,8 +2366,13 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWVPresets
       // 
-      this.comboBoxWVPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxWVPresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
+      this.comboBoxWVPresets.DroppedDown = false;
+      this.comboBoxWVPresets.Editable = false;
+      this.comboBoxWVPresets.FormatInfo = null;
+      this.comboBoxWVPresets.FormatString = "";
       this.comboBoxWVPresets.FormattingEnabled = true;
+      this.comboBoxWVPresets.Id = "6c51ef00-993b-45b4-a3d1-b488eb7ad7a5";
       this.comboBoxWVPresets.Items.AddRange(new object[] {
             "Medium",
             "Standard",
@@ -2293,6 +2382,7 @@ namespace MPTagThat.Preferences
       this.comboBoxWVPresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxWVPresets.Name = "comboBoxWVPresets";
       this.comboBoxWVPresets.Size = new System.Drawing.Size(507, 21);
+      this.comboBoxWVPresets.Sorted = false;
       this.comboBoxWVPresets.TabIndex = 1;
       // 
       // lbWVPreset
