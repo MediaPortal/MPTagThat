@@ -27,7 +27,7 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTGroupBox : GroupBox
+  public class MPTGroupBox : Elegant.Ui.GroupBox
   {
     #region Variables
 
@@ -114,6 +114,7 @@ namespace MPTagThat.Core.WinControls
 
       switch (action.ToLower())
       {
+          /*
           // Message sent, when a Theme is changing
         case "themechanged":
           {
@@ -121,6 +122,7 @@ namespace MPTagThat.Core.WinControls
             Font = themeManager.CurrentTheme.LabelFont;
             break;
           }
+        */
 
         case "languagechanged":
           Text = MPTWinControlsCommon.Localise(_localisationContext, _localisation);

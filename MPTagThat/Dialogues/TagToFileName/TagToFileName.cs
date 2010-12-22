@@ -25,6 +25,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MPTagThat.Core;
+using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 
 #endregion
@@ -392,7 +393,7 @@ namespace MPTagThat.TagToFileName
     /// <param name = "e"></param>
     private void lblParm_Click(object sender, EventArgs e)
     {
-      Label label = (Label)sender;
+      MPTLabel label = (MPTLabel)sender;
       int cursorPos = cbFormat.SelectionStart;
       string text = cbFormat.Text;
 

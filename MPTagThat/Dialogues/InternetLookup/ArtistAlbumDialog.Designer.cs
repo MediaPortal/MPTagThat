@@ -34,7 +34,7 @@
       this.textBoxAlbum = new System.Windows.Forms.TextBox();
       this.btContinue = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.SuspendLayout();
       // 
       // mptLabel1
@@ -146,6 +146,6 @@
     private System.Windows.Forms.TextBox textBoxAlbum;
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private MPTagThat.Core.WinControls.MPTButton btCancel;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
   }
 }

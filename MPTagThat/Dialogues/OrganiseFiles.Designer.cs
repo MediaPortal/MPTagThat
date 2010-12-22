@@ -58,7 +58,7 @@ namespace MPTagThat.Organise
       this.groupBoxOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.cbScripts = new System.Windows.Forms.ComboBox();
       this.lblOverrideTargetRootDir = new MPTagThat.Core.WinControls.MPTLabel();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.cbRootDir = new System.Windows.Forms.ComboBox();
@@ -647,7 +647,7 @@ namespace MPTagThat.Organise
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyFiles;
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyNonMusicFiles;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxOptions;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     private System.Windows.Forms.GroupBox groupBox1;
     private MPTagThat.Core.WinControls.MPTButton buttonBrowseRootDir;
     private MPTagThat.Core.WinControls.MPTLabel lblTargetRootDrectory;

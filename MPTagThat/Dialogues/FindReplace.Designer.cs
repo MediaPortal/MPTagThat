@@ -44,7 +44,7 @@ namespace MPTagThat.Dialogues
       this.rbSearchRegEx = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.rbSearchNormal = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.buttonClose = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.buttonFindNext = new MPTagThat.Core.WinControls.MPTButton();
       this.tabControlFindReplace.SuspendLayout();
       this.tabPageReplace.SuspendLayout();
@@ -151,7 +151,6 @@ namespace MPTagThat.Dialogues
       this.lblFindWhat.Size = new System.Drawing.Size(56, 13);
       this.lblFindWhat.TabIndex = 5;
       this.lblFindWhat.Text = "Find what:";
-      this.lblFindWhat.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
       // cbFind
       // 
@@ -321,7 +320,7 @@ namespace MPTagThat.Dialogues
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxMatchCase;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxOptions;
     private MPTagThat.Core.WinControls.MPTButton buttonClose;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     private MPTagThat.Core.WinControls.MPTLabel lblFindWhat;
     private System.Windows.Forms.ComboBox cbFind;
     private MPTagThat.Core.WinControls.MPTRadioButton rbSearchRegEx;

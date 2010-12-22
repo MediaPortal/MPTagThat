@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
 using MPTagThat.Core.ShellLib;
+using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 using TagLib;
 using File = System.IO.File;
@@ -390,7 +391,7 @@ namespace MPTagThat.TagEdit
     {
       int selectedIndex = -1;
 
-      Label label = sender as Label;
+      MPTLabel label = sender as MPTLabel;
       switch (label.Name)
       {
         case "lbLinkMainTags":

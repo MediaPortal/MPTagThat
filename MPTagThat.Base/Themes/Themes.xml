@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Themes>
-	<Theme name="ControlDefault" BackColor="255,231,235,247" >
+	<Theme name="ControlDefault" BackColor="255,213,228,242" >
 		<Label color="255,62,106,183" font="Tahoma" size="9.75" />
 		<Button backcolor="255,192,216,240" color="255,0,0,255" font="Tahoma" size="9.75" />
 		<PanelHeading backcolor="255,192,216,240" directionctrlcolor="255,169,169,169" font="Microsoft Sans Serif" size="9.75" />
 		<FormHeader forecolor="255,62,106,183" font="Microsoft Sans Serif" size="12.00" />
 		<GridView defaultbackcolor="255,255,255,255" selectionbackcolor="255,55,95,255" alternatingrowbackcolor="255,215,225,245" alternatingrowforecolor="255,0,0,0" changedbackcolor="255,255,255,0" changedforecolor="255,0,0,0" fixableerrorbackcolor="255,255,185,185" fixableerrorforecolor="255,0,0,0" nonfixableerrorbackcolor="255,210,255,230" nonfixableerrorforecolor="255,0,0,0" findreplacebackcolor="255,255,240,140" findreplaceforecolor="255,0,0,0" />
 	</Theme>
-	<Theme name="Office2007Silver" BackColor="255,227,227,229" >
-		<Label color="255,83,84,89" font="Tahoma" size="9.75" />
+	<Theme name="Office2007Silver" BackColor="255,238,238,244" >
+		<Label color="255,85,85,90" font="Tahoma" size="9.75" />
 		<Button backcolor="255,204,208,219" color="255,83,84,89" font="Tahoma" size="9.75" />
 		<PanelHeading backcolor="255,204,208,219" directionctrlcolor="255,222,226,235" font="Microsoft Sans Serif" size="9.75" />
-		<FormHeader forecolor="255,83,84,89" font="Microsoft Sans Serif" size="12.00" />
+		<FormHeader forecolor="255,85,85,90" font="Microsoft Sans Serif" size="12.00" />
 		<GridView defaultbackcolor="255,255,255,255" selectionbackcolor="255,55,95,255" alternatingrowbackcolor="255,204,208,219" alternatingrowforecolor="255,0,0,0" changedbackcolor="255,255,255,0" changedforecolor="255,0,0,0" fixableerrorbackcolor="255,255,185,185" fixableerrorforecolor="255,0,0,0" nonfixableerrorbackcolor="255,210,255,230" nonfixableerrorforecolor="255,0,0,0" findreplacebackcolor="255,255,240,140" findreplaceforecolor="255,0,0,0" />
 	</Theme>
-	<Theme name="Office2007Black" BackColor="255,67,70,77" >
-		<Label color="255,255,255,255" font="Tahoma" size="9.75" />
+	<Theme name="Office2007Black" BackColor="255,235,235,235" >
+		<Label color="255,85,85,90" font="Tahoma" size="9.75" />
 		<Button backcolor="255,160,160,160" color="255,0,0,0" font="Tahoma" size="9.75" />
 		<PanelHeading backcolor="255,162,164,163" directionctrlcolor="255,199,204,210" font="Microsoft Sans Serif" size="9.75" />
-		<FormHeader forecolor="255,255,255,255" font="Microsoft Sans Serif" size="12.00" />
+		<FormHeader forecolor="255,85,85,90" font="Microsoft Sans Serif" size="12.00" />
 		<GridView defaultbackcolor="255,255,255,255" selectionbackcolor="255,55,95,255" alternatingrowbackcolor="255,162,164,163" alternatingrowforecolor="255,255,255,255" changedbackcolor="255,255,255,0" changedforecolor="255,0,0,0" fixableerrorbackcolor="255,255,185,185" fixableerrorforecolor="255,0,0,0" nonfixableerrorbackcolor="255,210,255,230" nonfixableerrorforecolor="255,0,0,0" findreplacebackcolor="255,255,240,140" findreplaceforecolor="255,0,0,0" />
 	</Theme>
 </Themes>

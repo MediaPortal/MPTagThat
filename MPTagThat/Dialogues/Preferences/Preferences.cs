@@ -29,6 +29,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using MPTagThat.Core;
+using MPTagThat.Core.WinControls;
 using Un4seen.Bass.AddOn.Wma;
 
 #endregion
@@ -953,7 +954,7 @@ namespace MPTagThat.Preferences
     /// <param name = "e"></param>
     private void lblParm_Click(object sender, EventArgs e)
     {
-      Label label = (Label)sender;
+      MPTLabel label = (MPTLabel)sender;
       int cursorPos = textBoxRippingFilenameFormat.SelectionStart;
       string text = textBoxRippingFilenameFormat.Text;
 
@@ -1364,7 +1365,7 @@ namespace MPTagThat.Preferences
       tabPageTags.Hide();
       tabPageRipping.Hide();
 
-      Label label = sender as Label;
+      MPTLabel label = sender as MPTLabel;
       switch (label.Name)
       {
         case "lbLinkGeneral":

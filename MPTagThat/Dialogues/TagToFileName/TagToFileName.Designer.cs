@@ -54,7 +54,7 @@ namespace MPTagThat.TagToFileName
       this.lblParmAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblParmArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.GroupBoxFormat = new System.Windows.Forms.GroupBox();
       this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.btRemoveFormat = new MPTagThat.Core.WinControls.MPTButton();
@@ -559,7 +559,7 @@ namespace MPTagThat.TagToFileName
     private MPTagThat.Core.WinControls.MPTLabel lblNumberDigits;
     private System.Windows.Forms.NumericUpDown numericUpDownStartAt;
     private MPTagThat.Core.WinControls.MPTLabel lblStartAt;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     private System.Windows.Forms.GroupBox GroupBoxFormat;
     private MPTagThat.Core.WinControls.MPTButton btRemoveFormat;
     private MPTagThat.Core.WinControls.MPTButton btAddFormat;

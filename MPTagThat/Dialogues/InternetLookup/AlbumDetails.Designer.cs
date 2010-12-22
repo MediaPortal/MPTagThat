@@ -40,7 +40,7 @@
       this.lbAlbumTracks = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUp = new MPTagThat.Core.WinControls.MPTButton();
       this.btDown = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.GroupBoxAlbumDetails = new System.Windows.Forms.GroupBox();
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
       this.cbGenre = new System.Windows.Forms.ComboBox();
@@ -346,7 +346,7 @@
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private MPTagThat.Core.WinControls.MPTButton btUp;
     private MPTagThat.Core.WinControls.MPTButton btDown;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     private System.Windows.Forms.GroupBox GroupBoxAlbumDetails;
     private System.Windows.Forms.ComboBox cbGenre;
     private System.Windows.Forms.TextBox tbYear;

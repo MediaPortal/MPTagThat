@@ -268,7 +268,7 @@
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.panelTabPage.SuspendLayout();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
@@ -771,7 +771,6 @@
       this.lblDisc.Size = new System.Drawing.Size(103, 16);
       this.lblDisc.TabIndex = 30;
       this.lblDisc.Text = "Disc:";
-      this.lblDisc.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
       // tbDisc
       // 
@@ -3543,7 +3542,7 @@
     protected MPTagThat.Core.WinControls.MPTCheckBox ckRemoveExistingRatings;
     protected MPTagThat.Core.WinControls.MPTButton btGetLyricsFromText;
     protected MPTagThat.Core.WinControls.MPTButton buttonGetPictureInternet;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     protected MPTagThat.Core.WinControls.MPTComboBox cbAlbumArtist;
     protected MPTagThat.Core.WinControls.MPTComboBox cbArtist;
     protected MPTagThat.Core.WinControls.MPTComboBox cbAlbum;

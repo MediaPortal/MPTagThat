@@ -179,10 +179,8 @@
     <Compile Include="Controls\WinControls\MPTButton.cs">
     </Compile>
     <Compile Include="Controls\WinControls\MPTGroupBox.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTLabel.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTWinControlsCommon.cs" />
     <Compile Include="FreeDB\CDInfo.cs" />

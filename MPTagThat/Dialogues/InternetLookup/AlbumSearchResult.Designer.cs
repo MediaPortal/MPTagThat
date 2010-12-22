@@ -36,7 +36,7 @@
       this.chLabel = new System.Windows.Forms.ColumnHeader();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.btContinue = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.SuspendLayout();
       // 
       // lvAlbumSearchResult
@@ -154,6 +154,6 @@
     private MPTagThat.Core.WinControls.MPTButton btCancel;
     private MPTagThat.Core.WinControls.MPTButton btContinue;
     private System.Windows.Forms.ColumnHeader chTracks;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
   }
 }

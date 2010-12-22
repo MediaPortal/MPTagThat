@@ -31,9 +31,9 @@
       this.lvSearchResults = new System.Windows.Forms.ListView();
       this.chAlbum = new System.Windows.Forms.ColumnHeader();
       this.groupBoxAmazonMultipleAlbums = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.lbFileDetails = new System.Windows.Forms.Label();
-      this.lbAlbumDetail = new System.Windows.Forms.Label();
-      this.lbArtistDetail = new System.Windows.Forms.Label();
+      this.lbFileDetails = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lbAlbumDetail = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lbArtistDetail = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
@@ -189,8 +189,8 @@
     private MPTagThat.Core.WinControls.MPTButton btClose;
     protected MPTagThat.Core.WinControls.MPTLabel lblArtist;
     protected MPTagThat.Core.WinControls.MPTLabel lblAlbum;
-    private System.Windows.Forms.Label lbArtistDetail;
-    private System.Windows.Forms.Label lbAlbumDetail;
-    private System.Windows.Forms.Label lbFileDetails;
+    private MPTagThat.Core.WinControls.MPTLabel lbArtistDetail;
+    private MPTagThat.Core.WinControls.MPTLabel lbAlbumDetail;
+    private MPTagThat.Core.WinControls.MPTLabel lbFileDetails;
   }
 }

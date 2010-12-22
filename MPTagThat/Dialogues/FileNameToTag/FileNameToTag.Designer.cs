@@ -50,12 +50,12 @@ namespace MPTagThat.FileNameToTag
       this.lblParmArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
-      this.GroupBoxFormat = new System.Windows.Forms.GroupBox();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
+      this.GroupBoxFormat = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btReview = new MPTagThat.Core.WinControls.MPTButton();
       this.btRemoveFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
-      this.cbFormat = new System.Windows.Forms.ComboBox();
+      this.cbFormat = new MPTagThat.Core.WinControls.MPTComboBox();
       this.groupBoxParm.SuspendLayout();
       this.GroupBoxFormat.SuspendLayout();
       this.SuspendLayout();
@@ -325,6 +325,7 @@ namespace MPTagThat.FileNameToTag
       // btApply
       // 
       this.btApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btApply.Id = "7a3fba3f-8606-41df-ab64-228ba213763e";
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagAndRename";
       this.btApply.Location = new System.Drawing.Point(539, 340);
@@ -339,6 +340,7 @@ namespace MPTagThat.FileNameToTag
       // 
       this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.btCancel.Id = "8a8f88ae-9e30-43c9-afb0-bee2b454009c";
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagAndRename";
       this.btCancel.Location = new System.Drawing.Point(653, 340);
@@ -377,6 +379,7 @@ namespace MPTagThat.FileNameToTag
       // 
       // btReview
       // 
+      this.btReview.Id = "18c053af-42f5-4ecb-8ca7-3af4975be81d";
       this.btReview.Localisation = "Preview";
       this.btReview.LocalisationContext = "TagAndRename";
       this.btReview.Location = new System.Drawing.Point(421, 49);
@@ -389,6 +392,7 @@ namespace MPTagThat.FileNameToTag
       // 
       // btRemoveFormat
       // 
+      this.btRemoveFormat.Id = "cf59aab0-f07f-457c-9dbd-1f5bb12eca27";
       this.btRemoveFormat.Localisation = "RemoveFormat";
       this.btRemoveFormat.LocalisationContext = "TagAndRename";
       this.btRemoveFormat.Location = new System.Drawing.Point(215, 49);
@@ -401,6 +405,7 @@ namespace MPTagThat.FileNameToTag
       // 
       // btAddFormat
       // 
+      this.btAddFormat.Id = "3c061c33-44f6-42f1-abdc-6bdf9c7eaf2a";
       this.btAddFormat.Localisation = "AddFormat";
       this.btAddFormat.LocalisationContext = "TagAndRename";
       this.btAddFormat.Location = new System.Drawing.Point(9, 49);
@@ -413,11 +418,15 @@ namespace MPTagThat.FileNameToTag
       // 
       // cbFormat
       // 
+      this.cbFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbFormat.FormattingEnabled = true;
+      this.cbFormat.Id = "3f0c920e-4209-4cd6-ab23-12dc30a5e3f6";
       this.cbFormat.Location = new System.Drawing.Point(9, 22);
       this.cbFormat.Name = "cbFormat";
-      this.cbFormat.Size = new System.Drawing.Size(733, 21);
+      this.cbFormat.Size = new System.Drawing.Size(610, 21);
       this.cbFormat.TabIndex = 14;
+      this.cbFormat.TextEditorWidth = 591;
       this.cbFormat.TextChanged += new System.EventHandler(this.cbFormat_TextChanged);
       // 
       // FileNameToTag
@@ -449,6 +458,7 @@ namespace MPTagThat.FileNameToTag
       this.groupBoxParm.ResumeLayout(false);
       this.groupBoxParm.PerformLayout();
       this.GroupBoxFormat.ResumeLayout(false);
+      this.GroupBoxFormat.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -478,11 +488,11 @@ namespace MPTagThat.FileNameToTag
     private MPTagThat.Core.WinControls.MPTLabel lblSubTitle;
     private MPTagThat.Core.WinControls.MPTLabel lblContentGroup;
     private MPTagThat.Core.WinControls.MPTLabel lblComposer;
-    private System.Windows.Forms.Label labelHeader;
-    private System.Windows.Forms.GroupBox GroupBoxFormat;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
+    private MPTagThat.Core.WinControls.MPTGroupBox GroupBoxFormat;
     private MPTagThat.Core.WinControls.MPTButton btRemoveFormat;
     private MPTagThat.Core.WinControls.MPTButton btAddFormat;
-    private System.Windows.Forms.ComboBox cbFormat;
+    private MPTagThat.Core.WinControls.MPTComboBox cbFormat;
     private MPTagThat.Core.WinControls.MPTButton btReview;
   }
 }

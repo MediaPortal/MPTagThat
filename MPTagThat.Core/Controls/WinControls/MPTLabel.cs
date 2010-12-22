@@ -27,7 +27,7 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTLabel : Label
+  public class MPTLabel : Elegant.Ui.Label
   {
     #region Variables
 
@@ -114,13 +114,15 @@ namespace MPTagThat.Core.WinControls
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
+        /*
+        // Message sent, when a Theme is changing
         case "themechanged":
           {
             ForeColor = themeManager.CurrentTheme.LabelForeColor;
             Font = themeManager.CurrentTheme.LabelFont;
             break;
           }
+        */
 
         case "languagechanged":
           Text = MPTWinControlsCommon.Localise(_localisationContext, _localisation);

@@ -56,7 +56,7 @@ namespace MPTagThat.CaseConversion
       this.listBoxExceptions = new System.Windows.Forms.ListBox();
       this.buttonConvert = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonCancel = new MPTagThat.Core.WinControls.MPTButton();
-      this.labelHeader = new System.Windows.Forms.Label();
+      this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabControlConversion.SuspendLayout();
       this.tabPageSettings.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
@@ -510,6 +510,6 @@ namespace MPTagThat.CaseConversion
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxReplaceSpaceby20;
     private MPTagThat.Core.WinControls.MPTButton buttonConvert;
     private MPTagThat.Core.WinControls.MPTButton buttonCancel;
-    private System.Windows.Forms.Label labelHeader;
+    private MPTagThat.Core.WinControls.MPTLabel labelHeader;
   }
 }
