@@ -1,41 +1,37 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Timers;
+using Timer=System.Timers.Timer;
 
 namespace LyricsEngine.LyricSites
 {
-    class LyrDB
+    internal class LyrDB
     {
-        string lyric = "";
-        bool complete;
-        System.Timers.Timer timer;
-        int timeLimit;
+        private bool complete;
+        private string lyric = "";
         private ManualResetEvent m_EventStop_SiteSearches;
-
-        public string Lyric
-        {
-            get { return lyric; }
-        }
+        private int timeLimit;
+        private Timer timer;
 
         public LyrDB(string artist, string title, ManualResetEvent eventStop_SiteSearches, int timeLimit)
         {
             this.timeLimit = timeLimit;
-            timer = new System.Timers.Timer();
+            timer = new Timer();
 
             m_EventStop_SiteSearches = eventStop_SiteSearches;
 
             artist = LyricUtil.RemoveFeatComment(artist);
             title = LyricUtil.TrimForParenthesis(title);
             //string urlString = string.Format("http://www.lyrdb.com/lookup.php?q={0}|{1}&for=match", artist, title);
-            string urlString = string.Format("http://webservices.lyrdb.com/lookup.php?q={0}%7c{1}&for=match", artist, title);
-        
+            string urlString =
+                string.Format("http://webservices.lyrdb.com/lookup.php?q={0}%7c{1}&for=match", artist, title);
+
 
             LyricsWebClient client = new LyricsWebClient();
+
 
             timer.Enabled = true;
             timer.Interval = timeLimit;
@@ -43,7 +39,7 @@ namespace LyricsEngine.LyricSites
             timer.Start();
 
             Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(CallbackMethodSearch);
+            client.OpenReadCompleted += new OpenReadCompletedEventHandler(CallbackMethodSearch);
             client.OpenReadAsync(uri);
 
             while (complete == false)
@@ -54,16 +50,21 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(300);
+                    Thread.Sleep(300);
                 }
             }
+        }
+
+        public string Lyric
+        {
+            get { return lyric; }
         }
 
         private void CallbackMethodSearch(object sender, OpenReadCompletedEventArgs e)
         {
             StringBuilder lyricTemp = new StringBuilder();
 
-            LyricsWebClient client = (LyricsWebClient)sender;
+            LyricsWebClient client = (LyricsWebClient) sender;
             Stream reply = null;
             StreamReader sr = null;
 
@@ -71,7 +72,7 @@ namespace LyricsEngine.LyricSites
 
             try
             {
-                reply = (Stream)e.Result;
+                reply = (Stream) e.Result;
                 sr = new StreamReader(reply, Encoding.Default);
 
                 string result = sr.ReadToEnd();
@@ -89,7 +90,7 @@ namespace LyricsEngine.LyricSites
                 LyricsWebClient client2 = new LyricsWebClient();
 
                 Uri uri = new Uri(urlString);
-                client2.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(CallbackMethodGetLyric);
+                client2.OpenReadCompleted += new OpenReadCompletedEventHandler(CallbackMethodGetLyric);
                 client2.OpenReadAsync(uri);
 
                 while (complete == false)
@@ -100,7 +101,7 @@ namespace LyricsEngine.LyricSites
                     }
                     else
                     {
-                        System.Threading.Thread.Sleep(300);
+                        Thread.Sleep(300);
                     }
                 }
             }
@@ -127,29 +128,19 @@ namespace LyricsEngine.LyricSites
         {
             StringBuilder lyricTemp = new StringBuilder();
 
-            LyricsWebClient client = (LyricsWebClient)sender;
+            LyricsWebClient client = (LyricsWebClient) sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
-                reply = (Stream)e.Result;
+                reply = (Stream) e.Result;
                 sr = new StreamReader(reply, Encoding.Default);
 
                 lyric = sr.ReadToEnd().Trim();
 
                 lyric = lyric.Replace("*", "");
-
-                //lyricTemp.Replace("<br>", Environment.NewLine);
-                //lyricTemp.Replace(",<br />", Environment.NewLine);
-                //lyricTemp.Replace("<br />", Environment.NewLine);
-
-                //lyric = lyricTemp.ToString().Trim();
-
-                //if (lyric.Contains("but we do not have the lyrics"))
-                //{
-                //    lyric = "Not found";
-                //}
+                lyric = lyric.Replace("&amp;", "&");
             }
             catch
             {
@@ -171,7 +162,7 @@ namespace LyricsEngine.LyricSites
         }
 
 
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
             timer.Close();

@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Timers;
+using Timer=System.Timers.Timer;
 
 namespace LyricsEngine.LyricSites
 {
-    class LyricWiki
+    internal class LyricWiki
     {
-        string lyric = "";
         private bool complete;
-        System.Timers.Timer timer;
-        int timeLimit;
-
-        public string Lyric
-        {
-            get { return lyric; }
-        }
+        private string lyric = "";
+        private int timeLimit;
+        private Timer timer;
 
         public LyricWiki(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
         {
-            this.timeLimit = timeLimit / 2;
-            timer = new System.Timers.Timer();
+            this.timeLimit = timeLimit/2;
+            timer = new Timer();
 
             artist = LyricUtil.RemoveFeatComment(artist);
             artist = LyricUtil.CapatalizeString(artist);
@@ -50,7 +44,7 @@ namespace LyricsEngine.LyricSites
             timer.Start();
 
             Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(callbackMethod);
+            client.OpenReadCompleted += new OpenReadCompletedEventHandler(callbackMethod);
             client.OpenReadAsync(uri);
 
             while (complete == false)
@@ -61,9 +55,14 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(300);
+                    Thread.Sleep(300);
                 }
             }
+        }
+
+        public string Lyric
+        {
+            get { return lyric; }
         }
 
 
@@ -71,17 +70,17 @@ namespace LyricsEngine.LyricSites
         {
             bool thisMayBeTheCorrectLyric = true;
 
-            LyricsWebClient client = (LyricsWebClient)sender;
+            LyricsWebClient client = (LyricsWebClient) sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
-                reply = (Stream)e.Result;
+                reply = (Stream) e.Result;
                 sr = new StreamReader(reply, Encoding.Default);
 
                 string line = "";
-                
+
                 while (line.IndexOf("class='lyricbox' >") == -1)
                 {
                     if (sr.EndOfStream)
@@ -97,8 +96,6 @@ namespace LyricsEngine.LyricSites
 
                 if (thisMayBeTheCorrectLyric)
                 {
-
-
                     string cutString = "class='lyricbox' >";
 
                     int cutIndex = line.IndexOf(cutString);
@@ -116,6 +113,7 @@ namespace LyricsEngine.LyricSites
                     lyric = lyric.Replace("</i>", "");
                     lyric = lyric.Replace("<b>", "");
                     lyric = lyric.Replace("</b>", "");
+                    lyric = lyric.Replace("&amp;", "&");
 
                     lyric = lyric.Trim();
 
@@ -150,7 +148,7 @@ namespace LyricsEngine.LyricSites
             }
         }
 
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
             timer.Close();

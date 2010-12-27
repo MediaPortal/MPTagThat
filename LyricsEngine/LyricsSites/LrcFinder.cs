@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using LyricsEngine.lrcfinder;
-using LyricsEngine;
+using System;
 using System.Data;
-using System.Diagnostics;
 using System.Net;
 
 namespace LyricsEngine.LyricSites
 {
     public class LrcFinder
     {
-        private lrcfinder.LrcFinder lrcFinder;
-        private string artist = "";
-        private string title = "";
         public static bool Abort;
         public static string Domain = null;
 
         public static bool WebExceptionOccured = false;
+        private string artist = "";
+        private lrcfinder.LrcFinder lrcFinder;
+        private string title = "";
 
 
         public LrcFinder()
         {
-
         }
 
         public string FindLRC(string artist, string title)
@@ -123,7 +116,6 @@ namespace LyricsEngine.LyricSites
 
             try
             {
-
                 string url = GetUrl();
 
                 if (url == null)
@@ -181,7 +173,6 @@ namespace LyricsEngine.LyricSites
 
             try
             {
-
                 if (string.IsNullOrEmpty(Domain))
                 {
                     string[] domains = lrcFinder.NewDomain();
@@ -197,6 +188,5 @@ namespace LyricsEngine.LyricSites
                 return null;
             }
         }
-
     }
 }

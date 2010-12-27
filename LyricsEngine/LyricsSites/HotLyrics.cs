@@ -1,31 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Timers;
+using Timer=System.Timers.Timer;
 
 namespace LyricsEngine.LyricSites
 {
-    class HotLyrics
+    internal class HotLyrics
     {
-        string lyric = "";
         private bool complete;
-        System.Timers.Timer timer;
-        int timeLimit;
-
-        public string Lyric
-        {
-            get { return lyric; }
-        }
+        private string lyric = "";
+        private int timeLimit;
+        private Timer timer;
 
         public HotLyrics(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
         {
-            this.timeLimit = timeLimit / 2;
-            timer = new System.Timers.Timer();
-
+            this.timeLimit = timeLimit/2;
+            timer = new Timer();
 
             artist = LyricUtil.RemoveFeatComment(artist);
             artist = LyricUtil.CapatalizeString(artist);
@@ -86,6 +79,7 @@ namespace LyricsEngine.LyricSites
             {
                 return;
             }
+
             string firstLetter = artist[0].ToString();
 
             string urlString = "http://www.hotlyrics.net/lyrics/" + firstLetter + "/" + artist + "/" + title + ".html";
@@ -98,7 +92,7 @@ namespace LyricsEngine.LyricSites
             timer.Start();
 
             Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(callbackMethod);
+            client.OpenReadCompleted += new OpenReadCompletedEventHandler(callbackMethod);
             client.OpenReadAsync(uri);
 
             while (complete == false)
@@ -109,9 +103,14 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(300);
+                    Thread.Sleep(300);
                 }
             }
+        }
+
+        public string Lyric
+        {
+            get { return lyric; }
         }
 
         private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
@@ -119,72 +118,73 @@ namespace LyricsEngine.LyricSites
             bool thisMayBeTheCorrectLyric = true;
             StringBuilder lyricTemp = new StringBuilder();
 
-            LyricsWebClient client = (LyricsWebClient)sender;
+            LyricsWebClient client = (LyricsWebClient) sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
-              reply = (Stream)e.Result;
-              sr = new StreamReader(reply, Encoding.Default);
+                reply = (Stream) e.Result;
+                sr = new StreamReader(reply, Encoding.Default);
 
-              string line = "";
+                string line = "";
 
-              while (line.IndexOf("GOOGLE END") == -1)
-              {
-                if (sr.EndOfStream)
+                while (line.IndexOf("GOOGLE END") == -1)
                 {
-                  thisMayBeTheCorrectLyric = false;
-                  break;
+                    if (sr.EndOfStream)
+                    {
+                        thisMayBeTheCorrectLyric = false;
+                        break;
+                    }
+                    else
+                    {
+                        line = sr.ReadLine();
+                    }
                 }
-                else
-                {
-                  line = sr.ReadLine();
-                }
-              }
 
-              if (thisMayBeTheCorrectLyric)
-              {
-                lyricTemp = new StringBuilder();
-                line = sr.ReadLine();
-
-                while (line.IndexOf("<script type") == -1)
+                if (thisMayBeTheCorrectLyric)
                 {
-                  lyricTemp.Append(line);
-                  if (sr.EndOfStream)
-                  {
-                    thisMayBeTheCorrectLyric = false;
-                    break;
-                  }
-                  else
-                  {
+                    lyricTemp = new StringBuilder();
                     line = sr.ReadLine();
-                  }
+
+                    while (line.IndexOf("<script type") == -1)
+                    {
+                        lyricTemp.Append(line);
+                        if (sr.EndOfStream)
+                        {
+                            thisMayBeTheCorrectLyric = false;
+                            break;
+                        }
+                        else
+                        {
+                            line = sr.ReadLine();
+                        }
+                    }
+
+                    lyricTemp.Replace("?s", "'s");
+                    lyricTemp.Replace("?t", "'t");
+                    lyricTemp.Replace("?m", "'m");
+                    lyricTemp.Replace("?l", "'l");
+                    lyricTemp.Replace("?v", "'v");
+                    lyricTemp.Replace("<br>", "\r\n");
+                    lyricTemp.Replace("<br />", "\r\n");
+                    lyricTemp.Replace("&quot;", "\"");
+                    lyricTemp.Replace("</p>", "");
+                    lyricTemp.Replace("<BR>", "");
+                    lyricTemp.Replace("<br/>", "\r\n");
+                    lyricTemp.Replace("&amp;", "&");
+
+                    lyric = lyricTemp.ToString().Trim();
+
+                    if (lyric.Contains("<td"))
+                    {
+                        lyric = "Not found";
+                    }
                 }
-
-                lyricTemp.Replace("?s", "'s");
-                lyricTemp.Replace("?t", "'t");
-                lyricTemp.Replace("?m", "'m");
-                lyricTemp.Replace("?l", "'l");
-                lyricTemp.Replace("?v", "'v");
-                lyricTemp.Replace("<br>", "\r\n");
-                lyricTemp.Replace("<br />", "\r\n");
-                lyricTemp.Replace("&quot;", "\"");
-                lyricTemp.Replace("</p>", "");
-                lyricTemp.Replace("<BR>", "");
-                lyricTemp.Replace("<br/>", "\r\n");
-
-                lyric = lyricTemp.ToString().Trim();
-
-                if (lyric.Contains("<td"))
-                {
-                  lyric = "Not found";
-                }
-              }
             }
             catch
             {
-              lyric = "Not found";
+                lyric = "Not found";
             }
             finally
             {
@@ -207,7 +207,7 @@ namespace LyricsEngine.LyricSites
             }
         }
 
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
             timer.Close();

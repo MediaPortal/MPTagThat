@@ -1,31 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Timers;
+using Timer=System.Timers.Timer;
 
 namespace LyricsEngine.LyricSites
 {
-    class LyricsOnDemand
+    internal class LyricsOnDemand
     {
-        string lyric = "";
-        bool complete;
-        System.Timers.Timer timer;
-        int timeLimit;
-
-        public string Lyric
-        {
-            get { return lyric; }
-        }
+        private bool complete;
+        private string lyric = "";
+        private int timeLimit;
+        private Timer timer;
 
         public LyricsOnDemand(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
         {
             this.timeLimit = timeLimit;
-            timer = new System.Timers.Timer();
-
+            timer = new Timer();
 
             artist = LyricUtil.RemoveFeatComment(artist);
             artist = LyricUtil.DeleteSpecificChars(artist);
@@ -60,6 +53,7 @@ namespace LyricsEngine.LyricSites
             {
                 return;
             }
+
             string firstLetter = artist[0].ToString();
 
             int firstNumber = 0;
@@ -68,7 +62,8 @@ namespace LyricsEngine.LyricSites
                 firstLetter = "0";
             }
 
-            string urlString = "http://www.lyricsondemand.com/" + firstLetter + "/" + artist + "lyrics/" + title + "lyrics.html";
+            string urlString = "http://www.lyricsondemand.com/" + firstLetter + "/" + artist + "lyrics/" + title +
+                               "lyrics.html";
 
             LyricsWebClient client = new LyricsWebClient();
 
@@ -78,7 +73,7 @@ namespace LyricsEngine.LyricSites
             timer.Start();
 
             Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(callbackMethod);
+            client.OpenReadCompleted += new OpenReadCompletedEventHandler(callbackMethod);
             client.OpenReadAsync(uri);
 
             while (complete == false)
@@ -89,23 +84,28 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
                 }
             }
+        }
+
+        public string Lyric
+        {
+            get { return lyric; }
         }
 
         private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
         {
             bool thisMayBeTheCorrectLyric = true;
             StringBuilder lyricTemp = new StringBuilder();
-            
-            LyricsWebClient client = (LyricsWebClient)sender;
+
+            LyricsWebClient client = (LyricsWebClient) sender;
             Stream reply = null;
             StreamReader sr = null;
 
             try
             {
-                reply = (Stream)e.Result;
+                reply = (Stream) e.Result;
                 sr = new StreamReader(reply, Encoding.Default);
 
                 string line = "";
@@ -158,6 +158,7 @@ namespace LyricsEngine.LyricSites
                     lyricTemp.Replace("<BR>", " \r\n");
                     lyricTemp.Replace("<br />", " \r\n");
                     lyricTemp.Replace("&#039;", "'");
+                    lyricTemp.Replace("&amp;", "&");
 
                     lyric = lyricTemp.ToString().Trim();
 
@@ -186,7 +187,7 @@ namespace LyricsEngine.LyricSites
             }
         }
 
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
             timer.Close();
@@ -198,6 +199,3 @@ namespace LyricsEngine.LyricSites
         }
     }
 }
-
-
-

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,8 +6,13 @@ namespace LyricsEngine
 {
     public class LyricUtil
     {
-        static string[] parenthesesAndAlike = new string[6] { "(album", "(acoustic", "(live", "(radio", "[", "{" };
-        static string[] charsToDelete = new string[11] { ".", ",", "&", "'", "!", "\"", "&", "?", "(", ")", "+" /*, "ä", "ö", "ü", "Ä", "Ö", "Ü", "ß" */ };
+        private static readonly string[] charsToDelete = new string[11]
+                                                             {
+                                                                 ".", ",", "&", "'", "!", "\"", "&", "?", "(", ")", "+"
+                                                                 /*, "ä", "ö", "ü", "Ä", "Ö", "Ü", "ß" */
+                                                             };
+
+        private static readonly string[] parenthesesAndAlike = new string[3] { "(", "[", "{" };
 
         // capatalize string and make ready for XML
         public static string CapatalizeString(string s)
@@ -21,7 +25,8 @@ namespace LyricsEngine
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < words.Length; i++)
             {
-                result.Append(words[i].Substring(0, 1).ToUpper() + (words[i].Length > 1 ? words[i].Substring(1, words[i].Length - 1).ToLower() : "") + " ");
+                result.Append(words[i].Substring(0, 1).ToUpper() +
+                              (words[i].Length > 1 ? words[i].Substring(1, words[i].Length - 1).ToLower() : "") + " ");
             }
             return result.ToString().Trim();
         }
@@ -96,7 +101,6 @@ namespace LyricsEngine
 
                 foreach (string findValue in find)
                 {
-
                     if (findValue != "")
                     {
                         lyrics = lyrics.Replace(findValue, replace[valueIndex]);

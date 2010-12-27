@@ -1,31 +1,27 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Timers;
-using System.Text.RegularExpressions;
+using Timer = System.Timers.Timer;
 
 namespace LyricsEngine.LyricSites
 {
-    class LyricsPluginSite
+    internal class LyricsPluginSite
     {
-        string lyric = "";
-        bool complete;
-        System.Timers.Timer timer;
-        int timeLimit;
-
-        public string Lyric
-        {
-            get { return lyric; }
-        }
+        private bool firstStepComplete;
+        private bool complete;
+        private string lyric = "";
+        private int timeLimit;
+        private Timer timer;
+        private string timestamp;
+        private string checkCode;
 
         public LyricsPluginSite(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
         {
             this.timeLimit = timeLimit;
-            timer = new System.Timers.Timer();
+            timer = new Timer();
 
             artist = LyricUtil.RemoveFeatComment(artist);
             title = LyricUtil.TrimForParenthesis(title);
@@ -37,18 +33,44 @@ namespace LyricsEngine.LyricSites
             // Hebrew letters
             artist = fixHebrew(artist);
             title = fixHebrew(title);
-            
-            string urlString = "http://www.lyricsplugin.com/winamp03/plugin/?" + "artist=" + artist + "&title=" + title;
 
+            // timer
             timer.Enabled = true;
             timer.Interval = timeLimit;
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
-            Uri uri = new Uri(urlString);
-            LyricsWebClient client = new LyricsWebClient();
-            client.OpenReadCompleted += new System.Net.OpenReadCompletedEventHandler(callbackMethod);
-            client.OpenReadAsync(uri);
+            // LyricsPlugin.com changed their API to need 2 calls. The first is to get a timer & code
+
+            // 1st step
+            string firstUrlString = "http://www.lyricsplugin.com/winamp03/plugin/?" + "artist=" + artist + "&title=" + title;
+
+            Uri uri1 = new Uri(firstUrlString);
+            LyricsWebClient client1 = new LyricsWebClient();
+            client1.OpenReadCompleted += new OpenReadCompletedEventHandler(firstCallbackMethod);
+            client1.OpenReadAsync(uri1);
+
+            while (firstStepComplete == false)
+            {
+                if (m_EventStop_SiteSearches.WaitOne(1, true))
+                {
+                    firstStepComplete = true;
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                }
+            }
+
+            // assertion: !timestamp.Equals("") & !checkCode.Equals("");
+
+            // 2nd step
+            string secondUrlString = "http://www.lyricsplugin.com/winamp03/plugin/content.php?" + "artist=" + artist + "&title=" + title + "&time=" + timestamp + "&check=" + checkCode;
+
+            Uri uri2 = new Uri(secondUrlString);
+            LyricsWebClient client2 = new LyricsWebClient(firstUrlString);
+            client2.OpenReadCompleted += new OpenReadCompletedEventHandler(secondCallbackMethod);
+            client2.OpenReadAsync(uri2);
 
             while (complete == false)
             {
@@ -58,9 +80,178 @@ namespace LyricsEngine.LyricSites
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(100);
+                    Thread.Sleep(100);
                 }
             }
+        }
+
+        public string Lyric
+        {
+            get { return lyric; }
+        }
+
+        private void firstCallbackMethod(object sender, OpenReadCompletedEventArgs e)
+        {
+            bool thisMayBeTheCorrectPage = true;
+            StringBuilder lyricsCommand = new StringBuilder();
+
+            LyricsWebClient client = (LyricsWebClient)sender;
+            Stream reply = null;
+            StreamReader sr = null;
+
+            try
+            {
+                reply = (Stream)e.Result;
+                sr = new StreamReader(reply, Encoding.UTF8);
+
+                string line = "";
+                int noOfLinesCount = 0;
+
+                while (line.IndexOf(@"getContent(") == -1)
+                {
+                    if (sr.EndOfStream || ++noOfLinesCount > 300)
+                    {
+                        thisMayBeTheCorrectPage = false;
+                        break;
+                    }
+                    else
+                    {
+                        line = sr.ReadLine();
+                    }
+                }
+
+                if (thisMayBeTheCorrectPage)
+                {
+                    lyricsCommand.Append(line);
+
+                    string[] parameters = line.Split('\'');
+
+                    // todo - Find a better check here
+                    if (parameters.Length == 9)
+                    {
+                        timestamp = parameters[5];
+                        checkCode = parameters[7];
+                    }
+                }
+            }
+            catch
+            {
+                lyric = "Not found";
+            }
+            finally
+            {
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+
+                if (reply != null)
+                {
+                    reply.Close();
+                }
+                firstStepComplete = true;
+            }
+        }
+
+        private void secondCallbackMethod(object sender, OpenReadCompletedEventArgs e)
+        {
+            bool thisMayBeTheCorrectLyric = true;
+            StringBuilder lyricTemp = new StringBuilder();
+
+            LyricsWebClient client = (LyricsWebClient)sender;
+            Stream reply = null;
+            StreamReader sr = null;
+
+            try
+            {
+                reply = (Stream)e.Result;
+                sr = new StreamReader(reply, Encoding.UTF8);
+
+                string line = "";
+                int noOfLinesCount = 0;
+
+                while (line.IndexOf(@"<div id=""lyrics"">") == -1)
+                {
+                    if (sr.EndOfStream || ++noOfLinesCount > 300)
+                    {
+                        thisMayBeTheCorrectLyric = false;
+                        break;
+                    }
+                    else
+                    {
+                        line = sr.ReadLine();
+                    }
+                }
+
+
+                if (thisMayBeTheCorrectLyric)
+                {
+                    lyricTemp = new StringBuilder();
+                    line = sr.ReadLine();
+
+                    while (line.IndexOf("</div>") == -1)
+                    {
+                        lyricTemp.Append(line);
+
+                        if (sr.EndOfStream)
+                        {
+                            thisMayBeTheCorrectLyric = false;
+                            break;
+                        }
+                        else
+                        {
+                            line = sr.ReadLine();
+                        }
+                    }
+
+                    // Clean lyrics
+                    lyric = cleanLyrics(lyricTemp);
+
+                    if (lyric.Length == 0 || (lyric.Contains("<") || lyric.Contains(">") || lyric.Contains("a href") || lyric.ToLower().Contains("www")))
+                    {
+                        lyric = "Not found";
+                    }
+                }
+            }
+            catch
+            {
+                lyric = "Not found";
+            }
+            finally
+            {
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+
+                if (reply != null)
+                {
+                    reply.Close();
+                }
+                complete = true;
+            }
+        }
+
+        private string cleanLyrics(StringBuilder lyricTemp)
+        {
+            lyricTemp.Replace("<br>", Environment.NewLine);
+            lyricTemp.Replace("<br />", Environment.NewLine);
+            lyricTemp.Replace("&quot;", "\"");
+
+            lyricTemp.Replace(@"<a href=""http://www.tunerankings.com/"" target=""_blank"">www.tunerankings.com</a>", string.Empty);
+
+            return lyricTemp.ToString().Trim();
+        }
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            timer.Stop();
+            timer.Close();
+            timer.Dispose();
+
+            lyric = "Not found";
+            complete = true;
+            Thread.CurrentThread.Abort();
         }
 
         private static string fixEscapeCharacters(string text)
@@ -69,7 +260,7 @@ namespace LyricsEngine.LyricSites
             text = text.Replace(")", "");
             text = text.Replace("#", "");
             text = text.Replace("/", "");
-            
+
             text = text.Replace("%", "%25");
 
             text = text.Replace(" ", "%20");
@@ -82,7 +273,8 @@ namespace LyricsEngine.LyricSites
             text = text.Replace("=", "%3D");
             text = text.Replace("?", "%3F");
             text = text.Replace("@", "%40");
-            
+            text = text.Replace("&amp;", "&");
+
             return text;
         }
 
@@ -114,9 +306,9 @@ namespace LyricsEngine.LyricSites
             text = text.Replace("\uC3B7", "%D7%A7");
             text = text.Replace("\uC3B8", "%D7%A8");
             text = text.Replace("\uC3B9", "%D7%A9");
-            text = text.Replace("\uC3BA", "%D7%AA");  // ú
+            text = text.Replace("\uC3BA", "%D7%AA"); // ú
 
-            text = text.Replace("\uD790", "%d7%90");  // à
+            text = text.Replace("\uD790", "%d7%90"); // à
             text = text.Replace("\uD791", "%D7%91");
             text = text.Replace("\uD792", "%D7%92");
             text = text.Replace("\uD793", "%D7%93");
@@ -142,102 +334,9 @@ namespace LyricsEngine.LyricSites
             text = text.Replace("\uD7A7", "%D7%A7");
             text = text.Replace("\uD7A8", "%D7%A8");
             text = text.Replace("\uD7A9", "%D7%A9");
-            text = text.Replace("\uD7AA", "%D7%AA");  // ú
+            text = text.Replace("\uD7AA", "%D7%AA"); // ú
 
             return text;
-        }
-
-        private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
-        {
-            bool thisMayBeTheCorrectLyric = true;
-            StringBuilder lyricTemp = new StringBuilder();
-
-            LyricsWebClient client = (LyricsWebClient)sender;
-            Stream reply = null;
-            StreamReader sr = null;
-
-            try
-            {
-                reply = (Stream)e.Result;
-                sr = new StreamReader(reply, Encoding.UTF8);
-
-                string line = "";
-                int noOfLinesCount = 0;
-
-                while (line.IndexOf(@"<div id=""lyrics"">") == -1)
-                {
-                    if (sr.EndOfStream || ++noOfLinesCount > 300)
-                    {
-                        thisMayBeTheCorrectLyric = false;
-                        break;
-                    }
-                    else
-                    {
-                        line = sr.ReadLine();
-                    }
-                }
-
-                
-                if (thisMayBeTheCorrectLyric)
-                {
-                    lyricTemp = new StringBuilder();
-                    line = sr.ReadLine();
-
-                    while (line.IndexOf("</div>") == -1)
-                    {
-                        lyricTemp.Append(line);
-
-                        if (sr.EndOfStream)
-                        {
-                            thisMayBeTheCorrectLyric = false;
-                            break;
-                        }
-                        else
-                        {
-                            line = sr.ReadLine();
-                        }
-                    }
-
-                    lyricTemp.Replace("<br>", Environment.NewLine);
-                    lyricTemp.Replace("<br />", Environment.NewLine);
-                    lyricTemp.Replace("&quot;", "\"");
-
-                    lyric = lyricTemp.ToString().Trim();
-
-                    if (lyric.Length == 0)
-                    {
-                        lyric = "Not found";
-                    }
-                }
-            }
-            catch
-            {
-                lyric = "Not found";
-            }
-            finally
-            {
-                if (sr != null)
-                {
-                    sr.Close();
-                }
-
-                if (reply != null)
-                {
-                    reply.Close();
-                }
-                complete = true;
-            }
-        }
-
-        void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            timer.Stop();
-            timer.Close();
-            timer.Dispose();
-
-            lyric = "Not found";
-            complete = true;
-            Thread.CurrentThread.Abort();
         }
     }
 }
