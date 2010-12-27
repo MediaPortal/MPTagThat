@@ -480,7 +480,7 @@
     <String id="Format">Format:</String>
     <String id="RemoveFormat">Format aus Liste entfernen</String>
     <String id="AddFormat">Format zu Liste hinzufügen</String>
-    <String id="GroupBoxParm">Parameters (Maus-Klick fügt zur Liste hinzu)</String>
+    <String id="GroupBoxParm">Parameter (Maus-Klick fügt zur Liste hinzu)</String>
     <String id="Folder">\ = Verzeichnis: Parameter vor dem Indikator werden aus der Verzeichnisstruktur übernommen.</String> 
     <String id="Unused">&lt;X&gt; = Ignorieren</String>
     <String id="Comment">&lt;C&gt; = Kommentar</String>
@@ -569,6 +569,7 @@
     <String id="Copied">Kopiert</String>
     <String id="Moved">Verschoben</String>
     <String id="GroupBoxOptions">Optionen</String>
+	<String id="GroupBoxSelection">Auswahl</String>
     <String id="ButtonOrganise">Organisieren</String>
   </Section>
   
@@ -846,6 +847,7 @@
     <String id="Description">MPTagThat ist ein open source Tag Editor, der das Verwalten Ihrer gesamten Musiksammlung erlaubt.\n\nMehr Information:</String>
 	<String id="Version">Version:</String>
 	<String id="BuildDate">Build Datum:</String>
+	<String id="Contributors">Mitwirkende</String>
   </Section>
    
   <!-- Player -->

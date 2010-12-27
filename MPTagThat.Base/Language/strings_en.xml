@@ -569,6 +569,7 @@
     <String id="Copied">Copied</String>
     <String id="Moved">Moved</String>
     <String id="GroupBoxOptions">Options</String>
+    <String id="GroupBoxSelection">Selection</String>
     <String id="ButtonOrganise">Organise</String>
   </Section>
   
@@ -846,6 +847,7 @@
     <String id="Description">MPTagThat is an open source Tag Editor, which allows managing your complete Music Collection.\n\nMore information at:</String>
 	<String id="Version">Version:</String>
 	<String id="BuildDate">Build Date:</String>
+	<String id="Contributors">Contributors</String>
   </Section>
   
   <!-- Player -->
