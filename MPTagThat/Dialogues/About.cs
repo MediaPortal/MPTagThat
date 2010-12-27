@@ -51,6 +51,10 @@ namespace MPTagThat.Dialogues
       BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
       lbWikiLink.LinkColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
       lbLinkForum.LinkColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      tbDescription.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      tbDescription.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
+      tbContributors.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
+      tbContributors.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       LocaliseScreen();
@@ -73,6 +77,7 @@ namespace MPTagThat.Dialogues
     private void LocaliseScreen()
     {
       Text = localisation.ToString("About", "Header");
+      tbDescription.Text = localisation.ToString("About", "Description");
     }
 
     #endregion

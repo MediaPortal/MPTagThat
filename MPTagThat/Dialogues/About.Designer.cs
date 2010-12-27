@@ -30,7 +30,6 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
       this.lbAppTitle = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lbDescription = new MPTagThat.Core.WinControls.MPTLabel();
       this.btOk = new MPTagThat.Core.WinControls.MPTButton();
       this.lbVersion = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbBuildDate = new MPTagThat.Core.WinControls.MPTLabel();
@@ -39,12 +38,14 @@
       this.lbDate = new MPTagThat.Core.WinControls.MPTLabel();
       this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
       this.lbLinkForum = new System.Windows.Forms.LinkLabel();
+      this.tbDescription = new System.Windows.Forms.TextBox();
+      this.lbContributors = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbContributors = new System.Windows.Forms.TextBox();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
       this.SuspendLayout();
       // 
       // lbAppTitle
       // 
-      this.lbAppTitle.AutoSize = true;
       this.lbAppTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbAppTitle.Localisation = "ApplicationName";
       this.lbAppTitle.LocalisationContext = "system";
@@ -54,23 +55,13 @@
       this.lbAppTitle.TabIndex = 0;
       this.lbAppTitle.Text = "MPTagThat the MediaPortal Tag Editor";
       // 
-      // lbDescription
-      // 
-      this.lbDescription.Localisation = "Description";
-      this.lbDescription.LocalisationContext = "About";
-      this.lbDescription.Location = new System.Drawing.Point(18, 129);
-      this.lbDescription.Name = "lbDescription";
-      this.lbDescription.Size = new System.Drawing.Size(356, 91);
-      this.lbDescription.TabIndex = 1;
-      this.lbDescription.Text = "MPTagThat is an open source tag editor which allows to manage \r\nyour complete mus" +
-          "ic collection.\r\n\r\nMore information at:";
-      // 
       // btOk
       // 
       this.btOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.btOk.Id = "55f9833e-8053-49e4-bc73-490f80af59ec";
       this.btOk.Localisation = "Ok";
       this.btOk.LocalisationContext = "About";
-      this.btOk.Location = new System.Drawing.Point(214, 293);
+      this.btOk.Location = new System.Drawing.Point(212, 344);
       this.btOk.Name = "btOk";
       this.btOk.Size = new System.Drawing.Size(75, 23);
       this.btOk.TabIndex = 2;
@@ -79,7 +70,6 @@
       // 
       // lbVersion
       // 
-      this.lbVersion.AutoSize = true;
       this.lbVersion.Localisation = "Version";
       this.lbVersion.LocalisationContext = "About";
       this.lbVersion.Location = new System.Drawing.Point(15, 65);
@@ -90,7 +80,6 @@
       // 
       // lbBuildDate
       // 
-      this.lbBuildDate.AutoSize = true;
       this.lbBuildDate.Localisation = "BuildDate";
       this.lbBuildDate.LocalisationContext = "About";
       this.lbBuildDate.Location = new System.Drawing.Point(15, 91);
@@ -102,7 +91,7 @@
       // lbWikiLink
       // 
       this.lbWikiLink.AutoSize = true;
-      this.lbWikiLink.Location = new System.Drawing.Point(18, 220);
+      this.lbWikiLink.Location = new System.Drawing.Point(12, 279);
       this.lbWikiLink.Name = "lbWikiLink";
       this.lbWikiLink.Size = new System.Drawing.Size(356, 13);
       this.lbWikiLink.TabIndex = 5;
@@ -112,7 +101,6 @@
       // 
       // lbVersionDetail
       // 
-      this.lbVersionDetail.AutoSize = true;
       this.lbVersionDetail.Localisation = "mptLabel1";
       this.lbVersionDetail.LocalisationContext = "About";
       this.lbVersionDetail.Location = new System.Drawing.Point(142, 64);
@@ -123,7 +111,6 @@
       // 
       // lbDate
       // 
-      this.lbDate.AutoSize = true;
       this.lbDate.Localisation = "mptLabel1";
       this.lbDate.LocalisationContext = "About";
       this.lbDate.Location = new System.Drawing.Point(142, 91);
@@ -145,13 +132,47 @@
       // lbLinkForum
       // 
       this.lbLinkForum.AutoSize = true;
-      this.lbLinkForum.Location = new System.Drawing.Point(18, 249);
+      this.lbLinkForum.Location = new System.Drawing.Point(12, 308);
       this.lbLinkForum.Name = "lbLinkForum";
       this.lbLinkForum.Size = new System.Drawing.Size(243, 13);
       this.lbLinkForum.TabIndex = 9;
       this.lbLinkForum.TabStop = true;
       this.lbLinkForum.Text = "http://forum.team-mediaportal.com/mptagthat-310";
       this.lbLinkForum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbLinkForum_LinkClicked);
+      // 
+      // tbDescription
+      // 
+      this.tbDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.tbDescription.Location = new System.Drawing.Point(15, 221);
+      this.tbDescription.Multiline = true;
+      this.tbDescription.Name = "tbDescription";
+      this.tbDescription.ReadOnly = true;
+      this.tbDescription.Size = new System.Drawing.Size(480, 55);
+      this.tbDescription.TabIndex = 10;
+      this.tbDescription.Text = "MPTagThat is an open source tag editor which allows to manage your complete music" +
+          " collection.\r\n\r\nMore information at:";
+      // 
+      // lbContributors
+      // 
+      this.lbContributors.Localisation = "Contributors";
+      this.lbContributors.LocalisationContext = "About";
+      this.lbContributors.Location = new System.Drawing.Point(15, 128);
+      this.lbContributors.Name = "lbContributors";
+      this.lbContributors.Size = new System.Drawing.Size(59, 13);
+      this.lbContributors.TabIndex = 11;
+      this.lbContributors.Text = "Contributors";
+      // 
+      // tbContributors
+      // 
+      this.tbContributors.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.tbContributors.Location = new System.Drawing.Point(15, 145);
+      this.tbContributors.Multiline = true;
+      this.tbContributors.Name = "tbContributors";
+      this.tbContributors.ReadOnly = true;
+      this.tbContributors.Size = new System.Drawing.Size(323, 55);
+      this.tbContributors.TabIndex = 12;
+      this.tbContributors.Text = "Development: Helmut Wahrmann (Main Development), mackey (Lyrics), rtv (Burner Sup" +
+          "port)\r\n\r\nTesting: Roy Nilsen (Main Tester, Translation)";
       // 
       // About
       // 
@@ -160,18 +181,20 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BorderColor = System.Drawing.Color.Silver;
       this.CancelButton = this.btOk;
-      this.ClientSize = new System.Drawing.Size(528, 340);
+      this.ClientSize = new System.Drawing.Size(528, 394);
       this.ControlBox = false;
-      this.Controls.Add(this.lbLinkForum);
+      this.Controls.Add(this.tbContributors);
+      this.Controls.Add(this.lbContributors);
       this.Controls.Add(this.pictureBoxAbout);
+      this.Controls.Add(this.lbLinkForum);
       this.Controls.Add(this.lbDate);
+      this.Controls.Add(this.tbDescription);
       this.Controls.Add(this.lbVersionDetail);
-      this.Controls.Add(this.lbWikiLink);
       this.Controls.Add(this.lbBuildDate);
       this.Controls.Add(this.lbVersion);
-      this.Controls.Add(this.btOk);
-      this.Controls.Add(this.lbDescription);
+      this.Controls.Add(this.lbWikiLink);
       this.Controls.Add(this.lbAppTitle);
+      this.Controls.Add(this.btOk);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "About";
       this.ShowInTaskbar = false;
@@ -186,7 +209,6 @@
     #endregion
 
     private MPTagThat.Core.WinControls.MPTLabel lbAppTitle;
-    private MPTagThat.Core.WinControls.MPTLabel lbDescription;
     private MPTagThat.Core.WinControls.MPTButton btOk;
     private MPTagThat.Core.WinControls.MPTLabel lbVersion;
     private MPTagThat.Core.WinControls.MPTLabel lbBuildDate;
@@ -195,5 +217,8 @@
     private MPTagThat.Core.WinControls.MPTLabel lbDate;
     private System.Windows.Forms.PictureBox pictureBoxAbout;
     private System.Windows.Forms.LinkLabel lbLinkForum;
+    private System.Windows.Forms.TextBox tbDescription;
+    private MPTagThat.Core.WinControls.MPTLabel lbContributors;
+    private System.Windows.Forms.TextBox tbContributors;
   }
 }
