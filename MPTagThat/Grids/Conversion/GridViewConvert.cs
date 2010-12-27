@@ -61,6 +61,12 @@ namespace MPTagThat.GridView
 
     #endregion
 
+    #region Nested type: ThreadSafeConvertDelegate
+
+    private delegate void ThreadSafeConvertDelegate();
+
+    #endregion
+
     #endregion
 
     #region Properties
@@ -178,6 +184,13 @@ namespace MPTagThat.GridView
 
     private void ConversionThread()
     {
+      if (_main.MainRibbon.InvokeRequired)
+      {
+        ThreadSafeConvertDelegate d = ConversionThread;
+        _main.MainRibbon.Invoke(d);
+        return;
+      }
+
       log.Trace(">>>");
       string rootFolder = _main.MainRibbon.EncoderOutputDirectory;
       if (string.IsNullOrEmpty(rootFolder))
@@ -441,6 +454,7 @@ namespace MPTagThat.GridView
 
       double percentComplete = (double)message.MessageData["progress"];
       dataGridViewConvert.Rows[_currentRow].Cells[0].Value = (int)percentComplete;
+      dataGridViewConvert.Update();
     }
 
     /// <summary>

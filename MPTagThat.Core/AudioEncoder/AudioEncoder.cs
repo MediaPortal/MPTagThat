@@ -241,7 +241,7 @@ namespace MPTagThat.Core.AudioEncoder
           if (Options.MainSettings.RipEncoderWMACbrVbr == "Vbr")
           {
             encWma.WMA_UseVBR = true;
-            encWma.WMA_VBRQuality = Convert.ToInt32(Options.MainSettings.RipEncoderWMABitRate) / 1000;
+            encWma.WMA_VBRQuality = Convert.ToInt32(Options.MainSettings.RipEncoderWMABitRate);
           }
           else
             encWma.WMA_Bitrate = Convert.ToInt32(Options.MainSettings.RipEncoderWMABitRate) / 1000;
