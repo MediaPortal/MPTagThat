@@ -53,6 +53,7 @@ namespace MPTagThat
     private bool _initialising = true;
     private bool _numberingOnClick;
     private PictureControl picControl;
+    private GalleryItem _displayedGalleryItem;
 
     #endregion
 
@@ -1157,6 +1158,7 @@ namespace MPTagThat
 
       if (e.NewValue != null)
       {
+        _displayedGalleryItem = (GalleryItem)e.NewValue;
         if (picControl != null && picControl.Text != "")
         {
           picControl.Close();
@@ -1165,6 +1167,10 @@ namespace MPTagThat
       }
       else
       {
+        if (e.OldValue != null && e.OldValue == _displayedGalleryItem)
+        {
+          return;
+        }
         if (picControl != null)
         {
           picControl.Close();
