@@ -46,6 +46,7 @@
       this.buttonCaseConversion = new Elegant.Ui.SplitButton();
       this.popupMenu3 = new Elegant.Ui.PopupMenu();
       this.buttonCaseConversionOptions = new Elegant.Ui.Button();
+      this.separator2 = new Elegant.Ui.Separator();
       this.buttonDeleteTag = new Elegant.Ui.SplitButton();
       this.popupMenu2 = new Elegant.Ui.PopupMenu();
       this.buttonDeleteAllTags = new Elegant.Ui.Button();
@@ -53,13 +54,14 @@
       this.buttonDeleteID3v2 = new Elegant.Ui.Button();
       this.buttonGetLyrics = new Elegant.Ui.Button();
       this.buttonRemoveComment = new Elegant.Ui.Button();
+      this.separator3 = new Elegant.Ui.Separator();
+      this.buttonGroup1 = new Elegant.Ui.ButtonGroup();
+      this.comboBoxScripts = new Elegant.Ui.ComboBox();
+      this.buttonScriptExecute = new Elegant.Ui.Button();
       this.buttonGroup3 = new Elegant.Ui.ButtonGroup();
       this.buttonNumberOnClick = new Elegant.Ui.ToggleButton();
       this.buttonAutoNumber = new Elegant.Ui.Button();
       this.textBoxNumber = new Elegant.Ui.TextBox();
-      this.buttonGroup1 = new Elegant.Ui.ButtonGroup();
-      this.comboBoxScripts = new Elegant.Ui.ComboBox();
-      this.buttonScriptExecute = new Elegant.Ui.Button();
       this.ribbonGroupPicture = new Elegant.Ui.RibbonGroup();
       this.galleryPicture = new Elegant.Ui.Gallery();
       this.buttonGetCoverArt = new Elegant.Ui.Button();
@@ -108,8 +110,8 @@
       this.ribbonGroupTagsEdit.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu3)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).BeginInit();
-      this.buttonGroup3.SuspendLayout();
       this.buttonGroup1.SuspendLayout();
+      this.buttonGroup3.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).BeginInit();
       this.ribbonGroupPicture.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.galleryPicture)).BeginInit();
@@ -141,28 +143,20 @@
       // 
       // ribbon
       // 
-      this.ribbon.ApplicationButtonAccessibleDescription = null;
-      this.ribbon.ApplicationButtonAccessibleName = null;
-      this.ribbon.ApplicationButtonAnimationEnabled = false;
       this.ribbon.ApplicationButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("ribbon.ApplicationButtonImages.Images"))))});
       this.ribbon.ApplicationButtonPopup = this.applicationMenu1;
       this.ribbon.ApplicationButtonStyle = Elegant.Ui.RibbonApplicationButtonStyle.Default;
-      this.ribbon.CurrentTabPage = this.ribbonTabPageRip;
+      this.ribbon.CurrentTabPage = this.ribbonTabPageTag;
       this.ribbon.CustomTitleBarEnabled = false;
       this.ribbon.Dock = System.Windows.Forms.DockStyle.Top;
-      this.ribbon.HelpButtonAccessibleDescription = null;
-      this.ribbon.HelpButtonAccessibleName = null;
       this.ribbon.HelpButtonCommandName = "Help";
       this.ribbon.HelpButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.ribbon_help)});
       this.ribbon.HelpButtonVisible = true;
-      this.ribbon.Id = "bb5ad3ef-40ab-43b7-961c-5ed85028acfd";
       this.ribbon.Location = new System.Drawing.Point(0, 0);
-      this.ribbon.MinimizeButtonAccessibleDescription = null;
-      this.ribbon.MinimizeButtonAccessibleName = null;
       this.ribbon.Name = "ribbon";
-      this.ribbon.QuickAccessToolbarControls.AddRange(new Elegant.Ui.IControl[] {
+      this.ribbon.QuickAccessToolbarControls.AddRange(new Elegant.Ui.Control[] {
             this.startMenuSave,
             this.startMenuRefresh});
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
@@ -181,15 +175,12 @@
       // applicationMenu1
       // 
       this.applicationMenu1.ContentMinimumHeight = 0;
-      this.applicationMenu1.ExitButtonAccessibleDescription = null;
-      this.applicationMenu1.ExitButtonAccessibleName = null;
       this.applicationMenu1.ExitButtonCommandName = "Exit";
       this.applicationMenu1.Items.AddRange(new System.Windows.Forms.Control[] {
             this.startMenuSave,
             this.startMenuRefresh,
             this.startMenuChangeDisplayColumns});
-      this.applicationMenu1.OptionsButtonAccessibleDescription = null;
-      this.applicationMenu1.OptionsButtonAccessibleName = null;
+      this.applicationMenu1.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
       this.applicationMenu1.OptionsButtonCommandName = "Options";
       this.applicationMenu1.OptionsButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("applicationMenu1.OptionsButtonImages.Images"))))});
@@ -246,7 +237,6 @@
       this.ribbonTabPageTag.Controls.Add(this.ribbonGroupOrganise);
       this.ribbonTabPageTag.Controls.Add(this.ribbonGroupOther);
       this.ribbonTabPageTag.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ribbonTabPageTag.Id = "3cad05ed-c1df-4e5b-abe7-f52ba2eda10e";
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
@@ -260,11 +250,9 @@
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromFile);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagIdentifyFiles);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromInternet);
-      this.ribbonGroupTagsRetrieve.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupTagsRetrieve.Id = "b9de8d94-0b07-46e3-afb5-5a8869005e45";
       this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupTagsRetrieve.Name = "ribbonGroupTagsRetrieve";
-      this.ribbonGroupTagsRetrieve.Size = new System.Drawing.Size(147, 94);
+      this.ribbonGroupTagsRetrieve.Size = new System.Drawing.Size(162, 94);
       this.ribbonGroupTagsRetrieve.TabIndex = 1;
       this.ribbonGroupTagsRetrieve.Text = "Retrieve Tags";
       // 
@@ -277,7 +265,7 @@
       this.buttonTagFromFile.Location = new System.Drawing.Point(4, 2);
       this.buttonTagFromFile.Name = "buttonTagFromFile";
       this.buttonTagFromFile.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonTagFromFile.ScreenTip.Image")));
-      this.buttonTagFromFile.Size = new System.Drawing.Size(46, 72);
+      this.buttonTagFromFile.Size = new System.Drawing.Size(52, 72);
       this.buttonTagFromFile.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonTagFromFile.SmallImages.Images"))))});
       this.buttonTagFromFile.TabIndex = 0;
@@ -290,10 +278,10 @@
       this.buttonTagIdentifyFiles.Id = "ed6737da-d174-45ea-914a-07d738a04fa9";
       this.buttonTagIdentifyFiles.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonTagIdentifyFiles.LargeImages.Images"))))});
-      this.buttonTagIdentifyFiles.Location = new System.Drawing.Point(52, 2);
+      this.buttonTagIdentifyFiles.Location = new System.Drawing.Point(58, 2);
       this.buttonTagIdentifyFiles.Name = "buttonTagIdentifyFiles";
       this.buttonTagIdentifyFiles.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonTagIdentifyFiles.ScreenTip.Image")));
-      this.buttonTagIdentifyFiles.Size = new System.Drawing.Size(42, 72);
+      this.buttonTagIdentifyFiles.Size = new System.Drawing.Size(44, 72);
       this.buttonTagIdentifyFiles.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonTagIdentifyFiles.SmallImages.Images"))))});
       this.buttonTagIdentifyFiles.TabIndex = 1;
@@ -305,10 +293,10 @@
       this.buttonTagFromInternet.Id = "ba319a36-7b4b-4a50-b424-2a08ebe21a3b";
       this.buttonTagFromInternet.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonTagFromInternet.LargeImages.Images"))))});
-      this.buttonTagFromInternet.Location = new System.Drawing.Point(96, 2);
+      this.buttonTagFromInternet.Location = new System.Drawing.Point(104, 2);
       this.buttonTagFromInternet.Name = "buttonTagFromInternet";
       this.buttonTagFromInternet.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonTagFromInternet.ScreenTip.Image")));
-      this.buttonTagFromInternet.Size = new System.Drawing.Size(46, 72);
+      this.buttonTagFromInternet.Size = new System.Drawing.Size(53, 72);
       this.buttonTagFromInternet.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonTagFromInternet.SmallImages.Images"))))});
       this.buttonTagFromInternet.TabIndex = 2;
@@ -319,16 +307,16 @@
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonSingleTagEdit);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonMultiTagEdit);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonCaseConversion);
+      this.ribbonGroupTagsEdit.Controls.Add(this.separator2);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonDeleteTag);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGetLyrics);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonRemoveComment);
-      this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
+      this.ribbonGroupTagsEdit.Controls.Add(this.separator3);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
-      this.ribbonGroupTagsEdit.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupTagsEdit.Id = "c30c270e-1783-4a38-814f-7d1425df6b68";
-      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(153, 3);
+      this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
+      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(168, 3);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
-      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(342, 94);
+      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(285, 94);
       this.ribbonGroupTagsEdit.TabIndex = 2;
       this.ribbonGroupTagsEdit.Text = "Edit Tags";
       // 
@@ -342,7 +330,7 @@
       this.buttonSingleTagEdit.Location = new System.Drawing.Point(4, 2);
       this.buttonSingleTagEdit.Name = "buttonSingleTagEdit";
       this.buttonSingleTagEdit.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonSingleTagEdit.ScreenTip.Image")));
-      this.buttonSingleTagEdit.Size = new System.Drawing.Size(44, 72);
+      this.buttonSingleTagEdit.Size = new System.Drawing.Size(26, 24);
       this.buttonSingleTagEdit.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonSingleTagEdit.SmallImages.Images"))))});
       this.buttonSingleTagEdit.TabIndex = 0;
@@ -355,10 +343,10 @@
       this.buttonMultiTagEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
       this.buttonMultiTagEdit.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonMultiTagEdit.LargeImages.Images"))))});
-      this.buttonMultiTagEdit.Location = new System.Drawing.Point(50, 2);
+      this.buttonMultiTagEdit.Location = new System.Drawing.Point(4, 26);
       this.buttonMultiTagEdit.Name = "buttonMultiTagEdit";
       this.buttonMultiTagEdit.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonMultiTagEdit.ScreenTip.Image")));
-      this.buttonMultiTagEdit.Size = new System.Drawing.Size(44, 72);
+      this.buttonMultiTagEdit.Size = new System.Drawing.Size(26, 24);
       this.buttonMultiTagEdit.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonMultiTagEdit.SmallImages.Images"))))});
       this.buttonMultiTagEdit.TabIndex = 1;
@@ -368,13 +356,14 @@
       // 
       this.buttonCaseConversion.ButtonScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonCaseConversion.ButtonScreenTip.Image")));
       this.buttonCaseConversion.CommandName = "CaseConversion";
+      this.buttonCaseConversion.DescriptionText = null;
       this.buttonCaseConversion.Id = "000a4131-395d-420d-9e14-40811c6e525c";
       this.buttonCaseConversion.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonCaseConversion.LargeImages.Images"))))});
-      this.buttonCaseConversion.Location = new System.Drawing.Point(96, 2);
+      this.buttonCaseConversion.Location = new System.Drawing.Point(4, 50);
       this.buttonCaseConversion.Name = "buttonCaseConversion";
       this.buttonCaseConversion.Popup = this.popupMenu3;
-      this.buttonCaseConversion.Size = new System.Drawing.Size(67, 72);
+      this.buttonCaseConversion.Size = new System.Drawing.Size(33, 24);
       this.buttonCaseConversion.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonCaseConversion.SmallImages.Images"))))});
       this.buttonCaseConversion.TabIndex = 5;
@@ -384,6 +373,7 @@
       // 
       this.popupMenu3.Items.AddRange(new System.Windows.Forms.Control[] {
             this.buttonCaseConversionOptions});
+      this.popupMenu3.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
       this.popupMenu3.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
       this.popupMenu3.Size = new System.Drawing.Size(100, 100);
       // 
@@ -397,18 +387,28 @@
       this.buttonCaseConversionOptions.TabIndex = 2;
       this.buttonCaseConversionOptions.Text = "Case Conversion Options";
       // 
+      // separator2
+      // 
+      this.separator2.Id = "d7a68ab0-052d-457e-8ab3-95e30ecb244b";
+      this.separator2.Location = new System.Drawing.Point(41, 7);
+      this.separator2.Name = "separator2";
+      this.separator2.Size = new System.Drawing.Size(2, 60);
+      this.separator2.TabIndex = 8;
+      this.separator2.Text = "separator1";
+      // 
       // buttonDeleteTag
       // 
       this.buttonDeleteTag.ButtonScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.ButtonScreenTip.Image")));
       this.buttonDeleteTag.CommandName = "DeleteAllTags";
+      this.buttonDeleteTag.DescriptionText = null;
       this.ribbonGroupTagsEdit.SetFlowBreak(this.buttonDeleteTag, true);
       this.buttonDeleteTag.Id = "3356cb8b-8ef8-4134-b8e4-8290dd07b0f0";
       this.buttonDeleteTag.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.LargeImages.Images"))))});
-      this.buttonDeleteTag.Location = new System.Drawing.Point(165, 2);
+      this.buttonDeleteTag.Location = new System.Drawing.Point(47, 2);
       this.buttonDeleteTag.Name = "buttonDeleteTag";
       this.buttonDeleteTag.Popup = this.popupMenu2;
-      this.buttonDeleteTag.Size = new System.Drawing.Size(42, 72);
+      this.buttonDeleteTag.Size = new System.Drawing.Size(97, 24);
       this.buttonDeleteTag.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.SmallImages.Images"))))});
       this.buttonDeleteTag.TabIndex = 1;
@@ -420,6 +420,7 @@
             this.buttonDeleteAllTags,
             this.buttonDeleteID3v1,
             this.buttonDeleteID3v2});
+      this.popupMenu2.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
       this.popupMenu2.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
       this.popupMenu2.Size = new System.Drawing.Size(100, 100);
       // 
@@ -460,7 +461,7 @@
       this.buttonGetLyrics.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
       this.buttonGetLyrics.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonGetLyrics.LargeImages.Images"))))});
-      this.buttonGetLyrics.Location = new System.Drawing.Point(209, 2);
+      this.buttonGetLyrics.Location = new System.Drawing.Point(146, 2);
       this.buttonGetLyrics.Name = "buttonGetLyrics";
       this.buttonGetLyrics.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonGetLyrics.ScreenTip.Image")));
       this.buttonGetLyrics.Size = new System.Drawing.Size(26, 24);
@@ -476,7 +477,7 @@
       this.buttonRemoveComment.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
       this.buttonRemoveComment.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.LargeImages.Images"))))});
-      this.buttonRemoveComment.Location = new System.Drawing.Point(209, 26);
+      this.buttonRemoveComment.Location = new System.Drawing.Point(146, 26);
       this.buttonRemoveComment.Name = "buttonRemoveComment";
       this.buttonRemoveComment.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.ScreenTip.Image")));
       this.buttonRemoveComment.Size = new System.Drawing.Size(26, 24);
@@ -485,14 +486,58 @@
       this.buttonRemoveComment.TabIndex = 1;
       this.buttonRemoveComment.Text = "button1";
       // 
+      // separator3
+      // 
+      this.separator3.Id = "6d913a4c-a584-4ec3-87a9-bae2f1d79f15";
+      this.separator3.Location = new System.Drawing.Point(176, 7);
+      this.separator3.Name = "separator3";
+      this.separator3.Size = new System.Drawing.Size(2, 60);
+      this.separator3.TabIndex = 9;
+      this.separator3.Text = "separator1";
+      // 
+      // buttonGroup1
+      // 
+      this.buttonGroup1.Controls.Add(this.comboBoxScripts);
+      this.buttonGroup1.Controls.Add(this.buttonScriptExecute);
+      this.buttonGroup1.Location = new System.Drawing.Point(181, 2);
+      this.buttonGroup1.Name = "buttonGroup1";
+      this.buttonGroup1.Size = new System.Drawing.Size(57, 24);
+      this.buttonGroup1.TabIndex = 7;
+      // 
+      // comboBoxScripts
+      // 
+      this.comboBoxScripts.Editable = false;
+      this.comboBoxScripts.FormattingEnabled = false;
+      this.comboBoxScripts.Id = "517fc9cb-14b0-4fff-b350-cd5b098498c2";
+      this.comboBoxScripts.LabelAreaWidthTemplate = "";
+      this.comboBoxScripts.Location = new System.Drawing.Point(1, 0);
+      this.comboBoxScripts.Name = "comboBoxScripts";
+      this.comboBoxScripts.Size = new System.Drawing.Size(19, 23);
+      this.comboBoxScripts.TabIndex = 0;
+      this.comboBoxScripts.TextEditorWidth = 0;
+      // 
+      // buttonScriptExecute
+      // 
+      this.buttonScriptExecute.CommandName = "ScriptExecute";
+      this.buttonScriptExecute.Id = "980e2572-f8a5-4c19-9f23-296539fb858b";
+      this.buttonScriptExecute.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
+      this.buttonScriptExecute.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.LargeImages.Images"))))});
+      this.buttonScriptExecute.Location = new System.Drawing.Point(21, 0);
+      this.buttonScriptExecute.Name = "buttonScriptExecute";
+      this.buttonScriptExecute.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.ScreenTip.Image")));
+      this.buttonScriptExecute.Size = new System.Drawing.Size(26, 24);
+      this.buttonScriptExecute.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.SmallImages.Images"))))});
+      this.buttonScriptExecute.TabIndex = 1;
+      this.buttonScriptExecute.Text = "Execute Script";
+      // 
       // buttonGroup3
       // 
-      this.buttonGroup3.AutoSize = true;
       this.buttonGroup3.Controls.Add(this.buttonNumberOnClick);
       this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.textBoxNumber);
-      this.buttonGroup3.Id = "79080c7a-df4a-4d54-92f9-55baa9e29877";
-      this.buttonGroup3.Location = new System.Drawing.Point(237, 9);
+      this.buttonGroup3.Location = new System.Drawing.Point(181, 26);
       this.buttonGroup3.Name = "buttonGroup3";
       this.buttonGroup3.Size = new System.Drawing.Size(100, 24);
       this.buttonGroup3.TabIndex = 6;
@@ -535,56 +580,11 @@
       this.textBoxNumber.MinimumSize = new System.Drawing.Size(60, 0);
       this.textBoxNumber.Name = "textBoxNumber";
       this.textBoxNumber.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-      this.textBoxNumber.Size = new System.Drawing.Size(60, 21);
+      this.textBoxNumber.Size = new System.Drawing.Size(60, 23);
       this.textBoxNumber.TabIndex = 2;
       this.textBoxNumber.Text = "1";
       this.textBoxNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
       this.textBoxNumber.TextEditorWidth = 54;
-      // 
-      // buttonGroup1
-      // 
-      this.buttonGroup1.AutoSize = true;
-      this.buttonGroup1.Controls.Add(this.comboBoxScripts);
-      this.buttonGroup1.Controls.Add(this.buttonScriptExecute);
-      this.buttonGroup1.Id = "38472e01-802e-45cc-b13a-64413b517844";
-      this.buttonGroup1.Location = new System.Drawing.Point(237, 40);
-      this.buttonGroup1.Name = "buttonGroup1";
-      this.buttonGroup1.Size = new System.Drawing.Size(57, 24);
-      this.buttonGroup1.TabIndex = 7;
-      // 
-      // comboBoxScripts
-      // 
-      this.comboBoxScripts.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxScripts.DroppedDown = false;
-      this.comboBoxScripts.Editable = false;
-      this.buttonGroup1.SetFlowBreak(this.comboBoxScripts, true);
-      this.comboBoxScripts.FormatInfo = null;
-      this.comboBoxScripts.FormatString = "";
-      this.comboBoxScripts.FormattingEnabled = false;
-      this.comboBoxScripts.Id = "517fc9cb-14b0-4fff-b350-cd5b098498c2";
-      this.comboBoxScripts.LabelAreaWidthTemplate = "";
-      this.comboBoxScripts.Location = new System.Drawing.Point(1, 0);
-      this.comboBoxScripts.Name = "comboBoxScripts";
-      this.comboBoxScripts.Size = new System.Drawing.Size(19, 21);
-      this.comboBoxScripts.Sorted = false;
-      this.comboBoxScripts.TabIndex = 0;
-      this.comboBoxScripts.TextEditorWidth = 116;
-      // 
-      // buttonScriptExecute
-      // 
-      this.buttonScriptExecute.CommandName = "ScriptExecute";
-      this.buttonScriptExecute.Id = "980e2572-f8a5-4c19-9f23-296539fb858b";
-      this.buttonScriptExecute.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
-      this.buttonScriptExecute.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.LargeImages.Images"))))});
-      this.buttonScriptExecute.Location = new System.Drawing.Point(21, 0);
-      this.buttonScriptExecute.Name = "buttonScriptExecute";
-      this.buttonScriptExecute.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.ScreenTip.Image")));
-      this.buttonScriptExecute.Size = new System.Drawing.Size(26, 24);
-      this.buttonScriptExecute.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonScriptExecute.SmallImages.Images"))))});
-      this.buttonScriptExecute.TabIndex = 1;
-      this.buttonScriptExecute.Text = "Execute Script";
       // 
       // ribbonGroupPicture
       // 
@@ -592,9 +592,7 @@
       this.ribbonGroupPicture.Controls.Add(this.buttonGetCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonRemoveCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonSaveAsThumb);
-      this.ribbonGroupPicture.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupPicture.Id = "4e3e0701-7730-41ec-aa67-913b03b52b54";
-      this.ribbonGroupPicture.Location = new System.Drawing.Point(497, 3);
+      this.ribbonGroupPicture.Location = new System.Drawing.Point(455, 3);
       this.ribbonGroupPicture.Name = "ribbonGroupPicture";
       this.ribbonGroupPicture.Size = new System.Drawing.Size(242, 94);
       this.ribbonGroupPicture.TabIndex = 6;
@@ -602,7 +600,7 @@
       // 
       // galleryPicture
       // 
-      this.ribbon.SetGalleryItemHeightMeasurementMode(this.galleryPicture, Elegant.Ui.GalleryItemHeightMeasurementMode.Large);
+      this.galleryPicture.AutoScrollMinSize = new System.Drawing.Size(0, 0);
       this.galleryPicture.Id = "dfef072e-e209-42c2-8a2e-be1fc6f59025";
       this.galleryPicture.ItemWidth = 62;
       this.galleryPicture.Location = new System.Drawing.Point(4, 5);
@@ -611,6 +609,7 @@
       // 
       // 
       this.galleryPicture.Popup.Font = new System.Drawing.Font("Segoe UI", 9F);
+      this.galleryPicture.Popup.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
       this.galleryPicture.Popup.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
       this.galleryPicture.Popup.Size = new System.Drawing.Size(100, 100);
       this.galleryPicture.Size = new System.Drawing.Size(205, 66);
@@ -669,11 +668,9 @@
       // 
       this.ribbonGroupOrganise.Controls.Add(this.buttonRenameFiles);
       this.ribbonGroupOrganise.Controls.Add(this.buttonOrganiseFiles);
-      this.ribbonGroupOrganise.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupOrganise.Id = "2a6d0dd7-d35d-4a33-b667-2b2eb3896582";
-      this.ribbonGroupOrganise.Location = new System.Drawing.Point(741, 3);
+      this.ribbonGroupOrganise.Location = new System.Drawing.Point(699, 3);
       this.ribbonGroupOrganise.Name = "ribbonGroupOrganise";
-      this.ribbonGroupOrganise.Size = new System.Drawing.Size(103, 94);
+      this.ribbonGroupOrganise.Size = new System.Drawing.Size(111, 94);
       this.ribbonGroupOrganise.TabIndex = 3;
       this.ribbonGroupOrganise.Text = "Organise";
       // 
@@ -681,13 +678,14 @@
       // 
       this.buttonRenameFiles.ButtonScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRenameFiles.ButtonScreenTip.Image")));
       this.buttonRenameFiles.CommandName = "RenameFiles";
+      this.buttonRenameFiles.DescriptionText = null;
       this.buttonRenameFiles.Id = "6458a3fe-966e-4350-84a2-a2feea18c99d";
       this.buttonRenameFiles.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRenameFiles.LargeImages.Images"))))});
       this.buttonRenameFiles.Location = new System.Drawing.Point(4, 2);
       this.buttonRenameFiles.Name = "buttonRenameFiles";
       this.buttonRenameFiles.Popup = this.popupMenu1;
-      this.buttonRenameFiles.Size = new System.Drawing.Size(46, 72);
+      this.buttonRenameFiles.Size = new System.Drawing.Size(49, 72);
       this.buttonRenameFiles.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRenameFiles.SmallImages.Images"))))});
       this.buttonRenameFiles.TabIndex = 0;
@@ -697,6 +695,7 @@
       // 
       this.popupMenu1.Items.AddRange(new System.Windows.Forms.Control[] {
             this.buttonRenameFilesOptions});
+      this.popupMenu1.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
       this.popupMenu1.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
       this.popupMenu1.Size = new System.Drawing.Size(100, 100);
       // 
@@ -716,10 +715,10 @@
       this.buttonOrganiseFiles.Id = "c936611c-9924-417d-b0dc-9219e83aa5a0";
       this.buttonOrganiseFiles.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonOrganiseFiles.LargeImages.Images"))))});
-      this.buttonOrganiseFiles.Location = new System.Drawing.Point(52, 2);
+      this.buttonOrganiseFiles.Location = new System.Drawing.Point(55, 2);
       this.buttonOrganiseFiles.Name = "buttonOrganiseFiles";
       this.buttonOrganiseFiles.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonOrganiseFiles.ScreenTip.Image")));
-      this.buttonOrganiseFiles.Size = new System.Drawing.Size(46, 72);
+      this.buttonOrganiseFiles.Size = new System.Drawing.Size(51, 72);
       this.buttonOrganiseFiles.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonOrganiseFiles.SmallImages.Images"))))});
       this.buttonOrganiseFiles.TabIndex = 1;
@@ -730,11 +729,9 @@
       this.ribbonGroupOther.Controls.Add(this.buttonAddToBurner);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToConversion);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToPlaylist);
-      this.ribbonGroupOther.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupOther.Id = "f4a76008-92b5-470b-bf40-cceebe109c8e";
-      this.ribbonGroupOther.Location = new System.Drawing.Point(846, 3);
+      this.ribbonGroupOther.Location = new System.Drawing.Point(812, 3);
       this.ribbonGroupOther.Name = "ribbonGroupOther";
-      this.ribbonGroupOther.Size = new System.Drawing.Size(121, 94);
+      this.ribbonGroupOther.Size = new System.Drawing.Size(133, 94);
       this.ribbonGroupOther.TabIndex = 5;
       this.ribbonGroupOther.Text = "Other";
       // 
@@ -746,7 +743,7 @@
       this.buttonAddToBurner.Location = new System.Drawing.Point(4, 2);
       this.buttonAddToBurner.Name = "buttonAddToBurner";
       this.buttonAddToBurner.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddToBurner.ScreenTip.Image")));
-      this.buttonAddToBurner.Size = new System.Drawing.Size(90, 24);
+      this.buttonAddToBurner.Size = new System.Drawing.Size(99, 24);
       this.buttonAddToBurner.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonAddToBurner.SmallImages.Images"))))});
       this.buttonAddToBurner.TabIndex = 0;
@@ -760,7 +757,7 @@
       this.buttonAddToConversion.Location = new System.Drawing.Point(4, 26);
       this.buttonAddToConversion.Name = "buttonAddToConversion";
       this.buttonAddToConversion.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddToConversion.ScreenTip.Image")));
-      this.buttonAddToConversion.Size = new System.Drawing.Size(112, 24);
+      this.buttonAddToConversion.Size = new System.Drawing.Size(124, 24);
       this.buttonAddToConversion.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonAddToConversion.SmallImages.Images"))))});
       this.buttonAddToConversion.TabIndex = 1;
@@ -774,7 +771,7 @@
       this.buttonAddToPlaylist.Location = new System.Drawing.Point(4, 50);
       this.buttonAddToPlaylist.Name = "buttonAddToPlaylist";
       this.buttonAddToPlaylist.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddToPlaylist.ScreenTip.Image")));
-      this.buttonAddToPlaylist.Size = new System.Drawing.Size(91, 24);
+      this.buttonAddToPlaylist.Size = new System.Drawing.Size(101, 24);
       this.buttonAddToPlaylist.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonAddToPlaylist.SmallImages.Images"))))});
       this.buttonAddToPlaylist.TabIndex = 2;
@@ -785,7 +782,6 @@
       this.ribbonTabPageRip.Controls.Add(this.ribbonGroupRip);
       this.ribbonTabPageRip.Controls.Add(this.ribbonGroupRipOptions);
       this.ribbonTabPageRip.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ribbonTabPageRip.Id = "821f3e05-05da-4e74-8d1a-fe2f7d76c40f";
       this.ribbonTabPageRip.KeyTip = null;
       this.ribbonTabPageRip.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageRip.Name = "ribbonTabPageRip";
@@ -798,11 +794,9 @@
       // 
       this.ribbonGroupRip.Controls.Add(this.buttonRipStart);
       this.ribbonGroupRip.Controls.Add(this.buttonRipCancel);
-      this.ribbonGroupRip.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupRip.Id = "654696db-d983-463e-ac1a-0455c9ed52f5";
       this.ribbonGroupRip.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupRip.Name = "ribbonGroupRip";
-      this.ribbonGroupRip.Size = new System.Drawing.Size(95, 94);
+      this.ribbonGroupRip.Size = new System.Drawing.Size(95, 0);
       this.ribbonGroupRip.TabIndex = 1;
       // 
       // buttonRipStart
@@ -811,10 +805,10 @@
       this.buttonRipStart.Id = "d001a4be-1aa7-4920-93da-c0dc3ec51e31";
       this.buttonRipStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipStart.LargeImages.Images"))))});
-      this.buttonRipStart.Location = new System.Drawing.Point(4, 2);
+      this.buttonRipStart.Location = new System.Drawing.Point(16, 2);
       this.buttonRipStart.Name = "buttonRipStart";
       this.buttonRipStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRipStart.ScreenTip.Image")));
-      this.buttonRipStart.Size = new System.Drawing.Size(42, 72);
+      this.buttonRipStart.Size = new System.Drawing.Size(25, 0);
       this.buttonRipStart.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipStart.SmallImages.Images"))))});
       this.buttonRipStart.TabIndex = 4;
@@ -826,10 +820,10 @@
       this.buttonRipCancel.Id = "dd9e5847-c68c-44a1-9a44-246f6ae71cd5";
       this.buttonRipCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipCancel.LargeImages.Images"))))});
-      this.buttonRipCancel.Location = new System.Drawing.Point(48, 2);
+      this.buttonRipCancel.Location = new System.Drawing.Point(16, 2);
       this.buttonRipCancel.Name = "buttonRipCancel";
       this.buttonRipCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRipCancel.ScreenTip.Image")));
-      this.buttonRipCancel.Size = new System.Drawing.Size(42, 72);
+      this.buttonRipCancel.Size = new System.Drawing.Size(61, 0);
       this.buttonRipCancel.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipCancel.SmallImages.Images"))))});
       this.buttonRipCancel.TabIndex = 5;
@@ -840,11 +834,9 @@
       this.ribbonGroupRipOptions.Controls.Add(this.textBoxRipOutputFolder);
       this.ribbonGroupRipOptions.Controls.Add(this.comboBoxRipEncoder);
       this.ribbonGroupRipOptions.Controls.Add(this.buttonRipFolderSelect);
-      this.ribbonGroupRipOptions.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupRipOptions.Id = "afadd097-90ff-4137-bac0-8254851314f6";
       this.ribbonGroupRipOptions.Location = new System.Drawing.Point(101, 3);
       this.ribbonGroupRipOptions.Name = "ribbonGroupRipOptions";
-      this.ribbonGroupRipOptions.Size = new System.Drawing.Size(514, 94);
+      this.ribbonGroupRipOptions.Size = new System.Drawing.Size(514, 0);
       this.ribbonGroupRipOptions.TabIndex = 0;
       this.ribbonGroupRipOptions.Text = "Rip Options";
       // 
@@ -855,26 +847,21 @@
       this.textBoxRipOutputFolder.LabelText = "Output Folder:";
       this.textBoxRipOutputFolder.Location = new System.Drawing.Point(4, 2);
       this.textBoxRipOutputFolder.Name = "textBoxRipOutputFolder";
-      this.textBoxRipOutputFolder.Size = new System.Drawing.Size(477, 24);
+      this.textBoxRipOutputFolder.Size = new System.Drawing.Size(473, 19);
       this.textBoxRipOutputFolder.TabIndex = 3;
       this.textBoxRipOutputFolder.TextEditorWidth = 322;
       // 
       // comboBoxRipEncoder
       // 
-      this.comboBoxRipEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxRipEncoder.DroppedDown = false;
       this.comboBoxRipEncoder.Editable = false;
       this.ribbonGroupRipOptions.SetFlowBreak(this.comboBoxRipEncoder, true);
-      this.comboBoxRipEncoder.FormatInfo = null;
-      this.comboBoxRipEncoder.FormatString = "";
       this.comboBoxRipEncoder.FormattingEnabled = false;
       this.comboBoxRipEncoder.Id = "c8d5a621-31b2-4a30-81c4-ff37571165dc";
       this.comboBoxRipEncoder.LabelAreaWidthTemplate = "Select Encoder:                      ";
       this.comboBoxRipEncoder.LabelText = "Select Encoder:";
-      this.comboBoxRipEncoder.Location = new System.Drawing.Point(4, 26);
+      this.comboBoxRipEncoder.Location = new System.Drawing.Point(479, 2);
       this.comboBoxRipEncoder.Name = "comboBoxRipEncoder";
-      this.comboBoxRipEncoder.Size = new System.Drawing.Size(477, 24);
-      this.comboBoxRipEncoder.Sorted = false;
+      this.comboBoxRipEncoder.Size = new System.Drawing.Size(473, 19);
       this.comboBoxRipEncoder.TabIndex = 2;
       this.comboBoxRipEncoder.TextEditorWidth = 309;
       // 
@@ -883,9 +870,9 @@
       this.buttonRipFolderSelect.CommandName = "FolderSelect";
       this.buttonRipFolderSelect.Id = "ea53cc78-57ab-4d19-91e8-afe6a1d99e7a";
       this.buttonRipFolderSelect.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImage";
-      this.buttonRipFolderSelect.Location = new System.Drawing.Point(483, 2);
+      this.buttonRipFolderSelect.Location = new System.Drawing.Point(954, 2);
       this.buttonRipFolderSelect.Name = "buttonRipFolderSelect";
-      this.buttonRipFolderSelect.Size = new System.Drawing.Size(26, 24);
+      this.buttonRipFolderSelect.Size = new System.Drawing.Size(6, 0);
       this.buttonRipFolderSelect.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRipFolderSelect.SmallImages.Images"))))});
       this.buttonRipFolderSelect.TabIndex = 4;
@@ -895,11 +882,10 @@
       this.ribbonTabPageConvert.Controls.Add(this.ribbonGroupConvert);
       this.ribbonTabPageConvert.Controls.Add(this.ribbonGroupConvertOptions);
       this.ribbonTabPageConvert.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ribbonTabPageConvert.Id = "5ed9bb98-17b1-4376-95ca-024a38e68193";
       this.ribbonTabPageConvert.KeyTip = null;
       this.ribbonTabPageConvert.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageConvert.Name = "ribbonTabPageConvert";
-      this.ribbonTabPageConvert.Size = new System.Drawing.Size(1555, 115);
+      this.ribbonTabPageConvert.Size = new System.Drawing.Size(1166, 101);
       this.ribbonTabPageConvert.TabIndex = 0;
       this.ribbonTabPageConvert.Tag = "Convert";
       this.ribbonTabPageConvert.Text = "Convert";
@@ -908,8 +894,6 @@
       // 
       this.ribbonGroupConvert.Controls.Add(this.buttonConvertStart);
       this.ribbonGroupConvert.Controls.Add(this.buttonConvertCancel);
-      this.ribbonGroupConvert.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupConvert.Id = "05e69783-9b37-4e26-9d38-91a4622f5e43";
       this.ribbonGroupConvert.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupConvert.Name = "ribbonGroupConvert";
       this.ribbonGroupConvert.Size = new System.Drawing.Size(155, 0);
@@ -921,7 +905,7 @@
       this.buttonConvertStart.Id = "44c3e83e-aab8-4d1f-a1af-8986db19a11c";
       this.buttonConvertStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonConvertStart.LargeImages.Images"))))});
-      this.buttonConvertStart.Location = new System.Drawing.Point(4, 2);
+      this.buttonConvertStart.Location = new System.Drawing.Point(28, 2);
       this.buttonConvertStart.Name = "buttonConvertStart";
       this.buttonConvertStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonConvertStart.ScreenTip.Image")));
       this.buttonConvertStart.Size = new System.Drawing.Size(87, 0);
@@ -936,7 +920,7 @@
       this.buttonConvertCancel.Id = "45c66776-33b0-4832-b771-490f19f60493";
       this.buttonConvertCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonConvertCancel.LargeImages.Images"))))});
-      this.buttonConvertCancel.Location = new System.Drawing.Point(93, 2);
+      this.buttonConvertCancel.Location = new System.Drawing.Point(28, 2);
       this.buttonConvertCancel.Name = "buttonConvertCancel";
       this.buttonConvertCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonConvertCancel.ScreenTip.Image")));
       this.buttonConvertCancel.Size = new System.Drawing.Size(98, 0);
@@ -950,8 +934,6 @@
       this.ribbonGroupConvertOptions.Controls.Add(this.textBoxConvertOutputFolder);
       this.ribbonGroupConvertOptions.Controls.Add(this.comboBoxConvertEncoder);
       this.ribbonGroupConvertOptions.Controls.Add(this.buttonConvertFolderSelect);
-      this.ribbonGroupConvertOptions.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupConvertOptions.Id = "ac4b029e-f779-4f9a-a174-dc64e69df190";
       this.ribbonGroupConvertOptions.Location = new System.Drawing.Point(161, 3);
       this.ribbonGroupConvertOptions.Name = "ribbonGroupConvertOptions";
       this.ribbonGroupConvertOptions.Size = new System.Drawing.Size(535, 0);
@@ -971,12 +953,8 @@
       // 
       // comboBoxConvertEncoder
       // 
-      this.comboBoxConvertEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxConvertEncoder.DroppedDown = false;
       this.comboBoxConvertEncoder.Editable = false;
       this.ribbonGroupConvertOptions.SetFlowBreak(this.comboBoxConvertEncoder, true);
-      this.comboBoxConvertEncoder.FormatInfo = null;
-      this.comboBoxConvertEncoder.FormatString = "";
       this.comboBoxConvertEncoder.FormattingEnabled = false;
       this.comboBoxConvertEncoder.Id = "c76d2510-fde1-4b0d-b3b6-23f77f4a44af";
       this.comboBoxConvertEncoder.LabelAreaWidthTemplate = "Select Encoder:                      ";
@@ -984,7 +962,6 @@
       this.comboBoxConvertEncoder.Location = new System.Drawing.Point(478, 2);
       this.comboBoxConvertEncoder.Name = "comboBoxConvertEncoder";
       this.comboBoxConvertEncoder.Size = new System.Drawing.Size(472, 19);
-      this.comboBoxConvertEncoder.Sorted = false;
       this.comboBoxConvertEncoder.TabIndex = 5;
       this.comboBoxConvertEncoder.TextEditorWidth = 308;
       // 
@@ -1005,7 +982,6 @@
       this.ribbonTabPageBurn.Controls.Add(this.ribbonGroupBurn);
       this.ribbonTabPageBurn.Controls.Add(this.ribbonGroupBurnOptions);
       this.ribbonTabPageBurn.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ribbonTabPageBurn.Id = "fab82ec1-a356-4890-b390-9aa9cb95380e";
       this.ribbonTabPageBurn.KeyTip = null;
       this.ribbonTabPageBurn.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageBurn.Name = "ribbonTabPageBurn";
@@ -1018,8 +994,6 @@
       // 
       this.ribbonGroupBurn.Controls.Add(this.buttonBurnStart);
       this.ribbonGroupBurn.Controls.Add(this.buttonBurnCancel);
-      this.ribbonGroupBurn.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupBurn.Id = "33e025c9-2f59-4294-9d0f-6dd39499b1b2";
       this.ribbonGroupBurn.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupBurn.Name = "ribbonGroupBurn";
       this.ribbonGroupBurn.Size = new System.Drawing.Size(95, 0);
@@ -1031,7 +1005,7 @@
       this.buttonBurnStart.Id = "a741c025-7b86-4b1b-bf57-132c84317d09";
       this.buttonBurnStart.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonBurnStart.LargeImages.Images"))))});
-      this.buttonBurnStart.Location = new System.Drawing.Point(4, 2);
+      this.buttonBurnStart.Location = new System.Drawing.Point(13, 2);
       this.buttonBurnStart.Name = "buttonBurnStart";
       this.buttonBurnStart.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonBurnStart.ScreenTip.Image")));
       this.buttonBurnStart.Size = new System.Drawing.Size(56, 0);
@@ -1046,7 +1020,7 @@
       this.buttonBurnCancel.Id = "227f00e7-f669-417b-8c6f-505d30d342a0";
       this.buttonBurnCancel.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonBurnCancel.LargeImages.Images"))))});
-      this.buttonBurnCancel.Location = new System.Drawing.Point(62, 2);
+      this.buttonBurnCancel.Location = new System.Drawing.Point(13, 2);
       this.buttonBurnCancel.Name = "buttonBurnCancel";
       this.buttonBurnCancel.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonBurnCancel.ScreenTip.Image")));
       this.buttonBurnCancel.Size = new System.Drawing.Size(67, 0);
@@ -1059,8 +1033,6 @@
       // 
       this.ribbonGroupBurnOptions.Controls.Add(this.comboBoxBurner);
       this.ribbonGroupBurnOptions.Controls.Add(this.comboBoxBurnerSpeed);
-      this.ribbonGroupBurnOptions.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.ribbonGroupBurnOptions.Id = "db421cde-b391-471a-820a-a37b5b394b37";
       this.ribbonGroupBurnOptions.Location = new System.Drawing.Point(101, 3);
       this.ribbonGroupBurnOptions.Name = "ribbonGroupBurnOptions";
       this.ribbonGroupBurnOptions.Size = new System.Drawing.Size(357, 0);
@@ -1069,11 +1041,7 @@
       // 
       // comboBoxBurner
       // 
-      this.comboBoxBurner.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxBurner.DroppedDown = false;
       this.comboBoxBurner.Editable = false;
-      this.comboBoxBurner.FormatInfo = null;
-      this.comboBoxBurner.FormatString = "";
       this.comboBoxBurner.FormattingEnabled = false;
       this.comboBoxBurner.Id = "91b0d24e-514a-4df6-acc7-83af9eecc776";
       this.comboBoxBurner.LabelAreaWidthTemplate = "Burner Speed:                          ";
@@ -1081,18 +1049,13 @@
       this.comboBoxBurner.Location = new System.Drawing.Point(4, 2);
       this.comboBoxBurner.Name = "comboBoxBurner";
       this.comboBoxBurner.Size = new System.Drawing.Size(348, 19);
-      this.comboBoxBurner.Sorted = false;
       this.comboBoxBurner.TabIndex = 0;
       this.comboBoxBurner.TextEditorWidth = 180;
       this.comboBoxBurner.SelectedIndexChanged += new System.EventHandler(this.comboBoxBurner_SelectedIndexChanged);
       // 
       // comboBoxBurnerSpeed
       // 
-      this.comboBoxBurnerSpeed.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxBurnerSpeed.DroppedDown = false;
       this.comboBoxBurnerSpeed.Editable = false;
-      this.comboBoxBurnerSpeed.FormatInfo = null;
-      this.comboBoxBurnerSpeed.FormatString = "";
       this.comboBoxBurnerSpeed.FormattingEnabled = false;
       this.comboBoxBurnerSpeed.Id = "f13f2b7f-bee8-4078-8614-0efe27832435";
       this.comboBoxBurnerSpeed.LabelAreaWidthTemplate = "Burner Speed:                          ";
@@ -1100,7 +1063,6 @@
       this.comboBoxBurnerSpeed.Location = new System.Drawing.Point(354, 2);
       this.comboBoxBurnerSpeed.Name = "comboBoxBurnerSpeed";
       this.comboBoxBurnerSpeed.Size = new System.Drawing.Size(268, 19);
-      this.comboBoxBurnerSpeed.Sorted = false;
       this.comboBoxBurnerSpeed.TabIndex = 1;
       this.comboBoxBurnerSpeed.SelectedIndexChanged += new System.EventHandler(this.comboBoxBurnerSpeed_SelectedIndexChanged);
       // 
@@ -1125,10 +1087,10 @@
       this.ribbonGroupTagsEdit.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu3)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).EndInit();
-      this.buttonGroup3.ResumeLayout(false);
-      this.buttonGroup3.PerformLayout();
       this.buttonGroup1.ResumeLayout(false);
       this.buttonGroup1.PerformLayout();
+      this.buttonGroup3.ResumeLayout(false);
+      this.buttonGroup3.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).EndInit();
       this.ribbonGroupPicture.ResumeLayout(false);
       this.ribbonGroupPicture.PerformLayout();
@@ -1241,5 +1203,7 @@
     private Elegant.Ui.Gallery galleryPicture;
     private Elegant.Ui.ButtonGroup buttonGroup1;
     private Elegant.Ui.Button buttonSaveAsThumb;
+    private Elegant.Ui.Separator separator2;
+    private Elegant.Ui.Separator separator3;
   }
 }
