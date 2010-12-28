@@ -272,7 +272,7 @@ namespace MPTagThat
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
-      log.Debug("Main: Loading Main form");
+      log.Info("Main: Loading Main form");
 
       // Listen to Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -384,16 +384,14 @@ namespace MPTagThat
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
 
       // Load BASS
-      log.Debug("Main: Loading Bass");
       LoadBass();
 
       // Load the Settings
-      log.Debug("Main: Loading Settings");
       _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
       LoadSettings();
 
       // Localise the Screens
-      log.Debug("Main: Localisation");
+      log.Info("Main: Localisation");
       _splashScreen.SetInformation(localisation.ToString("splash", "Localisation"));
       LocaliseScreen();
 
@@ -428,6 +426,7 @@ namespace MPTagThat
       Focus();
       BringToFront();
       TopMost = false;
+      log.Info("Finished loading Main Form");
       log.Trace("<<<");
     }
 
@@ -453,7 +452,8 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Main_Close(object sender, FormClosingEventArgs e)
     {
-      log.Debug("Main: Closing Main form");
+      log.Trace(">>>");
+      log.Info("Main: Closing Main form");
       if (_musicDatabaseBuild != null && _musicDatabaseBuild.ScanActive)
       {
         if (
@@ -479,6 +479,8 @@ namespace MPTagThat
       Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ribbonControl.ScriptsCombo.Text;
       Options.SaveAllSettings();
+      log.Info("Main: Finished closing Main form");
+      log.Trace("<<<");
     }
 
     #endregion
@@ -528,6 +530,7 @@ namespace MPTagThat
     private void LoadBassAsync()
     {
       log.Trace(">>>");
+      log.Debug("Main: Initialising Bass Libraries");
       if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
@@ -558,6 +561,7 @@ namespace MPTagThat
 
         pluginHandle = Bass.BASS_PluginLoad(file.FullName);
       }
+      log.Debug("Main: Finished Initialising Bass Libraries");
       log.Trace("<<<");
     }
 
@@ -594,6 +598,7 @@ namespace MPTagThat
     private void LoadSettings()
     {
       log.Trace(">>>");
+      log.Info("Main: Loading Settings");
 
       // We might have received a folder via startup argument
       if (_selectedDirectory == string.Empty)
@@ -638,6 +643,7 @@ namespace MPTagThat
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
 
+      log.Info("Main: Finished Loading Settings");
       log.Trace("<<<");
     }
 

@@ -96,7 +96,8 @@ namespace MPTagThat
         
         log.Info("MPTagThat is starting...");
 
-        log.Info("Registering Settings Manager");
+        log.Info("Registering Services");
+        log.Debug("Registering Settings Manager");
         ServiceScope.Add<ISettingsManager>(new SettingsManager());
         // Set the portable Indicator
         ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
@@ -111,29 +112,31 @@ namespace MPTagThat
           logger.Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
         }
 
-        log.Info("Registering Localisation Services");
+        log.Debug("Registering Localisation Services");
         ServiceScope.Add<ILocalisation>(new StringManager());
 
         log.Debug("Registering Message Broker");
         ServiceScope.Add<IMessageBroker>(new MessageBroker());
 
-        log.Info("Registering Script Manager");
+        log.Debug("Registering Script Manager");
         ServiceScope.Add<IScriptManager>(new ScriptManager());
 
-        log.Info("Registering Burn Manager");
+        log.Debug("Registering Burn Manager");
         ServiceScope.Add<IBurnManager>(new BurnManager());
 
-        log.Info("Registering Audio Encoder");
+        log.Debug("Registering Audio Encoder");
         ServiceScope.Add<IAudioEncoder>(new AudioEncoder());
 
-        log.Info("Registering Media Change Monitor");
+        log.Debug("Registering Media Change Monitor");
         ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
 
-        log.Info("Registering Theme Manager");
+        log.Debug("Registering Theme Manager");
         ServiceScope.Add<IThemeManager>(new ThemeManager());
 
-        log.Info("Registering Action Handöer");
+        log.Debug("Registering Action Handler");
         ServiceScope.Add<IActionHandler>(new ActionHandler());
+
+        log.Info("Finished registering services");
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);

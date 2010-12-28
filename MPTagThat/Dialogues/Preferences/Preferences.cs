@@ -55,7 +55,6 @@ namespace MPTagThat.Preferences
     private bool _keysChanged;
     private TreeNode _selectedNode;
     private string headerText = "General";
-    private int[] modesTable;
     private Theme prevTheme;
 
     private TreeNode windowsNode;

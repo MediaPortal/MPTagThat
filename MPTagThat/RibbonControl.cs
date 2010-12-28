@@ -258,6 +258,8 @@ namespace MPTagThat
 
     public RibbonControl(Main main)
     {
+      log.Trace(">>>");
+      log.Info("Initialising Ribbon");
       this.main = main;
 
       InitializeComponent();
@@ -316,6 +318,8 @@ namespace MPTagThat
 
       textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
       ribbon.CurrentTabPage = ribbonTabPageTag;
+      log.Info("Finished Initialising Ribbon");
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -323,6 +327,7 @@ namespace MPTagThat
     /// </summary>
     private void RegisterCommands()
     {
+      log.Trace(">>>");
       ApplicationCommands.AddToBurner.Executed += TagsTabButton_Executed;
       ApplicationCommands.AddToConversion.Executed += TagsTabButton_Executed;
       ApplicationCommands.AddToPlaylist.Executed += TagsTabButton_Executed;
@@ -361,6 +366,7 @@ namespace MPTagThat
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -368,6 +374,7 @@ namespace MPTagThat
     /// </summary>
     private void RegisterKeyTips()
     {
+      log.Trace(">>>");
       // Start Menu
       startMenuSave.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
       startMenuRefresh.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
@@ -389,6 +396,7 @@ namespace MPTagThat
 
       buttonRenameFiles.ButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAG2FILENAME);
       buttonOrganiseFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_ORGANISE);
+      log.Trace("<<<");
     }
 
     #endregion
@@ -401,7 +409,7 @@ namespace MPTagThat
     private void LocaliseScreen()
     {
       log.Trace(">>>");
-
+      log.Debug("Localise Ribbon");
       // Start Menu
       startMenuSave.Text = localisation.ToString("ribbon", "Save");
       startMenuSave.ScreenTip.Caption = localisation.ToString("screentip", "Save");
@@ -546,6 +554,7 @@ namespace MPTagThat
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");
 
+      log.Debug("Finished localising Ribbon");
       log.Trace("<<<");
     }
 
