@@ -7,6 +7,20 @@ Legend:
 - Deleted
 x Fixed
 
+2.0.4014 Build 22365 Date: 28.12.2010 
+-------------------------------------
+x Lyrics: Updated LyricsEngine to 1.5.5.0
+x Encoding: FAAC is now used for AAC encoding instead of Winamp aacplus.
+x Encoding: WMA Lossless Ripping / Conversion was not working correctly
+x Encoding: Progress Counter for Conversion was not updated
+x Ribbon: Upgrading Ribbon Component to Version 3.8
+x Ribbon: Zooming of Gallery Item no longer worked after ribbon upgrade
+x Ribbon: Added some separators in Ribbon
+x General: Color was not correctly reset, when hovering in Treeview
+x General: Enable / Disable the Buttons on Rip and Burn Page, when a media is inserted / removed
+x General: Make controls use the Themes
+x General: Some controls were missing translations
+
 2.0.3987 Build 39202 Date: 01.12.2010 
 -------------------------------------
 x New version of BASS libs. Should fix problems, some user have
