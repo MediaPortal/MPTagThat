@@ -205,22 +205,17 @@ namespace MPTagThat.Core.AudioEncoder
           break;
 
         case "m4a":
-          EncoderWinampAACplus encAAC = new EncoderWinampAACplus(stream);
+          EncoderFAAC encAAC = new EncoderFAAC(stream);
 
           int bitrate =
             Convert.ToInt32(Options.MainSettings.RipEncoderAACBitRate.Substring(0,
                                                                                 Options.MainSettings.
                                                                                   RipEncoderAACBitRate.IndexOf(' ')));
-          encAAC.AACPlus_Bitrate = bitrate;
+          encAAC.FAAC_Bitrate = bitrate;
+          encAAC.FAAC_Quality = 100;
+          encAAC.FAAC_UseQualityMode = true;
+          encAAC.FAAC_WrapMP4 = true;
 
-          if (Options.MainSettings.RipEncoderAAC.Contains("High"))
-          {
-            encAAC.AACPlus_High = true;
-          }
-          if (Options.MainSettings.RipEncoderAAC.Contains("LC"))
-          {
-            encAAC.AACPlus_LC = true;
-          }
           encoder = encAAC;
           break;
 

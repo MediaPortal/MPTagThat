@@ -159,16 +159,9 @@ namespace MPTagThat.Preferences
       this.lbFlacQuality = new MPTagThat.Core.WinControls.MPTLabel();
       this.hScrollBarFlacEncodingQuality = new System.Windows.Forms.HScrollBar();
       this.tabPageRippingAAC = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.groupBoxAACAttention = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.labelAACAttention = new MPTagThat.Core.WinControls.MPTLabel();
       this.groupBoxAACEncoding = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.labelAACChannelModesWarning = new MPTagThat.Core.WinControls.MPTLabel();
-      this.comboBoxAACChannelModes = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.labelChannelModes = new MPTagThat.Core.WinControls.MPTLabel();
       this.comboBoxAACBitrates = new MPTagThat.Core.WinControls.MPTComboBox();
       this.labelAACBitrate = new MPTagThat.Core.WinControls.MPTLabel();
-      this.comboBoxAACEncoder = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.labelAACEncoder = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageRippingWMA = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxWMAEncoding = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.comboBoxWMABitRate = new MPTagThat.Core.WinControls.MPTComboBox();
@@ -241,7 +234,6 @@ namespace MPTagThat.Preferences
       this.groupBoxFlacSettings.SuspendLayout();
       this.groupBoxFlacEncoding.SuspendLayout();
       this.tabPageRippingAAC.SuspendLayout();
-      this.groupBoxAACAttention.SuspendLayout();
       this.groupBoxAACEncoding.SuspendLayout();
       this.tabPageRippingWMA.SuspendLayout();
       this.groupBoxWMAEncoding.SuspendLayout();
@@ -320,13 +312,13 @@ namespace MPTagThat.Preferences
       this.groupBoxKeys.Controls.Add(this.tbAction);
       this.groupBoxKeys.Controls.Add(this.lbKeyAction);
       this.groupBoxKeys.Controls.Add(this.treeViewKeys);
+      this.groupBoxKeys.Id = "b5bed9af-cb28-4e8c-bd41-b204ca827b9b";
       this.groupBoxKeys.Localisation = "GroupBoxKeys";
       this.groupBoxKeys.LocalisationContext = "Settings";
       this.groupBoxKeys.Location = new System.Drawing.Point(10, 136);
       this.groupBoxKeys.Name = "groupBoxKeys";
       this.groupBoxKeys.Size = new System.Drawing.Size(611, 471);
       this.groupBoxKeys.TabIndex = 1;
-      this.groupBoxKeys.TabStop = false;
       this.groupBoxKeys.Text = "Keyboard Shortcuts";
       // 
       // tbRibbonKeyValue
@@ -343,7 +335,6 @@ namespace MPTagThat.Preferences
       // lblRibbonShortCut
       // 
       this.lblRibbonShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lblRibbonShortCut.AutoSize = true;
       this.lblRibbonShortCut.Localisation = "RibbonShortCut";
       this.lblRibbonShortCut.LocalisationContext = "Settings";
       this.lblRibbonShortCut.Location = new System.Drawing.Point(22, 435);
@@ -355,7 +346,6 @@ namespace MPTagThat.Preferences
       // lblKeyShortCut
       // 
       this.lblKeyShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lblKeyShortCut.AutoSize = true;
       this.lblKeyShortCut.Localisation = "KeyShortCut";
       this.lblKeyShortCut.LocalisationContext = "Settings";
       this.lblKeyShortCut.Location = new System.Drawing.Point(22, 406);
@@ -367,6 +357,7 @@ namespace MPTagThat.Preferences
       // buttonChangeKey
       // 
       this.buttonChangeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonChangeKey.Id = "e588dcb0-ff3c-45ff-8b62-cfeb50055972";
       this.buttonChangeKey.Localisation = "ChangeKey";
       this.buttonChangeKey.LocalisationContext = "Settings";
       this.buttonChangeKey.Location = new System.Drawing.Point(502, 435);
@@ -389,7 +380,6 @@ namespace MPTagThat.Preferences
       // ttLabel1
       // 
       this.ttLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ttLabel1.AutoSize = true;
       this.ttLabel1.Localisation = "ttLabel1";
       this.ttLabel1.LocalisationContext = "Settings";
       this.ttLabel1.Location = new System.Drawing.Point(430, 397);
@@ -449,7 +439,6 @@ namespace MPTagThat.Preferences
       // lbKeyDescription
       // 
       this.lbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lbKeyDescription.AutoSize = true;
       this.lbKeyDescription.Localisation = "KeyDescription";
       this.lbKeyDescription.LocalisationContext = "Settings";
       this.lbKeyDescription.Location = new System.Drawing.Point(22, 357);
@@ -472,7 +461,6 @@ namespace MPTagThat.Preferences
       // lbKeyAction
       // 
       this.lbKeyAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lbKeyAction.AutoSize = true;
       this.lbKeyAction.Localisation = "KeyAction";
       this.lbKeyAction.LocalisationContext = "Settings";
       this.lbKeyAction.Location = new System.Drawing.Point(22, 331);
@@ -500,35 +488,31 @@ namespace MPTagThat.Preferences
       this.groupBoxGeneral.Controls.Add(this.comboBoxThemes);
       this.groupBoxGeneral.Controls.Add(this.comboBoxLanguage);
       this.groupBoxGeneral.Controls.Add(this.lbLanguage);
+      this.groupBoxGeneral.Id = "447b80ec-2816-4ed0-8c6a-51a2616de259";
       this.groupBoxGeneral.Localisation = "GroupBoxGeneral";
       this.groupBoxGeneral.LocalisationContext = "Settings";
       this.groupBoxGeneral.Location = new System.Drawing.Point(10, 15);
       this.groupBoxGeneral.Name = "groupBoxGeneral";
       this.groupBoxGeneral.Size = new System.Drawing.Size(611, 111);
       this.groupBoxGeneral.TabIndex = 0;
-      this.groupBoxGeneral.TabStop = false;
       this.groupBoxGeneral.Text = "General settings";
       // 
       // comboBoxDebugLevel
       // 
       this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxDebugLevel.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxDebugLevel.DroppedDown = false;
+      this.comboBoxDebugLevel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxDebugLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxDebugLevel.Editable = false;
-      this.comboBoxDebugLevel.FormatInfo = null;
-      this.comboBoxDebugLevel.FormatString = "";
       this.comboBoxDebugLevel.FormattingEnabled = true;
       this.comboBoxDebugLevel.Id = "35ea4dfa-282e-4448-9d8f-eba2fd42ea51";
       this.comboBoxDebugLevel.Location = new System.Drawing.Point(156, 80);
       this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
       this.comboBoxDebugLevel.Size = new System.Drawing.Size(435, 21);
-      this.comboBoxDebugLevel.Sorted = false;
       this.comboBoxDebugLevel.TabIndex = 2;
       // 
       // lbDebugLevel
       // 
-      this.lbDebugLevel.AutoSize = true;
       this.lbDebugLevel.Localisation = "DebugLevel";
       this.lbDebugLevel.LocalisationContext = "Settings";
       this.lbDebugLevel.Location = new System.Drawing.Point(16, 83);
@@ -539,7 +523,6 @@ namespace MPTagThat.Preferences
       // 
       // lbTheme
       // 
-      this.lbTheme.AutoSize = true;
       this.lbTheme.Localisation = "Theme";
       this.lbTheme.LocalisationContext = "Settings";
       this.lbTheme.Location = new System.Drawing.Point(16, 52);
@@ -552,17 +535,14 @@ namespace MPTagThat.Preferences
       // 
       this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxThemes.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxThemes.DroppedDown = false;
+      this.comboBoxThemes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxThemes.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxThemes.Editable = false;
-      this.comboBoxThemes.FormatInfo = null;
-      this.comboBoxThemes.FormatString = "";
       this.comboBoxThemes.FormattingEnabled = true;
       this.comboBoxThemes.Id = "f49db0d3-a424-42d2-840b-66c4cb04b316";
       this.comboBoxThemes.Location = new System.Drawing.Point(156, 49);
       this.comboBoxThemes.Name = "comboBoxThemes";
       this.comboBoxThemes.Size = new System.Drawing.Size(435, 21);
-      this.comboBoxThemes.Sorted = false;
       this.comboBoxThemes.TabIndex = 1;
       this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
@@ -570,22 +550,18 @@ namespace MPTagThat.Preferences
       // 
       this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxLanguage.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxLanguage.DroppedDown = false;
+      this.comboBoxLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxLanguage.Editable = false;
-      this.comboBoxLanguage.FormatInfo = null;
-      this.comboBoxLanguage.FormatString = "";
       this.comboBoxLanguage.FormattingEnabled = true;
       this.comboBoxLanguage.Id = "3559fd52-85c2-4687-815e-c91454d51151";
       this.comboBoxLanguage.Location = new System.Drawing.Point(156, 17);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
       this.comboBoxLanguage.Size = new System.Drawing.Size(435, 21);
-      this.comboBoxLanguage.Sorted = false;
       this.comboBoxLanguage.TabIndex = 0;
       // 
       // lbLanguage
       // 
-      this.lbLanguage.AutoSize = true;
       this.lbLanguage.Localisation = "Language";
       this.lbLanguage.LocalisationContext = "Settings";
       this.lbLanguage.Location = new System.Drawing.Point(16, 20);
@@ -637,13 +613,13 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsGeneral.Controls.Add(this.ckAutoFillNumberOfTracks);
       this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
       this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
+      this.groupBoxTagsGeneral.Id = "ab5cafcc-8eac-431c-9fc1-ce32b30671af";
       this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
       this.groupBoxTagsGeneral.LocalisationContext = "Settings";
       this.groupBoxTagsGeneral.Location = new System.Drawing.Point(6, 21);
       this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
       this.groupBoxTagsGeneral.Size = new System.Drawing.Size(611, 117);
       this.groupBoxTagsGeneral.TabIndex = 3;
-      this.groupBoxTagsGeneral.TabStop = false;
       this.groupBoxTagsGeneral.Text = "General";
       // 
       // ckAutoFillNumberOfTracks
@@ -700,13 +676,13 @@ namespace MPTagThat.Preferences
       // 
       this.groupBoxTagValidate.Controls.Add(this.ckAutoFixMp3);
       this.groupBoxTagValidate.Controls.Add(this.ckValidateMP3);
+      this.groupBoxTagValidate.Id = "712bc567-052e-45f2-b046-d421421d307a";
       this.groupBoxTagValidate.Localisation = "GroupBoxTagsValidate";
       this.groupBoxTagValidate.LocalisationContext = "Settings";
       this.groupBoxTagValidate.Location = new System.Drawing.Point(6, 191);
       this.groupBoxTagValidate.Name = "groupBoxTagValidate";
       this.groupBoxTagValidate.Size = new System.Drawing.Size(611, 87);
       this.groupBoxTagValidate.TabIndex = 2;
-      this.groupBoxTagValidate.TabStop = false;
       this.groupBoxTagValidate.Text = "MP3 File Validation";
       // 
       // ckAutoFixMp3
@@ -739,13 +715,13 @@ namespace MPTagThat.Preferences
       this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV4);
       this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV3);
       this.groupBoxTagsID3.Controls.Add(this.groupBoxID3Update);
+      this.groupBoxTagsID3.Id = "eed6e8eb-522b-43b0-9e6a-eeb483b4909e";
       this.groupBoxTagsID3.Localisation = "GroupBoxTagsID3";
       this.groupBoxTagsID3.LocalisationContext = "Settings";
       this.groupBoxTagsID3.Location = new System.Drawing.Point(6, 22);
       this.groupBoxTagsID3.Name = "groupBoxTagsID3";
       this.groupBoxTagsID3.Size = new System.Drawing.Size(611, 152);
       this.groupBoxTagsID3.TabIndex = 1;
-      this.groupBoxTagsID3.TabStop = false;
       this.groupBoxTagsID3.Text = "ID3";
       // 
       // radioButtonUseApe
@@ -793,13 +769,13 @@ namespace MPTagThat.Preferences
       this.groupBoxID3Update.Controls.Add(this.radioButtonID3Both);
       this.groupBoxID3Update.Controls.Add(this.radioButtonID3V2);
       this.groupBoxID3Update.Controls.Add(this.radioButtonID3V1);
+      this.groupBoxID3Update.Id = "14d60cb5-2087-4a77-8296-d8c0063167e6";
       this.groupBoxID3Update.Localisation = "GroupBoxID3Update";
       this.groupBoxID3Update.LocalisationContext = "Settings";
       this.groupBoxID3Update.Location = new System.Drawing.Point(285, 26);
       this.groupBoxID3Update.Name = "groupBoxID3Update";
       this.groupBoxID3Update.Size = new System.Drawing.Size(301, 99);
       this.groupBoxID3Update.TabIndex = 1;
-      this.groupBoxID3Update.TabStop = false;
       this.groupBoxID3Update.Text = "Update";
       // 
       // checkBoxRemoveID3V1
@@ -887,33 +863,29 @@ namespace MPTagThat.Preferences
       this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
       this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
       this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
+      this.groupBoxPictures.Id = "6429b0ab-26f2-4c70-8389-151f68972689";
       this.groupBoxPictures.Localisation = "GroupBoxPictures";
       this.groupBoxPictures.LocalisationContext = "Settings";
       this.groupBoxPictures.Location = new System.Drawing.Point(15, 22);
       this.groupBoxPictures.Name = "groupBoxPictures";
       this.groupBoxPictures.Size = new System.Drawing.Size(590, 180);
       this.groupBoxPictures.TabIndex = 3;
-      this.groupBoxPictures.TabStop = false;
       this.groupBoxPictures.Text = "Pictures";
       // 
       // comboBoxAmazonSite
       // 
-      this.comboBoxAmazonSite.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxAmazonSite.DroppedDown = false;
+      this.comboBoxAmazonSite.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxAmazonSite.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxAmazonSite.Editable = false;
-      this.comboBoxAmazonSite.FormatInfo = null;
-      this.comboBoxAmazonSite.FormatString = "";
       this.comboBoxAmazonSite.FormattingEnabled = true;
       this.comboBoxAmazonSite.Id = "aa136bfd-de97-43ab-bbfd-18ebe6590a9e";
       this.comboBoxAmazonSite.Location = new System.Drawing.Point(219, 108);
       this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
       this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
-      this.comboBoxAmazonSite.Sorted = false;
       this.comboBoxAmazonSite.TabIndex = 10;
       // 
       // lbAmazonSearchSite
       // 
-      this.lbAmazonSearchSite.AutoSize = true;
       this.lbAmazonSearchSite.Localisation = "AmazonSite";
       this.lbAmazonSearchSite.LocalisationContext = "Settings";
       this.lbAmazonSearchSite.Location = new System.Drawing.Point(24, 111);
@@ -963,13 +935,13 @@ namespace MPTagThat.Preferences
       this.groupBoxLyrics.Controls.Add(this.ckOverwriteExistingLyrics);
       this.groupBoxLyrics.Controls.Add(this.ckSwitchArtist);
       this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
+      this.groupBoxLyrics.Id = "c39256f5-6377-444a-ab97-efd91a6c1a64";
       this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
       this.groupBoxLyrics.LocalisationContext = "Settings";
       this.groupBoxLyrics.Location = new System.Drawing.Point(15, 220);
       this.groupBoxLyrics.Name = "groupBoxLyrics";
       this.groupBoxLyrics.Size = new System.Drawing.Size(590, 229);
       this.groupBoxLyrics.TabIndex = 2;
-      this.groupBoxLyrics.TabStop = false;
       this.groupBoxLyrics.Text = "Lyrics";
       // 
       // ckOverwriteExistingLyrics
@@ -1007,13 +979,13 @@ namespace MPTagThat.Preferences
       this.groupBoxLyricsSites.Controls.Add(this.ckLyrics007);
       this.groupBoxLyricsSites.Controls.Add(this.ckHotLyrics);
       this.groupBoxLyricsSites.Controls.Add(this.ckLyricWiki);
+      this.groupBoxLyricsSites.Id = "5520b22e-5255-4a5a-b460-75c86aa5e4ba";
       this.groupBoxLyricsSites.Localisation = "GroupBoxLyricsSites";
       this.groupBoxLyricsSites.LocalisationContext = "Settings";
       this.groupBoxLyricsSites.Location = new System.Drawing.Point(15, 96);
       this.groupBoxLyricsSites.Name = "groupBoxLyricsSites";
       this.groupBoxLyricsSites.Size = new System.Drawing.Size(557, 106);
       this.groupBoxLyricsSites.TabIndex = 0;
-      this.groupBoxLyricsSites.TabStop = false;
       this.groupBoxLyricsSites.Text = "Sites to Search";
       // 
       // ckLRCFinder
@@ -1148,13 +1120,13 @@ namespace MPTagThat.Preferences
       this.groupBoxDatabaseBuild.Controls.Add(this.buttonDBScanStatus);
       this.groupBoxDatabaseBuild.Controls.Add(this.buttonStartDatabaseScan);
       this.groupBoxDatabaseBuild.Controls.Add(this.lbDatabaseNote);
+      this.groupBoxDatabaseBuild.Id = "869c959b-fd0b-476f-a6b7-828485325317";
       this.groupBoxDatabaseBuild.Localisation = "GroupBoxDatabaseBuild";
       this.groupBoxDatabaseBuild.LocalisationContext = "Settings";
       this.groupBoxDatabaseBuild.Location = new System.Drawing.Point(12, 144);
       this.groupBoxDatabaseBuild.Name = "groupBoxDatabaseBuild";
       this.groupBoxDatabaseBuild.Size = new System.Drawing.Size(605, 189);
       this.groupBoxDatabaseBuild.TabIndex = 1;
-      this.groupBoxDatabaseBuild.TabStop = false;
       this.groupBoxDatabaseBuild.Text = "Music Database Build";
       // 
       // checkBoxClearDatabase
@@ -1171,7 +1143,6 @@ namespace MPTagThat.Preferences
       // 
       // lbDBScanStatus
       // 
-      this.lbDBScanStatus.AutoSize = true;
       this.lbDBScanStatus.Localisation = "mptLabel1";
       this.lbDBScanStatus.LocalisationContext = "groupBoxDatabaseBuild";
       this.lbDBScanStatus.Location = new System.Drawing.Point(10, 150);
@@ -1182,6 +1153,7 @@ namespace MPTagThat.Preferences
       // 
       // buttonDBScanStatus
       // 
+      this.buttonDBScanStatus.Id = "781b47e2-5123-4949-8cb1-fd4dacf9ee96";
       this.buttonDBScanStatus.Localisation = "DBScanStatus";
       this.buttonDBScanStatus.LocalisationContext = "Settings";
       this.buttonDBScanStatus.Location = new System.Drawing.Point(298, 95);
@@ -1194,6 +1166,7 @@ namespace MPTagThat.Preferences
       // 
       // buttonStartDatabaseScan
       // 
+      this.buttonStartDatabaseScan.Id = "4e27d57c-d4c3-4f2b-a75f-aaa5a14835d2";
       this.buttonStartDatabaseScan.Localisation = "StartDBScan";
       this.buttonStartDatabaseScan.LocalisationContext = "Settings";
       this.buttonStartDatabaseScan.Location = new System.Drawing.Point(77, 95);
@@ -1206,7 +1179,6 @@ namespace MPTagThat.Preferences
       // 
       // lbDatabaseNote
       // 
-      this.lbDatabaseNote.AutoSize = true;
       this.lbDatabaseNote.Localisation = "DatabaseScanNote";
       this.lbDatabaseNote.LocalisationContext = "Settings";
       this.lbDatabaseNote.Location = new System.Drawing.Point(7, 25);
@@ -1221,18 +1193,19 @@ namespace MPTagThat.Preferences
       this.groubBoxTagsDatabase.Controls.Add(this.buttonMusicDatabaseBrowse);
       this.groubBoxTagsDatabase.Controls.Add(this.tbMediaPortalDatabase);
       this.groubBoxTagsDatabase.Controls.Add(this.ckUseMediaPortalDatabase);
+      this.groubBoxTagsDatabase.Id = "d5cc9c6b-84ec-43e7-910d-dfdea1759d80";
       this.groubBoxTagsDatabase.Localisation = "TabTagsDatabase";
       this.groubBoxTagsDatabase.LocalisationContext = "Settings";
       this.groubBoxTagsDatabase.Location = new System.Drawing.Point(12, 22);
       this.groubBoxTagsDatabase.Name = "groubBoxTagsDatabase";
       this.groubBoxTagsDatabase.Size = new System.Drawing.Size(605, 100);
       this.groubBoxTagsDatabase.TabIndex = 0;
-      this.groubBoxTagsDatabase.TabStop = false;
       this.groubBoxTagsDatabase.Text = "Database";
       // 
       // buttonMusicDatabaseBrowse
       // 
       this.buttonMusicDatabaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonMusicDatabaseBrowse.Id = "29ea8bdf-36f1-4c2b-810d-1e7f3700a38c";
       this.buttonMusicDatabaseBrowse.Localisation = "TargetFolderBrowse";
       this.buttonMusicDatabaseBrowse.LocalisationContext = "Settings";
       this.buttonMusicDatabaseBrowse.Location = new System.Drawing.Point(540, 52);
@@ -1313,13 +1286,13 @@ namespace MPTagThat.Preferences
       // 
       this.groupBoxRippingOptions.Controls.Add(this.ckActivateTargetFolder);
       this.groupBoxRippingOptions.Controls.Add(this.ckRipEjectCD);
+      this.groupBoxRippingOptions.Id = "99b6f3bb-a659-4202-bbe5-c71f1cae7c3c";
       this.groupBoxRippingOptions.Localisation = "RipOptions";
       this.groupBoxRippingOptions.LocalisationContext = "Settings";
       this.groupBoxRippingOptions.Location = new System.Drawing.Point(18, 364);
       this.groupBoxRippingOptions.Name = "groupBoxRippingOptions";
       this.groupBoxRippingOptions.Size = new System.Drawing.Size(596, 90);
       this.groupBoxRippingOptions.TabIndex = 4;
-      this.groupBoxRippingOptions.TabStop = false;
       this.groupBoxRippingOptions.Text = "Ripping OPtions";
       // 
       // ckActivateTargetFolder
@@ -1356,13 +1329,13 @@ namespace MPTagThat.Preferences
       this.groupBoxCustomPath.Controls.Add(this.buttonTargetFolderBrowse);
       this.groupBoxCustomPath.Controls.Add(this.tbTargetFolder);
       this.groupBoxCustomPath.Controls.Add(this.lbTargetFolder);
+      this.groupBoxCustomPath.Id = "bb478213-98b9-4883-9ae8-58308c26c0aa";
       this.groupBoxCustomPath.Localisation = "CustomPath";
       this.groupBoxCustomPath.LocalisationContext = "Settings";
       this.groupBoxCustomPath.Location = new System.Drawing.Point(18, 122);
       this.groupBoxCustomPath.Name = "groupBoxCustomPath";
       this.groupBoxCustomPath.Size = new System.Drawing.Size(596, 235);
       this.groupBoxCustomPath.TabIndex = 2;
-      this.groupBoxCustomPath.TabStop = false;
       this.groupBoxCustomPath.Text = "Custom Paths and Filenames";
       // 
       // groupBoxRippingFormatOptions
@@ -1377,18 +1350,17 @@ namespace MPTagThat.Preferences
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmAlbum);
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmTitle);
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmArtist);
+      this.groupBoxRippingFormatOptions.Id = "f52c69ad-3c37-4358-9d8b-04aa378fc606";
       this.groupBoxRippingFormatOptions.Localisation = "GroupBoxParm";
       this.groupBoxRippingFormatOptions.LocalisationContext = "TagAndRename";
       this.groupBoxRippingFormatOptions.Location = new System.Drawing.Point(9, 108);
       this.groupBoxRippingFormatOptions.Name = "groupBoxRippingFormatOptions";
       this.groupBoxRippingFormatOptions.Size = new System.Drawing.Size(570, 109);
       this.groupBoxRippingFormatOptions.TabIndex = 5;
-      this.groupBoxRippingFormatOptions.TabStop = false;
       this.groupBoxRippingFormatOptions.Text = "Format Options (Click to insert)";
       // 
       // lblParmFolder
       // 
-      this.lblParmFolder.AutoSize = true;
       this.lblParmFolder.Localisation = "Folder";
       this.lblParmFolder.LocalisationContext = "TagAndRename";
       this.lblParmFolder.Location = new System.Drawing.Point(11, 78);
@@ -1400,7 +1372,6 @@ namespace MPTagThat.Preferences
       // 
       // lblAlbumArtist
       // 
-      this.lblAlbumArtist.AutoSize = true;
       this.lblAlbumArtist.Localisation = "TagAndRename";
       this.lblAlbumArtist.LocalisationContext = "Settings";
       this.lblAlbumArtist.Location = new System.Drawing.Point(7, 55);
@@ -1412,7 +1383,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmGenre
       // 
-      this.lblParmGenre.AutoSize = true;
       this.lblParmGenre.Localisation = "Genre";
       this.lblParmGenre.LocalisationContext = "TagAndRename";
       this.lblParmGenre.Location = new System.Drawing.Point(167, 37);
@@ -1424,7 +1394,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmTrack
       // 
-      this.lblParmTrack.AutoSize = true;
       this.lblParmTrack.Localisation = "Track";
       this.lblParmTrack.LocalisationContext = "TagAndRename";
       this.lblParmTrack.Location = new System.Drawing.Point(326, 37);
@@ -1436,7 +1405,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmYear
       // 
-      this.lblParmYear.AutoSize = true;
       this.lblParmYear.Localisation = "Year";
       this.lblParmYear.LocalisationContext = "TagAndRename";
       this.lblParmYear.Location = new System.Drawing.Point(7, 37);
@@ -1448,7 +1416,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmAlbum
       // 
-      this.lblParmAlbum.AutoSize = true;
       this.lblParmAlbum.Localisation = "Album";
       this.lblParmAlbum.LocalisationContext = "TagAndRename";
       this.lblParmAlbum.Location = new System.Drawing.Point(326, 20);
@@ -1460,7 +1427,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmTitle
       // 
-      this.lblParmTitle.AutoSize = true;
       this.lblParmTitle.Localisation = "Title";
       this.lblParmTitle.LocalisationContext = "TagAndRename";
       this.lblParmTitle.Location = new System.Drawing.Point(167, 20);
@@ -1472,7 +1438,6 @@ namespace MPTagThat.Preferences
       // 
       // lblParmArtist
       // 
-      this.lblParmArtist.AutoSize = true;
       this.lblParmArtist.Localisation = "Artist";
       this.lblParmArtist.LocalisationContext = "TagAndRename";
       this.lblParmArtist.Location = new System.Drawing.Point(5, 20);
@@ -1494,7 +1459,6 @@ namespace MPTagThat.Preferences
       // 
       // lbFormat
       // 
-      this.lbFormat.AutoSize = true;
       this.lbFormat.Localisation = "Format";
       this.lbFormat.LocalisationContext = "Settings";
       this.lbFormat.Location = new System.Drawing.Point(6, 74);
@@ -1506,6 +1470,7 @@ namespace MPTagThat.Preferences
       // buttonTargetFolderBrowse
       // 
       this.buttonTargetFolderBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonTargetFolderBrowse.Id = "98e9172a-7a25-4169-9122-9d416f46a695";
       this.buttonTargetFolderBrowse.Localisation = "TargetFolderBrowse";
       this.buttonTargetFolderBrowse.LocalisationContext = "Settings";
       this.buttonTargetFolderBrowse.Location = new System.Drawing.Point(533, 23);
@@ -1527,7 +1492,6 @@ namespace MPTagThat.Preferences
       // 
       // lbTargetFolder
       // 
-      this.lbTargetFolder.AutoSize = true;
       this.lbTargetFolder.Localisation = "TargetFolder";
       this.lbTargetFolder.LocalisationContext = "Settings";
       this.lbTargetFolder.Location = new System.Drawing.Point(6, 29);
@@ -1540,33 +1504,29 @@ namespace MPTagThat.Preferences
       // 
       this.groupBoxEncoding.Controls.Add(this.comboBoxEncoder);
       this.groupBoxEncoding.Controls.Add(this.lbEncodingFormat);
+      this.groupBoxEncoding.Id = "0b020078-2e20-47d3-b7bf-c12db3e9bf73";
       this.groupBoxEncoding.Localisation = "GroupBoxEncoding";
       this.groupBoxEncoding.LocalisationContext = "Settings";
       this.groupBoxEncoding.Location = new System.Drawing.Point(18, 18);
       this.groupBoxEncoding.Name = "groupBoxEncoding";
       this.groupBoxEncoding.Size = new System.Drawing.Size(596, 90);
       this.groupBoxEncoding.TabIndex = 3;
-      this.groupBoxEncoding.TabStop = false;
       this.groupBoxEncoding.Text = "Encoding Format";
       // 
       // comboBoxEncoder
       // 
-      this.comboBoxEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxEncoder.DroppedDown = false;
+      this.comboBoxEncoder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxEncoder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxEncoder.Editable = false;
-      this.comboBoxEncoder.FormatInfo = null;
-      this.comboBoxEncoder.FormatString = "";
       this.comboBoxEncoder.FormattingEnabled = true;
       this.comboBoxEncoder.Id = "0485bd48-dddd-420f-a85f-493be2c1952a";
       this.comboBoxEncoder.Location = new System.Drawing.Point(9, 41);
       this.comboBoxEncoder.Name = "comboBoxEncoder";
       this.comboBoxEncoder.Size = new System.Drawing.Size(275, 21);
-      this.comboBoxEncoder.Sorted = false;
       this.comboBoxEncoder.TabIndex = 1;
       // 
       // lbEncodingFormat
       // 
-      this.lbEncodingFormat.AutoSize = true;
       this.lbEncodingFormat.Localisation = "EncodingFormat";
       this.lbEncodingFormat.LocalisationContext = "Settings";
       this.lbEncodingFormat.Location = new System.Drawing.Point(6, 25);
@@ -1594,18 +1554,17 @@ namespace MPTagThat.Preferences
       this.groupBoxMp3Experts.Controls.Add(this.lbLameExpertsWarning);
       this.groupBoxMp3Experts.Controls.Add(this.textBoxLameParms);
       this.groupBoxMp3Experts.Controls.Add(this.lbLameExpertOptions);
+      this.groupBoxMp3Experts.Id = "ddab3340-80ee-487d-97fa-a7e6556f405c";
       this.groupBoxMp3Experts.Localisation = "GroupBoxMp3Experts";
       this.groupBoxMp3Experts.LocalisationContext = "Settings";
       this.groupBoxMp3Experts.Location = new System.Drawing.Point(18, 253);
       this.groupBoxMp3Experts.Name = "groupBoxMp3Experts";
       this.groupBoxMp3Experts.Size = new System.Drawing.Size(596, 112);
       this.groupBoxMp3Experts.TabIndex = 1;
-      this.groupBoxMp3Experts.TabStop = false;
       this.groupBoxMp3Experts.Text = "Expert settings";
       // 
       // lbLameExpertsWarning
       // 
-      this.lbLameExpertsWarning.AutoSize = true;
       this.lbLameExpertsWarning.Localisation = "LameExpertsWarning";
       this.lbLameExpertsWarning.LocalisationContext = "Settings";
       this.lbLameExpertsWarning.Location = new System.Drawing.Point(13, 80);
@@ -1623,7 +1582,6 @@ namespace MPTagThat.Preferences
       // 
       // lbLameExpertOptions
       // 
-      this.lbLameExpertOptions.AutoSize = true;
       this.lbLameExpertOptions.Localisation = "LameExpertOptions";
       this.lbLameExpertOptions.LocalisationContext = "Settings";
       this.lbLameExpertOptions.Location = new System.Drawing.Point(10, 20);
@@ -1639,13 +1597,13 @@ namespace MPTagThat.Preferences
       this.groupBoxPresets.Controls.Add(this.lbABRBitrate);
       this.groupBoxPresets.Controls.Add(this.comboBoxLamePresets);
       this.groupBoxPresets.Controls.Add(this.lbPreset);
+      this.groupBoxPresets.Id = "a10ea5c3-bfb2-40ab-b2b5-c5878a5408fc";
       this.groupBoxPresets.Localisation = "GroupBoxPresets";
       this.groupBoxPresets.LocalisationContext = "Settings";
       this.groupBoxPresets.Location = new System.Drawing.Point(18, 18);
       this.groupBoxPresets.Name = "groupBoxPresets";
       this.groupBoxPresets.Size = new System.Drawing.Size(596, 220);
       this.groupBoxPresets.TabIndex = 0;
-      this.groupBoxPresets.TabStop = false;
       this.groupBoxPresets.Text = "MP3 encoder presets";
       // 
       // textBoxPresetDesc
@@ -1668,7 +1626,6 @@ namespace MPTagThat.Preferences
       // 
       // lbABRBitrate
       // 
-      this.lbABRBitrate.AutoSize = true;
       this.lbABRBitrate.Localisation = "ABRBitrate";
       this.lbABRBitrate.LocalisationContext = "Settings";
       this.lbABRBitrate.Location = new System.Drawing.Point(263, 30);
@@ -1679,11 +1636,9 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxLamePresets
       // 
-      this.comboBoxLamePresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxLamePresets.DroppedDown = false;
+      this.comboBoxLamePresets.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxLamePresets.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxLamePresets.Editable = false;
-      this.comboBoxLamePresets.FormatInfo = null;
-      this.comboBoxLamePresets.FormatString = "";
       this.comboBoxLamePresets.FormattingEnabled = true;
       this.comboBoxLamePresets.Id = "1d84ef73-ff19-44d9-8da3-27c615bf4db0";
       this.comboBoxLamePresets.Items.AddRange(new object[] {
@@ -1695,13 +1650,11 @@ namespace MPTagThat.Preferences
       this.comboBoxLamePresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxLamePresets.Name = "comboBoxLamePresets";
       this.comboBoxLamePresets.Size = new System.Drawing.Size(154, 21);
-      this.comboBoxLamePresets.Sorted = false;
       this.comboBoxLamePresets.TabIndex = 1;
       this.comboBoxLamePresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxPreset_SelectedIndexChanged);
       // 
       // lbPreset
       // 
-      this.lbPreset.AutoSize = true;
       this.lbPreset.Localisation = "Preset";
       this.lbPreset.LocalisationContext = "Settings";
       this.lbPreset.Location = new System.Drawing.Point(7, 26);
@@ -1728,18 +1681,17 @@ namespace MPTagThat.Preferences
       this.groupBoxOggExpert.Controls.Add(this.lbOggExpertWarning);
       this.groupBoxOggExpert.Controls.Add(this.textBoxOggParms);
       this.groupBoxOggExpert.Controls.Add(this.lbOggExpert);
+      this.groupBoxOggExpert.Id = "ca91cfa1-b6ad-4732-83db-fcdc7306a467";
       this.groupBoxOggExpert.Localisation = "GroupBoxOggExpert";
       this.groupBoxOggExpert.LocalisationContext = "Settings";
       this.groupBoxOggExpert.Location = new System.Drawing.Point(16, 132);
       this.groupBoxOggExpert.Name = "groupBoxOggExpert";
       this.groupBoxOggExpert.Size = new System.Drawing.Size(598, 94);
       this.groupBoxOggExpert.TabIndex = 2;
-      this.groupBoxOggExpert.TabStop = false;
       this.groupBoxOggExpert.Text = "Expert settings";
       // 
       // lbOggExpertWarning
       // 
-      this.lbOggExpertWarning.AutoSize = true;
       this.lbOggExpertWarning.Localisation = "OggExpertWarning";
       this.lbOggExpertWarning.LocalisationContext = "Settings";
       this.lbOggExpertWarning.Location = new System.Drawing.Point(10, 70);
@@ -1758,7 +1710,6 @@ namespace MPTagThat.Preferences
       // 
       // lbOggExpert
       // 
-      this.lbOggExpert.AutoSize = true;
       this.lbOggExpert.Localisation = "OggExpert";
       this.lbOggExpert.LocalisationContext = "Settings";
       this.lbOggExpert.Location = new System.Drawing.Point(10, 20);
@@ -1772,18 +1723,17 @@ namespace MPTagThat.Preferences
       this.groupBoxOggEncoding.Controls.Add(this.lbOggQualitySelected);
       this.groupBoxOggEncoding.Controls.Add(this.lbOggQuality);
       this.groupBoxOggEncoding.Controls.Add(this.hScrollBarOggEncodingQuality);
+      this.groupBoxOggEncoding.Id = "172eba15-10f0-4ef7-91af-61e625293fb6";
       this.groupBoxOggEncoding.Localisation = "GroupBoxOggEncoding";
       this.groupBoxOggEncoding.LocalisationContext = "Settings";
       this.groupBoxOggEncoding.Location = new System.Drawing.Point(18, 18);
       this.groupBoxOggEncoding.Name = "groupBoxOggEncoding";
       this.groupBoxOggEncoding.Size = new System.Drawing.Size(596, 99);
       this.groupBoxOggEncoding.TabIndex = 0;
-      this.groupBoxOggEncoding.TabStop = false;
       this.groupBoxOggEncoding.Text = "OGG encoding settings";
       // 
       // lbOggQualitySelected
       // 
-      this.lbOggQualitySelected.AutoSize = true;
       this.lbOggQualitySelected.Localisation = "OggQualitySelected";
       this.lbOggQualitySelected.LocalisationContext = "Settings";
       this.lbOggQualitySelected.Location = new System.Drawing.Point(566, 48);
@@ -1794,7 +1744,6 @@ namespace MPTagThat.Preferences
       // 
       // lbOggQuality
       // 
-      this.lbOggQuality.AutoSize = true;
       this.lbOggQuality.Localisation = "OggQuality";
       this.lbOggQuality.LocalisationContext = "Settings";
       this.lbOggQuality.Location = new System.Drawing.Point(16, 48);
@@ -1833,18 +1782,17 @@ namespace MPTagThat.Preferences
       this.groupBoxFlacSettings.Controls.Add(this.lbFlacExpertsWarning);
       this.groupBoxFlacSettings.Controls.Add(this.textBoxFlacParms);
       this.groupBoxFlacSettings.Controls.Add(this.lbFlacExperts);
+      this.groupBoxFlacSettings.Id = "8df8b571-2bac-4377-937e-df8247a0f461";
       this.groupBoxFlacSettings.Localisation = "GroupBoxFlacSettings";
       this.groupBoxFlacSettings.LocalisationContext = "Settings";
       this.groupBoxFlacSettings.Location = new System.Drawing.Point(16, 132);
       this.groupBoxFlacSettings.Name = "groupBoxFlacSettings";
       this.groupBoxFlacSettings.Size = new System.Drawing.Size(598, 99);
       this.groupBoxFlacSettings.TabIndex = 4;
-      this.groupBoxFlacSettings.TabStop = false;
       this.groupBoxFlacSettings.Text = "Expert settings";
       // 
       // lbFlacExpertsWarning
       // 
-      this.lbFlacExpertsWarning.AutoSize = true;
       this.lbFlacExpertsWarning.Localisation = "FlacExpertsWarning";
       this.lbFlacExpertsWarning.LocalisationContext = "Settings";
       this.lbFlacExpertsWarning.Location = new System.Drawing.Point(10, 70);
@@ -1863,7 +1811,6 @@ namespace MPTagThat.Preferences
       // 
       // lbFlacExperts
       // 
-      this.lbFlacExperts.AutoSize = true;
       this.lbFlacExperts.Localisation = "FlacExperts";
       this.lbFlacExperts.LocalisationContext = "Settings";
       this.lbFlacExperts.Location = new System.Drawing.Point(10, 20);
@@ -1877,18 +1824,17 @@ namespace MPTagThat.Preferences
       this.groupBoxFlacEncoding.Controls.Add(this.lbFlacQualitySelected);
       this.groupBoxFlacEncoding.Controls.Add(this.lbFlacQuality);
       this.groupBoxFlacEncoding.Controls.Add(this.hScrollBarFlacEncodingQuality);
+      this.groupBoxFlacEncoding.Id = "a14324c8-abe8-4714-ac99-9e91c32750a6";
       this.groupBoxFlacEncoding.Localisation = "GroupBoxFlacEncoding";
       this.groupBoxFlacEncoding.LocalisationContext = "Settings";
       this.groupBoxFlacEncoding.Location = new System.Drawing.Point(18, 18);
       this.groupBoxFlacEncoding.Name = "groupBoxFlacEncoding";
       this.groupBoxFlacEncoding.Size = new System.Drawing.Size(596, 99);
       this.groupBoxFlacEncoding.TabIndex = 3;
-      this.groupBoxFlacEncoding.TabStop = false;
       this.groupBoxFlacEncoding.Text = "FLAC encoding settings";
       // 
       // lbFlacQualitySelected
       // 
-      this.lbFlacQualitySelected.AutoSize = true;
       this.lbFlacQualitySelected.Localisation = "FlacQualitySelected";
       this.lbFlacQualitySelected.LocalisationContext = "Settings";
       this.lbFlacQualitySelected.Location = new System.Drawing.Point(567, 48);
@@ -1899,7 +1845,6 @@ namespace MPTagThat.Preferences
       // 
       // lbFlacQuality
       // 
-      this.lbFlacQuality.AutoSize = true;
       this.lbFlacQuality.Localisation = "FlacQuality";
       this.lbFlacQuality.LocalisationContext = "Settings";
       this.lbFlacQuality.Location = new System.Drawing.Point(16, 48);
@@ -1922,7 +1867,6 @@ namespace MPTagThat.Preferences
       // tabPageRippingAAC
       // 
       this.tabPageRippingAAC.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageRippingAAC.Controls.Add(this.groupBoxAACAttention);
       this.tabPageRippingAAC.Controls.Add(this.groupBoxAACEncoding);
       this.tabPageRippingAAC.Localisation = "TabRippingAAC";
       this.tabPageRippingAAC.LocalisationContext = "Settings";
@@ -1933,139 +1877,40 @@ namespace MPTagThat.Preferences
       this.tabPageRippingAAC.TabIndex = 4;
       this.tabPageRippingAAC.Text = "AAC";
       // 
-      // groupBoxAACAttention
-      // 
-      this.groupBoxAACAttention.Controls.Add(this.labelAACAttention);
-      this.groupBoxAACAttention.Localisation = "GroupBoxAACAttention";
-      this.groupBoxAACAttention.LocalisationContext = "Settings";
-      this.groupBoxAACAttention.Location = new System.Drawing.Point(18, 222);
-      this.groupBoxAACAttention.Name = "groupBoxAACAttention";
-      this.groupBoxAACAttention.Size = new System.Drawing.Size(596, 107);
-      this.groupBoxAACAttention.TabIndex = 1;
-      this.groupBoxAACAttention.TabStop = false;
-      this.groupBoxAACAttention.Text = "Attention !";
-      // 
-      // labelAACAttention
-      // 
-      this.labelAACAttention.AutoSize = true;
-      this.labelAACAttention.Localisation = "AACAttention";
-      this.labelAACAttention.LocalisationContext = "Settings";
-      this.labelAACAttention.Location = new System.Drawing.Point(6, 32);
-      this.labelAACAttention.Name = "labelAACAttention";
-      this.labelAACAttention.Size = new System.Drawing.Size(422, 39);
-      this.labelAACAttention.TabIndex = 0;
-      this.labelAACAttention.Text = "Attention: For AAC Encoding you need to install Winamp first.\r\nThen you need to c" +
-          "opy \"nscrt.dll\" and \"enc_aacplus.dll\" from the winamp plugins folder \r\ninto the " +
-          "MPTagThat bin\\Encoder folder.";
-      // 
       // groupBoxAACEncoding
       // 
-      this.groupBoxAACEncoding.Controls.Add(this.labelAACChannelModesWarning);
-      this.groupBoxAACEncoding.Controls.Add(this.comboBoxAACChannelModes);
-      this.groupBoxAACEncoding.Controls.Add(this.labelChannelModes);
       this.groupBoxAACEncoding.Controls.Add(this.comboBoxAACBitrates);
       this.groupBoxAACEncoding.Controls.Add(this.labelAACBitrate);
-      this.groupBoxAACEncoding.Controls.Add(this.comboBoxAACEncoder);
-      this.groupBoxAACEncoding.Controls.Add(this.labelAACEncoder);
+      this.groupBoxAACEncoding.Id = "6c2a5063-6cc1-4ea5-933c-9891d14cf790";
       this.groupBoxAACEncoding.Localisation = "GroupBoxAACEncoding";
       this.groupBoxAACEncoding.LocalisationContext = "Settings";
       this.groupBoxAACEncoding.Location = new System.Drawing.Point(18, 18);
       this.groupBoxAACEncoding.Name = "groupBoxAACEncoding";
-      this.groupBoxAACEncoding.Size = new System.Drawing.Size(596, 189);
+      this.groupBoxAACEncoding.Size = new System.Drawing.Size(596, 117);
       this.groupBoxAACEncoding.TabIndex = 0;
-      this.groupBoxAACEncoding.TabStop = false;
-      this.groupBoxAACEncoding.Text = "AAC / AACPlus / LC-AAC Encoding Settings";
-      // 
-      // labelAACChannelModesWarning
-      // 
-      this.labelAACChannelModesWarning.AutoSize = true;
-      this.labelAACChannelModesWarning.Localisation = "AACWarning";
-      this.labelAACChannelModesWarning.LocalisationContext = "Settings";
-      this.labelAACChannelModesWarning.Location = new System.Drawing.Point(12, 156);
-      this.labelAACChannelModesWarning.Name = "labelAACChannelModesWarning";
-      this.labelAACChannelModesWarning.Size = new System.Drawing.Size(311, 13);
-      this.labelAACChannelModesWarning.TabIndex = 6;
-      this.labelAACChannelModesWarning.Text = "Note: some channel modes are only available for certain bitrates.";
-      // 
-      // comboBoxAACChannelModes
-      // 
-      this.comboBoxAACChannelModes.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxAACChannelModes.DroppedDown = false;
-      this.comboBoxAACChannelModes.Editable = false;
-      this.comboBoxAACChannelModes.FormatInfo = null;
-      this.comboBoxAACChannelModes.FormatString = "";
-      this.comboBoxAACChannelModes.FormattingEnabled = true;
-      this.comboBoxAACChannelModes.Id = "97cb4a9c-abb0-4e98-8d0d-400d9925a947";
-      this.comboBoxAACChannelModes.Location = new System.Drawing.Point(156, 112);
-      this.comboBoxAACChannelModes.Name = "comboBoxAACChannelModes";
-      this.comboBoxAACChannelModes.Size = new System.Drawing.Size(97, 21);
-      this.comboBoxAACChannelModes.Sorted = false;
-      this.comboBoxAACChannelModes.TabIndex = 5;
-      // 
-      // labelChannelModes
-      // 
-      this.labelChannelModes.AutoSize = true;
-      this.labelChannelModes.Localisation = "ChannelMode";
-      this.labelChannelModes.LocalisationContext = "Settings";
-      this.labelChannelModes.Location = new System.Drawing.Point(9, 115);
-      this.labelChannelModes.Name = "labelChannelModes";
-      this.labelChannelModes.Size = new System.Drawing.Size(84, 13);
-      this.labelChannelModes.TabIndex = 4;
-      this.labelChannelModes.Text = "Channel Modes:";
+      this.groupBoxAACEncoding.Text = "AAC Encoding Settings";
       // 
       // comboBoxAACBitrates
       // 
-      this.comboBoxAACBitrates.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxAACBitrates.DroppedDown = false;
+      this.comboBoxAACBitrates.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxAACBitrates.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxAACBitrates.Editable = false;
-      this.comboBoxAACBitrates.FormatInfo = null;
-      this.comboBoxAACBitrates.FormatString = "";
       this.comboBoxAACBitrates.FormattingEnabled = true;
       this.comboBoxAACBitrates.Id = "73b2d7e2-440a-463b-b13a-eec8e7f55424";
-      this.comboBoxAACBitrates.Location = new System.Drawing.Point(156, 72);
+      this.comboBoxAACBitrates.Location = new System.Drawing.Point(155, 38);
       this.comboBoxAACBitrates.Name = "comboBoxAACBitrates";
       this.comboBoxAACBitrates.Size = new System.Drawing.Size(97, 21);
-      this.comboBoxAACBitrates.Sorted = false;
       this.comboBoxAACBitrates.TabIndex = 3;
-      this.comboBoxAACBitrates.SelectedIndexChanged += new System.EventHandler(this.comboBoxAACBitrates_SelectedIndexChanged);
       // 
       // labelAACBitrate
       // 
-      this.labelAACBitrate.AutoSize = true;
       this.labelAACBitrate.Localisation = "AACBitRate";
       this.labelAACBitrate.LocalisationContext = "Settings";
-      this.labelAACBitrate.Location = new System.Drawing.Point(9, 75);
+      this.labelAACBitrate.Location = new System.Drawing.Point(8, 41);
       this.labelAACBitrate.Name = "labelAACBitrate";
       this.labelAACBitrate.Size = new System.Drawing.Size(40, 13);
       this.labelAACBitrate.TabIndex = 2;
       this.labelAACBitrate.Text = "Bitrate:";
-      // 
-      // comboBoxAACEncoder
-      // 
-      this.comboBoxAACEncoder.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxAACEncoder.DroppedDown = false;
-      this.comboBoxAACEncoder.Editable = false;
-      this.comboBoxAACEncoder.FormatInfo = null;
-      this.comboBoxAACEncoder.FormatString = "";
-      this.comboBoxAACEncoder.FormattingEnabled = true;
-      this.comboBoxAACEncoder.Id = "8e58374c-a678-4ec7-b25c-7e47f9b9bd61";
-      this.comboBoxAACEncoder.Location = new System.Drawing.Point(156, 32);
-      this.comboBoxAACEncoder.Name = "comboBoxAACEncoder";
-      this.comboBoxAACEncoder.Size = new System.Drawing.Size(246, 21);
-      this.comboBoxAACEncoder.Sorted = false;
-      this.comboBoxAACEncoder.TabIndex = 1;
-      this.comboBoxAACEncoder.SelectedIndexChanged += new System.EventHandler(this.comboBoxAACEncoder_SelectedIndexChanged);
-      // 
-      // labelAACEncoder
-      // 
-      this.labelAACEncoder.AutoSize = true;
-      this.labelAACEncoder.Localisation = "AACEncoder";
-      this.labelAACEncoder.LocalisationContext = "Settings";
-      this.labelAACEncoder.Location = new System.Drawing.Point(9, 35);
-      this.labelAACEncoder.Name = "labelAACEncoder";
-      this.labelAACEncoder.Size = new System.Drawing.Size(74, 13);
-      this.labelAACEncoder.TabIndex = 0;
-      this.labelAACEncoder.Text = "AAC Encoder:";
       // 
       // tabPageRippingWMA
       // 
@@ -2089,49 +1934,42 @@ namespace MPTagThat.Preferences
       this.groupBoxWMAEncoding.Controls.Add(this.labelWMASampleFormat);
       this.groupBoxWMAEncoding.Controls.Add(this.comboBoxWMAEncoderFormat);
       this.groupBoxWMAEncoding.Controls.Add(this.labelWMAEncoderFormat);
+      this.groupBoxWMAEncoding.Id = "84f21053-15f9-453d-9b72-a209f92b0443";
       this.groupBoxWMAEncoding.Localisation = "GroupBoxWMASettings";
       this.groupBoxWMAEncoding.LocalisationContext = "Settings";
       this.groupBoxWMAEncoding.Location = new System.Drawing.Point(18, 18);
       this.groupBoxWMAEncoding.Name = "groupBoxWMAEncoding";
       this.groupBoxWMAEncoding.Size = new System.Drawing.Size(596, 163);
       this.groupBoxWMAEncoding.TabIndex = 1;
-      this.groupBoxWMAEncoding.TabStop = false;
       this.groupBoxWMAEncoding.Text = "WMA Encoding Settings";
       // 
       // comboBoxWMABitRate
       // 
-      this.comboBoxWMABitRate.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxWMABitRate.DroppedDown = false;
+      this.comboBoxWMABitRate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxWMABitRate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxWMABitRate.Editable = false;
-      this.comboBoxWMABitRate.FormatInfo = null;
-      this.comboBoxWMABitRate.FormatString = "";
       this.comboBoxWMABitRate.FormattingEnabled = true;
       this.comboBoxWMABitRate.Id = "f8cc222a-5c5e-4e7d-b956-78bb21567751";
       this.comboBoxWMABitRate.Location = new System.Drawing.Point(294, 112);
       this.comboBoxWMABitRate.Name = "comboBoxWMABitRate";
       this.comboBoxWMABitRate.Size = new System.Drawing.Size(108, 21);
-      this.comboBoxWMABitRate.Sorted = false;
       this.comboBoxWMABitRate.TabIndex = 6;
       // 
       // comboBoxWMACbrVbr
       // 
-      this.comboBoxWMACbrVbr.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxWMACbrVbr.DroppedDown = false;
+      this.comboBoxWMACbrVbr.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxWMACbrVbr.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxWMACbrVbr.Editable = false;
-      this.comboBoxWMACbrVbr.FormatInfo = null;
-      this.comboBoxWMACbrVbr.FormatString = "";
       this.comboBoxWMACbrVbr.FormattingEnabled = true;
       this.comboBoxWMACbrVbr.Id = "adaac684-6abe-4bb5-ac67-d8e0aac62c9e";
       this.comboBoxWMACbrVbr.Location = new System.Drawing.Point(156, 112);
       this.comboBoxWMACbrVbr.Name = "comboBoxWMACbrVbr";
       this.comboBoxWMACbrVbr.Size = new System.Drawing.Size(110, 21);
-      this.comboBoxWMACbrVbr.Sorted = false;
       this.comboBoxWMACbrVbr.TabIndex = 5;
       this.comboBoxWMACbrVbr.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMACbrVbr_SelectedIndexChanged);
       // 
       // labelWMAQuality
       // 
-      this.labelWMAQuality.AutoSize = true;
       this.labelWMAQuality.Localisation = "WMAQuality";
       this.labelWMAQuality.LocalisationContext = "Settings";
       this.labelWMAQuality.Location = new System.Drawing.Point(9, 115);
@@ -2142,23 +1980,19 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWMASampleFormat
       // 
-      this.comboBoxWMASampleFormat.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxWMASampleFormat.DroppedDown = false;
+      this.comboBoxWMASampleFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxWMASampleFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxWMASampleFormat.Editable = false;
-      this.comboBoxWMASampleFormat.FormatInfo = null;
-      this.comboBoxWMASampleFormat.FormatString = "";
       this.comboBoxWMASampleFormat.FormattingEnabled = true;
       this.comboBoxWMASampleFormat.Id = "2f6ea721-50fb-4723-9def-33deddd14491";
       this.comboBoxWMASampleFormat.Location = new System.Drawing.Point(156, 72);
       this.comboBoxWMASampleFormat.Name = "comboBoxWMASampleFormat";
       this.comboBoxWMASampleFormat.Size = new System.Drawing.Size(246, 21);
-      this.comboBoxWMASampleFormat.Sorted = false;
       this.comboBoxWMASampleFormat.TabIndex = 3;
       this.comboBoxWMASampleFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMASampleFormat_SelectedIndexChanged);
       // 
       // labelWMASampleFormat
       // 
-      this.labelWMASampleFormat.AutoSize = true;
       this.labelWMASampleFormat.Localisation = "WMASample";
       this.labelWMASampleFormat.LocalisationContext = "Settings";
       this.labelWMASampleFormat.Location = new System.Drawing.Point(9, 75);
@@ -2169,23 +2003,19 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxWMAEncoderFormat
       // 
-      this.comboBoxWMAEncoderFormat.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxWMAEncoderFormat.DroppedDown = false;
+      this.comboBoxWMAEncoderFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxWMAEncoderFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxWMAEncoderFormat.Editable = false;
-      this.comboBoxWMAEncoderFormat.FormatInfo = null;
-      this.comboBoxWMAEncoderFormat.FormatString = "";
       this.comboBoxWMAEncoderFormat.FormattingEnabled = true;
       this.comboBoxWMAEncoderFormat.Id = "e0ee3c82-f1ee-4352-89d4-4edf4d4ced40";
       this.comboBoxWMAEncoderFormat.Location = new System.Drawing.Point(156, 32);
       this.comboBoxWMAEncoderFormat.Name = "comboBoxWMAEncoderFormat";
       this.comboBoxWMAEncoderFormat.Size = new System.Drawing.Size(246, 21);
-      this.comboBoxWMAEncoderFormat.Sorted = false;
       this.comboBoxWMAEncoderFormat.TabIndex = 1;
       this.comboBoxWMAEncoderFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxWMAEncoderFormat_SelectedIndexChanged);
       // 
       // labelWMAEncoderFormat
       // 
-      this.labelWMAEncoderFormat.AutoSize = true;
       this.labelWMAEncoderFormat.Localisation = "WMAEncoder";
       this.labelWMAEncoderFormat.LocalisationContext = "Settings";
       this.labelWMAEncoderFormat.Location = new System.Drawing.Point(9, 35);
@@ -2212,18 +2042,17 @@ namespace MPTagThat.Preferences
       this.groupBoxMPCExpert.Controls.Add(this.lbMPCExpertsWarning);
       this.groupBoxMPCExpert.Controls.Add(this.textBoxMPCParms);
       this.groupBoxMPCExpert.Controls.Add(this.lbMPCExperts);
+      this.groupBoxMPCExpert.Id = "7ba5ab91-c62d-46ca-9397-ad5e9fbd4d84";
       this.groupBoxMPCExpert.Localisation = "GroupBoxMpcExperts";
       this.groupBoxMPCExpert.LocalisationContext = "Settings";
       this.groupBoxMPCExpert.Location = new System.Drawing.Point(18, 96);
       this.groupBoxMPCExpert.Name = "groupBoxMPCExpert";
       this.groupBoxMPCExpert.Size = new System.Drawing.Size(596, 112);
       this.groupBoxMPCExpert.TabIndex = 3;
-      this.groupBoxMPCExpert.TabStop = false;
       this.groupBoxMPCExpert.Text = "Expert settings";
       // 
       // lbMPCExpertsWarning
       // 
-      this.lbMPCExpertsWarning.AutoSize = true;
       this.lbMPCExpertsWarning.Localisation = "MpcExpertsWarning";
       this.lbMPCExpertsWarning.LocalisationContext = "Settings";
       this.lbMPCExpertsWarning.Location = new System.Drawing.Point(13, 80);
@@ -2241,7 +2070,6 @@ namespace MPTagThat.Preferences
       // 
       // lbMPCExperts
       // 
-      this.lbMPCExperts.AutoSize = true;
       this.lbMPCExperts.Localisation = "MPCExpertOptions";
       this.lbMPCExperts.LocalisationContext = "Settings";
       this.lbMPCExperts.Location = new System.Drawing.Point(10, 20);
@@ -2254,22 +2082,20 @@ namespace MPTagThat.Preferences
       // 
       this.groupBoxMPCPresets.Controls.Add(this.comboBoxMPCPresets);
       this.groupBoxMPCPresets.Controls.Add(this.lbMPCPresets);
+      this.groupBoxMPCPresets.Id = "50198e97-6caa-491b-a35d-5dbca968003b";
       this.groupBoxMPCPresets.Localisation = "GroupBoxMPCPresets";
       this.groupBoxMPCPresets.LocalisationContext = "Settings";
       this.groupBoxMPCPresets.Location = new System.Drawing.Point(18, 18);
       this.groupBoxMPCPresets.Name = "groupBoxMPCPresets";
       this.groupBoxMPCPresets.Size = new System.Drawing.Size(596, 63);
       this.groupBoxMPCPresets.TabIndex = 2;
-      this.groupBoxMPCPresets.TabStop = false;
       this.groupBoxMPCPresets.Text = "Musepack encoder presets";
       // 
       // comboBoxMPCPresets
       // 
-      this.comboBoxMPCPresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxMPCPresets.DroppedDown = false;
+      this.comboBoxMPCPresets.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxMPCPresets.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxMPCPresets.Editable = false;
-      this.comboBoxMPCPresets.FormatInfo = null;
-      this.comboBoxMPCPresets.FormatString = "";
       this.comboBoxMPCPresets.FormattingEnabled = true;
       this.comboBoxMPCPresets.Id = "cf6b798a-aa0c-4232-b1e6-43843f88dc4f";
       this.comboBoxMPCPresets.Items.AddRange(new object[] {
@@ -2281,12 +2107,10 @@ namespace MPTagThat.Preferences
       this.comboBoxMPCPresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxMPCPresets.Name = "comboBoxMPCPresets";
       this.comboBoxMPCPresets.Size = new System.Drawing.Size(505, 21);
-      this.comboBoxMPCPresets.Sorted = false;
       this.comboBoxMPCPresets.TabIndex = 1;
       // 
       // lbMPCPresets
       // 
-      this.lbMPCPresets.AutoSize = true;
       this.lbMPCPresets.Localisation = "MPCPreset";
       this.lbMPCPresets.LocalisationContext = "Settings";
       this.lbMPCPresets.Location = new System.Drawing.Point(7, 26);
@@ -2313,18 +2137,17 @@ namespace MPTagThat.Preferences
       this.groupBoxWVExpertSettings.Controls.Add(this.lbWVExpertWarning);
       this.groupBoxWVExpertSettings.Controls.Add(this.textBoxWVParms);
       this.groupBoxWVExpertSettings.Controls.Add(this.lbWVExpert);
+      this.groupBoxWVExpertSettings.Id = "e2217ae2-dcc6-418d-8fd4-a79e07b19e36";
       this.groupBoxWVExpertSettings.Localisation = "groupBoxWvExperts";
       this.groupBoxWVExpertSettings.LocalisationContext = "Settings";
       this.groupBoxWVExpertSettings.Location = new System.Drawing.Point(18, 96);
       this.groupBoxWVExpertSettings.Name = "groupBoxWVExpertSettings";
       this.groupBoxWVExpertSettings.Size = new System.Drawing.Size(596, 97);
       this.groupBoxWVExpertSettings.TabIndex = 5;
-      this.groupBoxWVExpertSettings.TabStop = false;
       this.groupBoxWVExpertSettings.Text = "Expert Settings";
       // 
       // lbWVExpertWarning
       // 
-      this.lbWVExpertWarning.AutoSize = true;
       this.lbWVExpertWarning.Localisation = "WvExpertsWarning";
       this.lbWVExpertWarning.LocalisationContext = "Settings";
       this.lbWVExpertWarning.Location = new System.Drawing.Point(10, 69);
@@ -2342,7 +2165,6 @@ namespace MPTagThat.Preferences
       // 
       // lbWVExpert
       // 
-      this.lbWVExpert.AutoSize = true;
       this.lbWVExpert.Localisation = "WvExpertOptions";
       this.lbWVExpert.LocalisationContext = "Settings";
       this.lbWVExpert.Location = new System.Drawing.Point(10, 20);
@@ -2355,22 +2177,20 @@ namespace MPTagThat.Preferences
       // 
       this.groupBoxWVPresets.Controls.Add(this.comboBoxWVPresets);
       this.groupBoxWVPresets.Controls.Add(this.lbWVPreset);
+      this.groupBoxWVPresets.Id = "ea98b8c6-3d40-47c4-83ac-0f7bb8edcc6d";
       this.groupBoxWVPresets.Localisation = "GroupBoxWvPresets";
       this.groupBoxWVPresets.LocalisationContext = "Settings";
       this.groupBoxWVPresets.Location = new System.Drawing.Point(18, 18);
       this.groupBoxWVPresets.Name = "groupBoxWVPresets";
       this.groupBoxWVPresets.Size = new System.Drawing.Size(596, 63);
       this.groupBoxWVPresets.TabIndex = 4;
-      this.groupBoxWVPresets.TabStop = false;
       this.groupBoxWVPresets.Text = "WavPack Encoder Presets";
       // 
       // comboBoxWVPresets
       // 
-      this.comboBoxWVPresets.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.comboBoxWVPresets.DroppedDown = false;
+      this.comboBoxWVPresets.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxWVPresets.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxWVPresets.Editable = false;
-      this.comboBoxWVPresets.FormatInfo = null;
-      this.comboBoxWVPresets.FormatString = "";
       this.comboBoxWVPresets.FormattingEnabled = true;
       this.comboBoxWVPresets.Id = "6c51ef00-993b-45b4-a3d1-b488eb7ad7a5";
       this.comboBoxWVPresets.Items.AddRange(new object[] {
@@ -2382,12 +2202,10 @@ namespace MPTagThat.Preferences
       this.comboBoxWVPresets.Location = new System.Drawing.Point(73, 23);
       this.comboBoxWVPresets.Name = "comboBoxWVPresets";
       this.comboBoxWVPresets.Size = new System.Drawing.Size(507, 21);
-      this.comboBoxWVPresets.Sorted = false;
       this.comboBoxWVPresets.TabIndex = 1;
       // 
       // lbWVPreset
       // 
-      this.lbWVPreset.AutoSize = true;
       this.lbWVPreset.Localisation = "WvPreset";
       this.lbWVPreset.LocalisationContext = "Settings";
       this.lbWVPreset.Location = new System.Drawing.Point(7, 26);
@@ -2411,6 +2229,7 @@ namespace MPTagThat.Preferences
       // 
       this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.buttonCancel.Id = "212f815a-5ca1-4f4e-a4e7-c161f93ca4ba";
       this.buttonCancel.Localisation = "Cancel";
       this.buttonCancel.LocalisationContext = "Settings";
       this.buttonCancel.Location = new System.Drawing.Point(525, 6);
@@ -2424,6 +2243,7 @@ namespace MPTagThat.Preferences
       // buttonApply
       // 
       this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonApply.Id = "0bffbe91-0a59-4304-84bd-77cb84d83217";
       this.buttonApply.Localisation = "Apply";
       this.buttonApply.LocalisationContext = "Settings";
       this.buttonApply.Location = new System.Drawing.Point(419, 6);
@@ -2487,7 +2307,6 @@ namespace MPTagThat.Preferences
       // 
       // lbLinkTags
       // 
-      this.lbLinkTags.AutoSize = true;
       this.lbLinkTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbLinkTags.Localisation = "LinkTags";
       this.lbLinkTags.LocalisationContext = "Settings";
@@ -2500,7 +2319,6 @@ namespace MPTagThat.Preferences
       // 
       // lbLinkGeneral
       // 
-      this.lbLinkGeneral.AutoSize = true;
       this.lbLinkGeneral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbLinkGeneral.Localisation = "LinkGeneral";
       this.lbLinkGeneral.LocalisationContext = "Settings";
@@ -2513,7 +2331,6 @@ namespace MPTagThat.Preferences
       // 
       // lbLinkRipping
       // 
-      this.lbLinkRipping.AutoSize = true;
       this.lbLinkRipping.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbLinkRipping.Localisation = "LinkRipping";
       this.lbLinkRipping.LocalisationContext = "Settings";
@@ -2601,8 +2418,6 @@ namespace MPTagThat.Preferences
       this.groupBoxFlacEncoding.ResumeLayout(false);
       this.groupBoxFlacEncoding.PerformLayout();
       this.tabPageRippingAAC.ResumeLayout(false);
-      this.groupBoxAACAttention.ResumeLayout(false);
-      this.groupBoxAACAttention.PerformLayout();
       this.groupBoxAACEncoding.ResumeLayout(false);
       this.groupBoxAACEncoding.PerformLayout();
       this.tabPageRippingWMA.ResumeLayout(false);
@@ -2708,15 +2523,8 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTLabel lbTheme;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRippingAAC;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxAACEncoding;
-    private MPTagThat.Core.WinControls.MPTComboBox comboBoxAACEncoder;
-    private MPTagThat.Core.WinControls.MPTLabel labelAACEncoder;
-    private MPTagThat.Core.WinControls.MPTLabel labelAACChannelModesWarning;
-    private MPTagThat.Core.WinControls.MPTComboBox comboBoxAACChannelModes;
-    private MPTagThat.Core.WinControls.MPTLabel labelChannelModes;
     private MPTagThat.Core.WinControls.MPTComboBox comboBoxAACBitrates;
     private MPTagThat.Core.WinControls.MPTLabel labelAACBitrate;
-    private MPTagThat.Core.WinControls.MPTGroupBox groupBoxAACAttention;
-    private MPTagThat.Core.WinControls.MPTLabel labelAACAttention;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRippingWMA;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxWMAEncoding;
     private MPTagThat.Core.WinControls.MPTComboBox comboBoxWMACbrVbr;

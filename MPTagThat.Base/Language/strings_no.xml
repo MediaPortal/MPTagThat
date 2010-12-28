@@ -587,9 +587,6 @@
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
-    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
-    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
     <String id="EncoderWMAStandard">Windows Media Audio Standard</String>
     <String id="EncoderWMAPro">Windows Media Audio Professional</String>
     <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
@@ -706,13 +703,8 @@
     <String id="GroupBoxFlacEncoding">FLAC Encoding Innstillinger</String>
     <String id="FlacQuality">Kvalitet:</String>
     <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACAttention">Vær Oppmerksom !</String>
-    <String id="AACAttention">Advarsel: For AAC Encoding må Winamp være innstallert,\nfilene "nscrt.dll" og "enc_aacplus.dll" fra winamp plugins folder må kopieres til \nMPTagThat bin\Encoder folder.</String>
-    <String id="GroupBoxAACEncoding">AAC / AACPlus / LC-AAC Encoding Innstillinger</String>
-    <String id="AACWarning">Notis: noen kanaler er bare tigjengelig i noen bitrate moduser.</String>
-    <String id="ChannelMode">Kanal Modus:</String>
+    <String id="GroupBoxAACEncoding">AAC Encoding Innstillinger</String>
     <String id="AACBitRate">Bitrate:</String>
-    <String id="AACEncoder">AAC Encoder:</String>
     <String id="TabRippingWMA">WMA</String>
     <String id="GroupBoxWMASettings">WMA Encoding Innstillinger</String>
     <String id="WMAQuality">Kvalitet:</String>

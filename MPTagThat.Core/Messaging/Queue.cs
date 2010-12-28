@@ -49,7 +49,7 @@ namespace MPTagThat.Core
     }
 
     public void Send(QueueMessage message)
-    {
+{
       message.MessageQueue = this;
       foreach (IMessageFilter filter in _filters)
       {

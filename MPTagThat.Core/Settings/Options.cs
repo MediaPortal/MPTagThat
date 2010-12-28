@@ -132,39 +132,6 @@ namespace MPTagThat.Core
                                                new Item("24 bits, 6 Channels, 96000 Hz", "24,6,96000", ""),
                                              };
 
-    public static string[] BitRatesAACPlus = new[]
-                                               {
-                                                 "128 kbps", "112 kbps", "96 kbps", "80 kbps",
-                                                 "64 kbps", "56 kbps", "48 kbps", "40 kbps",
-                                                 "32 kbps", "28 kbps", "24 kbps", "20 kbps",
-                                                 "16 kbps", "12 kbps", "10 kbps", "8 kbps"
-                                               };
-
-    // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesAACPlus = new[]
-                                         {
-                                           0, 0, 0, 0,
-                                           2, 3, 3, 3,
-                                           3, 3, 3, 3,
-                                           3, 4, 1, 1
-                                         };
-
-    public static string[] BitRatesAACPlusHigh = new[]
-                                                   {
-                                                     "256 kbps", "224 kbps", "192 kbps", "160 kbps",
-                                                     "128 kbps", "112 kbps", "96 kbps", "80 kbps",
-                                                     "64 kbps"
-                                                   };
-
-    // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesPlusHigh = new[]
-                                          {
-                                            0, 0, 0, 2,
-                                            2, 2, 2, 1,
-                                            1
-                                          };
-
-
     public static string[] BitRatesLCAAC = new[]
                                              {
                                                "320 kbps", "288 kbps", "256 kbps", "224 kbps",
@@ -174,17 +141,6 @@ namespace MPTagThat.Core
                                                "24 kbps", "20 kbps", "16 kbps", "12 kbps",
                                                "10 kbps", "8 kbps"
                                              };
-
-    // 0 = Stereo, 1 = Mono, 2 = Stereo/Mono, 3 = Parametric Stero/Stereo/Mono, 4 = Parametric Stereo/Mono
-    public static int[] ModesLCAAC = new[]
-                                       {
-                                         0, 0, 0, 0,
-                                         0, 2, 2, 2,
-                                         2, 2, 2, 2,
-                                         2, 2, 2, 2,
-                                         2, 2, 2, 1,
-                                         1, 1
-                                       };
 
     #endregion
 

@@ -470,9 +470,6 @@
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
-    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
-    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
     <String id="EncoderWMAStandard">Windows Media Audio Standaard</String>
     <String id="EncoderWMAPro">Windows Media Audio Professional</String>
     <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
@@ -583,13 +580,8 @@
     <String id="GroupBoxFlacEncoding">FLAC Encodeer instellingen</String>
     <String id="FlacQuality">Kwaliteit:</String>
     <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACAttention">Let op !</String>
-    <String id="AACAttention">Let op: Voorafgaand aan AAC Encoderen dient WinAmp te worden geïnstalleerd.\nKopieer vervolgens "nscrt.dll" en "enc_aacplus.dll" van de WinAmp plugins map\nnaar de MPTagThat bin\Encoder map.</String>
-    <String id="GroupBoxAACEncoding">AAC / AACPlus / LC-AAC Encodeer instellingen</String>
-    <String id="AACWarning">NB: sommige kanaalmodi zijn alleen beschikbaar voor bepaalde bitrates.</String>
-    <String id="ChannelMode">Kanaal modi:</String>
+    <String id="GroupBoxAACEncoding">AAC Encodeer instellingen</String>
     <String id="AACBitRate">Bitrate:</String>
-    <String id="AACEncoder">AAC Encoder:</String>
     <String id="TabRippingWMA">WMA</String>
     <String id="GroupBoxWMASettings">WMA Encodeer instellingen</String>
     <String id="WMAQuality">Kwaliteit:</String>

@@ -42,7 +42,6 @@ namespace MPTagThat.Preferences
 
     private readonly List<Item> amazonSites = new List<Item>();
     private readonly List<Item> encoders = new List<Item>();
-    private readonly List<Item> encodersAAC = new List<Item>();
     private readonly List<Item> encodersWMA = new List<Item>();
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
@@ -167,26 +166,8 @@ namespace MPTagThat.Preferences
 
       #region AAC
 
-      encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4"), "mp4", ""));
-      encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4High"), "mp4High", ""));
-      encodersAAC.Add(new Item(localisation.ToString("Settings", "EncoderMP4LC"), "mp4LC", ""));
-      comboBoxAACEncoder.DisplayMember = "Name";
-      comboBoxAACEncoder.ValueMember = "Value";
-      comboBoxAACEncoder.DataSource = encodersAAC;
-
-      int selectedIndex = 0;
-      foreach (Item item in encodersAAC)
-      {
-        if ((string)item.Value == Options.MainSettings.RipEncoderAAC)
-        {
-          comboBoxAACEncoder.SelectedItem = item;
-          // Set the selected index and fire the selected index events for filling the bitrate and channel combo boxes
-          comboBoxAACEncoder.SelectedIndex = selectedIndex;
-          comboBoxAACEncoder_SelectedIndexChanged(null, null);
-          break;
-        }
-        selectedIndex++;
-      }
+      comboBoxAACBitrates.Items.AddRange(Options.BitRatesLCAAC);
+      SetBitRate();
 
       #endregion
 
@@ -199,7 +180,7 @@ namespace MPTagThat.Preferences
       comboBoxWMAEncoderFormat.ValueMember = "Value";
       comboBoxWMAEncoderFormat.DataSource = encodersWMA;
 
-      selectedIndex = 0;
+      int selectedIndex = 0;
       foreach (Item item in encodersWMA)
       {
         if ((string)item.Value == Options.MainSettings.RipEncoderWMA)
@@ -797,14 +778,9 @@ namespace MPTagThat.Preferences
       Options.MainSettings.RipFlacExpert = textBoxFlacParms.Text.Trim();
 
       // AAC Encoder Settings
-      Options.MainSettings.RipEncoderAAC = (string)(comboBoxAACEncoder.SelectedValue as Item).Value;
       Options.MainSettings.RipEncoderAACBitRate = comboBoxAACBitrates.SelectedItem != null
                                                     ? comboBoxAACBitrates.SelectedItem.ToString()
                                                     : "";
-      Options.MainSettings.RipEncoderAACChannelMode = comboBoxAACChannelModes.SelectedItem != null
-                                                        ? (string)(comboBoxAACChannelModes.SelectedItem as Item).Value
-                                                        : "";
-
       // WMA Encoder Settings
       Options.MainSettings.RipEncoderWMA = (string)(comboBoxWMAEncoderFormat.SelectedItem as Item).Value;
       Options.MainSettings.RipEncoderWMASample = (string)(comboBoxWMASampleFormat.SelectedItem as Item).Value;
@@ -1031,42 +1007,6 @@ namespace MPTagThat.Preferences
     #region AAC
 
     /// <summary>
-    ///   Encoder has changed. Set the correct Bitrate Table
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void comboBoxAACEncoder_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      switch (comboBoxAACEncoder.SelectedIndex)
-      {
-        case 0: // aacPlus  
-        case 2: // MP4/aacplus
-          comboBoxAACBitrates.Items.Clear();
-          comboBoxAACBitrates.Items.AddRange(Options.BitRatesAACPlus);
-          modesTable = Options.ModesAACPlus;
-          SetBitRate();
-          break;
-
-        case 1: // aacPlus High
-        case 3: // MP4/aacplus High
-          comboBoxAACBitrates.Items.Clear();
-          comboBoxAACBitrates.Items.AddRange(Options.BitRatesAACPlusHigh);
-          modesTable = Options.ModesPlusHigh;
-          SetBitRate();
-          break;
-
-        case 4: // LC-AAC  
-        case 5: // MP4/LC-AAc
-          comboBoxAACBitrates.Items.Clear();
-          comboBoxAACBitrates.Items.AddRange(Options.BitRatesLCAAC);
-          modesTable = Options.ModesLCAAC;
-          SetBitRate();
-          break;
-      }
-    }
-
-
-    /// <summary>
     ///   Sets the Bitrate according to the Settings / Selection
     /// </summary>
     private void SetBitRate()
@@ -1076,75 +1016,6 @@ namespace MPTagThat.Preferences
         if (item.Contains(Options.MainSettings.RipEncoderAACBitRate))
         {
           comboBoxAACBitrates.SelectedItem = item;
-          break;
-        }
-      }
-    }
-
-    /// <summary>
-    ///   Bitrate has changed. set the correct channel Mode Table
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void comboBoxAACBitrates_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      comboBoxAACChannelModes.Items.Clear();
-      int mode = modesTable[comboBoxAACBitrates.SelectedIndex];
-
-      switch (mode)
-      {
-        case 0:
-          comboBoxAACChannelModes.Items.AddRange(new[]
-                                                   {new Item(localisation.ToString("settings", "Stereo"), "Stereo", "")});
-          SetChannelMode();
-          break;
-
-        case 1:
-          comboBoxAACChannelModes.Items.AddRange(new[] {new Item(localisation.ToString("settings", "Mono"), "Mono", "")});
-          SetChannelMode();
-          break;
-
-        case 2:
-          comboBoxAACChannelModes.Items.AddRange(new[]
-                                                   {
-                                                     new Item(localisation.ToString("settings", "Stereo"), "Stereo", ""),
-                                                     new Item(localisation.ToString("settings", "Mono"), "Mono", "")
-                                                   });
-          SetChannelMode();
-          break;
-
-        case 3:
-          comboBoxAACChannelModes.Items.AddRange(new[]
-                                                   {
-                                                     new Item(localisation.ToString("settings", "ParametricStereo"),
-                                                              "Parametricstereo", ""),
-                                                     new Item(localisation.ToString("settings", "Stereo"), "Stereo", "")
-                                                     , new Item(localisation.ToString("settings", "Mono"), "Mono", "")
-                                                   });
-          SetChannelMode();
-          break;
-
-        case 4:
-          comboBoxAACChannelModes.Items.AddRange(new[]
-                                                   {
-                                                     new Item(localisation.ToString("settings", "ParametricStereo"),
-                                                              "Parametricstereo", ""), new Item("Mono", "Mono", "")
-                                                   });
-          SetChannelMode();
-          break;
-      }
-    }
-
-    /// <summary>
-    ///   Sets the Mode according to the Settings / Selection
-    /// </summary>
-    private void SetChannelMode()
-    {
-      foreach (Item item in comboBoxAACChannelModes.Items)
-      {
-        if ((item.Value as string).StartsWith(Options.MainSettings.RipEncoderAACChannelMode))
-        {
-          comboBoxAACChannelModes.SelectedItem = item;
           break;
         }
       }

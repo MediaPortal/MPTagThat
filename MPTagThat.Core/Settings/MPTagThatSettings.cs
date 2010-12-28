@@ -261,14 +261,8 @@ namespace MPTagThat.Core
 
     #region AAC
 
-    [Setting(SettingScope.User, "aac")]
-    public string RipEncoderAAC { get; set; }
-
     [Setting(SettingScope.User, "128")]
     public string RipEncoderAACBitRate { get; set; }
-
-    [Setting(SettingScope.User, "Stereo")]
-    public string RipEncoderAACChannelMode { get; set; }
 
     #endregion
 

@@ -588,9 +588,6 @@
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
-    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
-    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
     <String id="EncoderWMAStandard">Windows Media Audio Standard</String>
     <String id="EncoderWMAPro">Windows Media Audio Professional</String>
     <String id="EncoderWMALossless">Windows Media Audio Verlustfrei</String>
@@ -707,13 +704,8 @@
     <String id="GroupBoxFlacEncoding">FLAC Encoder Einstellungen</String>
     <String id="FlacQuality">Qualität:</String>
     <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACAttention">Achtung !</String>
-    <String id="AACAttention">Achtung: Um den AAC Encoder zu verwenden muß zuerst Winamp installiert sein.\nDann kopieren sie die Dateien "nscrt.dll" und "enc_aacplus.dll" aus dem Winamp plugins Verzeichnis\nin das MPTagThat bin\Encoder Verzeichnis.</String>
-    <String id="GroupBoxAACEncoding">AAC / AACPlus / LC-AAC Encoder Einstellungen</String>
-    <String id="AACWarning">Einige Modi sind nur für bestimmte Bitraten verfügbar.</String>
-    <String id="ChannelMode">Modus:</String>
+    <String id="GroupBoxAACEncoding">AAC Encoder Einstellungen</String>
     <String id="AACBitRate">Bitrate:</String>
-    <String id="AACEncoder">AAC Encoder:</String>
     <String id="TabRippingWMA">WMA</String>
     <String id="GroupBoxWMASettings">WMA Encoder Einstellungen</String>
     <String id="WMAQuality">Qualität:</String>
