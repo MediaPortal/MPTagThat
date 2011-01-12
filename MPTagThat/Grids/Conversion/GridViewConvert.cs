@@ -455,6 +455,7 @@ namespace MPTagThat.GridView
       double percentComplete = (double)message.MessageData["progress"];
       dataGridViewConvert.Rows[_currentRow].Cells[0].Value = (int)percentComplete;
       dataGridViewConvert.Update();
+      Application.DoEvents();
     }
 
     /// <summary>

@@ -45,7 +45,8 @@ namespace MPTagThat
     #region Variables
 
     private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
-    private readonly List<Item> encoders = new List<Item>();
+    private readonly List<Item> encodersRip = new List<Item>();
+    private readonly List<Item> encodersConvert = new List<Item>();
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly Main main;
@@ -285,24 +286,32 @@ namespace MPTagThat
       // Load the available Scripts
       PopulateScriptsCombo();
 
-      encoders.Add(new Item("MP3 Encoder", "mp3", ""));
-      encoders.Add(new Item("OGG Encoder", "ogg", ""));
-      encoders.Add(new Item("FLAC Encoder", "flac", ""));
-      encoders.Add(new Item("AAC Encoder", "m4a", ""));
-      encoders.Add(new Item("WMA Encoder", "wma", ""));
-      encoders.Add(new Item("WAV Encoder", "wav", ""));
-      encoders.Add(new Item("MusePack Encoder", "mpc", ""));
-      encoders.Add(new Item("WavPack Encoder", "wv", ""));
+      encodersRip.Add(new Item("MP3 Encoder", "mp3", ""));
+      encodersRip.Add(new Item("OGG Encoder", "ogg", ""));
+      encodersRip.Add(new Item("FLAC Encoder", "flac", ""));
+      encodersRip.Add(new Item("AAC Encoder", "m4a", ""));
+      encodersRip.Add(new Item("WMA Encoder", "wma", ""));
+      encodersRip.Add(new Item("WAV Encoder", "wav", ""));
+      encodersRip.Add(new Item("MusePack Encoder", "mpc", ""));
+      encodersRip.Add(new Item("WavPack Encoder", "wv", ""));
       comboBoxRipEncoder.DisplayMember = "Name";
       comboBoxRipEncoder.ValueMember = "Value";
-      comboBoxRipEncoder.DataSource = encoders;
+      comboBoxRipEncoder.DataSource = encodersRip;
 
+      encodersConvert.Add(new Item("MP3 Encoder", "mp3", ""));
+      encodersConvert.Add(new Item("OGG Encoder", "ogg", ""));
+      encodersConvert.Add(new Item("FLAC Encoder", "flac", ""));
+      encodersConvert.Add(new Item("AAC Encoder", "m4a", ""));
+      encodersConvert.Add(new Item("WMA Encoder", "wma", ""));
+      encodersConvert.Add(new Item("WAV Encoder", "wav", ""));
+      encodersConvert.Add(new Item("MusePack Encoder", "mpc", ""));
+      encodersConvert.Add(new Item("WavPack Encoder", "wv", ""));
       comboBoxConvertEncoder.DisplayMember = "Name";
       comboBoxConvertEncoder.ValueMember = "Value";
-      comboBoxConvertEncoder.DataSource = encoders;
+      comboBoxConvertEncoder.DataSource = encodersConvert;
 
       int i = 0;
-      foreach (Item item in encoders)
+      foreach (Item item in encodersRip)
       {
         if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
         {

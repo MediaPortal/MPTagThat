@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using MPTagThat.Core;
@@ -119,6 +120,10 @@ namespace MPTagThat.GridView
             }
             QueryFreeDB(Convert.ToChar(_selectedCDRomDrive));
             dataGridViewRip.DataSource = bindingList[CurrentDriveID];
+            if (dataGridViewRip.Rows.Count > 0)
+            {
+              dataGridViewRip.Rows[0].Selected = false;
+            }
           }
         }
       }
@@ -178,9 +183,15 @@ namespace MPTagThat.GridView
       if (driveCount == 0)
         bindingList.Add(new SortableBindingList<CDTrackDetail>()); // In case of no CD, we want a Dummy List
 
+      _main.MainRibbon.RipButtonsEnabled = false;
+
       for (int i = 0; i < driveCount; i++)
       {
         bindingList.Add(new SortableBindingList<CDTrackDetail>());
+        if (BassCd.BASS_CD_IsReady(i))
+        {
+          _main.MainRibbon.RipButtonsEnabled = true;
+        }
       }
 
       // Prepare the Gridview
@@ -192,8 +203,6 @@ namespace MPTagThat.GridView
       CreateColumns();
 
       SetStatusLabel("");
-
-      _main.MainRibbon.RipButtonsEnabled = false;
     }
 
     #endregion
@@ -281,6 +290,12 @@ namespace MPTagThat.GridView
         return;
       }
 
+      if (_selectedCDRomDrive == "")
+      {
+        log.Info("No CD drive selected. Rip not started.");
+        return;
+      }
+
       log.Trace(">>>");
       string targetDir = "";
       string encoder = null;
@@ -333,7 +348,9 @@ namespace MPTagThat.GridView
           outFileFormat = outFileFormat.Substring(index + 1);
         }
         else
-          targetDir = string.Format(@"{1}\{2}", artistDir, albumDir);
+        {
+          targetDir = string.Format(@"{0}\{1}", artistDir, albumDir);
+        }
 
         targetDir = string.Format(@"{0}\{1}", _musicDir, targetDir);
 
@@ -379,7 +396,7 @@ namespace MPTagThat.GridView
         foreach (DataGridViewRow row in dataGridViewRip.Rows)
         {
           // when checking and unchecking a row, we have the DBNull value
-          if (row.Cells[0].Value == DBNull.Value)
+          if (row.Cells[0].Value == null || row.Cells[0].Value == DBNull.Value)
             continue;
 
           if ((int)row.Cells[0].Value == 0)
@@ -399,7 +416,7 @@ namespace MPTagThat.GridView
             continue;
           }
 
-          log.Info("Decoding Audio CD Track{0}", row.Index);
+          log.Info("Ripping Audio CD Track{0} - {1}", row.Index + 1, track.Title);
           _outFile = outFileFormat;
           _outFile = _outFile.Replace("<O>", artistDir);
           _outFile = _outFile.Replace("<B>", albumDir);
@@ -423,7 +440,7 @@ namespace MPTagThat.GridView
           dataGridViewRip.Rows[_currentRow].Cells[1].Value = 100;
 
           Bass.BASS_StreamFree(stream);
-          log.Info("Finished Decoding Audio CD Track{0}", _currentRow);
+          log.Info("Finished Ripping Audio CD Track{0}", _currentRow + 1);
 
           try
           {
@@ -499,6 +516,8 @@ namespace MPTagThat.GridView
         SetStatusLabel("");
         return;
       }
+      log.Info("Starting FreeDB Lookup");
+      _main.Cursor = Cursors.WaitCursor;
       bindingList[driveID].Clear();
       try
       {
@@ -537,11 +556,26 @@ namespace MPTagThat.GridView
 
         freedb.Disconnect();
       }
+      catch (System.Net.WebException webEx)
+      {
+        if (webEx.Status == WebExceptionStatus.Timeout)
+        {
+          log.Info("FreeDB: Timeout querying FreeDB. No Data returned for CD");
+          MusicCD = null;
+        }
+        else
+        {
+          log.Error("FreeDB: Exception querying Disc. {0} {1}", webEx.Message, webEx.StackTrace);
+          MusicCD = null;
+        }
+      }
       catch (Exception ex)
       {
         log.Error("FreeDB: Exception querying Disc. {0} {1}", ex.Message, ex.StackTrace);
         MusicCD = null;
       }
+      log.Info("Finished FreeDB Lookup");
+      _main.Cursor = Cursors.Default;
 
       if (MusicCD != null)
       {
@@ -632,10 +666,16 @@ namespace MPTagThat.GridView
     /// <param name = "check"></param>
     private void CheckRows(bool check)
     {
-      foreach (DataGridViewRow row in dataGridViewRip.Rows)
+      for (int i = 0; i < dataGridViewRip.Rows.Count - 1; i++)
       {
-        row.Cells[0].Value = check ? 1 : 0;
+        dataGridViewRip.Rows[i].Cells[0].Value = check ? 1 : 0;
       }
+      /*
+        foreach (DataGridViewRow row in dataGridViewRip.Rows)
+        {
+          row.Cells[0].Value = check ? 1 : 0;
+        }
+      */
     }
 
     #endregion
@@ -744,6 +784,7 @@ namespace MPTagThat.GridView
       double percentComplete = (double)message.MessageData["progress"];
       dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
       dataGridViewRip.Update();
+      Application.DoEvents();
     }
 
     /// <summary>
