@@ -7,6 +7,19 @@ Legend:
 - Deleted
 x Fixed
 
+2.0.4034 Build 35136 Date: 17.01.2011 
+-------------------------------------
+x General: Don't save folder.jpg as hidden
++ General: Implemented sorting of Grid on Multiple columns
+x Rip: Enable Rip buttons on program startup, if a CD is present in drive
+x Rip: Prevent failure, when RIP button is pressed, without a CD drive selected in the Treeview
+x Rip: Don't block User interface while Ripping
+x Rip: Set Wait Cursor while querying FreeDB
+x Rip: Capture Timeout on FreeDB query and write meaningful Message
+x Rip: Fixed error when ripping single tracks and the first one is omited
+x Rip: Ribbon ComboBox entry for the Last used encoder for Ripping was not set correctly
+x Conversion: Don't block User Interface during Conversion
+
 2.0.4014 Build 22365 Date: 28.12.2010 
 -------------------------------------
 x Lyrics: Updated LyricsEngine to 1.5.5.0
