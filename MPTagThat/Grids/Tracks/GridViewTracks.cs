@@ -888,7 +888,6 @@ namespace MPTagThat.GridView
             if (img != null)
             {
               img.Save(fileName, ImageFormat.Jpeg);
-              System.IO.File.SetAttributes(fileName, FileAttributes.Hidden);
             }
           }
         }
