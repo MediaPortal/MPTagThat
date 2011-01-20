@@ -94,7 +94,6 @@
       <DependentUpon>CaseConversion.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\ColumnSelect.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\ColumnSelect.Designer.cs">
       <DependentUpon>ColumnSelect.cs</DependentUpon>
@@ -117,32 +116,27 @@
     <Compile Include="Dialogues\FileNameToTag\ParameterPart.cs" />
     <Compile Include="Dialogues\FileNameToTag\TagFormat.cs" />
     <Compile Include="Dialogues\AmazonAlbumSearchResults.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\AmazonAlbumSearchResults.Designer.cs">
       <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.Designer.cs">
       <DependentUpon>AlbumDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.Designer.cs">
       <DependentUpon>AlbumSearchResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.Designer.cs">
       <DependentUpon>ArtistAlbumDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\InternetLookup.cs" />
     <Compile Include="Dialogues\SplashScreen\SplashForm.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\SplashScreen\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
@@ -176,7 +170,6 @@
       <DependentUpon>LyricsSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagEdit\SingleTagEdit.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\SingleTagEdit.Designer.cs">
       <DependentUpon>SingleTagEdit.cs</DependentUpon>
@@ -184,7 +177,6 @@
     <Compile Include="Dialogues\TagEdit\Rating.cs" />
     <Compile Include="Dialogues\TagEdit\Lyrics.cs" />
     <Compile Include="Dialogues\TagEdit\MultiTagEdit.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\MultiTagEditOptions.cs" />
     <Compile Include="Dialogues\Preferences\Preferences.cs">
@@ -194,13 +186,11 @@
       <DependentUpon>Preferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.Designer.cs">
       <DependentUpon>OrganiseFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.Designer.cs">
       <DependentUpon>TagToFileName.cs</DependentUpon>

@@ -1,6 +1,5 @@
-﻿#region Copyright (C) 2009-2010 Team MediaPortal
-
-// Copyright (C) 2009-2010 Team MediaPortal
+﻿#region Copyright (C) 2009-2011 Team MediaPortal
+// Copyright (C) 2009-2011 Team MediaPortal
 // http://www.team-mediaportal.com
 // 
 // MPTagThat is free software: you can redistribute it and/or modify
@@ -15,9 +14,7 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
-
 #endregion
-
 #region
 
 using MPTagThat.Core;
