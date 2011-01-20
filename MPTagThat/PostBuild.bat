@@ -17,3 +17,6 @@ xcopy /y %1\taglib-sharp\bin\%2\ICSharpCode.SharpZipLib.dll .\bin
 REM Copy Lyricsengine 
 xcopy /y %1\LyricsEngine\bin\%2\LyricsEngine.dll .\bin
 xcopy /y %1\LyricsEngine\bin\%2\LyricsEngine.dll.* .\bin
+
+REM Copy Gain dll 
+xcopy /y %1\gain\bin\%2\gain.dll .\bin

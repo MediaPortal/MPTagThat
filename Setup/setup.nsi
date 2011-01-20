@@ -107,6 +107,8 @@ Section -Main SEC0000
     File /r /x .svn ..\MPTagThat.Base\bin\*
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll.config
+	File ..\taglib-sharp\bin\Release\taglib-sharp.dll
+	File ..\gain\bin\Release\gain.dll
     
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
