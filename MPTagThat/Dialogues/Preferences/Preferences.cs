@@ -28,6 +28,7 @@ using System.Xml;
 using MPTagThat.Core;
 using MPTagThat.Core.WinControls;
 using Un4seen.Bass.AddOn.Wma;
+using Action = MPTagThat.Core.Action;
 
 #endregion
 

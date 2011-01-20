@@ -17,6 +17,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <ApplicationIcon>MPTagThat.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +61,9 @@
       <HintPath>..\MPTagThat.Base\bin\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -70,10 +74,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="taglib-sharp, Version=2.0.2.17, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\taglib-sharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
@@ -84,31 +84,37 @@
       <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\About.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\CaseConversion.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\CaseConversion.Designer.cs">
       <DependentUpon>CaseConversion.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\ColumnSelect.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\ColumnSelect.Designer.cs">
       <DependentUpon>ColumnSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\FindReplace.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\FindReplace.Designer.cs">
       <DependentUpon>FindReplace.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\FileNameToTag.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\FileNameToTag.Designer.cs">
       <DependentUpon>FileNameToTag.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\Preview.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\Preview.Designer.cs">
       <DependentUpon>Preview.cs</DependentUpon>
@@ -116,27 +122,32 @@
     <Compile Include="Dialogues\FileNameToTag\ParameterPart.cs" />
     <Compile Include="Dialogues\FileNameToTag\TagFormat.cs" />
     <Compile Include="Dialogues\AmazonAlbumSearchResults.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\AmazonAlbumSearchResults.Designer.cs">
       <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.Designer.cs">
       <DependentUpon>AlbumDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumSearchResult.Designer.cs">
       <DependentUpon>AlbumSearchResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\ArtistAlbumDialog.Designer.cs">
       <DependentUpon>ArtistAlbumDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\InternetLookup.cs" />
     <Compile Include="Dialogues\SplashScreen\SplashForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\SplashScreen\SplashForm.Designer.cs">
       <DependentUpon>SplashForm.cs</DependentUpon>
@@ -146,6 +157,7 @@
       <DependentUpon>MultiTagEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditBase.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditBase.designer.cs">
       <DependentUpon>TagEditBase.cs</DependentUpon>
@@ -153,6 +165,7 @@
     <Compile Include="Grids\Tracks\FindResult.cs" />
     <Compile Include="Grids\Tracks\GridViewColumnsLyrics.cs" />
     <Compile Include="Grids\Tracks\LyricsSearch.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Grids\Tracks\LyricsSearch.Designer.cs">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
@@ -165,11 +178,13 @@
     </Compile>
     <Compile Include="Dialogues\TagEdit\Comment.cs" />
     <Compile Include="Dialogues\TagEdit\LyricsSearch.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\LyricsSearch.Designer.cs">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagEdit\SingleTagEdit.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\SingleTagEdit.Designer.cs">
       <DependentUpon>SingleTagEdit.cs</DependentUpon>
@@ -177,6 +192,7 @@
     <Compile Include="Dialogues\TagEdit\Rating.cs" />
     <Compile Include="Dialogues\TagEdit\Lyrics.cs" />
     <Compile Include="Dialogues\TagEdit\MultiTagEdit.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagEdit\MultiTagEditOptions.cs" />
     <Compile Include="Dialogues\Preferences\Preferences.cs">
@@ -186,11 +202,13 @@
       <DependentUpon>Preferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.Designer.cs">
       <DependentUpon>OrganiseFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.Designer.cs">
       <DependentUpon>TagToFileName.cs</DependentUpon>
@@ -444,6 +462,10 @@
     <ProjectReference Include="..\MPTagThat.Core\MPTagThat.Core.csproj">
       <Project>{329DC657-B4D5-4324-AA0D-4B77B6F72D8C}</Project>
       <Name>MPTagThat.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\taglib-sharp\taglib-sharp.csproj">
+      <Project>{6B143A39-C7B2-4743-9917-92262C60E9A6}</Project>
+      <Name>taglib-sharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

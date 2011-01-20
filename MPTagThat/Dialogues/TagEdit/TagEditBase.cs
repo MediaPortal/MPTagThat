@@ -30,6 +30,7 @@ using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 using TagLib;
 using File = System.IO.File;
+using Action = MPTagThat.Core.Action;
 
 #endregion
 

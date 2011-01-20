@@ -32,6 +32,7 @@ using MPTagThat.TagEdit;
 using TagLib;
 using Button = Elegant.Ui.Button;
 using ComboBox = Elegant.Ui.ComboBox;
+using Action = MPTagThat.Core.Action;
 
 #endregion
 

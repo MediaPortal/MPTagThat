@@ -26,6 +26,7 @@ using MPTagThat.Core;
 using TagLib;
 using TagLib.Id3v2;
 using Tag = TagLib.Id3v1.Tag;
+using Action = MPTagThat.Core.Action;
 
 #endregion
 
