@@ -88,10 +88,37 @@ namespace MPTagThat
           case "Office2007Black":
             theme = EmbeddedTheme.Office2007Black;
             break;
+
+          case "Office2010Blue":
+            theme = EmbeddedTheme.Office2010Blue;
+            break;
+
+          case "Office2010Silver":
+            theme = EmbeddedTheme.Office2010Silver;
+            break;
+
+          case "Office2010Black":
+            theme = EmbeddedTheme.Office2010Black;
+            break;
         }
 
         SkinManager.LoadEmbeddedTheme(theme, Product.Ribbon);
         ServiceScope.Get<IThemeManager>().ChangeTheme(value);
+
+        // On a "1020" Theme, remove the Application Button Image
+        if (value.Contains("2010"))
+        {
+          ribbon.ApplicationButtonImages.SetImage(RibbonApplicationButtonState.Normal, null);
+          ribbon.ApplicationButtonStyle = RibbonApplicationButtonStyle.Office2010Azure;
+        }
+        else
+        {
+          Image img = Image.FromFile(string.Format("{0}\\Themes\\ribbon_StartButton.png", Application.StartupPath));
+          if (img != null)
+          {
+            ribbon.ApplicationButtonImages.SetImage(RibbonApplicationButtonState.Normal, img);
+          }
+        }
       }
     }
 

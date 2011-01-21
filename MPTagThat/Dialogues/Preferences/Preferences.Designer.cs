@@ -544,7 +544,6 @@ namespace MPTagThat.Preferences
       this.comboBoxThemes.Name = "comboBoxThemes";
       this.comboBoxThemes.Size = new System.Drawing.Size(435, 21);
       this.comboBoxThemes.TabIndex = 1;
-      this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
       // comboBoxLanguage
       // 

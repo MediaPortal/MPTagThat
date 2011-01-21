@@ -81,10 +81,6 @@ namespace MPTagThat.Preferences
     private void OnLoad(object sender, EventArgs e)
     {
       log.Trace(">>>");
-      //textBoxPresetDesc.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      //textBoxPresetDesc.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
-      //treeViewKeys.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
-      //treeViewKeys.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.LabelForeColor;
 
       // Set the region for the Tabcontrol to hide the tabs
       tabControlOptions.Region = new Region(new RectangleF(tabPageGeneral.Left,
@@ -105,9 +101,15 @@ namespace MPTagThat.Preferences
       themes.Add(new Item(localisation.ToString("Settings", "Blue"), "ControlDefault", ""));
       themes.Add(new Item(localisation.ToString("Settings", "Silver"), "Office2007Silver", ""));
       themes.Add(new Item(localisation.ToString("Settings", "Black"), "Office2007Black", ""));
+      themes.Add(new Item(string.Format("{0} (2010)",localisation.ToString("Settings", "Blue")), "Office2010Blue", ""));
+      themes.Add(new Item(string.Format("{0} (2010)",localisation.ToString("Settings", "Silver")), "Office2010Silver", ""));
+      themes.Add(new Item(string.Format("{0} (2010)",localisation.ToString("Settings", "Black")), "Office2010Black", ""));
       comboBoxThemes.DisplayMember = "Name";
       comboBoxThemes.ValueMember = "Value";
       comboBoxThemes.DataSource = themes;
+
+      // Set the Selectedinde handler after we have filled the box to prevent changing the theme
+      comboBoxThemes.SelectedIndexChanged += new EventHandler(comboBoxThemes_SelectedIndexChanged);
       comboBoxThemes.SelectedIndex = Options.MainSettings.Theme;
 
       // Save the currently used theme, in case the user presses Cancel.
