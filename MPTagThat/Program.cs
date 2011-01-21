@@ -33,14 +33,6 @@ namespace MPTagThat
 {
   internal static class Program
   {
-    #region Imports
-
-    [DllImport("kernel32.dll", EntryPoint = "SetEnvironmentVariableA", ExactSpelling = true, CharSet = CharSet.Ansi,
-      SetLastError = true)]
-    public static extern int SetEnvironmentVariable(string lpName, string lpValue);
-
-    #endregion
-
     #region Variables
 
     private static int _portable;
@@ -60,8 +52,8 @@ namespace MPTagThat
       Directory.SetCurrentDirectory(Application.StartupPath);
 
       // Add our Bin and Bin\Bass Directory to the Path
-      SetEnvironmentVariable("Path", Path.Combine(Application.StartupPath, "Bin"));
-      SetEnvironmentVariable("Path", Path.Combine(Application.StartupPath, @"Bin\Bass"));
+      SetPath(Path.Combine(Application.StartupPath, "Bin"));
+      SetPath(Path.Combine(Application.StartupPath, @"Bin\Bass"));
 
       _portable = 0;
       _startupFolder = "";
@@ -189,6 +181,13 @@ namespace MPTagThat
         }
       }
       catch (Exception) {}
+    }
+
+    private static void SetPath(string path)
+    {
+      string currentPath = Environment.GetEnvironmentVariable("Path");
+      string newPath = string.Format("{0};{1}",currentPath, path);
+      Environment.SetEnvironmentVariable("Path", newPath);
     }
   }
 }
