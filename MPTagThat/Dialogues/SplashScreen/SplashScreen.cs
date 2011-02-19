@@ -102,7 +102,7 @@ namespace MPTagThat.Dialogues
 
       while (!_stopRequested) //run until stop of splashscreen is requested
       {
-        _frm.TopMost = true;
+        _frm.TopMost = false;
         _frm.BringToFront();
 
         if (oldInfo != _info)
