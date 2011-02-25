@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyricsEngine", "LyricsEngine\LyricsEngine.csproj", "{B0760CE8-086F-4301-9091-C9BE54F261FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPTagThat", "MPTagThat\MPTagThat.csproj", "{A4EC0924-5A90-4E83-8D61-4164ABFE13A5}"
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPTagThat.Core", "MPTagThat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "taglib-sharp\taglib-sharp.csproj", "{6B143A39-C7B2-4743-9917-92262C60E9A6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gain", "gain\gain.vcproj", "{B16A1BFF-6ADE-4705-AE72-079C0312DC23}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gain", "gain\gain.vcxproj", "{B16A1BFF-6ADE-4705-AE72-079C0312DC23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
