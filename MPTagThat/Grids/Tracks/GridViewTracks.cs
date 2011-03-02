@@ -209,6 +209,37 @@ namespace MPTagThat.GridView
       _main = main;
     }
 
+    #region Status Column
+
+    /// <summary>
+    /// Clears the Status column
+    /// </summary>
+    /// <param name="row"></param>
+    public void ClearStatusColumn(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = new Bitmap(1,1);
+    }
+
+    /// <summary>
+    /// Indicates the Status was ok
+    /// </summary>
+    /// <param name="row"></param>
+    public void SetStatusColumnOk(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Complete_OK;
+    }
+
+    /// <summary>
+    /// Indicates the Status was ok
+    /// </summary>
+    /// <param name="row"></param>
+    public void SetStatusColumnError(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.CriticalError;
+    }
+
+    #endregion
+
     #region Save
 
     /// <summary>
@@ -224,7 +255,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[0].Value = "";
+        ClearStatusColumn(row);
 
         if (!row.Selected)
         {
@@ -246,8 +277,8 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
+          SetStatusColumnError(row);
+          AddErrorMessage(row, ex.Message);
         }
       }
 
@@ -328,7 +359,7 @@ namespace MPTagThat.GridView
     {
       try
       {
-        tracksGrid.Rows[rowIndex].Cells[0].Value = "";
+        ClearStatusColumn(tracksGrid.Rows[rowIndex]);
         if (track.Changed)
         {
           log.Debug("Save: Saving track: {0}", track.FullFileName);
@@ -380,7 +411,8 @@ namespace MPTagThat.GridView
             SavePicture(track);
           }
 
-          tracksGrid.Rows[rowIndex].Cells[0].Value = localisation.ToString("message", "Ok");
+          SetStatusColumnOk(tracksGrid.Rows[rowIndex]);
+
           if (rowIndex % 2 == 0)
             tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
               ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
@@ -393,8 +425,8 @@ namespace MPTagThat.GridView
       }
       catch (Exception ex)
       {
-        tracksGrid.Rows[rowIndex].Cells[0].Value = localisation.ToString("message", "Error");
-        AddErrorMessage(track.File.Name, ex.Message);
+        SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+        AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
         return false;
       }
       return true;
@@ -460,7 +492,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[0].Value = "";
+        ClearStatusColumn(row);
 
         if (!row.Selected)
         {
@@ -576,14 +608,14 @@ namespace MPTagThat.GridView
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
               _itemsChanged = true;
-              row.Cells[0].Value = localisation.ToString("message", "Ok");
+              SetStatusColumnOk(row);
             }
           }
         }
         catch (Exception ex)
         {
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
+          SetStatusColumnError(row);
+          AddErrorMessage(row, ex.Message);
         }
       }
 
@@ -646,7 +678,7 @@ namespace MPTagThat.GridView
       // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[0].Value = "";
+        ClearStatusColumn(row);
 
         if (!row.Selected)
         {
@@ -680,7 +712,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        row.Cells[0].Value = "";
+        ClearStatusColumn(row);
 
         if (!row.Selected)
         {
@@ -723,7 +755,7 @@ namespace MPTagThat.GridView
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
                 _itemsChanged = true;
-                row.Cells[0].Value = localisation.ToString("message", "Ok");
+                SetStatusColumnOk(row);
                 _main.MainRibbon.SetGalleryItem();
               }
               continue;
@@ -824,14 +856,14 @@ namespace MPTagThat.GridView
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;
             _itemsChanged = true;
-            row.Cells[0].Value = localisation.ToString("message", "Ok");
+            SetStatusColumnOk(row);
             _main.MainRibbon.SetGalleryItem();
           }
         }
         catch (Exception ex)
         {
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(bindingList[row.Index].File.Name, ex.Message);
+          SetStatusColumnError(row);
+          AddErrorMessage(row, ex.Message);
         }
       }
 
@@ -1072,8 +1104,8 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error while Removing Tags: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(track.File.Name, ex.Message);
+          SetStatusColumnError(row);
+          AddErrorMessage(row, ex.Message);
         }
       }
 
@@ -1124,8 +1156,8 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error applying changes from MultiTagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          AddErrorMessage(track.File.Name, ex.Message);
+          SetStatusColumnError(row);
+          AddErrorMessage(row, ex.Message);
         }
       }
 
@@ -1377,26 +1409,18 @@ namespace MPTagThat.GridView
 
       if (error == TrackData.MP3Error.Fixed)
       {
-        tracksGrid.Rows[index].Cells[0].Value = localisation.ToString("message", "Fixed");
+        SetStatusColumnOk(tracksGrid.Rows[index]);
       }
     }
 
     /// <summary>
-    ///   Adds an Error Message to the Message Grid
+    ///   Adds an Error Message to the Status Column
     /// </summary>
-    /// <param name = "file"></param>
+    /// <param name = "row"></param>
     /// <param name = "message"></param>
-    public void AddErrorMessage(string file, string message)
+    public void AddErrorMessage(DataGridViewRow row, string message)
     {
-      if (_main.ErrorGridView.InvokeRequired)
-      {
-        ThreadSafeAddErrorDelegate d = AddErrorMessage;
-        _main.ErrorGridView.Invoke(d, new object[] {file, message});
-        return;
-      }
-
-      _main.ErrorGridView.Rows.Add(file, message);
-      _main.MiscInfoPanel.ActivateErrorTab();
+      row.Cells[0].ToolTipText = message;
     }
 
     #endregion

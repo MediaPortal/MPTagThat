@@ -411,8 +411,8 @@ namespace MPTagThat.TagEdit
         catch (Exception ex)
         {
           log.Error("Error applying changes from MultiTagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          main.TracksGridView.AddErrorMessage(main.TracksGridView.TrackList[row.Index].File.Name, ex.Message);
+          main.TracksGridView.SetStatusColumnError(row);
+          main.TracksGridView.AddErrorMessage(row, ex.Message);
           bErrors = true;
         }
       }

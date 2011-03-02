@@ -89,7 +89,7 @@ namespace MPTagThat.GridView
 
     public GridViewColumns()
     {
-      _status = new GridViewColumn("Status", "text", 45, true, true, false, true);
+      _status = new GridViewColumn("Status", "image", 45, true, true, false, true);
       _filename = new GridViewColumn("FileName", "text", 200, true, false, true, true);
       _filepath = new GridViewColumn("FilePath", "text", 200, false, true, true, true); // Initially hidden
       _track = new GridViewColumn("Track", "text", 40, true, false, true, false);
@@ -193,6 +193,11 @@ namespace MPTagThat.GridView
           // We still have an old setting with Status at position 1
           _settings.Columns.RemoveAt(1);
           _settings.Columns.Insert(0, _status);
+        }
+
+        if (_settings.Columns[0].Name == "Status" && _settings.Columns[0].Type != "image")
+        {
+          _settings.Columns[0].Type = "image";
         }
 
         // FilePath should be column index #2

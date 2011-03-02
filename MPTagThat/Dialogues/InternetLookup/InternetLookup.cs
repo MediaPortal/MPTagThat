@@ -328,8 +328,7 @@ namespace MPTagThat.InternetLookup
           main.TracksGridView.SetBackgroundColorChanged(index);
           track.Changed = true;
           main.TracksGridView.Changed = true;
-          main.TracksGridView.View.Rows[index].Cells[0].Value = ServiceScope.Get<ILocalisation>().ToString("message",
-                                                                                                           "Ok");
+          main.TracksGridView.SetStatusColumnOk(main.TracksGridView.View.Rows[index]);
         }
       }
       dlgAlbumDetails.Dispose();

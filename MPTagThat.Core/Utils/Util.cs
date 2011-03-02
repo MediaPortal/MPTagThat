@@ -808,6 +808,11 @@ namespace MPTagThat.Core
       DataGridViewColumn column;
       switch (setting.Type.ToLower())
       {
+        case "image":
+          column = new DataGridViewImageColumn();
+          ((DataGridViewImageColumn) column).Image = new Bitmap(1, 1);   // Default empty Image
+          break;
+
         case "process":
           column = new DataGridViewProgressColumn();
           break;

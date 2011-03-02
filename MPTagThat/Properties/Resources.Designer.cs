@@ -60,9 +60,23 @@ namespace MPTagThat.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Complete_OK {
+            get {
+                object obj = ResourceManager.GetObject("Complete_OK", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap CopyHS {
             get {
                 object obj = ResourceManager.GetObject("CopyHS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CriticalError {
+            get {
+                object obj = ResourceManager.GetObject("CriticalError", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

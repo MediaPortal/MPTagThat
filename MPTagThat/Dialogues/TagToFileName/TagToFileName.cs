@@ -145,8 +145,8 @@ namespace MPTagThat.TagToFileName
           if (fileName.Length > 255)
           {
             log.Debug("Filename too long: {0}", fileName);
-            row.Cells[0].Value = localisation.ToString("TagAndRename", "NameTooLong");
-            _main.TracksGridView.AddErrorMessage(track.File.Name,
+            _main.TracksGridView.SetStatusColumnError(row);
+            _main.TracksGridView.AddErrorMessage(row,
                                                  String.Format("{0}: {1}",
                                                                localisation.ToString("tag2filename", "NameTooLong"),
                                                                fileName));
@@ -160,8 +160,8 @@ namespace MPTagThat.TagToFileName
             if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
             {
               log.Debug("New Filename already exists: {0}", fileName);
-              row.Cells[0].Value = localisation.ToString("TagAndRename", "FileExists");
-              _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name,
+              _main.TracksGridView.SetStatusColumnError(row);
+              _main.TracksGridView.AddErrorMessage(row,
                                                    String.Format("{0}: {1}",
                                                                  localisation.ToString("tag2filename", "FileExists"),
                                                                  fileName));
@@ -188,8 +188,8 @@ namespace MPTagThat.TagToFileName
         catch (Exception ex)
         {
           log.Error("Error Renaming File: {0} stack: {1}", ex.Message, ex.StackTrace);
-          row.Cells[0].Value = localisation.ToString("message", "Error");
-          _main.TracksGridView.AddErrorMessage(_main.TracksGridView.TrackList[row.Index].File.Name,
+          _main.TracksGridView.SetStatusColumnError(row);
+          _main.TracksGridView.AddErrorMessage(row,
                                                String.Format("{0}: {1}", localisation.ToString("tag2filename", "Rename"),
                                                              fileName));
           bErrors = true;
