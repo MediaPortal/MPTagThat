@@ -126,15 +126,6 @@ namespace MPTagThat
       get { return gridViewConvert; }
     }
 
-
-    /// <summary>
-    ///   Returns the Error Gridview
-    /// </summary>
-    public DataGridView ErrorGridView
-    {
-      get { return miscInfoControl.ErrorGridView; }
-    }
-
     /// <summary>
     ///   Is Burning Active?
     /// </summary>
@@ -744,7 +735,6 @@ namespace MPTagThat
           gridViewControl.FolderScan();
         }
       }
-      miscInfoControl.ErrorGridView.Rows.Clear();
       quickEditControl.ClearForm();
       log.Trace("<<<");
     }

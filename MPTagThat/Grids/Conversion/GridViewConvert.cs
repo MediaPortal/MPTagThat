@@ -213,7 +213,7 @@ namespace MPTagThat.GridView
       }
       catch (Exception ex)
       {
-        _main.ErrorGridView.Rows.Add("", localisation.ToString("Conversion", "ErrorDirectory"));
+        MessageBox.Show(localisation.ToString("Conversion", "ErrorDirectory"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
         log.Error("Error creating Conversion output directory: {0}. {1}", rootFolder, ex.Message);
         return;
       }
@@ -247,8 +247,7 @@ namespace MPTagThat.GridView
           {
             log.Error("Error creating folder: {0} {1]", directoryName, e1.Message);
             row.Cells[0].Value = localisation.ToString("message", "Error");
-            AddErrorMessage(directoryName,
-                            String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message));
+            row.Cells[0].ToolTipText = String.Format("{0}: {1}", localisation.ToString("message", "Error"), e1.Message);
             continue; // Process next row
           }
         }
@@ -258,7 +257,7 @@ namespace MPTagThat.GridView
 
         if (inputFile == outFile)
         {
-          AddErrorMessage(inputFile, localisation.ToString("Conversion", "SameFile"));
+          row.Cells[0].ToolTipText = String.Format("{0}: {1}",inputFile, localisation.ToString("Conversion", "SameFile"));
           log.Error("No conversion for {0}. Output would overwrite input", inputFile);
           continue;
         }
@@ -266,7 +265,7 @@ namespace MPTagThat.GridView
         int stream = Bass.BASS_StreamCreateFile(inputFile, 0, 0, BASSFlag.BASS_STREAM_DECODE);
         if (stream == 0)
         {
-          AddErrorMessage(inputFile, localisation.ToString("Conversion", "OpenFileError"));
+          row.Cells[0].ToolTipText = String.Format("{0}: {1}", inputFile, localisation.ToString("Conversion", "OpenFileError"));
           log.Error("Error creating stream for file {0}. Error: {1}", inputFile,
                     Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
           continue;
@@ -276,7 +275,7 @@ namespace MPTagThat.GridView
 
         if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
         {
-          AddErrorMessage(inputFile, localisation.ToString("Conversion", "EncodingFileError"));
+          row.Cells[0].ToolTipText = String.Format("{0}: {1}", inputFile, localisation.ToString("Conversion", "EncodingFileError"));
           log.Error("Error starting Encoder for File {0}. Error: {1}", inputFile,
                     Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
           Bass.BASS_StreamFree(stream);
@@ -333,23 +332,6 @@ namespace MPTagThat.GridView
 
       bindingList[_currentRow].NewFileName = fileName;
       dataGridViewConvert.Refresh();
-    }
-
-    /// <summary>
-    ///   Adds an Error Message to the Message Grid
-    /// </summary>
-    /// <param name = "file"></param>
-    /// <param name = "message"></param>
-    public void AddErrorMessage(string file, string message)
-    {
-      if (_main.ErrorGridView.InvokeRequired)
-      {
-        ThreadSafeAddErrorDelegate d = AddErrorMessage;
-        _main.ErrorGridView.Invoke(d, new object[] {file, message});
-        return;
-      }
-
-      _main.ErrorGridView.Rows.Add(file, message);
     }
 
     #endregion

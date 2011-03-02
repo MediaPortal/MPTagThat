@@ -54,17 +54,6 @@ namespace MPTagThat
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
       queueMessage.OnMessageReceive += OnMessageReceive;
 
-      LocaliseScreen();
-      //SetColorBase();
-
-      // Build the Context Menu for the Error Grid
-      MenuItem[] rmitems = new MenuItem[1];
-      rmitems[0] = new MenuItem();
-      rmitems[0].Text = localisation.ToString("main", "ErrorContextMenuClear");
-      rmitems[0].Click += dataGridViewError_ClearList;
-      rmitems[0].DefaultItem = true;
-      dataGridViewError.ContextMenu = new ContextMenu(rmitems);
-
       // Setup Non-Music ListView
       listViewNonMusicFiles.View = View.LargeIcon;
       listViewNonMusicFiles.ShowItemToolTips = true;
@@ -89,39 +78,12 @@ namespace MPTagThat
 
     #region Localisation
 
-    /// <summary>
-    ///   Localise the Screen
-    /// </summary>
-    private void LocaliseScreen()
-    {
-      dataGridViewError.Columns[0].HeaderText = localisation.ToString("main", "ErrorHeaderFile");
-      dataGridViewError.Columns[1].HeaderText = localisation.ToString("main", "ErrorHeaderMessage");
-    }
-
     private void SetColorBase()
     {
       BackColor = themeManager.CurrentTheme.BackColor;
       // We want to have our own header color
-      dataGridViewError.EnableHeadersVisualStyles = false;
-      dataGridViewError.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      dataGridViewError.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-
-      dataGridViewError.BackgroundColor = themeManager.CurrentTheme.BackColor;
-      dataGridViewError.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       listViewNonMusicFiles.BackColor = themeManager.CurrentTheme.BackColor;
       listViewNonMusicFiles.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-    }
-
-    #endregion
-
-    #region Properties
-
-    /// <summary>
-    ///   Returns the Error Gridview
-    /// </summary>
-    public DataGridView ErrorGridView
-    {
-      get { return dataGridViewError; }
     }
 
     #endregion
@@ -219,14 +181,6 @@ namespace MPTagThat
     }
 
     /// <summary>
-    ///   Activate the Error Tab
-    /// </summary>
-    public void ActivateErrorTab()
-    {
-      tabControlMisc.SelectedIndex = 0;
-    }
-
-    /// <summary>
     ///   Activate the Non Music Files Tab
     /// </summary>
     public void ActivateNonMusicTab()
@@ -237,31 +191,6 @@ namespace MPTagThat
     #endregion
 
     #region Events
-
-    #region Error Grid
-
-    /// <summary>
-    ///   Handle Right Mouse Click to open the context Menu in the Error DataGrid
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void datagridViewError_MouseClick(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Right)
-        dataGridViewError.ContextMenu.Show(dataGridViewError, new Point(e.X, e.Y));
-    }
-
-    /// <summary>
-    ///   Context Menu entry has been selected
-    /// </summary>
-    /// <param name = "o"></param>
-    /// <param name = "e"></param>
-    private void dataGridViewError_ClearList(object o, EventArgs e)
-    {
-      dataGridViewError.Rows.Clear();
-    }
-
-    #endregion
 
     #region Non Music File Grid
 
@@ -437,7 +366,6 @@ namespace MPTagThat
 
         case "languagechanged":
           {
-            LocaliseScreen();
             Refresh();
             break;
           }
