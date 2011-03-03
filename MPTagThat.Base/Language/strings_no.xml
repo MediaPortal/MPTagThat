@@ -569,6 +569,7 @@
     <String id="Copied">Kopiert</String>
     <String id="Moved">Flyttet</String>
     <String id="GroupBoxOptions">Innstillinger</String>
+    <String id="GroupBoxSelection">Valg</String>
     <String id="ButtonOrganise">Organisere</String>
   </Section>
   
@@ -587,7 +588,10 @@
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderWMAStandard">Windows Media Audio Standard</String>
+    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
+    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
+    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
+	<String id="EncoderWMAStandard">Windows Media Audio Standard</String>
     <String id="EncoderWMAPro">Windows Media Audio Professional</String>
     <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
     <String id="EncoderMPCStandard">Høy Kvalitet (142-184 kbps)</String>
@@ -614,11 +618,11 @@
     <String id="Ctrl">Ctrl</String>
     <String id="Alt">Alt</String>
     <String id="KeyDescription">Beskrivelse:</String>
-    <String id="KeyAction">Hendelse:</String>
-    <String id="GroupBoxGeneral">Generelle Innstillinger</String>
+    <String id="KeyAction">Hendelse:</String>   
     <String id="KeyShortCut">Snarvei på tastaturet:</String>
     <String id="RibbonShortCut">Snarvei for knapp:</String>
-    <String id="DebugLevel">Debug Nivå:</String>
+    <String id="GroupBoxGeneral">Generelle Innstillinger</String>
+	<String id="DebugLevel">Debug Nivå:</String>
     <String id="Theme">Tema:</String>
     <String id="Language">Språk:</String>
     <String id="TabTags">Tagger</String>
@@ -703,8 +707,13 @@
     <String id="GroupBoxFlacEncoding">FLAC Encoding Innstillinger</String>
     <String id="FlacQuality">Kvalitet:</String>
     <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACEncoding">AAC Encoding Innstillinger</String>
+    <String id="GroupBoxAACAttention">Viktig !</String>
+    <String id="AACAttention">Viktig: For AAC Encoding trenger du først Winamp.\nEtter det må du kopiere "nscrt.dll" og "enc_aacplus.dll" fra winamp plugins folder\ntil MPTagThat bin\Encoder folder.</String>
+    <String id="GroupBoxAACEncoding">Innstillinger for AAC / AACPlus / LC-AAC Encoding</String>
+    <String id="AACWarning">NB!: noen kanal innstillinger er kun for noe utvalgte bit hastigheter.</String>
+    <String id="ChannelMode">Kanal instillinger:</String>
     <String id="AACBitRate">Bitrate:</String>
+    <String id="AACEncoder">AAC Encoder:</String>    
     <String id="TabRippingWMA">WMA</String>
     <String id="GroupBoxWMASettings">WMA Encoding Innstillinger</String>
     <String id="WMAQuality">Kvalitet:</String>
@@ -838,6 +847,7 @@
     <String id="Description">MPTagThat er en åpen kildekode Tagg Editor, \nsom tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</String>
 	<String id="Version">Versjon:</String>
 	<String id="BuildDate">Bygd Dato:</String>
+	<String id="Contributors">Bidragsytere</String>
   </Section>
     
   <!-- Player -->
