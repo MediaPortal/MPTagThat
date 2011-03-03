@@ -58,6 +58,7 @@ namespace MPTagThat
     private bool _keyHandled;
     private MusicDatabaseBuild _musicDatabaseBuild;
     private bool _rightPanelCollapsed;
+    private bool _bottomPanelCollapsed;
     private string _selectedDirectory = ""; // The currently selcted Directory
     private bool _showForm;
     private SplashScreen _splashScreen;
@@ -75,6 +76,7 @@ namespace MPTagThat
     private PlayerControl playerControl;
     private RibbonControl ribbonControl;
     private TreeViewControl treeViewControl;
+    private TagEditControl tagEditControl;
 
     private delegate void ThreadSafeFolderScan();
 
@@ -358,6 +360,11 @@ namespace MPTagThat
       miscInfoControl.Dock = DockStyle.Fill;
       panelRight.Controls.Add(miscInfoControl);
 
+      // Setup TagEdkit Control
+      tagEditControl = new TagEditControl();
+      tagEditControl.Dock = DockStyle.Fill;
+      panelMiddleBottom.Controls.Add(tagEditControl);
+
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
 
@@ -453,7 +460,8 @@ namespace MPTagThat
       Options.MainSettings.LeftPanelSize = panelLeft.Width;
       Options.MainSettings.RightPanelSize = panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
-      Options.MainSettings.ErrorPanelCollapsed = splitterBottom.IsCollapsed;
+      Options.MainSettings.BottomPanelSize = panelMiddleBottom.Height;
+      Options.MainSettings.BottomPanelCollapsed = _bottomPanelCollapsed;
       Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ribbonControl.ScriptsCombo.Text;
       Options.SaveAllSettings();
@@ -608,9 +616,6 @@ namespace MPTagThat
       if (Options.MainSettings.LeftPanelSize > -1)
         panelLeft.Width = Options.MainSettings.LeftPanelSize;
 
-      if (Options.MainSettings.ErrorPanelCollapsed)
-        splitterBottom.ToggleState();
-
       if (Options.MainSettings.PlayerPanelCollapsed)
         splitterPlayer.ToggleState();
 
@@ -620,6 +625,13 @@ namespace MPTagThat
       _rightPanelCollapsed = Options.MainSettings.RightPanelCollapsed;
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
+
+      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 600) 
+        panelMiddleBottom.Height = Options.MainSettings.BottomPanelSize;
+
+      _bottomPanelCollapsed = Options.MainSettings.BottomPanelCollapsed;
+      if (Options.MainSettings.BottomPanelCollapsed)
+        splitterBottom.ToggleState();
 
       log.Info("Main: Finished Loading Settings");
       log.Trace("<<<");
@@ -1071,6 +1083,11 @@ namespace MPTagThat
     private void splitterRight_Click(object sender, EventArgs e)
     {
       _rightPanelCollapsed = splitterRight.IsCollapsed;
+    }
+
+    private void splitterBottom_Click(object sender, EventArgs e)
+    {
+      _bottomPanelCollapsed = splitterBottom.IsCollapsed;
     }
 
     #endregion
