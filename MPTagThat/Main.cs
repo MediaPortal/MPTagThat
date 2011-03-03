@@ -73,7 +73,6 @@ namespace MPTagThat
     private GridViewRip gridViewRip;
     private MiscInfoControl miscInfoControl;
     private PlayerControl playerControl;
-    private QuickEditControl quickEditControl;
     private RibbonControl ribbonControl;
     private TreeViewControl treeViewControl;
 
@@ -218,11 +217,6 @@ namespace MPTagThat
       get { return treeViewControl; }
     }
 
-    public QuickEditControl QuickEdit
-    {
-      get { return quickEditControl; }
-    }
-
     public Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
@@ -354,11 +348,6 @@ namespace MPTagThat
       treeViewControl.Dock = DockStyle.Fill;
       panelLeftTop.Controls.Add(treeViewControl);
 
-      // Setup Quickedit
-      quickEditControl = new QuickEditControl(this);
-      quickEditControl.Dock = DockStyle.Fill;
-      panelRight.Controls.Add(quickEditControl);
-
       // Setup Database Search Control
       databaseSearchControl = new DatabaseSearchControl(this);
       databaseSearchControl.Dock = DockStyle.Fill;
@@ -367,7 +356,7 @@ namespace MPTagThat
       // Setup Misc Info Control
       miscInfoControl = new MiscInfoControl();
       miscInfoControl.Dock = DockStyle.Fill;
-      panelMiddleBottom.Controls.Add(miscInfoControl);
+      panelRight.Controls.Add(miscInfoControl);
 
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
@@ -735,7 +724,6 @@ namespace MPTagThat
           gridViewControl.FolderScan();
         }
       }
-      quickEditControl.ClearForm();
       log.Trace("<<<");
     }
 
@@ -1032,7 +1020,6 @@ namespace MPTagThat
     {
       if (gridViewControl.View.CurrentRow != null)
       {
-        quickEditControl.FillForm(gridViewControl.SelectedTrack);
         ribbonControl.SetGalleryItem();
       }
 

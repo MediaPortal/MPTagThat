@@ -43,7 +43,7 @@
       this.tabPageNonMusicFiles.Location = new System.Drawing.Point(4, 4);
       this.tabPageNonMusicFiles.Name = "tabPageNonMusicFiles";
       this.tabPageNonMusicFiles.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageNonMusicFiles.Size = new System.Drawing.Size(671, 85);
+      this.tabPageNonMusicFiles.Size = new System.Drawing.Size(195, 444);
       this.tabPageNonMusicFiles.TabIndex = 1;
       this.tabPageNonMusicFiles.Text = "Non Music Files";
       this.tabPageNonMusicFiles.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@
       this.listViewNonMusicFiles.Dock = System.Windows.Forms.DockStyle.Fill;
       this.listViewNonMusicFiles.Location = new System.Drawing.Point(3, 3);
       this.listViewNonMusicFiles.Name = "listViewNonMusicFiles";
-      this.listViewNonMusicFiles.Size = new System.Drawing.Size(665, 79);
+      this.listViewNonMusicFiles.Size = new System.Drawing.Size(189, 438);
       this.listViewNonMusicFiles.TabIndex = 0;
       this.listViewNonMusicFiles.UseCompatibleStateImageBehavior = false;
       this.listViewNonMusicFiles.View = System.Windows.Forms.View.List;
@@ -70,7 +70,7 @@
       this.tabControlMisc.Location = new System.Drawing.Point(0, 0);
       this.tabControlMisc.Name = "tabControlMisc";
       this.tabControlMisc.SelectedIndex = 0;
-      this.tabControlMisc.Size = new System.Drawing.Size(679, 111);
+      this.tabControlMisc.Size = new System.Drawing.Size(203, 470);
       this.tabControlMisc.TabIndex = 0;
       // 
       // MiscInfoControl
@@ -79,7 +79,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.tabControlMisc);
       this.Name = "MiscInfoControl";
-      this.Size = new System.Drawing.Size(679, 111);
+      this.Size = new System.Drawing.Size(203, 470);
       this.tabPageNonMusicFiles.ResumeLayout(false);
       this.tabControlMisc.ResumeLayout(false);
       this.ResumeLayout(false);
