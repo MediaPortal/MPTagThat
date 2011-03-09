@@ -383,7 +383,6 @@ namespace MPTagThat
       ApplicationCommands.GetLyrics.Executed += TagsTabButton_Executed;
       ApplicationCommands.Help.Executed += Help_Executed;
       ApplicationCommands.IdentifyFiles.Executed += TagsTabButton_Executed;
-      ApplicationCommands.MultiTagEdit.Executed += TagsTabButton_Executed;
       ApplicationCommands.Options.Executed += Options_Executed;
       ApplicationCommands.OrganiseFiles.Executed += TagsTabButton_Executed;
       ApplicationCommands.Refresh.Executed += Refresh_Executed;
@@ -395,7 +394,6 @@ namespace MPTagThat
       ApplicationCommands.RipStart.Executed += RipStart_Executed;
       ApplicationCommands.Save.Executed += Save_Executed;
       ApplicationCommands.ScriptExecute.Executed += TagsTabButton_Executed;
-      ApplicationCommands.SingleTagEdit.Executed += TagsTabButton_Executed;
       ApplicationCommands.TagFromInternet.Executed += TagsTabButton_Executed;
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
 
@@ -420,8 +418,6 @@ namespace MPTagThat
       buttonTagIdentifyFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_IDENTIFYFILE);
       buttonTagFromInternet.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAGFROMINTERNET);
 
-      buttonSingleTagEdit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EDIT);
-      buttonMultiTagEdit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_MULTI_EDIT);
       buttonGetCoverArt.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETCOVERART);
       buttonGetLyrics.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETLYRICS);
       buttonRemoveComment.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REMOVECOMMENT);
@@ -478,14 +474,6 @@ namespace MPTagThat
       buttonTagFromInternet.ScreenTip.Text = localisation.ToString("screentip", "TagFromInternetText");
 
       ribbonGroupTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");
-
-      buttonSingleTagEdit.Text = localisation.ToString("ribbon", "SingleTagEdit");
-      buttonSingleTagEdit.ScreenTip.Caption = localisation.ToString("screentip", "SingleTagEdit");
-      buttonSingleTagEdit.ScreenTip.Text = localisation.ToString("screentip", "SingleTagEditText");
-
-      buttonMultiTagEdit.Text = localisation.ToString("ribbon", "MultiTagEdit");
-      buttonMultiTagEdit.ScreenTip.Caption = localisation.ToString("screentip", "MultiTagEdit");
-      buttonMultiTagEdit.ScreenTip.Text = localisation.ToString("screentip", "MultiTagEditText");
 
       buttonGetCoverArt.ScreenTip.Caption = localisation.ToString("screentip", "GetCoverArt");
       buttonGetCoverArt.ScreenTip.Text = localisation.ToString("screentip", "GetCoverArtText");
@@ -636,20 +624,15 @@ namespace MPTagThat
       try
       {
         TrackData track = main.TracksGridView.SelectedTrack;
-        IPicture[] pics = new IPicture[] {};
-        pics = track.File.Tag.Pictures;
         ApplicationCommands.SaveAsThumb.Enabled = false;
-        if (pics.Length > 0)
+        if (track.Pictures.Count > 0)
         {
-          using (MemoryStream ms = new MemoryStream(pics[0].Data.Data))
+          img = track.Pictures[0].Data;
+          if (img != null)
           {
-            img = Image.FromStream(ms);
-            if (img != null)
-            {
-              GalleryItem galleryItem = new GalleryItem(img, "", "");
-              galleryPicture.Items.Add(galleryItem);
-              ApplicationCommands.SaveAsThumb.Enabled = true;
-            }
+            GalleryItem galleryItem = new GalleryItem(img, "", "");
+            galleryPicture.Items.Add(galleryItem);
+            ApplicationCommands.SaveAsThumb.Enabled = true;
           }
         }
       }
@@ -954,16 +937,6 @@ namespace MPTagThat
         case "TagFromInternet":
           InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(main);
           lookup.SearchForAlbumInformation();
-          break;
-
-        case "SingleTagEdit":
-          SingleTagEdit dlgSingleTagEdit = new SingleTagEdit(main);
-          main.ShowModalDialog(dlgSingleTagEdit);
-          break;
-
-        case "MultiTagEdit":
-          MultiTagEdit dlgMultiTagEdit = new MultiTagEdit(main);
-          main.ShowModalDialog(dlgMultiTagEdit);
           break;
 
         case "GetCoverArt":

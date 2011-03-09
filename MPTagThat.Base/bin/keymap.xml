@@ -10,18 +10,6 @@
       <description>Save the selected files</description>
     </action>
     <action>
-      <id>2</id>
-      <key>Ctrl-M</key>
-	  <ribbon>M</ribbon>
-      <description>Multiple Files Tag Edit</description>
-    </action>
-    <action>
-      <id>19</id>
-      <key>Ctrl-E</key>
-	  <ribbon>E</ribbon>
-      <description>Single File Tag Edit</description>
-    </action>
-    <action>
       <id>3</id>
       <key>Ctrl-F</key>
 	  <ribbon>F</ribbon>

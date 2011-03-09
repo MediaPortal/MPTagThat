@@ -372,7 +372,9 @@ namespace MPTagThat.GridView
           }
 
           if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
+          {
             track.AlbumArtist = track.Artist;
+          }
 
           if (Options.MainSettings.UseCaseConversion)
           {
@@ -382,9 +384,7 @@ namespace MPTagThat.GridView
           }
 
           // Save the file 
-          track.File = Util.FormatID3Tag(track.File);
-          track.File.Save();
-
+          Track.SaveFile(track);
 
           // If we are in Database mode, we should also update the MediaPortal Database
           if (_main.TreeView.DatabaseMode)
@@ -395,13 +395,10 @@ namespace MPTagThat.GridView
           if (RenameFile(track))
           {
             // rename was ok, so get the new file into the binding list
-            string ext = Path.GetExtension(track.File.Name);
-            string newFileName = Path.Combine(Path.GetDirectoryName(track.File.Name),
+            string ext = Path.GetExtension(track.FileName);
+            string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
                                               String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
                                                             ext));
-            ByteVector.UseBrokenLatin1Behavior = true;
-            File file = File.Create(newFileName);
-            track.File = file;
           }
 
           // Check, if we need to create a folder.jpg
@@ -439,13 +436,13 @@ namespace MPTagThat.GridView
     /// <param name = "track"></param>
     private bool RenameFile(TrackData track)
     {
-      string originalFileName = Path.GetFileName(track.File.Name);
+      string originalFileName = Path.GetFileName(track.FullFileName);
       if (originalFileName != track.FileName)
       {
-        string ext = Path.GetExtension(track.File.Name);
-        string newFileName = Path.Combine(Path.GetDirectoryName(track.File.Name),
+        string ext = Path.GetExtension(track.FileName);
+        string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
                                           String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName), ext));
-        System.IO.File.Move(track.File.Name, newFileName);
+        System.IO.File.Move(track.FullFileName, newFileName);
         log.Debug("Save: Renaming track: {0} Newname: {1}", track.FullFileName, newFileName);
         return true;
       }
@@ -591,16 +588,17 @@ namespace MPTagThat.GridView
               if (musicBrainzAlbum.Amazon != null)
               {
                 // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-                if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
+                if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
                 {
                   ByteVector vector = musicBrainzAlbum.Amazon.AlbumImage;
                   if (vector != null)
                   {
-                    Picture pic = new Picture(vector);
+                    MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
                     pic.MimeType = "image/jpg";
                     pic.Description = "";
                     pic.Type = PictureType.FrontCover;
-                    track.Pictures = new IPicture[] {pic};
+                    pic.Data = pic.ImageFromData(vector.Data);
+                    track.Pictures.Add(pic);
                   }
                 }
               }
@@ -671,7 +669,7 @@ namespace MPTagThat.GridView
       string savedAlbum = "";
       string savedFolder = "";
 
-      Picture folderThumb = null;
+      Core.Common.Picture folderThumb = null;
 
       // Find out, if we deal with a multiple artist album and submit only the album name
       // If we have different artists, then it is a multiple artist album.
@@ -744,14 +742,11 @@ namespace MPTagThat.GridView
             if (folderThumb != null)
             {
               // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-              if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
+              if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
                 log.Debug("CoverArt: Using existing folder.jpg");
                 // Prepare Picture Array and then add the cover retrieved
-                List<IPicture> pics = new List<IPicture>();
-                pics.Add(folderThumb);
-                track.Pictures = pics.ToArray();
-
+                track.Pictures.Add(folderThumb);
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
                 _itemsChanged = true;
@@ -821,17 +816,17 @@ namespace MPTagThat.GridView
           if (amazonAlbum != null)
           {
             // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-            if (track.Pictures.Length == 0 || Options.MainSettings.OverwriteExistingCovers)
+            if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
             {
               ByteVector vector = amazonAlbum.AlbumImage;
               if (vector != null)
               {
-                // Prepare Picture Array and then add the cover retrieved
-                List<IPicture> pics = new List<IPicture>();
-                Picture pic = new Picture(vector);
-                pics.Add(pic);
-
-                track.Pictures = pics.ToArray();
+                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+                pic.MimeType = "image/jpg";
+                pic.Description = "";
+                pic.Type = PictureType.FrontCover;
+                pic.Data = pic.ImageFromData(vector.Data);
+                track.Pictures.Add(pic);
               }
             }
 
@@ -880,7 +875,7 @@ namespace MPTagThat.GridView
     /// </summary>
     /// <param name = "folder"></param>
     /// <returns></returns>
-    public Picture GetFolderThumb(string folder)
+    public Core.Common.Picture GetFolderThumb(string folder)
     {
       string thumb = Path.Combine(folder, "folder.jpg");
       if (!System.IO.File.Exists(thumb))
@@ -890,7 +885,7 @@ namespace MPTagThat.GridView
 
       try
       {
-        Picture pic = new Picture(thumb);
+        Core.Common.Picture pic = new Core.Common.Picture(thumb);
         return pic;
       }
       catch (Exception ex)
@@ -911,14 +906,8 @@ namespace MPTagThat.GridView
         string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
         try
         {
-          using (MemoryStream ms = new MemoryStream(track.Pictures[0].Data.Data))
-          {
-            Image img = Image.FromStream(ms);
-            if (img != null)
-            {
-              img.Save(fileName, ImageFormat.Jpeg);
-            }
-          }
+          Image img = track.Pictures[0].Data;
+          img.Save(fileName, ImageFormat.Jpeg);
         }
         catch (Exception ex)
         {
@@ -1093,20 +1082,12 @@ namespace MPTagThat.GridView
         }
 
         TrackData track = bindingList[row.Index];
-        try
-        {
-          track.File.RemoveTags(type);
+        track.TagsRemoved.Add(type);
+        track = Track.ClearTag(track);
 
-          SetBackgroundColorChanged(row.Index);
-          track.Changed = true;
-          _itemsChanged = true;
-        }
-        catch (Exception ex)
-        {
-          log.Error("Error while Removing Tags: {0} stack: {1}", ex.Message, ex.StackTrace);
-          SetStatusColumnError(row);
-          AddErrorMessage(row, ex.Message);
-        }
+        SetBackgroundColorChanged(row.Index);
+        track.Changed = true;
+        _itemsChanged = true;
       }
 
       tracksGrid.Refresh();
@@ -1147,7 +1128,7 @@ namespace MPTagThat.GridView
           Util.SHFILEOPSTRUCT shf = new Util.SHFILEOPSTRUCT();
           shf.wFunc = Util.FO_DELETE;
           shf.fFlags = Util.FOF_ALLOWUNDO | Util.FOF_NOCONFIRMATION;
-          shf.pFrom = track.File.Name;
+          shf.pFrom = track.FullFileName;
           Util.SHFileOperation(ref shf);
 
           // Remove the file from the binding list
@@ -1186,37 +1167,11 @@ namespace MPTagThat.GridView
 
         TrackData track = bindingList[row.Index];
 
-        bool commentRemoved = false;
-        if (track.TagType.ToLower() == "mp3")
+        if (track.Comment != "")
         {
-          Tag id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as Tag;
-          TagLib.Id3v2.Tag id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+          track.Comment = "";
+          track.CommentRemoved = true;
 
-          if (id3v1tag.Comment != null)
-          {
-            track.Comment = "";
-            id3v1tag.Comment = null;
-            commentRemoved = true;
-          }
-          IEnumerator<CommentsFrame> id3v2comments = id3v2tag.GetFrames<CommentsFrame>().GetEnumerator();
-          if (id3v2comments.MoveNext())
-          {
-            track.Comment = "";
-            id3v2tag.RemoveFrames("COMM");
-            commentRemoved = true;
-          }
-        }
-        else
-        {
-          if (track.Comment != "")
-          {
-            commentRemoved = true;
-            track.Comment = "";
-          }
-        }
-
-        if (commentRemoved)
-        {
           SetBackgroundColorChanged(row.Index);
           track.Changed = true;
           _itemsChanged = true;
@@ -1242,15 +1197,9 @@ namespace MPTagThat.GridView
 
         TrackData track = bindingList[row.Index];
 
-        bool pictureRemoved = false;
         if (track.NumPics > 0)
         {
-          track.Pictures = null;
-          pictureRemoved = true;
-        }
-
-        if (pictureRemoved)
-        {
+          track.Pictures.Clear();
           SetBackgroundColorChanged(row.Index);
           track.Changed = true;
           _itemsChanged = true;
@@ -1494,8 +1443,6 @@ namespace MPTagThat.GridView
       _main.MiscInfoPanel.ActivateNonMusicTab();
       GC.Collect();
 
-      File file = null;
-
       string selectedFolder = _main.CurrentDirectory;
       if (!Directory.Exists(selectedFolder))
         return;
@@ -1530,29 +1477,10 @@ namespace MPTagThat.GridView
             if (Util.IsAudio(fi.FullName))
             {
               // Read the Tag
-              try
+              TrackData track = Track.Create(fi.FullName);
+              if (ApplyTagFilter(track))
               {
-                ByteVector.UseBrokenLatin1Behavior = true;
-                file = File.Create(fi.FullName);
-
-                // Apply the Tag Filter
-                TrackData track = new TrackData(file);
-                if (ApplyTagFilter(track))
-                {
-                  AddTrack(track);
-                }
-              }
-              catch (CorruptFileException)
-              {
-                log.Warn("FolderScan: Ignoring track {0} - Corrupt File!", fi.FullName);
-              }
-              catch (UnsupportedFormatException)
-              {
-                log.Warn("FolderScan: Ignoring track {0} - Unsupported format!", fi.FullName);
-              }
-              catch (Exception ex)
-              {
-                log.Error("FolderScan: Error processing file: {0} {1}", fi.FullName, ex.Message);
+                AddTrack(track);
               }
             }
             else
@@ -1730,7 +1658,6 @@ namespace MPTagThat.GridView
                           ? "*"
                           : _main.TreeView.ActiveFilter.FileMask.Trim();
 
-      File file = null;
       int count = 1;
       foreach (string song in songs)
       {
@@ -1741,35 +1668,13 @@ namespace MPTagThat.GridView
           break;
         }
 
-        try
+        if (ApplyFileFilter(song))
         {
-          if (ApplyFileFilter(song))
+          TrackData track = Track.Create(song);
+          if (ApplyTagFilter(track))
           {
-            ByteVector.UseBrokenLatin1Behavior = true;
-            file = File.Create(song);
-
-            TrackData track = new TrackData(file);
-            if (ApplyTagFilter(track))
-            {
-              AddTrack(track);
-            }
+            AddTrack(track);
           }
-        }
-        catch (CorruptFileException)
-        {
-          log.Warn("DatabaseScan: Ignoring track {0} - Corrupt File!", song);
-        }
-        catch (UnsupportedFormatException)
-        {
-          log.Warn("DatabaseScan: Ignoring track {0} - Unsupported format!", song);
-        }
-        catch (FileNotFoundException)
-        {
-          log.Warn("DatabaseScan: Ignoring track {0} - Physical file no longer existing!", song);
-        }
-        catch (Exception ex)
-        {
-          log.Error("DatabaseScan: Error processing file: {0} {1}", song, ex.Message);
         }
         count++;
       }
@@ -1891,8 +1796,11 @@ namespace MPTagThat.GridView
         discTotal = Convert.ToInt32(discs[1]);
       }
 
-      string originalFileName = Path.GetFileName(track.File.Name);
+      string originalFileName = Path.GetFileName(track.FullFileName);
       string newFileName = "";
+      newFileName = track.FullFileName;
+
+      /*
       if (originalFileName != track.FileName)
       {
         string ext = Path.GetExtension(track.File.Name);
@@ -1903,6 +1811,7 @@ namespace MPTagThat.GridView
       {
         newFileName = track.FullFileName;
       }
+       */
 
 
       string sql = String.Format(
@@ -2209,7 +2118,7 @@ namespace MPTagThat.GridView
 
             // Tags with are checked for existence or non-existence
           case "picture":
-            searchstring = track.Pictures.Length > 0 ? "True" : "False";
+            searchstring = track.Pictures.Count > 0 ? "True" : "False";
             break;
 
           case "lyrics":
@@ -2219,22 +2128,22 @@ namespace MPTagThat.GridView
             // Numeric Tags
           case "track":
             numericCompare = true;
-            searchNumber = (int)track.File.Tag.Track;
+            searchNumber = (int)track.TrackNumber;
             break;
 
           case "numtracks":
             numericCompare = true;
-            searchNumber = (int)track.File.Tag.TrackCount;
+            searchNumber = (int)track.TrackCount;
             break;
 
           case "disc":
             numericCompare = true;
-            searchNumber = (int)track.File.Tag.Disc;
+            searchNumber = (int)track.DiscNumber;
             break;
 
           case "numdiscs":
             numericCompare = true;
-            searchNumber = (int)track.File.Tag.DiscCount;
+            searchNumber = (int)track.DiscCount;
             break;
 
           case "year":
@@ -2254,17 +2163,17 @@ namespace MPTagThat.GridView
 
           case "bitrate":
             numericCompare = true;
-            searchNumber = track.File.Properties.AudioBitrate;
+            searchNumber = Convert.ToInt16(track.BitRate);
             break;
 
           case "samplerate":
             numericCompare = true;
-            searchNumber = track.File.Properties.AudioSampleRate;
+            searchNumber = Convert.ToInt16(track.SampleRate);
             break;
 
           case "channels":
             numericCompare = true;
-            searchNumber = track.File.Properties.AudioChannels;
+            searchNumber = Convert.ToInt16(track.Channels);
             break;
         }
 
@@ -2642,26 +2551,6 @@ namespace MPTagThat.GridView
           }
         }
       }
-    }
-
-    /// <summary>
-    ///   Double Click on a Row.
-    ///   Start Single Edit
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void tracksGrid_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      SingleTagEdit dlgSingleTagedit = new SingleTagEdit(_main);
-      Form f = dlgSingleTagedit;
-      int x = (_main.ClientSize.Width / 2) - (f.Width / 2);
-      int y = (_main.ClientSize.Height / 2) - (f.Height / 2);
-      Point clientLocation = _main.Location;
-      x += clientLocation.X;
-      y += clientLocation.Y;
-
-      f.Location = new Point(x, y);
-      f.ShowDialog();
     }
 
     /// <summary>

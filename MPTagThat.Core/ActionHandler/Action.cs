@@ -25,7 +25,6 @@ namespace MPTagThat.Core
     {
       ACTION_INVALID = 0,
       ACTION_SAVE = 1,
-      ACTION_MULTI_EDIT = 2,
       ACTION_FILENAME2TAG = 3,
       ACTION_TAG2FILENAME = 4,
       ACTION_SELECTALL = 5,
@@ -42,7 +41,6 @@ namespace MPTagThat.Core
       ACTION_PAGEUP = 16,
       ACTION_NEXTFILE = 17,
       ACTION_PREVFILE = 18,
-      ACTION_EDIT = 19,
       ACTION_ORGANISE = 20,
       ACTION_IDENTIFYFILE = 21,
       ACTION_GETCOVERART = 22,

@@ -171,15 +171,6 @@
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\SplashScreen\SplashScreen.cs" />
-    <Compile Include="Dialogues\TagEdit\MultiTagEdit.Designer.cs">
-      <DependentUpon>MultiTagEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogues\TagEdit\TagEditBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogues\TagEdit\TagEditBase.designer.cs">
-      <DependentUpon>TagEditBase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,18 +198,8 @@
     <Compile Include="Dialogues\TagEdit\LyricsSearch.Designer.cs">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogues\TagEdit\SingleTagEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogues\TagEdit\SingleTagEdit.Designer.cs">
-      <DependentUpon>SingleTagEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\TagEdit\Rating.cs" />
     <Compile Include="Dialogues\TagEdit\Lyrics.cs" />
-    <Compile Include="Dialogues\TagEdit\MultiTagEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogues\TagEdit\MultiTagEditOptions.cs" />
     <Compile Include="Dialogues\Preferences\Preferences.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,14 +337,6 @@
     <EmbeddedResource Include="Dialogues\SplashScreen\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\TagEdit\MultiTagEdit.resx">
-      <DependentUpon>MultiTagEdit.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\TagEdit\TagEditBase.resx">
-      <DependentUpon>TagEditBase.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\TagEditControl.resx">
       <DependentUpon>TagEditControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -377,10 +350,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\TagEdit\SingleTagEdit.resx">
-      <DependentUpon>SingleTagEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\Preferences\Preferences.resx">
@@ -437,9 +406,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuickEditControl.resx">
-      <DependentUpon>QuickEditControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RibbonControl.resx">
       <DependentUpon>RibbonControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -461,12 +427,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="QuickEditControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="QuickEditControl.Designer.cs">
-      <DependentUpon>QuickEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="RibbonControl.cs">
       <SubType>UserControl</SubType>

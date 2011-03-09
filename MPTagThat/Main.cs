@@ -829,19 +829,6 @@ namespace MPTagThat
           gridViewControl.SaveAll();
           break;
 
-        case Action.ActionType.ACTION_MULTI_EDIT:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-
-          _dialog = new MultiTagEdit(this);
-          _showForm = true;
-          break;
-
-        case Action.ActionType.ACTION_EDIT:
-          _dialog = new SingleTagEdit(this);
-          _showForm = true;
-          break;
-
         case Action.ActionType.ACTION_FILENAME2TAG:
           if (!gridViewControl.CheckSelections(true))
             break;

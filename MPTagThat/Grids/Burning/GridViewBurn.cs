@@ -564,7 +564,7 @@ namespace MPTagThat.GridView
       long totalTime = 0;
       foreach (TrackData track in bindingList)
       {
-        totalTime += track.File.Properties.Duration.Ticks;
+        totalTime += track.DurationTimespan.Ticks;
       }
       DateTime dt = new DateTime(totalTime);
       int minutes = dt.Hour * 60 + dt.Minute;

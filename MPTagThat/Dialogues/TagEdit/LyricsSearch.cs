@@ -386,9 +386,9 @@ namespace MPTagThat.TagEdit
     {
       if (lvSearchResults.SelectedItems.Count > 0)
       {
-        if (parent.GetType() == typeof (SingleTagEdit))
+        if (parent.GetType() == typeof (TagEditControl))
         {
-          (parent as SingleTagEdit).LyricsText =
+          (parent as TagEditControl).LyricsText =
             LyricUtil.ReturnEnvironmentNewLine(lvSearchResults.SelectedItems[0].SubItems[2].Text);
         }
       }
