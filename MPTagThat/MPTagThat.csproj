@@ -191,7 +191,6 @@
     <Compile Include="Grids\Tracks\MusicBrainzAlbumResults.Designer.cs">
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogues\TagEdit\Comment.cs" />
     <Compile Include="Dialogues\TagEdit\LyricsSearch.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1169,9 +1169,7 @@ namespace MPTagThat.GridView
 
         if (track.Comment != "")
         {
-          track.Comment = "";
-          track.CommentRemoved = true;
-
+          track.ID3Comments.Clear();
           SetBackgroundColorChanged(row.Index);
           track.Changed = true;
           _itemsChanged = true;

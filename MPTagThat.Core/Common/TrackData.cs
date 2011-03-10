@@ -46,6 +46,7 @@ namespace MPTagThat.Core
 
     private MP3Error _mp3ValError;
     private List<Picture> _pictures = new List<Picture>();
+    private List<Comment> _comments = new List<Comment>();
     private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
 
     #endregion
@@ -58,7 +59,6 @@ namespace MPTagThat.Core
       _mp3ValError = MP3Error.NoError;
       Frames = new Hashtable();
       ID3Version = 3;
-      CommentRemoved = false;
     }
 
     #endregion
@@ -97,11 +97,6 @@ namespace MPTagThat.Core
         return _removedTagTypes;
       } 
     }
-
-    /// <summary>
-    /// Have the comments been removed
-    /// </summary>
-    public bool CommentRemoved { get; set; }
 
     /// <summary>
     /// Is the File Readonly
@@ -209,13 +204,38 @@ namespace MPTagThat.Core
     /// Beats Per Minute Tag
     /// ID3: TBPM
     /// </summary>
-    public int BPM { get; set; } 
+    public int BPM { get; set; }
 
     /// <summary>
     /// Comment Tag
     /// ID3: COMM
     /// </summary>
-    public string Comment { get; set; }
+    public string Comment
+    {
+      get
+      {
+        return _comments.Count > 0 ? _comments[0].Text : "";
+      }
+      set
+      {
+        if (_comments.Count == 0)
+        {
+          _comments.Add(new Comment("", "", value));
+        }
+        else
+        {
+          _comments[0].Text = value;  
+        }
+      }
+    }
+
+    /// <summary>
+    /// Comment Tag
+    /// ID3: COMM
+    /// </summary>
+    public List<Comment> ID3Comments { 
+      get { return _comments; }
+    }
 
     /// <summary>
     /// Commercial Information Tag

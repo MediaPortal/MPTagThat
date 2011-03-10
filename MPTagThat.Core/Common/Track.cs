@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using MPTagThat.Core.Common;
 using TagLib;
+using TagLib.Id3v2;
 
 namespace MPTagThat.Core
 {
@@ -61,7 +63,7 @@ namespace MPTagThat.Core
       TagLib.Id3v2.Tag id3v2tag = null;
       if (file.MimeType.Substring(file.MimeType.IndexOf("/") + 1) == "mp3")
       {
-        id3v2tag = file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+        id3v2tag = file.GetTag(TagTypes.Id3v2, false) as TagLib.Id3v2.Tag;
       }
 
       #region Set Common Values
@@ -89,7 +91,6 @@ namespace MPTagThat.Core
 
       track.Album = file.Tag.Album ?? "";
       track.BPM = (int)file.Tag.BeatsPerMinute;
-      track.Comment = file.Tag.Comment ?? "";
       track.Compilation = id3v2tag == null ? false : id3v2tag.IsCompilation;
       track.Composer = string.Join(";", file.Tag.Composers);
       track.Conductor = file.Tag.Conductor ?? "";
@@ -101,25 +102,35 @@ namespace MPTagThat.Core
       track.Genre = string.Join(";", file.Tag.Genres);
       track.Grouping = file.Tag.Grouping ?? "";
       track.Lyrics = file.Tag.Lyrics;
-
-      foreach (IPicture picture in file.Tag.Pictures)
-      {
-        MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture
-                                              {
-                                                Type = picture.Type,
-                                                MimeType = picture.MimeType,
-                                                Description = picture.Description
-                                              };
-
-        pic.Data = pic.ImageFromData(picture.Data.Data);
-        track.Pictures.Add(pic);
-      }
-
       track.Title = file.Tag.Title ?? "";
 
       track.TrackNumber = file.Tag.Track;
       track.TrackCount = file.Tag.TrackCount;
       track.Year = (int)file.Tag.Year;
+
+      // Pictures
+      foreach (IPicture picture in file.Tag.Pictures)
+      {
+        MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture
+        {
+          Type = picture.Type,
+          MimeType = picture.MimeType,
+          Description = picture.Description
+        };
+
+        pic.Data = pic.ImageFromData(picture.Data.Data);
+        track.Pictures.Add(pic);
+      }
+
+      // Comments
+      if (track.TagType == "mp3" && id3v2tag != null)
+      {
+        foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
+        {
+          Comment comment = new Comment(commentsframe.Description, commentsframe.Language, commentsframe.Text);
+          track.ID3Comments.Add(comment);
+        }
+      }
 
       // Rating
       track.Rating = 0;
@@ -187,21 +198,18 @@ namespace MPTagThat.Core
 
       // Now copy all Text frames of an ID3 V2
 
-      if (track.TagType == "mp3")
+      if (track.TagType == "mp3" && id3v2tag != null)
       {
-        if (id3v2tag != null)
+        foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
         {
-          foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
+          string id = frame.FrameId.ToString();
+          if (!track.Frames.ContainsKey(id) && !_standardId3Frames.Contains(id))
           {
-            string id = frame.FrameId.ToString();
-            if (!track.Frames.ContainsKey(id) && !_standardId3Frames.Contains(id))
-            {
-              track.Frames.Add(id, frame.ToString());
-            }
+            track.Frames.Add(id, frame.ToString());
           }
-
-          track.ID3Version = id3v2tag.Version;
         }
+
+        track.ID3Version = id3v2tag.Version;
       }
 
       return track;
@@ -218,7 +226,7 @@ namespace MPTagThat.Core
       track.AlbumArtist = "";
       track.Album = "";
       track.BPM = 0;
-      track.Comment = "";
+      track.ID3Comments.Clear();
       track.Compilation = false;
       track.Composer = "";
       track.Conductor = "";
