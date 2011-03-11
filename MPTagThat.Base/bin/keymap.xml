@@ -183,6 +183,13 @@
 	  <ribbon></ribbon>
       <description>Toggle Quickedit Panel</description>
     </action>
+	<action>
+      <id>37</id>
+      <key>Alt-F11</key>
+	  <ribbon></ribbon>
+      <description>Toggle MiscFile Panel</description>
+    </action>
+
   </window>
   <window>
     <id>1</id>

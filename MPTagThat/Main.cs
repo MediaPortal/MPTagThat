@@ -960,6 +960,10 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TOGGLEQUICKEDIT:
+          splitterBottom.ToggleState();
+          break;
+
+        case Action.ActionType.ACTION_TOGGLEMISCFILES:
           splitterRight.ToggleState();
           break;
 

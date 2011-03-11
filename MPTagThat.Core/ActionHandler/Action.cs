@@ -58,6 +58,7 @@ namespace MPTagThat.Core
       ACTION_FIND = 34,
       ACTION_REPLACE = 35,
       ACTION_TOGGLEQUICKEDIT = 36,
+      ACTION_TOGGLEMISCFILES = 37,
     }
 
     #endregion
