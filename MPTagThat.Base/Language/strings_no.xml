@@ -98,10 +98,10 @@
     <String id="CaseConversion">Konverter Bokstaver</String>
     <String id="CaseConversionMenu">Konverter Bokstaver</String>
     <String id="CaseConversionOption">Innstillinger for Bokstav Konvertering</String>
-    <String id="DeleteTags">Slette Tagger</String>
-    <String id="DeleteAllTags">Slette Alle Tagger</String>
-    <String id="DeleteID3V1Tags">Slette Bare ID3 V1 Tagger</String>
-    <String id="DeleteID3V2Tags">Slette Bare ID3 V2 Tagger</String>
+    <String id="DeleteTags">Slett Tagger</String>
+    <String id="DeleteAllTags">Slett Alle Tagger</String>
+    <String id="DeleteID3V1Tags">Slett Bare ID3 V1 Tagger</String>
+    <String id="DeleteID3V2Tags">Slett Bare ID3 V2 Tagger</String>
     <String id="EditTags">Tag Endring</String>
     <String id="RetrieveTags">Finn Tagger</String>
     <String id="OrganiseFiles">Organiser</String>
@@ -114,7 +114,7 @@
     <String id="AddBurner">Legg til i Brenner</String>
     <String id="AddConvert">Legg til for Konvertering</String>
     <String id="AddPlaylist">Legg til i Spilleliste</String>
-    <String id="Other">Andre</String>
+    <String id="Other">Annet</String>
 
     <!-- Rip Tab-->
     <String id="RipTab">Ripp</String>
