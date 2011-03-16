@@ -619,6 +619,7 @@ namespace MPTagThat.GridView
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
 
       ResetProgressBar();
 
@@ -864,6 +865,7 @@ namespace MPTagThat.GridView
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
 
       ResetProgressBar();
 
@@ -1019,6 +1021,7 @@ namespace MPTagThat.GridView
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
 
       log.Trace("<<<");
     }
@@ -1060,6 +1063,8 @@ namespace MPTagThat.GridView
       _main.MainRibbon.AutoNumber = numberValue;
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
+
       log.Trace("<<<");
     }
 
@@ -1092,6 +1097,7 @@ namespace MPTagThat.GridView
 
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
 
       log.Trace("<<<");
     }
@@ -1177,6 +1183,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
       log.Trace("<<<");
     }
 
@@ -1206,6 +1213,7 @@ namespace MPTagThat.GridView
       _main.MainRibbon.SetGalleryItem();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
       log.Trace("<<<");
     }
 
@@ -1239,6 +1247,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
       log.Trace("<<<");
     }
 
@@ -1267,6 +1276,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
       log.Trace("<<<");
     }
 
@@ -1525,6 +1535,7 @@ namespace MPTagThat.GridView
       {
         if (tracksGrid.Rows.Count > 0)
         {
+          _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
           tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
@@ -1693,6 +1704,7 @@ namespace MPTagThat.GridView
       {
         if (tracksGrid.Rows.Count > 0)
         {
+          _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
           tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }

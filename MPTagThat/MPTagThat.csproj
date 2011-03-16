@@ -198,7 +198,6 @@
       <DependentUpon>LyricsSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagEdit\Rating.cs" />
-    <Compile Include="Dialogues\TagEdit\Lyrics.cs" />
     <Compile Include="Dialogues\Preferences\Preferences.cs">
       <SubType>Form</SubType>
     </Compile>

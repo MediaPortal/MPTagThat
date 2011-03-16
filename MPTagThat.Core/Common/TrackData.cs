@@ -47,6 +47,8 @@ namespace MPTagThat.Core
     private MP3Error _mp3ValError;
     private List<Picture> _pictures = new List<Picture>();
     private List<Comment> _comments = new List<Comment>();
+    private List<Lyric> _lyrics = new List<Lyric>();
+    private List<PopmFrame> _popmframes = new List<PopmFrame>();
     private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
 
     #endregion
@@ -384,7 +386,30 @@ namespace MPTagThat.Core
     /// Lyrics Tag
     /// ID3: USLT
     /// </summary>
-    public string Lyrics { get; set; }
+    public string Lyrics
+    {
+      get
+      {
+        return _lyrics.Count > 0 ? _lyrics[0].Text : "";
+      }
+      set
+      {
+        if (_lyrics.Count == 0)
+        {
+          _lyrics.Add(new Lyric("", "", value));
+        }
+        else
+        {
+          _lyrics[0].Text = value;
+        }
+      }
+    }
+
+
+    public List<Lyric> LyricsFrames
+    {
+      get { return _lyrics; }
+    }
 
     /// <summary>
     /// MediaType Tag
@@ -569,6 +594,11 @@ namespace MPTagThat.Core
     /// ID3: POPM
     /// </summary>
     public int Rating { get; set; }
+
+    public List<PopmFrame> Ratings
+    {
+      get { return _popmframes; }
+    }
 
     /// <summary>
     /// SubTitle / More Detailed Description

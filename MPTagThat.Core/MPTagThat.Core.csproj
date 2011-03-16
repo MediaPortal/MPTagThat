@@ -116,7 +116,9 @@
     <Compile Include="ActionHandler\Action.cs" />
     <Compile Include="ActionHandler\ActionHandler.cs" />
     <Compile Include="Common\Comment.cs" />
+    <Compile Include="Common\Lyric.cs" />
     <Compile Include="Common\Picture.cs" />
+    <Compile Include="Common\PopmFrame.cs" />
     <Compile Include="Common\Track.cs" />
     <Compile Include="Common\TrackDataPreview.cs" />
     <Compile Include="Controls\Colorslider\ColorSlider.cs">

@@ -101,7 +101,6 @@ namespace MPTagThat.Core
 
       track.Genre = string.Join(";", file.Tag.Genres);
       track.Grouping = file.Tag.Grouping ?? "";
-      track.Lyrics = file.Tag.Lyrics;
       track.Title = file.Tag.Title ?? "";
 
       track.TrackNumber = file.Tag.Track;
@@ -127,15 +126,31 @@ namespace MPTagThat.Core
       {
         foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
         {
-          Comment comment = new Comment(commentsframe.Description, commentsframe.Language, commentsframe.Text);
-          track.ID3Comments.Add(comment);
+          track.ID3Comments.Add(new Comment(commentsframe.Description, commentsframe.Language, commentsframe.Text));
         }
+      }
+      else
+      {
+        track.Comment = file.Tag.Comment;
+      }
+
+      // Lyrics
+      track.Lyrics = file.Tag.Lyrics;
+      foreach (UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<UnsynchronisedLyricsFrame>())
+      {
+        track.LyricsFrames.Add(new Lyric(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text));
       }
 
       // Rating
       track.Rating = 0;
       if (track.TagType == "mp3")
       {
+        // First read in all POPM Frames found
+        foreach (PopularimeterFrame popmframe in id3v2tag.GetFrames<PopularimeterFrame>())
+        {
+         track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+        }
+
         TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
         if (popmFrame != null)
         {
@@ -227,6 +242,7 @@ namespace MPTagThat.Core
       track.Album = "";
       track.BPM = 0;
       track.ID3Comments.Clear();
+      track.Frames.Clear();
       track.Compilation = false;
       track.Composer = "";
       track.Conductor = "";

@@ -37,6 +37,9 @@
       this.buttonRemoveComment = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonAddComment = new MPTagThat.Core.WinControls.MPTButton();
       this.dataGridViewComment = new System.Windows.Forms.DataGridView();
+      this.Descriptor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Language = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.lbComment = new MPTagThat.Core.WinControls.MPTLabel();
       this.textBoxComment = new System.Windows.Forms.TextBox();
       this.lbCommentLanguage = new MPTagThat.Core.WinControls.MPTLabel();
@@ -248,9 +251,9 @@
       this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.Descriptor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Language = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
+      this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.tabControlTagEdit.SuspendLayout();
       this.tabPageMain.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
@@ -283,6 +286,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
+      this.panelTop.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControlTagEdit
@@ -298,10 +302,10 @@
       this.tabControlTagEdit.Controls.Add(this.tabPageUserDefined);
       this.tabControlTagEdit.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tabControlTagEdit.Location = new System.Drawing.Point(0, 0);
+      this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
       this.tabControlTagEdit.SelectedIndex = 0;
-      this.tabControlTagEdit.Size = new System.Drawing.Size(1015, 620);
+      this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       // 
       // tabPageMain
@@ -312,12 +316,12 @@
       this.tabPageMain.Controls.Add(this.groupBoxGenre);
       this.tabPageMain.Controls.Add(this.groupBoxArtist);
       this.tabPageMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tabPageMain.Localisation = "tabPageMain";
+      this.tabPageMain.Localisation = "HeaderMainTags";
       this.tabPageMain.LocalisationContext = "TagEdit";
       this.tabPageMain.Location = new System.Drawing.Point(4, 25);
       this.tabPageMain.Name = "tabPageMain";
       this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageMain.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageMain.Size = new System.Drawing.Size(900, 579);
       this.tabPageMain.TabIndex = 0;
       this.tabPageMain.Text = "Main Tags";
       // 
@@ -337,9 +341,9 @@
       this.groupBoxComment.Id = "46983581-fdb2-4d53-b14f-80ce6b3dd74b";
       this.groupBoxComment.Localisation = "GroupBoxComment";
       this.groupBoxComment.LocalisationContext = "TagEdit";
-      this.groupBoxComment.Location = new System.Drawing.Point(7, 288);
+      this.groupBoxComment.Location = new System.Drawing.Point(3, 286);
       this.groupBoxComment.Name = "groupBoxComment";
-      this.groupBoxComment.Size = new System.Drawing.Size(853, 235);
+      this.groupBoxComment.Size = new System.Drawing.Size(885, 240);
       this.groupBoxComment.TabIndex = 2;
       this.groupBoxComment.Text = "Comment";
       // 
@@ -366,6 +370,7 @@
       this.buttonMoveTop.TabIndex = 3;
       this.buttonMoveTop.Text = "Move to Top";
       this.buttonMoveTop.UseVisualStyleBackColor = true;
+      this.buttonMoveTop.Click += new System.EventHandler(this.buttonMoveTop_Click);
       // 
       // buttonRemoveComment
       // 
@@ -378,6 +383,7 @@
       this.buttonRemoveComment.TabIndex = 2;
       this.buttonRemoveComment.Text = "Remove Comment";
       this.buttonRemoveComment.UseVisualStyleBackColor = true;
+      this.buttonRemoveComment.Click += new System.EventHandler(this.buttonRemoveComment_Click);
       // 
       // buttonAddComment
       // 
@@ -390,6 +396,7 @@
       this.buttonAddComment.TabIndex = 1;
       this.buttonAddComment.Text = "Add Comment";
       this.buttonAddComment.UseVisualStyleBackColor = true;
+      this.buttonAddComment.Click += new System.EventHandler(this.buttonAddComment_Click);
       // 
       // dataGridViewComment
       // 
@@ -410,6 +417,32 @@
       this.dataGridViewComment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dataGridViewComment.Size = new System.Drawing.Size(682, 109);
       this.dataGridViewComment.TabIndex = 6;
+      this.dataGridViewComment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewComment_CellClick);
+      // 
+      // Descriptor
+      // 
+      this.Descriptor.FillWeight = 150F;
+      this.Descriptor.Frozen = true;
+      this.Descriptor.HeaderText = "Descriptor";
+      this.Descriptor.Name = "Descriptor";
+      this.Descriptor.ReadOnly = true;
+      this.Descriptor.Width = 150;
+      // 
+      // Language
+      // 
+      this.Language.Frozen = true;
+      this.Language.HeaderText = "Lang";
+      this.Language.Name = "Language";
+      this.Language.ReadOnly = true;
+      this.Language.Width = 50;
+      // 
+      // Comment
+      // 
+      this.Comment.Frozen = true;
+      this.Comment.HeaderText = "Comment";
+      this.Comment.Name = "Comment";
+      this.Comment.ReadOnly = true;
+      this.Comment.Width = 470;
       // 
       // lbComment
       // 
@@ -489,9 +522,9 @@
       this.groupBoxGenre.Id = "484479fb-81de-4c88-8872-f35521c3f7d2";
       this.groupBoxGenre.Localisation = "groupBoxGenre";
       this.groupBoxGenre.LocalisationContext = "TagEdit";
-      this.groupBoxGenre.Location = new System.Drawing.Point(7, 164);
+      this.groupBoxGenre.Location = new System.Drawing.Point(3, 168);
       this.groupBoxGenre.Name = "groupBoxGenre";
-      this.groupBoxGenre.Size = new System.Drawing.Size(853, 118);
+      this.groupBoxGenre.Size = new System.Drawing.Size(885, 118);
       this.groupBoxGenre.TabIndex = 1;
       // 
       // btGenreToTop
@@ -505,6 +538,7 @@
       this.btGenreToTop.TabIndex = 4;
       this.btGenreToTop.Text = "Move To Top";
       this.btGenreToTop.UseVisualStyleBackColor = true;
+      this.btGenreToTop.Click += new System.EventHandler(this.btGenreToTop_Click);
       // 
       // btRemoveGenre
       // 
@@ -517,6 +551,7 @@
       this.btRemoveGenre.TabIndex = 3;
       this.btRemoveGenre.Text = "Remove Genre";
       this.btRemoveGenre.UseVisualStyleBackColor = true;
+      this.btRemoveGenre.Click += new System.EventHandler(this.btRemoveGenre_Click);
       // 
       // btAddGenre
       // 
@@ -529,6 +564,7 @@
       this.btAddGenre.TabIndex = 2;
       this.btAddGenre.Text = "Add Genre";
       this.btAddGenre.UseVisualStyleBackColor = true;
+      this.btAddGenre.Click += new System.EventHandler(this.btAddGenre_Click);
       // 
       // listBoxGenre
       // 
@@ -538,6 +574,7 @@
       this.listBoxGenre.Name = "listBoxGenre";
       this.listBoxGenre.Size = new System.Drawing.Size(401, 68);
       this.listBoxGenre.TabIndex = 1;
+      this.listBoxGenre.DoubleClick += new System.EventHandler(this.listBoxGenre_DoubleClick);
       // 
       // lblGenre
       // 
@@ -615,9 +652,9 @@
       this.groupBoxArtist.Id = "bb23ced4-b635-45c2-84e0-ce7d450ad34c";
       this.groupBoxArtist.Localisation = "groupBoxArtist";
       this.groupBoxArtist.LocalisationContext = "TagEdit";
-      this.groupBoxArtist.Location = new System.Drawing.Point(7, -1);
+      this.groupBoxArtist.Location = new System.Drawing.Point(3, 3);
       this.groupBoxArtist.Name = "groupBoxArtist";
-      this.groupBoxArtist.Size = new System.Drawing.Size(853, 165);
+      this.groupBoxArtist.Size = new System.Drawing.Size(885, 165);
       this.groupBoxArtist.TabIndex = 0;
       // 
       // checkBoxCompilation
@@ -966,12 +1003,12 @@
       this.tabPagePictures.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPagePictures.Controls.Add(this.groupBoxPicture);
       this.tabPagePictures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tabPagePictures.Localisation = "tabPagePicture";
+      this.tabPagePictures.Localisation = "HeaderPictures";
       this.tabPagePictures.LocalisationContext = "TagEdit";
       this.tabPagePictures.Location = new System.Drawing.Point(4, 25);
       this.tabPagePictures.Name = "tabPagePictures";
       this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPagePictures.Size = new System.Drawing.Size(1007, 591);
+      this.tabPagePictures.Size = new System.Drawing.Size(900, 579);
       this.tabPagePictures.TabIndex = 1;
       this.tabPagePictures.Text = "Picture";
       // 
@@ -1008,6 +1045,7 @@
       this.buttonGetPictureInternet.TabIndex = 2;
       this.buttonGetPictureInternet.Text = "Get from Internet";
       this.buttonGetPictureInternet.UseVisualStyleBackColor = true;
+      this.buttonGetPictureInternet.Click += new System.EventHandler(this.buttonGetPictureInternet_Click);
       // 
       // checkBoxRemoveExistingPictures
       // 
@@ -1068,6 +1106,7 @@
       this.buttonExportPicture.TabIndex = 4;
       this.buttonExportPicture.Text = "Export Picture";
       this.buttonExportPicture.UseVisualStyleBackColor = true;
+      this.buttonExportPicture.Click += new System.EventHandler(this.buttonExportPicture_Click);
       // 
       // buttonRemovePicture
       // 
@@ -1081,6 +1120,7 @@
       this.buttonRemovePicture.TabIndex = 3;
       this.buttonRemovePicture.Text = "Remove Picture";
       this.buttonRemovePicture.UseVisualStyleBackColor = true;
+      this.buttonRemovePicture.Click += new System.EventHandler(this.buttonRemovePicture_Click);
       // 
       // buttonGetPicture
       // 
@@ -1093,6 +1133,7 @@
       this.buttonGetPicture.TabIndex = 1;
       this.buttonGetPicture.Text = "Get from File";
       this.buttonGetPicture.UseVisualStyleBackColor = true;
+      this.buttonGetPicture.Click += new System.EventHandler(this.buttonGetPicture_Click);
       // 
       // lblPicType
       // 
@@ -1156,11 +1197,11 @@
       this.tabPageDetails.Controls.Add(this.groupBoxSort);
       this.tabPageDetails.Controls.Add(this.groupBoxContent);
       this.tabPageDetails.Controls.Add(this.groupBoxPeople);
-      this.tabPageDetails.Localisation = "tabPageDetails";
+      this.tabPageDetails.Localisation = "HeaderDetail";
       this.tabPageDetails.LocalisationContext = "TagEdit";
       this.tabPageDetails.Location = new System.Drawing.Point(4, 25);
       this.tabPageDetails.Name = "tabPageDetails";
-      this.tabPageDetails.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageDetails.Size = new System.Drawing.Size(900, 579);
       this.tabPageDetails.TabIndex = 2;
       this.tabPageDetails.Text = "Detailed Information";
       // 
@@ -1679,11 +1720,11 @@
       // 
       this.tabPageOriginal.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageOriginal.Controls.Add(this.groupBoxOriginalInformation);
-      this.tabPageOriginal.Localisation = "tabPageOriginal";
+      this.tabPageOriginal.Localisation = "HeaderOriginal";
       this.tabPageOriginal.LocalisationContext = "TagEdit";
       this.tabPageOriginal.Location = new System.Drawing.Point(4, 25);
       this.tabPageOriginal.Name = "tabPageOriginal";
-      this.tabPageOriginal.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageOriginal.Size = new System.Drawing.Size(900, 579);
       this.tabPageOriginal.TabIndex = 3;
       this.tabPageOriginal.Text = "Original Information";
       // 
@@ -1913,11 +1954,11 @@
       this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxMusician);
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxInvolvedPeople);
-      this.tabPageInvolvedPeople.Localisation = "tabPageInvolvedPeople";
+      this.tabPageInvolvedPeople.Localisation = "HeaderInvolved";
       this.tabPageInvolvedPeople.LocalisationContext = "TagEdit";
       this.tabPageInvolvedPeople.Location = new System.Drawing.Point(4, 25);
       this.tabPageInvolvedPeople.Name = "tabPageInvolvedPeople";
-      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(900, 579);
       this.tabPageInvolvedPeople.TabIndex = 4;
       this.tabPageInvolvedPeople.Text = "Involved People";
       // 
@@ -1975,6 +2016,7 @@
       this.buttonRemoveMusician.TabIndex = 3;
       this.buttonRemoveMusician.Text = "Remove Musician";
       this.buttonRemoveMusician.UseVisualStyleBackColor = true;
+      this.buttonRemoveMusician.Click += new System.EventHandler(this.buttonRemoveMusician_Click);
       // 
       // buttonAddMusician
       // 
@@ -1987,6 +2029,7 @@
       this.buttonAddMusician.TabIndex = 2;
       this.buttonAddMusician.Text = "Add Musician";
       this.buttonAddMusician.UseVisualStyleBackColor = true;
+      this.buttonAddMusician.Click += new System.EventHandler(this.buttonAddMusician_Click);
       // 
       // dataGridViewMusician
       // 
@@ -2104,6 +2147,7 @@
       this.buttonRemovePerson.TabIndex = 3;
       this.buttonRemovePerson.Text = "Remove Person";
       this.buttonRemovePerson.UseVisualStyleBackColor = true;
+      this.buttonRemovePerson.Click += new System.EventHandler(this.buttonRemovePerson_Click);
       // 
       // buttonAddInvolvedPerson
       // 
@@ -2116,6 +2160,7 @@
       this.buttonAddInvolvedPerson.TabIndex = 2;
       this.buttonAddInvolvedPerson.Text = "Add Person";
       this.buttonAddInvolvedPerson.UseVisualStyleBackColor = true;
+      this.buttonAddInvolvedPerson.Click += new System.EventHandler(this.buttonAddInvolvedPerson_Click);
       // 
       // dataGridViewInvolvedPeople
       // 
@@ -2195,11 +2240,11 @@
       // 
       this.tabPageWebInformation.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageWebInformation.Controls.Add(this.groupBoxWebInformation);
-      this.tabPageWebInformation.Localisation = "tabPageWebInformation";
+      this.tabPageWebInformation.Localisation = "HeaderWeb";
       this.tabPageWebInformation.LocalisationContext = "TagEdit";
       this.tabPageWebInformation.Location = new System.Drawing.Point(4, 25);
       this.tabPageWebInformation.Name = "tabPageWebInformation";
-      this.tabPageWebInformation.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageWebInformation.Size = new System.Drawing.Size(900, 579);
       this.tabPageWebInformation.TabIndex = 5;
       this.tabPageWebInformation.Text = "Web Information";
       // 
@@ -2498,11 +2543,11 @@
       this.tabPageLyrics.AutoScroll = true;
       this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
-      this.tabPageLyrics.Localisation = "tabPageLyrics";
+      this.tabPageLyrics.Localisation = "HeaderLyrics";
       this.tabPageLyrics.LocalisationContext = "TagEdit";
       this.tabPageLyrics.Location = new System.Drawing.Point(4, 25);
       this.tabPageLyrics.Name = "tabPageLyrics";
-      this.tabPageLyrics.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageLyrics.Size = new System.Drawing.Size(900, 579);
       this.tabPageLyrics.TabIndex = 6;
       this.tabPageLyrics.Text = "Lyrics";
       // 
@@ -2538,6 +2583,7 @@
       this.btGetLyricsFromText.TabIndex = 1;
       this.btGetLyricsFromText.Text = "Get Lyrics from Text File";
       this.btGetLyricsFromText.UseVisualStyleBackColor = true;
+      this.btGetLyricsFromText.Click += new System.EventHandler(this.btGetLyricsFromText_Click);
       // 
       // ckRemoveLyrics
       // 
@@ -2562,6 +2608,7 @@
       this.lblLyricsMoveTop.TabIndex = 4;
       this.lblLyricsMoveTop.Text = "Move to Top";
       this.lblLyricsMoveTop.UseVisualStyleBackColor = true;
+      this.lblLyricsMoveTop.Click += new System.EventHandler(this.btLyricsMoveTop_Click);
       // 
       // btRemoveLyrics
       // 
@@ -2574,6 +2621,7 @@
       this.btRemoveLyrics.TabIndex = 3;
       this.btRemoveLyrics.Text = "Remove Lyrics";
       this.btRemoveLyrics.UseVisualStyleBackColor = true;
+      this.btRemoveLyrics.Click += new System.EventHandler(this.btRemoveLyrics_Click);
       // 
       // btAddLyrics
       // 
@@ -2586,6 +2634,7 @@
       this.btAddLyrics.TabIndex = 2;
       this.btAddLyrics.Text = "Add Lyrics";
       this.btAddLyrics.UseVisualStyleBackColor = true;
+      this.btAddLyrics.Click += new System.EventHandler(this.btAddLyrics_Click);
       // 
       // dataGridViewLyrics
       // 
@@ -2606,6 +2655,7 @@
       this.dataGridViewLyrics.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dataGridViewLyrics.Size = new System.Drawing.Size(670, 170);
       this.dataGridViewLyrics.TabIndex = 6;
+      this.dataGridViewLyrics.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLyrics_CellClick);
       // 
       // dataGridViewTextBoxColumn7
       // 
@@ -2689,11 +2739,11 @@
       this.tabPageRating.AutoScroll = true;
       this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRating.Controls.Add(this.groupBoxRating);
-      this.tabPageRating.Localisation = "tabPageRating";
+      this.tabPageRating.Localisation = "HeaderRating";
       this.tabPageRating.LocalisationContext = "TagEdit";
       this.tabPageRating.Location = new System.Drawing.Point(4, 25);
       this.tabPageRating.Name = "tabPageRating";
-      this.tabPageRating.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageRating.Size = new System.Drawing.Size(900, 579);
       this.tabPageRating.TabIndex = 7;
       this.tabPageRating.Text = "Rating";
       // 
@@ -2795,6 +2845,7 @@
       this.btRatingMoveTop.TabIndex = 5;
       this.btRatingMoveTop.Text = "Move to Top";
       this.btRatingMoveTop.UseVisualStyleBackColor = true;
+      this.btRatingMoveTop.Click += new System.EventHandler(this.btRatingMoveTop_Click);
       // 
       // btRemoveRating
       // 
@@ -2807,6 +2858,7 @@
       this.btRemoveRating.TabIndex = 4;
       this.btRemoveRating.Text = "Remove Rating";
       this.btRemoveRating.UseVisualStyleBackColor = true;
+      this.btRemoveRating.Click += new System.EventHandler(this.btRemoveRating_Click);
       // 
       // btAddRating
       // 
@@ -2819,6 +2871,7 @@
       this.btAddRating.TabIndex = 3;
       this.btAddRating.Text = "Add Rating";
       this.btAddRating.UseVisualStyleBackColor = true;
+      this.btAddRating.Click += new System.EventHandler(this.btAddRating_Click);
       // 
       // dataGridViewRating
       // 
@@ -2839,6 +2892,7 @@
       this.dataGridViewRating.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dataGridViewRating.Size = new System.Drawing.Size(480, 170);
       this.dataGridViewRating.TabIndex = 6;
+      this.dataGridViewRating.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRating_CellClick);
       // 
       // dataGridViewTextBoxColumn10
       // 
@@ -2886,46 +2940,57 @@
       // tabPageUserDefined
       // 
       this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageUserDefined.Localisation = "tabPageUserDefined";
+      this.tabPageUserDefined.Localisation = "HeaderUser";
       this.tabPageUserDefined.LocalisationContext = "TagEdit";
       this.tabPageUserDefined.Location = new System.Drawing.Point(4, 25);
       this.tabPageUserDefined.Name = "tabPageUserDefined";
-      this.tabPageUserDefined.Size = new System.Drawing.Size(1007, 591);
+      this.tabPageUserDefined.Size = new System.Drawing.Size(900, 579);
       this.tabPageUserDefined.TabIndex = 8;
       this.tabPageUserDefined.Text = "User Defined Information";
       // 
-      // Descriptor
+      // panelTop
       // 
-      this.Descriptor.FillWeight = 150F;
-      this.Descriptor.Frozen = true;
-      this.Descriptor.HeaderText = "Descriptor";
-      this.Descriptor.Name = "Descriptor";
-      this.Descriptor.ReadOnly = true;
-      this.Descriptor.Width = 150;
+      this.panelTop.Controls.Add(this.lbEditedFile);
+      this.panelTop.Controls.Add(this.btApply);
+      this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panelTop.Location = new System.Drawing.Point(0, 0);
+      this.panelTop.Name = "panelTop";
+      this.panelTop.Size = new System.Drawing.Size(908, 46);
+      this.panelTop.TabIndex = 28;
       // 
-      // Language
+      // lbEditedFile
       // 
-      this.Language.Frozen = true;
-      this.Language.HeaderText = "Lang";
-      this.Language.Name = "Language";
-      this.Language.ReadOnly = true;
-      this.Language.Width = 50;
+      this.lbEditedFile.Localisation = "lbEditedFile";
+      this.lbEditedFile.LocalisationContext = "panelTop";
+      this.lbEditedFile.Location = new System.Drawing.Point(174, 14);
+      this.lbEditedFile.Name = "lbEditedFile";
+      this.lbEditedFile.Size = new System.Drawing.Size(689, 23);
+      this.lbEditedFile.TabIndex = 1;
+      this.lbEditedFile.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
       // 
-      // Comment
+      // btApply
       // 
-      this.Comment.Frozen = true;
-      this.Comment.HeaderText = "Comment";
-      this.Comment.Name = "Comment";
-      this.Comment.ReadOnly = true;
-      this.Comment.Width = 470;
+      this.btApply.Id = "7122c753-f115-426e-bcf5-9ca762f01f87";
+      this.btApply.Localisation = "Apply";
+      this.btApply.LocalisationContext = "TagEdit";
+      this.btApply.Location = new System.Drawing.Point(16, 11);
+      this.btApply.Name = "btApply";
+      this.btApply.Size = new System.Drawing.Size(143, 23);
+      this.btApply.TabIndex = 0;
+      this.btApply.Text = "Apply";
+      this.btApply.UseVisualStyleBackColor = true;
+      this.btApply.Click += new System.EventHandler(this.btApply_Click);
       // 
       // TagEditControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoSize = true;
       this.Controls.Add(this.tabControlTagEdit);
+      this.Controls.Add(this.panelTop);
       this.Name = "TagEditControl";
-      this.Size = new System.Drawing.Size(1015, 620);
+      this.Size = new System.Drawing.Size(908, 654);
+      this.Load += new System.EventHandler(this.OnLoad);
       this.tabControlTagEdit.ResumeLayout(false);
       this.tabPageMain.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
@@ -2972,6 +3037,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
+      this.panelTop.ResumeLayout(false);
+      this.panelTop.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -3200,5 +3267,8 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn Descriptor;
     private System.Windows.Forms.DataGridViewTextBoxColumn Language;
     private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
+    private Core.WinControls.MPTPanel panelTop;
+    private Core.WinControls.MPTButton btApply;
+    private Core.WinControls.MPTLabel lbEditedFile;
   }
 }

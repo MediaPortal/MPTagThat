@@ -239,6 +239,11 @@ namespace MPTagThat
       get { return miscInfoControl; }
     }
 
+    public TagEditControl TagEditForm
+    {
+      get { return tagEditControl; }
+    }
+
     #endregion
 
     #region Form Open / Close
@@ -361,7 +366,7 @@ namespace MPTagThat
       panelRight.Controls.Add(miscInfoControl);
 
       // Setup TagEdkit Control
-      tagEditControl = new TagEditControl();
+      tagEditControl = new TagEditControl(this);
       tagEditControl.Dock = DockStyle.Fill;
       panelMiddleBottom.Controls.Add(tagEditControl);
 
@@ -423,10 +428,10 @@ namespace MPTagThat
       if (gridViewControl.InvokeRequired)
       {
         ThreadSafeFolderScan d = FolderScanAsync;
-        gridViewControl.Invoke(d, new object[] {});
+        gridViewControl.Invoke(d);
         return;
       }
-
+      
       gridViewControl.FolderScan();
     }
 
@@ -724,6 +729,7 @@ namespace MPTagThat
       gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
+        tagEditControl.ClearForm();
         ribbonControl.ClearGallery();
         gridViewControl.View.Rows.Clear();
         toolStripStatusLabelFolder.Text = _selectedDirectory;
@@ -1023,6 +1029,7 @@ namespace MPTagThat
     {
       if (gridViewControl.View.CurrentRow != null)
       {
+        tagEditControl.FillForm();
         ribbonControl.SetGalleryItem();
       }
 

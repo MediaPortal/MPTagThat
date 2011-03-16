@@ -193,7 +193,7 @@
   </window>
   <window>
     <id>1</id>
-    <description>Multi Tag Edit</description>
+    <description>Tag Edit Control</description>
     <action>
       <id>15</id>
       <key>PageDown</key>
@@ -206,21 +206,7 @@
 	  <ribbon></ribbon>
       <description>Move to previous Page</description>
     </action>
-  </window>
-  <window>
-    <id>2</id>
-    <description>Single Tag Edit</description>
-    <action>
-      <id>15</id>
-      <key>PageDown</key>
-      <description>Move to next Page</description>
-    </action>
-    <action>
-      <id>16</id>
-      <key>Prior</key>
-      <description>Move to previous Page</description>
-    </action>
-    <action>
+	<action>
       <id>17</id>
       <key>F8</key>
       <description>Move to next File</description>
@@ -229,8 +215,8 @@
       <id>18</id>
       <key>F7</key>
       <description>Move to previous File</description>
-    </action>
-    <action>
+    </action>   
+	<action>
       <id>8</id>
       <key>Ctrl-Shift-E</key>
       <description>Execute active script</description>
