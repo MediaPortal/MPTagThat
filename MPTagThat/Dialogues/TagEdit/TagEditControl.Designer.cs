@@ -252,6 +252,8 @@
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
       this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.btNext = new MPTagThat.Core.WinControls.MPTButton();
+      this.btPrevious = new MPTagThat.Core.WinControls.MPTButton();
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       this.tabControlTagEdit.SuspendLayout();
@@ -2950,6 +2952,8 @@
       // 
       // panelTop
       // 
+      this.panelTop.Controls.Add(this.btNext);
+      this.panelTop.Controls.Add(this.btPrevious);
       this.panelTop.Controls.Add(this.lbEditedFile);
       this.panelTop.Controls.Add(this.btApply);
       this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2958,13 +2962,40 @@
       this.panelTop.Size = new System.Drawing.Size(908, 46);
       this.panelTop.TabIndex = 28;
       // 
+      // btNext
+      // 
+      this.btNext.Id = "fce3a24e-ce97-4cbe-8fbc-3721300b26ca";
+      this.btNext.Localisation = "Next";
+      this.btNext.LocalisationContext = "TagEdit";
+      this.btNext.Location = new System.Drawing.Point(326, 10);
+      this.btNext.Name = "btNext";
+      this.btNext.Size = new System.Drawing.Size(143, 23);
+      this.btNext.TabIndex = 3;
+      this.btNext.Text = "Next File";
+      this.btNext.UseVisualStyleBackColor = true;
+      this.btNext.Click += new System.EventHandler(this.btNext_Click);
+      // 
+      // btPrevious
+      // 
+      this.btPrevious.Id = "6f8af3a9-d866-4b8d-bc25-7df16a4f50f6";
+      this.btPrevious.Localisation = "Previous";
+      this.btPrevious.LocalisationContext = "TagEdit";
+      this.btPrevious.Location = new System.Drawing.Point(168, 10);
+      this.btPrevious.Name = "btPrevious";
+      this.btPrevious.Size = new System.Drawing.Size(143, 23);
+      this.btPrevious.TabIndex = 2;
+      this.btPrevious.Text = "Previous File";
+      this.btPrevious.UseVisualStyleBackColor = true;
+      this.btPrevious.Click += new System.EventHandler(this.btPrevious_Click);
+      // 
       // lbEditedFile
       // 
+      this.lbEditedFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbEditedFile.Localisation = "lbEditedFile";
       this.lbEditedFile.LocalisationContext = "panelTop";
-      this.lbEditedFile.Location = new System.Drawing.Point(174, 14);
+      this.lbEditedFile.Location = new System.Drawing.Point(480, 10);
       this.lbEditedFile.Name = "lbEditedFile";
-      this.lbEditedFile.Size = new System.Drawing.Size(689, 23);
+      this.lbEditedFile.Size = new System.Drawing.Size(380, 23);
       this.lbEditedFile.TabIndex = 1;
       this.lbEditedFile.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
       // 
@@ -2973,7 +3004,7 @@
       this.btApply.Id = "7122c753-f115-426e-bcf5-9ca762f01f87";
       this.btApply.Localisation = "Apply";
       this.btApply.LocalisationContext = "TagEdit";
-      this.btApply.Location = new System.Drawing.Point(16, 11);
+      this.btApply.Location = new System.Drawing.Point(13, 10);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(143, 23);
       this.btApply.TabIndex = 0;
@@ -3270,5 +3301,7 @@
     private Core.WinControls.MPTPanel panelTop;
     private Core.WinControls.MPTButton btApply;
     private Core.WinControls.MPTLabel lbEditedFile;
+    private Core.WinControls.MPTButton btNext;
+    private Core.WinControls.MPTButton btPrevious;
   }
 }

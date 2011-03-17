@@ -199,6 +199,9 @@ namespace MPTagThat.TagEdit
         cbArtist.Visible = true;
         cbAlbumArtist.Visible = true;
         cbAlbum.Visible = true;
+
+        btPrevious.Enabled = false;
+        btNext.Enabled = false;
       }
       else
       {
@@ -209,6 +212,9 @@ namespace MPTagThat.TagEdit
         cbArtist.Visible = false;
         cbAlbumArtist.Visible = false;
         cbAlbum.Visible = false;
+
+        btPrevious.Enabled = true;
+        btNext.Enabled = true;
       }
 
       foreach (DataGridViewRow row in main.TracksGridView.View.SelectedRows)
@@ -1969,6 +1975,21 @@ namespace MPTagThat.TagEdit
 
     #region Key Events
 
+    private void btPrevious_Click(object sender, EventArgs e)
+    {
+      Action action = new Action();
+      action.ID = Action.ActionType.ACTION_PREVFILE;
+      OnAction(action);
+    }
+
+    private void btNext_Click(object sender, EventArgs e)
+    {
+      Action action = new Action();
+      action.ID = Action.ActionType.ACTION_NEXTFILE;
+      OnAction(action);
+    }
+
+
     /// <summary>
     ///   A Key has been pressed
     /// </summary>
@@ -1992,6 +2013,7 @@ namespace MPTagThat.TagEdit
         return false;
 
       bool handled = true;
+      int curRow = -1;
       switch (action.ID)
       {
         case Action.ActionType.ACTION_PAGEDOWN:
@@ -2006,6 +2028,32 @@ namespace MPTagThat.TagEdit
             tabControlTagEdit.SelectedIndex = tabControlTagEdit.TabCount - 1;
           else
             tabControlTagEdit.SelectedIndex = tabControlTagEdit.SelectedIndex - 1;
+          break;
+
+        case Action.ActionType.ACTION_NEXTFILE:
+          if (main.TracksGridView.View.SelectedRows.Count == 1)
+          {
+            curRow = main.TracksGridView.View.SelectedRows[0].Index;
+            if ((curRow + 1) < main.TracksGridView.View.RowCount)
+            {
+              btApply_Click(null, new EventArgs());
+              main.TracksGridView.View.Rows[curRow].Selected = false;
+              main.TracksGridView.View.Rows[curRow + 1].Selected = true;
+            }
+          }
+          break;
+
+        case Action.ActionType.ACTION_PREVFILE:
+          if (main.TracksGridView.View.SelectedRows.Count == 1)
+          {
+            curRow = main.TracksGridView.View.SelectedRows[0].Index;
+            if ((curRow - 1) >= 0)
+            {
+              btApply_Click(null, new EventArgs());
+              main.TracksGridView.View.Rows[curRow].Selected = false;
+              main.TracksGridView.View.Rows[curRow - 1].Selected = true;
+            }
+          }
           break;
       }
       return handled;

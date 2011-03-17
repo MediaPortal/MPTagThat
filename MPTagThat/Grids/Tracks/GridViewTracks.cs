@@ -1433,6 +1433,7 @@ namespace MPTagThat.GridView
       }
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
 
       log.Trace("<<<");
     }
@@ -2429,6 +2430,7 @@ namespace MPTagThat.GridView
       _itemsChanged = true;
       SetBackgroundColorChanged(e.RowIndex);
       TrackData track = bindingList[e.RowIndex];
+      _main.TagEditForm.FillForm();
       track.Changed = true;
     }
 

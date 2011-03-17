@@ -41,8 +41,8 @@
     </action>
     <action>
       <id>8</id>
-      <key>Ctrl-X</key>
-	  <ribbon>X</ribbon>
+      <key>Ctrl-E</key>
+	  <ribbon>E</ribbon>
       <description>Execute active script</description>
     </action>
     <action>
@@ -216,10 +216,5 @@
       <key>F7</key>
       <description>Move to previous File</description>
     </action>   
-	<action>
-      <id>8</id>
-      <key>Ctrl-Shift-E</key>
-      <description>Execute active script</description>
-    </action>
-  </window>
+ </window>
 </keymap>
