@@ -1471,6 +1471,10 @@ namespace MPTagThat.GridView
       _main.progressBar1.MarqueeAnimationSpeed = 10;
 
       int count = 1;
+
+      // For Performance Reason we hide the Grid while filling the data
+      tracksGrid.SuspendLayout();
+      tracksGrid.Hide();
       try
       {
         foreach (FileInfo fi in GetFiles(new DirectoryInfo(selectedFolder), _main.TreeView.ScanFolderRecursive))
@@ -1512,6 +1516,11 @@ namespace MPTagThat.GridView
         MessageBox.Show(localisation.ToString("message", "OutOfMemory"), localisation.ToString("message", "Error_Title"),
                         MessageBoxButtons.OK);
         log.Error("Folderscan: Running out of memory. Scanning aborted.");
+      }
+      finally
+      {
+        tracksGrid.Show();
+        tracksGrid.ResumeLayout();
       }
       log.Info("FolderScan: Found {0} files", count);
 
@@ -3000,7 +3009,7 @@ namespace MPTagThat.GridView
         {
           if (_actionCopy)
           {
-            log.Debug("^TracksGrid: Copying file {0} to {1}", track.FullFileName, targetFile);
+            log.Debug("TracksGrid: Copying file {0} to {1}", track.FullFileName, targetFile);
             FileSystem.CopyFile(track.FullFileName, targetFile, UIOption.AllDialogs, UICancelOption.DoNothing);
           }
           else
