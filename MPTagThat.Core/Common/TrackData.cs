@@ -106,11 +106,6 @@ namespace MPTagThat.Core
     public bool Readonly { get; set; }
 
     /// <summary>
-    /// The New Full Filename including the path
-    /// </summary>
-    public string NewFileName { get; set; }
-
-    /// <summary>
     /// The Full Filename including the path
     /// </summary>
     public string FullFileName { get; set; }
@@ -118,10 +113,7 @@ namespace MPTagThat.Core
     /// <summary>
     /// Filename without Path
     /// </summary>
-    public string FileName
-    {
-      get { return Path.GetFileName(FullFileName); }
-    }
+    public string FileName { get; set; }
 
     /// <summary>
     /// File Extension
@@ -593,7 +585,24 @@ namespace MPTagThat.Core
     /// Rating Tag
     /// ID3: POPM
     /// </summary>
-    public int Rating { get; set; }
+    public int Rating
+    {
+      get
+      {
+        return _popmframes.Count > 0 ? _popmframes[0].Rating : 0;
+      }
+      set
+      {
+        if (_popmframes.Count == 0)
+        {
+          _popmframes.Add(new PopmFrame("", value, 0));
+        }
+        else
+        {
+          _popmframes[0].Rating = value;
+        }
+      }
+    }
 
     public List<PopmFrame> Ratings
     {

@@ -179,7 +179,7 @@ namespace MPTagThat.TagToFileName
           string ext = Path.GetExtension(track.FileName);
 
           // Now that we have a correct Filename and no duplicates accept the changes
-          track.NewFileName = string.Format("{0}{1}", fileName, ext);
+          track.FileName = string.Format("{0}{1}", fileName, ext);
           track.Changed = true;
 
           _main.TracksGridView.Changed = true;

@@ -150,7 +150,7 @@ namespace MPTagThat.CaseConversion
         if (!bErrors)
         {
           // Now that we have a correct Filename and no duplicates accept the changes
-          track.NewFileName = string.Format("{0}{1}", fileName, Path.GetExtension(track.FileName));
+          track.FileName = string.Format("{0}{1}", fileName, Path.GetExtension(track.FileName));
           track.Changed = true;
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(rowIndex);

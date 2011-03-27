@@ -70,6 +70,7 @@ namespace MPTagThat.Core
       
       track.Id = new Guid();
       track.FullFileName = fileName;
+      track.FileName = Path.GetFileName(fileName);
       FileInfo fi = new FileInfo(fileName);
       track.Readonly = fi.IsReadOnly;
       track.TagType = file.MimeType.Substring(file.MimeType.IndexOf("/") + 1);
@@ -253,13 +254,13 @@ namespace MPTagThat.Core
 
       track.Genre = "";
       track.Grouping = "";
-      track.Lyrics = "";
+      track.LyricsFrames.Clear();
       track.Pictures.Clear();
       track.Title = "";
       track.TrackNumber = 0;
       track.TrackCount = 0;
       track.Year = 0;
-      track.Rating = 0;
+      track.Ratings.Clear();
       return track;
     }
 
@@ -345,7 +346,12 @@ namespace MPTagThat.Core
         }
       */
       // Check for renamed file ???
+      
+      // Involved People - Look at Single Tagedit Apply
+      
+      // Lyrics
 
+      // Ratings
 
       return error;
     }

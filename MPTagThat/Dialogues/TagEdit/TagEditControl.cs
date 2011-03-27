@@ -49,6 +49,7 @@ namespace MPTagThat.TagEdit
     private List<Picture> _pictures = new List<Picture>();
     private bool _ratingIsChanged;
     private int _selectedPictureGridRow = -1;
+    private int _selectedRowIndex = -1;
 
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
@@ -134,15 +135,15 @@ namespace MPTagThat.TagEdit
         cbArtist.AutoCompleteCustomSource = customSource;
         cbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
         cbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-        
+
         tbArtist.AutoCompleteCustomSource = customSource;
         tbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
         tbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-        
+
         cbAlbumArtist.AutoCompleteCustomSource = customSource;
         cbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
         cbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-        
+
         tbAlbumArtist.AutoCompleteCustomSource = customSource;
         tbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
         tbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -192,6 +193,7 @@ namespace MPTagThat.TagEdit
       if (main.TracksGridView.View.SelectedRows.Count > 1)
       {
         _isMultiTagEdit = true;
+        _selectedRowIndex = -1;
         UncheckCheckboxes();
         ChangeCheckboxStatus(true);
 
@@ -200,18 +202,30 @@ namespace MPTagThat.TagEdit
         cbAlbumArtist.Visible = true;
         cbAlbum.Visible = true;
 
+        ckTrackLength.Visible = true;
+        tbTrackLength.Visible = false;
+        btGetTrackLength.Visible = false;
+
         btPrevious.Enabled = false;
         btNext.Enabled = false;
       }
       else
       {
         _isMultiTagEdit = false;
+        if (main.TracksGridView.View.SelectedRows.Count > 0)
+        {
+          _selectedRowIndex = main.TracksGridView.View.SelectedRows[0].Index;
+        }
         ChangeCheckboxStatus(false);
 
         // Hide the Combo boxes, which are only available for Multi Tag Edit
         cbArtist.Visible = false;
         cbAlbumArtist.Visible = false;
         cbAlbum.Visible = false;
+
+        ckTrackLength.Visible = false;
+        tbTrackLength.Visible = true;
+        btGetTrackLength.Visible = true;
 
         btPrevious.Enabled = true;
         btNext.Enabled = true;
@@ -248,7 +262,7 @@ namespace MPTagThat.TagEdit
           }
 
           if (cbAlbumArtist.Text.Trim() != track.AlbumArtist.Trim())
-          {  
+          {
             if (i == 0)
             {
               cbAlbumArtist.Text = track.AlbumArtist;
@@ -260,7 +274,8 @@ namespace MPTagThat.TagEdit
           }
 
           if (cbAlbum.Text.Trim() != track.Album.Trim())
-          {  if (i == 0)
+          {
+            if (i == 0)
             {
               cbAlbum.Text = track.Album;
             }
@@ -280,7 +295,8 @@ namespace MPTagThat.TagEdit
         if (_isMultiTagEdit)
         {
           if (checkBoxCompilation.Checked != track.Compilation)
-          {  if (i == 0)
+          {
+            if (i == 0)
             {
               checkBoxCompilation.Checked = track.Compilation;
             }
@@ -324,7 +340,7 @@ namespace MPTagThat.TagEdit
             tbDisc.Text = "";
           }
         }
-        
+
         if (tbNumDiscs.Text.Trim() != track.DiscCount.ToString())
         {
           if (i == 0 && track.DiscCount != 0)
@@ -410,8 +426,7 @@ namespace MPTagThat.TagEdit
           _pictures.Clear();
           foreach (Picture picture in track.Pictures)
           {
-            dataGridViewPicture.Rows.Add(new object[]
-                                           {picture.Description, Enum.Format(typeof (PictureType), picture.Type, "G")});
+            dataGridViewPicture.Rows.Add(new object[] { picture.Description, Enum.Format(typeof(PictureType), picture.Type, "G") });
             _pictures.Add(picture);
           }
 
@@ -440,7 +455,8 @@ namespace MPTagThat.TagEdit
         }
 
         if (tbComposer.Text.Trim() != track.Composer.Trim())
-        { if (i == 0)
+        {
+          if (i == 0)
           {
             tbComposer.Text = track.Composer;
           }
@@ -451,7 +467,8 @@ namespace MPTagThat.TagEdit
         }
 
         if (tbCopyright.Text.Trim() != track.Copyright.Trim())
-        {  if (i == 0)
+        {
+          if (i == 0)
           {
             tbCopyright.Text = track.Copyright;
           }
@@ -462,7 +479,8 @@ namespace MPTagThat.TagEdit
         }
 
         if (tbContentGroup.Text.Trim() != track.Grouping.Trim())
-        {  if (i == 0)
+        {
+          if (i == 0)
           {
             tbContentGroup.Text = track.Grouping;
           }
@@ -472,11 +490,24 @@ namespace MPTagThat.TagEdit
           }
         }
 
+        if (tbTrackLength.Text.Trim() != track.TrackLength.Trim())
+        {
+          if (i == 0)
+          {
+            tbTrackLength.Text = track.TrackLength;
+          }
+          else
+          {
+            tbTrackLength.Text = "";
+          }
+        }
+
         // The following values are only ID3 V2 specific
         if (track.TagType.ToLower() == "mp3")
         {
           if (tbInterpretedBy.Text.Trim() != track.Interpreter.Trim())
-          {if (i == 0)
+          {
+            if (i == 0)
             {
               tbInterpretedBy.Text = track.Interpreter;
             }
@@ -487,7 +518,8 @@ namespace MPTagThat.TagEdit
           }
 
           if (tbTextWriter.Text.Trim() != track.TextWriter.Trim())
-          {  if (i == 0)
+          {
+            if (i == 0)
             {
               tbTextWriter.Text = track.TextWriter;
             }
@@ -510,7 +542,7 @@ namespace MPTagThat.TagEdit
           }
 
           if (tbEncodedBy.Text.Trim() != track.EncodedBy.Trim())
-          {  
+          {
             if (i == 0)
             {
               tbEncodedBy.Text = track.EncodedBy;
@@ -1056,6 +1088,7 @@ namespace MPTagThat.TagEdit
       ckMediaType.Visible = visible;
       checkBoxRemoveComments.Visible = visible;
       checkBoxRemoveExistingPictures.Visible = visible;
+      ckTrackLength.Visible = visible;
     }
 
     /// <summary>
@@ -1106,6 +1139,7 @@ namespace MPTagThat.TagEdit
       ckMediaType.Checked = false;
       checkBoxRemoveComments.Checked = false;
       checkBoxRemoveExistingPictures.Checked = false;
+      ckTrackLength.Checked = false;
     }
 
     /// <summary>
@@ -1315,7 +1349,935 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     private void btApply_Click(object sender, EventArgs e)
     {
+      log.Trace(">>>");
+      bool bErrors = false;
+      DataGridView tracksGrid = main.TracksGridView.View;
 
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      {
+        bool trackChanged = false;
+        TrackData track = main.TracksGridView.TrackList[row.Index];
+
+        main.TracksGridView.ClearStatusColumn(row);
+
+        try
+        {
+          #region Main Tags
+
+          if (_isMultiTagEdit)
+          {
+            if (ckArtist.Checked)
+            {
+              track.Artist = cbArtist.Text.Trim();
+              trackChanged = true;
+            }
+
+            if (ckAlbumArtist.Checked)
+            {
+              track.AlbumArtist = cbAlbumArtist.Text.Trim();
+              trackChanged = true;
+            }
+
+            if (ckAlbum.Checked)
+            {
+              track.Album = cbAlbum.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Artist != tbArtist.Text.Trim())
+            {
+              track.Artist = tbArtist.Text.Trim();
+              trackChanged = true;
+            }
+
+            if (track.AlbumArtist != tbAlbumArtist.Text.Trim())
+            {
+              track.AlbumArtist = tbAlbumArtist.Text.Trim();
+              trackChanged = true;
+            }
+
+            if (track.Album != tbAlbum.Text.Trim())
+            {
+              track.Album = tbAlbum.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (track.Compilation != checkBoxCompilation.Checked)
+          {
+            track.Compilation = checkBoxCompilation.Checked;
+            trackChanged = true;
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckTitle.Checked)
+            {
+              track.Title = tbTitle.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Title != tbTitle.Text.Trim())
+            {
+              track.Title = tbTitle.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          int parsedYear = 0;
+          try
+          {
+            parsedYear = Int32.Parse(tbYear.Text.Trim());
+          }
+          catch (Exception)
+          { }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckYear.Checked)
+            {
+              track.Year = parsedYear;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (parsedYear != track.Year)
+            {
+              track.Year = parsedYear;
+              trackChanged = true;
+            }
+          }
+
+          int parsedBPM = 0;
+          try
+          {
+            parsedBPM = Int32.Parse(tbBPM.Text.Trim());
+          }
+          catch (Exception)
+          { }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckBPM.Checked)
+            {
+              track.BPM = parsedBPM;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (parsedBPM != track.BPM)
+            {
+              track.BPM = parsedBPM;
+              trackChanged = true;
+            }
+          }
+
+          int tracknumber = 0;
+          int trackcount = 0;
+
+          try
+          {
+            tracknumber = Int32.Parse(tbTrack.Text.Trim());
+          }
+          catch (Exception) { }
+          try
+          {
+            trackcount = Int32.Parse(tbNumTracks.Text.Trim());
+          }
+          catch (Exception) { }
+
+          if (!_isMultiTagEdit && tracknumber != track.TrackNumber)
+          {
+            track.TrackNumber = (uint)tracknumber;
+            trackChanged = true;
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckTrack.Checked)
+            {
+              track.TrackCount = (uint)trackcount;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (trackcount != track.TrackCount)
+            {
+              track.TrackCount = (uint)trackcount;
+              trackChanged = true;
+            }
+          }
+
+          int discnumber = 0;
+          int disccount = 0;
+
+          try
+          {
+            discnumber = Int32.Parse(tbDisc.Text.Trim());
+          }
+          catch (Exception) { }
+          try
+          {
+            disccount = Int32.Parse(tbNumDiscs.Text.Trim());
+          }
+          catch (Exception) { }
+
+          if (discnumber != track.DiscNumber)
+          {
+            if (_isMultiTagEdit)
+            {
+              if (ckDisk.Checked)
+              {
+                track.DiscNumber = (uint)discnumber;
+                trackChanged = true;
+              }
+            }
+            else
+            {
+              track.DiscNumber = (uint)discnumber;
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckDisk.Checked)
+            {
+              track.DiscCount = (uint)disccount;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (disccount != track.DiscCount)
+            {
+              track.DiscCount = (uint)disccount;
+              trackChanged = true;
+            }
+          }
+
+          string genre = "";
+          int i = 0;
+          if (cbGenre.Text.Trim() != "")
+          {
+            genre += cbGenre.Text.Trim();
+            i = 1;
+          }
+          foreach (string item in listBoxGenre.Items)
+          {
+            if (i == 0)
+              genre += item;
+            else
+              genre += ";" + item;
+            i++;
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckGenre.Checked)
+            {
+              track.Genre = genre;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Genre != genre)
+            {
+              track.Genre = genre;
+              trackChanged = true;
+            }
+          }
+
+          if (checkBoxRemoveComments.Checked)
+          {
+            if (track.ID3Comments.Count > 0)
+            {
+              trackChanged = true;
+            }
+            track.ID3Comments.Clear();
+          }
+
+          List<Comment> comments = new List<Comment>();
+          foreach (DataGridViewRow commentRow in dataGridViewComment.Rows)
+          {
+            Comment comment = new Comment(commentRow.Cells[0].Value.ToString(), commentRow.Cells[1].Value.ToString(),
+                                          commentRow.Cells[2].Value.ToString());
+            comments.Add(comment);
+          }
+
+          if (_isMultiTagEdit && (comments.Count > 0 || _commentIsChanged))
+          {
+            track.ID3Comments.Clear();
+            track.ID3Comments.AddRange(comments);
+            trackChanged = true;
+          }
+          else
+          {
+            if (_commentIsChanged)
+            {
+              track.ID3Comments.Clear();
+              track.ID3Comments.AddRange(comments);
+              trackChanged = true;
+            }
+          }
+
+          #endregion
+
+          #region Picture
+
+          if (checkBoxRemoveExistingPictures.Checked)
+          {
+            track.Pictures.Clear();
+            track.Changed = true;
+          }
+
+          if (_isMultiTagEdit)
+          {
+            track.Pictures.Clear();
+            track.Pictures.AddRange(_pictures);
+            track.Changed = true;
+          }
+          else
+          {
+            if (_pictureIsChanged)
+            {
+              track.Pictures.Clear();
+              track.Pictures.AddRange(_pictures);
+              track.Changed = true;
+            }
+          }
+
+          #endregion
+
+          #region Detailed Information
+
+          if (_isMultiTagEdit)
+          {
+            if (ckConductor.Checked)
+            {
+              track.Conductor = tbConductor.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Conductor != tbConductor.Text.Trim())
+            {
+              track.Conductor = tbConductor.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckComposer.Checked)
+            {
+              track.Composer = tbComposer.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Composer != tbComposer.Text.Trim())
+            {
+              track.Composer = tbComposer.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckCopyright.Checked)
+            {
+              track.Copyright = tbCopyright.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Copyright != tbCopyright.Text.Trim())
+            {
+              track.Copyright = tbCopyright.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckContentGroup.Checked)
+            {
+              track.Grouping = tbContentGroup.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Grouping != tbContentGroup.Text.Trim())
+            {
+              track.Grouping = tbContentGroup.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckInterpretedBy.Checked)
+            {
+              track.Interpreter = tbInterpretedBy.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Interpreter != tbInterpretedBy.Text.Trim())
+            {
+              track.Interpreter = tbInterpretedBy.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckTextWriter.Checked)
+            {
+              track.TextWriter = tbTextWriter.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.TextWriter != tbTextWriter.Text.Trim())
+            {
+              track.TextWriter = tbTextWriter.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckPublisher.Checked)
+            {
+              track.Publisher = tbPublisher.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.Publisher != tbPublisher.Text.Trim())
+            {
+              track.Publisher = tbPublisher.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckEncodedBy.Checked)
+            {
+              track.EncodedBy = tbEncodedBy.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.EncodedBy != tbEncodedBy.Text.Trim())
+            {
+              track.EncodedBy = tbEncodedBy.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckSubTitle.Checked)
+            {
+              track.SubTitle = tbSubTitle.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.SubTitle != tbSubTitle.Text.Trim())
+            {
+              track.SubTitle = tbSubTitle.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckMediaType.Checked)
+            {
+              track.MediaType = cbMediaType.SelectedText;
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.MediaType != cbMediaType.SelectedText)
+            {
+              track.MediaType = cbMediaType.SelectedText;
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckTrackLength.Checked)
+            {
+              track.TrackLength = track.DurationTimespan.TotalMilliseconds.ToString();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.TrackLength != tbTrackLength.Text)
+            {
+              track.TrackLength = tbTrackLength.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckArtistSort.Checked)
+            {
+              track.ArtistSortName = tbArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.ArtistSortName != tbArtistSort.Text)
+            {
+              track.ArtistSortName = tbArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckAlbumSort.Checked)
+            {
+              track.AlbumSortName = tbAlbumSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.AlbumSortName != tbAlbumSort.Text)
+            {
+              track.AlbumSortName = tbAlbumSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckTitleSort.Checked)
+            {
+              track.TitleSortName = tbTitleSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.TitleSortName != tbTitleSort.Text)
+            {
+              track.TitleSortName = tbTitleSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          #endregion
+
+          #region Original Information
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalArtist.Checked)
+            {
+              track.OriginalArtist = tbOriginalArtist.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalArtist != tbOriginalArtist.Text)
+            {
+              track.OriginalArtist = tbOriginalArtist.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalAlbum.Checked)
+            {
+              track.OriginalAlbum = tbOriginalAlbum.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalAlbum != tbOriginalAlbum.Text)
+            {
+              track.OriginalAlbum = tbOriginalAlbum.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalFileName.Checked)
+            {
+              track.OriginalFileName = tbOriginalFileName.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalFileName != tbOriginalFileName.Text)
+            {
+              track.OriginalFileName = tbOriginalFileName.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalLyricsWriter.Checked)
+            {
+              track.OriginalLyricsWriter = tbOriginalLyricsWriter.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalLyricsWriter != tbOriginalLyricsWriter.Text)
+            {
+              track.OriginalLyricsWriter = tbOriginalLyricsWriter.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalOwner.Checked)
+            {
+              track.OriginalOwner = tbOriginalOwner.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalOwner != tbOriginalOwner.Text)
+            {
+              track.OriginalOwner = tbOriginalOwner.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOriginalRelease.Checked)
+            {
+              track.OriginalRelease = tbOriginalRelease.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OriginalRelease != tbOriginalRelease.Text)
+            {
+              track.OriginalRelease = tbOriginalRelease.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          #endregion
+
+          #region Web Information
+
+          if (_isMultiTagEdit)
+          {
+            if (ckCopyrightUrl.Checked)
+            {
+              track.CopyrightInformation = tbCopyrightUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.CopyrightInformation != tbCopyrightUrl.Text)
+            {
+              track.CopyrightInformation = tbCopyrightUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialAudioFileUrl.Checked)
+            {
+              track.OfficialAudioFileInformation = tbOfficialAudioFileUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialAudioFileInformation != tbOfficialAudioFileUrl.Text)
+            {
+              track.OfficialAudioFileInformation = tbOfficialAudioFileUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialArtistUrl.Checked)
+            {
+              track.OfficialArtistInformation = tbOfficialArtistUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialArtistInformation != tbOfficialArtistUrl.Text)
+            {
+              track.OfficialArtistInformation = tbOfficialArtistUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialAudioSourceUrl.Checked)
+            {
+              track.OfficialAudioSourceInformation = tbOfficialAudioSourceUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialAudioSourceInformation != tbOfficialAudioSourceUrl.Text)
+            {
+              track.OfficialAudioSourceInformation = tbOfficialAudioSourceUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialInternetRadioUrl.Checked)
+            {
+              track.OfficialInternetRadioInformation = tbOfficialInternetRadioUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialInternetRadioInformation != tbOfficialInternetRadioUrl.Text)
+            {
+              track.OfficialInternetRadioInformation = tbOfficialInternetRadioUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialPaymentUrl.Checked)
+            {
+              track.OfficialPaymentInformation = tbOfficialPaymentUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialPaymentInformation != tbOfficialPaymentUrl.Text)
+            {
+              track.OfficialPaymentInformation = tbOfficialPaymentUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckOfficialPublisherUrl.Checked)
+            {
+              track.OfficialPublisherInformation = tbOfficialPublisherUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.OfficialPublisherInformation != tbOfficialPublisherUrl.Text)
+            {
+              track.OfficialPublisherInformation = tbOfficialPublisherUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
+            if (ckCommercialInformationUrl.Checked)
+            {
+              track.CommercialInformation = tbCommercialInformationUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.CommercialInformation != tbCommercialInformationUrl.Text)
+            {
+              track.CommercialInformation = tbCommercialInformationUrl.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          #endregion
+
+          #region Involved People
+
+          if (_involvedPeopleIsChanged)
+          {
+            char[] d = new char[1] { '\0' };
+            string delim = new string(d);
+            string tmp = "";
+
+            foreach (DataGridViewRow pplrow in dataGridViewInvolvedPeople.Rows)
+            {
+              tmp += string.Format(@"{0}{1}{2}{3}", pplrow.Cells[0].Value, delim, pplrow.Cells[1].Value, delim);
+            }
+
+            if (tmp != "")
+              tmp.Trim(new[] { '\0' });
+
+            track.InvolvedPeople = tmp;
+            track.Changed = true;
+          }
+
+          if (_musicianIsChanged)
+          {
+            char[] d = new char[1] { '\0' };
+            string delim = new string(d);
+            string tmp = "";
+
+            foreach (DataGridViewRow musicianrow in dataGridViewMusician.Rows)
+            {
+              tmp += string.Format(@"{0}{1}{2}{3}", musicianrow.Cells[0].Value, delim, musicianrow.Cells[1].Value, delim);
+            }
+
+            if (tmp != null)
+              tmp.Trim(new[] { '\0' });
+
+            track.MusicCreditList = tmp;
+            track.Changed = true;
+          }
+
+          #endregion
+
+          #region Lyrics
+
+          if (ckRemoveLyrics.Checked)
+          {
+            track.LyricsFrames.Clear();
+            track.Changed = true;
+          }
+
+          if (_lyricsIsChanged)
+          {
+            List<Lyric> lyrics = new List<Lyric>();
+            foreach (DataGridViewRow lyricsrow in dataGridViewLyrics.Rows)
+            {
+              Lyric lyric = new Lyric(lyricsrow.Cells[0].Value.ToString(), lyricsrow.Cells[1].Value.ToString(),
+                                      lyricsrow.Cells[2].Value.ToString());
+              lyrics.Add(lyric);
+            }
+
+            if (lyrics.Count > 0)
+            {
+              track.LyricsFrames.Clear();
+              track.LyricsFrames.AddRange(lyrics);
+            }
+            else
+            {
+              track.LyricsFrames.Clear();
+            }
+
+            track.Changed = true;
+          }
+
+          #endregion
+
+          #region Rating
+
+          if (ckRemoveExistingRatings.Checked)
+          {
+            track.Ratings.Clear();
+            track.Changed = true;
+          }
+
+          if (_ratingIsChanged)
+          {
+            List<PopmFrame> ratings = new List<PopmFrame>();
+            foreach (DataGridViewRow ratingRow in dataGridViewRating.Rows)
+            {
+              PopmFrame rating = new PopmFrame(ratingRow.Cells[0].Value.ToString(), (int)ratingRow.Cells[1].Value,
+                                         (int)ratingRow.Cells[2].Value);
+              ratings.Add(rating);
+            }
+
+            if (ratings.Count > 0)
+            {
+              track.Ratings.Clear();
+              track.Ratings.AddRange(ratings);
+            }
+            else
+            {
+              track.Ratings.Clear();
+            }
+            track.Changed = true;
+          }
+
+          #endregion
+
+          if (trackChanged)
+          {
+            main.TracksGridView.Changed = true;
+            main.TracksGridView.SetBackgroundColorChanged(row.Index);
+            track.Changed = true;
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("Error applying changes from Tagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
+          main.TracksGridView.SetStatusColumnError(row);
+          main.TracksGridView.AddErrorMessage(row, ex.Message);
+          bErrors = true;
+        }
+      }
+
+
+      main.TracksGridView.Changed = bErrors;
+      // check, if we still have changed items in the list
+      foreach (TrackData track in main.TracksGridView.TrackList)
+      {
+        if (track.Changed)
+          main.TracksGridView.Changed = true;
+      }
+
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -1623,6 +2585,7 @@ namespace MPTagThat.TagEdit
           _pic = new Picture(oFD.FileName);
           AddPictureToList();
           AddPictureToPictureBox();
+          _pictureIsChanged = true;
         }
         catch (Exception ex)
         {
@@ -1785,6 +2748,26 @@ namespace MPTagThat.TagEdit
         }
       }
       Cursor = Cursors.Default;
+    }
+
+    #endregion
+
+    #region Detailed Information
+
+    /// <summary>
+    /// Set the TRack Length Tag with the duration from the file
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btGetTrackLength_Click(object sender, EventArgs e)
+    {
+      if (_selectedRowIndex == -1)
+      {
+        return;
+      }
+
+      TrackData track = main.TracksGridView.TrackList[_selectedRowIndex];
+      tbTrackLength.Text = track.DurationTimespan.TotalMilliseconds.ToString();
     }
 
     #endregion
@@ -2034,6 +3017,7 @@ namespace MPTagThat.TagEdit
           if (main.TracksGridView.View.SelectedRows.Count == 1)
           {
             curRow = main.TracksGridView.View.SelectedRows[0].Index;
+            _selectedRowIndex = main.TracksGridView.View.SelectedRows[0].Index;
             if ((curRow + 1) < main.TracksGridView.View.RowCount)
             {
               btApply_Click(null, new EventArgs());
@@ -2047,6 +3031,7 @@ namespace MPTagThat.TagEdit
           if (main.TracksGridView.View.SelectedRows.Count == 1)
           {
             curRow = main.TracksGridView.View.SelectedRows[0].Index;
+            _selectedRowIndex = main.TracksGridView.View.SelectedRows[0].Index;
             if ((curRow - 1) >= 0)
             {
               btApply_Click(null, new EventArgs());
@@ -2060,6 +3045,7 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
+
 
     #endregion
   }

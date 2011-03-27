@@ -104,6 +104,9 @@
       this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.btGetTrackLength = new MPTagThat.Core.WinControls.MPTButton();
+      this.tbTrackLength = new System.Windows.Forms.TextBox();
       this.lblTRackLength = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckMediaType = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.cbMediaType = new MPTagThat.Core.WinControls.MPTComboBox();
@@ -1209,10 +1212,13 @@
       // 
       // groupBoxMedia
       // 
+      this.groupBoxMedia.Controls.Add(this.btGetTrackLength);
+      this.groupBoxMedia.Controls.Add(this.tbTrackLength);
       this.groupBoxMedia.Controls.Add(this.lblTRackLength);
       this.groupBoxMedia.Controls.Add(this.ckMediaType);
       this.groupBoxMedia.Controls.Add(this.cbMediaType);
       this.groupBoxMedia.Controls.Add(this.lblMediaType);
+      this.groupBoxMedia.Controls.Add(this.ckTrackLength);
       this.groupBoxMedia.Id = "086a378a-becd-43ec-9eee-f02b00204d9c";
       this.groupBoxMedia.Localisation = "ttGroupBox1";
       this.groupBoxMedia.LocalisationContext = "TagEdit";
@@ -1220,6 +1226,39 @@
       this.groupBoxMedia.Name = "groupBoxMedia";
       this.groupBoxMedia.Size = new System.Drawing.Size(693, 89);
       this.groupBoxMedia.TabIndex = 3;
+      // 
+      // ckTrackLength
+      // 
+      this.ckTrackLength.AutoSize = true;
+      this.ckTrackLength.Localisation = "GetTrackLength";
+      this.ckTrackLength.LocalisationContext = "TagEdit";
+      this.ckTrackLength.Location = new System.Drawing.Point(205, 52);
+      this.ckTrackLength.Name = "ckTrackLength";
+      this.ckTrackLength.Size = new System.Drawing.Size(183, 20);
+      this.ckTrackLength.TabIndex = 4;
+      this.ckTrackLength.Text = "Get Track Length from File";
+      this.ckTrackLength.UseVisualStyleBackColor = true;
+      // 
+      // btGetTrackLength
+      // 
+      this.btGetTrackLength.Id = "6b5f182e-fad3-442a-beec-5728562327d2";
+      this.btGetTrackLength.Localisation = "GetTrackLengthFromFile";
+      this.btGetTrackLength.LocalisationContext = "TagEdit";
+      this.btGetTrackLength.Location = new System.Drawing.Point(392, 49);
+      this.btGetTrackLength.Name = "btGetTrackLength";
+      this.btGetTrackLength.Size = new System.Drawing.Size(116, 23);
+      this.btGetTrackLength.TabIndex = 4;
+      this.btGetTrackLength.Text = "Get from File";
+      this.btGetTrackLength.UseVisualStyleBackColor = true;
+      this.btGetTrackLength.Click += new System.EventHandler(this.btGetTrackLength_Click);
+      // 
+      // tbTrackLength
+      // 
+      this.tbTrackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbTrackLength.Location = new System.Drawing.Point(205, 50);
+      this.tbTrackLength.Name = "tbTrackLength";
+      this.tbTrackLength.Size = new System.Drawing.Size(173, 22);
+      this.tbTrackLength.TabIndex = 30;
       // 
       // lblTRackLength
       // 
@@ -3303,5 +3342,8 @@
     private Core.WinControls.MPTLabel lbEditedFile;
     private Core.WinControls.MPTButton btNext;
     private Core.WinControls.MPTButton btPrevious;
+    private Core.WinControls.MPTButton btGetTrackLength;
+    protected System.Windows.Forms.TextBox tbTrackLength;
+    private Core.WinControls.MPTCheckBox ckTrackLength;
   }
 }
