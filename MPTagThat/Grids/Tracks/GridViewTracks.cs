@@ -1507,6 +1507,11 @@ namespace MPTagThat.GridView
             continue;
           }
           count++;
+          if (count > 20)
+          {
+            tracksGrid.Show();
+            tracksGrid.ResumeLayout();
+          }
           _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
         }
       }
