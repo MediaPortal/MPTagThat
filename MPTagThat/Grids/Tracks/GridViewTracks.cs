@@ -399,6 +399,9 @@ namespace MPTagThat.GridView
             string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
                                               String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
                                                             ext));
+
+            track = Track.Create(newFileName);
+            bindingList[rowIndex] = track;
           }
 
           // Check, if we need to create a folder.jpg

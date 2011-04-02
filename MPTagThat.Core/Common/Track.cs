@@ -361,7 +361,10 @@ namespace MPTagThat.Core
           file.Tag.Comment = "";
         }
 
-        id3v2tag.IsCompilation = track.Compilation;
+        if (track.TagType.ToLower() == "mp3")
+        {
+          id3v2tag.IsCompilation = track.Compilation;
+        }
 
         file.Tag.Disc = track.DiscNumber;
         file.Tag.DiscCount = track.DiscCount;
@@ -468,10 +471,10 @@ namespace MPTagThat.Core
 
         #endregion
         
-        // Check for renamed file ???
-
-        // Involved People - Look at Single Tagedit Apply
-
+        // Now, depending on which frames the user wants to save, we will remove the other Frames
+        file = Util.FormatID3Tag(file);
+        
+        // SAve the file
         file.Save();
       }
       catch (Exception ex)
