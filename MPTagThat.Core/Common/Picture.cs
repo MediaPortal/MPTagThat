@@ -91,6 +91,11 @@ namespace MPTagThat.Core.Common
 
     #region Public Methods
 
+    /// <summary>
+    /// Creates an Image from a Taglib Byte structure
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     public Image ImageFromData(byte[] data)
     {
       Image img = null;
@@ -107,6 +112,27 @@ namespace MPTagThat.Core.Common
 
       return img;
     }
+
+    /// <summary>
+    /// Returns the Byte array from an image to be used in Taglib.Picture
+    /// </summary>
+    /// <param name="img"></param>
+    /// <returns></returns>
+    public static byte[] ImageToByte(Image img)
+    {
+      // Need to make a copy, otherwise we have a GDI+ Error
+      
+      byte[] byteArray = new byte[0];
+      using (MemoryStream stream = new MemoryStream())
+      {
+        Bitmap bCopy = new Bitmap(img);
+        bCopy.Save(stream, img.RawFormat);
+        stream.Close();
+        byteArray = stream.ToArray();
+      }
+      return byteArray;
+    }
+
 
     #endregion
   }

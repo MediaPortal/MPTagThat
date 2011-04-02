@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using MPTagThat.Core.Common;
 using TagLib;
 using TagLib.Id3v2;
+using Picture = MPTagThat.Core.Common.Picture;
 
 namespace MPTagThat.Core
 {
@@ -67,7 +70,7 @@ namespace MPTagThat.Core
       }
 
       #region Set Common Values
-      
+
       track.Id = new Guid();
       track.FullFileName = fileName;
       track.FileName = Path.GetFileName(fileName);
@@ -149,7 +152,7 @@ namespace MPTagThat.Core
         // First read in all POPM Frames found
         foreach (PopularimeterFrame popmframe in id3v2tag.GetFrames<PopularimeterFrame>())
         {
-         track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+          track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
         }
 
         TagLib.Id3v2.PopularimeterFrame popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
@@ -304,54 +307,178 @@ namespace MPTagThat.Core
         error = true;
       }
 
+      if (file == null || error)
+      {
+        log.Error("File Read: Error processing file.: {0}", track.FullFileName);
+        return false;
+      }
 
-      // Remove Tags first!!!!
-      // Remove Comments first!!!!
-
-      /*
-       bool commentRemoved = false;
+      try
+      {
+        // Get the ID3 Frame for ID3 specifc frame handling
+        TagLib.Id3v1.Tag id3v1tag = null;
+        TagLib.Id3v2.Tag id3v2tag = null;
         if (track.TagType.ToLower() == "mp3")
         {
-          Tag id3v1tag = track.File.GetTag(TagTypes.Id3v1, true) as Tag;
-          TagLib.Id3v2.Tag id3v2tag = track.File.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+          id3v1tag = file.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
+          id3v2tag = file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
+        }
 
-          if (id3v1tag.Comment != null)
+        // Remove Tags, if they have been removed in TagEdit Panel
+        foreach (TagLib.TagTypes tagType in track.TagsRemoved)
+        {
+          file.RemoveTags(tagType);
+        }
+
+        #region Main Tags
+        string[] splitValues = track.Artist.Split(new[] { ';', '|' });
+        file.Tag.Performers = splitValues;
+
+        splitValues = track.AlbumArtist.Split(new[] { ';', '|' });
+        file.Tag.AlbumArtists = splitValues;
+
+        file.Tag.Album = track.Album.Trim();
+        file.Tag.BeatsPerMinute = (uint) track.BPM;
+        
+
+        if (track.Comment != "")
+        {
+          track.Comment = "";
+          if (track.TagType.ToLower() == "mp3")
           {
-            track.Comment = "";
-            id3v1tag.Comment = null;
-            commentRemoved = true;
+            id3v1tag.Comment = track.Comment;
+            foreach (Comment comment in track.ID3Comments)
+            {
+              CommentsFrame commentsframe = CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
+              commentsframe.Text = comment.Text;
+            }
           }
-          IEnumerator<CommentsFrame> id3v2comments = id3v2tag.GetFrames<CommentsFrame>().GetEnumerator();
-          if (id3v2comments.MoveNext())
-          {
-            track.Comment = "";
-            id3v2tag.RemoveFrames("COMM");
-            commentRemoved = true;
-          }
+          else
+            file.Tag.Comment = track.Comment;
         }
         else
         {
-          if (track.Comment != "")
-          {
-            commentRemoved = true;
-            track.Comment = "";
-          }
+          file.Tag.Comment = "";
         }
 
-        if (commentRemoved)
+        id3v2tag.IsCompilation = track.Compilation;
+
+        file.Tag.Disc = track.DiscNumber;
+        file.Tag.DiscCount = track.DiscCount;
+
+        splitValues = track.Genre.Split(new[] { ';', '|' });
+        file.Tag.Genres = splitValues;
+
+        file.Tag.Title = track.Title;
+
+        file.Tag.Track = track.TrackNumber;
+        file.Tag.TrackCount = track.TrackCount;
+
+        file.Tag.Year = (uint)track.Year;
+
+        #endregion
+
+        #region Detailed Information
+
+        splitValues = track.Composer.Split(new[] { ';', '|' });
+        file.Tag.Composers = splitValues;
+        file.Tag.Conductor = track.Conductor;
+        file.Tag.Copyright = track.Copyright;
+        file.Tag.Grouping = track.Grouping;
+
+        #endregion
+
+        #region Picture
+
+        List<TagLib.Picture> pics = new List<TagLib.Picture>();
+        foreach(Picture pic in track.Pictures)
         {
-          SetBackgroundColorChanged(row.Index);
-          track.Changed = true;
-          _itemsChanged = true;
-        }
-      */
-      // Check for renamed file ???
-      
-      // Involved People - Look at Single Tagedit Apply
-      
-      // Lyrics
+          ImageConverter imgConverter = new ImageConverter();
+          TagLib.Picture tagPic = new TagLib.Picture();
 
-      // Ratings
+          try
+          {
+            byte[] byteArray = Picture.ImageToByte(pic.Data);
+            ByteVector data = new ByteVector(byteArray);
+            tagPic.Data = data;
+            tagPic.Description = pic.Description;
+            tagPic.MimeType = pic.MimeType;
+            tagPic.Type = pic.Type;
+            pics.Add(tagPic);
+          }
+          catch (Exception ex)
+          {
+            log.Error("Error saving Picture: {0}", ex.Message);
+          }
+
+          file.Tag.Pictures = pics.ToArray();
+        }
+
+        #endregion
+
+        #region Lyrics
+
+        if (track.Lyrics != "")
+        {
+          track.Lyrics = "";
+          if (track.TagType.ToLower() == "mp3")
+          {
+            foreach (Lyric lyric in track.LyricsFrames)
+            {
+              UnsynchronisedLyricsFrame lyricframe = UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description, lyric.Language, true);
+              lyricframe.Text = lyric.Text;
+            }
+          }
+          else
+            file.Tag.Lyrics = track.Lyrics;
+        }
+        else
+        {
+          file.Tag.Lyrics = "";
+        }
+        #endregion
+
+        #region Ratings
+
+        if (track.TagType.ToLower() == "mp3")
+        {
+          if (track.Ratings.Count > 0)
+          {
+            foreach (PopmFrame rating in track.Ratings)
+            {
+              PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, rating.User, true);
+              popmFrame.Rating = Convert.ToByte(rating.Rating);
+              popmFrame.PlayCount = Convert.ToUInt32(rating.PlayCount);
+            }
+          }
+          else
+            id3v2tag.RemoveFrames("POPM");
+        }
+        
+
+        #endregion
+
+        #region Non- Standard Taglib and User Defined Frames
+
+        foreach (string id in track.Frames.Keys)
+        {
+          ByteVector frameId = new ByteVector(id);
+          id3v2tag.SetTextFrame(frameId, track.Frames[id].ToString());
+        }
+
+        #endregion
+        
+        // Check for renamed file ???
+
+        // Involved People - Look at Single Tagedit Apply
+
+        file.Save();
+      }
+      catch (Exception ex)
+      {
+        log.Error("File Read: Error processing file: {0} {1}", track.FullFileName, ex.Message);
+        error = true;
+      }
 
       return error;
     }

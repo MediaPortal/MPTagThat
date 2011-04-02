@@ -104,13 +104,13 @@
       this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.btGetTrackLength = new MPTagThat.Core.WinControls.MPTButton();
       this.tbTrackLength = new System.Windows.Forms.TextBox();
       this.lblTRackLength = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckMediaType = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.cbMediaType = new MPTagThat.Core.WinControls.MPTComboBox();
       this.lblMediaType = new MPTagThat.Core.WinControls.MPTLabel();
+      this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.groupBoxSort = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbTitleSort = new System.Windows.Forms.TextBox();
       this.ckTitleSort = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -1082,6 +1082,7 @@
       this.dataGridViewPicture.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dataGridViewPicture.Size = new System.Drawing.Size(330, 223);
       this.dataGridViewPicture.TabIndex = 24;
+      this.dataGridViewPicture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPicture_CellClick);
       // 
       // Description
       // 
@@ -1227,18 +1228,6 @@
       this.groupBoxMedia.Size = new System.Drawing.Size(693, 89);
       this.groupBoxMedia.TabIndex = 3;
       // 
-      // ckTrackLength
-      // 
-      this.ckTrackLength.AutoSize = true;
-      this.ckTrackLength.Localisation = "GetTrackLength";
-      this.ckTrackLength.LocalisationContext = "TagEdit";
-      this.ckTrackLength.Location = new System.Drawing.Point(205, 52);
-      this.ckTrackLength.Name = "ckTrackLength";
-      this.ckTrackLength.Size = new System.Drawing.Size(183, 20);
-      this.ckTrackLength.TabIndex = 4;
-      this.ckTrackLength.Text = "Get Track Length from File";
-      this.ckTrackLength.UseVisualStyleBackColor = true;
-      // 
       // btGetTrackLength
       // 
       this.btGetTrackLength.Id = "6b5f182e-fad3-442a-beec-5728562327d2";
@@ -1306,6 +1295,18 @@
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
       this.lblMediaType.Text = "Media Type:";
+      // 
+      // ckTrackLength
+      // 
+      this.ckTrackLength.AutoSize = true;
+      this.ckTrackLength.Localisation = "GetTrackLength";
+      this.ckTrackLength.LocalisationContext = "TagEdit";
+      this.ckTrackLength.Location = new System.Drawing.Point(205, 52);
+      this.ckTrackLength.Name = "ckTrackLength";
+      this.ckTrackLength.Size = new System.Drawing.Size(183, 20);
+      this.ckTrackLength.TabIndex = 4;
+      this.ckTrackLength.Text = "Get Track Length from File";
+      this.ckTrackLength.UseVisualStyleBackColor = true;
       // 
       // groupBoxSort
       // 
