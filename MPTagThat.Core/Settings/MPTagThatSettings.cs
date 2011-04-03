@@ -84,6 +84,14 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool PlayerPanelCollapsed { get; set; }
 
+    /// <summary>
+    /// Location of the Track List
+    /// 0 - Top
+    /// 1 - Bottom
+    /// </summary>
+    [Setting(SettingScope.User, "1")]
+    public int TrackListLocation { get; set; }
+
     #endregion
 
     [Setting(SettingScope.User, "")]

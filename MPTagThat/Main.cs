@@ -336,10 +336,22 @@ namespace MPTagThat
       playerControl.Size = new Size(1008, 68);
       playerControl.TabIndex = 0;
 
-      panelFileList.Controls.Add(gridViewControl);
-      panelFileList.Controls.Add(gridViewBurn);
-      panelFileList.Controls.Add(gridViewRip);
-      panelFileList.Controls.Add(gridViewConvert);
+      // Look where to place the Track LIst Panel
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        panelFileList.Controls.Add(gridViewControl);
+        panelFileList.Controls.Add(gridViewBurn);
+        panelFileList.Controls.Add(gridViewRip);
+        panelFileList.Controls.Add(gridViewConvert);
+      }
+      else
+      {
+        panelMiddleBottom.Controls.Add(gridViewControl);
+        panelMiddleBottom.Controls.Add(gridViewBurn);
+        panelMiddleBottom.Controls.Add(gridViewRip);
+        panelMiddleBottom.Controls.Add(gridViewConvert);        
+      }
+
       playerPanel.Controls.Add(playerControl);
 
       // Set reference to Main, so that we may use the ErrorGrid
@@ -365,10 +377,18 @@ namespace MPTagThat
       miscInfoControl.Dock = DockStyle.Fill;
       panelRight.Controls.Add(miscInfoControl);
 
-      // Setup TagEdkit Control
+      // Setup TagEdit Control
       tagEditControl = new TagEditControl(this);
       tagEditControl.Dock = DockStyle.Fill;
-      panelMiddleBottom.Controls.Add(tagEditControl);
+
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        panelMiddleBottom.Controls.Add(tagEditControl);
+      }
+      else
+      {
+        panelFileList.Controls.Add(tagEditControl);
+      }
 
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
