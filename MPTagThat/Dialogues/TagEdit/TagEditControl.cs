@@ -2987,6 +2987,19 @@ namespace MPTagThat.TagEdit
           return true;
         }
       }
+
+      if ((int)keyData == 13)   // Handle Enter key as default Apply Button
+      {
+        btApply_Click(null, new EventArgs());
+        return true;
+      }
+      else if ((int)keyData == 27)  // Handle Escape to clear the form
+      {
+        ClearForm();
+        return true;
+      }
+
+
       return base.ProcessCmdKey(ref msg, keyData);
     }
 
@@ -3045,7 +3058,6 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
-
 
     #endregion
   }
