@@ -478,10 +478,12 @@ namespace MPTagThat
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       gridViewControl.CheckForChanges();
+
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = Location;
       Options.MainSettings.FormSize = ClientSize;
+      Options.MainSettings.FormIsMaximized = WindowState == FormWindowState.Maximized ? true : false;
       Options.MainSettings.LeftPanelSize = panelLeft.Width;
       Options.MainSettings.RightPanelSize = panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
@@ -637,6 +639,9 @@ namespace MPTagThat
         _formSize.Height = 768;
       }
       Size = _formSize;
+
+      if (Options.MainSettings.FormIsMaximized)
+        WindowState = FormWindowState.Maximized;
 
       if (Options.MainSettings.LeftPanelSize > -1)
         panelLeft.Width = Options.MainSettings.LeftPanelSize;

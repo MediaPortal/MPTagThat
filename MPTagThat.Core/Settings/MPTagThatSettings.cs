@@ -66,6 +66,9 @@ namespace MPTagThat.Core
       set { _formSize = value; }
     }
 
+    [Setting(SettingScope.User, "false")]
+    public bool FormIsMaximized { get; set; }
+
     [Setting(SettingScope.User, "-1")]
     public int LeftPanelSize { get; set; }
 
