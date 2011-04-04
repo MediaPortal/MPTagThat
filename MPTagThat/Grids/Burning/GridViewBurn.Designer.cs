@@ -57,12 +57,11 @@ namespace MPTagThat.GridView
       // 
       // lbMediaInfo
       // 
-      this.lbMediaInfo.AutoSize = true;
       this.lbMediaInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbMediaInfo.ForeColor = System.Drawing.Color.White;
       this.lbMediaInfo.Localisation = "lbMediaInfo";
       this.lbMediaInfo.LocalisationContext = "panelTop";
-      this.lbMediaInfo.Location = new System.Drawing.Point(6, 6);
+      this.lbMediaInfo.Location = new System.Drawing.Point(10, 6);
       this.lbMediaInfo.Name = "lbMediaInfo";
       this.lbMediaInfo.Size = new System.Drawing.Size(137, 20);
       this.lbMediaInfo.TabIndex = 2;
@@ -70,12 +69,11 @@ namespace MPTagThat.GridView
       // 
       // lbUsed
       // 
-      this.lbUsed.AutoSize = true;
       this.lbUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbUsed.ForeColor = System.Drawing.Color.White;
       this.lbUsed.Localisation = "lbUsed";
       this.lbUsed.LocalisationContext = "panelTop";
-      this.lbUsed.Location = new System.Drawing.Point(6, 31);
+      this.lbUsed.Location = new System.Drawing.Point(10, 31);
       this.lbUsed.Name = "lbUsed";
       this.lbUsed.Size = new System.Drawing.Size(155, 20);
       this.lbUsed.TabIndex = 1;
@@ -83,12 +81,11 @@ namespace MPTagThat.GridView
       // 
       // lbBurningStatus
       // 
-      this.lbBurningStatus.AutoSize = true;
       this.lbBurningStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbBurningStatus.ForeColor = System.Drawing.Color.White;
       this.lbBurningStatus.Localisation = "lbBurningStatus";
       this.lbBurningStatus.LocalisationContext = "panelTop";
-      this.lbBurningStatus.Location = new System.Drawing.Point(6, 55);
+      this.lbBurningStatus.Location = new System.Drawing.Point(10, 55);
       this.lbBurningStatus.Name = "lbBurningStatus";
       this.lbBurningStatus.Size = new System.Drawing.Size(80, 20);
       this.lbBurningStatus.TabIndex = 0;
@@ -131,13 +128,13 @@ namespace MPTagThat.GridView
       this.dataGridViewBurn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.dataGridViewBurn.Size = new System.Drawing.Size(527, 355);
       this.dataGridViewBurn.TabIndex = 0;
-      this.dataGridViewBurn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-      this.dataGridViewBurn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
-      this.dataGridViewBurn.DragOver += new System.Windows.Forms.DragEventHandler(this.OnDragOver);
-      this.dataGridViewBurn.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewBurn_RowsAdded);
       this.dataGridViewBurn.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.OnCellPainting);
+      this.dataGridViewBurn.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewBurn_RowsAdded);
       this.dataGridViewBurn.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewBurn_RowsRemoved);
       this.dataGridViewBurn.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDragDrop);
+      this.dataGridViewBurn.DragOver += new System.Windows.Forms.DragEventHandler(this.OnDragOver);
+      this.dataGridViewBurn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
+      this.dataGridViewBurn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
       // 
       // GridViewBurn
       // 

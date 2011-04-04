@@ -723,6 +723,16 @@ namespace MPTagThat
         return;
       }
 
+      if (sender == null)
+      {
+        return;
+      }
+
+      if ((sender as Ribbon).CurrentTabPage == null)
+      {
+        return;
+      }
+
       string tabPage = (sender as Ribbon).CurrentTabPage.Tag as string;
 
       switch (tabPage)
@@ -735,6 +745,7 @@ namespace MPTagThat
               return;
             }
 
+            main.ToggleDetailPanel(false);
             main.TracksGridView.Hide();
             main.BurnGridView.Hide();
             main.RipGridView.Show();
@@ -753,6 +764,7 @@ namespace MPTagThat
               return;
             }
 
+            main.ToggleDetailPanel(false);
             main.TracksGridView.Hide();
             main.RipGridView.Hide();
             main.BurnGridView.SetMediaInfo();
@@ -775,6 +787,7 @@ namespace MPTagThat
 
             textBoxConvertOutputFolder.Text = Options.MainSettings.RipTargetFolder;
 
+            main.ToggleDetailPanel(false);
             main.TracksGridView.Hide();
             main.RipGridView.Hide();
             main.BurnGridView.Hide();
@@ -795,6 +808,7 @@ namespace MPTagThat
               return;
             }
 
+            main.ToggleDetailPanel(true);
             main.BurnGridView.Hide();
             main.RipGridView.Hide();
             main.TracksGridView.Show();

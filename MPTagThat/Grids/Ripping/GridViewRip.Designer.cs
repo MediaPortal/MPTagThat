@@ -67,12 +67,11 @@ namespace MPTagThat.GridView
       // 
       // lbRippingStatus
       // 
-      this.lbRippingStatus.AutoSize = true;
       this.lbRippingStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbRippingStatus.ForeColor = System.Drawing.Color.White;
       this.lbRippingStatus.Localisation = "lbRippingStatus";
       this.lbRippingStatus.LocalisationContext = "panelTop";
-      this.lbRippingStatus.Location = new System.Drawing.Point(2, 58);
+      this.lbRippingStatus.Location = new System.Drawing.Point(6, 58);
       this.lbRippingStatus.Name = "lbRippingStatus";
       this.lbRippingStatus.Size = new System.Drawing.Size(79, 20);
       this.lbRippingStatus.TabIndex = 8;
@@ -96,7 +95,6 @@ namespace MPTagThat.GridView
       // 
       // lbYear
       // 
-      this.lbYear.AutoSize = true;
       this.lbYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbYear.ForeColor = System.Drawing.Color.White;
       this.lbYear.Localisation = "Year";
@@ -109,7 +107,6 @@ namespace MPTagThat.GridView
       // 
       // lbGenre
       // 
-      this.lbGenre.AutoSize = true;
       this.lbGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbGenre.ForeColor = System.Drawing.Color.White;
       this.lbGenre.Localisation = "Genre";
@@ -123,7 +120,7 @@ namespace MPTagThat.GridView
       // tbAlbum
       // 
       this.tbAlbum.ForeColor = System.Drawing.SystemColors.WindowText;
-      this.tbAlbum.Location = new System.Drawing.Point(112, 28);
+      this.tbAlbum.Location = new System.Drawing.Point(116, 28);
       this.tbAlbum.Name = "tbAlbum";
       this.tbAlbum.Size = new System.Drawing.Size(201, 20);
       this.tbAlbum.TabIndex = 3;
@@ -131,19 +128,18 @@ namespace MPTagThat.GridView
       // tbAlbumArtist
       // 
       this.tbAlbumArtist.ForeColor = System.Drawing.SystemColors.WindowText;
-      this.tbAlbumArtist.Location = new System.Drawing.Point(112, 4);
+      this.tbAlbumArtist.Location = new System.Drawing.Point(116, 4);
       this.tbAlbumArtist.Name = "tbAlbumArtist";
       this.tbAlbumArtist.Size = new System.Drawing.Size(201, 20);
       this.tbAlbumArtist.TabIndex = 2;
       // 
       // lbAlbum
       // 
-      this.lbAlbum.AutoSize = true;
       this.lbAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbAlbum.ForeColor = System.Drawing.Color.White;
       this.lbAlbum.Localisation = "Album";
       this.lbAlbum.LocalisationContext = "TagEdit";
-      this.lbAlbum.Location = new System.Drawing.Point(4, 29);
+      this.lbAlbum.Location = new System.Drawing.Point(8, 29);
       this.lbAlbum.Name = "lbAlbum";
       this.lbAlbum.Size = new System.Drawing.Size(58, 20);
       this.lbAlbum.TabIndex = 1;
@@ -151,12 +147,11 @@ namespace MPTagThat.GridView
       // 
       // lbAlbumArtist
       // 
-      this.lbAlbumArtist.AutoSize = true;
       this.lbAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbAlbumArtist.ForeColor = System.Drawing.Color.White;
       this.lbAlbumArtist.Localisation = "AlbumArtist";
       this.lbAlbumArtist.LocalisationContext = "TagEdit";
-      this.lbAlbumArtist.Location = new System.Drawing.Point(4, 4);
+      this.lbAlbumArtist.Location = new System.Drawing.Point(8, 4);
       this.lbAlbumArtist.Name = "lbAlbumArtist";
       this.lbAlbumArtist.Size = new System.Drawing.Size(99, 20);
       this.lbAlbumArtist.TabIndex = 0;

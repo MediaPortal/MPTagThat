@@ -803,6 +803,48 @@ namespace MPTagThat
       return _musicDatabaseBuild.DatabaseScanStatus();
     }
 
+    /// <summary>
+    /// Toogles the display of the detail panel, which we should hide / deactivate when not in TRacks View
+    /// </summary>
+    /// <param name="show"></param>
+    public void ToggleDetailPanel(bool show)
+    {
+      if (show)
+      {
+        if (Options.MainSettings.TrackListLocation == 0)
+        {
+          // Enable Splitter and show the bar
+          if (splitterBottom.IsCollapsed)
+          {
+            splitterBottom.ToggleState();
+          }
+        }
+        else
+        {
+          panelMiddleTop.Show();
+          panelMiddleBottom.Dock = DockStyle.Bottom;
+        }
+        splitterBottom.Enabled = true;
+      }
+      else
+      {
+        if (Options.MainSettings.TrackListLocation == 0)
+        {
+          // Disable splitter
+          if (!splitterBottom.IsCollapsed)
+          {
+            splitterBottom.ToggleState();
+          }
+        }
+        else
+        {
+          panelMiddleTop.Hide();
+          panelMiddleBottom.Dock = DockStyle.Fill;
+        }
+        splitterBottom.Enabled = false;
+      }
+
+    }
     #endregion
 
     #region Event Handler

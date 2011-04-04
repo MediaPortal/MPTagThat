@@ -82,7 +82,7 @@ namespace MPTagThat
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 873);
+      this.panelBottom.Location = new System.Drawing.Point(0, 880);
       this.panelBottom.Name = "panelBottom";
       this.panelBottom.Size = new System.Drawing.Size(1008, 90);
       this.panelBottom.TabIndex = 12;
@@ -107,7 +107,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 147);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1008, 718);
+      this.panelMiddle.Size = new System.Drawing.Size(1008, 730);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -118,7 +118,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(676, 446);
+      this.panelMiddleTop.Size = new System.Drawing.Size(676, 458);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -126,7 +126,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(676, 358);
+      this.panelFileList.Size = new System.Drawing.Size(676, 370);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -175,7 +175,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 718);
+      this.panelLeft.Size = new System.Drawing.Size(150, 730);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -183,7 +183,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 718);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 730);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -212,7 +212,7 @@ namespace MPTagThat
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.panelRight.Location = new System.Drawing.Point(842, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 718);
+      this.panelRight.Size = new System.Drawing.Size(166, 730);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -225,7 +225,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 446);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 458);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -236,7 +236,7 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 454);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 466);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
       this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
       this.panelMiddleBottom.TabIndex = 12;
@@ -249,7 +249,7 @@ namespace MPTagThat
       this.splitterPlayer.ControlToHide = this.panelBottom;
       this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 865);
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 877);
       this.splitterPlayer.Name = "splitterPlayer";
       this.splitterPlayer.TabIndex = 13;
       this.splitterPlayer.TabStop = false;
@@ -279,7 +279,7 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Location = new System.Drawing.Point(0, 963);
+      this.statusBar.Location = new System.Drawing.Point(0, 970);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
       this.statusBar.Size = new System.Drawing.Size(1008, 22);
@@ -311,19 +311,19 @@ namespace MPTagThat
       // 
       // toolStripStatusLabelFiles
       // 
-      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 4);
+      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 5);
       this.toolStripStatusLabelFiles.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFiles.Name = "toolStripStatusLabelFiles";
-      this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(57, 15);
+      this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(57, 13);
       this.toolStripStatusLabelFiles.TabIndex = 0;
       this.toolStripStatusLabelFiles.Text = "                   ";
       // 
       // toolStripStatusLabelFilter
       // 
-      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 4);
+      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 5);
       this.toolStripStatusLabelFilter.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFilter.Name = "toolStripStatusLabelFilter";
-      this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(48, 15);
+      this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(48, 13);
       this.toolStripStatusLabelFilter.TabIndex = 1;
       this.toolStripStatusLabelFilter.Text = "                ";
       // 
@@ -340,10 +340,10 @@ namespace MPTagThat
       // 
       // toolStripStatusLabelFolder
       // 
-      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(13, 4);
+      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(13, 5);
       this.toolStripStatusLabelFolder.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFolder.Name = "toolStripStatusLabelFolder";
-      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(63, 15);
+      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(63, 13);
       this.toolStripStatusLabelFolder.TabIndex = 0;
       this.toolStripStatusLabelFolder.Text = "                     ";
       // 
@@ -424,7 +424,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1008, 985);
+      this.ClientSize = new System.Drawing.Size(1008, 992);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.splitterPlayer);
       this.Controls.Add(this.panelBottom);
