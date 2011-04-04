@@ -815,6 +815,11 @@ namespace MPTagThat.GridView
 
     #endregion
 
+    private void dataGridViewBurn_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
     #endregion
   }
 }

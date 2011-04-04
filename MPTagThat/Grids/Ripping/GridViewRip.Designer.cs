@@ -42,6 +42,7 @@ namespace MPTagThat.GridView
       this.lbAlbumArtist = new MPTagThat.Core.WinControls.MPTLabel();
       this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
       this.dataGridViewRip = new System.Windows.Forms.DataGridView();
+      this.leftAdjustmentPanel = new MPTagThat.Core.WinControls.MPTPanel();
       this.panelTop.SuspendLayout();
       this.panelMiddle.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRip)).BeginInit();
@@ -160,6 +161,7 @@ namespace MPTagThat.GridView
       // panelMiddle
       // 
       this.panelMiddle.Controls.Add(this.dataGridViewRip);
+      this.panelMiddle.Controls.Add(this.leftAdjustmentPanel);
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 81);
       this.panelMiddle.Name = "panelMiddle";
@@ -177,12 +179,20 @@ namespace MPTagThat.GridView
       this.dataGridViewRip.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
       this.dataGridViewRip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridViewRip.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.dataGridViewRip.Location = new System.Drawing.Point(0, 0);
+      this.dataGridViewRip.Location = new System.Drawing.Point(10, 0);
       this.dataGridViewRip.Name = "dataGridViewRip";
       this.dataGridViewRip.RowHeadersVisible = false;
       this.dataGridViewRip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewRip.Size = new System.Drawing.Size(800, 300);
+      this.dataGridViewRip.Size = new System.Drawing.Size(790, 300);
       this.dataGridViewRip.TabIndex = 0;
+      // 
+      // leftAdjustmentPanel
+      // 
+      this.leftAdjustmentPanel.Dock = System.Windows.Forms.DockStyle.Left;
+      this.leftAdjustmentPanel.Location = new System.Drawing.Point(0, 0);
+      this.leftAdjustmentPanel.Name = "leftAdjustmentPanel";
+      this.leftAdjustmentPanel.Size = new System.Drawing.Size(10, 300);
+      this.leftAdjustmentPanel.TabIndex = 1;
       // 
       // GridViewRip
       // 
@@ -214,5 +224,6 @@ namespace MPTagThat.GridView
     private MPTagThat.Core.WinControls.MPTLabel lbYear;
     private MPTagThat.Core.WinControls.MPTLabel lbGenre;
     private MPTagThat.Core.WinControls.MPTLabel lbRippingStatus;
+    private Core.WinControls.MPTPanel leftAdjustmentPanel;
   }
 }

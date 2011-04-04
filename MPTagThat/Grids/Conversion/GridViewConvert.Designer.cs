@@ -32,6 +32,7 @@ namespace MPTagThat.GridView
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.dataGridViewConvert = new System.Windows.Forms.DataGridView();
+      this.leftAdjustmentPanel = new MPTagThat.Core.WinControls.MPTPanel();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConvert)).BeginInit();
       this.SuspendLayout();
       // 
@@ -64,11 +65,20 @@ namespace MPTagThat.GridView
       this.dataGridViewConvert.TabIndex = 1;
       this.dataGridViewConvert.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewConvert_MouseClick);
       // 
+      // leftAdjustmentPanel
+      // 
+      this.leftAdjustmentPanel.Dock = System.Windows.Forms.DockStyle.Left;
+      this.leftAdjustmentPanel.Location = new System.Drawing.Point(0, 0);
+      this.leftAdjustmentPanel.Name = "leftAdjustmentPanel";
+      this.leftAdjustmentPanel.Size = new System.Drawing.Size(10, 447);
+      this.leftAdjustmentPanel.TabIndex = 2;
+      // 
       // GridViewConvert
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.dataGridViewConvert);
+      this.Controls.Add(this.leftAdjustmentPanel);
       this.Name = "GridViewConvert";
       this.Size = new System.Drawing.Size(540, 447);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConvert)).EndInit();
@@ -79,5 +89,6 @@ namespace MPTagThat.GridView
     #endregion
 
     private System.Windows.Forms.DataGridView dataGridViewConvert;
+    private Core.WinControls.MPTPanel leftAdjustmentPanel;
   }
 }

@@ -38,6 +38,7 @@ namespace MPTagThat.GridView
       this.lbBurningStatus = new MPTagThat.Core.WinControls.MPTLabel();
       this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
       this.dataGridViewBurn = new System.Windows.Forms.DataGridView();
+      this.leftAdjustmentPanel = new MPTagThat.Core.WinControls.MPTPanel();
       this.panelTop.SuspendLayout();
       this.panelMiddle.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBurn)).BeginInit();
@@ -95,6 +96,7 @@ namespace MPTagThat.GridView
       // 
       this.panelMiddle.BackColor = System.Drawing.SystemColors.Control;
       this.panelMiddle.Controls.Add(this.dataGridViewBurn);
+      this.panelMiddle.Controls.Add(this.leftAdjustmentPanel);
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 81);
       this.panelMiddle.Name = "panelMiddle";
@@ -121,13 +123,14 @@ namespace MPTagThat.GridView
       this.dataGridViewBurn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
       this.dataGridViewBurn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridViewBurn.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.dataGridViewBurn.Location = new System.Drawing.Point(0, 0);
+      this.dataGridViewBurn.Location = new System.Drawing.Point(10, 0);
       this.dataGridViewBurn.Name = "dataGridViewBurn";
       this.dataGridViewBurn.ReadOnly = true;
       this.dataGridViewBurn.RowHeadersVisible = false;
       this.dataGridViewBurn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewBurn.Size = new System.Drawing.Size(527, 355);
+      this.dataGridViewBurn.Size = new System.Drawing.Size(517, 355);
       this.dataGridViewBurn.TabIndex = 0;
+      this.dataGridViewBurn.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBurn_CellContentClick);
       this.dataGridViewBurn.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.OnCellPainting);
       this.dataGridViewBurn.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewBurn_RowsAdded);
       this.dataGridViewBurn.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewBurn_RowsRemoved);
@@ -135,6 +138,14 @@ namespace MPTagThat.GridView
       this.dataGridViewBurn.DragOver += new System.Windows.Forms.DragEventHandler(this.OnDragOver);
       this.dataGridViewBurn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
       this.dataGridViewBurn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
+      // 
+      // leftAdjustmentPanel
+      // 
+      this.leftAdjustmentPanel.Dock = System.Windows.Forms.DockStyle.Left;
+      this.leftAdjustmentPanel.Location = new System.Drawing.Point(0, 0);
+      this.leftAdjustmentPanel.Name = "leftAdjustmentPanel";
+      this.leftAdjustmentPanel.Size = new System.Drawing.Size(10, 355);
+      this.leftAdjustmentPanel.TabIndex = 2;
       // 
       // GridViewBurn
       // 
@@ -160,5 +171,6 @@ namespace MPTagThat.GridView
     private MPTagThat.Core.WinControls.MPTLabel lbBurningStatus;
     private MPTagThat.Core.WinControls.MPTLabel lbMediaInfo;
     private MPTagThat.Core.WinControls.MPTLabel lbUsed;
+    private Core.WinControls.MPTPanel leftAdjustmentPanel;
   }
 }
