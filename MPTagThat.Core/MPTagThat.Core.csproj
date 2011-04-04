@@ -62,7 +62,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Elegant.Ui.Common, Version=3.7.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
+    <Reference Include="Elegant.Ui.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Common.dll</HintPath>
     </Reference>
