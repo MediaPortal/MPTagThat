@@ -314,11 +314,12 @@ namespace MPTagThat.InternetLookup
           ByteVector vector = album.AlbumImage;
           if (vector != null)
           {
-            // Prepare Picture Array and then add the cover retrieved
-            List<IPicture> pics = new List<IPicture>();
-            Picture pic = new Picture(vector);
-            pics.Add(pic);
-            track.Pictures = pics.ToArray();
+            MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+            pic.MimeType = "image/jpg";
+            pic.Description = "";
+            pic.Type = PictureType.FrontCover;
+            pic.Data = pic.ImageFromData(vector.Data);
+            track.Pictures.Add(pic);
           }
 
           ListViewItem trackItem = dlgAlbumDetails.AlbumTracks.Items[i];

@@ -263,6 +263,7 @@
     <String id="PictureHeaderType">Picture Type</String>
     <String id="PictureDescriptor">Descriptor:</String>
     <!--  Detailed Information -->
+    <String id="GetTrackLengthFromFile">Get from File</String>
     <String id="GetTrackLength">Get Track Length from File</String>
     <String id="TrackLength">Track Length (ms):</String>
     <String id="MediaType">Media Type:</String>

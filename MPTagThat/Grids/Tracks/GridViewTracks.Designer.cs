@@ -69,7 +69,6 @@ namespace MPTagThat.GridView
       this.tracksGrid.Size = new System.Drawing.Size(569, 524);
       this.tracksGrid.TabIndex = 0;
       this.tracksGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tracksGrid_MouseClick);
-      this.tracksGrid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tracksGrid_MouseDoubleClick);
       // 
       // contextMenu
       // 

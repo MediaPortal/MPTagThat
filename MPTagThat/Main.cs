@@ -58,6 +58,7 @@ namespace MPTagThat
     private bool _keyHandled;
     private MusicDatabaseBuild _musicDatabaseBuild;
     private bool _rightPanelCollapsed;
+    private bool _bottomPanelCollapsed;
     private string _selectedDirectory = ""; // The currently selcted Directory
     private bool _showForm;
     private SplashScreen _splashScreen;
@@ -73,9 +74,9 @@ namespace MPTagThat
     private GridViewRip gridViewRip;
     private MiscInfoControl miscInfoControl;
     private PlayerControl playerControl;
-    private QuickEditControl quickEditControl;
     private RibbonControl ribbonControl;
     private TreeViewControl treeViewControl;
+    private TagEditControl tagEditControl;
 
     private delegate void ThreadSafeFolderScan();
 
@@ -218,11 +219,6 @@ namespace MPTagThat
       get { return treeViewControl; }
     }
 
-    public QuickEditControl QuickEdit
-    {
-      get { return quickEditControl; }
-    }
-
     public Label ToolStripStatusFiles
     {
       get { return toolStripStatusLabelFiles; }
@@ -241,6 +237,11 @@ namespace MPTagThat
     public MiscInfoControl MiscInfoPanel
     {
       get { return miscInfoControl; }
+    }
+
+    public TagEditControl TagEditForm
+    {
+      get { return tagEditControl; }
     }
 
     #endregion
@@ -335,10 +336,22 @@ namespace MPTagThat
       playerControl.Size = new Size(1008, 68);
       playerControl.TabIndex = 0;
 
-      panelFileList.Controls.Add(gridViewControl);
-      panelFileList.Controls.Add(gridViewBurn);
-      panelFileList.Controls.Add(gridViewRip);
-      panelFileList.Controls.Add(gridViewConvert);
+      // Look where to place the Track LIst Panel
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        panelFileList.Controls.Add(gridViewControl);
+        panelFileList.Controls.Add(gridViewBurn);
+        panelFileList.Controls.Add(gridViewRip);
+        panelFileList.Controls.Add(gridViewConvert);
+      }
+      else
+      {
+        panelMiddleBottom.Controls.Add(gridViewControl);
+        panelMiddleBottom.Controls.Add(gridViewBurn);
+        panelMiddleBottom.Controls.Add(gridViewRip);
+        panelMiddleBottom.Controls.Add(gridViewConvert);        
+      }
+
       playerPanel.Controls.Add(playerControl);
 
       // Set reference to Main, so that we may use the ErrorGrid
@@ -354,11 +367,6 @@ namespace MPTagThat
       treeViewControl.Dock = DockStyle.Fill;
       panelLeftTop.Controls.Add(treeViewControl);
 
-      // Setup Quickedit
-      quickEditControl = new QuickEditControl(this);
-      quickEditControl.Dock = DockStyle.Fill;
-      panelRight.Controls.Add(quickEditControl);
-
       // Setup Database Search Control
       databaseSearchControl = new DatabaseSearchControl(this);
       databaseSearchControl.Dock = DockStyle.Fill;
@@ -367,7 +375,20 @@ namespace MPTagThat
       // Setup Misc Info Control
       miscInfoControl = new MiscInfoControl();
       miscInfoControl.Dock = DockStyle.Fill;
-      panelMiddleBottom.Controls.Add(miscInfoControl);
+      panelRight.Controls.Add(miscInfoControl);
+
+      // Setup TagEdit Control
+      tagEditControl = new TagEditControl(this);
+      tagEditControl.Dock = DockStyle.Fill;
+
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        panelMiddleBottom.Controls.Add(tagEditControl);
+      }
+      else
+      {
+        panelFileList.Controls.Add(tagEditControl);
+      }
 
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
@@ -427,10 +448,10 @@ namespace MPTagThat
       if (gridViewControl.InvokeRequired)
       {
         ThreadSafeFolderScan d = FolderScanAsync;
-        gridViewControl.Invoke(d, new object[] {});
+        gridViewControl.Invoke(d);
         return;
       }
-
+      
       gridViewControl.FolderScan();
     }
 
@@ -457,14 +478,17 @@ namespace MPTagThat
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       gridViewControl.CheckForChanges();
+
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = Location;
       Options.MainSettings.FormSize = ClientSize;
+      Options.MainSettings.FormIsMaximized = WindowState == FormWindowState.Maximized ? true : false;
       Options.MainSettings.LeftPanelSize = panelLeft.Width;
       Options.MainSettings.RightPanelSize = panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
-      Options.MainSettings.ErrorPanelCollapsed = splitterBottom.IsCollapsed;
+      Options.MainSettings.BottomPanelSize = panelMiddleBottom.Height;
+      Options.MainSettings.BottomPanelCollapsed = _bottomPanelCollapsed;
       Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ribbonControl.ScriptsCombo.Text;
       Options.SaveAllSettings();
@@ -616,11 +640,11 @@ namespace MPTagThat
       }
       Size = _formSize;
 
+      if (Options.MainSettings.FormIsMaximized)
+        WindowState = FormWindowState.Maximized;
+
       if (Options.MainSettings.LeftPanelSize > -1)
         panelLeft.Width = Options.MainSettings.LeftPanelSize;
-
-      if (Options.MainSettings.ErrorPanelCollapsed)
-        splitterBottom.ToggleState();
 
       if (Options.MainSettings.PlayerPanelCollapsed)
         splitterPlayer.ToggleState();
@@ -631,6 +655,13 @@ namespace MPTagThat
       _rightPanelCollapsed = Options.MainSettings.RightPanelCollapsed;
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
+
+      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 600) 
+        panelMiddleBottom.Height = Options.MainSettings.BottomPanelSize;
+
+      _bottomPanelCollapsed = Options.MainSettings.BottomPanelCollapsed;
+      if (Options.MainSettings.BottomPanelCollapsed)
+        splitterBottom.ToggleState();
 
       log.Info("Main: Finished Loading Settings");
       log.Trace("<<<");
@@ -723,6 +754,7 @@ namespace MPTagThat
       gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
+        tagEditControl.ClearForm();
         ribbonControl.ClearGallery();
         gridViewControl.View.Rows.Clear();
         toolStripStatusLabelFolder.Text = _selectedDirectory;
@@ -735,7 +767,6 @@ namespace MPTagThat
           gridViewControl.FolderScan();
         }
       }
-      quickEditControl.ClearForm();
       log.Trace("<<<");
     }
 
@@ -777,6 +808,48 @@ namespace MPTagThat
       return _musicDatabaseBuild.DatabaseScanStatus();
     }
 
+    /// <summary>
+    /// Toogles the display of the detail panel, which we should hide / deactivate when not in TRacks View
+    /// </summary>
+    /// <param name="show"></param>
+    public void ToggleDetailPanel(bool show)
+    {
+      if (show)
+      {
+        if (Options.MainSettings.TrackListLocation == 0)
+        {
+          // Enable Splitter and show the bar
+          if (splitterBottom.IsCollapsed)
+          {
+            splitterBottom.ToggleState();
+          }
+        }
+        else
+        {
+          panelMiddleTop.Show();
+          panelMiddleBottom.Dock = DockStyle.Bottom;
+        }
+        splitterBottom.Enabled = true;
+      }
+      else
+      {
+        if (Options.MainSettings.TrackListLocation == 0)
+        {
+          // Disable splitter
+          if (!splitterBottom.IsCollapsed)
+          {
+            splitterBottom.ToggleState();
+          }
+        }
+        else
+        {
+          panelMiddleTop.Hide();
+          panelMiddleBottom.Dock = DockStyle.Fill;
+        }
+        splitterBottom.Enabled = false;
+      }
+
+    }
     #endregion
 
     #region Event Handler
@@ -827,19 +900,6 @@ namespace MPTagThat
 
         case Action.ActionType.ACTION_SAVEALL:
           gridViewControl.SaveAll();
-          break;
-
-        case Action.ActionType.ACTION_MULTI_EDIT:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-
-          _dialog = new MultiTagEdit(this);
-          _showForm = true;
-          break;
-
-        case Action.ActionType.ACTION_EDIT:
-          _dialog = new SingleTagEdit(this);
-          _showForm = true;
           break;
 
         case Action.ActionType.ACTION_FILENAME2TAG:
@@ -973,6 +1033,10 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TOGGLEQUICKEDIT:
+          splitterBottom.ToggleState();
+          break;
+
+        case Action.ActionType.ACTION_TOGGLEMISCFILES:
           splitterRight.ToggleState();
           break;
 
@@ -1032,7 +1096,7 @@ namespace MPTagThat
     {
       if (gridViewControl.View.CurrentRow != null)
       {
-        quickEditControl.FillForm(gridViewControl.SelectedTrack);
+        tagEditControl.FillForm();
         ribbonControl.SetGalleryItem();
       }
 
@@ -1084,6 +1148,11 @@ namespace MPTagThat
     private void splitterRight_Click(object sender, EventArgs e)
     {
       _rightPanelCollapsed = splitterRight.IsCollapsed;
+    }
+
+    private void splitterBottom_Click(object sender, EventArgs e)
+    {
+      _bottomPanelCollapsed = splitterBottom.IsCollapsed;
     }
 
     #endregion

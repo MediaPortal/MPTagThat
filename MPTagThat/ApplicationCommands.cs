@@ -55,12 +55,6 @@ namespace MPTagThat
     [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")] public static Command
       IdentifyFiles = new Command("IdentifyFiles");
 
-    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")] public static Command
-      SingleTagEdit = new Command("SingleTagEdit");
-
-    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")] public static Command
-      MultiTagEdit = new Command("MultiTagEdit");
-
     [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")] public static Command GetCoverArt
       = new Command("GetCoverArt");
 

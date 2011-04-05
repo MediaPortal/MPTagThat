@@ -18,150 +18,153 @@
 #region
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using TagLib;
-using TagLib.Id3v2;
-using File = TagLib.File;
-using Tag = TagLib.Id3v1.Tag;
+using MPTagThat.Core.Common;
 
 #endregion
 
 namespace MPTagThat.Core
 {
+  [Serializable]
   public class TrackData
   {
     #region Enum
-
-    public enum MP3Error
+    public enum MP3Error : int
     {
       NoError = 0,
       Fixable = 1,
       NonFixable = 2,
       Fixed = 3
     }
-
     #endregion
 
     #region Variables
 
-    private readonly FileInfo _fi;
-    private readonly int _numTrackDigits = Options.MainSettings.NumberTrackDigits;
-    private readonly TagLib.Ape.Tag apetag;
-    private File _file;
-    private Tag id3v1tag;
-    private TagLib.Id3v2.Tag id3v2tag;
+    private const int NumTrackDigits = 2;
+
+    private MP3Error _mp3ValError;
+    private List<Picture> _pictures = new List<Picture>();
+    private List<Comment> _comments = new List<Comment>();
+    private List<Lyric> _lyrics = new List<Lyric>();
+    private List<PopmFrame> _popmframes = new List<PopmFrame>();
+    private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
 
     #endregion
 
     #region ctor
 
-    public TrackData(File file)
+    public TrackData()
     {
       Changed = false;
-      MP3ValidationError = MP3Error.NoError;
-      _file = file;
-      _fi = new FileInfo(file.Name);
-      FileName = Path.GetFileName(file.Name);
-
-      //if (_file.MimeType.Substring(_file.MimeType.IndexOf("/") + 1).ToLower() == "mp3")
-      if (TagType.ToLower() == "mp3")
-      {
-        id3v1tag = _file.GetTag(TagTypes.Id3v1, true) as Tag;
-        id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-        apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
-      }
+      _mp3ValError = MP3Error.NoError;
+      Frames = new Hashtable();
+      ID3Version = 3;
     }
 
     #endregion
 
     #region Properties
-
     #region Common Properties
 
     /// <summary>
-    ///   Has the Track been changed
+    /// Unique ID of the Track
+    /// To be used in identifying cloned / changed tracks
+    /// </summary>
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// The ID3 Version
+    /// </summary>
+    public int ID3Version { get; set; } 
+   
+    /// <summary>
+    /// The Frames included in the file
+    /// </summary>
+    public Hashtable Frames { get; set; }
+
+    /// <summary>
+    /// Has the Track been changed
     /// </summary>
     public bool Changed { get; set; }
 
     /// <summary>
-    ///   The TagLib File instance
+    /// Indicates, if the Tags have been removed
     /// </summary>
-    public File File
-    {
-      get { return _file; }
-      set { _file = value; }
+    public List<TagLib.TagTypes> TagsRemoved 
+    { 
+      get
+      {
+        return _removedTagTypes;
+      } 
     }
 
     /// <summary>
-    ///   The Full Filename including the path
+    /// Is the File Readonly
     /// </summary>
-    public string FullFileName
-    {
-      get { return _file.Name; }
-    }
+    public bool Readonly { get; set; }
 
     /// <summary>
-    ///   Filename without Path
+    /// The Full Filename including the path
+    /// </summary>
+    public string FullFileName { get; set; }
+
+    /// <summary>
+    /// Filename without Path
     /// </summary>
     public string FileName { get; set; }
 
     /// <summary>
-    ///   Path of the File
+    /// File Extension
+    /// </summary>
+    public string FileExt
+    {
+      get { return Path.GetExtension(FullFileName); }
+    }
+
+    /// <summary>
+    /// Path of the File
     /// </summary>
     public string FilePath
     {
-      get { return Path.GetDirectoryName(_file.Name); }
+      get { return Path.GetDirectoryName(FullFileName); }
     }
 
     /// <summary>
-    ///   The Tag Type
+    /// The Tag Type
     /// </summary>
-    public string TagType
-    {
-      get { return _file.MimeType.Substring(_file.MimeType.IndexOf("/") + 1); }
-    }
+    public string TagType { get; set; }
 
     /// <summary>
-    ///   Number of Pictures in File
+    /// Number of Pictures in File
     /// </summary>
     public int NumPics
     {
-      get { return _file.Tag.Pictures.Length; }
+      get { return Pictures.Count; }
     }
 
     /// <summary>
-    ///   Has the Track fixable errors?
+    /// Has the Track fixable errors?
     /// </summary>
-    public MP3Error MP3ValidationError { get; set; }
-
+    public MP3Error MP3ValidationError
+    {
+      get { return _mp3ValError; }
+      set { _mp3ValError = value; }
+    }
     #endregion
 
     #region Tags
 
     /// <summary>
-    ///   Artist / Performer Tag
-    ///   ID3: TPE1
+    /// Artist / Performer Tag
+    /// ID3: TPE1
     /// </summary>
-    public string Artist
-    {
-      get
-      {
-        string artist = String.Join(";", File.Tag.Performers);
-        if (artist.Contains("AC;DC"))
-          artist = artist.Replace("AC;DC", "AC/DC");
-
-        return artist;
-      }
-      set
-      {
-        string[] artists = value.Split(new[] {';', '|'});
-        _file.Tag.Performers = artists;
-      }
-    }
+    public string Artist { get; set; }
 
     /// <summary>
-    ///   Artist Sortname Tag (V 2.4 only)
-    ///   ID3: TSOP
+    /// Artist Sortname Tag (V 2.4 only)
+    /// ID3: TSOP
     /// </summary>
     public string ArtistSortName
     {
@@ -170,41 +173,20 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Album Artist / Band  / Orchestra Tag
-    ///   ID3: TPE2
+    /// Album Artist / Band  / Orchestra Tag
+    /// ID3: TPE2
     /// </summary>
-    public string AlbumArtist
-    {
-      get
-      {
-        string albumartist = String.Join(";", File.Tag.AlbumArtists);
-        if (albumartist.Contains("AC;DC"))
-          albumartist = albumartist.Replace("AC;DC", "AC/DC");
-
-        return albumartist;
-      }
-      set
-      {
-        string[] artists = new string[] {};
-        if (value != null)
-          artists = value.Split(new[] {';', '|'});
-        _file.Tag.AlbumArtists = artists;
-      }
-    }
+    public string AlbumArtist { get; set; }
 
     /// <summary>
-    ///   ALbum Tag
-    ///   ID3: TALB
+    /// ALbum Tag
+    /// ID3: TALB
     /// </summary>
-    public string Album
-    {
-      get { return _file.Tag.Album == null ? "" : _file.Tag.Album; }
-      set { _file.Tag.Album = value; }
-    }
+    public string Album { get; set; }
 
     /// <summary>
-    ///   Album Sortname Tag (V 2.4 only)
-    ///   ID3: TSOA
+    /// Album Sortname Tag (V 2.4 only)
+    /// ID3: TSOA
     /// </summary>
     public string AlbumSortName
     {
@@ -213,28 +195,45 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Beats Per Minute Tag
-    ///   ID3: TBPM
+    /// Beats Per Minute Tag
+    /// ID3: TBPM
     /// </summary>
-    public int BPM
-    {
-      get { return (int)_file.Tag.BeatsPerMinute; }
-      set { _file.Tag.BeatsPerMinute = Convert.ToUInt32(value); }
-    }
+    public int BPM { get; set; }
 
     /// <summary>
-    ///   Comment Tag
-    ///   ID3: COMM
+    /// Comment Tag
+    /// ID3: COMM
     /// </summary>
     public string Comment
     {
-      get { return _file.Tag.Comment == null ? "" : _file.Tag.Comment; }
-      set { _file.Tag.Comment = value; }
+      get
+      {
+        return _comments.Count > 0 ? _comments[0].Text : "";
+      }
+      set
+      {
+        if (_comments.Count == 0)
+        {
+          _comments.Add(new Comment("", "", value));
+        }
+        else
+        {
+          _comments[0].Text = value;  
+        }
+      }
     }
 
     /// <summary>
-    ///   Commercial Information Tag
-    ///   ID3: WCOM
+    /// Comment Tag
+    /// ID3: COMM
+    /// </summary>
+    public List<Comment> ID3Comments { 
+      get { return _comments; }
+    }
+
+    /// <summary>
+    /// Commercial Information Tag
+    /// ID3: WCOM
     /// </summary>
     public string CommercialInformation
     {
@@ -242,68 +241,29 @@ namespace MPTagThat.Core
       set { SetText("WCOM", value); }
     }
 
-    public bool Compilation
-    {
-      get
-      {
-        if (TagType != "mp3")
-          return false;
-
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        return id3v2tag.IsCompilation;
-      }
-
-      set
-      {
-        if (TagType != "mp3")
-          return;
-
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        id3v2tag.IsCompilation = value;
-      }
-    }
+    public bool Compilation { get; set; }
 
     /// <summary>
-    ///   Composert Tag
-    ///   ID3: TCOM
+    /// Composer Tag
+    /// ID3: TCOM
     /// </summary>
-    public string Composer
-    {
-      get { return String.Join(";", File.Tag.Composers); }
-      set
-      {
-        string[] composers = value.Split(new[] {';', '|'});
-        _file.Tag.Composers = composers;
-      }
-    }
+    public string Composer { get; set; }
 
     /// <summary>
-    ///   Conductor Tag
-    ///   ID3: TPE3
+    /// Conductor Tag
+    /// ID3: TPE3
     /// </summary>
-    public string Conductor
-    {
-      get { return _file.Tag.Conductor == null ? "" : _file.Tag.Conductor; }
-      set { _file.Tag.Conductor = value; }
-    }
+    public string Conductor { get; set; }
 
     /// <summary>
-    ///   Copyright Tag
-    ///   ID3: TCOP
+    /// Copyright Tag
+    /// ID3: TCOP
     /// </summary>
-    public string Copyright
-    {
-      get { return _file.Tag.Copyright == null ? "" : _file.Tag.Copyright; }
-      set { _file.Tag.Copyright = value; }
-    }
+    public string Copyright { get; set; }
 
     /// <summary>
-    ///   Copyright Information Tag
-    ///   ID3: WCOP
+    /// Copyright Information Tag
+    /// ID3: WCOP
     /// </summary>
     public string CopyrightInformation
     {
@@ -312,41 +272,51 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Position in Mediaset Tag
-    ///   ID3: TPOS
+    /// Position in Mediaset Tag
+    /// ID3: TPOS
     /// </summary>
     public string Disc
     {
       get
       {
-        string disc = _file.Tag.Disc > 0 ? _file.Tag.Disc.ToString().PadLeft(_numTrackDigits, '0') : "";
-        return _file.Tag.DiscCount > 0
-                 ? String.Format("{0}/{1}", disc, _file.Tag.DiscCount.ToString().PadLeft(_numTrackDigits, '0'))
+        string disc = DiscNumber > 0 ? DiscNumber.ToString().PadLeft(NumTrackDigits, '0') : "";
+        return DiscCount > 0
+                 ? String.Format("{0}/{1}", disc, DiscCount.ToString().PadLeft(NumTrackDigits, '0'))
                  : disc;
-      }
-
+      } 
+      
       set
       {
         string[] disc = value.Split('/');
         try
         {
           if (disc[0] != "")
-            _file.Tag.Disc = Convert.ToUInt32(disc[0]);
+            DiscNumber = Convert.ToUInt32(disc[0]);
         }
-        catch (Exception) {}
+        catch (Exception) { }
 
         try
         {
           if (disc[1] != "")
-            _file.Tag.DiscCount = Convert.ToUInt32(disc[1]);
+            DiscCount = Convert.ToUInt32(disc[1]);
         }
-        catch (Exception) {}
+        catch (Exception) { }
       }
     }
 
     /// <summary>
-    ///   Encoded By
-    ///   ID3: TENC
+    /// The Disc Number part of TPOS
+    /// </summary>
+    public UInt32 DiscNumber { get; set; }
+
+    /// <summary>
+    /// The Disc Count part of TPOS
+    /// </summary>
+    public UInt32 DiscCount { get; set; }
+
+    /// <summary>
+    /// Encoded By
+    /// ID3: TENC
     /// </summary>
     public string EncodedBy
     {
@@ -355,8 +325,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Interpreted / Remixed / Modified by Tag
-    ///   ID3: TPE4
+    /// Interpreted / Remixed / Modified by Tag
+    /// ID3: TPE4
     /// </summary>
     public string Interpreter
     {
@@ -365,32 +335,20 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Genre Tag
-    ///   ID3: TCON
+    /// Genre Tag
+    /// ID3: TCON
     /// </summary>
-    public string Genre
-    {
-      get { return String.Join(";", File.Tag.Genres); }
-      set
-      {
-        string[] genres = value.Split(new[] {';', '|'});
-        _file.Tag.Genres = genres;
-      }
-    }
+    public string Genre { get; set; }
 
     /// <summary>
-    ///   Content Group  Tag
-    ///   ID3: TIT1
+    /// Content Group  Tag
+    /// ID3: TIT1
     /// </summary>
-    public string Grouping
-    {
-      get { return _file.Tag.Grouping == null ? "" : _file.Tag.Grouping; }
-      set { _file.Tag.Grouping = value; }
-    }
+    public string Grouping { get; set; }
 
     /// <summary>
-    ///   Involved People Tag
-    ///   ID3: IPLS (2.3) / TIPL (2.4)
+    /// Involved People Tag
+    /// ID3: IPLS (2.3) / TIPL (2.4)
     /// </summary>
     public string InvolvedPeople
     {
@@ -399,10 +357,7 @@ namespace MPTagThat.Core
         if (TagType != "mp3")
           return "";
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        if (id3v2tag.Version == 4)
+        if (ID3Version == 4)
           return GetFrame("TIPL");
 
         return GetFrame("IPLS");
@@ -412,10 +367,7 @@ namespace MPTagThat.Core
         if (TagType != "mp3")
           return;
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        if (id3v2tag.Version == 4)
+        if (ID3Version == 4)
           SetText("TIPL", value);
 
         SetText("IPLS", value);
@@ -423,18 +375,37 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Lyrics Tag
-    ///   ID3: USLT
+    /// Lyrics Tag
+    /// ID3: USLT
     /// </summary>
     public string Lyrics
     {
-      get { return _file.Tag.Lyrics; }
-      set { _file.Tag.Lyrics = value; }
+      get
+      {
+        return _lyrics.Count > 0 ? _lyrics[0].Text : "";
+      }
+      set
+      {
+        if (_lyrics.Count == 0)
+        {
+          _lyrics.Add(new Lyric("", "", value));
+        }
+        else
+        {
+          _lyrics[0].Text = value;
+        }
+      }
+    }
+
+
+    public List<Lyric> LyricsFrames
+    {
+      get { return _lyrics; }
     }
 
     /// <summary>
-    ///   MediaType Tag
-    ///   ID3: TMED
+    /// MediaType Tag
+    /// ID3: TMED
     /// </summary>
     public string MediaType
     {
@@ -443,8 +414,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Music Credit List Tag
-    ///   ID3: TMCL
+    /// Music Credit List Tag
+    /// ID3: TMCL
     /// </summary>
     public string MusicCreditList
     {
@@ -453,8 +424,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Audio File Information Tag
-    ///   ID3: WOAF
+    /// Official Audio File Information Tag
+    /// ID3: WOAF
     /// </summary>
     public string OfficialAudioFileInformation
     {
@@ -463,8 +434,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Artist Information Tag
-    ///   ID3: WOAR
+    /// Official Artist Information Tag
+    /// ID3: WOAR
     /// </summary>
     public string OfficialArtistInformation
     {
@@ -473,8 +444,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Audio Source Information Tag
-    ///   ID3: WOAS
+    /// Official Audio Source Information Tag
+    /// ID3: WOAS
     /// </summary>
     public string OfficialAudioSourceInformation
     {
@@ -483,8 +454,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Internet Radio Station Information Tag
-    ///   ID3: WORS
+    /// Official Internet Radio Station Information Tag
+    /// ID3: WORS
     /// </summary>
     public string OfficialInternetRadioInformation
     {
@@ -493,8 +464,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Payment Information Tag
-    ///   ID3: WPAY
+    /// Official Payment Information Tag
+    /// ID3: WPAY
     /// </summary>
     public string OfficialPaymentInformation
     {
@@ -503,8 +474,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Official Publisher Information Tag
-    ///   ID3: WPUB
+    /// Official Publisher Information Tag
+    /// ID3: WPUB
     /// </summary>
     public string OfficialPublisherInformation
     {
@@ -513,8 +484,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original Album Title Tag
-    ///   ID3: TOAL
+    /// Original Album Title Tag
+    /// ID3: TOAL
     /// </summary>
     public string OriginalAlbum
     {
@@ -523,8 +494,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original File Name Tag
-    ///   ID3: TOFN
+    /// Original File Name Tag
+    /// ID3: TOFN
     /// </summary>
     public string OriginalFileName
     {
@@ -533,8 +504,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original LyricsWriter Tag
-    ///   ID3: TOLY
+    /// Original LyricsWriter Tag
+    /// ID3: TOLY
     /// </summary>
     public string OriginalLyricsWriter
     {
@@ -543,8 +514,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original Artist / Performer Tag
-    ///   ID3: TOPE
+    /// Original Artist / Performer Tag
+    /// ID3: TOPE
     /// </summary>
     public string OriginalArtist
     {
@@ -553,8 +524,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original Owner Title Tag
-    ///   ID3: TOWN
+    /// Original Owner Title Tag
+    /// ID3: TOWN
     /// </summary>
     public string OriginalOwner
     {
@@ -563,8 +534,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Original Release Time Tag
-    ///   ID3: TORY (2.3) / TDOR (2.4)
+    /// Original Release Time Tag
+    /// ID3: TORY (2.3) / TDOR (2.4)
     /// </summary>
     public string OriginalRelease
     {
@@ -573,10 +544,7 @@ namespace MPTagThat.Core
         if (TagType != "mp3")
           return "";
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        if (id3v2tag.Version == 4)
+        if (ID3Version == 4)
           return GetFrame("TDOR");
 
         return GetFrame("TORY");
@@ -586,30 +554,26 @@ namespace MPTagThat.Core
         if (TagType != "mp3")
           return;
 
-        if (id3v2tag == null)
-          id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-        if (id3v2tag.Version == 4)
+        if (ID3Version == 4)
           SetText("TDOR", value);
 
         string year = value;
         if (year.Length > 4)
           year = year.Substring(0, 4);
 
-        SetText("TORY", value);
+        SetText("TORY", year);
       }
     }
 
 
-    public IPicture[] Pictures
+    public List<Picture> Pictures
     {
-      get { return _file.Tag.Pictures; }
-      set { _file.Tag.Pictures = value; }
+      get { return _pictures; } 
     }
 
     /// <summary>
-    ///   Publisher Writer Tag
-    ///   ID3: TPUB
+    /// Publisher Writer Tag
+    /// ID3: TPUB
     /// </summary>
     public string Publisher
     {
@@ -618,85 +582,36 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Rating Tag
-    ///   ID3: POPM
+    /// Rating Tag
+    /// ID3: POPM
     /// </summary>
     public int Rating
     {
       get
       {
-        if (TagType == "mp3")
-        {
-          if (id3v2tag == null)
-            id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-          PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
-          if (popmFrame != null)
-            return popmFrame.Rating;
-
-          // Now check for Ape Rating
-          TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
-          if (apeItem != null)
-          {
-            string rating = apeItem.ToString();
-            try
-            {
-              return Convert.ToInt32(rating);
-            }
-            catch (Exception)
-            {
-              return 0;
-            }
-          }
-        }
-        else
-        {
-          if (TagType == "ape")
-          {
-            TagLib.Ape.Tag apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
-            TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
-            if (apeItem != null)
-            {
-              string rating = apeItem.ToString();
-              try
-              {
-                return Convert.ToInt32(rating);
-              }
-              catch (Exception)
-              {
-                return 0;
-              }
-            }
-          }
-        }
-        return 0;
+        return _popmframes.Count > 0 ? _popmframes[0].Rating : 0;
       }
       set
       {
-        if (TagType == "mp3")
+        if (_popmframes.Count == 0)
         {
-          if (id3v2tag == null)
-            id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-          // Set ID3 V2
-          PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, "MPTagThat", true);
-          popmFrame.Rating = Convert.ToByte(value);
-          popmFrame.PlayCount = Convert.ToUInt32(0);
-
-          // Set Ape Tag
-          apetag.SetItem(new TagLib.Ape.Item("RATING", value.ToString()));
+          _popmframes.Add(new PopmFrame("", value, 0));
         }
-        else if (TagType == "ape")
+        else
         {
-          TagLib.Ape.Tag apetag = _file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
-          apetag.SetItem(new TagLib.Ape.Item("RATING", value.ToString()));
+          _popmframes[0].Rating = value;
         }
       }
     }
 
+    public List<PopmFrame> Ratings
+    {
+      get { return _popmframes; }
+    }
+
     /// <summary>
-    ///   SubTitle / More Detailed Description
-    ///   ID3: TIT3
+    /// SubTitle / More Detailed Description
+    /// ID3: TIT3
     /// </summary>
     public string SubTitle
     {
@@ -705,8 +620,8 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Text / Lyrics Writer Tag
-    ///   ID3: TPE4
+    /// Text / Lyrics Writer Tag
+    /// ID3: TPE4
     /// </summary>
     public string TextWriter
     {
@@ -715,18 +630,14 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Title Tag
-    ///   ID3: TIT2
+    /// Title Tag
+    /// ID3: TIT2
     /// </summary>
-    public string Title
-    {
-      get { return _file.Tag.Title == null ? "" : _file.Tag.Title; }
-      set { _file.Tag.Title = value; }
-    }
+    public string Title { get; set; }
 
     /// <summary>
-    ///   Title SortName Tag (V 2.4 only)
-    ///   ID3: TSOT
+    /// Title SortName Tag (V 2.4 only)
+    /// ID3: TSOT
     /// </summary>
     public string TitleSortName
     {
@@ -735,45 +646,55 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Track Tag
-    ///   ID3: TRCK
+    /// Track Tag
+    /// ID3: TRCK
     /// </summary>
     public string Track
     {
       get
       {
-        string track = _file.Tag.Track > 0 ? _file.Tag.Track.ToString().PadLeft(_numTrackDigits, '0') : "";
-        return _file.Tag.TrackCount > 0
-                 ? String.Format("{0}/{1}", track, _file.Tag.TrackCount.ToString().PadLeft(_numTrackDigits, '0'))
+        string track = TrackNumber > 0 ? TrackNumber.ToString().PadLeft(NumTrackDigits, '0') : "";
+        return TrackCount > 0
+                 ? String.Format("{0}/{1}", track, TrackCount.ToString().PadLeft(NumTrackDigits, '0'))
                  : track;
-      }
-
+      } 
+      
       set
       {
         string[] track = value.Split('/');
         try
         {
           if (track[0] != "")
-            _file.Tag.Track = Convert.ToUInt32(track[0]);
+            TrackNumber = Convert.ToUInt32(track[0]);
           else
-            _file.Tag.Track = 0;
+            TrackNumber = 0;
         }
-        catch (Exception) {}
+        catch (Exception) { }
 
         try
         {
           if (track.Length > 1 && track[1] != "")
-            _file.Tag.TrackCount = Convert.ToUInt32(track[1]);
+            TrackCount = Convert.ToUInt32(track[1]);
           else
-            _file.Tag.TrackCount = 0;
+            TrackCount = 0;
         }
-        catch (Exception) {}
+        catch (Exception) { }
       }
     }
 
     /// <summary>
-    ///   Track Length Tag
-    ///   ID3: TLEN
+    /// The Track Number of the TRCK frame
+    /// </summary>
+    public UInt32 TrackNumber { get; set; }
+
+    /// <summary>
+    /// The Track Count of the TRCK frame
+    /// </summary>
+    public UInt32 TrackCount { get; set; }
+
+    /// <summary>
+    /// Track Length Tag
+    /// ID3: TLEN
     /// </summary>
     public string TrackLength
     {
@@ -782,138 +703,84 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    ///   Year Tag
-    ///   ID3: TYER
+    /// Year Tag
+    /// ID3: TYER
     /// </summary>
-    public int Year
-    {
-      get { return (int)_file.Tag.Year; }
-      set { _file.Tag.Year = Convert.ToUInt32(value); }
-    }
-
+    public int Year { get; set; }
     #endregion
 
     #region Audio File Properties
 
     /// <summary>
-    ///   The Duration of the File
+    /// The Duration of the File as string
     /// </summary>
     public string Duration
     {
       get
       {
-        TimeSpan ts = _file.Properties.Duration;
-        DateTime dt = new DateTime(ts.Ticks);
-        return String.Format("{0:HH:mm:ss.fff}", dt);
-      }
+        DateTime dt = new DateTime(DurationTimespan.Ticks);
+        return String.Format("{0:HH:mm:ss.fff}", dt);        
+      }    
     }
 
     /// <summary>
-    ///   The Filesize in kb
+    /// The Duration of the File as timespan
     /// </summary>
-    public string FileSize
-    {
-      get
-      {
-        FileInfo fi = new FileInfo(_file.Name);
-        int fileLength = (int)(fi.Length / 1024);
-        return fileLength.ToString();
-      }
-    }
+    public TimeSpan DurationTimespan { get; set; }
 
     /// <summary>
-    ///   The Bitrate
+    /// The Filesize in kb
     /// </summary>
-    public string BitRate
-    {
-      get { return _file.Properties.AudioBitrate.ToString(); }
-    }
+    public string FileSize { get; set; }
 
     /// <summary>
-    ///   The Sample Rate
+    /// The Bitrate
     /// </summary>
-    public string SampleRate
-    {
-      get { return _file.Properties.AudioSampleRate.ToString(); }
-    }
+    public string BitRate { get; set; }
 
     /// <summary>
-    ///   The number of Audio Channels
+    /// The Sample Rate
     /// </summary>
-    public string Channels
-    {
-      get { return _file.Properties.AudioChannels.ToString(); }
-    }
+    public string SampleRate { get; set; }
 
     /// <summary>
-    ///   Version of the file
+    /// The number of Audio Channels
     /// </summary>
-    public string Version
-    {
-      get { return _file.Properties.Description; }
-    }
+    public string Channels { get; set; }
 
     /// <summary>
-    ///   File Creation date
+    /// Version of the file
     /// </summary>
-    public string CreationTime
-    {
-      get { return String.Format("{0:yyyy-MM-dd HH:mm:ss}", _fi.CreationTime); }
-      set { }
-    }
+    public string Version { get; set; }
 
     /// <summary>
-    ///   Last Write Date
+    /// File Creation date
     /// </summary>
-    public string LastWriteTime
-    {
-      get { return String.Format("{0:yyyy-MM-dd HH:mm:ss}", _fi.LastWriteTime); }
-      set { }
-    }
+    public string CreationTime { get; set; }
+
+    /// <summary>
+    /// Last Write Date
+    /// </summary>
+    public string LastWriteTime { get; set; }
 
     #endregion
-
     #endregion
 
     #region Private Methods
-
-    private string GetFrame(string frameID)
+    private string GetFrame(string frameId)
     {
-      if (TagType != "mp3")
-        return "";
-
-      if (id3v2tag == null)
-        id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-      foreach (Frame frame in id3v2tag.GetFrames(frameID))
+      if (Frames.ContainsKey(frameId))
       {
-        if (frameID.StartsWith("W"))
-        {
-          return (frame as UrlLinkFrame).ToString();
-        }
-        else
-          return (frame as TextInformationFrame).ToString();
+        return Frames[frameId].ToString();
       }
       return "";
     }
 
-    private void SetText(string frameID, string text)
+    private void SetText(string frameId, string text)
     {
-      if (TagType != "mp3")
-        return;
-
-      if (id3v2tag == null)
-        id3v2tag = _file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
-
-      if (frameID.StartsWith("W"))
-      {
-        UrlLinkFrame urlLinkFrame = UrlLinkFrame.Get(id3v2tag, frameID, true);
-        urlLinkFrame.Text = new[] {text};
-      }
-      else
-        id3v2tag.SetTextFrame(frameID, text);
+      Frames[frameId] = text;
     }
-
     #endregion
+
   }
 }

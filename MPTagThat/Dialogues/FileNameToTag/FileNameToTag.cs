@@ -154,7 +154,7 @@ namespace MPTagThat.FileNameToTag
         file = String.Format(@"{0}\{1}", Path.GetDirectoryName(trackPreview.FullFileName),
                              Path.GetFileNameWithoutExtension(trackPreview.FullFileName));
       else
-        file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.File.Name),
+        file = String.Format(@"{0}\{1}", Path.GetDirectoryName(track.FullFileName),
                              Path.GetFileNameWithoutExtension(track.FileName));
 
       string[] fileArray = file.Split(new[] {'\\'});
@@ -205,105 +205,101 @@ namespace MPTagThat.FileNameToTag
           switch (parm)
           {
             case "<A>":
-              string[] artists = splittedFileValues[index].Split(';');
               if (preview)
                 trackPreview.Artist = splittedFileValues[index];
               else
-                track.File.Tag.Performers = artists;
+                track.Artist = splittedFileValues[index];
               break;
 
             case "<T>":
               if (preview)
                 trackPreview.Title = splittedFileValues[index];
               else
-                track.File.Tag.Title = splittedFileValues[index];
+                track.Title = splittedFileValues[index];
               break;
 
             case "<B>":
               if (preview)
                 trackPreview.Album = splittedFileValues[index];
               else
-                track.File.Tag.Album = splittedFileValues[index];
+                track.Album = splittedFileValues[index];
               break;
 
             case "<Y>":
               if (preview)
                 trackPreview.Year = splittedFileValues[index];
               else
-                track.File.Tag.Year = Convert.ToUInt32(splittedFileValues[index]);
+                track.Year = Convert.ToInt32(splittedFileValues[index]);
               break;
 
             case "<K>":
               if (preview)
                 trackPreview.Track = splittedFileValues[index];
               else
-                track.File.Tag.Track = Convert.ToUInt32(splittedFileValues[index]);
+                track.TrackNumber = Convert.ToUInt32(splittedFileValues[index]);
               break;
 
             case "<k>":
               if (preview)
                 trackPreview.NumTrack = splittedFileValues[index];
               else
-                track.File.Tag.TrackCount = Convert.ToUInt32(splittedFileValues[index]);
+                track.TrackCount = Convert.ToUInt32(splittedFileValues[index]);
               break;
 
             case "<D>":
               if (preview)
                 trackPreview.Disc = splittedFileValues[index];
               else
-                track.File.Tag.Disc = Convert.ToUInt32(splittedFileValues[index]);
+                track.DiscNumber = Convert.ToUInt32(splittedFileValues[index]);
               break;
 
             case "<d>":
               if (preview)
                 trackPreview.NumDisc = splittedFileValues[index];
               else
-                track.File.Tag.DiscCount = Convert.ToUInt32(splittedFileValues[index]);
+                track.DiscCount = Convert.ToUInt32(splittedFileValues[index]);
               break;
 
             case "<G>":
-              string[] genres = splittedFileValues[index].Split(';');
               if (preview)
                 trackPreview.Genre = splittedFileValues[index];
               else
-                track.File.Tag.Genres = genres;
+                track.Genre = splittedFileValues[index];
               break;
 
             case "<O>":
-              string[] albumartists = splittedFileValues[index].Split(';');
               if (preview)
                 trackPreview.AlbumArtist = splittedFileValues[index];
               else
-                track.File.Tag.AlbumArtists = albumartists;
+                track.AlbumArtist = splittedFileValues[index];
               break;
 
             case "<C>":
               if (preview)
                 trackPreview.Comment = splittedFileValues[index];
               else
-                track.File.Tag.Comment = splittedFileValues[index];
+                track.Comment = splittedFileValues[index];
               break;
 
             case "<N>":
               if (preview)
                 trackPreview.Conductor = splittedFileValues[index];
               else
-                track.File.Tag.Conductor = splittedFileValues[index];
+                track.Conductor = splittedFileValues[index];
               break;
 
             case "<R>":
-              string[] composers = splittedFileValues[index].Split(';');
               if (preview)
                 trackPreview.Composer = splittedFileValues[index];
               else
-                track.File.Tag.Composers = composers;
+                track.Composer = splittedFileValues[index];
               break;
 
             case "<U>":
               if (preview)
                 trackPreview.Grouping = splittedFileValues[index];
               else
-                track.File.Tag.Grouping = splittedFileValues[index];
+                track.Grouping = splittedFileValues[index];
               break;
 
             case "<S>":
@@ -324,7 +320,7 @@ namespace MPTagThat.FileNameToTag
               if (preview)
                 trackPreview.BPM = splittedFileValues[index];
               else
-                track.File.Tag.BeatsPerMinute = Convert.ToUInt32(splittedFileValues[index]);
+                track.BPM = Convert.ToInt32(splittedFileValues[index]);
               break;
 
             case "<X>":

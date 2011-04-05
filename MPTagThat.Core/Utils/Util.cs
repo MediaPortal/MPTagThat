@@ -1115,7 +1115,7 @@ namespace MPTagThat.Core
           replacedString = replacedString.Replace("<M>", track.Interpreter.Trim());
 
         if (replacedString.IndexOf("<I>") > -1)
-          replacedString = replacedString.Replace("<I>", track.File.Properties.AudioBitrate.ToString());
+          replacedString = replacedString.Replace("<I>", track.BitRate);
 
         int index = replacedString.IndexOf("<A:");
         if (index > -1)

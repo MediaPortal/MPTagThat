@@ -66,6 +66,9 @@ namespace MPTagThat.Core
       set { _formSize = value; }
     }
 
+    [Setting(SettingScope.User, "false")]
+    public bool FormIsMaximized { get; set; }
+
     [Setting(SettingScope.User, "-1")]
     public int LeftPanelSize { get; set; }
 
@@ -75,11 +78,22 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool RightPanelCollapsed { get; set; }
 
+    [Setting(SettingScope.User, "-1")]
+    public int BottomPanelSize { get; set; }
+
     [Setting(SettingScope.User, "false")]
-    public bool ErrorPanelCollapsed { get; set; }
+    public bool BottomPanelCollapsed { get; set; }
 
     [Setting(SettingScope.User, "false")]
     public bool PlayerPanelCollapsed { get; set; }
+
+    /// <summary>
+    /// Location of the Track List
+    /// 0 - Top
+    /// 1 - Bottom
+    /// </summary>
+    [Setting(SettingScope.User, "1")]
+    public int TrackListLocation { get; set; }
 
     #endregion
 

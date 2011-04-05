@@ -58,13 +58,13 @@ namespace MPTagThat
       this.toolStripStatusLabelFilter = new Elegant.Ui.Label();
       this.statusBarPane3 = new Elegant.Ui.StatusBarPane();
       this.toolStripStatusLabelFolder = new Elegant.Ui.Label();
-      this.statusBarPane4 = new Elegant.Ui.StatusBarPane();
       this.statusBarControlsArea1 = new Elegant.Ui.StatusBarControlsArea();
+      this.statusBarPane4 = new Elegant.Ui.StatusBarPane();
+      this.toolStripStatusLabelScanProgress = new Elegant.Ui.Label();
       this.statusBarPane1 = new Elegant.Ui.StatusBarPane();
       this.progressBar1 = new Elegant.Ui.ProgressBar();
       this.buttonProgressCancel = new Elegant.Ui.Button();
       this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
-      this.toolStripStatusLabelScanProgress = new Elegant.Ui.Label();
       this.panelBottom.SuspendLayout();
       this.panelMiddle.SuspendLayout();
       this.panelMiddleTop.SuspendLayout();
@@ -73,8 +73,8 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.SuspendLayout();
       this.statusBarPane2.SuspendLayout();
       this.statusBarPane3.SuspendLayout();
-      this.statusBarPane4.SuspendLayout();
       this.statusBarControlsArea1.SuspendLayout();
+      this.statusBarPane4.SuspendLayout();
       this.statusBarPane1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -82,7 +82,7 @@ namespace MPTagThat
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 831);
+      this.panelBottom.Location = new System.Drawing.Point(0, 894);
       this.panelBottom.Name = "panelBottom";
       this.panelBottom.Size = new System.Drawing.Size(1008, 90);
       this.panelBottom.TabIndex = 12;
@@ -107,7 +107,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 147);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1008, 676);
+      this.panelMiddle.Size = new System.Drawing.Size(1008, 744);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -118,7 +118,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(544, 527);
+      this.panelMiddleTop.Size = new System.Drawing.Size(676, 472);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -126,7 +126,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(544, 439);
+      this.panelFileList.Size = new System.Drawing.Size(676, 384);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -149,7 +149,7 @@ namespace MPTagThat
       this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
       this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(544, 80);
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(676, 80);
       this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // splitterLeft
@@ -175,7 +175,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 676);
+      this.panelLeft.Size = new System.Drawing.Size(150, 744);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -183,7 +183,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 676);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 744);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -197,7 +197,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(702, 0);
+      this.splitterRight.Location = new System.Drawing.Point(834, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -210,9 +210,9 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(710, 0);
+      this.panelRight.Location = new System.Drawing.Point(842, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(298, 676);
+      this.panelRight.Size = new System.Drawing.Size(166, 744);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -225,19 +225,20 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 527);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 472);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
       this.splitterBottom.UseAnimations = false;
       this.splitterBottom.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      this.splitterBottom.Click += new System.EventHandler(this.splitterBottom_Click);
       // 
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 535);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 480);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(560, 141);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -248,7 +249,7 @@ namespace MPTagThat
       this.splitterPlayer.ControlToHide = this.panelBottom;
       this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 823);
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 891);
       this.splitterPlayer.Name = "splitterPlayer";
       this.splitterPlayer.TabIndex = 13;
       this.splitterPlayer.TabStop = false;
@@ -278,8 +279,7 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Id = "9f36caa8-c691-4743-a029-2e42ada47e03";
-      this.statusBar.Location = new System.Drawing.Point(0, 921);
+      this.statusBar.Location = new System.Drawing.Point(0, 984);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
       this.statusBar.Size = new System.Drawing.Size(1008, 22);
@@ -288,121 +288,113 @@ namespace MPTagThat
       // 
       // statusBarNotificationsArea1
       // 
-      this.statusBarNotificationsArea1.AutoSize = true;
       this.statusBarNotificationsArea1.Controls.Add(this.statusBarPane2);
       this.statusBarNotificationsArea1.Controls.Add(this.statusBarPane3);
       this.statusBarNotificationsArea1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.statusBarNotificationsArea1.Id = "04ca63fd-be8d-465d-b78a-f2dc3829035b";
       this.statusBarNotificationsArea1.Location = new System.Drawing.Point(0, 0);
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(743, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(689, 22);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
       // 
-      this.statusBarPane2.AutoSize = true;
       this.statusBarPane2.Controls.Add(this.toolStripStatusLabelFiles);
       this.statusBarPane2.Controls.Add(this.toolStripStatusLabelFilter);
-      this.statusBarPane2.Id = "31c6473f-9490-4bdb-8506-a8f5736636e4";
       this.statusBarPane2.Location = new System.Drawing.Point(0, 0);
       this.statusBarPane2.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane2.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane2.Name = "statusBarPane2";
-      this.statusBarPane2.Size = new System.Drawing.Size(139, 22);
+      this.statusBarPane2.Size = new System.Drawing.Size(149, 22);
       this.statusBarPane2.TabIndex = 0;
       // 
       // toolStripStatusLabelFiles
       // 
-      this.toolStripStatusLabelFiles.Id = "102bb77e-f358-4861-baaf-3d864126348d";
-      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 2);
+      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 5);
       this.toolStripStatusLabelFiles.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFiles.Name = "toolStripStatusLabelFiles";
-      this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(57, 19);
+      this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(57, 13);
       this.toolStripStatusLabelFiles.TabIndex = 0;
       this.toolStripStatusLabelFiles.Text = "                   ";
       // 
       // toolStripStatusLabelFilter
       // 
-      this.toolStripStatusLabelFilter.Id = "9630b051-7abe-463b-846b-3f17f0b608a6";
-      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 2);
+      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 5);
       this.toolStripStatusLabelFilter.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFilter.Name = "toolStripStatusLabelFilter";
-      this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(48, 19);
+      this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(48, 13);
       this.toolStripStatusLabelFilter.TabIndex = 1;
       this.toolStripStatusLabelFilter.Text = "                ";
       // 
       // statusBarPane3
       // 
-      this.statusBarPane3.AutoSize = true;
       this.statusBarPane3.Controls.Add(this.toolStripStatusLabelFolder);
-      this.statusBarPane3.Id = "96bcecd2-41a2-4a29-8f20-0147730acd87";
-      this.statusBarPane3.Location = new System.Drawing.Point(139, 0);
+      this.statusBarPane3.Location = new System.Drawing.Point(149, 0);
       this.statusBarPane3.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane3.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane3.Name = "statusBarPane3";
       this.statusBarPane3.Padding = new System.Windows.Forms.Padding(10, 2, 2, 1);
-      this.statusBarPane3.Size = new System.Drawing.Size(99, 22);
+      this.statusBarPane3.Size = new System.Drawing.Size(117, 22);
       this.statusBarPane3.TabIndex = 1;
       // 
       // toolStripStatusLabelFolder
       // 
-      this.toolStripStatusLabelFolder.Id = "514085f9-be54-4033-b45d-3f61671f32d7";
-      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(13, 2);
+      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(13, 5);
       this.toolStripStatusLabelFolder.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFolder.Name = "toolStripStatusLabelFolder";
-      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(63, 19);
+      this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(63, 13);
       this.toolStripStatusLabelFolder.TabIndex = 0;
       this.toolStripStatusLabelFolder.Text = "                     ";
       // 
-      // statusBarPane4
-      // 
-      this.statusBarPane4.AutoSize = true;
-      this.statusBarPane4.Dock = DockStyle.Right;
-      this.statusBarPane4.Controls.Add(this.toolStripStatusLabelScanProgress);
-      this.statusBarPane4.Id = "5b4f806c-dbe9-4a06-9f7e-1c797e7a188d";
-      this.statusBarPane4.Location = new System.Drawing.Point(238, 0);
-      this.statusBarPane4.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane4.MinimumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane4.Name = "statusBarPane4";
-      this.statusBarPane4.Size = new System.Drawing.Size(59, 22);
-      this.statusBarPane4.TabIndex = 2;
-      // 
       // statusBarControlsArea1
       // 
-      this.statusBarControlsArea1.AutoSize = true;
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Id = "ab6e139b-b0ad-48eb-a50f-ed1567007940";
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(743, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(689, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
-      this.statusBarControlsArea1.Size = new System.Drawing.Size(265, 22);
+      this.statusBarControlsArea1.Size = new System.Drawing.Size(319, 22);
       this.statusBarControlsArea1.TabIndex = 0;
+      // 
+      // statusBarPane4
+      // 
+      this.statusBarPane4.Controls.Add(this.toolStripStatusLabelScanProgress);
+      this.statusBarPane4.Dock = System.Windows.Forms.DockStyle.Right;
+      this.statusBarPane4.Location = new System.Drawing.Point(0, 0);
+      this.statusBarPane4.MaximumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane4.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane4.Name = "statusBarPane4";
+      this.statusBarPane4.Size = new System.Drawing.Size(34, 22);
+      this.statusBarPane4.TabIndex = 2;
+      // 
+      // toolStripStatusLabelScanProgress
+      // 
+      this.toolStripStatusLabelScanProgress.Location = new System.Drawing.Point(5, 11);
+      this.toolStripStatusLabelScanProgress.Name = "toolStripStatusLabelScanProgress";
+      this.toolStripStatusLabelScanProgress.Size = new System.Drawing.Size(0, 0);
+      this.toolStripStatusLabelScanProgress.TabIndex = 0;
       // 
       // statusBarPane1
       // 
-      this.statusBarPane1.AutoSize = true;
       this.statusBarPane1.Controls.Add(this.progressBar1);
       this.statusBarPane1.Controls.Add(this.buttonProgressCancel);
-      this.statusBarPane1.Id = "d8b59571-91d3-4185-a9a4-b735139df43b";
-      this.statusBarPane1.Location = new System.Drawing.Point(0, 0);
+      this.statusBarPane1.Location = new System.Drawing.Point(34, 0);
       this.statusBarPane1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarPane1.Name = "statusBarPane1";
-      this.statusBarPane1.Size = new System.Drawing.Size(229, 22);
+      this.statusBarPane1.Size = new System.Drawing.Size(233, 22);
       this.statusBarPane1.TabIndex = 0;
       // 
       // progressBar1
       // 
       this.progressBar1.DesiredWidth = 175;
       this.progressBar1.Id = "a3fc702d-0b4f-4160-9fff-0baba8d7430e";
-      this.progressBar1.Location = new System.Drawing.Point(3, 2);
+      this.progressBar1.Location = new System.Drawing.Point(3, 5);
       this.progressBar1.Name = "progressBar1";
-      this.progressBar1.Size = new System.Drawing.Size(175, 19);
+      this.progressBar1.Size = new System.Drawing.Size(175, 12);
       this.progressBar1.TabIndex = 0;
       this.progressBar1.Text = "progressBar1";
       // 
@@ -417,8 +409,8 @@ namespace MPTagThat
       this.buttonProgressCancel.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonProgressCancel.SmallImages.Images"))))});
       this.buttonProgressCancel.TabIndex = 1;
-      this.buttonProgressCancel.MouseLeave += new System.EventHandler(this.buttonProgressCancel_MouseLeave);
       this.buttonProgressCancel.MouseEnter += new System.EventHandler(this.buttonProgressCancel_MouseEnter);
+      this.buttonProgressCancel.MouseLeave += new System.EventHandler(this.buttonProgressCancel_MouseLeave);
       // 
       // panelTop
       // 
@@ -428,19 +420,11 @@ namespace MPTagThat
       this.panelTop.Size = new System.Drawing.Size(1008, 147);
       this.panelTop.TabIndex = 17;
       // 
-      // toolStripStatusLabelScanProgress
-      // 
-      this.toolStripStatusLabelScanProgress.Id = "1c0a8709-f9d1-4339-bfcb-50c586fbcceb";
-      this.toolStripStatusLabelScanProgress.Location = new System.Drawing.Point(5, 2);
-      this.toolStripStatusLabelScanProgress.Name = "toolStripStatusLabelScanProgress";
-      this.toolStripStatusLabelScanProgress.Size = new System.Drawing.Size(31, 19);
-      this.toolStripStatusLabelScanProgress.TabIndex = 0;
-      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1008, 943);
+      this.ClientSize = new System.Drawing.Size(1008, 1006);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.splitterPlayer);
       this.Controls.Add(this.panelBottom);
@@ -450,9 +434,9 @@ namespace MPTagThat
       this.Name = "Main";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "MPTagThat - The MediaPortal Tag Editor";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_Close);
       this.Load += new System.EventHandler(this.Main_Load);
       this.Move += new System.EventHandler(this.Main_Move);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_Close);
       this.Resize += new System.EventHandler(this.Main_Resize);
       this.panelBottom.ResumeLayout(false);
       this.panelMiddle.ResumeLayout(false);
@@ -466,10 +450,10 @@ namespace MPTagThat
       this.statusBarPane2.PerformLayout();
       this.statusBarPane3.ResumeLayout(false);
       this.statusBarPane3.PerformLayout();
-      this.statusBarPane4.ResumeLayout(false);
-      this.statusBarPane4.PerformLayout();
       this.statusBarControlsArea1.ResumeLayout(false);
       this.statusBarControlsArea1.PerformLayout();
+      this.statusBarPane4.ResumeLayout(false);
+      this.statusBarPane4.PerformLayout();
       this.statusBarPane1.ResumeLayout(false);
       this.statusBarPane1.PerformLayout();
       this.ResumeLayout(false);
