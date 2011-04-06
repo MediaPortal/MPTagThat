@@ -24,7 +24,7 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTTabPage : TabPage
+  public class MPTTabPage : Elegant.Ui.TabPage
   {
     #region Variables
 
@@ -111,7 +111,8 @@ namespace MPTagThat.Core.WinControls
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
+        // Message sent, when a Theme is changing
+        /*
         case "themechanged":
           {
             ForeColor = themeManager.CurrentTheme.LabelForeColor;
@@ -119,7 +120,8 @@ namespace MPTagThat.Core.WinControls
             BackColor = themeManager.CurrentTheme.BackColor;
             break;
           }
-
+        */
+ 
         case "languagechanged":
           Text = MPTWinControlsCommon.Localise(_localisationContext, _localisation);
           Refresh();

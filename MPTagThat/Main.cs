@@ -848,7 +848,22 @@ namespace MPTagThat
         }
         splitterBottom.Enabled = false;
       }
+    }
 
+    /// <summary>
+    /// Displays / Hides the Detail Panel
+    /// </summary>
+    /// <param name="show"></param>
+    public void ShowTagEditPanel(bool show)
+    {
+      if (show)
+      {
+        tagEditControl.Show();
+      }
+      else
+      {
+        tagEditControl.Hide();
+      }
     }
     #endregion
 
@@ -906,8 +921,11 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new FileNameToTag.FileNameToTag(this);
-          _showForm = true;
+          FileNameToTag.FileNameToTag dialog = new FileNameToTag.FileNameToTag(this);
+          panelFileList.Controls.Add(dialog);
+          ShowTagEditPanel(false);
+          dialog.Show();
+          _showForm = false;
           break;
 
         case Action.ActionType.ACTION_TAG2FILENAME:

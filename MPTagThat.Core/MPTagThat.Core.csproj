@@ -193,9 +193,7 @@
     <Compile Include="Controls\WinControls\MPTPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\WinControls\MPTTabPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\WinControls\MPTTabPage.cs" />
     <Compile Include="Controls\WinControls\MPTCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>

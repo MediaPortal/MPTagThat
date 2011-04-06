@@ -124,7 +124,7 @@ namespace MPTagThat.TagEdit
 
       Localisation();
 
-      tabControlTagEdit.SelectedIndex = 0;
+      tabControlTagEdit.SelectFirstTab();
 
       if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
       {
@@ -3013,17 +3013,27 @@ namespace MPTagThat.TagEdit
       switch (action.ID)
       {
         case Action.ActionType.ACTION_PAGEDOWN:
-          if (tabControlTagEdit.SelectedIndex == tabControlTagEdit.TabCount - 1)
-            tabControlTagEdit.SelectedIndex = 0;
+          // Scrolls the Tab Pages forward
+          if (tabControlTagEdit.SelectedTabPage == tabControlTagEdit.TabPages[tabControlTagEdit.TabPages.Count - 1])
+          {
+            tabControlTagEdit.SelectFirstTab();
+          }
           else
-            tabControlTagEdit.SelectedIndex = tabControlTagEdit.SelectedIndex + 1;
+          {
+            tabControlTagEdit.SelectNextTab();  
+          }
           break;
 
         case Action.ActionType.ACTION_PAGEUP:
-          if (tabControlTagEdit.SelectedIndex == 0)
-            tabControlTagEdit.SelectedIndex = tabControlTagEdit.TabCount - 1;
+          // Scrolls the Tab Pages backwards
+          if (tabControlTagEdit.SelectedTabPage == tabControlTagEdit.TabPages[0])
+          {
+            tabControlTagEdit.SelectLastTab();
+          }
           else
-            tabControlTagEdit.SelectedIndex = tabControlTagEdit.SelectedIndex - 1;
+          {
+            tabControlTagEdit.SelectPreviousTab();
+          }
           break;
 
         case Action.ActionType.ACTION_NEXTFILE:

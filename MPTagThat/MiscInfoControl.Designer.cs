@@ -1,4 +1,6 @@
-﻿namespace MPTagThat
+﻿using Elegant.Ui;
+
+namespace MPTagThat
 {
   partial class MiscInfoControl
   {
@@ -30,7 +32,7 @@
     {
       this.tabPageNonMusicFiles = new MPTagThat.Core.WinControls.MPTTabPage();
       this.listViewNonMusicFiles = new System.Windows.Forms.ListView();
-      this.tabControlMisc = new System.Windows.Forms.TabControl();
+      this.tabControlMisc = new Elegant.Ui.TabControl();
       this.tabPageNonMusicFiles.SuspendLayout();
       this.tabControlMisc.SuspendLayout();
       this.SuspendLayout();
@@ -46,8 +48,7 @@
       this.tabPageNonMusicFiles.Size = new System.Drawing.Size(195, 444);
       this.tabPageNonMusicFiles.TabIndex = 1;
       this.tabPageNonMusicFiles.Text = "Non Music Files";
-      this.tabPageNonMusicFiles.UseVisualStyleBackColor = true;
-      this.tabPageNonMusicFiles.Visible = false;
+      this.tabPageNonMusicFiles.Visible = true;
       // 
       // listViewNonMusicFiles
       // 
@@ -64,14 +65,15 @@
       // 
       // tabControlMisc
       // 
-      this.tabControlMisc.Alignment = System.Windows.Forms.TabAlignment.Bottom;
       this.tabControlMisc.Controls.Add(this.tabPageNonMusicFiles);
       this.tabControlMisc.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlMisc.Location = new System.Drawing.Point(0, 0);
       this.tabControlMisc.Name = "tabControlMisc";
-      this.tabControlMisc.SelectedIndex = 0;
       this.tabControlMisc.Size = new System.Drawing.Size(203, 470);
       this.tabControlMisc.TabIndex = 0;
+      this.tabControlMisc.TabsPlacement = TabsPlacement.Bottom;
+      this.tabControlMisc.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageNonMusicFiles });
       // 
       // MiscInfoControl
       // 
@@ -89,7 +91,7 @@
     #endregion
 
     private MPTagThat.Core.WinControls.MPTTabPage tabPageNonMusicFiles;
-    private System.Windows.Forms.TabControl tabControlMisc;
+    private Elegant.Ui.TabControl tabControlMisc;
     private System.Windows.Forms.ListView listViewNonMusicFiles;
   }
 }

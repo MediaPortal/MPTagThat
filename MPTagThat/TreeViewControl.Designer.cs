@@ -41,7 +41,7 @@
       this.contextMenuStripFilter = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuInsertFilter = new System.Windows.Forms.ToolStripMenuItem();
       this.menuDeleteFilter = new System.Windows.Forms.ToolStripMenuItem();
-      this.tabControlTreeView = new System.Windows.Forms.TabControl();
+      this.tabControlTreeView = new Elegant.Ui.TabControl();
       this.tabPageViews = new MPTagThat.Core.WinControls.MPTTabPage();
       this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.treeViewPanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
@@ -156,14 +156,14 @@
       // 
       // tabControlTreeView
       // 
-      this.tabControlTreeView.Controls.Add(this.tabPageViews);
-      this.tabControlTreeView.Controls.Add(this.tabPageFilter);
       this.tabControlTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTreeView.Location = new System.Drawing.Point(0, 0);
       this.tabControlTreeView.Name = "tabControlTreeView";
-      this.tabControlTreeView.SelectedIndex = 0;
       this.tabControlTreeView.Size = new System.Drawing.Size(218, 535);
       this.tabControlTreeView.TabIndex = 8;
+      this.tabControlTreeView.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageViews,
+            this.tabPageFilter});
       // 
       // tabPageViews
       // 
@@ -176,7 +176,6 @@
       this.tabPageViews.Size = new System.Drawing.Size(210, 509);
       this.tabPageViews.TabIndex = 0;
       this.tabPageViews.Text = "Views";
-      this.tabPageViews.UseVisualStyleBackColor = true;
       // 
       // treeViewPanel
       // 
@@ -260,7 +259,6 @@
       this.tabPageFilter.Size = new System.Drawing.Size(210, 509);
       this.tabPageFilter.TabIndex = 1;
       this.tabPageFilter.Text = "Filters";
-      this.tabPageFilter.UseVisualStyleBackColor = true;
       // 
       // dataGridViewTagFilter
       // 
@@ -487,7 +485,7 @@
     private System.Windows.Forms.ToolStripMenuItem menuCut;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem menuPaste;
-    private System.Windows.Forms.TabControl tabControlTreeView;
+    private Elegant.Ui.TabControl tabControlTreeView;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageViews;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageFilter;
     private MPTagThat.Core.WinControls.MPTComboBox cbListFormats;

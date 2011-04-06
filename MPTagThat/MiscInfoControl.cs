@@ -185,7 +185,7 @@ namespace MPTagThat
     /// </summary>
     public void ActivateNonMusicTab()
     {
-      tabControlMisc.SelectedIndex = 1;
+      tabControlMisc.SelectFirstTab();
     }
 
     #endregion
@@ -239,7 +239,7 @@ namespace MPTagThat
     {
       if (keyData == Keys.Delete)
       {
-        if (tabControlMisc.SelectedIndex == 1 && listViewNonMusicFiles.SelectedItems.Count > 0 && !_inLabeledit)
+        if (listViewNonMusicFiles.SelectedItems.Count > 0 && !_inLabeledit)
         {
           UIOption dialogOption = UIOption.AllDialogs;
           if (listViewNonMusicFiles.SelectedItems.Count > 1)

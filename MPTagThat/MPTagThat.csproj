@@ -126,7 +126,7 @@
       <DependentUpon>FindReplace.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\FileNameToTag.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\FileNameToTag.Designer.cs">
       <DependentUpon>FileNameToTag.cs</DependentUpon>

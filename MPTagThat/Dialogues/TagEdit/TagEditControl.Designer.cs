@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
-      this.tabControlTagEdit = new System.Windows.Forms.TabControl();
+      this.tabControlTagEdit = new Elegant.Ui.TabControl();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxRemoveComments = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -296,26 +296,25 @@
       // 
       // tabControlTagEdit
       // 
-      this.tabControlTagEdit.Controls.Add(this.tabPageMain);
-      this.tabControlTagEdit.Controls.Add(this.tabPagePictures);
-      this.tabControlTagEdit.Controls.Add(this.tabPageDetails);
-      this.tabControlTagEdit.Controls.Add(this.tabPageOriginal);
-      this.tabControlTagEdit.Controls.Add(this.tabPageInvolvedPeople);
-      this.tabControlTagEdit.Controls.Add(this.tabPageWebInformation);
-      this.tabControlTagEdit.Controls.Add(this.tabPageLyrics);
-      this.tabControlTagEdit.Controls.Add(this.tabPageRating);
-      this.tabControlTagEdit.Controls.Add(this.tabPageUserDefined);
       this.tabControlTagEdit.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedIndex = 0;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
+      this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageMain,
+            this.tabPagePictures,
+            this.tabPageDetails,
+            this.tabPageOriginal,
+            this.tabPageInvolvedPeople,
+            this.tabPageWebInformation,
+            this.tabPageLyrics,
+            this.tabPageRating,
+            this.tabPageUserDefined});
       // 
       // tabPageMain
-      // 
-      this.tabPageMain.AutoScroll = true;
+      // );
       this.tabPageMain.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageMain.Controls.Add(this.groupBoxComment);
       this.tabPageMain.Controls.Add(this.groupBoxGenre);
@@ -1197,7 +1196,6 @@
       // 
       // tabPageDetails
       // 
-      this.tabPageDetails.AutoScroll = true;
       this.tabPageDetails.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageDetails.Controls.Add(this.groupBoxMedia);
       this.tabPageDetails.Controls.Add(this.groupBoxSort);
@@ -1992,7 +1990,6 @@
       // 
       // tabPageInvolvedPeople
       // 
-      this.tabPageInvolvedPeople.AutoScroll = true;
       this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxMusician);
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxInvolvedPeople);
@@ -2582,7 +2579,6 @@
       // 
       // tabPageLyrics
       // 
-      this.tabPageLyrics.AutoScroll = true;
       this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
       this.tabPageLyrics.Localisation = "HeaderLyrics";
@@ -2778,7 +2774,6 @@
       // 
       // tabPageRating
       // 
-      this.tabPageRating.AutoScroll = true;
       this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRating.Controls.Add(this.groupBoxRating);
       this.tabPageRating.Localisation = "HeaderRating";
@@ -3116,7 +3111,7 @@
 
     #endregion
 
-    protected System.Windows.Forms.TabControl tabControlTagEdit;
+    protected Elegant.Ui.TabControl tabControlTagEdit;
     protected Core.WinControls.MPTTabPage tabPageMain;
     protected Core.WinControls.MPTGroupBox groupBoxComment;
     protected Core.WinControls.MPTCheckBox checkBoxRemoveComments;
