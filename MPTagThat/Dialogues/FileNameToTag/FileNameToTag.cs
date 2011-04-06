@@ -30,14 +30,14 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.FileNameToTag
 {
-  public partial class FileNameToTag : ShapedForm
+  public partial class FileNameToTag : UserControl
   {
     #region Variables
 
     private readonly Main _main;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _isPreviewOpen;
+    private bool _isPreviewFilled;
     private Preview _previewForm;
     private TrackData track;
     private TrackDataPreview trackPreview;
@@ -60,6 +60,8 @@ namespace MPTagThat.FileNameToTag
       LoadSettings();
 
       LocaliseScreen();
+
+      tabControl1.SelectFirstTab();
     }
 
     #endregion
@@ -383,15 +385,6 @@ namespace MPTagThat.FileNameToTag
 
     #region Event Handlers
 
-    /// <summary>
-    ///   Form is Closed. Save Settings
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void OnClose(object sender, FormClosedEventArgs e)
-    {
-      Options.FileNameToTagSettings.LastUsedFormat = cbFormat.SelectedIndex;
-    }
 
     /// <summary>
     ///   Apply the changes to the selected files.
@@ -423,10 +416,9 @@ namespace MPTagThat.FileNameToTag
         if (newFormat)
           Options.FileNameToTagSettingsTemp.Add(cbFormat.Text);
 
-        if (_previewForm != null)
-          _previewForm.Close();
-
-        Close();
+        Options.FileNameToTagSettings.LastUsedFormat = cbFormat.SelectedIndex;
+        _main.ShowTagEditPanel(true);
+        Dispose();
       }
     }
 
@@ -437,10 +429,8 @@ namespace MPTagThat.FileNameToTag
     /// <param name = "e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
-      if (_previewForm != null)
-        _previewForm.Close();
-
-      Close();
+      _main.ShowTagEditPanel(true);
+      Dispose();
     }
 
     /// <summary>
@@ -450,7 +440,7 @@ namespace MPTagThat.FileNameToTag
     /// <param name = "e"></param>
     private void cbFormat_TextChanged(object sender, EventArgs e)
     {
-      if (!_isPreviewOpen)
+      if (!_isPreviewFilled)
         return;
 
       if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.FileNameToTag))
@@ -541,36 +531,7 @@ namespace MPTagThat.FileNameToTag
     /// <param name = "e"></param>
     private void btReview_Click(object sender, EventArgs e)
     {
-      if (_isPreviewOpen)
-      {
-        _isPreviewOpen = false;
-        _previewForm.Hide();
-      }
-      else
-      {
-        _isPreviewOpen = true;
-        if (_previewForm == null)
-        {
-          _previewForm = new Preview();
-          FillPreview();
-        }
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
-        cbFormat_TextChanged(null, new EventArgs());
-        _previewForm.Show();
-      }
-    }
-
-    /// <summary>
-    ///   The form is moved. Move the Preview Window as well
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void FileNameToTag_Move(object sender, EventArgs e)
-    {
-      if (_isPreviewOpen)
-      {
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
-      }
+      tabControl1.SelectLastTab();
     }
 
     /// <summary>
@@ -591,6 +552,56 @@ namespace MPTagThat.FileNameToTag
           e.Handled = true;
           break;
       }
+    }
+
+    /// <summary>
+    /// Tabpage select event to invoke Preview
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tabControl1_SelectedTabPageChanged(object sender, Elegant.Ui.TabPageChangedEventArgs e)
+    {
+      if (sender == null)
+      {
+        return;
+      }
+
+      if ((sender as Elegant.Ui.TabControl).SelectedTabPage == tabPagePreview)
+      {
+        if (!_isPreviewFilled)
+        {
+          _isPreviewFilled = true;
+          if (_previewForm == null)
+          {
+            _previewForm = new Preview();
+            _previewForm.Dock = DockStyle.Fill;
+            FillPreview();
+            tabPagePreview.Controls.Add(_previewForm);
+          }
+          cbFormat_TextChanged(null, new EventArgs());
+        }
+      }
+    }
+
+    /// <summary>
+    ///   A Key has been pressed
+    /// </summary>
+    /// <param name = "e"></param>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if ((int)keyData == 13)   // Handle Enter key as default Apply Button
+      {
+        btApply_Click(null, new EventArgs());
+        return true;
+      }
+      else if ((int)keyData == 27)  // Handle Escape to Close the form
+      {
+        btCancel_Click(null, new EventArgs());
+        return true;
+      }
+
+
+      return base.ProcessCmdKey(ref msg, keyData);
     }
 
     #endregion

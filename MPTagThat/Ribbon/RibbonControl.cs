@@ -941,7 +941,7 @@ namespace MPTagThat
       {
         case "FileNameToTag":
           FileNameToTag.FileNameToTag dlgFileNameToTag = new FileNameToTag.FileNameToTag(main);
-          main.ShowModalDialog(dlgFileNameToTag);
+          main.ShowDialogInDetailPanel(dlgFileNameToTag);
           break;
 
         case "IdentifyFiles":

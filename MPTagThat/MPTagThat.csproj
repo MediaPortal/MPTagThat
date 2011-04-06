@@ -132,7 +132,7 @@
       <DependentUpon>FileNameToTag.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\Preview.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogues\Preview.Designer.cs">
       <DependentUpon>Preview.cs</DependentUpon>

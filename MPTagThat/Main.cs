@@ -865,6 +865,27 @@ namespace MPTagThat
         tagEditControl.Hide();
       }
     }
+
+    /// <summary>
+    ///   Shows the Dialogue in the Detail Panel
+    /// </summary>
+    /// <param name = "dlg"></param>
+    public void ShowDialogInDetailPanel(object dlg)
+    {
+      UserControl control = (UserControl) dlg;
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        panelMiddleBottom.Controls.Add(control);
+      }
+      else
+      {
+        panelFileList.Controls.Add(control);
+      }
+      
+      ShowTagEditPanel(false);
+      control.Show();
+    }
+
     #endregion
 
     #region Event Handler
@@ -922,9 +943,7 @@ namespace MPTagThat
             break;
 
           FileNameToTag.FileNameToTag dialog = new FileNameToTag.FileNameToTag(this);
-          panelFileList.Controls.Add(dialog);
-          ShowTagEditPanel(false);
-          dialog.Show();
+          ShowDialogInDetailPanel(dialog);
           _showForm = false;
           break;
 

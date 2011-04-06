@@ -514,6 +514,7 @@
     <String id="InvalidParm">Falsches Parameter Format. Bitte ändern</String> 
     <String id="Original">Original:</String> 
     <String id="Preview">Vorschau</String> 
+    <String id="Parameters">Parameter</String> 
   </Section>
 
   <!--  Case Conversion -->

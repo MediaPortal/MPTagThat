@@ -27,7 +27,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.Dialogues
 {
-  public partial class Preview : ShapedForm
+  public partial class Preview : UserControl
   {
     #region Variables
 
