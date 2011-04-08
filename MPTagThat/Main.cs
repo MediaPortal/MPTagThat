@@ -917,6 +917,7 @@ namespace MPTagThat
       if (action == null)
         return false;
 
+      object dialog = null;
       _dialog = null;
       _showForm = false;
       bool handled = true;
@@ -942,7 +943,7 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          FileNameToTag.FileNameToTag dialog = new FileNameToTag.FileNameToTag(this);
+          dialog = new FileNameToTag.FileNameToTag(this);
           ShowDialogInDetailPanel(dialog);
           _showForm = false;
           break;
@@ -951,8 +952,9 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new TagToFileName.TagToFileName(this);
-          _showForm = true;
+          dialog = new TagToFileName.TagToFileName(this);
+          ShowDialogInDetailPanel(dialog);
+          _showForm = false;
           break;
 
         case Action.ActionType.ACTION_IDENTIFYFILE:

@@ -210,7 +210,7 @@
       <DependentUpon>OrganiseFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogues\TagToFileName\TagToFileName.Designer.cs">
       <DependentUpon>TagToFileName.cs</DependentUpon>

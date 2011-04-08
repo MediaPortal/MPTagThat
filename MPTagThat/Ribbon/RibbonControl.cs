@@ -984,7 +984,7 @@ namespace MPTagThat
 
         case "RenameFileOptions":
           TagToFileName.TagToFileName dlgTagToFileOptions = new TagToFileName.TagToFileName(main, false);
-          main.ShowModalDialog(dlgTagToFileOptions);
+          main.ShowDialogInDetailPanel(dlgTagToFileOptions);
           break;
 
         case "CaseConversion":
