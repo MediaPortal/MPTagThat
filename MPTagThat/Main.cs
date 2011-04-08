@@ -656,7 +656,7 @@ namespace MPTagThat
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
 
-      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 600) 
+      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 1024) 
         panelMiddleBottom.Height = Options.MainSettings.BottomPanelSize;
 
       _bottomPanelCollapsed = Options.MainSettings.BottomPanelCollapsed;
