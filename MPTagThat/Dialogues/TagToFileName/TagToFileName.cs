@@ -253,6 +253,7 @@ namespace MPTagThat.TagToFileName
     {
       log.Trace(">>>");
       _previewForm.Tracks.Clear();
+      _previewForm.AddGridColumn(1, "NewFileName", localisation.ToString("column_header", "NewFileName"), 250);
       foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
       {
         if (!row.Selected)

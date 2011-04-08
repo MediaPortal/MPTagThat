@@ -413,7 +413,7 @@ namespace MPTagThat.Organise
     {
       log.Trace(">>>");
       _previewForm.Tracks.Clear();
-      _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFullFileName"), 250);
+      _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFileName"), 250);
       foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
       {
         if (!row.Selected)
