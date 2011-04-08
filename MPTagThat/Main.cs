@@ -976,8 +976,9 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new OrganiseFiles(this);
-          _showForm = true;
+          dialog = new OrganiseFiles(this);
+          ShowDialogInDetailPanel(dialog);
+          _showForm = false;
           break;
 
         case Action.ActionType.ACTION_GETCOVERART:

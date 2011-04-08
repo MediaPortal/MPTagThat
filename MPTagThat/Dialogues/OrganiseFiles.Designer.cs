@@ -68,9 +68,16 @@ namespace MPTagThat.Organise
       this.btAddFormat = new MPTagThat.Core.WinControls.MPTButton();
       this.cbFormat = new System.Windows.Forms.ComboBox();
       this.lblFormat = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tabControl1 = new Elegant.Ui.TabControl();
+      this.tabPageParameter = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPagePreview = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.mptPanel1 = new MPTagThat.Core.WinControls.MPTPanel();
       this.groupBoxParm.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
       this.groupBoxSelection.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
+      this.tabPageParameter.SuspendLayout();
+      this.mptPanel1.SuspendLayout();
       this.SuspendLayout();
       // 
       // btApply
@@ -79,7 +86,7 @@ namespace MPTagThat.Organise
       this.btApply.Id = "25a677de-50c3-4dcb-96e8-5977032faf48";
       this.btApply.Localisation = "ButtonOrganise";
       this.btApply.LocalisationContext = "Organise";
-      this.btApply.Location = new System.Drawing.Point(583, 480);
+      this.btApply.Location = new System.Drawing.Point(667, 10);
       this.btApply.Name = "btApply";
       this.btApply.Size = new System.Drawing.Size(100, 23);
       this.btApply.TabIndex = 3;
@@ -94,7 +101,7 @@ namespace MPTagThat.Organise
       this.btCancel.Id = "d270a889-3439-4b70-8c85-b982ba7d1f2f";
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "TagAndRename";
-      this.btCancel.Location = new System.Drawing.Point(690, 480);
+      this.btCancel.Location = new System.Drawing.Point(774, 10);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(100, 23);
       this.btCancel.TabIndex = 4;
@@ -129,9 +136,9 @@ namespace MPTagThat.Organise
       this.groupBoxParm.Id = "acb6a2a7-0ef5-486f-be04-56755b94b2fd";
       this.groupBoxParm.Localisation = "groupBoxParm";
       this.groupBoxParm.LocalisationContext = "TagAndRename";
-      this.groupBoxParm.Location = new System.Drawing.Point(16, 160);
+      this.groupBoxParm.Location = new System.Drawing.Point(14, 16);
       this.groupBoxParm.Name = "groupBoxParm";
-      this.groupBoxParm.Size = new System.Drawing.Size(774, 182);
+      this.groupBoxParm.Size = new System.Drawing.Size(824, 182);
       this.groupBoxParm.TabIndex = 22;
       this.groupBoxParm.Text = "Parameters (Click to add to the list)";
       // 
@@ -144,7 +151,7 @@ namespace MPTagThat.Organise
       this.lblParmFolder.Size = new System.Drawing.Size(391, 13);
       this.lblParmFolder.TabIndex = 21;
       this.lblParmFolder.Text = "\\ = Folder: to specify that parameters in front of it to be taken from the folder" +
-          " name";
+    " name";
       this.lblParmFolder.Click += new System.EventHandler(this.lblParm_Click);
       // 
       // lblParmFirstAlbumArtist
@@ -416,9 +423,9 @@ namespace MPTagThat.Organise
       this.groupBoxOptions.Id = "c909303a-6f6c-45dd-b766-0fab714f3139";
       this.groupBoxOptions.Localisation = "GroupBoxOptions";
       this.groupBoxOptions.LocalisationContext = "Organise";
-      this.groupBoxOptions.Location = new System.Drawing.Point(16, 346);
+      this.groupBoxOptions.Location = new System.Drawing.Point(14, 214);
       this.groupBoxOptions.Name = "groupBoxOptions";
-      this.groupBoxOptions.Size = new System.Drawing.Size(774, 113);
+      this.groupBoxOptions.Size = new System.Drawing.Size(824, 113);
       this.groupBoxOptions.TabIndex = 29;
       this.groupBoxOptions.Text = "Options";
       // 
@@ -455,8 +462,8 @@ namespace MPTagThat.Organise
       // 
       // groupBoxSelection
       // 
-      this.groupBoxSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBoxSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.groupBoxSelection.Controls.Add(this.btReview);
       this.groupBoxSelection.Controls.Add(this.cbRootDir);
       this.groupBoxSelection.Controls.Add(this.buttonBrowseRootDir);
@@ -470,7 +477,7 @@ namespace MPTagThat.Organise
       this.groupBoxSelection.LocalisationContext = "Organise";
       this.groupBoxSelection.Location = new System.Drawing.Point(16, 45);
       this.groupBoxSelection.Name = "groupBoxSelection";
-      this.groupBoxSelection.Size = new System.Drawing.Size(774, 115);
+      this.groupBoxSelection.Size = new System.Drawing.Size(858, 115);
       this.groupBoxSelection.TabIndex = 31;
       this.groupBoxSelection.Text = "Selection";
       // 
@@ -495,8 +502,8 @@ namespace MPTagThat.Organise
       this.cbRootDir.Size = new System.Drawing.Size(544, 21);
       this.cbRootDir.TabIndex = 33;
       this.cbRootDir.SelectedIndexChanged += new System.EventHandler(this.cbRootDir_SelectedIndexChanged);
-      this.cbRootDir.Leave += new System.EventHandler(this.cbRootDir_Leave);
       this.cbRootDir.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbRootDir_KeyDown);
+      this.cbRootDir.Leave += new System.EventHandler(this.cbRootDir_Leave);
       // 
       // buttonBrowseRootDir
       // 
@@ -555,6 +562,7 @@ namespace MPTagThat.Organise
       this.cbFormat.Size = new System.Drawing.Size(544, 21);
       this.cbFormat.TabIndex = 26;
       this.cbFormat.TextChanged += new System.EventHandler(this.cbFormat_TextChanged);
+      this.cbFormat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbFormat_Keypress);
       // 
       // lblFormat
       // 
@@ -566,37 +574,75 @@ namespace MPTagThat.Organise
       this.lblFormat.TabIndex = 29;
       this.lblFormat.Text = "Format:";
       // 
+      // tabControl1
+      // 
+      this.tabControl1.Location = new System.Drawing.Point(16, 173);
+      this.tabControl1.Name = "tabControl1";
+      this.tabControl1.SelectedTabPage = this.tabPageParameter;
+      this.tabControl1.Size = new System.Drawing.Size(858, 361);
+      this.tabControl1.TabIndex = 22;
+      this.tabControl1.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageParameter,
+            this.tabPagePreview});
+      this.tabControl1.Tag = "Preview";
+      this.tabControl1.Text = "tabControl1";
+      this.tabControl1.SelectedTabPageChanged += new Elegant.Ui.TabPageChangedEventHandler(this.tabControl1_SelectedTabPageChanged);
+      // 
+      // tabPageParameter
+      // 
+      this.tabPageParameter.ActiveControl = null;
+      this.tabPageParameter.Controls.Add(this.groupBoxParm);
+      this.tabPageParameter.Controls.Add(this.groupBoxOptions);
+      this.tabPageParameter.KeyTip = null;
+      this.tabPageParameter.Localisation = "Parameters";
+      this.tabPageParameter.LocalisationContext = "TagAndRename";
+      this.tabPageParameter.Name = "tabPageParameter";
+      this.tabPageParameter.Size = new System.Drawing.Size(856, 340);
+      this.tabPageParameter.TabIndex = 0;
+      this.tabPageParameter.Tag = "Parameter";
+      this.tabPageParameter.Text = "Parameters";
+      // 
+      // tabPagePreview
+      // 
+      this.tabPagePreview.ActiveControl = null;
+      this.tabPagePreview.KeyTip = null;
+      this.tabPagePreview.Localisation = "Preview";
+      this.tabPagePreview.LocalisationContext = "TagAndRename";
+      this.tabPagePreview.Name = "tabPagePreview";
+      this.tabPagePreview.Size = new System.Drawing.Size(742, 225);
+      this.tabPagePreview.TabIndex = 1;
+      this.tabPagePreview.Text = "Preview";
+      // 
+      // mptPanel1
+      // 
+      this.mptPanel1.Controls.Add(this.tabControl1);
+      this.mptPanel1.Controls.Add(this.btCancel);
+      this.mptPanel1.Controls.Add(this.btApply);
+      this.mptPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.mptPanel1.Location = new System.Drawing.Point(0, 0);
+      this.mptPanel1.Name = "mptPanel1";
+      this.mptPanel1.Size = new System.Drawing.Size(894, 554);
+      this.mptPanel1.TabIndex = 25;
+      // 
       // OrganiseFiles
       // 
-      this.AcceptButton = this.btApply;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
-      this.CancelButton = this.btCancel;
-      this.ClientSize = new System.Drawing.Size(810, 554);
       this.Controls.Add(this.groupBoxSelection);
       this.Controls.Add(this.labelHeader);
-      this.Controls.Add(this.groupBoxOptions);
-      this.Controls.Add(this.groupBoxParm);
-      this.Controls.Add(this.btCancel);
-      this.Controls.Add(this.btApply);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-      this.MaximizeBox = false;
-      this.MaximumSize = new System.Drawing.Size(810, 554);
-      this.MinimizeBox = false;
-      this.MinimumSize = new System.Drawing.Size(810, 554);
+      this.Controls.Add(this.mptPanel1);
       this.Name = "OrganiseFiles";
-      this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-      this.Text = "Organise Files";
-      this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);
-      this.Move += new System.EventHandler(this.OrganiseFiles_Move);
+      this.Size = new System.Drawing.Size(894, 554);
       this.groupBoxParm.ResumeLayout(false);
       this.groupBoxParm.PerformLayout();
       this.groupBoxOptions.ResumeLayout(false);
       this.groupBoxOptions.PerformLayout();
       this.groupBoxSelection.ResumeLayout(false);
       this.groupBoxSelection.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
+      this.tabPageParameter.ResumeLayout(false);
+      this.mptPanel1.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -644,5 +690,9 @@ namespace MPTagThat.Organise
     private MPTagThat.Core.WinControls.MPTButton btReview;
     private MPTagThat.Core.WinControls.MPTLabel lblOverrideTargetRootDir;
     private System.Windows.Forms.ComboBox cbScripts;
+    private Elegant.Ui.TabControl tabControl1;
+    private MPTagThat.Core.WinControls.MPTTabPage tabPageParameter;
+    private MPTagThat.Core.WinControls.MPTTabPage tabPagePreview;
+    private Core.WinControls.MPTPanel mptPanel1;
   }
 }

@@ -975,7 +975,7 @@ namespace MPTagThat
 
         case "OrganiseFiles":
           OrganiseFiles dlgOrganise = new OrganiseFiles(main);
-          main.ShowModalDialog(dlgOrganise);
+          main.ShowDialogInDetailPanel(dlgOrganise);
           break;
 
         case "RenameFiles":

@@ -204,7 +204,7 @@
       <DependentUpon>Preferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogues\OrganiseFiles.Designer.cs">
       <DependentUpon>OrganiseFiles.cs</DependentUpon>

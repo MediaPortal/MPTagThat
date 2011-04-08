@@ -33,7 +33,7 @@ using MPTagThat.Dialogues;
 
 namespace MPTagThat.Organise
 {
-  public partial class OrganiseFiles : ShapedForm
+  public partial class OrganiseFiles : UserControl
   {
     #region Variables
 
@@ -41,7 +41,7 @@ namespace MPTagThat.Organise
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private Dictionary<string, string> _directories;
-    private bool _isPreviewOpen;
+    private bool _isPreviewFilled;
     private Preview _previewForm;
     private Assembly _scriptAssembly;
     private TrackData track;
@@ -65,6 +65,8 @@ namespace MPTagThat.Organise
 
       labelHeader.ForeColor = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderForeColor;
       labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
+
+      tabControl1.SelectFirstTab();
     }
 
     #endregion
@@ -411,6 +413,7 @@ namespace MPTagThat.Organise
     {
       log.Trace(">>>");
       _previewForm.Tracks.Clear();
+      _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFullFileName"), 250);
       foreach (DataGridViewRow row in _main.TracksGridView.View.Rows)
       {
         if (!row.Selected)
@@ -457,21 +460,6 @@ namespace MPTagThat.Organise
     #endregion
 
     #region Event Handlers
-
-    /// <summary>
-    ///   Form is Closed. Save Settings
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void OnClose(object sender, FormClosedEventArgs e)
-    {
-      Options.OrganiseSettings.LastUsedFormat = cbFormat.SelectedIndex;
-      Options.OrganiseSettings.LastUsedFolderIndex = cbRootDir.SelectedIndex;
-      Options.OrganiseSettings.CopyFiles = ckCopyFiles.Checked;
-      Options.OrganiseSettings.OverWriteFiles = ckOverwriteFiles.Checked;
-      Options.OrganiseSettings.CopyNonMusicFiles = ckCopyNonMusicFiles.Checked;
-      Options.OrganiseSettings.LastUsedScript = cbScripts.Text;
-    }
 
     /// <summary>
     ///   Open a folder browser dialog
@@ -590,10 +578,15 @@ namespace MPTagThat.Organise
         if (newFormat)
           Options.OrganiseSettingsTemp.Add(cbFormat.Text);
 
-        if (_isPreviewOpen)
-          _previewForm.Close();
+        Options.OrganiseSettings.LastUsedFormat = cbFormat.SelectedIndex;
+        Options.OrganiseSettings.LastUsedFolderIndex = cbRootDir.SelectedIndex;
+        Options.OrganiseSettings.CopyFiles = ckCopyFiles.Checked;
+        Options.OrganiseSettings.OverWriteFiles = ckOverwriteFiles.Checked;
+        Options.OrganiseSettings.CopyNonMusicFiles = ckCopyNonMusicFiles.Checked;
+        Options.OrganiseSettings.LastUsedScript = cbScripts.Text;
 
-        Close();
+        _main.ShowTagEditPanel(true);
+        Dispose();
       }
     }
 
@@ -604,10 +597,8 @@ namespace MPTagThat.Organise
     /// <param name = "e"></param>
     private void btCancel_Click(object sender, EventArgs e)
     {
-      if (_isPreviewOpen)
-        _previewForm.Close();
-
-      Close();
+      _main.ShowTagEditPanel(true);
+      Dispose();
     }
 
     /// <summary>
@@ -617,7 +608,7 @@ namespace MPTagThat.Organise
     /// <param name = "e"></param>
     private void cbFormat_TextChanged(object sender, EventArgs e)
     {
-      if (!_isPreviewOpen)
+      if (!_isPreviewFilled)
         return;
 
       if (Util.CheckParameterFormat(cbFormat.Text, Options.ParameterFormat.Organise))
@@ -701,40 +692,7 @@ namespace MPTagThat.Organise
     /// <param name = "e"></param>
     private void btReview_Click(object sender, EventArgs e)
     {
-      if (_isPreviewOpen)
-      {
-        _isPreviewOpen = false;
-        _previewForm.Hide();
-      }
-      else
-      {
-        _isPreviewOpen = true;
-        if (_previewForm == null)
-        {
-          _previewForm = new Preview();
-          // Add the second column for the new filename to preview
-          _previewForm.AddGridColumn(1, "NewFullFileName", localisation.ToString("column_header", "NewFileName"), 480);
-          FillPreview();
-        }
-        _previewForm.MaximumSize = new Size(Width, _previewForm.Height);
-        _previewForm.Size = new Size(Width + 50, _previewForm.Height);
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
-        cbFormat_TextChanged(null, new EventArgs());
-        _previewForm.Show();
-      }
-    }
-
-    /// <summary>
-    ///   The form is moved. Move the Preview Window as well
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void OrganiseFiles_Move(object sender, EventArgs e)
-    {
-      if (_isPreviewOpen)
-      {
-        _previewForm.Location = new Point(Location.X, Location.Y + Height);
-      }
+      tabControl1.SelectLastTab();
     }
 
     /// <summary>
@@ -755,6 +713,56 @@ namespace MPTagThat.Organise
           e.Handled = true;
           break;
       }
+    }
+
+    /// <summary>
+    /// Tabpage select event to invoke Preview
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tabControl1_SelectedTabPageChanged(object sender, Elegant.Ui.TabPageChangedEventArgs e)
+    {
+      if (sender == null)
+      {
+        return;
+      }
+
+      if ((sender as Elegant.Ui.TabControl).SelectedTabPage == tabPagePreview)
+      {
+        if (!_isPreviewFilled)
+        {
+          _isPreviewFilled = true;
+          if (_previewForm == null)
+          {
+            _previewForm = new Preview();
+            _previewForm.Dock = DockStyle.Fill;
+            FillPreview();
+            tabPagePreview.Controls.Add(_previewForm);
+          }
+          cbFormat_TextChanged(null, new EventArgs());
+        }
+      }
+    }
+
+    /// <summary>
+    ///   A Key has been pressed
+    /// </summary>
+    /// <param name = "e"></param>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if ((int)keyData == 13)   // Handle Enter key as default Apply Button
+      {
+        btApply_Click(null, new EventArgs());
+        return true;
+      }
+      else if ((int)keyData == 27)  // Handle Escape to Close the form
+      {
+        btCancel_Click(null, new EventArgs());
+        return true;
+      }
+
+
+      return base.ProcessCmdKey(ref msg, keyData);
     }
 
     #endregion
