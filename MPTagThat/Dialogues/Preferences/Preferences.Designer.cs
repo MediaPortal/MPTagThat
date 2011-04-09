@@ -30,7 +30,7 @@ namespace MPTagThat.Preferences
     {
       this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
       this.panelOptions = new MPTagThat.Core.WinControls.MPTPanel();
-      this.tabControlOptions = new System.Windows.Forms.TabControl();
+      this.tabControlOptions = new Elegant.Ui.TabControl();
       this.tabPageGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxKeys = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbRibbonKeyValue = new System.Windows.Forms.TextBox();
@@ -55,7 +55,7 @@ namespace MPTagThat.Preferences
       this.comboBoxLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
       this.lbLanguage = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageTags = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabControlTags = new System.Windows.Forms.TabControl();
+      this.tabControlTags = new Elegant.Ui.TabControl();
       this.tabPageTagsGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxTagsGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -106,7 +106,7 @@ namespace MPTagThat.Preferences
       this.tbMediaPortalDatabase = new System.Windows.Forms.TextBox();
       this.ckUseMediaPortalDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageRipping = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabControlRipping = new System.Windows.Forms.TabControl();
+      this.tabControlRipping = new Elegant.Ui.TabControl();
       this.tabPageRippingGeneral = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxRippingOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckActivateTargetFolder = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -198,12 +198,12 @@ namespace MPTagThat.Preferences
       this.lbLinkRipping = new MPTagThat.Core.WinControls.MPTLabel();
       this.panelRight.SuspendLayout();
       this.panelOptions.SuspendLayout();
-      this.tabControlOptions.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlOptions)).BeginInit();
       this.tabPageGeneral.SuspendLayout();
       this.groupBoxKeys.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
       this.tabPageTags.SuspendLayout();
-      this.tabControlTags.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTags)).BeginInit();
       this.tabPageTagsGeneral.SuspendLayout();
       this.groupBoxTagsGeneral.SuspendLayout();
       this.tabPageTagsID3.SuspendLayout();
@@ -218,7 +218,7 @@ namespace MPTagThat.Preferences
       this.groupBoxDatabaseBuild.SuspendLayout();
       this.groubBoxTagsDatabase.SuspendLayout();
       this.tabPageRipping.SuspendLayout();
-      this.tabControlRipping.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlRipping)).BeginInit();
       this.tabPageRippingGeneral.SuspendLayout();
       this.groupBoxRippingOptions.SuspendLayout();
       this.groupBoxCustomPath.SuspendLayout();
@@ -271,28 +271,30 @@ namespace MPTagThat.Preferences
       // 
       // tabControlOptions
       // 
-      this.tabControlOptions.Controls.Add(this.tabPageGeneral);
-      this.tabControlOptions.Controls.Add(this.tabPageTags);
-      this.tabControlOptions.Controls.Add(this.tabPageRipping);
       this.tabControlOptions.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlOptions.ItemSize = new System.Drawing.Size(76, 21);
       this.tabControlOptions.Location = new System.Drawing.Point(0, 0);
       this.tabControlOptions.Name = "tabControlOptions";
-      this.tabControlOptions.SelectedIndex = 0;
+      this.tabControlOptions.SelectedTabPage = this.tabPageGeneral;
       this.tabControlOptions.Size = new System.Drawing.Size(647, 654);
       this.tabControlOptions.TabIndex = 0;
+      this.tabControlOptions.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageGeneral,
+            this.tabPageTags,
+            this.tabPageRipping});
       // 
       // tabPageGeneral
       // 
+      this.tabPageGeneral.ActiveControl = null;
       this.tabPageGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageGeneral.Controls.Add(this.groupBoxKeys);
       this.tabPageGeneral.Controls.Add(this.groupBoxGeneral);
+      this.tabPageGeneral.KeyTip = null;
       this.tabPageGeneral.Localisation = "TabGeneral";
       this.tabPageGeneral.LocalisationContext = "Settings";
-      this.tabPageGeneral.Location = new System.Drawing.Point(4, 25);
       this.tabPageGeneral.Name = "tabPageGeneral";
       this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageGeneral.Size = new System.Drawing.Size(639, 625);
+      this.tabPageGeneral.Size = new System.Drawing.Size(645, 633);
       this.tabPageGeneral.TabIndex = 0;
       this.tabPageGeneral.Text = "General";
       // 
@@ -323,8 +325,8 @@ namespace MPTagThat.Preferences
       // 
       // tbRibbonKeyValue
       // 
-      this.tbRibbonKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbRibbonKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbRibbonKeyValue.Location = new System.Drawing.Point(196, 432);
       this.tbRibbonKeyValue.MaxLength = 1;
       this.tbRibbonKeyValue.Name = "tbRibbonKeyValue";
@@ -370,8 +372,8 @@ namespace MPTagThat.Preferences
       // 
       // tbKeyValue
       // 
-      this.tbKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbKeyValue.Location = new System.Drawing.Point(449, 393);
       this.tbKeyValue.Name = "tbKeyValue";
       this.tbKeyValue.Size = new System.Drawing.Size(142, 20);
@@ -429,8 +431,8 @@ namespace MPTagThat.Preferences
       // 
       // tbKeyDescription
       // 
-      this.tbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbKeyDescription.Location = new System.Drawing.Point(194, 357);
       this.tbKeyDescription.Name = "tbKeyDescription";
       this.tbKeyDescription.Size = new System.Drawing.Size(397, 20);
@@ -449,8 +451,8 @@ namespace MPTagThat.Preferences
       // 
       // tbAction
       // 
-      this.tbAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbAction.Enabled = false;
       this.tbAction.Location = new System.Drawing.Point(194, 328);
       this.tbAction.Name = "tbAction";
@@ -471,9 +473,9 @@ namespace MPTagThat.Preferences
       // 
       // treeViewKeys
       // 
-      this.treeViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.treeViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.treeViewKeys.Location = new System.Drawing.Point(19, 31);
       this.treeViewKeys.Name = "treeViewKeys";
       this.treeViewKeys.Size = new System.Drawing.Size(572, 284);
@@ -499,8 +501,8 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxDebugLevel
       // 
-      this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxDebugLevel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
       this.comboBoxDebugLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxDebugLevel.Editable = false;
@@ -533,8 +535,8 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxThemes
       // 
-      this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxThemes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
       this.comboBoxThemes.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxThemes.Editable = false;
@@ -547,8 +549,8 @@ namespace MPTagThat.Preferences
       // 
       // comboBoxLanguage
       // 
-      this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.comboBoxLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
       this.comboBoxLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.comboBoxLanguage.Editable = false;
@@ -571,39 +573,42 @@ namespace MPTagThat.Preferences
       // 
       // tabPageTags
       // 
+      this.tabPageTags.ActiveControl = null;
       this.tabPageTags.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageTags.Controls.Add(this.tabControlTags);
+      this.tabPageTags.KeyTip = null;
       this.tabPageTags.Localisation = "TabTags";
       this.tabPageTags.LocalisationContext = "Settings";
-      this.tabPageTags.Location = new System.Drawing.Point(4, 25);
       this.tabPageTags.Name = "tabPageTags";
-      this.tabPageTags.Size = new System.Drawing.Size(639, 625);
+      this.tabPageTags.Size = new System.Drawing.Size(645, 633);
       this.tabPageTags.TabIndex = 2;
       this.tabPageTags.Text = "Tags";
       // 
       // tabControlTags
       // 
-      this.tabControlTags.Controls.Add(this.tabPageTagsGeneral);
-      this.tabControlTags.Controls.Add(this.tabPageTagsID3);
-      this.tabControlTags.Controls.Add(this.tabPageTagsLyricsCover);
-      this.tabControlTags.Controls.Add(this.tabPageDatabase);
       this.tabControlTags.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTags.Location = new System.Drawing.Point(0, 0);
       this.tabControlTags.Name = "tabControlTags";
-      this.tabControlTags.SelectedIndex = 0;
-      this.tabControlTags.Size = new System.Drawing.Size(639, 625);
+      this.tabControlTags.SelectedTabPage = this.tabPageDatabase;
+      this.tabControlTags.Size = new System.Drawing.Size(645, 633);
       this.tabControlTags.TabIndex = 4;
+      this.tabControlTags.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageTagsGeneral,
+            this.tabPageTagsID3,
+            this.tabPageTagsLyricsCover,
+            this.tabPageDatabase});
       // 
       // tabPageTagsGeneral
       // 
+      this.tabPageTagsGeneral.ActiveControl = null;
       this.tabPageTagsGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
+      this.tabPageTagsGeneral.KeyTip = null;
       this.tabPageTagsGeneral.Localisation = "TabGeneral";
       this.tabPageTagsGeneral.LocalisationContext = "Settings";
-      this.tabPageTagsGeneral.Location = new System.Drawing.Point(4, 22);
       this.tabPageTagsGeneral.Name = "tabPageTagsGeneral";
       this.tabPageTagsGeneral.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageTagsGeneral.Size = new System.Drawing.Size(631, 599);
+      this.tabPageTagsGeneral.Size = new System.Drawing.Size(643, 612);
       this.tabPageTagsGeneral.TabIndex = 0;
       this.tabPageTagsGeneral.Text = "General";
       // 
@@ -659,15 +664,16 @@ namespace MPTagThat.Preferences
       // 
       // tabPageTagsID3
       // 
+      this.tabPageTagsID3.ActiveControl = null;
       this.tabPageTagsID3.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageTagsID3.Controls.Add(this.groupBoxTagValidate);
       this.tabPageTagsID3.Controls.Add(this.groupBoxTagsID3);
+      this.tabPageTagsID3.KeyTip = null;
       this.tabPageTagsID3.Localisation = "TabTagsID3";
       this.tabPageTagsID3.LocalisationContext = "Settings";
-      this.tabPageTagsID3.Location = new System.Drawing.Point(4, 22);
       this.tabPageTagsID3.Name = "tabPageTagsID3";
       this.tabPageTagsID3.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageTagsID3.Size = new System.Drawing.Size(631, 599);
+      this.tabPageTagsID3.Size = new System.Drawing.Size(643, 612);
       this.tabPageTagsID3.TabIndex = 1;
       this.tabPageTagsID3.Text = "ID3";
       // 
@@ -844,14 +850,15 @@ namespace MPTagThat.Preferences
       // 
       // tabPageTagsLyricsCover
       // 
+      this.tabPageTagsLyricsCover.ActiveControl = null;
       this.tabPageTagsLyricsCover.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageTagsLyricsCover.Controls.Add(this.groupBoxPictures);
       this.tabPageTagsLyricsCover.Controls.Add(this.groupBoxLyrics);
+      this.tabPageTagsLyricsCover.KeyTip = null;
       this.tabPageTagsLyricsCover.Localisation = "TabTagsLyricsCover";
       this.tabPageTagsLyricsCover.LocalisationContext = "Settings";
-      this.tabPageTagsLyricsCover.Location = new System.Drawing.Point(4, 22);
       this.tabPageTagsLyricsCover.Name = "tabPageTagsLyricsCover";
-      this.tabPageTagsLyricsCover.Size = new System.Drawing.Size(631, 599);
+      this.tabPageTagsLyricsCover.Size = new System.Drawing.Size(643, 612);
       this.tabPageTagsLyricsCover.TabIndex = 2;
       this.tabPageTagsLyricsCover.Text = "Lyrics / Cover";
       // 
@@ -1101,14 +1108,15 @@ namespace MPTagThat.Preferences
       // 
       // tabPageDatabase
       // 
+      this.tabPageDatabase.ActiveControl = null;
       this.tabPageDatabase.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageDatabase.Controls.Add(this.groupBoxDatabaseBuild);
       this.tabPageDatabase.Controls.Add(this.groubBoxTagsDatabase);
+      this.tabPageDatabase.KeyTip = null;
       this.tabPageDatabase.Localisation = "TabTagsDatabase";
       this.tabPageDatabase.LocalisationContext = "Settings";
-      this.tabPageDatabase.Location = new System.Drawing.Point(4, 22);
       this.tabPageDatabase.Name = "tabPageDatabase";
-      this.tabPageDatabase.Size = new System.Drawing.Size(631, 599);
+      this.tabPageDatabase.Size = new System.Drawing.Size(643, 612);
       this.tabPageDatabase.TabIndex = 3;
       this.tabPageDatabase.Text = "Database";
       // 
@@ -1185,7 +1193,7 @@ namespace MPTagThat.Preferences
       this.lbDatabaseNote.Size = new System.Drawing.Size(515, 26);
       this.lbDatabaseNote.TabIndex = 0;
       this.lbDatabaseNote.Text = "If no Music Database is available, a database may be created, by entering a file " +
-          "name in the above text box.\r\nThen select a folder and start the scan.";
+    "name in the above text box.\r\nThen select a folder and start the scan.";
       // 
       // groubBoxTagsDatabase
       // 
@@ -1217,8 +1225,8 @@ namespace MPTagThat.Preferences
       // 
       // tbMediaPortalDatabase
       // 
-      this.tbMediaPortalDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbMediaPortalDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbMediaPortalDatabase.Location = new System.Drawing.Point(10, 54);
       this.tbMediaPortalDatabase.Name = "tbMediaPortalDatabase";
       this.tbMediaPortalDatabase.Size = new System.Drawing.Size(524, 20);
@@ -1238,46 +1246,49 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRipping
       // 
+      this.tabPageRipping.ActiveControl = null;
       this.tabPageRipping.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRipping.Controls.Add(this.tabControlRipping);
+      this.tabPageRipping.KeyTip = null;
       this.tabPageRipping.Localisation = "TabRipping";
       this.tabPageRipping.LocalisationContext = "Settings";
-      this.tabPageRipping.Location = new System.Drawing.Point(4, 25);
       this.tabPageRipping.Name = "tabPageRipping";
       this.tabPageRipping.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageRipping.Size = new System.Drawing.Size(639, 625);
+      this.tabPageRipping.Size = new System.Drawing.Size(645, 633);
       this.tabPageRipping.TabIndex = 1;
       this.tabPageRipping.Text = "Ripping";
       // 
       // tabControlRipping
       // 
-      this.tabControlRipping.Controls.Add(this.tabPageRippingGeneral);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingMP3);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingOGG);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingFlac);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingAAC);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingWMA);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingMPC);
-      this.tabControlRipping.Controls.Add(this.tabPageRippingWV);
       this.tabControlRipping.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlRipping.Location = new System.Drawing.Point(3, 3);
       this.tabControlRipping.Name = "tabControlRipping";
-      this.tabControlRipping.SelectedIndex = 0;
-      this.tabControlRipping.Size = new System.Drawing.Size(633, 619);
+      this.tabControlRipping.SelectedTabPage = this.tabPageRippingGeneral;
+      this.tabControlRipping.Size = new System.Drawing.Size(639, 627);
       this.tabControlRipping.TabIndex = 0;
+      this.tabControlRipping.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageRippingGeneral,
+            this.tabPageRippingMP3,
+            this.tabPageRippingOGG,
+            this.tabPageRippingFlac,
+            this.tabPageRippingAAC,
+            this.tabPageRippingWMA,
+            this.tabPageRippingMPC,
+            this.tabPageRippingWV});
       // 
       // tabPageRippingGeneral
       // 
+      this.tabPageRippingGeneral.ActiveControl = null;
       this.tabPageRippingGeneral.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingGeneral.Controls.Add(this.groupBoxRippingOptions);
       this.tabPageRippingGeneral.Controls.Add(this.groupBoxCustomPath);
       this.tabPageRippingGeneral.Controls.Add(this.groupBoxEncoding);
+      this.tabPageRippingGeneral.KeyTip = null;
       this.tabPageRippingGeneral.Localisation = "TabRippingGeneral";
       this.tabPageRippingGeneral.LocalisationContext = "Settings";
-      this.tabPageRippingGeneral.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingGeneral.Name = "tabPageRippingGeneral";
       this.tabPageRippingGeneral.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageRippingGeneral.Size = new System.Drawing.Size(625, 593);
+      this.tabPageRippingGeneral.Size = new System.Drawing.Size(637, 606);
       this.tabPageRippingGeneral.TabIndex = 0;
       this.tabPageRippingGeneral.Text = "General";
       // 
@@ -1339,8 +1350,8 @@ namespace MPTagThat.Preferences
       // 
       // groupBoxRippingFormatOptions
       // 
-      this.groupBoxRippingFormatOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBoxRippingFormatOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmFolder);
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblAlbumArtist);
       this.groupBoxRippingFormatOptions.Controls.Add(this.lblParmGenre);
@@ -1448,8 +1459,8 @@ namespace MPTagThat.Preferences
       // 
       // textBoxRippingFilenameFormat
       // 
-      this.textBoxRippingFilenameFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxRippingFilenameFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.textBoxRippingFilenameFormat.Location = new System.Drawing.Point(85, 71);
       this.textBoxRippingFilenameFormat.Name = "textBoxRippingFilenameFormat";
       this.textBoxRippingFilenameFormat.Size = new System.Drawing.Size(440, 20);
@@ -1482,8 +1493,8 @@ namespace MPTagThat.Preferences
       // 
       // tbTargetFolder
       // 
-      this.tbTargetFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbTargetFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbTargetFolder.Location = new System.Drawing.Point(85, 25);
       this.tbTargetFolder.Name = "tbTargetFolder";
       this.tbTargetFolder.Size = new System.Drawing.Size(440, 20);
@@ -1536,12 +1547,13 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingMP3
       // 
+      this.tabPageRippingMP3.ActiveControl = null;
       this.tabPageRippingMP3.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingMP3.Controls.Add(this.groupBoxMp3Experts);
       this.tabPageRippingMP3.Controls.Add(this.groupBoxPresets);
+      this.tabPageRippingMP3.KeyTip = null;
       this.tabPageRippingMP3.Localisation = "TabRippingMP3";
       this.tabPageRippingMP3.LocalisationContext = "Settings";
-      this.tabPageRippingMP3.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingMP3.Name = "tabPageRippingMP3";
       this.tabPageRippingMP3.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageRippingMP3.Size = new System.Drawing.Size(625, 593);
@@ -1664,12 +1676,13 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingOGG
       // 
+      this.tabPageRippingOGG.ActiveControl = null;
       this.tabPageRippingOGG.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingOGG.Controls.Add(this.groupBoxOggExpert);
       this.tabPageRippingOGG.Controls.Add(this.groupBoxOggEncoding);
+      this.tabPageRippingOGG.KeyTip = null;
       this.tabPageRippingOGG.Localisation = "TabRippingOGG";
       this.tabPageRippingOGG.LocalisationContext = "Settings";
-      this.tabPageRippingOGG.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingOGG.Name = "tabPageRippingOGG";
       this.tabPageRippingOGG.Size = new System.Drawing.Size(625, 593);
       this.tabPageRippingOGG.TabIndex = 2;
@@ -1698,7 +1711,7 @@ namespace MPTagThat.Preferences
       this.lbOggExpertWarning.Size = new System.Drawing.Size(413, 13);
       this.lbOggExpertWarning.TabIndex = 2;
       this.lbOggExpertWarning.Text = "Warning: The settings above will not be used, when specifying Ogg Expert paramete" +
-          "rs";
+    "rs";
       // 
       // textBoxOggParms
       // 
@@ -1765,12 +1778,13 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingFlac
       // 
+      this.tabPageRippingFlac.ActiveControl = null;
       this.tabPageRippingFlac.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingFlac.Controls.Add(this.groupBoxFlacSettings);
       this.tabPageRippingFlac.Controls.Add(this.groupBoxFlacEncoding);
+      this.tabPageRippingFlac.KeyTip = null;
       this.tabPageRippingFlac.Localisation = "TabRippingFlac";
       this.tabPageRippingFlac.LocalisationContext = "Settings";
-      this.tabPageRippingFlac.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingFlac.Name = "tabPageRippingFlac";
       this.tabPageRippingFlac.Size = new System.Drawing.Size(625, 593);
       this.tabPageRippingFlac.TabIndex = 3;
@@ -1799,7 +1813,7 @@ namespace MPTagThat.Preferences
       this.lbFlacExpertsWarning.Size = new System.Drawing.Size(416, 13);
       this.lbFlacExpertsWarning.TabIndex = 2;
       this.lbFlacExpertsWarning.Text = "Warning: The settings above will not be used when specifying FLAC Expert paramete" +
-          "rs";
+    "rs";
       // 
       // textBoxFlacParms
       // 
@@ -1865,11 +1879,12 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingAAC
       // 
+      this.tabPageRippingAAC.ActiveControl = null;
       this.tabPageRippingAAC.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingAAC.Controls.Add(this.groupBoxAACEncoding);
+      this.tabPageRippingAAC.KeyTip = null;
       this.tabPageRippingAAC.Localisation = "TabRippingAAC";
       this.tabPageRippingAAC.LocalisationContext = "Settings";
-      this.tabPageRippingAAC.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingAAC.Name = "tabPageRippingAAC";
       this.tabPageRippingAAC.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageRippingAAC.Size = new System.Drawing.Size(625, 593);
@@ -1913,11 +1928,12 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingWMA
       // 
+      this.tabPageRippingWMA.ActiveControl = null;
       this.tabPageRippingWMA.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingWMA.Controls.Add(this.groupBoxWMAEncoding);
+      this.tabPageRippingWMA.KeyTip = null;
       this.tabPageRippingWMA.Localisation = "TabRippingWMA";
       this.tabPageRippingWMA.LocalisationContext = "Settings";
-      this.tabPageRippingWMA.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingWMA.Name = "tabPageRippingWMA";
       this.tabPageRippingWMA.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageRippingWMA.Size = new System.Drawing.Size(625, 593);
@@ -2025,12 +2041,13 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingMPC
       // 
+      this.tabPageRippingMPC.ActiveControl = null;
       this.tabPageRippingMPC.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingMPC.Controls.Add(this.groupBoxMPCExpert);
       this.tabPageRippingMPC.Controls.Add(this.groupBoxMPCPresets);
+      this.tabPageRippingMPC.KeyTip = null;
       this.tabPageRippingMPC.Localisation = "TabRippingMPC";
       this.tabPageRippingMPC.LocalisationContext = "Settings";
-      this.tabPageRippingMPC.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingMPC.Name = "tabPageRippingMPC";
       this.tabPageRippingMPC.Size = new System.Drawing.Size(625, 593);
       this.tabPageRippingMPC.TabIndex = 6;
@@ -2120,12 +2137,13 @@ namespace MPTagThat.Preferences
       // 
       // tabPageRippingWV
       // 
+      this.tabPageRippingWV.ActiveControl = null;
       this.tabPageRippingWV.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRippingWV.Controls.Add(this.groupBoxWVExpertSettings);
       this.tabPageRippingWV.Controls.Add(this.groupBoxWVPresets);
+      this.tabPageRippingWV.KeyTip = null;
       this.tabPageRippingWV.Localisation = "TabRippingWV";
       this.tabPageRippingWV.LocalisationContext = "Settings";
-      this.tabPageRippingWV.Location = new System.Drawing.Point(4, 22);
       this.tabPageRippingWV.Name = "tabPageRippingWV";
       this.tabPageRippingWV.Size = new System.Drawing.Size(625, 593);
       this.tabPageRippingWV.TabIndex = 7;
@@ -2360,14 +2378,14 @@ namespace MPTagThat.Preferences
       this.Load += new System.EventHandler(this.OnLoad);
       this.panelRight.ResumeLayout(false);
       this.panelOptions.ResumeLayout(false);
-      this.tabControlOptions.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlOptions)).EndInit();
       this.tabPageGeneral.ResumeLayout(false);
       this.groupBoxKeys.ResumeLayout(false);
       this.groupBoxKeys.PerformLayout();
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
       this.tabPageTags.ResumeLayout(false);
-      this.tabControlTags.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTags)).EndInit();
       this.tabPageTagsGeneral.ResumeLayout(false);
       this.groupBoxTagsGeneral.ResumeLayout(false);
       this.groupBoxTagsGeneral.PerformLayout();
@@ -2391,7 +2409,7 @@ namespace MPTagThat.Preferences
       this.groubBoxTagsDatabase.ResumeLayout(false);
       this.groubBoxTagsDatabase.PerformLayout();
       this.tabPageRipping.ResumeLayout(false);
-      this.tabControlRipping.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlRipping)).EndInit();
       this.tabPageRippingGeneral.ResumeLayout(false);
       this.groupBoxRippingOptions.ResumeLayout(false);
       this.groupBoxRippingOptions.PerformLayout();
@@ -2449,13 +2467,13 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTPanel panelRight;
     private MPTagThat.Core.WinControls.MPTPanel panelOptions;
     private MPTagThat.Core.WinControls.MPTPanel panelBottom;
-    private System.Windows.Forms.TabControl tabControlOptions;
+    private Elegant.Ui.TabControl tabControlOptions;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageGeneral;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRipping;
     private MPTagThat.Core.WinControls.MPTButton buttonCancel;
     private MPTagThat.Core.WinControls.MPTButton buttonApply;
     private MPTagThat.Core.WinControls.MPTLabel lbLinkRipping;
-    private System.Windows.Forms.TabControl tabControlRipping;
+    private Elegant.Ui.TabControl tabControlRipping;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRippingGeneral;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageRippingMP3;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxGeneral;
@@ -2575,7 +2593,7 @@ namespace MPTagThat.Preferences
     private MPTagThat.Core.WinControls.MPTCheckBox ckCopyArtistToAlbumArtist;
     private MPTagThat.Core.WinControls.MPTCheckBox ckUseCaseConversionWhenSaving;
     private MPTagThat.Core.WinControls.MPTRadioButton radioButtonUseApe;
-    private System.Windows.Forms.TabControl tabControlTags;
+    private Elegant.Ui.TabControl tabControlTags;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageTagsGeneral;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageTagsID3;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageTagsLyricsCover;
