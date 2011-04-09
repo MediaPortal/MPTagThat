@@ -57,7 +57,7 @@ namespace MPTagThat.Dialogues
         LocaliseScreen();
         if (_replace)
         {
-          tabControlFindReplace.SelectedIndex = 1;
+          tabControlFindReplace.SelectLastTab();
         }
       }
     }
@@ -85,6 +85,8 @@ namespace MPTagThat.Dialogues
       }
 
       LocaliseScreen();
+
+      tabControlFindReplace.SelectFirstTab();
     }
 
     #endregion

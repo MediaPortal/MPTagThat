@@ -28,7 +28,7 @@ namespace MPTagThat.Dialogues
     /// </summary>
     private void InitializeComponent()
     {
-      this.tabControlFindReplace = new System.Windows.Forms.TabControl();
+      this.tabControlFindReplace = new Elegant.Ui.TabControl();
       this.tabPageFind = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageReplace = new MPTagThat.Core.WinControls.MPTTabPage();
       this.buttonReplaceAll = new MPTagThat.Core.WinControls.MPTButton();
@@ -57,16 +57,19 @@ namespace MPTagThat.Dialogues
       this.tabControlFindReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                   | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
-      this.tabControlFindReplace.Controls.Add(this.tabPageFind);
-      this.tabControlFindReplace.Controls.Add(this.tabPageReplace);
       this.tabControlFindReplace.Location = new System.Drawing.Point(11, 32);
       this.tabControlFindReplace.Name = "tabControlFindReplace";
-      this.tabControlFindReplace.SelectedIndex = 0;
       this.tabControlFindReplace.Size = new System.Drawing.Size(466, 375);
       this.tabControlFindReplace.TabIndex = 0;
+      this.tabControlFindReplace.TabPages.AddRange(new Elegant.Ui.TabPage[]
+                                                     {
+                                                       this.tabPageFind,
+                                                       this.tabPageReplace
+                                                     });
+
       // 
       // tabPageFind
-      // 
+      // );
       this.tabPageFind.BackColor = System.Drawing.SystemColors.Control;
       this.tabPageFind.Localisation = "TabFind";
       this.tabPageFind.LocalisationContext = "FindReplace";
@@ -312,7 +315,7 @@ namespace MPTagThat.Dialogues
 
     #endregion
 
-    private System.Windows.Forms.TabControl tabControlFindReplace;
+    private Elegant.Ui.TabControl tabControlFindReplace;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageFind;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageReplace;
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxMatching;
