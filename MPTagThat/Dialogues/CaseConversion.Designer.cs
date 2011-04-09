@@ -28,7 +28,7 @@ namespace MPTagThat.CaseConversion
     /// </summary>
     private void InitializeComponent()
     {
-      this.tabControlConversion = new System.Windows.Forms.TabControl();
+      this.tabControlConversion = new Elegant.Ui.TabControl();
       this.tabPageSettings = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxAlwaysUpperCaseFirstLetter = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -57,7 +57,8 @@ namespace MPTagThat.CaseConversion
       this.buttonConvert = new MPTagThat.Core.WinControls.MPTButton();
       this.buttonCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tabControlConversion.SuspendLayout();
+      this.mptPanel1 = new MPTagThat.Core.WinControls.MPTPanel();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlConversion)).BeginInit();
       this.tabPageSettings.SuspendLayout();
       this.groupBoxOptions.SuspendLayout();
       this.groupBoxMethod.SuspendLayout();
@@ -67,31 +68,33 @@ namespace MPTagThat.CaseConversion
       // 
       // tabControlConversion
       // 
-      this.tabControlConversion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.tabControlConversion.Controls.Add(this.tabPageSettings);
-      this.tabControlConversion.Controls.Add(this.Exceptions);
-      this.tabControlConversion.Location = new System.Drawing.Point(11, 32);
+      this.tabControlConversion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tabControlConversion.Location = new System.Drawing.Point(11, 49);
       this.tabControlConversion.Name = "tabControlConversion";
-      this.tabControlConversion.SelectedIndex = 0;
-      this.tabControlConversion.Size = new System.Drawing.Size(466, 341);
+      this.tabControlConversion.SelectedTabPage = this.tabPageSettings;
+      this.tabControlConversion.Size = new System.Drawing.Size(591, 341);
       this.tabControlConversion.TabIndex = 0;
+      this.tabControlConversion.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageSettings,
+            this.Exceptions});
       // 
       // tabPageSettings
       // 
+      this.tabPageSettings.ActiveControl = null;
       this.tabPageSettings.BackColor = System.Drawing.SystemColors.Control;
       this.tabPageSettings.Controls.Add(this.groupBoxOptions);
       this.tabPageSettings.Controls.Add(this.groupBoxMethod);
       this.tabPageSettings.Controls.Add(this.groupBoxConvert);
       this.tabPageSettings.Controls.Add(this.checkBoxConvertTags);
       this.tabPageSettings.Controls.Add(this.checkBoxConvertFileName);
+      this.tabPageSettings.KeyTip = null;
       this.tabPageSettings.Localisation = "TabSettings";
       this.tabPageSettings.LocalisationContext = "CaseConversion";
-      this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
       this.tabPageSettings.Name = "tabPageSettings";
       this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageSettings.Size = new System.Drawing.Size(458, 315);
+      this.tabPageSettings.Size = new System.Drawing.Size(589, 320);
       this.tabPageSettings.TabIndex = 0;
       this.tabPageSettings.Text = "Settings";
       // 
@@ -102,13 +105,13 @@ namespace MPTagThat.CaseConversion
       this.groupBoxOptions.Controls.Add(this.checkBoxReplaceUnderscoreBySpace);
       this.groupBoxOptions.Controls.Add(this.checkBoxReplaceSpaceby20);
       this.groupBoxOptions.Controls.Add(this.checkBoxReplace20bySpace);
+      this.groupBoxOptions.Id = "fbbf1532-b251-4da6-a781-09fe5f2aca06";
       this.groupBoxOptions.Localisation = "GroupBoxOptions";
       this.groupBoxOptions.LocalisationContext = "CaseConversion";
       this.groupBoxOptions.Location = new System.Drawing.Point(8, 207);
       this.groupBoxOptions.Name = "groupBoxOptions";
-      this.groupBoxOptions.Size = new System.Drawing.Size(444, 100);
+      this.groupBoxOptions.Size = new System.Drawing.Size(563, 100);
       this.groupBoxOptions.TabIndex = 4;
-      this.groupBoxOptions.TabStop = false;
       this.groupBoxOptions.Text = "Options";
       // 
       // checkBoxAlwaysUpperCaseFirstLetter
@@ -130,7 +133,7 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplaceSpaceByUnderscore.AutoSize = true;
       this.checkBoxReplaceSpaceByUnderscore.Localisation = "ReplaceSpaceByUnderscore";
       this.checkBoxReplaceSpaceByUnderscore.LocalisationContext = "CaseConversion";
-      this.checkBoxReplaceSpaceByUnderscore.Location = new System.Drawing.Point(234, 51);
+      this.checkBoxReplaceSpaceByUnderscore.Location = new System.Drawing.Point(272, 51);
       this.checkBoxReplaceSpaceByUnderscore.Name = "checkBoxReplaceSpaceByUnderscore";
       this.checkBoxReplaceSpaceByUnderscore.Size = new System.Drawing.Size(133, 17);
       this.checkBoxReplaceSpaceByUnderscore.TabIndex = 4;
@@ -154,7 +157,7 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplaceSpaceby20.AutoSize = true;
       this.checkBoxReplaceSpaceby20.Localisation = "ReplaceSpaceby20";
       this.checkBoxReplaceSpaceby20.LocalisationContext = "CaseConversion";
-      this.checkBoxReplaceSpaceby20.Location = new System.Drawing.Point(234, 28);
+      this.checkBoxReplaceSpaceby20.Location = new System.Drawing.Point(272, 28);
       this.checkBoxReplaceSpaceby20.Name = "checkBoxReplaceSpaceby20";
       this.checkBoxReplaceSpaceby20.Size = new System.Drawing.Size(147, 17);
       this.checkBoxReplaceSpaceby20.TabIndex = 2;
@@ -179,13 +182,13 @@ namespace MPTagThat.CaseConversion
       this.groupBoxMethod.Controls.Add(this.radioButtonFirstLetterUpperCase);
       this.groupBoxMethod.Controls.Add(this.radioButtonAllUpperCase);
       this.groupBoxMethod.Controls.Add(this.radioButtonAllLowerCase);
+      this.groupBoxMethod.Id = "7fdee678-b0ec-4bf4-bcc4-2cef8260448f";
       this.groupBoxMethod.Localisation = "GroupBoxMethod";
       this.groupBoxMethod.LocalisationContext = "CaseConversion";
-      this.groupBoxMethod.Location = new System.Drawing.Point(232, 55);
+      this.groupBoxMethod.Location = new System.Drawing.Point(278, 55);
       this.groupBoxMethod.Name = "groupBoxMethod";
-      this.groupBoxMethod.Size = new System.Drawing.Size(220, 145);
+      this.groupBoxMethod.Size = new System.Drawing.Size(293, 145);
       this.groupBoxMethod.TabIndex = 3;
-      this.groupBoxMethod.TabStop = false;
       this.groupBoxMethod.Text = "Conversion Method";
       // 
       // radioButtonAllFirstLetterUpperCase
@@ -245,13 +248,13 @@ namespace MPTagThat.CaseConversion
       this.groupBoxConvert.Controls.Add(this.checkBoxAlbum);
       this.groupBoxConvert.Controls.Add(this.checkBoxAlbumArtist);
       this.groupBoxConvert.Controls.Add(this.checkBoxArtist);
+      this.groupBoxConvert.Id = "faed8e47-990d-4282-96ad-066964014816";
       this.groupBoxConvert.Localisation = "GroupBoxConvert";
       this.groupBoxConvert.LocalisationContext = "CaseConversion";
       this.groupBoxConvert.Location = new System.Drawing.Point(8, 55);
       this.groupBoxConvert.Name = "groupBoxConvert";
-      this.groupBoxConvert.Size = new System.Drawing.Size(220, 145);
+      this.groupBoxConvert.Size = new System.Drawing.Size(255, 145);
       this.groupBoxConvert.TabIndex = 2;
-      this.groupBoxConvert.TabStop = false;
       this.groupBoxConvert.Text = "Convert Tags for ...";
       // 
       // checkBoxComment
@@ -331,7 +334,7 @@ namespace MPTagThat.CaseConversion
       this.checkBoxConvertTags.CheckState = System.Windows.Forms.CheckState.Checked;
       this.checkBoxConvertTags.Localisation = "ConvertTags";
       this.checkBoxConvertTags.LocalisationContext = "CaseConversion";
-      this.checkBoxConvertTags.Location = new System.Drawing.Point(238, 21);
+      this.checkBoxConvertTags.Location = new System.Drawing.Point(284, 21);
       this.checkBoxConvertTags.Name = "checkBoxConvertTags";
       this.checkBoxConvertTags.Size = new System.Drawing.Size(90, 17);
       this.checkBoxConvertTags.TabIndex = 1;
@@ -354,25 +357,27 @@ namespace MPTagThat.CaseConversion
       // 
       // Exceptions
       // 
+      this.Exceptions.ActiveControl = null;
       this.Exceptions.BackColor = System.Drawing.SystemColors.Control;
       this.Exceptions.Controls.Add(this.buttonRemoveException);
       this.Exceptions.Controls.Add(this.buttonAddException);
       this.Exceptions.Controls.Add(this.tbException);
       this.Exceptions.Controls.Add(this.listBoxExceptions);
+      this.Exceptions.KeyTip = null;
       this.Exceptions.Localisation = "Exceptions";
       this.Exceptions.LocalisationContext = "CaseConversion";
-      this.Exceptions.Location = new System.Drawing.Point(4, 22);
       this.Exceptions.Name = "Exceptions";
       this.Exceptions.Padding = new System.Windows.Forms.Padding(3);
-      this.Exceptions.Size = new System.Drawing.Size(458, 315);
+      this.Exceptions.Size = new System.Drawing.Size(589, 320);
       this.Exceptions.TabIndex = 1;
       this.Exceptions.Text = "Exceptions";
       // 
       // buttonRemoveException
       // 
+      this.buttonRemoveException.Id = "776aa327-eb9e-4ae6-8a29-04c525a2bc39";
       this.buttonRemoveException.Localisation = "RemoveException";
       this.buttonRemoveException.LocalisationContext = "Exceptions";
-      this.buttonRemoveException.Location = new System.Drawing.Point(281, 53);
+      this.buttonRemoveException.Location = new System.Drawing.Point(397, 53);
       this.buttonRemoveException.Name = "buttonRemoveException";
       this.buttonRemoveException.Size = new System.Drawing.Size(171, 23);
       this.buttonRemoveException.TabIndex = 3;
@@ -382,9 +387,10 @@ namespace MPTagThat.CaseConversion
       // 
       // buttonAddException
       // 
+      this.buttonAddException.Id = "42db35ac-be29-4a14-8906-d5d28ac5340b";
       this.buttonAddException.Localisation = "AddException";
       this.buttonAddException.LocalisationContext = "Exceptions";
-      this.buttonAddException.Location = new System.Drawing.Point(281, 16);
+      this.buttonAddException.Location = new System.Drawing.Point(397, 16);
       this.buttonAddException.Name = "buttonAddException";
       this.buttonAddException.Size = new System.Drawing.Size(171, 23);
       this.buttonAddException.TabIndex = 2;
@@ -396,7 +402,7 @@ namespace MPTagThat.CaseConversion
       // 
       this.tbException.Location = new System.Drawing.Point(7, 16);
       this.tbException.Name = "tbException";
-      this.tbException.Size = new System.Drawing.Size(247, 20);
+      this.tbException.Size = new System.Drawing.Size(367, 20);
       this.tbException.TabIndex = 1;
       // 
       // listBoxExceptions
@@ -404,16 +410,16 @@ namespace MPTagThat.CaseConversion
       this.listBoxExceptions.FormattingEnabled = true;
       this.listBoxExceptions.Location = new System.Drawing.Point(8, 53);
       this.listBoxExceptions.Name = "listBoxExceptions";
-      this.listBoxExceptions.Size = new System.Drawing.Size(246, 251);
+      this.listBoxExceptions.Size = new System.Drawing.Size(366, 251);
       this.listBoxExceptions.TabIndex = 0;
       // 
       // buttonConvert
       // 
       this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonConvert.AutoSize = true;
+      this.buttonConvert.Id = "bdcfc799-7281-4375-b074-2ccaaf4ac996";
       this.buttonConvert.Localisation = "Convert";
       this.buttonConvert.LocalisationContext = "CaseConversion";
-      this.buttonConvert.Location = new System.Drawing.Point(311, 384);
+      this.buttonConvert.Location = new System.Drawing.Point(437, 9);
       this.buttonConvert.Name = "buttonConvert";
       this.buttonConvert.Size = new System.Drawing.Size(75, 23);
       this.buttonConvert.TabIndex = 1;
@@ -424,11 +430,11 @@ namespace MPTagThat.CaseConversion
       // buttonCancel
       // 
       this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonCancel.AutoSize = true;
       this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.buttonCancel.Id = "b7efe35e-024a-4bb1-847b-d5e5f901cb13";
       this.buttonCancel.Localisation = "Cancel";
       this.buttonCancel.LocalisationContext = "CaseConversion";
-      this.buttonCancel.Location = new System.Drawing.Point(392, 384);
+      this.buttonCancel.Location = new System.Drawing.Point(518, 9);
       this.buttonCancel.Name = "buttonCancel";
       this.buttonCancel.Size = new System.Drawing.Size(75, 23);
       this.buttonCancel.TabIndex = 2;
@@ -438,33 +444,37 @@ namespace MPTagThat.CaseConversion
       // 
       // labelHeader
       // 
-      this.labelHeader.AutoSize = true;
       this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.labelHeader.ForeColor = System.Drawing.Color.White;
+      this.labelHeader.Localisation = "labelHeader";
+      this.labelHeader.LocalisationContext = "CaseConversion";
       this.labelHeader.Location = new System.Drawing.Point(7, 9);
       this.labelHeader.Name = "labelHeader";
       this.labelHeader.Size = new System.Drawing.Size(62, 20);
       this.labelHeader.TabIndex = 23;
       this.labelHeader.Text = "Header";
       // 
+      // mptPanel1
+      // 
+      this.mptPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.mptPanel1.Location = new System.Drawing.Point(0, 0);
+      this.mptPanel1.Name = "mptPanel1";
+      this.mptPanel1.Size = new System.Drawing.Size(614, 419);
+      this.mptPanel1.TabIndex = 24;
+      // 
       // CaseConversion
       // 
-      this.AcceptButton = this.buttonConvert;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
-      this.CancelButton = this.buttonCancel;
-      this.ClientSize = new System.Drawing.Size(489, 419);
       this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.buttonCancel);
       this.Controls.Add(this.buttonConvert);
       this.Controls.Add(this.tabControlConversion);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.Controls.Add(this.mptPanel1);
       this.Name = "CaseConversion";
-      this.ShowInTaskbar = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-      this.Text = "CaseConversion";
-      this.tabControlConversion.ResumeLayout(false);
+      this.Size = new System.Drawing.Size(614, 419);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlConversion)).EndInit();
       this.tabPageSettings.ResumeLayout(false);
       this.tabPageSettings.PerformLayout();
       this.groupBoxOptions.ResumeLayout(false);
@@ -482,7 +492,7 @@ namespace MPTagThat.CaseConversion
 
     #endregion
 
-    private System.Windows.Forms.TabControl tabControlConversion;
+    private Elegant.Ui.TabControl tabControlConversion;
     private MPTagThat.Core.WinControls.MPTTabPage tabPageSettings;
     private MPTagThat.Core.WinControls.MPTTabPage Exceptions;
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxConvertTags;
@@ -511,5 +521,6 @@ namespace MPTagThat.CaseConversion
     private MPTagThat.Core.WinControls.MPTButton buttonConvert;
     private MPTagThat.Core.WinControls.MPTButton buttonCancel;
     private MPTagThat.Core.WinControls.MPTLabel labelHeader;
+    private Core.WinControls.MPTPanel mptPanel1;
   }
 }

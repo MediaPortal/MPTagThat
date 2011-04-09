@@ -1029,8 +1029,8 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
 
-          _dialog = new CaseConversion.CaseConversion(this);
-          ShowModalDialog(_dialog);
+          dialog = new CaseConversion.CaseConversion(this);
+          ShowDialogInDetailPanel(dialog);
           break;
 
         case Action.ActionType.ACTION_REFRESH:

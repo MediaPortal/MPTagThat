@@ -108,7 +108,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\CaseConversion.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Dialogues\CaseConversion.Designer.cs">
       <DependentUpon>CaseConversion.cs</DependentUpon>

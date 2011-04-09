@@ -29,7 +29,7 @@ using MPTagThat.Core;
 
 namespace MPTagThat.CaseConversion
 {
-  public partial class CaseConversion : ShapedForm
+  public partial class CaseConversion : UserControl
   {
     #region Variables
 
@@ -100,6 +100,8 @@ namespace MPTagThat.CaseConversion
       checkBoxReplaceSpaceByUnderscore.Checked = Options.ConversionSettings.ReplaceSpaceByUnderscore;
       checkBoxReplaceUnderscoreBySpace.Checked = Options.ConversionSettings.ReplaceUnderscoreBySpace;
       checkBoxAlwaysUpperCaseFirstLetter.Checked = Options.ConversionSettings.ConvertAllWaysFirstUpper;
+
+      tabControlConversion.SelectFirstTab();
     }
 
     /// <summary>
@@ -332,7 +334,8 @@ namespace MPTagThat.CaseConversion
       Options.ConversionSettings.ReplaceUnderscoreBySpace = checkBoxReplaceUnderscoreBySpace.Checked;
       Options.ConversionSettings.ConvertAllWaysFirstUpper = checkBoxAlwaysUpperCaseFirstLetter.Checked;
 
-      Close();
+      _main.ShowTagEditPanel(true);
+      Dispose();
     }
 
     /// <summary>
@@ -342,7 +345,8 @@ namespace MPTagThat.CaseConversion
     /// <param name = "e"></param>
     private void buttonCancel_Click(object sender, EventArgs e)
     {
-      Close();
+      _main.ShowTagEditPanel(true);
+      Dispose();
     }
 
     /// <summary>
@@ -385,6 +389,26 @@ namespace MPTagThat.CaseConversion
       }
     }
 
+    /// <summary>
+    ///   A Key has been pressed
+    /// </summary>
+    /// <param name = "e"></param>
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+      if ((int)keyData == 13)   // Handle Enter key as default Apply Button
+      {
+        buttonConvert_Click(null, new EventArgs());
+        return true;
+      }
+      else if ((int)keyData == 27)  // Handle Escape to Close the form
+      {
+        buttonCancel_Click(null, new EventArgs());
+        return true;
+      }
+
+
+      return base.ProcessCmdKey(ref msg, keyData);
+    }
     #endregion
   }
 }

@@ -994,7 +994,7 @@ namespace MPTagThat
 
         case "CaseConversionOptions":
           CaseConversion.CaseConversion dlgCaseConversionOptions = new CaseConversion.CaseConversion(main);
-          main.ShowModalDialog(dlgCaseConversionOptions);
+          main.ShowDialogInDetailPanel(dlgCaseConversionOptions);
           break;
 
         case "DeleteAllTags":
