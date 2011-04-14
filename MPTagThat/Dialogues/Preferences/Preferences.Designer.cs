@@ -401,7 +401,6 @@ namespace MPTagThat.Preferences
       this.ckShift.Size = new System.Drawing.Size(47, 17);
       this.ckShift.TabIndex = 7;
       this.ckShift.Text = "Shift";
-      this.ckShift.UseVisualStyleBackColor = true;
       // 
       // ckCtrl
       // 
@@ -414,7 +413,6 @@ namespace MPTagThat.Preferences
       this.ckCtrl.Size = new System.Drawing.Size(41, 17);
       this.ckCtrl.TabIndex = 6;
       this.ckCtrl.Text = "Ctrl";
-      this.ckCtrl.UseVisualStyleBackColor = true;
       // 
       // ckAlt
       // 
@@ -427,7 +425,6 @@ namespace MPTagThat.Preferences
       this.ckAlt.Size = new System.Drawing.Size(38, 17);
       this.ckAlt.TabIndex = 5;
       this.ckAlt.Text = "Alt";
-      this.ckAlt.UseVisualStyleBackColor = true;
       // 
       // tbKeyDescription
       // 
@@ -636,7 +633,6 @@ namespace MPTagThat.Preferences
       this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(244, 17);
       this.ckAutoFillNumberOfTracks.TabIndex = 5;
       this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
-      this.ckAutoFillNumberOfTracks.UseVisualStyleBackColor = true;
       // 
       // ckUseCaseConversionWhenSaving
       // 
@@ -648,7 +644,6 @@ namespace MPTagThat.Preferences
       this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(208, 17);
       this.ckUseCaseConversionWhenSaving.TabIndex = 1;
       this.ckUseCaseConversionWhenSaving.Text = "Use case conversion settings on Save";
-      this.ckUseCaseConversionWhenSaving.UseVisualStyleBackColor = true;
       // 
       // ckCopyArtistToAlbumArtist
       // 
@@ -660,7 +655,6 @@ namespace MPTagThat.Preferences
       this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(203, 17);
       this.ckCopyArtistToAlbumArtist.TabIndex = 0;
       this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
-      this.ckCopyArtistToAlbumArtist.UseVisualStyleBackColor = true;
       // 
       // tabPageTagsID3
       // 
@@ -700,7 +694,6 @@ namespace MPTagThat.Preferences
       this.ckAutoFixMp3.Size = new System.Drawing.Size(202, 17);
       this.ckAutoFixMp3.TabIndex = 1;
       this.ckAutoFixMp3.Text = "Automatically fix errorneous Mp3 Files";
-      this.ckAutoFixMp3.UseVisualStyleBackColor = true;
       // 
       // ckValidateMP3
       // 
@@ -712,7 +705,6 @@ namespace MPTagThat.Preferences
       this.ckValidateMP3.Size = new System.Drawing.Size(233, 17);
       this.ckValidateMP3.TabIndex = 0;
       this.ckValidateMP3.Text = "Validate MP3 Files while scanning the folder";
-      this.ckValidateMP3.UseVisualStyleBackColor = true;
       // 
       // groupBoxTagsID3
       // 
@@ -793,7 +785,6 @@ namespace MPTagThat.Preferences
       this.checkBoxRemoveID3V1.Size = new System.Drawing.Size(99, 17);
       this.checkBoxRemoveID3V1.TabIndex = 4;
       this.checkBoxRemoveID3V1.Text = "Remove ID3V1";
-      this.checkBoxRemoveID3V1.UseVisualStyleBackColor = true;
       // 
       // checkBoxRemoveID3V2
       // 
@@ -805,7 +796,6 @@ namespace MPTagThat.Preferences
       this.checkBoxRemoveID3V2.Size = new System.Drawing.Size(99, 17);
       this.checkBoxRemoveID3V2.TabIndex = 3;
       this.checkBoxRemoveID3V2.Text = "Remove ID3V2";
-      this.checkBoxRemoveID3V2.UseVisualStyleBackColor = true;
       // 
       // radioButtonID3Both
       // 
@@ -910,7 +900,6 @@ namespace MPTagThat.Preferences
       this.ckUseExistinbgThumb.Size = new System.Drawing.Size(294, 17);
       this.ckUseExistinbgThumb.TabIndex = 8;
       this.ckUseExistinbgThumb.Text = "Embed existing folder thumb (folder.jpg)  on Cover search";
-      this.ckUseExistinbgThumb.UseVisualStyleBackColor = true;
       // 
       // ckOverwriteExistingCovers
       // 
@@ -922,7 +911,6 @@ namespace MPTagThat.Preferences
       this.ckOverwriteExistingCovers.Size = new System.Drawing.Size(246, 17);
       this.ckOverwriteExistingCovers.TabIndex = 7;
       this.ckOverwriteExistingCovers.Text = "Overwrite existing covers on automatic tagging";
-      this.ckOverwriteExistingCovers.UseVisualStyleBackColor = true;
       // 
       // ckCreateMissingFolderThumb
       // 
@@ -934,7 +922,6 @@ namespace MPTagThat.Preferences
       this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(248, 17);
       this.ckCreateMissingFolderThumb.TabIndex = 6;
       this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on save";
-      this.ckCreateMissingFolderThumb.UseVisualStyleBackColor = true;
       // 
       // groupBoxLyrics
       // 
@@ -960,7 +947,6 @@ namespace MPTagThat.Preferences
       this.ckOverwriteExistingLyrics.Size = new System.Drawing.Size(237, 17);
       this.ckOverwriteExistingLyrics.TabIndex = 9;
       this.ckOverwriteExistingLyrics.Text = "Overwrite existing lyrics on automatic tagging";
-      this.ckOverwriteExistingLyrics.UseVisualStyleBackColor = true;
       // 
       // ckSwitchArtist
       // 
@@ -973,7 +959,6 @@ namespace MPTagThat.Preferences
       this.ckSwitchArtist.Size = new System.Drawing.Size(150, 17);
       this.ckSwitchArtist.TabIndex = 1;
       this.ckSwitchArtist.Text = "Switch Artist before submit";
-      this.ckSwitchArtist.UseVisualStyleBackColor = true;
       // 
       // groupBoxLyricsSites
       // 
@@ -1006,7 +991,6 @@ namespace MPTagThat.Preferences
       this.ckLRCFinder.Size = new System.Drawing.Size(76, 17);
       this.ckLRCFinder.TabIndex = 7;
       this.ckLRCFinder.Text = "LRCFinder";
-      this.ckLRCFinder.UseVisualStyleBackColor = true;
       // 
       // ckLyrDB
       // 
@@ -1020,7 +1004,6 @@ namespace MPTagThat.Preferences
       this.ckLyrDB.Size = new System.Drawing.Size(55, 17);
       this.ckLyrDB.TabIndex = 6;
       this.ckLyrDB.Text = "LyrDB";
-      this.ckLyrDB.UseVisualStyleBackColor = true;
       // 
       // ckActionext
       // 
@@ -1034,7 +1017,6 @@ namespace MPTagThat.Preferences
       this.ckActionext.Size = new System.Drawing.Size(70, 17);
       this.ckActionext.TabIndex = 5;
       this.ckActionext.Text = "Actionext";
-      this.ckActionext.UseVisualStyleBackColor = true;
       // 
       // ckLyricsPlugin
       // 
@@ -1048,7 +1030,6 @@ namespace MPTagThat.Preferences
       this.ckLyricsPlugin.Size = new System.Drawing.Size(82, 17);
       this.ckLyricsPlugin.TabIndex = 4;
       this.ckLyricsPlugin.Text = "LyricsPlugin";
-      this.ckLyricsPlugin.UseVisualStyleBackColor = true;
       // 
       // ckLyricsOnDemand
       // 
@@ -1062,7 +1043,6 @@ namespace MPTagThat.Preferences
       this.ckLyricsOnDemand.Size = new System.Drawing.Size(113, 17);
       this.ckLyricsOnDemand.TabIndex = 3;
       this.ckLyricsOnDemand.Text = "Lyrics On Demand";
-      this.ckLyricsOnDemand.UseVisualStyleBackColor = true;
       // 
       // ckLyrics007
       // 
@@ -1076,7 +1056,6 @@ namespace MPTagThat.Preferences
       this.ckLyrics007.Size = new System.Drawing.Size(71, 17);
       this.ckLyrics007.TabIndex = 2;
       this.ckLyrics007.Text = "Lyrics007";
-      this.ckLyrics007.UseVisualStyleBackColor = true;
       // 
       // ckHotLyrics
       // 
@@ -1090,7 +1069,6 @@ namespace MPTagThat.Preferences
       this.ckHotLyrics.Size = new System.Drawing.Size(73, 17);
       this.ckHotLyrics.TabIndex = 1;
       this.ckHotLyrics.Text = "Hot Lyrics";
-      this.ckHotLyrics.UseVisualStyleBackColor = true;
       // 
       // ckLyricWiki
       // 
@@ -1104,7 +1082,6 @@ namespace MPTagThat.Preferences
       this.ckLyricWiki.Size = new System.Drawing.Size(72, 17);
       this.ckLyricWiki.TabIndex = 0;
       this.ckLyricWiki.Text = "Lyric Wiki";
-      this.ckLyricWiki.UseVisualStyleBackColor = true;
       // 
       // tabPageDatabase
       // 
@@ -1146,7 +1123,6 @@ namespace MPTagThat.Preferences
       this.checkBoxClearDatabase.Size = new System.Drawing.Size(215, 17);
       this.checkBoxClearDatabase.TabIndex = 4;
       this.checkBoxClearDatabase.Text = "Clear database content before scanning";
-      this.checkBoxClearDatabase.UseVisualStyleBackColor = true;
       // 
       // lbDBScanStatus
       // 
@@ -1242,7 +1218,6 @@ namespace MPTagThat.Preferences
       this.ckUseMediaPortalDatabase.Size = new System.Drawing.Size(307, 17);
       this.ckUseMediaPortalDatabase.TabIndex = 5;
       this.ckUseMediaPortalDatabase.Text = "Use MediaPortal\'s music database for Artist auto completion";
-      this.ckUseMediaPortalDatabase.UseVisualStyleBackColor = true;
       // 
       // tabPageRipping
       // 
@@ -1315,7 +1290,6 @@ namespace MPTagThat.Preferences
       this.ckActivateTargetFolder.Size = new System.Drawing.Size(194, 17);
       this.ckActivateTargetFolder.TabIndex = 1;
       this.ckActivateTargetFolder.Text = "Activate Target Folder after Ripping";
-      this.ckActivateTargetFolder.UseVisualStyleBackColor = true;
       // 
       // ckRipEjectCD
       // 
@@ -1329,7 +1303,6 @@ namespace MPTagThat.Preferences
       this.ckRipEjectCD.Size = new System.Drawing.Size(131, 17);
       this.ckRipEjectCD.TabIndex = 0;
       this.ckRipEjectCD.Text = "Eject CD after Ripping";
-      this.ckRipEjectCD.UseVisualStyleBackColor = true;
       // 
       // groupBoxCustomPath
       // 

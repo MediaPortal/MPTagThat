@@ -126,7 +126,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxAlwaysUpperCaseFirstLetter.Size = new System.Drawing.Size(166, 17);
       this.checkBoxAlwaysUpperCaseFirstLetter.TabIndex = 5;
       this.checkBoxAlwaysUpperCaseFirstLetter.Text = "Always Uppercase First Letter";
-      this.checkBoxAlwaysUpperCaseFirstLetter.UseVisualStyleBackColor = true;
       // 
       // checkBoxReplaceSpaceByUnderscore
       // 
@@ -138,7 +137,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplaceSpaceByUnderscore.Size = new System.Drawing.Size(133, 17);
       this.checkBoxReplaceSpaceByUnderscore.TabIndex = 4;
       this.checkBoxReplaceSpaceByUnderscore.Text = "Replace Space by \"_\"";
-      this.checkBoxReplaceSpaceByUnderscore.UseVisualStyleBackColor = true;
       // 
       // checkBoxReplaceUnderscoreBySpace
       // 
@@ -150,7 +148,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplaceUnderscoreBySpace.Size = new System.Drawing.Size(133, 17);
       this.checkBoxReplaceUnderscoreBySpace.TabIndex = 3;
       this.checkBoxReplaceUnderscoreBySpace.Text = "Replace \"_\" by Space";
-      this.checkBoxReplaceUnderscoreBySpace.UseVisualStyleBackColor = true;
       // 
       // checkBoxReplaceSpaceby20
       // 
@@ -162,7 +159,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplaceSpaceby20.Size = new System.Drawing.Size(147, 17);
       this.checkBoxReplaceSpaceby20.TabIndex = 2;
       this.checkBoxReplaceSpaceby20.Text = "Replace Space by \"%20\"";
-      this.checkBoxReplaceSpaceby20.UseVisualStyleBackColor = true;
       // 
       // checkBoxReplace20bySpace
       // 
@@ -174,7 +170,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxReplace20bySpace.Size = new System.Drawing.Size(147, 17);
       this.checkBoxReplace20bySpace.TabIndex = 1;
       this.checkBoxReplace20bySpace.Text = "Replace \"%20\" by Space";
-      this.checkBoxReplace20bySpace.UseVisualStyleBackColor = true;
       // 
       // groupBoxMethod
       // 
@@ -269,7 +264,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxComment.Size = new System.Drawing.Size(70, 17);
       this.checkBoxComment.TabIndex = 4;
       this.checkBoxComment.Text = "Comment";
-      this.checkBoxComment.UseVisualStyleBackColor = true;
       // 
       // checkBoxTitle
       // 
@@ -283,7 +277,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxTitle.Size = new System.Drawing.Size(46, 17);
       this.checkBoxTitle.TabIndex = 3;
       this.checkBoxTitle.Text = "Title";
-      this.checkBoxTitle.UseVisualStyleBackColor = true;
       // 
       // checkBoxAlbum
       // 
@@ -297,7 +290,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxAlbum.Size = new System.Drawing.Size(55, 17);
       this.checkBoxAlbum.TabIndex = 2;
       this.checkBoxAlbum.Text = "Album";
-      this.checkBoxAlbum.UseVisualStyleBackColor = true;
       // 
       // checkBoxAlbumArtist
       // 
@@ -311,7 +303,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxAlbumArtist.Size = new System.Drawing.Size(78, 17);
       this.checkBoxAlbumArtist.TabIndex = 1;
       this.checkBoxAlbumArtist.Text = "AlbumArtist";
-      this.checkBoxAlbumArtist.UseVisualStyleBackColor = true;
       // 
       // checkBoxArtist
       // 
@@ -325,7 +316,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxArtist.Size = new System.Drawing.Size(49, 17);
       this.checkBoxArtist.TabIndex = 0;
       this.checkBoxArtist.Text = "Artist";
-      this.checkBoxArtist.UseVisualStyleBackColor = true;
       // 
       // checkBoxConvertTags
       // 
@@ -339,7 +329,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxConvertTags.Size = new System.Drawing.Size(90, 17);
       this.checkBoxConvertTags.TabIndex = 1;
       this.checkBoxConvertTags.Text = "Convert Tags";
-      this.checkBoxConvertTags.UseVisualStyleBackColor = true;
       // 
       // checkBoxConvertFileName
       // 
@@ -353,7 +342,6 @@ namespace MPTagThat.CaseConversion
       this.checkBoxConvertFileName.Size = new System.Drawing.Size(108, 17);
       this.checkBoxConvertFileName.TabIndex = 0;
       this.checkBoxConvertFileName.Text = "Convert Filename";
-      this.checkBoxConvertFileName.UseVisualStyleBackColor = true;
       // 
       // Exceptions
       // 

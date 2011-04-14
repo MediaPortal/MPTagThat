@@ -386,7 +386,6 @@ namespace MPTagThat.Organise
       this.ckOverwriteFiles.Size = new System.Drawing.Size(130, 17);
       this.ckOverwriteFiles.TabIndex = 26;
       this.ckOverwriteFiles.Text = "Overwrite existing files";
-      this.ckOverwriteFiles.UseVisualStyleBackColor = true;
       // 
       // ckCopyFiles
       // 
@@ -398,7 +397,6 @@ namespace MPTagThat.Organise
       this.ckCopyFiles.Size = new System.Drawing.Size(183, 17);
       this.ckCopyFiles.TabIndex = 27;
       this.ckCopyFiles.Text = "Copy files instead of moving them";
-      this.ckCopyFiles.UseVisualStyleBackColor = true;
       // 
       // ckCopyNonMusicFiles
       // 
@@ -410,7 +408,6 @@ namespace MPTagThat.Organise
       this.ckCopyNonMusicFiles.Size = new System.Drawing.Size(208, 17);
       this.ckCopyNonMusicFiles.TabIndex = 28;
       this.ckCopyNonMusicFiles.Text = "Include all files (Pictures, playlists, etc.)";
-      this.ckCopyNonMusicFiles.UseVisualStyleBackColor = true;
       // 
       // groupBoxOptions
       // 

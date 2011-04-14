@@ -24,7 +24,7 @@ using System.Windows.Forms;
 
 namespace MPTagThat.Core.WinControls
 {
-  public class MPTCheckBox : CheckBox
+  public class MPTCheckBox : Elegant.Ui.CheckBox
   {
     #region Variables
 

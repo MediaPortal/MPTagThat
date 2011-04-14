@@ -63,7 +63,7 @@
       this.checkBoxRecursive = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.contextMenuTreeView.SuspendLayout();
       this.contextMenuStripFilter.SuspendLayout();
-      this.tabControlTreeView.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTreeView)).BeginInit();
       this.tabPageViews.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
       this.treeViewPanelBottom.SuspendLayout();
@@ -159,6 +159,7 @@
       this.tabControlTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTreeView.Location = new System.Drawing.Point(0, 0);
       this.tabControlTreeView.Name = "tabControlTreeView";
+      this.tabControlTreeView.SelectedTabPage = this.tabPageFilter;
       this.tabControlTreeView.Size = new System.Drawing.Size(218, 535);
       this.tabControlTreeView.TabIndex = 8;
       this.tabControlTreeView.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -167,13 +168,14 @@
       // 
       // tabPageViews
       // 
+      this.tabPageViews.ActiveControl = null;
       this.tabPageViews.Controls.Add(this.treeViewPanel);
+      this.tabPageViews.KeyTip = null;
       this.tabPageViews.Localisation = "TreeViewViews";
       this.tabPageViews.LocalisationContext = "main";
-      this.tabPageViews.Location = new System.Drawing.Point(4, 22);
       this.tabPageViews.Name = "tabPageViews";
       this.tabPageViews.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageViews.Size = new System.Drawing.Size(210, 509);
+      this.tabPageViews.Size = new System.Drawing.Size(216, 514);
       this.tabPageViews.TabIndex = 0;
       this.tabPageViews.Text = "Views";
       // 
@@ -196,7 +198,7 @@
       this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanel.Location = new System.Drawing.Point(3, 3);
       this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(204, 503);
+      this.treeViewPanel.Size = new System.Drawing.Size(210, 508);
       this.treeViewPanel.TabIndex = 7;
       // 
       // treeViewPanelBottom
@@ -205,7 +207,7 @@
       this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
       this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(204, 479);
+      this.treeViewPanelBottom.Size = new System.Drawing.Size(210, 484);
       this.treeViewPanelBottom.TabIndex = 2;
       // 
       // treeViewFolderBrowser
@@ -215,48 +217,49 @@
       this.treeViewFolderBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.treeViewFolderBrowser.DataSource = null;
       this.treeViewFolderBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk)
-                  | Raccoom.Windows.Forms.DriveTypes.LocalDisk)
-                  | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
+      this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk) 
+            | Raccoom.Windows.Forms.DriveTypes.LocalDisk) 
+            | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
       this.treeViewFolderBrowser.HideSelection = false;
       this.treeViewFolderBrowser.LabelEdit = true;
       this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
       this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(204, 479);
+      this.treeViewFolderBrowser.Size = new System.Drawing.Size(210, 484);
       this.treeViewFolderBrowser.TabIndex = 1;
       this.treeViewFolderBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewFolderBrowser_AfterLabelEdit);
       this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
-      this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
-      this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
-      this.treeViewFolderBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragDrop);
-      this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
-      this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
       this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
-      this.treeViewFolderBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragOver);
+      this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
       this.treeViewFolderBrowser.Click += new System.EventHandler(this.treeViewFolderBrowser_Click);
+      this.treeViewFolderBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragDrop);
+      this.treeViewFolderBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragOver);
+      this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
+      this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
+      this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
       // 
       // treeViewPanelTop
       // 
       this.treeViewPanelTop.Dock = System.Windows.Forms.DockStyle.Top;
       this.treeViewPanelTop.Location = new System.Drawing.Point(0, 0);
       this.treeViewPanelTop.Name = "treeViewPanelTop";
-      this.treeViewPanelTop.Size = new System.Drawing.Size(204, 24);
+      this.treeViewPanelTop.Size = new System.Drawing.Size(210, 24);
       this.treeViewPanelTop.TabIndex = 1;
       // 
       // tabPageFilter
       // 
+      this.tabPageFilter.ActiveControl = null;
       this.tabPageFilter.Controls.Add(this.dataGridViewTagFilter);
       this.tabPageFilter.Controls.Add(this.lbFileMask);
       this.tabPageFilter.Controls.Add(this.tbFileMask);
       this.tabPageFilter.Controls.Add(this.cbListFormats);
       this.tabPageFilter.Controls.Add(this.ckUseTagFilter);
+      this.tabPageFilter.KeyTip = null;
       this.tabPageFilter.Localisation = "TreeViewFilters";
       this.tabPageFilter.LocalisationContext = "main";
-      this.tabPageFilter.Location = new System.Drawing.Point(4, 22);
       this.tabPageFilter.Name = "tabPageFilter";
       this.tabPageFilter.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageFilter.Size = new System.Drawing.Size(210, 509);
+      this.tabPageFilter.Size = new System.Drawing.Size(216, 514);
       this.tabPageFilter.TabIndex = 1;
       this.tabPageFilter.Text = "Filters";
       // 
@@ -266,9 +269,9 @@
       this.dataGridViewTagFilter.AllowUserToDeleteRows = false;
       this.dataGridViewTagFilter.AllowUserToResizeColumns = false;
       this.dataGridViewTagFilter.AllowUserToResizeRows = false;
-      this.dataGridViewTagFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.dataGridViewTagFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.dataGridViewTagFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.dataGridViewTagFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridViewTagFilter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -279,13 +282,13 @@
       this.dataGridViewTagFilter.Name = "dataGridViewTagFilter";
       this.dataGridViewTagFilter.RowHeadersVisible = false;
       this.dataGridViewTagFilter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-      this.dataGridViewTagFilter.Size = new System.Drawing.Size(192, 387);
+      this.dataGridViewTagFilter.Size = new System.Drawing.Size(198, 392);
       this.dataGridViewTagFilter.TabIndex = 4;
-      this.dataGridViewTagFilter.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewTagFilter_MouseUp);
       this.dataGridViewTagFilter.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTagFilter_CellEndEdit);
       this.dataGridViewTagFilter.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridViewTagFilter_CurrentCellDirtyStateChanged);
       this.dataGridViewTagFilter.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewTagFilter_DataError);
       this.dataGridViewTagFilter.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewTagFilter_RowsRemoved);
+      this.dataGridViewTagFilter.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewTagFilter_MouseUp);
       // 
       // TagFilterField
       // 
@@ -316,10 +319,9 @@
       // lbFileMask
       // 
       this.lbFileMask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lbFileMask.AutoSize = true;
       this.lbFileMask.Localisation = "FilterFileMask";
       this.lbFileMask.LocalisationContext = "main";
-      this.lbFileMask.Location = new System.Drawing.Point(8, 454);
+      this.lbFileMask.Location = new System.Drawing.Point(8, 459);
       this.lbFileMask.Name = "lbFileMask";
       this.lbFileMask.Size = new System.Drawing.Size(52, 13);
       this.lbFileMask.TabIndex = 3;
@@ -327,43 +329,39 @@
       // 
       // tbFileMask
       // 
-      this.tbFileMask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbFileMask.Location = new System.Drawing.Point(6, 471);
+      this.tbFileMask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbFileMask.Location = new System.Drawing.Point(6, 476);
       this.tbFileMask.Name = "tbFileMask";
-      this.tbFileMask.Size = new System.Drawing.Size(195, 20);
+      this.tbFileMask.Size = new System.Drawing.Size(201, 20);
       this.tbFileMask.TabIndex = 2;
       this.tbFileMask.TextChanged += new System.EventHandler(this.tbFileMask_TextChanged);
       // 
       // cbListFormats
       // 
-      this.cbListFormats.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
-      this.cbListFormats.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.cbListFormats.DroppedDown = false;
+      this.cbListFormats.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.cbListFormats.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbListFormats.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbListFormats.Editable = false;
-      this.cbListFormats.FormatInfo = null;
-      this.cbListFormats.FormatString = "";
       this.cbListFormats.FormattingEnabled = true;
       this.cbListFormats.Id = "7e083ceb-b5c5-420b-b12a-6c8239e676c9";
-      this.cbListFormats.Location = new System.Drawing.Point(6, 427);
+      this.cbListFormats.Location = new System.Drawing.Point(6, 432);
       this.cbListFormats.Name = "cbListFormats";
-      this.cbListFormats.Size = new System.Drawing.Size(195, 21);
-      this.cbListFormats.Sorted = false;
+      this.cbListFormats.Size = new System.Drawing.Size(201, 21);
       this.cbListFormats.TabIndex = 1;
       this.cbListFormats.SelectedIndexChanged += new System.EventHandler(this.cbListFormats_SelectedIndexChanged);
       // 
       // ckUseTagFilter
       // 
-      this.ckUseTagFilter.AutoSize = true;
+      this.ckUseTagFilter.Id = "02abeb36-c67e-413a-b98d-fb986ae6e931";
       this.ckUseTagFilter.Localisation = "FilterUseTag";
       this.ckUseTagFilter.LocalisationContext = "main";
-      this.ckUseTagFilter.Location = new System.Drawing.Point(6, 11);
+      this.ckUseTagFilter.Location = new System.Drawing.Point(6, 7);
       this.ckUseTagFilter.Name = "ckUseTagFilter";
-      this.ckUseTagFilter.Size = new System.Drawing.Size(85, 17);
+      this.ckUseTagFilter.Size = new System.Drawing.Size(85, 26);
       this.ckUseTagFilter.TabIndex = 0;
       this.ckUseTagFilter.Text = "Use tag filter";
-      this.ckUseTagFilter.UseVisualStyleBackColor = true;
       this.ckUseTagFilter.CheckedChanged += new System.EventHandler(this.ckUseTagFilter_CheckedChanged);
       // 
       // panelLeftBottom
@@ -418,31 +416,27 @@
       // 
       // cbDataProvider
       // 
-      this.cbDataProvider.DrawMode = System.Windows.Forms.DrawMode.Normal;
-      this.cbDataProvider.DroppedDown = false;
+      this.cbDataProvider.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbDataProvider.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbDataProvider.Editable = false;
-      this.cbDataProvider.FormatInfo = null;
-      this.cbDataProvider.FormatString = "";
       this.cbDataProvider.FormattingEnabled = true;
       this.cbDataProvider.Id = "2c9ad13d-d9c5-490c-ad67-bcc11a584c96";
       this.cbDataProvider.Location = new System.Drawing.Point(17, 34);
       this.cbDataProvider.Name = "cbDataProvider";
       this.cbDataProvider.Size = new System.Drawing.Size(180, 21);
-      this.cbDataProvider.Sorted = false;
       this.cbDataProvider.TabIndex = 5;
       // 
       // checkBoxRecursive
       // 
-      this.checkBoxRecursive.AutoSize = true;
+      this.checkBoxRecursive.Id = "b29408d1-fb73-4f6b-a7ca-ad3a9493b46a";
       this.checkBoxRecursive.Localisation = "ScanSubfolder";
       this.checkBoxRecursive.LocalisationContext = "main";
-      this.checkBoxRecursive.Location = new System.Drawing.Point(17, 71);
+      this.checkBoxRecursive.Location = new System.Drawing.Point(17, 68);
       this.checkBoxRecursive.MaximumSize = new System.Drawing.Size(250, 0);
       this.checkBoxRecursive.Name = "checkBoxRecursive";
-      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 17);
+      this.checkBoxRecursive.Size = new System.Drawing.Size(132, 26);
       this.checkBoxRecursive.TabIndex = 3;
       this.checkBoxRecursive.Text = "Scan all subdirectories";
-      this.checkBoxRecursive.UseVisualStyleBackColor = true;
       // 
       // TreeViewControl
       // 
@@ -454,7 +448,7 @@
       this.Size = new System.Drawing.Size(218, 676);
       this.contextMenuTreeView.ResumeLayout(false);
       this.contextMenuStripFilter.ResumeLayout(false);
-      this.tabControlTreeView.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTreeView)).EndInit();
       this.tabPageViews.ResumeLayout(false);
       this.treeViewPanel.ResumeLayout(false);
       this.treeViewPanelBottom.ResumeLayout(false);

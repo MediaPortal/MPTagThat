@@ -69,7 +69,6 @@
       this.ckUseRelativePath.Size = new System.Drawing.Size(106, 17);
       this.ckUseRelativePath.TabIndex = 2;
       this.ckUseRelativePath.Text = "Use relative path";
-      this.ckUseRelativePath.UseVisualStyleBackColor = true;
       // 
       // btPlayListSave
       // 

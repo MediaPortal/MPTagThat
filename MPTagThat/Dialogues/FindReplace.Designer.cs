@@ -184,7 +184,6 @@ namespace MPTagThat.Dialogues
       this.checkBoxMatchWholeWords.Size = new System.Drawing.Size(140, 17);
       this.checkBoxMatchWholeWords.TabIndex = 1;
       this.checkBoxMatchWholeWords.Text = "Match whole words only";
-      this.checkBoxMatchWholeWords.UseVisualStyleBackColor = true;
       // 
       // checkBoxMatchCase
       // 
@@ -196,7 +195,6 @@ namespace MPTagThat.Dialogues
       this.checkBoxMatchCase.Size = new System.Drawing.Size(83, 17);
       this.checkBoxMatchCase.TabIndex = 0;
       this.checkBoxMatchCase.Text = "Match Case";
-      this.checkBoxMatchCase.UseVisualStyleBackColor = true;
       // 
       // groupBoxOptions
       // 
