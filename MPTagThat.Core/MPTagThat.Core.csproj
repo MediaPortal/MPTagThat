@@ -15,7 +15,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,13 +31,14 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -116,6 +117,7 @@
     <Compile Include="ActionHandler\Action.cs" />
     <Compile Include="ActionHandler\ActionHandler.cs" />
     <Compile Include="Common\Comment.cs" />
+    <Compile Include="Common\Frame.cs" />
     <Compile Include="Common\Lyric.cs" />
     <Compile Include="Common\Picture.cs" />
     <Compile Include="Common\PopmFrame.cs" />
@@ -194,9 +196,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WinControls\MPTTabPage.cs" />
-    <Compile Include="Controls\WinControls\MPTCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\WinControls\MPTCheckBox.cs" />
     <Compile Include="Controls\WinControls\MPTButton.cs">
     </Compile>
     <Compile Include="Controls\WinControls\MPTGroupBox.cs">
