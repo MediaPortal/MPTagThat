@@ -150,6 +150,8 @@ namespace MPTagThat.TagEdit
         tbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
       }
 
+      dataGridViewUserFrames.CellValueChanged += dataGridViewUserFrames_CellValueChanged;
+
       ChangeCheckboxStatus(false);
     }
 
@@ -3037,6 +3039,16 @@ namespace MPTagThat.TagEdit
         dataGridViewUserFrames.Rows.Remove(row);
         _userFrameIsChanged = true;
       }
+    }
+
+    /// <summary>
+    /// Something was edited in the Grid. Indicate that the cell has been changed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void dataGridViewUserFrames_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+      _userFrameIsChanged = true;
     }
 
     #endregion
