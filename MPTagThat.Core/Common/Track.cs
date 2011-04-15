@@ -474,38 +474,41 @@ namespace MPTagThat.Core
         #region Non- Standard Taglib and User Defined Frames
 
         // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
-        foreach (Frame frame in track.SavedUserFrames)
+        if (track.SavedUserFrames != null)
         {
-          ByteVector frameId = new ByteVector(frame.Id);
-
-          if (frame.Id == "TXXX")
+          foreach (Frame frame in track.SavedUserFrames)
           {
-            id3v2tag.SetUserTextAsString(frame.Description, "");
-          }
-          else
-          {
-            id3v2tag.SetTextFrame(frameId, "");
-          }
-        }
+            ByteVector frameId = new ByteVector(frame.Id);
 
-        List<Frame> allFrames = new List<Frame>();
-        allFrames.AddRange(track.Frames);
-        allFrames.AddRange(track.UserFrames);
-
-        foreach (Frame frame in allFrames)
-        {
-          ByteVector frameId = new ByteVector(frame.Id);
-
-          if (frame.Id == "TXXX")
-          {
-            if (frame.Description != "")
+            if (frame.Id == "TXXX")
             {
-              id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+              id3v2tag.SetUserTextAsString(frame.Description, "");
+            }
+            else
+            {
+              id3v2tag.SetTextFrame(frameId, "");
             }
           }
-          else
+
+          List<Frame> allFrames = new List<Frame>();
+          allFrames.AddRange(track.Frames);
+          allFrames.AddRange(track.UserFrames);
+
+          foreach (Frame frame in allFrames)
           {
-            id3v2tag.SetTextFrame(frameId, frame.Value);
+            ByteVector frameId = new ByteVector(frame.Id);
+
+            if (frame.Id == "TXXX")
+            {
+              if (frame.Description != "")
+              {
+                id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+              }
+            }
+            else
+            {
+              id3v2tag.SetTextFrame(frameId, frame.Value);
+            }
           }
         }
 
