@@ -104,6 +104,8 @@ namespace MPTagThat
       LocaliseScreen();
 
       LoadSettings();
+
+      tabControlTreeView.SelectFirstTab();
     }
 
     #endregion
