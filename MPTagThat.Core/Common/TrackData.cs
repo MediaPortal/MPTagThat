@@ -31,6 +31,7 @@ namespace MPTagThat.Core
   public class TrackData
   {
     #region Enum
+
     public enum MP3Error : int
     {
       NoError = 0,
@@ -38,6 +39,7 @@ namespace MPTagThat.Core
       NonFixable = 2,
       Fixed = 3
     }
+
     #endregion
 
     #region Variables
@@ -51,6 +53,21 @@ namespace MPTagThat.Core
     private List<PopmFrame> _popmframes = new List<PopmFrame>();
     private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
 
+    private static readonly string[] _standardId3Frames = new[]
+                                                            {
+                                                              "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM",
+                                                              "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC",
+                                                              "POPM", "TIT2", "TRCK", "TYER"
+                                                            };
+
+    private static readonly string[] _extendedId3Frames = new[]
+                                                             {
+                                                               "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
+                                                               "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
+                                                               "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
+                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN"
+                                                             };
+
     #endregion
 
     #region ctor
@@ -59,7 +76,8 @@ namespace MPTagThat.Core
     {
       Changed = false;
       _mp3ValError = MP3Error.NoError;
-      Frames = new Hashtable();
+      Frames = new List<Common.Frame>();
+      UserFrames = new List<Frame>();
       ID3Version = 3;
     }
 
@@ -77,12 +95,22 @@ namespace MPTagThat.Core
     /// <summary>
     /// The ID3 Version
     /// </summary>
-    public int ID3Version { get; set; } 
-   
+    public int ID3Version { get; set; }
+
     /// <summary>
-    /// The Frames included in the file
+    /// The Extended Frames included in the file
     /// </summary>
-    public Hashtable Frames { get; set; }
+    public List<Common.Frame> Frames { get; set; }
+
+    /// <summary>
+    /// The User Defined Frames included in the file
+    /// </summary>
+    public List<Common.Frame> UserFrames { get; set; }
+
+    /// <summary>
+    /// The User Defined Frames that we have read before modification
+    /// </summary>
+    public List<Common.Frame> SavedUserFrames { get; set; }
 
     /// <summary>
     /// Has the Track been changed
@@ -92,12 +120,12 @@ namespace MPTagThat.Core
     /// <summary>
     /// Indicates, if the Tags have been removed
     /// </summary>
-    public List<TagLib.TagTypes> TagsRemoved 
-    { 
+    public List<TagLib.TagTypes> TagsRemoved
+    {
       get
       {
         return _removedTagTypes;
-      } 
+      }
     }
 
     /// <summary>
@@ -152,6 +180,23 @@ namespace MPTagThat.Core
       get { return _mp3ValError; }
       set { _mp3ValError = value; }
     }
+
+    /// <summary>
+    /// The standard ID3 Frames directly supported by TagLib #
+    /// </summary>
+    public string[] StandardFrames
+    {
+      get { return _standardId3Frames; }
+    }
+
+    /// <summary>
+    /// The extended ID3 Frames 
+    /// </summary>
+    public string[] ExtendedFrames
+    {
+      get { return _extendedId3Frames; }
+    }
+
     #endregion
 
     #region Tags
@@ -218,7 +263,7 @@ namespace MPTagThat.Core
         }
         else
         {
-          _comments[0].Text = value;  
+          _comments[0].Text = value;
         }
       }
     }
@@ -227,7 +272,8 @@ namespace MPTagThat.Core
     /// Comment Tag
     /// ID3: COMM
     /// </summary>
-    public List<Comment> ID3Comments { 
+    public List<Comment> ID3Comments
+    {
       get { return _comments; }
     }
 
@@ -283,8 +329,8 @@ namespace MPTagThat.Core
         return DiscCount > 0
                  ? String.Format("{0}/{1}", disc, DiscCount.ToString().PadLeft(NumTrackDigits, '0'))
                  : disc;
-      } 
-      
+      }
+
       set
       {
         string[] disc = value.Split('/');
@@ -568,7 +614,7 @@ namespace MPTagThat.Core
 
     public List<Picture> Pictures
     {
-      get { return _pictures; } 
+      get { return _pictures; }
     }
 
     /// <summary>
@@ -657,8 +703,8 @@ namespace MPTagThat.Core
         return TrackCount > 0
                  ? String.Format("{0}/{1}", track, TrackCount.ToString().PadLeft(NumTrackDigits, '0'))
                  : track;
-      } 
-      
+      }
+
       set
       {
         string[] track = value.Split('/');
@@ -719,8 +765,8 @@ namespace MPTagThat.Core
       get
       {
         DateTime dt = new DateTime(DurationTimespan.Ticks);
-        return String.Format("{0:HH:mm:ss.fff}", dt);        
-      }    
+        return String.Format("{0:HH:mm:ss.fff}", dt);
+      }
     }
 
     /// <summary>
@@ -769,16 +815,25 @@ namespace MPTagThat.Core
     #region Private Methods
     private string GetFrame(string frameId)
     {
-      if (Frames.ContainsKey(frameId))
+      int index = -1;
+      if ((index = Frames.FindIndex((f => f.Id == frameId))) > -1)
       {
-        return Frames[frameId].ToString();
+        return Frames[index].Value;
       }
       return "";
     }
 
     private void SetText(string frameId, string text)
     {
-      Frames[frameId] = text;
+      int index = -1;
+      if ((index = Frames.FindIndex((f => f.Id == frameId))) > -1)
+      {
+        Frames[index].Value = text;
+      }
+      else
+      {
+        Frames.Add(new Frame(frameId, "", text));
+      }
     }
     #endregion
 

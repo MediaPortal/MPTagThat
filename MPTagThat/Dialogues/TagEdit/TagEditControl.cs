@@ -44,6 +44,7 @@ namespace MPTagThat.TagEdit
     private bool _involvedPeopleIsChanged;
     private bool _lyricsIsChanged;
     private bool _musicianIsChanged;
+    private bool _userFrameIsChanged;
     private Picture _pic;
     private bool _pictureIsChanged;
     private List<Picture> _pictures = new List<Picture>();
@@ -166,6 +167,10 @@ namespace MPTagThat.TagEdit
       dataGridViewTextBoxColumn7.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderDescriptor");
       dataGridViewTextBoxColumn8.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLanguage");
       dataGridViewTextBoxColumn9.HeaderText = localisation.ToString("TagEdit", "LyricsHeaderLyrics");
+
+      FrameID.HeaderText = localisation.ToString("TagEdit", "FrameID");
+      FrameDesc.HeaderText = localisation.ToString("TagEdit", "FrameDesc");
+      FrameValue.HeaderText = localisation.ToString("TagEdit", "FrameText");
       log.Trace("<<<");
     }
 
@@ -183,6 +188,7 @@ namespace MPTagThat.TagEdit
       int i = 0;
       string strGenreTemp = "";
       string strCommentTemp = "";
+      string strUserFramesTemp = "";
       string strInvoledPeopleTemp = "";
       string strMusicianCreditList = "";
 
@@ -828,6 +834,32 @@ namespace MPTagThat.TagEdit
 
         #endregion
 
+        #region User Defined Frames
+
+        // Build tem string for comparison
+        string sFrames = "";
+        foreach (Frame frame in track.UserFrames)
+        {
+          sFrames += frame.Id + frame.Description + frame.Value;
+        }
+
+        if (strUserFramesTemp != sFrames)
+        {
+          if (i == 0)
+          {
+            strUserFramesTemp = sFrames;
+            foreach (Frame frame in track.UserFrames)
+            {
+              dataGridViewUserFrames.Rows.Add(new object[] { frame.Id, frame.Description, frame.Value });
+            }
+
+          }
+          else
+            dataGridViewUserFrames.Rows.Clear();
+        }
+
+        #endregion
+
         if (!_isMultiTagEdit)
         {
           #region Lyrics
@@ -983,7 +1015,7 @@ namespace MPTagThat.TagEdit
       dataGridViewMusician.Rows.Clear();
       dataGridViewLyrics.Rows.Clear();
       dataGridViewRating.Rows.Clear();
-
+      dataGridViewUserFrames.Rows.Clear();
 
       checkBoxRemoveComments.Checked = false;
       textBoxComment.Text = "";
@@ -1636,14 +1668,14 @@ namespace MPTagThat.TagEdit
           if (checkBoxRemoveExistingPictures.Checked)
           {
             track.Pictures.Clear();
-            track.Changed = true;
+            trackChanged = true;
           }
 
           if (_isMultiTagEdit)
           {
             track.Pictures.Clear();
             track.Pictures.AddRange(_pictures);
-            track.Changed = true;
+            trackChanged = true;
           }
           else
           {
@@ -1651,7 +1683,7 @@ namespace MPTagThat.TagEdit
             {
               track.Pictures.Clear();
               track.Pictures.AddRange(_pictures);
-              track.Changed = true;
+              trackChanged = true;
             }
           }
 
@@ -2162,7 +2194,7 @@ namespace MPTagThat.TagEdit
               tmp.Trim(new[] { '\0' });
 
             track.InvolvedPeople = tmp;
-            track.Changed = true;
+            trackChanged = true;
           }
 
           if (_musicianIsChanged)
@@ -2180,7 +2212,7 @@ namespace MPTagThat.TagEdit
               tmp.Trim(new[] { '\0' });
 
             track.MusicCreditList = tmp;
-            track.Changed = true;
+            trackChanged = true;
           }
 
           #endregion
@@ -2190,7 +2222,7 @@ namespace MPTagThat.TagEdit
           if (ckRemoveLyrics.Checked)
           {
             track.LyricsFrames.Clear();
-            track.Changed = true;
+            trackChanged = true;
           }
 
           if (_lyricsIsChanged)
@@ -2213,7 +2245,7 @@ namespace MPTagThat.TagEdit
               track.LyricsFrames.Clear();
             }
 
-            track.Changed = true;
+            trackChanged = true;
           }
 
           #endregion
@@ -2223,7 +2255,7 @@ namespace MPTagThat.TagEdit
           if (ckRemoveExistingRatings.Checked)
           {
             track.Ratings.Clear();
-            track.Changed = true;
+            trackChanged = true;
           }
 
           if (_ratingIsChanged)
@@ -2245,7 +2277,36 @@ namespace MPTagThat.TagEdit
             {
               track.Ratings.Clear();
             }
-            track.Changed = true;
+            trackChanged = true;
+          }
+
+          #endregion
+
+          #region User Defined Frames
+
+          if (_userFrameIsChanged)
+          {
+            List<Frame> userFrames = new List<Frame>();
+            foreach (DataGridViewRow userFrameRow in dataGridViewUserFrames.Rows)
+            {
+              Frame frame = new Frame(userFrameRow.Cells[0].Value.ToString(), userFrameRow.Cells[1].Value.ToString(),
+                                      userFrameRow.Cells[2].Value.ToString());
+              userFrames.Add(frame);
+            }
+
+            // Let's save the Current User frames first, so that on Save we are able to delete them to avoid duplicates
+            track.SavedUserFrames = new List<Frame>(track.UserFrames);
+
+            if (userFrames.Count > 0)
+            {
+              track.UserFrames.Clear();
+              track.UserFrames.AddRange(userFrames);
+            }
+            else
+            {
+              track.UserFrames.Clear();
+            }
+            trackChanged = true;
           }
 
           #endregion
@@ -2956,6 +3017,30 @@ namespace MPTagThat.TagEdit
 
     #endregion
 
+    #region User Defined Frames
+
+    /// <summary>
+    /// Add a User Frame 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btAddUserFrame_Click(object sender, EventArgs e)
+    {
+      dataGridViewUserFrames.Rows.Add(new object[] {"TXXX", "", ""});
+      _userFrameIsChanged = true;
+    }
+
+    private void btDeleteFrame_Click(object sender, EventArgs e)
+    {
+      foreach (DataGridViewRow row in dataGridViewUserFrames.SelectedRows)
+      {
+        dataGridViewUserFrames.Rows.Remove(row);
+        _userFrameIsChanged = true;
+      }
+    }
+
+    #endregion
+
     #region Key Events
 
     private void btPrevious_Click(object sender, EventArgs e)
@@ -3020,7 +3105,7 @@ namespace MPTagThat.TagEdit
           }
           else
           {
-            tabControlTagEdit.SelectNextTab();  
+            tabControlTagEdit.SelectNextTab();
           }
           break;
 
@@ -3068,6 +3153,7 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
+
 
     #endregion
   }

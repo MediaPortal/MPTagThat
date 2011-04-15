@@ -6,6 +6,7 @@ using System.Linq;
 using MPTagThat.Core.Common;
 using TagLib;
 using TagLib.Id3v2;
+using Frame = MPTagThat.Core.Common.Frame;
 using Picture = MPTagThat.Core.Common.Picture;
 
 namespace MPTagThat.Core
@@ -14,7 +15,6 @@ namespace MPTagThat.Core
   {
     #region Variables
 
-    private static readonly string[] _standardId3Frames = new string[] { "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM", "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC", "POPM", "TIT2", "TRCK", "TYER" };
     private static readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
     #endregion
@@ -216,15 +216,25 @@ namespace MPTagThat.Core
       #endregion
 
       // Now copy all Text frames of an ID3 V2
-
       if (track.TagType == "mp3" && id3v2tag != null)
       {
         foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
         {
           string id = frame.FrameId.ToString();
-          if (!track.Frames.ContainsKey(id) && !_standardId3Frames.Contains(id))
+          if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
           {
-            track.Frames.Add(id, frame.ToString());
+            track.Frames.Add(new Frame(id, "", frame.ToString()));
+          }
+          else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
+          {
+            if (frame.GetType() == typeof(UserTextInformationFrame))
+            {
+              track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description, (frame as UserTextInformationFrame).Text[0]));
+            }
+            else
+            {
+              track.UserFrames.Add(new Frame(id, "", frame.ToString()));
+            }
           }
         }
 
@@ -463,18 +473,49 @@ namespace MPTagThat.Core
 
         #region Non- Standard Taglib and User Defined Frames
 
-        foreach (string id in track.Frames.Keys)
+        // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
+        foreach (Frame frame in track.SavedUserFrames)
         {
-          ByteVector frameId = new ByteVector(id);
-          id3v2tag.SetTextFrame(frameId, track.Frames[id].ToString());
+          ByteVector frameId = new ByteVector(frame.Id);
+
+          if (frame.Id == "TXXX")
+          {
+            id3v2tag.SetUserTextAsString(frame.Description, "");
+          }
+          else
+          {
+            id3v2tag.SetTextFrame(frameId, "");
+          }
+        }
+
+        List<Frame> allFrames = new List<Frame>();
+        allFrames.AddRange(track.Frames);
+        allFrames.AddRange(track.UserFrames);
+
+        foreach (Frame frame in allFrames)
+        {
+          ByteVector frameId = new ByteVector(frame.Id);
+
+          if (frame.Id == "TXXX")
+          {
+            if (frame.Description != "")
+            {
+              id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+            }
+          }
+          else
+          {
+            id3v2tag.SetTextFrame(frameId, frame.Value);
+          }
         }
 
         #endregion
         
+
         // Now, depending on which frames the user wants to save, we will remove the other Frames
         file = Util.FormatID3Tag(file);
         
-        // SAve the file
+        // Save the file
         file.Save();
       }
       catch (Exception ex)

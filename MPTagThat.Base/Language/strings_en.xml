@@ -347,6 +347,13 @@
     <String id="Previous">Previous File</String>
     <String id="Next">Next File</String>
     <String id="Commands">Commands</String>
+	
+	<!-- User Defined Frames -->
+	<String id="FrameID">Frame Id</String>
+	<String id="FrameDesc">Description</String>
+	<String id="FrameText">Text</String>
+	<String id="AddFrame">Add Frame</String>
+	<String id="DeleteFrame">Delete Frame(s)</String>
   </Section>
   
     

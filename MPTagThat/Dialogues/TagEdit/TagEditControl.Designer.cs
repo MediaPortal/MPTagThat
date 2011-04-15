@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -254,12 +255,18 @@
       this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewUserFrames = new System.Windows.Forms.DataGridView();
+      this.FrameID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.btNext = new MPTagThat.Core.WinControls.MPTButton();
       this.btPrevious = new MPTagThat.Core.WinControls.MPTButton();
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
-      this.tabControlTagEdit.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).BeginInit();
@@ -291,6 +298,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
+      this.tabPageUserDefined.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
       this.panelTop.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -300,6 +309,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageUserDefined;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -314,18 +324,19 @@
             this.tabPageUserDefined});
       // 
       // tabPageMain
-      // );
+      // 
+      this.tabPageMain.ActiveControl = null;
       this.tabPageMain.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageMain.Controls.Add(this.groupBoxComment);
       this.tabPageMain.Controls.Add(this.groupBoxGenre);
       this.tabPageMain.Controls.Add(this.groupBoxArtist);
       this.tabPageMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tabPageMain.KeyTip = null;
       this.tabPageMain.Localisation = "HeaderMainTags";
       this.tabPageMain.LocalisationContext = "TagEdit";
-      this.tabPageMain.Location = new System.Drawing.Point(4, 25);
       this.tabPageMain.Name = "tabPageMain";
       this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageMain.Size = new System.Drawing.Size(900, 579);
+      this.tabPageMain.Size = new System.Drawing.Size(906, 584);
       this.tabPageMain.TabIndex = 0;
       this.tabPageMain.Text = "Main Tags";
       // 
@@ -353,15 +364,14 @@
       // 
       // checkBoxRemoveComments
       // 
-      this.checkBoxRemoveComments.AutoSize = true;
+      this.checkBoxRemoveComments.Id = "9e02eb05-4568-48d3-8cdd-6b44572bb8ab";
       this.checkBoxRemoveComments.Localisation = "RemoveExistingComments";
       this.checkBoxRemoveComments.LocalisationContext = "TagEdit";
-      this.checkBoxRemoveComments.Location = new System.Drawing.Point(608, 94);
+      this.checkBoxRemoveComments.Location = new System.Drawing.Point(608, 91);
       this.checkBoxRemoveComments.Name = "checkBoxRemoveComments";
-      this.checkBoxRemoveComments.Size = new System.Drawing.Size(174, 20);
+      this.checkBoxRemoveComments.Size = new System.Drawing.Size(174, 29);
       this.checkBoxRemoveComments.TabIndex = 4;
       this.checkBoxRemoveComments.Text = "Remove Comments First";
-      this.checkBoxRemoveComments.UseVisualStyleBackColor = true;
       // 
       // buttonMoveTop
       // 
@@ -607,16 +617,15 @@
       // 
       // ckGenre
       // 
-      this.ckGenre.AutoSize = true;
       this.ckGenre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckGenre.Id = "c2337854-62d1-40e7-9f8f-98f73cae9769";
       this.ckGenre.Localisation = "ckGenre";
       this.ckGenre.LocalisationContext = "TagEdit";
       this.ckGenre.Location = new System.Drawing.Point(558, 46);
       this.ckGenre.Name = "ckGenre";
-      this.ckGenre.Size = new System.Drawing.Size(15, 14);
+      this.ckGenre.Size = new System.Drawing.Size(17, 29);
       this.ckGenre.TabIndex = 16;
       this.ckGenre.TabStop = false;
-      this.ckGenre.UseVisualStyleBackColor = true;
       // 
       // groupBoxArtist
       // 
@@ -663,15 +672,14 @@
       // 
       // checkBoxCompilation
       // 
-      this.checkBoxCompilation.AutoSize = true;
+      this.checkBoxCompilation.Id = "90b5c785-509f-418c-9f49-f4da0fe756d7";
       this.checkBoxCompilation.Localisation = "PartOfCompilation";
       this.checkBoxCompilation.LocalisationContext = "TagEdit";
       this.checkBoxCompilation.Location = new System.Drawing.Point(608, 46);
       this.checkBoxCompilation.Name = "checkBoxCompilation";
-      this.checkBoxCompilation.Size = new System.Drawing.Size(150, 20);
+      this.checkBoxCompilation.Size = new System.Drawing.Size(150, 29);
       this.checkBoxCompilation.TabIndex = 3;
       this.checkBoxCompilation.Text = "Part of a Compilation";
-      this.checkBoxCompilation.UseVisualStyleBackColor = true;
       // 
       // cbAlbum
       // 
@@ -727,16 +735,15 @@
       // 
       // ckDisk
       // 
-      this.ckDisk.AutoSize = true;
       this.ckDisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckDisk.Id = "846a7e26-c998-463e-80b9-1cc7dec1762a";
       this.ckDisk.Localisation = "ckDisk";
       this.ckDisk.LocalisationContext = "TagEdit";
-      this.ckDisk.Location = new System.Drawing.Point(817, 141);
+      this.ckDisk.Location = new System.Drawing.Point(817, 133);
       this.ckDisk.Name = "ckDisk";
-      this.ckDisk.Size = new System.Drawing.Size(15, 14);
+      this.ckDisk.Size = new System.Drawing.Size(17, 29);
       this.ckDisk.TabIndex = 10;
       this.ckDisk.TabStop = false;
-      this.ckDisk.UseVisualStyleBackColor = true;
       // 
       // lblDisc
       // 
@@ -760,16 +767,15 @@
       // 
       // ckBPM
       // 
-      this.ckBPM.AutoSize = true;
       this.ckBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckBPM.Id = "bd498e69-45d7-4e65-b1b5-eb1438168002";
       this.ckBPM.Localisation = "ckBPM";
       this.ckBPM.LocalisationContext = "TagEdit";
-      this.ckBPM.Location = new System.Drawing.Point(817, 112);
+      this.ckBPM.Location = new System.Drawing.Point(817, 105);
       this.ckBPM.Name = "ckBPM";
-      this.ckBPM.Size = new System.Drawing.Size(15, 14);
+      this.ckBPM.Size = new System.Drawing.Size(17, 29);
       this.ckBPM.TabIndex = 10;
       this.ckBPM.TabStop = false;
-      this.ckBPM.UseVisualStyleBackColor = true;
       // 
       // lblBPM
       // 
@@ -819,29 +825,27 @@
       // 
       // ckYear
       // 
-      this.ckYear.AutoSize = true;
       this.ckYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckYear.Id = "1ec255d5-e8df-43e5-8781-f98c6c8df0e1";
       this.ckYear.Localisation = "ckYear";
       this.ckYear.LocalisationContext = "TagEdit";
-      this.ckYear.Location = new System.Drawing.Point(289, 109);
+      this.ckYear.Location = new System.Drawing.Point(289, 102);
       this.ckYear.Name = "ckYear";
-      this.ckYear.Size = new System.Drawing.Size(15, 14);
+      this.ckYear.Size = new System.Drawing.Size(17, 29);
       this.ckYear.TabIndex = 10;
       this.ckYear.TabStop = false;
-      this.ckYear.UseVisualStyleBackColor = true;
       // 
       // ckTrack
       // 
-      this.ckTrack.AutoSize = true;
       this.ckTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTrack.Id = "1c5ac3fd-a4b8-488b-b9a0-91d7aeb17af0";
       this.ckTrack.Localisation = "ckTrack";
       this.ckTrack.LocalisationContext = "TagEdit";
-      this.ckTrack.Location = new System.Drawing.Point(289, 138);
+      this.ckTrack.Location = new System.Drawing.Point(289, 131);
       this.ckTrack.Name = "ckTrack";
-      this.ckTrack.Size = new System.Drawing.Size(15, 14);
+      this.ckTrack.Size = new System.Drawing.Size(17, 29);
       this.ckTrack.TabIndex = 10;
       this.ckTrack.TabStop = false;
-      this.ckTrack.UseVisualStyleBackColor = true;
       // 
       // lblAlbumArtist
       // 
@@ -856,16 +860,15 @@
       // 
       // ckArtist
       // 
-      this.ckArtist.AutoSize = true;
       this.ckArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckArtist.Id = "3f22f873-d4e9-40ae-87e2-af5903585c35";
       this.ckArtist.Localisation = "ckArtist";
       this.ckArtist.LocalisationContext = "TagEdit";
-      this.ckArtist.Location = new System.Drawing.Point(357, 21);
+      this.ckArtist.Location = new System.Drawing.Point(357, 13);
       this.ckArtist.Name = "ckArtist";
-      this.ckArtist.Size = new System.Drawing.Size(15, 14);
+      this.ckArtist.Size = new System.Drawing.Size(17, 29);
       this.ckArtist.TabIndex = 10;
       this.ckArtist.TabStop = false;
-      this.ckArtist.UseVisualStyleBackColor = true;
       // 
       // lblTrack
       // 
@@ -889,16 +892,15 @@
       // 
       // ckAlbumArtist
       // 
-      this.ckAlbumArtist.AutoSize = true;
       this.ckAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckAlbumArtist.Id = "7d1e52ec-27e3-43b1-a37e-8e494c3ffc81";
       this.ckAlbumArtist.Localisation = "ckAlbumArtist";
       this.ckAlbumArtist.LocalisationContext = "TagEdit";
-      this.ckAlbumArtist.Location = new System.Drawing.Point(820, 19);
+      this.ckAlbumArtist.Location = new System.Drawing.Point(820, 14);
       this.ckAlbumArtist.Name = "ckAlbumArtist";
-      this.ckAlbumArtist.Size = new System.Drawing.Size(15, 14);
+      this.ckAlbumArtist.Size = new System.Drawing.Size(17, 29);
       this.ckAlbumArtist.TabIndex = 10;
       this.ckAlbumArtist.TabStop = false;
-      this.ckAlbumArtist.UseVisualStyleBackColor = true;
       // 
       // lblArtist
       // 
@@ -929,16 +931,15 @@
       // 
       // ckAlbum
       // 
-      this.ckAlbum.AutoSize = true;
       this.ckAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckAlbum.Id = "6200c0ad-849b-4295-a070-5e8ff4099864";
       this.ckAlbum.Localisation = "ckAlbum";
       this.ckAlbum.LocalisationContext = "TagEdit";
-      this.ckAlbum.Location = new System.Drawing.Point(357, 51);
+      this.ckAlbum.Location = new System.Drawing.Point(357, 42);
       this.ckAlbum.Name = "ckAlbum";
-      this.ckAlbum.Size = new System.Drawing.Size(15, 14);
+      this.ckAlbum.Size = new System.Drawing.Size(17, 29);
       this.ckAlbum.TabIndex = 10;
       this.ckAlbum.TabStop = false;
-      this.ckAlbum.UseVisualStyleBackColor = true;
       // 
       // lblYear
       // 
@@ -983,16 +984,15 @@
       // 
       // ckTitle
       // 
-      this.ckTitle.AutoSize = true;
       this.ckTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTitle.Id = "85da5543-f85c-4954-be7f-0c86ccedc19e";
       this.ckTitle.Localisation = "ckTitle";
       this.ckTitle.LocalisationContext = "TagEdit";
       this.ckTitle.Location = new System.Drawing.Point(817, 75);
       this.ckTitle.Name = "ckTitle";
-      this.ckTitle.Size = new System.Drawing.Size(15, 14);
+      this.ckTitle.Size = new System.Drawing.Size(17, 29);
       this.ckTitle.TabIndex = 10;
       this.ckTitle.TabStop = false;
-      this.ckTitle.UseVisualStyleBackColor = true;
       // 
       // tbTitle
       // 
@@ -1004,15 +1004,16 @@
       // 
       // tabPagePictures
       // 
+      this.tabPagePictures.ActiveControl = null;
       this.tabPagePictures.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPagePictures.Controls.Add(this.groupBoxPicture);
       this.tabPagePictures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tabPagePictures.KeyTip = null;
       this.tabPagePictures.Localisation = "HeaderPictures";
       this.tabPagePictures.LocalisationContext = "TagEdit";
-      this.tabPagePictures.Location = new System.Drawing.Point(4, 25);
       this.tabPagePictures.Name = "tabPagePictures";
       this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPagePictures.Size = new System.Drawing.Size(900, 579);
+      this.tabPagePictures.Size = new System.Drawing.Size(906, 584);
       this.tabPagePictures.TabIndex = 1;
       this.tabPagePictures.Text = "Picture";
       // 
@@ -1053,15 +1054,14 @@
       // 
       // checkBoxRemoveExistingPictures
       // 
-      this.checkBoxRemoveExistingPictures.AutoSize = true;
+      this.checkBoxRemoveExistingPictures.Id = "f879a4c8-8bb0-45e3-985e-813bc3a0f387";
       this.checkBoxRemoveExistingPictures.Localisation = "RemoveExistingPictures";
       this.checkBoxRemoveExistingPictures.LocalisationContext = "TagEdit";
       this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(251, 325);
       this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
-      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(207, 20);
+      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(207, 29);
       this.checkBoxRemoveExistingPictures.TabIndex = 5;
       this.checkBoxRemoveExistingPictures.Text = "Remove Existing Pictures First";
-      this.checkBoxRemoveExistingPictures.UseVisualStyleBackColor = true;
       // 
       // dataGridViewPicture
       // 
@@ -1167,6 +1167,7 @@
       // 
       // pictureBoxCover
       // 
+      this.pictureBoxCover.BackColor = System.Drawing.Color.White;
       this.pictureBoxCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.pictureBoxCover.Location = new System.Drawing.Point(642, 21);
       this.pictureBoxCover.Name = "pictureBoxCover";
@@ -1196,16 +1197,17 @@
       // 
       // tabPageDetails
       // 
+      this.tabPageDetails.ActiveControl = null;
       this.tabPageDetails.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageDetails.Controls.Add(this.groupBoxMedia);
       this.tabPageDetails.Controls.Add(this.groupBoxSort);
       this.tabPageDetails.Controls.Add(this.groupBoxContent);
       this.tabPageDetails.Controls.Add(this.groupBoxPeople);
+      this.tabPageDetails.KeyTip = null;
       this.tabPageDetails.Localisation = "HeaderDetail";
       this.tabPageDetails.LocalisationContext = "TagEdit";
-      this.tabPageDetails.Location = new System.Drawing.Point(4, 25);
       this.tabPageDetails.Name = "tabPageDetails";
-      this.tabPageDetails.Size = new System.Drawing.Size(900, 579);
+      this.tabPageDetails.Size = new System.Drawing.Size(906, 584);
       this.tabPageDetails.TabIndex = 2;
       this.tabPageDetails.Text = "Detailed Information";
       // 
@@ -1231,7 +1233,7 @@
       this.btGetTrackLength.Id = "6b5f182e-fad3-442a-beec-5728562327d2";
       this.btGetTrackLength.Localisation = "GetTrackLengthFromFile";
       this.btGetTrackLength.LocalisationContext = "TagEdit";
-      this.btGetTrackLength.Location = new System.Drawing.Point(392, 49);
+      this.btGetTrackLength.Location = new System.Drawing.Point(392, 54);
       this.btGetTrackLength.Name = "btGetTrackLength";
       this.btGetTrackLength.Size = new System.Drawing.Size(116, 23);
       this.btGetTrackLength.TabIndex = 4;
@@ -1242,7 +1244,7 @@
       // tbTrackLength
       // 
       this.tbTrackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTrackLength.Location = new System.Drawing.Point(205, 50);
+      this.tbTrackLength.Location = new System.Drawing.Point(205, 55);
       this.tbTrackLength.Name = "tbTrackLength";
       this.tbTrackLength.Size = new System.Drawing.Size(173, 22);
       this.tbTrackLength.TabIndex = 30;
@@ -1252,7 +1254,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 56);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 64);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1260,16 +1262,15 @@
       // 
       // ckMediaType
       // 
-      this.ckMediaType.AutoSize = true;
       this.ckMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckMediaType.Id = "2bc2dc7f-fb67-4ebc-85d7-e120c1f7aa9d";
       this.ckMediaType.Localisation = "ckMediaType";
       this.ckMediaType.LocalisationContext = "TagEdit";
-      this.ckMediaType.Location = new System.Drawing.Point(521, 23);
+      this.ckMediaType.Location = new System.Drawing.Point(521, 14);
       this.ckMediaType.Name = "ckMediaType";
-      this.ckMediaType.Size = new System.Drawing.Size(15, 14);
+      this.ckMediaType.Size = new System.Drawing.Size(17, 29);
       this.ckMediaType.TabIndex = 45;
       this.ckMediaType.TabStop = false;
-      this.ckMediaType.UseVisualStyleBackColor = true;
       // 
       // cbMediaType
       // 
@@ -1288,7 +1289,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 18);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 26);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -1296,15 +1297,14 @@
       // 
       // ckTrackLength
       // 
-      this.ckTrackLength.AutoSize = true;
+      this.ckTrackLength.Id = "4bfd4ef5-03ce-4780-95c4-0f061b3c2655";
       this.ckTrackLength.Localisation = "GetTrackLength";
       this.ckTrackLength.LocalisationContext = "TagEdit";
-      this.ckTrackLength.Location = new System.Drawing.Point(205, 52);
+      this.ckTrackLength.Location = new System.Drawing.Point(205, 53);
       this.ckTrackLength.Name = "ckTrackLength";
-      this.ckTrackLength.Size = new System.Drawing.Size(183, 20);
+      this.ckTrackLength.Size = new System.Drawing.Size(183, 29);
       this.ckTrackLength.TabIndex = 4;
       this.ckTrackLength.Text = "Get Track Length from File";
-      this.ckTrackLength.UseVisualStyleBackColor = true;
       // 
       // groupBoxSort
       // 
@@ -1335,16 +1335,15 @@
       // 
       // ckTitleSort
       // 
-      this.ckTitleSort.AutoSize = true;
       this.ckTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTitleSort.Id = "91ee12d4-671d-403a-861d-cc3b96b4a9a0";
       this.ckTitleSort.Localisation = "ckTitleSort";
       this.ckTitleSort.LocalisationContext = "TagEdit";
-      this.ckTitleSort.Location = new System.Drawing.Point(671, 76);
+      this.ckTitleSort.Location = new System.Drawing.Point(671, 70);
       this.ckTitleSort.Name = "ckTitleSort";
-      this.ckTitleSort.Size = new System.Drawing.Size(15, 14);
+      this.ckTitleSort.Size = new System.Drawing.Size(17, 29);
       this.ckTitleSort.TabIndex = 44;
       this.ckTitleSort.TabStop = false;
-      this.ckTitleSort.UseVisualStyleBackColor = true;
       // 
       // lblTitleSort
       // 
@@ -1367,16 +1366,15 @@
       // 
       // ckAlbumSort
       // 
-      this.ckAlbumSort.AutoSize = true;
       this.ckAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckAlbumSort.Id = "62b84211-4a08-4499-a285-232fdbeb74fd";
       this.ckAlbumSort.Localisation = "ckAlbumSort";
       this.ckAlbumSort.LocalisationContext = "TagEdit";
-      this.ckAlbumSort.Location = new System.Drawing.Point(671, 49);
+      this.ckAlbumSort.Location = new System.Drawing.Point(671, 43);
       this.ckAlbumSort.Name = "ckAlbumSort";
-      this.ckAlbumSort.Size = new System.Drawing.Size(15, 14);
+      this.ckAlbumSort.Size = new System.Drawing.Size(17, 29);
       this.ckAlbumSort.TabIndex = 41;
       this.ckAlbumSort.TabStop = false;
-      this.ckAlbumSort.UseVisualStyleBackColor = true;
       // 
       // lblAlbumSort
       // 
@@ -1399,16 +1397,15 @@
       // 
       // ckArtistSort
       // 
-      this.ckArtistSort.AutoSize = true;
       this.ckArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckArtistSort.Id = "35d418e4-d62c-451a-ac17-8dd4bfc18869";
       this.ckArtistSort.Localisation = "ckArtistSort";
       this.ckArtistSort.LocalisationContext = "TagEdit";
-      this.ckArtistSort.Location = new System.Drawing.Point(671, 20);
+      this.ckArtistSort.Location = new System.Drawing.Point(671, 16);
       this.ckArtistSort.Name = "ckArtistSort";
-      this.ckArtistSort.Size = new System.Drawing.Size(15, 14);
+      this.ckArtistSort.Size = new System.Drawing.Size(17, 29);
       this.ckArtistSort.TabIndex = 38;
       this.ckArtistSort.TabStop = false;
-      this.ckArtistSort.UseVisualStyleBackColor = true;
       // 
       // lblArtistSort
       // 
@@ -1447,16 +1444,15 @@
       // 
       // ckSubTitle
       // 
-      this.ckSubTitle.AutoSize = true;
       this.ckSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckSubTitle.Id = "d54d2d9d-6da3-42ce-a9a8-9e6a12c91c63";
       this.ckSubTitle.Localisation = "ckSubTitle";
       this.ckSubTitle.LocalisationContext = "TagEdit";
-      this.ckSubTitle.Location = new System.Drawing.Point(671, 53);
+      this.ckSubTitle.Location = new System.Drawing.Point(671, 47);
       this.ckSubTitle.Name = "ckSubTitle";
-      this.ckSubTitle.Size = new System.Drawing.Size(15, 14);
+      this.ckSubTitle.Size = new System.Drawing.Size(17, 29);
       this.ckSubTitle.TabIndex = 35;
       this.ckSubTitle.TabStop = false;
-      this.ckSubTitle.UseVisualStyleBackColor = true;
       // 
       // lblSubTitle
       // 
@@ -1479,16 +1475,15 @@
       // 
       // ckContentGroup
       // 
-      this.ckContentGroup.AutoSize = true;
       this.ckContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckContentGroup.Id = "2dcb16c6-4670-4910-9194-e73a1f71e2a6";
       this.ckContentGroup.Localisation = "ckContentGroup";
       this.ckContentGroup.LocalisationContext = "TagEdit";
-      this.ckContentGroup.Location = new System.Drawing.Point(671, 25);
+      this.ckContentGroup.Location = new System.Drawing.Point(671, 19);
       this.ckContentGroup.Name = "ckContentGroup";
-      this.ckContentGroup.Size = new System.Drawing.Size(15, 14);
+      this.ckContentGroup.Size = new System.Drawing.Size(17, 29);
       this.ckContentGroup.TabIndex = 32;
       this.ckContentGroup.TabStop = false;
-      this.ckContentGroup.UseVisualStyleBackColor = true;
       // 
       // lblContentGroup
       // 
@@ -1542,16 +1537,15 @@
       // 
       // ckCopyright
       // 
-      this.ckCopyright.AutoSize = true;
       this.ckCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckCopyright.Id = "680c3bbf-a6b3-4b66-9078-f0d3551941d1";
       this.ckCopyright.Localisation = "ckCopyright";
       this.ckCopyright.LocalisationContext = "TagEdit";
       this.ckCopyright.Location = new System.Drawing.Point(671, 193);
       this.ckCopyright.Name = "ckCopyright";
-      this.ckCopyright.Size = new System.Drawing.Size(15, 14);
+      this.ckCopyright.Size = new System.Drawing.Size(17, 29);
       this.ckCopyright.TabIndex = 29;
       this.ckCopyright.TabStop = false;
-      this.ckCopyright.UseVisualStyleBackColor = true;
       // 
       // lblCopyright
       // 
@@ -1574,16 +1568,15 @@
       // 
       // ckEncodedBy
       // 
-      this.ckEncodedBy.AutoSize = true;
       this.ckEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckEncodedBy.Id = "9d226420-ee3b-46f1-88bf-f565296f88d3";
       this.ckEncodedBy.Localisation = "ckEncodedBy";
       this.ckEncodedBy.LocalisationContext = "TagEdit";
       this.ckEncodedBy.Location = new System.Drawing.Point(671, 165);
       this.ckEncodedBy.Name = "ckEncodedBy";
-      this.ckEncodedBy.Size = new System.Drawing.Size(15, 14);
+      this.ckEncodedBy.Size = new System.Drawing.Size(17, 29);
       this.ckEncodedBy.TabIndex = 26;
       this.ckEncodedBy.TabStop = false;
-      this.ckEncodedBy.UseVisualStyleBackColor = true;
       // 
       // lblEncodedBy
       // 
@@ -1606,16 +1599,15 @@
       // 
       // ckPublisher
       // 
-      this.ckPublisher.AutoSize = true;
       this.ckPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckPublisher.Id = "db6a1213-790a-4ab6-8ae0-3d0845e8c4df";
       this.ckPublisher.Localisation = "ckPublisher";
       this.ckPublisher.LocalisationContext = "TagEdit";
       this.ckPublisher.Location = new System.Drawing.Point(671, 137);
       this.ckPublisher.Name = "ckPublisher";
-      this.ckPublisher.Size = new System.Drawing.Size(15, 14);
+      this.ckPublisher.Size = new System.Drawing.Size(17, 29);
       this.ckPublisher.TabIndex = 23;
       this.ckPublisher.TabStop = false;
-      this.ckPublisher.UseVisualStyleBackColor = true;
       // 
       // lblPublisher
       // 
@@ -1638,16 +1630,15 @@
       // 
       // ckTextWriter
       // 
-      this.ckTextWriter.AutoSize = true;
       this.ckTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTextWriter.Id = "0d4f078a-1ce6-424e-9978-8a96e7ce27c3";
       this.ckTextWriter.Localisation = "ckTextWriter";
       this.ckTextWriter.LocalisationContext = "TagEdit";
       this.ckTextWriter.Location = new System.Drawing.Point(671, 109);
       this.ckTextWriter.Name = "ckTextWriter";
-      this.ckTextWriter.Size = new System.Drawing.Size(15, 14);
+      this.ckTextWriter.Size = new System.Drawing.Size(17, 29);
       this.ckTextWriter.TabIndex = 20;
       this.ckTextWriter.TabStop = false;
-      this.ckTextWriter.UseVisualStyleBackColor = true;
       // 
       // lblTextWriter
       // 
@@ -1670,16 +1661,15 @@
       // 
       // ckInterpretedBy
       // 
-      this.ckInterpretedBy.AutoSize = true;
       this.ckInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInterpretedBy.Id = "2cd0712c-3768-4312-bd25-9d01426944a2";
       this.ckInterpretedBy.Localisation = "ckInterpretedBy";
       this.ckInterpretedBy.LocalisationContext = "TagEdit";
       this.ckInterpretedBy.Location = new System.Drawing.Point(671, 81);
       this.ckInterpretedBy.Name = "ckInterpretedBy";
-      this.ckInterpretedBy.Size = new System.Drawing.Size(15, 14);
+      this.ckInterpretedBy.Size = new System.Drawing.Size(17, 29);
       this.ckInterpretedBy.TabIndex = 17;
       this.ckInterpretedBy.TabStop = false;
-      this.ckInterpretedBy.UseVisualStyleBackColor = true;
       // 
       // lblInterpretedBy
       // 
@@ -1702,16 +1692,15 @@
       // 
       // ckComposer
       // 
-      this.ckComposer.AutoSize = true;
       this.ckComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckComposer.Id = "fc042ddd-c72d-4cf1-85ed-837417ee18c6";
       this.ckComposer.Localisation = "ckComposer";
       this.ckComposer.LocalisationContext = "TagEdit";
       this.ckComposer.Location = new System.Drawing.Point(671, 53);
       this.ckComposer.Name = "ckComposer";
-      this.ckComposer.Size = new System.Drawing.Size(15, 14);
+      this.ckComposer.Size = new System.Drawing.Size(17, 29);
       this.ckComposer.TabIndex = 14;
       this.ckComposer.TabStop = false;
-      this.ckComposer.UseVisualStyleBackColor = true;
       // 
       // lblComposer
       // 
@@ -1734,16 +1723,15 @@
       // 
       // ckConductor
       // 
-      this.ckConductor.AutoSize = true;
       this.ckConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckConductor.Id = "e291d824-49a6-43d8-b9bf-71e892707ca5";
       this.ckConductor.Localisation = "ckConductor";
       this.ckConductor.LocalisationContext = "TagEdit";
       this.ckConductor.Location = new System.Drawing.Point(671, 25);
       this.ckConductor.Name = "ckConductor";
-      this.ckConductor.Size = new System.Drawing.Size(15, 14);
+      this.ckConductor.Size = new System.Drawing.Size(17, 29);
       this.ckConductor.TabIndex = 11;
       this.ckConductor.TabStop = false;
-      this.ckConductor.UseVisualStyleBackColor = true;
       // 
       // lblConductor
       // 
@@ -1758,13 +1746,14 @@
       // 
       // tabPageOriginal
       // 
+      this.tabPageOriginal.ActiveControl = null;
       this.tabPageOriginal.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageOriginal.Controls.Add(this.groupBoxOriginalInformation);
+      this.tabPageOriginal.KeyTip = null;
       this.tabPageOriginal.Localisation = "HeaderOriginal";
       this.tabPageOriginal.LocalisationContext = "TagEdit";
-      this.tabPageOriginal.Location = new System.Drawing.Point(4, 25);
       this.tabPageOriginal.Name = "tabPageOriginal";
-      this.tabPageOriginal.Size = new System.Drawing.Size(900, 579);
+      this.tabPageOriginal.Size = new System.Drawing.Size(906, 584);
       this.tabPageOriginal.TabIndex = 3;
       this.tabPageOriginal.Text = "Original Information";
       // 
@@ -1806,16 +1795,15 @@
       // 
       // ckOriginalRelease
       // 
-      this.ckOriginalRelease.AutoSize = true;
       this.ckOriginalRelease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalRelease.Id = "10214933-abdd-454f-8aaa-bd8e0515be11";
       this.ckOriginalRelease.Localisation = "ckOriginalRelease";
       this.ckOriginalRelease.LocalisationContext = "TagEdit";
-      this.ckOriginalRelease.Location = new System.Drawing.Point(305, 169);
+      this.ckOriginalRelease.Location = new System.Drawing.Point(305, 163);
       this.ckOriginalRelease.Name = "ckOriginalRelease";
-      this.ckOriginalRelease.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalRelease.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalRelease.TabIndex = 26;
       this.ckOriginalRelease.TabStop = false;
-      this.ckOriginalRelease.UseVisualStyleBackColor = true;
       // 
       // lblOriginalRelease
       // 
@@ -1838,16 +1826,15 @@
       // 
       // ckOriginalOwner
       // 
-      this.ckOriginalOwner.AutoSize = true;
       this.ckOriginalOwner.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalOwner.Id = "ed3ebee6-b46e-4ef6-bcd2-4ee13b9d2c55";
       this.ckOriginalOwner.Localisation = "ckOriginalOwner";
       this.ckOriginalOwner.LocalisationContext = "TagEdit";
-      this.ckOriginalOwner.Location = new System.Drawing.Point(671, 137);
+      this.ckOriginalOwner.Location = new System.Drawing.Point(671, 131);
       this.ckOriginalOwner.Name = "ckOriginalOwner";
-      this.ckOriginalOwner.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalOwner.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalOwner.TabIndex = 23;
       this.ckOriginalOwner.TabStop = false;
-      this.ckOriginalOwner.UseVisualStyleBackColor = true;
       // 
       // lblOriginalOwner
       // 
@@ -1870,16 +1857,15 @@
       // 
       // ckOriginalArtist
       // 
-      this.ckOriginalArtist.AutoSize = true;
       this.ckOriginalArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalArtist.Id = "522ddc97-4192-4cd4-9c34-52ccdba8d69b";
       this.ckOriginalArtist.Localisation = "ckOriginalArtist";
       this.ckOriginalArtist.LocalisationContext = "TagEdit";
-      this.ckOriginalArtist.Location = new System.Drawing.Point(671, 109);
+      this.ckOriginalArtist.Location = new System.Drawing.Point(671, 103);
       this.ckOriginalArtist.Name = "ckOriginalArtist";
-      this.ckOriginalArtist.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalArtist.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalArtist.TabIndex = 20;
       this.ckOriginalArtist.TabStop = false;
-      this.ckOriginalArtist.UseVisualStyleBackColor = true;
       // 
       // lblOriginalArtist
       // 
@@ -1902,16 +1888,15 @@
       // 
       // ckOriginalLyricsWriter
       // 
-      this.ckOriginalLyricsWriter.AutoSize = true;
       this.ckOriginalLyricsWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalLyricsWriter.Id = "c2587e18-5dc5-49a4-b37d-0ad0f0b7e78c";
       this.ckOriginalLyricsWriter.Localisation = "ckOriginalLyricsWriter";
       this.ckOriginalLyricsWriter.LocalisationContext = "TagEdit";
-      this.ckOriginalLyricsWriter.Location = new System.Drawing.Point(671, 81);
+      this.ckOriginalLyricsWriter.Location = new System.Drawing.Point(671, 74);
       this.ckOriginalLyricsWriter.Name = "ckOriginalLyricsWriter";
-      this.ckOriginalLyricsWriter.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalLyricsWriter.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalLyricsWriter.TabIndex = 17;
       this.ckOriginalLyricsWriter.TabStop = false;
-      this.ckOriginalLyricsWriter.UseVisualStyleBackColor = true;
       // 
       // lblOriginalLyricsWriter
       // 
@@ -1934,16 +1919,15 @@
       // 
       // ckOriginalFileName
       // 
-      this.ckOriginalFileName.AutoSize = true;
       this.ckOriginalFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalFileName.Id = "6c83c0c5-9751-42e9-98b7-b358194fb875";
       this.ckOriginalFileName.Localisation = "ckOriginalFileName";
       this.ckOriginalFileName.LocalisationContext = "TagEdit";
-      this.ckOriginalFileName.Location = new System.Drawing.Point(671, 53);
+      this.ckOriginalFileName.Location = new System.Drawing.Point(671, 48);
       this.ckOriginalFileName.Name = "ckOriginalFileName";
-      this.ckOriginalFileName.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalFileName.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalFileName.TabIndex = 14;
       this.ckOriginalFileName.TabStop = false;
-      this.ckOriginalFileName.UseVisualStyleBackColor = true;
       // 
       // lblOriginalFileName
       // 
@@ -1966,16 +1950,15 @@
       // 
       // ckOriginalAlbum
       // 
-      this.ckOriginalAlbum.AutoSize = true;
       this.ckOriginalAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOriginalAlbum.Id = "3b5801c5-3882-436c-b29e-24a88239181b";
       this.ckOriginalAlbum.Localisation = "ckOriginalAlbum";
       this.ckOriginalAlbum.LocalisationContext = "TagEdit";
-      this.ckOriginalAlbum.Location = new System.Drawing.Point(671, 25);
+      this.ckOriginalAlbum.Location = new System.Drawing.Point(671, 20);
       this.ckOriginalAlbum.Name = "ckOriginalAlbum";
-      this.ckOriginalAlbum.Size = new System.Drawing.Size(15, 14);
+      this.ckOriginalAlbum.Size = new System.Drawing.Size(17, 29);
       this.ckOriginalAlbum.TabIndex = 11;
       this.ckOriginalAlbum.TabStop = false;
-      this.ckOriginalAlbum.UseVisualStyleBackColor = true;
       // 
       // lblOriginalAlbum
       // 
@@ -1990,14 +1973,15 @@
       // 
       // tabPageInvolvedPeople
       // 
+      this.tabPageInvolvedPeople.ActiveControl = null;
       this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxMusician);
       this.tabPageInvolvedPeople.Controls.Add(this.groupBoxInvolvedPeople);
+      this.tabPageInvolvedPeople.KeyTip = null;
       this.tabPageInvolvedPeople.Localisation = "HeaderInvolved";
       this.tabPageInvolvedPeople.LocalisationContext = "TagEdit";
-      this.tabPageInvolvedPeople.Location = new System.Drawing.Point(4, 25);
       this.tabPageInvolvedPeople.Name = "tabPageInvolvedPeople";
-      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(900, 579);
+      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(906, 584);
       this.tabPageInvolvedPeople.TabIndex = 4;
       this.tabPageInvolvedPeople.Text = "Involved People";
       // 
@@ -2033,16 +2017,15 @@
       // 
       // ckInvolvedMusician
       // 
-      this.ckInvolvedMusician.AutoSize = true;
       this.ckInvolvedMusician.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInvolvedMusician.Id = "488a84fc-1427-470b-970e-a3d5467e7d23";
       this.ckInvolvedMusician.Localisation = "ckInvolvedMusician";
       this.ckInvolvedMusician.LocalisationContext = "TagEdit";
       this.ckInvolvedMusician.Location = new System.Drawing.Point(666, 98);
       this.ckInvolvedMusician.Name = "ckInvolvedMusician";
-      this.ckInvolvedMusician.Size = new System.Drawing.Size(15, 14);
+      this.ckInvolvedMusician.Size = new System.Drawing.Size(17, 29);
       this.ckInvolvedMusician.TabIndex = 24;
       this.ckInvolvedMusician.TabStop = false;
-      this.ckInvolvedMusician.UseVisualStyleBackColor = true;
       // 
       // buttonRemoveMusician
       // 
@@ -2164,16 +2147,15 @@
       // 
       // ckInvolvedPerson
       // 
-      this.ckInvolvedPerson.AutoSize = true;
       this.ckInvolvedPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInvolvedPerson.Id = "9c636a43-e19a-4990-97c0-2675d292862b";
       this.ckInvolvedPerson.Localisation = "ckInvolvedPerson";
       this.ckInvolvedPerson.LocalisationContext = "TagEdit";
       this.ckInvolvedPerson.Location = new System.Drawing.Point(666, 98);
       this.ckInvolvedPerson.Name = "ckInvolvedPerson";
-      this.ckInvolvedPerson.Size = new System.Drawing.Size(15, 14);
+      this.ckInvolvedPerson.Size = new System.Drawing.Size(17, 29);
       this.ckInvolvedPerson.TabIndex = 24;
       this.ckInvolvedPerson.TabStop = false;
-      this.ckInvolvedPerson.UseVisualStyleBackColor = true;
       // 
       // buttonRemovePerson
       // 
@@ -2277,13 +2259,14 @@
       // 
       // tabPageWebInformation
       // 
+      this.tabPageWebInformation.ActiveControl = null;
       this.tabPageWebInformation.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageWebInformation.Controls.Add(this.groupBoxWebInformation);
+      this.tabPageWebInformation.KeyTip = null;
       this.tabPageWebInformation.Localisation = "HeaderWeb";
       this.tabPageWebInformation.LocalisationContext = "TagEdit";
-      this.tabPageWebInformation.Location = new System.Drawing.Point(4, 25);
       this.tabPageWebInformation.Name = "tabPageWebInformation";
-      this.tabPageWebInformation.Size = new System.Drawing.Size(900, 579);
+      this.tabPageWebInformation.Size = new System.Drawing.Size(906, 584);
       this.tabPageWebInformation.TabIndex = 5;
       this.tabPageWebInformation.Text = "Web Information";
       // 
@@ -2331,16 +2314,15 @@
       // 
       // ckCommercialInformationUrl
       // 
-      this.ckCommercialInformationUrl.AutoSize = true;
       this.ckCommercialInformationUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckCommercialInformationUrl.Id = "57b7d8cd-9f03-4f87-b7e8-9614a36b1048";
       this.ckCommercialInformationUrl.Localisation = "ckCommercialInformationUrl";
       this.ckCommercialInformationUrl.LocalisationContext = "TagEdit";
-      this.ckCommercialInformationUrl.Location = new System.Drawing.Point(671, 225);
+      this.ckCommercialInformationUrl.Location = new System.Drawing.Point(671, 218);
       this.ckCommercialInformationUrl.Name = "ckCommercialInformationUrl";
-      this.ckCommercialInformationUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckCommercialInformationUrl.Size = new System.Drawing.Size(17, 29);
       this.ckCommercialInformationUrl.TabIndex = 32;
       this.ckCommercialInformationUrl.TabStop = false;
-      this.ckCommercialInformationUrl.UseVisualStyleBackColor = true;
       // 
       // lblCommercialInformationUrl
       // 
@@ -2363,16 +2345,15 @@
       // 
       // ckOfficialPublisherUrl
       // 
-      this.ckOfficialPublisherUrl.AutoSize = true;
       this.ckOfficialPublisherUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialPublisherUrl.Id = "4ff42ac1-7fbd-41e6-b0d9-0460aa4bd8f9";
       this.ckOfficialPublisherUrl.Localisation = "ckOfficialPublisherUrl";
       this.ckOfficialPublisherUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialPublisherUrl.Location = new System.Drawing.Point(671, 197);
+      this.ckOfficialPublisherUrl.Location = new System.Drawing.Point(671, 190);
       this.ckOfficialPublisherUrl.Name = "ckOfficialPublisherUrl";
-      this.ckOfficialPublisherUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialPublisherUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialPublisherUrl.TabIndex = 29;
       this.ckOfficialPublisherUrl.TabStop = false;
-      this.ckOfficialPublisherUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialPublisherUrl
       // 
@@ -2395,16 +2376,15 @@
       // 
       // ckOfficialPaymentUrl
       // 
-      this.ckOfficialPaymentUrl.AutoSize = true;
       this.ckOfficialPaymentUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialPaymentUrl.Id = "6fa446e5-e7ba-4f76-bdf7-004a22f46142";
       this.ckOfficialPaymentUrl.Localisation = "ckOfficialPaymentUrl";
       this.ckOfficialPaymentUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialPaymentUrl.Location = new System.Drawing.Point(671, 169);
+      this.ckOfficialPaymentUrl.Location = new System.Drawing.Point(671, 162);
       this.ckOfficialPaymentUrl.Name = "ckOfficialPaymentUrl";
-      this.ckOfficialPaymentUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialPaymentUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialPaymentUrl.TabIndex = 26;
       this.ckOfficialPaymentUrl.TabStop = false;
-      this.ckOfficialPaymentUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialPaymentUrl
       // 
@@ -2427,16 +2407,15 @@
       // 
       // ckOfficialInternetRadioUrl
       // 
-      this.ckOfficialInternetRadioUrl.AutoSize = true;
       this.ckOfficialInternetRadioUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialInternetRadioUrl.Id = "10100738-2a49-4ccd-8e1d-4c0a53636d0b";
       this.ckOfficialInternetRadioUrl.Localisation = "ckOfficialInternetRadioUrl";
       this.ckOfficialInternetRadioUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialInternetRadioUrl.Location = new System.Drawing.Point(671, 137);
+      this.ckOfficialInternetRadioUrl.Location = new System.Drawing.Point(671, 133);
       this.ckOfficialInternetRadioUrl.Name = "ckOfficialInternetRadioUrl";
-      this.ckOfficialInternetRadioUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialInternetRadioUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialInternetRadioUrl.TabIndex = 23;
       this.ckOfficialInternetRadioUrl.TabStop = false;
-      this.ckOfficialInternetRadioUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialInternetRadioUrl
       // 
@@ -2459,16 +2438,15 @@
       // 
       // ckOfficialAudioSourceUrl
       // 
-      this.ckOfficialAudioSourceUrl.AutoSize = true;
       this.ckOfficialAudioSourceUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialAudioSourceUrl.Id = "b8ad8d43-84b4-4d27-b5f5-fb94da074367";
       this.ckOfficialAudioSourceUrl.Localisation = "ckOfficialAudioSourceUrl";
       this.ckOfficialAudioSourceUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialAudioSourceUrl.Location = new System.Drawing.Point(671, 109);
+      this.ckOfficialAudioSourceUrl.Location = new System.Drawing.Point(671, 103);
       this.ckOfficialAudioSourceUrl.Name = "ckOfficialAudioSourceUrl";
-      this.ckOfficialAudioSourceUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialAudioSourceUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialAudioSourceUrl.TabIndex = 20;
       this.ckOfficialAudioSourceUrl.TabStop = false;
-      this.ckOfficialAudioSourceUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialAudioSourceUrl
       // 
@@ -2491,16 +2469,15 @@
       // 
       // ckOfficialArtistUrl
       // 
-      this.ckOfficialArtistUrl.AutoSize = true;
       this.ckOfficialArtistUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialArtistUrl.Id = "9846d64b-9c29-4553-9a73-b0d411ec9fb7";
       this.ckOfficialArtistUrl.Localisation = "ckOfficialArtistUrl";
       this.ckOfficialArtistUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialArtistUrl.Location = new System.Drawing.Point(671, 81);
+      this.ckOfficialArtistUrl.Location = new System.Drawing.Point(671, 76);
       this.ckOfficialArtistUrl.Name = "ckOfficialArtistUrl";
-      this.ckOfficialArtistUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialArtistUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialArtistUrl.TabIndex = 17;
       this.ckOfficialArtistUrl.TabStop = false;
-      this.ckOfficialArtistUrl.UseVisualStyleBackColor = true;
       // 
       // lblOfficialArtistUrl
       // 
@@ -2523,16 +2500,15 @@
       // 
       // ckOfficialAudioFileUrl
       // 
-      this.ckOfficialAudioFileUrl.AutoSize = true;
       this.ckOfficialAudioFileUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckOfficialAudioFileUrl.Id = "dec5a543-f358-4ebc-a50b-a776c28cd051";
       this.ckOfficialAudioFileUrl.Localisation = "ckOfficialAudioFileUrl";
       this.ckOfficialAudioFileUrl.LocalisationContext = "TagEdit";
-      this.ckOfficialAudioFileUrl.Location = new System.Drawing.Point(671, 53);
+      this.ckOfficialAudioFileUrl.Location = new System.Drawing.Point(671, 48);
       this.ckOfficialAudioFileUrl.Name = "ckOfficialAudioFileUrl";
-      this.ckOfficialAudioFileUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckOfficialAudioFileUrl.Size = new System.Drawing.Size(17, 29);
       this.ckOfficialAudioFileUrl.TabIndex = 14;
       this.ckOfficialAudioFileUrl.TabStop = false;
-      this.ckOfficialAudioFileUrl.UseVisualStyleBackColor = true;
       // 
       // lbOfficialAudioFileUrl
       // 
@@ -2555,16 +2531,15 @@
       // 
       // ckCopyrightUrl
       // 
-      this.ckCopyrightUrl.AutoSize = true;
       this.ckCopyrightUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckCopyrightUrl.Id = "f574a281-f66a-433a-bb08-a00533073917";
       this.ckCopyrightUrl.Localisation = "ckCopyrightUrl";
       this.ckCopyrightUrl.LocalisationContext = "TagEdit";
-      this.ckCopyrightUrl.Location = new System.Drawing.Point(671, 25);
+      this.ckCopyrightUrl.Location = new System.Drawing.Point(671, 20);
       this.ckCopyrightUrl.Name = "ckCopyrightUrl";
-      this.ckCopyrightUrl.Size = new System.Drawing.Size(15, 14);
+      this.ckCopyrightUrl.Size = new System.Drawing.Size(17, 29);
       this.ckCopyrightUrl.TabIndex = 11;
       this.ckCopyrightUrl.TabStop = false;
-      this.ckCopyrightUrl.UseVisualStyleBackColor = true;
       // 
       // lblCopyrightUrl
       // 
@@ -2579,13 +2554,14 @@
       // 
       // tabPageLyrics
       // 
+      this.tabPageLyrics.ActiveControl = null;
       this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
+      this.tabPageLyrics.KeyTip = null;
       this.tabPageLyrics.Localisation = "HeaderLyrics";
       this.tabPageLyrics.LocalisationContext = "TagEdit";
-      this.tabPageLyrics.Location = new System.Drawing.Point(4, 25);
       this.tabPageLyrics.Name = "tabPageLyrics";
-      this.tabPageLyrics.Size = new System.Drawing.Size(900, 579);
+      this.tabPageLyrics.Size = new System.Drawing.Size(906, 584);
       this.tabPageLyrics.TabIndex = 6;
       this.tabPageLyrics.Text = "Lyrics";
       // 
@@ -2625,15 +2601,14 @@
       // 
       // ckRemoveLyrics
       // 
-      this.ckRemoveLyrics.AutoSize = true;
+      this.ckRemoveLyrics.Id = "d307d84e-9cf4-42db-84a3-1316ad1204cb";
       this.ckRemoveLyrics.Localisation = "RemoveExistingLyrics";
       this.ckRemoveLyrics.LocalisationContext = "TagEdit";
-      this.ckRemoveLyrics.Location = new System.Drawing.Point(10, 313);
+      this.ckRemoveLyrics.Location = new System.Drawing.Point(10, 307);
       this.ckRemoveLyrics.Name = "ckRemoveLyrics";
-      this.ckRemoveLyrics.Size = new System.Drawing.Size(193, 20);
+      this.ckRemoveLyrics.Size = new System.Drawing.Size(193, 29);
       this.ckRemoveLyrics.TabIndex = 5;
       this.ckRemoveLyrics.Text = "Remove existing Lyrics First";
-      this.ckRemoveLyrics.UseVisualStyleBackColor = true;
       // 
       // lblLyricsMoveTop
       // 
@@ -2732,7 +2707,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(7, 51);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(7, 59);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2742,7 +2717,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(6, 20);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(6, 28);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -2774,13 +2749,14 @@
       // 
       // tabPageRating
       // 
+      this.tabPageRating.ActiveControl = null;
       this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
       this.tabPageRating.Controls.Add(this.groupBoxRating);
+      this.tabPageRating.KeyTip = null;
       this.tabPageRating.Localisation = "HeaderRating";
       this.tabPageRating.LocalisationContext = "TagEdit";
-      this.tabPageRating.Location = new System.Drawing.Point(4, 25);
       this.tabPageRating.Name = "tabPageRating";
-      this.tabPageRating.Size = new System.Drawing.Size(900, 579);
+      this.tabPageRating.Size = new System.Drawing.Size(906, 584);
       this.tabPageRating.TabIndex = 7;
       this.tabPageRating.Text = "Rating";
       // 
@@ -2808,15 +2784,14 @@
       // 
       // ckRemoveExistingRatings
       // 
-      this.ckRemoveExistingRatings.AutoSize = true;
+      this.ckRemoveExistingRatings.Id = "49287410-7c75-4dde-8587-498a55239e7d";
       this.ckRemoveExistingRatings.Localisation = "RemoveExistingRatings";
       this.ckRemoveExistingRatings.LocalisationContext = "TagEdit";
-      this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 157);
+      this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 153);
       this.ckRemoveExistingRatings.Name = "ckRemoveExistingRatings";
-      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(204, 20);
+      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(204, 29);
       this.ckRemoveExistingRatings.TabIndex = 6;
       this.ckRemoveExistingRatings.Text = "Remove existing Ratings First";
-      this.ckRemoveExistingRatings.UseVisualStyleBackColor = true;
       // 
       // lblRatingNote
       // 
@@ -2976,14 +2951,84 @@
       // 
       // tabPageUserDefined
       // 
+      this.tabPageUserDefined.ActiveControl = null;
       this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
+      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
+      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
+      this.tabPageUserDefined.KeyTip = null;
       this.tabPageUserDefined.Localisation = "HeaderUser";
       this.tabPageUserDefined.LocalisationContext = "TagEdit";
-      this.tabPageUserDefined.Location = new System.Drawing.Point(4, 25);
       this.tabPageUserDefined.Name = "tabPageUserDefined";
-      this.tabPageUserDefined.Size = new System.Drawing.Size(900, 579);
+      this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
       this.tabPageUserDefined.TabIndex = 8;
       this.tabPageUserDefined.Text = "User Defined Information";
+      // 
+      // btDeleteFrame
+      // 
+      this.btDeleteFrame.Id = "404467c3-f119-4822-b3ae-916db197e89c";
+      this.btDeleteFrame.Localisation = "DeleteFrame";
+      this.btDeleteFrame.LocalisationContext = "TagEdit";
+      this.btDeleteFrame.Location = new System.Drawing.Point(263, 29);
+      this.btDeleteFrame.Name = "btDeleteFrame";
+      this.btDeleteFrame.Size = new System.Drawing.Size(212, 23);
+      this.btDeleteFrame.TabIndex = 2;
+      this.btDeleteFrame.Text = "Delete Frame(s)";
+      this.btDeleteFrame.UseVisualStyleBackColor = true;
+      this.btDeleteFrame.Click += new System.EventHandler(this.btDeleteFrame_Click);
+      // 
+      // btAddUserFrame
+      // 
+      this.btAddUserFrame.Id = "26daeb93-17fe-41fe-a679-d040d25e61dd";
+      this.btAddUserFrame.Localisation = "AddFrame";
+      this.btAddUserFrame.LocalisationContext = "TagEdit";
+      this.btAddUserFrame.Location = new System.Drawing.Point(21, 29);
+      this.btAddUserFrame.Name = "btAddUserFrame";
+      this.btAddUserFrame.Size = new System.Drawing.Size(212, 23);
+      this.btAddUserFrame.TabIndex = 1;
+      this.btAddUserFrame.Text = "Add Frame";
+      this.btAddUserFrame.UseVisualStyleBackColor = true;
+      this.btAddUserFrame.Click += new System.EventHandler(this.btAddUserFrame_Click);
+      // 
+      // dataGridViewUserFrames
+      // 
+      this.dataGridViewUserFrames.AllowUserToAddRows = false;
+      this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
+      this.dataGridViewUserFrames.AllowUserToResizeRows = false;
+      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+      this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewUserFrames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FrameID,
+            this.FrameDesc,
+            this.FrameValue});
+      this.dataGridViewUserFrames.Location = new System.Drawing.Point(21, 68);
+      this.dataGridViewUserFrames.Name = "dataGridViewUserFrames";
+      this.dataGridViewUserFrames.RowHeadersVisible = false;
+      this.dataGridViewUserFrames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewUserFrames.Size = new System.Drawing.Size(846, 296);
+      this.dataGridViewUserFrames.TabIndex = 0;
+      // 
+      // FrameID
+      // 
+      this.FrameID.HeaderText = "Frame ID";
+      this.FrameID.Name = "FrameID";
+      this.FrameID.ReadOnly = true;
+      this.FrameID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      // 
+      // FrameDesc
+      // 
+      this.FrameDesc.HeaderText = "Description";
+      this.FrameDesc.Name = "FrameDesc";
+      this.FrameDesc.Width = 250;
+      // 
+      // FrameValue
+      // 
+      this.FrameValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.FrameValue.HeaderText = "Value";
+      this.FrameValue.Name = "FrameValue";
       // 
       // panelTop
       // 
@@ -3057,7 +3102,7 @@
       this.Name = "TagEditControl";
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
-      this.tabControlTagEdit.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
       this.groupBoxComment.PerformLayout();
@@ -3103,6 +3148,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
+      this.tabPageUserDefined.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
       this.panelTop.ResumeLayout(false);
       this.panelTop.PerformLayout();
       this.ResumeLayout(false);
@@ -3341,5 +3388,11 @@
     private Core.WinControls.MPTButton btGetTrackLength;
     protected System.Windows.Forms.TextBox tbTrackLength;
     private Core.WinControls.MPTCheckBox ckTrackLength;
+    private System.Windows.Forms.DataGridView dataGridViewUserFrames;
+    private Core.WinControls.MPTButton btDeleteFrame;
+    private Core.WinControls.MPTButton btAddUserFrame;
+    private System.Windows.Forms.DataGridViewTextBoxColumn FrameID;
+    private System.Windows.Forms.DataGridViewTextBoxColumn FrameDesc;
+    private System.Windows.Forms.DataGridViewTextBoxColumn FrameValue;
   }
 }
