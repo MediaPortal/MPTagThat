@@ -107,7 +107,7 @@ namespace MPTagThat.GridView
           if (CurrentDriveID > -1)
           {
             // Activate the Rip Grid
-            _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabRip;
+            _main.Ribbon.CurrentTabPage = _main.TabRip;
             _main.BurnGridView.Hide();
             _main.TracksGridView.Hide();
             _main.RipGridView.Show();
@@ -180,14 +180,14 @@ namespace MPTagThat.GridView
       if (driveCount == 0)
         bindingList.Add(new SortableBindingList<CDTrackDetail>()); // In case of no CD, we want a Dummy List
 
-      _main.MainRibbon.RipButtonsEnabled = false;
+      _main.RipButtonsEnabled = false;
 
       for (int i = 0; i < driveCount; i++)
       {
         bindingList.Add(new SortableBindingList<CDTrackDetail>());
         if (BassCd.BASS_CD_IsReady(i))
         {
-          _main.MainRibbon.RipButtonsEnabled = true;
+          _main.RipButtonsEnabled = true;
         }
       }
 
@@ -298,12 +298,12 @@ namespace MPTagThat.GridView
       string encoder = null;
       try
       {
-        _musicDir = _main.MainRibbon.RipOutputDirectory;
+        _musicDir = _main.RipOutputDirectory;
 
-        List<Item> encoders = (List<Item>)_main.MainRibbon.RipEncoderCombo.DataSource;
-        if (_main.MainRibbon.RipEncoderCombo.SelectedItem != null)
+        List<Item> encoders = (List<Item>)_main.RipEncoderCombo.DataSource;
+        if (_main.RipEncoderCombo.SelectedItem != null)
         {
-          encoder = (string)encoders[_main.MainRibbon.RipEncoderCombo.SelectedIndex].Value;
+          encoder = (string)encoders[_main.RipEncoderCombo.SelectedIndex].Value;
           Options.MainSettings.RipEncoder = encoder;
         }
         else
@@ -481,7 +481,7 @@ namespace MPTagThat.GridView
       {
         _main.CurrentDirectory = targetDir;
         _main.TreeView.RefreshFolders();
-        _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabTag;
+        _main.Ribbon.CurrentTabPage = _main.TabTag;
         _main.TracksGridView.Show();
         if (_main.SplitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
         {
@@ -713,7 +713,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      _main.MainRibbon.RipButtonsEnabled = false;
+      _main.RipButtonsEnabled = false;
 
       // Clear the Header fields
       tbAlbumArtist.Text = "";
@@ -749,7 +749,7 @@ namespace MPTagThat.GridView
 
       SelectedCDRomDrive = driveLetter;
 
-      _main.MainRibbon.RipButtonsEnabled = true;
+      _main.RipButtonsEnabled = true;
     }
 
     /// <summary>

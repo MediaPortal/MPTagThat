@@ -755,7 +755,7 @@ namespace MPTagThat.GridView
                 track.Changed = true;
                 _itemsChanged = true;
                 SetStatusColumnOk(row);
-                _main.MainRibbon.SetGalleryItem();
+                _main.SetGalleryItem();
               }
               continue;
             }
@@ -856,7 +856,7 @@ namespace MPTagThat.GridView
             track.Changed = true;
             _itemsChanged = true;
             SetStatusColumnOk(row);
-            _main.MainRibbon.SetGalleryItem();
+            _main.SetGalleryItem();
           }
         }
         catch (Exception ex)
@@ -1036,7 +1036,7 @@ namespace MPTagThat.GridView
     public void AutoNumber()
     {
       log.Trace(">>>");
-      int numberValue = _main.MainRibbon.AutoNumber;
+      int numberValue = _main.AutoNumber;
       if (numberValue == -1)
         return;
 
@@ -1063,7 +1063,7 @@ namespace MPTagThat.GridView
         _itemsChanged = true;
         numberValue++;
       }
-      _main.MainRibbon.AutoNumber = numberValue;
+      _main.AutoNumber = numberValue;
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -1213,7 +1213,7 @@ namespace MPTagThat.GridView
           _itemsChanged = true;
         }
       }
-      _main.MainRibbon.SetGalleryItem();
+      _main.SetGalleryItem();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -2546,14 +2546,14 @@ namespace MPTagThat.GridView
       else
       {
         // Handle Numbering on Click
-        if (_main.MainRibbon.NumberingOnClick)
+        if (_main.NumberingOnClick)
         {
           Point mouse = tracksGrid.PointToClient(Cursor.Position);
           DataGridView.HitTestInfo selectedRow = tracksGrid.HitTest(mouse.X, mouse.Y);
 
           if (selectedRow.Type != DataGridViewHitTestType.ColumnHeader)
           {
-            int numberValue = _main.MainRibbon.AutoNumber;
+            int numberValue = _main.AutoNumber;
             if (numberValue == -1)
               return;
 
@@ -2574,7 +2574,7 @@ namespace MPTagThat.GridView
             SetBackgroundColorChanged(selectedRow.RowIndex);
             track.Changed = true;
             _itemsChanged = true;
-            _main.MainRibbon.AutoNumber = numberValue + 1;
+            _main.AutoNumber = numberValue + 1;
             tracksGrid.Refresh();
             tracksGrid.Parent.Refresh();
           }
@@ -2590,7 +2590,7 @@ namespace MPTagThat.GridView
     private void tracksGrid_MouseEnter(object sender, EventArgs e)
     {
       // Numbering on Click enabled
-      if (_main.MainRibbon.NumberingOnClick)
+      if (_main.NumberingOnClick)
         tracksGrid.Cursor = _numberingCursor;
       else
       {

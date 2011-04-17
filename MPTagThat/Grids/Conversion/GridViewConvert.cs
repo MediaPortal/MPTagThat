@@ -181,15 +181,15 @@ namespace MPTagThat.GridView
 
     private void ConversionThread()
     {
-      if (_main.MainRibbon.InvokeRequired)
+      if (_main.InvokeRequired)
       {
         ThreadSafeConvertDelegate d = ConversionThread;
-        _main.MainRibbon.Invoke(d);
+        _main.Invoke(d);
         return;
       }
 
       log.Trace(">>>");
-      string rootFolder = _main.MainRibbon.EncoderOutputDirectory;
+      string rootFolder = _main.EncoderOutputDirectory;
       if (string.IsNullOrEmpty(rootFolder))
       {
         rootFolder = Options.MainSettings.RipTargetFolder;
@@ -197,10 +197,10 @@ namespace MPTagThat.GridView
 
       string encoder = null;
 
-      List<Item> encoders = (List<Item>)_main.MainRibbon.EncoderCombo.DataSource;
-      if (_main.MainRibbon.EncoderCombo.SelectedItem != null)
+      List<Item> encoders = (List<Item>)_main.EncoderCombo.DataSource;
+      if (_main.EncoderCombo.SelectedItem != null)
       {
-        encoder = (string)encoders[_main.MainRibbon.EncoderCombo.SelectedIndex].Value;
+        encoder = (string)encoders[_main.EncoderCombo.SelectedIndex].Value;
       }
 
       if (encoder == null)

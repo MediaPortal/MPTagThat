@@ -692,7 +692,7 @@ namespace MPTagThat.Preferences
     /// <param name = "e"></param>
     private void comboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
     {
-      main.MainRibbon.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
+      main.Theme = (string)themes[comboBoxThemes.SelectedIndex].Value;
     }
 
     /// <summary>
@@ -867,7 +867,7 @@ namespace MPTagThat.Preferences
     {
       if (prevTheme.ThemeName != ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName)
       {
-        main.MainRibbon.Theme = prevTheme.ThemeName;
+        main.Theme = prevTheme.ThemeName;
       }
       Close();
     }

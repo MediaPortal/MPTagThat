@@ -149,7 +149,7 @@ namespace MPTagThat.GridView
 
       InitializeComponent();
 
-      _main.MainRibbon.BurnButtonsEnabled = false;
+      _main.BurnButtonsEnabled = false;
 
       burnManager = ServiceScope.Get<IBurnManager>();
       mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
@@ -601,13 +601,13 @@ namespace MPTagThat.GridView
         {
           string deviceName = string.Format("{0} {1}", burner.DeviceVendor, burner.DeviceName);
           Item item = new Item(deviceName, burner, "");
-          _main.MainRibbon.BurnerCombo.Items.Add(item);
+          _main.BurnerCombo.Items.Add(item);
         }
       }
 
-      if (_main.MainRibbon.BurnerCombo.Items.Count > 0)
+      if (_main.BurnerCombo.Items.Count > 0)
       {
-        _main.MainRibbon.BurnerCombo.SelectedIndex = 0;
+        _main.BurnerCombo.SelectedIndex = 0;
       }
     }
 
@@ -657,7 +657,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      _main.MainRibbon.BurnButtonsEnabled = false;
+      _main.BurnButtonsEnabled = false;
 
       mediainfo = null;
       lbMediaInfo.Text = localisation.ToString("Burning", "NoMedia");
@@ -674,7 +674,7 @@ namespace MPTagThat.GridView
 
       SetMediaInfo();
 
-      _main.MainRibbon.BurnButtonsEnabled = true;
+      _main.BurnButtonsEnabled = true;
     }
 
     /// <summary>

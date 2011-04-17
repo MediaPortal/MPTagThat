@@ -151,7 +151,7 @@ namespace MPTagThat
 
         // Clear the tracks
         _main.TracksGridView.TrackList.Clear();
-        _main.MainRibbon.ClearGallery();
+        _main.ClearGallery();
 
         // Now set the Selected directory to the Parent of the delted folder and reread the view
         TreeNodePath parent = node.Parent as TreeNodePath;
@@ -351,7 +351,7 @@ namespace MPTagThat
     private void SwitchMode()
     {
       _main.TracksGridView.TrackList.Clear();
-      _main.MainRibbon.ClearGallery();
+      _main.ClearGallery();
 
       if (_databaseMode)
       {
@@ -483,7 +483,7 @@ namespace MPTagThat
         }
         if (isCDDrive)
         {
-          _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabRip;
+          _main.Ribbon.CurrentTabPage = _main.TabRip;
           _main.BurnGridView.Hide();
           _main.RipGridView.Show();
           _main.TracksGridView.Hide();
@@ -496,16 +496,16 @@ namespace MPTagThat
         else
         {
           // If we selected a folder, while being in the Burn or Rip View, go to the TagTab
-          if (_main.MainRibbon.ribbon.CurrentTabPage != _main.MainRibbon.TabTag)
+          if (_main.Ribbon.CurrentTabPage != _main.TabTag)
           {
-            _main.MainRibbon.ribbon.CurrentTabPage = _main.MainRibbon.TabTag;
+            _main.Ribbon.CurrentTabPage = _main.TabTag;
             _main.BurnGridView.Hide();
             _main.RipGridView.Hide();
             _main.TracksGridView.Show();
             if (_main.SplitterRight.IsCollapsed && !Options.MainSettings.RightPanelCollapsed)
               _main.SplitterRight.ToggleState();
           }
-          _main.MainRibbon.SetRecentFolder(_main.CurrentDirectory);
+          _main.SetRecentFolder(_main.CurrentDirectory);
           _main.RefreshTrackList();
         }
       }

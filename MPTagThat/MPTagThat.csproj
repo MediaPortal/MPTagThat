@@ -404,9 +404,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\RibbonControl.resx">
-      <DependentUpon>RibbonControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TreeViewControl.resx">
       <DependentUpon>TreeViewControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -426,12 +423,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Ribbon\RibbonControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ribbon\RibbonControl.Designer.cs">
-      <DependentUpon>RibbonControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeViewControl.cs">
       <SubType>UserControl</SubType>
