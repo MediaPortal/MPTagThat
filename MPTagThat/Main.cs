@@ -68,6 +68,7 @@ namespace MPTagThat
     private SplashScreen _splashScreen;
     private bool _treeViewFolderSelected;
     private bool _treeViewSelected; // Has the user selected the Treeview
+    private UserControl _currentControlshown = null;
 
     private DatabaseSearchControl databaseSearchControl;
 
@@ -1469,6 +1470,15 @@ namespace MPTagThat
     public void ShowDialogInDetailPanel(object dlg)
     {
       UserControl control = (UserControl) dlg;
+      
+      // REmove current control first, before adding anothe one
+      if (_currentControlshown != null)
+      {
+        _currentControlshown.Dispose();
+      }
+
+      _currentControlshown = control;
+
       if (Options.MainSettings.TrackListLocation == 0)
       {
         panelMiddleBottom.Controls.Add(control);
