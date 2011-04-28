@@ -34,6 +34,7 @@ using MPTagThat.Dialogues;
 using MPTagThat.GridView;
 using MPTagThat.Organise;
 using MPTagThat.Player;
+using MPTagThat.Properties;
 using MPTagThat.TagEdit;
 using NJFLib.Controls;
 using Raccoom.Windows.Forms;
@@ -88,7 +89,6 @@ namespace MPTagThat
     private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
     private readonly List<Item> encodersRip = new List<Item>();
     private readonly List<Item> encodersConvert = new List<Item>();
-    private readonly RecentDocumentsControl recentFolders = new RecentDocumentsControl();
     private bool _initialising = true;
     private bool _numberingOnClick;
     private PictureControl picControl;
@@ -259,7 +259,7 @@ namespace MPTagThat
       get { return tagEditControl; }
     }
 
-#endregion
+    #endregion
 
     #region Ribbon Properties
 
@@ -516,10 +516,29 @@ namespace MPTagThat
       RegisterKeyTips();
 
       // Load Recent Folders
-      recentFolders.Items.AddRange(Options.MainSettings.RecentFolders.ToArray());
-      applicationMenu1.RightPaneControl = recentFolders;
-      applicationMenu1.VisibleChanged += applicationMenu1_VisibleChanged;
-      recentFolders.ItemClick += recentFolders_ItemClick;
+      List<PinItem> recentPlacesPinItems = new List<PinItem>();
+
+      foreach (string folderItem in Options.MainSettings.RecentFolders)
+      {
+        string directoryName = Path.GetDirectoryName(folderItem);
+
+        string folderName = Path.GetFileName(directoryName);
+        if (string.IsNullOrEmpty(folderName))
+          folderName = directoryName;
+
+        PinItem pinItem = new PinItem(
+        folderName,
+        directoryName,
+        Resources.RecentFolder_Large,
+        false,
+        directoryName);
+
+        recentPlacesPinItems.Add(pinItem);
+      }
+
+      pinListRecentFolders.BeginInit();
+      pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
+      pinListRecentFolders.EndInit();
 
       // Load the available Scripts
       PopulateScriptsCombo();
@@ -640,7 +659,7 @@ namespace MPTagThat
         panelMiddleBottom.Controls.Add(gridViewControl);
         panelMiddleBottom.Controls.Add(gridViewBurn);
         panelMiddleBottom.Controls.Add(gridViewRip);
-        panelMiddleBottom.Controls.Add(gridViewConvert);        
+        panelMiddleBottom.Controls.Add(gridViewConvert);
       }
 
       playerPanel.Controls.Add(playerControl);
@@ -742,7 +761,7 @@ namespace MPTagThat
         gridViewControl.Invoke(d);
         return;
       }
-      
+
       gridViewControl.FolderScan();
     }
 
@@ -843,10 +862,10 @@ namespace MPTagThat
     {
       log.Trace(">>>");
       // Start Menu
-      startMenuSave.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
-      startMenuRefresh.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
-      applicationMenu1.OptionsButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_OPTIONS);
-      applicationMenu1.ExitButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EXIT);
+      backstageViewButtonSave.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
+      backstageViewButtonRefresh.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
+      backstageViewPageOptions.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_OPTIONS);
+      backstageViewButtonExit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EXIT);
 
       // Tags Tab
       buttonTagFromFile.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
@@ -930,29 +949,37 @@ namespace MPTagThat
     /// <param name = "newFolder"></param>
     public void SetRecentFolder(string newFolder)
     {
+      string folderName = Path.GetFileName(newFolder);
+      if (string.IsNullOrEmpty(folderName))
+        folderName = newFolder;
+
+      PinItem pinItem = new PinItem(
+          folderName,
+          newFolder,
+          Resources.RecentFolder_Large,
+          false,
+          newFolder);
+
       try
       {
-        recentFolders.Items.Remove(newFolder);
+        for (int i = 0; i < pinListRecentFolders.Items.Count; i++)
+        {
+          if (pinListRecentFolders.Items[i].DescriptionText == newFolder)
+          {
+            pinListRecentFolders.Items.RemoveAt(i);
+            break;
+          }
+        }
       }
       catch (ArgumentException) { }
 
-      // Due to an error in the ribbon, we can't insert at position 0
-      // So we loop through the list and re-add the items again
-      Options.MainSettings.RecentFolders.Clear();
+      pinListRecentFolders.Items.Insert(0, pinItem);
 
-      int i = 0;
-      foreach (string item in recentFolders.Items)
-      {
-        Options.MainSettings.RecentFolders.Add(item);
-        i++;
-        if (i > 8) // Keep a maximum of 10 entries in the list
-        {
-          break;
-        }
-      }
       Options.MainSettings.RecentFolders.Insert(0, newFolder);
-      recentFolders.Items.Clear();
-      recentFolders.Items.AddRange(Options.MainSettings.RecentFolders.ToArray());
+      if (Options.MainSettings.RecentFolders.Count > 20)
+      {
+        Options.MainSettings.RecentFolders.RemoveAt(20);
+      }
     }
 
     private const int WM_SYSCOMMAND = 0x0112;
@@ -1002,7 +1029,7 @@ namespace MPTagThat
       if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero))
       {
         int error = (int)Bass.BASS_ErrorGetCode();
-        log.Error("Error Init Bass: {0}", Enum.GetName(typeof (BASSError), error));
+        log.Error("Error Init Bass: {0}", Enum.GetName(typeof(BASSError), error));
         return;
       }
 
@@ -1040,7 +1067,6 @@ namespace MPTagThat
     /// <summary>
     ///   Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name = "language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
@@ -1056,23 +1082,25 @@ namespace MPTagThat
 
       // Ribbon
       log.Debug("Localise Ribbon");
-      // Start Menu
-      startMenuSave.Text = localisation.ToString("ribbon", "Save");
-      startMenuSave.ScreenTip.Caption = localisation.ToString("screentip", "Save");
-      startMenuSave.ScreenTip.Text = localisation.ToString("screentip", "SaveText");
+      // BackstageView
+      backstageViewButtonSave.Text = localisation.ToString("ribbon", "Save");
+      backstageViewButtonSave.ScreenTip.Caption = localisation.ToString("screentip", "Save");
+      backstageViewButtonSave.ScreenTip.Text = localisation.ToString("screentip", "SaveText");
 
-      startMenuRefresh.Text = localisation.ToString("ribbon", "Refresh");
-      startMenuRefresh.ScreenTip.Caption = localisation.ToString("screentip", "Refresh");
-      startMenuRefresh.ScreenTip.Text = localisation.ToString("screentip", "RefreshText");
+      backstageViewButtonRefresh.Text = localisation.ToString("ribbon", "Refresh");
+      backstageViewButtonRefresh.ScreenTip.Caption = localisation.ToString("screentip", "Refresh");
+      backstageViewButtonRefresh.ScreenTip.Text = localisation.ToString("screentip", "RefreshText");
 
-      startMenuChangeDisplayColumns.Text = localisation.ToString("ribbon", "ColumnsSelect");
-      startMenuChangeDisplayColumns.ScreenTip.Caption = localisation.ToString("screentip", "ColumnsSelect");
-      startMenuChangeDisplayColumns.ScreenTip.Text = localisation.ToString("screentip", "ColumnsSelectText");
+      backstageViewButtonChangeColumns.Text = localisation.ToString("ribbon", "ColumnsSelect");
+      backstageViewButtonChangeColumns.ScreenTip.Caption = localisation.ToString("screentip", "ColumnsSelect");
+      backstageViewButtonChangeColumns.ScreenTip.Text = localisation.ToString("screentip", "ColumnsSelectText");
 
-      applicationMenu1.OptionsButtonText = localisation.ToString("ribbon", "Settings");
-      applicationMenu1.ExitButtonText = localisation.ToString("ribbon", "Exit");
+      backstageViewButtonExit.Text = localisation.ToString("ribbon", "Exit");
 
-      recentFolders.Caption = localisation.ToString("ribbon", "RecentFolders");
+      backstageViewPageRecentFolders.Text = localisation.ToString("ribbon", "RecentFolders");
+      separatorRecentFolders.Text = localisation.ToString("ribbon", "RecentFolders");
+
+      backstageViewPageOptions.Text = localisation.ToString("ribbon", "Settings");
 
       // Tags Tab
       ribbonTabPageTag.Text = localisation.ToString("ribbon", "TagTab");
@@ -1253,7 +1281,7 @@ namespace MPTagThat
       if (Options.MainSettings.RightPanelCollapsed)
         splitterRight.ToggleState();
 
-      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 1024) 
+      if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 1024)
         panelMiddleBottom.Height = Options.MainSettings.BottomPanelSize;
 
       _bottomPanelCollapsed = Options.MainSettings.BottomPanelCollapsed;
@@ -1469,8 +1497,8 @@ namespace MPTagThat
     /// <param name = "dlg"></param>
     public void ShowDialogInDetailPanel(object dlg)
     {
-      UserControl control = (UserControl) dlg;
-      
+      UserControl control = (UserControl)dlg;
+
       // REmove current control first, before adding anothe one
       if (_currentControlshown != null)
       {
@@ -1487,7 +1515,7 @@ namespace MPTagThat
       {
         panelFileList.Controls.Add(control);
       }
-      
+
       ShowTagEditPanel(false);
       control.Show();
     }
@@ -1754,7 +1782,7 @@ namespace MPTagThat
                                                        gridViewControl.View.SelectedRows.Count);
       }
       catch (InvalidOperationException) // we might get a Cross-thread Exception on startup
-      {}
+      { }
     }
 
     #endregion
@@ -1771,7 +1799,7 @@ namespace MPTagThat
 
       switch (action.ToLower())
       {
-          // Message sent, when a Theme is changing
+        // Message sent, when a Theme is changing
         case "themechanged":
           {
             SetRibbonColorBase();
@@ -2009,6 +2037,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Exit_Executed(object sender, CommandExecutedEventArgs e)
     {
+      this.ribbon.BackstageViewVisible = false;
       Application.Exit();
     }
 
@@ -2019,6 +2048,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Save_Executed(object sender, CommandExecutedEventArgs e)
     {
+      this.ribbon.BackstageViewVisible = false;
       TracksGridView.Save();
     }
 
@@ -2029,6 +2059,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Options_Executed(object sender, CommandExecutedEventArgs e)
     {
+      this.ribbon.BackstageViewVisible = false;
       Preferences.Preferences dlgPreferences = new Preferences.Preferences(this);
       ShowModalDialog(dlgPreferences);
     }
@@ -2040,6 +2071,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Refresh_Executed(object sender, CommandExecutedEventArgs e)
     {
+      this.ribbon.BackstageViewVisible = false;
       RefreshTrackList();
     }
 
@@ -2050,6 +2082,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void ChangeDisplayColumns_Executed(object sender, CommandExecutedEventArgs e)
     {
+      this.ribbon.BackstageViewVisible = false;
       Form dlg = new ColumnSelect(TracksGridView);
       ShowModalDialog(dlg);
     }
@@ -2066,30 +2099,21 @@ namespace MPTagThat
     }
 
     /// <summary>
-    ///   Refresh the Recent Folder Menu, when we get a change
-    ///   Seems to be a bug in version 3.7
+    /// An Item has been selected in the Recent Folder List
+    /// Change to that folder.
     /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void applicationMenu1_VisibleChanged(object sender, EventArgs e)
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void pinListRecentFolders_ItemClick(object sender, PinItemEventArgs e)
     {
-      applicationMenu1.RightPaneControl.Controls[0].PerformLayout();
-    }
-
-    /// <summary>
-    ///   An Item has been selected in the Recent Folder List
-    ///   Change to that folder.
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void recentFolders_ItemClick(object sender, RecentDocumentsControlItemClickEventArgs e)
-    {
-      string folder = (string)e.Item;
+      string folder = e.PinItem.DescriptionText;
       if (!Directory.Exists(folder))
       {
-        recentFolders.Items.Remove(folder);
+        pinListRecentFolders.Items.Remove(e.PinItem);
         return;
       }
+
+      this.ribbon.BackstageViewVisible = false;
       CurrentDirectory = folder;
       TreeView.TreeView.ShowFolder(folder);
       SetRecentFolder(folder);

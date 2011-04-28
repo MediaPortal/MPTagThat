@@ -66,10 +66,22 @@ namespace MPTagThat
       this.progressBar1 = new Elegant.Ui.ProgressBar();
       this.buttonProgressCancel = new Elegant.Ui.Button();
       this.ribbon = new Elegant.Ui.Ribbon();
-      this.applicationMenu1 = new Elegant.Ui.ApplicationMenu(this.components);
       this.startMenuSave = new Elegant.Ui.Button();
       this.startMenuRefresh = new Elegant.Ui.Button();
-      this.startMenuChangeDisplayColumns = new Elegant.Ui.Button();
+      this.backstageView = new Elegant.Ui.BackstageView();
+      this.backstageViewPageOptions = new Elegant.Ui.BackstageViewPage();
+      this.panel2 = new Elegant.Ui.Panel();
+      this.backstageViewPanel1 = new Elegant.Ui.BackstageViewPanel();
+      this.backstageViewButtonSave = new Elegant.Ui.BackstageViewButton();
+      this.backstageViewButtonRefresh = new Elegant.Ui.BackstageViewButton();
+      this.backstageViewPageRecentFolders = new Elegant.Ui.BackstageViewPage();
+      this.panel1 = new Elegant.Ui.Panel();
+      this.separatorRecentFolders = new Elegant.Ui.Separator();
+      this.pinListRecentFolders = new Elegant.Ui.PinList();
+      this.backstageViewSeparator1 = new Elegant.Ui.BackstageViewSeparator();
+      this.backstageViewButtonChangeColumns = new Elegant.Ui.BackstageViewButton();
+      this.backstageViewSeparator2 = new Elegant.Ui.BackstageViewSeparator();
+      this.backstageViewButtonExit = new Elegant.Ui.BackstageViewButton();
       this.ribbonTabPageTag = new Elegant.Ui.RibbonTabPage();
       this.ribbonGroupTagsRetrieve = new Elegant.Ui.RibbonGroup();
       this.buttonTagFromFile = new Elegant.Ui.Button();
@@ -145,7 +157,11 @@ namespace MPTagThat
       this.statusBarPane4.SuspendLayout();
       this.statusBarPane1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backstageView)).BeginInit();
+      this.backstageViewPageOptions.SuspendLayout();
+      this.backstageViewPageRecentFolders.SuspendLayout();
+      this.panel1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pinListRecentFolders)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonTabPageTag)).BeginInit();
       this.ribbonTabPageTag.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupTagsRetrieve)).BeginInit();
@@ -188,7 +204,7 @@ namespace MPTagThat
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 936);
+      this.panelBottom.Location = new System.Drawing.Point(0, 999);
       this.panelBottom.Name = "panelBottom";
       this.panelBottom.Size = new System.Drawing.Size(1008, 90);
       this.panelBottom.TabIndex = 12;
@@ -213,7 +229,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 153);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1008, 780);
+      this.panelMiddle.Size = new System.Drawing.Size(1008, 843);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -224,7 +240,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(676, 508);
+      this.panelMiddleTop.Size = new System.Drawing.Size(676, 571);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -232,7 +248,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(676, 420);
+      this.panelFileList.Size = new System.Drawing.Size(676, 483);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -281,7 +297,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 780);
+      this.panelLeft.Size = new System.Drawing.Size(150, 843);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -289,7 +305,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 780);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 843);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -318,7 +334,7 @@ namespace MPTagThat
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.panelRight.Location = new System.Drawing.Point(842, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 780);
+      this.panelRight.Size = new System.Drawing.Size(166, 843);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -331,7 +347,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 508);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 571);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -342,7 +358,7 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 516);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 579);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
       this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
       this.panelMiddleBottom.TabIndex = 12;
@@ -355,7 +371,7 @@ namespace MPTagThat
       this.splitterPlayer.ControlToHide = this.panelBottom;
       this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 933);
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 996);
       this.splitterPlayer.Name = "splitterPlayer";
       this.splitterPlayer.TabIndex = 13;
       this.splitterPlayer.TabStop = false;
@@ -385,7 +401,7 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Location = new System.Drawing.Point(0, 1026);
+      this.statusBar.Location = new System.Drawing.Point(0, 1089);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
       this.statusBar.Size = new System.Drawing.Size(1008, 22);
@@ -522,8 +538,8 @@ namespace MPTagThat
       // 
       this.ribbon.ApplicationButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("ribbon.ApplicationButtonImages.Images"))))});
-      this.ribbon.ApplicationButtonPopup = this.applicationMenu1;
       this.ribbon.ApplicationButtonStyle = Elegant.Ui.RibbonApplicationButtonStyle.Default;
+      this.ribbon.BackstageView = this.backstageView;
       this.ribbon.CurrentTabPage = this.ribbonTabPageTag;
       this.ribbon.CustomTitleBarEnabled = false;
       this.ribbon.Dock = System.Windows.Forms.DockStyle.Top;
@@ -548,22 +564,6 @@ namespace MPTagThat
             this.ribbonTabPageBurn});
       this.ribbon.Text = "ribbon1";
       this.ribbon.CurrentTabPageChanged += new System.EventHandler(this.ribbon_CurrentTabPageChanged);
-      // 
-      // applicationMenu1
-      // 
-      this.applicationMenu1.ContentMinimumHeight = 0;
-      this.applicationMenu1.ExitButtonCommandName = "Exit";
-      this.applicationMenu1.Items.AddRange(new System.Windows.Forms.Control[] {
-            this.startMenuSave,
-            this.startMenuRefresh,
-            this.startMenuChangeDisplayColumns});
-      this.applicationMenu1.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
-      this.applicationMenu1.OptionsButtonCommandName = "Options";
-      this.applicationMenu1.OptionsButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("applicationMenu1.OptionsButtonImages.Images"))))});
-      this.applicationMenu1.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
-      this.applicationMenu1.Size = new System.Drawing.Size(100, 310);
-      this.applicationMenu1.SizeToContentMode = Elegant.Ui.SizeToContentMode.Width;
       // 
       // startMenuSave
       // 
@@ -596,15 +596,174 @@ namespace MPTagThat
       this.startMenuRefresh.TabIndex = 4;
       this.startMenuRefresh.Text = "Refresh";
       // 
-      // startMenuChangeDisplayColumns
+      // backstageView
       // 
-      this.startMenuChangeDisplayColumns.CommandName = "ChangeDisplayColumns";
-      this.startMenuChangeDisplayColumns.Id = "828301a3-b6be-4264-a635-2f4a9cebe179";
-      this.startMenuChangeDisplayColumns.Location = new System.Drawing.Point(0, 46);
-      this.startMenuChangeDisplayColumns.Name = "startMenuChangeDisplayColumns";
-      this.startMenuChangeDisplayColumns.Size = new System.Drawing.Size(195, 23);
-      this.startMenuChangeDisplayColumns.TabIndex = 3;
-      this.startMenuChangeDisplayColumns.Text = "Select Columns Displayed";
+      this.backstageView.CurrentPage = this.backstageViewPageOptions;
+      this.backstageView.Id = "7072530e-3b26-4337-af20-69a8f1207f12";
+      this.backstageView.Items.AddRange(new System.Windows.Forms.Control[] {
+            this.backstageViewButtonSave,
+            this.backstageViewButtonRefresh,
+            this.backstageViewPageRecentFolders,
+            this.backstageViewPageOptions,
+            this.backstageViewSeparator1,
+            this.backstageViewButtonChangeColumns,
+            this.backstageViewSeparator2,
+            this.backstageViewButtonExit});
+      this.backstageView.Location = new System.Drawing.Point(0, 52);
+      this.backstageView.Name = "backstageView";
+      this.backstageView.Size = new System.Drawing.Size(1008, 1030);
+      this.backstageView.TabIndex = 17;
+      // 
+      // backstageViewPageOptions
+      // 
+      this.backstageViewPageOptions.Controls.Add(this.panel2);
+      this.backstageViewPageOptions.Controls.Add(this.backstageViewPanel1);
+      this.backstageViewPageOptions.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
+      this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 5);
+      this.backstageViewPageOptions.Name = "backstageViewPageOptions";
+      this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(12);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(910, 1020);
+      this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
+      this.backstageViewPageOptions.TabIndex = 0;
+      this.backstageViewPageOptions.Text = "Options";
+      // 
+      // panel2
+      // 
+      this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panel2.Location = new System.Drawing.Point(222, 12);
+      this.panel2.Name = "panel2";
+      this.panel2.Size = new System.Drawing.Size(676, 996);
+      this.panel2.TabIndex = 1;
+      this.panel2.Text = "panel2";
+      // 
+      // backstageViewPanel1
+      // 
+      this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+      this.backstageViewPanel1.Location = new System.Drawing.Point(12, 12);
+      this.backstageViewPanel1.Name = "backstageViewPanel1";
+      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 996);
+      this.backstageViewPanel1.TabIndex = 0;
+      // 
+      // backstageViewButtonSave
+      // 
+      this.backstageViewButtonSave.CommandName = "Save";
+      this.backstageViewButtonSave.Id = "32efd3ca-28d1-4652-86df-5fc3b5ec04e5";
+      this.backstageViewButtonSave.ImageToTextSpace = 5;
+      this.backstageViewButtonSave.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images")))),
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images1"))))});
+      this.backstageViewButtonSave.Location = new System.Drawing.Point(5, 22);
+      this.backstageViewButtonSave.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonSave.Name = "backstageViewButtonSave";
+      this.backstageViewButtonSave.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonSave.Size = new System.Drawing.Size(150, 34);
+      this.backstageViewButtonSave.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images")))),
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images1"))))});
+      this.backstageViewButtonSave.TabIndex = 2;
+      this.backstageViewButtonSave.Text = "Save";
+      // 
+      // backstageViewButtonRefresh
+      // 
+      this.backstageViewButtonRefresh.CommandName = "Refresh";
+      this.backstageViewButtonRefresh.Id = "e76de925-453d-41f3-aa98-02e009a23f90";
+      this.backstageViewButtonRefresh.ImageToTextSpace = 5;
+      this.backstageViewButtonRefresh.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.LargeImages.Images"))))});
+      this.backstageViewButtonRefresh.Location = new System.Drawing.Point(5, 56);
+      this.backstageViewButtonRefresh.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonRefresh.Name = "backstageViewButtonRefresh";
+      this.backstageViewButtonRefresh.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonRefresh.Size = new System.Drawing.Size(150, 34);
+      this.backstageViewButtonRefresh.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.SmallImages.Images"))))});
+      this.backstageViewButtonRefresh.TabIndex = 4;
+      this.backstageViewButtonRefresh.Text = "Refresh";
+      // 
+      // backstageViewPageRecentFolders
+      // 
+      this.backstageViewPageRecentFolders.Controls.Add(this.panel1);
+      this.backstageViewPageRecentFolders.Location = new System.Drawing.Point(0, 5);
+      this.backstageViewPageRecentFolders.Name = "backstageViewPageRecentFolders";
+      this.backstageViewPageRecentFolders.Padding = new System.Windows.Forms.Padding(12);
+      this.backstageViewPageRecentFolders.Size = new System.Drawing.Size(840, 1020);
+      this.backstageViewPageRecentFolders.TabIndex = 0;
+      this.backstageViewPageRecentFolders.Text = "Recent Folders";
+      // 
+      // panel1
+      // 
+      this.panel1.Controls.Add(this.separatorRecentFolders);
+      this.panel1.Controls.Add(this.pinListRecentFolders);
+      this.panel1.Location = new System.Drawing.Point(33, 36);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(779, 913);
+      this.panel1.TabIndex = 0;
+      this.panel1.Text = "panel1";
+      // 
+      // separatorRecentFolders
+      // 
+      this.separatorRecentFolders.Id = "dc2159b0-fc8b-48bb-9a49-96fc2c9c61e9";
+      this.separatorRecentFolders.Location = new System.Drawing.Point(16, 19);
+      this.separatorRecentFolders.Name = "separatorRecentFolders";
+      this.separatorRecentFolders.Size = new System.Drawing.Size(112, 20);
+      this.separatorRecentFolders.TabIndex = 2;
+      this.separatorRecentFolders.Text = "Recent Folders";
+      // 
+      // pinListRecentFolders
+      // 
+      this.pinListRecentFolders.Id = "085c0e4d-df88-45cf-b68e-c8dea1b7af05";
+      this.pinListRecentFolders.Location = new System.Drawing.Point(16, 56);
+      this.pinListRecentFolders.Name = "pinListRecentFolders";
+      this.pinListRecentFolders.PinnedItemsSeparatorMargin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+      this.pinListRecentFolders.Size = new System.Drawing.Size(747, 837);
+      this.pinListRecentFolders.TabIndex = 1;
+      this.pinListRecentFolders.ItemClick += new Elegant.Ui.PinItemEventHandler(this.pinListRecentFolders_ItemClick);
+      // 
+      // backstageViewSeparator1
+      // 
+      this.backstageViewSeparator1.Id = "369d25d6-d37c-4006-867c-9c1e69f63586";
+      this.backstageViewSeparator1.Location = new System.Drawing.Point(0, 184);
+      this.backstageViewSeparator1.Name = "backstageViewSeparator1";
+      this.backstageViewSeparator1.Size = new System.Drawing.Size(155, 2);
+      this.backstageViewSeparator1.TabIndex = 6;
+      this.backstageViewSeparator1.Text = "backstageViewSeparator1";
+      // 
+      // backstageViewButtonChangeColumns
+      // 
+      this.backstageViewButtonChangeColumns.CommandName = "ChangeDisplayColumns";
+      this.backstageViewButtonChangeColumns.Id = "86ec7f12-cb60-44d1-8593-5d4c8b9a22ce";
+      this.backstageViewButtonChangeColumns.ImageToTextSpace = 5;
+      this.backstageViewButtonChangeColumns.Location = new System.Drawing.Point(5, 186);
+      this.backstageViewButtonChangeColumns.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonChangeColumns.Name = "backstageViewButtonChangeColumns";
+      this.backstageViewButtonChangeColumns.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonChangeColumns.Size = new System.Drawing.Size(150, 31);
+      this.backstageViewButtonChangeColumns.TabIndex = 5;
+      this.backstageViewButtonChangeColumns.Text = "Change Display Columns";
+      // 
+      // backstageViewSeparator2
+      // 
+      this.backstageViewSeparator2.Id = "1f44213c-f649-4525-8a34-f85c80e2607f";
+      this.backstageViewSeparator2.Location = new System.Drawing.Point(0, 217);
+      this.backstageViewSeparator2.Name = "backstageViewSeparator2";
+      this.backstageViewSeparator2.Size = new System.Drawing.Size(155, 2);
+      this.backstageViewSeparator2.TabIndex = 8;
+      this.backstageViewSeparator2.Text = "backstageViewSeparator2";
+      // 
+      // backstageViewButtonExit
+      // 
+      this.backstageViewButtonExit.CommandName = "Exit";
+      this.backstageViewButtonExit.Id = "c79011c7-3dcd-44b7-8414-e1276b7e331f";
+      this.backstageViewButtonExit.ImageToTextSpace = 5;
+      this.backstageViewButtonExit.Location = new System.Drawing.Point(5, 219);
+      this.backstageViewButtonExit.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonExit.Name = "backstageViewButtonExit";
+      this.backstageViewButtonExit.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonExit.Size = new System.Drawing.Size(150, 31);
+      this.backstageViewButtonExit.TabIndex = 7;
+      this.backstageViewButtonExit.Text = "Exit";
       // 
       // ribbonTabPageTag
       // 
@@ -1453,7 +1612,8 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1008, 1048);
+      this.ClientSize = new System.Drawing.Size(1008, 1111);
+      this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
       this.Controls.Add(this.splitterPlayer);
@@ -1485,9 +1645,14 @@ namespace MPTagThat
       this.statusBarPane4.PerformLayout();
       this.statusBarPane1.ResumeLayout(false);
       this.statusBarPane1.PerformLayout();
-      this.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backstageView)).EndInit();
+      this.backstageViewPageOptions.ResumeLayout(false);
+      this.backstageViewPageOptions.PerformLayout();
+      this.backstageViewPageRecentFolders.ResumeLayout(false);
+      this.panel1.ResumeLayout(false);
+      this.panel1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pinListRecentFolders)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonTabPageTag)).EndInit();
       this.ribbonTabPageTag.ResumeLayout(false);
       this.ribbonTabPageTag.PerformLayout();
@@ -1542,6 +1707,8 @@ namespace MPTagThat
       this.ribbonGroupBurnOptions.ResumeLayout(false);
       this.ribbonGroupBurnOptions.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
+
     }
 
     #endregion
@@ -1579,9 +1746,7 @@ namespace MPTagThat
     private Elegant.Ui.StatusBarPane statusBarPane4;
     private Elegant.Ui.Label toolStripStatusLabelScanProgress;
     private Elegant.Ui.Ribbon ribbon;
-    private Elegant.Ui.ApplicationMenu applicationMenu1;
     private Elegant.Ui.Button startMenuSave;
-    private Elegant.Ui.Button startMenuChangeDisplayColumns;
     private Elegant.Ui.Button startMenuRefresh;
     private Elegant.Ui.RibbonTabPage ribbonTabPageTag;
     private Elegant.Ui.RibbonGroup ribbonGroupTagsRetrieve;
@@ -1647,6 +1812,20 @@ namespace MPTagThat
     private Elegant.Ui.Separator separator3;
     private Elegant.Ui.BackstageView backstageView1;
     private Elegant.Ui.BackstageViewPage backstageViewPage1;
+    private Elegant.Ui.BackstageView backstageView;
+    private Elegant.Ui.BackstageViewPage backstageViewPageRecentFolders;
+    private Elegant.Ui.BackstageViewButton backstageViewButtonSave;
+    private Elegant.Ui.BackstageViewButton backstageViewButtonRefresh;
+    private Elegant.Ui.BackstageViewSeparator backstageViewSeparator1;
+    private Elegant.Ui.BackstageViewButton backstageViewButtonChangeColumns;
+    private Elegant.Ui.BackstageViewSeparator backstageViewSeparator2;
+    private Elegant.Ui.BackstageViewButton backstageViewButtonExit;
+    private Elegant.Ui.Panel panel1;
+    private Elegant.Ui.PinList pinListRecentFolders;
+    private Elegant.Ui.Separator separatorRecentFolders;
+    private Elegant.Ui.BackstageViewPage backstageViewPageOptions;
+    private Elegant.Ui.Panel panel2;
+    private Elegant.Ui.BackstageViewPanel backstageViewPanel1;
   }
 }
 

@@ -165,6 +165,13 @@ namespace MPTagThat.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap RecentFolder_Large {
+            get {
+                object obj = ResourceManager.GetObject("RecentFolder_Large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap RefreshDocViewHS {
             get {
                 object obj = ResourceManager.GetObject("RefreshDocViewHS", resourceCulture);

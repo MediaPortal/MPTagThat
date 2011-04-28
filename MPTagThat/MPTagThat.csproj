@@ -483,6 +483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\RecentFolder_Large.png" />
     <None Include="Resources\Complete_OK.png" />
     <None Include="Resources\ribbon_CoverArt_16x.png" />
     <None Include="Resources\ribbon_AddPlayList_16x.png" />

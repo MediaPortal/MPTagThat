@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -26,6 +27,7 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Elegant.Ui;
 using TagLib;
 using Un4seen.Bass.AddOn.Cd;
 using File = TagLib.File;
@@ -276,6 +278,9 @@ namespace MPTagThat.Core
                                                         "zun - Zuni", "zxx - No linguistic content",
                                                         "zza - Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"
                                                       };
+
+    private static readonly Dictionary<string, Image> FileLargeImageCache = new Dictionary<string, Image>();
+    private static readonly Dictionary<string, Image> FileSmallImageCache = new Dictionary<string, Image>();
 
     #endregion
 
@@ -1398,6 +1403,49 @@ namespace MPTagThat.Core
       string newPath = string.Join(Path.DirectorySeparatorChar.ToString(), relativeParts);
 
       return newPath;
+    }
+
+    public static Image GetImageAssociatedWithFile(string filePath, bool small)
+    {
+      string fileExtension = Path.GetExtension(filePath);
+
+      Dictionary<string, Image> fileImageCache = small ? FileSmallImageCache : FileLargeImageCache;
+
+      Image image;
+      if (fileImageCache.TryGetValue(fileExtension, out image))
+        return image;
+
+      WinApi.SHFILEINFO info = new WinApi.SHFILEINFO();
+      int cbFileInfo = Marshal.SizeOf(info);
+      int flags = WinApi.SHGFI_ICON | WinApi.SHGFI_USEFILEATTRIBUTES;
+      if (small)
+        flags |= WinApi.SHGFI_SMALLICON;
+      else
+        flags |= WinApi.SHGFI_LARGEICON;
+
+      WinApi.SHGetFileInfo(
+        fileExtension,
+        WinApi.FILE_ATTRIBUTE_NORMAL,
+        ref info,
+        cbFileInfo,
+        flags);
+
+      Icon iconFromHandle = null;
+
+      try
+      {
+        iconFromHandle = Icon.FromHandle(info.hIcon);
+        image = iconFromHandle.ToBitmap();
+      }
+      finally
+      {
+        WinApi.DestroyIcon(info.hIcon);
+        if (iconFromHandle != null)
+          iconFromHandle.Dispose();
+      }
+
+      fileImageCache[fileExtension] = image;
+      return image;
     }
 
     #endregion
