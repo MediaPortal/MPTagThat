@@ -53,7 +53,7 @@ namespace MPTagThat.Core
     private static List<TrackData> _copyPasteBuffer;
 
     private static string _configDir;
-    private static readonly string[] availableThemes = new[] { "ControlDefault", "Office2007Silver", "Office2007Black", "Office2010Black" };
+    private static readonly string[] availableThemes = new[] { "ControlDefault", "Office2007Silver", "Office2007Black", "Office2010Blue", "Office2010Silver", "Office2010Black" };
     private static string[] _mediaPortalArtists; // String array filled with database content to be available in tagedit
 
     #endregion
