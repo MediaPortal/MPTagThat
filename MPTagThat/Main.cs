@@ -3212,6 +3212,7 @@ namespace MPTagThat
             ToggleDetailPanel(false);
             TracksGridView.Hide();
             BurnGridView.Hide();
+            ConvertGridView.Hide();
             RipGridView.Show();
             if (!SplitterRight.IsCollapsed)
             {
@@ -3230,7 +3231,8 @@ namespace MPTagThat
 
             ToggleDetailPanel(false);
             TracksGridView.Hide();
-            Hide();
+            ConvertGridView.Hide();
+            RipGridView.Hide();
             BurnGridView.SetMediaInfo();
             BurnGridView.Show();
             if (!SplitterRight.IsCollapsed)
