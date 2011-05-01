@@ -631,6 +631,7 @@
     <String id="DebugLevel">Debug Level:</String>
     <String id="Theme">Theme:</String>
     <String id="Language">Language:</String>
+    <String id="TrackListLocation">Location of Tracklist:</String>
     <String id="TabTags">Tags</String>
     <String id="TabTagsID3">ID3</String>
     <String id="TabTagsLyricsCover">Lyrics / Cover</String>

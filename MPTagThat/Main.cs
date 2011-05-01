@@ -663,22 +663,6 @@ namespace MPTagThat
       playerControl.Size = new Size(1008, 68);
       playerControl.TabIndex = 0;
 
-      // Look where to place the Track LIst Panel
-      if (Options.MainSettings.TrackListLocation == 0)
-      {
-        panelFileList.Controls.Add(gridViewControl);
-        panelFileList.Controls.Add(gridViewBurn);
-        panelFileList.Controls.Add(gridViewRip);
-        panelFileList.Controls.Add(gridViewConvert);
-      }
-      else
-      {
-        panelMiddleBottom.Controls.Add(gridViewControl);
-        panelMiddleBottom.Controls.Add(gridViewBurn);
-        panelMiddleBottom.Controls.Add(gridViewRip);
-        panelMiddleBottom.Controls.Add(gridViewConvert);
-      }
-
       playerPanel.Controls.Add(playerControl);
 
       // Set reference to Main, so that we may use the ErrorGrid
@@ -708,14 +692,8 @@ namespace MPTagThat
       tagEditControl = new TagEditControl(this);
       tagEditControl.Dock = DockStyle.Fill;
 
-      if (Options.MainSettings.TrackListLocation == 0)
-      {
-        panelMiddleBottom.Controls.Add(tagEditControl);
-      }
-      else
-      {
-        panelFileList.Controls.Add(tagEditControl);
-      }
+      // Now position the Tracklist and Tagedit Panel
+      PositionTrackList();
 
       // Start Listening for Media Changes
       ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
@@ -823,6 +801,52 @@ namespace MPTagThat
       log.Trace("<<<");
     }
 
+    /// <summary>
+    /// Position the Tracklist and Tagedit Details based on the selected option
+    /// </summary>
+    private void PositionTrackList()
+    {
+      // Remove controls firs, if they already exist
+      if (panelMiddleBottom.Controls.Contains(tagEditControl))
+      {
+        panelMiddleBottom.Controls.Remove(tagEditControl);
+        panelFileList.Controls.Remove(gridViewControl);
+        panelFileList.Controls.Remove(gridViewBurn);
+        panelFileList.Controls.Remove(gridViewRip);
+        panelFileList.Controls.Remove(gridViewConvert);
+      }
+      else if (panelFileList.Controls.Contains(tagEditControl))
+      {
+        panelFileList.Controls.Remove(tagEditControl);
+        panelMiddleBottom.Controls.Remove(gridViewControl);
+        panelMiddleBottom.Controls.Remove(gridViewBurn);
+        panelMiddleBottom.Controls.Remove(gridViewRip);
+        panelMiddleBottom.Controls.Remove(gridViewConvert);
+      }
+
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        // Tag Edit Details goes bottom
+        panelMiddleBottom.Controls.Add(tagEditControl);
+
+        // Tracklist goes Top
+        panelFileList.Controls.Add(gridViewControl);
+        panelFileList.Controls.Add(gridViewBurn);
+        panelFileList.Controls.Add(gridViewRip);
+        panelFileList.Controls.Add(gridViewConvert);
+      }
+      else
+      {
+        // Tag Edit Details goes Top
+        panelFileList.Controls.Add(tagEditControl);
+
+        // Tracklist goes bottom
+        panelMiddleBottom.Controls.Add(gridViewControl);
+        panelMiddleBottom.Controls.Add(gridViewBurn);
+        panelMiddleBottom.Controls.Add(gridViewRip);
+        panelMiddleBottom.Controls.Add(gridViewConvert);
+      }
+    }
     #endregion
 
     #region Ribbon Related Methods
@@ -1594,6 +1618,18 @@ namespace MPTagThat
       comboBoxDebugLevel.Items.Add("Trace");
       comboBoxDebugLevel.Text = Options.MainSettings.DebugLevel;
 
+      if (Options.MainSettings.TrackListLocation == 0)
+      {
+        pictureBoxTrackListTop.Image = Resources.TrackList_top_selected;
+        pictureBoxTrackListBottom.Image = Resources.TrackList_bottom;
+      }
+      else
+      {
+        pictureBoxTrackListTop.Image = Resources.TrackList_top;
+        pictureBoxTrackListBottom.Image = Resources.TrackList_bottom_selected;
+      }
+
+
       // Load the keymap file into the treeview
       if (LoadKeyMap())
       {
@@ -2132,6 +2168,38 @@ namespace MPTagThat
     {
       Item item = (Item)comboBoxThemes.Items[comboBoxThemes.SelectedIndex];
       Theme = (string)item.Value;
+    }
+
+    /// <summary>
+    /// The Tracklist should be displayed top
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void pictureBoxTrackListTop_Click(object sender, EventArgs e)
+    {
+      if (pictureBoxTrackListTop.Image != Resources.TrackList_top_selected)
+      {
+        pictureBoxTrackListTop.Image = Resources.TrackList_top_selected;
+        pictureBoxTrackListBottom.Image = Resources.TrackList_bottom;
+        Options.MainSettings.TrackListLocation = 0;
+        PositionTrackList();
+      }
+    }
+
+    /// <summary>
+    /// The Tracklist should be displayed bottom
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void pictureBoxTrackListBottom_Click(object sender, EventArgs e)
+    {
+      if (pictureBoxTrackListBottom.Image != Resources.TrackList_bottom_selected)
+      {
+        pictureBoxTrackListTop.Image = Resources.TrackList_top;
+        pictureBoxTrackListBottom.Image = Resources.TrackList_bottom_selected;
+        Options.MainSettings.TrackListLocation = 1;
+        PositionTrackList();
+      }
     }
 
     /// <summary>
@@ -3672,6 +3740,7 @@ namespace MPTagThat
     #endregion   
 
     #endregion
+
     #endregion
   }
 }

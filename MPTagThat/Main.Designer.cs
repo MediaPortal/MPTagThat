@@ -72,6 +72,9 @@ namespace MPTagThat
       this.tabControlSettings = new Elegant.Ui.TabControl();
       this.tabPageSettingsGeneral = new Elegant.Ui.TabPage();
       this.groupBoxGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.lbTracklistLocation = new MPTagThat.Core.WinControls.MPTLabel();
+      this.pictureBoxTrackListTop = new System.Windows.Forms.PictureBox();
+      this.pictureBoxTrackListBottom = new System.Windows.Forms.PictureBox();
       this.comboBoxDebugLevel = new MPTagThat.Core.WinControls.MPTComboBox();
       this.lbDebugLevel = new MPTagThat.Core.WinControls.MPTLabel();
       this.lbTheme = new MPTagThat.Core.WinControls.MPTLabel();
@@ -341,6 +344,8 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).BeginInit();
       this.tabPageSettingsGeneral.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListTop)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListBottom)).BeginInit();
       this.tabPageSettingsKeys.SuspendLayout();
       this.groupBoxKeys.SuspendLayout();
       this.tabPageSettingsTagsGeneral.SuspendLayout();
@@ -825,7 +830,7 @@ namespace MPTagThat
       this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 5);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
       this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(12);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(910, 1097);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(840, 1097);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -837,7 +842,7 @@ namespace MPTagThat
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel2.Location = new System.Drawing.Point(222, 68);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(676, 1017);
+      this.panel2.Size = new System.Drawing.Size(606, 1017);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -847,7 +852,7 @@ namespace MPTagThat
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
       this.tabControlSettings.SelectedTabPage = null;
-      this.tabControlSettings.Size = new System.Drawing.Size(676, 1017);
+      this.tabControlSettings.Size = new System.Drawing.Size(606, 1017);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -871,11 +876,14 @@ namespace MPTagThat
       this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageSettingsGeneral.KeyTip = null;
       this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(674, 1002);
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(604, 1002);
       this.tabPageSettingsGeneral.TabIndex = 0;
       // 
       // groupBoxGeneral
       // 
+      this.groupBoxGeneral.Controls.Add(this.lbTracklistLocation);
+      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListTop);
+      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListBottom);
       this.groupBoxGeneral.Controls.Add(this.comboBoxDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbDebugLevel);
       this.groupBoxGeneral.Controls.Add(this.lbTheme);
@@ -887,9 +895,46 @@ namespace MPTagThat
       this.groupBoxGeneral.LocalisationContext = "Settings";
       this.groupBoxGeneral.Location = new System.Drawing.Point(6, 25);
       this.groupBoxGeneral.Name = "groupBoxGeneral";
-      this.groupBoxGeneral.Size = new System.Drawing.Size(587, 111);
+      this.groupBoxGeneral.Size = new System.Drawing.Size(587, 207);
       this.groupBoxGeneral.TabIndex = 1;
       this.groupBoxGeneral.Text = "General settings";
+      // 
+      // lbTracklistLocation
+      // 
+      this.lbTracklistLocation.Localisation = "Settings";
+      this.lbTracklistLocation.LocalisationContext = "TrackListLocation";
+      this.lbTracklistLocation.Location = new System.Drawing.Point(16, 144);
+      this.lbTracklistLocation.Name = "lbTracklistLocation";
+      this.lbTracklistLocation.Size = new System.Drawing.Size(100, 23);
+      this.lbTracklistLocation.TabIndex = 2;
+      this.lbTracklistLocation.Text = "Location of Tracklist:";
+      // 
+      // pictureBoxTrackListTop
+      // 
+      this.pictureBoxTrackListTop.BackColor = System.Drawing.SystemColors.Control;
+      this.pictureBoxTrackListTop.Image = global::MPTagThat.Properties.Resources.TrackList_top;
+      this.pictureBoxTrackListTop.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListTop.InitialImage")));
+      this.pictureBoxTrackListTop.Location = new System.Drawing.Point(215, 122);
+      this.pictureBoxTrackListTop.Name = "pictureBoxTrackListTop";
+      this.pictureBoxTrackListTop.Size = new System.Drawing.Size(97, 57);
+      this.pictureBoxTrackListTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.pictureBoxTrackListTop.TabIndex = 2;
+      this.pictureBoxTrackListTop.TabStop = false;
+      this.pictureBoxTrackListTop.Text = "pictureBox1";
+      this.pictureBoxTrackListTop.Click += new System.EventHandler(this.pictureBoxTrackListTop_Click);
+      // 
+      // pictureBoxTrackListBottom
+      // 
+      this.pictureBoxTrackListBottom.Image = global::MPTagThat.Properties.Resources.TrackList_bottom;
+      this.pictureBoxTrackListBottom.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListBottom.InitialImage")));
+      this.pictureBoxTrackListBottom.Location = new System.Drawing.Point(333, 122);
+      this.pictureBoxTrackListBottom.Name = "pictureBoxTrackListBottom";
+      this.pictureBoxTrackListBottom.Size = new System.Drawing.Size(97, 57);
+      this.pictureBoxTrackListBottom.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.pictureBoxTrackListBottom.TabIndex = 6;
+      this.pictureBoxTrackListBottom.TabStop = false;
+      this.pictureBoxTrackListBottom.Text = "pictureBox2";
+      this.pictureBoxTrackListBottom.Click += new System.EventHandler(this.pictureBoxTrackListBottom_Click);
       // 
       // comboBoxDebugLevel
       // 
@@ -900,11 +945,11 @@ namespace MPTagThat
       this.comboBoxDebugLevel.Editable = false;
       this.comboBoxDebugLevel.FormattingEnabled = true;
       this.comboBoxDebugLevel.Id = "6b30288d-a831-4af5-b3b0-9049e7ca8e36";
-      this.comboBoxDebugLevel.Location = new System.Drawing.Point(156, 80);
+      this.comboBoxDebugLevel.Location = new System.Drawing.Point(218, 80);
       this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
-      this.comboBoxDebugLevel.Size = new System.Drawing.Size(382, 21);
+      this.comboBoxDebugLevel.Size = new System.Drawing.Size(320, 21);
       this.comboBoxDebugLevel.TabIndex = 2;
-      this.comboBoxDebugLevel.TextEditorWidth = 387;
+      this.comboBoxDebugLevel.TextEditorWidth = 301;
       // 
       // lbDebugLevel
       // 
@@ -935,11 +980,11 @@ namespace MPTagThat
       this.comboBoxThemes.Editable = false;
       this.comboBoxThemes.FormattingEnabled = true;
       this.comboBoxThemes.Id = "9accc7a3-4b86-4931-b228-8b00d8d049b6";
-      this.comboBoxThemes.Location = new System.Drawing.Point(156, 49);
+      this.comboBoxThemes.Location = new System.Drawing.Point(218, 49);
       this.comboBoxThemes.Name = "comboBoxThemes";
-      this.comboBoxThemes.Size = new System.Drawing.Size(382, 21);
+      this.comboBoxThemes.Size = new System.Drawing.Size(320, 21);
       this.comboBoxThemes.TabIndex = 1;
-      this.comboBoxThemes.TextEditorWidth = 387;
+      this.comboBoxThemes.TextEditorWidth = 301;
       this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
       // 
       // comboBoxLanguage
@@ -951,11 +996,11 @@ namespace MPTagThat
       this.comboBoxLanguage.Editable = false;
       this.comboBoxLanguage.FormattingEnabled = true;
       this.comboBoxLanguage.Id = "1795cc6e-129d-4902-9edc-657a97c2c276";
-      this.comboBoxLanguage.Location = new System.Drawing.Point(156, 17);
+      this.comboBoxLanguage.Location = new System.Drawing.Point(218, 17);
       this.comboBoxLanguage.Name = "comboBoxLanguage";
-      this.comboBoxLanguage.Size = new System.Drawing.Size(382, 21);
+      this.comboBoxLanguage.Size = new System.Drawing.Size(320, 21);
       this.comboBoxLanguage.TabIndex = 0;
-      this.comboBoxLanguage.TextEditorWidth = 387;
+      this.comboBoxLanguage.TextEditorWidth = 301;
       // 
       // lbLanguage
       // 
@@ -2677,7 +2722,7 @@ namespace MPTagThat
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel3.Location = new System.Drawing.Point(222, 12);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(676, 56);
+      this.panel3.Size = new System.Drawing.Size(606, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2753,7 +2798,7 @@ namespace MPTagThat
             this.navigationBarItemKeys});
       this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 21);
       this.navigationBarGroupItemsContainer1.Name = "navigationBarGroupItemsContainer1";
-      this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 10);
+      this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 48);
       this.navigationBarGroupItemsContainer1.TabIndex = 2;
       // 
       // navigationBarItemGeneral
@@ -2761,7 +2806,7 @@ namespace MPTagThat
       this.navigationBarItemGeneral.Id = "4db69fb3-e8aa-4ea2-a37e-19b60609bd39";
       this.navigationBarItemGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemGeneral.Name = "navigationBarItemGeneral";
-      this.navigationBarItemGeneral.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemGeneral.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemGeneral.TabIndex = 1;
       this.navigationBarItemGeneral.Text = "General";
       this.navigationBarItemGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2769,9 +2814,9 @@ namespace MPTagThat
       // navigationBarItemKeys
       // 
       this.navigationBarItemKeys.Id = "00b369ff-5784-4a70-b131-59a883bcdcc6";
-      this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 19);
       this.navigationBarItemKeys.Name = "navigationBarItemKeys";
-      this.navigationBarItemKeys.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemKeys.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemKeys.TabIndex = 2;
       this.navigationBarItemKeys.Text = "Keys";
       this.navigationBarItemKeys.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2792,9 +2837,9 @@ namespace MPTagThat
             this.navigationBarItemTagsId3,
             this.navigationBarItemTagsLyricsCover,
             this.navigationBarItemTagsDatabase});
-      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 52);
+      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 90);
       this.navigationBarGroupItemsContainer2.Name = "navigationBarGroupItemsContainer2";
-      this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 10);
+      this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 86);
       this.navigationBarGroupItemsContainer2.TabIndex = 5;
       // 
       // navigationBarItemTagsGeneral
@@ -2802,7 +2847,7 @@ namespace MPTagThat
       this.navigationBarItemTagsGeneral.Id = "b3698914-5def-4d5b-9eb3-575e3de603a4";
       this.navigationBarItemTagsGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemTagsGeneral.Name = "navigationBarItemTagsGeneral";
-      this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemTagsGeneral.TabIndex = 1;
       this.navigationBarItemTagsGeneral.Text = "General";
       this.navigationBarItemTagsGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2810,9 +2855,9 @@ namespace MPTagThat
       // navigationBarItemTagsId3
       // 
       this.navigationBarItemTagsId3.Id = "e5db1b69-dfd6-4c8f-b3e4-89191c88381e";
-      this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 19);
       this.navigationBarItemTagsId3.Name = "navigationBarItemTagsId3";
-      this.navigationBarItemTagsId3.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemTagsId3.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemTagsId3.TabIndex = 2;
       this.navigationBarItemTagsId3.Text = "ID3";
       this.navigationBarItemTagsId3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2820,9 +2865,9 @@ namespace MPTagThat
       // navigationBarItemTagsLyricsCover
       // 
       this.navigationBarItemTagsLyricsCover.Id = "8aca463b-fb85-407e-98db-f779d493d24f";
-      this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 38);
       this.navigationBarItemTagsLyricsCover.Name = "navigationBarItemTagsLyricsCover";
-      this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemTagsLyricsCover.TabIndex = 3;
       this.navigationBarItemTagsLyricsCover.Text = "Lyrics / Cover";
       this.navigationBarItemTagsLyricsCover.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2830,9 +2875,9 @@ namespace MPTagThat
       // navigationBarItemTagsDatabase
       // 
       this.navigationBarItemTagsDatabase.Id = "88cfd696-ed66-40cf-8fc8-4b57612a86b1";
-      this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 57);
       this.navigationBarItemTagsDatabase.Name = "navigationBarItemTagsDatabase";
-      this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemTagsDatabase.TabIndex = 4;
       this.navigationBarItemTagsDatabase.Text = "Database";
       this.navigationBarItemTagsDatabase.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2857,9 +2902,9 @@ namespace MPTagThat
             this.navigationBarItemRipWMA,
             this.navigationBarItemMPC,
             this.navigationBarItemRipWV});
-      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 83);
+      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 197);
       this.navigationBarGroupItemsContainer3.Name = "navigationBarGroupItemsContainer3";
-      this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 10);
+      this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 162);
       this.navigationBarGroupItemsContainer3.TabIndex = 8;
       // 
       // navigationBarItemRipGeneral
@@ -2867,7 +2912,7 @@ namespace MPTagThat
       this.navigationBarItemRipGeneral.Id = "f32def35-f20f-4311-a0f2-1c8355043d68";
       this.navigationBarItemRipGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipGeneral.Name = "navigationBarItemRipGeneral";
-      this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipGeneral.TabIndex = 1;
       this.navigationBarItemRipGeneral.Text = "General";
       this.navigationBarItemRipGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2875,9 +2920,9 @@ namespace MPTagThat
       // navigationBarItemRipMp3
       // 
       this.navigationBarItemRipMp3.Id = "9d8979f0-7c74-47e7-8197-4792f75f513f";
-      this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 19);
       this.navigationBarItemRipMp3.Name = "navigationBarItemRipMp3";
-      this.navigationBarItemRipMp3.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipMp3.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipMp3.TabIndex = 2;
       this.navigationBarItemRipMp3.Text = "MP3";
       this.navigationBarItemRipMp3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2885,9 +2930,9 @@ namespace MPTagThat
       // navigationBarItemRipOgg
       // 
       this.navigationBarItemRipOgg.Id = "6cd82a8c-1a93-4ea2-87e6-c226163612b2";
-      this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 38);
       this.navigationBarItemRipOgg.Name = "navigationBarItemRipOgg";
-      this.navigationBarItemRipOgg.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipOgg.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipOgg.TabIndex = 3;
       this.navigationBarItemRipOgg.Text = "OGG";
       this.navigationBarItemRipOgg.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2895,9 +2940,9 @@ namespace MPTagThat
       // navigationBarItemFlac
       // 
       this.navigationBarItemFlac.Id = "92a49143-104e-4885-a538-db9557075803";
-      this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 57);
       this.navigationBarItemFlac.Name = "navigationBarItemFlac";
-      this.navigationBarItemFlac.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemFlac.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemFlac.TabIndex = 4;
       this.navigationBarItemFlac.Text = "FLAC";
       this.navigationBarItemFlac.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2905,9 +2950,9 @@ namespace MPTagThat
       // navigationBarItemRipAAC
       // 
       this.navigationBarItemRipAAC.Id = "062f0637-9556-4f29-a6b4-ccd7c41f76be";
-      this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 76);
       this.navigationBarItemRipAAC.Name = "navigationBarItemRipAAC";
-      this.navigationBarItemRipAAC.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipAAC.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipAAC.TabIndex = 5;
       this.navigationBarItemRipAAC.Text = "AAC";
       this.navigationBarItemRipAAC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2915,9 +2960,9 @@ namespace MPTagThat
       // navigationBarItemRipWMA
       // 
       this.navigationBarItemRipWMA.Id = "16c82fc1-67af-4336-8771-0ba81707e707";
-      this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 95);
       this.navigationBarItemRipWMA.Name = "navigationBarItemRipWMA";
-      this.navigationBarItemRipWMA.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipWMA.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipWMA.TabIndex = 6;
       this.navigationBarItemRipWMA.Text = "WMA";
       this.navigationBarItemRipWMA.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2925,9 +2970,9 @@ namespace MPTagThat
       // navigationBarItemMPC
       // 
       this.navigationBarItemMPC.Id = "0187f926-0f64-4f0f-aaa8-f834549b0c63";
-      this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 114);
       this.navigationBarItemMPC.Name = "navigationBarItemMPC";
-      this.navigationBarItemMPC.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemMPC.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemMPC.TabIndex = 7;
       this.navigationBarItemMPC.Text = "MPC";
       this.navigationBarItemMPC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2935,9 +2980,9 @@ namespace MPTagThat
       // navigationBarItemRipWV
       // 
       this.navigationBarItemRipWV.Id = "c628d04e-f8e7-4091-be19-4a288c7176a0";
-      this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 0);
+      this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 133);
       this.navigationBarItemRipWV.Name = "navigationBarItemRipWV";
-      this.navigationBarItemRipWV.Size = new System.Drawing.Size(0, 0);
+      this.navigationBarItemRipWV.Size = new System.Drawing.Size(208, 19);
       this.navigationBarItemRipWV.TabIndex = 8;
       this.navigationBarItemRipWV.Text = "WV";
       this.navigationBarItemRipWV.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -3981,6 +4026,8 @@ namespace MPTagThat
       this.tabPageSettingsGeneral.ResumeLayout(false);
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListTop)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListBottom)).EndInit();
       this.tabPageSettingsKeys.ResumeLayout(false);
       this.groupBoxKeys.ResumeLayout(false);
       this.groupBoxKeys.PerformLayout();
@@ -4214,8 +4261,6 @@ namespace MPTagThat
     private Elegant.Ui.Button buttonSaveAsThumb;
     private Elegant.Ui.Separator separator2;
     private Elegant.Ui.Separator separator3;
-    private Elegant.Ui.BackstageView backstageView1;
-    private Elegant.Ui.BackstageViewPage backstageViewPage1;
     private Elegant.Ui.BackstageView backstageView;
     private Elegant.Ui.BackstageViewPage backstageViewPageRecentFolders;
     private Elegant.Ui.BackstageViewButton backstageViewButtonSave;
@@ -4408,6 +4453,9 @@ namespace MPTagThat
     private Core.WinControls.MPTGroupBox groupBoxWVPresets;
     private Core.WinControls.MPTComboBox comboBoxWVPresets;
     private Core.WinControls.MPTLabel lbWVPreset;
+    private Core.WinControls.MPTLabel lbTracklistLocation;
+    private System.Windows.Forms.PictureBox pictureBoxTrackListBottom;
+    private System.Windows.Forms.PictureBox pictureBoxTrackListTop;
   }
 }
 

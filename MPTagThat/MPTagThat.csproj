@@ -474,6 +474,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\TageditDetails_top_selected.png" />
+    <None Include="Resources\TageditDetails_top.png" />
+    <None Include="Resources\TageditDetails_bottom_selected.png" />
+    <None Include="Resources\TageditDetails_bottom.png" />
     <None Include="Resources\RecentFolder_Large.png" />
     <None Include="Resources\Complete_OK.png" />
     <None Include="Resources\ribbon_CoverArt_16x.png" />

@@ -126,6 +126,41 @@
   <metadata name="formFrameSkinner.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>237, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBoxTrackListTop.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////////8bD
+        xgAAAAAAhIKE////hIKE/wAA/wAA/wAA/wAA/wAAAAAA////////////xsPGAAAAAACEgoT///////+E
+        goT/AAD/AAD/AAAAAAD////////////////Gw8YAAAAAAISChP///////////4SChP8AAAAAAP///wAA
+        AAAAAAAAAP///8bDxgAAAAAAhIKE////////////////hIKE////hIKEAIIAAIIAAIIAAAAAxsPGAAAA
+        AACEgoT///////////////////////+EgoQAggAAggAAggAAAADGw8YAAAAAAISChP//////////////
+        /////////4SChACCAACCAACCAAAAAMbDxgAAAAAAhIKE////hIKEAAAAAAAAAAAAAAAA////hIKEhIKE
+        hIKE////xsPGAAAAAACEgoT///+EgoQAAP8AAP8AAP8AAAD////////////////////Gw8YAAAAAAISC
+        hP///4SChAAA/wAA/wAA/wAAAP///////////////////8bDxgAAAAAAhIKE////hIKEAAD/AAD/AAD/
+        AAAA////////////////////xsPGAAAAAACEgoT///+EgoSEgoSEgoSEgoSEgoT/////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="pictureBoxTrackListBottom.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////////8bD
+        xgAAAAAAhIKE////hIKE/wAA/wAA/wAA/wAA/wAAAAAA////////////xsPGAAAAAACEgoT///////+E
+        goT/AAD/AAD/AAAAAAD////////////////Gw8YAAAAAAISChP///////////4SChP8AAAAAAP///wAA
+        AAAAAAAAAP///8bDxgAAAAAAhIKE////////////////hIKE////hIKEAIIAAIIAAIIAAAAAxsPGAAAA
+        AACEgoT///////////////////////+EgoQAggAAggAAggAAAADGw8YAAAAAAISChP//////////////
+        /////////4SChACCAACCAACCAAAAAMbDxgAAAAAAhIKE////hIKEAAAAAAAAAAAAAAAA////hIKEhIKE
+        hIKE////xsPGAAAAAACEgoT///+EgoQAAP8AAP8AAP8AAAD////////////////////Gw8YAAAAAAISC
+        hP///4SChAAA/wAA/wAA/wAAAP///////////////////8bDxgAAAAAAhIKE////hIKEAAD/AAD/AAD/
+        AAAA////////////////////xsPGAAAAAACEgoT///+EgoSEgoSEgoSEgoSEgoT/////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
   <metadata name="navigationBarGroupGeneral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>389, 17</value>
   </metadata>
@@ -135,7 +170,6 @@
   <metadata name="navigationBarGroupRipConvert.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>778, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="backstageViewButtonSave.LargeImages.Images" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6

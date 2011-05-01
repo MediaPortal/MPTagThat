@@ -631,6 +631,7 @@
     <String id="DebugLevel">Debug Stufe:</String>
     <String id="Theme">Farbschema:</String>
     <String id="Language">Sprache:</String>
+    <String id="TrackListLocation">Position der Dateiliste:</String>
     <String id="TabTags">Tags</String>
     <String id="TabTagsID3">ID3</String>
     <String id="TabTagsLyricsCover">Liedtexte / Bilder</String>

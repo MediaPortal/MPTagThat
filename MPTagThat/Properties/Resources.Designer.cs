@@ -102,6 +102,13 @@ namespace MPTagThat.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap DeleteHS1 {
+            get {
+                object obj = ResourceManager.GetObject("DeleteHS1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap empty {
             get {
                 object obj = ResourceManager.GetObject("empty", resourceCulture);
@@ -210,6 +217,34 @@ namespace MPTagThat.Properties {
         internal static System.Drawing.Bitmap ribbon_help {
             get {
                 object obj = ResourceManager.GetObject("ribbon_help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TrackList_bottom {
+            get {
+                object obj = ResourceManager.GetObject("TrackList_bottom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TrackList_bottom_selected {
+            get {
+                object obj = ResourceManager.GetObject("TrackList_bottom_selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TrackList_top {
+            get {
+                object obj = ResourceManager.GetObject("TrackList_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TrackList_top_selected {
+            get {
+                object obj = ResourceManager.GetObject("TrackList_top_selected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
