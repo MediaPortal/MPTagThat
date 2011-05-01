@@ -542,6 +542,34 @@ namespace MPTagThat.Core
         // Now, depending on which frames the user wants to save, we will remove the other Frames
         file = Util.FormatID3Tag(file);
 
+        // Set the encoding for ID3 Tags
+        if (track.TagType.ToLower() == "mp3")
+        {
+          TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
+          switch (Options.MainSettings.CharacterEncoding)
+          {
+            case 0:
+              TagLib.Id3v2.Tag.DefaultEncoding = StringType.Latin1;
+              break;
+
+            case 1:
+              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16;
+              break;
+
+            case 2:
+              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16BE;
+              break;
+
+            case 3:
+              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF8;
+              break;
+
+            case 4:
+              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16LE;
+              break;
+          }
+        }
+
         // Save the file
         file.Save();
       }

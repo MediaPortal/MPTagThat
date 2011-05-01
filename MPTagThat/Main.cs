@@ -1764,6 +1764,8 @@ namespace MPTagThat
 
       #region TabPage Tags
 
+      comboBoxCharacterEncoding.SelectedIndex = Options.MainSettings.CharacterEncoding;
+
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckAutoFillNumberOfTracks.Checked = Options.MainSettings.AutoFillNumberOfTracks;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
@@ -2287,6 +2289,7 @@ namespace MPTagThat
 
       #region Tags
 
+      Options.MainSettings.CharacterEncoding = comboBoxCharacterEncoding.SelectedIndex;
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.AutoFillNumberOfTracks = ckAutoFillNumberOfTracks.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;

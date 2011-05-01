@@ -122,6 +122,9 @@ namespace MPTagThat.Core
 
     #region Tags
 
+    [Setting(SettingScope.User, "1")]
+    public int CharacterEncoding  { get; set; }
+
     [Setting(SettingScope.User, "2")]
     public int NumberTrackDigits
     {
