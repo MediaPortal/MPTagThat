@@ -189,9 +189,7 @@
     <Compile Include="Controls\WinControls\MPTExtendedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\WinControls\MPTRadioButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\WinControls\MPTRadioButton.cs" />
     <Compile Include="Controls\WinControls\MPTPanel.cs">
       <SubType>Component</SubType>
     </Compile>

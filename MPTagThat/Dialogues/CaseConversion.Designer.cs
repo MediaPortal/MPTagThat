@@ -198,7 +198,6 @@ namespace MPTagThat.CaseConversion
       this.radioButtonAllFirstLetterUpperCase.TabIndex = 3;
       this.radioButtonAllFirstLetterUpperCase.TabStop = true;
       this.radioButtonAllFirstLetterUpperCase.Text = "All First Letter Upper Case";
-      this.radioButtonAllFirstLetterUpperCase.UseVisualStyleBackColor = true;
       // 
       // radioButtonFirstLetterUpperCase
       // 
@@ -210,7 +209,6 @@ namespace MPTagThat.CaseConversion
       this.radioButtonFirstLetterUpperCase.Size = new System.Drawing.Size(133, 17);
       this.radioButtonFirstLetterUpperCase.TabIndex = 2;
       this.radioButtonFirstLetterUpperCase.Text = "First Letter Upper Case";
-      this.radioButtonFirstLetterUpperCase.UseVisualStyleBackColor = true;
       // 
       // radioButtonAllUpperCase
       // 
@@ -222,7 +220,6 @@ namespace MPTagThat.CaseConversion
       this.radioButtonAllUpperCase.Size = new System.Drawing.Size(95, 17);
       this.radioButtonAllUpperCase.TabIndex = 1;
       this.radioButtonAllUpperCase.Text = "All Upper Case";
-      this.radioButtonAllUpperCase.UseVisualStyleBackColor = true;
       // 
       // radioButtonAllLowerCase
       // 
@@ -234,7 +231,6 @@ namespace MPTagThat.CaseConversion
       this.radioButtonAllLowerCase.Size = new System.Drawing.Size(95, 17);
       this.radioButtonAllLowerCase.TabIndex = 0;
       this.radioButtonAllLowerCase.Text = "All Lower Case";
-      this.radioButtonAllLowerCase.UseVisualStyleBackColor = true;
       // 
       // groupBoxConvert
       // 

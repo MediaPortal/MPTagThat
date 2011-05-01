@@ -219,7 +219,6 @@ namespace MPTagThat.Dialogues
       this.rbSearchRegEx.Size = new System.Drawing.Size(116, 17);
       this.rbSearchRegEx.TabIndex = 8;
       this.rbSearchRegEx.Text = "Regular Expression";
-      this.rbSearchRegEx.UseVisualStyleBackColor = true;
       // 
       // rbSearchNormal
       // 
@@ -233,7 +232,6 @@ namespace MPTagThat.Dialogues
       this.rbSearchNormal.TabIndex = 7;
       this.rbSearchNormal.TabStop = true;
       this.rbSearchNormal.Text = "Normal";
-      this.rbSearchNormal.UseVisualStyleBackColor = true;
       // 
       // buttonClose
       // 
