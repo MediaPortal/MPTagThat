@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using MPTagThat.Core;
@@ -107,25 +108,17 @@ namespace MPTagThat
         log.Debug("Registering Message Broker");
         ServiceScope.Add<IMessageBroker>(new MessageBroker());
 
-        log.Debug("Registering Script Manager");
-        ServiceScope.Add<IScriptManager>(new ScriptManager());
-
-        log.Debug("Registering Burn Manager");
-        ServiceScope.Add<IBurnManager>(new BurnManager());
-
-        log.Debug("Registering Audio Encoder");
-        ServiceScope.Add<IAudioEncoder>(new AudioEncoder());
-
-        log.Debug("Registering Media Change Monitor");
-        ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
-
         log.Debug("Registering Theme Manager");
         ServiceScope.Add<IThemeManager>(new ThemeManager());
 
         log.Debug("Registering Action Handler");
         ServiceScope.Add<IActionHandler>(new ActionHandler());
 
-        log.Info("Finished registering services");
+        // Move Init of Services, which we don't need immediately to a separate thread to increase startup performance
+        Thread initService = new Thread(DoInitService);
+        initService.IsBackground = true;
+        initService.Name = "InitService";
+        initService.Start();
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
@@ -154,6 +147,31 @@ namespace MPTagThat
       }
     }
 
+    #region Methods
+
+    /// <summary>
+    /// Init Service Thread
+    /// </summary>
+    private static void DoInitService()
+    {
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Script Manager");
+      ServiceScope.Add<IScriptManager>(new ScriptManager());
+
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Burn Manager");
+      ServiceScope.Add<IBurnManager>(new BurnManager());
+
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Audio Encoder");
+      ServiceScope.Add<IAudioEncoder>(new AudioEncoder());
+
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Media Change Monitor");
+      ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
+
+      ServiceScope.Get<ILogger>().GetLogger.Info("Finished registering services");
+    }
+
+    /// <summary>
+    /// Read the Config.xml file
+    /// </summary>
     private static void ReadConfig()
     {
       string configFile = Path.Combine(Application.StartupPath, "Config.xml");
@@ -183,11 +201,17 @@ namespace MPTagThat
       catch (Exception) {}
     }
 
+    /// <summary>
+    /// Set the Path for the binaries
+    /// </summary>
+    /// <param name="path"></param>
     private static void SetPath(string path)
     {
       string currentPath = Environment.GetEnvironmentVariable("Path");
       string newPath = string.Format("{0};{1}",currentPath, path);
       Environment.SetEnvironmentVariable("Path", newPath);
     }
+
+    #endregion
   }
 }
