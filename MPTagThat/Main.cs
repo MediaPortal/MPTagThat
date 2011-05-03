@@ -1432,6 +1432,7 @@ namespace MPTagThat
           gridViewControl.FolderScan();
         }
       }
+      AutoNumber = 1; // Reset the number on Folder Change
       log.Trace("<<<");
     }
 
