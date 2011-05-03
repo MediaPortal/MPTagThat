@@ -147,17 +147,30 @@ namespace MPTagThat
       TreeNodePath node = treeViewFolderBrowser.SelectedNode as TreeNodePath;
       if (node != null)
       {
-        FileSystem.DeleteDirectory(node.Path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+        try
+        {
+          FileSystem.DeleteDirectory(node.Path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
 
-        // Clear the tracks
-        _main.TracksGridView.TrackList.Clear();
-        _main.ClearGallery();
+          // Clear the tracks
+          _main.TracksGridView.TrackList.Clear();
+          _main.ClearGallery();
 
-        // Now set the Selected directory to the Parent of the delted folder and reread the view
-        TreeNodePath parent = node.Parent as TreeNodePath;
-        _main.CurrentDirectory = parent.Path;
-        treeViewFolderBrowser.Populate();
-        treeViewFolderBrowser.ShowFolder(_main.CurrentDirectory);
+          // Now set the Selected directory to the Parent of the delted folder and reread the view
+          TreeNodePath parent = node.Parent as TreeNodePath;
+          _main.CurrentDirectory = parent.Path;
+          treeViewFolderBrowser.Populate();
+          treeViewFolderBrowser.ShowFolder(_main.CurrentDirectory);
+        }
+        catch (OperationCanceledException)
+        { }
+        catch (DirectoryNotFoundException)
+        { }
+        catch (NotSupportedException)
+        { }
+        catch (Exception ex)
+        {
+          log.Error("Error deleting Folder {0} {1}", node.Path, ex.Message);
+        }
       }
       log.Trace("<<<");
     }
@@ -538,7 +551,7 @@ namespace MPTagThat
 
       string sourcePath = node.Path;
       string targetPath = Path.Combine(Path.GetDirectoryName(node.Path), e.Label);
-      if (Directory.Exists(targetPath)) {}
+      if (Directory.Exists(targetPath)) { }
 
       bool bError = false;
       try
@@ -622,13 +635,13 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void treeViewFolderBrowser_DragOver(object sender, DragEventArgs e)
     {
-      if (!e.Data.GetDataPresent(typeof (List<TrackData>)))
+      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
       {
         return;
       }
 
       if (e.KeyState == 9 && (e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
-        // The Ctrl Key + LMB was pressed
+      // The Ctrl Key + LMB was pressed
       {
         e.Effect = DragDropEffects.Copy;
       }
@@ -662,7 +675,7 @@ namespace MPTagThat
     private void treeViewFolderBrowser_DragDrop(object sender, DragEventArgs e)
     {
       bool bMove = true;
-      if (!e.Data.GetDataPresent(typeof (List<TrackData>)))
+      if (!e.Data.GetDataPresent(typeof(List<TrackData>)))
       {
         return;
       }
@@ -691,7 +704,7 @@ namespace MPTagThat
           return;
         }
 
-        List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof (List<TrackData>));
+        List<TrackData> selectedRows = (List<TrackData>)e.Data.GetData(typeof(List<TrackData>));
         foreach (TrackData track in selectedRows)
         {
           string targetFile = Path.Combine(node.Path, track.FileName);
@@ -853,7 +866,7 @@ namespace MPTagThat
     {
       // For combo box and check box cells, commit any value change as soon
       // as it is made rather than waiting for the focus to leave the cell.
-      if (!dataGridViewTagFilter.CurrentCell.GetType().Equals(typeof (DataGridViewTextBoxCell)))
+      if (!dataGridViewTagFilter.CurrentCell.GetType().Equals(typeof(DataGridViewTextBoxCell)))
       {
         dataGridViewTagFilter.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
@@ -867,7 +880,7 @@ namespace MPTagThat
         else
         {
           if (dataGridViewTagFilter.CurrentCell.ColumnIndex == 0 &&
-              dataGridViewTagFilter.CurrentRow.Cells[1].GetType().Equals(typeof (DataGridViewCheckBoxCell)))
+              dataGridViewTagFilter.CurrentRow.Cells[1].GetType().Equals(typeof(DataGridViewCheckBoxCell)))
           {
             DataGridViewTextBoxCell tbCell = new DataGridViewTextBoxCell();
             tbCell.Value = "";
