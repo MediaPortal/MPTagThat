@@ -120,6 +120,9 @@ namespace MPTagThat.Core
       set { _recentFolders = value; }
     }
 
+    [Setting(SettingScope.User, "false")]
+    public bool ChangeReadOnlyAttributte { get; set; }
+
     #region Tags
 
     [Setting(SettingScope.User, "1")]

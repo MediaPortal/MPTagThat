@@ -656,6 +656,7 @@
     <String id="CopyArtist">Copy Artist to AlbumArtist when empty</String>
     <String id="AutoFillNumberTracks">Auto Fill "Number of Tracks" on Multiple Tag Edit</String>
     <String id="CaseConversion">Use case conversion settings on Save</String>
+    <String id="ChangeReadonly">Change Readonly Attributte on Save</String>
     <String id="Encoding">Encoding used for saving Tags:</String>
     <String id="CreateMissingFolderThumb">Create missing folder thumb (folder.jpg) on Save</String>
     <String id="AutoCompletion">Use MediaPortal Music Database for Artist auto completion</String>
@@ -824,6 +825,12 @@
     <String id="Fixed">Fixed</String>
     <String id="FatalError">Fatal Exception. MPTagThat will be terminated\r\nPlease look at log for the reason of termination</String>
     <String id="OutOfMemory">Too many files scanned. Running out of Memory.\r\nAborting Scan.</String>
+    <String id="ErrorResetAttr">Can't reset readonly attribute</String>
+    <String id="CorruptFile">Corrupt File</String>
+    <String id="UnsupportedFormat">Unsupported Format</String>
+    <String id="NonExistingFile">File no longer existing!</String>
+    <String id="ErrorReadingFile">Error reading file: {0}</String>
+    <String id="ErrorSave">Error saving file: {0}</String>
   </Section>
     
   <!-- Progress Dialog -->
@@ -897,5 +904,15 @@
     <String id="ReplaceWith">Replace with:</String>
     <String id="ReplaceBtn">Replace</String>
     <String id="ReplaceAllBtn">Replace All</String>
+  </Section>
+  
+  <!-- Readonly Dialog -->
+  <Section name="readonly">
+    <String id="Header">Readonly File</String>
+    <String id="Explanation">The indicated file is read-only.\nShould MPTagThat change the attribute and save the file?</String>
+	<String id="Yes">Yes</String>
+	<String id="YesToAll">Yes to All</String>
+	<String id="No">No</String>
+	<String id="NoToAll">No to All</String>
   </Section>
 </Language>

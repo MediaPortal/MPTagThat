@@ -1769,6 +1769,7 @@ namespace MPTagThat
       ckCopyArtistToAlbumArtist.Checked = Options.MainSettings.CopyArtist;
       ckAutoFillNumberOfTracks.Checked = Options.MainSettings.AutoFillNumberOfTracks;
       ckUseCaseConversionWhenSaving.Checked = Options.MainSettings.UseCaseConversion;
+      ckChangeReadonlyAttributte.Checked = Options.MainSettings.ChangeReadOnlyAttributte;
       ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
       ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
       ckOverwriteExistingCovers.Checked = Options.MainSettings.OverwriteExistingCovers;
@@ -2293,6 +2294,7 @@ namespace MPTagThat
       Options.MainSettings.CopyArtist = ckCopyArtistToAlbumArtist.Checked;
       Options.MainSettings.AutoFillNumberOfTracks = ckAutoFillNumberOfTracks.Checked;
       Options.MainSettings.UseCaseConversion = ckUseCaseConversionWhenSaving.Checked;
+      Options.MainSettings.ChangeReadOnlyAttributte = ckChangeReadonlyAttributte.Checked;
       Options.MainSettings.CreateFolderThumb = ckCreateMissingFolderThumb.Checked;
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;

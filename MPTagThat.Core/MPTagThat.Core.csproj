@@ -121,6 +121,12 @@
     <Compile Include="Common\Lyric.cs" />
     <Compile Include="Common\Picture.cs" />
     <Compile Include="Common\PopmFrame.cs" />
+    <Compile Include="Common\ReadOnlyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\ReadOnlyDialog.Designer.cs">
+      <DependentUpon>ReadOnlyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\Track.cs" />
     <Compile Include="Common\TrackDataPreview.cs" />
     <Compile Include="Controls\Colorslider\ColorSlider.cs">
@@ -300,6 +306,9 @@
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Common\ReadOnlyDialog.resx">
+      <DependentUpon>ReadOnlyDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Colorslider\ColorSlider.resx">
       <DependentUpon>ColorSlider.cs</DependentUpon>
     </EmbeddedResource>

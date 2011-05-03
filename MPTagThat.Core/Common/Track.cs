@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using MPTagThat.Core.Common;
 using TagLib;
 using TagLib.Id3v2;
@@ -305,12 +306,64 @@ namespace MPTagThat.Core
     /// Save the Modified file
     /// </summary>
     /// <param name="track"></param>
+    /// <param name="errorMessage"></param>
     /// <returns></returns>
-    public static bool SaveFile(TrackData track)
+    public static bool SaveFile(TrackData track, ref string errorMessage)
     {
+      errorMessage = "";
       if (!track.Changed)
       {
         return true;
+      }
+
+      if (track.Readonly && !Options.MainSettings.ChangeReadOnlyAttributte && 
+            (Options.ReadOnlyFileHandling == 0 || Options.ReadOnlyFileHandling == 2))
+      {
+        Form dlg = new ReadOnlyDialog(track.FullFileName);
+        DialogResult dlgResult = dlg.ShowDialog(); 
+
+        switch (dlgResult)
+        {
+          case DialogResult.Yes:
+            Options.ReadOnlyFileHandling = 0; // Yes 
+            break;
+
+          case DialogResult.OK:
+            Options.ReadOnlyFileHandling = 1; // Yes to All 
+            break;
+
+          case DialogResult.No:
+            Options.ReadOnlyFileHandling = 2; // No 
+            break;
+
+          case DialogResult.Cancel:
+            Options.ReadOnlyFileHandling = 3; // No to All 
+            break;
+        }
+      }
+
+      if (track.Readonly)
+      {
+        if (!Options.MainSettings.ChangeReadOnlyAttributte && Options.ReadOnlyFileHandling > 1)
+        {
+          errorMessage = "File is readonly";
+          return false;
+        }
+
+        try
+        {
+
+          System.IO.File.SetAttributes(track.FullFileName,
+                                       System.IO.File.GetAttributes(track.FullFileName) & ~FileAttributes.ReadOnly);
+
+          track.Readonly = false;
+        }
+        catch (Exception ex)
+        {
+          log.Error("File Save: Can't reset Readonly attribute: {0} {1}", track.FullFileName, ex.Message);
+          errorMessage = ServiceScope.Get<ILocalisation>().ToString("message", "ErrorResetAttr");
+          return false;
+        }
       }
 
       TagLib.File file = null;
@@ -323,21 +376,25 @@ namespace MPTagThat.Core
       catch (CorruptFileException)
       {
         log.Warn("File Read: Ignoring track {0} - Corrupt File!", track.FullFileName);
+        errorMessage = ServiceScope.Get<ILocalisation>().ToString("message", "CorruptFile");
         error = true;
       }
       catch (UnsupportedFormatException)
       {
         log.Warn("File Read: Ignoring track {0} - Unsupported format!", track.FullFileName);
+        errorMessage = ServiceScope.Get<ILocalisation>().ToString("message", "UnsupportedFormat");
         error = true;
       }
       catch (FileNotFoundException)
       {
         log.Warn("File Read: Ignoring track {0} - Physical file no longer existing!", track.FullFileName);
+        errorMessage = ServiceScope.Get<ILocalisation>().ToString("message", "NonExistingFile");
         error = true;
       }
       catch (Exception ex)
       {
         log.Error("File Read: Error processing file: {0} {1}", track.FullFileName, ex.Message);
+        errorMessage = string.Format(ServiceScope.Get<ILocalisation>().ToString("message", "ErrorReadingFile"), ex.Message);
         error = true;
       }
 
@@ -575,11 +632,17 @@ namespace MPTagThat.Core
       }
       catch (Exception ex)
       {
-        log.Error("File Read: Error processing file: {0} {1}", track.FullFileName, ex.Message);
+        log.Error("File Save: Error processing file: {0} {1}", track.FullFileName, ex.Message);
+        errorMessage = ServiceScope.Get<ILocalisation>().ToString("message", "ErrorSave");
         error = true;
       }
 
-      return error;
+      if (error)
+      {
+        return false;
+      }
+
+      return true;
     }
 
     #endregion

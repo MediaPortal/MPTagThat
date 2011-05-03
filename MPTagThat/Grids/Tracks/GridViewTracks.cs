@@ -282,6 +282,7 @@ namespace MPTagThat.GridView
         }
       }
 
+      Options.ReadOnlyFileHandling = 2; //No
       ResetProgressBar();
 
       _itemsChanged = false;
@@ -340,6 +341,7 @@ namespace MPTagThat.GridView
         i++;
       }
 
+      Options.ReadOnlyFileHandling = 2; //No
       if (showProgressDialog)
       {
         ResetProgressBar();
@@ -384,43 +386,54 @@ namespace MPTagThat.GridView
           }
 
           // Save the file 
-          Track.SaveFile(track);
-
-          // If we are in Database mode, we should also update the MediaPortal Database
-          if (_main.TreeView.DatabaseMode)
+          string errorMessage = "";
+          if (Track.SaveFile(track, ref errorMessage))
           {
-            UpdateMusicDatabase(track);
+            // If we are in Database mode, we should also update the MediaPortal Database
+            if (_main.TreeView.DatabaseMode)
+            {
+              UpdateMusicDatabase(track);
+            }
+
+            if (RenameFile(track))
+            {
+              // rename was ok, so get the new file into the binding list
+              string ext = Path.GetExtension(track.FileName);
+              string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
+                                                String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
+                                                              ext));
+
+              track = Track.Create(newFileName);
+              bindingList[rowIndex] = track;
+            }
+
+            // Check, if we need to create a folder.jpg
+            if (!System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg")) &&
+                Options.MainSettings.CreateFolderThumb)
+            {
+              SavePicture(track);
+            }
+
+            SetStatusColumnOk(tracksGrid.Rows[rowIndex]);
+            tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
+            track.Changed = false;
+
+            if (rowIndex % 2 == 0)
+            {
+              tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
+                ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+            }
+            else
+            {
+              tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
+                ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+            }
           }
-
-          if (RenameFile(track))
-          {
-            // rename was ok, so get the new file into the binding list
-            string ext = Path.GetExtension(track.FileName);
-            string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
-                                              String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
-                                                            ext));
-
-            track = Track.Create(newFileName);
-            bindingList[rowIndex] = track;
-          }
-
-          // Check, if we need to create a folder.jpg
-          if (!System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg")) &&
-              Options.MainSettings.CreateFolderThumb)
-          {
-            SavePicture(track);
-          }
-
-          SetStatusColumnOk(tracksGrid.Rows[rowIndex]);
-
-          if (rowIndex % 2 == 0)
-            tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
-              ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
           else
-            tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
-              ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-
-          track.Changed = false;
+          {
+            SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+            AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
+          }
         }
       }
       catch (Exception ex)

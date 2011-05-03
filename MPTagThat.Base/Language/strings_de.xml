@@ -656,6 +656,7 @@
     <String id="CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</String>
     <String id="AutoFillNumberTracks">"Anzahl von Tracks" bei merfach editieren automatisch füllen</String>
     <String id="CaseConversion">Einstellungen für Groß- und Kleinschreibung beim Speichern verwenden</String>
+    <String id="ChangeReadonly">Change Readonly Attributte on Save</String>
     <String id="Encoding">Verwendeter Zeichensatz beim Speichern der Tags:</String>
     <String id="CreateMissingFolderThumb">Erstelle fehlende Ordnervorschau (folder.jpg) beim Speichern</String>
     <String id="AutoCompletion">MediaPortal Datenbank für automatisches Vervollständigen der Interpreten verwenden</String>
@@ -824,6 +825,12 @@
     <String id="Fixed">Fixed</String>
     <String id="FatalError">Schwerer Ausnahmefehler. MPTagThat wird beendet.\r\nDie entsprechende Fehlermeldung ist im Log zu finden.</String>
     <String id="OutOfMemory">Zuviele Dateien gefunden. Kein weiterer Speicher verfügbar.\r\nDie Verarbeitung wird abgebrochen.</String>
+    <String id="ErrorResetAttr">Schreibschutz Attribut nicht zurückgesetzt</String>
+    <String id="CorruptFile">Beschädigte Datie</String>
+    <String id="UnsupportedFormat">Format nicht unterstützt</String>
+    <String id="NonExistingFile">Datei existiert nicht mehr</String>
+    <String id="ErrorReadingFile">Fehler beim Lesen: {0}</String>
+    <String id="ErrorSave">Fehler beim Speichern: {0}</String>
   </Section>
     
   <!-- Progress Dialog -->
@@ -897,5 +904,15 @@
     <String id="ReplaceWith">Ersetzen durch:</String>
     <String id="ReplaceBtn">Ersetzen</String>
     <String id="ReplaceAllBtn">Alle ersetzen</String>
+  </Section>
+ 
+   <!-- Readonly Dialog -->
+  <Section name="readonly">
+    <String id="Header">Schreibgeschützte Datei</String>
+    <String id="Explanation">Die angeführte Datei ist schreibgeschützt.\nSoll der Schreibschutz entfernt und die Datei abgespeichert werden?</String>
+	<String id="Yes">Ja</String>
+	<String id="YesToAll">Ja Alle</String>
+	<String id="No">Nein</String>
+	<String id="NoToAll">Nein Alle</String>
   </Section>
 </Language>

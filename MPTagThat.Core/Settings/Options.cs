@@ -246,6 +246,8 @@ namespace MPTagThat.Core
 
     public static ArrayList ReplaceBuffer { get; set; }
 
+    public static int ReadOnlyFileHandling { get; set; }
+
     #endregion
 
     #region Constructor
@@ -382,6 +384,8 @@ namespace MPTagThat.Core
       }
 
       _copyPasteBuffer = new List<TrackData>();
+
+      ReadOnlyFileHandling = 2; // Don't change attribute as a default.
     }
 
     #endregion
