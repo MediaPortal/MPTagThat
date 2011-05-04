@@ -639,6 +639,7 @@
 	<String id="GroupBoxPictures">Bilder</String>
     <String id="OverwriteExistingCover">Existierende Bilder beim automatischen Taggen überschreiben</String>
     <String id="EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</String>
+    <String id="OnlySaveFolderThumb">Nur Orndervorschau speichern. Nicht die Musikdatei verändern</String>
 	<String id="AmazonSite">Amazon Suchseite:</String>
     <String id="GroupBoxLyrics">Liedtexte</String>
     <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>

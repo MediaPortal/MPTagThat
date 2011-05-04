@@ -833,7 +833,7 @@ namespace MPTagThat.GridView
           if (amazonAlbum != null)
           {
             // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-            if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
+            if ((track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers) && !Options.MainSettings.OnlySaveFolderThumb)
             {
               ByteVector vector = amazonAlbum.AlbumImage;
               if (vector != null)
@@ -845,31 +845,63 @@ namespace MPTagThat.GridView
                 pic.Data = pic.ImageFromData(vector.Data);
                 track.Pictures.Add(pic);
               }
+
+              // And also set the Year from the Release Date delivered by Amazon
+              // only if not present in Track
+              if (amazonAlbum.Year != null)
+              {
+                string strYear = amazonAlbum.Year;
+                if (strYear.Length > 4)
+                  strYear = strYear.Substring(0, 4);
+
+                int year = 0;
+                try
+                {
+                  year = Convert.ToInt32(strYear);
+                }
+                catch (Exception) { }
+                if (year > 0 && track.Year == 0)
+                  track.Year = year;
+              }
+
+              SetBackgroundColorChanged(row.Index);
+              track.Changed = true;
+              _itemsChanged = true;
+              SetStatusColumnOk(row);
+              _main.SetGalleryItem();
             }
+          }
 
-            // And also set the Year from the Release Date delivered by Amazon
-            // only if not present in Track
-            if (amazonAlbum.Year != null)
+          // If the user has selected to store only the folder thumb, without touching the file 
+          if (amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
+          {
+            ByteVector vector = amazonAlbum.AlbumImage;
+            if (vector != null)
             {
-              string strYear = amazonAlbum.Year;
-              if (strYear.Length > 4)
-                strYear = strYear.Substring(0, 4);
-
-              int year = 0;
+              string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
               try
               {
-                year = Convert.ToInt32(strYear);
-              }
-              catch (Exception) {}
-              if (year > 0 && track.Year == 0)
-                track.Year = year;
-            }
+                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+                Image img = pic.ImageFromData(vector.Data);
 
-            SetBackgroundColorChanged(row.Index);
-            track.Changed = true;
-            _itemsChanged = true;
-            SetStatusColumnOk(row);
-            _main.SetGalleryItem();
+                // Need to make a copy, otherwise we have a GDI+ Error
+                Bitmap bmp = new Bitmap(img);
+                bmp.Save(fileName, ImageFormat.Jpeg);
+
+                FileInfo fi = new FileInfo(fileName);
+                if (_nonMusicFiles.Exists(f=>f == fi))
+                {
+                  _nonMusicFiles.Remove(fi);
+                }
+                _nonMusicFiles.Add(fi);
+                _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
+              }
+              catch (Exception ex)
+              {
+                log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
+              }
+              break;
+            }
           }
         }
         catch (Exception ex)

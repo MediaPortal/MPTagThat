@@ -183,6 +183,9 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "com")]
     public string AmazonSite { get; set; }
 
+    [Setting(SettingScope.User, "false")]
+    public bool OnlySaveFolderThumb { get; set; }
+
     #endregion
 
     #region Lyrics

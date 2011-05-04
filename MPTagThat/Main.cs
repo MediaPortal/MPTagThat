@@ -1775,6 +1775,7 @@ namespace MPTagThat
       ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
       ckOverwriteExistingCovers.Checked = Options.MainSettings.OverwriteExistingCovers;
       ckOverwriteExistingLyrics.Checked = Options.MainSettings.OverwriteExistingLyrics;
+      ckOnlySaveFolderThumb.Checked = Options.MainSettings.OnlySaveFolderThumb;
 
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
@@ -2299,6 +2300,7 @@ namespace MPTagThat
       Options.MainSettings.CreateFolderThumb = ckCreateMissingFolderThumb.Checked;
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
+      Options.MainSettings.OnlySaveFolderThumb = ckOnlySaveFolderThumb.Checked;
       Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
       Options.MainSettings.MP3Validate = ckValidateMP3.Checked;
       Options.MainSettings.MP3AutoFix = ckAutoFixMp3.Checked;
