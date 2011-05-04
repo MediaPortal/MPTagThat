@@ -748,7 +748,7 @@ namespace MPTagThat.GridView
 
           log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
           // Should we take an existing folder.jpg instead of searching the web
-          if (Options.MainSettings.EmbedFolderThumb)
+          if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
           {
             if (folderThumb == null || Path.GetDirectoryName(track.FullFileName) != savedFolder)
             {
@@ -889,10 +889,7 @@ namespace MPTagThat.GridView
                 bmp.Save(fileName, ImageFormat.Jpeg);
 
                 FileInfo fi = new FileInfo(fileName);
-                if (_nonMusicFiles.Exists(f=>f == fi))
-                {
-                  _nonMusicFiles.Remove(fi);
-                }
+                _nonMusicFiles.RemoveAll(f => f.Name == fi.Name);
                 _nonMusicFiles.Add(fi);
                 _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
               }
