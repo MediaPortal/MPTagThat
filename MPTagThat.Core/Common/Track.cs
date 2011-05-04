@@ -508,6 +508,12 @@ namespace MPTagThat.Core
           file.Tag.Pictures = pics.ToArray();
         }
 
+        // Clear the picture
+        if (track.Pictures.Count == 0)
+        {
+          file.Tag.Pictures = pics.ToArray();
+        }
+
         #endregion
 
         #region Lyrics
