@@ -1579,12 +1579,12 @@ namespace MPTagThat
       CultureInfo[] availLanguages = localisation.AvailableLanguages();
       foreach (CultureInfo info in availLanguages)
       {
-        comboBoxLanguage.Items.Add(new Item(info.DisplayName, info.TwoLetterISOLanguageName, ""));
+        comboBoxLanguage.Items.Add(new Item(info.DisplayName, info.Name, ""));
       }
 
       foreach (Item item in comboBoxLanguage.Items)
       {
-        if ((string)item.Value == localisation.CurrentCulture.TwoLetterISOLanguageName)
+        if ((string)item.Value == localisation.CurrentCulture.Name)
         {
           comboBoxLanguage.SelectedItem = item;
           break;
