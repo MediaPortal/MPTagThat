@@ -1159,12 +1159,14 @@ namespace MPTagThat
 
       ribbonGroupTagsRetrieve.Text = localisation.ToString("ribbon", "RetrieveTags");
 
+      buttonGetCoverArt.Text = localisation.ToString("ribbon", "GetCoverArt");
       buttonGetCoverArt.ScreenTip.Caption = localisation.ToString("screentip", "GetCoverArt");
       buttonGetCoverArt.ScreenTip.Text = localisation.ToString("screentip", "GetCoverArtText");
 
       buttonSaveAsThumb.ScreenTip.Caption = localisation.ToString("screentip", "SaveFolderThumb");
       buttonSaveAsThumb.ScreenTip.Text = localisation.ToString("screentip", "SaveFolderThumbText");
 
+      buttonGetLyrics.Text = localisation.ToString("ribbon", "GetLyrics");
       buttonGetLyrics.ScreenTip.Caption = localisation.ToString("screentip", "GetLyrics");
       buttonGetLyrics.ScreenTip.Text = localisation.ToString("screentip", "GetLyricsText");
 
@@ -1174,6 +1176,7 @@ namespace MPTagThat
       buttonNumberOnClick.ScreenTip.Caption = localisation.ToString("screentip", "NumberOnClick");
       buttonNumberOnClick.ScreenTip.Text = localisation.ToString("screentip", "NumberOnClickText");
 
+      buttonRemoveComment.Text = localisation.ToString("ribbon", "RemoveComments");
       buttonRemoveComment.ScreenTip.Caption = localisation.ToString("screentip", "RemoveComments");
       buttonRemoveComment.ScreenTip.Text = localisation.ToString("screentip", "RemoveCommentsText");
 
