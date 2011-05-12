@@ -263,6 +263,7 @@
     <String id="PictureHeaderType">Bilde Type</String>
     <String id="PictureDescriptor">Beskrivelse:</String>
     <!--  Detailed Information -->
+    <String id="GetTrackLengthFromFile">Hent fra fil</String>
     <String id="GetTrackLength">Hent Spor Lengde fra Fil</String>
     <String id="TrackLength">Spor Lengde (ms):</String>
     <String id="MediaType">Media Type:</String>
@@ -346,6 +347,13 @@
     <String id="Previous">Forrige Fil</String>
     <String id="Next">Neste Fil</String>
     <String id="Commands">Kommandoer</String>
+    
+    	<!-- User Defined Frames -->
+	<String id="FrameID">Ramme Id</String>
+	<String id="FrameDesc">Beskrivelse</String>
+	<String id="FrameText">Tekst</String>
+	<String id="AddFrame">Legg til ramme</String>
+	<String id="DeleteFrame">Slett ramme(r)</String>
   </Section>
   
     
@@ -512,7 +520,8 @@
     <String id="Rename">Kan ikke gi nytt navn til fil {0}: {1}</String>
     <String id="InvalidParm">Feil Parameter Format. Vennligst Korriger.</String>
     <String id="Original">Original:</String> 
-    <String id="Preview">Forhåndsvisning:</String> 
+    <String id="Preview">Forhåndsvisning:</String>
+    <String id="Parameters">Parametere</String>  
   </Section>
 
   <!--  Case Conversion -->
@@ -588,9 +597,6 @@
     <String id="EncoderWAV">WAV Encoder</String>
     <String id="EncoderMPC">Musepack Encoder</String>
     <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderMP4">MP4/aacPlus (HE-AAC) Encoder</String>
-    <String id="EncoderMP4High">MP4/aacPlus (HE-AAC) High Bitrate Encoder</String>
-    <String id="EncoderMP4LC">MP4/LC-AAC Encoder</String>
 	<String id="EncoderWMAStandard">Windows Media Audio Standard</String>
     <String id="EncoderWMAPro">Windows Media Audio Professional</String>
     <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
@@ -707,13 +713,8 @@
     <String id="GroupBoxFlacEncoding">FLAC Encoding Innstillinger</String>
     <String id="FlacQuality">Kvalitet:</String>
     <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACAttention">Viktig !</String>
-    <String id="AACAttention">Viktig: For AAC Encoding trenger du først Winamp.\nEtter det må du kopiere "nscrt.dll" og "enc_aacplus.dll" fra winamp plugins folder\ntil MPTagThat bin\Encoder folder.</String>
     <String id="GroupBoxAACEncoding">Innstillinger for AAC / AACPlus / LC-AAC Encoding</String>
-    <String id="AACWarning">NB!: noen kanal innstillinger er kun for noe utvalgte bit hastigheter.</String>
-    <String id="ChannelMode">Kanal instillinger:</String>
     <String id="AACBitRate">Bitrate:</String>
-    <String id="AACEncoder">AAC Encoder:</String>    
     <String id="TabRippingWMA">WMA</String>
     <String id="GroupBoxWMASettings">WMA Encoding Innstillinger</String>
     <String id="WMAQuality">Kvalitet:</String>
