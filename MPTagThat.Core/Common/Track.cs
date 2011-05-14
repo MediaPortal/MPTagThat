@@ -215,8 +215,7 @@ namespace MPTagThat.Core
       }
 
       #endregion
-
-
+      
       #region Set Properties
 
       try
@@ -520,13 +519,15 @@ namespace MPTagThat.Core
 
         if (track.Lyrics != "")
         {
-          track.Lyrics = "";
+          file.Tag.Lyrics = track.Lyrics;
           if (track.TagType.ToLower() == "mp3")
           {
             foreach (Lyric lyric in track.LyricsFrames)
             {
               UnsynchronisedLyricsFrame lyricframe = UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description, lyric.Language, true);
               lyricframe.Text = lyric.Text;
+              lyricframe.Description = lyric.Description;
+              lyricframe.Language = lyric.Language;
             }
           }
           else

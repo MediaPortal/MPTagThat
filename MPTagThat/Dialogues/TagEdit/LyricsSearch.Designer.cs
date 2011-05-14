@@ -31,9 +31,9 @@
       this.btCancel = new MPTagThat.Core.WinControls.MPTButton();
       this.tbTitle = new System.Windows.Forms.TextBox();
       this.lvSearchResults = new System.Windows.Forms.ListView();
-      this.chSite = new System.Windows.Forms.ColumnHeader();
-      this.chResult = new System.Windows.Forms.ColumnHeader();
-      this.chLyric = new System.Windows.Forms.ColumnHeader();
+      this.chSite = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.chResult = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.chLyric = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.groupBox1 = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lbTitle = new MPTagThat.Core.WinControls.MPTLabel();
       this.btUpdate = new MPTagThat.Core.WinControls.MPTButton();
@@ -52,6 +52,7 @@
       // 
       // btCancel
       // 
+      this.btCancel.Id = "512afead-3145-484e-a7ee-6d543133c3d1";
       this.btCancel.Localisation = "Cancel";
       this.btCancel.LocalisationContext = "LyricsSearch";
       this.btCancel.Location = new System.Drawing.Point(489, 109);
@@ -64,8 +65,8 @@
       // 
       // tbTitle
       // 
-      this.tbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbTitle.Location = new System.Drawing.Point(73, 53);
       this.tbTitle.Name = "tbTitle";
       this.tbTitle.Size = new System.Drawing.Size(498, 20);
@@ -73,9 +74,9 @@
       // 
       // lvSearchResults
       // 
-      this.lvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.lvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.lvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chSite,
             this.chResult,
@@ -108,22 +109,21 @@
       // 
       // groupBox1
       // 
-      this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.groupBox1.Controls.Add(this.lvSearchResults);
+      this.groupBox1.Id = "9acc7891-750c-4711-945d-aa94f486977b";
       this.groupBox1.Localisation = "GroupBoxSearchResults";
       this.groupBox1.LocalisationContext = "LyricsSearch";
       this.groupBox1.Location = new System.Drawing.Point(18, 148);
       this.groupBox1.Name = "groupBox1";
       this.groupBox1.Size = new System.Drawing.Size(591, 191);
       this.groupBox1.TabIndex = 39;
-      this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Search results";
       // 
       // lbTitle
       // 
-      this.lbTitle.AutoSize = true;
       this.lbTitle.Localisation = "Title";
       this.lbTitle.LocalisationContext = "LyricsSearch";
       this.lbTitle.Location = new System.Drawing.Point(15, 56);
@@ -136,6 +136,7 @@
       // 
       this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btUpdate.Enabled = false;
+      this.btUpdate.Id = "617aeb49-8a43-431b-b319-ec45f68116be";
       this.btUpdate.Localisation = "Update";
       this.btUpdate.LocalisationContext = "LyricsSearch";
       this.btUpdate.Location = new System.Drawing.Point(403, 599);
@@ -148,8 +149,8 @@
       // 
       // tbArtist
       // 
-      this.tbArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbArtist.Location = new System.Drawing.Point(73, 26);
       this.tbArtist.Name = "tbArtist";
       this.tbArtist.Size = new System.Drawing.Size(498, 20);
@@ -157,6 +158,7 @@
       // 
       // btFind
       // 
+      this.btFind.Id = "b9513354-0ab0-4eb2-9ab8-b6132886f6bb";
       this.btFind.Localisation = "Find";
       this.btFind.LocalisationContext = "LyricsSearch";
       this.btFind.Location = new System.Drawing.Point(383, 109);
@@ -170,6 +172,7 @@
       // btClose
       // 
       this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btClose.Id = "a8efc655-3c74-402e-ae90-24da17fb017c";
       this.btClose.Localisation = "Close";
       this.btClose.LocalisationContext = "LyricsSearch";
       this.btClose.Location = new System.Drawing.Point(509, 599);
@@ -182,8 +185,8 @@
       // 
       // tbLyrics
       // 
-      this.tbLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tbLyrics.Location = new System.Drawing.Point(17, 19);
       this.tbLyrics.Multiline = true;
       this.tbLyrics.Name = "tbLyrics";
@@ -193,21 +196,20 @@
       // 
       // groupBox2
       // 
-      this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.groupBox2.Controls.Add(this.tbLyrics);
+      this.groupBox2.Id = "40b91b00-0b77-4b76-a233-ea42be63285e";
       this.groupBox2.Localisation = "GroupBoxLyric";
       this.groupBox2.LocalisationContext = "LyricsSearch";
       this.groupBox2.Location = new System.Drawing.Point(18, 356);
       this.groupBox2.Name = "groupBox2";
       this.groupBox2.Size = new System.Drawing.Size(591, 230);
       this.groupBox2.TabIndex = 40;
-      this.groupBox2.TabStop = false;
       this.groupBox2.Text = "Lyric";
       // 
       // lbArtist
       // 
-      this.lbArtist.AutoSize = true;
       this.lbArtist.Localisation = "Artist";
       this.lbArtist.LocalisationContext = "LyricsSearch";
       this.lbArtist.Location = new System.Drawing.Point(15, 29);
@@ -218,28 +220,29 @@
       // 
       // gbSearchInfo
       // 
-      this.gbSearchInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.gbSearchInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.gbSearchInfo.Controls.Add(this.tbTitle);
       this.gbSearchInfo.Controls.Add(this.lbTitle);
       this.gbSearchInfo.Controls.Add(this.tbArtist);
       this.gbSearchInfo.Controls.Add(this.lbArtist);
+      this.gbSearchInfo.Id = "5f7de5a3-08f5-4fee-a4e1-45a37d4535cf";
       this.gbSearchInfo.Localisation = "GroupBoxSearchInfo";
       this.gbSearchInfo.LocalisationContext = "LyricsSearch";
       this.gbSearchInfo.Location = new System.Drawing.Point(18, 18);
       this.gbSearchInfo.Name = "gbSearchInfo";
       this.gbSearchInfo.Size = new System.Drawing.Size(591, 85);
       this.gbSearchInfo.TabIndex = 38;
-      this.gbSearchInfo.TabStop = false;
       this.gbSearchInfo.Text = "Search information";
       // 
       // btSwitchArtist
       // 
+      this.btSwitchArtist.Id = "094642bb-33e6-4e95-bb93-1a623cef6c55";
       this.btSwitchArtist.Localisation = "SwitchArtist";
       this.btSwitchArtist.LocalisationContext = "LyricsSearch";
-      this.btSwitchArtist.Location = new System.Drawing.Point(91, 109);
+      this.btSwitchArtist.Location = new System.Drawing.Point(18, 109);
       this.btSwitchArtist.Name = "btSwitchArtist";
-      this.btSwitchArtist.Size = new System.Drawing.Size(100, 23);
+      this.btSwitchArtist.Size = new System.Drawing.Size(192, 23);
       this.btSwitchArtist.TabIndex = 45;
       this.btSwitchArtist.Text = "&Switch Artist";
       this.btSwitchArtist.UseVisualStyleBackColor = true;

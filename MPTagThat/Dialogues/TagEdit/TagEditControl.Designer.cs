@@ -28,16 +28,26 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
-      this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
-      this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewUserFrames = new System.Windows.Forms.DataGridView();
-      this.FrameID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tabPageLyrics = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.btGetLyricsFromInternet = new MPTagThat.Core.WinControls.MPTButton();
+      this.btGetLyricsFromText = new MPTagThat.Core.WinControls.MPTButton();
+      this.ckRemoveLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblLyricsMoveTop = new MPTagThat.Core.WinControls.MPTButton();
+      this.btRemoveLyrics = new MPTagThat.Core.WinControls.MPTButton();
+      this.btAddLyrics = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewLyrics = new System.Windows.Forms.DataGridView();
+      this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tbLyrics = new System.Windows.Forms.TextBox();
+      this.lblLyricsLanguage = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblLyricsDescriptor = new MPTagThat.Core.WinControls.MPTLabel();
+      this.cbLyricsLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.cbLyricsDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxRemoveComments = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -228,22 +238,6 @@
       this.tbCopyrightUrl = new System.Windows.Forms.TextBox();
       this.ckCopyrightUrl = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblCopyrightUrl = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tabPageLyrics = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.btGetLyricsFromText = new MPTagThat.Core.WinControls.MPTButton();
-      this.ckRemoveLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblLyricsMoveTop = new MPTagThat.Core.WinControls.MPTButton();
-      this.btRemoveLyrics = new MPTagThat.Core.WinControls.MPTButton();
-      this.btAddLyrics = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewLyrics = new System.Windows.Forms.DataGridView();
-      this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.tbLyrics = new System.Windows.Forms.TextBox();
-      this.lblLyricsLanguage = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblLyricsDescriptor = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbLyricsLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.cbLyricsDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
       this.tabPageRating = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxRating = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckRemoveExistingRatings = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -261,14 +255,22 @@
       this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewUserFrames = new System.Windows.Forms.DataGridView();
+      this.FrameID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.btNext = new MPTagThat.Core.WinControls.MPTButton();
       this.btPrevious = new MPTagThat.Core.WinControls.MPTButton();
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
-      this.tabPageUserDefined.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
+      this.tabPageLyrics.SuspendLayout();
+      this.groupBoxLyrics.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).BeginInit();
@@ -292,14 +294,13 @@
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).BeginInit();
       this.tabPageWebInformation.SuspendLayout();
       this.groupBoxWebInformation.SuspendLayout();
-      this.tabPageLyrics.SuspendLayout();
-      this.groupBoxLyrics.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).BeginInit();
       this.tabPageRating.SuspendLayout();
       this.groupBoxRating.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
+      this.tabPageUserDefined.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
       this.panelTop.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -309,7 +310,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageUserDefined;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageMain;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -323,86 +324,214 @@
             this.tabPageRating,
             this.tabPageUserDefined});
       // 
-      // tabPageUserDefined
+      // tabPageLyrics
       // 
-      this.tabPageUserDefined.ActiveControl = null;
-      this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
-      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
-      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
-      this.tabPageUserDefined.KeyTip = null;
-      this.tabPageUserDefined.Localisation = "HeaderUser";
-      this.tabPageUserDefined.LocalisationContext = "TagEdit";
-      this.tabPageUserDefined.Name = "tabPageUserDefined";
-      this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
-      this.tabPageUserDefined.TabIndex = 8;
-      this.tabPageUserDefined.Text = "User Defined Information";
+      this.tabPageLyrics.ActiveControl = null;
+      this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
+      this.tabPageLyrics.KeyTip = null;
+      this.tabPageLyrics.Localisation = "HeaderLyrics";
+      this.tabPageLyrics.LocalisationContext = "TagEdit";
+      this.tabPageLyrics.Name = "tabPageLyrics";
+      this.tabPageLyrics.Size = new System.Drawing.Size(906, 584);
+      this.tabPageLyrics.TabIndex = 6;
+      this.tabPageLyrics.Text = "Lyrics";
       // 
-      // btDeleteFrame
+      // groupBoxLyrics
       // 
-      this.btDeleteFrame.Id = "404467c3-f119-4822-b3ae-916db197e89c";
-      this.btDeleteFrame.Localisation = "DeleteFrame";
-      this.btDeleteFrame.LocalisationContext = "TagEdit";
-      this.btDeleteFrame.Location = new System.Drawing.Point(263, 29);
-      this.btDeleteFrame.Name = "btDeleteFrame";
-      this.btDeleteFrame.Size = new System.Drawing.Size(212, 23);
-      this.btDeleteFrame.TabIndex = 2;
-      this.btDeleteFrame.Text = "Delete Frame(s)";
-      this.btDeleteFrame.UseVisualStyleBackColor = true;
-      this.btDeleteFrame.Click += new System.EventHandler(this.btDeleteFrame_Click);
+      this.groupBoxLyrics.Controls.Add(this.btGetLyricsFromInternet);
+      this.groupBoxLyrics.Controls.Add(this.btGetLyricsFromText);
+      this.groupBoxLyrics.Controls.Add(this.ckRemoveLyrics);
+      this.groupBoxLyrics.Controls.Add(this.lblLyricsMoveTop);
+      this.groupBoxLyrics.Controls.Add(this.btRemoveLyrics);
+      this.groupBoxLyrics.Controls.Add(this.btAddLyrics);
+      this.groupBoxLyrics.Controls.Add(this.dataGridViewLyrics);
+      this.groupBoxLyrics.Controls.Add(this.tbLyrics);
+      this.groupBoxLyrics.Controls.Add(this.lblLyricsLanguage);
+      this.groupBoxLyrics.Controls.Add(this.lblLyricsDescriptor);
+      this.groupBoxLyrics.Controls.Add(this.cbLyricsLanguage);
+      this.groupBoxLyrics.Controls.Add(this.cbLyricsDescriptor);
+      this.groupBoxLyrics.Id = "7e13ad74-226e-4c80-91f5-c05c1644997d";
+      this.groupBoxLyrics.Localisation = "groupBoxComment";
+      this.groupBoxLyrics.LocalisationContext = "TagEdit";
+      this.groupBoxLyrics.Location = new System.Drawing.Point(7, 0);
+      this.groupBoxLyrics.Name = "groupBoxLyrics";
+      this.groupBoxLyrics.Size = new System.Drawing.Size(693, 515);
+      this.groupBoxLyrics.TabIndex = 3;
       // 
-      // btAddUserFrame
+      // btGetLyricsFromInternet
       // 
-      this.btAddUserFrame.Id = "26daeb93-17fe-41fe-a679-d040d25e61dd";
-      this.btAddUserFrame.Localisation = "AddFrame";
-      this.btAddUserFrame.LocalisationContext = "TagEdit";
-      this.btAddUserFrame.Location = new System.Drawing.Point(21, 29);
-      this.btAddUserFrame.Name = "btAddUserFrame";
-      this.btAddUserFrame.Size = new System.Drawing.Size(212, 23);
-      this.btAddUserFrame.TabIndex = 1;
-      this.btAddUserFrame.Text = "Add Frame";
-      this.btAddUserFrame.UseVisualStyleBackColor = true;
-      this.btAddUserFrame.Click += new System.EventHandler(this.btAddUserFrame_Click);
+      this.btGetLyricsFromInternet.Id = "9c29dead-ca15-484a-bbb4-916ad226e543";
+      this.btGetLyricsFromInternet.Localisation = "GetLyricsFromInternet";
+      this.btGetLyricsFromInternet.LocalisationContext = "TagEdit";
+      this.btGetLyricsFromInternet.Location = new System.Drawing.Point(358, 246);
+      this.btGetLyricsFromInternet.Name = "btGetLyricsFromInternet";
+      this.btGetLyricsFromInternet.Size = new System.Drawing.Size(307, 23);
+      this.btGetLyricsFromInternet.TabIndex = 8;
+      this.btGetLyricsFromInternet.Text = "Get Lyrics from Internet";
+      this.btGetLyricsFromInternet.UseVisualStyleBackColor = true;
+      this.btGetLyricsFromInternet.Click += new System.EventHandler(this.btGetLyricsFromInternet_Click);
       // 
-      // dataGridViewUserFrames
+      // btGetLyricsFromText
       // 
-      this.dataGridViewUserFrames.AllowUserToAddRows = false;
-      this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
-      this.dataGridViewUserFrames.AllowUserToResizeRows = false;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-      this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
-      this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-      this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewUserFrames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FrameID,
-            this.FrameDesc,
-            this.FrameValue});
-      this.dataGridViewUserFrames.Location = new System.Drawing.Point(21, 68);
-      this.dataGridViewUserFrames.Name = "dataGridViewUserFrames";
-      this.dataGridViewUserFrames.RowHeadersVisible = false;
-      this.dataGridViewUserFrames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewUserFrames.Size = new System.Drawing.Size(846, 296);
-      this.dataGridViewUserFrames.TabIndex = 0;
+      this.btGetLyricsFromText.Id = "0e33ef97-c495-4e39-8ede-8d51a9259bdc";
+      this.btGetLyricsFromText.Localisation = "GetLyricsFromText";
+      this.btGetLyricsFromText.LocalisationContext = "TagEdit";
+      this.btGetLyricsFromText.Location = new System.Drawing.Point(26, 246);
+      this.btGetLyricsFromText.Name = "btGetLyricsFromText";
+      this.btGetLyricsFromText.Size = new System.Drawing.Size(307, 23);
+      this.btGetLyricsFromText.TabIndex = 1;
+      this.btGetLyricsFromText.Text = "Get Lyrics from Text File";
+      this.btGetLyricsFromText.UseVisualStyleBackColor = true;
+      this.btGetLyricsFromText.Click += new System.EventHandler(this.btGetLyricsFromText_Click);
       // 
-      // FrameID
+      // ckRemoveLyrics
       // 
-      this.FrameID.HeaderText = "Frame ID";
-      this.FrameID.Name = "FrameID";
-      this.FrameID.ReadOnly = true;
-      this.FrameID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      this.ckRemoveLyrics.Id = "d307d84e-9cf4-42db-84a3-1316ad1204cb";
+      this.ckRemoveLyrics.Localisation = "RemoveExistingLyrics";
+      this.ckRemoveLyrics.LocalisationContext = "TagEdit";
+      this.ckRemoveLyrics.Location = new System.Drawing.Point(10, 307);
+      this.ckRemoveLyrics.Name = "ckRemoveLyrics";
+      this.ckRemoveLyrics.Size = new System.Drawing.Size(654, 29);
+      this.ckRemoveLyrics.TabIndex = 5;
+      this.ckRemoveLyrics.Text = "Remove existing Lyrics First";
       // 
-      // FrameDesc
+      // lblLyricsMoveTop
       // 
-      this.FrameDesc.HeaderText = "Description";
-      this.FrameDesc.Name = "FrameDesc";
-      this.FrameDesc.Width = 250;
+      this.lblLyricsMoveTop.Id = "c1ab9336-c8c5-484f-92ee-e7e8cdba5082";
+      this.lblLyricsMoveTop.Localisation = "MoveTop";
+      this.lblLyricsMoveTop.LocalisationContext = "TagEdit";
+      this.lblLyricsMoveTop.Location = new System.Drawing.Point(477, 275);
+      this.lblLyricsMoveTop.Name = "lblLyricsMoveTop";
+      this.lblLyricsMoveTop.Size = new System.Drawing.Size(189, 23);
+      this.lblLyricsMoveTop.TabIndex = 4;
+      this.lblLyricsMoveTop.Text = "Move to Top";
+      this.lblLyricsMoveTop.UseVisualStyleBackColor = true;
+      this.lblLyricsMoveTop.Click += new System.EventHandler(this.btLyricsMoveTop_Click);
       // 
-      // FrameValue
+      // btRemoveLyrics
       // 
-      this.FrameValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.FrameValue.HeaderText = "Value";
-      this.FrameValue.Name = "FrameValue";
+      this.btRemoveLyrics.Id = "feb9eb54-a985-4988-a395-847efc2b7666";
+      this.btRemoveLyrics.Localisation = "RemoveLyrics";
+      this.btRemoveLyrics.LocalisationContext = "TagEdit";
+      this.btRemoveLyrics.Location = new System.Drawing.Point(252, 275);
+      this.btRemoveLyrics.Name = "btRemoveLyrics";
+      this.btRemoveLyrics.Size = new System.Drawing.Size(189, 23);
+      this.btRemoveLyrics.TabIndex = 3;
+      this.btRemoveLyrics.Text = "Remove Lyrics";
+      this.btRemoveLyrics.UseVisualStyleBackColor = true;
+      this.btRemoveLyrics.Click += new System.EventHandler(this.btRemoveLyrics_Click);
+      // 
+      // btAddLyrics
+      // 
+      this.btAddLyrics.Id = "5b0bb7d4-cd3a-4be5-9f61-5d34dc9b3c6c";
+      this.btAddLyrics.Localisation = "AddLyrics";
+      this.btAddLyrics.LocalisationContext = "TagEdit";
+      this.btAddLyrics.Location = new System.Drawing.Point(26, 275);
+      this.btAddLyrics.Name = "btAddLyrics";
+      this.btAddLyrics.Size = new System.Drawing.Size(189, 23);
+      this.btAddLyrics.TabIndex = 2;
+      this.btAddLyrics.Text = "Add Lyrics";
+      this.btAddLyrics.UseVisualStyleBackColor = true;
+      this.btAddLyrics.Click += new System.EventHandler(this.btAddLyrics_Click);
+      // 
+      // dataGridViewLyrics
+      // 
+      this.dataGridViewLyrics.AllowUserToAddRows = false;
+      this.dataGridViewLyrics.AllowUserToDeleteRows = false;
+      this.dataGridViewLyrics.AllowUserToResizeColumns = false;
+      this.dataGridViewLyrics.AllowUserToResizeRows = false;
+      this.dataGridViewLyrics.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.dataGridViewLyrics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewLyrics.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9});
+      this.dataGridViewLyrics.Location = new System.Drawing.Point(9, 339);
+      this.dataGridViewLyrics.Name = "dataGridViewLyrics";
+      this.dataGridViewLyrics.ReadOnly = true;
+      this.dataGridViewLyrics.RowHeadersVisible = false;
+      this.dataGridViewLyrics.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewLyrics.Size = new System.Drawing.Size(670, 170);
+      this.dataGridViewLyrics.TabIndex = 6;
+      this.dataGridViewLyrics.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLyrics_CellClick);
+      // 
+      // dataGridViewTextBoxColumn7
+      // 
+      this.dataGridViewTextBoxColumn7.FillWeight = 150F;
+      this.dataGridViewTextBoxColumn7.Frozen = true;
+      this.dataGridViewTextBoxColumn7.HeaderText = "Descriptor";
+      this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+      this.dataGridViewTextBoxColumn7.ReadOnly = true;
+      // 
+      // dataGridViewTextBoxColumn8
+      // 
+      this.dataGridViewTextBoxColumn8.Frozen = true;
+      this.dataGridViewTextBoxColumn8.HeaderText = "Lang";
+      this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+      this.dataGridViewTextBoxColumn8.ReadOnly = true;
+      this.dataGridViewTextBoxColumn8.Width = 50;
+      // 
+      // dataGridViewTextBoxColumn9
+      // 
+      this.dataGridViewTextBoxColumn9.Frozen = true;
+      this.dataGridViewTextBoxColumn9.HeaderText = "Lyrics";
+      this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+      this.dataGridViewTextBoxColumn9.ReadOnly = true;
+      this.dataGridViewTextBoxColumn9.Width = 520;
+      // 
+      // tbLyrics
+      // 
+      this.tbLyrics.Location = new System.Drawing.Point(9, 83);
+      this.tbLyrics.Multiline = true;
+      this.tbLyrics.Name = "tbLyrics";
+      this.tbLyrics.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+      this.tbLyrics.Size = new System.Drawing.Size(667, 153);
+      this.tbLyrics.TabIndex = 0;
+      // 
+      // lblLyricsLanguage
+      // 
+      this.lblLyricsLanguage.Localisation = "LyricsLanguage";
+      this.lblLyricsLanguage.LocalisationContext = "TagEdit";
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 56);
+      this.lblLyricsLanguage.Name = "lblLyricsLanguage";
+      this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
+      this.lblLyricsLanguage.TabIndex = 3;
+      this.lblLyricsLanguage.Text = "Language (ID3 only):";
+      // 
+      // lblLyricsDescriptor
+      // 
+      this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
+      this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 25);
+      this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
+      this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
+      this.lblLyricsDescriptor.TabIndex = 2;
+      this.lblLyricsDescriptor.Text = "Descriptor (ID3 only):";
+      // 
+      // cbLyricsLanguage
+      // 
+      this.cbLyricsLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbLyricsLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbLyricsLanguage.Editable = false;
+      this.cbLyricsLanguage.FormattingEnabled = true;
+      this.cbLyricsLanguage.Id = "30bfde7a-85ca-472d-a619-296a000ef986";
+      this.cbLyricsLanguage.Location = new System.Drawing.Point(200, 46);
+      this.cbLyricsLanguage.Name = "cbLyricsLanguage";
+      this.cbLyricsLanguage.Size = new System.Drawing.Size(280, 24);
+      this.cbLyricsLanguage.TabIndex = 7;
+      // 
+      // cbLyricsDescriptor
+      // 
+      this.cbLyricsDescriptor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbLyricsDescriptor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbLyricsDescriptor.Editable = false;
+      this.cbLyricsDescriptor.FormattingEnabled = true;
+      this.cbLyricsDescriptor.Id = "118cfb9b-8033-4acb-a9de-60741816911d";
+      this.cbLyricsDescriptor.Location = new System.Drawing.Point(200, 15);
+      this.cbLyricsDescriptor.Name = "cbLyricsDescriptor";
+      this.cbLyricsDescriptor.Size = new System.Drawing.Size(280, 24);
+      this.cbLyricsDescriptor.TabIndex = 6;
       // 
       // tabPageMain
       // 
@@ -450,7 +579,7 @@
       this.checkBoxRemoveComments.LocalisationContext = "TagEdit";
       this.checkBoxRemoveComments.Location = new System.Drawing.Point(608, 91);
       this.checkBoxRemoveComments.Name = "checkBoxRemoveComments";
-      this.checkBoxRemoveComments.Size = new System.Drawing.Size(174, 29);
+      this.checkBoxRemoveComments.Size = new System.Drawing.Size(229, 29);
       this.checkBoxRemoveComments.TabIndex = 4;
       this.checkBoxRemoveComments.Text = "Remove Comments First";
       // 
@@ -1140,7 +1269,7 @@
       this.checkBoxRemoveExistingPictures.LocalisationContext = "TagEdit";
       this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(251, 325);
       this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
-      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(207, 29);
+      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(329, 29);
       this.checkBoxRemoveExistingPictures.TabIndex = 5;
       this.checkBoxRemoveExistingPictures.Text = "Remove Existing Pictures First";
       // 
@@ -1335,7 +1464,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 66);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 72);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1370,7 +1499,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 28);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 34);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -2633,201 +2762,6 @@
       this.lblCopyrightUrl.TabIndex = 10;
       this.lblCopyrightUrl.Text = "Copyright Information URL:";
       // 
-      // tabPageLyrics
-      // 
-      this.tabPageLyrics.ActiveControl = null;
-      this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
-      this.tabPageLyrics.KeyTip = null;
-      this.tabPageLyrics.Localisation = "HeaderLyrics";
-      this.tabPageLyrics.LocalisationContext = "TagEdit";
-      this.tabPageLyrics.Name = "tabPageLyrics";
-      this.tabPageLyrics.Size = new System.Drawing.Size(906, 584);
-      this.tabPageLyrics.TabIndex = 6;
-      this.tabPageLyrics.Text = "Lyrics";
-      // 
-      // groupBoxLyrics
-      // 
-      this.groupBoxLyrics.Controls.Add(this.btGetLyricsFromText);
-      this.groupBoxLyrics.Controls.Add(this.ckRemoveLyrics);
-      this.groupBoxLyrics.Controls.Add(this.lblLyricsMoveTop);
-      this.groupBoxLyrics.Controls.Add(this.btRemoveLyrics);
-      this.groupBoxLyrics.Controls.Add(this.btAddLyrics);
-      this.groupBoxLyrics.Controls.Add(this.dataGridViewLyrics);
-      this.groupBoxLyrics.Controls.Add(this.tbLyrics);
-      this.groupBoxLyrics.Controls.Add(this.lblLyricsLanguage);
-      this.groupBoxLyrics.Controls.Add(this.lblLyricsDescriptor);
-      this.groupBoxLyrics.Controls.Add(this.cbLyricsLanguage);
-      this.groupBoxLyrics.Controls.Add(this.cbLyricsDescriptor);
-      this.groupBoxLyrics.Id = "7e13ad74-226e-4c80-91f5-c05c1644997d";
-      this.groupBoxLyrics.Localisation = "groupBoxComment";
-      this.groupBoxLyrics.LocalisationContext = "TagEdit";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(7, 0);
-      this.groupBoxLyrics.Name = "groupBoxLyrics";
-      this.groupBoxLyrics.Size = new System.Drawing.Size(693, 515);
-      this.groupBoxLyrics.TabIndex = 3;
-      // 
-      // btGetLyricsFromText
-      // 
-      this.btGetLyricsFromText.Id = "0e33ef97-c495-4e39-8ede-8d51a9259bdc";
-      this.btGetLyricsFromText.Localisation = "GetLyricsFromText";
-      this.btGetLyricsFromText.LocalisationContext = "TagEdit";
-      this.btGetLyricsFromText.Location = new System.Drawing.Point(26, 246);
-      this.btGetLyricsFromText.Name = "btGetLyricsFromText";
-      this.btGetLyricsFromText.Size = new System.Drawing.Size(307, 23);
-      this.btGetLyricsFromText.TabIndex = 1;
-      this.btGetLyricsFromText.Text = "Get Lyrics from Text File";
-      this.btGetLyricsFromText.UseVisualStyleBackColor = true;
-      this.btGetLyricsFromText.Click += new System.EventHandler(this.btGetLyricsFromText_Click);
-      // 
-      // ckRemoveLyrics
-      // 
-      this.ckRemoveLyrics.Id = "d307d84e-9cf4-42db-84a3-1316ad1204cb";
-      this.ckRemoveLyrics.Localisation = "RemoveExistingLyrics";
-      this.ckRemoveLyrics.LocalisationContext = "TagEdit";
-      this.ckRemoveLyrics.Location = new System.Drawing.Point(10, 307);
-      this.ckRemoveLyrics.Name = "ckRemoveLyrics";
-      this.ckRemoveLyrics.Size = new System.Drawing.Size(193, 29);
-      this.ckRemoveLyrics.TabIndex = 5;
-      this.ckRemoveLyrics.Text = "Remove existing Lyrics First";
-      // 
-      // lblLyricsMoveTop
-      // 
-      this.lblLyricsMoveTop.Id = "c1ab9336-c8c5-484f-92ee-e7e8cdba5082";
-      this.lblLyricsMoveTop.Localisation = "MoveTop";
-      this.lblLyricsMoveTop.LocalisationContext = "TagEdit";
-      this.lblLyricsMoveTop.Location = new System.Drawing.Point(477, 275);
-      this.lblLyricsMoveTop.Name = "lblLyricsMoveTop";
-      this.lblLyricsMoveTop.Size = new System.Drawing.Size(189, 23);
-      this.lblLyricsMoveTop.TabIndex = 4;
-      this.lblLyricsMoveTop.Text = "Move to Top";
-      this.lblLyricsMoveTop.UseVisualStyleBackColor = true;
-      this.lblLyricsMoveTop.Click += new System.EventHandler(this.btLyricsMoveTop_Click);
-      // 
-      // btRemoveLyrics
-      // 
-      this.btRemoveLyrics.Id = "feb9eb54-a985-4988-a395-847efc2b7666";
-      this.btRemoveLyrics.Localisation = "RemoveLyrics";
-      this.btRemoveLyrics.LocalisationContext = "TagEdit";
-      this.btRemoveLyrics.Location = new System.Drawing.Point(252, 275);
-      this.btRemoveLyrics.Name = "btRemoveLyrics";
-      this.btRemoveLyrics.Size = new System.Drawing.Size(189, 23);
-      this.btRemoveLyrics.TabIndex = 3;
-      this.btRemoveLyrics.Text = "Remove Lyrics";
-      this.btRemoveLyrics.UseVisualStyleBackColor = true;
-      this.btRemoveLyrics.Click += new System.EventHandler(this.btRemoveLyrics_Click);
-      // 
-      // btAddLyrics
-      // 
-      this.btAddLyrics.Id = "5b0bb7d4-cd3a-4be5-9f61-5d34dc9b3c6c";
-      this.btAddLyrics.Localisation = "AddLyrics";
-      this.btAddLyrics.LocalisationContext = "TagEdit";
-      this.btAddLyrics.Location = new System.Drawing.Point(26, 275);
-      this.btAddLyrics.Name = "btAddLyrics";
-      this.btAddLyrics.Size = new System.Drawing.Size(189, 23);
-      this.btAddLyrics.TabIndex = 2;
-      this.btAddLyrics.Text = "Add Lyrics";
-      this.btAddLyrics.UseVisualStyleBackColor = true;
-      this.btAddLyrics.Click += new System.EventHandler(this.btAddLyrics_Click);
-      // 
-      // dataGridViewLyrics
-      // 
-      this.dataGridViewLyrics.AllowUserToAddRows = false;
-      this.dataGridViewLyrics.AllowUserToDeleteRows = false;
-      this.dataGridViewLyrics.AllowUserToResizeColumns = false;
-      this.dataGridViewLyrics.AllowUserToResizeRows = false;
-      this.dataGridViewLyrics.BackgroundColor = System.Drawing.SystemColors.Window;
-      this.dataGridViewLyrics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewLyrics.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9});
-      this.dataGridViewLyrics.Location = new System.Drawing.Point(9, 339);
-      this.dataGridViewLyrics.Name = "dataGridViewLyrics";
-      this.dataGridViewLyrics.ReadOnly = true;
-      this.dataGridViewLyrics.RowHeadersVisible = false;
-      this.dataGridViewLyrics.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewLyrics.Size = new System.Drawing.Size(670, 170);
-      this.dataGridViewLyrics.TabIndex = 6;
-      this.dataGridViewLyrics.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLyrics_CellClick);
-      // 
-      // dataGridViewTextBoxColumn7
-      // 
-      this.dataGridViewTextBoxColumn7.FillWeight = 150F;
-      this.dataGridViewTextBoxColumn7.Frozen = true;
-      this.dataGridViewTextBoxColumn7.HeaderText = "Descriptor";
-      this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-      this.dataGridViewTextBoxColumn7.ReadOnly = true;
-      // 
-      // dataGridViewTextBoxColumn8
-      // 
-      this.dataGridViewTextBoxColumn8.Frozen = true;
-      this.dataGridViewTextBoxColumn8.HeaderText = "Lang";
-      this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-      this.dataGridViewTextBoxColumn8.ReadOnly = true;
-      this.dataGridViewTextBoxColumn8.Width = 50;
-      // 
-      // dataGridViewTextBoxColumn9
-      // 
-      this.dataGridViewTextBoxColumn9.Frozen = true;
-      this.dataGridViewTextBoxColumn9.HeaderText = "Lyrics";
-      this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-      this.dataGridViewTextBoxColumn9.ReadOnly = true;
-      this.dataGridViewTextBoxColumn9.Width = 520;
-      // 
-      // tbLyrics
-      // 
-      this.tbLyrics.Location = new System.Drawing.Point(9, 83);
-      this.tbLyrics.Multiline = true;
-      this.tbLyrics.Name = "tbLyrics";
-      this.tbLyrics.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-      this.tbLyrics.Size = new System.Drawing.Size(667, 153);
-      this.tbLyrics.TabIndex = 0;
-      // 
-      // lblLyricsLanguage
-      // 
-      this.lblLyricsLanguage.Localisation = "LyricsLanguage";
-      this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(7, 61);
-      this.lblLyricsLanguage.Name = "lblLyricsLanguage";
-      this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
-      this.lblLyricsLanguage.TabIndex = 3;
-      this.lblLyricsLanguage.Text = "Language (ID3 only):";
-      // 
-      // lblLyricsDescriptor
-      // 
-      this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
-      this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(6, 30);
-      this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
-      this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
-      this.lblLyricsDescriptor.TabIndex = 2;
-      this.lblLyricsDescriptor.Text = "Descriptor (ID3 only):";
-      // 
-      // cbLyricsLanguage
-      // 
-      this.cbLyricsLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.cbLyricsLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.cbLyricsLanguage.Editable = false;
-      this.cbLyricsLanguage.FormattingEnabled = true;
-      this.cbLyricsLanguage.Id = "30bfde7a-85ca-472d-a619-296a000ef986";
-      this.cbLyricsLanguage.Location = new System.Drawing.Point(200, 46);
-      this.cbLyricsLanguage.Name = "cbLyricsLanguage";
-      this.cbLyricsLanguage.Size = new System.Drawing.Size(280, 24);
-      this.cbLyricsLanguage.TabIndex = 7;
-      // 
-      // cbLyricsDescriptor
-      // 
-      this.cbLyricsDescriptor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.cbLyricsDescriptor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.cbLyricsDescriptor.Editable = false;
-      this.cbLyricsDescriptor.FormattingEnabled = true;
-      this.cbLyricsDescriptor.Id = "118cfb9b-8033-4acb-a9de-60741816911d";
-      this.cbLyricsDescriptor.Location = new System.Drawing.Point(200, 15);
-      this.cbLyricsDescriptor.Name = "cbLyricsDescriptor";
-      this.cbLyricsDescriptor.Size = new System.Drawing.Size(280, 24);
-      this.cbLyricsDescriptor.TabIndex = 6;
-      // 
       // tabPageRating
       // 
       this.tabPageRating.ActiveControl = null;
@@ -2870,7 +2804,7 @@
       this.ckRemoveExistingRatings.LocalisationContext = "TagEdit";
       this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 153);
       this.ckRemoveExistingRatings.Name = "ckRemoveExistingRatings";
-      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(204, 29);
+      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(479, 29);
       this.ckRemoveExistingRatings.TabIndex = 6;
       this.ckRemoveExistingRatings.Text = "Remove existing Ratings First";
       // 
@@ -3030,6 +2964,87 @@
       this.lblRatingUser.TabIndex = 2;
       this.lblRatingUser.Text = "User (eMail):";
       // 
+      // tabPageUserDefined
+      // 
+      this.tabPageUserDefined.ActiveControl = null;
+      this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
+      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
+      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
+      this.tabPageUserDefined.KeyTip = null;
+      this.tabPageUserDefined.Localisation = "HeaderUser";
+      this.tabPageUserDefined.LocalisationContext = "TagEdit";
+      this.tabPageUserDefined.Name = "tabPageUserDefined";
+      this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
+      this.tabPageUserDefined.TabIndex = 8;
+      this.tabPageUserDefined.Text = "User Defined Information";
+      // 
+      // btDeleteFrame
+      // 
+      this.btDeleteFrame.Id = "404467c3-f119-4822-b3ae-916db197e89c";
+      this.btDeleteFrame.Localisation = "DeleteFrame";
+      this.btDeleteFrame.LocalisationContext = "TagEdit";
+      this.btDeleteFrame.Location = new System.Drawing.Point(263, 29);
+      this.btDeleteFrame.Name = "btDeleteFrame";
+      this.btDeleteFrame.Size = new System.Drawing.Size(212, 23);
+      this.btDeleteFrame.TabIndex = 2;
+      this.btDeleteFrame.Text = "Delete Frame(s)";
+      this.btDeleteFrame.UseVisualStyleBackColor = true;
+      this.btDeleteFrame.Click += new System.EventHandler(this.btDeleteFrame_Click);
+      // 
+      // btAddUserFrame
+      // 
+      this.btAddUserFrame.Id = "26daeb93-17fe-41fe-a679-d040d25e61dd";
+      this.btAddUserFrame.Localisation = "AddFrame";
+      this.btAddUserFrame.LocalisationContext = "TagEdit";
+      this.btAddUserFrame.Location = new System.Drawing.Point(21, 29);
+      this.btAddUserFrame.Name = "btAddUserFrame";
+      this.btAddUserFrame.Size = new System.Drawing.Size(212, 23);
+      this.btAddUserFrame.TabIndex = 1;
+      this.btAddUserFrame.Text = "Add Frame";
+      this.btAddUserFrame.UseVisualStyleBackColor = true;
+      this.btAddUserFrame.Click += new System.EventHandler(this.btAddUserFrame_Click);
+      // 
+      // dataGridViewUserFrames
+      // 
+      this.dataGridViewUserFrames.AllowUserToAddRows = false;
+      this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
+      this.dataGridViewUserFrames.AllowUserToResizeRows = false;
+      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+      this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewUserFrames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FrameID,
+            this.FrameDesc,
+            this.FrameValue});
+      this.dataGridViewUserFrames.Location = new System.Drawing.Point(21, 68);
+      this.dataGridViewUserFrames.Name = "dataGridViewUserFrames";
+      this.dataGridViewUserFrames.RowHeadersVisible = false;
+      this.dataGridViewUserFrames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewUserFrames.Size = new System.Drawing.Size(846, 296);
+      this.dataGridViewUserFrames.TabIndex = 0;
+      // 
+      // FrameID
+      // 
+      this.FrameID.HeaderText = "Frame ID";
+      this.FrameID.Name = "FrameID";
+      this.FrameID.ReadOnly = true;
+      this.FrameID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      // 
+      // FrameDesc
+      // 
+      this.FrameDesc.HeaderText = "Description";
+      this.FrameDesc.Name = "FrameDesc";
+      this.FrameDesc.Width = 250;
+      // 
+      // FrameValue
+      // 
+      this.FrameValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.FrameValue.HeaderText = "Value";
+      this.FrameValue.Name = "FrameValue";
+      // 
       // panelTop
       // 
       this.panelTop.Controls.Add(this.btNext);
@@ -3103,8 +3118,10 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
-      this.tabPageUserDefined.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
+      this.tabPageLyrics.ResumeLayout(false);
+      this.groupBoxLyrics.ResumeLayout(false);
+      this.groupBoxLyrics.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
       this.groupBoxComment.PerformLayout();
@@ -3140,16 +3157,14 @@
       this.tabPageWebInformation.ResumeLayout(false);
       this.groupBoxWebInformation.ResumeLayout(false);
       this.groupBoxWebInformation.PerformLayout();
-      this.tabPageLyrics.ResumeLayout(false);
-      this.groupBoxLyrics.ResumeLayout(false);
-      this.groupBoxLyrics.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).EndInit();
       this.tabPageRating.ResumeLayout(false);
       this.groupBoxRating.ResumeLayout(false);
       this.groupBoxRating.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
+      this.tabPageUserDefined.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
       this.panelTop.ResumeLayout(false);
       this.panelTop.PerformLayout();
       this.ResumeLayout(false);
@@ -3394,5 +3409,6 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn FrameID;
     private System.Windows.Forms.DataGridViewTextBoxColumn FrameDesc;
     private System.Windows.Forms.DataGridViewTextBoxColumn FrameValue;
+    protected Core.WinControls.MPTButton btGetLyricsFromInternet;
   }
 }

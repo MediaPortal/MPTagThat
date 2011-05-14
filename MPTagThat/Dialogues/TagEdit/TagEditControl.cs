@@ -213,6 +213,7 @@ namespace MPTagThat.TagEdit
         ckTrackLength.Visible = true;
         tbTrackLength.Visible = false;
         btGetTrackLength.Visible = false;
+        btGetLyricsFromInternet.Visible = false;
 
         btPrevious.Enabled = false;
         btNext.Enabled = false;
@@ -234,6 +235,7 @@ namespace MPTagThat.TagEdit
         ckTrackLength.Visible = false;
         tbTrackLength.Visible = true;
         btGetTrackLength.Visible = true;
+        btGetLyricsFromInternet.Visible = true;
 
         btPrevious.Enabled = true;
         btNext.Enabled = true;
@@ -1117,11 +1119,7 @@ namespace MPTagThat.TagEdit
       ckOfficialPublisherUrl.Visible = visible;
       ckInvolvedPerson.Visible = visible;
       ckInvolvedMusician.Visible = visible;
-      ckRemoveExistingRatings.Visible = visible;
-      ckRemoveLyrics.Visible = visible;
       ckMediaType.Visible = visible;
-      checkBoxRemoveComments.Visible = visible;
-      checkBoxRemoveExistingPictures.Visible = visible;
       ckTrackLength.Visible = visible;
     }
 
@@ -2962,6 +2960,11 @@ namespace MPTagThat.TagEdit
       }
     }
 
+    private void btGetLyricsFromInternet_Click(object sender, EventArgs e)
+    {
+      LyricsSearch lyricsSearch = new LyricsSearch(this, tbArtist.Text, tbTitle.Text, false);
+    }
+
     #endregion
 
     #region Rating
@@ -3165,7 +3168,6 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
-
 
     #endregion
   }
