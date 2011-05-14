@@ -141,11 +141,11 @@
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\ParameterPart.cs" />
     <Compile Include="Dialogues\FileNameToTag\TagFormat.cs" />
-    <Compile Include="Dialogues\AmazonAlbumSearchResults.cs">
+    <Compile Include="Dialogues\CoverSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogues\AmazonAlbumSearchResults.Designer.cs">
-      <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+    <Compile Include="Dialogues\CoverSearch.Designer.cs">
+      <DependentUpon>CoverSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.cs">
       <SubType>Form</SubType>
@@ -308,8 +308,8 @@
       <SubType>Designer</SubType>
       <DependentUpon>FileNameToTag.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\AmazonAlbumSearchResults.resx">
-      <DependentUpon>AmazonAlbumSearchResults.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogues\CoverSearch.resx">
+      <DependentUpon>CoverSearch.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\Preview.resx">

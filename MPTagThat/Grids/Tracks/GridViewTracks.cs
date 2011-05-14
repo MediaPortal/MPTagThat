@@ -785,50 +785,29 @@ namespace MPTagThat.GridView
             savedArtist = track.Artist;
             savedAlbum = track.Album;
 
-            List<AmazonAlbum> albums = new List<AmazonAlbum>();
-            using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
-            {
-              string searchArtist = isMultipleArtistAlbum ? "" : track.Artist;
-              albums = amazonInfo.AmazonAlbumSearch(searchArtist, track.Album);
-            }
+            CoverSearch dlgAlbumResults = new CoverSearch();
+            dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
+            dlgAlbumResults.Album = track.Album;
+            dlgAlbumResults.FileDetails = track.FullFileName;
+            dlgAlbumResults.Owner = _main;
 
             amazonAlbum = null;
-            if (albums.Count > 0)
+            if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
             {
-              if (albums.Count == 1)
+              if (dlgAlbumResults.SelectedAlbum != null)
               {
-                amazonAlbum = albums[0];
-              }
-              else
-              {
-                AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
-                dlgAlbumResults.Artist = track.Artist;
-                dlgAlbumResults.Album = track.Album;
-                dlgAlbumResults.FileDetails = track.FullFileName;
-
-                dlgAlbumResults.Owner = _main;
-                if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
-                {
-                  if (dlgAlbumResults.SelectedListItem > -1)
-                    amazonAlbum = albums[dlgAlbumResults.SelectedListItem];
-                  else
-                    amazonAlbum = albums[0];
-                }
-                dlgAlbumResults.Dispose();
-              }
-
-              if (amazonAlbum == null)
-              {
-                log.Debug("CoverArt: Album Selection cancelled");
-                continue;
+                amazonAlbum = dlgAlbumResults.SelectedAlbum;
               }
             }
             else
             {
-              log.Debug("CoverArt: No coverart found");
+              log.Debug("CoverArt: Album Selection cancelled");
+              continue;
             }
+            dlgAlbumResults.Dispose();
           }
-
+          
+           
           // Now update the Cover Art
           if (amazonAlbum != null)
           {

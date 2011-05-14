@@ -2761,6 +2761,7 @@ namespace MPTagThat.TagEdit
       if (searchAlbum.Length == 0)
         return;
 
+      /*
       Cursor = Cursors.WaitCursor;
       List<AmazonAlbum> albums = new List<AmazonAlbum>();
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
@@ -2777,7 +2778,7 @@ namespace MPTagThat.TagEdit
         }
         else
         {
-          AmazonAlbumSearchResults dlgAlbumResults = new AmazonAlbumSearchResults(albums);
+          CoverSearch dlgAlbumResults = new CoverSearch();
           dlgAlbumResults.Artist = tbArtist.Text;
           dlgAlbumResults.Album = tbAlbum.Text;
 
@@ -2809,6 +2810,7 @@ namespace MPTagThat.TagEdit
         }
       }
       Cursor = Cursors.Default;
+      */
     }
 
     #endregion
