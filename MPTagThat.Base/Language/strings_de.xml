@@ -387,8 +387,11 @@
     <String id="Header">Album Suche</String>
     <String id="Close">Abbrechen</String>
     <String id="Update">Auswählen</String>
-    <String id="Albums">Album(s)</String>
-    <String id="GroupBoxResults">Mehrere Album gefunden. Bitte auswählen ...</String>
+    <String id="Search">Suche</String>
+    <String id="Albums">Album</String>
+    <String id="GroupBoxResults">Mehrere Alben gefunden. Bitte auswählen ...</String>
+	<String id="NotFound">Nichts gefunden. Suchkriterien ändern ...</String>
+    <String id="Searching">Suche ...</String>
   </Section>
 
   <!--  MusicBrainz Search -->
@@ -399,7 +402,7 @@
     <String id="SearchInfo">Identifizierte Lieder</String>
     <String id="Album">Album</String>
     <String id="Duration">Dauer</String>
-    <String id="GroupBoxResults">Das identifizierte Lied ist auf mehreren Albums verfügbar. Bitte auswählen</String>
+    <String id="GroupBoxResults">Das identifizierte Lied ist auf mehreren Alben verfügbar. Bitte auswählen</String>
   </Section>
   
   <!--  Header of the Grid View showing the Tracks -->

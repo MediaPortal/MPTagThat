@@ -387,8 +387,11 @@
     <String id="Header">Album Search</String>
     <String id="Close">Cancel</String>
     <String id="Update">Select</String>
+    <String id="Search">Search</String>
     <String id="Albums">Albums</String>
     <String id="GroupBoxResults">Multiple Albums found. Please select ...</String>
+    <String id="NotFound">Nothing found. Revise search criteria ...</String>
+    <String id="Searching">Searching ...</String>
   </Section>
 
   <!--  MusicBrainz Search -->

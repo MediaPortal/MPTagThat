@@ -65,7 +65,7 @@ namespace MPTagThat.Dialogues
     /// </summary>
     public string Artist
     {
-      set { lbArtistDetail.Text = _artist = value; }
+      set { tbArtist.Text = _artist = value; }
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ namespace MPTagThat.Dialogues
     /// </summary>
     public string Album
     {
-      set { lbAlbumDetail.Text = _album = value; }
+      set { tbAlbum.Text = _album = value; }
     }
 
     #endregion
@@ -90,8 +90,8 @@ namespace MPTagThat.Dialogues
       LocaliseScreen();
 
       lbFileDetails.Text = "";
-      lbAlbumDetail.Text = "";
-      lbArtistDetail.Text = "";
+      tbArtist.Text = "";
+      tbAlbum.Text = "";
 
       lvSearchResults.View = View.LargeIcon;
       imagelist.ImageSize = new Size(128, 128);
@@ -123,6 +123,10 @@ namespace MPTagThat.Dialogues
     private void DoSearchAlbum()
     {
       Cursor = Cursors.WaitCursor;
+      tbArtist.Enabled = false;
+      tbAlbum.Enabled = false;
+      btSearch.Enabled = false;
+      btUpdate.Enabled = false;
       using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
         _albums = amazonInfo.AmazonAlbumSearch(_artist, _album);
@@ -130,6 +134,8 @@ namespace MPTagThat.Dialogues
 
       if (_albums.Count > 0)
       {
+        btUpdate.Enabled = true;
+        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "GroupBoxResults");
         if (_albums.Count == 1)
         {
           _amazonAlbum = _albums[0];
@@ -140,6 +146,14 @@ namespace MPTagThat.Dialogues
           FillResults();
         }
       }
+      else
+      {
+        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "NotFound");
+        btUpdate.Enabled = false;
+      }
+      tbArtist.Enabled = true;
+      tbAlbum.Enabled = true;
+      btSearch.Enabled = true;
       Cursor = Cursors.Default;
     }
 
@@ -202,6 +216,18 @@ namespace MPTagThat.Dialogues
       btUpdate.PerformClick();
     }
 
+
+    private void btSearch_Click(object sender, EventArgs e)
+    {
+      _artist = tbArtist.Text;
+      _album = tbAlbum.Text;
+      lvSearchResults.Items.Clear();
+      imagelist.Images.Clear();
+      _albums.Clear();
+      groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "Searching");
+      this.Update();
+      DoSearchAlbum();
+    }
     #endregion
   }
 }
