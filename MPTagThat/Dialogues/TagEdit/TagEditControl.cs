@@ -2759,58 +2759,48 @@ namespace MPTagThat.TagEdit
       }
 
       if (searchAlbum.Length == 0)
-        return;
-
-      /*
-      Cursor = Cursors.WaitCursor;
-      List<AmazonAlbum> albums = new List<AmazonAlbum>();
-      using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
       {
-        albums = amazonInfo.AmazonAlbumSearch(searchArtist, searchAlbum);
+        return;
       }
 
-      if (albums.Count > 0)
+      Cursor = Cursors.WaitCursor;
+      CoverSearch dlgAlbumResults = new CoverSearch();
+      dlgAlbumResults.Artist = searchArtist;
+      dlgAlbumResults.Album = searchAlbum;
+      dlgAlbumResults.Owner = main;
+
+      AmazonAlbum amazonAlbum = null;
+      if (main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
       {
-        AmazonAlbum amazonalbum = null;
-        if (albums.Count == 1)
+        if (dlgAlbumResults.SelectedAlbum != null)
         {
-          amazonalbum = albums[0];
+          amazonAlbum = dlgAlbumResults.SelectedAlbum;
         }
-        else
-        {
-          CoverSearch dlgAlbumResults = new CoverSearch();
-          dlgAlbumResults.Artist = tbArtist.Text;
-          dlgAlbumResults.Album = tbAlbum.Text;
+      }
+      else
+      {
+        log.Debug("CoverArt: Album Selection cancelled");
+      }
+      dlgAlbumResults.Dispose();
 
-          Cursor = Cursors.Default;
-          if (main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
-          {
-            if (dlgAlbumResults.SelectedListItem > -1)
-              amazonalbum = albums[dlgAlbumResults.SelectedListItem];
-            else
-              amazonalbum = albums[0];
-          }
-          dlgAlbumResults.Dispose();
-        }
+      if (amazonAlbum == null)
+      {
+        return;
+      }
 
-        if (amazonalbum == null)
-          return;
-
-        ByteVector vector = amazonalbum.AlbumImage;
-        if (vector != null)
-        {
-          _pic = new Picture();
-          _pic.MimeType = "image/jpg";
-          _pic.Description = "";
-          _pic.Type = TagLib.PictureType.FrontCover;
-          _pic.Data = _pic.ImageFromData(vector.Data);
-          AddPictureToList();
-          AddPictureToPictureBox();
-          _pictureIsChanged = true;
-        }
+      ByteVector vector = amazonAlbum.AlbumImage;
+      if (vector != null)
+      {
+        _pic = new Picture();
+        _pic.MimeType = "image/jpg";
+        _pic.Description = "";
+        _pic.Type = TagLib.PictureType.FrontCover;
+        _pic.Data = _pic.ImageFromData(vector.Data);
+        AddPictureToList();
+        AddPictureToPictureBox();
+        _pictureIsChanged = true;
       }
       Cursor = Cursors.Default;
-      */
     }
 
     #endregion

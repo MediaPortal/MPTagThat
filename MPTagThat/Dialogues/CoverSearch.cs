@@ -225,7 +225,7 @@ namespace MPTagThat.Dialogues
       imagelist.Images.Clear();
       _albums.Clear();
       groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "Searching");
-      this.Update();
+      groupBoxAmazonMultipleAlbums.Refresh();
       DoSearchAlbum();
     }
     #endregion
