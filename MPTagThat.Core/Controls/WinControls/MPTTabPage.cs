@@ -114,7 +114,10 @@ namespace MPTagThat.Core.WinControls
         case "themechanged":
           {
             Font = themeManager.CurrentTheme.LabelFont;
-            TabControl.Font = themeManager.CurrentTheme.LabelFont;
+            if (TabControl != null)
+            {
+              TabControl.Font = themeManager.CurrentTheme.LabelFont;
+            }
             break;
           }
  
