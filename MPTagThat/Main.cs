@@ -1344,7 +1344,8 @@ namespace MPTagThat
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
       databaseSearchControl.BackColor = themeManager.CurrentTheme.BackColor;
 
-      // We want to have our own header color
+      // We want to have our own color and Font for the various Grids
+      gridViewControl.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewControl.View.EnableHeadersVisualStyles = false;
       gridViewControl.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       gridViewControl.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
@@ -1352,21 +1353,24 @@ namespace MPTagThat
       gridViewControl.View.DefaultCellStyle.SelectionBackColor = themeManager.CurrentTheme.SelectionBackColor;
       gridViewControl.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewControl.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      // We want to have our own header color
+      
+      gridViewBurn.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewBurn.View.EnableHeadersVisualStyles = false;
       gridViewBurn.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       gridViewBurn.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       gridViewBurn.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewBurn.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewBurn.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      // We want to have our own header color
+      
+      gridViewRip.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewRip.View.EnableHeadersVisualStyles = false;
       gridViewRip.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       gridViewRip.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
       gridViewRip.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewRip.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewRip.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      // We want to have our own header color
+      
+      gridViewConvert.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewConvert.View.EnableHeadersVisualStyles = false;
       gridViewConvert.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
       gridViewConvert.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;

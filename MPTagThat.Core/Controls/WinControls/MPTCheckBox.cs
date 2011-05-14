@@ -114,7 +114,6 @@ namespace MPTagThat.Core.WinControls
           // Message sent, when a Theme is changing
         case "themechanged":
           {
-            ForeColor = themeManager.CurrentTheme.LabelForeColor;
             Font = themeManager.CurrentTheme.LabelFont;
             break;
           }

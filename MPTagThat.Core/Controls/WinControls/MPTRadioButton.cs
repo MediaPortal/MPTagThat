@@ -111,6 +111,12 @@ namespace MPTagThat.Core.WinControls
 
       switch (action.ToLower())
       {
+        case "themechanged":
+          {
+            Font = themeManager.CurrentTheme.LabelFont;
+            break;
+          }
+
         case "languagechanged":
           Text = MPTWinControlsCommon.Localise(_localisationContext, _localisation);
           Refresh();
