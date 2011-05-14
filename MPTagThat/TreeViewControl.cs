@@ -34,8 +34,6 @@ namespace MPTagThat
   {
     #region Variables
 
-    private readonly List<Item> _fileFormats = new List<Item>();
-
     private readonly string[] _filterFieldValues = new[]
                                                      {
                                                        "artist", "albumartist", "album", "title", "year", "genre",
@@ -247,21 +245,17 @@ namespace MPTagThat
       TagFilterOperator.Items.Add(localisation.ToString("main", "FilterOperatorOr"));
 
       // Fill the File Select Combo with values
-      _fileFormats.Add(new Item(localisation.ToString("main", "FilterAllFiles"), "*", ""));
-      _fileFormats.Add(new Item(".mp3 (MPEG Layer-3)", "mp3", ""));
-      _fileFormats.Add(new Item(".ogg (OGG Vorbis)", "ogg", ""));
-      _fileFormats.Add(new Item(".wma (Windows Media Audio)", "wma", ""));
-      _fileFormats.Add(new Item(".flac (Free Lossless Audio Codec)", "flac", ""));
-      _fileFormats.Add(new Item(".ape (Monkey's Audio)", "ape", ""));
-      _fileFormats.Add(new Item(".mpc/.mpp/.mp+ (MusePack)", "mpc|mpp|mp+", ""));
-      _fileFormats.Add(new Item(".mp4/.m4a/.m4p (MPEG-4/AAC)", "mp4|m4a|m4p", ""));
-      _fileFormats.Add(new Item(".wv (Wavpack)", "wv", ""));
-      _fileFormats.Add(new Item(".wav (Wave / RIFF)", "wav", ""));
-      _fileFormats.Add(new Item(".aif|.aiff (Audio Interchange File Format)", "aif|aiff", ""));
-      cbListFormats.DisplayMember = "Name";
-      cbListFormats.ValueMember = "Value";
-      cbListFormats.DataSource = _fileFormats;
-
+      cbListFormats.Items.Add(new Item(localisation.ToString("main", "FilterAllFiles"), "*.*", ""));
+      cbListFormats.Items.Add(new Item(".mp3 (MPEG Layer-3)", "mp3", ""));
+      cbListFormats.Items.Add(new Item(".ogg (OGG Vorbis)", "ogg", ""));
+      cbListFormats.Items.Add(new Item(".wma (Windows Media Audio)", "wma", ""));
+      cbListFormats.Items.Add(new Item(".flac (Free Lossless Audio Codec)", "flac", ""));
+      cbListFormats.Items.Add(new Item(".ape (Monkey's Audio)", "ape", ""));
+      cbListFormats.Items.Add(new Item(".mpc/.mpp/.mp+ (MusePack)", "mpc|mpp|mp+", ""));
+      cbListFormats.Items.Add(new Item(".mp4/.m4a/.m4p (MPEG-4/AAC)", "mp4|m4a|m4p", ""));
+      cbListFormats.Items.Add(new Item(".wv (Wavpack)", "wv", ""));
+      cbListFormats.Items.Add(new Item(".wav (Wave / RIFF)", "wav", ""));
+      cbListFormats.Items.Add(new Item(".aif|.aiff (Audio Interchange File Format)", "aif|aiff", ""));
 
       if (Options.TreeViewSettings.Filter.Count > 0)
       {
@@ -279,7 +273,7 @@ namespace MPTagThat
         }
 
         // Now set the File Formats
-        foreach (Item item in _fileFormats)
+        foreach (Item item in cbListFormats.Items)
         {
           if ((string)item.Value == _filter.FileFilter)
           {
@@ -946,7 +940,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void cbListFormats_SelectedIndexChanged(object sender, EventArgs e)
     {
-      Item item = (Item)(sender as ComboBox).SelectedItem;
+      Item item = (Item)cbListFormats.SelectedItem;
       _filter.FileFilter = (string)item.Value;
     }
 
