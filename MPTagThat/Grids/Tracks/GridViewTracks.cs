@@ -153,6 +153,13 @@ namespace MPTagThat.GridView
 
     public GridViewTracks()
     {
+      // Activates double buffering 
+      this.SetStyle(ControlStyles.DoubleBuffer |
+         ControlStyles.OptimizedDoubleBuffer |
+         ControlStyles.UserPaint |
+         ControlStyles.AllPaintingInWmPaint, true);
+      this.UpdateStyles();
+
       InitializeComponent();
 
       // Setup message queue for receiving Messages

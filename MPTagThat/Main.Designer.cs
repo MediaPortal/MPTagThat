@@ -579,7 +579,7 @@ namespace MPTagThat
       // splitterBottom
       // 
       this.splitterBottom.AnimationDelay = 20;
-      this.splitterBottom.AnimationStep = 20;
+      this.splitterBottom.AnimationStep = 200;
       this.splitterBottom.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
       this.splitterBottom.ControlToHide = this.panelMiddleBottom;
       this.splitterBottom.Dock = System.Windows.Forms.DockStyle.Bottom;

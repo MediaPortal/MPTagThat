@@ -117,6 +117,13 @@ namespace MPTagThat
 
     public Main()
     {
+      // Activates double buffering 
+      this.SetStyle(ControlStyles.DoubleBuffer |
+         ControlStyles.OptimizedDoubleBuffer |
+         ControlStyles.UserPaint |
+         ControlStyles.AllPaintingInWmPaint, true);
+      this.UpdateStyles();
+
       SkinManager.LoadEmbeddedTheme(EmbeddedTheme.Office2007Silver, Product.Common);
       SkinManager.LoadEmbeddedTheme(EmbeddedTheme.Office2007Silver, Product.Ribbon);
       InitializeComponent();
@@ -508,6 +515,7 @@ namespace MPTagThat
 
       //FindRibbonWin();
 
+
       _splashScreen = new SplashScreen();
       _splashScreen.Run();
       _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
@@ -701,14 +709,14 @@ namespace MPTagThat
       // Load BASS
       LoadBass();
 
-      // Load the Settings
-      _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
-      LoadSettings();
-
       // Localise the Screens
       log.Info("Main: Localisation");
       _splashScreen.SetInformation(localisation.ToString("splash", "Localisation"));
       LocaliseScreen();
+
+      // Load the Settings
+      _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
+      LoadSettings();
 
       // Populate the Treeview with the directories found
       treeViewControl.Init();
@@ -737,10 +745,8 @@ namespace MPTagThat
       _initialising = false;
 
       // Activate the form, will be hidden because of the size change
-      TopMost = true;
-      Focus();
-      BringToFront();
-      TopMost = false;
+      //Focus();
+      //BringToFront();
       log.Info("Finished loading Main Form");
       log.Trace("<<<");
     }

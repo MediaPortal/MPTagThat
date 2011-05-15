@@ -61,6 +61,13 @@ namespace MPTagThat.TagEdit
     #region ctor
     public TagEditControl(Main main)
     {
+      // Activates double buffering 
+      this.SetStyle(ControlStyles.DoubleBuffer |
+         ControlStyles.OptimizedDoubleBuffer |
+         ControlStyles.UserPaint |
+         ControlStyles.AllPaintingInWmPaint, true);
+      this.UpdateStyles();
+
       this.main = main;
       InitializeComponent();
     }
