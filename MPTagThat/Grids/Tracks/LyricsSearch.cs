@@ -151,6 +151,7 @@ namespace MPTagThat.GridView
       bgWorkerLyrics.DoWork += bgWorkerLyrics_DoWork;
       bgWorkerLyrics.ProgressChanged += bgWorkerLyrics_ProgressChanged;
       bgWorkerLyrics.RunWorkerCompleted += bgWorkerLyrics_RunWorkerCompleted;
+      bgWorkerLyrics.WorkerSupportsCancellation = true;
 
       lbFinished.Visible = false;
 
