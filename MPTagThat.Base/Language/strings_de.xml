@@ -386,6 +386,7 @@
   <Section name="AmazonAlbumSearch">
     <String id="Header">Album Suche</String>
     <String id="Close">Abbrechen</String>
+	<String id="CancelAll">Alles Abbrechen</String>
     <String id="Update">Auswählen</String>
     <String id="Search">Suche</String>
     <String id="Albums">Album</String>

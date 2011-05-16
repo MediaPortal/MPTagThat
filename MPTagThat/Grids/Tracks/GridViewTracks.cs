@@ -806,12 +806,18 @@ namespace MPTagThat.GridView
             dlgAlbumResults.Owner = _main;
 
             amazonAlbum = null;
-            if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
+            DialogResult dlgResult = _main.ShowModalDialog(dlgAlbumResults);
+            if (dlgResult == DialogResult.OK)
             {
               if (dlgAlbumResults.SelectedAlbum != null)
               {
                 amazonAlbum = dlgAlbumResults.SelectedAlbum;
               }
+            }
+            else if (dlgResult == DialogResult.Abort)
+            {
+              log.Debug("CoverArt: Search for all albums cancelled");
+              break;
             }
             else
             {

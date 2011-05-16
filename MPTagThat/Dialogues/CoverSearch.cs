@@ -149,6 +149,7 @@ namespace MPTagThat.Dialogues
       else
       {
         groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "NotFound");
+        ServiceScope.Get<ILogger>().GetLogger.Debug("No Cover Art found");
         btUpdate.Enabled = false;
       }
       tbArtist.Enabled = true;
@@ -191,12 +192,22 @@ namespace MPTagThat.Dialogues
 
     #region Events
 
+    /// <summary>
+    /// Cancel Button has been clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btClose_Click(object sender, EventArgs e)
     {
       DialogResult = DialogResult.Cancel;
       Close();
     }
 
+    /// <summary>
+    /// Update Button has been clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btUpdate_Click(object sender, EventArgs e)
     {
       DialogResult = DialogResult.OK;
@@ -211,12 +222,32 @@ namespace MPTagThat.Dialogues
       Close();
     }
 
+    /// <summary>
+    /// Cancel All Button has been clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btCancelAll_Click(object sender, EventArgs e)
+    {
+      DialogResult = DialogResult.Abort;
+      Close();
+    }
+
+    /// <summary>
+    /// User Double clicked on a Cover
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void lvSearchResults_DoubleClick(object sender, EventArgs e)
     {
       btUpdate.PerformClick();
     }
 
-
+    /// <summary>
+    /// A Search is performed
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btSearch_Click(object sender, EventArgs e)
     {
       _artist = tbArtist.Text;
