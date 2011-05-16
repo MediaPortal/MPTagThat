@@ -745,8 +745,10 @@ namespace MPTagThat
       _initialising = false;
 
       // Activate the form, will be hidden because of the size change
-      //Focus();
-      //BringToFront();
+      TopMost = true;
+      Focus();
+      BringToFront();
+      TopMost = false;
       log.Info("Finished loading Main Form");
       log.Trace("<<<");
     }
