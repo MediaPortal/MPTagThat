@@ -237,12 +237,21 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    /// Indicates the Status was ok
+    /// Indicates there was an Error
     /// </summary>
     /// <param name="row"></param>
     public void SetStatusColumnError(DataGridViewRow row)
     {
       ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.CriticalError;
+    }
+
+    /// <summary>
+    /// Indicates there was a Change
+    /// </summary>
+    /// <param name="row"></param>
+    public void SetStatusColumnChange(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Warning;
     }
 
     #endregion
@@ -629,7 +638,6 @@ namespace MPTagThat.GridView
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
               _itemsChanged = true;
-              SetStatusColumnOk(row);
             }
           }
         }
@@ -774,7 +782,6 @@ namespace MPTagThat.GridView
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
                 _itemsChanged = true;
-                SetStatusColumnOk(row);
                 _main.SetGalleryItem();
               }
               continue;
@@ -853,7 +860,6 @@ namespace MPTagThat.GridView
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
               _itemsChanged = true;
-              SetStatusColumnOk(row);
               _main.SetGalleryItem();
             }
           }
@@ -1372,6 +1378,8 @@ namespace MPTagThat.GridView
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
       tracksGrid.Rows[index].DefaultCellStyle.ForeColor =
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
+
+      SetStatusColumnChange(tracksGrid.Rows[index]);
     }
 
     /// <summary>
