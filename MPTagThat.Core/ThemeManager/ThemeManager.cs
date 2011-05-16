@@ -94,7 +94,7 @@ namespace MPTagThat.Core
           theme.ThemeName = aTheme;
           string[] colorArray = attributes.GetNamedItem("BackColor").Value.Split(',');
           theme.BackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                           Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                           Convert.ToInt16(colorArray[2]));
 
           foreach (XmlNode attr in themeNode.ChildNodes)
           {
@@ -103,7 +103,7 @@ namespace MPTagThat.Core
               case "Label":
                 colorArray = attr.Attributes.GetNamedItem("color").Value.Split(',');
                 theme.LabelForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                      Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                      Convert.ToInt16(colorArray[2]));
                 theme.LabelFont = new Font(attr.Attributes.GetNamedItem("font").Value,
                                            (float)
                                            Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value,
@@ -114,13 +114,11 @@ namespace MPTagThat.Core
                 colorArray = attr.Attributes.GetNamedItem("backcolor").Value.Split(',');
                 theme.PanelHeadingBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                              Convert.ToInt16(colorArray[1]),
-                                                             Convert.ToInt16(colorArray[2]),
-                                                             Convert.ToInt16(colorArray[3]));
+                                                             Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("directionctrlcolor").Value.Split(',');
                 theme.PanelHeadingDirectionCtrlColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                                       Convert.ToInt16(colorArray[1]),
-                                                                      Convert.ToInt16(colorArray[2]),
-                                                                      Convert.ToInt16(colorArray[3]));
+                                                                      Convert.ToInt16(colorArray[2]));
                 theme.PanelHeadingFont = new Font(attr.Attributes.GetNamedItem("font").Value,
                                                   (float)
                                                   Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value,
@@ -131,8 +129,7 @@ namespace MPTagThat.Core
                 colorArray = attr.Attributes.GetNamedItem("forecolor").Value.Split(',');
                 theme.FormHeaderForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                            Convert.ToInt16(colorArray[1]),
-                                                           Convert.ToInt16(colorArray[2]),
-                                                           Convert.ToInt16(colorArray[3]));
+                                                           Convert.ToInt16(colorArray[2]));
                 theme.FormHeaderFont = new Font(attr.Attributes.GetNamedItem("font").Value,
                                                 (float)
                                                 Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value,
@@ -142,65 +139,57 @@ namespace MPTagThat.Core
               case "GridView":
                 colorArray = attr.Attributes.GetNamedItem("defaultbackcolor").Value.Split(',');
                 theme.DefaultBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                        Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                        Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("selectionbackcolor").Value.Split(',');
                 theme.SelectionBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                          Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                          Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("alternatingrowbackcolor").Value.Split(',');
                 theme.AlternatingRowBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                                Convert.ToInt16(colorArray[1]),
-                                                               Convert.ToInt16(colorArray[2]),
-                                                               Convert.ToInt16(colorArray[3]));
+                                                               Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("alternatingrowforecolor").Value.Split(',');
                 theme.AlternatingRowForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                                Convert.ToInt16(colorArray[1]),
-                                                               Convert.ToInt16(colorArray[2]),
-                                                               Convert.ToInt16(colorArray[3]));
+                                                               Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("changedbackcolor").Value.Split(',');
                 theme.ChangedBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                        Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                        Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("changedforecolor").Value.Split(',');
                 theme.ChangedForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                        Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                        Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("fixableerrorbackcolor").Value.Split(',');
                 theme.FixableErrorBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                              Convert.ToInt16(colorArray[1]),
-                                                             Convert.ToInt16(colorArray[2]),
-                                                             Convert.ToInt16(colorArray[3]));
+                                                             Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("fixableerrorforecolor").Value.Split(',');
                 theme.FixableErrorForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                              Convert.ToInt16(colorArray[1]),
-                                                             Convert.ToInt16(colorArray[2]),
-                                                             Convert.ToInt16(colorArray[3]));
+                                                             Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("nonfixableerrorbackcolor").Value.Split(',');
                 theme.NonFixableErrorBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                                 Convert.ToInt16(colorArray[1]),
-                                                                Convert.ToInt16(colorArray[2]),
-                                                                Convert.ToInt16(colorArray[3]));
+                                                                Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("nonfixableerrorforecolor").Value.Split(',');
                 theme.NonFixableErrorForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                                 Convert.ToInt16(colorArray[1]),
-                                                                Convert.ToInt16(colorArray[2]),
-                                                                Convert.ToInt16(colorArray[3]));
+                                                                Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("findreplacebackcolor").Value.Split(',');
                 theme.FindReplaceBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                             Convert.ToInt16(colorArray[1]),
-                                                            Convert.ToInt16(colorArray[2]),
-                                                            Convert.ToInt16(colorArray[3]));
+                                                            Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("findreplaceforecolor").Value.Split(',');
                 theme.FindReplaceForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]),
                                                             Convert.ToInt16(colorArray[1]),
-                                                            Convert.ToInt16(colorArray[2]),
-                                                            Convert.ToInt16(colorArray[3]));
+                                                            Convert.ToInt16(colorArray[2]));
                 break;
 
               case "Button":
                 colorArray = attr.Attributes.GetNamedItem("backcolor").Value.Split(',');
                 theme.ButtonBackColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                       Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                       Convert.ToInt16(colorArray[2]));
                 colorArray = attr.Attributes.GetNamedItem("color").Value.Split(',');
                 theme.ButtonForeColor = Color.FromArgb(Convert.ToInt16(colorArray[0]), Convert.ToInt16(colorArray[1]),
-                                                       Convert.ToInt16(colorArray[2]), Convert.ToInt16(colorArray[3]));
+                                                       Convert.ToInt16(colorArray[2]));
                 theme.ButtonFont = new Font(attr.Attributes.GetNamedItem("font").Value,
                                             (float)
                                             Convert.ToDecimal(attr.Attributes.GetNamedItem("size").Value,
