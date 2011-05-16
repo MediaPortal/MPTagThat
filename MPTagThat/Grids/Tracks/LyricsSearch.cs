@@ -192,7 +192,7 @@ namespace MPTagThat.GridView
       col.HeaderText = "";
       col.ReadOnly = true;
       col.Visible = true;
-      col.Width = 5;
+      col.Width = 1;
       dataGridViewLyrics.Columns.Add(col);
       dataGridViewLyrics.Columns[dataGridViewLyrics.Columns.Count - 1].AutoSizeMode =
         DataGridViewAutoSizeColumnMode.Fill;
@@ -363,7 +363,10 @@ namespace MPTagThat.GridView
 
     private void btCancel_Click(object sender, EventArgs e)
     {
-      lc.StopSearches = true;
+      if (lc != null)
+      {
+        lc.StopSearches = true;
+      }
       StopThread();
       Close();
     }
