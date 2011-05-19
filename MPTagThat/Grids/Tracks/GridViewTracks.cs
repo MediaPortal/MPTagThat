@@ -952,7 +952,9 @@ namespace MPTagThat.GridView
         try
         {
           Image img = track.Pictures[0].Data;
-          img.Save(fileName, ImageFormat.Jpeg);
+          // Need to make a copy, otherwise we have a GDI+ Error
+          Bitmap bCopy = new Bitmap(img);
+          bCopy.Save(fileName, ImageFormat.Jpeg);
         }
         catch (Exception ex)
         {
