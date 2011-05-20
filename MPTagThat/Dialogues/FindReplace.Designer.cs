@@ -35,75 +35,71 @@ namespace MPTagThat.Dialogues
       this.buttonReplace = new MPTagThat.Core.WinControls.MPTButton();
       this.cbReplace = new System.Windows.Forms.ComboBox();
       this.lblReplaceWith = new MPTagThat.Core.WinControls.MPTLabel();
+      this.buttonClose = new MPTagThat.Core.WinControls.MPTButton();
       this.lblFindWhat = new MPTagThat.Core.WinControls.MPTLabel();
       this.cbFind = new System.Windows.Forms.ComboBox();
       this.groupBoxMatching = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxMatchWholeWords = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.checkBoxMatchCase = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxOptions = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.rbSearchRegEx = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.rbSearchNormal = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.buttonClose = new MPTagThat.Core.WinControls.MPTButton();
       this.labelHeader = new MPTagThat.Core.WinControls.MPTLabel();
       this.buttonFindNext = new MPTagThat.Core.WinControls.MPTButton();
-      this.tabControlFindReplace.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlFindReplace)).BeginInit();
       this.tabPageReplace.SuspendLayout();
       this.groupBoxMatching.SuspendLayout();
-      this.groupBoxOptions.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControlFindReplace
       // 
-      this.tabControlFindReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+      this.tabControlFindReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.tabControlFindReplace.Location = new System.Drawing.Point(11, 32);
       this.tabControlFindReplace.Name = "tabControlFindReplace";
-      this.tabControlFindReplace.Size = new System.Drawing.Size(466, 375);
+      this.tabControlFindReplace.SelectedTabPage = this.tabPageFind;
+      this.tabControlFindReplace.Size = new System.Drawing.Size(466, 273);
       this.tabControlFindReplace.TabIndex = 0;
-      this.tabControlFindReplace.TabPages.AddRange(new Elegant.Ui.TabPage[]
-                                                     {
-                                                       this.tabPageFind,
-                                                       this.tabPageReplace
-                                                     });
-
+      this.tabControlFindReplace.TabPages.AddRange(new Elegant.Ui.TabPage[] {
+            this.tabPageFind,
+            this.tabPageReplace});
       // 
       // tabPageFind
-      // );
+      // 
+      this.tabPageFind.ActiveControl = null;
       this.tabPageFind.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPageFind.KeyTip = null;
       this.tabPageFind.Localisation = "TabFind";
       this.tabPageFind.LocalisationContext = "FindReplace";
-      this.tabPageFind.Location = new System.Drawing.Point(4, 22);
       this.tabPageFind.Name = "tabPageFind";
       this.tabPageFind.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageFind.Size = new System.Drawing.Size(458, 349);
+      this.tabPageFind.Size = new System.Drawing.Size(464, 252);
       this.tabPageFind.TabIndex = 0;
       this.tabPageFind.Text = "Find";
       // 
       // tabPageReplace
       // 
+      this.tabPageReplace.ActiveControl = null;
       this.tabPageReplace.BackColor = System.Drawing.SystemColors.Control;
       this.tabPageReplace.Controls.Add(this.buttonReplaceAll);
       this.tabPageReplace.Controls.Add(this.buttonReplace);
       this.tabPageReplace.Controls.Add(this.cbReplace);
       this.tabPageReplace.Controls.Add(this.lblReplaceWith);
+      this.tabPageReplace.KeyTip = null;
       this.tabPageReplace.Localisation = "TabReplace";
       this.tabPageReplace.LocalisationContext = "FindReplace";
-      this.tabPageReplace.Location = new System.Drawing.Point(4, 22);
       this.tabPageReplace.Name = "tabPageReplace";
       this.tabPageReplace.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageReplace.Size = new System.Drawing.Size(458, 349);
+      this.tabPageReplace.Size = new System.Drawing.Size(464, 252);
       this.tabPageReplace.TabIndex = 1;
       this.tabPageReplace.Text = "Replace";
       // 
       // buttonReplaceAll
       // 
       this.buttonReplaceAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonReplaceAll.AutoSize = true;
       this.buttonReplaceAll.DialogResult = System.Windows.Forms.DialogResult.OK;
+      this.buttonReplaceAll.Id = "eb8696a5-2e99-46d3-b041-edfa0b71e041";
       this.buttonReplaceAll.Localisation = "ReplaceAllBtn";
       this.buttonReplaceAll.LocalisationContext = "FindReplace";
-      this.buttonReplaceAll.Location = new System.Drawing.Point(343, 84);
+      this.buttonReplaceAll.Location = new System.Drawing.Point(346, 94);
       this.buttonReplaceAll.Name = "buttonReplaceAll";
       this.buttonReplaceAll.Size = new System.Drawing.Size(108, 23);
       this.buttonReplaceAll.TabIndex = 26;
@@ -114,11 +110,11 @@ namespace MPTagThat.Dialogues
       // buttonReplace
       // 
       this.buttonReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonReplace.AutoSize = true;
       this.buttonReplace.DialogResult = System.Windows.Forms.DialogResult.OK;
+      this.buttonReplace.Id = "1be41ce4-fc96-4c03-943f-8ea8df530a4f";
       this.buttonReplace.Localisation = "ReplaceBtn";
       this.buttonReplace.LocalisationContext = "FindReplace";
-      this.buttonReplace.Location = new System.Drawing.Point(343, 54);
+      this.buttonReplace.Location = new System.Drawing.Point(346, 63);
       this.buttonReplace.Name = "buttonReplace";
       this.buttonReplace.Size = new System.Drawing.Size(108, 23);
       this.buttonReplace.TabIndex = 25;
@@ -135,7 +131,6 @@ namespace MPTagThat.Dialogues
       // 
       // lblReplaceWith
       // 
-      this.lblReplaceWith.AutoSize = true;
       this.lblReplaceWith.Localisation = "ReplaceWith";
       this.lblReplaceWith.LocalisationContext = "FindReplace";
       this.lblReplaceWith.Location = new System.Drawing.Point(39, 57);
@@ -144,9 +139,23 @@ namespace MPTagThat.Dialogues
       this.lblReplaceWith.TabIndex = 0;
       this.lblReplaceWith.Text = "Replace with:";
       // 
+      // buttonClose
+      // 
+      this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+      this.buttonClose.Id = "534e1f87-ff24-4653-aa52-0bb88a95f758";
+      this.buttonClose.Localisation = "Cancel";
+      this.buttonClose.LocalisationContext = "FindReplace";
+      this.buttonClose.Location = new System.Drawing.Point(358, 176);
+      this.buttonClose.Name = "buttonClose";
+      this.buttonClose.Size = new System.Drawing.Size(108, 23);
+      this.buttonClose.TabIndex = 2;
+      this.buttonClose.Text = "Close";
+      this.buttonClose.UseVisualStyleBackColor = true;
+      this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+      // 
       // lblFindWhat
       // 
-      this.lblFindWhat.AutoSize = true;
       this.lblFindWhat.Localisation = "FindWhat";
       this.lblFindWhat.LocalisationContext = "FindReplace";
       this.lblFindWhat.Location = new System.Drawing.Point(74, 84);
@@ -166,93 +175,42 @@ namespace MPTagThat.Dialogues
       // 
       this.groupBoxMatching.Controls.Add(this.checkBoxMatchWholeWords);
       this.groupBoxMatching.Controls.Add(this.checkBoxMatchCase);
+      this.groupBoxMatching.Id = "a2ba2e69-6147-49fb-a7f0-aacdc8f051ec";
       this.groupBoxMatching.Localisation = "GroupBoxConvert";
       this.groupBoxMatching.LocalisationContext = "FindReplace";
-      this.groupBoxMatching.Location = new System.Drawing.Point(25, 201);
+      this.groupBoxMatching.Location = new System.Drawing.Point(25, 200);
       this.groupBoxMatching.Name = "groupBoxMatching";
-      this.groupBoxMatching.Size = new System.Drawing.Size(220, 80);
+      this.groupBoxMatching.Size = new System.Drawing.Size(220, 81);
       this.groupBoxMatching.TabIndex = 2;
-      this.groupBoxMatching.TabStop = false;
       // 
       // checkBoxMatchWholeWords
       // 
-      this.checkBoxMatchWholeWords.AutoSize = true;
+      this.checkBoxMatchWholeWords.Id = "cba3926c-5836-4143-8dce-eb480b03a5b5";
       this.checkBoxMatchWholeWords.Localisation = "MatchWords";
       this.checkBoxMatchWholeWords.LocalisationContext = "FindReplace";
       this.checkBoxMatchWholeWords.Location = new System.Drawing.Point(10, 46);
       this.checkBoxMatchWholeWords.Name = "checkBoxMatchWholeWords";
-      this.checkBoxMatchWholeWords.Size = new System.Drawing.Size(140, 17);
+      this.checkBoxMatchWholeWords.Size = new System.Drawing.Size(140, 26);
       this.checkBoxMatchWholeWords.TabIndex = 1;
       this.checkBoxMatchWholeWords.Text = "Match whole words only";
       // 
       // checkBoxMatchCase
       // 
-      this.checkBoxMatchCase.AutoSize = true;
+      this.checkBoxMatchCase.Id = "e50c4a0b-6a62-4310-b93f-75da4bb28d9c";
       this.checkBoxMatchCase.Localisation = "MatchCase";
       this.checkBoxMatchCase.LocalisationContext = "FindReplace";
       this.checkBoxMatchCase.Location = new System.Drawing.Point(10, 23);
       this.checkBoxMatchCase.Name = "checkBoxMatchCase";
-      this.checkBoxMatchCase.Size = new System.Drawing.Size(83, 17);
+      this.checkBoxMatchCase.Size = new System.Drawing.Size(83, 26);
       this.checkBoxMatchCase.TabIndex = 0;
       this.checkBoxMatchCase.Text = "Match Case";
       // 
-      // groupBoxOptions
-      // 
-      this.groupBoxOptions.Controls.Add(this.rbSearchRegEx);
-      this.groupBoxOptions.Controls.Add(this.rbSearchNormal);
-      this.groupBoxOptions.Localisation = "GroupBoxSearch";
-      this.groupBoxOptions.LocalisationContext = "FindReplace";
-      this.groupBoxOptions.Location = new System.Drawing.Point(25, 287);
-      this.groupBoxOptions.Name = "groupBoxOptions";
-      this.groupBoxOptions.Size = new System.Drawing.Size(220, 85);
-      this.groupBoxOptions.TabIndex = 4;
-      this.groupBoxOptions.TabStop = false;
-      this.groupBoxOptions.Text = "Search Mode";
-      // 
-      // rbSearchRegEx
-      // 
-      this.rbSearchRegEx.AutoSize = true;
-      this.rbSearchRegEx.Localisation = "SearchRegex";
-      this.rbSearchRegEx.LocalisationContext = "FindReplace";
-      this.rbSearchRegEx.Location = new System.Drawing.Point(10, 52);
-      this.rbSearchRegEx.Name = "rbSearchRegEx";
-      this.rbSearchRegEx.Size = new System.Drawing.Size(116, 17);
-      this.rbSearchRegEx.TabIndex = 8;
-      this.rbSearchRegEx.Text = "Regular Expression";
-      // 
-      // rbSearchNormal
-      // 
-      this.rbSearchNormal.AutoSize = true;
-      this.rbSearchNormal.Checked = true;
-      this.rbSearchNormal.Localisation = "SearchNormal";
-      this.rbSearchNormal.LocalisationContext = "FindReplace";
-      this.rbSearchNormal.Location = new System.Drawing.Point(10, 29);
-      this.rbSearchNormal.Name = "rbSearchNormal";
-      this.rbSearchNormal.Size = new System.Drawing.Size(58, 17);
-      this.rbSearchNormal.TabIndex = 7;
-      this.rbSearchNormal.TabStop = true;
-      this.rbSearchNormal.Text = "Normal";
-      // 
-      // buttonClose
-      // 
-      this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonClose.AutoSize = true;
-      this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.buttonClose.Localisation = "Cancel";
-      this.buttonClose.LocalisationContext = "FindReplace";
-      this.buttonClose.Location = new System.Drawing.Point(358, 170);
-      this.buttonClose.Name = "buttonClose";
-      this.buttonClose.Size = new System.Drawing.Size(108, 23);
-      this.buttonClose.TabIndex = 2;
-      this.buttonClose.Text = "Close";
-      this.buttonClose.UseVisualStyleBackColor = true;
-      this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-      // 
       // labelHeader
       // 
-      this.labelHeader.AutoSize = true;
       this.labelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.labelHeader.ForeColor = System.Drawing.Color.DarkGray;
+      this.labelHeader.Localisation = "labelHeader";
+      this.labelHeader.LocalisationContext = "ShapedForm";
       this.labelHeader.Location = new System.Drawing.Point(7, 9);
       this.labelHeader.Name = "labelHeader";
       this.labelHeader.Size = new System.Drawing.Size(62, 20);
@@ -262,11 +220,11 @@ namespace MPTagThat.Dialogues
       // buttonFindNext
       // 
       this.buttonFindNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonFindNext.AutoSize = true;
       this.buttonFindNext.DialogResult = System.Windows.Forms.DialogResult.OK;
+      this.buttonFindNext.Id = "8ca33566-e3a6-485c-a2f0-f5eb534f2c6b";
       this.buttonFindNext.Localisation = "FindNext";
       this.buttonFindNext.LocalisationContext = "FindReplace";
-      this.buttonFindNext.Location = new System.Drawing.Point(358, 74);
+      this.buttonFindNext.Location = new System.Drawing.Point(358, 82);
       this.buttonFindNext.Name = "buttonFindNext";
       this.buttonFindNext.Size = new System.Drawing.Size(108, 23);
       this.buttonFindNext.TabIndex = 24;
@@ -281,13 +239,12 @@ namespace MPTagThat.Dialogues
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.Control;
       this.CancelButton = this.buttonClose;
-      this.ClientSize = new System.Drawing.Size(489, 419);
+      this.ClientSize = new System.Drawing.Size(489, 318);
       this.Controls.Add(this.lblFindWhat);
       this.Controls.Add(this.buttonFindNext);
+      this.Controls.Add(this.buttonClose);
       this.Controls.Add(this.cbFind);
       this.Controls.Add(this.groupBoxMatching);
-      this.Controls.Add(this.buttonClose);
-      this.Controls.Add(this.groupBoxOptions);
       this.Controls.Add(this.labelHeader);
       this.Controls.Add(this.tabControlFindReplace);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -297,13 +254,10 @@ namespace MPTagThat.Dialogues
       this.Text = "FindReplace";
       this.TopMost = true;
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
-      this.tabControlFindReplace.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.tabControlFindReplace)).EndInit();
       this.tabPageReplace.ResumeLayout(false);
       this.tabPageReplace.PerformLayout();
       this.groupBoxMatching.ResumeLayout(false);
-      this.groupBoxMatching.PerformLayout();
-      this.groupBoxOptions.ResumeLayout(false);
-      this.groupBoxOptions.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -317,13 +271,10 @@ namespace MPTagThat.Dialogues
     private MPTagThat.Core.WinControls.MPTGroupBox groupBoxMatching;
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxMatchWholeWords;
     private MPTagThat.Core.WinControls.MPTCheckBox checkBoxMatchCase;
-    private MPTagThat.Core.WinControls.MPTGroupBox groupBoxOptions;
     private MPTagThat.Core.WinControls.MPTButton buttonClose;
     private MPTagThat.Core.WinControls.MPTLabel labelHeader;
     private MPTagThat.Core.WinControls.MPTLabel lblFindWhat;
     private System.Windows.Forms.ComboBox cbFind;
-    private MPTagThat.Core.WinControls.MPTRadioButton rbSearchRegEx;
-    private MPTagThat.Core.WinControls.MPTRadioButton rbSearchNormal;
     private MPTagThat.Core.WinControls.MPTButton buttonFindNext;
     private MPTagThat.Core.WinControls.MPTLabel lblReplaceWith;
     private MPTagThat.Core.WinControls.MPTButton buttonReplace;

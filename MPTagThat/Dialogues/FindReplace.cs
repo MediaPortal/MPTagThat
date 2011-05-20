@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.GridView;
@@ -57,7 +58,7 @@ namespace MPTagThat.Dialogues
         LocaliseScreen();
         if (_replace)
         {
-          tabControlFindReplace.SelectLastTab();
+          tabControlFindReplace.SelectedTabPage = tabPageReplace;
         }
       }
     }
@@ -86,7 +87,7 @@ namespace MPTagThat.Dialogues
 
       LocaliseScreen();
 
-      tabControlFindReplace.SelectFirstTab();
+      tabControlFindReplace.SelectedTabPage = tabPageFind;
     }
 
     #endregion
@@ -115,10 +116,18 @@ namespace MPTagThat.Dialogues
     private bool FindString()
     {
       string searchString = cbFind.Text;
+
+      if (checkBoxMatchWholeWords.Checked)
+      {
+        searchString = string.Format(@"\b{0}\b", searchString);
+      }
+
+      RegexOptions searchOptions = RegexOptions.CultureInvariant;
       if (!checkBoxMatchCase.Checked)
       {
-        searchString = searchString.ToLowerInvariant();
+        searchOptions = RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
       }
+
 
       for (int i = _curRow; i < _main.TracksGridView.View.Rows.Count; i++)
       {
@@ -131,22 +140,20 @@ namespace MPTagThat.Dialogues
           }
 
           string cellContent = row.Cells[j].Value == null ? "" : row.Cells[j].Value.ToString();
-          if (!checkBoxMatchCase.Checked)
-          {
-            cellContent = cellContent.ToLowerInvariant();
-          }
-          int findPos = cellContent.IndexOf(searchString, _curCellFindPos);
-          if (findPos > -1)
+          cellContent = cellContent.Substring(_curCellFindPos);
+
+          MatchCollection regexMatches = Regex.Matches(cellContent, searchString, searchOptions);
+          if (regexMatches.Count > 0)
           {
             _searchStringFound = true;
             _curCell = j;
             _curRow = i;
-            _curCellFindPos = findPos + 1;
+            _curCellFindPos = regexMatches[0].Index + 1;
             _findResult = new FindResult();
             _findResult.Row = _curRow;
             _findResult.Column = _curCell;
-            _findResult.StartPos = findPos;
-            _findResult.Length = searchString.Length;
+            _findResult.StartPos = regexMatches[0].Index;
+            _findResult.Length = regexMatches[0].Length;
             _main.TracksGridView.ResultFind = _findResult;
 
             // Position Cell and deselect row, so that we have our find color

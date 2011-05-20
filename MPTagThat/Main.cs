@@ -898,6 +898,8 @@ namespace MPTagThat
       ApplicationCommands.ScriptExecute.Executed += TagsTabButton_Executed;
       ApplicationCommands.TagFromInternet.Executed += TagsTabButton_Executed;
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
+      ApplicationCommands.Find.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -1234,6 +1236,14 @@ namespace MPTagThat
       buttonAddToPlaylist.ScreenTip.Text = localisation.ToString("screentip", "AddPlaylistText");
 
       ribbonGroupOther.Text = localisation.ToString("ribbon", "Other");
+
+      buttonFind.Text = localisation.ToString("ribbon", "Find");
+      buttonFind.ScreenTip.Caption = localisation.ToString("screentip", "Find");
+      buttonFind.ScreenTip.Text = localisation.ToString("screentip", "FindText");
+
+      buttonReplace.Text = localisation.ToString("ribbon", "Replace");
+      buttonReplace.ScreenTip.Caption = localisation.ToString("screentip", "Replace");
+      buttonReplace.ScreenTip.Text = localisation.ToString("screentip", "ReplaceText");
 
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
@@ -3581,6 +3591,18 @@ namespace MPTagThat
 
         case "AddToPlaylist":
           TracksGridView.tracksGrid_AddToPlayList(sender, new EventArgs());
+          break;
+
+        case "Find":
+          FindReplace findDlg = new FindReplace(this);
+          findDlg.Replace = false;
+          ShowCenteredForm(findDlg);
+          break;
+
+        case "Replace":
+          FindReplace replaceDlg = new FindReplace(this);
+          replaceDlg.Replace = true;
+          ShowCenteredForm(replaceDlg);
           break;
       }
     }

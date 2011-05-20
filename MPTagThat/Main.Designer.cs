@@ -290,6 +290,9 @@ namespace MPTagThat
       this.buttonNumberOnClick = new Elegant.Ui.ToggleButton();
       this.buttonAutoNumber = new Elegant.Ui.Button();
       this.textBoxNumber = new Elegant.Ui.TextBox();
+      this.buttonFind = new Elegant.Ui.SplitButton();
+      this.popupMenu4 = new Elegant.Ui.PopupMenu(this.components);
+      this.buttonReplace = new Elegant.Ui.Button();
       this.ribbonGroupPicture = new Elegant.Ui.RibbonGroup();
       this.galleryPicture = new Elegant.Ui.Gallery();
       this.buttonGetCoverArt = new Elegant.Ui.Button();
@@ -411,6 +414,7 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).BeginInit();
       this.buttonGroup1.SuspendLayout();
       this.buttonGroup3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).BeginInit();
       this.ribbonGroupPicture.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.galleryPicture)).BeginInit();
@@ -3240,6 +3244,7 @@ namespace MPTagThat
       this.ribbonGroupTagsEdit.Controls.Add(this.separator3);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
+      this.ribbonGroupTagsEdit.Controls.Add(this.buttonFind);
       this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(168, 3);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
       this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(347, 94);
@@ -3477,19 +3482,55 @@ namespace MPTagThat
       // 
       // textBoxNumber
       // 
+      this.ribbonGroupTagsEdit.SetFlowBreak(this.textBoxNumber, true);
+      this.buttonGroup3.SetFlowBreak(this.textBoxNumber, true);
       this.textBoxNumber.Id = "103acbe1-2662-4c90-b050-8dc9c604b5a0";
       this.textBoxNumber.Location = new System.Drawing.Point(53, 0);
       this.textBoxNumber.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
       this.textBoxNumber.MaxLength = 4;
       this.textBoxNumber.MinimumSize = new System.Drawing.Size(60, 0);
       this.textBoxNumber.Name = "textBoxNumber";
-      this.textBoxNumber.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+      this.textBoxNumber.Padding = new System.Windows.Forms.Padding(0, 1, 15, 0);
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.textBoxNumber, System.Windows.Forms.Keys.None);
-      this.textBoxNumber.Size = new System.Drawing.Size(60, 23);
+      this.textBoxNumber.Size = new System.Drawing.Size(60, 24);
       this.textBoxNumber.TabIndex = 2;
       this.textBoxNumber.Text = "1";
       this.textBoxNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.textBoxNumber.TextEditorWidth = 54;
+      this.textBoxNumber.TextEditorWidth = 39;
+      // 
+      // buttonFind
+      // 
+      this.buttonFind.CommandName = "Find";
+      this.buttonFind.DescriptionText = null;
+      this.buttonFind.Id = "664cf5e1-775a-448d-9871-064b4c8b33a1";
+      this.buttonFind.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImageWithText";
+      this.buttonFind.Location = new System.Drawing.Point(244, 50);
+      this.buttonFind.Name = "buttonFind";
+      this.buttonFind.Popup = this.popupMenu4;
+      this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonFind, System.Windows.Forms.Keys.None);
+      this.buttonFind.Size = new System.Drawing.Size(59, 24);
+      this.buttonFind.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.FindHS)});
+      this.buttonFind.TabIndex = 10;
+      this.buttonFind.Text = "Find";
+      // 
+      // popupMenu4
+      // 
+      this.popupMenu4.Items.AddRange(new System.Windows.Forms.Control[] {
+            this.buttonReplace});
+      this.popupMenu4.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
+      this.popupMenu4.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
+      this.popupMenu4.Size = new System.Drawing.Size(100, 100);
+      // 
+      // buttonReplace
+      // 
+      this.buttonReplace.CommandName = "Replace";
+      this.buttonReplace.Id = "de9f5394-ae31-4316-81ea-093d0d194213";
+      this.buttonReplace.Location = new System.Drawing.Point(2, 2);
+      this.buttonReplace.Name = "buttonReplace";
+      this.buttonReplace.Size = new System.Drawing.Size(126, 23);
+      this.buttonReplace.TabIndex = 3;
+      this.buttonReplace.Text = "Replace";
       // 
       // ribbonGroupPicture
       // 
@@ -4164,6 +4205,7 @@ namespace MPTagThat
       this.buttonGroup1.PerformLayout();
       this.buttonGroup3.ResumeLayout(false);
       this.buttonGroup3.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).EndInit();
       this.ribbonGroupPicture.ResumeLayout(false);
       this.ribbonGroupPicture.PerformLayout();
@@ -4505,6 +4547,9 @@ namespace MPTagThat
     private Core.WinControls.MPTLabel lbCharacterEncoding;
     private Core.WinControls.MPTCheckBox ckChangeReadonlyAttributte;
     private Core.WinControls.MPTCheckBox ckOnlySaveFolderThumb;
+    private Elegant.Ui.SplitButton buttonFind;
+    private Elegant.Ui.PopupMenu popupMenu4;
+    private Elegant.Ui.Button buttonReplace;
   }
 }
 

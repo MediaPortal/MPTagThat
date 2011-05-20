@@ -135,5 +135,9 @@ namespace MPTagThat
 
     [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")] public static Command SaveAsThumb
       = new Command("SaveAsThumb");
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command Find = new Elegant.Ui.Command("Find");
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command Replace = new Elegant.Ui.Command("Replace");
   }
 }

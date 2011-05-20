@@ -92,6 +92,8 @@
     <String id="GetLyrics">Liedtext holen</String>
     <String id="AutoNumber">Automatisch nummerieren</String>
     <String id="NumberOnClick">Nummeriern bei Click</String>
+	<String id="Find">Suchen</String>
+	<String id="Replace">Ersetzen</String>
     <String id="RemoveCommentPicture">Entfernen:</String>
     <String id="RemoveComments">Alle Kommentare entfernen</String>
     <String id="RemovePictures">Alle Bilder entfernen</String>
@@ -193,6 +195,10 @@
     <String id="AddConvertText">Fügt die ausgewählten Dateien zur Konvertierungsliste, um sie in ein anderes Format zu konvertieren.</String>
     <String id="AddPlaylist">Zur Abspielliste hinzufügen</String>
     <String id="AddPlaylistText">Fügt die ausgewählten Dateien zur Abspielliste und startet mit dem Abspielen falls der Player inaktiv ist.</String>
+	<String id="Find">Suchen</String>
+    <String id="FindText">Öffnet den Suchdialog und sucht nach dem angegebenen Text in den ausgewählten Dateien.</String>
+	<String id="Replace">Replace</String>
+    <String id="ReplaceText">Öfffnet den Suchen- / Ersetzendialog, um einen eingegebenen Text durch einen anderen Text zu ersetzen.</String>
 
     <!-- Rip Tab-->
     <String id="RipButton">Rip starten</String>
@@ -900,9 +906,6 @@
     <String id="FindWhat">Suchen nach:</String>
     <String id="MatchCase">Groß- / Kleinschreibung</String>
     <String id="MatchWords">Ganze Wörter</String>
-    <String id="GroupBoxSearch">Suchmodus</String>
-    <String id="SearchNormal">Normal</String>
-    <String id="SearchRegex">Regular Expression</String>
     <String id="FindNext">Nächster</String>
     <String id="Cancel">Schließen</String>
     <String id="TabReplace">Ersetzen</String>

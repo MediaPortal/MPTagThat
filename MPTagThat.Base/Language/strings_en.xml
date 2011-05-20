@@ -92,6 +92,8 @@
     <String id="GetLyrics">Get Lyrics</String>
     <String id="AutoNumber">Auto Number</String>
     <String id="NumberOnClick">Number on Click</String>
+	<String id="Find">Find</String>
+	<String id="Replace">Replace</String>
     <String id="RemoveCommentPicture">Remove:</String>
     <String id="RemoveComments">Remove all comments</String>
     <String id="RemovePictures">Remove all pictures</String>
@@ -193,7 +195,11 @@
     <String id="AddConvertText">Adds the selected files to the list of files to be converted to a different format.</String>
     <String id="AddPlaylist">Add to Playlist</String>
     <String id="AddPlaylistText">Adds the selected files to the Playlist, starting playback with the first file if the player is idle.</String>
-
+	<String id="Find">Find</String>
+    <String id="FindText">Opens the find dialog to search for the specified string in the selected Tracks.</String>
+	<String id="Replace">Replace</String>
+    <String id="ReplaceText">Opens the Find / Replace dialog to replace a specified serach string in the selected Tracks.</String>
+	
     <!-- Rip Tab-->
     <String id="RipButton">Start Rip</String>
     <String id="RipButtonText">Start Ripping of the selected files</String>
@@ -900,9 +906,6 @@
     <String id="FindWhat">Find what:</String>
     <String id="MatchCase">Match Case</String>
     <String id="MatchWords">Match whole words only</String>
-    <String id="GroupBoxSearch">Search Mode</String>
-    <String id="SearchNormal">Normal</String>
-    <String id="SearchRegex">Regular Expression</String>
     <String id="FindNext">Find Next</String>
     <String id="Cancel">Close</String>
     <String id="TabReplace">Replace</String>
