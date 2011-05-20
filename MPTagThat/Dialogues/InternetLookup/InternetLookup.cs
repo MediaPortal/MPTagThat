@@ -185,7 +185,7 @@ namespace MPTagThat.InternetLookup
           {
             if (main.ShowModalDialog(dlgSearchResult) == DialogResult.OK)
             {
-              if (dlgSearchResult.ResultView.SelectedIndices[0] > -1)
+              if (dlgSearchResult.ResultView.SelectedIndices.Count > 0)
                 amazonAlbum = albums[dlgSearchResult.ResultView.SelectedIndices[0]];
               else
                 amazonAlbum = albums[0];
