@@ -36,7 +36,7 @@ SetCompressor /SOLID lzma
 
 # Defines
 !define REGKEY "SOFTWARE\Team MediaPortal\$(^Name)"
-!define VERSION 2.0
+!define VERSION 3.0.0
 !define COMPANY "Team MediaPortal"
 !define URL www.team-mediaportal.com
 
@@ -58,6 +58,7 @@ SetCompressor /SOLID lzma
 !include MUI2.nsh
 !include LogicLib.nsh
 !include InstallOptions.nsh
+!include "DotNetVer.nsh"
 
 # Variables
 Var StartMenuGroup
@@ -100,6 +101,14 @@ BrandingText  "$(^Name) ${VERSION} by ${COMPANY}"
 
 # Installer sections
 Section -Main SEC0000
+	${IfNOT} ${HasDotNet4.0}
+		MessageBox MB_OK "Missing installation of Microsoft .NET Framework 4.0. Please install first."
+		Abort "Missing Microsoft .NET Framework 4.0"
+		Quit
+	${EndIf}
+
+	DetailPrint "Microsoft .NET Framework 4.0 installed."
+	
     SetOverwrite on
     
     # Bin Dir including Lyrics
