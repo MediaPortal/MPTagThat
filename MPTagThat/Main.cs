@@ -2893,6 +2893,8 @@ namespace MPTagThat
 
           InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(this);
           lookup.SearchForAlbumInformation();
+          tagEditControl.FillForm();
+          SetGalleryItem();
           break;
 
         case Action.ActionType.ACTION_ORGANISE:
@@ -3515,6 +3517,8 @@ namespace MPTagThat
         case "TagFromInternet":
           InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(this);
           lookup.SearchForAlbumInformation();
+          tagEditControl.FillForm();
+          SetGalleryItem();
           break;
 
         case "GetCoverArt":
