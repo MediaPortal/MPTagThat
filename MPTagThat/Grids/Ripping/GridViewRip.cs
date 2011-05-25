@@ -300,10 +300,9 @@ namespace MPTagThat.GridView
       {
         _musicDir = _main.RipOutputDirectory;
 
-        List<Item> encoders = (List<Item>)_main.RipEncoderCombo.DataSource;
         if (_main.RipEncoderCombo.SelectedItem != null)
         {
-          encoder = (string)encoders[_main.RipEncoderCombo.SelectedIndex].Value;
+          encoder = (string)(_main.RipEncoderCombo.SelectedItem as Item).Value;
           Options.MainSettings.RipEncoder = encoder;
         }
         else

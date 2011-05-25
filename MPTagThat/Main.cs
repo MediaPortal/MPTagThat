@@ -94,15 +94,12 @@ namespace MPTagThat
 
     // Ribbon Related Vars
     private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
-    private readonly List<Item> encodersRip = new List<Item>();
-    private readonly List<Item> encodersConvert = new List<Item>();
     private bool _initialising = true;
     private bool _numberingOnClick;
     private PictureControl picControl;
     private GalleryItem _displayedGalleryItem;
 
     // Settings related Variables
-    private readonly List<Item> amazonSites = new List<Item>();
     private readonly List<ActionWindow> mapWindows = new List<ActionWindow>();
 
     private int _defaultBitRateIndex;
@@ -568,41 +565,42 @@ namespace MPTagThat
       // Load the available Scripts
       PopulateScriptsCombo();
 
-      encodersRip.Add(new Item("MP3 Encoder", "mp3", ""));
-      encodersRip.Add(new Item("OGG Encoder", "ogg", ""));
-      encodersRip.Add(new Item("FLAC Encoder", "flac", ""));
-      encodersRip.Add(new Item("AAC Encoder", "m4a", ""));
-      encodersRip.Add(new Item("WMA Encoder", "wma", ""));
-      encodersRip.Add(new Item("WAV Encoder", "wav", ""));
-      encodersRip.Add(new Item("MusePack Encoder", "mpc", ""));
-      encodersRip.Add(new Item("WavPack Encoder", "wv", ""));
-      comboBoxRipEncoder.DisplayMember = "Name";
-      comboBoxRipEncoder.ValueMember = "Value";
-      comboBoxRipEncoder.DataSource = encodersRip;
+      comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+      comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+      comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+      comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+      comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+      comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+      comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+      comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
 
-      encodersConvert.Add(new Item("MP3 Encoder", "mp3", ""));
-      encodersConvert.Add(new Item("OGG Encoder", "ogg", ""));
-      encodersConvert.Add(new Item("FLAC Encoder", "flac", ""));
-      encodersConvert.Add(new Item("AAC Encoder", "m4a", ""));
-      encodersConvert.Add(new Item("WMA Encoder", "wma", ""));
-      encodersConvert.Add(new Item("WAV Encoder", "wav", ""));
-      encodersConvert.Add(new Item("MusePack Encoder", "mpc", ""));
-      encodersConvert.Add(new Item("WavPack Encoder", "wv", ""));
-      comboBoxConvertEncoder.DisplayMember = "Name";
-      comboBoxConvertEncoder.ValueMember = "Value";
-      comboBoxConvertEncoder.DataSource = encodersConvert;
+      comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+      comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
 
       int i = 0;
-      foreach (Item item in encodersRip)
+      foreach (Item item in comboBoxRipEncoder.Items)
+      {
+        if ((string)item.Value == Options.MainSettings.RipEncoder)
+        {
+          comboBoxRipEncoder.SelectedIndex = i;
+          break;
+        }
+        i++;
+      }
+
+      i = 0;
+      foreach (Item item in comboBoxConvertEncoder.Items)
       {
         if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
         {
           comboBoxConvertEncoder.SelectedIndex = i;
-        }
-
-        if ((string)item.Value == Options.MainSettings.RipEncoder)
-        {
-          comboBoxRipEncoder.SelectedIndex = i;
+          break;
         }
         i++;
       }

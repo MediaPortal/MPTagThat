@@ -197,10 +197,9 @@ namespace MPTagThat.GridView
 
       string encoder = null;
 
-      List<Item> encoders = (List<Item>)_main.EncoderCombo.DataSource;
       if (_main.EncoderCombo.SelectedItem != null)
       {
-        encoder = (string)encoders[_main.EncoderCombo.SelectedIndex].Value;
+        encoder = (string)(_main.EncoderCombo.SelectedItem as Item).Value;
       }
 
       if (encoder == null)
