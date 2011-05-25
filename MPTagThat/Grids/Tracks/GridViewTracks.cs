@@ -329,7 +329,6 @@ namespace MPTagThat.GridView
       log.Trace(">>>");
 
       bool bErrors = false;
-      int i = 0;
 
       if (showProgressDialog)
       {
@@ -337,10 +336,11 @@ namespace MPTagThat.GridView
       }
 
       int trackCount = bindingList.Count;
-      foreach (TrackData track in bindingList)
+      for (int i = 0; i < trackCount; i++)
       {
         Application.DoEvents();
 
+        TrackData track = bindingList[i];
         if (showProgressDialog)
         {
           _main.progressBar1.Value += 1;
@@ -353,8 +353,6 @@ namespace MPTagThat.GridView
 
         if (!SaveTrack(track, i))
           bErrors = true;
-
-        i++;
       }
 
       Options.ReadOnlyFileHandling = 2; //No
