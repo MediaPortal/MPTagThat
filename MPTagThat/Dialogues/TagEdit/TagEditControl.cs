@@ -1470,7 +1470,7 @@ namespace MPTagThat.TagEdit
           int parsedYear = 0;
           try
           {
-            parsedYear = Int32.Parse(tbYear.Text.Trim());
+            parsedYear = tbYear.Text.Trim() == "" ? 0 : Int32.Parse(tbYear.Text.Trim());
           }
           catch (Exception)
           { }
@@ -1495,7 +1495,7 @@ namespace MPTagThat.TagEdit
           int parsedBPM = 0;
           try
           {
-            parsedBPM = Int32.Parse(tbBPM.Text.Trim());
+            parsedBPM = tbBPM.Text.Trim() == "" ? 0 : Int32.Parse(tbBPM.Text.Trim());
           }
           catch (Exception)
           { }
@@ -1522,12 +1522,12 @@ namespace MPTagThat.TagEdit
 
           try
           {
-            tracknumber = Int32.Parse(tbTrack.Text.Trim());
+            tracknumber = tbTrack.Text.Trim() == "" ? 0 : Int32.Parse(tbTrack.Text.Trim());
           }
           catch (Exception) { }
           try
           {
-            trackcount = Int32.Parse(tbNumTracks.Text.Trim());
+            trackcount = tbNumTracks.Text.Trim() == "" ? 0 : Int32.Parse(tbNumTracks.Text.Trim());
           }
           catch (Exception) { }
 
@@ -1559,12 +1559,12 @@ namespace MPTagThat.TagEdit
 
           try
           {
-            discnumber = Int32.Parse(tbDisc.Text.Trim());
+            discnumber = tbDisc.Text.Trim() == "" ? 0 : Int32.Parse(tbDisc.Text.Trim());
           }
           catch (Exception) { }
           try
           {
-            disccount = Int32.Parse(tbNumDiscs.Text.Trim());
+            disccount = tbNumDiscs.Text.Trim() == "" ? 0 : Int32.Parse(tbNumDiscs.Text.Trim());
           }
           catch (Exception) { }
 
