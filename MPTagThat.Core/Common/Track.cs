@@ -433,7 +433,7 @@ namespace MPTagThat.Core
 
         if (track.Comment != "")
         {
-          track.Comment = "";
+          file.Tag.Comment = "";
           if (track.TagType.ToLower() == "mp3")
           {
             id3v1tag.Comment = track.Comment;
@@ -441,6 +441,8 @@ namespace MPTagThat.Core
             {
               CommentsFrame commentsframe = CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
               commentsframe.Text = comment.Text;
+              commentsframe.Description = comment.Description;
+              commentsframe.Language = comment.Language;
             }
           }
           else
