@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using LyricsEngine;
@@ -115,6 +116,7 @@ namespace MPTagThat.TagEdit
 
       BeginSearchIfPossible(artist, title);
 
+      this.CenterToScreen();
       ShowDialog();
     }
 
