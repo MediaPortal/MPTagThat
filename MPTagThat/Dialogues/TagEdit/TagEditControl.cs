@@ -220,7 +220,7 @@ namespace MPTagThat.TagEdit
         ckTrackLength.Visible = true;
         tbTrackLength.Visible = false;
         btGetTrackLength.Visible = false;
-        btGetLyricsFromInternet.Visible = false;
+        btGetLyricsFromText.Visible = false;
 
         btPrevious.Enabled = false;
         btNext.Enabled = false;
@@ -242,7 +242,7 @@ namespace MPTagThat.TagEdit
         ckTrackLength.Visible = false;
         tbTrackLength.Visible = true;
         btGetTrackLength.Visible = true;
-        btGetLyricsFromInternet.Visible = true;
+        btGetLyricsFromText.Visible = true;
 
         btPrevious.Enabled = true;
         btNext.Enabled = true;
@@ -2961,7 +2961,14 @@ namespace MPTagThat.TagEdit
 
     private void btGetLyricsFromInternet_Click(object sender, EventArgs e)
     {
-      LyricsSearch lyricsSearch = new LyricsSearch(this, tbArtist.Text, tbTitle.Text, false);
+      if (_isMultiTagEdit)
+      {
+        main.TracksGridView.GetLyrics();
+      }
+      else
+      {
+        LyricsSearch lyricsSearch = new LyricsSearch(this, tbArtist.Text, tbTitle.Text, false);  
+      }
     }
 
     #endregion
