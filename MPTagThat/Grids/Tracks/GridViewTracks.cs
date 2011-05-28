@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -735,8 +736,7 @@ namespace MPTagThat.GridView
         log.Debug("CoverArt: Album contains Multiple Artists, just search for the album");
       }
 
-      savedAlbum = "";
-      savedArtist = "";
+      Dictionary<string, AmazonAlbum> savedCoverCash = new Dictionary<string, AmazonAlbum>();
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
@@ -790,13 +790,25 @@ namespace MPTagThat.GridView
           if (track.Album == "")
             continue;
 
-          // Only retrieve the Cover Art, if we don't have it yet
-          if (track.Album != savedAlbum || (track.Artist != savedArtist && !isMultipleArtistAlbum) ||
-              amazonAlbum == null)
+          string coverSearchString = track.Artist + track.Album;
+          if (isMultipleArtistAlbum)
           {
-            savedArtist = track.Artist;
-            savedAlbum = track.Album;
+            coverSearchString = track.Album;
+          }
 
+          bool foundInCash = savedCoverCash.ContainsKey(coverSearchString);
+          if (foundInCash)
+          {
+            amazonAlbum = savedCoverCash[coverSearchString];
+          }
+          else
+          {
+            amazonAlbum = null;
+          }
+
+          // Only retrieve the Cover Art, if we don't have it yet)
+          if (!foundInCash || amazonAlbum == null)
+          {
             CoverSearch dlgAlbumResults = new CoverSearch();
             dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
             dlgAlbumResults.Album = track.Album;
@@ -829,9 +841,16 @@ namespace MPTagThat.GridView
           // Now update the Cover Art
           if (amazonAlbum != null)
           {
-            // Only write a picture if we don't have a picture OR Overwrite Pictures is set
+            if (!savedCoverCash.ContainsKey(coverSearchString))
+            {
+              savedCoverCash.Add(coverSearchString, amazonAlbum);
+            }
+
+            // Only write a picture if we don't have a picture OR Overwrite Pictures is set);
             if ((track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers) && !Options.MainSettings.OnlySaveFolderThumb)
             {
+              track.Pictures.Clear();
+            
               ByteVector vector = amazonAlbum.AlbumImage;
               if (vector != null)
               {
