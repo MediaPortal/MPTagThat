@@ -433,16 +433,7 @@ namespace MPTagThat.GridView
             tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
 
-            if (rowIndex % 2 == 0)
-            {
-              tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
-                ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-            }
-            else
-            {
-              tracksGrid.Rows[rowIndex].DefaultCellStyle.BackColor =
-                ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-            }
+            SetGridRowColors(rowIndex);
           }
           else
           {
@@ -1330,7 +1321,11 @@ namespace MPTagThat.GridView
         if (track.TagType.ToLower() == "mp3")
         {
           track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName);
-          if (track.MP3ValidationError != TrackData.MP3Error.NoError)
+          if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
+          {
+            SetGridRowColors(row.Index);
+          }
+          else
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
           }
@@ -1405,6 +1400,24 @@ namespace MPTagThat.GridView
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
 
       SetStatusColumnChange(tracksGrid.Rows[index]);
+    }
+
+    /// <summary>
+    /// Sets the Grid Color based on the Line
+    /// </summary>
+    /// <param name="index"></param>
+    public void SetGridRowColors(int index)
+    {
+      if (index % 2 == 0)
+      {
+        tracksGrid.Rows[index].DefaultCellStyle.BackColor =
+          ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+      }
+      else
+      {
+        tracksGrid.Rows[index].DefaultCellStyle.BackColor =
+          ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+      }
     }
 
     /// <summary>

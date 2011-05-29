@@ -120,6 +120,15 @@ namespace MPTagThat.Core
         error = TrackData.MP3Error.NonFixable; // Non Fixable error
       }
 
+      if (error == TrackData.MP3Error.Fixable)
+      {
+        log.Warn("MP3 Validate Fixable error: {0}", StdOutList[0]);
+      }
+      else if (error == TrackData.MP3Error.NonFixable)
+      {
+        log.Warn("MP3 Validate Non-Fixable error: {0}", StdOutList[0]);
+      }
+
       // This happens, if we fixed an error
       if (StdOutList.Count > 2)
       {
