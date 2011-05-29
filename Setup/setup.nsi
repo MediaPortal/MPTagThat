@@ -38,6 +38,7 @@ SetCompressor /SOLID lzma
 !define REGKEY "SOFTWARE\Team MediaPortal\$(^Name)"
 !define VERSION 3.0.0
 !define COMPANY "Team MediaPortal"
+!define AUTHOR "Helmut Wahrmann"
 !define URL www.team-mediaportal.com
 
 # MUI defines
@@ -86,18 +87,19 @@ InstallDir "$PROGRAMFILES\Team MediaPortal\MPTagThat"
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 1.0.0.0
+VIProductVersion 3.0.0.0
 VIAddVersionKey ProductName "MPTagThat the MediaPortal Tag Editor"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
+VIAddVersionKey Author "${AUTHOR}"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey FileDescription ""
 VIAddVersionKey LegalCopyright ""
 InstallDirRegKey HKLM "${REGKEY}" Path
 ShowUninstDetails show
 
-BrandingText  "$(^Name) ${VERSION} by ${COMPANY}"
+BrandingText  "$(^Name) ${VERSION} by ${AUTHOR}"
 
 # Installer sections
 Section -Main SEC0000
@@ -163,14 +165,15 @@ Section -post SEC0001
 	
 	${IF} $CreateStartMenu == 1
 		!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
-		CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe" 0 "" "" "MPTagThat" 
-		CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" "$INSTDIR\uninstall.exe"
+		CreateShortCut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" "$INSTDIR\MpTagThat.exe" "" "$INSTDIR\MpTagThat.exe" 0 "" "" "MPTagThat" 
+		CreateShortCut "$SMPROGRAMS\$StartMenuGroup\User Files.lnk" "$AppData\$(^Name)" "" "$AppData\$(^Name)" 0 "" "" "Browse your config files, logs, ..."
+		CreateShortCut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" "$INSTDIR\uninstall.exe"
 		!insertmacro MUI_STARTMENU_WRITE_END
 	${ENDIF}
 	
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${VERSION}"
-    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" Publisher "${COMPANY}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" Publisher "${AUTHOR}"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" URLInfoAbout "${URL}"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayIcon $INSTDIR\uninstall.exe
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
@@ -222,6 +225,7 @@ Section -un.post UNSEC0001
     DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\User Files.lnk"
     Delete "$DESKTOP\$(^Name).lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     DeleteRegValue HKLM "${REGKEY}" StartMenuGroup
@@ -238,6 +242,20 @@ Function .onInit
     InitPluginsDir
 	;Extract InstallOptions files
 	File /oname=$PLUGINSDIR\options.ini "options.ini"
+
+	; Check for old verion and do uninstall
+	ReadRegStr $R0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" "UninstallString"
+	StrCmp $R0 "" done
+ 
+	MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "$(^Name) is already installed. $\n$\nClick `OK` to remove the  previous version or `Cancel` to cancel this upgrade." IDOK uninst
+	Abort
+ 
+	;Run the uninstaller
+	uninst:
+		ClearErrors
+		Exec $INSTDIR\uninstall.exe
+ 
+	done:
 
 FunctionEnd
 
