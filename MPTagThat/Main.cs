@@ -512,241 +512,253 @@ namespace MPTagThat
 
       //FindRibbonWin();
 
-
-      _splashScreen = new SplashScreen();
-      _splashScreen.Run();
-      _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
-      log.Info("Main: Loading Main form");
-
-      // Listen to Messages
-      IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
-      queueMessage.OnMessageReceive += OnMessageReceive;
-
-      // Add the Ribbon Control to the Top Panel
-      _splashScreen.SetInformation(localisation.ToString("splash", "AddRibbon"));
-
-      _initialising = true;
-
-      #region Setup Ribbon
-
-      log.Info("Initialising Ribbon");
-
-      // Register the Ribbon Button Events
-      RegisterCommands();
-
-      // Register Ribbon KeyTips
-      RegisterKeyTips();
-
-      // Load Recent Folders
-      List<PinItem> recentPlacesPinItems = new List<PinItem>();
-
-      foreach (string folderItem in Options.MainSettings.RecentFolders)
+      try
       {
-        string directoryName = Path.GetDirectoryName(folderItem);
+        _splashScreen = new SplashScreen();
+        _splashScreen.Run();
+        _splashScreen.SetInformation(localisation.ToString("splash", "Startup"));
+        log.Info("Main: Loading Main form");
 
-        string folderName = Path.GetFileName(directoryName);
-        if (string.IsNullOrEmpty(folderName))
-          folderName = directoryName;
+        // Listen to Messages
+        IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+        queueMessage.OnMessageReceive += OnMessageReceive;
 
-        PinItem pinItem = new PinItem(
-        folderName,
-        directoryName,
-        Resources.RecentFolder_Large,
-        false,
-        directoryName);
+        // Add the Ribbon Control to the Top Panel
+        _splashScreen.SetInformation(localisation.ToString("splash", "AddRibbon"));
 
-        recentPlacesPinItems.Add(pinItem);
-      }
+        _initialising = true;
 
-      pinListRecentFolders.BeginInit();
-      pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
-      pinListRecentFolders.EndInit();
+        #region Setup Ribbon
 
-      // Load the available Scripts
-      PopulateScriptsCombo();
+        log.Info("Initialising Ribbon");
 
-      comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-      comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-      comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-      comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-      comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-      comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-      comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-      comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+        // Register the Ribbon Button Events
+        RegisterCommands();
 
-      comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-      comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+        // Register Ribbon KeyTips
+        RegisterKeyTips();
 
-      int i = 0;
-      foreach (Item item in comboBoxRipEncoder.Items)
-      {
-        if ((string)item.Value == Options.MainSettings.RipEncoder)
+        // Load Recent Folders
+        List<PinItem> recentPlacesPinItems = new List<PinItem>();
+
+        foreach (string folderItem in Options.MainSettings.RecentFolders)
         {
-          comboBoxRipEncoder.SelectedIndex = i;
-          break;
-        }
-        i++;
-      }
+          try
+          {
+            string directoryName = Path.GetDirectoryName(folderItem);
+            string folderName = Path.GetFileName(directoryName);
+            if (string.IsNullOrEmpty(folderName))
+              folderName = directoryName;
 
-      i = 0;
-      foreach (Item item in comboBoxConvertEncoder.Items)
-      {
-        if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
+            PinItem pinItem = new PinItem(
+              folderName,
+              directoryName,
+              Resources.RecentFolder_Large,
+              false,
+              directoryName);
+
+            recentPlacesPinItems.Add(pinItem);
+          }
+          catch (ArgumentException)
+          {
+
+          }
+        }
+
+        pinListRecentFolders.BeginInit();
+        pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
+        pinListRecentFolders.EndInit();
+
+        // Load the available Scripts
+        PopulateScriptsCombo();
+
+        comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+        comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+        comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+        comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+        comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+        comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+        int i = 0;
+        foreach (Item item in comboBoxRipEncoder.Items)
         {
-          comboBoxConvertEncoder.SelectedIndex = i;
-          break;
+          if ((string) item.Value == Options.MainSettings.RipEncoder)
+          {
+            comboBoxRipEncoder.SelectedIndex = i;
+            break;
+          }
+          i++;
         }
-        i++;
+
+        i = 0;
+        foreach (Item item in comboBoxConvertEncoder.Items)
+        {
+          if ((string) item.Value == Options.MainSettings.LastConversionEncoderUsed)
+          {
+            comboBoxConvertEncoder.SelectedIndex = i;
+            break;
+          }
+          i++;
+        }
+
+        textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
+        ribbon.CurrentTabPage = ribbonTabPageTag;
+        ribbon.CustomTitleBarEnabled = true;
+        log.Info("Finished Initialising Ribbon");
+
+        #endregion
+
+        #region Setup Grids
+
+        log.Debug("Main: Setup Grid");
+        _splashScreen.SetInformation(localisation.ToString("splash", "AddGrids"));
+        // Add the Grids to the Main Form
+        gridViewControl = new GridViewTracks();
+        gridViewBurn = new GridViewBurn(this);
+        gridViewRip = new GridViewRip(this);
+        gridViewConvert = new GridViewConvert(this);
+        playerControl = new PlayerControl();
+
+        // 
+        // gridViewControl
+        // 
+        gridViewControl.AutoScroll = true;
+        gridViewControl.Changed = false;
+        gridViewControl.Dock = DockStyle.Fill;
+        gridViewControl.Location = new Point(0, 0);
+        gridViewControl.Name = "gridViewControl";
+        gridViewControl.Size = new Size(676, 470);
+        gridViewControl.TabIndex = 8;
+        // 
+        // gridViewBurn
+        // 
+        gridViewBurn.Dock = DockStyle.Fill;
+        gridViewBurn.Location = new Point(0, 0);
+        gridViewBurn.Name = "gridViewBurn";
+        gridViewBurn.Size = new Size(676, 470);
+        gridViewBurn.TabIndex = 9;
+        gridViewBurn.Visible = false;
+        //
+        // gridViewRip
+        // 
+        gridViewRip.Dock = DockStyle.Fill;
+        gridViewRip.Location = new Point(0, 0);
+        gridViewRip.Name = "gridViewRip";
+        gridViewRip.Size = new Size(676, 470);
+        gridViewRip.TabIndex = 9;
+        gridViewRip.Visible = false;
+        //
+        // gridViewConvert
+        // 
+        gridViewConvert.Dock = DockStyle.Fill;
+        gridViewConvert.Location = new Point(0, 0);
+        gridViewConvert.Name = "gridViewConvert";
+        gridViewConvert.Size = new Size(676, 470);
+        gridViewConvert.TabIndex = 9;
+        gridViewConvert.Visible = false;
+        // 
+        // playerControl
+        // 
+        playerControl.Dock = DockStyle.Fill;
+        playerControl.Location = new Point(0, 0);
+        playerControl.Name = "playerControl";
+        playerControl.Size = new Size(1008, 68);
+        playerControl.TabIndex = 0;
+
+        playerPanel.Controls.Add(playerControl);
+
+        // Set reference to Main, so that we may use the ErrorGrid
+        gridViewControl.SetMainRef(this);
+
+        #endregion
+
+        // Hide the DB Search Panel
+        splitterTop.ToggleState();
+
+        // Setup Treeview
+        treeViewControl = new TreeViewControl(this);
+        treeViewControl.Dock = DockStyle.Fill;
+        panelLeftTop.Controls.Add(treeViewControl);
+
+        // Setup Database Search Control
+        databaseSearchControl = new DatabaseSearchControl(this);
+        databaseSearchControl.Dock = DockStyle.Fill;
+        panelMiddleDBSearch.Controls.Add(databaseSearchControl);
+
+        // Setup Misc Info Control
+        miscInfoControl = new MiscInfoControl();
+        miscInfoControl.Dock = DockStyle.Fill;
+        panelRight.Controls.Add(miscInfoControl);
+
+        // Setup TagEdit Control
+        tagEditControl = new TagEditControl(this);
+        tagEditControl.Dock = DockStyle.Fill;
+
+        // Now position the Tracklist and Tagedit Panel
+        PositionTrackList();
+
+        // Start Listening for Media Changes
+        ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
+
+        // Load BASS
+        LoadBass();
+
+        // Localise the Screens
+        log.Info("Main: Localisation");
+        _splashScreen.SetInformation(localisation.ToString("splash", "Localisation"));
+        LocaliseScreen();
+
+        // Load the Settings
+        _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
+        LoadSettings();
+
+        // Populate the Treeview with the directories found
+        treeViewControl.Init();
+        treeViewControl.TreeView.Populate();
+        treeViewControl.TreeView.Nodes[0].Expand();
+        treeViewControl.TreeView.ShowFolder(_selectedDirectory);
+
+        _splashScreen.Stop();
+
+        Theme = Options.Themes[Options.MainSettings.Theme];
+
+        // Display the files in the last selected Directory
+        if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
+        {
+          toolStripStatusLabelFolder.Text = _selectedDirectory;
+
+          ThreadStart ts = FolderScanAsync;
+          Thread FolderScanAsyncThread = new Thread(ts);
+          FolderScanAsyncThread.Name = "FolderScanAsyncThread";
+          FolderScanAsyncThread.Start();
+        }
+
+        // setup various Event Handler needed
+        gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
+
+        _initialising = false;
+
+        // Activate the form, will be hidden because of the size change
+        TopMost = true;
+        Focus();
+        BringToFront();
+        TopMost = false;
       }
-
-      textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
-      ribbon.CurrentTabPage = ribbonTabPageTag;
-      ribbon.CustomTitleBarEnabled = true;
-      log.Info("Finished Initialising Ribbon");
-
-      #endregion
-
-      #region Setup Grids
-
-      log.Debug("Main: Setup Grid");
-      _splashScreen.SetInformation(localisation.ToString("splash", "AddGrids"));
-      // Add the Grids to the Main Form
-      gridViewControl = new GridViewTracks();
-      gridViewBurn = new GridViewBurn(this);
-      gridViewRip = new GridViewRip(this);
-      gridViewConvert = new GridViewConvert(this);
-      playerControl = new PlayerControl();
-
-      // 
-      // gridViewControl
-      // 
-      gridViewControl.AutoScroll = true;
-      gridViewControl.Changed = false;
-      gridViewControl.Dock = DockStyle.Fill;
-      gridViewControl.Location = new Point(0, 0);
-      gridViewControl.Name = "gridViewControl";
-      gridViewControl.Size = new Size(676, 470);
-      gridViewControl.TabIndex = 8;
-      // 
-      // gridViewBurn
-      // 
-      gridViewBurn.Dock = DockStyle.Fill;
-      gridViewBurn.Location = new Point(0, 0);
-      gridViewBurn.Name = "gridViewBurn";
-      gridViewBurn.Size = new Size(676, 470);
-      gridViewBurn.TabIndex = 9;
-      gridViewBurn.Visible = false;
-      //
-      // gridViewRip
-      // 
-      gridViewRip.Dock = DockStyle.Fill;
-      gridViewRip.Location = new Point(0, 0);
-      gridViewRip.Name = "gridViewRip";
-      gridViewRip.Size = new Size(676, 470);
-      gridViewRip.TabIndex = 9;
-      gridViewRip.Visible = false;
-      //
-      // gridViewConvert
-      // 
-      gridViewConvert.Dock = DockStyle.Fill;
-      gridViewConvert.Location = new Point(0, 0);
-      gridViewConvert.Name = "gridViewConvert";
-      gridViewConvert.Size = new Size(676, 470);
-      gridViewConvert.TabIndex = 9;
-      gridViewConvert.Visible = false;
-      // 
-      // playerControl
-      // 
-      playerControl.Dock = DockStyle.Fill;
-      playerControl.Location = new Point(0, 0);
-      playerControl.Name = "playerControl";
-      playerControl.Size = new Size(1008, 68);
-      playerControl.TabIndex = 0;
-
-      playerPanel.Controls.Add(playerControl);
-
-      // Set reference to Main, so that we may use the ErrorGrid
-      gridViewControl.SetMainRef(this);
-
-      #endregion
-
-      // Hide the DB Search Panel
-      splitterTop.ToggleState();
-
-      // Setup Treeview
-      treeViewControl = new TreeViewControl(this);
-      treeViewControl.Dock = DockStyle.Fill;
-      panelLeftTop.Controls.Add(treeViewControl);
-
-      // Setup Database Search Control
-      databaseSearchControl = new DatabaseSearchControl(this);
-      databaseSearchControl.Dock = DockStyle.Fill;
-      panelMiddleDBSearch.Controls.Add(databaseSearchControl);
-
-      // Setup Misc Info Control
-      miscInfoControl = new MiscInfoControl();
-      miscInfoControl.Dock = DockStyle.Fill;
-      panelRight.Controls.Add(miscInfoControl);
-
-      // Setup TagEdit Control
-      tagEditControl = new TagEditControl(this);
-      tagEditControl.Dock = DockStyle.Fill;
-
-      // Now position the Tracklist and Tagedit Panel
-      PositionTrackList();
-
-      // Start Listening for Media Changes
-      ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
-
-      // Load BASS
-      LoadBass();
-
-      // Localise the Screens
-      log.Info("Main: Localisation");
-      _splashScreen.SetInformation(localisation.ToString("splash", "Localisation"));
-      LocaliseScreen();
-
-      // Load the Settings
-      _splashScreen.SetInformation(localisation.ToString("splash", "LoadSettings"));
-      LoadSettings();
-
-      // Populate the Treeview with the directories found
-      treeViewControl.Init();
-      treeViewControl.TreeView.Populate();
-      treeViewControl.TreeView.Nodes[0].Expand();
-      treeViewControl.TreeView.ShowFolder(_selectedDirectory);
-
-      _splashScreen.Stop();
-
-      Theme = Options.Themes[Options.MainSettings.Theme];
-
-      // Display the files in the last selected Directory
-      if (_selectedDirectory != String.Empty && !TreeView.DatabaseMode)
+      catch (Exception ex)
       {
-        toolStripStatusLabelFolder.Text = _selectedDirectory;
-
-        ThreadStart ts = FolderScanAsync;
-        Thread FolderScanAsyncThread = new Thread(ts);
-        FolderScanAsyncThread.Name = "FolderScanAsyncThread";
-        FolderScanAsyncThread.Start();
+        log.Error("Exception while loading main form. {0} {1}", ex.Message, ex.StackTrace);
       }
-
-      // setup various Event Handler needed
-      gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
-
-      _initialising = false;
-
-      // Activate the form, will be hidden because of the size change
-      TopMost = true;
-      Focus();
-      BringToFront();
-      TopMost = false;
       log.Info("Finished loading Main Form");
       log.Trace("<<<");
     }
