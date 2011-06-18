@@ -474,6 +474,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\ReplaceHS.png" />
     <None Include="Resources\FindHS.png" />
     <None Include="Resources\Warning.png" />
     <None Include="Resources\TageditDetails_top_selected.png" />

@@ -36,21 +36,6 @@ namespace MPTagThat
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       this.panelBottom = new System.Windows.Forms.Panel();
       this.playerPanel = new MPTagThat.Core.WinControls.MPTPanel();
-      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
-      this.panelMiddleTop = new MPTagThat.Core.WinControls.MPTPanel();
-      this.panelFileList = new MPTagThat.Core.WinControls.MPTPanel();
-      this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
-      this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.MPTPanel();
-      this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
-      this.panelLeftTop = new MPTagThat.Core.WinControls.MPTPanel();
-      this.splitterRight = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
-      this.splitterBottom = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
-      this.panelMiddleBottom = new MPTagThat.Core.WinControls.MPTPanel();
-      this.splitterPlayer = new NJFLib.Controls.CollapsibleSplitter();
-      this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.formFrameSkinner = new Elegant.Ui.FormFrameSkinner();
       this.statusBar = new Elegant.Ui.StatusBar();
       this.statusBarNotificationsArea1 = new Elegant.Ui.StatusBarNotificationsArea();
@@ -332,11 +317,23 @@ namespace MPTagThat
       this.ribbonGroupBurnOptions = new Elegant.Ui.RibbonGroup();
       this.comboBoxBurner = new Elegant.Ui.ComboBox();
       this.comboBoxBurnerSpeed = new Elegant.Ui.ComboBox();
+      this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelMiddleTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelFileList = new MPTagThat.Core.WinControls.MPTPanel();
+      this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
+      this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.MPTPanel();
+      this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
+      this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
+      this.panelLeftTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.splitterRight = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
+      this.panelRight = new MPTagThat.Core.WinControls.MPTPanel();
+      this.splitterBottom = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
+      this.panelMiddleBottom = new MPTagThat.Core.WinControls.MPTPanel();
+      this.splitterPlayer = new NJFLib.Controls.CollapsibleSplitter();
+      this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       themeSelector = new Elegant.Ui.ThemeSelector(this.components);
       this.panelBottom.SuspendLayout();
-      this.panelMiddle.SuspendLayout();
-      this.panelMiddleTop.SuspendLayout();
-      this.panelLeft.SuspendLayout();
       this.statusBar.SuspendLayout();
       this.statusBarNotificationsArea1.SuspendLayout();
       this.statusBarPane2.SuspendLayout();
@@ -441,13 +438,16 @@ namespace MPTagThat
       this.ribbonGroupBurn.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupBurnOptions)).BeginInit();
       this.ribbonGroupBurnOptions.SuspendLayout();
+      this.panelMiddle.SuspendLayout();
+      this.panelMiddleTop.SuspendLayout();
+      this.panelLeft.SuspendLayout();
       this.SuspendLayout();
       // 
       // panelBottom
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 1077);
+      this.panelBottom.Location = new System.Drawing.Point(0, 1075);
       this.panelBottom.Name = "panelBottom";
       this.panelBottom.Size = new System.Drawing.Size(1008, 90);
       this.panelBottom.TabIndex = 12;
@@ -460,179 +460,6 @@ namespace MPTagThat
       this.playerPanel.Size = new System.Drawing.Size(1008, 90);
       this.playerPanel.TabIndex = 11;
       // 
-      // panelMiddle
-      // 
-      this.panelMiddle.Controls.Add(this.panelMiddleTop);
-      this.panelMiddle.Controls.Add(this.splitterLeft);
-      this.panelMiddle.Controls.Add(this.splitterRight);
-      this.panelMiddle.Controls.Add(this.splitterBottom);
-      this.panelMiddle.Controls.Add(this.panelMiddleBottom);
-      this.panelMiddle.Controls.Add(this.panelLeft);
-      this.panelMiddle.Controls.Add(this.panelRight);
-      this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddle.Location = new System.Drawing.Point(0, 153);
-      this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1008, 921);
-      this.panelMiddle.TabIndex = 10;
-      // 
-      // panelMiddleTop
-      // 
-      this.panelMiddleTop.Controls.Add(this.panelFileList);
-      this.panelMiddleTop.Controls.Add(this.splitterTop);
-      this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
-      this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
-      this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(676, 649);
-      this.panelMiddleTop.TabIndex = 11;
-      // 
-      // panelFileList
-      // 
-      this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(0, 88);
-      this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(676, 561);
-      this.panelFileList.TabIndex = 9;
-      // 
-      // splitterTop
-      // 
-      this.splitterTop.AnimationDelay = 20;
-      this.splitterTop.AnimationStep = 20;
-      this.splitterTop.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-      this.splitterTop.ControlToHide = this.panelMiddleDBSearch;
-      this.splitterTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.splitterTop.ExpandParentForm = false;
-      this.splitterTop.Location = new System.Drawing.Point(0, 80);
-      this.splitterTop.Name = "splitterTop";
-      this.splitterTop.TabIndex = 11;
-      this.splitterTop.TabStop = false;
-      this.splitterTop.UseAnimations = true;
-      this.splitterTop.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      // 
-      // panelMiddleDBSearch
-      // 
-      this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
-      this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(676, 80);
-      this.panelMiddleDBSearch.TabIndex = 10;
-      // 
-      // splitterLeft
-      // 
-      this.splitterLeft.AnimationDelay = 20;
-      this.splitterLeft.AnimationStep = 20;
-      this.splitterLeft.BackColor = System.Drawing.SystemColors.Control;
-      this.splitterLeft.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-      this.splitterLeft.ControlToHide = this.panelLeft;
-      this.splitterLeft.ExpandParentForm = false;
-      this.splitterLeft.Localisation = "splitterLeft";
-      this.splitterLeft.LocalisationContext = "Main";
-      this.splitterLeft.Location = new System.Drawing.Point(150, 0);
-      this.splitterLeft.Name = "splitterLeft";
-      this.splitterLeft.TabIndex = 2;
-      this.splitterLeft.TabStop = false;
-      this.splitterLeft.UseAnimations = false;
-      this.splitterLeft.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      // 
-      // panelLeft
-      // 
-      this.panelLeft.Controls.Add(this.panelLeftTop);
-      this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-      this.panelLeft.Location = new System.Drawing.Point(0, 0);
-      this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 921);
-      this.panelLeft.TabIndex = 1;
-      // 
-      // panelLeftTop
-      // 
-      this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
-      this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 921);
-      this.panelLeftTop.TabIndex = 4;
-      // 
-      // splitterRight
-      // 
-      this.splitterRight.AnimationDelay = 20;
-      this.splitterRight.AnimationStep = 20;
-      this.splitterRight.BackColor = System.Drawing.SystemColors.Control;
-      this.splitterRight.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-      this.splitterRight.ControlToHide = this.panelRight;
-      this.splitterRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.splitterRight.ExpandParentForm = false;
-      this.splitterRight.Localisation = "splitterRight";
-      this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(834, 0);
-      this.splitterRight.Name = "splitterRight";
-      this.splitterRight.TabIndex = 4;
-      this.splitterRight.TabStop = false;
-      this.splitterRight.UseAnimations = false;
-      this.splitterRight.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      this.splitterRight.Click += new System.EventHandler(this.splitterRight_Click);
-      // 
-      // panelRight
-      // 
-      this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.panelRight.BackColor = System.Drawing.SystemColors.Control;
-      this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(842, 0);
-      this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 921);
-      this.panelRight.TabIndex = 3;
-      // 
-      // splitterBottom
-      // 
-      this.splitterBottom.AnimationDelay = 20;
-      this.splitterBottom.AnimationStep = 200;
-      this.splitterBottom.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-      this.splitterBottom.ControlToHide = this.panelMiddleBottom;
-      this.splitterBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.splitterBottom.ExpandParentForm = false;
-      this.splitterBottom.Localisation = "collapsibleSplitter1";
-      this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 649);
-      this.splitterBottom.Name = "collapsibleSplitter1";
-      this.splitterBottom.TabIndex = 6;
-      this.splitterBottom.TabStop = false;
-      this.splitterBottom.UseAnimations = false;
-      this.splitterBottom.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      this.splitterBottom.Click += new System.EventHandler(this.splitterBottom_Click);
-      // 
-      // panelMiddleBottom
-      // 
-      this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 657);
-      this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
-      this.panelMiddleBottom.TabIndex = 12;
-      // 
-      // splitterPlayer
-      // 
-      this.splitterPlayer.AnimationDelay = 1;
-      this.splitterPlayer.AnimationStep = 50;
-      this.splitterPlayer.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-      this.splitterPlayer.ControlToHide = this.panelBottom;
-      this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 1074);
-      this.splitterPlayer.Name = "splitterPlayer";
-      this.splitterPlayer.TabIndex = 13;
-      this.splitterPlayer.TabStop = false;
-      this.splitterPlayer.UseAnimations = true;
-      this.splitterPlayer.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-      // 
-      // dataGridViewTextBoxColumn1
-      // 
-      this.dataGridViewTextBoxColumn1.HeaderText = "File";
-      this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-      this.dataGridViewTextBoxColumn1.Width = 300;
-      // 
-      // dataGridViewTextBoxColumn2
-      // 
-      this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.dataGridViewTextBoxColumn2.HeaderText = "Message";
-      this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-      // 
       // formFrameSkinner
       // 
       this.formFrameSkinner.Form = this;
@@ -644,10 +471,10 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Location = new System.Drawing.Point(0, 1167);
+      this.statusBar.Location = new System.Drawing.Point(0, 1165);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1008, 22);
+      this.statusBar.Size = new System.Drawing.Size(1008, 24);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -657,10 +484,10 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.Controls.Add(this.statusBarPane3);
       this.statusBarNotificationsArea1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.statusBarNotificationsArea1.Location = new System.Drawing.Point(0, 0);
-      this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(689, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(689, 24);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -668,15 +495,15 @@ namespace MPTagThat
       this.statusBarPane2.Controls.Add(this.toolStripStatusLabelFiles);
       this.statusBarPane2.Controls.Add(this.toolStripStatusLabelFilter);
       this.statusBarPane2.Location = new System.Drawing.Point(0, 0);
-      this.statusBarPane2.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane2.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane2.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarPane2.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane2.Name = "statusBarPane2";
-      this.statusBarPane2.Size = new System.Drawing.Size(149, 22);
+      this.statusBarPane2.Size = new System.Drawing.Size(149, 24);
       this.statusBarPane2.TabIndex = 0;
       // 
       // toolStripStatusLabelFiles
       // 
-      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 5);
+      this.toolStripStatusLabelFiles.Location = new System.Drawing.Point(5, 6);
       this.toolStripStatusLabelFiles.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFiles.Name = "toolStripStatusLabelFiles";
       this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(57, 13);
@@ -685,7 +512,7 @@ namespace MPTagThat
       // 
       // toolStripStatusLabelFilter
       // 
-      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 5);
+      this.toolStripStatusLabelFilter.Location = new System.Drawing.Point(68, 6);
       this.toolStripStatusLabelFilter.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFilter.Name = "toolStripStatusLabelFilter";
       this.toolStripStatusLabelFilter.Size = new System.Drawing.Size(48, 13);
@@ -696,16 +523,16 @@ namespace MPTagThat
       // 
       this.statusBarPane3.Controls.Add(this.toolStripStatusLabelFolder);
       this.statusBarPane3.Location = new System.Drawing.Point(149, 0);
-      this.statusBarPane3.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane3.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane3.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarPane3.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane3.Name = "statusBarPane3";
-      this.statusBarPane3.Padding = new System.Windows.Forms.Padding(10, 2, 2, 1);
-      this.statusBarPane3.Size = new System.Drawing.Size(117, 22);
+      this.statusBarPane3.Padding = new System.Windows.Forms.Padding(2, 10, 2, 1);
+      this.statusBarPane3.Size = new System.Drawing.Size(101, 24);
       this.statusBarPane3.TabIndex = 1;
       // 
       // toolStripStatusLabelFolder
       // 
-      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(13, 5);
+      this.toolStripStatusLabelFolder.Location = new System.Drawing.Point(5, 10);
       this.toolStripStatusLabelFolder.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
       this.toolStripStatusLabelFolder.Name = "toolStripStatusLabelFolder";
       this.toolStripStatusLabelFolder.Size = new System.Drawing.Size(63, 13);
@@ -718,10 +545,10 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
       this.statusBarControlsArea1.Location = new System.Drawing.Point(689, 0);
-      this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
-      this.statusBarControlsArea1.Size = new System.Drawing.Size(319, 22);
+      this.statusBarControlsArea1.Size = new System.Drawing.Size(319, 24);
       this.statusBarControlsArea1.TabIndex = 0;
       // 
       // statusBarPane4
@@ -729,15 +556,15 @@ namespace MPTagThat
       this.statusBarPane4.Controls.Add(this.toolStripStatusLabelScanProgress);
       this.statusBarPane4.Dock = System.Windows.Forms.DockStyle.Right;
       this.statusBarPane4.Location = new System.Drawing.Point(0, 0);
-      this.statusBarPane4.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane4.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane4.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarPane4.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane4.Name = "statusBarPane4";
-      this.statusBarPane4.Size = new System.Drawing.Size(34, 22);
+      this.statusBarPane4.Size = new System.Drawing.Size(34, 24);
       this.statusBarPane4.TabIndex = 2;
       // 
       // toolStripStatusLabelScanProgress
       // 
-      this.toolStripStatusLabelScanProgress.Location = new System.Drawing.Point(5, 11);
+      this.toolStripStatusLabelScanProgress.Location = new System.Drawing.Point(5, 12);
       this.toolStripStatusLabelScanProgress.Name = "toolStripStatusLabelScanProgress";
       this.toolStripStatusLabelScanProgress.Size = new System.Drawing.Size(0, 0);
       this.toolStripStatusLabelScanProgress.TabIndex = 0;
@@ -747,17 +574,17 @@ namespace MPTagThat
       this.statusBarPane1.Controls.Add(this.progressBar1);
       this.statusBarPane1.Controls.Add(this.buttonProgressCancel);
       this.statusBarPane1.Location = new System.Drawing.Point(34, 0);
-      this.statusBarPane1.MaximumSize = new System.Drawing.Size(0, 22);
-      this.statusBarPane1.MinimumSize = new System.Drawing.Size(0, 22);
+      this.statusBarPane1.MaximumSize = new System.Drawing.Size(0, 24);
+      this.statusBarPane1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane1.Name = "statusBarPane1";
-      this.statusBarPane1.Size = new System.Drawing.Size(233, 22);
+      this.statusBarPane1.Size = new System.Drawing.Size(233, 24);
       this.statusBarPane1.TabIndex = 0;
       // 
       // progressBar1
       // 
       this.progressBar1.DesiredWidth = 175;
       this.progressBar1.Id = "a3fc702d-0b4f-4160-9fff-0baba8d7430e";
-      this.progressBar1.Location = new System.Drawing.Point(3, 5);
+      this.progressBar1.Location = new System.Drawing.Point(3, 6);
       this.progressBar1.Name = "progressBar1";
       this.progressBar1.Size = new System.Drawing.Size(175, 12);
       this.progressBar1.TabIndex = 0;
@@ -768,7 +595,7 @@ namespace MPTagThat
       this.buttonProgressCancel.AutoSize = true;
       this.buttonProgressCancel.CommandName = "ProgressCancel";
       this.buttonProgressCancel.Id = "72fee6d7-03bc-42a8-8e13-35309ec722ad";
-      this.buttonProgressCancel.Location = new System.Drawing.Point(180, 2);
+      this.buttonProgressCancel.Location = new System.Drawing.Point(180, 3);
       this.buttonProgressCancel.Name = "buttonProgressCancel";
       this.buttonProgressCancel.Size = new System.Drawing.Size(26, 19);
       this.buttonProgressCancel.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
@@ -1601,7 +1428,7 @@ namespace MPTagThat
       this.ckSwitchArtist.Location = new System.Drawing.Point(27, 33);
       this.ckSwitchArtist.MaximumSize = new System.Drawing.Size(400, 0);
       this.ckSwitchArtist.Name = "ckSwitchArtist";
-      this.ckSwitchArtist.Size = new System.Drawing.Size(400, 26);
+      this.ckSwitchArtist.Size = new System.Drawing.Size(400, 0);
       this.ckSwitchArtist.TabIndex = 1;
       this.ckSwitchArtist.Text = "Switch Artist before submit";
       // 
@@ -3529,6 +3356,8 @@ namespace MPTagThat
       this.buttonReplace.Location = new System.Drawing.Point(2, 2);
       this.buttonReplace.Name = "buttonReplace";
       this.buttonReplace.Size = new System.Drawing.Size(126, 23);
+      this.buttonReplace.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonReplace.SmallImages.Images"))))});
       this.buttonReplace.TabIndex = 3;
       this.buttonReplace.Text = "Replace";
       // 
@@ -4067,6 +3896,179 @@ namespace MPTagThat
       this.comboBoxBurnerSpeed.TabIndex = 1;
       this.comboBoxBurnerSpeed.SelectedIndexChanged += new System.EventHandler(this.comboBoxBurnerSpeed_SelectedIndexChanged);
       // 
+      // panelMiddle
+      // 
+      this.panelMiddle.Controls.Add(this.panelMiddleTop);
+      this.panelMiddle.Controls.Add(this.splitterLeft);
+      this.panelMiddle.Controls.Add(this.splitterRight);
+      this.panelMiddle.Controls.Add(this.splitterBottom);
+      this.panelMiddle.Controls.Add(this.panelMiddleBottom);
+      this.panelMiddle.Controls.Add(this.panelLeft);
+      this.panelMiddle.Controls.Add(this.panelRight);
+      this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelMiddle.Location = new System.Drawing.Point(0, 153);
+      this.panelMiddle.Name = "panelMiddle";
+      this.panelMiddle.Size = new System.Drawing.Size(1008, 919);
+      this.panelMiddle.TabIndex = 10;
+      // 
+      // panelMiddleTop
+      // 
+      this.panelMiddleTop.Controls.Add(this.panelFileList);
+      this.panelMiddleTop.Controls.Add(this.splitterTop);
+      this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
+      this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
+      this.panelMiddleTop.Name = "panelMiddleTop";
+      this.panelMiddleTop.Size = new System.Drawing.Size(676, 647);
+      this.panelMiddleTop.TabIndex = 11;
+      // 
+      // panelFileList
+      // 
+      this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelFileList.Location = new System.Drawing.Point(0, 88);
+      this.panelFileList.Name = "panelFileList";
+      this.panelFileList.Size = new System.Drawing.Size(676, 559);
+      this.panelFileList.TabIndex = 9;
+      // 
+      // splitterTop
+      // 
+      this.splitterTop.AnimationDelay = 20;
+      this.splitterTop.AnimationStep = 20;
+      this.splitterTop.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+      this.splitterTop.ControlToHide = this.panelMiddleDBSearch;
+      this.splitterTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.splitterTop.ExpandParentForm = false;
+      this.splitterTop.Location = new System.Drawing.Point(0, 80);
+      this.splitterTop.Name = "splitterTop";
+      this.splitterTop.TabIndex = 11;
+      this.splitterTop.TabStop = false;
+      this.splitterTop.UseAnimations = true;
+      this.splitterTop.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      // 
+      // panelMiddleDBSearch
+      // 
+      this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
+      this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(676, 80);
+      this.panelMiddleDBSearch.TabIndex = 10;
+      // 
+      // splitterLeft
+      // 
+      this.splitterLeft.AnimationDelay = 20;
+      this.splitterLeft.AnimationStep = 20;
+      this.splitterLeft.BackColor = System.Drawing.SystemColors.Control;
+      this.splitterLeft.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+      this.splitterLeft.ControlToHide = this.panelLeft;
+      this.splitterLeft.ExpandParentForm = false;
+      this.splitterLeft.Localisation = "splitterLeft";
+      this.splitterLeft.LocalisationContext = "Main";
+      this.splitterLeft.Location = new System.Drawing.Point(150, 0);
+      this.splitterLeft.Name = "splitterLeft";
+      this.splitterLeft.TabIndex = 2;
+      this.splitterLeft.TabStop = false;
+      this.splitterLeft.UseAnimations = false;
+      this.splitterLeft.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      // 
+      // panelLeft
+      // 
+      this.panelLeft.Controls.Add(this.panelLeftTop);
+      this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+      this.panelLeft.Location = new System.Drawing.Point(0, 0);
+      this.panelLeft.Name = "panelLeft";
+      this.panelLeft.Size = new System.Drawing.Size(150, 919);
+      this.panelLeft.TabIndex = 1;
+      // 
+      // panelLeftTop
+      // 
+      this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
+      this.panelLeftTop.Name = "panelLeftTop";
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 919);
+      this.panelLeftTop.TabIndex = 4;
+      // 
+      // splitterRight
+      // 
+      this.splitterRight.AnimationDelay = 20;
+      this.splitterRight.AnimationStep = 20;
+      this.splitterRight.BackColor = System.Drawing.SystemColors.Control;
+      this.splitterRight.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+      this.splitterRight.ControlToHide = this.panelRight;
+      this.splitterRight.Dock = System.Windows.Forms.DockStyle.Right;
+      this.splitterRight.ExpandParentForm = false;
+      this.splitterRight.Localisation = "splitterRight";
+      this.splitterRight.LocalisationContext = "Main";
+      this.splitterRight.Location = new System.Drawing.Point(834, 0);
+      this.splitterRight.Name = "splitterRight";
+      this.splitterRight.TabIndex = 4;
+      this.splitterRight.TabStop = false;
+      this.splitterRight.UseAnimations = false;
+      this.splitterRight.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      this.splitterRight.Click += new System.EventHandler(this.splitterRight_Click);
+      // 
+      // panelRight
+      // 
+      this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.panelRight.BackColor = System.Drawing.SystemColors.Control;
+      this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panelRight.Location = new System.Drawing.Point(842, 0);
+      this.panelRight.Name = "panelRight";
+      this.panelRight.Size = new System.Drawing.Size(166, 919);
+      this.panelRight.TabIndex = 3;
+      // 
+      // splitterBottom
+      // 
+      this.splitterBottom.AnimationDelay = 20;
+      this.splitterBottom.AnimationStep = 200;
+      this.splitterBottom.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+      this.splitterBottom.ControlToHide = this.panelMiddleBottom;
+      this.splitterBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.splitterBottom.ExpandParentForm = false;
+      this.splitterBottom.Localisation = "collapsibleSplitter1";
+      this.splitterBottom.LocalisationContext = "Main";
+      this.splitterBottom.Location = new System.Drawing.Point(150, 647);
+      this.splitterBottom.Name = "collapsibleSplitter1";
+      this.splitterBottom.TabIndex = 6;
+      this.splitterBottom.TabStop = false;
+      this.splitterBottom.UseAnimations = false;
+      this.splitterBottom.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      this.splitterBottom.Click += new System.EventHandler(this.splitterBottom_Click);
+      // 
+      // panelMiddleBottom
+      // 
+      this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
+      this.panelMiddleBottom.Name = "panelMiddleBottom";
+      this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
+      this.panelMiddleBottom.TabIndex = 12;
+      // 
+      // splitterPlayer
+      // 
+      this.splitterPlayer.AnimationDelay = 1;
+      this.splitterPlayer.AnimationStep = 50;
+      this.splitterPlayer.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+      this.splitterPlayer.ControlToHide = this.panelBottom;
+      this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.splitterPlayer.ExpandParentForm = false;
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 1072);
+      this.splitterPlayer.Name = "splitterPlayer";
+      this.splitterPlayer.TabIndex = 13;
+      this.splitterPlayer.TabStop = false;
+      this.splitterPlayer.UseAnimations = true;
+      this.splitterPlayer.VisualStyle = NJFLib.Controls.VisualStyles.XP;
+      // 
+      // dataGridViewTextBoxColumn1
+      // 
+      this.dataGridViewTextBoxColumn1.HeaderText = "File";
+      this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+      this.dataGridViewTextBoxColumn1.Width = 300;
+      // 
+      // dataGridViewTextBoxColumn2
+      // 
+      this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.dataGridViewTextBoxColumn2.HeaderText = "Message";
+      this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4087,9 +4089,6 @@ namespace MPTagThat
       this.Move += new System.EventHandler(this.Main_Move);
       this.Resize += new System.EventHandler(this.Main_Resize);
       this.panelBottom.ResumeLayout(false);
-      this.panelMiddle.ResumeLayout(false);
-      this.panelMiddleTop.ResumeLayout(false);
-      this.panelLeft.ResumeLayout(false);
       this.statusBar.ResumeLayout(false);
       this.statusBar.PerformLayout();
       this.statusBarNotificationsArea1.ResumeLayout(false);
@@ -4244,6 +4243,9 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupBurnOptions)).EndInit();
       this.ribbonGroupBurnOptions.ResumeLayout(false);
       this.ribbonGroupBurnOptions.PerformLayout();
+      this.panelMiddle.ResumeLayout(false);
+      this.panelMiddleTop.ResumeLayout(false);
+      this.panelLeft.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
