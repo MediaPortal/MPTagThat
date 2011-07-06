@@ -1174,8 +1174,9 @@ namespace MPTagThat.GridView
         }
       }
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      for (int i = tracksGrid.Rows.Count - 1; i > 0; i-- )
       {
+        DataGridViewRow row = tracksGrid.Rows[i];
         if (!row.Selected)
         {
           continue;
@@ -1184,18 +1185,17 @@ namespace MPTagThat.GridView
         TrackData track = bindingList[row.Index];
         try
         {
-          Util.SHFILEOPSTRUCT shf = new Util.SHFILEOPSTRUCT();
-          shf.wFunc = Util.FO_DELETE;
-          shf.fFlags = Util.FOF_ALLOWUNDO | Util.FOF_NOCONFIRMATION;
-          shf.pFrom = track.FullFileName;
-          Util.SHFileOperation(ref shf);
+          FileSystem.DeleteFile(track.FullFileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin,
+                                UICancelOption.ThrowException);
 
           // Remove the file from the binding list
           bindingList.RemoveAt(row.Index);
         }
+        catch (OperationCanceledException) // User pressed No on delete. Do nothing
+        { }
         catch (Exception ex)
         {
-          log.Error("Error applying changes from MultiTagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
+          log.Error("Error deleting file: {0} Exception: {1}", track.FullFileName, ex.Message);
           SetStatusColumnError(row);
           AddErrorMessage(row, ex.Message);
         }
