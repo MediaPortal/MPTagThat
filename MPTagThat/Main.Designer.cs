@@ -260,6 +260,13 @@ namespace MPTagThat
       this.popupMenu3 = new Elegant.Ui.PopupMenu(this.components);
       this.buttonCaseConversionOptions = new Elegant.Ui.Button();
       this.buttonGetLyrics = new Elegant.Ui.Button();
+      this.separator1 = new Elegant.Ui.Separator();
+      this.buttonFind = new Elegant.Ui.SplitButton();
+      this.popupMenu4 = new Elegant.Ui.PopupMenu(this.components);
+      this.buttonReplace = new Elegant.Ui.Button();
+      this.buttonValidateSong = new Elegant.Ui.SplitButton();
+      this.popupMenu5 = new Elegant.Ui.PopupMenu(this.components);
+      this.buttonFixSong = new Elegant.Ui.Button();
       this.separator2 = new Elegant.Ui.Separator();
       this.buttonDeleteTag = new Elegant.Ui.SplitButton();
       this.popupMenu2 = new Elegant.Ui.PopupMenu(this.components);
@@ -275,9 +282,6 @@ namespace MPTagThat
       this.buttonNumberOnClick = new Elegant.Ui.ToggleButton();
       this.buttonAutoNumber = new Elegant.Ui.Button();
       this.textBoxNumber = new Elegant.Ui.TextBox();
-      this.buttonFind = new Elegant.Ui.SplitButton();
-      this.popupMenu4 = new Elegant.Ui.PopupMenu(this.components);
-      this.buttonReplace = new Elegant.Ui.Button();
       this.ribbonGroupPicture = new Elegant.Ui.RibbonGroup();
       this.galleryPicture = new Elegant.Ui.Gallery();
       this.buttonGetCoverArt = new Elegant.Ui.Button();
@@ -408,10 +412,11 @@ namespace MPTagThat
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupTagsEdit)).BeginInit();
       this.ribbonGroupTagsEdit.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu3)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu5)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).BeginInit();
       this.buttonGroup1.SuspendLayout();
       this.buttonGroup3.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).BeginInit();
       this.ribbonGroupPicture.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.galleryPicture)).BeginInit();
@@ -449,7 +454,7 @@ namespace MPTagThat
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelBottom.Location = new System.Drawing.Point(0, 1075);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1008, 90);
+      this.panelBottom.Size = new System.Drawing.Size(1073, 90);
       this.panelBottom.TabIndex = 12;
       // 
       // playerPanel
@@ -457,7 +462,7 @@ namespace MPTagThat
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.playerPanel.Location = new System.Drawing.Point(0, 0);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1008, 90);
+      this.playerPanel.Size = new System.Drawing.Size(1073, 90);
       this.playerPanel.TabIndex = 11;
       // 
       // formFrameSkinner
@@ -474,7 +479,7 @@ namespace MPTagThat
       this.statusBar.Location = new System.Drawing.Point(0, 1165);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1008, 24);
+      this.statusBar.Size = new System.Drawing.Size(1073, 24);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -487,7 +492,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(689, 24);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(754, 24);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -544,7 +549,7 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(689, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(754, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -625,7 +630,7 @@ namespace MPTagThat
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
       this.ribbon.QuickAccessToolbarPlacementMode = Elegant.Ui.QuickAccessToolbarPlacementMode.AboveRibbon;
-      this.ribbon.Size = new System.Drawing.Size(1008, 153);
+      this.ribbon.Size = new System.Drawing.Size(1073, 153);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -650,7 +655,7 @@ namespace MPTagThat
             this.backstageViewButtonExit});
       this.backstageView.Location = new System.Drawing.Point(0, 52);
       this.backstageView.Name = "backstageView";
-      this.backstageView.Size = new System.Drawing.Size(1008, 1115);
+      this.backstageView.Size = new System.Drawing.Size(1073, 1115);
       this.backstageView.TabIndex = 17;
       this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
       // 
@@ -665,7 +670,7 @@ namespace MPTagThat
       this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 5);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
       this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(12);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(910, 1105);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(975, 1105);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -677,7 +682,7 @@ namespace MPTagThat
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel2.Location = new System.Drawing.Point(222, 68);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(676, 1025);
+      this.panel2.Size = new System.Drawing.Size(741, 1025);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -687,7 +692,7 @@ namespace MPTagThat
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
       this.tabControlSettings.SelectedTabPage = null;
-      this.tabControlSettings.Size = new System.Drawing.Size(676, 1025);
+      this.tabControlSettings.Size = new System.Drawing.Size(741, 1025);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -711,7 +716,7 @@ namespace MPTagThat
       this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageSettingsGeneral.KeyTip = null;
       this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(674, 1010);
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(739, 1010);
       this.tabPageSettingsGeneral.TabIndex = 0;
       // 
       // groupBoxGeneral
@@ -2601,7 +2606,7 @@ namespace MPTagThat
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel3.Location = new System.Drawing.Point(222, 12);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(676, 56);
+      this.panel3.Size = new System.Drawing.Size(741, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2996,7 +3001,7 @@ namespace MPTagThat
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1008, 101);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1073, 101);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -3065,16 +3070,18 @@ namespace MPTagThat
       // 
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonCaseConversion);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGetLyrics);
+      this.ribbonGroupTagsEdit.Controls.Add(this.separator1);
+      this.ribbonGroupTagsEdit.Controls.Add(this.buttonFind);
+      this.ribbonGroupTagsEdit.Controls.Add(this.buttonValidateSong);
       this.ribbonGroupTagsEdit.Controls.Add(this.separator2);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonDeleteTag);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonRemoveComment);
       this.ribbonGroupTagsEdit.Controls.Add(this.separator3);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
-      this.ribbonGroupTagsEdit.Controls.Add(this.buttonFind);
       this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(168, 3);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
-      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(347, 94);
+      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(449, 94);
       this.ribbonGroupTagsEdit.TabIndex = 2;
       this.ribbonGroupTagsEdit.Text = "Edit Tags";
       // 
@@ -3130,10 +3137,96 @@ namespace MPTagThat
       this.buttonGetLyrics.TabIndex = 0;
       this.buttonGetLyrics.Text = "Get Lyrics";
       // 
+      // separator1
+      // 
+      this.separator1.Id = "881260b2-614a-4b71-92dc-b0876220635a";
+      this.separator1.Location = new System.Drawing.Point(126, 7);
+      this.separator1.Name = "separator1";
+      this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator1, System.Windows.Forms.Keys.None);
+      this.separator1.Size = new System.Drawing.Size(2, 60);
+      this.separator1.TabIndex = 11;
+      this.separator1.Text = "separator1";
+      // 
+      // buttonFind
+      // 
+      this.buttonFind.CommandName = "Find";
+      this.buttonFind.DescriptionText = null;
+      this.buttonFind.Id = "664cf5e1-775a-448d-9871-064b4c8b33a1";
+      this.buttonFind.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFind.LargeImages.Images"))))});
+      this.buttonFind.Location = new System.Drawing.Point(132, 2);
+      this.buttonFind.Name = "buttonFind";
+      this.buttonFind.Popup = this.popupMenu4;
+      this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonFind, System.Windows.Forms.Keys.None);
+      this.buttonFind.Size = new System.Drawing.Size(42, 72);
+      this.buttonFind.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.FindHS)});
+      this.buttonFind.TabIndex = 10;
+      this.buttonFind.Text = "Find";
+      // 
+      // popupMenu4
+      // 
+      this.popupMenu4.Items.AddRange(new System.Windows.Forms.Control[] {
+            this.buttonReplace});
+      this.popupMenu4.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
+      this.popupMenu4.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
+      this.popupMenu4.Size = new System.Drawing.Size(100, 100);
+      // 
+      // buttonReplace
+      // 
+      this.buttonReplace.CommandName = "Replace";
+      this.buttonReplace.Id = "de9f5394-ae31-4316-81ea-093d0d194213";
+      this.buttonReplace.Location = new System.Drawing.Point(2, 2);
+      this.buttonReplace.Name = "buttonReplace";
+      this.buttonReplace.Size = new System.Drawing.Size(126, 23);
+      this.buttonReplace.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonReplace.SmallImages.Images"))))});
+      this.buttonReplace.TabIndex = 3;
+      this.buttonReplace.Text = "Replace";
+      // 
+      // buttonValidateSong
+      // 
+      this.buttonValidateSong.CommandName = "ValidateSong";
+      this.buttonValidateSong.DescriptionText = null;
+      this.buttonValidateSong.Id = "6b558c4a-6aeb-42e1-bedf-c5e7e0ec886e";
+      this.buttonValidateSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonValidateSong.LargeImages.Images"))))});
+      this.buttonValidateSong.Location = new System.Drawing.Point(176, 2);
+      this.buttonValidateSong.Name = "buttonValidateSong";
+      this.buttonValidateSong.Popup = this.popupMenu5;
+      this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonValidateSong, System.Windows.Forms.Keys.None);
+      this.buttonValidateSong.Size = new System.Drawing.Size(48, 72);
+      this.buttonValidateSong.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonValidateSong.SmallImages.Images"))))});
+      this.buttonValidateSong.TabIndex = 12;
+      this.buttonValidateSong.Text = "Validate Song";
+      // 
+      // popupMenu5
+      // 
+      this.popupMenu5.Items.AddRange(new System.Windows.Forms.Control[] {
+            this.buttonFixSong});
+      this.popupMenu5.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
+      this.popupMenu5.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
+      this.popupMenu5.Size = new System.Drawing.Size(100, 100);
+      // 
+      // buttonFixSong
+      // 
+      this.buttonFixSong.CommandName = "FixSong";
+      this.buttonFixSong.Id = "2e9164c1-fb65-4678-9aff-2dc474add3ad";
+      this.buttonFixSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFixSong.LargeImages.Images"))))});
+      this.buttonFixSong.Location = new System.Drawing.Point(2, 2);
+      this.buttonFixSong.Name = "buttonFixSong";
+      this.buttonFixSong.Size = new System.Drawing.Size(126, 23);
+      this.buttonFixSong.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFixSong.SmallImages.Images"))))});
+      this.buttonFixSong.TabIndex = 3;
+      this.buttonFixSong.Text = "Fix Song";
+      // 
       // separator2
       // 
       this.separator2.Id = "d7a68ab0-052d-457e-8ab3-95e30ecb244b";
-      this.separator2.Location = new System.Drawing.Point(126, 7);
+      this.separator2.Location = new System.Drawing.Point(228, 7);
       this.separator2.Name = "separator2";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator2, System.Windows.Forms.Keys.None);
       this.separator2.Size = new System.Drawing.Size(2, 60);
@@ -3149,7 +3242,7 @@ namespace MPTagThat
       this.buttonDeleteTag.Id = "3356cb8b-8ef8-4134-b8e4-8290dd07b0f0";
       this.buttonDeleteTag.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.LargeImages.Images"))))});
-      this.buttonDeleteTag.Location = new System.Drawing.Point(132, 2);
+      this.buttonDeleteTag.Location = new System.Drawing.Point(234, 2);
       this.buttonDeleteTag.Name = "buttonDeleteTag";
       this.buttonDeleteTag.Popup = this.popupMenu2;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonDeleteTag, System.Windows.Forms.Keys.None);
@@ -3205,7 +3298,7 @@ namespace MPTagThat
       this.buttonRemoveComment.Id = "cbb994ed-acd4-4eeb-92d2-692a3e92d5bb";
       this.buttonRemoveComment.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.LargeImages.Images"))))});
-      this.buttonRemoveComment.Location = new System.Drawing.Point(176, 2);
+      this.buttonRemoveComment.Location = new System.Drawing.Point(278, 2);
       this.buttonRemoveComment.Name = "buttonRemoveComment";
       this.buttonRemoveComment.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.ScreenTip.Image")));
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonRemoveComment, System.Windows.Forms.Keys.None);
@@ -3218,7 +3311,7 @@ namespace MPTagThat
       // separator3
       // 
       this.separator3.Id = "6d913a4c-a584-4ec3-87a9-bae2f1d79f15";
-      this.separator3.Location = new System.Drawing.Point(238, 7);
+      this.separator3.Location = new System.Drawing.Point(340, 7);
       this.separator3.Name = "separator3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator3, System.Windows.Forms.Keys.None);
       this.separator3.Size = new System.Drawing.Size(2, 60);
@@ -3229,7 +3322,7 @@ namespace MPTagThat
       // 
       this.buttonGroup1.Controls.Add(this.comboBoxScripts);
       this.buttonGroup1.Controls.Add(this.buttonScriptExecute);
-      this.buttonGroup1.Location = new System.Drawing.Point(243, 2);
+      this.buttonGroup1.Location = new System.Drawing.Point(345, 2);
       this.buttonGroup1.Name = "buttonGroup1";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup1, System.Windows.Forms.Keys.None);
       this.buttonGroup1.Size = new System.Drawing.Size(57, 24);
@@ -3270,7 +3363,7 @@ namespace MPTagThat
       this.buttonGroup3.Controls.Add(this.buttonNumberOnClick);
       this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.textBoxNumber);
-      this.buttonGroup3.Location = new System.Drawing.Point(243, 26);
+      this.buttonGroup3.Location = new System.Drawing.Point(345, 26);
       this.buttonGroup3.Name = "buttonGroup3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup3, System.Windows.Forms.Keys.None);
       this.buttonGroup3.Size = new System.Drawing.Size(100, 24);
@@ -3325,49 +3418,13 @@ namespace MPTagThat
       this.textBoxNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
       this.textBoxNumber.TextEditorWidth = 39;
       // 
-      // buttonFind
-      // 
-      this.buttonFind.CommandName = "Find";
-      this.buttonFind.DescriptionText = null;
-      this.buttonFind.Id = "664cf5e1-775a-448d-9871-064b4c8b33a1";
-      this.buttonFind.InformativenessMaximumLevel = "Elegant.Ui.RibbonGroupButtonInformativenessLevel:SmallImageWithText";
-      this.buttonFind.Location = new System.Drawing.Point(244, 50);
-      this.buttonFind.Name = "buttonFind";
-      this.buttonFind.Popup = this.popupMenu4;
-      this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonFind, System.Windows.Forms.Keys.None);
-      this.buttonFind.Size = new System.Drawing.Size(59, 24);
-      this.buttonFind.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.FindHS)});
-      this.buttonFind.TabIndex = 10;
-      this.buttonFind.Text = "Find";
-      // 
-      // popupMenu4
-      // 
-      this.popupMenu4.Items.AddRange(new System.Windows.Forms.Control[] {
-            this.buttonReplace});
-      this.popupMenu4.KeepPopupsWithOffsetPlacementWithinPlacementArea = false;
-      this.popupMenu4.PlacementMode = Elegant.Ui.PopupPlacementMode.Bottom;
-      this.popupMenu4.Size = new System.Drawing.Size(100, 100);
-      // 
-      // buttonReplace
-      // 
-      this.buttonReplace.CommandName = "Replace";
-      this.buttonReplace.Id = "de9f5394-ae31-4316-81ea-093d0d194213";
-      this.buttonReplace.Location = new System.Drawing.Point(2, 2);
-      this.buttonReplace.Name = "buttonReplace";
-      this.buttonReplace.Size = new System.Drawing.Size(126, 23);
-      this.buttonReplace.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonReplace.SmallImages.Images"))))});
-      this.buttonReplace.TabIndex = 3;
-      this.buttonReplace.Text = "Replace";
-      // 
       // ribbonGroupPicture
       // 
       this.ribbonGroupPicture.Controls.Add(this.galleryPicture);
       this.ribbonGroupPicture.Controls.Add(this.buttonGetCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonRemoveCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonSaveAsThumb);
-      this.ribbonGroupPicture.Location = new System.Drawing.Point(517, 3);
+      this.ribbonGroupPicture.Location = new System.Drawing.Point(619, 3);
       this.ribbonGroupPicture.Name = "ribbonGroupPicture";
       this.ribbonGroupPicture.Size = new System.Drawing.Size(118, 94);
       this.ribbonGroupPicture.TabIndex = 6;
@@ -3448,7 +3505,7 @@ namespace MPTagThat
       // 
       this.ribbonGroupOrganise.Controls.Add(this.buttonRenameFiles);
       this.ribbonGroupOrganise.Controls.Add(this.buttonOrganiseFiles);
-      this.ribbonGroupOrganise.Location = new System.Drawing.Point(637, 3);
+      this.ribbonGroupOrganise.Location = new System.Drawing.Point(739, 3);
       this.ribbonGroupOrganise.Name = "ribbonGroupOrganise";
       this.ribbonGroupOrganise.Size = new System.Drawing.Size(111, 94);
       this.ribbonGroupOrganise.TabIndex = 3;
@@ -3511,7 +3568,7 @@ namespace MPTagThat
       this.ribbonGroupOther.Controls.Add(this.buttonAddToBurner);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToConversion);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToPlaylist);
-      this.ribbonGroupOther.Location = new System.Drawing.Point(750, 3);
+      this.ribbonGroupOther.Location = new System.Drawing.Point(852, 3);
       this.ribbonGroupOther.Name = "ribbonGroupOther";
       this.ribbonGroupOther.Size = new System.Drawing.Size(133, 94);
       this.ribbonGroupOther.TabIndex = 5;
@@ -3908,7 +3965,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 153);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1008, 919);
+      this.panelMiddle.Size = new System.Drawing.Size(1073, 919);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -3917,17 +3974,17 @@ namespace MPTagThat
       this.panelMiddleTop.Controls.Add(this.splitterTop);
       this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
+      this.panelMiddleTop.Location = new System.Drawing.Point(153, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(676, 647);
+      this.panelMiddleTop.Size = new System.Drawing.Size(751, 652);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
       // 
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(0, 88);
+      this.panelFileList.Location = new System.Drawing.Point(0, 83);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(676, 559);
+      this.panelFileList.Size = new System.Drawing.Size(751, 569);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -3950,7 +4007,7 @@ namespace MPTagThat
       this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
       this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(676, 80);
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(751, 80);
       this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // splitterLeft
@@ -3998,7 +4055,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(834, 0);
+      this.splitterRight.Location = new System.Drawing.Point(904, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4011,7 +4068,7 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(842, 0);
+      this.panelRight.Location = new System.Drawing.Point(907, 0);
       this.panelRight.Name = "panelRight";
       this.panelRight.Size = new System.Drawing.Size(166, 919);
       this.panelRight.TabIndex = 3;
@@ -4026,7 +4083,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 647);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 652);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -4039,7 +4096,7 @@ namespace MPTagThat
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(692, 264);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(757, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -4073,7 +4130,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1008, 1189);
+      this.ClientSize = new System.Drawing.Size(1073, 1189);
       this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
@@ -4199,12 +4256,13 @@ namespace MPTagThat
       this.ribbonGroupTagsEdit.ResumeLayout(false);
       this.ribbonGroupTagsEdit.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu3)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.popupMenu5)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).EndInit();
       this.buttonGroup1.ResumeLayout(false);
       this.buttonGroup1.PerformLayout();
       this.buttonGroup3.ResumeLayout(false);
       this.buttonGroup3.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.popupMenu4)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.ribbonGroupPicture)).EndInit();
       this.ribbonGroupPicture.ResumeLayout(false);
       this.ribbonGroupPicture.PerformLayout();
@@ -4552,6 +4610,10 @@ namespace MPTagThat
     private Elegant.Ui.SplitButton buttonFind;
     private Elegant.Ui.PopupMenu popupMenu4;
     private Elegant.Ui.Button buttonReplace;
+    private Elegant.Ui.Separator separator1;
+    private Elegant.Ui.SplitButton buttonValidateSong;
+    private Elegant.Ui.PopupMenu popupMenu5;
+    private Elegant.Ui.Button buttonFixSong;
   }
 }
 

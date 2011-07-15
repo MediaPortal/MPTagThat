@@ -47,6 +47,7 @@ namespace MPTagThat.Core
     private const int NumTrackDigits = 2;
 
     private MP3Error _mp3ValError;
+    private string _mp3ValErrorText;
     private List<Picture> _pictures = new List<Picture>();
     private List<Comment> _comments = new List<Comment>();
     private List<Lyric> _lyrics = new List<Lyric>();
@@ -76,6 +77,7 @@ namespace MPTagThat.Core
     {
       Changed = false;
       _mp3ValError = MP3Error.NoError;
+      _mp3ValErrorText = "";
       Frames = new List<Common.Frame>();
       UserFrames = new List<Frame>();
       ID3Version = 3;
@@ -179,6 +181,12 @@ namespace MPTagThat.Core
     {
       get { return _mp3ValError; }
       set { _mp3ValError = value; }
+    }
+
+    public string MP3ValidationErrorText
+    {
+      get { return _mp3ValErrorText; }
+      set { _mp3ValErrorText = value; }
     }
 
     /// <summary>

@@ -255,6 +255,23 @@ namespace MPTagThat.GridView
       ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Warning;
     }
 
+    /// <summary>
+    /// Indicates that a MP3 File has an error
+    /// </summary>
+    /// <param name="row"></param>
+    public void SetStatusColumnBrokenSong(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_BrokenSong_16x;
+    }
+
+    /// <summary>
+    /// Indicates that a MP3 File was fixed
+    /// </summary>
+    /// <param name="row"></param>
+    public void SetStatusColumnFixedSong(DataGridViewRow row)
+    {
+      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_FixedSong_16x;
+    }
     #endregion
 
     #region Save
@@ -1280,24 +1297,46 @@ namespace MPTagThat.GridView
     public void ValidateMP3File()
     {
       log.Trace(">>>");
+
+      int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        ClearStatusColumn(row);
+
         if (!row.Selected)
         {
           continue;
+        }
+
+        Application.DoEvents();
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
+        {
+          ResetProgressBar();
+          return;
         }
 
         TrackData track = bindingList[row.Index];
 
         if (track.TagType.ToLower() == "mp3")
         {
-          track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName);
+          string strError = "";
+          track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
           if (track.MP3ValidationError != TrackData.MP3Error.NoError)
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
+            SetStatusColumnBrokenSong(row);
+            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
+          }
+          else
+          {
+            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
           }
         }
       }
+      ResetProgressBar();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -1310,6 +1349,10 @@ namespace MPTagThat.GridView
     public void FixMP3File()
     {
       log.Trace(">>>");
+
+      int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
+
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
@@ -1317,20 +1360,34 @@ namespace MPTagThat.GridView
           continue;
         }
 
+        Application.DoEvents();
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
+        {
+          ResetProgressBar();
+          return;
+        }
+
         TrackData track = bindingList[row.Index];
         if (track.TagType.ToLower() == "mp3")
         {
-          track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName);
+          string strError = "";
+          track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
           if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
           {
             SetGridRowColors(row.Index);
+            SetStatusColumnFixedSong(row);
+            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
           }
           else
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
+            SetStatusColumnBrokenSong(row);
+            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
           }
         }
       }
+      ResetProgressBar();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -2074,7 +2131,9 @@ namespace MPTagThat.GridView
       // Validate the MP3 File
       if (Options.MainSettings.MP3Validate && track.TagType.ToLower() == "mp3")
       {
-        track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName);
+        string strError = "";
+        track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
+        track.MP3ValidationErrorText = strError;
       }
 
       bindingList.Add(track);
@@ -2103,6 +2162,8 @@ namespace MPTagThat.GridView
         }
 
         SetColorMP3Errors(row.Index, track.MP3ValidationError);
+        tracksGrid.Rows[row.Index].Cells[0].ToolTipText = track.MP3ValidationErrorText;
+        SetStatusColumnBrokenSong(row);
       }
     }
 

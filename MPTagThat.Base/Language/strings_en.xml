@@ -94,6 +94,8 @@
     <String id="NumberOnClick">Number on Click</String>
 	<String id="Find">Find</String>
 	<String id="Replace">Replace</String>
+	<String id="ValidateSong">Validate MP3</String>
+	<String id="FixSong">Fix MP3</String>
     <String id="RemoveCommentPicture">Remove:</String>
     <String id="RemoveComments">Remove all comments</String>
     <String id="RemovePictures">Remove all pictures</String>
@@ -199,6 +201,10 @@
     <String id="FindText">Opens the find dialog to search for the specified string in the selected Tracks.</String>
 	<String id="Replace">Replace</String>
     <String id="ReplaceText">Opens the Find / Replace dialog to replace a specified serach string in the selected Tracks.</String>
+	<String id="ValidateSong">Validate MP3</String>
+    <String id="ValidateSongText">Uses MP3Val to validate the correctness of the selected MP3 File. Some errors may be fixed using the "Fix MP3" Button</String>
+	<String id="FixSong">Fix MP3</String>
+    <String id="FixSongText">Uses MP3Val to fix errors detected in the selected MP3 File.</String>
 	
     <!-- Rip Tab-->
     <String id="RipButton">Start Rip</String>

@@ -910,6 +910,8 @@ namespace MPTagThat
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
       ApplicationCommands.Find.Executed += TagsTabButton_Executed;
       ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
+      ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -1254,6 +1256,14 @@ namespace MPTagThat
       buttonReplace.Text = localisation.ToString("ribbon", "Replace");
       buttonReplace.ScreenTip.Caption = localisation.ToString("screentip", "Replace");
       buttonReplace.ScreenTip.Text = localisation.ToString("screentip", "ReplaceText");
+
+      buttonValidateSong.Text = localisation.ToString("ribbon", "ValidateSong");
+      buttonValidateSong.ScreenTip.Caption = localisation.ToString("screentip", "ValidateSong");
+      buttonValidateSong.ScreenTip.Text = localisation.ToString("screentip", "ValidateSongText");
+
+      buttonFixSong.Text = localisation.ToString("ribbon", "FixSong");
+      buttonFixSong.ScreenTip.Caption = localisation.ToString("screentip", "FixSong");
+      buttonFixSong.ScreenTip.Text = localisation.ToString("screentip", "FixSongText");
 
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
@@ -3617,6 +3627,19 @@ namespace MPTagThat
           FindReplace replaceDlg = new FindReplace(this);
           replaceDlg.Replace = true;
           ShowCenteredForm(replaceDlg);
+          break;
+
+        case "ValidateSong":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ValidateMP3File();
+          gridViewControl.View.ClearSelection();
+          break;
+
+        case "FixSong":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.FixMP3File();
           break;
       }
     }

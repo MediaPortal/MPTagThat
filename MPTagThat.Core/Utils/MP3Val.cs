@@ -38,10 +38,11 @@ namespace MPTagThat.Core
 
     #region File Validation
 
-    public static TrackData.MP3Error ValidateMp3File(string fileName)
+    public static TrackData.MP3Error ValidateMp3File(string fileName, out string strError)
     {
       ValidateOrFixFile(fileName, false);
 
+      strError = "";
       // we might have an error in mp3val. the Log should contain the error
       if (StdOutList.Count == 0)
       {
@@ -59,65 +60,79 @@ namespace MPTagThat.Core
       {
         return TrackData.MP3Error.NoError; // Fixed by MPTagThat :-)
       }
-      else if (StdOutList[0].Contains(@"Garbage at the beginning of the file "))
+      else if (StdOutList[0].Contains(@"Garbage at the beginning of the file"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "01");
       }
-      else if (StdOutList[0].Contains(@"Garbage at the end of the file "))
+      else if (StdOutList[0].Contains(@"Garbage at the end of the file"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "02");
       }
       else if (StdOutList[0].Contains(@"MPEG stream error, resynchronized successfully"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "03");
       }
       else if (StdOutList[0].Contains(@"This is a RIFF file, not MPEG stream"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "04");
       }
       else if (StdOutList[0].Contains(@"It seems that file is truncated or there is garbage at the end of the file"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "05");
       }
       else if (StdOutList[0].Contains(@"Wrong number of MPEG frames specified in Xing header"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "06");
       }
       else if (StdOutList[0].Contains(@"Wrong number of MPEG data bytes specified in Xing header"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "07");
       }
       else if (StdOutList[0].Contains(@"Wrong number of MPEG frames specified in VBRI header"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "08");
       }
       else if (StdOutList[0].Contains(@"Wrong number of MPEG data bytes specified in VBRI header"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "09");
       }
       else if (StdOutList[0].Contains(@"Wrong CRC in"))
       {
         error = TrackData.MP3Error.Fixable; // Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "10");
       }
       else if (StdOutList[0].Contains(@"Several APEv2 tags in one file"))
       {
         return TrackData.MP3Error.NoError; // Handled by MPTagThat
       }
-      else if (StdOutList[0].Contains(@"Too few MPEG frames "))
+      else if (StdOutList[0].Contains(@"Too few MPEG frames"))
       {
         error = TrackData.MP3Error.NonFixable; // Non Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "11");
       }
       else if (StdOutList[0].Contains(@"VBR detected, but no VBR header is present. Seeking may not work properly"))
       {
         error = TrackData.MP3Error.NonFixable; // Non Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "12");
       }
       else if (StdOutList[0].Contains(@"Different MPEG versions or layers in one file"))
       {
         error = TrackData.MP3Error.NonFixable; // Non Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "13");
       }
       else if (StdOutList[0].Contains(@"Non-layer-III frame encountered"))
       {
         error = TrackData.MP3Error.NonFixable; // Non Fixable error
+        strError = ServiceScope.Get<ILocalisation>().ToString("mp3val", "14");
       }
 
       if (error == TrackData.MP3Error.Fixable)
@@ -141,9 +156,10 @@ namespace MPTagThat.Core
       return error;
     }
 
-    public static TrackData.MP3Error FixMp3File(string fileName)
+    public static TrackData.MP3Error FixMp3File(string fileName, out string strError)
     {
       ValidateOrFixFile(fileName, true);
+      strError = "";
       // we might have an error in mp3val. the Log should contain the error
       if (StdOutList.Count == 0)
       {
@@ -167,6 +183,7 @@ namespace MPTagThat.Core
         }
       }
 
+      strError = StdOutList[0];
       return error;
     }
 

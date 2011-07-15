@@ -474,6 +474,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\ribbon_FixedSong_16x.png" />
+    <None Include="Resources\ribbon_BrokenSong_16x.png" />
     <None Include="Resources\ReplaceHS.png" />
     <None Include="Resources\FindHS.png" />
     <None Include="Resources\Warning.png" />
