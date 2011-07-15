@@ -209,6 +209,7 @@ namespace MPTagThat.TagEdit
       {
         _isMultiTagEdit = true;
         _selectedRowIndex = -1;
+        _pictures.Clear();
         UncheckCheckboxes();
         ChangeCheckboxStatus(true);
 
@@ -454,7 +455,7 @@ namespace MPTagThat.TagEdit
             dataGridViewPicture_CellClick(dataGridViewPicture, evt);
           }
         }
-
+        
         #endregion
 
         #region Detailed Information
@@ -1678,20 +1679,11 @@ namespace MPTagThat.TagEdit
             trackChanged = true;
           }
 
-          if (_isMultiTagEdit)
+          if (_pictureIsChanged)
           {
             track.Pictures.Clear();
             track.Pictures.AddRange(_pictures);
             trackChanged = true;
-          }
-          else
-          {
-            if (_pictureIsChanged)
-            {
-              track.Pictures.Clear();
-              track.Pictures.AddRange(_pictures);
-              trackChanged = true;
-            }
           }
 
           #endregion
@@ -2343,6 +2335,7 @@ namespace MPTagThat.TagEdit
           main.TracksGridView.Changed = true;
       }
 
+      _pictureIsChanged = false;
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       log.Trace("<<<");
