@@ -265,6 +265,7 @@ namespace MPTagThat.Organise
             newFilename = resolvedParmString.Substring(lastBackSlash + 1);
           }
 
+          newFilename += track.FileExt;
           newFilename = Path.Combine(directoryName, newFilename);
           try
           {
