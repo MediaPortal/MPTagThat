@@ -596,6 +596,7 @@
     <String id="GroupBoxOptions">Optionen</String>
 	<String id="GroupBoxSelection">Auswahl</String>
     <String id="ButtonOrganise">Organisieren</String>
+	<String id="Folder">\ = Verzeichnis: Parameter vor dem Indikator werden als Name für das Unterverzeichnis verwendet</String> 
   </Section>
   
   <!-- Settings  / Preferences --> 

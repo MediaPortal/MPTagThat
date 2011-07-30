@@ -24,10 +24,13 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Elegant.Ui;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
 using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
+using MessageBox = System.Windows.Forms.MessageBox;
+using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 
 #endregion
 
@@ -42,6 +45,8 @@ namespace MPTagThat.Organise
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private Dictionary<string, string> _directories;
     private bool _isPreviewFilled;
+    private bool _progressCancelled;
+    private bool _waitCursorActive;
     private Preview _previewForm;
     private Assembly _scriptAssembly;
     private TrackData track;
@@ -67,6 +72,11 @@ namespace MPTagThat.Organise
       labelHeader.Font = ServiceScope.Get<IThemeManager>().CurrentTheme.FormHeaderFont;
 
       tabControl1.SelectFirstTab();
+
+      // Register for ProgressBar Events
+      ApplicationCommands.ProgressCancel.Executed += ProgressCancel_Executed;
+      _main.ProgressCancelHovering += new Main.ProgressCancelHover(ProgressCancel_Hover);
+      _main.ProgressCancelLeaving += new Main.ProgressCancelLeave(ProgressCancel_Leave);
     }
 
     #endregion
@@ -169,16 +179,29 @@ namespace MPTagThat.Organise
       _main.TracksGridView.SaveAll(false);
 
       bool bError = false;
+      string targetFolder = cbRootDir.Text;
+
+      int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         if (!row.Selected)
           continue;
 
-        track = _main.TracksGridView.TrackList[row.Index];
-        string directoryName = Util.ReplaceParametersWithTrackValues(parameter, track);
+        Application.DoEvents();
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
+        {
+          ResetProgressBar();
+          return;
+        }
 
-        string targetFolder = cbRootDir.Text;
+        track = _main.TracksGridView.TrackList[row.Index];
+
+        // Replace the Parameter Value with the Values from the track
+        string resolvedParmString = Util.ReplaceParametersWithTrackValues(parameter, track);
+        
         if (_scriptAssembly != null) // Do we have a script selected
         {
           try
@@ -195,6 +218,12 @@ namespace MPTagThat.Organise
           {
             log.Error("Script Execution failed: {0}", ex.Message);
           }
+        }
+
+        string directoryName = "";
+        if (resolvedParmString.Contains(@"\"))
+        {
+          directoryName = Path.GetDirectoryName(resolvedParmString);
         }
 
         directoryName = Path.Combine(targetFolder, directoryName);
@@ -228,7 +257,15 @@ namespace MPTagThat.Organise
             _directories.Add(dir, directoryName);
           }
 
-          string newFilename = Path.Combine(directoryName, track.FileName);
+          // Now construct the new File Name
+          string newFilename = resolvedParmString;
+          int lastBackSlash = resolvedParmString.LastIndexOf(@"\");
+          if (lastBackSlash > -1)
+          {
+            newFilename = resolvedParmString.Substring(lastBackSlash + 1);
+          }
+
+          newFilename = Path.Combine(directoryName, newFilename);
           try
           {
             if (!ckOverwriteFiles.Checked)
@@ -326,6 +363,8 @@ namespace MPTagThat.Organise
           }
         }
       }
+
+      ResetProgressBar();
 
       // Delete empty folders,if we didn't get any error
       if (!ckCopyFiles.Checked && !bError)
@@ -445,8 +484,7 @@ namespace MPTagThat.Organise
         {
           track = _main.TracksGridView.TrackList[row.Index];
           trackPreview = _previewForm.Tracks[index];
-          trackPreview.NewFullFileName = Path.Combine(Util.ReplaceParametersWithTrackValues(parameters, track),
-                                                      trackPreview.FileName);
+          trackPreview.NewFullFileName = Util.ReplaceParametersWithTrackValues(parameters, track);
         }
         catch (Exception) {}
       }
@@ -455,6 +493,84 @@ namespace MPTagThat.Organise
       log.Trace("<<<");
     }
 
+    #endregion
+
+    #region Private Methods
+    /// <summary>
+    ///   Sets the maximum value of Progressbar
+    /// </summary>
+    /// <param name = "maxCount"></param>
+    private void SetProgressBar(int maxCount)
+    {
+      _main.progressBar1.Maximum = maxCount == 0 ? 100 : maxCount;
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+      SetWaitCursor();
+    }
+
+    /// <summary>
+    ///   Reset the Progressbar to Initiaövfalue
+    /// </summary>
+    private void ResetProgressBar()
+    {
+      _main.progressBar1.Value = 0;
+      _progressCancelled = false;
+      ResetWaitCursor();
+    }
+
+    /// <summary>
+    ///   Sets the WaitCursor during various operations
+    /// </summary>
+    private void SetWaitCursor()
+    {
+      _main.Cursor = Cursors.WaitCursor;
+      this.Cursor = Cursors.WaitCursor;
+      _waitCursorActive = true;
+    }
+
+    /// <summary>
+    ///   Resets the WaitCursor to the default
+    /// </summary>
+    private void ResetWaitCursor()
+    {
+      _main.Cursor = Cursors.Default;
+      this.Cursor = Cursors.Default;
+      _waitCursorActive = false;
+    }
+
+    /// <summary>
+    ///   The Progress Cancel has been fired from the Statusbar Button
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void ProgressCancel_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      _progressCancelled = true;
+      ResetWaitCursor();
+    }
+
+    /// <summary>
+    ///   We're hovering over the Progress Cancel button.
+    ///   If the Wait Cursor is active, change it to Default
+    /// </summary>
+    private void ProgressCancel_Hover(object sender, EventArgs e)
+    {
+      if (_waitCursorActive)
+      {
+        _main.Cursor = Cursors.Default;
+      }
+    }
+
+    /// <summary>
+    ///   We are leaving the Button again. If WaitCursor is active, we should set it back again
+    /// </summary>
+    private void ProgressCancel_Leave(object sender, EventArgs e)
+    {
+      if (_waitCursorActive)
+      {
+        _main.Cursor = Cursors.WaitCursor;
+      }
+    }
     #endregion
 
     #endregion

@@ -108,6 +108,14 @@ namespace MPTagThat
     private Theme prevTheme;
     private TreeNode windowsNode;
 
+    // Delegates
+    
+    // Delegate to fire, when a hover over the Progress Cancel button occurs
+    public delegate void ProgressCancelHover(object sender, EventArgs args);
+    public delegate void ProgressCancelLeave(object sender, EventArgs args);
+    public event ProgressCancelHover ProgressCancelHovering; 
+    public event ProgressCancelLeave ProgressCancelLeaving; 
+
     #endregion
 
     #region Constructor
@@ -3185,7 +3193,10 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void buttonProgressCancel_MouseEnter(object sender, EventArgs e)
     {
-      TracksGridView.ProgressCancel_Hover();
+      if (ProgressCancelHovering != null)
+      {
+        ProgressCancelHovering(this, new EventArgs());
+      }
     }
 
     /// <summary>
@@ -3195,7 +3206,10 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void buttonProgressCancel_MouseLeave(object sender, EventArgs e)
     {
-      TracksGridView.ProgressCancel_Leave();
+      if (ProgressCancelLeaving != null)
+      {
+        ProgressCancelLeaving(this, new EventArgs());
+      }
     }
 
     #endregion

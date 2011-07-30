@@ -198,9 +198,6 @@ namespace MPTagThat.GridView
       CreateColumns();
 
       LocaliseScreen();
-
-      // Register for Command Cancel
-      ApplicationCommands.ProgressCancel.Executed += ProgressCancel_Executed;
     }
 
     #endregion
@@ -215,6 +212,11 @@ namespace MPTagThat.GridView
     public void SetMainRef(Main main)
     {
       _main = main;
+
+      // Register for ProgressBar Events
+      ApplicationCommands.ProgressCancel.Executed += ProgressCancel_Executed;
+      _main.ProgressCancelHovering += new Main.ProgressCancelHover(ProgressCancel_Hover);
+      _main.ProgressCancelLeaving += new Main.ProgressCancelLeave(ProgressCancel_Leave);
     }
 
     #region Status Column
@@ -2868,7 +2870,7 @@ namespace MPTagThat.GridView
     ///   We're hovering over the Progress Cancel button.
     ///   If the Wait Cursor is active, change it to Default
     /// </summary>
-    public void ProgressCancel_Hover()
+    private void ProgressCancel_Hover(object sender, EventArgs e)
     {
       if (_waitCursorActive)
       {
@@ -2879,7 +2881,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   We are leaving the Button again. If WaitCursor is active, we should set it back again
     /// </summary>
-    public void ProgressCancel_Leave()
+    private void ProgressCancel_Leave(object sender, EventArgs e)
     {
       if (_waitCursorActive)
       {

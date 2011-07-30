@@ -150,8 +150,8 @@ namespace MPTagThat.Organise
       this.lblParmFolder.Name = "lblParmFolder";
       this.lblParmFolder.Size = new System.Drawing.Size(391, 13);
       this.lblParmFolder.TabIndex = 21;
-      this.lblParmFolder.Text = "\\ = Folder: to specify that parameters in front of it to be taken from the folder" +
-    " name";
+      this.lblParmFolder.Text =
+        "\\ = Folder: to specify that parameters in front to be used as subfoldername within target folder";
       this.lblParmFolder.Click += new System.EventHandler(this.lblParm_Click);
       // 
       // lblParmFirstAlbumArtist

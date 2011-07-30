@@ -596,6 +596,7 @@
     <String id="GroupBoxOptions">Options</String>
     <String id="GroupBoxSelection">Selection</String>
     <String id="ButtonOrganise">Organise</String>
+	<String id="Folder">\ = Folder: to specify that parameters in front to be used as subfoldername within target folder</String> 
   </Section>
   
   <!-- Settings  / Preferences --> 

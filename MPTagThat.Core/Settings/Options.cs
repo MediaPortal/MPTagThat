@@ -358,8 +358,10 @@ namespace MPTagThat.Core
       if (_organiseSettings.FormatValues.Count == 0)
       {
         // Add Default values
-        _organiseSettings.FormatValues.Add(@"<A>\<B>");
-        _organiseSettings.FormatValues.Add(@"<A:1>\<A>\<B>");
+        _organiseSettings.FormatValues.Add(@"<A>\<B>\<K> - <T>");
+        _organiseSettings.FormatValues.Add(@"<A:1>\<A>\<B>\<K> - <T>");
+        _organiseSettings.FormatValues.Add(@"<O>\<B>\<K> - <A> - <T>");
+        _organiseSettings.FormatValues.Add(@"<O:1>\<A>\<B>\<K> - <T>");
       }
 
       _organiseSettingsTemp = new List<string>(_organiseSettings.FormatValues);
