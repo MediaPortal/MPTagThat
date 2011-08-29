@@ -2726,6 +2726,8 @@ namespace MPTagThat.TagEdit
           if (img != null)
           {
             pictureBoxCover.Image = img;
+            tbPicDesc.Text = _pictures[e.RowIndex].Description;
+            cbPicType.Text = Enum.GetName(typeof (PictureType),_pictures[e.RowIndex].Type);
           }
         }
         catch (Exception ex)
@@ -2735,6 +2737,45 @@ namespace MPTagThat.TagEdit
         _selectedPictureGridRow = e.RowIndex;
         buttonExportPicture.Enabled = true;
         buttonRemovePicture.Enabled = true;
+      }
+    }
+
+    /// <summary>
+    /// A Picture Type has been selected. Update the Item
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbPicType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      TagLib.PictureType picType = (PictureType)Enum.Parse(typeof (PictureType), cbPicType.Text);
+      foreach (DataGridViewRow row in dataGridViewPicture.SelectedRows)
+      {
+        if (_pictures[row.Index].Type != picType)
+        {
+          row.Cells[1].Value = cbPicType.Text;
+          _pictures[row.Index].Type = picType;
+          _pictureIsChanged = true;
+          
+        }
+      }
+    }
+
+    /// <summary>
+    /// The Description for the Picture has been changed. Update the Item
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tbPicDesc_Validated(object sender, EventArgs e)
+    {
+      foreach (DataGridViewRow row in dataGridViewPicture.SelectedRows)
+      {
+        if (_pictures[row.Index].Description != tbPicDesc.Text)
+        {
+          row.Cells[0].Value = tbPicDesc.Text;
+          _pictures[row.Index].Description = tbPicDesc.Text;
+          _pictureIsChanged = true;
+
+        }
       }
     }
 
