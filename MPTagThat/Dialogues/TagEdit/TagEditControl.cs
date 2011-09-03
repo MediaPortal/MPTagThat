@@ -2507,6 +2507,23 @@ namespace MPTagThat.TagEdit
       }
     }
 
+    /// <summary>
+    /// Copy the content of the Artist field to Album Artist
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btCopyArtistToAlbumArtist_Click(object sender, EventArgs e)
+    {
+      if (_isMultiTagEdit)
+      {
+        cbAlbumArtist.Text = cbArtist.Text;
+      }
+      else
+      {
+        tbAlbumArtist.Text = tbArtist.Text;
+      }
+    }
+
     #region Genre
 
     /// <summary>
@@ -3208,7 +3225,6 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
-
     #endregion
   }
 }
