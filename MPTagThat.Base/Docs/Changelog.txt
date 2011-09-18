@@ -7,6 +7,29 @@ Legend:
 - Deleted
 x Fixed
 
+3.0.0 Date: 18.09.2011 
+-------------------------------------
++ GUI: Complete redesign of GUI
++ GUI: Added Find / Replace to Ribbon
++ GUI: Show a symbol for changed tracks, as the color for changed rows can't be seen, when all rows are selecteed
++ General: .Net 4.0 now required
++ General: Setup will now uninstall previous version before installing new version
++ General: Added "Cancel ALl" Button to Cover Search dialog
++ TagEdit: Added a button, which copies content of Artist to AlbumArtist
++ TagEdit: Allow changing of Type and Desc of an existing Picture
++ TagEdit: Organise uses now no longer just only the filename as target, but will allow to fully qualify the format of the filename
++ TagEdit: Added Ribbon for Validate / Fix MP3 Songs
++ TagEdit: Added re-search dialog, if nothing is found or wrong album displayed
++ TagEdit: Cash retrieved covers, so that the user isn't asked multiple times on Cover Search
++ TagEdit: Allow Lyrics Search, when Multiple Songs are selected
++ TagEdit: 0003495: Ability to store Cover Art only in folder thumb and don't touch the Music File
++ TagEdit: 0003496: Reset the Number count in the ribbon to 1 after folder change
++ TagEdit: 0003488: Better handling of Read-only files
++ TagEdit: 0003479: User may change Text Encoding for MP3 files
++ TagEdit:0003518: Setting to display TagEdit Details in Top or Bottom Panel
+x General: Handle exceptions when loading Main Menu. The splash screen sometimes kept open without any further reaction
+x General: Further Performance Improvement on Folder Scan
+
 2.0.4034 Build 35136 Date: 17.01.2011 
 -------------------------------------
 x General: Don't save folder.jpg as hidden
