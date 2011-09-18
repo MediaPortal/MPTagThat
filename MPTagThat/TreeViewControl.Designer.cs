@@ -42,6 +42,11 @@
       this.menuInsertFilter = new System.Windows.Forms.ToolStripMenuItem();
       this.menuDeleteFilter = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControlTreeView = new Elegant.Ui.TabControl();
+      this.tabPageViews = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
+      this.treeViewPanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
+      this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
+      this.treeViewPanelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.tabPageFilter = new MPTagThat.Core.WinControls.MPTTabPage();
       this.dataGridViewTagFilter = new System.Windows.Forms.DataGridView();
       this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -51,11 +56,6 @@
       this.tbFileMask = new System.Windows.Forms.TextBox();
       this.cbListFormats = new MPTagThat.Core.WinControls.MPTComboBox();
       this.ckUseTagFilter = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.tabPageViews = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.treeViewPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
-      this.treeViewPanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
-      this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
-      this.treeViewPanelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.panelLeftBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.optionsPanelLeft = new MPTagThat.Core.WinControls.TTExtendedPanel();
       this.btnRefreshFolder = new MPTagThat.Core.WinControls.MPTButton();
@@ -64,11 +64,11 @@
       this.contextMenuTreeView.SuspendLayout();
       this.contextMenuStripFilter.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTreeView)).BeginInit();
-      this.tabPageFilter.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).BeginInit();
       this.tabPageViews.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
       this.treeViewPanelBottom.SuspendLayout();
+      this.tabPageFilter.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).BeginInit();
       this.panelLeftBottom.SuspendLayout();
       this.optionsPanelLeft.SuspendLayout();
       this.SuspendLayout();
@@ -159,12 +159,92 @@
       this.tabControlTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTreeView.Location = new System.Drawing.Point(0, 0);
       this.tabControlTreeView.Name = "tabControlTreeView";
-      this.tabControlTreeView.SelectedTabPage = this.tabPageViews;
+      this.tabControlTreeView.SelectedTabPage = this.tabPageFilter;
       this.tabControlTreeView.Size = new System.Drawing.Size(218, 535);
       this.tabControlTreeView.TabIndex = 8;
       this.tabControlTreeView.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageViews,
             this.tabPageFilter});
+      // 
+      // tabPageViews
+      // 
+      this.tabPageViews.ActiveControl = null;
+      this.tabPageViews.Controls.Add(this.treeViewPanel);
+      this.tabPageViews.KeyTip = null;
+      this.tabPageViews.Localisation = "TreeViewViews";
+      this.tabPageViews.LocalisationContext = "main";
+      this.tabPageViews.Name = "tabPageViews";
+      this.tabPageViews.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPageViews.Size = new System.Drawing.Size(216, 514);
+      this.tabPageViews.TabIndex = 0;
+      this.tabPageViews.Text = "Views";
+      // 
+      // treeViewPanel
+      // 
+      this.treeViewPanel.AnimationStep = 30;
+      this.treeViewPanel.BorderColor = System.Drawing.Color.Transparent;
+      this.treeViewPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
+      this.treeViewPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
+      this.treeViewPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
+      this.treeViewPanel.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.treeViewPanel.CaptionSize = 24;
+      this.treeViewPanel.CaptionText = "Folders";
+      this.treeViewPanel.CaptionTextColor = System.Drawing.Color.Black;
+      this.treeViewPanel.Controls.Add(this.treeViewPanelBottom);
+      this.treeViewPanel.Controls.Add(this.treeViewPanelTop);
+      this.treeViewPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
+      this.treeViewPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
+      this.treeViewPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
+      this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.treeViewPanel.Location = new System.Drawing.Point(3, 3);
+      this.treeViewPanel.Name = "treeViewPanel";
+      this.treeViewPanel.Size = new System.Drawing.Size(210, 508);
+      this.treeViewPanel.TabIndex = 7;
+      // 
+      // treeViewPanelBottom
+      // 
+      this.treeViewPanelBottom.Controls.Add(this.treeViewFolderBrowser);
+      this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
+      this.treeViewPanelBottom.Name = "treeViewPanelBottom";
+      this.treeViewPanelBottom.Size = new System.Drawing.Size(210, 484);
+      this.treeViewPanelBottom.TabIndex = 2;
+      // 
+      // treeViewFolderBrowser
+      // 
+      this.treeViewFolderBrowser.AllowDrop = true;
+      this.treeViewFolderBrowser.BackColor = System.Drawing.SystemColors.Window;
+      this.treeViewFolderBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.treeViewFolderBrowser.DataSource = null;
+      this.treeViewFolderBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk) 
+            | Raccoom.Windows.Forms.DriveTypes.LocalDisk) 
+            | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
+      this.treeViewFolderBrowser.HideSelection = false;
+      this.treeViewFolderBrowser.LabelEdit = true;
+      this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
+      this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
+      this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
+      this.treeViewFolderBrowser.Size = new System.Drawing.Size(210, 484);
+      this.treeViewFolderBrowser.TabIndex = 1;
+      this.treeViewFolderBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewFolderBrowser_AfterLabelEdit);
+      this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
+      this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
+      this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
+      this.treeViewFolderBrowser.Click += new System.EventHandler(this.treeViewFolderBrowser_Click);
+      this.treeViewFolderBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragDrop);
+      this.treeViewFolderBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragOver);
+      this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
+      this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
+      this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
+      // 
+      // treeViewPanelTop
+      // 
+      this.treeViewPanelTop.Dock = System.Windows.Forms.DockStyle.Top;
+      this.treeViewPanelTop.Location = new System.Drawing.Point(0, 0);
+      this.treeViewPanelTop.Name = "treeViewPanelTop";
+      this.treeViewPanelTop.Size = new System.Drawing.Size(210, 24);
+      this.treeViewPanelTop.TabIndex = 1;
       // 
       // tabPageFilter
       // 
@@ -279,90 +359,10 @@
       this.ckUseTagFilter.LocalisationContext = "main";
       this.ckUseTagFilter.Location = new System.Drawing.Point(6, 7);
       this.ckUseTagFilter.Name = "ckUseTagFilter";
-      this.ckUseTagFilter.Size = new System.Drawing.Size(85, 26);
+      this.ckUseTagFilter.Size = new System.Drawing.Size(198, 26);
       this.ckUseTagFilter.TabIndex = 0;
       this.ckUseTagFilter.Text = "Use tag filter";
       this.ckUseTagFilter.CheckedChanged += new System.EventHandler(this.ckUseTagFilter_CheckedChanged);
-      // 
-      // tabPageViews
-      // 
-      this.tabPageViews.ActiveControl = null;
-      this.tabPageViews.Controls.Add(this.treeViewPanel);
-      this.tabPageViews.KeyTip = null;
-      this.tabPageViews.Localisation = "TreeViewViews";
-      this.tabPageViews.LocalisationContext = "main";
-      this.tabPageViews.Name = "tabPageViews";
-      this.tabPageViews.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageViews.Size = new System.Drawing.Size(216, 514);
-      this.tabPageViews.TabIndex = 0;
-      this.tabPageViews.Text = "Views";
-      // 
-      // treeViewPanel
-      // 
-      this.treeViewPanel.AnimationStep = 30;
-      this.treeViewPanel.BorderColor = System.Drawing.Color.Transparent;
-      this.treeViewPanel.CaptionBrush = Stepi.UI.BrushType.Solid;
-      this.treeViewPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
-      this.treeViewPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
-      this.treeViewPanel.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.treeViewPanel.CaptionSize = 24;
-      this.treeViewPanel.CaptionText = "Folders";
-      this.treeViewPanel.CaptionTextColor = System.Drawing.Color.Black;
-      this.treeViewPanel.Controls.Add(this.treeViewPanelBottom);
-      this.treeViewPanel.Controls.Add(this.treeViewPanelTop);
-      this.treeViewPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
-      this.treeViewPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
-      this.treeViewPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
-      this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewPanel.Location = new System.Drawing.Point(3, 3);
-      this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(210, 508);
-      this.treeViewPanel.TabIndex = 7;
-      // 
-      // treeViewPanelBottom
-      // 
-      this.treeViewPanelBottom.Controls.Add(this.treeViewFolderBrowser);
-      this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
-      this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(210, 484);
-      this.treeViewPanelBottom.TabIndex = 2;
-      // 
-      // treeViewFolderBrowser
-      // 
-      this.treeViewFolderBrowser.AllowDrop = true;
-      this.treeViewFolderBrowser.BackColor = System.Drawing.SystemColors.Window;
-      this.treeViewFolderBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.treeViewFolderBrowser.DataSource = null;
-      this.treeViewFolderBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewFolderBrowser.DriveTypes = ((Raccoom.Windows.Forms.DriveTypes)((((Raccoom.Windows.Forms.DriveTypes.NoRootDirectory | Raccoom.Windows.Forms.DriveTypes.RemovableDisk) 
-            | Raccoom.Windows.Forms.DriveTypes.LocalDisk) 
-            | Raccoom.Windows.Forms.DriveTypes.NetworkDrive)));
-      this.treeViewFolderBrowser.HideSelection = false;
-      this.treeViewFolderBrowser.LabelEdit = true;
-      this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
-      this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
-      this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(210, 484);
-      this.treeViewFolderBrowser.TabIndex = 1;
-      this.treeViewFolderBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewFolderBrowser_AfterLabelEdit);
-      this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
-      this.treeViewFolderBrowser.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewFolderBrowser_BeforeSelect);
-      this.treeViewFolderBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolderBrowser_AfterSelect);
-      this.treeViewFolderBrowser.Click += new System.EventHandler(this.treeViewFolderBrowser_Click);
-      this.treeViewFolderBrowser.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragDrop);
-      this.treeViewFolderBrowser.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewFolderBrowser_DragOver);
-      this.treeViewFolderBrowser.Enter += new System.EventHandler(this.treeViewFolderBrowser_Enter);
-      this.treeViewFolderBrowser.Leave += new System.EventHandler(this.treeViewFolderBrowser_Leave);
-      this.treeViewFolderBrowser.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewFolderBrowser_MouseUp);
-      // 
-      // treeViewPanelTop
-      // 
-      this.treeViewPanelTop.Dock = System.Windows.Forms.DockStyle.Top;
-      this.treeViewPanelTop.Location = new System.Drawing.Point(0, 0);
-      this.treeViewPanelTop.Name = "treeViewPanelTop";
-      this.treeViewPanelTop.Size = new System.Drawing.Size(210, 24);
-      this.treeViewPanelTop.TabIndex = 1;
       // 
       // panelLeftBottom
       // 
@@ -449,12 +449,12 @@
       this.contextMenuTreeView.ResumeLayout(false);
       this.contextMenuStripFilter.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTreeView)).EndInit();
-      this.tabPageFilter.ResumeLayout(false);
-      this.tabPageFilter.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).EndInit();
       this.tabPageViews.ResumeLayout(false);
       this.treeViewPanel.ResumeLayout(false);
       this.treeViewPanelBottom.ResumeLayout(false);
+      this.tabPageFilter.ResumeLayout(false);
+      this.tabPageFilter.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).EndInit();
       this.panelLeftBottom.ResumeLayout(false);
       this.optionsPanelLeft.ResumeLayout(false);
       this.optionsPanelLeft.PerformLayout();
