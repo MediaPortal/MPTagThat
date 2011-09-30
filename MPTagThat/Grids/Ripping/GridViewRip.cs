@@ -234,6 +234,12 @@ namespace MPTagThat.GridView
       if (threadRip != null)
       {
         SetStatusLabel("Rip aborted");
+
+        if(audioEncoder != null)
+        {
+          audioEncoder.AbortEncoding();
+        }
+
         threadRip.Abort();
         _currentRow = -1;
         BassCd.BASS_CD_Door(CurrentDriveID, BASSCDDoor.BASS_CD_DOOR_UNLOCK);
