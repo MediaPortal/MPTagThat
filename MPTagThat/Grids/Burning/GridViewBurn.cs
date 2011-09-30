@@ -45,12 +45,11 @@ namespace MPTagThat.GridView
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
 
-    private readonly IMediaChangeMonitor mediaChangeMonitor;
-
     private readonly string tmpBurnDirectory = String.Format(@"{0}\MPTagThat\TmpBurn",
                                                              Environment.GetFolderPath(
                                                                Environment.SpecialFolder.LocalApplicationData));
 
+    private IMediaChangeMonitor mediaChangeMonitor;
     private IBurnManager burnManager;
     private int DragDropCurrentIndex = -1;
 
@@ -151,10 +150,6 @@ namespace MPTagThat.GridView
 
       _main.BurnButtonsEnabled = false;
 
-      mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
-      mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
-      mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
-
       // Create the Temp Directory for the burner
       if (!Directory.Exists(tmpBurnDirectory))
         Directory.CreateDirectory(tmpBurnDirectory);
@@ -188,6 +183,10 @@ namespace MPTagThat.GridView
       {
         ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Burn Manager");
         ServiceScope.Add<IBurnManager>(new BurnManager());
+
+        mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
+        mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
+        mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
 
         burnManager = ServiceScope.Get<IBurnManager>();
         GetDrives();
