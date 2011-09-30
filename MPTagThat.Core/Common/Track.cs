@@ -65,19 +65,35 @@ namespace MPTagThat.Core
       }
 
       TagLib.Id3v2.Tag id3v2tag = null;
-      if (file.MimeType.Substring(file.MimeType.IndexOf("/") + 1) == "mp3")
+      try
       {
-        id3v2tag = file.GetTag(TagTypes.Id3v2, false) as TagLib.Id3v2.Tag;
+        if (file.MimeType.Substring(file.MimeType.IndexOf("/") + 1) == "mp3")
+        {
+          id3v2tag = file.GetTag(TagTypes.Id3v2, false) as TagLib.Id3v2.Tag;
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Error("File Read: Error retrieving id3tag: {0} {1}", fileName, ex.Message);
+        return null;
       }
 
       #region Set Common Values
 
-      track.Id = new Guid();
-      track.FullFileName = fileName;
-      track.FileName = Path.GetFileName(fileName);
       FileInfo fi = new FileInfo(fileName);
-      track.Readonly = fi.IsReadOnly;
-      track.TagType = file.MimeType.Substring(file.MimeType.IndexOf("/") + 1);
+      try
+      {
+        track.Id = new Guid();
+        track.FullFileName = fileName;
+        track.FileName = Path.GetFileName(fileName);
+        track.Readonly = fi.IsReadOnly;
+        track.TagType = file.MimeType.Substring(file.MimeType.IndexOf("/") + 1);
+      }
+      catch (Exception ex)
+      {
+        log.Error("File Read: Error setting Common tags: {0} {1}", fileName, ex.Message);
+        return null;
+      }
       #endregion
 
       #region Set Tags
@@ -253,7 +269,19 @@ namespace MPTagThat.Core
           {
             if (frame.GetType() == typeof(UserTextInformationFrame))
             {
-              track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description, (frame as UserTextInformationFrame).Text[0]));
+              track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "", (frame as UserTextInformationFrame).Text.Length == 0 ? "" : (frame as UserTextInformationFrame).Text[0]));
+            }
+            else if (frame.GetType() == typeof(PrivateFrame))
+            {
+              track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "", (frame as PrivateFrame).PrivateData.ToString()));
+            }
+            else if (frame.GetType() == typeof(UniqueFileIdentifierFrame))
+            {
+              track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "", (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
+            }
+            else if (frame.GetType() == typeof(UnknownFrame))
+            {
+              track.UserFrames.Add(new Frame(id, "", (frame as UnknownFrame).Data.ToString()));
             }
             else
             {

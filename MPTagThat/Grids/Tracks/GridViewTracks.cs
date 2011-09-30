@@ -227,7 +227,7 @@ namespace MPTagThat.GridView
     /// <param name="row"></param>
     public void ClearStatusColumn(DataGridViewRow row)
     {
-      ((DataGridViewImageCell)row.Cells[0]).Value = new Bitmap(1,1);
+      ((DataGridViewImageCell)row.Cells[0]).Value = new Bitmap(1, 1);
     }
 
     /// <summary>
@@ -518,7 +518,7 @@ namespace MPTagThat.GridView
       if (tracksGrid.InvokeRequired)
       {
         ThreadSafeGridDelegate1 d = IdentifyFilesThread;
-        tracksGrid.Invoke(d, new[] {sender, e});
+        tracksGrid.Invoke(d, new[] { sender, e });
         return;
       }
 
@@ -695,7 +695,7 @@ namespace MPTagThat.GridView
       if (tracksGrid.InvokeRequired)
       {
         ThreadSafeGridDelegate d = GetCoverArtThread;
-        tracksGrid.Invoke(d, new object[] {});
+        tracksGrid.Invoke(d, new object[] { });
         return;
       }
 
@@ -846,8 +846,8 @@ namespace MPTagThat.GridView
             }
             dlgAlbumResults.Dispose();
           }
-          
-           
+
+
           // Now update the Cover Art
           if (amazonAlbum != null)
           {
@@ -860,7 +860,7 @@ namespace MPTagThat.GridView
             if ((track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers) && !Options.MainSettings.OnlySaveFolderThumb)
             {
               track.Pictures.Clear();
-            
+
               ByteVector vector = amazonAlbum.AlbumImage;
               if (vector != null)
               {
@@ -1019,7 +1019,7 @@ namespace MPTagThat.GridView
       if (tracksGrid.InvokeRequired)
       {
         ThreadSafeGridDelegate d = GetLyricsThread;
-        tracksGrid.Invoke(d, new object[] {});
+        tracksGrid.Invoke(d, new object[] { });
         return;
       }
 
@@ -1193,7 +1193,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      for (int i = tracksGrid.Rows.Count - 1; i > 0; i-- )
+      for (int i = tracksGrid.Rows.Count - 1; i > 0; i--)
       {
         DataGridViewRow row = tracksGrid.Rows[i];
         if (!row.Selected)
@@ -1625,6 +1625,7 @@ namespace MPTagThat.GridView
           {
             if (Util.IsAudio(fi.FullName))
             {
+              log.Trace("Retrieving file: {0}", fi.FullName);
               // Read the Tag
               TrackData track = Track.Create(fi.FullName);
               if (ApplyTagFilter(track))
@@ -1658,6 +1659,14 @@ namespace MPTagThat.GridView
                         MessageBoxButtons.OK);
         log.Error("Folderscan: Running out of memory. Scanning aborted.");
       }
+      catch(System.UnauthorizedAccessException exUna)
+      {
+        log.Warn("Could not access file or folder: {0}. {1}", exUna.Message,exUna.Source);
+      }
+      catch (Exception ex)
+      {
+        log.Error("Caugth error processing files: {0} {1}", ex.Message, ex.StackTrace);
+      }
       finally
       {
         tracksGrid.Show();
@@ -1678,7 +1687,7 @@ namespace MPTagThat.GridView
       {
         _main.ToolStripStatusFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
       }
-      catch (InvalidOperationException) {}
+      catch (InvalidOperationException) { }
 
       // unselect the first row, which would be selected automatically by the grid
       // And set the background color of the rating cell, as it isn't reset by the grid
@@ -1691,7 +1700,7 @@ namespace MPTagThat.GridView
           tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
-      catch (ArgumentOutOfRangeException) {}
+      catch (ArgumentOutOfRangeException) { }
 
       // If MP3 Validation is turned on, set the color
       if (Options.MainSettings.MP3Validate)
@@ -1847,7 +1856,7 @@ namespace MPTagThat.GridView
       {
         _main.ToolStripStatusFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"), count, 0);
       }
-      catch (InvalidOperationException) {}
+      catch (InvalidOperationException) { }
 
       // unselect the first row, which would be selected automatically by the grid
       // And set the background color of the rating cell, as it isn't reset by the grid
@@ -1860,7 +1869,7 @@ namespace MPTagThat.GridView
           tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
-      catch (ArgumentOutOfRangeException) {}
+      catch (ArgumentOutOfRangeException) { }
 
 
       // If MP3 Validation is turned on, set the color
@@ -2018,7 +2027,7 @@ namespace MPTagThat.GridView
     /// <returns>Formatted string</returns>
     private string FormatMultipleEntry(string str)
     {
-      string[] strSplit = str.Split(new[] {';', '|'});
+      string[] strSplit = str.Split(new[] { ';', '|' });
       // Can't use a simple String.Join as i need to trim all the elements 
       string strJoin = "| ";
       foreach (string strTmp in strSplit)
@@ -2126,7 +2135,7 @@ namespace MPTagThat.GridView
       if (tracksGrid.InvokeRequired)
       {
         ThreadSafeAddTracksDelegate d = AddTrack;
-        tracksGrid.Invoke(d, new object[] {track});
+        tracksGrid.Invoke(d, new object[] { track });
         return;
       }
 
@@ -2281,7 +2290,7 @@ namespace MPTagThat.GridView
             searchstring = track.Conductor;
             break;
 
-            // Tags with are checked for existence or non-existence
+          // Tags with are checked for existence or non-existence
           case "picture":
             searchstring = track.Pictures.Count > 0 ? "True" : "False";
             break;
@@ -2290,7 +2299,7 @@ namespace MPTagThat.GridView
             searchstring = track.Lyrics != null ? "True" : "False";
             break;
 
-            // Numeric Tags
+          // Numeric Tags
           case "track":
             numericCompare = true;
             searchNumber = (int)track.TrackNumber;
@@ -2516,7 +2525,7 @@ namespace MPTagThat.GridView
         if (tracksGrid.Rows.Count > 0)
           tracksGrid.InvalidateRow(e.Column.Index);
       }
-      catch (Exception) {}
+      catch (Exception) { }
     }
 
     /// <summary>
@@ -2528,7 +2537,7 @@ namespace MPTagThat.GridView
     {
       // For combo box and check box cells, commit any value change as soon
       // as it is made rather than waiting for the focus to leave the cell.
-      if (!tracksGrid.CurrentCell.OwningColumn.GetType().Equals(typeof (DataGridViewTextBoxColumn)))
+      if (!tracksGrid.CurrentCell.OwningColumn.GetType().Equals(typeof(DataGridViewTextBoxColumn)))
       {
         tracksGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
       }
@@ -2546,8 +2555,8 @@ namespace MPTagThat.GridView
       // If the user-specified value is invalid, cancel the change 
       // and display the error icon in the row header.
       if ((e.Context & DataGridViewDataErrorContexts.Commit) != 0 &&
-          (typeof (FormatException).IsAssignableFrom(e.Exception.GetType()) ||
-           typeof (ArgumentException).IsAssignableFrom(e.Exception.GetType())))
+          (typeof(FormatException).IsAssignableFrom(e.Exception.GetType()) ||
+           typeof(ArgumentException).IsAssignableFrom(e.Exception.GetType())))
       {
         tracksGrid.Rows[e.RowIndex].ErrorText = localisation.ToString("message", "DataEntryError");
         e.Cancel = true;
