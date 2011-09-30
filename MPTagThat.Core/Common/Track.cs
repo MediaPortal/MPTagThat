@@ -169,7 +169,6 @@ namespace MPTagThat.Core
         }
 
         // Rating
-        track.Rating = 0;
         if (track.TagType == "mp3")
         {
           TagLib.Id3v2.PopularimeterFrame popmFrame = null;
@@ -547,7 +546,7 @@ namespace MPTagThat.Core
 
         #region Lyrics
 
-        if (track.Lyrics != "")
+        if (track.Lyrics != null && track.Lyrics != "")
         {
           file.Tag.Lyrics = track.Lyrics;
           if (track.TagType.ToLower() == "mp3")
