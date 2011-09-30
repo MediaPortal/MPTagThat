@@ -157,9 +157,6 @@ namespace MPTagThat
       ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Script Manager");
       ServiceScope.Add<IScriptManager>(new ScriptManager());
 
-      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Burn Manager");
-      ServiceScope.Add<IBurnManager>(new BurnManager());
-
       ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Audio Encoder");
       ServiceScope.Add<IAudioEncoder>(new AudioEncoder());
 

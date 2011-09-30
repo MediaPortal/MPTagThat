@@ -3302,6 +3302,7 @@ namespace MPTagThat
             TracksGridView.Hide();
             ConvertGridView.Hide();
             RipGridView.Hide();
+            BurnGridView.InitRibbon();
             BurnGridView.SetMediaInfo();
             BurnGridView.Show();
             if (!SplitterRight.IsCollapsed)
