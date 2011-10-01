@@ -100,27 +100,24 @@ namespace MPTagThat.GridView
       get { return _selectedCDRomDrive; }
       set
       {
-        if (_selectedCDRomDrive != value)
+        _selectedCDRomDrive = value;
+        // Change the Datasource of the grid to the correct bindinglist
+        if (CurrentDriveID > -1)
         {
-          _selectedCDRomDrive = value;
-          // Change the Datasource of the grid to the correct bindinglist
-          if (CurrentDriveID > -1)
+          // Activate the Rip Grid
+          _main.Ribbon.CurrentTabPage = _main.TabRip;
+          _main.BurnGridView.Hide();
+          _main.TracksGridView.Hide();
+          _main.RipGridView.Show();
+          if (!_main.SplitterRight.IsCollapsed)
           {
-            // Activate the Rip Grid
-            _main.Ribbon.CurrentTabPage = _main.TabRip;
-            _main.BurnGridView.Hide();
-            _main.TracksGridView.Hide();
-            _main.RipGridView.Show();
-            if (!_main.SplitterRight.IsCollapsed)
-            {
-              _main.SplitterRight.ToggleState();
-            }
-            QueryFreeDB(Convert.ToChar(_selectedCDRomDrive));
-            dataGridViewRip.DataSource = bindingList[CurrentDriveID];
-            if (dataGridViewRip.Rows.Count > 0)
-            {
-              dataGridViewRip.Rows[0].Selected = false;
-            }
+            _main.SplitterRight.ToggleState();
+          }
+          QueryFreeDB(Convert.ToChar(_selectedCDRomDrive));
+          dataGridViewRip.DataSource = bindingList[CurrentDriveID];
+          if (dataGridViewRip.Rows.Count > 0)
+          {
+            dataGridViewRip.Rows[0].Selected = false;
           }
         }
       }
@@ -235,7 +232,7 @@ namespace MPTagThat.GridView
       {
         SetStatusLabel("Rip aborted");
 
-        if(audioEncoder != null)
+        if (audioEncoder != null)
         {
           audioEncoder.AbortEncoding();
         }
@@ -255,7 +252,7 @@ namespace MPTagThat.GridView
       if (lbRippingStatus.InvokeRequired)
       {
         ThreadSafeRippingStatusDelegate d = SetStatusLabel;
-        lbRippingStatus.Invoke(d, new object[] {text});
+        lbRippingStatus.Invoke(d, new object[] { text });
       }
       lbRippingStatus.Text = text;
     }
@@ -289,7 +286,7 @@ namespace MPTagThat.GridView
       if (_main.TreeView.InvokeRequired)
       {
         ThreadSafeGridDelegate d = RippingThread;
-        _main.TreeView.Invoke(d, new object[] {});
+        _main.TreeView.Invoke(d, new object[] { });
         return;
       }
 
@@ -414,7 +411,7 @@ namespace MPTagThat.GridView
           if (stream == 0)
           {
             log.Error("Error creating stream for Audio Track {0}. Error: {1}", _currentRow,
-                      Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+                      Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
             continue;
           }
 
@@ -436,7 +433,7 @@ namespace MPTagThat.GridView
           if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
           {
             log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow,
-                      Enum.GetName(typeof (BASSError), Bass.BASS_ErrorGetCode()));
+                      Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
           }
 
           dataGridViewRip.Rows[_currentRow].Cells[1].Value = 100;
@@ -448,11 +445,11 @@ namespace MPTagThat.GridView
           {
             // Now Tag the encoded File
             File file = File.Create(_outFile);
-            file.Tag.AlbumArtists = new[] {tbAlbumArtist.Text};
+            file.Tag.AlbumArtists = new[] { tbAlbumArtist.Text };
             file.Tag.Album = tbAlbum.Text;
-            file.Tag.Genres = new[] {tbGenre.Text};
+            file.Tag.Genres = new[] { tbGenre.Text };
             file.Tag.Year = tbYear.Text == string.Empty ? 0 : Convert.ToUInt32(tbYear.Text);
-            file.Tag.Performers = new[] {track.Artist};
+            file.Tag.Performers = new[] { track.Artist };
             file.Tag.Track = (uint)track.Track;
             file.Tag.Title = track.Title;
             file = Util.FormatID3Tag(file);
@@ -694,7 +691,7 @@ namespace MPTagThat.GridView
     /// <param name = "e"></param>
     private void dataGridViewRip_CurrentCellDirtyStateChanged(object sender, EventArgs e)
     {
-      if (!dataGridViewRip.CurrentCell.OwningColumn.GetType().Equals(typeof (DataGridViewTextBoxColumn)))
+      if (!dataGridViewRip.CurrentCell.OwningColumn.GetType().Equals(typeof(DataGridViewTextBoxColumn)))
       {
         dataGridViewRip.CommitEdit(DataGridViewDataErrorContexts.Commit);
       }
@@ -714,7 +711,7 @@ namespace MPTagThat.GridView
       if (dataGridViewRip.InvokeRequired)
       {
         ThreadSafeMediaRemovedDelegate d = mediaChangeMonitor_MediaRemoved;
-        dataGridViewRip.Invoke(d, new object[] {eDriveLetter});
+        dataGridViewRip.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
@@ -742,7 +739,7 @@ namespace MPTagThat.GridView
       if (dataGridViewRip.InvokeRequired)
       {
         ThreadSafeMediaInsertedDelegate d = mediaChangeMonitor_MediaInserted;
-        dataGridViewRip.Invoke(d, new object[] {eDriveLetter});
+        dataGridViewRip.Invoke(d, new object[] { eDriveLetter });
         return;
       }
 
