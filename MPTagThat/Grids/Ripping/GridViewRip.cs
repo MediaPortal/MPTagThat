@@ -665,16 +665,11 @@ namespace MPTagThat.GridView
     /// <param name = "check"></param>
     private void CheckRows(bool check)
     {
-      for (int i = 0; i < dataGridViewRip.Rows.Count - 1; i++)
+      foreach (DataGridViewRow row in dataGridViewRip.Rows)
       {
-        dataGridViewRip.Rows[i].Cells[0].Value = check ? 1 : 0;
+        row.Cells[0].Value = check ? 1 : 0;
       }
-      /*
-        foreach (DataGridViewRow row in dataGridViewRip.Rows)
-        {
-          row.Cells[0].Value = check ? 1 : 0;
-        }
-      */
+      dataGridViewRip.Update();
     }
 
     #endregion
