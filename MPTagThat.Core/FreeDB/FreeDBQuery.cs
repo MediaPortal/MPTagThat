@@ -334,7 +334,7 @@ namespace MPTagThat.Core.Freedb
       Uri url = new Uri(m_serverURL + "?cmd=" + command + m_idStr);
 
       WebRequest req = WebRequest.Create(url);
-      req.Timeout = 10000;
+      req.Timeout = 50000;
       try
       {
         // Use the current user in case an NTLM Proxy or similar is used.
