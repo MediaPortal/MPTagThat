@@ -1643,6 +1643,14 @@ namespace MPTagThat.GridView
             log.Warn("FolderScan: Ignoring track {0} - path too long!", fi.FullName);
             continue;
           }
+          catch (System.UnauthorizedAccessException exUna)
+          {
+            log.Warn("Could not access file or folder: {0}. {1}", exUna.Message, fi.FullName);
+          }
+          catch (Exception ex)
+          {
+            log.Error("Caugth error processing files: {0} {1}", ex.Message, fi.FullName);
+          }
           count++;
           if (count > 20)
           {
@@ -1658,14 +1666,6 @@ namespace MPTagThat.GridView
         MessageBox.Show(localisation.ToString("message", "OutOfMemory"), localisation.ToString("message", "Error_Title"),
                         MessageBoxButtons.OK);
         log.Error("Folderscan: Running out of memory. Scanning aborted.");
-      }
-      catch(System.UnauthorizedAccessException exUna)
-      {
-        log.Warn("Could not access file or folder: {0}. {1}", exUna.Message,exUna.Source);
-      }
-      catch (Exception ex)
-      {
-        log.Error("Caugth error processing files: {0} {1}", ex.Message, ex.StackTrace);
       }
       finally
       {
