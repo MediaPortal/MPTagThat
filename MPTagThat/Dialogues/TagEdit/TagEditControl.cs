@@ -885,7 +885,12 @@ namespace MPTagThat.TagEdit
             }
           }
           else
-            AddLyrics("", "", track.Lyrics);
+          {
+            if (track.Lyrics != "")
+            {
+              AddLyrics("", "", track.Lyrics);
+            }
+          }
 
           #endregion
 

@@ -164,7 +164,11 @@ namespace MPTagThat.Core
         {
           foreach (UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<UnsynchronisedLyricsFrame>())
           {
-            track.LyricsFrames.Add(new Lyric(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text));
+            // Only add non-empty Frames
+            if (lyricsframe.Text != "")
+            {
+              track.LyricsFrames.Add(new Lyric(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text));
+            }
           }
         }
 
@@ -177,7 +181,11 @@ namespace MPTagThat.Core
           {
             foreach (PopularimeterFrame popmframe in id3v2tag.GetFrames<PopularimeterFrame>())
             {
-              track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+              // Only add valid POPM Frames
+              if (popmframe.User != "" && popmframe.Rating > 0)
+              {
+                track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+              }
             }
 
             popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
