@@ -255,42 +255,61 @@ namespace MPTagThat.Core
       #endregion
 
       // Now copy all Text frames of an ID3 V2
-      if (track.TagType == "mp3" && id3v2tag != null)
+      try
       {
-        foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
+        if (track.TagType == "mp3" && id3v2tag != null)
         {
-          string id = frame.FrameId.ToString();
-          if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
+          foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
           {
-            track.Frames.Add(new Frame(id, "", frame.ToString()));
-          }
-          else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
-          {
-            if (frame.GetType() == typeof(UserTextInformationFrame))
+            string id = frame.FrameId.ToString();
+            if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
             {
-              track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "", (frame as UserTextInformationFrame).Text.Length == 0 ? "" : (frame as UserTextInformationFrame).Text[0]));
+              track.Frames.Add(new Frame(id, "", frame.ToString()));
             }
-            else if (frame.GetType() == typeof(PrivateFrame))
+            else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
             {
-              track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "", (frame as PrivateFrame).PrivateData.ToString()));
-            }
-            else if (frame.GetType() == typeof(UniqueFileIdentifierFrame))
-            {
-              track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "", (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
-            }
-            else if (frame.GetType() == typeof(UnknownFrame))
-            {
-              track.UserFrames.Add(new Frame(id, "", (frame as UnknownFrame).Data.ToString()));
-            }
-            else
-            {
-              track.UserFrames.Add(new Frame(id, "", frame.ToString()));
+              if (frame.GetType() == typeof (UserTextInformationFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
+                                               (frame as UserTextInformationFrame).Text.Length == 0
+                                                 ? ""
+                                                 : (frame as UserTextInformationFrame).Text[0]));
+              }
+              else if (frame.GetType() == typeof (PrivateFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
+                                               (frame as PrivateFrame).PrivateData == null
+                                                 ? ""
+                                                 : (frame as PrivateFrame).PrivateData.ToString()));
+              }
+              else if (frame.GetType() == typeof (UniqueFileIdentifierFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
+                                               (frame as UniqueFileIdentifierFrame).Identifier == null
+                                                 ? ""
+                                                 : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
+              }
+              else if (frame.GetType() == typeof (UnknownFrame))
+              {
+                track.UserFrames.Add(new Frame(id, "",
+                                               (frame as UnknownFrame).Data == null
+                                                 ? ""
+                                                 : (frame as UnknownFrame).Data.ToString()));
+              }
+              else
+              {
+                track.UserFrames.Add(new Frame(id, "", frame.ToString()));
+              }
             }
           }
         }
-
-        track.ID3Version = id3v2tag.Version;
       }
+      catch (Exception ex)
+      {
+        log.Error("Exception getting User Defined frames for file: {0}. {1}", fileName, ex.Message);
+      }
+
+      track.ID3Version = id3v2tag.Version;
 
       return track;
     }

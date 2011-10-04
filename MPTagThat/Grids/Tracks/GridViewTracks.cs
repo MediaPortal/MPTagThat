@@ -1607,6 +1607,7 @@ namespace MPTagThat.GridView
       _main.progressBar1.MarqueeAnimationSpeed = 10;
 
       int count = 1;
+      int nonMusicCount = 0;
 
       // For Performance Reason we hide the Grid while filling the data
       tracksGrid.SuspendLayout();
@@ -1631,11 +1632,13 @@ namespace MPTagThat.GridView
               if (ApplyTagFilter(track))
               {
                 AddTrack(track);
+                count++;
               }
             }
             else
             {
               _nonMusicFiles.Add(fi);
+              nonMusicCount++;
             }
           }
           catch (PathTooLongException)
@@ -1651,7 +1654,6 @@ namespace MPTagThat.GridView
           {
             log.Error("Caugth error processing files: {0} {1}", ex.Message, fi.FullName);
           }
-          count++;
           if (count > 20)
           {
             tracksGrid.Show();
@@ -1672,7 +1674,7 @@ namespace MPTagThat.GridView
         tracksGrid.Show();
         tracksGrid.ResumeLayout();
       }
-      log.Info("FolderScan: Found {0} files", count);
+      log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
 
