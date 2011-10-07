@@ -3097,6 +3097,11 @@ namespace MPTagThat.TagEdit
       _userFrameIsChanged = true;
     }
 
+    /// <summary>
+    /// Delete Selected Userdefined Frame
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btDeleteFrame_Click(object sender, EventArgs e)
     {
       foreach (DataGridViewRow row in dataGridViewUserFrames.SelectedRows)
@@ -3104,6 +3109,17 @@ namespace MPTagThat.TagEdit
         dataGridViewUserFrames.Rows.Remove(row);
         _userFrameIsChanged = true;
       }
+    }
+
+    /// <summary>
+    /// Delete All User defined Frames
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btDeleteAllFrames_Click(object sender, EventArgs e)
+    {
+      dataGridViewUserFrames.Rows.Clear();
+      _userFrameIsChanged = true;
     }
 
     /// <summary>
@@ -3230,6 +3246,7 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
+
     #endregion
   }
 }

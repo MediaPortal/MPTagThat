@@ -28,9 +28,17 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
+      this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.btDeleteAllFrames = new MPTagThat.Core.WinControls.MPTButton();
+      this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewUserFrames = new System.Windows.Forms.DataGridView();
+      this.FrameID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxRemoveComments = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -256,19 +264,14 @@
       this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
       this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
-      this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewUserFrames = new System.Windows.Forms.DataGridView();
-      this.FrameID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panelTop = new MPTagThat.Core.WinControls.MPTPanel();
       this.btNext = new MPTagThat.Core.WinControls.MPTButton();
       this.btPrevious = new MPTagThat.Core.WinControls.MPTButton();
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
+      this.tabPageUserDefined.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).BeginInit();
@@ -300,8 +303,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
-      this.tabPageUserDefined.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
       this.panelTop.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -311,7 +312,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageMain;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageRating;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -324,6 +325,101 @@
             this.tabPageLyrics,
             this.tabPageRating,
             this.tabPageUserDefined});
+      // 
+      // tabPageUserDefined
+      // 
+      this.tabPageUserDefined.ActiveControl = null;
+      this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageUserDefined.Controls.Add(this.btDeleteAllFrames);
+      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
+      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
+      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
+      this.tabPageUserDefined.KeyTip = null;
+      this.tabPageUserDefined.Localisation = "HeaderUser";
+      this.tabPageUserDefined.LocalisationContext = "TagEdit";
+      this.tabPageUserDefined.Name = "tabPageUserDefined";
+      this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
+      this.tabPageUserDefined.TabIndex = 8;
+      this.tabPageUserDefined.Text = "User Defined Information";
+      // 
+      // btDeleteAllFrames
+      // 
+      this.btDeleteAllFrames.Id = "dda207a4-2233-4a81-b9ad-1ec67d0e5c38";
+      this.btDeleteAllFrames.Localisation = "DeleteAllFrames";
+      this.btDeleteAllFrames.LocalisationContext = "TagEdit";
+      this.btDeleteAllFrames.Location = new System.Drawing.Point(512, 29);
+      this.btDeleteAllFrames.Name = "btDeleteAllFrames";
+      this.btDeleteAllFrames.Size = new System.Drawing.Size(212, 23);
+      this.btDeleteAllFrames.TabIndex = 2;
+      this.btDeleteAllFrames.Text = "Delete All Frames";
+      this.btDeleteAllFrames.UseVisualStyleBackColor = true;
+      this.btDeleteAllFrames.Click += new System.EventHandler(this.btDeleteAllFrames_Click);
+      // 
+      // btDeleteFrame
+      // 
+      this.btDeleteFrame.Id = "404467c3-f119-4822-b3ae-916db197e89c";
+      this.btDeleteFrame.Localisation = "DeleteFrame";
+      this.btDeleteFrame.LocalisationContext = "TagEdit";
+      this.btDeleteFrame.Location = new System.Drawing.Point(263, 29);
+      this.btDeleteFrame.Name = "btDeleteFrame";
+      this.btDeleteFrame.Size = new System.Drawing.Size(212, 23);
+      this.btDeleteFrame.TabIndex = 2;
+      this.btDeleteFrame.Text = "Delete Frame(s)";
+      this.btDeleteFrame.UseVisualStyleBackColor = true;
+      this.btDeleteFrame.Click += new System.EventHandler(this.btDeleteFrame_Click);
+      // 
+      // btAddUserFrame
+      // 
+      this.btAddUserFrame.Id = "26daeb93-17fe-41fe-a679-d040d25e61dd";
+      this.btAddUserFrame.Localisation = "AddFrame";
+      this.btAddUserFrame.LocalisationContext = "TagEdit";
+      this.btAddUserFrame.Location = new System.Drawing.Point(21, 29);
+      this.btAddUserFrame.Name = "btAddUserFrame";
+      this.btAddUserFrame.Size = new System.Drawing.Size(212, 23);
+      this.btAddUserFrame.TabIndex = 1;
+      this.btAddUserFrame.Text = "Add Frame";
+      this.btAddUserFrame.UseVisualStyleBackColor = true;
+      this.btAddUserFrame.Click += new System.EventHandler(this.btAddUserFrame_Click);
+      // 
+      // dataGridViewUserFrames
+      // 
+      this.dataGridViewUserFrames.AllowUserToAddRows = false;
+      this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
+      this.dataGridViewUserFrames.AllowUserToResizeRows = false;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
+      this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+      this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewUserFrames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FrameID,
+            this.FrameDesc,
+            this.FrameValue});
+      this.dataGridViewUserFrames.Location = new System.Drawing.Point(21, 68);
+      this.dataGridViewUserFrames.Name = "dataGridViewUserFrames";
+      this.dataGridViewUserFrames.RowHeadersVisible = false;
+      this.dataGridViewUserFrames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewUserFrames.Size = new System.Drawing.Size(846, 296);
+      this.dataGridViewUserFrames.TabIndex = 0;
+      // 
+      // FrameID
+      // 
+      this.FrameID.HeaderText = "Frame ID";
+      this.FrameID.Name = "FrameID";
+      this.FrameID.ReadOnly = true;
+      this.FrameID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      // 
+      // FrameDesc
+      // 
+      this.FrameDesc.HeaderText = "Description";
+      this.FrameDesc.Name = "FrameDesc";
+      this.FrameDesc.Width = 250;
+      // 
+      // FrameValue
+      // 
+      this.FrameValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.FrameValue.HeaderText = "Value";
+      this.FrameValue.Name = "FrameValue";
       // 
       // tabPageMain
       // 
@@ -1272,7 +1368,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 84);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 88);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1307,7 +1403,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 46);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 50);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -2739,7 +2835,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 68);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 72);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2749,7 +2845,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 37);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 41);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -2981,87 +3077,6 @@
       this.lblRatingUser.TabIndex = 2;
       this.lblRatingUser.Text = "User (eMail):";
       // 
-      // tabPageUserDefined
-      // 
-      this.tabPageUserDefined.ActiveControl = null;
-      this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
-      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
-      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
-      this.tabPageUserDefined.KeyTip = null;
-      this.tabPageUserDefined.Localisation = "HeaderUser";
-      this.tabPageUserDefined.LocalisationContext = "TagEdit";
-      this.tabPageUserDefined.Name = "tabPageUserDefined";
-      this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
-      this.tabPageUserDefined.TabIndex = 8;
-      this.tabPageUserDefined.Text = "User Defined Information";
-      // 
-      // btDeleteFrame
-      // 
-      this.btDeleteFrame.Id = "404467c3-f119-4822-b3ae-916db197e89c";
-      this.btDeleteFrame.Localisation = "DeleteFrame";
-      this.btDeleteFrame.LocalisationContext = "TagEdit";
-      this.btDeleteFrame.Location = new System.Drawing.Point(263, 29);
-      this.btDeleteFrame.Name = "btDeleteFrame";
-      this.btDeleteFrame.Size = new System.Drawing.Size(212, 23);
-      this.btDeleteFrame.TabIndex = 2;
-      this.btDeleteFrame.Text = "Delete Frame(s)";
-      this.btDeleteFrame.UseVisualStyleBackColor = true;
-      this.btDeleteFrame.Click += new System.EventHandler(this.btDeleteFrame_Click);
-      // 
-      // btAddUserFrame
-      // 
-      this.btAddUserFrame.Id = "26daeb93-17fe-41fe-a679-d040d25e61dd";
-      this.btAddUserFrame.Localisation = "AddFrame";
-      this.btAddUserFrame.LocalisationContext = "TagEdit";
-      this.btAddUserFrame.Location = new System.Drawing.Point(21, 29);
-      this.btAddUserFrame.Name = "btAddUserFrame";
-      this.btAddUserFrame.Size = new System.Drawing.Size(212, 23);
-      this.btAddUserFrame.TabIndex = 1;
-      this.btAddUserFrame.Text = "Add Frame";
-      this.btAddUserFrame.UseVisualStyleBackColor = true;
-      this.btAddUserFrame.Click += new System.EventHandler(this.btAddUserFrame_Click);
-      // 
-      // dataGridViewUserFrames
-      // 
-      this.dataGridViewUserFrames.AllowUserToAddRows = false;
-      this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
-      this.dataGridViewUserFrames.AllowUserToResizeRows = false;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-      this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
-      this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-      this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewUserFrames.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FrameID,
-            this.FrameDesc,
-            this.FrameValue});
-      this.dataGridViewUserFrames.Location = new System.Drawing.Point(21, 68);
-      this.dataGridViewUserFrames.Name = "dataGridViewUserFrames";
-      this.dataGridViewUserFrames.RowHeadersVisible = false;
-      this.dataGridViewUserFrames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewUserFrames.Size = new System.Drawing.Size(846, 296);
-      this.dataGridViewUserFrames.TabIndex = 0;
-      // 
-      // FrameID
-      // 
-      this.FrameID.HeaderText = "Frame ID";
-      this.FrameID.Name = "FrameID";
-      this.FrameID.ReadOnly = true;
-      this.FrameID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-      // 
-      // FrameDesc
-      // 
-      this.FrameDesc.HeaderText = "Description";
-      this.FrameDesc.Name = "FrameDesc";
-      this.FrameDesc.Width = 250;
-      // 
-      // FrameValue
-      // 
-      this.FrameValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.FrameValue.HeaderText = "Value";
-      this.FrameValue.Name = "FrameValue";
-      // 
       // panelTop
       // 
       this.panelTop.Controls.Add(this.btNext);
@@ -3135,6 +3150,8 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
+      this.tabPageUserDefined.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
       this.groupBoxComment.PerformLayout();
@@ -3180,8 +3197,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
-      this.tabPageUserDefined.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
       this.panelTop.ResumeLayout(false);
       this.panelTop.PerformLayout();
       this.ResumeLayout(false);
@@ -3428,5 +3443,6 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn FrameValue;
     protected Core.WinControls.MPTButton btGetLyricsFromInternet;
     private Core.WinControls.MPTButton btCopyArtistToAlbumArtist;
+    private Core.WinControls.MPTButton btDeleteAllFrames;
   }
 }

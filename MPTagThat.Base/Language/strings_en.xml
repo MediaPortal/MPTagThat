@@ -366,6 +366,7 @@
 	<String id="FrameText">Text</String>
 	<String id="AddFrame">Add Frame</String>
 	<String id="DeleteFrame">Delete Frame(s)</String>
+	<String id="DeleteAllFrames">Delete All Frames</String>
   </Section>
   
     
