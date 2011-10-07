@@ -870,6 +870,11 @@ namespace MPTagThat.TagEdit
             dataGridViewUserFrames.Rows.Clear();
         }
 
+        if (track.UserFrames.Count > 0)
+        {
+          tabPageUserDefined.DefaultSmallImage = Properties.Resources.Warning;
+        }
+
         #endregion
 
         if (!_isMultiTagEdit)
@@ -1033,6 +1038,8 @@ namespace MPTagThat.TagEdit
       dataGridViewLyrics.Rows.Clear();
       dataGridViewRating.Rows.Clear();
       dataGridViewUserFrames.Rows.Clear();
+
+      tabPageUserDefined.DefaultSmallImage = null;
 
       checkBoxRemoveComments.Checked = false;
       textBoxComment.Text = "";
