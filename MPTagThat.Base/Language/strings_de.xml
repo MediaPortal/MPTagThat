@@ -366,6 +366,7 @@
 	<String id="FrameText">Text</String>
 	<String id="AddFrame">Eintrag hinzufügen</String>
 	<String id="DeleteFrame">Eintrag löschen</String>
+	<String id="DeleteAllFrames">Alle Einträge löschen</String>
   </Section>
   
     
@@ -688,6 +689,7 @@
     <String id="ID3Both">ID3V1 und ID3V2 schreiben</String>
     <String id="ID3V2">ID3 V2</String>
     <String id="ID3V1">ID3 V1</String>
+	<String id="ClearUserFrames">Benutzerdefinierte Frames beim Speichern löschen</String>
     <String id="GroupBoxTagsValidate">MP3 Dateiformatprüfung</String>
     <String id="ValidateMP3">Überprüfe MP3 Dateien beim Einlesen von Verzeichnis / Datenbank</String>
     <String id="AutoFixMP3">Fehlerhafte MP3 Dateien automatisch korrigieren</String>

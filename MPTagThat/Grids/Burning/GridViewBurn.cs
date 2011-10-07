@@ -41,17 +41,16 @@ namespace MPTagThat.GridView
     private readonly Main _main;
 
     private readonly SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
-    private readonly IBurnManager burnManager;
     private readonly GridViewColumnsBurn gridColumns;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-
-    private readonly IMediaChangeMonitor mediaChangeMonitor;
 
     private readonly string tmpBurnDirectory = String.Format(@"{0}\MPTagThat\TmpBurn",
                                                              Environment.GetFolderPath(
                                                                Environment.SpecialFolder.LocalApplicationData));
 
+    private IMediaChangeMonitor mediaChangeMonitor;
+    private IBurnManager burnManager;
     private int DragDropCurrentIndex = -1;
 
     private Rectangle DragDropRectangle;
@@ -151,11 +150,6 @@ namespace MPTagThat.GridView
 
       _main.BurnButtonsEnabled = false;
 
-      burnManager = ServiceScope.Get<IBurnManager>();
-      mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
-      mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
-      mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
-
       // Create the Temp Directory for the burner
       if (!Directory.Exists(tmpBurnDirectory))
         Directory.CreateDirectory(tmpBurnDirectory);
@@ -173,14 +167,31 @@ namespace MPTagThat.GridView
 
       lbBurningStatus.Text = localisation.ToString("Burning", "DragAndDrop");
         // "Use Drag & Drop to order the tracks for burning";
-
-      Thread threadGetDrives = new Thread(GetDrivesThread);
-      threadGetDrives.Start();
     }
 
     #endregion
 
     #region Public Methods
+
+    /// <summary>
+    /// When the Tab Page is clicked the first time, we want to fill the ribbon with the burner.
+    /// Don't do it, when initially loading, as it might cause delays in displaying the Ui
+    /// </summary>
+    public void InitRibbon()
+    {
+      if (burnManager == null)
+      {
+        ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Burn Manager");
+        ServiceScope.Add<IBurnManager>(new BurnManager());
+
+        mediaChangeMonitor = ServiceScope.Get<IMediaChangeMonitor>();
+        mediaChangeMonitor.MediaInserted += mediaChangeMonitor_MediaInserted;
+        mediaChangeMonitor.MediaRemoved += mediaChangeMonitor_MediaRemoved;
+
+        burnManager = ServiceScope.Get<IBurnManager>();
+        GetDrives();
+      }
+    }
 
     /// <summary>
     ///   Adds a Track to the Burn Gridview
@@ -226,6 +237,9 @@ namespace MPTagThat.GridView
       }
     }
 
+    /// <summary>
+    /// Get MediaInfo
+    /// </summary>
     public void SetMediaInfo()
     {
       if (threadMediaInfo == null)
@@ -241,6 +255,10 @@ namespace MPTagThat.GridView
       }
     }
 
+    /// <summary>
+    /// Set the active Burner
+    /// </summary>
+    /// <param name="burner"></param>
     public void SetActiveBurner(Burner burner)
     {
       burnManager.SetActiveBurner(burner);
@@ -583,7 +601,7 @@ namespace MPTagThat.GridView
       return (int)Math.Round(size / 75.0 / 60.0);
     }
 
-    private void GetDrivesThread()
+    private void GetDrives()
     {
       List<Burner> burners = burnManager.GetDrives();
       // Try 10 times to get burners. might be a problem with the Burner Service not ready yet

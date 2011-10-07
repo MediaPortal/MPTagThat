@@ -65,19 +65,35 @@ namespace MPTagThat.Core
       }
 
       TagLib.Id3v2.Tag id3v2tag = null;
-      if (file.MimeType.Substring(file.MimeType.IndexOf("/") + 1) == "mp3")
+      try
       {
-        id3v2tag = file.GetTag(TagTypes.Id3v2, false) as TagLib.Id3v2.Tag;
+        if (file.MimeType.Substring(file.MimeType.IndexOf("/") + 1) == "mp3")
+        {
+          id3v2tag = file.GetTag(TagTypes.Id3v2, false) as TagLib.Id3v2.Tag;
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Error("File Read: Error retrieving id3tag: {0} {1}", fileName, ex.Message);
+        return null;
       }
 
       #region Set Common Values
 
-      track.Id = new Guid();
-      track.FullFileName = fileName;
-      track.FileName = Path.GetFileName(fileName);
       FileInfo fi = new FileInfo(fileName);
-      track.Readonly = fi.IsReadOnly;
-      track.TagType = file.MimeType.Substring(file.MimeType.IndexOf("/") + 1);
+      try
+      {
+        track.Id = new Guid();
+        track.FullFileName = fileName;
+        track.FileName = Path.GetFileName(fileName);
+        track.Readonly = fi.IsReadOnly;
+        track.TagType = file.MimeType.Substring(file.MimeType.IndexOf("/") + 1);
+      }
+      catch (Exception ex)
+      {
+        log.Error("File Read: Error setting Common tags: {0} {1}", fileName, ex.Message);
+        return null;
+      }
       #endregion
 
       #region Set Tags
@@ -148,12 +164,15 @@ namespace MPTagThat.Core
         {
           foreach (UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<UnsynchronisedLyricsFrame>())
           {
-            track.LyricsFrames.Add(new Lyric(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text));
+            // Only add non-empty Frames
+            if (lyricsframe.Text != "")
+            {
+              track.LyricsFrames.Add(new Lyric(lyricsframe.Description, lyricsframe.Language, lyricsframe.Text));
+            }
           }
         }
 
         // Rating
-        track.Rating = 0;
         if (track.TagType == "mp3")
         {
           TagLib.Id3v2.PopularimeterFrame popmFrame = null;
@@ -162,7 +181,11 @@ namespace MPTagThat.Core
           {
             foreach (PopularimeterFrame popmframe in id3v2tag.GetFrames<PopularimeterFrame>())
             {
-              track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+              // Only add valid POPM Frames
+              if (popmframe.User != "" && popmframe.Rating > 0)
+              {
+                track.Ratings.Add(new PopmFrame(popmframe.User, (int)popmframe.Rating, (int)popmframe.PlayCount));
+              }
             }
 
             popmFrame = TagLib.Id3v2.PopularimeterFrame.Get(id3v2tag, "MPTagThat", false);
@@ -240,30 +263,61 @@ namespace MPTagThat.Core
       #endregion
 
       // Now copy all Text frames of an ID3 V2
-      if (track.TagType == "mp3" && id3v2tag != null)
+      try
       {
-        foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
+        if (track.TagType == "mp3" && id3v2tag != null)
         {
-          string id = frame.FrameId.ToString();
-          if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
+          foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
           {
-            track.Frames.Add(new Frame(id, "", frame.ToString()));
-          }
-          else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
-          {
-            if (frame.GetType() == typeof(UserTextInformationFrame))
+            string id = frame.FrameId.ToString();
+            if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
             {
-              track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description, (frame as UserTextInformationFrame).Text[0]));
+              track.Frames.Add(new Frame(id, "", frame.ToString()));
             }
-            else
+            else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
             {
-              track.UserFrames.Add(new Frame(id, "", frame.ToString()));
+              if (frame.GetType() == typeof (UserTextInformationFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
+                                               (frame as UserTextInformationFrame).Text.Length == 0
+                                                 ? ""
+                                                 : (frame as UserTextInformationFrame).Text[0]));
+              }
+              else if (frame.GetType() == typeof (PrivateFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
+                                               (frame as PrivateFrame).PrivateData == null
+                                                 ? ""
+                                                 : (frame as PrivateFrame).PrivateData.ToString()));
+              }
+              else if (frame.GetType() == typeof (UniqueFileIdentifierFrame))
+              {
+                track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
+                                               (frame as UniqueFileIdentifierFrame).Identifier == null
+                                                 ? ""
+                                                 : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
+              }
+              else if (frame.GetType() == typeof (UnknownFrame))
+              {
+                track.UserFrames.Add(new Frame(id, "",
+                                               (frame as UnknownFrame).Data == null
+                                                 ? ""
+                                                 : (frame as UnknownFrame).Data.ToString()));
+              }
+              else
+              {
+                track.UserFrames.Add(new Frame(id, "", frame.ToString()));
+              }
             }
           }
         }
-
-        track.ID3Version = id3v2tag.Version;
       }
+      catch (Exception ex)
+      {
+        log.Error("Exception getting User Defined frames for file: {0}. {1}", fileName, ex.Message);
+      }
+
+      track.ID3Version = id3v2tag.Version;
 
       return track;
     }
@@ -519,7 +573,7 @@ namespace MPTagThat.Core
 
         #region Lyrics
 
-        if (track.Lyrics != "")
+        if (track.Lyrics != null && track.Lyrics != "")
         {
           file.Tag.Lyrics = track.Lyrics;
           if (track.TagType.ToLower() == "mp3")
@@ -563,8 +617,25 @@ namespace MPTagThat.Core
 
         #region Non- Standard Taglib and User Defined Frames
 
+        if (Options.MainSettings.ClearUserFrames)
+        {
+          foreach (Frame frame in track.UserFrames)
+          {
+            ByteVector frameId = new ByteVector(frame.Id);
+
+            if (frame.Id == "TXXX")
+            {
+              id3v2tag.SetUserTextAsString(frame.Description, "");
+            }
+            else
+            {
+              id3v2tag.SetTextFrame(frameId, "");
+            }
+          }
+        }
+
         // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
-        if (track.SavedUserFrames != null)
+        if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
         {
           foreach (Frame frame in track.SavedUserFrames)
           {

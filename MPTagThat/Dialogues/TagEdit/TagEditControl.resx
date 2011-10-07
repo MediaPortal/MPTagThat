@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblRatingNote.Text" xml:space="preserve">
-    <value>The rating is 1-255 where 1 is worst and 255 is best. 0 is unknown. 
- Note: Many programs have their own rating and may redefine the ID3 standard.
-
- If no personal counter is wanted it may be omitted.</value>
-  </data>
   <metadata name="FrameID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -132,4 +126,10 @@
   <metadata name="FrameValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="lblRatingNote.Text" xml:space="preserve">
+    <value>The rating is 1-255 where 1 is worst and 255 is best. 0 is unknown. 
+ Note: Many programs have their own rating and may redefine the ID3 standard.
+
+ If no personal counter is wanted it may be omitted.</value>
+  </data>
 </root>

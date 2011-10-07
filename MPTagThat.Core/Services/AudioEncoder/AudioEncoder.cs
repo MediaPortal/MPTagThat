@@ -37,6 +37,7 @@ namespace MPTagThat.Core.AudioEncoder
     private string _encoder;
     private string _outFile;
     private ILogger log;
+    private bool _isAborted;
 
     #endregion
 
@@ -86,9 +87,10 @@ namespace MPTagThat.Core.AudioEncoder
 
       long pos = 0;
       long chanLength = Bass.BASS_ChannelGetLength(stream);
+      _isAborted = false;
 
       byte[] encBuffer = new byte[60000]; // our encoding buffer
-      while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
+      while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING && !_isAborted)
       {
         // getting sample data will automatically feed the encoder
         int len = Bass.BASS_ChannelGetData(stream, encBuffer, encBuffer.Length);
@@ -102,6 +104,11 @@ namespace MPTagThat.Core.AudioEncoder
 
       encoder.Stop();
       return BASSError.BASS_OK;
+    }
+
+    public void AbortEncoding()
+    {
+      _isAborted = true;
     }
 
     #endregion

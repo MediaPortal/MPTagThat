@@ -7,6 +7,22 @@ Legend:
 - Deleted
 x Fixed
 
+3.0.1 Date: 07.10.2011 
+-------------------------------------
+x General: Performance improvement for startup. Don't access CD Drives during startup
++ Tagedit: Added a Warning icon to the User defined Tab, when user defined frames are found
++ Tagedit: Added a button to remove all use defined frames
+x Tagedit: Remove empty Lyrics and Rating tags
+x Tagedit: Better Error Handling for Non Standard Frames
+x Tagedit: Better Error handling, when reading tags
+x Tagedit: Save was always creating a Lyrics and a Rating frame by mistake
+x Tagedit: Exception, when a file contained user defined frames with  empty data
+x Rip: Last Track from FreeDB Query wasn't checked automatically for ripping
+x Rip: When changing a CD, while in Rip View, the view was not refreshed
+x Rip: Corrected Timeout in FreeDB Query
+x Rip: Cancel Ripping was not working correctly
++ Settings: Added Option to ID3 Settings, which allows removing of user defined frames automatically on save
+
 3.0.0 Date: 18.09.2011 
 -------------------------------------
 + GUI: Complete redesign of GUI

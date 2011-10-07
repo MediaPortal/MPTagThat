@@ -1833,6 +1833,8 @@ namespace MPTagThat
       ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
       tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
 
+      ckClearUserFramesOnSave.Checked = Options.MainSettings.ClearUserFrames;
+
       ckValidateMP3.Checked = Options.MainSettings.MP3Validate;
       ckAutoFixMp3.Checked = Options.MainSettings.MP3AutoFix;
 
@@ -2355,6 +2357,7 @@ namespace MPTagThat
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
       Options.MainSettings.OnlySaveFolderThumb = ckOnlySaveFolderThumb.Checked;
       Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
+      Options.MainSettings.ClearUserFrames = ckClearUserFramesOnSave.Checked;
       Options.MainSettings.MP3Validate = ckValidateMP3.Checked;
       Options.MainSettings.MP3AutoFix = ckAutoFixMp3.Checked;
 
@@ -3302,6 +3305,7 @@ namespace MPTagThat
             TracksGridView.Hide();
             ConvertGridView.Hide();
             RipGridView.Hide();
+            BurnGridView.InitRibbon();
             BurnGridView.SetMediaInfo();
             BurnGridView.Show();
             if (!SplitterRight.IsCollapsed)

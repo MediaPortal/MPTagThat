@@ -38,5 +38,10 @@ namespace MPTagThat.Core.AudioEncoder
     /// </summary>
     /// <param name = "stream"></param>
     BASSError StartEncoding(int stream);
+
+    /// <summary>
+    /// Aborts the current encoding
+    /// </summary>
+    void AbortEncoding();
   }
 }

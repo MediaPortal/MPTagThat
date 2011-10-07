@@ -870,6 +870,11 @@ namespace MPTagThat.TagEdit
             dataGridViewUserFrames.Rows.Clear();
         }
 
+        if (track.UserFrames.Count > 0)
+        {
+          tabPageUserDefined.DefaultSmallImage = Properties.Resources.Warning;
+        }
+
         #endregion
 
         if (!_isMultiTagEdit)
@@ -885,7 +890,12 @@ namespace MPTagThat.TagEdit
             }
           }
           else
-            AddLyrics("", "", track.Lyrics);
+          {
+            if (track.Lyrics != "")
+            {
+              AddLyrics("", "", track.Lyrics);
+            }
+          }
 
           #endregion
 
@@ -1028,6 +1038,8 @@ namespace MPTagThat.TagEdit
       dataGridViewLyrics.Rows.Clear();
       dataGridViewRating.Rows.Clear();
       dataGridViewUserFrames.Rows.Clear();
+
+      tabPageUserDefined.DefaultSmallImage = null;
 
       checkBoxRemoveComments.Checked = false;
       textBoxComment.Text = "";
@@ -3092,6 +3104,11 @@ namespace MPTagThat.TagEdit
       _userFrameIsChanged = true;
     }
 
+    /// <summary>
+    /// Delete Selected Userdefined Frame
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btDeleteFrame_Click(object sender, EventArgs e)
     {
       foreach (DataGridViewRow row in dataGridViewUserFrames.SelectedRows)
@@ -3099,6 +3116,17 @@ namespace MPTagThat.TagEdit
         dataGridViewUserFrames.Rows.Remove(row);
         _userFrameIsChanged = true;
       }
+    }
+
+    /// <summary>
+    /// Delete All User defined Frames
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btDeleteAllFrames_Click(object sender, EventArgs e)
+    {
+      dataGridViewUserFrames.Rows.Clear();
+      _userFrameIsChanged = true;
     }
 
     /// <summary>
@@ -3225,6 +3253,7 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
+
     #endregion
   }
 }

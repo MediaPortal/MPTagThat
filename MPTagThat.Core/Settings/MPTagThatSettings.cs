@@ -186,6 +186,9 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool OnlySaveFolderThumb { get; set; }
 
+    [Setting(SettingScope.User, "false")]
+    public bool ClearUserFrames { get; set; }
+
     #endregion
 
     #region Lyrics
