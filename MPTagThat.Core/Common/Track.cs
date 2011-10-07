@@ -617,8 +617,25 @@ namespace MPTagThat.Core
 
         #region Non- Standard Taglib and User Defined Frames
 
+        if (Options.MainSettings.ClearUserFrames)
+        {
+          foreach (Frame frame in track.UserFrames)
+          {
+            ByteVector frameId = new ByteVector(frame.Id);
+
+            if (frame.Id == "TXXX")
+            {
+              id3v2tag.SetUserTextAsString(frame.Description, "");
+            }
+            else
+            {
+              id3v2tag.SetTextFrame(frameId, "");
+            }
+          }
+        }
+
         // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
-        if (track.SavedUserFrames != null)
+        if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
         {
           foreach (Frame frame in track.SavedUserFrames)
           {

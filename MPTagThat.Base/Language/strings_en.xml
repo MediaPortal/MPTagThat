@@ -689,6 +689,7 @@
     <String id="ID3Both">ID3V1 and ID3V2</String>
     <String id="ID3V2">ID3V2</String>
     <String id="ID3V1">ID3V1</String>
+    <String id="ClearUserFrames">Clear User Defined Frames on Save</String>
     <String id="GroupBoxTagsValidate">MP3 File Validation</String>
     <String id="ValidateMP3">Validate Mp3 Files while scanning the folder / database</String>
     <String id="AutoFixMP3">Automatically fix errorneous Mp3 Files</String>
