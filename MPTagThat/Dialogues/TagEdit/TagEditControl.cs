@@ -329,7 +329,7 @@ namespace MPTagThat.TagEdit
           checkBoxCompilation.Checked = track.Compilation;
         }
 
-        if (tbTitle.Text.Trim() != track.Title.Trim())
+        if (track.Title == null || tbTitle.Text.Trim() != track.Title.Trim())
           if (i == 0)
             tbTitle.Text = track.Title;
           else
