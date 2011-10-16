@@ -1612,6 +1612,7 @@ namespace MPTagThat
 
       ShowTagEditPanel(false);
       control.Show();
+      control.Focus();
     }
 
     #endregion

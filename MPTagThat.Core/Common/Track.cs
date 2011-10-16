@@ -310,14 +310,14 @@ namespace MPTagThat.Core
               }
             }
           }
+
+          track.ID3Version = id3v2tag.Version;
         }
       }
       catch (Exception ex)
       {
         log.Error("Exception getting User Defined frames for file: {0}. {1}", fileName, ex.Message);
       }
-
-      track.ID3Version = id3v2tag.Version;
 
       return track;
     }
