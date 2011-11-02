@@ -46,6 +46,16 @@ namespace MPTagThat.Core
 
     private const int NumTrackDigits = 2;
 
+    private string _artist;
+    private string _albumArtist;
+    private string _album;
+    private string _composer;
+    private string _conductor;
+    private string _copyright;
+    private string _genre;
+    private string _grouping;
+    private string _title;
+
     private MP3Error _mp3ValError;
     private string _mp3ValErrorText;
     private List<Picture> _pictures = new List<Picture>();
@@ -213,7 +223,11 @@ namespace MPTagThat.Core
     /// Artist / Performer Tag
     /// ID3: TPE1
     /// </summary>
-    public string Artist { get; set; }
+    public string Artist
+    {
+      get { return _artist; }
+      set { _artist = value ?? ""; }
+    }
 
     /// <summary>
     /// Artist Sortname Tag (V 2.4 only)
@@ -229,13 +243,21 @@ namespace MPTagThat.Core
     /// Album Artist / Band  / Orchestra Tag
     /// ID3: TPE2
     /// </summary>
-    public string AlbumArtist { get; set; }
+    public string AlbumArtist
+    {
+      get { return _albumArtist; }
+      set { _albumArtist = value ?? ""; }
+    }
 
     /// <summary>
     /// ALbum Tag
     /// ID3: TALB
     /// </summary>
-    public string Album { get; set; }
+    public string Album
+    {
+      get { return _album; }
+      set { _album = value ?? ""; }
+    }
 
     /// <summary>
     /// Album Sortname Tag (V 2.4 only)
@@ -301,19 +323,31 @@ namespace MPTagThat.Core
     /// Composer Tag
     /// ID3: TCOM
     /// </summary>
-    public string Composer { get; set; }
+    public string Composer
+    {
+      get { return _composer; }
+      set { _composer = value ?? ""; }
+    }
 
     /// <summary>
     /// Conductor Tag
     /// ID3: TPE3
     /// </summary>
-    public string Conductor { get; set; }
+    public string Conductor
+    {
+      get { return _conductor; }
+      set { _conductor = value ?? ""; }
+    }
 
     /// <summary>
     /// Copyright Tag
     /// ID3: TCOP
     /// </summary>
-    public string Copyright { get; set; }
+    public string Copyright
+    {
+      get { return _copyright; }
+      set { _copyright = value ?? ""; }
+    }
 
     /// <summary>
     /// Copyright Information Tag
@@ -341,9 +375,10 @@ namespace MPTagThat.Core
 
       set
       {
-        string[] disc = value.Split('/');
+        string[] disc = null;
         try
         {
+          disc = value.Split('/');
           if (disc[0] != "")
             DiscNumber = Convert.ToUInt32(disc[0]);
         }
@@ -392,13 +427,21 @@ namespace MPTagThat.Core
     /// Genre Tag
     /// ID3: TCON
     /// </summary>
-    public string Genre { get; set; }
+    public string Genre
+    {
+      get { return _genre; }
+      set { _genre = value ?? ""; }
+    }
 
     /// <summary>
     /// Content Group  Tag
     /// ID3: TIT1
     /// </summary>
-    public string Grouping { get; set; }
+    public string Grouping
+    {
+      get { return _grouping; }
+      set { _grouping = value ?? ""; }
+    }
 
     /// <summary>
     /// Involved People Tag
@@ -687,7 +730,11 @@ namespace MPTagThat.Core
     /// Title Tag
     /// ID3: TIT2
     /// </summary>
-    public string Title { get; set; }
+    public string Title
+    {
+      get { return _title; }
+      set { _title = value ?? ""; }
+    }
 
     /// <summary>
     /// Title SortName Tag (V 2.4 only)
@@ -715,15 +762,19 @@ namespace MPTagThat.Core
 
       set
       {
-        string[] track = value.Split('/');
+        string[] track = null;
         try
         {
+          track =  value.Split('/');
           if (track[0] != "")
             TrackNumber = Convert.ToUInt32(track[0]);
           else
             TrackNumber = 0;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+          TrackNumber = 0;
+        }
 
         try
         {
@@ -732,7 +783,10 @@ namespace MPTagThat.Core
           else
             TrackCount = 0;
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+          TrackCount = 0;
+        }
       }
     }
 
