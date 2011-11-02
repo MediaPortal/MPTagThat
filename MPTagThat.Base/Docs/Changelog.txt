@@ -7,7 +7,12 @@ Legend:
 - Deleted
 x Fixed
 
-3.0.1 Date: 16.10.2011 
+3.0.3 Date: 02.11.2011 
+-------------------------------------
+x Tagedit: Prevent Null value assignment to tag values when editing in Grid
+x Cover Art: Amazon changed API, so an additional parm in the request is necessary
+
+3.0.2 Date: 16.10.2011 
 -------------------------------------
 x Tagedit: Edit of Non-MP3 file caused an error
 x TagEdit: Prevented an error when emptying a title directly in the Grid
