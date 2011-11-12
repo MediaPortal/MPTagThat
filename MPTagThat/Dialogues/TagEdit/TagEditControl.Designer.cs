@@ -32,6 +32,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageUserDefinedPanel = new Elegant.Ui.Panel();
       this.btDeleteAllFrames = new MPTagThat.Core.WinControls.MPTButton();
       this.btDeleteFrame = new MPTagThat.Core.WinControls.MPTButton();
       this.btAddUserFrame = new MPTagThat.Core.WinControls.MPTButton();
@@ -40,6 +41,7 @@
       this.FrameDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.FrameValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageMainPanel = new Elegant.Ui.Panel();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxRemoveComments = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.buttonMoveTop = new MPTagThat.Core.WinControls.MPTButton();
@@ -98,6 +100,7 @@
       this.ckTitle = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tbTitle = new System.Windows.Forms.TextBox();
       this.tabPagePictures = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPagePicturePanel = new Elegant.Ui.Panel();
       this.groupBoxPicture = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.buttonGetPictureInternet = new MPTagThat.Core.WinControls.MPTButton();
       this.checkBoxRemoveExistingPictures = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -113,6 +116,7 @@
       this.tbPicDesc = new System.Windows.Forms.TextBox();
       this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageDetailsPanel = new Elegant.Ui.Panel();
       this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btGetTrackLength = new MPTagThat.Core.WinControls.MPTButton();
       this.tbTrackLength = new System.Windows.Forms.TextBox();
@@ -161,6 +165,7 @@
       this.ckConductor = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblConductor = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageOriginal = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageOriginalPanel = new Elegant.Ui.Panel();
       this.groupBoxOriginalInformation = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbOriginalRelease = new System.Windows.Forms.TextBox();
       this.ckOriginalRelease = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -204,7 +209,9 @@
       this.lblInvolvedPersonName = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbInvolvedPersonFunction = new System.Windows.Forms.TextBox();
       this.lblInvolvedPersonFunction = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tabPageInvolvedPeoplePanel = new Elegant.Ui.Panel();
       this.tabPageWebInformation = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageWebInformationPanel = new Elegant.Ui.Panel();
       this.groupBoxWebInformation = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbCommercialInformationUrl = new System.Windows.Forms.TextBox();
       this.ckCommercialInformationUrl = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -231,6 +238,7 @@
       this.ckCopyrightUrl = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblCopyrightUrl = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageLyrics = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageLyricsPanel = new Elegant.Ui.Panel();
       this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.btGetLyricsFromInternet = new MPTagThat.Core.WinControls.MPTButton();
       this.btGetLyricsFromText = new MPTagThat.Core.WinControls.MPTButton();
@@ -248,6 +256,7 @@
       this.cbLyricsLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
       this.cbLyricsDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
       this.tabPageRating = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageRatingPanel = new Elegant.Ui.Panel();
       this.groupBoxRating = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.ckRemoveExistingRatings = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblRatingNote = new MPTagThat.Core.WinControls.MPTLabel();
@@ -271,22 +280,27 @@
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
       this.tabPageUserDefined.SuspendLayout();
+      this.tabPageUserDefinedPanel.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
       this.tabPageMain.SuspendLayout();
+      this.tabPageMainPanel.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).BeginInit();
       this.groupBoxGenre.SuspendLayout();
       this.groupBoxArtist.SuspendLayout();
       this.tabPagePictures.SuspendLayout();
+      this.tabPagePicturePanel.SuspendLayout();
       this.groupBoxPicture.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
       this.tabPageDetails.SuspendLayout();
+      this.tabPageDetailsPanel.SuspendLayout();
       this.groupBoxMedia.SuspendLayout();
       this.groupBoxSort.SuspendLayout();
       this.groupBoxContent.SuspendLayout();
       this.groupBoxPeople.SuspendLayout();
       this.tabPageOriginal.SuspendLayout();
+      this.tabPageOriginalPanel.SuspendLayout();
       this.groupBoxOriginalInformation.SuspendLayout();
       this.tabPageInvolvedPeople.SuspendLayout();
       this.groupBoxMusician.SuspendLayout();
@@ -294,11 +308,14 @@
       this.groupBoxInvolvedPeople.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).BeginInit();
       this.tabPageWebInformation.SuspendLayout();
+      this.tabPageWebInformationPanel.SuspendLayout();
       this.groupBoxWebInformation.SuspendLayout();
       this.tabPageLyrics.SuspendLayout();
+      this.tabPageLyricsPanel.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).BeginInit();
       this.tabPageRating.SuspendLayout();
+      this.tabPageRatingPanel.SuspendLayout();
       this.groupBoxRating.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
@@ -312,7 +329,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageUserDefined;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageInvolvedPeople;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -330,10 +347,7 @@
       // 
       this.tabPageUserDefined.ActiveControl = null;
       this.tabPageUserDefined.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageUserDefined.Controls.Add(this.btDeleteAllFrames);
-      this.tabPageUserDefined.Controls.Add(this.btDeleteFrame);
-      this.tabPageUserDefined.Controls.Add(this.btAddUserFrame);
-      this.tabPageUserDefined.Controls.Add(this.dataGridViewUserFrames);
+      this.tabPageUserDefined.Controls.Add(this.tabPageUserDefinedPanel);
       this.tabPageUserDefined.KeyTip = null;
       this.tabPageUserDefined.Localisation = "HeaderUser";
       this.tabPageUserDefined.LocalisationContext = "TagEdit";
@@ -341,6 +355,21 @@
       this.tabPageUserDefined.Size = new System.Drawing.Size(906, 584);
       this.tabPageUserDefined.TabIndex = 8;
       this.tabPageUserDefined.Text = "User Defined Information";
+      // 
+      // tabPageUserDefinedPanel
+      // 
+      this.tabPageUserDefinedPanel.AutoScroll = true;
+      this.tabPageUserDefinedPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageUserDefinedPanel.Controls.Add(this.btDeleteAllFrames);
+      this.tabPageUserDefinedPanel.Controls.Add(this.btDeleteFrame);
+      this.tabPageUserDefinedPanel.Controls.Add(this.btAddUserFrame);
+      this.tabPageUserDefinedPanel.Controls.Add(this.dataGridViewUserFrames);
+      this.tabPageUserDefinedPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageUserDefinedPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageUserDefinedPanel.Name = "tabPageUserDefinedPanel";
+      this.tabPageUserDefinedPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageUserDefinedPanel.TabIndex = 3;
+      this.tabPageUserDefinedPanel.Text = "panel1";
       // 
       // btDeleteAllFrames
       // 
@@ -425,9 +454,7 @@
       // 
       this.tabPageMain.ActiveControl = null;
       this.tabPageMain.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageMain.Controls.Add(this.groupBoxComment);
-      this.tabPageMain.Controls.Add(this.groupBoxGenre);
-      this.tabPageMain.Controls.Add(this.groupBoxArtist);
+      this.tabPageMain.Controls.Add(this.tabPageMainPanel);
       this.tabPageMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabPageMain.KeyTip = null;
       this.tabPageMain.Localisation = "HeaderMainTags";
@@ -437,6 +464,20 @@
       this.tabPageMain.Size = new System.Drawing.Size(906, 584);
       this.tabPageMain.TabIndex = 0;
       this.tabPageMain.Text = "Main Tags";
+      // 
+      // tabPageMainPanel
+      // 
+      this.tabPageMainPanel.AutoScroll = true;
+      this.tabPageMainPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageMainPanel.Controls.Add(this.groupBoxComment);
+      this.tabPageMainPanel.Controls.Add(this.groupBoxGenre);
+      this.tabPageMainPanel.Controls.Add(this.groupBoxArtist);
+      this.tabPageMainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageMainPanel.Location = new System.Drawing.Point(3, 3);
+      this.tabPageMainPanel.Name = "tabPageMainPanel";
+      this.tabPageMainPanel.Size = new System.Drawing.Size(900, 578);
+      this.tabPageMainPanel.TabIndex = 3;
+      this.tabPageMainPanel.Text = "panel1";
       // 
       // groupBoxComment
       // 
@@ -1118,7 +1159,7 @@
       // 
       this.tabPagePictures.ActiveControl = null;
       this.tabPagePictures.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPagePictures.Controls.Add(this.groupBoxPicture);
+      this.tabPagePictures.Controls.Add(this.tabPagePicturePanel);
       this.tabPagePictures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabPagePictures.KeyTip = null;
       this.tabPagePictures.Localisation = "HeaderPictures";
@@ -1128,6 +1169,18 @@
       this.tabPagePictures.Size = new System.Drawing.Size(906, 584);
       this.tabPagePictures.TabIndex = 1;
       this.tabPagePictures.Text = "Picture";
+      // 
+      // tabPagePicturePanel
+      // 
+      this.tabPagePicturePanel.AutoScroll = true;
+      this.tabPagePicturePanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPagePicturePanel.Controls.Add(this.groupBoxPicture);
+      this.tabPagePicturePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPagePicturePanel.Location = new System.Drawing.Point(3, 3);
+      this.tabPagePicturePanel.Name = "tabPagePicturePanel";
+      this.tabPagePicturePanel.Size = new System.Drawing.Size(900, 578);
+      this.tabPagePicturePanel.TabIndex = 1;
+      this.tabPagePicturePanel.Text = "panel1";
       // 
       // groupBoxPicture
       // 
@@ -1313,10 +1366,7 @@
       // 
       this.tabPageDetails.ActiveControl = null;
       this.tabPageDetails.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageDetails.Controls.Add(this.groupBoxMedia);
-      this.tabPageDetails.Controls.Add(this.groupBoxSort);
-      this.tabPageDetails.Controls.Add(this.groupBoxContent);
-      this.tabPageDetails.Controls.Add(this.groupBoxPeople);
+      this.tabPageDetails.Controls.Add(this.tabPageDetailsPanel);
       this.tabPageDetails.KeyTip = null;
       this.tabPageDetails.Localisation = "HeaderDetail";
       this.tabPageDetails.LocalisationContext = "TagEdit";
@@ -1324,6 +1374,21 @@
       this.tabPageDetails.Size = new System.Drawing.Size(906, 584);
       this.tabPageDetails.TabIndex = 2;
       this.tabPageDetails.Text = "Detailed Information";
+      // 
+      // tabPageDetailsPanel
+      // 
+      this.tabPageDetailsPanel.AutoScroll = true;
+      this.tabPageDetailsPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxMedia);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxSort);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxContent);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxPeople);
+      this.tabPageDetailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageDetailsPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageDetailsPanel.Name = "tabPageDetailsPanel";
+      this.tabPageDetailsPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageDetailsPanel.TabIndex = 4;
+      this.tabPageDetailsPanel.Text = "panel1";
       // 
       // groupBoxMedia
       // 
@@ -1368,7 +1433,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 92);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 118);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1403,7 +1468,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 54);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 80);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -1862,7 +1927,7 @@
       // 
       this.tabPageOriginal.ActiveControl = null;
       this.tabPageOriginal.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageOriginal.Controls.Add(this.groupBoxOriginalInformation);
+      this.tabPageOriginal.Controls.Add(this.tabPageOriginalPanel);
       this.tabPageOriginal.KeyTip = null;
       this.tabPageOriginal.Localisation = "HeaderOriginal";
       this.tabPageOriginal.LocalisationContext = "TagEdit";
@@ -1870,6 +1935,18 @@
       this.tabPageOriginal.Size = new System.Drawing.Size(906, 584);
       this.tabPageOriginal.TabIndex = 3;
       this.tabPageOriginal.Text = "Original Information";
+      // 
+      // tabPageOriginalPanel
+      // 
+      this.tabPageOriginalPanel.AutoScroll = true;
+      this.tabPageOriginalPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageOriginalPanel.Controls.Add(this.groupBoxOriginalInformation);
+      this.tabPageOriginalPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageOriginalPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageOriginalPanel.Name = "tabPageOriginalPanel";
+      this.tabPageOriginalPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageOriginalPanel.TabIndex = 2;
+      this.tabPageOriginalPanel.Text = "panel1";
       // 
       // groupBoxOriginalInformation
       // 
@@ -2089,8 +2166,7 @@
       // 
       this.tabPageInvolvedPeople.ActiveControl = null;
       this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageInvolvedPeople.Controls.Add(this.groupBoxMusician);
-      this.tabPageInvolvedPeople.Controls.Add(this.groupBoxInvolvedPeople);
+      this.tabPageInvolvedPeople.Controls.Add(this.tabPageInvolvedPeoplePanel);
       this.tabPageInvolvedPeople.KeyTip = null;
       this.tabPageInvolvedPeople.Localisation = "HeaderInvolved";
       this.tabPageInvolvedPeople.LocalisationContext = "TagEdit";
@@ -2371,11 +2447,24 @@
       this.lblInvolvedPersonFunction.TabIndex = 12;
       this.lblInvolvedPersonFunction.Text = "Involved Person Function:";
       // 
+      // tabPageInvolvedPeoplePanel
+      // 
+      this.tabPageInvolvedPeoplePanel.AutoScroll = true;
+      this.tabPageInvolvedPeoplePanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxMusician);
+      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxInvolvedPeople);
+      this.tabPageInvolvedPeoplePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageInvolvedPeoplePanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageInvolvedPeoplePanel.Name = "tabPageInvolvedPeoplePanel";
+      this.tabPageInvolvedPeoplePanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageInvolvedPeoplePanel.TabIndex = 26;
+      this.tabPageInvolvedPeoplePanel.Text = "panel1";
+      // 
       // tabPageWebInformation
       // 
       this.tabPageWebInformation.ActiveControl = null;
       this.tabPageWebInformation.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageWebInformation.Controls.Add(this.groupBoxWebInformation);
+      this.tabPageWebInformation.Controls.Add(this.tabPageWebInformationPanel);
       this.tabPageWebInformation.KeyTip = null;
       this.tabPageWebInformation.Localisation = "HeaderWeb";
       this.tabPageWebInformation.LocalisationContext = "TagEdit";
@@ -2383,6 +2472,18 @@
       this.tabPageWebInformation.Size = new System.Drawing.Size(906, 584);
       this.tabPageWebInformation.TabIndex = 5;
       this.tabPageWebInformation.Text = "Web Information";
+      // 
+      // tabPageWebInformationPanel
+      // 
+      this.tabPageWebInformationPanel.AutoScroll = true;
+      this.tabPageWebInformationPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageWebInformationPanel.Controls.Add(this.groupBoxWebInformation);
+      this.tabPageWebInformationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageWebInformationPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageWebInformationPanel.Name = "tabPageWebInformationPanel";
+      this.tabPageWebInformationPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageWebInformationPanel.TabIndex = 4;
+      this.tabPageWebInformationPanel.Text = "panel1";
       // 
       // groupBoxWebInformation
       // 
@@ -2670,7 +2771,7 @@
       // 
       this.tabPageLyrics.ActiveControl = null;
       this.tabPageLyrics.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageLyrics.Controls.Add(this.groupBoxLyrics);
+      this.tabPageLyrics.Controls.Add(this.tabPageLyricsPanel);
       this.tabPageLyrics.KeyTip = null;
       this.tabPageLyrics.Localisation = "HeaderLyrics";
       this.tabPageLyrics.LocalisationContext = "TagEdit";
@@ -2678,6 +2779,18 @@
       this.tabPageLyrics.Size = new System.Drawing.Size(906, 584);
       this.tabPageLyrics.TabIndex = 6;
       this.tabPageLyrics.Text = "Lyrics";
+      // 
+      // tabPageLyricsPanel
+      // 
+      this.tabPageLyricsPanel.AutoScroll = true;
+      this.tabPageLyricsPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageLyricsPanel.Controls.Add(this.groupBoxLyrics);
+      this.tabPageLyricsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageLyricsPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageLyricsPanel.Name = "tabPageLyricsPanel";
+      this.tabPageLyricsPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageLyricsPanel.TabIndex = 4;
+      this.tabPageLyricsPanel.Text = "panel1";
       // 
       // groupBoxLyrics
       // 
@@ -2835,7 +2948,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 76);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 102);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2845,7 +2958,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 45);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 71);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -2879,7 +2992,7 @@
       // 
       this.tabPageRating.ActiveControl = null;
       this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageRating.Controls.Add(this.groupBoxRating);
+      this.tabPageRating.Controls.Add(this.tabPageRatingPanel);
       this.tabPageRating.KeyTip = null;
       this.tabPageRating.Localisation = "HeaderRating";
       this.tabPageRating.LocalisationContext = "TagEdit";
@@ -2887,6 +3000,18 @@
       this.tabPageRating.Size = new System.Drawing.Size(906, 584);
       this.tabPageRating.TabIndex = 7;
       this.tabPageRating.Text = "Rating";
+      // 
+      // tabPageRatingPanel
+      // 
+      this.tabPageRatingPanel.AutoScroll = true;
+      this.tabPageRatingPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageRatingPanel.Controls.Add(this.groupBoxRating);
+      this.tabPageRatingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageRatingPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageRatingPanel.Name = "tabPageRatingPanel";
+      this.tabPageRatingPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageRatingPanel.TabIndex = 5;
+      this.tabPageRatingPanel.Text = "panel1";
       // 
       // groupBoxRating
       // 
@@ -3151,8 +3276,10 @@
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
       this.tabPageUserDefined.ResumeLayout(false);
+      this.tabPageUserDefinedPanel.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();
       this.tabPageMain.ResumeLayout(false);
+      this.tabPageMainPanel.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
       this.groupBoxComment.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).EndInit();
@@ -3161,11 +3288,13 @@
       this.groupBoxArtist.ResumeLayout(false);
       this.groupBoxArtist.PerformLayout();
       this.tabPagePictures.ResumeLayout(false);
+      this.tabPagePicturePanel.ResumeLayout(false);
       this.groupBoxPicture.ResumeLayout(false);
       this.groupBoxPicture.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
       this.tabPageDetails.ResumeLayout(false);
+      this.tabPageDetailsPanel.ResumeLayout(false);
       this.groupBoxMedia.ResumeLayout(false);
       this.groupBoxMedia.PerformLayout();
       this.groupBoxSort.ResumeLayout(false);
@@ -3175,6 +3304,7 @@
       this.groupBoxPeople.ResumeLayout(false);
       this.groupBoxPeople.PerformLayout();
       this.tabPageOriginal.ResumeLayout(false);
+      this.tabPageOriginalPanel.ResumeLayout(false);
       this.groupBoxOriginalInformation.ResumeLayout(false);
       this.groupBoxOriginalInformation.PerformLayout();
       this.tabPageInvolvedPeople.ResumeLayout(false);
@@ -3185,13 +3315,16 @@
       this.groupBoxInvolvedPeople.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).EndInit();
       this.tabPageWebInformation.ResumeLayout(false);
+      this.tabPageWebInformationPanel.ResumeLayout(false);
       this.groupBoxWebInformation.ResumeLayout(false);
       this.groupBoxWebInformation.PerformLayout();
       this.tabPageLyrics.ResumeLayout(false);
+      this.tabPageLyricsPanel.ResumeLayout(false);
       this.groupBoxLyrics.ResumeLayout(false);
       this.groupBoxLyrics.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).EndInit();
       this.tabPageRating.ResumeLayout(false);
+      this.tabPageRatingPanel.ResumeLayout(false);
       this.groupBoxRating.ResumeLayout(false);
       this.groupBoxRating.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
@@ -3444,5 +3577,14 @@
     protected Core.WinControls.MPTButton btGetLyricsFromInternet;
     private Core.WinControls.MPTButton btCopyArtistToAlbumArtist;
     private Core.WinControls.MPTButton btDeleteAllFrames;
+    private Elegant.Ui.Panel tabPageMainPanel;
+    private Elegant.Ui.Panel tabPagePicturePanel;
+    private Elegant.Ui.Panel tabPageDetailsPanel;
+    private Elegant.Ui.Panel tabPageOriginalPanel;
+    private Elegant.Ui.Panel tabPageInvolvedPeoplePanel;
+    private Elegant.Ui.Panel tabPageWebInformationPanel;
+    private Elegant.Ui.Panel tabPageLyricsPanel;
+    private Elegant.Ui.Panel tabPageRatingPanel;
+    private Elegant.Ui.Panel tabPageUserDefinedPanel;
   }
 }
