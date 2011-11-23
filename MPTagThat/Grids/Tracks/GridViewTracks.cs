@@ -785,7 +785,7 @@ namespace MPTagThat.GridView
               if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
                 log.Debug("CoverArt: Using existing folder.jpg");
-                // Prepare Picture Array and then add the cover retrieved
+
                 track.Pictures.Add(folderThumb);
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
@@ -866,7 +866,7 @@ namespace MPTagThat.GridView
               {
                 MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
                 pic.MimeType = "image/jpg";
-                pic.Description = "";
+                pic.Description = "Front Cover";
                 pic.Type = PictureType.FrontCover;
                 pic.Data = pic.ImageFromData(vector.Data);
                 track.Pictures.Add(pic);
@@ -958,6 +958,8 @@ namespace MPTagThat.GridView
       try
       {
         Core.Common.Picture pic = new Core.Common.Picture(thumb);
+        pic.Description = "Front Cover";
+        pic.Type = PictureType.FrontCover;
         return pic;
       }
       catch (Exception ex)
