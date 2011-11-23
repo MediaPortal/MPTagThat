@@ -785,7 +785,8 @@ namespace MPTagThat.GridView
               if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
                 log.Debug("CoverArt: Using existing folder.jpg");
-
+                // First Clear all the existingPictures
+                track.Pictures.Clear();
                 track.Pictures.Add(folderThumb);
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
