@@ -7,6 +7,12 @@ Legend:
 - Deleted
 x Fixed
 
+3.0.4 Date: 23.11.2011 
+-------------------------------------
+x Cover: under some circumstances a Cover was added twice to a file
+x Cover: Set Description of added Cover to "Front Cover" so that it is recognized by iTunes / iPod
++ TagEdit: Added Vertical Scrollbar capabilities to TagEdit Control
+
 3.0.3 Date: 02.11.2011 
 -------------------------------------
 x Tagedit: Prevent Null value assignment to tag values when editing in Grid
