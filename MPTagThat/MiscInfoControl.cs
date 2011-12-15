@@ -175,7 +175,14 @@ namespace MPTagThat
     private Image GetImageFromFile(string fileName)
     {
       FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-      Image img = Image.FromStream(fs);
+      Image img = null;
+      try
+      {
+        img = Image.FromFile(fileName);
+      }
+      catch (OutOfMemoryException)
+      {
+      }
       fs.Close();
       return img;
     }
