@@ -493,7 +493,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(754, 24);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(758, 24);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -504,7 +504,7 @@ namespace MPTagThat
       this.statusBarPane2.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane2.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane2.Name = "statusBarPane2";
-      this.statusBarPane2.Size = new System.Drawing.Size(149, 24);
+      this.statusBarPane2.Size = new System.Drawing.Size(151, 24);
       this.statusBarPane2.TabIndex = 0;
       // 
       // toolStripStatusLabelFiles
@@ -528,12 +528,12 @@ namespace MPTagThat
       // statusBarPane3
       // 
       this.statusBarPane3.Controls.Add(this.toolStripStatusLabelFolder);
-      this.statusBarPane3.Location = new System.Drawing.Point(149, 0);
+      this.statusBarPane3.Location = new System.Drawing.Point(151, 0);
       this.statusBarPane3.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane3.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane3.Name = "statusBarPane3";
       this.statusBarPane3.Padding = new System.Windows.Forms.Padding(2, 10, 2, 1);
-      this.statusBarPane3.Size = new System.Drawing.Size(101, 24);
+      this.statusBarPane3.Size = new System.Drawing.Size(103, 24);
       this.statusBarPane3.TabIndex = 1;
       // 
       // toolStripStatusLabelFolder
@@ -550,11 +550,11 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(754, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(758, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
-      this.statusBarControlsArea1.Size = new System.Drawing.Size(319, 24);
+      this.statusBarControlsArea1.Size = new System.Drawing.Size(315, 24);
       this.statusBarControlsArea1.TabIndex = 0;
       // 
       // statusBarPane4
@@ -583,7 +583,7 @@ namespace MPTagThat
       this.statusBarPane1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane1.Name = "statusBarPane1";
-      this.statusBarPane1.Size = new System.Drawing.Size(233, 24);
+      this.statusBarPane1.Size = new System.Drawing.Size(229, 24);
       this.statusBarPane1.TabIndex = 0;
       // 
       // progressBar1
@@ -603,7 +603,7 @@ namespace MPTagThat
       this.buttonProgressCancel.Id = "72fee6d7-03bc-42a8-8e13-35309ec722ad";
       this.buttonProgressCancel.Location = new System.Drawing.Point(180, 3);
       this.buttonProgressCancel.Name = "buttonProgressCancel";
-      this.buttonProgressCancel.Size = new System.Drawing.Size(26, 19);
+      this.buttonProgressCancel.Size = new System.Drawing.Size(22, 19);
       this.buttonProgressCancel.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonProgressCancel.SmallImages.Images"))))});
       this.buttonProgressCancel.TabIndex = 1;
@@ -632,7 +632,7 @@ namespace MPTagThat
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
       this.ribbon.QuickAccessToolbarPlacementMode = Elegant.Ui.QuickAccessToolbarPlacementMode.AboveRibbon;
-      this.ribbon.Size = new System.Drawing.Size(1073, 153);
+      this.ribbon.Size = new System.Drawing.Size(1073, 150);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -655,9 +655,9 @@ namespace MPTagThat
             this.backstageViewButtonChangeColumns,
             this.backstageViewSeparator2,
             this.backstageViewButtonExit});
-      this.backstageView.Location = new System.Drawing.Point(0, 52);
+      this.backstageView.Location = new System.Drawing.Point(0, 51);
       this.backstageView.Name = "backstageView";
-      this.backstageView.Size = new System.Drawing.Size(1073, 1113);
+      this.backstageView.Size = new System.Drawing.Size(1073, 1114);
       this.backstageView.TabIndex = 17;
       this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
       // 
@@ -669,10 +669,10 @@ namespace MPTagThat
       this.backstageViewPageOptions.Controls.Add(this.backstageViewPanel1);
       this.backstageViewPageOptions.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
-      this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 5);
+      this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 0);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
-      this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(12);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(905, 1103);
+      this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(0, 1, 2, 1);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(918, 1112);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -682,9 +682,9 @@ namespace MPTagThat
       // 
       this.panel2.Controls.Add(this.tabControlSettings);
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel2.Location = new System.Drawing.Point(222, 68);
+      this.panel2.Location = new System.Drawing.Point(210, 57);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(671, 1023);
+      this.panel2.Size = new System.Drawing.Size(706, 1054);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -693,8 +693,8 @@ namespace MPTagThat
       this.tabControlSettings.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
-      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsTagsId3;
-      this.tabControlSettings.Size = new System.Drawing.Size(671, 1023);
+      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsGeneral;
+      this.tabControlSettings.Size = new System.Drawing.Size(706, 1054);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -718,7 +718,7 @@ namespace MPTagThat
       this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageSettingsGeneral.KeyTip = null;
       this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(739, 1008);
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsGeneral.TabIndex = 0;
       // 
       // groupBoxGeneral
@@ -860,7 +860,7 @@ namespace MPTagThat
       this.tabPageSettingsKeys.Controls.Add(this.groupBoxKeys);
       this.tabPageSettingsKeys.KeyTip = null;
       this.tabPageSettingsKeys.Name = "tabPageSettingsKeys";
-      this.tabPageSettingsKeys.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsKeys.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsKeys.TabIndex = 1;
       // 
       // groupBoxKeys
@@ -1050,7 +1050,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
       this.tabPageSettingsTagsGeneral.KeyTip = null;
       this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
-      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsTagsGeneral.TabIndex = 2;
       // 
       // groupBoxTagsGeneral
@@ -1119,7 +1119,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
       this.tabPageSettingsTagsId3.KeyTip = null;
       this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
-      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsTagsId3.TabIndex = 3;
       // 
       // groupBoxTagValidate
@@ -1209,6 +1209,7 @@ namespace MPTagThat
       this.radioButtonUseApe.LocalisationContext = "Settings";
       this.radioButtonUseApe.Location = new System.Drawing.Point(12, 92);
       this.radioButtonUseApe.Name = "radioButtonUseApe";
+      this.radioButtonUseApe.RadioGroupName = "groupBoxTagsID3";
       this.radioButtonUseApe.Size = new System.Drawing.Size(300, 26);
       this.radioButtonUseApe.TabIndex = 2;
       this.radioButtonUseApe.Text = "Use APE and ID3 V1 Tags";
@@ -1230,6 +1231,7 @@ namespace MPTagThat
       this.radioButtonUseV4.LocalisationContext = "Settings";
       this.radioButtonUseV4.Location = new System.Drawing.Point(12, 69);
       this.radioButtonUseV4.Name = "radioButtonUseV4";
+      this.radioButtonUseV4.RadioGroupName = "groupBoxTagsID3";
       this.radioButtonUseV4.Size = new System.Drawing.Size(282, 26);
       this.radioButtonUseV4.TabIndex = 1;
       this.radioButtonUseV4.Text = "Use Version 2.4 for ID3 V2 Tags";
@@ -1242,6 +1244,7 @@ namespace MPTagThat
       this.radioButtonUseV3.LocalisationContext = "Settings";
       this.radioButtonUseV3.Location = new System.Drawing.Point(12, 46);
       this.radioButtonUseV3.Name = "radioButtonUseV3";
+      this.radioButtonUseV3.RadioGroupName = "groupBoxTagsID3";
       this.radioButtonUseV3.Size = new System.Drawing.Size(271, 26);
       this.radioButtonUseV3.TabIndex = 0;
       this.radioButtonUseV3.Text = "Use Version 2.3 for ID3 V2 Tags";
@@ -1292,7 +1295,8 @@ namespace MPTagThat
       this.radioButtonID3Both.LocalisationContext = "Settings";
       this.radioButtonID3Both.Location = new System.Drawing.Point(15, 66);
       this.radioButtonID3Both.Name = "radioButtonID3Both";
-      this.radioButtonID3Both.Size = new System.Drawing.Size(109, 26);
+      this.radioButtonID3Both.RadioGroupName = "groupBoxID3Update";
+      this.radioButtonID3Both.Size = new System.Drawing.Size(256, 26);
       this.radioButtonID3Both.TabIndex = 2;
       this.radioButtonID3Both.Text = "ID3V1 and ID3V2";
       this.radioButtonID3Both.CheckedChanged += new System.EventHandler(this.radioButtonID3Both_CheckedChanged);
@@ -1304,6 +1308,7 @@ namespace MPTagThat
       this.radioButtonID3V2.LocalisationContext = "Settings";
       this.radioButtonID3V2.Location = new System.Drawing.Point(15, 43);
       this.radioButtonID3V2.Name = "radioButtonID3V2";
+      this.radioButtonID3V2.RadioGroupName = "groupBoxID3Update";
       this.radioButtonID3V2.Size = new System.Drawing.Size(55, 26);
       this.radioButtonID3V2.TabIndex = 1;
       this.radioButtonID3V2.Text = "ID3V2";
@@ -1316,6 +1321,7 @@ namespace MPTagThat
       this.radioButtonID3V1.LocalisationContext = "Settings";
       this.radioButtonID3V1.Location = new System.Drawing.Point(15, 20);
       this.radioButtonID3V1.Name = "radioButtonID3V1";
+      this.radioButtonID3V1.RadioGroupName = "groupBoxID3Update";
       this.radioButtonID3V1.Size = new System.Drawing.Size(55, 26);
       this.radioButtonID3V1.TabIndex = 0;
       this.radioButtonID3V1.Text = "ID3V1";
@@ -1328,7 +1334,7 @@ namespace MPTagThat
       this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxLyrics);
       this.tabPageSettingsLyricsCover.KeyTip = null;
       this.tabPageSettingsLyricsCover.Name = "tabPageSettingsLyricsCover";
-      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsLyricsCover.TabIndex = 4;
       // 
       // groupBoxPictures
@@ -1581,7 +1587,7 @@ namespace MPTagThat
       this.tabPageSettingsDatabase.Controls.Add(this.groubBoxTagsDatabase);
       this.tabPageSettingsDatabase.KeyTip = null;
       this.tabPageSettingsDatabase.Name = "tabPageSettingsDatabase";
-      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsDatabase.TabIndex = 5;
       // 
       // groupBoxDatabaseBuild
@@ -1714,7 +1720,7 @@ namespace MPTagThat
       this.tabPageSettingsRipGeneral.Controls.Add(this.groupBoxCustomPath);
       this.tabPageSettingsRipGeneral.KeyTip = null;
       this.tabPageSettingsRipGeneral.Name = "tabPageSettingsRipGeneral";
-      this.tabPageSettingsRipGeneral.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsRipGeneral.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipGeneral.TabIndex = 6;
       // 
       // groupBoxEncoding
@@ -1975,7 +1981,7 @@ namespace MPTagThat
       this.tabPageSettingsRipMp3.Controls.Add(this.groupBoxMp3Experts);
       this.tabPageSettingsRipMp3.KeyTip = null;
       this.tabPageSettingsRipMp3.Name = "tabPageSettingsRipMp3";
-      this.tabPageSettingsRipMp3.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsRipMp3.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipMp3.TabIndex = 7;
       // 
       // groupBoxPresets
@@ -2099,7 +2105,7 @@ namespace MPTagThat
       this.tabPageSettingsRipOgg.Controls.Add(this.groupBoxOggExpert);
       this.tabPageSettingsRipOgg.KeyTip = null;
       this.tabPageSettingsRipOgg.Name = "tabPageSettingsRipOgg";
-      this.tabPageSettingsRipOgg.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsRipOgg.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipOgg.TabIndex = 8;
       // 
       // groupBoxOggEncoding
@@ -2197,7 +2203,7 @@ namespace MPTagThat
       this.tabPageSettingsRipFlac.Controls.Add(this.groupBoxFlacSettings);
       this.tabPageSettingsRipFlac.KeyTip = null;
       this.tabPageSettingsRipFlac.Name = "tabPageSettingsRipFlac";
-      this.tabPageSettingsRipFlac.Size = new System.Drawing.Size(604, 1002);
+      this.tabPageSettingsRipFlac.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipFlac.TabIndex = 9;
       // 
       // groupBoxFlacEncoding
@@ -2293,7 +2299,7 @@ namespace MPTagThat
       this.tabPageSettingsRipAAC.Controls.Add(this.groupBoxAACEncoding);
       this.tabPageSettingsRipAAC.KeyTip = null;
       this.tabPageSettingsRipAAC.Name = "tabPageSettingsRipAAC";
-      this.tabPageSettingsRipAAC.Size = new System.Drawing.Size(604, 1002);
+      this.tabPageSettingsRipAAC.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipAAC.TabIndex = 10;
       // 
       // groupBoxAACEncoding
@@ -2337,7 +2343,7 @@ namespace MPTagThat
       this.tabPageSettingsRipWMA.Controls.Add(this.groupBoxWMAEncoding);
       this.tabPageSettingsRipWMA.KeyTip = null;
       this.tabPageSettingsRipWMA.Name = "tabPageSettingsRipWMA";
-      this.tabPageSettingsRipWMA.Size = new System.Drawing.Size(604, 1002);
+      this.tabPageSettingsRipWMA.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipWMA.TabIndex = 11;
       // 
       // groupBoxWMAEncoding
@@ -2446,7 +2452,7 @@ namespace MPTagThat
       this.tabPageSettingsRipMPC.Controls.Add(this.groupBoxMPCPresets);
       this.tabPageSettingsRipMPC.KeyTip = null;
       this.tabPageSettingsRipMPC.Name = "tabPageSettingsRipMPC";
-      this.tabPageSettingsRipMPC.Size = new System.Drawing.Size(604, 1002);
+      this.tabPageSettingsRipMPC.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipMPC.TabIndex = 12;
       // 
       // groupBoxMPCExpert
@@ -2533,7 +2539,7 @@ namespace MPTagThat
       this.tabPageSettingsRipWV.Controls.Add(this.groupBoxWVPresets);
       this.tabPageSettingsRipWV.KeyTip = null;
       this.tabPageSettingsRipWV.Name = "tabPageSettingsRipWV";
-      this.tabPageSettingsRipWV.Size = new System.Drawing.Size(604, 1002);
+      this.tabPageSettingsRipWV.Size = new System.Drawing.Size(704, 1039);
       this.tabPageSettingsRipWV.TabIndex = 13;
       // 
       // groupBoxWVExpertSettings
@@ -2618,9 +2624,9 @@ namespace MPTagThat
       this.panel3.Controls.Add(this.buttonSettingsCancel);
       this.panel3.Controls.Add(this.buttonSettingsApply);
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panel3.Location = new System.Drawing.Point(222, 12);
+      this.panel3.Location = new System.Drawing.Point(210, 1);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(671, 56);
+      this.panel3.Size = new System.Drawing.Size(706, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2655,9 +2661,9 @@ namespace MPTagThat
       // 
       this.backstageViewPanel1.Controls.Add(this.groupedNavigationBar1);
       this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-      this.backstageViewPanel1.Location = new System.Drawing.Point(12, 12);
+      this.backstageViewPanel1.Location = new System.Drawing.Point(0, 1);
       this.backstageViewPanel1.Name = "backstageViewPanel1";
-      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 1079);
+      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 1110);
       this.backstageViewPanel1.TabIndex = 0;
       // 
       // groupedNavigationBar1
@@ -2675,7 +2681,7 @@ namespace MPTagThat
       this.groupedNavigationBar1.Location = new System.Drawing.Point(0, 0);
       this.groupedNavigationBar1.MinimizeButtonDirection = Elegant.Ui.NavigationBarCaptionMinimizeButtonDirection.Left;
       this.groupedNavigationBar1.Name = "groupedNavigationBar1";
-      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 1079);
+      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 1110);
       this.groupedNavigationBar1.TabIndex = 0;
       this.groupedNavigationBar1.Text = "Settings";
       this.groupedNavigationBar1.VisibleOutlookGroupHeadersCount = 0;
@@ -2694,7 +2700,7 @@ namespace MPTagThat
       this.navigationBarGroupItemsContainer1.Items.AddRange(new Elegant.Ui.NavigationBarItem[] {
             this.navigationBarItemGeneral,
             this.navigationBarItemKeys});
-      this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 21);
+      this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 24);
       this.navigationBarGroupItemsContainer1.Name = "navigationBarGroupItemsContainer1";
       this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 48);
       this.navigationBarGroupItemsContainer1.TabIndex = 2;
@@ -2735,7 +2741,7 @@ namespace MPTagThat
             this.navigationBarItemTagsId3,
             this.navigationBarItemTagsLyricsCover,
             this.navigationBarItemTagsDatabase});
-      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 90);
+      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 96);
       this.navigationBarGroupItemsContainer2.Name = "navigationBarGroupItemsContainer2";
       this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 86);
       this.navigationBarGroupItemsContainer2.TabIndex = 5;
@@ -2800,7 +2806,7 @@ namespace MPTagThat
             this.navigationBarItemRipWMA,
             this.navigationBarItemMPC,
             this.navigationBarItemRipWV});
-      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 197);
+      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 206);
       this.navigationBarGroupItemsContainer3.Name = "navigationBarGroupItemsContainer3";
       this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 162);
       this.navigationBarGroupItemsContainer3.TabIndex = 8;
@@ -2893,11 +2899,11 @@ namespace MPTagThat
       this.backstageViewButtonSave.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images")))),
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images1"))))});
-      this.backstageViewButtonSave.Location = new System.Drawing.Point(5, 22);
-      this.backstageViewButtonSave.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonSave.Location = new System.Drawing.Point(7, 7);
+      this.backstageViewButtonSave.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
       this.backstageViewButtonSave.Name = "backstageViewButtonSave";
-      this.backstageViewButtonSave.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
-      this.backstageViewButtonSave.Size = new System.Drawing.Size(150, 34);
+      this.backstageViewButtonSave.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
+      this.backstageViewButtonSave.Size = new System.Drawing.Size(142, 28);
       this.backstageViewButtonSave.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images")))),
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images1"))))});
@@ -2911,11 +2917,11 @@ namespace MPTagThat
       this.backstageViewButtonRefresh.ImageToTextSpace = 5;
       this.backstageViewButtonRefresh.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.LargeImages.Images"))))});
-      this.backstageViewButtonRefresh.Location = new System.Drawing.Point(5, 56);
-      this.backstageViewButtonRefresh.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonRefresh.Location = new System.Drawing.Point(7, 37);
+      this.backstageViewButtonRefresh.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
       this.backstageViewButtonRefresh.Name = "backstageViewButtonRefresh";
-      this.backstageViewButtonRefresh.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
-      this.backstageViewButtonRefresh.Size = new System.Drawing.Size(150, 34);
+      this.backstageViewButtonRefresh.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
+      this.backstageViewButtonRefresh.Size = new System.Drawing.Size(142, 28);
       this.backstageViewButtonRefresh.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.SmallImages.Images"))))});
       this.backstageViewButtonRefresh.TabIndex = 4;
@@ -2963,9 +2969,9 @@ namespace MPTagThat
       // backstageViewSeparator1
       // 
       this.backstageViewSeparator1.Id = "369d25d6-d37c-4006-867c-9c1e69f63586";
-      this.backstageViewSeparator1.Location = new System.Drawing.Point(0, 184);
+      this.backstageViewSeparator1.Location = new System.Drawing.Point(1, 143);
       this.backstageViewSeparator1.Name = "backstageViewSeparator1";
-      this.backstageViewSeparator1.Size = new System.Drawing.Size(155, 2);
+      this.backstageViewSeparator1.Size = new System.Drawing.Size(154, 2);
       this.backstageViewSeparator1.TabIndex = 6;
       this.backstageViewSeparator1.Text = "backstageViewSeparator1";
       // 
@@ -2974,20 +2980,20 @@ namespace MPTagThat
       this.backstageViewButtonChangeColumns.CommandName = "ChangeDisplayColumns";
       this.backstageViewButtonChangeColumns.Id = "86ec7f12-cb60-44d1-8593-5d4c8b9a22ce";
       this.backstageViewButtonChangeColumns.ImageToTextSpace = 5;
-      this.backstageViewButtonChangeColumns.Location = new System.Drawing.Point(5, 186);
-      this.backstageViewButtonChangeColumns.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonChangeColumns.Location = new System.Drawing.Point(7, 145);
+      this.backstageViewButtonChangeColumns.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
       this.backstageViewButtonChangeColumns.Name = "backstageViewButtonChangeColumns";
-      this.backstageViewButtonChangeColumns.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
-      this.backstageViewButtonChangeColumns.Size = new System.Drawing.Size(150, 31);
+      this.backstageViewButtonChangeColumns.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
+      this.backstageViewButtonChangeColumns.Size = new System.Drawing.Size(142, 25);
       this.backstageViewButtonChangeColumns.TabIndex = 5;
       this.backstageViewButtonChangeColumns.Text = "Change Display Columns";
       // 
       // backstageViewSeparator2
       // 
       this.backstageViewSeparator2.Id = "1f44213c-f649-4525-8a34-f85c80e2607f";
-      this.backstageViewSeparator2.Location = new System.Drawing.Point(0, 217);
+      this.backstageViewSeparator2.Location = new System.Drawing.Point(1, 172);
       this.backstageViewSeparator2.Name = "backstageViewSeparator2";
-      this.backstageViewSeparator2.Size = new System.Drawing.Size(155, 2);
+      this.backstageViewSeparator2.Size = new System.Drawing.Size(154, 2);
       this.backstageViewSeparator2.TabIndex = 8;
       this.backstageViewSeparator2.Text = "backstageViewSeparator2";
       // 
@@ -2996,11 +3002,11 @@ namespace MPTagThat
       this.backstageViewButtonExit.CommandName = "Exit";
       this.backstageViewButtonExit.Id = "c79011c7-3dcd-44b7-8414-e1276b7e331f";
       this.backstageViewButtonExit.ImageToTextSpace = 5;
-      this.backstageViewButtonExit.Location = new System.Drawing.Point(5, 219);
-      this.backstageViewButtonExit.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+      this.backstageViewButtonExit.Location = new System.Drawing.Point(7, 174);
+      this.backstageViewButtonExit.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
       this.backstageViewButtonExit.Name = "backstageViewButtonExit";
-      this.backstageViewButtonExit.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
-      this.backstageViewButtonExit.Size = new System.Drawing.Size(150, 31);
+      this.backstageViewButtonExit.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
+      this.backstageViewButtonExit.Size = new System.Drawing.Size(142, 25);
       this.backstageViewButtonExit.TabIndex = 7;
       this.backstageViewButtonExit.Text = "Exit";
       // 
@@ -3015,7 +3021,7 @@ namespace MPTagThat
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1073, 101);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1073, 99);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -3025,7 +3031,7 @@ namespace MPTagThat
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromFile);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagIdentifyFiles);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromInternet);
-      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(4, 3);
+      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(1, 1);
       this.ribbonGroupTagsRetrieve.Name = "ribbonGroupTagsRetrieve";
       this.ribbonGroupTagsRetrieve.Size = new System.Drawing.Size(162, 94);
       this.ribbonGroupTagsRetrieve.TabIndex = 1;
@@ -3093,9 +3099,9 @@ namespace MPTagThat
       this.ribbonGroupTagsEdit.Controls.Add(this.separator3);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
-      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(168, 3);
+      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(163, 1);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
-      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(449, 94);
+      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(446, 94);
       this.ribbonGroupTagsEdit.TabIndex = 2;
       this.ribbonGroupTagsEdit.Text = "Edit Tags";
       // 
@@ -3154,10 +3160,10 @@ namespace MPTagThat
       // separator1
       // 
       this.separator1.Id = "881260b2-614a-4b71-92dc-b0876220635a";
-      this.separator1.Location = new System.Drawing.Point(126, 7);
+      this.separator1.Location = new System.Drawing.Point(125, 6);
       this.separator1.Name = "separator1";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator1, System.Windows.Forms.Keys.None);
-      this.separator1.Size = new System.Drawing.Size(2, 60);
+      this.separator1.Size = new System.Drawing.Size(3, 61);
       this.separator1.TabIndex = 11;
       this.separator1.Text = "separator1";
       // 
@@ -3168,7 +3174,7 @@ namespace MPTagThat
       this.buttonFind.Id = "664cf5e1-775a-448d-9871-064b4c8b33a1";
       this.buttonFind.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFind.LargeImages.Images"))))});
-      this.buttonFind.Location = new System.Drawing.Point(132, 2);
+      this.buttonFind.Location = new System.Drawing.Point(131, 2);
       this.buttonFind.Name = "buttonFind";
       this.buttonFind.Popup = this.popupMenu4;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonFind, System.Windows.Forms.Keys.None);
@@ -3205,7 +3211,7 @@ namespace MPTagThat
       this.buttonValidateSong.Id = "6b558c4a-6aeb-42e1-bedf-c5e7e0ec886e";
       this.buttonValidateSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonValidateSong.LargeImages.Images"))))});
-      this.buttonValidateSong.Location = new System.Drawing.Point(176, 2);
+      this.buttonValidateSong.Location = new System.Drawing.Point(175, 2);
       this.buttonValidateSong.Name = "buttonValidateSong";
       this.buttonValidateSong.Popup = this.popupMenu5;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonValidateSong, System.Windows.Forms.Keys.None);
@@ -3240,10 +3246,10 @@ namespace MPTagThat
       // separator2
       // 
       this.separator2.Id = "d7a68ab0-052d-457e-8ab3-95e30ecb244b";
-      this.separator2.Location = new System.Drawing.Point(228, 7);
+      this.separator2.Location = new System.Drawing.Point(226, 6);
       this.separator2.Name = "separator2";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator2, System.Windows.Forms.Keys.None);
-      this.separator2.Size = new System.Drawing.Size(2, 60);
+      this.separator2.Size = new System.Drawing.Size(3, 61);
       this.separator2.TabIndex = 8;
       this.separator2.Text = "separator1";
       // 
@@ -3256,7 +3262,7 @@ namespace MPTagThat
       this.buttonDeleteTag.Id = "3356cb8b-8ef8-4134-b8e4-8290dd07b0f0";
       this.buttonDeleteTag.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.LargeImages.Images"))))});
-      this.buttonDeleteTag.Location = new System.Drawing.Point(234, 2);
+      this.buttonDeleteTag.Location = new System.Drawing.Point(232, 2);
       this.buttonDeleteTag.Name = "buttonDeleteTag";
       this.buttonDeleteTag.Popup = this.popupMenu2;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonDeleteTag, System.Windows.Forms.Keys.None);
@@ -3312,7 +3318,7 @@ namespace MPTagThat
       this.buttonRemoveComment.Id = "cbb994ed-acd4-4eeb-92d2-692a3e92d5bb";
       this.buttonRemoveComment.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.LargeImages.Images"))))});
-      this.buttonRemoveComment.Location = new System.Drawing.Point(278, 2);
+      this.buttonRemoveComment.Location = new System.Drawing.Point(276, 2);
       this.buttonRemoveComment.Name = "buttonRemoveComment";
       this.buttonRemoveComment.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.ScreenTip.Image")));
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonRemoveComment, System.Windows.Forms.Keys.None);
@@ -3325,10 +3331,10 @@ namespace MPTagThat
       // separator3
       // 
       this.separator3.Id = "6d913a4c-a584-4ec3-87a9-bae2f1d79f15";
-      this.separator3.Location = new System.Drawing.Point(340, 7);
+      this.separator3.Location = new System.Drawing.Point(337, 6);
       this.separator3.Name = "separator3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator3, System.Windows.Forms.Keys.None);
-      this.separator3.Size = new System.Drawing.Size(2, 60);
+      this.separator3.Size = new System.Drawing.Size(3, 61);
       this.separator3.TabIndex = 9;
       this.separator3.Text = "separator1";
       // 
@@ -3336,7 +3342,7 @@ namespace MPTagThat
       // 
       this.buttonGroup1.Controls.Add(this.comboBoxScripts);
       this.buttonGroup1.Controls.Add(this.buttonScriptExecute);
-      this.buttonGroup1.Location = new System.Drawing.Point(345, 2);
+      this.buttonGroup1.Location = new System.Drawing.Point(342, 2);
       this.buttonGroup1.Name = "buttonGroup1";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup1, System.Windows.Forms.Keys.None);
       this.buttonGroup1.Size = new System.Drawing.Size(57, 24);
@@ -3377,7 +3383,7 @@ namespace MPTagThat
       this.buttonGroup3.Controls.Add(this.buttonNumberOnClick);
       this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.textBoxNumber);
-      this.buttonGroup3.Location = new System.Drawing.Point(345, 26);
+      this.buttonGroup3.Location = new System.Drawing.Point(342, 26);
       this.buttonGroup3.Name = "buttonGroup3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup3, System.Windows.Forms.Keys.None);
       this.buttonGroup3.Size = new System.Drawing.Size(100, 24);
@@ -3438,7 +3444,7 @@ namespace MPTagThat
       this.ribbonGroupPicture.Controls.Add(this.buttonGetCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonRemoveCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonSaveAsThumb);
-      this.ribbonGroupPicture.Location = new System.Drawing.Point(619, 3);
+      this.ribbonGroupPicture.Location = new System.Drawing.Point(609, 1);
       this.ribbonGroupPicture.Name = "ribbonGroupPicture";
       this.ribbonGroupPicture.Size = new System.Drawing.Size(118, 94);
       this.ribbonGroupPicture.TabIndex = 6;
@@ -3520,7 +3526,7 @@ namespace MPTagThat
       // 
       this.ribbonGroupOrganise.Controls.Add(this.buttonRenameFiles);
       this.ribbonGroupOrganise.Controls.Add(this.buttonOrganiseFiles);
-      this.ribbonGroupOrganise.Location = new System.Drawing.Point(739, 3);
+      this.ribbonGroupOrganise.Location = new System.Drawing.Point(727, 1);
       this.ribbonGroupOrganise.Name = "ribbonGroupOrganise";
       this.ribbonGroupOrganise.Size = new System.Drawing.Size(111, 94);
       this.ribbonGroupOrganise.TabIndex = 3;
@@ -3583,7 +3589,7 @@ namespace MPTagThat
       this.ribbonGroupOther.Controls.Add(this.buttonAddToBurner);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToConversion);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToPlaylist);
-      this.ribbonGroupOther.Location = new System.Drawing.Point(852, 3);
+      this.ribbonGroupOther.Location = new System.Drawing.Point(838, 1);
       this.ribbonGroupOther.Name = "ribbonGroupOther";
       this.ribbonGroupOther.Size = new System.Drawing.Size(133, 94);
       this.ribbonGroupOther.TabIndex = 5;
@@ -3978,9 +3984,9 @@ namespace MPTagThat
       this.panelMiddle.Controls.Add(this.panelLeft);
       this.panelMiddle.Controls.Add(this.panelRight);
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddle.Location = new System.Drawing.Point(0, 153);
+      this.panelMiddle.Location = new System.Drawing.Point(0, 150);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1073, 919);
+      this.panelMiddle.Size = new System.Drawing.Size(1073, 922);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -3991,7 +3997,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(741, 647);
+      this.panelMiddleTop.Size = new System.Drawing.Size(741, 650);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -3999,7 +4005,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(741, 559);
+      this.panelFileList.Size = new System.Drawing.Size(741, 562);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -4048,7 +4054,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 919);
+      this.panelLeft.Size = new System.Drawing.Size(150, 922);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -4056,7 +4062,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 919);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 922);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -4085,7 +4091,7 @@ namespace MPTagThat
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.panelRight.Location = new System.Drawing.Point(907, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 919);
+      this.panelRight.Size = new System.Drawing.Size(166, 922);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -4098,7 +4104,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 647);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 650);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -4109,7 +4115,7 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 658);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
       this.panelMiddleBottom.Size = new System.Drawing.Size(757, 264);
       this.panelMiddleBottom.TabIndex = 12;
