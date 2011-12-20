@@ -112,19 +112,17 @@ namespace MPTagThat
       int i = 0;
       foreach (FileInfo fi in files)
       {
-        ListViewItem item = new ListViewItem(fi.FullName);
-        item.ToolTipText = string.Format("{0} | {1} {2} | {3}kb", fi.Name, fi.LastWriteTime.ToShortDateString(),
-                                         fi.LastWriteTime.ToShortTimeString(), fi.Length / 1024);
-
         // Create Image
         bool imgFailure = false;
         bool nonPicFile = true;
+        Size originalImageSize = new Size(0,0);
+
         if (Util.IsPicture(fi.Name))
         {
           nonPicFile = false;
           try
           {
-            Image img = GetImageFromFile(fi.FullName);
+            Image img = GetImageFromFile(fi.FullName, out originalImageSize);
             if (img != null)
             {
               _imgList.Images.Add(img);
@@ -153,7 +151,7 @@ namespace MPTagThat
           }
           if (File.Exists(defaultName))
           {
-            Image img = GetImageFromFile(defaultName);
+            Image img = GetImageFromFile(defaultName, out originalImageSize);
             if (img != null)
             {
               _imgList.Images.Add(img);
@@ -161,13 +159,18 @@ namespace MPTagThat
           }
           else
           {
-            Image img = GetImageFromFile("Fileicons\\unknown.png");
+            Image img = GetImageFromFile("Fileicons\\unknown.png", out originalImageSize);
             if (img != null)
             {
               _imgList.Images.Add(img);
             }
           }
         }
+
+        string itemName = string.Format("{0}\n{1}x{2}", fi.Name, originalImageSize.Width, originalImageSize.Height);
+        ListViewItem item = new ListViewItem(itemName);
+        item.ToolTipText = string.Format("{0} | {1} {2} | {3}x{4} | {5}kb", fi.FullName, fi.LastWriteTime.ToShortDateString(),
+                                         fi.LastWriteTime.ToShortTimeString(), originalImageSize.Width, originalImageSize.Height, fi.Length / 1024);
 
         item.ImageIndex = i;
         listViewNonMusicFiles.Items.Add(item);
@@ -180,13 +183,17 @@ namespace MPTagThat
     ///   Return an image from a given filename
     /// </summary>
     /// <param name = "fileName"></param>
+    /// <param name = "size"></param>
     /// <returns></returns>
-    private Image GetImageFromFile(string fileName)
+    private Image GetImageFromFile(string fileName, out Size size)
     {
       FreeImageBitmap img = null;
+      size = new Size(0, 0);
       try
       {
         img = new FreeImageBitmap(fileName);
+        size = img.Size;
+
         // convert Image Size to 64 x 64 for display in the Imagelist
         img.Rescale(64, 64, FREE_IMAGE_FILTER.FILTER_BOX);
       }
