@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using FreeImageAPI;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
 using MPTagThat.Core.ShellLib;
@@ -106,6 +107,7 @@ namespace MPTagThat
     {
       listViewNonMusicFiles.Items.Clear();
       _imgList = new ImageList();
+      _imgList.ImageSize = new Size(64, 64);
 
       int i = 0;
       foreach (FileInfo fi in files)
@@ -157,13 +159,20 @@ namespace MPTagThat
               _imgList.Images.Add(img);
             }
           }
+          else
+          {
+            Image img = GetImageFromFile("Fileicons\\unknown.png");
+            if (img != null)
+            {
+              _imgList.Images.Add(img);
+            }
+          }
         }
 
         item.ImageIndex = i;
         listViewNonMusicFiles.Items.Add(item);
         i++;
       }
-      _imgList.ImageSize = new Size(64, 64);
       listViewNonMusicFiles.LargeImageList = _imgList;
     }
 
@@ -174,17 +183,18 @@ namespace MPTagThat
     /// <returns></returns>
     private Image GetImageFromFile(string fileName)
     {
-      FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-      Image img = null;
+      FreeImageBitmap img = null;
       try
       {
-        img = Image.FromFile(fileName);
+        img = new FreeImageBitmap(fileName);
+        // convert Image Size to 64 x 64 for display in the Imagelist
+        img.Rescale(64, 64, FREE_IMAGE_FILTER.FILTER_BOX);
       }
-      catch (OutOfMemoryException)
+      catch (Exception ex)
       {
+        log.Error("File has invalid Picture: {0} {1}", fileName, ex.Message);
       }
-      fs.Close();
-      return img;
+      return img != null ? (Image)img : null;
     }
 
     /// <summary>
