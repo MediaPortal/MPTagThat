@@ -113,13 +113,14 @@ Section -Main SEC0000
 	
     SetOverwrite on
     
-    # Bin Dir including Lyrics
+    # Bin Dir including external binaries
     SetOutPath $INSTDIR\bin
     File /r /x .svn ..\MPTagThat.Base\bin\*
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll
     File ..\LyricsEngine\bin\Release\LyricsEngine.dll.config
 	File ..\taglib-sharp\bin\Release\taglib-sharp.dll
 	File ..\gain\bin\Release\gain.dll
+	File ..\FreeImage\bin\Release\FreeImageNET.dll
     
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
