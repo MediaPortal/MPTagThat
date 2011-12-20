@@ -20,3 +20,6 @@ xcopy /y %1\LyricsEngine\bin\%2\LyricsEngine.dll.* .\bin
 
 REM Copy Gain dll 
 xcopy /y %1\gain\bin\%2\gain.dll .\bin
+
+REM Copy FreeImage Library
+xcopy /y %1\FreeImage\bin\%2\FreeImageNET.dll .\bin
