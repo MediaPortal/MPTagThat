@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using TagLib;
+using FreeImageAPI;
 
 namespace MPTagThat.Core.Common
 {
@@ -27,13 +28,10 @@ namespace MPTagThat.Core.Common
       {
         using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
-          Image img = Image.FromStream(fs);
+          FreeImageBitmap img = new FreeImageBitmap(fs);
           fs.Close();
-          if (img != null)
-          {
-            Data = img.Clone() as Image;
-            img.Dispose();
-          }
+          Data = (Image)(img.Clone() as FreeImageBitmap);
+          img.Dispose();
         }
       }
       catch (Exception ex)
@@ -98,19 +96,17 @@ namespace MPTagThat.Core.Common
     /// <returns></returns>
     public Image ImageFromData(byte[] data)
     {
-      Image img = null;
+      FreeImageBitmap img = null;
       try
       {
-        using (MemoryStream ms = new MemoryStream(data))
-        {
-          img = Image.FromStream(ms);
-        }
+        MemoryStream ms = new MemoryStream(data);
+        img = new FreeImageBitmap(ms);
       }
       catch (Exception)
       {
       }
 
-      return img;
+      return img != null ? (Image)img : null;
     }
 
     /// <summary>
