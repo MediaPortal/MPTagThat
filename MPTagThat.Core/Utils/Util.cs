@@ -338,6 +338,12 @@ namespace MPTagThat.Core
     [DllImport("user32.dll")]
     public static extern IntPtr CreateIconIndirect(ref IconInfo icon);
 
+    [DllImport("user32.dll", CharSet = CharSet.Ansi)]
+    public static extern IntPtr SendMessage(IntPtr hWnd, int msg, int len, IntPtr order);
+
+    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    public static extern bool SetWindowText(IntPtr hwnd, String lpString);
+
     #endregion
 
     #region Properties
