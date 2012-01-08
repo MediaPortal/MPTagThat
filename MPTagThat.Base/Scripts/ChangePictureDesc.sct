@@ -1,0 +1,42 @@
+// Title: Change Picture
+// Description: Change the Picture Description to "Front Cover" for iTunes to recognize it
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  public bool Invoke(List<TrackData> tracks)
+  {
+    if (tracks == null) return false;
+
+	// Loop through all Music Tracks and perform the necessary action
+	foreach (TrackData track in tracks)
+	{
+		if (track.Pictures.Count > 0)
+		{
+			if (track.Pictures[0].Description != "Front Cover")
+			{
+				track.Pictures[0].Description = "Front Cover";
+				track.Changed = true;
+			}
+		}
+	}
+    return true;
+  }
+  
+  public string Invoke(TrackData track)
+  {
+	return "";
+  }
+}

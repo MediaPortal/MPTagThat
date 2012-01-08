@@ -7,6 +7,23 @@ Legend:
 - Deleted
 x Fixed
 
+3.0.5 Date: 08.01.2012 
+-------------------------------------
++ GUI: Added Picture dimensions to the Thumbs title in the Non-Music File section
++ General: Using FreeImage to Create and Resize the Non-Music Files Thumbs
++ GUI: Added "Unknown" Fileicon to be displayed, when a non-music file extension is not found
++ General: Use FreeImage to create Pictures instead of Windows Image. should prevent Exceptions
++ Scripts: Script to change the Picture Description in Songs to "Front Cover" so that iTunes will recognise it
+x TagEdit: Copy (Ctrl+C) didn't work for the text fields in the Tagedit control
+x Settings: Radio Buttons in ID3 Settings, were not working correct
+x Catch OutOfMemoryException in case of an invalid picture
+
+3.0.4 Date: 23.11.2011 
+-------------------------------------
+x Cover: under some circumstances a Cover was added twice to a file
+x Cover: Set Description of added Cover to "Front Cover" so that it is recognized by iTunes / iPod
++ TagEdit: Added Vertical Scrollbar capabilities to TagEdit Control
+
 3.0.3 Date: 02.11.2011 
 -------------------------------------
 x Tagedit: Prevent Null value assignment to tag values when editing in Grid

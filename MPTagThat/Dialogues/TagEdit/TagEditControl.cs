@@ -3164,6 +3164,28 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
+      if (keyData == Keys.Enter)   // Handle Enter key as default Apply Button
+      {
+        btApply_Click(null, new EventArgs());
+        return true;
+      }
+      
+      if (keyData == Keys.Escape)  // Handle Escape to clear the form
+      {
+        ClearForm();
+        return true;
+      }
+      
+      if (keyData == (Keys.Control | Keys.C))  // Handle Copy. This would else be consumed by the grid
+      {
+        var ctrl = this.ActiveControl as TextBoxBase;
+        if (ctrl != null)
+        {
+          ctrl.Copy();
+          return true;
+        }
+      }
+
       Action newaction = new Action();
       if (ServiceScope.Get<IActionHandler>().GetAction(1, keyData, ref newaction))
       {
@@ -3172,18 +3194,6 @@ namespace MPTagThat.TagEdit
           return true;
         }
       }
-
-      if ((int)keyData == 13)   // Handle Enter key as default Apply Button
-      {
-        btApply_Click(null, new EventArgs());
-        return true;
-      }
-      else if ((int)keyData == 27)  // Handle Escape to clear the form
-      {
-        ClearForm();
-        return true;
-      }
-
 
       return base.ProcessCmdKey(ref msg, keyData);
     }
