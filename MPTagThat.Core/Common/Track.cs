@@ -238,14 +238,14 @@ namespace MPTagThat.Core
       }
 
       #endregion
-      
+
       #region Set Properties
 
       try
       {
         track.DurationTimespan = file.Properties.Duration;
 
-        int fileLength = (int) (fi.Length/1024);
+        int fileLength = (int)(fi.Length / 1024);
         track.FileSize = fileLength.ToString();
 
         track.BitRate = file.Properties.AudioBitrate.ToString();
@@ -276,28 +276,28 @@ namespace MPTagThat.Core
             }
             else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
             {
-              if (frame.GetType() == typeof (UserTextInformationFrame))
+              if (frame.GetType() == typeof(UserTextInformationFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
                                                (frame as UserTextInformationFrame).Text.Length == 0
                                                  ? ""
                                                  : (frame as UserTextInformationFrame).Text[0]));
               }
-              else if (frame.GetType() == typeof (PrivateFrame))
+              else if (frame.GetType() == typeof(PrivateFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
                                                (frame as PrivateFrame).PrivateData == null
                                                  ? ""
                                                  : (frame as PrivateFrame).PrivateData.ToString()));
               }
-              else if (frame.GetType() == typeof (UniqueFileIdentifierFrame))
+              else if (frame.GetType() == typeof(UniqueFileIdentifierFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
                                                (frame as UniqueFileIdentifierFrame).Identifier == null
                                                  ? ""
                                                  : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
               }
-              else if (frame.GetType() == typeof (UnknownFrame))
+              else if (frame.GetType() == typeof(UnknownFrame))
               {
                 track.UserFrames.Add(new Frame(id, "",
                                                (frame as UnknownFrame).Data == null
@@ -369,11 +369,11 @@ namespace MPTagThat.Core
         return true;
       }
 
-      if (track.Readonly && !Options.MainSettings.ChangeReadOnlyAttributte && 
+      if (track.Readonly && !Options.MainSettings.ChangeReadOnlyAttributte &&
             (Options.ReadOnlyFileHandling == 0 || Options.ReadOnlyFileHandling == 2))
       {
         Form dlg = new ReadOnlyDialog(track.FullFileName);
-        DialogResult dlgResult = dlg.ShowDialog(); 
+        DialogResult dlgResult = dlg.ShowDialog();
 
         switch (dlgResult)
         {
@@ -634,6 +634,9 @@ namespace MPTagThat.Core
           }
         }
 
+        List<Frame> allFrames = new List<Frame>();
+        allFrames.AddRange(track.Frames);
+
         // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
         if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
         {
@@ -650,26 +653,24 @@ namespace MPTagThat.Core
               id3v2tag.SetTextFrame(frameId, "");
             }
           }
-
-          List<Frame> allFrames = new List<Frame>();
-          allFrames.AddRange(track.Frames);
+          
           allFrames.AddRange(track.UserFrames);
+        }
 
-          foreach (Frame frame in allFrames)
+        foreach (Frame frame in allFrames)
+        {
+          ByteVector frameId = new ByteVector(frame.Id);
+
+          if (frame.Id == "TXXX")
           {
-            ByteVector frameId = new ByteVector(frame.Id);
-
-            if (frame.Id == "TXXX")
+            if (frame.Description != "")
             {
-              if (frame.Description != "")
-              {
-                id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
-              }
+              id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
             }
-            else
-            {
-              id3v2tag.SetTextFrame(frameId, frame.Value);
-            }
+          }
+          else
+          {
+            id3v2tag.SetTextFrame(frameId, frame.Value);
           }
         }
 
