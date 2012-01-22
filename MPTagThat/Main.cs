@@ -3091,7 +3091,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void DataGridView_SelectionChanged(object sender, EventArgs e)
     {
-      if (gridViewControl.View.CurrentRow != null)
+      if (gridViewControl.View.CurrentRow != null && !FolderScanning)
       {
         tagEditControl.FillForm();
         SetGalleryItem();
