@@ -640,6 +640,7 @@ namespace MPTagThat.Core
         // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
         if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
         {
+          // Clean the previously saved Userframes, to avoid duplicates
           foreach (Frame frame in track.SavedUserFrames)
           {
             ByteVector frameId = new ByteVector(frame.Id);
@@ -653,7 +654,7 @@ namespace MPTagThat.Core
               id3v2tag.SetTextFrame(frameId, "");
             }
           }
-          
+
           allFrames.AddRange(track.UserFrames);
         }
 
@@ -661,15 +662,18 @@ namespace MPTagThat.Core
         {
           ByteVector frameId = new ByteVector(frame.Id);
 
+          // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
           if (frame.Id == "TXXX")
           {
             if (frame.Description != "")
             {
+              id3v2tag.SetUserTextAsString(frame.Description, "");
               id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
             }
           }
           else
           {
+            id3v2tag.SetTextFrame(frameId, "");
             id3v2tag.SetTextFrame(frameId, frame.Value);
           }
         }
