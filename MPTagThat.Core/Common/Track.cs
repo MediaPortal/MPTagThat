@@ -550,7 +550,7 @@ namespace MPTagThat.Core
             ByteVector data = new ByteVector(byteArray);
             tagPic.Data = data;
             tagPic.Description = pic.Description;
-            tagPic.MimeType = pic.MimeType;
+            tagPic.MimeType = "image/jpg";
             tagPic.Type = pic.Type;
             pics.Add(tagPic);
           }
