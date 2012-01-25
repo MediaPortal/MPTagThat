@@ -542,7 +542,6 @@ namespace MPTagThat.Core
         List<TagLib.Picture> pics = new List<TagLib.Picture>();
         foreach (Picture pic in track.Pictures)
         {
-          ImageConverter imgConverter = new ImageConverter();
           TagLib.Picture tagPic = new TagLib.Picture();
 
           try

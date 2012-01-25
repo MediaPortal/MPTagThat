@@ -121,8 +121,8 @@ namespace MPTagThat.Core.Common
       byte[] byteArray = new byte[0];
       using (MemoryStream stream = new MemoryStream())
       {
-        Bitmap bCopy = new Bitmap(img);
-        bCopy.Save(stream, img.RawFormat);
+        FreeImageBitmap bCopy = new FreeImageBitmap(img);
+        bCopy.Save(stream, FREE_IMAGE_FORMAT.FIF_JPEG);
         stream.Close();
         byteArray = stream.ToArray();
       }
