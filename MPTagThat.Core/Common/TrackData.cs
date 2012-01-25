@@ -76,7 +76,8 @@ namespace MPTagThat.Core
                                                                "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
                                                                "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
                                                                "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
-                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN"
+                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
+                                                               "TCMP"
                                                              };
 
     #endregion
