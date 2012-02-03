@@ -728,7 +728,7 @@ namespace MPTagThat.TagEdit
           {
             if (i == 0)
             {
-              string[] mcl = track.MusicCreditList.Split(';');
+              string[] mcl = track.MusicCreditList.Split(new[] { '\0', ';' });
               for (int j = 0; j < mcl.Length - 1; j += 2)
               {
                 dataGridViewMusician.Rows.Add(new object[] { mcl[j].Trim(), mcl[j + 1].Trim() });
