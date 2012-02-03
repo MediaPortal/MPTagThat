@@ -869,7 +869,7 @@ namespace TagLib.Id3v2 {
 				
 				// Truncate values containing NULL bytes
 				int null_index = value.IndexOf ('\x00');
-				if (null_index >= 0) {
+				if (null_index >= 0 && FrameId != FrameType.IPLS) {
 					value = value.Substring (0, null_index);
 				}
 				
