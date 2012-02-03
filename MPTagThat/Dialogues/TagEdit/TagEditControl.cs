@@ -583,40 +583,48 @@ namespace MPTagThat.TagEdit
             }
           }
 
-          if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
+          if (Options.MainSettings.ID3V2Version == 4)
           {
-            if (i == 0)
+            groupBoxSort.Enabled = true;
+            if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
             {
-              tbArtistSort.Text = track.ArtistSortName;
+              if (i == 0)
+              {
+                tbArtistSort.Text = track.ArtistSortName;
+              }
+              else
+              {
+                tbArtistSort.Text = "";
+              }
             }
-            else
+
+            if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
             {
-              tbArtistSort.Text = "";
+              if (i == 0)
+              {
+                tbAlbumSort.Text = track.AlbumSortName;
+              }
+              else
+              {
+                tbAlbumSort.Text = "";
+              }
+            }
+
+            if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
+            {
+              if (i == 0)
+              {
+                tbTitleSort.Text = track.TitleSortName;
+              }
+              else
+              {
+                tbTitleSort.Text = "";
+              }
             }
           }
-
-          if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
+          else
           {
-            if (i == 0)
-            {
-              tbAlbumSort.Text = track.AlbumSortName;
-            }
-            else
-            {
-              tbAlbumSort.Text = "";
-            }
-          }
-
-          if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
-          {
-            if (i == 0)
-            {
-              tbTitleSort.Text = track.TitleSortName;
-            }
-            else
-            {
-              tbTitleSort.Text = "";
-            }
+            groupBoxSort.Enabled = false;
           }
         }
 
@@ -724,19 +732,28 @@ namespace MPTagThat.TagEdit
               dataGridViewInvolvedPeople.Rows.Clear();
           }
 
-          if (strMusicianCreditList != track.MusicCreditList)
+          // TMCL is only available in 2.4
+          if (Options.MainSettings.ID3V2Version == 4)
           {
-            if (i == 0)
+            groupBoxMusician.Enabled = true;
+            if (strMusicianCreditList != track.MusicCreditList)
             {
-              string[] mcl = track.MusicCreditList.Split(new[] { '\0', ';' });
-              for (int j = 0; j < mcl.Length - 1; j += 2)
+              if (i == 0)
               {
-                dataGridViewMusician.Rows.Add(new object[] { mcl[j].Trim(), mcl[j + 1].Trim() });
+                string[] mcl = track.MusicCreditList.Split(new[] {'\0', ';'});
+                for (int j = 0; j < mcl.Length - 1; j += 2)
+                {
+                  dataGridViewMusician.Rows.Add(new object[] {mcl[j].Trim(), mcl[j + 1].Trim()});
+                }
+                strMusicianCreditList = track.MusicCreditList;
               }
-              strMusicianCreditList = track.MusicCreditList;
+              else
+                dataGridViewMusician.Rows.Clear();
             }
-            else
-              dataGridViewMusician.Rows.Clear();
+          }
+          else
+          {
+            groupBoxMusician.Enabled = false;
           }
         }
 
