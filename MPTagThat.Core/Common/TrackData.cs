@@ -76,7 +76,8 @@ namespace MPTagThat.Core
                                                                "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
                                                                "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
                                                                "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
-                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN"
+                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
+                                                               "TCMP"
                                                              };
 
     #endregion
@@ -633,6 +634,7 @@ namespace MPTagThat.Core
     /// <summary>
     /// Original Release Time Tag
     /// ID3: TORY (2.3) / TDOR (2.4)
+    /// Handled transparently by Taglib. We only need to look for TDOR
     /// </summary>
     public string OriginalRelease
     {
@@ -641,24 +643,14 @@ namespace MPTagThat.Core
         if (TagType != "mp3")
           return "";
 
-        if (ID3Version == 4)
-          return GetFrame("TDOR");
-
-        return GetFrame("TORY");
+        return GetFrame("TDOR");
       }
       set
       {
         if (TagType != "mp3")
           return;
 
-        if (ID3Version == 4)
-          SetText("TDOR", value);
-
-        string year = value;
-        if (year.Length > 4)
-          year = year.Substring(0, 4);
-
-        SetText("TORY", year);
+        SetText("TDOR", value);
       }
     }
 

@@ -31,31 +31,6 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
-      this.tabPageInvolvedPeople = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabPageInvolvedPeoplePanel = new Elegant.Ui.Panel();
-      this.groupBoxMusician = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.lblID3V24only = new MPTagThat.Core.WinControls.MPTLabel();
-      this.ckInvolvedMusician = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.buttonRemoveMusician = new MPTagThat.Core.WinControls.MPTButton();
-      this.buttonAddMusician = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewMusician = new System.Windows.Forms.DataGridView();
-      this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.tbMusicianName = new System.Windows.Forms.TextBox();
-      this.lblMusicianName = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbMusicianInstrument = new System.Windows.Forms.TextBox();
-      this.lblMusicianInstrument = new MPTagThat.Core.WinControls.MPTLabel();
-      this.groupBoxInvolvedPeople = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckInvolvedPerson = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.buttonRemovePerson = new MPTagThat.Core.WinControls.MPTButton();
-      this.buttonAddInvolvedPerson = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewInvolvedPeople = new System.Windows.Forms.DataGridView();
-      this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.tbInvolvedPersonName = new System.Windows.Forms.TextBox();
-      this.lblInvolvedPersonName = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbInvolvedPersonFunction = new System.Windows.Forms.TextBox();
-      this.lblInvolvedPersonFunction = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageMainPanel = new Elegant.Ui.Panel();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -201,6 +176,31 @@
       this.tbOriginalAlbum = new System.Windows.Forms.TextBox();
       this.ckOriginalAlbum = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblOriginalAlbum = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tabPageInvolvedPeople = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageInvolvedPeoplePanel = new Elegant.Ui.Panel();
+      this.groupBoxMusician = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.lblID3V24only = new MPTagThat.Core.WinControls.MPTLabel();
+      this.ckInvolvedMusician = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.buttonRemoveMusician = new MPTagThat.Core.WinControls.MPTButton();
+      this.buttonAddMusician = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewMusician = new System.Windows.Forms.DataGridView();
+      this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tbMusicianName = new System.Windows.Forms.TextBox();
+      this.lblMusicianName = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbMusicianInstrument = new System.Windows.Forms.TextBox();
+      this.lblMusicianInstrument = new MPTagThat.Core.WinControls.MPTLabel();
+      this.groupBoxInvolvedPeople = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckInvolvedPerson = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.buttonRemovePerson = new MPTagThat.Core.WinControls.MPTButton();
+      this.buttonAddInvolvedPerson = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewInvolvedPeople = new System.Windows.Forms.DataGridView();
+      this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tbInvolvedPersonName = new System.Windows.Forms.TextBox();
+      this.lblInvolvedPersonName = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbInvolvedPersonFunction = new System.Windows.Forms.TextBox();
+      this.lblInvolvedPersonFunction = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageWebInformation = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageWebInformationPanel = new Elegant.Ui.Panel();
       this.groupBoxWebInformation = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -279,12 +279,6 @@
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
-      this.tabPageInvolvedPeople.SuspendLayout();
-      this.tabPageInvolvedPeoplePanel.SuspendLayout();
-      this.groupBoxMusician.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMusician)).BeginInit();
-      this.groupBoxInvolvedPeople.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.tabPageMainPanel.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
@@ -305,6 +299,12 @@
       this.tabPageOriginal.SuspendLayout();
       this.tabPageOriginalPanel.SuspendLayout();
       this.groupBoxOriginalInformation.SuspendLayout();
+      this.tabPageInvolvedPeople.SuspendLayout();
+      this.tabPageInvolvedPeoplePanel.SuspendLayout();
+      this.groupBoxMusician.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMusician)).BeginInit();
+      this.groupBoxInvolvedPeople.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).BeginInit();
       this.tabPageWebInformation.SuspendLayout();
       this.tabPageWebInformationPanel.SuspendLayout();
       this.groupBoxWebInformation.SuspendLayout();
@@ -330,7 +330,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageMain;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageRating;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -343,304 +343,6 @@
             this.tabPageLyrics,
             this.tabPageRating,
             this.tabPageUserDefined});
-      // 
-      // tabPageInvolvedPeople
-      // 
-      this.tabPageInvolvedPeople.ActiveControl = null;
-      this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageInvolvedPeople.Controls.Add(this.tabPageInvolvedPeoplePanel);
-      this.tabPageInvolvedPeople.KeyTip = null;
-      this.tabPageInvolvedPeople.Localisation = "HeaderInvolved";
-      this.tabPageInvolvedPeople.LocalisationContext = "TagEdit";
-      this.tabPageInvolvedPeople.Name = "tabPageInvolvedPeople";
-      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(906, 584);
-      this.tabPageInvolvedPeople.TabIndex = 4;
-      this.tabPageInvolvedPeople.Text = "Involved People";
-      // 
-      // tabPageInvolvedPeoplePanel
-      // 
-      this.tabPageInvolvedPeoplePanel.AutoScroll = true;
-      this.tabPageInvolvedPeoplePanel.BackColor = System.Drawing.Color.Transparent;
-      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxMusician);
-      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxInvolvedPeople);
-      this.tabPageInvolvedPeoplePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabPageInvolvedPeoplePanel.Location = new System.Drawing.Point(0, 0);
-      this.tabPageInvolvedPeoplePanel.Name = "tabPageInvolvedPeoplePanel";
-      this.tabPageInvolvedPeoplePanel.Size = new System.Drawing.Size(906, 584);
-      this.tabPageInvolvedPeoplePanel.TabIndex = 26;
-      this.tabPageInvolvedPeoplePanel.Text = "panel1";
-      // 
-      // groupBoxMusician
-      // 
-      this.groupBoxMusician.Controls.Add(this.lblID3V24only);
-      this.groupBoxMusician.Controls.Add(this.ckInvolvedMusician);
-      this.groupBoxMusician.Controls.Add(this.buttonRemoveMusician);
-      this.groupBoxMusician.Controls.Add(this.buttonAddMusician);
-      this.groupBoxMusician.Controls.Add(this.dataGridViewMusician);
-      this.groupBoxMusician.Controls.Add(this.tbMusicianName);
-      this.groupBoxMusician.Controls.Add(this.lblMusicianName);
-      this.groupBoxMusician.Controls.Add(this.tbMusicianInstrument);
-      this.groupBoxMusician.Controls.Add(this.lblMusicianInstrument);
-      this.groupBoxMusician.Id = "da75ee5a-8818-47f8-b0e6-eead206c7558";
-      this.groupBoxMusician.Localisation = "ttGroupBox1";
-      this.groupBoxMusician.LocalisationContext = "TagEdit";
-      this.groupBoxMusician.Location = new System.Drawing.Point(10, 270);
-      this.groupBoxMusician.Name = "groupBoxMusician";
-      this.groupBoxMusician.Size = new System.Drawing.Size(693, 248);
-      this.groupBoxMusician.TabIndex = 25;
-      // 
-      // lblID3V24only
-      // 
-      this.lblID3V24only.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblID3V24only.Localisation = "ID3V24only";
-      this.lblID3V24only.LocalisationContext = "TagEdit";
-      this.lblID3V24only.Location = new System.Drawing.Point(8, 91);
-      this.lblID3V24only.Name = "lblID3V24only";
-      this.lblID3V24only.Size = new System.Drawing.Size(85, 16);
-      this.lblID3V24only.TabIndex = 25;
-      this.lblID3V24only.Text = "ID3 V2.4 only";
-      // 
-      // ckInvolvedMusician
-      // 
-      this.ckInvolvedMusician.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckInvolvedMusician.Id = "488a84fc-1427-470b-970e-a3d5467e7d23";
-      this.ckInvolvedMusician.Localisation = "ckInvolvedMusician";
-      this.ckInvolvedMusician.LocalisationContext = "TagEdit";
-      this.ckInvolvedMusician.Location = new System.Drawing.Point(666, 98);
-      this.ckInvolvedMusician.Name = "ckInvolvedMusician";
-      this.ckInvolvedMusician.Size = new System.Drawing.Size(17, 29);
-      this.ckInvolvedMusician.TabIndex = 24;
-      this.ckInvolvedMusician.TabStop = false;
-      // 
-      // buttonRemoveMusician
-      // 
-      this.buttonRemoveMusician.Id = "41e7e141-c2a0-4fbc-a1b4-53f492549c77";
-      this.buttonRemoveMusician.Localisation = "RemoveMusician";
-      this.buttonRemoveMusician.LocalisationContext = "TagEdit";
-      this.buttonRemoveMusician.Location = new System.Drawing.Point(497, 50);
-      this.buttonRemoveMusician.Name = "buttonRemoveMusician";
-      this.buttonRemoveMusician.Size = new System.Drawing.Size(184, 25);
-      this.buttonRemoveMusician.TabIndex = 3;
-      this.buttonRemoveMusician.Text = "Remove Musician";
-      this.buttonRemoveMusician.UseVisualStyleBackColor = true;
-      this.buttonRemoveMusician.Click += new System.EventHandler(this.buttonRemoveMusician_Click);
-      // 
-      // buttonAddMusician
-      // 
-      this.buttonAddMusician.Id = "ca146822-b6b1-464e-ab9c-1628f12cd9aa";
-      this.buttonAddMusician.Localisation = "AddMusician";
-      this.buttonAddMusician.LocalisationContext = "TagEdit";
-      this.buttonAddMusician.Location = new System.Drawing.Point(498, 19);
-      this.buttonAddMusician.Name = "buttonAddMusician";
-      this.buttonAddMusician.Size = new System.Drawing.Size(183, 25);
-      this.buttonAddMusician.TabIndex = 2;
-      this.buttonAddMusician.Text = "Add Musician";
-      this.buttonAddMusician.UseVisualStyleBackColor = true;
-      this.buttonAddMusician.Click += new System.EventHandler(this.buttonAddMusician_Click);
-      // 
-      // dataGridViewMusician
-      // 
-      this.dataGridViewMusician.AllowUserToAddRows = false;
-      this.dataGridViewMusician.AllowUserToDeleteRows = false;
-      this.dataGridViewMusician.AllowUserToResizeColumns = false;
-      this.dataGridViewMusician.AllowUserToResizeRows = false;
-      this.dataGridViewMusician.BackgroundColor = System.Drawing.SystemColors.Window;
-      this.dataGridViewMusician.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewMusician.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn6});
-      this.dataGridViewMusician.Location = new System.Drawing.Point(187, 91);
-      this.dataGridViewMusician.Name = "dataGridViewMusician";
-      this.dataGridViewMusician.ReadOnly = true;
-      this.dataGridViewMusician.RowHeadersVisible = false;
-      this.dataGridViewMusician.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewMusician.Size = new System.Drawing.Size(470, 151);
-      this.dataGridViewMusician.TabIndex = 15;
-      // 
-      // dataGridViewTextBoxColumn4
-      // 
-      this.dataGridViewTextBoxColumn4.FillWeight = 150F;
-      this.dataGridViewTextBoxColumn4.Frozen = true;
-      this.dataGridViewTextBoxColumn4.HeaderText = "Instrument";
-      this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-      this.dataGridViewTextBoxColumn4.ReadOnly = true;
-      this.dataGridViewTextBoxColumn4.Width = 235;
-      // 
-      // dataGridViewTextBoxColumn6
-      // 
-      this.dataGridViewTextBoxColumn6.Frozen = true;
-      this.dataGridViewTextBoxColumn6.HeaderText = "Name";
-      this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-      this.dataGridViewTextBoxColumn6.ReadOnly = true;
-      this.dataGridViewTextBoxColumn6.Width = 235;
-      // 
-      // tbMusicianName
-      // 
-      this.tbMusicianName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbMusicianName.Location = new System.Drawing.Point(187, 51);
-      this.tbMusicianName.Name = "tbMusicianName";
-      this.tbMusicianName.Size = new System.Drawing.Size(304, 22);
-      this.tbMusicianName.TabIndex = 1;
-      // 
-      // lblMusicianName
-      // 
-      this.lblMusicianName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblMusicianName.Localisation = "MusicianName";
-      this.lblMusicianName.LocalisationContext = "TagEdit";
-      this.lblMusicianName.Location = new System.Drawing.Point(8, 54);
-      this.lblMusicianName.Name = "lblMusicianName";
-      this.lblMusicianName.Size = new System.Drawing.Size(104, 16);
-      this.lblMusicianName.TabIndex = 14;
-      this.lblMusicianName.Text = "Musician Name:";
-      // 
-      // tbMusicianInstrument
-      // 
-      this.tbMusicianInstrument.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbMusicianInstrument.Location = new System.Drawing.Point(187, 21);
-      this.tbMusicianInstrument.Name = "tbMusicianInstrument";
-      this.tbMusicianInstrument.Size = new System.Drawing.Size(304, 22);
-      this.tbMusicianInstrument.TabIndex = 0;
-      // 
-      // lblMusicianInstrument
-      // 
-      this.lblMusicianInstrument.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblMusicianInstrument.Localisation = "MusicianInstrument";
-      this.lblMusicianInstrument.LocalisationContext = "TagEdit";
-      this.lblMusicianInstrument.Location = new System.Drawing.Point(8, 24);
-      this.lblMusicianInstrument.Name = "lblMusicianInstrument";
-      this.lblMusicianInstrument.Size = new System.Drawing.Size(127, 16);
-      this.lblMusicianInstrument.TabIndex = 12;
-      this.lblMusicianInstrument.Text = "Musician Instrument:";
-      // 
-      // groupBoxInvolvedPeople
-      // 
-      this.groupBoxInvolvedPeople.Controls.Add(this.ckInvolvedPerson);
-      this.groupBoxInvolvedPeople.Controls.Add(this.buttonRemovePerson);
-      this.groupBoxInvolvedPeople.Controls.Add(this.buttonAddInvolvedPerson);
-      this.groupBoxInvolvedPeople.Controls.Add(this.dataGridViewInvolvedPeople);
-      this.groupBoxInvolvedPeople.Controls.Add(this.tbInvolvedPersonName);
-      this.groupBoxInvolvedPeople.Controls.Add(this.lblInvolvedPersonName);
-      this.groupBoxInvolvedPeople.Controls.Add(this.tbInvolvedPersonFunction);
-      this.groupBoxInvolvedPeople.Controls.Add(this.lblInvolvedPersonFunction);
-      this.groupBoxInvolvedPeople.Id = "1472e7ab-0bfc-4fa5-a5e6-8d26669e0054";
-      this.groupBoxInvolvedPeople.Localisation = "ttGroupBox1";
-      this.groupBoxInvolvedPeople.LocalisationContext = "TagEdit";
-      this.groupBoxInvolvedPeople.Location = new System.Drawing.Point(10, 0);
-      this.groupBoxInvolvedPeople.Name = "groupBoxInvolvedPeople";
-      this.groupBoxInvolvedPeople.Size = new System.Drawing.Size(693, 264);
-      this.groupBoxInvolvedPeople.TabIndex = 0;
-      // 
-      // ckInvolvedPerson
-      // 
-      this.ckInvolvedPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckInvolvedPerson.Id = "9c636a43-e19a-4990-97c0-2675d292862b";
-      this.ckInvolvedPerson.Localisation = "ckInvolvedPerson";
-      this.ckInvolvedPerson.LocalisationContext = "TagEdit";
-      this.ckInvolvedPerson.Location = new System.Drawing.Point(666, 98);
-      this.ckInvolvedPerson.Name = "ckInvolvedPerson";
-      this.ckInvolvedPerson.Size = new System.Drawing.Size(17, 29);
-      this.ckInvolvedPerson.TabIndex = 24;
-      this.ckInvolvedPerson.TabStop = false;
-      // 
-      // buttonRemovePerson
-      // 
-      this.buttonRemovePerson.Id = "a0714128-d363-4f01-a16e-62487e87da45";
-      this.buttonRemovePerson.Localisation = "RemovePerson";
-      this.buttonRemovePerson.LocalisationContext = "TagEdit";
-      this.buttonRemovePerson.Location = new System.Drawing.Point(497, 50);
-      this.buttonRemovePerson.Name = "buttonRemovePerson";
-      this.buttonRemovePerson.Size = new System.Drawing.Size(184, 25);
-      this.buttonRemovePerson.TabIndex = 3;
-      this.buttonRemovePerson.Text = "Remove Person";
-      this.buttonRemovePerson.UseVisualStyleBackColor = true;
-      this.buttonRemovePerson.Click += new System.EventHandler(this.buttonRemovePerson_Click);
-      // 
-      // buttonAddInvolvedPerson
-      // 
-      this.buttonAddInvolvedPerson.Id = "18ab4fbb-c843-4599-b125-9e9183997d06";
-      this.buttonAddInvolvedPerson.Localisation = "AddPerson";
-      this.buttonAddInvolvedPerson.LocalisationContext = "TagEdit";
-      this.buttonAddInvolvedPerson.Location = new System.Drawing.Point(498, 19);
-      this.buttonAddInvolvedPerson.Name = "buttonAddInvolvedPerson";
-      this.buttonAddInvolvedPerson.Size = new System.Drawing.Size(183, 25);
-      this.buttonAddInvolvedPerson.TabIndex = 2;
-      this.buttonAddInvolvedPerson.Text = "Add Person";
-      this.buttonAddInvolvedPerson.UseVisualStyleBackColor = true;
-      this.buttonAddInvolvedPerson.Click += new System.EventHandler(this.buttonAddInvolvedPerson_Click);
-      // 
-      // dataGridViewInvolvedPeople
-      // 
-      this.dataGridViewInvolvedPeople.AllowUserToAddRows = false;
-      this.dataGridViewInvolvedPeople.AllowUserToDeleteRows = false;
-      this.dataGridViewInvolvedPeople.AllowUserToResizeColumns = false;
-      this.dataGridViewInvolvedPeople.AllowUserToResizeRows = false;
-      this.dataGridViewInvolvedPeople.BackgroundColor = System.Drawing.SystemColors.Window;
-      this.dataGridViewInvolvedPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewInvolvedPeople.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn5});
-      this.dataGridViewInvolvedPeople.Location = new System.Drawing.Point(187, 91);
-      this.dataGridViewInvolvedPeople.Name = "dataGridViewInvolvedPeople";
-      this.dataGridViewInvolvedPeople.ReadOnly = true;
-      this.dataGridViewInvolvedPeople.RowHeadersVisible = false;
-      this.dataGridViewInvolvedPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewInvolvedPeople.Size = new System.Drawing.Size(470, 167);
-      this.dataGridViewInvolvedPeople.TabIndex = 15;
-      // 
-      // dataGridViewTextBoxColumn3
-      // 
-      this.dataGridViewTextBoxColumn3.FillWeight = 150F;
-      this.dataGridViewTextBoxColumn3.Frozen = true;
-      this.dataGridViewTextBoxColumn3.HeaderText = "Function";
-      this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-      this.dataGridViewTextBoxColumn3.ReadOnly = true;
-      this.dataGridViewTextBoxColumn3.Width = 235;
-      // 
-      // dataGridViewTextBoxColumn5
-      // 
-      this.dataGridViewTextBoxColumn5.Frozen = true;
-      this.dataGridViewTextBoxColumn5.HeaderText = "Name";
-      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-      this.dataGridViewTextBoxColumn5.ReadOnly = true;
-      this.dataGridViewTextBoxColumn5.Width = 235;
-      // 
-      // tbInvolvedPersonName
-      // 
-      this.tbInvolvedPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbInvolvedPersonName.Location = new System.Drawing.Point(187, 51);
-      this.tbInvolvedPersonName.Name = "tbInvolvedPersonName";
-      this.tbInvolvedPersonName.Size = new System.Drawing.Size(304, 22);
-      this.tbInvolvedPersonName.TabIndex = 1;
-      // 
-      // lblInvolvedPersonName
-      // 
-      this.lblInvolvedPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblInvolvedPersonName.Localisation = "PersonName";
-      this.lblInvolvedPersonName.LocalisationContext = "TagEdit";
-      this.lblInvolvedPersonName.Location = new System.Drawing.Point(8, 54);
-      this.lblInvolvedPersonName.Name = "lblInvolvedPersonName";
-      this.lblInvolvedPersonName.Size = new System.Drawing.Size(148, 16);
-      this.lblInvolvedPersonName.TabIndex = 14;
-      this.lblInvolvedPersonName.Text = "Involved Person Name:";
-      // 
-      // tbInvolvedPersonFunction
-      // 
-      this.tbInvolvedPersonFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbInvolvedPersonFunction.Location = new System.Drawing.Point(187, 21);
-      this.tbInvolvedPersonFunction.Name = "tbInvolvedPersonFunction";
-      this.tbInvolvedPersonFunction.Size = new System.Drawing.Size(304, 22);
-      this.tbInvolvedPersonFunction.TabIndex = 0;
-      // 
-      // lblInvolvedPersonFunction
-      // 
-      this.lblInvolvedPersonFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblInvolvedPersonFunction.Localisation = "PersonFunction";
-      this.lblInvolvedPersonFunction.LocalisationContext = "TagEdit";
-      this.lblInvolvedPersonFunction.Location = new System.Drawing.Point(8, 24);
-      this.lblInvolvedPersonFunction.Name = "lblInvolvedPersonFunction";
-      this.lblInvolvedPersonFunction.Size = new System.Drawing.Size(161, 16);
-      this.lblInvolvedPersonFunction.TabIndex = 12;
-      this.lblInvolvedPersonFunction.Text = "Involved Person Function:";
       // 
       // tabPageMain
       // 
@@ -1625,7 +1327,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 120);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 124);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1660,7 +1362,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 82);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 86);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -2354,6 +2056,304 @@
       this.lblOriginalAlbum.TabIndex = 10;
       this.lblOriginalAlbum.Text = "Original Album Title:";
       // 
+      // tabPageInvolvedPeople
+      // 
+      this.tabPageInvolvedPeople.ActiveControl = null;
+      this.tabPageInvolvedPeople.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageInvolvedPeople.Controls.Add(this.tabPageInvolvedPeoplePanel);
+      this.tabPageInvolvedPeople.KeyTip = null;
+      this.tabPageInvolvedPeople.Localisation = "HeaderInvolved";
+      this.tabPageInvolvedPeople.LocalisationContext = "TagEdit";
+      this.tabPageInvolvedPeople.Name = "tabPageInvolvedPeople";
+      this.tabPageInvolvedPeople.Size = new System.Drawing.Size(906, 584);
+      this.tabPageInvolvedPeople.TabIndex = 4;
+      this.tabPageInvolvedPeople.Text = "Involved People";
+      // 
+      // tabPageInvolvedPeoplePanel
+      // 
+      this.tabPageInvolvedPeoplePanel.AutoScroll = true;
+      this.tabPageInvolvedPeoplePanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxMusician);
+      this.tabPageInvolvedPeoplePanel.Controls.Add(this.groupBoxInvolvedPeople);
+      this.tabPageInvolvedPeoplePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageInvolvedPeoplePanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageInvolvedPeoplePanel.Name = "tabPageInvolvedPeoplePanel";
+      this.tabPageInvolvedPeoplePanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageInvolvedPeoplePanel.TabIndex = 26;
+      this.tabPageInvolvedPeoplePanel.Text = "panel1";
+      // 
+      // groupBoxMusician
+      // 
+      this.groupBoxMusician.Controls.Add(this.lblID3V24only);
+      this.groupBoxMusician.Controls.Add(this.ckInvolvedMusician);
+      this.groupBoxMusician.Controls.Add(this.buttonRemoveMusician);
+      this.groupBoxMusician.Controls.Add(this.buttonAddMusician);
+      this.groupBoxMusician.Controls.Add(this.dataGridViewMusician);
+      this.groupBoxMusician.Controls.Add(this.tbMusicianName);
+      this.groupBoxMusician.Controls.Add(this.lblMusicianName);
+      this.groupBoxMusician.Controls.Add(this.tbMusicianInstrument);
+      this.groupBoxMusician.Controls.Add(this.lblMusicianInstrument);
+      this.groupBoxMusician.Id = "da75ee5a-8818-47f8-b0e6-eead206c7558";
+      this.groupBoxMusician.Localisation = "ttGroupBox1";
+      this.groupBoxMusician.LocalisationContext = "TagEdit";
+      this.groupBoxMusician.Location = new System.Drawing.Point(10, 270);
+      this.groupBoxMusician.Name = "groupBoxMusician";
+      this.groupBoxMusician.Size = new System.Drawing.Size(693, 248);
+      this.groupBoxMusician.TabIndex = 25;
+      // 
+      // lblID3V24only
+      // 
+      this.lblID3V24only.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblID3V24only.Localisation = "ID3V24only";
+      this.lblID3V24only.LocalisationContext = "TagEdit";
+      this.lblID3V24only.Location = new System.Drawing.Point(8, 91);
+      this.lblID3V24only.Name = "lblID3V24only";
+      this.lblID3V24only.Size = new System.Drawing.Size(85, 16);
+      this.lblID3V24only.TabIndex = 25;
+      this.lblID3V24only.Text = "ID3 V2.4 only";
+      // 
+      // ckInvolvedMusician
+      // 
+      this.ckInvolvedMusician.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInvolvedMusician.Id = "488a84fc-1427-470b-970e-a3d5467e7d23";
+      this.ckInvolvedMusician.Localisation = "ckInvolvedMusician";
+      this.ckInvolvedMusician.LocalisationContext = "TagEdit";
+      this.ckInvolvedMusician.Location = new System.Drawing.Point(666, 98);
+      this.ckInvolvedMusician.Name = "ckInvolvedMusician";
+      this.ckInvolvedMusician.Size = new System.Drawing.Size(17, 29);
+      this.ckInvolvedMusician.TabIndex = 24;
+      this.ckInvolvedMusician.TabStop = false;
+      // 
+      // buttonRemoveMusician
+      // 
+      this.buttonRemoveMusician.Id = "41e7e141-c2a0-4fbc-a1b4-53f492549c77";
+      this.buttonRemoveMusician.Localisation = "RemoveMusician";
+      this.buttonRemoveMusician.LocalisationContext = "TagEdit";
+      this.buttonRemoveMusician.Location = new System.Drawing.Point(497, 50);
+      this.buttonRemoveMusician.Name = "buttonRemoveMusician";
+      this.buttonRemoveMusician.Size = new System.Drawing.Size(184, 25);
+      this.buttonRemoveMusician.TabIndex = 3;
+      this.buttonRemoveMusician.Text = "Remove Musician";
+      this.buttonRemoveMusician.UseVisualStyleBackColor = true;
+      this.buttonRemoveMusician.Click += new System.EventHandler(this.buttonRemoveMusician_Click);
+      // 
+      // buttonAddMusician
+      // 
+      this.buttonAddMusician.Id = "ca146822-b6b1-464e-ab9c-1628f12cd9aa";
+      this.buttonAddMusician.Localisation = "AddMusician";
+      this.buttonAddMusician.LocalisationContext = "TagEdit";
+      this.buttonAddMusician.Location = new System.Drawing.Point(498, 19);
+      this.buttonAddMusician.Name = "buttonAddMusician";
+      this.buttonAddMusician.Size = new System.Drawing.Size(183, 25);
+      this.buttonAddMusician.TabIndex = 2;
+      this.buttonAddMusician.Text = "Add Musician";
+      this.buttonAddMusician.UseVisualStyleBackColor = true;
+      this.buttonAddMusician.Click += new System.EventHandler(this.buttonAddMusician_Click);
+      // 
+      // dataGridViewMusician
+      // 
+      this.dataGridViewMusician.AllowUserToAddRows = false;
+      this.dataGridViewMusician.AllowUserToDeleteRows = false;
+      this.dataGridViewMusician.AllowUserToResizeColumns = false;
+      this.dataGridViewMusician.AllowUserToResizeRows = false;
+      this.dataGridViewMusician.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.dataGridViewMusician.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewMusician.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn6});
+      this.dataGridViewMusician.Location = new System.Drawing.Point(187, 91);
+      this.dataGridViewMusician.Name = "dataGridViewMusician";
+      this.dataGridViewMusician.ReadOnly = true;
+      this.dataGridViewMusician.RowHeadersVisible = false;
+      this.dataGridViewMusician.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewMusician.Size = new System.Drawing.Size(470, 151);
+      this.dataGridViewMusician.TabIndex = 15;
+      // 
+      // dataGridViewTextBoxColumn4
+      // 
+      this.dataGridViewTextBoxColumn4.FillWeight = 150F;
+      this.dataGridViewTextBoxColumn4.Frozen = true;
+      this.dataGridViewTextBoxColumn4.HeaderText = "Instrument";
+      this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+      this.dataGridViewTextBoxColumn4.ReadOnly = true;
+      this.dataGridViewTextBoxColumn4.Width = 235;
+      // 
+      // dataGridViewTextBoxColumn6
+      // 
+      this.dataGridViewTextBoxColumn6.Frozen = true;
+      this.dataGridViewTextBoxColumn6.HeaderText = "Name";
+      this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+      this.dataGridViewTextBoxColumn6.ReadOnly = true;
+      this.dataGridViewTextBoxColumn6.Width = 235;
+      // 
+      // tbMusicianName
+      // 
+      this.tbMusicianName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbMusicianName.Location = new System.Drawing.Point(187, 51);
+      this.tbMusicianName.Name = "tbMusicianName";
+      this.tbMusicianName.Size = new System.Drawing.Size(304, 22);
+      this.tbMusicianName.TabIndex = 1;
+      // 
+      // lblMusicianName
+      // 
+      this.lblMusicianName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblMusicianName.Localisation = "MusicianName";
+      this.lblMusicianName.LocalisationContext = "TagEdit";
+      this.lblMusicianName.Location = new System.Drawing.Point(8, 54);
+      this.lblMusicianName.Name = "lblMusicianName";
+      this.lblMusicianName.Size = new System.Drawing.Size(104, 16);
+      this.lblMusicianName.TabIndex = 14;
+      this.lblMusicianName.Text = "Musician Name:";
+      // 
+      // tbMusicianInstrument
+      // 
+      this.tbMusicianInstrument.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbMusicianInstrument.Location = new System.Drawing.Point(187, 21);
+      this.tbMusicianInstrument.Name = "tbMusicianInstrument";
+      this.tbMusicianInstrument.Size = new System.Drawing.Size(304, 22);
+      this.tbMusicianInstrument.TabIndex = 0;
+      // 
+      // lblMusicianInstrument
+      // 
+      this.lblMusicianInstrument.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblMusicianInstrument.Localisation = "MusicianInstrument";
+      this.lblMusicianInstrument.LocalisationContext = "TagEdit";
+      this.lblMusicianInstrument.Location = new System.Drawing.Point(8, 24);
+      this.lblMusicianInstrument.Name = "lblMusicianInstrument";
+      this.lblMusicianInstrument.Size = new System.Drawing.Size(127, 16);
+      this.lblMusicianInstrument.TabIndex = 12;
+      this.lblMusicianInstrument.Text = "Musician Instrument:";
+      // 
+      // groupBoxInvolvedPeople
+      // 
+      this.groupBoxInvolvedPeople.Controls.Add(this.ckInvolvedPerson);
+      this.groupBoxInvolvedPeople.Controls.Add(this.buttonRemovePerson);
+      this.groupBoxInvolvedPeople.Controls.Add(this.buttonAddInvolvedPerson);
+      this.groupBoxInvolvedPeople.Controls.Add(this.dataGridViewInvolvedPeople);
+      this.groupBoxInvolvedPeople.Controls.Add(this.tbInvolvedPersonName);
+      this.groupBoxInvolvedPeople.Controls.Add(this.lblInvolvedPersonName);
+      this.groupBoxInvolvedPeople.Controls.Add(this.tbInvolvedPersonFunction);
+      this.groupBoxInvolvedPeople.Controls.Add(this.lblInvolvedPersonFunction);
+      this.groupBoxInvolvedPeople.Id = "1472e7ab-0bfc-4fa5-a5e6-8d26669e0054";
+      this.groupBoxInvolvedPeople.Localisation = "ttGroupBox1";
+      this.groupBoxInvolvedPeople.LocalisationContext = "TagEdit";
+      this.groupBoxInvolvedPeople.Location = new System.Drawing.Point(10, 0);
+      this.groupBoxInvolvedPeople.Name = "groupBoxInvolvedPeople";
+      this.groupBoxInvolvedPeople.Size = new System.Drawing.Size(693, 264);
+      this.groupBoxInvolvedPeople.TabIndex = 0;
+      // 
+      // ckInvolvedPerson
+      // 
+      this.ckInvolvedPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInvolvedPerson.Id = "9c636a43-e19a-4990-97c0-2675d292862b";
+      this.ckInvolvedPerson.Localisation = "ckInvolvedPerson";
+      this.ckInvolvedPerson.LocalisationContext = "TagEdit";
+      this.ckInvolvedPerson.Location = new System.Drawing.Point(666, 98);
+      this.ckInvolvedPerson.Name = "ckInvolvedPerson";
+      this.ckInvolvedPerson.Size = new System.Drawing.Size(17, 29);
+      this.ckInvolvedPerson.TabIndex = 24;
+      this.ckInvolvedPerson.TabStop = false;
+      // 
+      // buttonRemovePerson
+      // 
+      this.buttonRemovePerson.Id = "a0714128-d363-4f01-a16e-62487e87da45";
+      this.buttonRemovePerson.Localisation = "RemovePerson";
+      this.buttonRemovePerson.LocalisationContext = "TagEdit";
+      this.buttonRemovePerson.Location = new System.Drawing.Point(497, 50);
+      this.buttonRemovePerson.Name = "buttonRemovePerson";
+      this.buttonRemovePerson.Size = new System.Drawing.Size(184, 25);
+      this.buttonRemovePerson.TabIndex = 3;
+      this.buttonRemovePerson.Text = "Remove Person";
+      this.buttonRemovePerson.UseVisualStyleBackColor = true;
+      this.buttonRemovePerson.Click += new System.EventHandler(this.buttonRemovePerson_Click);
+      // 
+      // buttonAddInvolvedPerson
+      // 
+      this.buttonAddInvolvedPerson.Id = "18ab4fbb-c843-4599-b125-9e9183997d06";
+      this.buttonAddInvolvedPerson.Localisation = "AddPerson";
+      this.buttonAddInvolvedPerson.LocalisationContext = "TagEdit";
+      this.buttonAddInvolvedPerson.Location = new System.Drawing.Point(498, 19);
+      this.buttonAddInvolvedPerson.Name = "buttonAddInvolvedPerson";
+      this.buttonAddInvolvedPerson.Size = new System.Drawing.Size(183, 25);
+      this.buttonAddInvolvedPerson.TabIndex = 2;
+      this.buttonAddInvolvedPerson.Text = "Add Person";
+      this.buttonAddInvolvedPerson.UseVisualStyleBackColor = true;
+      this.buttonAddInvolvedPerson.Click += new System.EventHandler(this.buttonAddInvolvedPerson_Click);
+      // 
+      // dataGridViewInvolvedPeople
+      // 
+      this.dataGridViewInvolvedPeople.AllowUserToAddRows = false;
+      this.dataGridViewInvolvedPeople.AllowUserToDeleteRows = false;
+      this.dataGridViewInvolvedPeople.AllowUserToResizeColumns = false;
+      this.dataGridViewInvolvedPeople.AllowUserToResizeRows = false;
+      this.dataGridViewInvolvedPeople.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.dataGridViewInvolvedPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewInvolvedPeople.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn5});
+      this.dataGridViewInvolvedPeople.Location = new System.Drawing.Point(187, 91);
+      this.dataGridViewInvolvedPeople.Name = "dataGridViewInvolvedPeople";
+      this.dataGridViewInvolvedPeople.ReadOnly = true;
+      this.dataGridViewInvolvedPeople.RowHeadersVisible = false;
+      this.dataGridViewInvolvedPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewInvolvedPeople.Size = new System.Drawing.Size(470, 167);
+      this.dataGridViewInvolvedPeople.TabIndex = 15;
+      // 
+      // dataGridViewTextBoxColumn3
+      // 
+      this.dataGridViewTextBoxColumn3.FillWeight = 150F;
+      this.dataGridViewTextBoxColumn3.Frozen = true;
+      this.dataGridViewTextBoxColumn3.HeaderText = "Function";
+      this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+      this.dataGridViewTextBoxColumn3.ReadOnly = true;
+      this.dataGridViewTextBoxColumn3.Width = 235;
+      // 
+      // dataGridViewTextBoxColumn5
+      // 
+      this.dataGridViewTextBoxColumn5.Frozen = true;
+      this.dataGridViewTextBoxColumn5.HeaderText = "Name";
+      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+      this.dataGridViewTextBoxColumn5.ReadOnly = true;
+      this.dataGridViewTextBoxColumn5.Width = 235;
+      // 
+      // tbInvolvedPersonName
+      // 
+      this.tbInvolvedPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbInvolvedPersonName.Location = new System.Drawing.Point(187, 51);
+      this.tbInvolvedPersonName.Name = "tbInvolvedPersonName";
+      this.tbInvolvedPersonName.Size = new System.Drawing.Size(304, 22);
+      this.tbInvolvedPersonName.TabIndex = 1;
+      // 
+      // lblInvolvedPersonName
+      // 
+      this.lblInvolvedPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblInvolvedPersonName.Localisation = "PersonName";
+      this.lblInvolvedPersonName.LocalisationContext = "TagEdit";
+      this.lblInvolvedPersonName.Location = new System.Drawing.Point(8, 54);
+      this.lblInvolvedPersonName.Name = "lblInvolvedPersonName";
+      this.lblInvolvedPersonName.Size = new System.Drawing.Size(148, 16);
+      this.lblInvolvedPersonName.TabIndex = 14;
+      this.lblInvolvedPersonName.Text = "Involved Person Name:";
+      // 
+      // tbInvolvedPersonFunction
+      // 
+      this.tbInvolvedPersonFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbInvolvedPersonFunction.Location = new System.Drawing.Point(187, 21);
+      this.tbInvolvedPersonFunction.Name = "tbInvolvedPersonFunction";
+      this.tbInvolvedPersonFunction.Size = new System.Drawing.Size(304, 22);
+      this.tbInvolvedPersonFunction.TabIndex = 0;
+      // 
+      // lblInvolvedPersonFunction
+      // 
+      this.lblInvolvedPersonFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblInvolvedPersonFunction.Localisation = "PersonFunction";
+      this.lblInvolvedPersonFunction.LocalisationContext = "TagEdit";
+      this.lblInvolvedPersonFunction.Location = new System.Drawing.Point(8, 24);
+      this.lblInvolvedPersonFunction.Name = "lblInvolvedPersonFunction";
+      this.lblInvolvedPersonFunction.Size = new System.Drawing.Size(161, 16);
+      this.lblInvolvedPersonFunction.TabIndex = 12;
+      this.lblInvolvedPersonFunction.Text = "Involved Person Function:";
+      // 
       // tabPageWebInformation
       // 
       this.tabPageWebInformation.ActiveControl = null;
@@ -2842,7 +2842,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 104);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 108);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2852,7 +2852,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 73);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 77);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -3276,14 +3276,6 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
-      this.tabPageInvolvedPeople.ResumeLayout(false);
-      this.tabPageInvolvedPeoplePanel.ResumeLayout(false);
-      this.groupBoxMusician.ResumeLayout(false);
-      this.groupBoxMusician.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMusician)).EndInit();
-      this.groupBoxInvolvedPeople.ResumeLayout(false);
-      this.groupBoxInvolvedPeople.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.tabPageMainPanel.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
@@ -3313,6 +3305,14 @@
       this.tabPageOriginalPanel.ResumeLayout(false);
       this.groupBoxOriginalInformation.ResumeLayout(false);
       this.groupBoxOriginalInformation.PerformLayout();
+      this.tabPageInvolvedPeople.ResumeLayout(false);
+      this.tabPageInvolvedPeoplePanel.ResumeLayout(false);
+      this.groupBoxMusician.ResumeLayout(false);
+      this.groupBoxMusician.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMusician)).EndInit();
+      this.groupBoxInvolvedPeople.ResumeLayout(false);
+      this.groupBoxInvolvedPeople.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvolvedPeople)).EndInit();
       this.tabPageWebInformation.ResumeLayout(false);
       this.tabPageWebInformationPanel.ResumeLayout(false);
       this.groupBoxWebInformation.ResumeLayout(false);

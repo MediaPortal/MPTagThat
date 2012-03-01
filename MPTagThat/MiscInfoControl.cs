@@ -314,7 +314,7 @@ namespace MPTagThat
           {
             try
             {
-              FileSystem.DeleteFile(item.Text, dialogOption, RecycleOption.SendToRecycleBin,
+              FileSystem.DeleteFile((string)item.Tag, dialogOption, RecycleOption.SendToRecycleBin,
                                     UICancelOption.ThrowException);
               listViewNonMusicFiles.Items[item.Index].Remove();
             }
@@ -322,7 +322,7 @@ namespace MPTagThat
             {}
             catch (Exception ex)
             {
-              log.Error("Error deleting file: {0} Exception: {1}", item.Text, ex.Message);
+              log.Error("Error deleting file: {0} Exception: {1}", (string)item.Tag, ex.Message);
             }
           }
         }

@@ -61,8 +61,11 @@ namespace MPTagThat.Core.Amazon
 
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
+
+      // Retrieve default Namespace of the document and add it to the NameSpacemanager
+      string defaultNameSpace = xml.DocumentElement.GetNamespaceOfPrefix("");
       XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2009-03-31");
+      nsMgr.AddNamespace("ns", defaultNameSpace);
 
       XmlNodeList nodes = xml.SelectNodes("/ns:ItemLookupResponse/ns:Items/ns:Item", nsMgr);
       if (nodes.Count > 0)
@@ -95,8 +98,11 @@ namespace MPTagThat.Core.Amazon
 
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
+
+      // Retrieve default Namespace of the document and add it to the NameSpacemanager
+      string defaultNameSpace = xml.DocumentElement.GetNamespaceOfPrefix("");
       XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("ns", "http://webservices.amazon.com/AWSECommerceService/2005-10-05");
+      nsMgr.AddNamespace("ns", defaultNameSpace);
 
       XmlNodeList nodes = xml.SelectNodes("/ns:ItemSearchResponse/ns:Items/ns:Item", nsMgr);
       if (nodes.Count > 0)
