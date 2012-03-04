@@ -87,6 +87,7 @@ namespace MPTagThat.Core
     public TrackData()
     {
       Changed = false;
+      Status = -1;
       _mp3ValError = MP3Error.NoError;
       _mp3ValErrorText = "";
       Frames = new List<Common.Frame>();
@@ -124,6 +125,17 @@ namespace MPTagThat.Core
     /// The User Defined Frames that we have read before modification
     /// </summary>
     public List<Common.Frame> SavedUserFrames { get; set; }
+
+    /// <summary>
+    /// Current Status of Track, as indicated in Column 0 of grid
+    /// -1 = Not set
+    /// 0  = Ok
+    /// 1  = Changed
+    /// 2  = Error
+    /// 3  = Broken Song
+    /// 4  = Fixed Song
+    /// </summary>
+    public int Status { get; set; }
 
     /// <summary>
     /// Has the Track been changed

@@ -1427,7 +1427,7 @@ namespace MPTagThat.TagEdit
         bool trackChanged = false;
         TrackData track = main.TracksGridView.TrackList[row.Index];
 
-        main.TracksGridView.ClearStatusColumn(row);
+        main.TracksGridView.ClearStatusColumn(row.Index);
 
         try
         {
@@ -2349,7 +2349,7 @@ namespace MPTagThat.TagEdit
         catch (Exception ex)
         {
           log.Error("Error applying changes from Tagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          main.TracksGridView.SetStatusColumnError(row);
+          main.TracksGridView.TrackList[row.Index].Status = 2;
           main.TracksGridView.AddErrorMessage(row, ex.Message);
           bErrors = true;
         }

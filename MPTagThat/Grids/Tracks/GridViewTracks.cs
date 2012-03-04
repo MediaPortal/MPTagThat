@@ -230,55 +230,11 @@ namespace MPTagThat.GridView
     /// Clears the Status column
     /// </summary>
     /// <param name="row"></param>
-    public void ClearStatusColumn(DataGridViewRow row)
+    public void ClearStatusColumn(int rowIndex)
     {
-      ((DataGridViewImageCell)row.Cells[0]).Value = new Bitmap(1, 1);
+      bindingList[rowIndex].Status = -1;
     }
 
-    /// <summary>
-    /// Indicates the Status was ok
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnOk(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Complete_OK;
-    }
-
-    /// <summary>
-    /// Indicates there was an Error
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnError(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.CriticalError;
-    }
-
-    /// <summary>
-    /// Indicates there was a Change
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnChange(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Warning;
-    }
-
-    /// <summary>
-    /// Indicates that a MP3 File has an error
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnBrokenSong(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_BrokenSong_16x;
-    }
-
-    /// <summary>
-    /// Indicates that a MP3 File was fixed
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnFixedSong(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_FixedSong_16x;
-    }
     #endregion
 
     #region Save
@@ -296,7 +252,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -318,7 +274,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -400,7 +356,7 @@ namespace MPTagThat.GridView
     {
       try
       {
-        ClearStatusColumn(tracksGrid.Rows[rowIndex]);
+        ClearStatusColumn(rowIndex);
         if (track.Changed)
         {
           log.Debug("Save: Saving track: {0}", track.FullFileName);
@@ -453,7 +409,7 @@ namespace MPTagThat.GridView
               SavePicture(track);
             }
 
-            SetStatusColumnOk(tracksGrid.Rows[rowIndex]);
+            bindingList[rowIndex].Status = 0;
             tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
 
@@ -461,14 +417,14 @@ namespace MPTagThat.GridView
           }
           else
           {
-            SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+            bindingList[rowIndex].Status = 2;
             AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
           }
         }
       }
       catch (Exception ex)
       {
-        SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+        bindingList[rowIndex].Status = 2;
         AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
         return false;
       }
@@ -535,7 +491,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -657,7 +613,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -722,7 +678,7 @@ namespace MPTagThat.GridView
       // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -755,7 +711,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -934,7 +890,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1223,7 +1179,7 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error deleting file: {0} Exception: {1}", track.FullFileName, ex.Message);
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1313,7 +1269,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -1337,7 +1293,7 @@ namespace MPTagThat.GridView
           if (track.MP3ValidationError != TrackData.MP3Error.NoError)
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            SetStatusColumnBrokenSong(row);
+            track.Status = 3;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
           }
           else
@@ -1386,13 +1342,13 @@ namespace MPTagThat.GridView
           if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
           {
             SetGridRowColors(row.Index);
-            SetStatusColumnFixedSong(row);
+            track.Status = 4;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
           }
           else
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            SetStatusColumnBrokenSong(row);
+            track.Status = 3;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
           }
         }
@@ -1469,8 +1425,6 @@ namespace MPTagThat.GridView
       // Rating cell needs special processing
       tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
              ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
-
-      SetStatusColumnChange(tracksGrid.Rows[index]);
     }
 
     /// <summary>
@@ -1520,7 +1474,7 @@ namespace MPTagThat.GridView
 
       if (error == TrackData.MP3Error.Fixed)
       {
-        SetStatusColumnOk(tracksGrid.Rows[index]);
+        bindingList[index].Status = 4;
       }
     }
 
@@ -2184,7 +2138,7 @@ namespace MPTagThat.GridView
 
         SetColorMP3Errors(row.Index, track.MP3ValidationError);
         tracksGrid.Rows[row.Index].Cells[0].ToolTipText = track.MP3ValidationErrorText;
-        SetStatusColumnBrokenSong(row);
+        track.Status = 3;
       }
     }
 
@@ -2826,8 +2780,13 @@ namespace MPTagThat.GridView
       for (int i = 0; i < tracksGrid.Rows.Count; i++)
       {
         if (tracksGrid.Rows[i].Selected)
+        {
           tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
             ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+
+          tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
+              ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+        }
         else
         {
           if (bindingList[i].Changed)
@@ -2968,9 +2927,49 @@ namespace MPTagThat.GridView
     /// <param name="e"></param>
     void tracksGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
     {
-      // Don't handle the Status column or empty folders
-      if (e.ColumnIndex == 0 || bindingList.Count == 0)
+      // Don't handle empty folders
+      if (bindingList.Count == 0)
       {
+        return;
+      }
+
+      TrackData track = bindingList[e.RowIndex];
+
+      // Handle the status column
+      if (e.ColumnIndex == 0)
+      {
+        if (track.Changed)
+        {
+          e.Value = Properties.Resources.Warning;
+          return;
+        }
+        
+        switch (track.Status)
+        {
+          case -1:
+            return;
+
+          case 0:
+            e.Value = Properties.Resources.Complete_OK;
+            break;
+
+          case 1:
+            e.Value = Properties.Resources.Warning;
+            break;
+
+          case 2:
+            e.Value = Properties.Resources.CriticalError;
+            break;
+
+          case 3:
+            e.Value = Properties.Resources.ribbon_BrokenSong_16x;
+            break;
+
+          case 4:
+            e.Value = Properties.Resources.ribbon_FixedSong_16x;
+            break;
+        }
+
         return;
       }
 
