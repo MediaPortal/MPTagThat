@@ -30,22 +30,22 @@ namespace MPTagThat.GridView
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tracksGrid = new System.Windows.Forms.DataGridView();
       this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
       this.menuSavePlaylist = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       ((System.ComponentModel.ISupportInitialize)(this.tracksGrid)).BeginInit();
       this.contextMenu.SuspendLayout();
       this.SuspendLayout();
@@ -56,8 +56,8 @@ namespace MPTagThat.GridView
       this.tracksGrid.AllowUserToDeleteRows = false;
       this.tracksGrid.AllowUserToOrderColumns = true;
       this.tracksGrid.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.tracksGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.tracksGrid.BackgroundColor = System.Drawing.Color.White;
       this.tracksGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
       this.tracksGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -68,6 +68,7 @@ namespace MPTagThat.GridView
       this.tracksGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.tracksGrid.Size = new System.Drawing.Size(569, 524);
       this.tracksGrid.TabIndex = 0;
+      this.tracksGrid.VirtualMode = true;
       this.tracksGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tracksGrid_MouseClick);
       // 
       // contextMenu
@@ -114,10 +115,30 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem3.Text = "Paste";
       this.toolStripMenuItem3.Click += new System.EventHandler(this.tracksGrid_Paste);
       // 
+      // toolStripMenuItem8
+      // 
+      this.toolStripMenuItem8.Image = global::MPTagThat.Properties.Resources.DeleteHS;
+      this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+      this.toolStripMenuItem8.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem8.Text = "Delete";
+      this.toolStripMenuItem8.Click += new System.EventHandler(this.tracksGrid_Delete);
+      // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
       this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
+      // 
+      // toolStripMenuItem9
+      // 
+      this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+      this.toolStripMenuItem9.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem9.Text = "Select All";
+      this.toolStripMenuItem9.Click += new System.EventHandler(this.tracksGrid_SelectAll);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
       // 
       // toolStripMenuItem4
       // 
@@ -163,26 +184,6 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem7.Size = new System.Drawing.Size(194, 22);
       this.toolStripMenuItem7.Text = "Create Folder Thumb";
       this.toolStripMenuItem7.Click += new System.EventHandler(this.tracksGrid_CreateFolderThumb);
-      // 
-      // toolStripMenuItem8
-      // 
-      this.toolStripMenuItem8.Image = global::MPTagThat.Properties.Resources.DeleteHS;
-      this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-      this.toolStripMenuItem8.Size = new System.Drawing.Size(194, 22);
-      this.toolStripMenuItem8.Text = "Delete";
-      this.toolStripMenuItem8.Click += new System.EventHandler(this.tracksGrid_Delete);
-      // 
-      // toolStripMenuItem9
-      // 
-      this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-      this.toolStripMenuItem9.Size = new System.Drawing.Size(194, 22);
-      this.toolStripMenuItem9.Text = "Select All";
-      this.toolStripMenuItem9.Click += new System.EventHandler(this.tracksGrid_SelectAll);
-      // 
-      // toolStripSeparator1
-      // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
       // 
       // GridViewTracks
       // 

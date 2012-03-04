@@ -85,6 +85,11 @@ namespace MPTagThat.Core
                                                 TypeConverter formattedValueTypeConverter,
                                                 DataGridViewDataErrorContexts context)
     {
+      if (value == null)
+      {
+        return starImages[0];
+      }
+
       // Check for a valid range
       if ((int)value < 0 || (int)value > 5)
         return starImages[0];
