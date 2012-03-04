@@ -1647,6 +1647,7 @@ namespace MPTagThat.GridView
               if (ApplyTagFilter(track))
               {
                 AddTrack(track);
+                tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
                 count++;
               }
             }
@@ -1679,14 +1680,7 @@ namespace MPTagThat.GridView
                         MessageBoxButtons.OK);
         log.Error("Folderscan: Running out of memory. Scanning aborted.");
       }
-      finally
-      {
-        if (bindingList.Count > 0)
-        {
-          tracksGrid.Rows.Add();
-          tracksGrid.Rows.AddCopies(0, bindingList.Count - 1);
-        }
-      }
+
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
@@ -1858,6 +1852,7 @@ namespace MPTagThat.GridView
           if (ApplyTagFilter(track))
           {
             AddTrack(track);
+            tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
           }
         }
         count++;
