@@ -1581,6 +1581,8 @@ namespace MPTagThat.GridView
       int count = 1;
       int nonMusicCount = 0;
 
+      tracksGrid.SuspendLayout();
+      tracksGrid.Hide();
       try
       {
         foreach (FileInfo fi in GetFiles(new DirectoryInfo(selectedFolder), _main.TreeView.ScanFolderRecursive))
@@ -1624,6 +1626,13 @@ namespace MPTagThat.GridView
           {
             log.Error("Caugth error processing files: {0} {1}", ex.Message, fi.FullName);
           }
+
+          if (count > 20)
+          {
+            tracksGrid.Show();
+            tracksGrid.ResumeLayout();
+          }
+
           _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
         }
       }
@@ -1633,6 +1642,11 @@ namespace MPTagThat.GridView
         MessageBox.Show(localisation.ToString("message", "OutOfMemory"), localisation.ToString("message", "Error_Title"),
                         MessageBoxButtons.OK);
         log.Error("Folderscan: Running out of memory. Scanning aborted.");
+      }
+      finally
+      {
+        tracksGrid.Show();
+        tracksGrid.ResumeLayout();
       }
 
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
