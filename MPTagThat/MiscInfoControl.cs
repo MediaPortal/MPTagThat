@@ -44,6 +44,9 @@ namespace MPTagThat
     private string _savedImageSize = "";
     private string _savedFileName = "";
 
+    private Rectangle _dragBoxFromMouseDown;
+    private Point _screenOffset;
+
     // ListView messages
     private const int LVM_FIRST = 0x1000;
     private const int LVM_GETEDITCONTROL = (LVM_FIRST + 24);
@@ -445,5 +448,47 @@ namespace MPTagThat
     }
 
     #endregion
+
+    private void listViewNonMusicFiles_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Left && listViewNonMusicFiles.SelectedItems.Count > 0)
+      {
+        // Remember the point where the mouse down occurred. The DragSize indicates
+        // the size that the mouse can move before a drag event should be started.                
+        Size dragSize = SystemInformation.DragSize;
+
+        // Create a rectangle using the DragSize, with the mouse position being
+        // at the center of the rectangle.
+        _dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)),
+                                              dragSize);
+      }
+      else
+        _dragBoxFromMouseDown = Rectangle.Empty;
+    }
+
+    private void listViewNonMusicFiles_MouseMove(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Left)
+      {
+        // If the mouse moves outside the rectangle, start the drag.
+        if (_dragBoxFromMouseDown != Rectangle.Empty &&
+            !_dragBoxFromMouseDown.Contains(e.X, e.Y))
+        {
+          // The screenOffset is used to account for any desktop bands 
+          // that may be at the top or left side of the screen when 
+          // determining when to cancel the drag drop operation.
+          _screenOffset = SystemInformation.WorkingArea.Location;
+
+          string fileName = (string)listViewNonMusicFiles.SelectedItems[0].Tag;
+          listViewNonMusicFiles.DoDragDrop(fileName, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+      }
+    }
+
+    private void listViewNonMusicFiles_MouseUp(object sender, MouseEventArgs e)
+    {
+      // Reset the drag rectangle when the mouse button is raised.
+      _dragBoxFromMouseDown = Rectangle.Empty;
+    }
   }
 }

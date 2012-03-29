@@ -3848,26 +3848,41 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void galleryPicture_DragDrop(object sender, DragEventArgs e)
     {
-      // Return if no rows are selected
-      if (TracksGridView.View.SelectedRows.Count == 0)
-      {
-        return;
-      }
+      // If no rows are selected, select them all
+      gridViewControl.CheckSelections(true);
 
       if (e.Data == null)
       {
         return;
       }
 
-      object fileName = e.Data.GetData("FileName");
-      if (fileName == null)
+      object formatArray = e.Data.GetFormats();
+      List<string> formats = new List<string>(formatArray as string[]);
+      string dataObject = "FileName";
+      if (formats.Contains("Text"))
+      {
+        dataObject = "Text";
+      }
+      object fileNameObj = e.Data.GetData(dataObject);
+      if (fileNameObj == null)
       {
         return;
       }
 
-      if (Util.IsPicture((fileName as string[])[0]))
+      string fileName = "";
+      if (dataObject == "FileName")
       {
-        TracksGridView.CoverArtDrop((fileName as string[])[0]);   
+        // When dragging from explorer, we get a string array
+        fileName = (fileNameObj as string[])[0];
+      }
+      else
+      {
+        fileName = (string) fileNameObj;
+      }
+
+      if (Util.IsPicture(fileName))
+      {
+        TracksGridView.CoverArtDrop(fileName);   
       }
     }
 
