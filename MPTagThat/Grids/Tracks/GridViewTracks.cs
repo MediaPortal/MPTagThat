@@ -956,6 +956,43 @@ namespace MPTagThat.GridView
 
     #endregion
 
+    #region Cover Art Drop
+
+    /// <summary>
+    /// A Picture file has been dropped on the Ribbon Gallery. 
+    /// Set the picture for all selected rows
+    /// </summary>
+    /// <param name="fileName"></param>
+    public void CoverArtDrop(string fileName)
+    {
+      Core.Common.Picture pic = new Core.Common.Picture(fileName);
+      if (pic.Data == null)
+      {
+        return;
+      }
+
+      pic.MimeType = "image/jpg";
+      pic.Description = "Front Cover";
+      pic.Type = PictureType.FrontCover;
+
+
+      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+      {
+        ClearStatusColumn(row.Index);
+
+        TrackData track = bindingList[row.Index];
+        track.Pictures.Clear();
+        track.Pictures.Add(pic);
+        SetBackgroundColorChanged(row.Index);
+        track.Changed = true;
+        _itemsChanged = true;
+      }
+
+      _main.SetGalleryItem();
+    }
+
+    #endregion
+
     #region Lyrics
 
     public void GetLyrics()

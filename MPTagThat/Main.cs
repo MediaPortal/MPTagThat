@@ -51,6 +51,7 @@ using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 using Action = MPTagThat.Core.Action;
 using ComboBox = Elegant.Ui.ComboBox;
+using Picture = MPTagThat.Core.Common.Picture;
 using ScrollEventArgs = System.Windows.Forms.ScrollEventArgs;
 
 #endregion
@@ -3837,6 +3838,36 @@ namespace MPTagThat
         {
           picControl.Close();
         }
+      }
+    }
+
+    /// <summary>
+    /// A file is dropped on the gallery. If it is a valid picture, update all the selected files
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void galleryPicture_DragDrop(object sender, DragEventArgs e)
+    {
+      // Return if no rows are selected
+      if (TracksGridView.View.SelectedRows.Count == 0)
+      {
+        return;
+      }
+
+      if (e.Data == null)
+      {
+        return;
+      }
+
+      object fileName = e.Data.GetData("FileName");
+      if (fileName == null)
+      {
+        return;
+      }
+
+      if (Util.IsPicture((fileName as string[])[0]))
+      {
+        TracksGridView.CoverArtDrop((fileName as string[])[0]);   
       }
     }
 
