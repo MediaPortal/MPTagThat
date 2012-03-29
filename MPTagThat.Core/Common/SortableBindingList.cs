@@ -129,12 +129,11 @@ namespace MPTagThat.Core
       get { return _isSorted; }
     }
 
-    protected override void ApplySortCore(PropertyDescriptor property, ListSortDirection direction)
+    public void ApplySortCore(PropertyDescriptor property, ListSortDirection direction)
     {
       _sortProperty = property;
       _sortDirection = direction;
 
-      // Get list to sort
       List<T> items = Items as List<T>;
 
       // Apply and set the sort, if items to sort

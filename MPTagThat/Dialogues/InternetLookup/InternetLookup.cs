@@ -329,7 +329,6 @@ namespace MPTagThat.InternetLookup
           main.TracksGridView.SetBackgroundColorChanged(index);
           track.Changed = true;
           main.TracksGridView.Changed = true;
-          main.TracksGridView.SetStatusColumnChange(main.TracksGridView.View.Rows[index]);
         }
       }
       dlgAlbumDetails.Dispose();

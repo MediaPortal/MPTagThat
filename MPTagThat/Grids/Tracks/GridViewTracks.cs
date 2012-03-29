@@ -56,6 +56,8 @@ namespace MPTagThat.GridView
   {
     #region Variables
 
+    private const int RATINGCELLNUMBER = 11;
+
     private readonly Cursor _numberingCursor = Util.CreateCursorFromResource("CursorNumbering", 0, 0);
     private readonly GridViewColumns gridColumns;
 
@@ -73,14 +75,15 @@ namespace MPTagThat.GridView
 
     private FindResult _findResult;
     private bool _itemsChanged;
-    private List<string> _lyrics = new List<string>();
     private Main _main;
     private List<FileInfo> _nonMusicFiles;
     private bool _progressCancelled;
     private Point _screenOffset;
-    private List<string> _stdOutList = new List<string>();
     private bool _waitCursorActive;
     private SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
+
+    // Get Properties to be able to sort on column heading 
+    private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData()); 
 
     #region Nested type: ThreadSafeAddErrorDelegate
 
@@ -172,7 +175,6 @@ namespace MPTagThat.GridView
 
       // Setup Dataview Grid
       tracksGrid.AutoGenerateColumns = false;
-      tracksGrid.DataSource = bindingList;
       tracksGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable; // Handle Copy 
 
       // Setup Event Handler
@@ -183,13 +185,16 @@ namespace MPTagThat.GridView
       tracksGrid.CellValueChanged += tracksGrid_CellValueChanged;
       tracksGrid.CellPainting += tracksGrid_CellPainting;
       tracksGrid.EditingControlShowing += tracksGrid_EditingControlShowing;
-      tracksGrid.Sorted += tracksGrid_Sorted;
       tracksGrid.ColumnHeaderMouseClick += tracksGrid_ColumnHeaderMouseClick;
       tracksGrid.MouseDown += tracksGrid_MouseDown;
       tracksGrid.MouseUp += tracksGrid_MouseUp;
       tracksGrid.MouseMove += tracksGrid_MouseMove;
       tracksGrid.QueryContinueDrag += tracksGrid_QueryContinueDrag;
       tracksGrid.MouseEnter += tracksGrid_MouseEnter;
+
+      // establish Event Handlers for Virtual Mode hangling of the grid
+      tracksGrid.CellValueNeeded += tracksGrid_CellValueNeeded;
+      tracksGrid.CellValuePushed += tracksGrid_CellValuePushed;
 
       // The Color for the Image Cell for the Rating is not handled correctly. so we need to handle it via an event
       tracksGrid.SelectionChanged += tracksGrid_SelectionChanged;
@@ -225,55 +230,11 @@ namespace MPTagThat.GridView
     /// Clears the Status column
     /// </summary>
     /// <param name="row"></param>
-    public void ClearStatusColumn(DataGridViewRow row)
+    public void ClearStatusColumn(int rowIndex)
     {
-      ((DataGridViewImageCell)row.Cells[0]).Value = new Bitmap(1, 1);
+      bindingList[rowIndex].Status = -1;
     }
 
-    /// <summary>
-    /// Indicates the Status was ok
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnOk(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Complete_OK;
-    }
-
-    /// <summary>
-    /// Indicates there was an Error
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnError(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.CriticalError;
-    }
-
-    /// <summary>
-    /// Indicates there was a Change
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnChange(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.Warning;
-    }
-
-    /// <summary>
-    /// Indicates that a MP3 File has an error
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnBrokenSong(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_BrokenSong_16x;
-    }
-
-    /// <summary>
-    /// Indicates that a MP3 File was fixed
-    /// </summary>
-    /// <param name="row"></param>
-    public void SetStatusColumnFixedSong(DataGridViewRow row)
-    {
-      ((DataGridViewImageCell)row.Cells[0]).Value = Properties.Resources.ribbon_FixedSong_16x;
-    }
     #endregion
 
     #region Save
@@ -291,7 +252,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -313,7 +274,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -395,7 +356,7 @@ namespace MPTagThat.GridView
     {
       try
       {
-        ClearStatusColumn(tracksGrid.Rows[rowIndex]);
+        ClearStatusColumn(rowIndex);
         if (track.Changed)
         {
           log.Debug("Save: Saving track: {0}", track.FullFileName);
@@ -448,7 +409,7 @@ namespace MPTagThat.GridView
               SavePicture(track);
             }
 
-            SetStatusColumnOk(tracksGrid.Rows[rowIndex]);
+            bindingList[rowIndex].Status = 0;
             tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
 
@@ -456,14 +417,14 @@ namespace MPTagThat.GridView
           }
           else
           {
-            SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+            bindingList[rowIndex].Status = 2;
             AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
           }
         }
       }
       catch (Exception ex)
       {
-        SetStatusColumnError(tracksGrid.Rows[rowIndex]);
+        bindingList[rowIndex].Status = 2;
         AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
         return false;
       }
@@ -530,7 +491,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -652,7 +613,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -717,7 +678,7 @@ namespace MPTagThat.GridView
       // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -750,7 +711,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -929,7 +890,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1218,7 +1179,7 @@ namespace MPTagThat.GridView
         catch (Exception ex)
         {
           log.Error("Error deleting file: {0} Exception: {1}", track.FullFileName, ex.Message);
-          SetStatusColumnError(row);
+          bindingList[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1308,7 +1269,7 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        ClearStatusColumn(row);
+        ClearStatusColumn(row.Index);
 
         if (!row.Selected)
         {
@@ -1332,7 +1293,7 @@ namespace MPTagThat.GridView
           if (track.MP3ValidationError != TrackData.MP3Error.NoError)
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            SetStatusColumnBrokenSong(row);
+            track.Status = 3;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
           }
           else
@@ -1381,13 +1342,13 @@ namespace MPTagThat.GridView
           if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
           {
             SetGridRowColors(row.Index);
-            SetStatusColumnFixedSong(row);
+            track.Status = 4;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
           }
           else
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            SetStatusColumnBrokenSong(row);
+            track.Status = 3;
             tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
           }
         }
@@ -1461,7 +1422,9 @@ namespace MPTagThat.GridView
       tracksGrid.Rows[index].DefaultCellStyle.ForeColor =
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
 
-      SetStatusColumnChange(tracksGrid.Rows[index]);
+      // Rating cell needs special processing
+      tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+             ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
     }
 
     /// <summary>
@@ -1474,11 +1437,17 @@ namespace MPTagThat.GridView
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+        // Rating cell needs special processing
+        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+          ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
       }
       else
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+        // Rating cell needs special processing
+        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+         ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
       }
     }
 
@@ -1505,7 +1474,7 @@ namespace MPTagThat.GridView
 
       if (error == TrackData.MP3Error.Fixed)
       {
-        SetStatusColumnOk(tracksGrid.Rows[index]);
+        bindingList[index].Status = 4;
       }
     }
 
@@ -1584,8 +1553,8 @@ namespace MPTagThat.GridView
     public void FolderScan()
     {
       log.Trace(">>>");
+      tracksGrid.Rows.Clear();
       bindingList = new SortableBindingList<TrackData>();
-      tracksGrid.DataSource = bindingList;
       _nonMusicFiles = new List<FileInfo>();
       _main.MiscInfoPanel.ClearNonMusicFiles();
       _main.MiscInfoPanel.ActivateNonMusicTab();
@@ -1612,7 +1581,6 @@ namespace MPTagThat.GridView
       int count = 1;
       int nonMusicCount = 0;
 
-      // For Performance Reason we hide the Grid while filling the data
       tracksGrid.SuspendLayout();
       tracksGrid.Hide();
       try
@@ -1635,6 +1603,7 @@ namespace MPTagThat.GridView
               if (ApplyTagFilter(track))
               {
                 AddTrack(track);
+                tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
                 count++;
               }
             }
@@ -1657,11 +1626,13 @@ namespace MPTagThat.GridView
           {
             log.Error("Caugth error processing files: {0} {1}", ex.Message, fi.FullName);
           }
+
           if (count > 20)
           {
             tracksGrid.Show();
             tracksGrid.ResumeLayout();
           }
+
           _main.ToolStripStatusScan.Text = string.Format(localisation.ToString("main", "toolStripLabelScan"), count);
         }
       }
@@ -1677,6 +1648,7 @@ namespace MPTagThat.GridView
         tracksGrid.Show();
         tracksGrid.ResumeLayout();
       }
+
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
@@ -1702,7 +1674,7 @@ namespace MPTagThat.GridView
         {
           _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
-          tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+          tracksGrid.Rows[0].Cells[RATINGCELLNUMBER].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
       catch (ArgumentOutOfRangeException) { }
@@ -1820,8 +1792,8 @@ namespace MPTagThat.GridView
     public void AddDatabaseSongsToGrid(List<string> songs)
     {
       // Clear the list and free up resources
+      tracksGrid.Rows.Clear();
       bindingList = new SortableBindingList<TrackData>();
-      tracksGrid.DataSource = bindingList;
       GC.Collect();
 
       SetProgressBar(songs.Count);
@@ -1848,6 +1820,7 @@ namespace MPTagThat.GridView
           if (ApplyTagFilter(track))
           {
             AddTrack(track);
+            tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
           }
         }
         count++;
@@ -1871,7 +1844,7 @@ namespace MPTagThat.GridView
         {
           _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
-          tracksGrid.Rows[0].Cells[10].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+          tracksGrid.Rows[0].Cells[RATINGCELLNUMBER].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
       catch (ArgumentOutOfRangeException) { }
@@ -2179,7 +2152,7 @@ namespace MPTagThat.GridView
 
         SetColorMP3Errors(row.Index, track.MP3ValidationError);
         tracksGrid.Rows[row.Index].Cells[0].ToolTipText = track.MP3ValidationErrorText;
-        SetStatusColumnBrokenSong(row);
+        track.Status = 3;
       }
     }
 
@@ -2603,11 +2576,72 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Clicking on the Column Header sorts by this column
+    ///   Handle Right Mouse Click to show Column Config Dialogue
     /// </summary>
     /// <param name = "sender"></param>
     /// <param name = "e"></param>
-    private void tracksGrid_Sorted(object sender, EventArgs e)
+    private void tracksGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+    {
+      // On right click on Header show config dialogue
+      if (e.Button == MouseButtons.Right)
+      {
+        ColumnSelect dialog = new ColumnSelect(this);
+        dialog.ShowDialog();
+        return;
+      }
+
+      if (e.ColumnIndex == 0) // Don't Sort the Status Column
+      {
+        return;
+      }
+
+      // We clicked on the column, so let's sort it
+      DataGridViewColumn newColumn = tracksGrid.Columns[e.ColumnIndex];
+      ListSortDirection direction;
+
+      // We store the Sortoder in the Columns Tag
+      object currentSortOrder = newColumn.Tag;
+      if (currentSortOrder != null)
+      {
+        // Sort the same column again, reversing the SortOrder.
+        if ((int)currentSortOrder == 0)
+        {
+          direction = ListSortDirection.Descending;
+        }
+        else
+        {
+          direction = ListSortDirection.Ascending;
+        }
+      }
+      else
+      {
+        direction = ListSortDirection.Ascending;
+        // Clear the Glyph for all 
+        foreach (DataGridViewColumn col in tracksGrid.Columns)
+        {
+          col.Tag = null;
+          col.HeaderCell.SortGlyphDirection = SortOrder.None;
+        }
+      }
+
+      // Sort the selected column.
+
+      PropertyDescriptor prop = _propColl.Find(newColumn.Name, false);
+      bindingList.ApplySortCore(prop, direction);
+
+      newColumn.HeaderCell.SortGlyphDirection =
+          direction == ListSortDirection.Ascending ?
+          SortOrder.Ascending : SortOrder.Descending;
+      newColumn.Tag = (int)direction;
+
+      tracksGrid_Sorted();
+      tracksGrid.Refresh();
+    }
+
+    /// <summary>
+    ///   THe Grid has been sorted. We need to change the Background Color of the changed Rows
+    /// </summary>
+    private void tracksGrid_Sorted()
     {
       int i = 0;
       // Set the Color for changed rows again
@@ -2617,22 +2651,11 @@ namespace MPTagThat.GridView
         {
           SetBackgroundColorChanged(i);
         }
+        else
+        {
+          SetGridRowColors(i);
+        }
         i++;
-      }
-    }
-
-    /// <summary>
-    ///   Handle Right Mouse Click to show Column Config Dialogue
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void tracksGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-    {
-      // only hndle right click on Header to show config dialogue
-      if (e.Button == MouseButtons.Right)
-      {
-        ColumnSelect dialog = new ColumnSelect(this);
-        dialog.ShowDialog();
       }
     }
 
@@ -2771,22 +2794,27 @@ namespace MPTagThat.GridView
       for (int i = 0; i < tracksGrid.Rows.Count; i++)
       {
         if (tracksGrid.Rows[i].Selected)
-          tracksGrid.Rows[i].Cells[11].Style.BackColor =
+        {
+          tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
             ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+
+          tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
+              ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+        }
         else
         {
           if (bindingList[i].Changed)
           {
-            tracksGrid.Rows[i].Cells[11].Style.BackColor =
+            tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
               ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
           }
           else
           {
             if (i % 2 == 0)
-              tracksGrid.Rows[i].Cells[11].Style.BackColor =
+              tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
                 ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
             else
-              tracksGrid.Rows[i].Cells[11].Style.BackColor =
+              tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
                 ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
           }
         }
@@ -2902,6 +2930,93 @@ namespace MPTagThat.GridView
         _main.Cursor = Cursors.WaitCursor;
       }
     }
+
+    #region Virtual Mode Handling
+
+    /// <summary>
+    /// This method is invoked, whenever the Grid decides that it needs a cell value.
+    /// We get the required row from from the Sortablebindinglist and retrieve the cell value using reflection
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void tracksGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+    {
+      // Don't handle empty folders
+      if (bindingList.Count == 0)
+      {
+        return;
+      }
+
+      TrackData track = bindingList[e.RowIndex];
+
+      // Handle the status column
+      if (e.ColumnIndex == 0)
+      {
+        if (track.Changed)
+        {
+          e.Value = Properties.Resources.Warning;
+          return;
+        }
+        
+        switch (track.Status)
+        {
+          case -1:
+            return;
+
+          case 0:
+            e.Value = Properties.Resources.Complete_OK;
+            break;
+
+          case 1:
+            e.Value = Properties.Resources.Warning;
+            break;
+
+          case 2:
+            e.Value = Properties.Resources.CriticalError;
+            break;
+
+          case 3:
+            e.Value = Properties.Resources.ribbon_BrokenSong_16x;
+            break;
+
+          case 4:
+            e.Value = Properties.Resources.ribbon_FixedSong_16x;
+            break;
+        }
+
+        return;
+      }
+
+      string colName = tracksGrid.Columns[e.ColumnIndex].Name;
+      if (colName == "dummy")
+      {
+        return;
+      }
+
+      // Get the row from the bindinglist and set the required cell
+      e.Value = bindingList[e.RowIndex].GetType().InvokeMember(colName, BindingFlags.GetField | BindingFlags.GetProperty, null, bindingList[e.RowIndex],
+                                                 new object[] { });
+    }
+
+    /// <summary>
+    /// A cell value has changed. Push it back into the Sortablebindinglist
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void tracksGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+    {
+      // Don't handle the Status column
+      if (e.ColumnIndex == 0)
+      {
+        return;
+      }
+
+      bindingList[e.RowIndex].GetType().InvokeMember(tracksGrid.Columns[e.ColumnIndex].Name,
+                                      BindingFlags.SetProperty | BindingFlags.SetField, null, bindingList[e.RowIndex],
+                                      new object[] { e.Value });
+    }
+
+    #endregion
 
     #region Drag & Drop
 
