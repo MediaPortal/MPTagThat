@@ -1475,16 +1475,32 @@ namespace MPTagThat.GridView
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         // Rating cell needs special processing
-        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-          ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+        if (tracksGrid.Rows[index].Selected)
+        {
+          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+               ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+        }
+        else
+        {
+          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+            ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+        }
       }
       else
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
         // Rating cell needs special processing
-        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-         ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+        if (tracksGrid.Rows[index].Selected)
+        {
+          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+               ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+        }
+        else
+        {
+          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+            ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+        }
       }
     }
 
