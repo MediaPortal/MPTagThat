@@ -1460,8 +1460,16 @@ namespace MPTagThat.GridView
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
 
       // Rating cell needs special processing
-      tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-             ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
+      if (tracksGrid.Rows[index].Selected)
+      {
+        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+             ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+      }
+      else
+      {
+        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
+          ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
+      }
     }
 
     /// <summary>
