@@ -711,9 +711,9 @@
     <String id="CustomPath">Pfad und Dateiname</String>
     <String id="Format">Format:</String>
     <String id="TargetFolder">Zielverzeichnis:</String>
-    <String id="RipOptions">Riping Optionen</String>
-    <String id="EjectCD">CD nach ripen auswerfen</String>
-    <String id="ActivateTargetFolder">Zielverzeichnis nach ripen aktivieren</String>
+    <String id="RipOptions">Ripping Optionen</String>
+    <String id="EjectCD">CD nach rippen auswerfen</String>
+    <String id="ActivateTargetFolder">Zielverzeichnis nach rippen aktivieren</String>
     <String id="GroupBoxEncoding">Enkodier Formate</String>
     <String id="EncodingFormat">Wählen Sie ein Enkodier Format aus:</String>
     <String id="TabRippingMP3">MP3</String>
