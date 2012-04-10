@@ -26,11 +26,13 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Elegant.Ui;
+using FreeImageAPI;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
@@ -45,6 +47,7 @@ using File = TagLib.File;
 using MessageBox = System.Windows.Forms.MessageBox;
 using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
+using Picture = MPTagThat.Core.Common.Picture;
 using Tag = TagLib.Id3v1.Tag;
 using TextBox = System.Windows.Forms.TextBox;
 
@@ -965,9 +968,19 @@ namespace MPTagThat.GridView
     /// <param name="fileName"></param>
     public void CoverArtDrop(string fileName)
     {
-      Core.Common.Picture pic = new Core.Common.Picture(fileName);
-      if (pic.Data == null)
+      SetWaitCursor();
+      Picture pic = null;
+      if (fileName.ToLower().StartsWith("http"))
       {
+        pic = GetCoverArtFromUrl(fileName);
+      }
+      else
+      {
+        pic = new Picture(fileName);
+      }
+      if (pic == null || pic.Data == null)
+      {
+        ResetWaitCursor();
         return;
       }
 
@@ -989,6 +1002,61 @@ namespace MPTagThat.GridView
       }
 
       _main.SetGalleryItem();
+      ResetWaitCursor();
+    }
+
+    /// <summary>
+    /// Get Cover Art from a given Url
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private Picture GetCoverArtFromUrl(string url)
+    {
+      Picture pic = null;
+      try
+      {
+        // When dragging from Google images, we have a imgurl. extract the right url.
+        int imgurlIndex = url.IndexOf("imgurl=");
+        if (imgurlIndex > -1)
+        {
+          url = url.Substring(imgurlIndex + 7);
+          url = url.Substring(0, url.IndexOf("&"));
+        }
+
+        log.Info("Retrieving Coverart from: {0}", url);
+        WebRequest req = WebRequest.Create(url);
+        req.Proxy = new WebProxy();
+        req.Proxy.Credentials = CredentialCache.DefaultCredentials;
+        WebResponse response = req.GetResponse();
+        if (response == null)
+        {
+          return null;
+        }
+        Stream stream = response.GetResponseStream();
+        if (stream == null)
+        {
+          return null;
+        }
+        Image img = Image.FromStream(stream);
+        FreeImageBitmap bmp = new FreeImageBitmap(img);
+
+        if (bmp.Width > 500)
+        {
+          int height = (int)((double)bmp.Height / bmp.Width * 500);
+          bmp.Rescale(500, height, FREE_IMAGE_FILTER.FILTER_BOX);
+        }
+
+        stream.Close();
+        pic = new Picture { Data = (Image)(bmp.Clone() as FreeImageBitmap) };
+        img.Dispose();
+        bmp.Dispose();
+        return pic;
+      }
+      catch (Exception ex)
+      {
+        log.Error("Error retrieving Image from Url: {0} Error: {1}", url, ex.Message);
+      }
+      return null;
     }
 
     #endregion

@@ -3880,7 +3880,7 @@ namespace MPTagThat
         fileName = (string) fileNameObj;
       }
 
-      if (Util.IsPicture(fileName))
+      if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
       {
         TracksGridView.CoverArtDrop(fileName);   
       }
