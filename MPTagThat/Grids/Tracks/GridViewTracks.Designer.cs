@@ -40,6 +40,7 @@ namespace MPTagThat.GridView
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +82,7 @@ namespace MPTagThat.GridView
             this.toolStripSeparator3,
             this.toolStripMenuItem9,
             this.toolStripSeparator1,
+            this.lookupTitlleOnGoogleImagesToolStripMenuItem,
             this.toolStripMenuItem4,
             this.toolStripMenuItem5,
             this.toolStripMenuItem6,
@@ -88,13 +90,13 @@ namespace MPTagThat.GridView
             this.toolStripSeparator4,
             this.toolStripMenuItem7});
       this.contextMenu.Name = "contextMenuTreeView";
-      this.contextMenu.Size = new System.Drawing.Size(195, 264);
+      this.contextMenu.Size = new System.Drawing.Size(236, 286);
       // 
       // toolStripMenuItem1
       // 
       this.toolStripMenuItem1.Image = global::MPTagThat.Properties.Resources.CopyHS;
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-      this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem1.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem1.Text = "Copy";
       this.toolStripMenuItem1.Click += new System.EventHandler(this.tracksGrid_Copy);
       // 
@@ -102,7 +104,7 @@ namespace MPTagThat.GridView
       // 
       this.toolStripMenuItem2.Image = global::MPTagThat.Properties.Resources.CutHS;
       this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-      this.toolStripMenuItem2.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem2.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem2.Text = "Cut";
       this.toolStripMenuItem2.Click += new System.EventHandler(this.tracksGrid_Cut);
       // 
@@ -111,7 +113,7 @@ namespace MPTagThat.GridView
       this.toolStripMenuItem3.Enabled = false;
       this.toolStripMenuItem3.Image = global::MPTagThat.Properties.Resources.PasteHS;
       this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-      this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem3.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem3.Text = "Paste";
       this.toolStripMenuItem3.Click += new System.EventHandler(this.tracksGrid_Paste);
       // 
@@ -119,33 +121,43 @@ namespace MPTagThat.GridView
       // 
       this.toolStripMenuItem8.Image = global::MPTagThat.Properties.Resources.DeleteHS;
       this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-      this.toolStripMenuItem8.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem8.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem8.Text = "Delete";
       this.toolStripMenuItem8.Click += new System.EventHandler(this.tracksGrid_Delete);
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(191, 6);
+      this.toolStripSeparator3.Size = new System.Drawing.Size(232, 6);
       // 
       // toolStripMenuItem9
       // 
       this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-      this.toolStripMenuItem9.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem9.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem9.Text = "Select All";
       this.toolStripMenuItem9.Click += new System.EventHandler(this.tracksGrid_SelectAll);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(232, 6);
+      // 
+      // lookupTitlleOnGoogleImagesToolStripMenuItem
+      // 
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.Image = global::MPTagThat.Properties.Resources.ribbon_CoverArt_16x;
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.Name = "lookupTitlleOnGoogleImagesToolStripMenuItem";
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.ShowShortcutKeys = false;
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.Text = "Lookup Titlle on Google Images";
+      this.lookupTitlleOnGoogleImagesToolStripMenuItem.Click += new System.EventHandler(this.lookupTitlleOnGoogleImagesToolStripMenuItem_Click);
       // 
       // toolStripMenuItem4
       // 
       this.toolStripMenuItem4.Image = global::MPTagThat.Properties.Resources.ribbon_AddBurnList_16x;
       this.toolStripMenuItem4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-      this.toolStripMenuItem4.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem4.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem4.Text = "Add to Burnlist";
       this.toolStripMenuItem4.Click += new System.EventHandler(this.tracksGrid_AddToBurner);
       // 
@@ -153,7 +165,7 @@ namespace MPTagThat.GridView
       // 
       this.toolStripMenuItem5.Image = global::MPTagThat.Properties.Resources.ribbon_AddConversionList_16x;
       this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-      this.toolStripMenuItem5.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem5.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem5.Text = "Add to Conversion List";
       this.toolStripMenuItem5.Click += new System.EventHandler(this.tracksGrid_AddToConvert);
       // 
@@ -161,27 +173,27 @@ namespace MPTagThat.GridView
       // 
       this.toolStripMenuItem6.Image = global::MPTagThat.Properties.Resources.ribbon_AddPlayList_16x;
       this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-      this.toolStripMenuItem6.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem6.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem6.Text = "Add To Playlist";
       this.toolStripMenuItem6.Click += new System.EventHandler(this.tracksGrid_AddToPlayList);
       // 
       // menuSavePlaylist
       // 
       this.menuSavePlaylist.Name = "menuSavePlaylist";
-      this.menuSavePlaylist.Size = new System.Drawing.Size(194, 22);
+      this.menuSavePlaylist.Size = new System.Drawing.Size(235, 22);
       this.menuSavePlaylist.Text = "Save as PlayList";
       this.menuSavePlaylist.Click += new System.EventHandler(this.tracksGrid_SaveAsPlayList);
       // 
       // toolStripSeparator4
       // 
       this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(191, 6);
+      this.toolStripSeparator4.Size = new System.Drawing.Size(232, 6);
       // 
       // toolStripMenuItem7
       // 
       this.toolStripMenuItem7.Image = global::MPTagThat.Properties.Resources.ribbon_CoverArt_16x;
       this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-      this.toolStripMenuItem7.Size = new System.Drawing.Size(194, 22);
+      this.toolStripMenuItem7.Size = new System.Drawing.Size(235, 22);
       this.toolStripMenuItem7.Text = "Create Folder Thumb";
       this.toolStripMenuItem7.Click += new System.EventHandler(this.tracksGrid_CreateFolderThumb);
       // 
@@ -215,6 +227,7 @@ namespace MPTagThat.GridView
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem lookupTitlleOnGoogleImagesToolStripMenuItem;
 
   }
 }

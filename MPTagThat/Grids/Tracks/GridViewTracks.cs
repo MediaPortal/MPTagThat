@@ -2173,11 +2173,12 @@ namespace MPTagThat.GridView
       contextMenu.Items[2].Text = localisation.ToString("contextmenu", "Paste");
       contextMenu.Items[3].Text = localisation.ToString("contextmenu", "Delete");
       contextMenu.Items[5].Text = localisation.ToString("contextmenu", "SelectAll");
-      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "AddBurner");
-      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "AddConverter");
-      contextMenu.Items[9].Text = localisation.ToString("contextmenu", "AddPlaylist");
-      contextMenu.Items[10].Text = localisation.ToString("contextmenu", "SavePlaylist");
-      contextMenu.Items[12].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
+      contextMenu.Items[7].Text = localisation.ToString("contextmenu", "CoverLookup");
+      contextMenu.Items[8].Text = localisation.ToString("contextmenu", "AddBurner");
+      contextMenu.Items[9].Text = localisation.ToString("contextmenu", "AddConverter");
+      contextMenu.Items[10].Text = localisation.ToString("contextmenu", "AddPlaylist");
+      contextMenu.Items[12].Text = localisation.ToString("contextmenu", "SavePlaylist");
+      contextMenu.Items[13].Text = localisation.ToString("contextmenu", "CreateFolderThumb");
     }
 
     #endregion
@@ -3438,6 +3439,22 @@ namespace MPTagThat.GridView
     private void tracksGrid_SelectAll(object sender, EventArgs e)
     {
       tracksGrid.SelectAll();
+    }
+
+
+    private void lookupTitlleOnGoogleImagesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      if (tracksGrid.SelectedRows.Count == 0)
+      {
+        return;
+      }
+
+      TrackData track = bindingList[tracksGrid.SelectedRows[0].Index];
+      string songString = track.Artist + " " + track.Title;
+      songString = songString.Replace(" ", "+");
+
+      string url = "https://www.google.com/search?tbm=isch&q=" + songString;
+      System.Diagnostics.Process.Start(url);
     }
 
     #endregion

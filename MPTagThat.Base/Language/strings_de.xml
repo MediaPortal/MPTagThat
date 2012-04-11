@@ -481,6 +481,7 @@
     
   <!--  Context Menus -->
   <Section name="contextmenu">
+	<String id="CoverLookup">Suche Song Cover auf Google</String>
     <String id="AddBurner">Zur Brennliste hinzufügen</String>
     <String id="AddConverter">Zur Konvertierungliste hinzufügen</String>
     <String id="AddPlayList">Zur Abspielliste hinzufügen</String>
