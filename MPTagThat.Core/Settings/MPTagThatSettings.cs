@@ -189,6 +189,12 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool ClearUserFrames { get; set; }
 
+    [Setting(SettingScope.User, "false")]
+    public bool ChangeCoverSize { get; set; }
+
+    [Setting(SettingScope.User, "500")]
+    public int MaxCoverWidth { get; set; }
+
     #endregion
 
     #region Lyrics

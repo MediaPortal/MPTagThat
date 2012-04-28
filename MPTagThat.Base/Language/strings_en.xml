@@ -659,6 +659,7 @@
     <String id="OverwriteExistingCover">Overwrite existing Cover(s) on automatic tagging</String>
     <String id="EmbedExistingThumb">Embed existing folder thumb (folder.jpg) on cover search</String>
     <String id="OnlySaveFolderThumb">Save Cover Art only to folder thumb. Don't touch the music file</String>
+    <String id="ChangeCoverSize">Save covers with a maximum pixel width of:</String>
     <String id="AmazonSite">Amazon Search Site:</String>
     <String id="GroupBoxLyrics">Lyrics</String>
     <String id="SwitchArtist">Switch Artist before submit</String>

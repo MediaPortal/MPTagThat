@@ -1829,6 +1829,8 @@ namespace MPTagThat
       ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
       ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
       ckOverwriteExistingCovers.Checked = Options.MainSettings.OverwriteExistingCovers;
+      ckChangeCoverSize.Checked = Options.MainSettings.ChangeCoverSize;
+      tbCoverSize.Text = Options.MainSettings.MaxCoverWidth.ToString();
       ckOverwriteExistingLyrics.Checked = Options.MainSettings.OverwriteExistingLyrics;
       ckOnlySaveFolderThumb.Checked = Options.MainSettings.OnlySaveFolderThumb;
 
@@ -2358,6 +2360,8 @@ namespace MPTagThat
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
       Options.MainSettings.OnlySaveFolderThumb = ckOnlySaveFolderThumb.Checked;
+      Options.MainSettings.ChangeCoverSize = ckChangeCoverSize.Checked;
+      Options.MainSettings.MaxCoverWidth = Convert.ToInt32(tbCoverSize.Text);
       Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
       Options.MainSettings.ClearUserFrames = ckClearUserFramesOnSave.Checked;
       Options.MainSettings.MP3Validate = ckValidateMP3.Checked;

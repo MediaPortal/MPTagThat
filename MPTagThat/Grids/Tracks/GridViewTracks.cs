@@ -748,6 +748,11 @@ namespace MPTagThat.GridView
               // Only write a picture if we don't have a picture OR Overwrite Pictures is set
               if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
+                if (Options.MainSettings.ChangeCoverSize && folderThumb.Data.Width > Options.MainSettings.MaxCoverWidth)
+                {
+                  folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
+                }
+
                 log.Debug("CoverArt: Using existing folder.jpg");
                 // First Clear all the existingPictures
                 track.Pictures.Clear();
@@ -834,6 +839,12 @@ namespace MPTagThat.GridView
                 pic.Description = "Front Cover";
                 pic.Type = PictureType.FrontCover;
                 pic.Data = pic.ImageFromData(vector.Data);
+
+                if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+                {
+                  pic.Resize(Options.MainSettings.MaxCoverWidth);
+                }
+
                 track.Pictures.Add(pic);
               }
 
@@ -872,6 +883,11 @@ namespace MPTagThat.GridView
               try
               {
                 MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+                if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+                {
+                  pic.Resize(Options.MainSettings.MaxCoverWidth);
+                }
+
                 Image img = pic.ImageFromData(vector.Data);
 
                 // Need to make a copy, otherwise we have a GDI+ Error
@@ -984,6 +1000,11 @@ namespace MPTagThat.GridView
         return;
       }
 
+      if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+      {
+        pic.Resize(Options.MainSettings.MaxCoverWidth);
+      }
+
       pic.MimeType = "image/jpg";
       pic.Description = "Front Cover";
       pic.Type = PictureType.FrontCover;
@@ -1038,18 +1059,16 @@ namespace MPTagThat.GridView
           return null;
         }
         Image img = Image.FromStream(stream);
-        FreeImageBitmap bmp = new FreeImageBitmap(img);
+        stream.Close();
+        
+        pic = new Picture { Data = (Image)img.Clone() };
 
-        if (bmp.Width > 500)
+        if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
         {
-          int height = (int)((double)bmp.Height / bmp.Width * 500);
-          bmp.Rescale(500, height, FREE_IMAGE_FILTER.FILTER_BOX);
+          pic.Resize(Options.MainSettings.MaxCoverWidth);
         }
 
-        stream.Close();
-        pic = new Picture { Data = (Image)(bmp.Clone() as FreeImageBitmap) };
         img.Dispose();
-        bmp.Dispose();
         return pic;
       }
       catch (Exception ex)

@@ -129,6 +129,15 @@ namespace MPTagThat.Core.Common
       return byteArray;
     }
 
+    public void Resize (int width)
+    {
+      FreeImageBitmap bmp = new FreeImageBitmap(Data);
+      
+      int ratio = (int)((double)bmp.Height / bmp.Width * width);
+      bmp.Rescale(width, ratio, FREE_IMAGE_FILTER.FILTER_BOX);
+      Data = (Image) (bmp.Clone() as FreeImageBitmap);
+      bmp.Dispose();
+    }
 
     #endregion
   }
