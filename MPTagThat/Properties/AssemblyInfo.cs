@@ -54,5 +54,5 @@ using Elegant.Ui;
 //      Revision
 //
 
-[assembly: AssemblyVersion("3.0.6")]
+[assembly: AssemblyVersion("3.0.7")]
 [assembly: DefaultTheme(EmbeddedTheme.Office2007Blue)]
