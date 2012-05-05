@@ -440,7 +440,17 @@ namespace TagLib.Id3v2 {
 				RemoveFrames (ident);
 				return;
 			}
-			
+
+      // Handle URL LInk frames differently
+      if (ident[0] == 'W')
+      {
+        UrlLinkFrame urlFrame = 
+          UrlLinkFrame.Get(this, ident, true);
+
+        urlFrame.Text = text;
+        return;
+      }
+
 			TextInformationFrame frame =
 				TextInformationFrame.Get (this, ident, true);
 			

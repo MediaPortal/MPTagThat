@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 
 namespace TagLib.Id3v2
@@ -141,8 +140,6 @@ namespace TagLib.Id3v2
 
     #endregion
 
-
-
     #region Constructors
 
     /// <summary>
@@ -154,29 +151,10 @@ namespace TagLib.Id3v2
     ///    A <see cref="ByteVector" /> object containing an ID3v2.4
     ///    frame identifier.
     /// </param>
-    /// <param name="encoding">
-    ///    A <see cref="StringType" /> value specifying the encoding
-    ///    to use for the new instance.
-    /// </param>
-    public UrlLinkFrame(ByteVector ident,
-                                 StringType encoding)
+    public UrlLinkFrame(ByteVector ident)
       : base(ident, 4)
     {
       this.encoding = encoding;
-    }
-
-    /// <summary>
-    ///    Constructs and initializes a new instance of <see
-    ///    cref="UrlLinkFrame" /> with a specified
-    ///    identifer.
-    /// </summary>
-    /// <param name="ident">
-    ///    A <see cref="ByteVector" /> object containing an ID3v2.4
-    ///    frame identifier.
-    /// </param>
-    public UrlLinkFrame(ByteVector ident)
-      : this(ident, Id3v2.Tag.DefaultEncoding)
-    {
     }
 
     /// <summary>
@@ -230,8 +208,6 @@ namespace TagLib.Id3v2
     }
 
     #endregion
-
-
 
     #region Public Properties
     /// <summary>
@@ -299,9 +275,7 @@ namespace TagLib.Id3v2
     }
 
     #endregion
-
-
-
+    
     #region Public Methods
 
     /// <summary>
@@ -335,8 +309,6 @@ namespace TagLib.Id3v2
 
     #endregion
 
-
-
     #region Public Static Methods
 
     /// <summary>
@@ -352,10 +324,6 @@ namespace TagLib.Id3v2
     /// <param name="ident">
     ///    A <see cref="ByteVector" /> object containing the frame
     ///    identifer to search for.
-    /// </param>
-    /// <param name="encoding">
-    ///    A <see cref="StringType" /> value specifying the encoding
-    ///    to use if a new frame is created.
     /// </param>
     /// <param name="create">
     ///    A <see cref="bool" /> value specifying whether or not to
@@ -380,7 +348,6 @@ namespace TagLib.Id3v2
     /// </exception>
     public static UrlLinkFrame Get(Tag tag,
                                             ByteVector ident,
-                                            StringType encoding,
                                             bool create)
     {
       if (tag == null)
@@ -402,52 +369,13 @@ namespace TagLib.Id3v2
         return null;
 
       UrlLinkFrame new_frame =
-        new UrlLinkFrame(ident, encoding);
+        new UrlLinkFrame(ident);
       tag.AddFrame(new_frame);
       return new_frame;
     }
-
-    /// <summary>
-    ///    Gets a <see cref="UrlLinkFrame" /> object of a
-    ///    specified type from a specified tag, optionally creating
-    ///    and adding one if none is found.
-    /// </summary>
-    /// <param name="tag">
-    ///    A <see cref="Tag" /> object to search for the specified
-    ///    tag in.
-    /// </param>
-    /// <param name="ident">
-    ///    A <see cref="ByteVector" /> object containing the frame
-    ///    identifer to search for.
-    /// </param>
-    /// <param name="create">
-    ///    A <see cref="bool" /> value specifying whether or not to
-    ///    create a new frame if an existing frame was not found.
-    /// </param>
-    /// <returns>
-    ///    A <see cref="UrlLinkFrame" /> object containing
-    ///    the frame found in or added to <paramref name="tag" /> or
-    ///    <see langword="null" /> if no value was found <paramref
-    ///    name="create" /> is <see langword="false" />.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    ///    <paramref name="tag" /> or <paramref name="ident" /> is
-    ///    <see langword="null" />.
-    /// </exception>
-    /// <exception cref="ArgumentException">
-    ///    <paramref name="ident" /> is not exactly four bytes long.
-    /// </exception>
-    public static UrlLinkFrame Get(Tag tag,
-                                            ByteVector ident,
-                                            bool create)
-    {
-      return Get(tag, ident, Tag.DefaultEncoding, create);
-    }
-
+    
     #endregion
-
-
-
+    
     #region Protected Methods
 
     /// <summary>
@@ -488,16 +416,13 @@ namespace TagLib.Id3v2
       ByteVector data = raw_data;
       raw_data = null;
 
-      // read the string data type (the first byte of the
-      // field data)
-      encoding = (StringType)data[0];
       List<string> field_list = new List<string>();
 
       ByteVector delim = ByteVector.TextDelimiter(encoding);
 
       if (FrameId != FrameType.WXXX)
       {
-        field_list.AddRange(data.ToStrings(encoding, 0));
+        field_list.AddRange(data.ToStrings(StringType.Latin1, 0));
       }
       else if (data.Count > 1 && !data.Mid(0,
         delim.Count).Equals(delim))
@@ -570,23 +495,8 @@ namespace TagLib.Id3v2
 							null};
         }
 
-        for (int i = 0; i < text.Length; i++)
-        {
-          // Since the field list is null
-          // delimited, if this is not the first
-          // element in the list, append the
-          // appropriate delimiter for this
-          // encoding.
-
-          if (i != 0)
-            v.Add(ByteVector.TextDelimiter(
-              encoding));
-
-          if (text[i] != null)
-            v.Add(ByteVector.FromString(
-              text[i],
-              encoding));
-        }
+        v.Add(ByteVector.FromString(
+        string.Join("/", text), StringType.Latin1));
       }
       else
       {
@@ -616,7 +526,7 @@ namespace TagLib.Id3v2
       UrlLinkFrame frame =
         (this is UserUrlLinkFrame) ?
         new UserUrlLinkFrame(null, encoding) :
-        new UrlLinkFrame(FrameId, encoding);
+        new UrlLinkFrame(FrameId);
       frame.text_fields = (string[])text_fields.Clone();
       if (raw_data != null)
         frame.raw_data = new ByteVector(raw_data);
@@ -658,7 +568,7 @@ namespace TagLib.Id3v2
     /// </remarks>
     public UserUrlLinkFrame(string description,
                                      StringType encoding)
-      : base(FrameType.WXXX, encoding)
+      : base(FrameType.WXXX)
     {
       base.Text = new string[] { description };
     }

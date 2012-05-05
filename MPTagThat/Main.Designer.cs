@@ -55,6 +55,28 @@ namespace MPTagThat
       this.backstageViewPageOptions = new Elegant.Ui.BackstageViewPage();
       this.panel2 = new Elegant.Ui.Panel();
       this.tabControlSettings = new Elegant.Ui.TabControl();
+      this.tabPageSettingsLyricsCover = new Elegant.Ui.TabPage();
+      this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.tbCoverSize = new System.Windows.Forms.TextBox();
+      this.ckChangeCoverSize = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckOnlySaveFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.comboBoxAmazonSite = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.lbAmazonSearchSite = new MPTagThat.Core.WinControls.MPTLabel();
+      this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckLRCFinder = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyricsPlugin = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyricsOnDemand = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyrics007 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckHotLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckLyricWiki = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageSettingsGeneral = new Elegant.Ui.TabPage();
       this.groupBoxGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lbTracklistLocation = new MPTagThat.Core.WinControls.MPTLabel();
@@ -105,26 +127,6 @@ namespace MPTagThat
       this.radioButtonID3Both = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.tabPageSettingsLyricsCover = new Elegant.Ui.TabPage();
-      this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckOnlySaveFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.comboBoxAmazonSite = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.lbAmazonSearchSite = new MPTagThat.Core.WinControls.MPTLabel();
-      this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxLyrics = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckOverwriteExistingLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckSwitchArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxLyricsSites = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckLRCFinder = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyrDB = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckActionext = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyricsPlugin = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyricsOnDemand = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyrics007 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckHotLyrics = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckLyricWiki = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tabPageSettingsDatabase = new Elegant.Ui.TabPage();
       this.groupBoxDatabaseBuild = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.checkBoxClearDatabase = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -351,6 +353,10 @@ namespace MPTagThat
       this.backstageViewPageOptions.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).BeginInit();
+      this.tabPageSettingsLyricsCover.SuspendLayout();
+      this.groupBoxPictures.SuspendLayout();
+      this.groupBoxLyrics.SuspendLayout();
+      this.groupBoxLyricsSites.SuspendLayout();
       this.tabPageSettingsGeneral.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListTop)).BeginInit();
@@ -363,10 +369,6 @@ namespace MPTagThat
       this.groupBoxTagValidate.SuspendLayout();
       this.groupBoxTagsID3.SuspendLayout();
       this.groupBoxID3Update.SuspendLayout();
-      this.tabPageSettingsLyricsCover.SuspendLayout();
-      this.groupBoxPictures.SuspendLayout();
-      this.groupBoxLyrics.SuspendLayout();
-      this.groupBoxLyricsSites.SuspendLayout();
       this.tabPageSettingsDatabase.SuspendLayout();
       this.groupBoxDatabaseBuild.SuspendLayout();
       this.groubBoxTagsDatabase.SuspendLayout();
@@ -493,7 +495,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(758, 24);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(754, 24);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -504,7 +506,7 @@ namespace MPTagThat
       this.statusBarPane2.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane2.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane2.Name = "statusBarPane2";
-      this.statusBarPane2.Size = new System.Drawing.Size(151, 24);
+      this.statusBarPane2.Size = new System.Drawing.Size(149, 24);
       this.statusBarPane2.TabIndex = 0;
       // 
       // toolStripStatusLabelFiles
@@ -528,12 +530,12 @@ namespace MPTagThat
       // statusBarPane3
       // 
       this.statusBarPane3.Controls.Add(this.toolStripStatusLabelFolder);
-      this.statusBarPane3.Location = new System.Drawing.Point(151, 0);
+      this.statusBarPane3.Location = new System.Drawing.Point(149, 0);
       this.statusBarPane3.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane3.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane3.Name = "statusBarPane3";
       this.statusBarPane3.Padding = new System.Windows.Forms.Padding(2, 10, 2, 1);
-      this.statusBarPane3.Size = new System.Drawing.Size(103, 24);
+      this.statusBarPane3.Size = new System.Drawing.Size(101, 24);
       this.statusBarPane3.TabIndex = 1;
       // 
       // toolStripStatusLabelFolder
@@ -550,11 +552,11 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(758, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(754, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
-      this.statusBarControlsArea1.Size = new System.Drawing.Size(315, 24);
+      this.statusBarControlsArea1.Size = new System.Drawing.Size(319, 24);
       this.statusBarControlsArea1.TabIndex = 0;
       // 
       // statusBarPane4
@@ -583,7 +585,7 @@ namespace MPTagThat
       this.statusBarPane1.MaximumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane1.MinimumSize = new System.Drawing.Size(0, 24);
       this.statusBarPane1.Name = "statusBarPane1";
-      this.statusBarPane1.Size = new System.Drawing.Size(229, 24);
+      this.statusBarPane1.Size = new System.Drawing.Size(233, 24);
       this.statusBarPane1.TabIndex = 0;
       // 
       // progressBar1
@@ -603,7 +605,7 @@ namespace MPTagThat
       this.buttonProgressCancel.Id = "72fee6d7-03bc-42a8-8e13-35309ec722ad";
       this.buttonProgressCancel.Location = new System.Drawing.Point(180, 3);
       this.buttonProgressCancel.Name = "buttonProgressCancel";
-      this.buttonProgressCancel.Size = new System.Drawing.Size(22, 19);
+      this.buttonProgressCancel.Size = new System.Drawing.Size(26, 19);
       this.buttonProgressCancel.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonProgressCancel.SmallImages.Images"))))});
       this.buttonProgressCancel.TabIndex = 1;
@@ -612,6 +614,7 @@ namespace MPTagThat
       // 
       // ribbon
       // 
+      this.ribbon.AllowDrop = true;
       this.ribbon.ApplicationButtonImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("ribbon.ApplicationButtonImages.Images"))))});
       this.ribbon.ApplicationButtonStyle = Elegant.Ui.RibbonApplicationButtonStyle.Default;
@@ -632,7 +635,7 @@ namespace MPTagThat
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
       this.ribbon.QuickAccessToolbarPlacementMode = Elegant.Ui.QuickAccessToolbarPlacementMode.AboveRibbon;
-      this.ribbon.Size = new System.Drawing.Size(1073, 150);
+      this.ribbon.Size = new System.Drawing.Size(1073, 153);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -655,9 +658,9 @@ namespace MPTagThat
             this.backstageViewButtonChangeColumns,
             this.backstageViewSeparator2,
             this.backstageViewButtonExit});
-      this.backstageView.Location = new System.Drawing.Point(0, 51);
+      this.backstageView.Location = new System.Drawing.Point(0, 52);
       this.backstageView.Name = "backstageView";
-      this.backstageView.Size = new System.Drawing.Size(1073, 1114);
+      this.backstageView.Size = new System.Drawing.Size(1073, 1113);
       this.backstageView.TabIndex = 17;
       this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
       // 
@@ -669,10 +672,10 @@ namespace MPTagThat
       this.backstageViewPageOptions.Controls.Add(this.backstageViewPanel1);
       this.backstageViewPageOptions.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
-      this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 0);
+      this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 5);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
-      this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(0, 1, 2, 1);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(918, 1112);
+      this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(12);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(975, 1103);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -682,9 +685,9 @@ namespace MPTagThat
       // 
       this.panel2.Controls.Add(this.tabControlSettings);
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel2.Location = new System.Drawing.Point(210, 57);
+      this.panel2.Location = new System.Drawing.Point(222, 68);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(706, 1054);
+      this.panel2.Size = new System.Drawing.Size(741, 1023);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -693,8 +696,8 @@ namespace MPTagThat
       this.tabControlSettings.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
-      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsGeneral;
-      this.tabControlSettings.Size = new System.Drawing.Size(706, 1054);
+      this.tabControlSettings.SelectedTabPage = null;
+      this.tabControlSettings.Size = new System.Drawing.Size(741, 1023);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -712,13 +715,293 @@ namespace MPTagThat
             this.tabPageSettingsRipMPC,
             this.tabPageSettingsRipWV});
       // 
+      // tabPageSettingsLyricsCover
+      // 
+      this.tabPageSettingsLyricsCover.ActiveControl = null;
+      this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxPictures);
+      this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxLyrics);
+      this.tabPageSettingsLyricsCover.KeyTip = null;
+      this.tabPageSettingsLyricsCover.Name = "tabPageSettingsLyricsCover";
+      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(669, 1008);
+      this.tabPageSettingsLyricsCover.TabIndex = 4;
+      // 
+      // groupBoxPictures
+      // 
+      this.groupBoxPictures.Controls.Add(this.tbCoverSize);
+      this.groupBoxPictures.Controls.Add(this.ckChangeCoverSize);
+      this.groupBoxPictures.Controls.Add(this.ckOnlySaveFolderThumb);
+      this.groupBoxPictures.Controls.Add(this.comboBoxAmazonSite);
+      this.groupBoxPictures.Controls.Add(this.lbAmazonSearchSite);
+      this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
+      this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
+      this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
+      this.groupBoxPictures.Id = "bc9f8805-f201-4e8e-9ff9-8d04ec79ba1d";
+      this.groupBoxPictures.Localisation = "GroupBoxPictures";
+      this.groupBoxPictures.LocalisationContext = "Settings";
+      this.groupBoxPictures.Location = new System.Drawing.Point(6, 25);
+      this.groupBoxPictures.Name = "groupBoxPictures";
+      this.groupBoxPictures.Size = new System.Drawing.Size(590, 259);
+      this.groupBoxPictures.TabIndex = 5;
+      this.groupBoxPictures.Text = "Pictures";
+      // 
+      // tbCoverSize
+      // 
+      this.tbCoverSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
+      this.tbCoverSize.Location = new System.Drawing.Point(44, 162);
+      this.tbCoverSize.MaxLength = 5;
+      this.tbCoverSize.Multiline = true;
+      this.tbCoverSize.Name = "tbCoverSize";
+      this.tbCoverSize.Size = new System.Drawing.Size(51, 20);
+      this.tbCoverSize.TabIndex = 13;
+      this.tbCoverSize.Text = "500";
+      this.tbCoverSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      // 
+      // ckChangeCoverSize
+      // 
+      this.ckChangeCoverSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ckChangeCoverSize.Id = "cd419dc0-5ec2-428c-9d61-fde91267619f";
+      this.ckChangeCoverSize.Localisation = "ChangeCoverSize";
+      this.ckChangeCoverSize.LocalisationContext = "Settings";
+      this.ckChangeCoverSize.Location = new System.Drawing.Point(27, 135);
+      this.ckChangeCoverSize.Name = "ckChangeCoverSize";
+      this.ckChangeCoverSize.Size = new System.Drawing.Size(484, 26);
+      this.ckChangeCoverSize.TabIndex = 12;
+      this.ckChangeCoverSize.Text = "Save covers with a maximum width of:";
+      // 
+      // ckOnlySaveFolderThumb
+      // 
+      this.ckOnlySaveFolderThumb.Id = "50a2621b-c4e3-439e-9d77-9137e14ac18d";
+      this.ckOnlySaveFolderThumb.Localisation = "OnlySaveFolderThumb";
+      this.ckOnlySaveFolderThumb.LocalisationContext = "Settings";
+      this.ckOnlySaveFolderThumb.Location = new System.Drawing.Point(27, 106);
+      this.ckOnlySaveFolderThumb.Name = "ckOnlySaveFolderThumb";
+      this.ckOnlySaveFolderThumb.Size = new System.Drawing.Size(531, 26);
+      this.ckOnlySaveFolderThumb.TabIndex = 11;
+      this.ckOnlySaveFolderThumb.Text = "Save Cover Art only to folder thumb. Don\'t touch the music file";
+      // 
+      // comboBoxAmazonSite
+      // 
+      this.comboBoxAmazonSite.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxAmazonSite.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.comboBoxAmazonSite.Editable = false;
+      this.comboBoxAmazonSite.FormattingEnabled = true;
+      this.comboBoxAmazonSite.Id = "00255aaf-7dc5-4aad-bbef-25bcdf98f8a0";
+      this.comboBoxAmazonSite.Location = new System.Drawing.Point(27, 217);
+      this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
+      this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
+      this.comboBoxAmazonSite.TabIndex = 10;
+      // 
+      // lbAmazonSearchSite
+      // 
+      this.lbAmazonSearchSite.Localisation = "AmazonSite";
+      this.lbAmazonSearchSite.LocalisationContext = "Settings";
+      this.lbAmazonSearchSite.Location = new System.Drawing.Point(27, 196);
+      this.lbAmazonSearchSite.Name = "lbAmazonSearchSite";
+      this.lbAmazonSearchSite.Size = new System.Drawing.Size(321, 13);
+      this.lbAmazonSearchSite.TabIndex = 9;
+      this.lbAmazonSearchSite.Text = "Amazon Search Site:";
+      // 
+      // ckUseExistinbgThumb
+      // 
+      this.ckUseExistinbgThumb.Id = "a8929ca2-5329-419f-a075-2cc413e5294c";
+      this.ckUseExistinbgThumb.Localisation = "EmbedExistingThumb";
+      this.ckUseExistinbgThumb.LocalisationContext = "Settings";
+      this.ckUseExistinbgThumb.Location = new System.Drawing.Point(27, 52);
+      this.ckUseExistinbgThumb.Name = "ckUseExistinbgThumb";
+      this.ckUseExistinbgThumb.Size = new System.Drawing.Size(545, 26);
+      this.ckUseExistinbgThumb.TabIndex = 8;
+      this.ckUseExistinbgThumb.Text = "Embed existing folder thumb (folder.jpg)  on Cover search";
+      // 
+      // ckOverwriteExistingCovers
+      // 
+      this.ckOverwriteExistingCovers.Id = "51379b1b-ef8f-40e5-810f-a764197edd23";
+      this.ckOverwriteExistingCovers.Localisation = "OverwriteExistingCover";
+      this.ckOverwriteExistingCovers.LocalisationContext = "Settings";
+      this.ckOverwriteExistingCovers.Location = new System.Drawing.Point(27, 78);
+      this.ckOverwriteExistingCovers.Name = "ckOverwriteExistingCovers";
+      this.ckOverwriteExistingCovers.Size = new System.Drawing.Size(531, 26);
+      this.ckOverwriteExistingCovers.TabIndex = 7;
+      this.ckOverwriteExistingCovers.Text = "Overwrite existing covers on automatic tagging";
+      // 
+      // ckCreateMissingFolderThumb
+      // 
+      this.ckCreateMissingFolderThumb.Id = "51c174e0-1555-40eb-afc2-d31b47ed3740";
+      this.ckCreateMissingFolderThumb.Localisation = "CreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.LocalisationContext = "Settings";
+      this.ckCreateMissingFolderThumb.Location = new System.Drawing.Point(27, 26);
+      this.ckCreateMissingFolderThumb.Name = "ckCreateMissingFolderThumb";
+      this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(545, 26);
+      this.ckCreateMissingFolderThumb.TabIndex = 6;
+      this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on save";
+      // 
+      // groupBoxLyrics
+      // 
+      this.groupBoxLyrics.Controls.Add(this.ckOverwriteExistingLyrics);
+      this.groupBoxLyrics.Controls.Add(this.ckSwitchArtist);
+      this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
+      this.groupBoxLyrics.Id = "455cf3ea-34c2-46c3-9024-547257e6e4c5";
+      this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
+      this.groupBoxLyrics.LocalisationContext = "Settings";
+      this.groupBoxLyrics.Location = new System.Drawing.Point(12, 295);
+      this.groupBoxLyrics.Name = "groupBoxLyrics";
+      this.groupBoxLyrics.Size = new System.Drawing.Size(590, 229);
+      this.groupBoxLyrics.TabIndex = 4;
+      this.groupBoxLyrics.Text = "Lyrics";
+      // 
+      // ckOverwriteExistingLyrics
+      // 
+      this.ckOverwriteExistingLyrics.Id = "9faefec4-e120-46f7-a0b5-0342b1086154";
+      this.ckOverwriteExistingLyrics.Localisation = "OverwriteExistingLyrics";
+      this.ckOverwriteExistingLyrics.LocalisationContext = "Settings";
+      this.ckOverwriteExistingLyrics.Location = new System.Drawing.Point(27, 57);
+      this.ckOverwriteExistingLyrics.Name = "ckOverwriteExistingLyrics";
+      this.ckOverwriteExistingLyrics.Size = new System.Drawing.Size(475, 26);
+      this.ckOverwriteExistingLyrics.TabIndex = 9;
+      this.ckOverwriteExistingLyrics.Text = "Overwrite existing lyrics on automatic tagging";
+      // 
+      // ckSwitchArtist
+      // 
+      this.ckSwitchArtist.Id = "530ac569-1285-4a23-8e9c-082f5636223b";
+      this.ckSwitchArtist.Localisation = "SwitchArtist";
+      this.ckSwitchArtist.LocalisationContext = "Settings";
+      this.ckSwitchArtist.Location = new System.Drawing.Point(27, 33);
+      this.ckSwitchArtist.MaximumSize = new System.Drawing.Size(400, 0);
+      this.ckSwitchArtist.Name = "ckSwitchArtist";
+      this.ckSwitchArtist.Size = new System.Drawing.Size(400, 0);
+      this.ckSwitchArtist.TabIndex = 1;
+      this.ckSwitchArtist.Text = "Switch Artist before submit";
+      // 
+      // groupBoxLyricsSites
+      // 
+      this.groupBoxLyricsSites.Controls.Add(this.ckLRCFinder);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyrDB);
+      this.groupBoxLyricsSites.Controls.Add(this.ckActionext);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyricsPlugin);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyricsOnDemand);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyrics007);
+      this.groupBoxLyricsSites.Controls.Add(this.ckHotLyrics);
+      this.groupBoxLyricsSites.Controls.Add(this.ckLyricWiki);
+      this.groupBoxLyricsSites.Id = "d3c679e8-f772-4aff-a216-8804db1516e9";
+      this.groupBoxLyricsSites.Localisation = "GroupBoxLyricsSites";
+      this.groupBoxLyricsSites.LocalisationContext = "Settings";
+      this.groupBoxLyricsSites.Location = new System.Drawing.Point(15, 96);
+      this.groupBoxLyricsSites.Name = "groupBoxLyricsSites";
+      this.groupBoxLyricsSites.Size = new System.Drawing.Size(557, 106);
+      this.groupBoxLyricsSites.TabIndex = 0;
+      this.groupBoxLyricsSites.Text = "Sites to Search";
+      // 
+      // ckLRCFinder
+      // 
+      this.ckLRCFinder.Checked = true;
+      this.ckLRCFinder.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLRCFinder.Id = "db5f5e4c-7b7b-4507-b455-747acb017eaf";
+      this.ckLRCFinder.Localisation = "LrcFimder";
+      this.ckLRCFinder.LocalisationContext = "Settings";
+      this.ckLRCFinder.Location = new System.Drawing.Point(432, 60);
+      this.ckLRCFinder.Name = "ckLRCFinder";
+      this.ckLRCFinder.Size = new System.Drawing.Size(76, 26);
+      this.ckLRCFinder.TabIndex = 7;
+      this.ckLRCFinder.Text = "LRCFinder";
+      // 
+      // ckLyrDB
+      // 
+      this.ckLyrDB.Checked = true;
+      this.ckLyrDB.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyrDB.Id = "14e3c95b-c46b-4b04-bb02-e4c4d8e549c0";
+      this.ckLyrDB.Localisation = "LyrDB";
+      this.ckLyrDB.LocalisationContext = "Settings";
+      this.ckLyrDB.Location = new System.Drawing.Point(432, 28);
+      this.ckLyrDB.Name = "ckLyrDB";
+      this.ckLyrDB.Size = new System.Drawing.Size(55, 26);
+      this.ckLyrDB.TabIndex = 6;
+      this.ckLyrDB.Text = "LyrDB";
+      // 
+      // ckActionext
+      // 
+      this.ckActionext.Checked = true;
+      this.ckActionext.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckActionext.Id = "b9632e78-1a2f-4599-bf3b-fa0c0f5f5f9a";
+      this.ckActionext.Localisation = "Actionext";
+      this.ckActionext.LocalisationContext = "Settings";
+      this.ckActionext.Location = new System.Drawing.Point(288, 60);
+      this.ckActionext.Name = "ckActionext";
+      this.ckActionext.Size = new System.Drawing.Size(70, 26);
+      this.ckActionext.TabIndex = 5;
+      this.ckActionext.Text = "Actionext";
+      // 
+      // ckLyricsPlugin
+      // 
+      this.ckLyricsPlugin.Checked = true;
+      this.ckLyricsPlugin.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyricsPlugin.Id = "47a9cf89-a178-4e59-8ecd-e253994f7176";
+      this.ckLyricsPlugin.Localisation = "LyricsPlugin";
+      this.ckLyricsPlugin.LocalisationContext = "Settings";
+      this.ckLyricsPlugin.Location = new System.Drawing.Point(145, 60);
+      this.ckLyricsPlugin.Name = "ckLyricsPlugin";
+      this.ckLyricsPlugin.Size = new System.Drawing.Size(82, 26);
+      this.ckLyricsPlugin.TabIndex = 4;
+      this.ckLyricsPlugin.Text = "LyricsPlugin";
+      // 
+      // ckLyricsOnDemand
+      // 
+      this.ckLyricsOnDemand.Checked = true;
+      this.ckLyricsOnDemand.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyricsOnDemand.Id = "fef42135-2e92-4470-ac77-16f7a6791775";
+      this.ckLyricsOnDemand.Localisation = "LyricsOnDemand";
+      this.ckLyricsOnDemand.LocalisationContext = "Settings";
+      this.ckLyricsOnDemand.Location = new System.Drawing.Point(15, 60);
+      this.ckLyricsOnDemand.Name = "ckLyricsOnDemand";
+      this.ckLyricsOnDemand.Size = new System.Drawing.Size(113, 26);
+      this.ckLyricsOnDemand.TabIndex = 3;
+      this.ckLyricsOnDemand.Text = "Lyrics On Demand";
+      // 
+      // ckLyrics007
+      // 
+      this.ckLyrics007.Checked = true;
+      this.ckLyrics007.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyrics007.Id = "1c0e07f0-fd1d-43b3-8b7d-ea61a61a80ca";
+      this.ckLyrics007.Localisation = "Lyrics007";
+      this.ckLyrics007.LocalisationContext = "Settings";
+      this.ckLyrics007.Location = new System.Drawing.Point(288, 28);
+      this.ckLyrics007.Name = "ckLyrics007";
+      this.ckLyrics007.Size = new System.Drawing.Size(71, 26);
+      this.ckLyrics007.TabIndex = 2;
+      this.ckLyrics007.Text = "Lyrics007";
+      // 
+      // ckHotLyrics
+      // 
+      this.ckHotLyrics.Checked = true;
+      this.ckHotLyrics.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckHotLyrics.Id = "de7e3b04-77b7-4162-b9b0-caaa90c52201";
+      this.ckHotLyrics.Localisation = "HotLyrics";
+      this.ckHotLyrics.LocalisationContext = "Settings";
+      this.ckHotLyrics.Location = new System.Drawing.Point(145, 28);
+      this.ckHotLyrics.Name = "ckHotLyrics";
+      this.ckHotLyrics.Size = new System.Drawing.Size(73, 26);
+      this.ckHotLyrics.TabIndex = 1;
+      this.ckHotLyrics.Text = "Hot Lyrics";
+      // 
+      // ckLyricWiki
+      // 
+      this.ckLyricWiki.Checked = true;
+      this.ckLyricWiki.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLyricWiki.Id = "c4fe6501-7176-4604-b7d3-42bfb998edbf";
+      this.ckLyricWiki.Localisation = "LyricWiki";
+      this.ckLyricWiki.LocalisationContext = "Settings";
+      this.ckLyricWiki.Location = new System.Drawing.Point(15, 28);
+      this.ckLyricWiki.Name = "ckLyricWiki";
+      this.ckLyricWiki.Size = new System.Drawing.Size(72, 26);
+      this.ckLyricWiki.TabIndex = 0;
+      this.ckLyricWiki.Text = "Lyric Wiki";
+      // 
       // tabPageSettingsGeneral
       // 
       this.tabPageSettingsGeneral.ActiveControl = null;
       this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageSettingsGeneral.KeyTip = null;
       this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(669, 1008);
       this.tabPageSettingsGeneral.TabIndex = 0;
       // 
       // groupBoxGeneral
@@ -860,7 +1143,7 @@ namespace MPTagThat
       this.tabPageSettingsKeys.Controls.Add(this.groupBoxKeys);
       this.tabPageSettingsKeys.KeyTip = null;
       this.tabPageSettingsKeys.Name = "tabPageSettingsKeys";
-      this.tabPageSettingsKeys.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsKeys.Size = new System.Drawing.Size(669, 1008);
       this.tabPageSettingsKeys.TabIndex = 1;
       // 
       // groupBoxKeys
@@ -1050,7 +1333,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
       this.tabPageSettingsTagsGeneral.KeyTip = null;
       this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
-      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(669, 1008);
       this.tabPageSettingsTagsGeneral.TabIndex = 2;
       // 
       // groupBoxTagsGeneral
@@ -1119,7 +1402,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
       this.tabPageSettingsTagsId3.KeyTip = null;
       this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
-      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(669, 1008);
       this.tabPageSettingsTagsId3.TabIndex = 3;
       // 
       // groupBoxTagValidate
@@ -1327,259 +1610,6 @@ namespace MPTagThat
       this.radioButtonID3V1.Text = "ID3V1";
       this.radioButtonID3V1.CheckedChanged += new System.EventHandler(this.radioButtonID3V1_CheckedChanged);
       // 
-      // tabPageSettingsLyricsCover
-      // 
-      this.tabPageSettingsLyricsCover.ActiveControl = null;
-      this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxPictures);
-      this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxLyrics);
-      this.tabPageSettingsLyricsCover.KeyTip = null;
-      this.tabPageSettingsLyricsCover.Name = "tabPageSettingsLyricsCover";
-      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(704, 1039);
-      this.tabPageSettingsLyricsCover.TabIndex = 4;
-      // 
-      // groupBoxPictures
-      // 
-      this.groupBoxPictures.Controls.Add(this.ckOnlySaveFolderThumb);
-      this.groupBoxPictures.Controls.Add(this.comboBoxAmazonSite);
-      this.groupBoxPictures.Controls.Add(this.lbAmazonSearchSite);
-      this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
-      this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
-      this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
-      this.groupBoxPictures.Id = "bc9f8805-f201-4e8e-9ff9-8d04ec79ba1d";
-      this.groupBoxPictures.Localisation = "GroupBoxPictures";
-      this.groupBoxPictures.LocalisationContext = "Settings";
-      this.groupBoxPictures.Location = new System.Drawing.Point(6, 25);
-      this.groupBoxPictures.Name = "groupBoxPictures";
-      this.groupBoxPictures.Size = new System.Drawing.Size(590, 196);
-      this.groupBoxPictures.TabIndex = 5;
-      this.groupBoxPictures.Text = "Pictures";
-      // 
-      // ckOnlySaveFolderThumb
-      // 
-      this.ckOnlySaveFolderThumb.Id = "50a2621b-c4e3-439e-9d77-9137e14ac18d";
-      this.ckOnlySaveFolderThumb.Localisation = "OnlySaveFolderThumb";
-      this.ckOnlySaveFolderThumb.LocalisationContext = "Settings";
-      this.ckOnlySaveFolderThumb.Location = new System.Drawing.Point(27, 106);
-      this.ckOnlySaveFolderThumb.Name = "ckOnlySaveFolderThumb";
-      this.ckOnlySaveFolderThumb.Size = new System.Drawing.Size(531, 26);
-      this.ckOnlySaveFolderThumb.TabIndex = 11;
-      this.ckOnlySaveFolderThumb.Text = "Save Cover Art only to folder thumb. Don\'t touch the music file";
-      // 
-      // comboBoxAmazonSite
-      // 
-      this.comboBoxAmazonSite.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.comboBoxAmazonSite.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.comboBoxAmazonSite.Editable = false;
-      this.comboBoxAmazonSite.FormattingEnabled = true;
-      this.comboBoxAmazonSite.Id = "00255aaf-7dc5-4aad-bbef-25bcdf98f8a0";
-      this.comboBoxAmazonSite.Location = new System.Drawing.Point(27, 161);
-      this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
-      this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
-      this.comboBoxAmazonSite.TabIndex = 10;
-      // 
-      // lbAmazonSearchSite
-      // 
-      this.lbAmazonSearchSite.Localisation = "AmazonSite";
-      this.lbAmazonSearchSite.LocalisationContext = "Settings";
-      this.lbAmazonSearchSite.Location = new System.Drawing.Point(27, 140);
-      this.lbAmazonSearchSite.Name = "lbAmazonSearchSite";
-      this.lbAmazonSearchSite.Size = new System.Drawing.Size(321, 13);
-      this.lbAmazonSearchSite.TabIndex = 9;
-      this.lbAmazonSearchSite.Text = "Amazon Search Site:";
-      // 
-      // ckUseExistinbgThumb
-      // 
-      this.ckUseExistinbgThumb.Id = "a8929ca2-5329-419f-a075-2cc413e5294c";
-      this.ckUseExistinbgThumb.Localisation = "EmbedExistingThumb";
-      this.ckUseExistinbgThumb.LocalisationContext = "Settings";
-      this.ckUseExistinbgThumb.Location = new System.Drawing.Point(27, 52);
-      this.ckUseExistinbgThumb.Name = "ckUseExistinbgThumb";
-      this.ckUseExistinbgThumb.Size = new System.Drawing.Size(545, 26);
-      this.ckUseExistinbgThumb.TabIndex = 8;
-      this.ckUseExistinbgThumb.Text = "Embed existing folder thumb (folder.jpg)  on Cover search";
-      // 
-      // ckOverwriteExistingCovers
-      // 
-      this.ckOverwriteExistingCovers.Id = "51379b1b-ef8f-40e5-810f-a764197edd23";
-      this.ckOverwriteExistingCovers.Localisation = "OverwriteExistingCover";
-      this.ckOverwriteExistingCovers.LocalisationContext = "Settings";
-      this.ckOverwriteExistingCovers.Location = new System.Drawing.Point(27, 78);
-      this.ckOverwriteExistingCovers.Name = "ckOverwriteExistingCovers";
-      this.ckOverwriteExistingCovers.Size = new System.Drawing.Size(531, 26);
-      this.ckOverwriteExistingCovers.TabIndex = 7;
-      this.ckOverwriteExistingCovers.Text = "Overwrite existing covers on automatic tagging";
-      // 
-      // ckCreateMissingFolderThumb
-      // 
-      this.ckCreateMissingFolderThumb.Id = "51c174e0-1555-40eb-afc2-d31b47ed3740";
-      this.ckCreateMissingFolderThumb.Localisation = "CreateMissingFolderThumb";
-      this.ckCreateMissingFolderThumb.LocalisationContext = "Settings";
-      this.ckCreateMissingFolderThumb.Location = new System.Drawing.Point(27, 26);
-      this.ckCreateMissingFolderThumb.Name = "ckCreateMissingFolderThumb";
-      this.ckCreateMissingFolderThumb.Size = new System.Drawing.Size(545, 26);
-      this.ckCreateMissingFolderThumb.TabIndex = 6;
-      this.ckCreateMissingFolderThumb.Text = "Create missing folder thumb (folder.jpg) on save";
-      // 
-      // groupBoxLyrics
-      // 
-      this.groupBoxLyrics.Controls.Add(this.ckOverwriteExistingLyrics);
-      this.groupBoxLyrics.Controls.Add(this.ckSwitchArtist);
-      this.groupBoxLyrics.Controls.Add(this.groupBoxLyricsSites);
-      this.groupBoxLyrics.Id = "455cf3ea-34c2-46c3-9024-547257e6e4c5";
-      this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
-      this.groupBoxLyrics.LocalisationContext = "Settings";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(6, 235);
-      this.groupBoxLyrics.Name = "groupBoxLyrics";
-      this.groupBoxLyrics.Size = new System.Drawing.Size(590, 229);
-      this.groupBoxLyrics.TabIndex = 4;
-      this.groupBoxLyrics.Text = "Lyrics";
-      // 
-      // ckOverwriteExistingLyrics
-      // 
-      this.ckOverwriteExistingLyrics.Id = "9faefec4-e120-46f7-a0b5-0342b1086154";
-      this.ckOverwriteExistingLyrics.Localisation = "OverwriteExistingLyrics";
-      this.ckOverwriteExistingLyrics.LocalisationContext = "Settings";
-      this.ckOverwriteExistingLyrics.Location = new System.Drawing.Point(27, 57);
-      this.ckOverwriteExistingLyrics.Name = "ckOverwriteExistingLyrics";
-      this.ckOverwriteExistingLyrics.Size = new System.Drawing.Size(475, 26);
-      this.ckOverwriteExistingLyrics.TabIndex = 9;
-      this.ckOverwriteExistingLyrics.Text = "Overwrite existing lyrics on automatic tagging";
-      // 
-      // ckSwitchArtist
-      // 
-      this.ckSwitchArtist.Id = "530ac569-1285-4a23-8e9c-082f5636223b";
-      this.ckSwitchArtist.Localisation = "SwitchArtist";
-      this.ckSwitchArtist.LocalisationContext = "Settings";
-      this.ckSwitchArtist.Location = new System.Drawing.Point(27, 33);
-      this.ckSwitchArtist.MaximumSize = new System.Drawing.Size(400, 0);
-      this.ckSwitchArtist.Name = "ckSwitchArtist";
-      this.ckSwitchArtist.Size = new System.Drawing.Size(400, 0);
-      this.ckSwitchArtist.TabIndex = 1;
-      this.ckSwitchArtist.Text = "Switch Artist before submit";
-      // 
-      // groupBoxLyricsSites
-      // 
-      this.groupBoxLyricsSites.Controls.Add(this.ckLRCFinder);
-      this.groupBoxLyricsSites.Controls.Add(this.ckLyrDB);
-      this.groupBoxLyricsSites.Controls.Add(this.ckActionext);
-      this.groupBoxLyricsSites.Controls.Add(this.ckLyricsPlugin);
-      this.groupBoxLyricsSites.Controls.Add(this.ckLyricsOnDemand);
-      this.groupBoxLyricsSites.Controls.Add(this.ckLyrics007);
-      this.groupBoxLyricsSites.Controls.Add(this.ckHotLyrics);
-      this.groupBoxLyricsSites.Controls.Add(this.ckLyricWiki);
-      this.groupBoxLyricsSites.Id = "d3c679e8-f772-4aff-a216-8804db1516e9";
-      this.groupBoxLyricsSites.Localisation = "GroupBoxLyricsSites";
-      this.groupBoxLyricsSites.LocalisationContext = "Settings";
-      this.groupBoxLyricsSites.Location = new System.Drawing.Point(15, 96);
-      this.groupBoxLyricsSites.Name = "groupBoxLyricsSites";
-      this.groupBoxLyricsSites.Size = new System.Drawing.Size(557, 106);
-      this.groupBoxLyricsSites.TabIndex = 0;
-      this.groupBoxLyricsSites.Text = "Sites to Search";
-      // 
-      // ckLRCFinder
-      // 
-      this.ckLRCFinder.Checked = true;
-      this.ckLRCFinder.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLRCFinder.Id = "db5f5e4c-7b7b-4507-b455-747acb017eaf";
-      this.ckLRCFinder.Localisation = "LrcFimder";
-      this.ckLRCFinder.LocalisationContext = "Settings";
-      this.ckLRCFinder.Location = new System.Drawing.Point(432, 60);
-      this.ckLRCFinder.Name = "ckLRCFinder";
-      this.ckLRCFinder.Size = new System.Drawing.Size(76, 26);
-      this.ckLRCFinder.TabIndex = 7;
-      this.ckLRCFinder.Text = "LRCFinder";
-      // 
-      // ckLyrDB
-      // 
-      this.ckLyrDB.Checked = true;
-      this.ckLyrDB.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyrDB.Id = "14e3c95b-c46b-4b04-bb02-e4c4d8e549c0";
-      this.ckLyrDB.Localisation = "LyrDB";
-      this.ckLyrDB.LocalisationContext = "Settings";
-      this.ckLyrDB.Location = new System.Drawing.Point(432, 28);
-      this.ckLyrDB.Name = "ckLyrDB";
-      this.ckLyrDB.Size = new System.Drawing.Size(55, 26);
-      this.ckLyrDB.TabIndex = 6;
-      this.ckLyrDB.Text = "LyrDB";
-      // 
-      // ckActionext
-      // 
-      this.ckActionext.Checked = true;
-      this.ckActionext.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckActionext.Id = "b9632e78-1a2f-4599-bf3b-fa0c0f5f5f9a";
-      this.ckActionext.Localisation = "Actionext";
-      this.ckActionext.LocalisationContext = "Settings";
-      this.ckActionext.Location = new System.Drawing.Point(288, 60);
-      this.ckActionext.Name = "ckActionext";
-      this.ckActionext.Size = new System.Drawing.Size(70, 26);
-      this.ckActionext.TabIndex = 5;
-      this.ckActionext.Text = "Actionext";
-      // 
-      // ckLyricsPlugin
-      // 
-      this.ckLyricsPlugin.Checked = true;
-      this.ckLyricsPlugin.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyricsPlugin.Id = "47a9cf89-a178-4e59-8ecd-e253994f7176";
-      this.ckLyricsPlugin.Localisation = "LyricsPlugin";
-      this.ckLyricsPlugin.LocalisationContext = "Settings";
-      this.ckLyricsPlugin.Location = new System.Drawing.Point(145, 60);
-      this.ckLyricsPlugin.Name = "ckLyricsPlugin";
-      this.ckLyricsPlugin.Size = new System.Drawing.Size(82, 26);
-      this.ckLyricsPlugin.TabIndex = 4;
-      this.ckLyricsPlugin.Text = "LyricsPlugin";
-      // 
-      // ckLyricsOnDemand
-      // 
-      this.ckLyricsOnDemand.Checked = true;
-      this.ckLyricsOnDemand.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyricsOnDemand.Id = "fef42135-2e92-4470-ac77-16f7a6791775";
-      this.ckLyricsOnDemand.Localisation = "LyricsOnDemand";
-      this.ckLyricsOnDemand.LocalisationContext = "Settings";
-      this.ckLyricsOnDemand.Location = new System.Drawing.Point(15, 60);
-      this.ckLyricsOnDemand.Name = "ckLyricsOnDemand";
-      this.ckLyricsOnDemand.Size = new System.Drawing.Size(113, 26);
-      this.ckLyricsOnDemand.TabIndex = 3;
-      this.ckLyricsOnDemand.Text = "Lyrics On Demand";
-      // 
-      // ckLyrics007
-      // 
-      this.ckLyrics007.Checked = true;
-      this.ckLyrics007.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyrics007.Id = "1c0e07f0-fd1d-43b3-8b7d-ea61a61a80ca";
-      this.ckLyrics007.Localisation = "Lyrics007";
-      this.ckLyrics007.LocalisationContext = "Settings";
-      this.ckLyrics007.Location = new System.Drawing.Point(288, 28);
-      this.ckLyrics007.Name = "ckLyrics007";
-      this.ckLyrics007.Size = new System.Drawing.Size(71, 26);
-      this.ckLyrics007.TabIndex = 2;
-      this.ckLyrics007.Text = "Lyrics007";
-      // 
-      // ckHotLyrics
-      // 
-      this.ckHotLyrics.Checked = true;
-      this.ckHotLyrics.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckHotLyrics.Id = "de7e3b04-77b7-4162-b9b0-caaa90c52201";
-      this.ckHotLyrics.Localisation = "HotLyrics";
-      this.ckHotLyrics.LocalisationContext = "Settings";
-      this.ckHotLyrics.Location = new System.Drawing.Point(145, 28);
-      this.ckHotLyrics.Name = "ckHotLyrics";
-      this.ckHotLyrics.Size = new System.Drawing.Size(73, 26);
-      this.ckHotLyrics.TabIndex = 1;
-      this.ckHotLyrics.Text = "Hot Lyrics";
-      // 
-      // ckLyricWiki
-      // 
-      this.ckLyricWiki.Checked = true;
-      this.ckLyricWiki.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckLyricWiki.Id = "c4fe6501-7176-4604-b7d3-42bfb998edbf";
-      this.ckLyricWiki.Localisation = "LyricWiki";
-      this.ckLyricWiki.LocalisationContext = "Settings";
-      this.ckLyricWiki.Location = new System.Drawing.Point(15, 28);
-      this.ckLyricWiki.Name = "ckLyricWiki";
-      this.ckLyricWiki.Size = new System.Drawing.Size(72, 26);
-      this.ckLyricWiki.TabIndex = 0;
-      this.ckLyricWiki.Text = "Lyric Wiki";
-      // 
       // tabPageSettingsDatabase
       // 
       this.tabPageSettingsDatabase.ActiveControl = null;
@@ -1587,7 +1617,7 @@ namespace MPTagThat
       this.tabPageSettingsDatabase.Controls.Add(this.groubBoxTagsDatabase);
       this.tabPageSettingsDatabase.KeyTip = null;
       this.tabPageSettingsDatabase.Name = "tabPageSettingsDatabase";
-      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(669, 1008);
       this.tabPageSettingsDatabase.TabIndex = 5;
       // 
       // groupBoxDatabaseBuild
@@ -2624,9 +2654,9 @@ namespace MPTagThat
       this.panel3.Controls.Add(this.buttonSettingsCancel);
       this.panel3.Controls.Add(this.buttonSettingsApply);
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panel3.Location = new System.Drawing.Point(210, 1);
+      this.panel3.Location = new System.Drawing.Point(222, 12);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(706, 56);
+      this.panel3.Size = new System.Drawing.Size(741, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2661,9 +2691,9 @@ namespace MPTagThat
       // 
       this.backstageViewPanel1.Controls.Add(this.groupedNavigationBar1);
       this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-      this.backstageViewPanel1.Location = new System.Drawing.Point(0, 1);
+      this.backstageViewPanel1.Location = new System.Drawing.Point(12, 12);
       this.backstageViewPanel1.Name = "backstageViewPanel1";
-      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 1110);
+      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 1079);
       this.backstageViewPanel1.TabIndex = 0;
       // 
       // groupedNavigationBar1
@@ -2681,7 +2711,7 @@ namespace MPTagThat
       this.groupedNavigationBar1.Location = new System.Drawing.Point(0, 0);
       this.groupedNavigationBar1.MinimizeButtonDirection = Elegant.Ui.NavigationBarCaptionMinimizeButtonDirection.Left;
       this.groupedNavigationBar1.Name = "groupedNavigationBar1";
-      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 1110);
+      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 1079);
       this.groupedNavigationBar1.TabIndex = 0;
       this.groupedNavigationBar1.Text = "Settings";
       this.groupedNavigationBar1.VisibleOutlookGroupHeadersCount = 0;
@@ -2700,9 +2730,9 @@ namespace MPTagThat
       this.navigationBarGroupItemsContainer1.Items.AddRange(new Elegant.Ui.NavigationBarItem[] {
             this.navigationBarItemGeneral,
             this.navigationBarItemKeys});
-      this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 24);
+      this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 21);
       this.navigationBarGroupItemsContainer1.Name = "navigationBarGroupItemsContainer1";
-      this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 48);
+      this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 10);
       this.navigationBarGroupItemsContainer1.TabIndex = 2;
       // 
       // navigationBarItemGeneral
@@ -2710,7 +2740,7 @@ namespace MPTagThat
       this.navigationBarItemGeneral.Id = "4db69fb3-e8aa-4ea2-a37e-19b60609bd39";
       this.navigationBarItemGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemGeneral.Name = "navigationBarItemGeneral";
-      this.navigationBarItemGeneral.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemGeneral.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemGeneral.TabIndex = 1;
       this.navigationBarItemGeneral.Text = "General";
       this.navigationBarItemGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2718,9 +2748,9 @@ namespace MPTagThat
       // navigationBarItemKeys
       // 
       this.navigationBarItemKeys.Id = "00b369ff-5784-4a70-b131-59a883bcdcc6";
-      this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 19);
+      this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemKeys.Name = "navigationBarItemKeys";
-      this.navigationBarItemKeys.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemKeys.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemKeys.TabIndex = 2;
       this.navigationBarItemKeys.Text = "Keys";
       this.navigationBarItemKeys.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2741,9 +2771,9 @@ namespace MPTagThat
             this.navigationBarItemTagsId3,
             this.navigationBarItemTagsLyricsCover,
             this.navigationBarItemTagsDatabase});
-      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 96);
+      this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 52);
       this.navigationBarGroupItemsContainer2.Name = "navigationBarGroupItemsContainer2";
-      this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 86);
+      this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 10);
       this.navigationBarGroupItemsContainer2.TabIndex = 5;
       // 
       // navigationBarItemTagsGeneral
@@ -2751,7 +2781,7 @@ namespace MPTagThat
       this.navigationBarItemTagsGeneral.Id = "b3698914-5def-4d5b-9eb3-575e3de603a4";
       this.navigationBarItemTagsGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemTagsGeneral.Name = "navigationBarItemTagsGeneral";
-      this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemTagsGeneral.TabIndex = 1;
       this.navigationBarItemTagsGeneral.Text = "General";
       this.navigationBarItemTagsGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2759,9 +2789,9 @@ namespace MPTagThat
       // navigationBarItemTagsId3
       // 
       this.navigationBarItemTagsId3.Id = "e5db1b69-dfd6-4c8f-b3e4-89191c88381e";
-      this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 19);
+      this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemTagsId3.Name = "navigationBarItemTagsId3";
-      this.navigationBarItemTagsId3.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemTagsId3.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemTagsId3.TabIndex = 2;
       this.navigationBarItemTagsId3.Text = "ID3";
       this.navigationBarItemTagsId3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2769,9 +2799,9 @@ namespace MPTagThat
       // navigationBarItemTagsLyricsCover
       // 
       this.navigationBarItemTagsLyricsCover.Id = "8aca463b-fb85-407e-98db-f779d493d24f";
-      this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 38);
+      this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemTagsLyricsCover.Name = "navigationBarItemTagsLyricsCover";
-      this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemTagsLyricsCover.TabIndex = 3;
       this.navigationBarItemTagsLyricsCover.Text = "Lyrics / Cover";
       this.navigationBarItemTagsLyricsCover.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2779,9 +2809,9 @@ namespace MPTagThat
       // navigationBarItemTagsDatabase
       // 
       this.navigationBarItemTagsDatabase.Id = "88cfd696-ed66-40cf-8fc8-4b57612a86b1";
-      this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 57);
+      this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemTagsDatabase.Name = "navigationBarItemTagsDatabase";
-      this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemTagsDatabase.TabIndex = 4;
       this.navigationBarItemTagsDatabase.Text = "Database";
       this.navigationBarItemTagsDatabase.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2806,9 +2836,9 @@ namespace MPTagThat
             this.navigationBarItemRipWMA,
             this.navigationBarItemMPC,
             this.navigationBarItemRipWV});
-      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 206);
+      this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 83);
       this.navigationBarGroupItemsContainer3.Name = "navigationBarGroupItemsContainer3";
-      this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 162);
+      this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 10);
       this.navigationBarGroupItemsContainer3.TabIndex = 8;
       // 
       // navigationBarItemRipGeneral
@@ -2816,7 +2846,7 @@ namespace MPTagThat
       this.navigationBarItemRipGeneral.Id = "f32def35-f20f-4311-a0f2-1c8355043d68";
       this.navigationBarItemRipGeneral.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipGeneral.Name = "navigationBarItemRipGeneral";
-      this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipGeneral.TabIndex = 1;
       this.navigationBarItemRipGeneral.Text = "General";
       this.navigationBarItemRipGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2824,9 +2854,9 @@ namespace MPTagThat
       // navigationBarItemRipMp3
       // 
       this.navigationBarItemRipMp3.Id = "9d8979f0-7c74-47e7-8197-4792f75f513f";
-      this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 19);
+      this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipMp3.Name = "navigationBarItemRipMp3";
-      this.navigationBarItemRipMp3.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipMp3.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipMp3.TabIndex = 2;
       this.navigationBarItemRipMp3.Text = "MP3";
       this.navigationBarItemRipMp3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2834,9 +2864,9 @@ namespace MPTagThat
       // navigationBarItemRipOgg
       // 
       this.navigationBarItemRipOgg.Id = "6cd82a8c-1a93-4ea2-87e6-c226163612b2";
-      this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 38);
+      this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipOgg.Name = "navigationBarItemRipOgg";
-      this.navigationBarItemRipOgg.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipOgg.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipOgg.TabIndex = 3;
       this.navigationBarItemRipOgg.Text = "OGG";
       this.navigationBarItemRipOgg.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2844,9 +2874,9 @@ namespace MPTagThat
       // navigationBarItemFlac
       // 
       this.navigationBarItemFlac.Id = "92a49143-104e-4885-a538-db9557075803";
-      this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 57);
+      this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemFlac.Name = "navigationBarItemFlac";
-      this.navigationBarItemFlac.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemFlac.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemFlac.TabIndex = 4;
       this.navigationBarItemFlac.Text = "FLAC";
       this.navigationBarItemFlac.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2854,9 +2884,9 @@ namespace MPTagThat
       // navigationBarItemRipAAC
       // 
       this.navigationBarItemRipAAC.Id = "062f0637-9556-4f29-a6b4-ccd7c41f76be";
-      this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 76);
+      this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipAAC.Name = "navigationBarItemRipAAC";
-      this.navigationBarItemRipAAC.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipAAC.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipAAC.TabIndex = 5;
       this.navigationBarItemRipAAC.Text = "AAC";
       this.navigationBarItemRipAAC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2864,9 +2894,9 @@ namespace MPTagThat
       // navigationBarItemRipWMA
       // 
       this.navigationBarItemRipWMA.Id = "16c82fc1-67af-4336-8771-0ba81707e707";
-      this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 95);
+      this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipWMA.Name = "navigationBarItemRipWMA";
-      this.navigationBarItemRipWMA.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipWMA.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipWMA.TabIndex = 6;
       this.navigationBarItemRipWMA.Text = "WMA";
       this.navigationBarItemRipWMA.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2874,9 +2904,9 @@ namespace MPTagThat
       // navigationBarItemMPC
       // 
       this.navigationBarItemMPC.Id = "0187f926-0f64-4f0f-aaa8-f834549b0c63";
-      this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 114);
+      this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemMPC.Name = "navigationBarItemMPC";
-      this.navigationBarItemMPC.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemMPC.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemMPC.TabIndex = 7;
       this.navigationBarItemMPC.Text = "MPC";
       this.navigationBarItemMPC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2884,9 +2914,9 @@ namespace MPTagThat
       // navigationBarItemRipWV
       // 
       this.navigationBarItemRipWV.Id = "c628d04e-f8e7-4091-be19-4a288c7176a0";
-      this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 133);
+      this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 0);
       this.navigationBarItemRipWV.Name = "navigationBarItemRipWV";
-      this.navigationBarItemRipWV.Size = new System.Drawing.Size(208, 19);
+      this.navigationBarItemRipWV.Size = new System.Drawing.Size(0, 0);
       this.navigationBarItemRipWV.TabIndex = 8;
       this.navigationBarItemRipWV.Text = "WV";
       this.navigationBarItemRipWV.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2899,11 +2929,11 @@ namespace MPTagThat
       this.backstageViewButtonSave.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images")))),
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.LargeImages.Images1"))))});
-      this.backstageViewButtonSave.Location = new System.Drawing.Point(7, 7);
-      this.backstageViewButtonSave.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
+      this.backstageViewButtonSave.Location = new System.Drawing.Point(5, 22);
+      this.backstageViewButtonSave.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
       this.backstageViewButtonSave.Name = "backstageViewButtonSave";
-      this.backstageViewButtonSave.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
-      this.backstageViewButtonSave.Size = new System.Drawing.Size(142, 28);
+      this.backstageViewButtonSave.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonSave.Size = new System.Drawing.Size(150, 34);
       this.backstageViewButtonSave.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Default", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images")))),
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonSave.SmallImages.Images1"))))});
@@ -2917,11 +2947,11 @@ namespace MPTagThat
       this.backstageViewButtonRefresh.ImageToTextSpace = 5;
       this.backstageViewButtonRefresh.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.LargeImages.Images"))))});
-      this.backstageViewButtonRefresh.Location = new System.Drawing.Point(7, 37);
-      this.backstageViewButtonRefresh.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
+      this.backstageViewButtonRefresh.Location = new System.Drawing.Point(5, 56);
+      this.backstageViewButtonRefresh.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
       this.backstageViewButtonRefresh.Name = "backstageViewButtonRefresh";
-      this.backstageViewButtonRefresh.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
-      this.backstageViewButtonRefresh.Size = new System.Drawing.Size(142, 28);
+      this.backstageViewButtonRefresh.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonRefresh.Size = new System.Drawing.Size(150, 34);
       this.backstageViewButtonRefresh.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("backstageViewButtonRefresh.SmallImages.Images"))))});
       this.backstageViewButtonRefresh.TabIndex = 4;
@@ -2969,9 +2999,9 @@ namespace MPTagThat
       // backstageViewSeparator1
       // 
       this.backstageViewSeparator1.Id = "369d25d6-d37c-4006-867c-9c1e69f63586";
-      this.backstageViewSeparator1.Location = new System.Drawing.Point(1, 143);
+      this.backstageViewSeparator1.Location = new System.Drawing.Point(0, 184);
       this.backstageViewSeparator1.Name = "backstageViewSeparator1";
-      this.backstageViewSeparator1.Size = new System.Drawing.Size(154, 2);
+      this.backstageViewSeparator1.Size = new System.Drawing.Size(155, 2);
       this.backstageViewSeparator1.TabIndex = 6;
       this.backstageViewSeparator1.Text = "backstageViewSeparator1";
       // 
@@ -2980,20 +3010,20 @@ namespace MPTagThat
       this.backstageViewButtonChangeColumns.CommandName = "ChangeDisplayColumns";
       this.backstageViewButtonChangeColumns.Id = "86ec7f12-cb60-44d1-8593-5d4c8b9a22ce";
       this.backstageViewButtonChangeColumns.ImageToTextSpace = 5;
-      this.backstageViewButtonChangeColumns.Location = new System.Drawing.Point(7, 145);
-      this.backstageViewButtonChangeColumns.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
+      this.backstageViewButtonChangeColumns.Location = new System.Drawing.Point(5, 186);
+      this.backstageViewButtonChangeColumns.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
       this.backstageViewButtonChangeColumns.Name = "backstageViewButtonChangeColumns";
-      this.backstageViewButtonChangeColumns.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
-      this.backstageViewButtonChangeColumns.Size = new System.Drawing.Size(142, 25);
+      this.backstageViewButtonChangeColumns.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonChangeColumns.Size = new System.Drawing.Size(150, 31);
       this.backstageViewButtonChangeColumns.TabIndex = 5;
       this.backstageViewButtonChangeColumns.Text = "Change Display Columns";
       // 
       // backstageViewSeparator2
       // 
       this.backstageViewSeparator2.Id = "1f44213c-f649-4525-8a34-f85c80e2607f";
-      this.backstageViewSeparator2.Location = new System.Drawing.Point(1, 172);
+      this.backstageViewSeparator2.Location = new System.Drawing.Point(0, 217);
       this.backstageViewSeparator2.Name = "backstageViewSeparator2";
-      this.backstageViewSeparator2.Size = new System.Drawing.Size(154, 2);
+      this.backstageViewSeparator2.Size = new System.Drawing.Size(155, 2);
       this.backstageViewSeparator2.TabIndex = 8;
       this.backstageViewSeparator2.Text = "backstageViewSeparator2";
       // 
@@ -3002,11 +3032,11 @@ namespace MPTagThat
       this.backstageViewButtonExit.CommandName = "Exit";
       this.backstageViewButtonExit.Id = "c79011c7-3dcd-44b7-8414-e1276b7e331f";
       this.backstageViewButtonExit.ImageToTextSpace = 5;
-      this.backstageViewButtonExit.Location = new System.Drawing.Point(7, 174);
-      this.backstageViewButtonExit.Margin = new System.Windows.Forms.Padding(6, 0, 6, 2);
+      this.backstageViewButtonExit.Location = new System.Drawing.Point(5, 219);
+      this.backstageViewButtonExit.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
       this.backstageViewButtonExit.Name = "backstageViewButtonExit";
-      this.backstageViewButtonExit.Padding = new System.Windows.Forms.Padding(16, 6, 16, 6);
-      this.backstageViewButtonExit.Size = new System.Drawing.Size(142, 25);
+      this.backstageViewButtonExit.Padding = new System.Windows.Forms.Padding(15, 9, 25, 9);
+      this.backstageViewButtonExit.Size = new System.Drawing.Size(150, 31);
       this.backstageViewButtonExit.TabIndex = 7;
       this.backstageViewButtonExit.Text = "Exit";
       // 
@@ -3021,7 +3051,7 @@ namespace MPTagThat
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1073, 99);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1073, 101);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -3031,7 +3061,7 @@ namespace MPTagThat
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromFile);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagIdentifyFiles);
       this.ribbonGroupTagsRetrieve.Controls.Add(this.buttonTagFromInternet);
-      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(1, 1);
+      this.ribbonGroupTagsRetrieve.Location = new System.Drawing.Point(4, 3);
       this.ribbonGroupTagsRetrieve.Name = "ribbonGroupTagsRetrieve";
       this.ribbonGroupTagsRetrieve.Size = new System.Drawing.Size(162, 94);
       this.ribbonGroupTagsRetrieve.TabIndex = 1;
@@ -3099,9 +3129,9 @@ namespace MPTagThat
       this.ribbonGroupTagsEdit.Controls.Add(this.separator3);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup1);
       this.ribbonGroupTagsEdit.Controls.Add(this.buttonGroup3);
-      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(163, 1);
+      this.ribbonGroupTagsEdit.Location = new System.Drawing.Point(168, 3);
       this.ribbonGroupTagsEdit.Name = "ribbonGroupTagsEdit";
-      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(446, 94);
+      this.ribbonGroupTagsEdit.Size = new System.Drawing.Size(449, 94);
       this.ribbonGroupTagsEdit.TabIndex = 2;
       this.ribbonGroupTagsEdit.Text = "Edit Tags";
       // 
@@ -3160,10 +3190,10 @@ namespace MPTagThat
       // separator1
       // 
       this.separator1.Id = "881260b2-614a-4b71-92dc-b0876220635a";
-      this.separator1.Location = new System.Drawing.Point(125, 6);
+      this.separator1.Location = new System.Drawing.Point(126, 7);
       this.separator1.Name = "separator1";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator1, System.Windows.Forms.Keys.None);
-      this.separator1.Size = new System.Drawing.Size(3, 61);
+      this.separator1.Size = new System.Drawing.Size(2, 60);
       this.separator1.TabIndex = 11;
       this.separator1.Text = "separator1";
       // 
@@ -3174,7 +3204,7 @@ namespace MPTagThat
       this.buttonFind.Id = "664cf5e1-775a-448d-9871-064b4c8b33a1";
       this.buttonFind.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFind.LargeImages.Images"))))});
-      this.buttonFind.Location = new System.Drawing.Point(131, 2);
+      this.buttonFind.Location = new System.Drawing.Point(132, 2);
       this.buttonFind.Name = "buttonFind";
       this.buttonFind.Popup = this.popupMenu4;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonFind, System.Windows.Forms.Keys.None);
@@ -3211,7 +3241,7 @@ namespace MPTagThat
       this.buttonValidateSong.Id = "6b558c4a-6aeb-42e1-bedf-c5e7e0ec886e";
       this.buttonValidateSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonValidateSong.LargeImages.Images"))))});
-      this.buttonValidateSong.Location = new System.Drawing.Point(175, 2);
+      this.buttonValidateSong.Location = new System.Drawing.Point(176, 2);
       this.buttonValidateSong.Name = "buttonValidateSong";
       this.buttonValidateSong.Popup = this.popupMenu5;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonValidateSong, System.Windows.Forms.Keys.None);
@@ -3246,10 +3276,10 @@ namespace MPTagThat
       // separator2
       // 
       this.separator2.Id = "d7a68ab0-052d-457e-8ab3-95e30ecb244b";
-      this.separator2.Location = new System.Drawing.Point(226, 6);
+      this.separator2.Location = new System.Drawing.Point(228, 7);
       this.separator2.Name = "separator2";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator2, System.Windows.Forms.Keys.None);
-      this.separator2.Size = new System.Drawing.Size(3, 61);
+      this.separator2.Size = new System.Drawing.Size(2, 60);
       this.separator2.TabIndex = 8;
       this.separator2.Text = "separator1";
       // 
@@ -3262,7 +3292,7 @@ namespace MPTagThat
       this.buttonDeleteTag.Id = "3356cb8b-8ef8-4134-b8e4-8290dd07b0f0";
       this.buttonDeleteTag.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteTag.LargeImages.Images"))))});
-      this.buttonDeleteTag.Location = new System.Drawing.Point(232, 2);
+      this.buttonDeleteTag.Location = new System.Drawing.Point(234, 2);
       this.buttonDeleteTag.Name = "buttonDeleteTag";
       this.buttonDeleteTag.Popup = this.popupMenu2;
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonDeleteTag, System.Windows.Forms.Keys.None);
@@ -3318,7 +3348,7 @@ namespace MPTagThat
       this.buttonRemoveComment.Id = "cbb994ed-acd4-4eeb-92d2-692a3e92d5bb";
       this.buttonRemoveComment.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.LargeImages.Images"))))});
-      this.buttonRemoveComment.Location = new System.Drawing.Point(276, 2);
+      this.buttonRemoveComment.Location = new System.Drawing.Point(278, 2);
       this.buttonRemoveComment.Name = "buttonRemoveComment";
       this.buttonRemoveComment.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonRemoveComment.ScreenTip.Image")));
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonRemoveComment, System.Windows.Forms.Keys.None);
@@ -3331,10 +3361,10 @@ namespace MPTagThat
       // separator3
       // 
       this.separator3.Id = "6d913a4c-a584-4ec3-87a9-bae2f1d79f15";
-      this.separator3.Location = new System.Drawing.Point(337, 6);
+      this.separator3.Location = new System.Drawing.Point(340, 7);
       this.separator3.Name = "separator3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.separator3, System.Windows.Forms.Keys.None);
-      this.separator3.Size = new System.Drawing.Size(3, 61);
+      this.separator3.Size = new System.Drawing.Size(2, 60);
       this.separator3.TabIndex = 9;
       this.separator3.Text = "separator1";
       // 
@@ -3342,7 +3372,7 @@ namespace MPTagThat
       // 
       this.buttonGroup1.Controls.Add(this.comboBoxScripts);
       this.buttonGroup1.Controls.Add(this.buttonScriptExecute);
-      this.buttonGroup1.Location = new System.Drawing.Point(342, 2);
+      this.buttonGroup1.Location = new System.Drawing.Point(345, 2);
       this.buttonGroup1.Name = "buttonGroup1";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup1, System.Windows.Forms.Keys.None);
       this.buttonGroup1.Size = new System.Drawing.Size(57, 24);
@@ -3383,7 +3413,7 @@ namespace MPTagThat
       this.buttonGroup3.Controls.Add(this.buttonNumberOnClick);
       this.buttonGroup3.Controls.Add(this.buttonAutoNumber);
       this.buttonGroup3.Controls.Add(this.textBoxNumber);
-      this.buttonGroup3.Location = new System.Drawing.Point(342, 26);
+      this.buttonGroup3.Location = new System.Drawing.Point(345, 26);
       this.buttonGroup3.Name = "buttonGroup3";
       this.ribbonGroupTagsEdit.SetShortcutKeys(this.buttonGroup3, System.Windows.Forms.Keys.None);
       this.buttonGroup3.Size = new System.Drawing.Size(100, 24);
@@ -3444,7 +3474,7 @@ namespace MPTagThat
       this.ribbonGroupPicture.Controls.Add(this.buttonGetCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonRemoveCoverArt);
       this.ribbonGroupPicture.Controls.Add(this.buttonSaveAsThumb);
-      this.ribbonGroupPicture.Location = new System.Drawing.Point(609, 1);
+      this.ribbonGroupPicture.Location = new System.Drawing.Point(619, 3);
       this.ribbonGroupPicture.Name = "ribbonGroupPicture";
       this.ribbonGroupPicture.Size = new System.Drawing.Size(118, 94);
       this.ribbonGroupPicture.TabIndex = 6;
@@ -3452,6 +3482,7 @@ namespace MPTagThat
       // 
       // galleryPicture
       // 
+      this.galleryPicture.AllowDrop = true;
       this.galleryPicture.AutoScrollMinSize = new System.Drawing.Size(0, 0);
       this.ribbon.SetGalleryItemHeightMeasurementMode(this.galleryPicture, Elegant.Ui.GalleryItemHeightMeasurementMode.Large);
       this.galleryPicture.Id = "dfef072e-e209-42c2-8a2e-be1fc6f59025";
@@ -3471,6 +3502,7 @@ namespace MPTagThat
       this.galleryPicture.TabIndex = 0;
       this.galleryPicture.Text = "gallery1";
       this.galleryPicture.HoveredItemChanged += new System.EventHandler<Elegant.Ui.GalleryHoveredItemChangedEventArgs>(this.galleryPicture_HoveredItemChanged);
+      this.galleryPicture.DragDrop += new System.Windows.Forms.DragEventHandler(this.galleryPicture_DragDrop);
       // 
       // buttonGetCoverArt
       // 
@@ -3526,7 +3558,7 @@ namespace MPTagThat
       // 
       this.ribbonGroupOrganise.Controls.Add(this.buttonRenameFiles);
       this.ribbonGroupOrganise.Controls.Add(this.buttonOrganiseFiles);
-      this.ribbonGroupOrganise.Location = new System.Drawing.Point(727, 1);
+      this.ribbonGroupOrganise.Location = new System.Drawing.Point(739, 3);
       this.ribbonGroupOrganise.Name = "ribbonGroupOrganise";
       this.ribbonGroupOrganise.Size = new System.Drawing.Size(111, 94);
       this.ribbonGroupOrganise.TabIndex = 3;
@@ -3589,7 +3621,7 @@ namespace MPTagThat
       this.ribbonGroupOther.Controls.Add(this.buttonAddToBurner);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToConversion);
       this.ribbonGroupOther.Controls.Add(this.buttonAddToPlaylist);
-      this.ribbonGroupOther.Location = new System.Drawing.Point(838, 1);
+      this.ribbonGroupOther.Location = new System.Drawing.Point(852, 3);
       this.ribbonGroupOther.Name = "ribbonGroupOther";
       this.ribbonGroupOther.Size = new System.Drawing.Size(133, 94);
       this.ribbonGroupOther.TabIndex = 5;
@@ -3984,9 +4016,9 @@ namespace MPTagThat
       this.panelMiddle.Controls.Add(this.panelLeft);
       this.panelMiddle.Controls.Add(this.panelRight);
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddle.Location = new System.Drawing.Point(0, 150);
+      this.panelMiddle.Location = new System.Drawing.Point(0, 153);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1073, 922);
+      this.panelMiddle.Size = new System.Drawing.Size(1073, 919);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -3995,17 +4027,17 @@ namespace MPTagThat
       this.panelMiddleTop.Controls.Add(this.splitterTop);
       this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
+      this.panelMiddleTop.Location = new System.Drawing.Point(153, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(741, 650);
+      this.panelMiddleTop.Size = new System.Drawing.Size(751, 652);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
       // 
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panelFileList.Location = new System.Drawing.Point(0, 88);
+      this.panelFileList.Location = new System.Drawing.Point(0, 83);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(741, 562);
+      this.panelFileList.Size = new System.Drawing.Size(751, 569);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -4028,7 +4060,7 @@ namespace MPTagThat
       this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
       this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(741, 80);
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(751, 80);
       this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // splitterLeft
@@ -4054,7 +4086,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 922);
+      this.panelLeft.Size = new System.Drawing.Size(150, 919);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -4062,7 +4094,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 922);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 919);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -4076,7 +4108,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(899, 0);
+      this.splitterRight.Location = new System.Drawing.Point(904, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4091,7 +4123,7 @@ namespace MPTagThat
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
       this.panelRight.Location = new System.Drawing.Point(907, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 922);
+      this.panelRight.Size = new System.Drawing.Size(166, 919);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -4104,7 +4136,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 650);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 652);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -4115,7 +4147,7 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 658);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
       this.panelMiddleBottom.Size = new System.Drawing.Size(757, 264);
       this.panelMiddleBottom.TabIndex = 12;
@@ -4187,6 +4219,11 @@ namespace MPTagThat
       this.backstageViewPageOptions.PerformLayout();
       this.panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).EndInit();
+      this.tabPageSettingsLyricsCover.ResumeLayout(false);
+      this.groupBoxPictures.ResumeLayout(false);
+      this.groupBoxPictures.PerformLayout();
+      this.groupBoxLyrics.ResumeLayout(false);
+      this.groupBoxLyricsSites.ResumeLayout(false);
       this.tabPageSettingsGeneral.ResumeLayout(false);
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
@@ -4202,11 +4239,6 @@ namespace MPTagThat
       this.groupBoxTagsID3.ResumeLayout(false);
       this.groupBoxTagsID3.PerformLayout();
       this.groupBoxID3Update.ResumeLayout(false);
-      this.tabPageSettingsLyricsCover.ResumeLayout(false);
-      this.groupBoxPictures.ResumeLayout(false);
-      this.groupBoxPictures.PerformLayout();
-      this.groupBoxLyrics.ResumeLayout(false);
-      this.groupBoxLyricsSites.ResumeLayout(false);
       this.tabPageSettingsDatabase.ResumeLayout(false);
       this.groupBoxDatabaseBuild.ResumeLayout(false);
       this.groupBoxDatabaseBuild.PerformLayout();
@@ -4636,6 +4668,8 @@ namespace MPTagThat
     private Elegant.Ui.PopupMenu popupMenu5;
     private Elegant.Ui.Button buttonFixSong;
     private Core.WinControls.MPTCheckBox ckClearUserFramesOnSave;
+    private Core.WinControls.MPTCheckBox ckChangeCoverSize;
+    private TextBox tbCoverSize;
   }
 }
 

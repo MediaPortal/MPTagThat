@@ -158,11 +158,17 @@ namespace MPTagThat.InternetLookup
         else
         {
           dlgSearchResult = new AlbumSearchResult();
-          foreach (AmazonAlbum foundAlbum in albums)
+          for (int i = albums.Count - 1; i >= 0; i--)
           {
+
+            AmazonAlbum foundAlbum = albums[i];
+
             // Skip Albums with no Discs returned
             if (foundAlbum.Discs.Count == 0)
+            {
+              albums.RemoveAt(i);
               continue;
+            }
 
             // count the number of tracks, as we may have multiple discs
             int trackCount = 0;
@@ -329,7 +335,6 @@ namespace MPTagThat.InternetLookup
           main.TracksGridView.SetBackgroundColorChanged(index);
           track.Changed = true;
           main.TracksGridView.Changed = true;
-          main.TracksGridView.SetStatusColumnChange(main.TracksGridView.View.Rows[index]);
         }
       }
       dlgAlbumDetails.Dispose();

@@ -7,6 +7,34 @@ Legend:
 - Deleted
 x Fixed
 
+3.0.7 Date: 05.05.2012 
+-------------------------------------
++ Cover Art: Added new setting to resize saved Cover Art to the specified maximum width
++ Cover Art: Added Context Menu to search for Coverart on Google based on Artist and Title
++ Cover Art: Allowing Drag and Drop of Images from Explorer or from a Website, e.g. Google Images
++ Cover Art: Enable Drag & Drop of Cover Art from the Non-Music Files Panel
++ Cover Art: Implement Drag & Drop Operation of Cover Art from Explorer to Ribbon Picture Box
+x General: Changed the way the tags are kept in memory, should allow reading a lot more files, without Out Of Memory Exceptions
+x TagEdit: The column for Star rating didn't have the correct background color
+x Language: Fixed some spelling issues
+x TagEdit: Tag from Internet was returning wrong Album in some special cases
+
+3.0.6 Date: 01.03.2012 
+-------------------------------------
++ Localisation: French Translation provided by Pierre le Lidgeu et Colok. Merci!
+x General: Deleting non-music files did no longer work
+x General: Avoid filling the Tagedit Form with first item of the grid when Scanning a folder
+x Cover Art lookup was broken due to change in Amazon Interface. Made the code a bit more generic, so that it won't break on future changes
+x Cover: iTunes does not recognize Artwork if MimeType is not set
+x TagEdit: Disable editing ID3 v2.4 only frames, when ID3 2.3 is set as default Format for saving
+x Tagedit: The Id3 v2.4 TMCL was not handled correctly
+x TagEdit: The TCMP (Part of Compilation) flag was noit written correctly
+x TagEdit: Saving CoverArt was failing due to some logic error. Converted to FreeImage use
+x Tagedit: Non-Standard ID3 Frames were written multiple times
+x Tagedit: Original RElease Year handling corrected
+x TagEdit: Non-Standard ID3 Tags were not updated
+x TaglibSharp: The ID3 v2.3 IPLS frame was not correctly returned
+
 3.0.5 Date: 08.01.2012 
 -------------------------------------
 + GUI: Added Picture dimensions to the Thumbs title in the Non-Music File section

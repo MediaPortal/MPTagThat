@@ -121,7 +121,7 @@ namespace MPTagThat.CaseConversion
         if (fileName.Length > 255)
         {
           log.Debug("Filename too long: {0}", fileName);
-          _main.TracksGridView.SetStatusColumnError(_main.TracksGridView.View.Rows[rowIndex]);
+          _main.TracksGridView.TrackList[rowIndex].Status = 2;
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
                                                String.Format("{0}: {1}",
                                                              localisation.ToString("tag2filename", "NameTooLong"),
@@ -140,7 +140,7 @@ namespace MPTagThat.CaseConversion
           if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
           {
             log.Debug("New Filename already exists: {0}", fileName);
-            _main.TracksGridView.SetStatusColumnError(_main.TracksGridView.View.Rows[rowIndex]);
+            _main.TracksGridView.TrackList[rowIndex].Status = 2;
             _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
                                                  String.Format("{0}: {1}",
                                                                localisation.ToString("tag2filename", "FileExists"),

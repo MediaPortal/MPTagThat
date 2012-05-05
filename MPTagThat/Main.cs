@@ -51,6 +51,7 @@ using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 using Action = MPTagThat.Core.Action;
 using ComboBox = Elegant.Ui.ComboBox;
+using Picture = MPTagThat.Core.Common.Picture;
 using ScrollEventArgs = System.Windows.Forms.ScrollEventArgs;
 
 #endregion
@@ -1828,6 +1829,8 @@ namespace MPTagThat
       ckCreateMissingFolderThumb.Checked = Options.MainSettings.CreateFolderThumb;
       ckUseExistinbgThumb.Checked = Options.MainSettings.EmbedFolderThumb;
       ckOverwriteExistingCovers.Checked = Options.MainSettings.OverwriteExistingCovers;
+      ckChangeCoverSize.Checked = Options.MainSettings.ChangeCoverSize;
+      tbCoverSize.Text = Options.MainSettings.MaxCoverWidth.ToString();
       ckOverwriteExistingLyrics.Checked = Options.MainSettings.OverwriteExistingLyrics;
       ckOnlySaveFolderThumb.Checked = Options.MainSettings.OnlySaveFolderThumb;
 
@@ -2357,6 +2360,8 @@ namespace MPTagThat
       Options.MainSettings.EmbedFolderThumb = ckUseExistinbgThumb.Checked;
       Options.MainSettings.OverwriteExistingCovers = ckOverwriteExistingCovers.Checked;
       Options.MainSettings.OnlySaveFolderThumb = ckOnlySaveFolderThumb.Checked;
+      Options.MainSettings.ChangeCoverSize = ckChangeCoverSize.Checked;
+      Options.MainSettings.MaxCoverWidth = Convert.ToInt32(tbCoverSize.Text);
       Options.MainSettings.OverwriteExistingLyrics = ckOverwriteExistingLyrics.Checked;
       Options.MainSettings.ClearUserFrames = ckClearUserFramesOnSave.Checked;
       Options.MainSettings.MP3Validate = ckValidateMP3.Checked;
@@ -3837,6 +3842,51 @@ namespace MPTagThat
         {
           picControl.Close();
         }
+      }
+    }
+
+    /// <summary>
+    /// A file is dropped on the gallery. If it is a valid picture, update all the selected files
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void galleryPicture_DragDrop(object sender, DragEventArgs e)
+    {
+      // If no rows are selected, select them all
+      gridViewControl.CheckSelections(true);
+
+      if (e.Data == null)
+      {
+        return;
+      }
+
+      object formatArray = e.Data.GetFormats();
+      List<string> formats = new List<string>(formatArray as string[]);
+      string dataObject = "FileName";
+      if (formats.Contains("Text"))
+      {
+        dataObject = "Text";
+      }
+      object fileNameObj = e.Data.GetData(dataObject);
+      if (fileNameObj == null)
+      {
+        return;
+      }
+
+      string fileName = "";
+      if (dataObject == "FileName")
+      {
+        // When dragging from explorer, we get a string array
+        fileName = (fileNameObj as string[])[0];
+      }
+      else
+      {
+        fileName = (string) fileNameObj;
+      }
+
+      if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
+      {
+        TracksGridView.CoverArtDrop(fileName);   
       }
     }
 

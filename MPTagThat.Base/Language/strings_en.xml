@@ -481,6 +481,7 @@
 
   <!--  Context Menus -->
   <Section name="contextmenu">
+    <String id="CoverLookup">Search for Song Cover on Google</String>
     <String id="AddBurner">Add Item(s) to Burner</String>
     <String id="AddConverter">Add Item(s) to Converter</String>
     <String id="AddPlayList">Add Item(s) to PlayList</String>
@@ -658,6 +659,7 @@
     <String id="OverwriteExistingCover">Overwrite existing Cover(s) on automatic tagging</String>
     <String id="EmbedExistingThumb">Embed existing folder thumb (folder.jpg) on cover search</String>
     <String id="OnlySaveFolderThumb">Save Cover Art only to folder thumb. Don't touch the music file</String>
+    <String id="ChangeCoverSize">Save covers with a maximum pixel width of:</String>
     <String id="AmazonSite">Amazon Search Site:</String>
     <String id="GroupBoxLyrics">Lyrics</String>
     <String id="SwitchArtist">Switch Artist before submit</String>
@@ -711,9 +713,9 @@
     <String id="CustomPath">Custom Paths and Filenames</String>
     <String id="Format">Format:</String>
     <String id="TargetFolder">Target Folder:</String>
-    <String id="RipOptions">Riping Options</String>
-    <String id="EjectCD">Eject CD after Riping</String>
-    <String id="ActivateTargetFolder">Activate Target Folder after Riping</String>
+    <String id="RipOptions">Ripping Options</String>
+    <String id="EjectCD">Eject CD after Ripping</String>
+    <String id="ActivateTargetFolder">Activate Target Folder after Ripping</String>
     <String id="GroupBoxEncoding">Encoding Format</String>
     <String id="EncodingFormat">Select the format you wish to encode to:</String>
     <String id="TabRippingMP3">MP3</String>

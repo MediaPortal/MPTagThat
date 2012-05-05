@@ -481,6 +481,7 @@
     
   <!--  Context Menus -->
   <Section name="contextmenu">
+	<String id="CoverLookup">Suche Song Cover auf Google</String>
     <String id="AddBurner">Zur Brennliste hinzufügen</String>
     <String id="AddConverter">Zur Konvertierungliste hinzufügen</String>
     <String id="AddPlayList">Zur Abspielliste hinzufügen</String>
@@ -658,6 +659,7 @@
     <String id="OverwriteExistingCover">Existierende Bilder beim automatischen Taggen überschreiben</String>
     <String id="EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</String>
     <String id="OnlySaveFolderThumb">Nur Orndervorschau speichern. Nicht die Musikdatei verändern</String>
+    <String id="ChangeCoverSize">Speichern von Bildern mit einer maximalen Pixel Breite von:</String>
 	<String id="AmazonSite">Amazon Suchseite:</String>
     <String id="GroupBoxLyrics">Liedtexte</String>
     <String id="SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</String>
@@ -711,9 +713,9 @@
     <String id="CustomPath">Pfad und Dateiname</String>
     <String id="Format">Format:</String>
     <String id="TargetFolder">Zielverzeichnis:</String>
-    <String id="RipOptions">Riping Optionen</String>
-    <String id="EjectCD">CD nach ripen auswerfen</String>
-    <String id="ActivateTargetFolder">Zielverzeichnis nach ripen aktivieren</String>
+    <String id="RipOptions">Ripping Optionen</String>
+    <String id="EjectCD">CD nach rippen auswerfen</String>
+    <String id="ActivateTargetFolder">Zielverzeichnis nach rippen aktivieren</String>
     <String id="GroupBoxEncoding">Enkodier Formate</String>
     <String id="EncodingFormat">Wählen Sie ein Enkodier Format aus:</String>
     <String id="TabRippingMP3">MP3</String>
