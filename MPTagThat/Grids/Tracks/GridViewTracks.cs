@@ -86,7 +86,7 @@ namespace MPTagThat.GridView
     private SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
 
     // Get Properties to be able to sort on column heading 
-    private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData()); 
+    private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
 
     #region Nested type: ThreadSafeAddErrorDelegate
 
@@ -1060,7 +1060,7 @@ namespace MPTagThat.GridView
         }
         Image img = Image.FromStream(stream);
         stream.Close();
-        
+
         pic = new Picture { Data = (Image)img.Clone() };
 
         if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
@@ -1748,11 +1748,14 @@ namespace MPTagThat.GridView
               log.Trace("Retrieving file: {0}", fi.FullName);
               // Read the Tag
               TrackData track = Track.Create(fi.FullName);
-              if (ApplyTagFilter(track))
+              if (track != null)
               {
-                AddTrack(track);
-                tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
-                count++;
+                if (ApplyTagFilter(track))
+                {
+                  AddTrack(track);
+                  tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+                  count++;
+                }
               }
             }
             else
@@ -3096,6 +3099,11 @@ namespace MPTagThat.GridView
         return;
       }
 
+      if (e.RowIndex == bindingList.Count)
+      {
+        return;
+      }
+
       TrackData track = bindingList[e.RowIndex];
 
       // Handle the status column
@@ -3106,7 +3114,7 @@ namespace MPTagThat.GridView
           e.Value = Properties.Resources.Warning;
           return;
         }
-        
+
         switch (track.Status)
         {
           case -1:
