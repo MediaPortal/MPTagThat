@@ -58,7 +58,12 @@ namespace TagLib {
 		/// <summary>
 		///    A Photo is present.
 		/// </summary>
-		Photo = 3,
+		Photo = 4,
+
+		/// <summary>
+		///    Text is present.
+		/// </summary>
+		Text = 8
 	}
 	
 	/// <summary>
