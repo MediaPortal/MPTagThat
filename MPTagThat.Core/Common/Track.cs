@@ -530,6 +530,11 @@ namespace MPTagThat.Core
 
         file.Tag.Year = (uint)track.Year;
 
+        file.Tag.ReplayGainTrack = track.ReplayGainTrack;
+        file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
+        file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
+        file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
+
         #endregion
 
         #region Detailed Information

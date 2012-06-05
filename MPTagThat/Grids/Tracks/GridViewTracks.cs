@@ -25,6 +25,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -1566,7 +1567,11 @@ namespace MPTagThat.GridView
           }
         }
 
-        log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", Convert.ToString(titleGain), Convert.ToString(peak));
+        Bass.BASS_StreamFree(stream);
+
+        log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", titleGain.ToString(CultureInfo.InvariantCulture), peak.ToString(CultureInfo.InvariantCulture));
+        track.ReplayGainTrack = titleGain.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainTrackPeak = peak.ToString(CultureInfo.InvariantCulture);
 
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
