@@ -823,6 +823,83 @@ namespace TagLib {
 			set {}
 		}
 
+    /// <summary>
+    ///    Gets and sets the ReplayGain Track Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>This field represents the ReplayGain Track Value, and can be used
+    ///    to determine the required Volume leveling on playback of the track.</para>
+    /// </remarks>
+    public virtual string ReplayGainTrack
+    {
+      get { return null; }
+      set { }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>This field represents the ReplayGain Peak Value
+    ///    </para>
+    /// </remarks>
+    public virtual string ReplayGainTrackPeak
+    {
+      get { return null; }
+      set { }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>This field represents the ReplayGain Album Value, and can be used
+    ///    to determine the required Volume leveling on playback of the track.</para>
+    /// </remarks>
+    public virtual string ReplayGainAlbum
+    {
+      get { return null; }
+      set { }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>This field represents the ReplayGain Album Peak Value
+    ///    </para>
+    /// </remarks>
+    public virtual string ReplayGainAlbumPeak
+    {
+      get { return null; }
+      set { }
+    }
+
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.

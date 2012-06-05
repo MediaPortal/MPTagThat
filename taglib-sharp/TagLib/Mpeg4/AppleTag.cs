@@ -1360,6 +1360,78 @@ namespace TagLib.Mpeg4 {
 			set {SetDashBox("com.apple.iTunes", "MusicBrainz Album Release Country",value);}
 		}
 
+    /// <summary>
+    ///    Gets and sets the ReplayGain Track Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "dash"/"----" box type.
+    /// </remarks>
+    public override string ReplayGainTrack
+    {
+      get { return GetDashBox("com.apple.iTunes", "replaygain_track_gain"); }
+      set { SetDashBox("com.apple.iTunes", "replaygain_track_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "dash"/"----" box type.
+    /// </remarks>
+    public override string ReplayGainTrackPeak
+    {
+      get { return GetDashBox("com.apple.iTunes", "replaygain_track_peak"); }
+      set { SetDashBox("com.apple.iTunes", "replaygain_track_peak", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "dash"/"----" box type.
+    /// </remarks>
+    public override string ReplayGainAlbum
+    {
+      get { return GetDashBox("com.apple.iTunes", "replaygain_album_gain"); }
+      set { SetDashBox("com.apple.iTunes", "replaygain_album_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "dash"/"----" box type.
+    /// </remarks>
+    public override string ReplayGainAlbumPeak
+    {
+      get { return GetDashBox("com.apple.iTunes", "replaygain_album_peak"); }
+      set { SetDashBox("com.apple.iTunes", "replaygain_album_peak", value); }
+    }
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.
