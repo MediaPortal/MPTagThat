@@ -443,6 +443,10 @@
 	<String id="NumDisc">Num. Discs</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
+    <String id="ReplayGainTrack">Track Gain</String>
+    <String id="ReplayGainTrackPeak">Track Peak</String>
+    <String id="ReplayGainAlbum">Album Gain</String>
+    <String id="ReplayGainAlbumPeak">Album Peak</String>
     <String id="Comment">Comment</String>
     <String id="Composer">Composer</String>
     <String id="Conductor">Conductor</String>

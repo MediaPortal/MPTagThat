@@ -443,6 +443,10 @@
 	<String id="NumDisc">Anz. Medien</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Bewertung</String>
+    <String id="ReplayGainTrack">Track Gain</String>
+    <String id="ReplayGainTrackPeak">Track Peak</String>
+    <String id="ReplayGainAlbum">Album Gain</String>
+    <String id="ReplayGainAlbumPeak">Album Peak</String>
     <String id="Comment">Kommentar</String>
     <String id="Composer">Komponist</String>
     <String id="Conductor">Dirigent</String>

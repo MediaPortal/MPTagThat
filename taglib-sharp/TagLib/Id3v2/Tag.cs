@@ -1902,7 +1902,79 @@ namespace TagLib.Id3v2 {
 			get {return GetUserTextAsString ("MusicBrainz Album Release Country");}
 			set {SetUserTextAsString ("MusicBrainz Album Release Country",value);}
 		}
-		
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Track Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "TXXX:replaygain_track_gain" frame.
+    /// </remarks>
+    public override string ReplayGainTrack
+    {
+      get { return GetUserTextAsString("replaygain_track_gain"); }
+      set { SetUserTextAsString("replaygain_track_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "TXXX:replaygain_track_peak" frame.
+    /// </remarks>
+    public override string ReplayGainTrackPeak
+    {
+      get { return GetUserTextAsString("replaygain_track_peak"); }
+      set { SetUserTextAsString("replaygain_track_peak", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "TXXX:replaygain_album_gain" frame.
+    /// </remarks>
+    public override string ReplayGainAlbum
+    {
+      get { return GetUserTextAsString("replaygain_album_gain"); }
+      set { SetUserTextAsString("replaygain_album_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain ALbum Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "TXXX:replaygain_album_peak" frame.
+    /// </remarks>
+    public override string ReplayGainAlbumPeak
+    {
+      get { return GetUserTextAsString("replaygain_album_peak"); }
+      set { SetUserTextAsString("replaygain_album_peak", value); }
+    }
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.

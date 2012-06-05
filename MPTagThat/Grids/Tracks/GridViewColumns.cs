@@ -71,6 +71,10 @@ namespace MPTagThat.GridView
     private readonly GridViewColumn _originalRelease;
     private readonly GridViewColumn _publisher;
     private readonly GridViewColumn _rating;
+    private readonly GridViewColumn _replayGainTrack;
+    private readonly GridViewColumn _replayGainTrackPeak;
+    private readonly GridViewColumn _replayGainAlbum;
+    private readonly GridViewColumn _replayGainAlbumPeak;
     private readonly GridViewColumn _samplerate;
     private readonly GridViewColumn _status;
     private readonly GridViewColumn _subTitle;
@@ -105,6 +109,10 @@ namespace MPTagThat.GridView
       _disc = new GridViewColumn("Disc", "^text", 45, true, false, true, false);
       _bpm = new GridViewColumn("BPM", "number", 40, true, false, true, false);
       _rating = new GridViewColumn("Rating", "rating", 90, true, false, true, false);
+      _replayGainTrack = new GridViewColumn("ReplayGainTrack", "text", 100, true, true, true, false);
+      _replayGainTrackPeak = new GridViewColumn("ReplayGainTrackPeak", "text", 100, true, true, true, false);
+      _replayGainAlbum = new GridViewColumn("ReplayGainAlbum", "text", 100, true, true, true, false);
+      _replayGainAlbumPeak = new GridViewColumn("ReplayGainAlbumPeak", "text", 100, true, true, true, false);
       _comment = new GridViewColumn("Comment", "text", 200, true, false, true, false);
       _composer = new GridViewColumn("Composer", "text", 150, true, false, true, false);
       _conductor = new GridViewColumn("Conductor", "text", 150, true, false, true, false);
@@ -205,6 +213,16 @@ namespace MPTagThat.GridView
         {
           _settings.Columns.Insert(2, _filepath);
         }
+
+        // Replaygain Columns
+        if (_settings.Columns[17].Name != "ReplayGainTrack")
+        {
+          _settings.Columns.Insert(17, _replayGainTrack);
+          _settings.Columns.Insert(18, _replayGainTrackPeak);
+          _settings.Columns.Insert(19, _replayGainAlbum);
+          _settings.Columns.Insert(20, _replayGainAlbumPeak);
+        }
+
       }
     }
 
@@ -242,6 +260,10 @@ namespace MPTagThat.GridView
       columnList.Add(_composer);
       columnList.Add(_conductor);
       columnList.Add(_numpics);
+      columnList.Add(_replayGainTrack);
+      columnList.Add(_replayGainTrackPeak);
+      columnList.Add(_replayGainAlbum);
+      columnList.Add(_replayGainAlbumPeak);
       // Initially hidden columns
       columnList.Add(_artistSortName);
       columnList.Add(_albumSortName);
