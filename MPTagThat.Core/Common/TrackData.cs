@@ -68,7 +68,7 @@ namespace MPTagThat.Core
                                                             {
                                                               "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM",
                                                               "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC",
-                                                              "POPM", "TIT2", "TRCK", "TYER"
+                                                              "POPM", "TIT2", "TRCK", "TYER", "TDRC"
                                                             };
 
     private static readonly string[] _extendedId3Frames = new[]
