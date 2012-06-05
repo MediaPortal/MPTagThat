@@ -55,6 +55,8 @@ namespace MPTagThat.Core
     private string _genre;
     private string _grouping;
     private string _title;
+    private string _replaygainTrack;
+    private string _replaygainAlbum;
 
     private MP3Error _mp3ValError;
     private string _mp3ValErrorText;
@@ -710,6 +712,39 @@ namespace MPTagThat.Core
       get { return _popmframes; }
     }
 
+    public string ReplayGainTrack
+    {
+      get { return _replaygainTrack; } 
+      
+      set
+      {
+        if (value != "" && !value.Contains("db"))
+        {
+          value += " db";
+        }
+        _replaygainTrack = value;
+      }
+    }
+
+    public string ReplayGainTrackPeak { get; set; }
+
+    public string ReplayGainAlbum
+    {
+      get { return _replaygainAlbum; } 
+      
+      set
+      {
+        if (value != "" && !value.Contains("db"))
+        {
+          value += " db";
+        }
+        _replaygainAlbum = value;
+      }
+    }
+
+    public string ReplayGainAlbumPeak { get; set; }
+
+
     /// <summary>
     /// SubTitle / More Detailed Description
     /// ID3: TIT3
@@ -879,10 +914,32 @@ namespace MPTagThat.Core
     #endregion
 
     #region Private Methods
+
+    /// <summary>
+    /// Returns the Value of the Frame with the specified Frame id
+    /// </summary>
+    /// <param name="frameId"></param>
+    /// <returns></returns>
     private string GetFrame(string frameId)
     {
       int index = -1;
       if ((index = Frames.FindIndex((f => f.Id == frameId))) > -1)
+      {
+        return Frames[index].Value;
+      }
+      return "";
+    }
+
+    /// <summary>
+    /// Returns the value of the frame with the specified frame id and value
+    /// </summary>
+    /// <param name="frameId"></param>
+    /// <param name="frameValue"></param>
+    /// <returns></returns>
+    private string GetFrame(string frameId, string frameValue)
+    {
+      int index = -1;
+      if ((index = Frames.FindIndex((f => f.Id == frameId && f.Value == frameValue))) > -1)
       {
         return Frames[index].Value;
       }
@@ -901,6 +958,7 @@ namespace MPTagThat.Core
         Frames.Add(new Frame(frameId, "", text));
       }
     }
+
     #endregion
 
   }

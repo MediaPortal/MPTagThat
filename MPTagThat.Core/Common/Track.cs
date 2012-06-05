@@ -127,6 +127,11 @@ namespace MPTagThat.Core
         track.Grouping = file.Tag.Grouping ?? "";
         track.Title = file.Tag.Title ?? "";
 
+        track.ReplayGainTrack = file.Tag.ReplayGainTrack ?? "";
+        track.ReplayGainTrackPeak = file.Tag.ReplayGainTrackPeak ?? "";
+        track.ReplayGainAlbum = file.Tag.ReplayGainAlbum ?? "";
+        track.ReplayGainAlbumPeak = file.Tag.ReplayGainAlbumPeak ?? "";
+
         track.TrackNumber = file.Tag.Track;
         track.TrackCount = file.Tag.TrackCount;
         track.Year = (int)file.Tag.Year;
