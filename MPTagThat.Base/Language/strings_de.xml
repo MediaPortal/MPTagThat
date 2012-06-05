@@ -96,6 +96,7 @@
 	<String id="Replace">Ersetzen</String>
 	<String id="ValidateSong">Überprüfen MP3</String>
 	<String id="FixSong">Korrigieren MP3</String>
+	<String id="ReplayGain">Replay Gain Analyse</String>
     <String id="RemoveCommentPicture">Entfernen:</String>
     <String id="RemoveComments">Alle Kommentare entfernen</String>
     <String id="RemovePictures">Alle Bilder entfernen</String>
@@ -205,6 +206,8 @@
     <String id="ValidateSongText">Verwendet MP3Val, um die ausgewählte MP3 Datei auf Fehler zu untersuchen. Manche Fehler können mit der "Korrigieren MP3" Funktion behoben werden.</String>
 	<String id="FixSong">Korrigieren MP3</String>
     <String id="FixSongText">Verwendet MP3Val um Fehler in der MP3 Datei zu korrigieren.</String>
+	<String id="ReplayGain">Replay Gain Analyse</String>
+    <String id="ReplayGainText">Analysiert die ausgewählten Dateien und ermittelt den Replay Gain. Der ermittelte Wert wird in die Tags geschrieben.\nDAchtung: as File selbst wird nicht modifiziert.</String>
 
     <!-- Rip Tab-->
     <String id="RipButton">Rip starten</String>

@@ -28,6 +28,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -42,6 +43,8 @@ using MPTagThat.Player;
 using MPTagThat.TagEdit;
 using TagLib;
 using TagLib.Id3v2;
+using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Mix;
 using Control = System.Windows.Forms.Control;
 using File = TagLib.File;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -109,6 +112,17 @@ namespace MPTagThat.GridView
     #region Nested type: ThreadSafeGridDelegate1
 
     private delegate void ThreadSafeGridDelegate1(object sender, DoWorkEventArgs e);
+
+    #endregion
+
+    #region Imports
+
+    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+    public static extern int InitGainAnalysis(long samplefreq);
+    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+    public static extern int AnalyzeSamples(double[] left_samples, double[] right_samples, UIntPtr num_samples, int num_channels);
+    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+    public static extern float GetTitleGain();
 
     #endregion
 
@@ -1482,6 +1496,134 @@ namespace MPTagThat.GridView
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
       log.Trace("<<<");
+    }
+
+    #endregion
+
+    #region Replay Gain
+
+    /// <summary>
+    ///   Analyses selected files and calculates the ReplayGain
+    /// </summary>
+    public void ReplayGain()
+    {
+      log.Trace(">>>");
+
+      int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
+
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        ClearStatusColumn(row.Index);
+
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        Application.DoEvents();
+        _main.progressBar1.Value += 1;
+        if (_progressCancelled)
+        {
+          ResetProgressBar();
+          return;
+        }
+
+        TrackData track = bindingList[row.Index];
+
+        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
+        if (stream == 0)
+        {
+          log.Error("ReplayGain: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
+          continue;
+        }
+
+        BASS_CHANNELINFO chInfo = Bass.BASS_ChannelGetInfo(stream);
+        if (chInfo == null)
+        {
+          log.Error("ReplayGain: Could not get channel info for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
+          continue;
+        }
+        
+        log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
+        InitGainAnalysis((long)chInfo.freq);
+        ReplayAnalyze(stream);
+        float titleGain = GetTitleGain();
+        
+        // Calculating the peak level
+        float peak = 0;
+        Bass.BASS_ChannelSetPosition(stream, 0);
+
+        float[] level = new float[chInfo.chans];  // allocate for all Channels of the stream
+        while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
+        { // not reached the end yet
+          if(Bass.BASS_ChannelGetLevel(stream, level))
+          {
+            for (int i = 0; i < chInfo.chans; i++ )
+            {
+              if (peak < level[i]) peak = level[i];
+            }
+          }
+        }
+
+        log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", Convert.ToString(titleGain), Convert.ToString(peak));
+
+        SetBackgroundColorChanged(row.Index);
+        track.Changed = true;
+        _itemsChanged = true;
+      }
+      ResetProgressBar();
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      log.Trace("<<<");
+    }
+
+    /// <summary>
+    /// Do a Replaygain and Peak analyses
+    /// </summary>
+    /// <param name="channel"></param>
+    void ReplayAnalyze(int channel)
+    {
+      int result;
+      int peak = 0;
+
+      int[] chanmap = new int[2];
+      chanmap[0] = 0; // left channel
+      chanmap[1] = -1;
+      int stream1 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
+      chanmap[0] = 1; // right channel
+      int stream2 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
+
+      int length = (int)Bass.BASS_ChannelSeconds2Bytes(channel, 0.02); // 20ms window
+
+      Int16[] buffer = new Int16[length / 2];
+      double[] leftSamples = new double[length / 2];
+      double[] rightSamples = new double[length / 2];
+
+      Bass.BASS_ChannelSetPosition(stream1, 0); // make sure to start from the beginning
+      Bass.BASS_ChannelSetPosition(stream2, 0); // make sure to start from the beginning
+      while (Bass.BASS_ChannelIsActive(stream1) == BASSActive.BASS_ACTIVE_PLAYING
+        || Bass.BASS_ChannelIsActive(stream2) == BASSActive.BASS_ACTIVE_PLAYING)
+      {
+        result = Bass.BASS_ChannelGetData(stream1, buffer, length);
+
+        int l4 = result / 2;
+        for (int a = 0; a < l4; a++)
+        {
+          leftSamples[a] = Convert.ToDouble(buffer[a]);
+        }
+
+        result = Bass.BASS_ChannelGetData(stream2, buffer, length);
+        l4 = result / 2;
+        for (int a = 0; a < l4; a++)
+        {
+          rightSamples[a] = Convert.ToDouble(buffer[a]);
+        }
+
+        AnalyzeSamples(leftSamples, rightSamples, new UIntPtr((uint)l4 / 2), 2);
+        leftSamples = new double[length / 2];
+        rightSamples = new double[length / 2];
+      }
     }
 
     #endregion

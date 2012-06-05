@@ -190,8 +190,8 @@
       <description>Toggle MiscFile Panel</description>
     </action>
 	<action>
-      <id>37</id>
-      <key>CTRL-G</key>
+      <id>38</id>
+      <key>Ctrl-G</key>
 	  <ribbon>G</ribbon>
       <description>Replay Gain</description>
     </action>

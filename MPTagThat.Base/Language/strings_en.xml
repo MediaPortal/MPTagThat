@@ -96,6 +96,7 @@
 	<String id="Replace">Replace</String>
 	<String id="ValidateSong">Validate MP3</String>
 	<String id="FixSong">Fix MP3</String>
+	<String id="ReplayGain">Replay Gain</String>
     <String id="RemoveCommentPicture">Remove:</String>
     <String id="RemoveComments">Remove all comments</String>
     <String id="RemovePictures">Remove all pictures</String>
@@ -205,6 +206,8 @@
     <String id="ValidateSongText">Uses MP3Val to validate the correctness of the selected MP3 File. Some errors may be fixed using the "Fix MP3" Button</String>
 	<String id="FixSong">Fix MP3</String>
     <String id="FixSongText">Uses MP3Val to fix errors detected in the selected MP3 File.</String>
+	<String id="ReplayGain">Replay Gain</String>
+    <String id="ReplayGainText">Analyses the selected file and calculates the Replay Gain. The calcualted value is written into the Tags.\nNote: The file itself is not modified.</String>
 	
     <!-- Rip Tab-->
     <String id="RipButton">Start Rip</String>

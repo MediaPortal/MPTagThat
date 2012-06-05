@@ -921,6 +921,7 @@ namespace MPTagThat
       ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
       ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -1273,6 +1274,10 @@ namespace MPTagThat
       buttonFixSong.Text = localisation.ToString("ribbon", "FixSong");
       buttonFixSong.ScreenTip.Caption = localisation.ToString("screentip", "FixSong");
       buttonFixSong.ScreenTip.Text = localisation.ToString("screentip", "FixSongText");
+
+      buttonReplayGain.Text = localisation.ToString("ribbon", "ReplayGain");
+      buttonReplayGain.ScreenTip.Caption = localisation.ToString("screentip", "ReplayGain");
+      buttonReplayGain.ScreenTip.Text = localisation.ToString("screentip", "ReplayGainText");
 
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
@@ -3080,6 +3085,12 @@ namespace MPTagThat
           ShowCenteredForm(_dialog);
           _showForm = false; // Don't show the dialog in the Keypress event
           break;
+
+        case Action.ActionType.ACTION_REPLAYGAIN:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ReplayGain();
+          break;
       }
 
       return handled;
@@ -3664,6 +3675,12 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.FixMP3File();
+          break;
+
+        case "ReplayGain":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ReplayGain();
           break;
       }
     }
