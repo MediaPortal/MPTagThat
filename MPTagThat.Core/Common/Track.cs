@@ -281,28 +281,32 @@ namespace MPTagThat.Core
             }
             else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
             {
-              if (frame.GetType() == typeof(UserTextInformationFrame))
+              if ((Type) frame.GetType() == typeof(UserTextInformationFrame))
               {
-                track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
+                // Don't add Replaygain frames, as they are handled in taglib tags
+                if (!Util.IsReplayGain((frame as UserTextInformationFrame).Description))
+                { 
+                  track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
                                                (frame as UserTextInformationFrame).Text.Length == 0
                                                  ? ""
                                                  : (frame as UserTextInformationFrame).Text[0]));
+                }
               }
-              else if (frame.GetType() == typeof(PrivateFrame))
+              else if ((Type) frame.GetType() == typeof(PrivateFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
                                                (frame as PrivateFrame).PrivateData == null
                                                  ? ""
                                                  : (frame as PrivateFrame).PrivateData.ToString()));
               }
-              else if (frame.GetType() == typeof(UniqueFileIdentifierFrame))
+              else if ((Type) frame.GetType() == typeof(UniqueFileIdentifierFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
                                                (frame as UniqueFileIdentifierFrame).Identifier == null
                                                  ? ""
                                                  : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
               }
-              else if (frame.GetType() == typeof(UnknownFrame))
+              else if ((Type) frame.GetType() == typeof(UnknownFrame))
               {
                 track.UserFrames.Add(new Frame(id, "",
                                                (frame as UnknownFrame).Data == null
