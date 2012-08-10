@@ -428,6 +428,24 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// Checks, if we got a replaygain frame
+    /// </summary>
+    /// <param name="description"></param>
+    /// <returns></returns>
+    public static bool IsReplayGain(string description)
+    {
+      switch (description.ToLowerInvariant())
+      {
+        case "replaygain_track_gain":
+        case "replaygain_track_peak":
+        case "replaygain_album_gain":
+        case "replaygain_album_peak":
+          return true;
+      }
+      return false;
+    }
+
+    /// <summary>
     ///   Check the Parameter Format for validity
     /// </summary>
     /// <param name = "str"></param>
