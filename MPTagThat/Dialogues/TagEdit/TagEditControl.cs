@@ -252,7 +252,7 @@ namespace MPTagThat.TagEdit
       foreach (DataGridViewRow row in main.TracksGridView.View.SelectedRows)
       {
 
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (!_isMultiTagEdit)
         {
@@ -959,7 +959,7 @@ namespace MPTagThat.TagEdit
         List<string> itemsAlbum = new List<string>();
         foreach (DataGridViewRow row in main.TracksGridView.View.SelectedRows)
         {
-          TrackData track = main.TracksGridView.TrackList[row.Index];
+          TrackData track = Options.Songlist[row.Index];
 
           bool found = false;
           foreach (string item in itemsArtist)
@@ -1425,7 +1425,7 @@ namespace MPTagThat.TagEdit
       foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
         bool trackChanged = false;
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         main.TracksGridView.ClearStatusColumn(row.Index);
 
@@ -2349,7 +2349,7 @@ namespace MPTagThat.TagEdit
         catch (Exception ex)
         {
           log.Error("Error applying changes from Tagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          main.TracksGridView.TrackList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           main.TracksGridView.AddErrorMessage(row, ex.Message);
           bErrors = true;
         }
@@ -2358,7 +2358,7 @@ namespace MPTagThat.TagEdit
 
       main.TracksGridView.Changed = bErrors;
       // check, if we still have changed items in the list
-      foreach (TrackData track in main.TracksGridView.TrackList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           main.TracksGridView.Changed = true;
@@ -2906,7 +2906,7 @@ namespace MPTagThat.TagEdit
         return;
       }
 
-      TrackData track = main.TracksGridView.TrackList[_selectedRowIndex];
+      TrackData track = Options.Songlist[_selectedRowIndex];
       tbTrackLength.Text = track.DurationTimespan.TotalMilliseconds.ToString();
     }
 

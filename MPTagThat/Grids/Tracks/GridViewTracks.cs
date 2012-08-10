@@ -87,7 +87,6 @@ namespace MPTagThat.GridView
     private bool _progressCancelled;
     private Point _screenOffset;
     private bool _waitCursorActive;
-    private SortableBindingList<TrackData> bindingList = new SortableBindingList<TrackData>();
 
     // Get Properties to be able to sort on column heading 
     private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
@@ -144,7 +143,7 @@ namespace MPTagThat.GridView
     /// </summary>
     public TrackData SelectedTrack
     {
-      get { return bindingList[tracksGrid.CurrentRow.Index]; }
+      get { return Options.Songlist[tracksGrid.CurrentRow.Index]; }
     }
 
     /// <summary>
@@ -154,14 +153,6 @@ namespace MPTagThat.GridView
     {
       get { return _itemsChanged; }
       set { _itemsChanged = value; }
-    }
-
-    /// <summary>
-    ///   Returns the Bindinglist with all the Rows
-    /// </summary>
-    public SortableBindingList<TrackData> TrackList
-    {
-      get { return bindingList; }
     }
 
     public FindResult ResultFind
@@ -250,7 +241,7 @@ namespace MPTagThat.GridView
     /// <param name="row"></param>
     public void ClearStatusColumn(int rowIndex)
     {
-      bindingList[rowIndex].Status = -1;
+      Options.Songlist[rowIndex].Status = -1;
     }
 
     #endregion
@@ -287,12 +278,12 @@ namespace MPTagThat.GridView
             ResetProgressBar();
             return;
           }
-          TrackData track = bindingList[row.Index];
+          TrackData track = Options.Songlist[row.Index];
           SaveTrack(track, row.Index);
         }
         catch (Exception ex)
         {
-          bindingList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -303,7 +294,7 @@ namespace MPTagThat.GridView
 
       _itemsChanged = false;
       // check, if we still have changed items in the list
-      foreach (TrackData track in bindingList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           _itemsChanged = true;
@@ -335,12 +326,12 @@ namespace MPTagThat.GridView
         SetProgressBar(tracksGrid.Rows.Count);
       }
 
-      int trackCount = bindingList.Count;
+      int trackCount = Options.Songlist.Count;
       for (int i = 0; i < trackCount; i++)
       {
         Application.DoEvents();
 
-        TrackData track = bindingList[i];
+        TrackData track = Options.Songlist[i];
         if (showProgressDialog)
         {
           _main.progressBar1.Value += 1;
@@ -420,7 +411,7 @@ namespace MPTagThat.GridView
                                                               ext));
 
               track = Track.Create(newFileName);
-              bindingList[rowIndex] = track;
+              Options.Songlist[rowIndex] = track;
             }
 
             // Check, if we need to create a folder.jpg
@@ -430,7 +421,7 @@ namespace MPTagThat.GridView
               SavePicture(track);
             }
 
-            bindingList[rowIndex].Status = 0;
+            Options.Songlist[rowIndex].Status = 0;
             tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
 
@@ -438,14 +429,14 @@ namespace MPTagThat.GridView
           }
           else
           {
-            bindingList[rowIndex].Status = 2;
+            Options.Songlist[rowIndex].Status = 2;
             AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
           }
         }
       }
       catch (Exception ex)
       {
-        bindingList[rowIndex].Status = 2;
+        Options.Songlist[rowIndex].Status = 2;
         AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
         return false;
       }
@@ -529,7 +520,7 @@ namespace MPTagThat.GridView
             ResetProgressBar();
             return;
           }
-          TrackData track = bindingList[row.Index];
+          TrackData track = Options.Songlist[row.Index];
 
           using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
           {
@@ -635,7 +626,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          bindingList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -708,7 +699,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         if (savedArtist == "")
         {
           savedArtist = track.Artist;
@@ -751,7 +742,7 @@ namespace MPTagThat.GridView
             ResetProgressBar();
             return;
           }
-          TrackData track = bindingList[row.Index];
+          TrackData track = Options.Songlist[row.Index];
 
           Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
           log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
@@ -930,7 +921,7 @@ namespace MPTagThat.GridView
         }
         catch (Exception ex)
         {
-          bindingList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1037,7 +1028,7 @@ namespace MPTagThat.GridView
       {
         ClearStatusColumn(row.Index);
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         track.Pictures.Clear();
         track.Pictures.Add(pic);
         SetBackgroundColorChanged(row.Index);
@@ -1155,7 +1146,7 @@ namespace MPTagThat.GridView
           ResetProgressBar();
           return;
         }
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
         {
           tracks.Add(track);
@@ -1184,7 +1175,7 @@ namespace MPTagThat.GridView
               foreach (DataGridViewRow row in tracksGrid.Rows)
               {
                 TrackData lyricsTrack = tracks[lyricsRow.Index];
-                TrackData track = bindingList[row.Index];
+                TrackData track = Options.Songlist[row.Index];
                 if (lyricsTrack.FullFileName == track.FullFileName)
                 {
                   track.Lyrics = (string)lyricsRow.Cells[5].Value;
@@ -1228,7 +1219,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         // Get the Number of tracks, so that we don't loose it
         string[] tracks = track.Track.Split('/');
@@ -1270,7 +1261,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         track.TagsRemoved.Add(type);
         track = Track.ClearTag(track);
 
@@ -1313,21 +1304,21 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         try
         {
           FileSystem.DeleteFile(track.FullFileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin,
                                 UICancelOption.ThrowException);
 
           // Remove the file from the binding list
-          bindingList.RemoveAt(row.Index);
+          Options.Songlist.RemoveAt(row.Index);
         }
         catch (OperationCanceledException) // User pressed No on delete. Do nothing
         { }
         catch (Exception ex)
         {
           log.Error("Error deleting file: {0} Exception: {1}", track.FullFileName, ex.Message);
-          bindingList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           AddErrorMessage(row, ex.Message);
         }
       }
@@ -1355,7 +1346,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (track.Comment != "")
         {
@@ -1384,7 +1375,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (track.NumPics > 0)
         {
@@ -1432,7 +1423,7 @@ namespace MPTagThat.GridView
           return;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (track.TagType.ToLower() == "mp3")
         {
@@ -1484,7 +1475,7 @@ namespace MPTagThat.GridView
           return;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         if (track.TagType.ToLower() == "mp3")
         {
           Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
@@ -1543,7 +1534,7 @@ namespace MPTagThat.GridView
           return;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
         if (stream == 0)
@@ -1784,7 +1775,7 @@ namespace MPTagThat.GridView
 
       if (error == TrackData.MP3Error.Fixed)
       {
-        bindingList[index].Status = 4;
+        Options.Songlist[index].Status = 4;
       }
     }
 
@@ -1825,7 +1816,7 @@ namespace MPTagThat.GridView
               continue;
             }
 
-            tracks.Add(bindingList[row.Index]);
+            tracks.Add(Options.Songlist[row.Index]);
           }
           script.Invoke(tracks);
           foreach (DataGridViewRow row in tracksGrid.Rows)
@@ -1835,7 +1826,7 @@ namespace MPTagThat.GridView
               continue;
             }
 
-            if (bindingList[row.Index].Changed)
+            if (Options.Songlist[row.Index].Changed)
             {
               SetBackgroundColorChanged(row.Index);
               _itemsChanged = true;
@@ -1864,7 +1855,7 @@ namespace MPTagThat.GridView
     {
       log.Trace(">>>");
       tracksGrid.Rows.Clear();
-      bindingList = new SortableBindingList<TrackData>();
+      Options.Songlist.Clear();
       _nonMusicFiles = new List<FileInfo>();
       _main.MiscInfoPanel.ClearNonMusicFiles();
       _main.MiscInfoPanel.ActivateNonMusicTab();
@@ -2108,7 +2099,7 @@ namespace MPTagThat.GridView
     {
       // Clear the list and free up resources
       tracksGrid.Rows.Clear();
-      bindingList = new SortableBindingList<TrackData>();
+      Options.Songlist.Clear();
       GC.Collect();
 
       SetProgressBar(songs.Count);
@@ -2441,7 +2432,7 @@ namespace MPTagThat.GridView
         track.MP3ValidationErrorText = strError;
       }
 
-      bindingList.Add(track);
+      Options.Songlist.Add(track);
     }
 
     private void ShowForm(Form f)
@@ -2459,7 +2450,7 @@ namespace MPTagThat.GridView
     {
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (track.MP3ValidationError == TrackData.MP3Error.NoError)
         {
@@ -2886,7 +2877,7 @@ namespace MPTagThat.GridView
 
       _itemsChanged = true;
       SetBackgroundColorChanged(e.RowIndex);
-      TrackData track = bindingList[e.RowIndex];
+      TrackData track = Options.Songlist[e.RowIndex];
       _main.TagEditForm.FillForm();
       track.Changed = true;
     }
@@ -2943,7 +2934,7 @@ namespace MPTagThat.GridView
       // Sort the selected column.
 
       PropertyDescriptor prop = _propColl.Find(newColumn.Name, false);
-      bindingList.ApplySortCore(prop, direction);
+      Options.Songlist.Sort(prop, direction);
 
       newColumn.HeaderCell.SortGlyphDirection =
           direction == ListSortDirection.Ascending ?
@@ -2961,7 +2952,7 @@ namespace MPTagThat.GridView
     {
       int i = 0;
       // Set the Color for changed rows again
-      foreach (TrackData track in bindingList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
         {
@@ -3050,7 +3041,7 @@ namespace MPTagThat.GridView
             if (selectedRow.RowIndex == -1)
               return;
 
-            TrackData track = bindingList[selectedRow.RowIndex];
+            TrackData track = Options.Songlist[selectedRow.RowIndex];
 
             // Get the Number of tracks, so that we don't loose it
             string[] tracks = track.Track.Split('/');
@@ -3102,7 +3093,7 @@ namespace MPTagThat.GridView
     /// <param name = "e"></param>
     private void tracksGrid_SelectionChanged(object sender, EventArgs e)
     {
-      if (bindingList.Count == 0)
+      if (Options.Songlist.Count == 0)
       {
         return;
       }
@@ -3119,7 +3110,7 @@ namespace MPTagThat.GridView
         }
         else
         {
-          if (bindingList[i].Changed)
+          if (Options.Songlist[i].Changed)
           {
             tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
               ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
@@ -3258,17 +3249,17 @@ namespace MPTagThat.GridView
     void tracksGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
     {
       // Don't handle empty folders
-      if (bindingList.Count == 0)
+      if (Options.Songlist.Count == 0)
       {
         return;
       }
 
-      if (e.RowIndex == bindingList.Count)
+      if (e.RowIndex == Options.Songlist.Count)
       {
         return;
       }
 
-      TrackData track = bindingList[e.RowIndex];
+      TrackData track = Options.Songlist[e.RowIndex];
 
       // Handle the status column
       if (e.ColumnIndex == 0)
@@ -3315,7 +3306,7 @@ namespace MPTagThat.GridView
       }
 
       // Get the row from the bindinglist and set the required cell
-      e.Value = bindingList[e.RowIndex].GetType().InvokeMember(colName, BindingFlags.GetField | BindingFlags.GetProperty, null, bindingList[e.RowIndex],
+      e.Value = Options.Songlist[e.RowIndex].GetType().InvokeMember(colName, BindingFlags.GetField | BindingFlags.GetProperty, null, Options.Songlist[e.RowIndex],
                                                  new object[] { });
     }
 
@@ -3332,8 +3323,8 @@ namespace MPTagThat.GridView
         return;
       }
 
-      bindingList[e.RowIndex].GetType().InvokeMember(tracksGrid.Columns[e.ColumnIndex].Name,
-                                      BindingFlags.SetProperty | BindingFlags.SetField, null, bindingList[e.RowIndex],
+      Options.Songlist[e.RowIndex].GetType().InvokeMember(tracksGrid.Columns[e.ColumnIndex].Name,
+                                      BindingFlags.SetProperty | BindingFlags.SetField, null, Options.Songlist[e.RowIndex],
                                       new object[] { e.Value });
     }
 
@@ -3387,7 +3378,7 @@ namespace MPTagThat.GridView
             if (!row.Selected)
               continue;
 
-            TrackData track = bindingList[row.Index];
+            TrackData track = Options.Songlist[row.Index];
             selectedRows.Add(track);
           }
           tracksGrid.DoDragDrop(selectedRows, DragDropEffects.Copy | DragDropEffects.Move);
@@ -3447,7 +3438,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         _main.BurnGridView.AddToBurner(track);
       }
     }
@@ -3464,7 +3455,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         _main.ConvertGridView.AddToConvert(track);
       }
     }
@@ -3483,7 +3474,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         PlayListData playListItem = new PlayListData();
         playListItem.FileName = track.FullFileName;
         playListItem.Title = track.Title;
@@ -3518,7 +3509,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         PlayListData playListItem = new PlayListData();
         playListItem.FileName = track.FullFileName;
         playListItem.Title = track.Title;
@@ -3552,7 +3543,7 @@ namespace MPTagThat.GridView
           continue;
         }
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         SavePicture(track);
       }
     }
@@ -3566,7 +3557,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         Options.CopyPasteBuffer.Add(track);
       }
       _actionCopy = true;
@@ -3581,7 +3572,7 @@ namespace MPTagThat.GridView
         if (!row.Selected)
           continue;
 
-        TrackData track = bindingList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         Options.CopyPasteBuffer.Add(track);
       }
       _actionCopy = false;
@@ -3640,7 +3631,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      TrackData track = bindingList[tracksGrid.SelectedRows[0].Index];
+      TrackData track = Options.Songlist[tracksGrid.SelectedRows[0].Index];
       string songString = track.Artist + " " + track.Title;
       songString = songString.Replace(" ", "+");
 

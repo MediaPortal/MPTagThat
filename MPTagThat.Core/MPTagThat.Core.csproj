@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\SongList.cs" />
     <Compile Include="Services\ActionHandler\Button.cs" />
     <Compile Include="Services\ActionHandler\IActionHandler.cs" />
     <Compile Include="Services\ActionHandler\WindowMap.cs" />

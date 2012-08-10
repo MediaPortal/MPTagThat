@@ -69,7 +69,7 @@ namespace MPTagThat.InternetLookup
         if (!row.Selected)
           continue;
 
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         if (_selectedArtist == "")
           _selectedArtist = track.Artist;
 
@@ -250,7 +250,7 @@ namespace MPTagThat.InternetLookup
         if (!row.Selected)
           continue;
 
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         ListViewItem lvItem = new ListViewItem((row.Index + 1).ToString());
         lvItem.SubItems.Add(track.FileName);
         lvItem.Tag = row.Index;
@@ -300,7 +300,7 @@ namespace MPTagThat.InternetLookup
           if (index == -1 || lvItem.Checked == false)
             continue;
 
-          TrackData track = main.TracksGridView.TrackList[index];
+          TrackData track = Options.Songlist[index];
           track.Artist = dlgAlbumDetails.Artist;
           track.Album = dlgAlbumDetails.Album;
           string strYear = dlgAlbumDetails.Year;

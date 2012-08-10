@@ -248,6 +248,8 @@ namespace MPTagThat.Core
 
     public static int ReadOnlyFileHandling { get; set; }
 
+    public static SongList Songlist { get; private set; }
+
     #endregion
 
     #region Constructor
@@ -388,6 +390,8 @@ namespace MPTagThat.Core
       _copyPasteBuffer = new List<TrackData>();
 
       ReadOnlyFileHandling = 2; // Don't change attribute as a default.
+
+      Songlist = new SongList();
     }
 
     #endregion
