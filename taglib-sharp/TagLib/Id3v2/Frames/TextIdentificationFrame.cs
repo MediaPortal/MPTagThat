@@ -398,7 +398,12 @@ namespace TagLib.Id3v2 {
 		///    Contains the ID3v2 version of <see cref="raw_data" />.
 		/// </summary>
 		private byte raw_version = 0;
-		
+
+		/// <summary>
+		///    Contains the Encoding of the raw_data
+		/// </summary>
+    private StringType raw_encoding = StringType.Latin1;
+
 		#endregion
 		
 		
@@ -832,6 +837,10 @@ namespace TagLib.Id3v2 {
 		{
 			raw_data = data;
 			raw_version = version;
+
+      // read the string data type (the first byte of the
+      // field data)
+      raw_encoding = (StringType)data[0];
 		}
 		
 		/// <summary>
@@ -933,7 +942,7 @@ namespace TagLib.Id3v2 {
 		///    rendered field data.
 		/// </returns>
 		protected override ByteVector RenderFields (byte version) {
-			if (raw_data != null && raw_version == version)
+			if (raw_data != null && raw_version == version && raw_encoding == Tag.DefaultEncoding)
 				return raw_data;
 			
 			StringType encoding = CorrectEncoding (TextEncoding,
