@@ -3306,10 +3306,10 @@ namespace MPTagThat.GridView
       }
 
       // Get the row from the bindinglist and set the required cell
-      e.Value = Options.Songlist[e.RowIndex].GetType().InvokeMember(colName, BindingFlags.GetField | BindingFlags.GetProperty, null, Options.Songlist[e.RowIndex],
+      e.Value = track.GetType().InvokeMember(colName, BindingFlags.GetField | BindingFlags.GetProperty, null, track,
                                                  new object[] { });
     }
-
+    
     /// <summary>
     /// A cell value has changed. Push it back into the Sortablebindinglist
     /// </summary>
