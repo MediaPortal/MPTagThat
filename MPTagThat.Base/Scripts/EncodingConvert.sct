@@ -1,0 +1,255 @@
+// Title: Encoding Convert
+// Description: This script Converts the encoding of ID3 Text Frames. Can be run in Batch or Interactive Mode
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using MPTagThat.Core;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  private string encoding = "Latin1";
+  private bool runInbatch = false;
+  
+  // We get all selected tracks in a list, so that we can loop through them in one call
+  public bool Invoke(List<TrackData> tracks)
+  {
+    if (tracks == null) return false;
+
+	// If NO Form should be displayed uncomment the next line
+	//runInbatch = true;
+	
+	// Uncomment the type of Encoding necessary for Batch processing
+	// Leave the encodings commented, if a form should be displayed
+	//encoding = "UTF8";
+	//encoding = "Latin1";
+	//encoding = "UTF16";
+	//encoding = "UTF16LE";
+	//encoding = "UTF16BE";
+
+	if (!runInbatch)
+	{
+		Form f = new Form1(this);
+		if (f.ShowDialog() == DialogResult.Cancel)
+		{
+			return false;
+		}
+	}
+	
+	switch (encoding)
+	{
+		case "Latin1":
+			TagLib.Id3v2.Tag.DefaultEncoding = StringType.Latin1;
+			break;
+		
+		case "UTF8":
+			TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF8;
+			break;
+			
+		case "UTF16":
+			TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16;
+			break;
+			
+		case "UTF16LE":
+			TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16LE;
+			break;
+			
+		case "UTF16BE":
+			TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16BE;
+			break;
+	}
+	
+	// Loop through all Music Tracks and perform the necessary action
+	foreach (TrackData track in tracks)
+	{
+        if (track.TagType.ToLower() != "mp3")
+        {
+		  // No mp3 continue with next file
+          continue;
+        }
+
+		TagLib.File file = null;
+		bool error = false;
+		
+		Util.SendProgress(string.Format("Procesing file {0}", track.FullFileName));
+		
+		try
+		{
+			TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
+			TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+			
+			file = TagLib.File.Create(track.FullFileName);
+		}
+		catch (CorruptFileException)
+		{
+			error = true;
+		}
+		catch (UnsupportedFormatException)
+		{
+			error = true;
+		}
+		catch (System.IO.FileNotFoundException)
+		{
+			error = true;
+		}
+		catch (Exception ex)
+		{
+			error = true;
+		}
+
+		if (file == null || error)
+		{
+			return false;
+		}
+
+		file.Save();	
+	}
+	Util.SendProgress("");
+    return true;
+  }
+  
+  public string Invoke(TrackData track)
+  {
+	return "";
+  }
+  
+  //
+  // Don't modify any code below, unless you know what you are doing
+  //
+  
+  #region Forms Code
+
+  private class Form1 : Form
+  {
+	private Script main = null;
+  
+    public Form1(Script main)
+    {
+	  this.main = main;
+      InitializeComponent();
+	  comboBoxEncoding.SelectedIndex = 0;
+    }
+	
+	private void buttonExecute_Click(object sender, EventArgs e)
+    {
+		main.encoding = comboBoxEncoding.Text;
+		DialogResult = DialogResult.OK;
+		this.Close();
+    }
+
+	private void buttonCancel_Click(object sender, EventArgs e)
+    {
+		DialogResult = DialogResult.Cancel;
+		this.Close();
+    }
+	
+	/// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
+
+    #region Windows Form Designer generated code
+
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
+      this.comboBoxEncoding = new System.Windows.Forms.ComboBox();
+      this.label1 = new System.Windows.Forms.Label();
+      this.buttonExecute = new System.Windows.Forms.Button();
+      this.buttonCancel = new System.Windows.Forms.Button();
+      this.SuspendLayout();
+	  //
+      // comboBoxEncoding
+      // 
+      this.comboBoxEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.comboBoxEncoding.FormattingEnabled = true;
+      this.comboBoxEncoding.Items.AddRange(new object[] {
+            "UTF8",
+            "Latin1",
+			"UTF16",
+			"UTF16LE",
+			"UTF16BE"});
+      this.comboBoxEncoding.Location = new System.Drawing.Point(118, 27);
+      this.comboBoxEncoding.Name = "comboBoxEncoding";
+      this.comboBoxEncoding.Size = new System.Drawing.Size(196, 21);
+      this.comboBoxEncoding.TabIndex = 0;      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(13, 34);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(55, 13);
+      this.label1.TabIndex = 1;
+      this.label1.Text = "Encoding:";
+      // 
+      // buttonExecute
+      // 
+      this.buttonExecute.Location = new System.Drawing.Point(118, 67);
+      this.buttonExecute.Name = "buttonExecute";
+      this.buttonExecute.Size = new System.Drawing.Size(75, 23);
+      this.buttonExecute.TabIndex = 2;
+      this.buttonExecute.Text = "Execute";
+      this.buttonExecute.UseVisualStyleBackColor = true;
+      this.buttonExecute.Click += new System.EventHandler(this.buttonExecute_Click);
+      // 
+      // buttonCancel
+      // 
+      this.buttonCancel.Location = new System.Drawing.Point(239, 67);
+      this.buttonCancel.Name = "buttonCancel";
+      this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+      this.buttonCancel.TabIndex = 3;
+      this.buttonCancel.Text = "Cancel";
+      this.buttonCancel.UseVisualStyleBackColor = true;
+	  this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+      // 
+      // Form1
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.ClientSize = new System.Drawing.Size(364, 102);
+      this.Controls.Add(this.buttonCancel);
+      this.Controls.Add(this.buttonExecute);
+      this.Controls.Add(this.label1);
+      this.Controls.Add(this.comboBoxEncoding);
+      this.Name = "Form1";
+      this.Text = "Change Encoding";
+      this.ResumeLayout(false);
+      this.PerformLayout();
+
+    }
+
+    #endregion
+
+    private System.Windows.Forms.ComboBox comboBoxEncoding;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Button buttonExecute;
+    private System.Windows.Forms.Button buttonCancel;
+  #endregion
+  }
+}
