@@ -3155,6 +3155,10 @@ namespace MPTagThat
             Refresh();
             break;
           }
+
+        case "statusprogress":
+          toolStripStatusLabelProgress.Text = message.MessageData["data"] as string;
+          break;
       }
     }
 

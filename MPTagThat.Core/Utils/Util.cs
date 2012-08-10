@@ -1454,6 +1454,19 @@ namespace MPTagThat.Core
       return image;
     }
 
+    /// <summary>
+    /// Sends a Progress Message, so that the status bar can be updated
+    /// </summary>
+    /// <param name="message"></param>
+    public static void SendProgress(string message)
+    {
+      QueueMessage msg = new QueueMessage();
+      msg.MessageData["action"] = "statusprogress";
+      msg.MessageData["data"] = message;
+      IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      msgQueue.Send(msg);
+    }
+
     #endregion
   }
 }

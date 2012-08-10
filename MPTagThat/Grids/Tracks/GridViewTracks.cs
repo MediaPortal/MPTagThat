@@ -297,6 +297,7 @@ namespace MPTagThat.GridView
         }
       }
 
+      Util.SendProgress("");
       Options.ReadOnlyFileHandling = 2; //No
       ResetProgressBar();
 
@@ -354,6 +355,7 @@ namespace MPTagThat.GridView
           bErrors = true;
       }
 
+      Util.SendProgress("");
       Options.ReadOnlyFileHandling = 2; //No
       if (showProgressDialog)
       {
@@ -377,6 +379,7 @@ namespace MPTagThat.GridView
         ClearStatusColumn(rowIndex);
         if (track.Changed)
         {
+          Util.SendProgress(string.Format("Saving file {0}", track.FullFileName));
           log.Debug("Save: Saving track: {0}", track.FullFileName);
 
           // The track to be saved, may be currently playing. If this is the case stop playnack to free the file
@@ -530,6 +533,7 @@ namespace MPTagThat.GridView
 
           using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
           {
+            Util.SendProgress(string.Format("Identifying file {0}", track.FileName));
             log.Debug("Identify: Processing file: {0}", track.FullFileName);
             List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
 
@@ -636,6 +640,7 @@ namespace MPTagThat.GridView
         }
       }
 
+      Util.SendProgress("");
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -748,6 +753,7 @@ namespace MPTagThat.GridView
           }
           TrackData track = bindingList[row.Index];
 
+          Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
           log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
           // Should we take an existing folder.jpg instead of searching the web
           if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
@@ -929,6 +935,7 @@ namespace MPTagThat.GridView
         }
       }
 
+      Util.SendProgress("");
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
@@ -1000,6 +1007,7 @@ namespace MPTagThat.GridView
     public void CoverArtDrop(string fileName)
     {
       SetWaitCursor();
+      Util.SendProgress(string.Format("Downloading picture from {0}", fileName));
       Picture pic = null;
       if (fileName.ToLower().StartsWith("http"))
       {
@@ -1037,6 +1045,7 @@ namespace MPTagThat.GridView
         _itemsChanged = true;
       }
 
+      Util.SendProgress("");
       _main.SetGalleryItem();
       ResetWaitCursor();
     }
@@ -1427,6 +1436,7 @@ namespace MPTagThat.GridView
 
         if (track.TagType.ToLower() == "mp3")
         {
+          Util.SendProgress(string.Format("Validating file {0}", track.FileName));
           string strError = "";
           track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
           if (track.MP3ValidationError != TrackData.MP3Error.NoError)
@@ -1441,6 +1451,7 @@ namespace MPTagThat.GridView
           }
         }
       }
+      Util.SendProgress("");
       ResetProgressBar();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
@@ -1476,6 +1487,7 @@ namespace MPTagThat.GridView
         TrackData track = bindingList[row.Index];
         if (track.TagType.ToLower() == "mp3")
         {
+          Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
           string strError = "";
           track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
           if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
@@ -1492,6 +1504,7 @@ namespace MPTagThat.GridView
           }
         }
       }
+      Util.SendProgress("");
       ResetProgressBar();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
@@ -1546,6 +1559,7 @@ namespace MPTagThat.GridView
           continue;
         }
         
+        Util.SendProgress(string.Format("Analysing gain for {0}", track.FileName));
         log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
         InitGainAnalysis((long)chInfo.freq);
         ReplayAnalyze(stream);
@@ -1577,6 +1591,7 @@ namespace MPTagThat.GridView
         track.Changed = true;
         _itemsChanged = true;
       }
+      Util.SendProgress("");
       ResetProgressBar();
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
@@ -1892,6 +1907,7 @@ namespace MPTagThat.GridView
           {
             if (Util.IsAudio(fi.FullName))
             {
+              Util.SendProgress(string.Format("Reading file {0}", fi.FullName));
               log.Trace("Retrieving file: {0}", fi.FullName);
               // Read the Tag
               TrackData track = Track.Create(fi.FullName);
@@ -1947,6 +1963,7 @@ namespace MPTagThat.GridView
         tracksGrid.ResumeLayout();
       }
 
+      Util.SendProgress("");
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
