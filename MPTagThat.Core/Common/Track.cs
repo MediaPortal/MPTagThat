@@ -83,7 +83,7 @@ namespace MPTagThat.Core
       FileInfo fi = new FileInfo(fileName);
       try
       {
-        track.Id = new Guid();
+        track.Id = Guid.NewGuid();
         track.FullFileName = fileName;
         track.FileName = Path.GetFileName(fileName);
         track.Readonly = fi.IsReadOnly;

@@ -16,6 +16,13 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 #region
+
+using System;
+using Db4objects.Db4o;
+using Db4objects.Db4o.Config;
+using Db4objects.Db4o.IO;
+using Db4objects.Db4o.Linq;
+using Db4objects.Db4o.Query;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +38,43 @@ namespace MPTagThat.Core
   /// </summary>
   public class SongList : IEnumerable<TrackData>
   {
+    #region Variables
+
+    private readonly string _databaseName = string.Format(@"{0}\MPTagThat\Songs.db4o",
+                                                         Environment.GetFolderPath(
+                                                           Environment.SpecialFolder.LocalApplicationData));
+
+    private const int Maxobjectsforlist = 10;
     private SortableBindingList<TrackData> _bindingList = new SortableBindingList<TrackData>();
+    private bool _databaseModeEnabled = false;
+
+    private IObjectContainer _db = null;
+    private IEmbeddedConfiguration _dbConfig = null;
+    private Dictionary<int, Guid> _dbIdList = new Dictionary<int, Guid>(); 
+
+    private int _lastRetrievedTrackIndex = -1;
+    private TrackData _lastRetrievedTrack = null;
+
+    #endregion
+
+    #region ctor / dtor
+
+    public SongList()
+    {
+      _databaseModeEnabled = false;
+    }
+
+    ~SongList()
+    {
+      if (_db != null)
+      {
+        _db.Close();
+        _db.Dispose();
+      }
+    }
+
+    #endregion
+
 
     #region Properties
 
@@ -41,10 +84,21 @@ namespace MPTagThat.Core
     /// <returns></returns>
     public int Count
     {
-      get { return _bindingList.Count; }
+      get
+      {
+        if (_databaseModeEnabled)
+        {
+          return (from TrackData d in _db 
+                    select d).Count();  
+        }
+
+        return _bindingList.Count;
+      }
     }
 
     #endregion
+
+    #region Indexer
 
     /// <summary>
     /// Implementation of indexer
@@ -55,6 +109,27 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (_databaseModeEnabled)
+        {
+          if (i == _lastRetrievedTrackIndex)
+          {
+            return _lastRetrievedTrack;
+          }
+
+          _lastRetrievedTrackIndex = i;
+
+          var result = from TrackData d in _db
+                       where d.Id == _dbIdList[i]
+                       select d;
+
+          foreach (var trackData in result)
+          {
+            _db.Activate(trackData, 10);
+            _lastRetrievedTrack = trackData;
+            return trackData;
+          }
+        }
+        
         return _bindingList[i];
       }
       set
@@ -63,13 +138,30 @@ namespace MPTagThat.Core
       }
     }
 
+    #endregion
+
+    #region Public Methods
+
     /// <summary>
     /// Adding of new songs to the list
     /// </summary>
     /// <param name="track"></param>
     public void Add(TrackData track)
     {
-      _bindingList.Add(track);
+      if (!_databaseModeEnabled && _bindingList.Count > Maxobjectsforlist )
+      {
+        CopyLIstToDatabase();  
+      }
+
+      if (_databaseModeEnabled)
+      {
+        _db.Store(track);
+        _dbIdList.Add(_dbIdList.Count, track.Id);
+      }
+      else
+      {
+        _bindingList.Add(track); 
+      }
     }
 
     /// <summary>
@@ -78,7 +170,20 @@ namespace MPTagThat.Core
     /// <param name="index"></param>
     public void RemoveAt(int index)
     {
-      _bindingList.RemoveAt(index);
+      if (_databaseModeEnabled)
+      {
+        var result = from TrackData d in _db
+                     where d.Id == _dbIdList[index]
+                     select d;
+        foreach (var trackData in result)
+        {
+          _db.Delete(trackData);
+        }
+      }
+      else
+      {
+        _bindingList.RemoveAt(index);
+      }
     }
 
     /// <summary>
@@ -86,7 +191,24 @@ namespace MPTagThat.Core
     /// </summary>
     public void Clear()
     {
-      _bindingList.Clear();
+      if (_databaseModeEnabled)
+      {
+        var result = from TrackData d in _db
+                select d;
+        foreach (var trackData in result)
+        {
+          _db.Delete(trackData);
+        }
+
+        _databaseModeEnabled = false;
+        _db.Close();
+        _db.Dispose();
+        System.IO.File.Delete(_databaseName);
+      }
+      else
+      {
+        _bindingList.Clear();
+      }
     }
 
     /// <summary>
@@ -99,12 +221,85 @@ namespace MPTagThat.Core
       _bindingList.ApplySortCore(property, direction);
     }
 
+    #endregion
+
+    #region Private Methods
+
+    private bool CreateDbConnection()
+    {
+      try
+      {
+        if (_db != null)
+        {
+          _db.Close();
+          _db.Dispose();
+          System.IO.File.Delete(_databaseName);
+        }
+
+        _dbConfig = Db4oEmbedded.NewConfiguration();
+        _dbConfig.Common.ObjectClass(typeof(TrackData)).ObjectField("_id").Indexed(true);
+        _dbConfig.Common.ObjectClass(typeof(TrackData)).CascadeOnUpdate(true);
+
+        IStorage fileStorage = new FileStorage();
+        IStorage cachingStorage = new CachingStorage(fileStorage, 128, 4096);
+        _dbConfig.File.Storage = cachingStorage;
+
+        _db = Db4oEmbedded.OpenFile(_dbConfig, _databaseName);
+
+        return true;
+      }
+      catch (Exception ex)
+      {
+        ServiceScope.Get<ILogger>().GetLogger.Error("Error creating DB Connection. Database Mode disabled. {0}", ex.Message);
+      }
+
+      return false;
+    }
+
+
+    /// <summary>
+    /// The number of allowed objects in the BindingList has been exceeded
+    /// Copy all the data to the database
+    /// </summary>
+    private void CopyLIstToDatabase()
+    {
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Number of Songs in list exceeded the limnit. Database mode enabled");
+      
+      if (!CreateDbConnection())
+      {
+        return;
+      }
+
+      _dbIdList.Clear();
+
+      foreach (TrackData track in _bindingList)
+      {
+        _db.Store(track);
+        _dbIdList.Add(_dbIdList.Count, track.Id);
+      }
+
+      _bindingList.Clear();
+      _databaseModeEnabled = true;
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Finished enabling database mode.");
+    }
+
+    #endregion
+
+    #region Interfaces
+
     /// <summary>
     /// Provide enumeration
     /// </summary>
     /// <returns></returns>
     public IEnumerator<TrackData> GetEnumerator()
     {
+      if (_databaseModeEnabled)
+      {
+        return (from TrackData d in _db
+                select d).GetEnumerator();
+
+      }
+
       return _bindingList.GetEnumerator();
     }
 
@@ -116,5 +311,7 @@ namespace MPTagThat.Core
     {
       return GetEnumerator();
     }
+
+    #endregion
   }
 }

@@ -248,7 +248,7 @@ namespace MPTagThat.Core
 
     public static int ReadOnlyFileHandling { get; set; }
 
-    public static SongList Songlist { get; private set; }
+    public static SongList Songlist { get; set; }
 
     #endregion
 

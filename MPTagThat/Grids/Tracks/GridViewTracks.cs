@@ -1855,7 +1855,7 @@ namespace MPTagThat.GridView
     {
       log.Trace(">>>");
       tracksGrid.Rows.Clear();
-      Options.Songlist.Clear();
+      Options.Songlist = new SongList();
       _nonMusicFiles = new List<FileInfo>();
       _main.MiscInfoPanel.ClearNonMusicFiles();
       _main.MiscInfoPanel.ActivateNonMusicTab();
@@ -3242,12 +3242,13 @@ namespace MPTagThat.GridView
 
     /// <summary>
     /// This method is invoked, whenever the Grid decides that it needs a cell value.
-    /// We get the required row from from the Sortablebindinglist and retrieve the cell value using reflection
+    /// We get the required row from from the Songlist and retrieve the cell value using reflection
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     void tracksGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
     {
+      /*
       // Don't handle empty folders
       if (Options.Songlist.Count == 0)
       {
@@ -3258,6 +3259,7 @@ namespace MPTagThat.GridView
       {
         return;
       }
+      */
 
       TrackData track = Options.Songlist[e.RowIndex];
 
@@ -3311,7 +3313,7 @@ namespace MPTagThat.GridView
     }
     
     /// <summary>
-    /// A cell value has changed. Push it back into the Sortablebindinglist
+    /// A cell value has changed. Push it back into the Songlist
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
