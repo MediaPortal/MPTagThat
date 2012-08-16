@@ -1328,7 +1328,7 @@ namespace MPTagThat.TagEdit
     {
       if (_pic != null)
       {
-        pictureBoxCover.Image = _pic.Data;
+        pictureBoxCover.Image = Picture.ImageFromData(_pic.Data);
       }
     }
 
@@ -2743,7 +2743,7 @@ namespace MPTagThat.TagEdit
               extension = "jpg";
 
             string fileName = String.Format("{0}.{1}", sFD.FileName, extension);
-            Image img = _pictures[_selectedPictureGridRow].Data;
+            Image img = Picture.ImageFromData(_pictures[_selectedPictureGridRow].Data);
             if (img != null)
             {
               img.Save(fileName);
@@ -2768,7 +2768,7 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          Image img = _pictures[e.RowIndex].Data;
+          Image img = Picture.ImageFromData(_pictures[e.RowIndex].Data);
           if (img != null)
           {
             pictureBoxCover.Image = img;
@@ -2882,7 +2882,7 @@ namespace MPTagThat.TagEdit
         _pic.MimeType = "image/jpg";
         _pic.Description = "";
         _pic.Type = TagLib.PictureType.FrontCover;
-        _pic.Data = _pic.ImageFromData(vector.Data);
+        _pic.Data = vector.Data;
         AddPictureToList();
         AddPictureToPictureBox();
         _pictureIsChanged = true;

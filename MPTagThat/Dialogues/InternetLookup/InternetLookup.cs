@@ -324,7 +324,7 @@ namespace MPTagThat.InternetLookup
             pic.MimeType = "image/jpg";
             pic.Description = "";
             pic.Type = PictureType.FrontCover;
-            pic.Data = pic.ImageFromData(vector.Data);
+            pic.Data = vector.Data;
             track.Pictures.Add(pic);
           }
 

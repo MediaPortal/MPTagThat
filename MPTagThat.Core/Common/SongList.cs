@@ -71,6 +71,7 @@ namespace MPTagThat.Core
         _db.Close();
         _db.Dispose();
       }
+      System.IO.File.Delete(_databaseName);
     }
 
     #endregion
@@ -88,8 +89,7 @@ namespace MPTagThat.Core
       {
         if (_databaseModeEnabled)
         {
-          return (from TrackData d in _db 
-                    select d).Count();  
+          return _db.Query(typeof (TrackData)).Count;
         }
 
         return _bindingList.Count;

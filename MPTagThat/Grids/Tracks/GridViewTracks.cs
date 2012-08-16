@@ -612,7 +612,7 @@ namespace MPTagThat.GridView
                     pic.MimeType = "image/jpg";
                     pic.Description = "";
                     pic.Type = PictureType.FrontCover;
-                    pic.Data = pic.ImageFromData(vector.Data);
+                    pic.Data = vector.Data;
                     track.Pictures.Add(pic);
                   }
                 }
@@ -760,7 +760,7 @@ namespace MPTagThat.GridView
               // Only write a picture if we don't have a picture OR Overwrite Pictures is set
               if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
               {
-                if (Options.MainSettings.ChangeCoverSize && folderThumb.Data.Width > Options.MainSettings.MaxCoverWidth)
+                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(folderThumb.Data).Width > Options.MainSettings.MaxCoverWidth)
                 {
                   folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
                 }
@@ -850,9 +850,9 @@ namespace MPTagThat.GridView
                 pic.MimeType = "image/jpg";
                 pic.Description = "Front Cover";
                 pic.Type = PictureType.FrontCover;
-                pic.Data = pic.ImageFromData(vector.Data);
+                pic.Data = vector.Data;
 
-                if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
                 {
                   pic.Resize(Options.MainSettings.MaxCoverWidth);
                 }
@@ -895,12 +895,12 @@ namespace MPTagThat.GridView
               try
               {
                 MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
-                if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
                 {
                   pic.Resize(Options.MainSettings.MaxCoverWidth);
                 }
 
-                Image img = pic.ImageFromData(vector.Data);
+                Image img = Picture.ImageFromData(vector.Data);
 
                 // Need to make a copy, otherwise we have a GDI+ Error
                 Bitmap bmp = new Bitmap(img);
@@ -974,7 +974,7 @@ namespace MPTagThat.GridView
         string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
         try
         {
-          Image img = track.Pictures[0].Data;
+          Image img = Picture.ImageFromData(track.Pictures[0].Data);
           // Need to make a copy, otherwise we have a GDI+ Error
           Bitmap bCopy = new Bitmap(img);
           bCopy.Save(fileName, ImageFormat.Jpeg);
@@ -1014,7 +1014,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      if (Options.MainSettings.ChangeCoverSize && pic.Data.Width > Options.MainSettings.MaxCoverWidth)
+      if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
       {
         pic.Resize(Options.MainSettings.MaxCoverWidth);
       }
@@ -1076,7 +1076,7 @@ namespace MPTagThat.GridView
         Image img = Image.FromStream(stream);
         stream.Close();
 
-        pic = new Picture { Data = (Image)img.Clone() };
+        pic = new Picture { Data = Picture.ImageToByte((Image)img.Clone()) };
 
         if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
         {
@@ -1855,7 +1855,7 @@ namespace MPTagThat.GridView
     {
       log.Trace(">>>");
       tracksGrid.Rows.Clear();
-      Options.Songlist = new SongList();
+      Options.Songlist.Clear();
       _nonMusicFiles = new List<FileInfo>();
       _main.MiscInfoPanel.ClearNonMusicFiles();
       _main.MiscInfoPanel.ActivateNonMusicTab();
@@ -3248,7 +3248,6 @@ namespace MPTagThat.GridView
     /// <param name="e"></param>
     void tracksGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
     {
-      /*
       // Don't handle empty folders
       if (Options.Songlist.Count == 0)
       {
@@ -3259,7 +3258,6 @@ namespace MPTagThat.GridView
       {
         return;
       }
-      */
 
       TrackData track = Options.Songlist[e.RowIndex];
 

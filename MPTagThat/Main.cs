@@ -994,7 +994,7 @@ namespace MPTagThat
         ApplicationCommands.SaveAsThumb.Enabled = false;
         if (track.Pictures.Count > 0)
         {
-          img = track.Pictures[0].Data;
+          img = Picture.ImageFromData(track.Pictures[0].Data);
           if (img != null)
           {
             GalleryItem galleryItem = new GalleryItem(img, "", "");
