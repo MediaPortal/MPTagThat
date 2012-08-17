@@ -46,7 +46,6 @@ namespace MPTagThat.Core
                                                          Environment.GetFolderPath(
                                                            Environment.SpecialFolder.LocalApplicationData));
 
-    private const int Maxobjectsforlist = 10;
     private SortableBindingList<TrackData> _bindingList = new SortableBindingList<TrackData>();
     private bool _databaseModeEnabled = false;
 
@@ -150,7 +149,7 @@ namespace MPTagThat.Core
     /// <param name="track"></param>
     public void Add(TrackData track)
     {
-      if (!_databaseModeEnabled && _bindingList.Count > Maxobjectsforlist )
+      if (!_databaseModeEnabled && _bindingList.Count > Options.MaximumNumberOfSongsInList )
       {
         CopyLIstToDatabase();  
       }

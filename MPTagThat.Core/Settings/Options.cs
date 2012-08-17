@@ -250,6 +250,8 @@ namespace MPTagThat.Core
 
     public static SongList Songlist { get; set; }
 
+    public static int MaximumNumberOfSongsInList { get; set; }
+
     #endregion
 
     #region Constructor
@@ -268,6 +270,8 @@ namespace MPTagThat.Core
                                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
       else
         _configDir = String.Format(@"{0}\Config", Application.StartupPath);
+
+      MaximumNumberOfSongsInList = ServiceScope.Get<ISettingsManager>().GetMaxSongs();
 
       _MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);
