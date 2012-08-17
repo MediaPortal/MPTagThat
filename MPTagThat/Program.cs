@@ -37,6 +37,7 @@ namespace MPTagThat
     #region Variables
 
     private static int _portable;
+    private static int _maxSongs;
     private static string _startupFolder;
 
     #endregion
@@ -91,6 +92,8 @@ namespace MPTagThat
         ServiceScope.Add<ISettingsManager>(new SettingsManager());
         // Set the portable Indicator
         ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
+        // Set the Max Songs number
+        ServiceScope.Get<ISettingsManager>().SetMaxSongs(_maxSongs);
 
         try
         {
@@ -193,6 +196,16 @@ namespace MPTagThat
             // Only use the value from Config, if not overriden by an argument
             _portable = Convert.ToInt32(portableNode.InnerText);
           }
+        }
+
+        XmlNode maxSongsNode = doc.DocumentElement.SelectSingleNode("/config/MaximumNumberOfSongsInList");
+        if (maxSongsNode != null)
+        {
+          _maxSongs = Convert.ToInt32(maxSongsNode.InnerText);
+        }
+        else
+        {
+          _maxSongs = 200;
         }
       }
       catch (Exception) {}

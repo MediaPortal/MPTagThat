@@ -121,7 +121,7 @@ namespace MPTagThat.CaseConversion
         if (fileName.Length > 255)
         {
           log.Debug("Filename too long: {0}", fileName);
-          _main.TracksGridView.TrackList[rowIndex].Status = 2;
+          Options.Songlist[rowIndex].Status = 2;
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
                                                String.Format("{0}: {1}",
                                                              localisation.ToString("tag2filename", "NameTooLong"),
@@ -136,11 +136,11 @@ namespace MPTagThat.CaseConversion
           if (rowIndex == file.Index)
             continue;
 
-          TrackData filedata = _main.TracksGridView.TrackList[file.Index];
+          TrackData filedata = Options.Songlist[file.Index];
           if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
           {
             log.Debug("New Filename already exists: {0}", fileName);
-            _main.TracksGridView.TrackList[rowIndex].Status = 2;
+            Options.Songlist[rowIndex].Status = 2;
             _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
                                                  String.Format("{0}: {1}",
                                                                localisation.ToString("tag2filename", "FileExists"),
@@ -218,11 +218,11 @@ namespace MPTagThat.CaseConversion
         if (!row.Selected)
           continue;
 
-        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         CaseConvert(track, row.Index);
       }
 
-      foreach (TrackData track in _main.TracksGridView.TrackList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           _main.TracksGridView.Changed = true;

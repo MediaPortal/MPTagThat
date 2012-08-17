@@ -30,7 +30,7 @@ namespace MPTagThat.Core.Common
         {
           FreeImageBitmap img = new FreeImageBitmap(fs);
           fs.Close();
-          Data = (Image)(img.Clone() as FreeImageBitmap);
+          Data = ImageToByte((Image)(img.Clone() as FreeImageBitmap));
           img.Dispose();
         }
       }
@@ -80,10 +80,10 @@ namespace MPTagThat.Core.Common
     ///    instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="Image" /> object containing the picture
+    ///    A <see cref="byte"/> object containing the picture
     ///    data stored in the current instance.
     /// </value>
-    public Image Data { get; set; }
+    public byte[] Data { get; set; }
 
     #endregion
 
@@ -94,7 +94,7 @@ namespace MPTagThat.Core.Common
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    public Image ImageFromData(byte[] data)
+    public static Image ImageFromData(byte[] data)
     {
       FreeImageBitmap img = null;
       try
@@ -131,11 +131,11 @@ namespace MPTagThat.Core.Common
 
     public void Resize (int width)
     {
-      FreeImageBitmap bmp = new FreeImageBitmap(Data);
+      FreeImageBitmap bmp = new FreeImageBitmap(ImageFromData(Data));
       
       int ratio = (int)((double)bmp.Height / bmp.Width * width);
       bmp.Rescale(width, ratio, FREE_IMAGE_FILTER.FILTER_BOX);
-      Data = (Image) (bmp.Clone() as FreeImageBitmap);
+      Data = ImageToByte((Image) (bmp.Clone() as FreeImageBitmap));
       bmp.Dispose();
     }
 

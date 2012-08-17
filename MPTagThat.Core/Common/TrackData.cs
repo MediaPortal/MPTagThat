@@ -102,11 +102,17 @@ namespace MPTagThat.Core
     #region Properties
     #region Common Properties
 
+    private Guid _id;
+
     /// <summary>
     /// Unique ID of the Track
     /// To be used in identifying cloned / changed tracks
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid Id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
 
     /// <summary>
     /// The ID3 Version

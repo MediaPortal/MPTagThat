@@ -83,7 +83,7 @@ namespace MPTagThat.Core
       FileInfo fi = new FileInfo(fileName);
       try
       {
-        track.Id = new Guid();
+        track.Id = Guid.NewGuid();
         track.FullFileName = fileName;
         track.FileName = Path.GetFileName(fileName);
         track.Readonly = fi.IsReadOnly;
@@ -146,7 +146,7 @@ namespace MPTagThat.Core
             Description = picture.Description
           };
 
-          pic.Data = pic.ImageFromData(picture.Data.Data);
+          pic.Data = picture.Data.Data;
           track.Pictures.Add(pic);
         }
 
@@ -560,7 +560,7 @@ namespace MPTagThat.Core
 
           try
           {
-            byte[] byteArray = Picture.ImageToByte(pic.Data);
+            byte[] byteArray = pic.Data;
             ByteVector data = new ByteVector(byteArray);
             tagPic.Data = data;
             tagPic.Description = pic.Description;

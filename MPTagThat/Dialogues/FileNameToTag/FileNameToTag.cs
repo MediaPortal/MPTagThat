@@ -118,7 +118,7 @@ namespace MPTagThat.FileNameToTag
         {
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(row.Index);
-          track = _main.TracksGridView.TrackList[row.Index];
+          track = Options.Songlist[row.Index];
           track.Changed = true;
 
           ReplaceParametersWithValues(parameters, false);
@@ -126,7 +126,7 @@ namespace MPTagThat.FileNameToTag
         catch (Exception ex)
         {
           log.Error("Error applying changes from Filename To Tag: {0} stack: {1}", ex.Message, ex.StackTrace);
-          _main.TracksGridView.TrackList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           _main.TracksGridView.AddErrorMessage(row, localisation.ToString("TagAndRename", "InvalidParm"));
           bErrors = true;
         }
@@ -134,7 +134,7 @@ namespace MPTagThat.FileNameToTag
 
       _main.TracksGridView.Changed = bErrors;
       // check, if we still have changed items in the list
-      foreach (TrackData track in _main.TracksGridView.TrackList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           _main.TracksGridView.Changed = true;
@@ -349,7 +349,7 @@ namespace MPTagThat.FileNameToTag
         if (!row.Selected)
           continue;
 
-        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
       }
       log.Trace("<<<");
