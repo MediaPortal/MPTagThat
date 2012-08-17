@@ -2942,6 +2942,7 @@ namespace MPTagThat.GridView
       newColumn.Tag = (int)direction;
 
       tracksGrid_Sorted();
+      tracksGrid.Update();
       tracksGrid.Refresh();
     }
 

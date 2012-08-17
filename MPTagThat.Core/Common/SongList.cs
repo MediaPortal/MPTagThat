@@ -18,6 +18,8 @@
 #region
 
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Db4objects.Db4o.IO;
@@ -218,7 +220,44 @@ namespace MPTagThat.Core
     /// <param name="direction"></param>
     public void Sort(PropertyDescriptor property, ListSortDirection direction)
     {
-      _bindingList.ApplySortCore(property, direction);
+      if (_databaseModeEnabled)
+      {
+        // Build the Linq Expression tree for sorting
+        string sortFieldName = property.Name;
+        string sortMethod = "OrderBy";
+        if (direction.ToString() == "Descending")
+        {
+          sortMethod = "OrderbyDescending";
+        }
+
+        var queryableData = _db.AsQueryable<TrackData>();
+        var type = typeof(TrackData);
+        var prop = type.GetProperty(sortFieldName);
+        var parameter = Expression.Parameter(type, "p");
+        var propertyAccess = Expression.MakeMemberAccess(parameter, prop);
+        var orderByExpression = Expression.Lambda(propertyAccess, parameter);
+
+        var queryExpr = Expression.Call(typeof(Queryable), sortMethod,
+                                                new[] { type, property.PropertyType },
+                                                queryableData.Expression, Expression.Quote(orderByExpression));
+
+
+        var result = queryableData.Provider.CreateQuery<TrackData>(queryExpr);
+
+
+        int i = 0;
+        _dbIdList.Clear();
+        foreach (TrackData dataObject in result)
+        {
+          _dbIdList.Add(i, dataObject.Id);
+          i++;
+        }
+
+      }
+      else
+      {
+        _bindingList.ApplySortCore(property, direction);
+      }
     }
 
     #endregion
