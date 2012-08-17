@@ -123,6 +123,8 @@ namespace MPTagThat.GridView
     public static extern int AnalyzeSamples(double[] left_samples, double[] right_samples, UIntPtr num_samples, int num_channels);
     [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
     public static extern float GetTitleGain();
+    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+    public static extern float GetAlbumGain();
 
     #endregion
 
@@ -1517,6 +1519,47 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       SetProgressBar(trackCount);
 
+      bool albumGain = false;
+      bool foundDifferentSampleRate = false;
+      string sampleRate = "";
+
+      // Check, if all rows have been selected and provide the option to invoke Album Gain analysis
+      if (tracksGrid.Rows.Count == tracksGrid.SelectedRows.Count)
+      {
+        // Look, if we have the same Sample Rate for all files, otherwise we can't do a album gain
+        foreach (DataGridViewRow row in tracksGrid.SelectedRows)
+        {
+          TrackData track = Options.Songlist[row.Index];
+          if (sampleRate == "")
+          {
+            sampleRate = track.SampleRate;
+            continue;
+          }
+          if (sampleRate != track.SampleRate)
+          {
+            foundDifferentSampleRate = true;
+            break;
+          }
+        }
+
+        if (!foundDifferentSampleRate)
+        {
+          if (
+            MessageBox.Show(localisation.ToString("albumgain", "Explanation"),
+                            localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+          {
+            albumGain = true;
+          }
+        }
+      }
+
+      float maxPeak = 0.0f;
+
+      if (albumGain)
+      {
+        InitGainAnalysis(Convert.ToInt32(sampleRate));  
+      }
+      
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         ClearStatusColumn(row.Index);
@@ -1552,7 +1595,11 @@ namespace MPTagThat.GridView
         
         Util.SendProgress(string.Format("Analysing gain for {0}", track.FileName));
         log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
-        InitGainAnalysis((long)chInfo.freq);
+        
+        if (!albumGain)
+        {
+          InitGainAnalysis(chInfo.freq);
+        }
         ReplayAnalyze(stream);
         float titleGain = GetTitleGain();
         
@@ -1572,6 +1619,11 @@ namespace MPTagThat.GridView
           }
         }
 
+        if (albumGain && maxPeak < peak)
+        {
+          maxPeak = peak;
+        }
+
         Bass.BASS_StreamFree(stream);
 
         log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", titleGain.ToString(CultureInfo.InvariantCulture), peak.ToString(CultureInfo.InvariantCulture));
@@ -1582,6 +1634,27 @@ namespace MPTagThat.GridView
         track.Changed = true;
         _itemsChanged = true;
       }
+
+      // Should we also get Album Gain
+      if (albumGain)
+      {
+        float albumGainValue = GetAlbumGain();
+        string albumGainValueStr = albumGainValue.ToString(CultureInfo.InvariantCulture);
+        string albumPeakValueStr = maxPeak.ToString(CultureInfo.InvariantCulture);
+
+        foreach (DataGridViewRow row in tracksGrid.Rows)
+        {
+          if (!row.Selected)
+          {
+            continue;
+          }
+
+          TrackData track = Options.Songlist[row.Index];
+          track.ReplayGainAlbum = albumGainValueStr;
+          track.ReplayGainAlbumPeak = albumPeakValueStr;
+        }
+      }
+
       Util.SendProgress("");
       ResetProgressBar();
       tracksGrid.Refresh();

@@ -941,4 +941,10 @@
 	<String id="No">Nein</String>
 	<String id="NoToAll">Nein Alle</String>
   </Section>
+   
+  <!-- Replay Gain Popup -->
+  <Section name="albumgain">
+    <String id="Header">Album Gain</String>
+    <String id="Explanation">Alle Titel selektiert.\nSoll MPTagThat den Album Gain berechnen?</String>
+  </Section>
 </Language>

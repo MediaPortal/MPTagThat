@@ -724,9 +724,9 @@ namespace MPTagThat.Core
       
       set
       {
-        if (value != "" && !value.Contains("db"))
+        if (value != "" && !value.ToLower().Contains("db"))
         {
-          value += " db";
+          value += " dB";
         }
         _replaygainTrack = value;
       }
@@ -740,9 +740,9 @@ namespace MPTagThat.Core
       
       set
       {
-        if (value != "" && !value.Contains("db"))
+        if (value != "" && !value.ToLower().Contains("db"))
         {
-          value += " db";
+          value += " dB";
         }
         _replaygainAlbum = value;
       }
