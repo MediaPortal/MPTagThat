@@ -55,6 +55,7 @@ namespace MPTagThat.Core
 
     private int _lastRetrievedTrackIndex = -1;
     private TrackData _lastRetrievedTrack = null;
+    private int _countCache = 0;
 
     #endregion
 
@@ -77,7 +78,6 @@ namespace MPTagThat.Core
 
     #endregion
 
-
     #region Properties
 
     /// <summary>
@@ -90,7 +90,11 @@ namespace MPTagThat.Core
       {
         if (_databaseModeEnabled)
         {
-          return _db.Query(typeof (TrackData)).Count;
+          if (_countCache == 0)
+          {
+            _countCache = _db.Query(typeof(TrackData)).Count;
+          }
+          return _countCache;
         }
 
         return _bindingList.Count;
@@ -119,14 +123,16 @@ namespace MPTagThat.Core
 
           _lastRetrievedTrackIndex = i;
 
+          ServiceScope.Get<ILogger>().GetLogger.Trace("Getting Track from database: {0}", i);
+
           var result = from TrackData d in _db
                        where d.Id == _dbIdList[i]
                        select d;
 
           foreach (var trackData in result)
           {
-            _db.Activate(trackData, 10);
             _lastRetrievedTrack = trackData;
+            ServiceScope.Get<ILogger>().GetLogger.Trace("Finished Getting Track from database");
             return trackData;
           }
         }
@@ -276,10 +282,11 @@ namespace MPTagThat.Core
 
         _dbConfig = Db4oEmbedded.NewConfiguration();
         _dbConfig.Common.ObjectClass(typeof(TrackData)).ObjectField("_id").Indexed(true);
+        _dbConfig.Common.ActivationDepth = 1; // To increase performance
         _dbConfig.Common.ObjectClass(typeof(TrackData)).CascadeOnUpdate(true);
 
         IStorage fileStorage = new FileStorage();
-        IStorage cachingStorage = new CachingStorage(fileStorage, 128, 4096);
+        IStorage cachingStorage = new CachingStorage(fileStorage, 128, 2048);
         _dbConfig.File.Storage = cachingStorage;
 
         _db = Db4oEmbedded.OpenFile(_dbConfig, _databaseName);
