@@ -1047,6 +1047,7 @@ namespace MPTagThat
 
       pinListRecentFolders.Items.Insert(0, pinItem);
 
+      Options.MainSettings.RecentFolders.Remove(newFolder);
       Options.MainSettings.RecentFolders.Insert(0, newFolder);
       if (Options.MainSettings.RecentFolders.Count > 20)
       {
