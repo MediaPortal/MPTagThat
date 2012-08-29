@@ -28,6 +28,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Elegant.Ui;
+using NLog;
 using TagLib;
 using Un4seen.Bass.AddOn.Cd;
 using File = TagLib.File;
@@ -40,6 +41,18 @@ namespace MPTagThat.Core
 {
   public sealed class Util
   {
+    #region Enum
+
+    public enum MP3Error : int
+    {
+      NoError = 0,
+      Fixable = 1,
+      NonFixable = 2,
+      Fixed = 3
+    }
+
+    #endregion
+
     #region Structures
 
     #region Nested type: IconInfo
@@ -78,7 +91,7 @@ namespace MPTagThat.Core
     #region Variables
 
     private static Util instance = new Util();
-    private static NLog.Logger log;
+    private static Logger log;
     private static readonly object padlock = new object();
 
     private static char[] _invalidFilenameChars;
@@ -279,6 +292,22 @@ namespace MPTagThat.Core
                                                         "zza - Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"
                                                       };
 
+    private static readonly string[] _standardId3Frames = new[]
+                                                            {
+                                                              "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM",
+                                                              "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC",
+                                                              "POPM", "TIT2", "TRCK", "TYER", "TDRC"
+                                                            };
+
+    private static readonly string[] _extendedId3Frames = new[]
+                                                            {
+                                                              "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
+                                                              "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
+                                                              "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
+                                                              "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
+                                                              "TCMP"
+                                                            };
+
     private static readonly Dictionary<string, Image> FileLargeImageCache = new Dictionary<string, Image>();
     private static readonly Dictionary<string, Image> FileSmallImageCache = new Dictionary<string, Image>();
 
@@ -348,9 +377,28 @@ namespace MPTagThat.Core
 
     #region Properties
 
+    /// <summary>
+    /// The available ISO Languages
+    /// </summary>
     public static string[] ISO_LANGUAGES
     {
       get { return _iso_languages; }
+    }
+
+    /// <summary>
+    /// The standard ID3 Frames directly supported by TagLib #
+    /// </summary>
+    public static string[] StandardFrames
+    {
+      get { return _standardId3Frames; }
+    }
+
+    /// <summary>
+    /// The extended ID3 Frames 
+    /// </summary>
+    public static string[] ExtendedFrames
+    {
+      get { return _extendedId3Frames; }
     }
 
     #endregion
@@ -1342,8 +1390,8 @@ namespace MPTagThat.Core
 
     public static string RemoveTrailingSlash(string strLine)
     {
-      if (strLine == null) return string.Empty;
-      if (strLine.Length == 0) return string.Empty;
+      if (strLine == null) return String.Empty;
+      if (strLine.Length == 0) return String.Empty;
       string strPath = strLine;
       while (strPath.Length > 0)
       {
@@ -1384,7 +1432,7 @@ namespace MPTagThat.Core
 
       if (isRooted)
       {
-        bool isDifferentRoot = string.Compare(Path.GetPathRoot(fromDirectory), Path.GetPathRoot(toPath), true) != 0;
+        bool isDifferentRoot = String.Compare(Path.GetPathRoot(fromDirectory), Path.GetPathRoot(toPath), true) != 0;
 
         if (isDifferentRoot)
           return toPath;
@@ -1402,7 +1450,7 @@ namespace MPTagThat.Core
       // find common root
       for (int x = 0; x < length; x++)
       {
-        if (string.Compare(fromDirectories[x], toDirectories[x], true) != 0)
+        if (String.Compare(fromDirectories[x], toDirectories[x], true) != 0)
           break;
 
         lastCommonRoot = x;
@@ -1424,7 +1472,7 @@ namespace MPTagThat.Core
       string[] relativeParts = new string[relativePath.Count];
       relativePath.CopyTo(relativeParts, 0);
 
-      string newPath = string.Join(Path.DirectorySeparatorChar.ToString(), relativeParts);
+      string newPath = String.Join(Path.DirectorySeparatorChar.ToString(), relativeParts);
 
       return newPath;
     }

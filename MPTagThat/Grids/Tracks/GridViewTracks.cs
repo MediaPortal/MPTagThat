@@ -1434,7 +1434,7 @@ namespace MPTagThat.GridView
           Util.SendProgress(string.Format("Validating file {0}", track.FileName));
           string strError = "";
           track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError != TrackData.MP3Error.NoError)
+          if (track.MP3ValidationError != Util.MP3Error.NoError)
           {
             SetColorMP3Errors(row.Index, track.MP3ValidationError);
             track.Status = 3;
@@ -1485,7 +1485,7 @@ namespace MPTagThat.GridView
           Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
           string strError = "";
           track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError == TrackData.MP3Error.Fixed)
+          if (track.MP3ValidationError == Util.MP3Error.Fixed)
           {
             SetGridRowColors(row.Index);
             track.Status = 4;
@@ -1817,16 +1817,16 @@ namespace MPTagThat.GridView
     ///   Sets the Color for Tracks, that contain errors found by mp3val
     /// </summary>
     /// <param name = "index"></param>
-    public void SetColorMP3Errors(int index, TrackData.MP3Error error)
+    public void SetColorMP3Errors(int index, Util.MP3Error error)
     {
-      if (error == TrackData.MP3Error.Fixable || error == TrackData.MP3Error.Fixed)
+      if (error == Util.MP3Error.Fixable || error == Util.MP3Error.Fixed)
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.FixableErrorBackColor;
         tracksGrid.Rows[index].DefaultCellStyle.ForeColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.FixableErrorForeColor;
       }
-      else if (error == TrackData.MP3Error.NonFixable)
+      else if (error == Util.MP3Error.NonFixable)
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.NonFixableErrorBackColor;
@@ -1834,7 +1834,7 @@ namespace MPTagThat.GridView
           ServiceScope.Get<IThemeManager>().CurrentTheme.NonFixableErrorForeColor;
       }
 
-      if (error == TrackData.MP3Error.Fixed)
+      if (error == Util.MP3Error.Fixed)
       {
         Options.Songlist[index].Status = 4;
       }
@@ -2513,7 +2513,7 @@ namespace MPTagThat.GridView
       {
         TrackData track = Options.Songlist[row.Index];
 
-        if (track.MP3ValidationError == TrackData.MP3Error.NoError)
+        if (track.MP3ValidationError == Util.MP3Error.NoError)
         {
           continue;
         }

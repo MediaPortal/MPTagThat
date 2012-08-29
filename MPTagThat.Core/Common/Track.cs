@@ -275,11 +275,11 @@ namespace MPTagThat.Core
           foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
           {
             string id = frame.FrameId.ToString();
-            if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
+            if (!Util.StandardFrames.Contains(id) && Util.ExtendedFrames.Contains(id))
             {
               track.Frames.Add(new Frame(id, "", frame.ToString()));
             }
-            else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
+            else if (!Util.StandardFrames.Contains(id) && !Util.ExtendedFrames.Contains(id))
             {
               if ((Type) frame.GetType() == typeof(UserTextInformationFrame))
               {

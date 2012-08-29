@@ -22,6 +22,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using MPTagThat.Core.Common;
+using TagLib;
+using Picture = MPTagThat.Core.Common.Picture;
 
 #endregion
 
@@ -30,18 +32,6 @@ namespace MPTagThat.Core
   [Serializable]
   public class TrackData
   {
-    #region Enum
-
-    public enum MP3Error : int
-    {
-      NoError = 0,
-      Fixable = 1,
-      NonFixable = 2,
-      Fixed = 3
-    }
-
-    #endregion
-
     #region Variables
 
     private const int NumTrackDigits = 2;
@@ -58,29 +48,13 @@ namespace MPTagThat.Core
     private string _replaygainTrack;
     private string _replaygainAlbum;
 
-    private MP3Error _mp3ValError;
+    private Util.MP3Error _mp3ValError;
     private string _mp3ValErrorText;
     private List<Picture> _pictures = new List<Picture>();
     private List<Comment> _comments = new List<Comment>();
     private List<Lyric> _lyrics = new List<Lyric>();
     private List<PopmFrame> _popmframes = new List<PopmFrame>();
-    private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
-
-    private static readonly string[] _standardId3Frames = new[]
-                                                            {
-                                                              "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM",
-                                                              "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC",
-                                                              "POPM", "TIT2", "TRCK", "TYER", "TDRC"
-                                                            };
-
-    private static readonly string[] _extendedId3Frames = new[]
-                                                             {
-                                                               "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
-                                                               "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
-                                                               "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
-                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
-                                                               "TCMP"
-                                                             };
+    private List<TagLib.TagTypes> _removedTagTypes = null;
 
     #endregion
 
@@ -90,7 +64,7 @@ namespace MPTagThat.Core
     {
       Changed = false;
       Status = -1;
-      _mp3ValError = MP3Error.NoError;
+      _mp3ValError = Util.MP3Error.NoError;
       _mp3ValErrorText = "";
       Frames = new List<Common.Frame>();
       UserFrames = new List<Frame>();
@@ -157,6 +131,10 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (_removedTagTypes == null)
+        {
+          _removedTagTypes = new List<TagTypes>();
+        }
         return _removedTagTypes;
       }
     }
@@ -208,7 +186,7 @@ namespace MPTagThat.Core
     /// <summary>
     /// Has the Track fixable errors?
     /// </summary>
-    public MP3Error MP3ValidationError
+    public Util.MP3Error MP3ValidationError
     {
       get { return _mp3ValError; }
       set { _mp3ValError = value; }
@@ -218,22 +196,6 @@ namespace MPTagThat.Core
     {
       get { return _mp3ValErrorText; }
       set { _mp3ValErrorText = value; }
-    }
-
-    /// <summary>
-    /// The standard ID3 Frames directly supported by TagLib #
-    /// </summary>
-    public string[] StandardFrames
-    {
-      get { return _standardId3Frames; }
-    }
-
-    /// <summary>
-    /// The extended ID3 Frames 
-    /// </summary>
-    public string[] ExtendedFrames
-    {
-      get { return _extendedId3Frames; }
     }
 
     #endregion
@@ -966,6 +928,5 @@ namespace MPTagThat.Core
     }
 
     #endregion
-
   }
 }
