@@ -401,7 +401,7 @@ namespace MPTagThat.TagEdit
 
         // Get Comment
         string sComment = "";
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           sComment += track.Comment;
           foreach (Comment commentsframe in track.ID3Comments)
@@ -417,7 +417,7 @@ namespace MPTagThat.TagEdit
           if (i == 0)
           {
             strCommentTemp = sComment;
-            if (track.TagType.ToLower() == "mp3")
+            if (track.IsMp3)
             {
               AddComment("", "", track.Comment);
               foreach (Comment commentsframe in track.ID3Comments)
@@ -521,7 +521,7 @@ namespace MPTagThat.TagEdit
         }
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbInterpretedBy.Text.Trim() != track.Interpreter.Trim())
           {
@@ -633,7 +633,7 @@ namespace MPTagThat.TagEdit
         #region Original Information
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbOriginalAlbum.Text.Trim() != track.OriginalAlbum.Trim())
           {
@@ -713,7 +713,7 @@ namespace MPTagThat.TagEdit
         #region Involved People
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (strInvoledPeopleTemp != track.InvolvedPeople)
           {
@@ -762,7 +762,7 @@ namespace MPTagThat.TagEdit
         #region Web Information
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbCopyrightUrl.Text.Trim() != track.CopyrightInformation.Trim())
           {
@@ -899,7 +899,7 @@ namespace MPTagThat.TagEdit
           #region Lyrics
 
           dataGridViewLyrics.Rows.Clear();
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (Lyric lyricsframe in track.LyricsFrames)
             {
@@ -919,14 +919,14 @@ namespace MPTagThat.TagEdit
           #region Rating
 
           dataGridViewRating.Rows.Clear();
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (PopmFrame popmframe in track.Ratings)
             {
               AddRating(popmframe.User, Convert.ToString(popmframe.Rating), Convert.ToString(popmframe.PlayCount));
             }
           }
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
             groupBoxRating.Enabled = true;
           else
             groupBoxRating.Enabled = false;

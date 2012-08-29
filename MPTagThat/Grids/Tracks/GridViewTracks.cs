@@ -1429,7 +1429,7 @@ namespace MPTagThat.GridView
 
         TrackData track = Options.Songlist[row.Index];
 
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           Util.SendProgress(string.Format("Validating file {0}", track.FileName));
           string strError = "";
@@ -1480,7 +1480,7 @@ namespace MPTagThat.GridView
         }
 
         TrackData track = Options.Songlist[row.Index];
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
           string strError = "";
@@ -2486,7 +2486,7 @@ namespace MPTagThat.GridView
       }
 
       // Validate the MP3 File
-      if (Options.MainSettings.MP3Validate && track.TagType.ToLower() == "mp3")
+      if (Options.MainSettings.MP3Validate && track.IsMp3)
       {
         string strError = "";
         track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);

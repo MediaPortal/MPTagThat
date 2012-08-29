@@ -151,7 +151,7 @@ namespace MPTagThat.Core
         }
 
         // Comments
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
           {
@@ -165,7 +165,7 @@ namespace MPTagThat.Core
 
         // Lyrics
         track.Lyrics = file.Tag.Lyrics;
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<UnsynchronisedLyricsFrame>())
           {
@@ -178,7 +178,7 @@ namespace MPTagThat.Core
         }
 
         // Rating
-        if (track.TagType == "mp3")
+        if (track.IsMp3)
         {
           TagLib.Id3v2.PopularimeterFrame popmFrame = null;
           // First read in all POPM Frames found
@@ -270,7 +270,7 @@ namespace MPTagThat.Core
       // Now copy all Text frames of an ID3 V2
       try
       {
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
           {
@@ -471,7 +471,7 @@ namespace MPTagThat.Core
         // Get the ID3 Frame for ID3 specifc frame handling
         TagLib.Id3v1.Tag id3v1tag = null;
         TagLib.Id3v2.Tag id3v2tag = null;
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           id3v1tag = file.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
           id3v2tag = file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
@@ -497,7 +497,7 @@ namespace MPTagThat.Core
         if (track.Comment != "")
         {
           file.Tag.Comment = "";
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             id3v1tag.Comment = track.Comment;
             foreach (Comment comment in track.ID3Comments)
@@ -516,7 +516,7 @@ namespace MPTagThat.Core
           file.Tag.Comment = "";
         }
 
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           id3v2tag.IsCompilation = track.Compilation;
         }
@@ -589,7 +589,7 @@ namespace MPTagThat.Core
         if (track.Lyrics != null && track.Lyrics != "")
         {
           file.Tag.Lyrics = track.Lyrics;
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (Lyric lyric in track.LyricsFrames)
             {
@@ -610,7 +610,7 @@ namespace MPTagThat.Core
 
         #region Ratings
 
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (track.Ratings.Count > 0)
           {
@@ -698,7 +698,7 @@ namespace MPTagThat.Core
         file = Util.FormatID3Tag(file);
 
         // Set the encoding for ID3 Tags
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
           switch (Options.MainSettings.CharacterEncoding)

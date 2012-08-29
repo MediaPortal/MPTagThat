@@ -74,6 +74,7 @@ namespace MPTagThat.Core
     #endregion
 
     #region Properties
+
     #region Common Properties
 
     private Guid _id;
@@ -174,6 +175,14 @@ namespace MPTagThat.Core
     /// The Tag Type
     /// </summary>
     public string TagType { get; set; }
+
+    /// <summary>
+    /// Do we have a MP3 File?
+    /// </summary>
+    public bool IsMp3
+    {
+      get { return TagType.ToLower() == "mp3"; }
+    }
 
     /// <summary>
     /// Number of Pictures in File
