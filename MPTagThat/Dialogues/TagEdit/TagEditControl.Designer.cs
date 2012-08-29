@@ -31,6 +31,58 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
+      this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageDetailsPanel = new Elegant.Ui.Panel();
+      this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.btGetTrackLength = new MPTagThat.Core.WinControls.MPTButton();
+      this.tbTrackLength = new System.Windows.Forms.TextBox();
+      this.lblTRackLength = new MPTagThat.Core.WinControls.MPTLabel();
+      this.ckMediaType = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.cbMediaType = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.lblMediaType = new MPTagThat.Core.WinControls.MPTLabel();
+      this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.groupBoxSort = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.tbAlbumArtistSort = new System.Windows.Forms.TextBox();
+      this.ckAlbumArtistSort = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblAlbumArtistSort = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbTitleSort = new System.Windows.Forms.TextBox();
+      this.ckTitleSort = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblTitleSort = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbAlbumSort = new System.Windows.Forms.TextBox();
+      this.ckAlbumSort = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblAlbumSort = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbArtistSort = new System.Windows.Forms.TextBox();
+      this.ckArtistSort = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblArtistSort = new MPTagThat.Core.WinControls.MPTLabel();
+      this.groupBoxContent = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.tbSubTitle = new System.Windows.Forms.TextBox();
+      this.ckSubTitle = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblSubTitle = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbContentGroup = new System.Windows.Forms.TextBox();
+      this.ckContentGroup = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblContentGroup = new MPTagThat.Core.WinControls.MPTLabel();
+      this.groupBoxPeople = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.tbCopyright = new System.Windows.Forms.TextBox();
+      this.ckCopyright = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblCopyright = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbEncodedBy = new System.Windows.Forms.TextBox();
+      this.ckEncodedBy = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblEncodedBy = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbPublisher = new System.Windows.Forms.TextBox();
+      this.ckPublisher = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblPublisher = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbTextWriter = new System.Windows.Forms.TextBox();
+      this.ckTextWriter = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblTextWriter = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbInterpretedBy = new System.Windows.Forms.TextBox();
+      this.ckInterpretedBy = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblInterpretedBy = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbComposer = new System.Windows.Forms.TextBox();
+      this.ckComposer = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblComposer = new MPTagThat.Core.WinControls.MPTLabel();
+      this.tbConductor = new System.Windows.Forms.TextBox();
+      this.ckConductor = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblConductor = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageMainPanel = new Elegant.Ui.Panel();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -106,55 +158,6 @@
       this.pictureBoxCover = new System.Windows.Forms.PictureBox();
       this.tbPicDesc = new System.Windows.Forms.TextBox();
       this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabPageDetailsPanel = new Elegant.Ui.Panel();
-      this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.btGetTrackLength = new MPTagThat.Core.WinControls.MPTButton();
-      this.tbTrackLength = new System.Windows.Forms.TextBox();
-      this.lblTRackLength = new MPTagThat.Core.WinControls.MPTLabel();
-      this.ckMediaType = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.cbMediaType = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.lblMediaType = new MPTagThat.Core.WinControls.MPTLabel();
-      this.ckTrackLength = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxSort = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.tbTitleSort = new System.Windows.Forms.TextBox();
-      this.ckTitleSort = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblTitleSort = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbAlbumSort = new System.Windows.Forms.TextBox();
-      this.ckAlbumSort = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblAlbumSort = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbArtistSort = new System.Windows.Forms.TextBox();
-      this.ckArtistSort = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblArtistSort = new MPTagThat.Core.WinControls.MPTLabel();
-      this.groupBoxContent = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.tbSubTitle = new System.Windows.Forms.TextBox();
-      this.ckSubTitle = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblSubTitle = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbContentGroup = new System.Windows.Forms.TextBox();
-      this.ckContentGroup = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblContentGroup = new MPTagThat.Core.WinControls.MPTLabel();
-      this.groupBoxPeople = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.tbCopyright = new System.Windows.Forms.TextBox();
-      this.ckCopyright = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblCopyright = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbEncodedBy = new System.Windows.Forms.TextBox();
-      this.ckEncodedBy = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblEncodedBy = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbPublisher = new System.Windows.Forms.TextBox();
-      this.ckPublisher = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblPublisher = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbTextWriter = new System.Windows.Forms.TextBox();
-      this.ckTextWriter = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblTextWriter = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbInterpretedBy = new System.Windows.Forms.TextBox();
-      this.ckInterpretedBy = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblInterpretedBy = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbComposer = new System.Windows.Forms.TextBox();
-      this.ckComposer = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblComposer = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbConductor = new System.Windows.Forms.TextBox();
-      this.ckConductor = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblConductor = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageOriginal = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageOriginalPanel = new Elegant.Ui.Panel();
       this.groupBoxOriginalInformation = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -279,6 +282,12 @@
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
+      this.tabPageDetails.SuspendLayout();
+      this.tabPageDetailsPanel.SuspendLayout();
+      this.groupBoxMedia.SuspendLayout();
+      this.groupBoxSort.SuspendLayout();
+      this.groupBoxContent.SuspendLayout();
+      this.groupBoxPeople.SuspendLayout();
       this.tabPageMain.SuspendLayout();
       this.tabPageMainPanel.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
@@ -290,12 +299,6 @@
       this.groupBoxPicture.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
-      this.tabPageDetails.SuspendLayout();
-      this.tabPageDetailsPanel.SuspendLayout();
-      this.groupBoxMedia.SuspendLayout();
-      this.groupBoxSort.SuspendLayout();
-      this.groupBoxContent.SuspendLayout();
-      this.groupBoxPeople.SuspendLayout();
       this.tabPageOriginal.SuspendLayout();
       this.tabPageOriginalPanel.SuspendLayout();
       this.groupBoxOriginalInformation.SuspendLayout();
@@ -330,7 +333,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageRating;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageDetails;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -343,6 +346,601 @@
             this.tabPageLyrics,
             this.tabPageRating,
             this.tabPageUserDefined});
+      // 
+      // tabPageDetails
+      // 
+      this.tabPageDetails.ActiveControl = null;
+      this.tabPageDetails.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageDetails.Controls.Add(this.tabPageDetailsPanel);
+      this.tabPageDetails.KeyTip = null;
+      this.tabPageDetails.Localisation = "HeaderDetail";
+      this.tabPageDetails.LocalisationContext = "TagEdit";
+      this.tabPageDetails.Name = "tabPageDetails";
+      this.tabPageDetails.Size = new System.Drawing.Size(906, 584);
+      this.tabPageDetails.TabIndex = 2;
+      this.tabPageDetails.Text = "Detailed Information";
+      // 
+      // tabPageDetailsPanel
+      // 
+      this.tabPageDetailsPanel.AutoScroll = true;
+      this.tabPageDetailsPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxMedia);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxSort);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxContent);
+      this.tabPageDetailsPanel.Controls.Add(this.groupBoxPeople);
+      this.tabPageDetailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageDetailsPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageDetailsPanel.Name = "tabPageDetailsPanel";
+      this.tabPageDetailsPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageDetailsPanel.TabIndex = 4;
+      this.tabPageDetailsPanel.Text = "panel1";
+      // 
+      // groupBoxMedia
+      // 
+      this.groupBoxMedia.Controls.Add(this.btGetTrackLength);
+      this.groupBoxMedia.Controls.Add(this.tbTrackLength);
+      this.groupBoxMedia.Controls.Add(this.lblTRackLength);
+      this.groupBoxMedia.Controls.Add(this.ckMediaType);
+      this.groupBoxMedia.Controls.Add(this.cbMediaType);
+      this.groupBoxMedia.Controls.Add(this.lblMediaType);
+      this.groupBoxMedia.Controls.Add(this.ckTrackLength);
+      this.groupBoxMedia.Id = "086a378a-becd-43ec-9eee-f02b00204d9c";
+      this.groupBoxMedia.Localisation = "ttGroupBox1";
+      this.groupBoxMedia.LocalisationContext = "TagEdit";
+      this.groupBoxMedia.Location = new System.Drawing.Point(7, 471);
+      this.groupBoxMedia.Name = "groupBoxMedia";
+      this.groupBoxMedia.Size = new System.Drawing.Size(693, 89);
+      this.groupBoxMedia.TabIndex = 3;
+      // 
+      // btGetTrackLength
+      // 
+      this.btGetTrackLength.Id = "6b5f182e-fad3-442a-beec-5728562327d2";
+      this.btGetTrackLength.Localisation = "GetTrackLengthFromFile";
+      this.btGetTrackLength.LocalisationContext = "TagEdit";
+      this.btGetTrackLength.Location = new System.Drawing.Point(392, 54);
+      this.btGetTrackLength.Name = "btGetTrackLength";
+      this.btGetTrackLength.Size = new System.Drawing.Size(116, 23);
+      this.btGetTrackLength.TabIndex = 4;
+      this.btGetTrackLength.Text = "Get from File";
+      this.btGetTrackLength.UseVisualStyleBackColor = true;
+      this.btGetTrackLength.Click += new System.EventHandler(this.btGetTrackLength_Click);
+      // 
+      // tbTrackLength
+      // 
+      this.tbTrackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbTrackLength.Location = new System.Drawing.Point(205, 55);
+      this.tbTrackLength.Name = "tbTrackLength";
+      this.tbTrackLength.Size = new System.Drawing.Size(173, 22);
+      this.tbTrackLength.TabIndex = 30;
+      // 
+      // lblTRackLength
+      // 
+      this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblTRackLength.Localisation = "TrackLength";
+      this.lblTRackLength.LocalisationContext = "TagEdit";
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 132);
+      this.lblTRackLength.Name = "lblTRackLength";
+      this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
+      this.lblTRackLength.TabIndex = 46;
+      this.lblTRackLength.Text = "Track Length (ms):";
+      // 
+      // ckMediaType
+      // 
+      this.ckMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckMediaType.Id = "2bc2dc7f-fb67-4ebc-85d7-e120c1f7aa9d";
+      this.ckMediaType.Localisation = "ckMediaType";
+      this.ckMediaType.LocalisationContext = "TagEdit";
+      this.ckMediaType.Location = new System.Drawing.Point(521, 14);
+      this.ckMediaType.Name = "ckMediaType";
+      this.ckMediaType.Size = new System.Drawing.Size(17, 29);
+      this.ckMediaType.TabIndex = 45;
+      this.ckMediaType.TabStop = false;
+      // 
+      // cbMediaType
+      // 
+      this.cbMediaType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbMediaType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbMediaType.Editable = false;
+      this.cbMediaType.FormattingEnabled = true;
+      this.cbMediaType.Id = "0f7a5a5f-c0bb-4322-bce2-d4439e4f3c36";
+      this.cbMediaType.Location = new System.Drawing.Point(205, 15);
+      this.cbMediaType.Name = "cbMediaType";
+      this.cbMediaType.Size = new System.Drawing.Size(303, 24);
+      this.cbMediaType.TabIndex = 0;
+      // 
+      // lblMediaType
+      // 
+      this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblMediaType.Localisation = "MediaType";
+      this.lblMediaType.LocalisationContext = "TagEdit";
+      this.lblMediaType.Location = new System.Drawing.Point(6, 94);
+      this.lblMediaType.Name = "lblMediaType";
+      this.lblMediaType.Size = new System.Drawing.Size(84, 16);
+      this.lblMediaType.TabIndex = 32;
+      this.lblMediaType.Text = "Media Type:";
+      // 
+      // ckTrackLength
+      // 
+      this.ckTrackLength.Id = "4bfd4ef5-03ce-4780-95c4-0f061b3c2655";
+      this.ckTrackLength.Localisation = "GetTrackLength";
+      this.ckTrackLength.LocalisationContext = "TagEdit";
+      this.ckTrackLength.Location = new System.Drawing.Point(205, 53);
+      this.ckTrackLength.Name = "ckTrackLength";
+      this.ckTrackLength.Size = new System.Drawing.Size(183, 29);
+      this.ckTrackLength.TabIndex = 4;
+      this.ckTrackLength.Text = "Get Track Length from File";
+      // 
+      // groupBoxSort
+      // 
+      this.groupBoxSort.Controls.Add(this.tbAlbumArtistSort);
+      this.groupBoxSort.Controls.Add(this.ckAlbumArtistSort);
+      this.groupBoxSort.Controls.Add(this.lblAlbumArtistSort);
+      this.groupBoxSort.Controls.Add(this.tbTitleSort);
+      this.groupBoxSort.Controls.Add(this.ckTitleSort);
+      this.groupBoxSort.Controls.Add(this.lblTitleSort);
+      this.groupBoxSort.Controls.Add(this.tbAlbumSort);
+      this.groupBoxSort.Controls.Add(this.ckAlbumSort);
+      this.groupBoxSort.Controls.Add(this.lblAlbumSort);
+      this.groupBoxSort.Controls.Add(this.tbArtistSort);
+      this.groupBoxSort.Controls.Add(this.ckArtistSort);
+      this.groupBoxSort.Controls.Add(this.lblArtistSort);
+      this.groupBoxSort.Id = "25df963a-b294-4cf6-8e9e-1b6b13fe1572";
+      this.groupBoxSort.Localisation = "ttGroupBox1";
+      this.groupBoxSort.LocalisationContext = "TagEdit";
+      this.groupBoxSort.Location = new System.Drawing.Point(7, 325);
+      this.groupBoxSort.Name = "groupBoxSort";
+      this.groupBoxSort.Size = new System.Drawing.Size(693, 135);
+      this.groupBoxSort.TabIndex = 2;
+      // 
+      // tbAlbumArtistSort
+      // 
+      this.tbAlbumArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbAlbumArtistSort.Location = new System.Drawing.Point(204, 42);
+      this.tbAlbumArtistSort.Name = "tbAlbumArtistSort";
+      this.tbAlbumArtistSort.Size = new System.Drawing.Size(460, 22);
+      this.tbAlbumArtistSort.TabIndex = 1;
+      // 
+      // ckAlbumArtistSort
+      // 
+      this.ckAlbumArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckAlbumArtistSort.Id = "bdc390ab-0145-4043-8cd3-e268d8112eee";
+      this.ckAlbumArtistSort.Localisation = "ckArtistSort";
+      this.ckAlbumArtistSort.LocalisationContext = "TagEdit";
+      this.ckAlbumArtistSort.Location = new System.Drawing.Point(670, 42);
+      this.ckAlbumArtistSort.Name = "ckAlbumArtistSort";
+      this.ckAlbumArtistSort.Size = new System.Drawing.Size(17, 29);
+      this.ckAlbumArtistSort.TabIndex = 39;
+      this.ckAlbumArtistSort.TabStop = false;
+      // 
+      // lblAlbumArtistSort
+      // 
+      this.lblAlbumArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblAlbumArtistSort.Localisation = "AlbumArtistSort";
+      this.lblAlbumArtistSort.LocalisationContext = "TagEdit";
+      this.lblAlbumArtistSort.Location = new System.Drawing.Point(5, 45);
+      this.lblAlbumArtistSort.Name = "lblAlbumArtistSort";
+      this.lblAlbumArtistSort.Size = new System.Drawing.Size(118, 16);
+      this.lblAlbumArtistSort.TabIndex = 46;
+      this.lblAlbumArtistSort.Text = "AlbumArtist Sort:";
+      // 
+      // tbTitleSort
+      // 
+      this.tbTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbTitleSort.Location = new System.Drawing.Point(205, 98);
+      this.tbTitleSort.Name = "tbTitleSort";
+      this.tbTitleSort.Size = new System.Drawing.Size(460, 22);
+      this.tbTitleSort.TabIndex = 2;
+      // 
+      // ckTitleSort
+      // 
+      this.ckTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTitleSort.Id = "91ee12d4-671d-403a-861d-cc3b96b4a9a0";
+      this.ckTitleSort.Localisation = "ckTitleSort";
+      this.ckTitleSort.LocalisationContext = "TagEdit";
+      this.ckTitleSort.Location = new System.Drawing.Point(671, 96);
+      this.ckTitleSort.Name = "ckTitleSort";
+      this.ckTitleSort.Size = new System.Drawing.Size(17, 29);
+      this.ckTitleSort.TabIndex = 44;
+      this.ckTitleSort.TabStop = false;
+      // 
+      // lblTitleSort
+      // 
+      this.lblTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblTitleSort.Localisation = "TitleSort";
+      this.lblTitleSort.LocalisationContext = "TagEdit";
+      this.lblTitleSort.Location = new System.Drawing.Point(6, 101);
+      this.lblTitleSort.Name = "lblTitleSort";
+      this.lblTitleSort.Size = new System.Drawing.Size(115, 16);
+      this.lblTitleSort.TabIndex = 43;
+      this.lblTitleSort.Text = "Title Sort:";
+      // 
+      // tbAlbumSort
+      // 
+      this.tbAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbAlbumSort.Location = new System.Drawing.Point(205, 70);
+      this.tbAlbumSort.Name = "tbAlbumSort";
+      this.tbAlbumSort.Size = new System.Drawing.Size(460, 22);
+      this.tbAlbumSort.TabIndex = 1;
+      // 
+      // ckAlbumSort
+      // 
+      this.ckAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckAlbumSort.Id = "62b84211-4a08-4499-a285-232fdbeb74fd";
+      this.ckAlbumSort.Localisation = "ckAlbumSort";
+      this.ckAlbumSort.LocalisationContext = "TagEdit";
+      this.ckAlbumSort.Location = new System.Drawing.Point(671, 69);
+      this.ckAlbumSort.Name = "ckAlbumSort";
+      this.ckAlbumSort.Size = new System.Drawing.Size(17, 29);
+      this.ckAlbumSort.TabIndex = 41;
+      this.ckAlbumSort.TabStop = false;
+      // 
+      // lblAlbumSort
+      // 
+      this.lblAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblAlbumSort.Localisation = "AlbumSort";
+      this.lblAlbumSort.LocalisationContext = "TagEdit";
+      this.lblAlbumSort.Location = new System.Drawing.Point(6, 74);
+      this.lblAlbumSort.Name = "lblAlbumSort";
+      this.lblAlbumSort.Size = new System.Drawing.Size(127, 16);
+      this.lblAlbumSort.TabIndex = 40;
+      this.lblAlbumSort.Text = "Album Sort:";
+      // 
+      // tbArtistSort
+      // 
+      this.tbArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbArtistSort.Location = new System.Drawing.Point(205, 16);
+      this.tbArtistSort.Name = "tbArtistSort";
+      this.tbArtistSort.Size = new System.Drawing.Size(460, 22);
+      this.tbArtistSort.TabIndex = 0;
+      // 
+      // ckArtistSort
+      // 
+      this.ckArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckArtistSort.Id = "35d418e4-d62c-451a-ac17-8dd4bfc18869";
+      this.ckArtistSort.Localisation = "ckArtistSort";
+      this.ckArtistSort.LocalisationContext = "TagEdit";
+      this.ckArtistSort.Location = new System.Drawing.Point(671, 16);
+      this.ckArtistSort.Name = "ckArtistSort";
+      this.ckArtistSort.Size = new System.Drawing.Size(17, 29);
+      this.ckArtistSort.TabIndex = 38;
+      this.ckArtistSort.TabStop = false;
+      // 
+      // lblArtistSort
+      // 
+      this.lblArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblArtistSort.Localisation = "ArtistSort";
+      this.lblArtistSort.LocalisationContext = "TagEdit";
+      this.lblArtistSort.Location = new System.Drawing.Point(6, 19);
+      this.lblArtistSort.Name = "lblArtistSort";
+      this.lblArtistSort.Size = new System.Drawing.Size(118, 16);
+      this.lblArtistSort.TabIndex = 37;
+      this.lblArtistSort.Text = "Artist Sort:";
+      // 
+      // groupBoxContent
+      // 
+      this.groupBoxContent.Controls.Add(this.tbSubTitle);
+      this.groupBoxContent.Controls.Add(this.ckSubTitle);
+      this.groupBoxContent.Controls.Add(this.lblSubTitle);
+      this.groupBoxContent.Controls.Add(this.tbContentGroup);
+      this.groupBoxContent.Controls.Add(this.ckContentGroup);
+      this.groupBoxContent.Controls.Add(this.lblContentGroup);
+      this.groupBoxContent.Id = "319a7910-c426-4da1-b994-563872f1351a";
+      this.groupBoxContent.Localisation = "ttGroupBox1";
+      this.groupBoxContent.LocalisationContext = "TagEdit";
+      this.groupBoxContent.Location = new System.Drawing.Point(7, 231);
+      this.groupBoxContent.Name = "groupBoxContent";
+      this.groupBoxContent.Size = new System.Drawing.Size(693, 89);
+      this.groupBoxContent.TabIndex = 1;
+      // 
+      // tbSubTitle
+      // 
+      this.tbSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbSubTitle.Location = new System.Drawing.Point(205, 48);
+      this.tbSubTitle.Name = "tbSubTitle";
+      this.tbSubTitle.Size = new System.Drawing.Size(460, 22);
+      this.tbSubTitle.TabIndex = 1;
+      // 
+      // ckSubTitle
+      // 
+      this.ckSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckSubTitle.Id = "d54d2d9d-6da3-42ce-a9a8-9e6a12c91c63";
+      this.ckSubTitle.Localisation = "ckSubTitle";
+      this.ckSubTitle.LocalisationContext = "TagEdit";
+      this.ckSubTitle.Location = new System.Drawing.Point(671, 47);
+      this.ckSubTitle.Name = "ckSubTitle";
+      this.ckSubTitle.Size = new System.Drawing.Size(17, 29);
+      this.ckSubTitle.TabIndex = 35;
+      this.ckSubTitle.TabStop = false;
+      // 
+      // lblSubTitle
+      // 
+      this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblSubTitle.Localisation = "SubTitle";
+      this.lblSubTitle.LocalisationContext = "TagEdit";
+      this.lblSubTitle.Location = new System.Drawing.Point(6, 52);
+      this.lblSubTitle.Name = "lblSubTitle";
+      this.lblSubTitle.Size = new System.Drawing.Size(55, 16);
+      this.lblSubTitle.TabIndex = 34;
+      this.lblSubTitle.Text = "Subtitle:";
+      // 
+      // tbContentGroup
+      // 
+      this.tbContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbContentGroup.Location = new System.Drawing.Point(205, 20);
+      this.tbContentGroup.Name = "tbContentGroup";
+      this.tbContentGroup.Size = new System.Drawing.Size(460, 22);
+      this.tbContentGroup.TabIndex = 0;
+      // 
+      // ckContentGroup
+      // 
+      this.ckContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckContentGroup.Id = "2dcb16c6-4670-4910-9194-e73a1f71e2a6";
+      this.ckContentGroup.Localisation = "ckContentGroup";
+      this.ckContentGroup.LocalisationContext = "TagEdit";
+      this.ckContentGroup.Location = new System.Drawing.Point(671, 19);
+      this.ckContentGroup.Name = "ckContentGroup";
+      this.ckContentGroup.Size = new System.Drawing.Size(17, 29);
+      this.ckContentGroup.TabIndex = 32;
+      this.ckContentGroup.TabStop = false;
+      // 
+      // lblContentGroup
+      // 
+      this.lblContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblContentGroup.Localisation = "ContentGroup";
+      this.lblContentGroup.LocalisationContext = "TagEdit";
+      this.lblContentGroup.Location = new System.Drawing.Point(6, 24);
+      this.lblContentGroup.Name = "lblContentGroup";
+      this.lblContentGroup.Size = new System.Drawing.Size(94, 16);
+      this.lblContentGroup.TabIndex = 31;
+      this.lblContentGroup.Text = "Content group:";
+      // 
+      // groupBoxPeople
+      // 
+      this.groupBoxPeople.Controls.Add(this.tbCopyright);
+      this.groupBoxPeople.Controls.Add(this.ckCopyright);
+      this.groupBoxPeople.Controls.Add(this.lblCopyright);
+      this.groupBoxPeople.Controls.Add(this.tbEncodedBy);
+      this.groupBoxPeople.Controls.Add(this.ckEncodedBy);
+      this.groupBoxPeople.Controls.Add(this.lblEncodedBy);
+      this.groupBoxPeople.Controls.Add(this.tbPublisher);
+      this.groupBoxPeople.Controls.Add(this.ckPublisher);
+      this.groupBoxPeople.Controls.Add(this.lblPublisher);
+      this.groupBoxPeople.Controls.Add(this.tbTextWriter);
+      this.groupBoxPeople.Controls.Add(this.ckTextWriter);
+      this.groupBoxPeople.Controls.Add(this.lblTextWriter);
+      this.groupBoxPeople.Controls.Add(this.tbInterpretedBy);
+      this.groupBoxPeople.Controls.Add(this.ckInterpretedBy);
+      this.groupBoxPeople.Controls.Add(this.lblInterpretedBy);
+      this.groupBoxPeople.Controls.Add(this.tbComposer);
+      this.groupBoxPeople.Controls.Add(this.ckComposer);
+      this.groupBoxPeople.Controls.Add(this.lblComposer);
+      this.groupBoxPeople.Controls.Add(this.tbConductor);
+      this.groupBoxPeople.Controls.Add(this.ckConductor);
+      this.groupBoxPeople.Controls.Add(this.lblConductor);
+      this.groupBoxPeople.Id = "268da420-ad74-4207-aa8d-3a52ae7a1c31";
+      this.groupBoxPeople.Localisation = "ttGroupBox1";
+      this.groupBoxPeople.LocalisationContext = "TagEdit";
+      this.groupBoxPeople.Location = new System.Drawing.Point(7, 0);
+      this.groupBoxPeople.Name = "groupBoxPeople";
+      this.groupBoxPeople.Size = new System.Drawing.Size(693, 224);
+      this.groupBoxPeople.TabIndex = 0;
+      // 
+      // tbCopyright
+      // 
+      this.tbCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbCopyright.Location = new System.Drawing.Point(205, 192);
+      this.tbCopyright.Name = "tbCopyright";
+      this.tbCopyright.Size = new System.Drawing.Size(460, 22);
+      this.tbCopyright.TabIndex = 6;
+      // 
+      // ckCopyright
+      // 
+      this.ckCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckCopyright.Id = "680c3bbf-a6b3-4b66-9078-f0d3551941d1";
+      this.ckCopyright.Localisation = "ckCopyright";
+      this.ckCopyright.LocalisationContext = "TagEdit";
+      this.ckCopyright.Location = new System.Drawing.Point(671, 193);
+      this.ckCopyright.Name = "ckCopyright";
+      this.ckCopyright.Size = new System.Drawing.Size(17, 29);
+      this.ckCopyright.TabIndex = 29;
+      this.ckCopyright.TabStop = false;
+      // 
+      // lblCopyright
+      // 
+      this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblCopyright.Localisation = "Copyright";
+      this.lblCopyright.LocalisationContext = "TagEdit";
+      this.lblCopyright.Location = new System.Drawing.Point(6, 192);
+      this.lblCopyright.Name = "lblCopyright";
+      this.lblCopyright.Size = new System.Drawing.Size(68, 16);
+      this.lblCopyright.TabIndex = 28;
+      this.lblCopyright.Text = "Copyright:";
+      // 
+      // tbEncodedBy
+      // 
+      this.tbEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbEncodedBy.Location = new System.Drawing.Point(205, 164);
+      this.tbEncodedBy.Name = "tbEncodedBy";
+      this.tbEncodedBy.Size = new System.Drawing.Size(460, 22);
+      this.tbEncodedBy.TabIndex = 5;
+      // 
+      // ckEncodedBy
+      // 
+      this.ckEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckEncodedBy.Id = "9d226420-ee3b-46f1-88bf-f565296f88d3";
+      this.ckEncodedBy.Localisation = "ckEncodedBy";
+      this.ckEncodedBy.LocalisationContext = "TagEdit";
+      this.ckEncodedBy.Location = new System.Drawing.Point(671, 165);
+      this.ckEncodedBy.Name = "ckEncodedBy";
+      this.ckEncodedBy.Size = new System.Drawing.Size(17, 29);
+      this.ckEncodedBy.TabIndex = 26;
+      this.ckEncodedBy.TabStop = false;
+      // 
+      // lblEncodedBy
+      // 
+      this.lblEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblEncodedBy.Localisation = "EncodedBy";
+      this.lblEncodedBy.LocalisationContext = "TagEdit";
+      this.lblEncodedBy.Location = new System.Drawing.Point(6, 164);
+      this.lblEncodedBy.Name = "lblEncodedBy";
+      this.lblEncodedBy.Size = new System.Drawing.Size(84, 16);
+      this.lblEncodedBy.TabIndex = 25;
+      this.lblEncodedBy.Text = "Encoded by:";
+      // 
+      // tbPublisher
+      // 
+      this.tbPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbPublisher.Location = new System.Drawing.Point(205, 136);
+      this.tbPublisher.Name = "tbPublisher";
+      this.tbPublisher.Size = new System.Drawing.Size(460, 22);
+      this.tbPublisher.TabIndex = 4;
+      // 
+      // ckPublisher
+      // 
+      this.ckPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckPublisher.Id = "db6a1213-790a-4ab6-8ae0-3d0845e8c4df";
+      this.ckPublisher.Localisation = "ckPublisher";
+      this.ckPublisher.LocalisationContext = "TagEdit";
+      this.ckPublisher.Location = new System.Drawing.Point(671, 137);
+      this.ckPublisher.Name = "ckPublisher";
+      this.ckPublisher.Size = new System.Drawing.Size(17, 29);
+      this.ckPublisher.TabIndex = 23;
+      this.ckPublisher.TabStop = false;
+      // 
+      // lblPublisher
+      // 
+      this.lblPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblPublisher.Localisation = "Publisher";
+      this.lblPublisher.LocalisationContext = "TagEdit";
+      this.lblPublisher.Location = new System.Drawing.Point(6, 136);
+      this.lblPublisher.Name = "lblPublisher";
+      this.lblPublisher.Size = new System.Drawing.Size(67, 16);
+      this.lblPublisher.TabIndex = 22;
+      this.lblPublisher.Text = "Publisher:";
+      // 
+      // tbTextWriter
+      // 
+      this.tbTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbTextWriter.Location = new System.Drawing.Point(205, 108);
+      this.tbTextWriter.Name = "tbTextWriter";
+      this.tbTextWriter.Size = new System.Drawing.Size(460, 22);
+      this.tbTextWriter.TabIndex = 3;
+      // 
+      // ckTextWriter
+      // 
+      this.ckTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckTextWriter.Id = "0d4f078a-1ce6-424e-9978-8a96e7ce27c3";
+      this.ckTextWriter.Localisation = "ckTextWriter";
+      this.ckTextWriter.LocalisationContext = "TagEdit";
+      this.ckTextWriter.Location = new System.Drawing.Point(671, 109);
+      this.ckTextWriter.Name = "ckTextWriter";
+      this.ckTextWriter.Size = new System.Drawing.Size(17, 29);
+      this.ckTextWriter.TabIndex = 20;
+      this.ckTextWriter.TabStop = false;
+      // 
+      // lblTextWriter
+      // 
+      this.lblTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblTextWriter.Localisation = "TextWriter";
+      this.lblTextWriter.LocalisationContext = "TagEdit";
+      this.lblTextWriter.Location = new System.Drawing.Point(6, 108);
+      this.lblTextWriter.Name = "lblTextWriter";
+      this.lblTextWriter.Size = new System.Drawing.Size(120, 16);
+      this.lblTextWriter.TabIndex = 19;
+      this.lblTextWriter.Text = "Lyrics / Text Writer:";
+      // 
+      // tbInterpretedBy
+      // 
+      this.tbInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbInterpretedBy.Location = new System.Drawing.Point(205, 80);
+      this.tbInterpretedBy.Name = "tbInterpretedBy";
+      this.tbInterpretedBy.Size = new System.Drawing.Size(460, 22);
+      this.tbInterpretedBy.TabIndex = 2;
+      // 
+      // ckInterpretedBy
+      // 
+      this.ckInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckInterpretedBy.Id = "2cd0712c-3768-4312-bd25-9d01426944a2";
+      this.ckInterpretedBy.Localisation = "ckInterpretedBy";
+      this.ckInterpretedBy.LocalisationContext = "TagEdit";
+      this.ckInterpretedBy.Location = new System.Drawing.Point(671, 81);
+      this.ckInterpretedBy.Name = "ckInterpretedBy";
+      this.ckInterpretedBy.Size = new System.Drawing.Size(17, 29);
+      this.ckInterpretedBy.TabIndex = 17;
+      this.ckInterpretedBy.TabStop = false;
+      // 
+      // lblInterpretedBy
+      // 
+      this.lblInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblInterpretedBy.Localisation = "Interpreter";
+      this.lblInterpretedBy.LocalisationContext = "TagEdit";
+      this.lblInterpretedBy.Location = new System.Drawing.Point(6, 80);
+      this.lblInterpretedBy.Name = "lblInterpretedBy";
+      this.lblInterpretedBy.Size = new System.Drawing.Size(93, 16);
+      this.lblInterpretedBy.TabIndex = 16;
+      this.lblInterpretedBy.Text = "Interpreted by:";
+      // 
+      // tbComposer
+      // 
+      this.tbComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbComposer.Location = new System.Drawing.Point(205, 52);
+      this.tbComposer.Name = "tbComposer";
+      this.tbComposer.Size = new System.Drawing.Size(460, 22);
+      this.tbComposer.TabIndex = 1;
+      // 
+      // ckComposer
+      // 
+      this.ckComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckComposer.Id = "fc042ddd-c72d-4cf1-85ed-837417ee18c6";
+      this.ckComposer.Localisation = "ckComposer";
+      this.ckComposer.LocalisationContext = "TagEdit";
+      this.ckComposer.Location = new System.Drawing.Point(671, 53);
+      this.ckComposer.Name = "ckComposer";
+      this.ckComposer.Size = new System.Drawing.Size(17, 29);
+      this.ckComposer.TabIndex = 14;
+      this.ckComposer.TabStop = false;
+      // 
+      // lblComposer
+      // 
+      this.lblComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblComposer.Localisation = "Composer";
+      this.lblComposer.LocalisationContext = "TagEdit";
+      this.lblComposer.Location = new System.Drawing.Point(6, 52);
+      this.lblComposer.Name = "lblComposer";
+      this.lblComposer.Size = new System.Drawing.Size(74, 16);
+      this.lblComposer.TabIndex = 13;
+      this.lblComposer.Text = "Composer:";
+      // 
+      // tbConductor
+      // 
+      this.tbConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbConductor.Location = new System.Drawing.Point(205, 24);
+      this.tbConductor.Name = "tbConductor";
+      this.tbConductor.Size = new System.Drawing.Size(460, 22);
+      this.tbConductor.TabIndex = 0;
+      // 
+      // ckConductor
+      // 
+      this.ckConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.ckConductor.Id = "e291d824-49a6-43d8-b9bf-71e892707ca5";
+      this.ckConductor.Localisation = "ckConductor";
+      this.ckConductor.LocalisationContext = "TagEdit";
+      this.ckConductor.Location = new System.Drawing.Point(671, 25);
+      this.ckConductor.Name = "ckConductor";
+      this.ckConductor.Size = new System.Drawing.Size(17, 29);
+      this.ckConductor.TabIndex = 11;
+      this.ckConductor.TabStop = false;
+      // 
+      // lblConductor
+      // 
+      this.lblConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblConductor.Localisation = "Conductor";
+      this.lblConductor.LocalisationContext = "TagEdit";
+      this.lblConductor.Location = new System.Drawing.Point(6, 24);
+      this.lblConductor.Name = "lblConductor";
+      this.lblConductor.Size = new System.Drawing.Size(72, 16);
+      this.lblConductor.TabIndex = 10;
+      this.lblConductor.Text = "Conductor:";
       // 
       // tabPageMain
       // 
@@ -1255,567 +1853,6 @@
       this.lblPicDesc.Size = new System.Drawing.Size(73, 16);
       this.lblPicDesc.TabIndex = 10;
       this.lblPicDesc.Text = "Descriptor:";
-      // 
-      // tabPageDetails
-      // 
-      this.tabPageDetails.ActiveControl = null;
-      this.tabPageDetails.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageDetails.Controls.Add(this.tabPageDetailsPanel);
-      this.tabPageDetails.KeyTip = null;
-      this.tabPageDetails.Localisation = "HeaderDetail";
-      this.tabPageDetails.LocalisationContext = "TagEdit";
-      this.tabPageDetails.Name = "tabPageDetails";
-      this.tabPageDetails.Size = new System.Drawing.Size(906, 584);
-      this.tabPageDetails.TabIndex = 2;
-      this.tabPageDetails.Text = "Detailed Information";
-      // 
-      // tabPageDetailsPanel
-      // 
-      this.tabPageDetailsPanel.AutoScroll = true;
-      this.tabPageDetailsPanel.BackColor = System.Drawing.Color.Transparent;
-      this.tabPageDetailsPanel.Controls.Add(this.groupBoxMedia);
-      this.tabPageDetailsPanel.Controls.Add(this.groupBoxSort);
-      this.tabPageDetailsPanel.Controls.Add(this.groupBoxContent);
-      this.tabPageDetailsPanel.Controls.Add(this.groupBoxPeople);
-      this.tabPageDetailsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabPageDetailsPanel.Location = new System.Drawing.Point(0, 0);
-      this.tabPageDetailsPanel.Name = "tabPageDetailsPanel";
-      this.tabPageDetailsPanel.Size = new System.Drawing.Size(906, 584);
-      this.tabPageDetailsPanel.TabIndex = 4;
-      this.tabPageDetailsPanel.Text = "panel1";
-      // 
-      // groupBoxMedia
-      // 
-      this.groupBoxMedia.Controls.Add(this.btGetTrackLength);
-      this.groupBoxMedia.Controls.Add(this.tbTrackLength);
-      this.groupBoxMedia.Controls.Add(this.lblTRackLength);
-      this.groupBoxMedia.Controls.Add(this.ckMediaType);
-      this.groupBoxMedia.Controls.Add(this.cbMediaType);
-      this.groupBoxMedia.Controls.Add(this.lblMediaType);
-      this.groupBoxMedia.Controls.Add(this.ckTrackLength);
-      this.groupBoxMedia.Id = "086a378a-becd-43ec-9eee-f02b00204d9c";
-      this.groupBoxMedia.Localisation = "ttGroupBox1";
-      this.groupBoxMedia.LocalisationContext = "TagEdit";
-      this.groupBoxMedia.Location = new System.Drawing.Point(7, 436);
-      this.groupBoxMedia.Name = "groupBoxMedia";
-      this.groupBoxMedia.Size = new System.Drawing.Size(693, 89);
-      this.groupBoxMedia.TabIndex = 3;
-      // 
-      // btGetTrackLength
-      // 
-      this.btGetTrackLength.Id = "6b5f182e-fad3-442a-beec-5728562327d2";
-      this.btGetTrackLength.Localisation = "GetTrackLengthFromFile";
-      this.btGetTrackLength.LocalisationContext = "TagEdit";
-      this.btGetTrackLength.Location = new System.Drawing.Point(392, 54);
-      this.btGetTrackLength.Name = "btGetTrackLength";
-      this.btGetTrackLength.Size = new System.Drawing.Size(116, 23);
-      this.btGetTrackLength.TabIndex = 4;
-      this.btGetTrackLength.Text = "Get from File";
-      this.btGetTrackLength.UseVisualStyleBackColor = true;
-      this.btGetTrackLength.Click += new System.EventHandler(this.btGetTrackLength_Click);
-      // 
-      // tbTrackLength
-      // 
-      this.tbTrackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTrackLength.Location = new System.Drawing.Point(205, 55);
-      this.tbTrackLength.Name = "tbTrackLength";
-      this.tbTrackLength.Size = new System.Drawing.Size(173, 22);
-      this.tbTrackLength.TabIndex = 30;
-      // 
-      // lblTRackLength
-      // 
-      this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblTRackLength.Localisation = "TrackLength";
-      this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 124);
-      this.lblTRackLength.Name = "lblTRackLength";
-      this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
-      this.lblTRackLength.TabIndex = 46;
-      this.lblTRackLength.Text = "Track Length (ms):";
-      // 
-      // ckMediaType
-      // 
-      this.ckMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckMediaType.Id = "2bc2dc7f-fb67-4ebc-85d7-e120c1f7aa9d";
-      this.ckMediaType.Localisation = "ckMediaType";
-      this.ckMediaType.LocalisationContext = "TagEdit";
-      this.ckMediaType.Location = new System.Drawing.Point(521, 14);
-      this.ckMediaType.Name = "ckMediaType";
-      this.ckMediaType.Size = new System.Drawing.Size(17, 29);
-      this.ckMediaType.TabIndex = 45;
-      this.ckMediaType.TabStop = false;
-      // 
-      // cbMediaType
-      // 
-      this.cbMediaType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.cbMediaType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.cbMediaType.Editable = false;
-      this.cbMediaType.FormattingEnabled = true;
-      this.cbMediaType.Id = "0f7a5a5f-c0bb-4322-bce2-d4439e4f3c36";
-      this.cbMediaType.Location = new System.Drawing.Point(205, 15);
-      this.cbMediaType.Name = "cbMediaType";
-      this.cbMediaType.Size = new System.Drawing.Size(303, 24);
-      this.cbMediaType.TabIndex = 0;
-      // 
-      // lblMediaType
-      // 
-      this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblMediaType.Localisation = "MediaType";
-      this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 86);
-      this.lblMediaType.Name = "lblMediaType";
-      this.lblMediaType.Size = new System.Drawing.Size(84, 16);
-      this.lblMediaType.TabIndex = 32;
-      this.lblMediaType.Text = "Media Type:";
-      // 
-      // ckTrackLength
-      // 
-      this.ckTrackLength.Id = "4bfd4ef5-03ce-4780-95c4-0f061b3c2655";
-      this.ckTrackLength.Localisation = "GetTrackLength";
-      this.ckTrackLength.LocalisationContext = "TagEdit";
-      this.ckTrackLength.Location = new System.Drawing.Point(205, 53);
-      this.ckTrackLength.Name = "ckTrackLength";
-      this.ckTrackLength.Size = new System.Drawing.Size(183, 29);
-      this.ckTrackLength.TabIndex = 4;
-      this.ckTrackLength.Text = "Get Track Length from File";
-      // 
-      // groupBoxSort
-      // 
-      this.groupBoxSort.Controls.Add(this.tbTitleSort);
-      this.groupBoxSort.Controls.Add(this.ckTitleSort);
-      this.groupBoxSort.Controls.Add(this.lblTitleSort);
-      this.groupBoxSort.Controls.Add(this.tbAlbumSort);
-      this.groupBoxSort.Controls.Add(this.ckAlbumSort);
-      this.groupBoxSort.Controls.Add(this.lblAlbumSort);
-      this.groupBoxSort.Controls.Add(this.tbArtistSort);
-      this.groupBoxSort.Controls.Add(this.ckArtistSort);
-      this.groupBoxSort.Controls.Add(this.lblArtistSort);
-      this.groupBoxSort.Id = "25df963a-b294-4cf6-8e9e-1b6b13fe1572";
-      this.groupBoxSort.Localisation = "ttGroupBox1";
-      this.groupBoxSort.LocalisationContext = "TagEdit";
-      this.groupBoxSort.Location = new System.Drawing.Point(7, 325);
-      this.groupBoxSort.Name = "groupBoxSort";
-      this.groupBoxSort.Size = new System.Drawing.Size(693, 105);
-      this.groupBoxSort.TabIndex = 2;
-      // 
-      // tbTitleSort
-      // 
-      this.tbTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTitleSort.Location = new System.Drawing.Point(205, 72);
-      this.tbTitleSort.Name = "tbTitleSort";
-      this.tbTitleSort.Size = new System.Drawing.Size(460, 22);
-      this.tbTitleSort.TabIndex = 2;
-      // 
-      // ckTitleSort
-      // 
-      this.ckTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckTitleSort.Id = "91ee12d4-671d-403a-861d-cc3b96b4a9a0";
-      this.ckTitleSort.Localisation = "ckTitleSort";
-      this.ckTitleSort.LocalisationContext = "TagEdit";
-      this.ckTitleSort.Location = new System.Drawing.Point(671, 70);
-      this.ckTitleSort.Name = "ckTitleSort";
-      this.ckTitleSort.Size = new System.Drawing.Size(17, 29);
-      this.ckTitleSort.TabIndex = 44;
-      this.ckTitleSort.TabStop = false;
-      // 
-      // lblTitleSort
-      // 
-      this.lblTitleSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblTitleSort.Localisation = "TitleSort";
-      this.lblTitleSort.LocalisationContext = "TagEdit";
-      this.lblTitleSort.Location = new System.Drawing.Point(6, 75);
-      this.lblTitleSort.Name = "lblTitleSort";
-      this.lblTitleSort.Size = new System.Drawing.Size(115, 16);
-      this.lblTitleSort.TabIndex = 43;
-      this.lblTitleSort.Text = "Title Sort (ID3 2.4):";
-      // 
-      // tbAlbumSort
-      // 
-      this.tbAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbAlbumSort.Location = new System.Drawing.Point(205, 44);
-      this.tbAlbumSort.Name = "tbAlbumSort";
-      this.tbAlbumSort.Size = new System.Drawing.Size(460, 22);
-      this.tbAlbumSort.TabIndex = 1;
-      // 
-      // ckAlbumSort
-      // 
-      this.ckAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckAlbumSort.Id = "62b84211-4a08-4499-a285-232fdbeb74fd";
-      this.ckAlbumSort.Localisation = "ckAlbumSort";
-      this.ckAlbumSort.LocalisationContext = "TagEdit";
-      this.ckAlbumSort.Location = new System.Drawing.Point(671, 43);
-      this.ckAlbumSort.Name = "ckAlbumSort";
-      this.ckAlbumSort.Size = new System.Drawing.Size(17, 29);
-      this.ckAlbumSort.TabIndex = 41;
-      this.ckAlbumSort.TabStop = false;
-      // 
-      // lblAlbumSort
-      // 
-      this.lblAlbumSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblAlbumSort.Localisation = "AlbumSort";
-      this.lblAlbumSort.LocalisationContext = "TagEdit";
-      this.lblAlbumSort.Location = new System.Drawing.Point(6, 48);
-      this.lblAlbumSort.Name = "lblAlbumSort";
-      this.lblAlbumSort.Size = new System.Drawing.Size(127, 16);
-      this.lblAlbumSort.TabIndex = 40;
-      this.lblAlbumSort.Text = "Album Sort (ID3 2.4):";
-      // 
-      // tbArtistSort
-      // 
-      this.tbArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbArtistSort.Location = new System.Drawing.Point(205, 16);
-      this.tbArtistSort.Name = "tbArtistSort";
-      this.tbArtistSort.Size = new System.Drawing.Size(460, 22);
-      this.tbArtistSort.TabIndex = 0;
-      // 
-      // ckArtistSort
-      // 
-      this.ckArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckArtistSort.Id = "35d418e4-d62c-451a-ac17-8dd4bfc18869";
-      this.ckArtistSort.Localisation = "ckArtistSort";
-      this.ckArtistSort.LocalisationContext = "TagEdit";
-      this.ckArtistSort.Location = new System.Drawing.Point(671, 16);
-      this.ckArtistSort.Name = "ckArtistSort";
-      this.ckArtistSort.Size = new System.Drawing.Size(17, 29);
-      this.ckArtistSort.TabIndex = 38;
-      this.ckArtistSort.TabStop = false;
-      // 
-      // lblArtistSort
-      // 
-      this.lblArtistSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblArtistSort.Localisation = "ArtistSort";
-      this.lblArtistSort.LocalisationContext = "TagEdit";
-      this.lblArtistSort.Location = new System.Drawing.Point(6, 19);
-      this.lblArtistSort.Name = "lblArtistSort";
-      this.lblArtistSort.Size = new System.Drawing.Size(118, 16);
-      this.lblArtistSort.TabIndex = 37;
-      this.lblArtistSort.Text = "Artist Sort (ID3 2.4):";
-      // 
-      // groupBoxContent
-      // 
-      this.groupBoxContent.Controls.Add(this.tbSubTitle);
-      this.groupBoxContent.Controls.Add(this.ckSubTitle);
-      this.groupBoxContent.Controls.Add(this.lblSubTitle);
-      this.groupBoxContent.Controls.Add(this.tbContentGroup);
-      this.groupBoxContent.Controls.Add(this.ckContentGroup);
-      this.groupBoxContent.Controls.Add(this.lblContentGroup);
-      this.groupBoxContent.Id = "319a7910-c426-4da1-b994-563872f1351a";
-      this.groupBoxContent.Localisation = "ttGroupBox1";
-      this.groupBoxContent.LocalisationContext = "TagEdit";
-      this.groupBoxContent.Location = new System.Drawing.Point(7, 231);
-      this.groupBoxContent.Name = "groupBoxContent";
-      this.groupBoxContent.Size = new System.Drawing.Size(693, 89);
-      this.groupBoxContent.TabIndex = 1;
-      // 
-      // tbSubTitle
-      // 
-      this.tbSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbSubTitle.Location = new System.Drawing.Point(205, 48);
-      this.tbSubTitle.Name = "tbSubTitle";
-      this.tbSubTitle.Size = new System.Drawing.Size(460, 22);
-      this.tbSubTitle.TabIndex = 1;
-      // 
-      // ckSubTitle
-      // 
-      this.ckSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckSubTitle.Id = "d54d2d9d-6da3-42ce-a9a8-9e6a12c91c63";
-      this.ckSubTitle.Localisation = "ckSubTitle";
-      this.ckSubTitle.LocalisationContext = "TagEdit";
-      this.ckSubTitle.Location = new System.Drawing.Point(671, 47);
-      this.ckSubTitle.Name = "ckSubTitle";
-      this.ckSubTitle.Size = new System.Drawing.Size(17, 29);
-      this.ckSubTitle.TabIndex = 35;
-      this.ckSubTitle.TabStop = false;
-      // 
-      // lblSubTitle
-      // 
-      this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblSubTitle.Localisation = "SubTitle";
-      this.lblSubTitle.LocalisationContext = "TagEdit";
-      this.lblSubTitle.Location = new System.Drawing.Point(6, 52);
-      this.lblSubTitle.Name = "lblSubTitle";
-      this.lblSubTitle.Size = new System.Drawing.Size(55, 16);
-      this.lblSubTitle.TabIndex = 34;
-      this.lblSubTitle.Text = "Subtitle:";
-      // 
-      // tbContentGroup
-      // 
-      this.tbContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbContentGroup.Location = new System.Drawing.Point(205, 20);
-      this.tbContentGroup.Name = "tbContentGroup";
-      this.tbContentGroup.Size = new System.Drawing.Size(460, 22);
-      this.tbContentGroup.TabIndex = 0;
-      // 
-      // ckContentGroup
-      // 
-      this.ckContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckContentGroup.Id = "2dcb16c6-4670-4910-9194-e73a1f71e2a6";
-      this.ckContentGroup.Localisation = "ckContentGroup";
-      this.ckContentGroup.LocalisationContext = "TagEdit";
-      this.ckContentGroup.Location = new System.Drawing.Point(671, 19);
-      this.ckContentGroup.Name = "ckContentGroup";
-      this.ckContentGroup.Size = new System.Drawing.Size(17, 29);
-      this.ckContentGroup.TabIndex = 32;
-      this.ckContentGroup.TabStop = false;
-      // 
-      // lblContentGroup
-      // 
-      this.lblContentGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblContentGroup.Localisation = "ContentGroup";
-      this.lblContentGroup.LocalisationContext = "TagEdit";
-      this.lblContentGroup.Location = new System.Drawing.Point(6, 24);
-      this.lblContentGroup.Name = "lblContentGroup";
-      this.lblContentGroup.Size = new System.Drawing.Size(94, 16);
-      this.lblContentGroup.TabIndex = 31;
-      this.lblContentGroup.Text = "Content group:";
-      // 
-      // groupBoxPeople
-      // 
-      this.groupBoxPeople.Controls.Add(this.tbCopyright);
-      this.groupBoxPeople.Controls.Add(this.ckCopyright);
-      this.groupBoxPeople.Controls.Add(this.lblCopyright);
-      this.groupBoxPeople.Controls.Add(this.tbEncodedBy);
-      this.groupBoxPeople.Controls.Add(this.ckEncodedBy);
-      this.groupBoxPeople.Controls.Add(this.lblEncodedBy);
-      this.groupBoxPeople.Controls.Add(this.tbPublisher);
-      this.groupBoxPeople.Controls.Add(this.ckPublisher);
-      this.groupBoxPeople.Controls.Add(this.lblPublisher);
-      this.groupBoxPeople.Controls.Add(this.tbTextWriter);
-      this.groupBoxPeople.Controls.Add(this.ckTextWriter);
-      this.groupBoxPeople.Controls.Add(this.lblTextWriter);
-      this.groupBoxPeople.Controls.Add(this.tbInterpretedBy);
-      this.groupBoxPeople.Controls.Add(this.ckInterpretedBy);
-      this.groupBoxPeople.Controls.Add(this.lblInterpretedBy);
-      this.groupBoxPeople.Controls.Add(this.tbComposer);
-      this.groupBoxPeople.Controls.Add(this.ckComposer);
-      this.groupBoxPeople.Controls.Add(this.lblComposer);
-      this.groupBoxPeople.Controls.Add(this.tbConductor);
-      this.groupBoxPeople.Controls.Add(this.ckConductor);
-      this.groupBoxPeople.Controls.Add(this.lblConductor);
-      this.groupBoxPeople.Id = "268da420-ad74-4207-aa8d-3a52ae7a1c31";
-      this.groupBoxPeople.Localisation = "ttGroupBox1";
-      this.groupBoxPeople.LocalisationContext = "TagEdit";
-      this.groupBoxPeople.Location = new System.Drawing.Point(7, 0);
-      this.groupBoxPeople.Name = "groupBoxPeople";
-      this.groupBoxPeople.Size = new System.Drawing.Size(693, 224);
-      this.groupBoxPeople.TabIndex = 0;
-      // 
-      // tbCopyright
-      // 
-      this.tbCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbCopyright.Location = new System.Drawing.Point(205, 192);
-      this.tbCopyright.Name = "tbCopyright";
-      this.tbCopyright.Size = new System.Drawing.Size(460, 22);
-      this.tbCopyright.TabIndex = 6;
-      // 
-      // ckCopyright
-      // 
-      this.ckCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckCopyright.Id = "680c3bbf-a6b3-4b66-9078-f0d3551941d1";
-      this.ckCopyright.Localisation = "ckCopyright";
-      this.ckCopyright.LocalisationContext = "TagEdit";
-      this.ckCopyright.Location = new System.Drawing.Point(671, 193);
-      this.ckCopyright.Name = "ckCopyright";
-      this.ckCopyright.Size = new System.Drawing.Size(17, 29);
-      this.ckCopyright.TabIndex = 29;
-      this.ckCopyright.TabStop = false;
-      // 
-      // lblCopyright
-      // 
-      this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblCopyright.Localisation = "Copyright";
-      this.lblCopyright.LocalisationContext = "TagEdit";
-      this.lblCopyright.Location = new System.Drawing.Point(6, 192);
-      this.lblCopyright.Name = "lblCopyright";
-      this.lblCopyright.Size = new System.Drawing.Size(68, 16);
-      this.lblCopyright.TabIndex = 28;
-      this.lblCopyright.Text = "Copyright:";
-      // 
-      // tbEncodedBy
-      // 
-      this.tbEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbEncodedBy.Location = new System.Drawing.Point(205, 164);
-      this.tbEncodedBy.Name = "tbEncodedBy";
-      this.tbEncodedBy.Size = new System.Drawing.Size(460, 22);
-      this.tbEncodedBy.TabIndex = 5;
-      // 
-      // ckEncodedBy
-      // 
-      this.ckEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckEncodedBy.Id = "9d226420-ee3b-46f1-88bf-f565296f88d3";
-      this.ckEncodedBy.Localisation = "ckEncodedBy";
-      this.ckEncodedBy.LocalisationContext = "TagEdit";
-      this.ckEncodedBy.Location = new System.Drawing.Point(671, 165);
-      this.ckEncodedBy.Name = "ckEncodedBy";
-      this.ckEncodedBy.Size = new System.Drawing.Size(17, 29);
-      this.ckEncodedBy.TabIndex = 26;
-      this.ckEncodedBy.TabStop = false;
-      // 
-      // lblEncodedBy
-      // 
-      this.lblEncodedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblEncodedBy.Localisation = "EncodedBy";
-      this.lblEncodedBy.LocalisationContext = "TagEdit";
-      this.lblEncodedBy.Location = new System.Drawing.Point(6, 164);
-      this.lblEncodedBy.Name = "lblEncodedBy";
-      this.lblEncodedBy.Size = new System.Drawing.Size(84, 16);
-      this.lblEncodedBy.TabIndex = 25;
-      this.lblEncodedBy.Text = "Encoded by:";
-      // 
-      // tbPublisher
-      // 
-      this.tbPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbPublisher.Location = new System.Drawing.Point(205, 136);
-      this.tbPublisher.Name = "tbPublisher";
-      this.tbPublisher.Size = new System.Drawing.Size(460, 22);
-      this.tbPublisher.TabIndex = 4;
-      // 
-      // ckPublisher
-      // 
-      this.ckPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckPublisher.Id = "db6a1213-790a-4ab6-8ae0-3d0845e8c4df";
-      this.ckPublisher.Localisation = "ckPublisher";
-      this.ckPublisher.LocalisationContext = "TagEdit";
-      this.ckPublisher.Location = new System.Drawing.Point(671, 137);
-      this.ckPublisher.Name = "ckPublisher";
-      this.ckPublisher.Size = new System.Drawing.Size(17, 29);
-      this.ckPublisher.TabIndex = 23;
-      this.ckPublisher.TabStop = false;
-      // 
-      // lblPublisher
-      // 
-      this.lblPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblPublisher.Localisation = "Publisher";
-      this.lblPublisher.LocalisationContext = "TagEdit";
-      this.lblPublisher.Location = new System.Drawing.Point(6, 136);
-      this.lblPublisher.Name = "lblPublisher";
-      this.lblPublisher.Size = new System.Drawing.Size(67, 16);
-      this.lblPublisher.TabIndex = 22;
-      this.lblPublisher.Text = "Publisher:";
-      // 
-      // tbTextWriter
-      // 
-      this.tbTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbTextWriter.Location = new System.Drawing.Point(205, 108);
-      this.tbTextWriter.Name = "tbTextWriter";
-      this.tbTextWriter.Size = new System.Drawing.Size(460, 22);
-      this.tbTextWriter.TabIndex = 3;
-      // 
-      // ckTextWriter
-      // 
-      this.ckTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckTextWriter.Id = "0d4f078a-1ce6-424e-9978-8a96e7ce27c3";
-      this.ckTextWriter.Localisation = "ckTextWriter";
-      this.ckTextWriter.LocalisationContext = "TagEdit";
-      this.ckTextWriter.Location = new System.Drawing.Point(671, 109);
-      this.ckTextWriter.Name = "ckTextWriter";
-      this.ckTextWriter.Size = new System.Drawing.Size(17, 29);
-      this.ckTextWriter.TabIndex = 20;
-      this.ckTextWriter.TabStop = false;
-      // 
-      // lblTextWriter
-      // 
-      this.lblTextWriter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblTextWriter.Localisation = "TextWriter";
-      this.lblTextWriter.LocalisationContext = "TagEdit";
-      this.lblTextWriter.Location = new System.Drawing.Point(6, 108);
-      this.lblTextWriter.Name = "lblTextWriter";
-      this.lblTextWriter.Size = new System.Drawing.Size(120, 16);
-      this.lblTextWriter.TabIndex = 19;
-      this.lblTextWriter.Text = "Lyrics / Text Writer:";
-      // 
-      // tbInterpretedBy
-      // 
-      this.tbInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbInterpretedBy.Location = new System.Drawing.Point(205, 80);
-      this.tbInterpretedBy.Name = "tbInterpretedBy";
-      this.tbInterpretedBy.Size = new System.Drawing.Size(460, 22);
-      this.tbInterpretedBy.TabIndex = 2;
-      // 
-      // ckInterpretedBy
-      // 
-      this.ckInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckInterpretedBy.Id = "2cd0712c-3768-4312-bd25-9d01426944a2";
-      this.ckInterpretedBy.Localisation = "ckInterpretedBy";
-      this.ckInterpretedBy.LocalisationContext = "TagEdit";
-      this.ckInterpretedBy.Location = new System.Drawing.Point(671, 81);
-      this.ckInterpretedBy.Name = "ckInterpretedBy";
-      this.ckInterpretedBy.Size = new System.Drawing.Size(17, 29);
-      this.ckInterpretedBy.TabIndex = 17;
-      this.ckInterpretedBy.TabStop = false;
-      // 
-      // lblInterpretedBy
-      // 
-      this.lblInterpretedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblInterpretedBy.Localisation = "Interpreter";
-      this.lblInterpretedBy.LocalisationContext = "TagEdit";
-      this.lblInterpretedBy.Location = new System.Drawing.Point(6, 80);
-      this.lblInterpretedBy.Name = "lblInterpretedBy";
-      this.lblInterpretedBy.Size = new System.Drawing.Size(93, 16);
-      this.lblInterpretedBy.TabIndex = 16;
-      this.lblInterpretedBy.Text = "Interpreted by:";
-      // 
-      // tbComposer
-      // 
-      this.tbComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbComposer.Location = new System.Drawing.Point(205, 52);
-      this.tbComposer.Name = "tbComposer";
-      this.tbComposer.Size = new System.Drawing.Size(460, 22);
-      this.tbComposer.TabIndex = 1;
-      // 
-      // ckComposer
-      // 
-      this.ckComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckComposer.Id = "fc042ddd-c72d-4cf1-85ed-837417ee18c6";
-      this.ckComposer.Localisation = "ckComposer";
-      this.ckComposer.LocalisationContext = "TagEdit";
-      this.ckComposer.Location = new System.Drawing.Point(671, 53);
-      this.ckComposer.Name = "ckComposer";
-      this.ckComposer.Size = new System.Drawing.Size(17, 29);
-      this.ckComposer.TabIndex = 14;
-      this.ckComposer.TabStop = false;
-      // 
-      // lblComposer
-      // 
-      this.lblComposer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblComposer.Localisation = "Composer";
-      this.lblComposer.LocalisationContext = "TagEdit";
-      this.lblComposer.Location = new System.Drawing.Point(6, 52);
-      this.lblComposer.Name = "lblComposer";
-      this.lblComposer.Size = new System.Drawing.Size(74, 16);
-      this.lblComposer.TabIndex = 13;
-      this.lblComposer.Text = "Composer:";
-      // 
-      // tbConductor
-      // 
-      this.tbConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbConductor.Location = new System.Drawing.Point(205, 24);
-      this.tbConductor.Name = "tbConductor";
-      this.tbConductor.Size = new System.Drawing.Size(460, 22);
-      this.tbConductor.TabIndex = 0;
-      // 
-      // ckConductor
-      // 
-      this.ckConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ckConductor.Id = "e291d824-49a6-43d8-b9bf-71e892707ca5";
-      this.ckConductor.Localisation = "ckConductor";
-      this.ckConductor.LocalisationContext = "TagEdit";
-      this.ckConductor.Location = new System.Drawing.Point(671, 25);
-      this.ckConductor.Name = "ckConductor";
-      this.ckConductor.Size = new System.Drawing.Size(17, 29);
-      this.ckConductor.TabIndex = 11;
-      this.ckConductor.TabStop = false;
-      // 
-      // lblConductor
-      // 
-      this.lblConductor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblConductor.Localisation = "Conductor";
-      this.lblConductor.LocalisationContext = "TagEdit";
-      this.lblConductor.Location = new System.Drawing.Point(6, 24);
-      this.lblConductor.Name = "lblConductor";
-      this.lblConductor.Size = new System.Drawing.Size(72, 16);
-      this.lblConductor.TabIndex = 10;
-      this.lblConductor.Text = "Conductor:";
       // 
       // tabPageOriginal
       // 
@@ -2842,7 +2879,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 108);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 116);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2852,7 +2889,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 77);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 85);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -3276,6 +3313,16 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
+      this.tabPageDetails.ResumeLayout(false);
+      this.tabPageDetailsPanel.ResumeLayout(false);
+      this.groupBoxMedia.ResumeLayout(false);
+      this.groupBoxMedia.PerformLayout();
+      this.groupBoxSort.ResumeLayout(false);
+      this.groupBoxSort.PerformLayout();
+      this.groupBoxContent.ResumeLayout(false);
+      this.groupBoxContent.PerformLayout();
+      this.groupBoxPeople.ResumeLayout(false);
+      this.groupBoxPeople.PerformLayout();
       this.tabPageMain.ResumeLayout(false);
       this.tabPageMainPanel.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
@@ -3291,16 +3338,6 @@
       this.groupBoxPicture.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
-      this.tabPageDetails.ResumeLayout(false);
-      this.tabPageDetailsPanel.ResumeLayout(false);
-      this.groupBoxMedia.ResumeLayout(false);
-      this.groupBoxMedia.PerformLayout();
-      this.groupBoxSort.ResumeLayout(false);
-      this.groupBoxSort.PerformLayout();
-      this.groupBoxContent.ResumeLayout(false);
-      this.groupBoxContent.PerformLayout();
-      this.groupBoxPeople.ResumeLayout(false);
-      this.groupBoxPeople.PerformLayout();
       this.tabPageOriginal.ResumeLayout(false);
       this.tabPageOriginalPanel.ResumeLayout(false);
       this.groupBoxOriginalInformation.ResumeLayout(false);
@@ -3588,5 +3625,8 @@
     private Elegant.Ui.Panel tabPageLyricsPanel;
     private Elegant.Ui.Panel tabPageRatingPanel;
     private Elegant.Ui.Panel tabPageUserDefinedPanel;
+    protected System.Windows.Forms.TextBox tbAlbumArtistSort;
+    protected Core.WinControls.MPTCheckBox ckAlbumArtistSort;
+    protected Core.WinControls.MPTLabel lblAlbumArtistSort;
   }
 }

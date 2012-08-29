@@ -154,9 +154,10 @@
     <String id="GetTrackLength">Haal nummer duur uit bestand</String>
     <String id="TrackLength">Duur nummer (ms):</String>
     <String id="MediaType">Media Type:</String>
-    <String id="TitleSort">Titel Sortering (ID3 2.4):</String>
-    <String id="AlbumSort">Album Sortering (ID3 2.4):</String>
-    <String id="ArtistSort">Artiest Sortering (ID3 2.4):</String>
+    <String id="TitleSort">Titel Sortering:</String>
+    <String id="AlbumSort">Album Sortering:</String>
+    <String id="ArtistSort">Artiest Sortering:</String>
+    <String id="AlbumArtistSort">AlbumArtiest Sortering:</String>
     <String id="SubTitle">Subtitel:</String>
     <String id="ContentGroup">Groepering:</String>
     <String id="Copyright">Copyright:</String>

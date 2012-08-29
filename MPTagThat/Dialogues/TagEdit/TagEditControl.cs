@@ -520,6 +520,54 @@ namespace MPTagThat.TagEdit
           }
         }
 
+        if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbArtistSort.Text = track.ArtistSortName;
+          }
+          else
+          {
+            tbArtistSort.Text = "";
+          }
+        }
+
+        if (tbAlbumArtistSort.Text.Trim() != track.AlbumArtistSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbAlbumArtistSort.Text = track.AlbumArtistSortName;
+          }
+          else
+          {
+            tbAlbumArtistSort.Text = "";
+          }
+        }
+
+        if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbAlbumSort.Text = track.AlbumSortName;
+          }
+          else
+          {
+            tbAlbumSort.Text = "";
+          }
+        }
+
+        if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbTitleSort.Text = track.TitleSortName;
+          }
+          else
+          {
+            tbTitleSort.Text = "";
+          }
+        }
+
         // The following values are only ID3 V2 specific
         if (track.IsMp3)
         {
@@ -581,50 +629,6 @@ namespace MPTagThat.TagEdit
             {
               tbSubTitle.Text = "";
             }
-          }
-
-          if (Options.MainSettings.ID3V2Version == 4)
-          {
-            groupBoxSort.Enabled = true;
-            if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbArtistSort.Text = track.ArtistSortName;
-              }
-              else
-              {
-                tbArtistSort.Text = "";
-              }
-            }
-
-            if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbAlbumSort.Text = track.AlbumSortName;
-              }
-              else
-              {
-                tbAlbumSort.Text = "";
-              }
-            }
-
-            if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbTitleSort.Text = track.TitleSortName;
-              }
-              else
-              {
-                tbTitleSort.Text = "";
-              }
-            }
-          }
-          else
-          {
-            groupBoxSort.Enabled = false;
           }
         }
 
@@ -1072,6 +1076,7 @@ namespace MPTagThat.TagEdit
       tbTitleSort.Text = "";
       tbAlbumSort.Text = "";
       tbArtistSort.Text = "";
+      tbAlbumArtistSort.Text = "";
       tbSubTitle.Text = "";
       tbContentGroup.Text = "";
       tbCopyright.Text = "";
@@ -1138,6 +1143,7 @@ namespace MPTagThat.TagEdit
       ckContentGroup.Visible = visible;
       ckSubTitle.Visible = visible;
       ckArtistSort.Visible = visible;
+      ckAlbumArtistSort.Visible = visible;
       ckAlbumSort.Visible = visible;
       ckTitleSort.Visible = visible;
       ckOriginalAlbum.Visible = visible;
@@ -1185,6 +1191,7 @@ namespace MPTagThat.TagEdit
       ckContentGroup.Checked = false;
       ckSubTitle.Checked = false;
       ckArtistSort.Checked = false;
+      ckAlbumSort.Checked = false;
       ckAlbumSort.Checked = false;
       ckTitleSort.Checked = false;
       ckOriginalAlbum.Checked = false;
@@ -1239,6 +1246,7 @@ namespace MPTagThat.TagEdit
         tbContentGroup.TextChanged += OnTextChanged;
         tbSubTitle.TextChanged += OnTextChanged;
         tbArtistSort.TextChanged += OnTextChanged;
+        tbAlbumArtistSort.TextChanged += OnTextChanged;
         tbAlbumSort.TextChanged += OnTextChanged;
         tbTitleSort.TextChanged += OnTextChanged;
         cbMediaType.TextChanged += OnComboChanged;
@@ -1273,6 +1281,7 @@ namespace MPTagThat.TagEdit
         tbContentGroup.TextChanged -= OnTextChanged;
         tbSubTitle.TextChanged -= OnTextChanged;
         tbArtistSort.TextChanged -= OnTextChanged;
+        tbAlbumArtistSort.TextChanged -= OnTextChanged;
         tbAlbumSort.TextChanged -= OnTextChanged;
         tbTitleSort.TextChanged -= OnTextChanged;
         cbMediaType.TextChanged -= OnComboChanged;
@@ -1925,6 +1934,23 @@ namespace MPTagThat.TagEdit
 
           if (_isMultiTagEdit)
           {
+            if (ckAlbumArtistSort.Checked)
+            {
+              track.AlbumArtistSortName = tbAlbumArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.AlbumArtistSortName != tbAlbumArtistSort.Text)
+            {
+              track.AlbumArtistSortName = tbAlbumArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
             if (ckAlbumSort.Checked)
             {
               track.AlbumSortName = tbAlbumSort.Text.Trim();
@@ -2440,6 +2466,10 @@ namespace MPTagThat.TagEdit
 
         case "tbArtistSort":
           ckArtistSort.Checked = true;
+          break;
+
+        case "tbAlbumArtistSort":
+          ckAlbumArtistSort.Checked = true;
           break;
 
         case "tbAlbumSort":

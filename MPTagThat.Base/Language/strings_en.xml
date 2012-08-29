@@ -282,9 +282,10 @@
     <String id="GetTrackLength">Get Track Length from File</String>
     <String id="TrackLength">Track Length (ms):</String>
     <String id="MediaType">Media Type:</String>
-    <String id="TitleSort">Title Sort (ID3 2.4):</String>
-    <String id="AlbumSort">Album Sort (ID3 2.4):</String>
-    <String id="ArtistSort">Artist Sort (ID3 2.4):</String>
+    <String id="TitleSort">Title Sort:</String>
+    <String id="AlbumSort">Album Sort:</String>
+    <String id="ArtistSort">Artist Sort:</String>
+    <String id="AlbumArtistSort">Album Artist Sort:</String>
     <String id="SubTitle">Subtitle:</String>
     <String id="ContentGroup">Content group:</String>
     <String id="Copyright">Copyright:</String>

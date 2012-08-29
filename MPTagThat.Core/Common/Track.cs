@@ -107,13 +107,27 @@ namespace MPTagThat.Core
           track.Artist = track.Artist.Replace("AC;DC", "AC/DC");
         }
 
+        track.ArtistSortName = String.Join(";", file.Tag.PerformersSort);
+        if (track.ArtistSortName.Contains("AC;DC"))
+        {
+          track.ArtistSortName = track.ArtistSortName.Replace("AC;DC", "AC/DC");
+        }
+
         track.AlbumArtist = String.Join(";", file.Tag.AlbumArtists);
         if (track.AlbumArtist.Contains("AC;DC"))
         {
           track.AlbumArtist = track.AlbumArtist.Replace("AC;DC", "AC/DC");
         }
 
+        track.AlbumArtistSortName = String.Join(";", file.Tag.AlbumArtistsSort);
+        if (track.AlbumArtistSortName.Contains("AC;DC"))
+        {
+          track.AlbumArtistSortName = track.AlbumArtistSortName.Replace("AC;DC", "AC/DC");
+        }
+
         track.Album = file.Tag.Album ?? "";
+        track.AlbumSortName = file.Tag.AlbumSort ?? "";
+
         track.BPM = (int)file.Tag.BeatsPerMinute;
         track.Compilation = id3v2tag == null ? false : id3v2tag.IsCompilation;
         track.Composer = string.Join(";", file.Tag.Composers);
@@ -126,6 +140,7 @@ namespace MPTagThat.Core
         track.Genre = string.Join(";", file.Tag.Genres);
         track.Grouping = file.Tag.Grouping ?? "";
         track.Title = file.Tag.Title ?? "";
+        track.TitleSortName = file.Tag.TitleSort ?? "";
 
         track.ReplayGainTrack = file.Tag.ReplayGainTrack ?? "";
         track.ReplayGainTrackPeak = file.Tag.ReplayGainTrackPeak ?? "";
@@ -548,6 +563,13 @@ namespace MPTagThat.Core
         file.Tag.Conductor = track.Conductor;
         file.Tag.Copyright = track.Copyright;
         file.Tag.Grouping = track.Grouping;
+
+        splitValues = track.ArtistSortName.Split(new[] { ';', '|' });
+        file.Tag.PerformersSort = splitValues;
+        splitValues = track.AlbumArtistSortName.Split(new[] { ';', '|' });
+        file.Tag.AlbumArtistsSort = splitValues;
+        file.Tag.AlbumSort = track.AlbumSortName;
+        file.Tag.TitleSort = track.TitleSortName;
 
         #endregion
 

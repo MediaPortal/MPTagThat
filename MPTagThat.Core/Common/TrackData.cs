@@ -37,14 +37,18 @@ namespace MPTagThat.Core
     private const int NumTrackDigits = 2;
 
     private string _artist;
+    private string _artistSort;
     private string _albumArtist;
+    private string _albumArtistSort;
     private string _album;
+    private string _albumSort;
     private string _composer;
     private string _conductor;
     private string _copyright;
     private string _genre;
     private string _grouping;
     private string _title;
+    private string _titleSort;
     private string _replaygainTrack;
     private string _replaygainAlbum;
 
@@ -222,13 +226,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Artist Sortname Tag (V 2.4 only)
+    /// Artist Sortname Tag
     /// ID3: TSOP
     /// </summary>
     public string ArtistSortName
     {
-      get { return GetFrame("TSOP"); }
-      set { SetText("TSOP", value); }
+      get { return _artistSort; }
+      set { _artistSort = value ?? ""; }
     }
 
     /// <summary>
@@ -242,6 +246,16 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// AlbumArtist Sortname Tag
+    /// ID3: TSO2
+    /// </summary>
+    public string AlbumArtistSortName
+    {
+      get { return _albumArtistSort; }
+      set { _albumArtistSort = value ?? ""; }
+    }
+
+    /// <summary>
     /// ALbum Tag
     /// ID3: TALB
     /// </summary>
@@ -252,13 +266,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Album Sortname Tag (V 2.4 only)
+    /// Album Sortname Tag
     /// ID3: TSOA
     /// </summary>
     public string AlbumSortName
     {
-      get { return GetFrame("TSOA"); }
-      set { SetText("TSOA", value); }
+      get { return _albumSort; }
+      set { _albumSort = value ?? ""; }
     }
 
     /// <summary>
@@ -753,13 +767,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Title SortName Tag (V 2.4 only)
+    /// Title SortName Tag
     /// ID3: TSOT
     /// </summary>
     public string TitleSortName
     {
-      get { return GetFrame("TSOT"); }
-      set { SetText("TSOT", value); }
+      get { return _titleSort; }
+      set { _titleSort = value ?? ""; }
     }
 
     /// <summary>

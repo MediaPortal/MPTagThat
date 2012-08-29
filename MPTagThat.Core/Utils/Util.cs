@@ -305,7 +305,7 @@ namespace MPTagThat.Core
                                                               "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
                                                               "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
-                                                              "TCMP"
+                                                              "TCMP", "TSO2"
                                                             };
 
     private static readonly Dictionary<string, Image> FileLargeImageCache = new Dictionary<string, Image>();
