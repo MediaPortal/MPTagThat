@@ -123,16 +123,14 @@ namespace MPTagThat.Core
 
           _lastRetrievedTrackIndex = i;
 
-          ServiceScope.Get<ILogger>().GetLogger.Trace("Getting Track from database: {0}", i);
-
           var result = from TrackData d in _db
                        where d.Id == _dbIdList[i]
                        select d;
 
           foreach (var trackData in result)
           {
+            _db.Activate(trackData, 1);
             _lastRetrievedTrack = trackData;
-            ServiceScope.Get<ILogger>().GetLogger.Trace("Finished Getting Track from database");
             return trackData;
           }
         }

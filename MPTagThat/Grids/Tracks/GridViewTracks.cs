@@ -1755,6 +1755,8 @@ namespace MPTagThat.GridView
     /// <param name = "index"></param>
     public void SetBackgroundColorChanged(int index)
     {
+      tracksGrid.Rows[index].Tag = "Changed";
+
       tracksGrid.Rows[index].DefaultCellStyle.BackColor =
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
       tracksGrid.Rows[index].DefaultCellStyle.ForeColor =
@@ -2021,7 +2023,7 @@ namespace MPTagThat.GridView
       _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
 
       _main.ToolStripStatusScan.Text = "";
-      _main.FolderScanning = false;
+      
 
       ResetProgressBar();
       _main.progressBar1.Style = ProgressBarStyle.Continuous;
@@ -2051,6 +2053,8 @@ namespace MPTagThat.GridView
       {
         ChangeErrorRowColor();
       }
+
+      _main.FolderScanning = false;
 
       log.Trace("<<<");
     }
@@ -3155,11 +3159,11 @@ namespace MPTagThat.GridView
     /// <param name = "e"></param>
     private void tracksGrid_SelectionChanged(object sender, EventArgs e)
     {
-      if (Options.Songlist.Count == 0)
+      if (Options.Songlist.Count == 0 || _main.FolderScanning)
       {
         return;
       }
-
+      
       for (int i = 0; i < tracksGrid.Rows.Count; i++)
       {
         if (tracksGrid.Rows[i].Selected)
@@ -3172,7 +3176,7 @@ namespace MPTagThat.GridView
         }
         else
         {
-          if (Options.Songlist[i].Changed)
+          if ((string)tracksGrid.Rows[i].Tag == "Changed")
           {
             tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
               ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
