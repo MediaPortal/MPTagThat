@@ -127,19 +127,28 @@ namespace MPTagThat.Core
                        where d.Id == _dbIdList[i]
                        select d;
 
-          foreach (var trackData in result)
-          {
-            _db.Activate(trackData, 1);
-            _lastRetrievedTrack = trackData;
-            return trackData;
-          }
+          _lastRetrievedTrack = result.First();
+          return _lastRetrievedTrack;
         }
         
         return _bindingList[i];
       }
       set
       {
-        _bindingList[i] = value;
+        if (_databaseModeEnabled)
+        {
+          var result = from TrackData d in _db
+                       where d.Id == _dbIdList[i]
+                       select d;
+
+          TrackData track = result.First();
+          track = value;
+          _db.Store(track);
+        }
+        else
+        {
+          _bindingList[i] = value;
+        }
       }
     }
 
@@ -280,7 +289,7 @@ namespace MPTagThat.Core
 
         _dbConfig = Db4oEmbedded.NewConfiguration();
         _dbConfig.Common.ObjectClass(typeof(TrackData)).ObjectField("_id").Indexed(true);
-        _dbConfig.Common.ActivationDepth = 1; // To increase performance
+        _dbConfig.Common.ActivationDepth = 3; // To increase performance
         _dbConfig.Common.ObjectClass(typeof(TrackData)).CascadeOnUpdate(true);
 
         IStorage fileStorage = new FileStorage();
@@ -306,7 +315,7 @@ namespace MPTagThat.Core
     /// </summary>
     private void CopyLIstToDatabase()
     {
-      ServiceScope.Get<ILogger>().GetLogger.Debug("Number of Songs in list exceeded the limnit. Database mode enabled");
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Number of Songs in list exceeded the limit. Database mode enabled");
       
       if (!CreateDbConnection())
       {
