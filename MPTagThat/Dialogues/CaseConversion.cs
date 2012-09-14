@@ -129,29 +129,9 @@ namespace MPTagThat.CaseConversion
           bErrors = true;
         }
 
-        // Check, if we would generate duplicate file names
-        foreach (DataGridViewRow file in _main.TracksGridView.View.Rows)
-        {
-          // Don't compare the file with itself
-          if (rowIndex == file.Index)
-            continue;
-
-          TrackData filedata = Options.Songlist[file.Index];
-          if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
-          {
-            log.Debug("New Filename already exists: {0}", fileName);
-            Options.Songlist[rowIndex].Status = 2;
-            _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
-                                                 String.Format("{0}: {1}",
-                                                               localisation.ToString("tag2filename", "FileExists"),
-                                                               fileName));
-            bErrors = true;
-            break;
-          }
-        }
         if (!bErrors)
         {
-          // Now that we have a correct Filename and no duplicates accept the changes
+          // Now that we have a correct Filename
           track.FileName = string.Format("{0}{1}", fileName, Path.GetExtension(track.FileName));
           track.Changed = true;
           _main.TracksGridView.Changed = true;

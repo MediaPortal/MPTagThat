@@ -464,8 +464,22 @@ namespace MPTagThat.GridView
       if (originalFileName != track.FileName)
       {
         string ext = Path.GetExtension(track.FileName);
-        string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
-                                          String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName), ext));
+        string filename = Path.GetFileNameWithoutExtension(track.FileName);
+        string path = Path.GetDirectoryName(track.FullFileName);
+        string newFileName = Path.Combine(path, string.Format("{0}{1}", filename, ext));
+
+        // Check, if the New file name already exists
+        int i = 1;
+        if (System.IO.File.Exists(newFileName))
+        {
+          newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
+          while (System.IO.File.Exists(newFileName))
+          {
+            i++;
+            newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
+          }
+        }
+        
         System.IO.File.Move(track.FullFileName, newFileName);
         log.Debug("Save: Renaming track: {0} Newname: {1}", track.FullFileName, newFileName);
         return true;
