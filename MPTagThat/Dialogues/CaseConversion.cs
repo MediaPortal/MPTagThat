@@ -121,7 +121,7 @@ namespace MPTagThat.CaseConversion
         if (fileName.Length > 255)
         {
           log.Debug("Filename too long: {0}", fileName);
-          Options.Songlist[rowIndex].Status = 2;
+          track.Status = 2;
           _main.TracksGridView.AddErrorMessage(_main.TracksGridView.View.Rows[rowIndex],
                                                String.Format("{0}: {1}",
                                                              localisation.ToString("tag2filename", "NameTooLong"),
@@ -156,6 +156,7 @@ namespace MPTagThat.CaseConversion
           track.Changed = true;
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(rowIndex);
+          Options.Songlist[rowIndex] = track;
         }
       }
 
@@ -205,6 +206,7 @@ namespace MPTagThat.CaseConversion
           track.Changed = true;
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(rowIndex);
+          Options.Songlist[rowIndex] = track;
         }
       }
     }

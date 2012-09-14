@@ -187,6 +187,7 @@ namespace MPTagThat.TagToFileName
 
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(row.Index);
+          Options.Songlist[row.Index] = track;
         }
         catch (Exception ex)
         {

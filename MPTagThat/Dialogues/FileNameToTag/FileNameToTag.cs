@@ -134,10 +134,12 @@ namespace MPTagThat.FileNameToTag
 
       _main.TracksGridView.Changed = bErrors;
       // check, if we still have changed items in the list
-      foreach (TrackData track in Options.Songlist)
+      foreach (DataGridViewRow row in tracksGrid.Rows)
       {
-        if (track.Changed)
+        if ((string)row.Tag == "Changed")
+        {
           _main.TracksGridView.Changed = true;
+        }
       }
 
       tracksGrid.Refresh();

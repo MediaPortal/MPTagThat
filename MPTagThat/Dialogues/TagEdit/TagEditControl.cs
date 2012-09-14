@@ -2370,6 +2370,7 @@ namespace MPTagThat.TagEdit
             main.TracksGridView.Changed = true;
             main.TracksGridView.SetBackgroundColorChanged(row.Index);
             track.Changed = true;
+            Options.Songlist[row.Index] = track;
           }
         }
         catch (Exception ex)

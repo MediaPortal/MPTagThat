@@ -265,10 +265,12 @@ namespace MPTagThat.GridView
 
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
+        
         ClearStatusColumn(row.Index);
 
-        if (!row.Selected)
+        if (!row.Selected || (string)row.Tag != "Changed")
         {
+          log.Trace("Save: Row {0} not selected or changed", row.Index);
           continue;
         }
 
@@ -282,6 +284,7 @@ namespace MPTagThat.GridView
             ResetProgressBar();
             return;
           }
+
           TrackData track = Options.Songlist[row.Index];
           SaveTrack(track, row.Index);
         }
@@ -336,6 +339,8 @@ namespace MPTagThat.GridView
         Application.DoEvents();
 
         TrackData track = Options.Songlist[i];
+        track.Status = -1;
+
         if (showProgressDialog)
         {
           _main.progressBar1.Value += 1;
@@ -371,7 +376,6 @@ namespace MPTagThat.GridView
     {
       try
       {
-        ClearStatusColumn(rowIndex);
         if (track.Changed)
         {
           Util.SendProgress(string.Format("Saving file {0}", track.FullFileName));
@@ -425,15 +429,16 @@ namespace MPTagThat.GridView
               SavePicture(track);
             }
 
-            Options.Songlist[rowIndex].Status = 0;
+            track.Status = 0;
             tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
-
+            tracksGrid.Rows[rowIndex].Tag = "";
+            Options.Songlist[rowIndex] = track;
             SetGridRowColors(rowIndex);
           }
           else
           {
-            Options.Songlist[rowIndex].Status = 2;
+            track.Status = 2;
             AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
           }
         }
@@ -442,6 +447,7 @@ namespace MPTagThat.GridView
       {
         Options.Songlist[rowIndex].Status = 2;
         AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
+        log.Error("Save: Error Saving data for row {0}: {1} {2}", rowIndex, ex.Message, ex.StackTrace);
         return false;
       }
       return true;
@@ -624,6 +630,7 @@ namespace MPTagThat.GridView
 
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
+              Options.Songlist[row.Index] = track;
               _itemsChanged = true;
             }
           }
@@ -775,6 +782,7 @@ namespace MPTagThat.GridView
                 track.Pictures.Add(folderThumb);
                 SetBackgroundColorChanged(row.Index);
                 track.Changed = true;
+                Options.Songlist[row.Index] = track;
                 _itemsChanged = true;
                 _main.SetGalleryItem();
               }
@@ -884,6 +892,7 @@ namespace MPTagThat.GridView
 
               SetBackgroundColorChanged(row.Index);
               track.Changed = true;
+              Options.Songlist[row.Index] = track;
               _itemsChanged = true;
               _main.SetGalleryItem();
             }
@@ -1037,6 +1046,7 @@ namespace MPTagThat.GridView
         track.Pictures.Add(pic);
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
+        Options.Songlist[row.Index] = track;
         _itemsChanged = true;
       }
 
@@ -1185,6 +1195,7 @@ namespace MPTagThat.GridView
                   track.Lyrics = (string)lyricsRow.Cells[5].Value;
                   SetBackgroundColorChanged(row.Index);
                   track.Changed = true;
+                  Options.Songlist[row.Index] = track;
                   _itemsChanged = true;
                   break;
                 }
@@ -1236,6 +1247,7 @@ namespace MPTagThat.GridView
         track.Track = string.Format("{0}/{1}", numberValue, numTracks);
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
+        Options.Songlist[row.Index] = track;
         _itemsChanged = true;
         numberValue++;
       }
@@ -1271,6 +1283,7 @@ namespace MPTagThat.GridView
 
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
+        Options.Songlist[row.Index] = track;
         _itemsChanged = true;
       }
 
@@ -1357,6 +1370,7 @@ namespace MPTagThat.GridView
           track.ID3Comments.Clear();
           SetBackgroundColorChanged(row.Index);
           track.Changed = true;
+          Options.Songlist[row.Index] = track;
           _itemsChanged = true;
         }
       }
@@ -1386,6 +1400,7 @@ namespace MPTagThat.GridView
           track.Pictures.Clear();
           SetBackgroundColorChanged(row.Index);
           track.Changed = true;
+          Options.Songlist[row.Index] = track;
           _itemsChanged = true;
         }
       }
@@ -1620,6 +1635,7 @@ namespace MPTagThat.GridView
 
         SetBackgroundColorChanged(row.Index);
         track.Changed = true;
+        Options.Songlist[row.Index] = track;
         _itemsChanged = true;
       }
 
@@ -1869,9 +1885,12 @@ namespace MPTagThat.GridView
       {
         if (assembly != null)
         {
+          
+          int trackCount = tracksGrid.SelectedRows.Count;
+          SetProgressBar(trackCount);
+
           IScript script = (IScript)assembly.CreateInstance("Script");
 
-          List<TrackData> tracks = new List<TrackData>();
           foreach (DataGridViewRow row in tracksGrid.Rows)
           {
             if (!row.Selected)
@@ -1879,22 +1898,28 @@ namespace MPTagThat.GridView
               continue;
             }
 
-            tracks.Add(Options.Songlist[row.Index]);
-          }
-          script.Invoke(tracks);
-          foreach (DataGridViewRow row in tracksGrid.Rows)
-          {
-            if (!row.Selected)
+            Application.DoEvents();
+            _main.progressBar1.Value += 1;
+            if (_progressCancelled)
             {
-              continue;
+              ResetProgressBar();
+              Util.SendProgress("");
+              return;
             }
 
-            if (Options.Songlist[row.Index].Changed)
+            TrackData track = Options.Songlist[row.Index];
+            Util.SendProgress(string.Format("Running script on {0}", track.FullFileName));
+            script.Invoke(track);
+
+            if (track.Changed)
             {
+              Options.Songlist[row.Index] = track;
               SetBackgroundColorChanged(row.Index);
               _itemsChanged = true;
             }
           }
+          ResetProgressBar();
+          Util.SendProgress("");
         }
       }
       catch (Exception ex)
@@ -2944,6 +2969,7 @@ namespace MPTagThat.GridView
       SetBackgroundColorChanged(e.RowIndex);
       TrackData track = Options.Songlist[e.RowIndex];
       _main.TagEditForm.FillForm();
+      Options.Songlist[e.RowIndex] = track;
       track.Changed = true;
     }
 
@@ -3120,6 +3146,7 @@ namespace MPTagThat.GridView
             track.Track = string.Format("{0}/{1}", numberValue, numTracks);
             SetBackgroundColorChanged(selectedRow.RowIndex);
             track.Changed = true;
+            Options.Songlist[selectedRow.RowIndex] = track;
             _itemsChanged = true;
             _main.AutoNumber = numberValue + 1;
             tracksGrid.Refresh();

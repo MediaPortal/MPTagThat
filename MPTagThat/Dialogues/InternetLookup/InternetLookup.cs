@@ -334,6 +334,7 @@ namespace MPTagThat.InternetLookup
 
           main.TracksGridView.SetBackgroundColorChanged(index);
           track.Changed = true;
+          Options.Songlist[index] = track;
           main.TracksGridView.Changed = true;
         }
       }
