@@ -110,6 +110,30 @@ namespace MPTagThat.Core
       if (starNumber != -1)
         cellImage = starHotImages[starNumber];
 
+      if (DataGridView.Rows[rowIndex].Selected)
+      {
+        cellStyle.BackColor =
+          ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
+
+      }
+      else
+      {
+        if ((string)this.DataGridView.Rows[rowIndex].Tag == "Changed")
+        {
+          cellStyle.BackColor =
+            ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
+        }
+        else
+        {
+          if (rowIndex % 2 == 0)
+            cellStyle.BackColor =
+              ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
+          else
+            cellStyle.BackColor =
+              ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
+        }
+      }
+
       // surpress painting of selection
       base.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, cellImage, errorText, cellStyle,
                  advancedBorderStyle, (paintParts & ~DataGridViewPaintParts.SelectionBackground));

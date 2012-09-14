@@ -63,8 +63,6 @@ namespace MPTagThat.GridView
   {
     #region Variables
 
-    private const int RATINGCELLNUMBER = 11;
-
     private readonly Cursor _numberingCursor = Util.CreateCursorFromResource("CursorNumbering", 0, 0);
     private readonly GridViewColumns gridColumns;
 
@@ -208,9 +206,6 @@ namespace MPTagThat.GridView
       // establish Event Handlers for Virtual Mode hangling of the grid
       tracksGrid.CellValueNeeded += tracksGrid_CellValueNeeded;
       tracksGrid.CellValuePushed += tracksGrid_CellValuePushed;
-
-      // The Color for the Image Cell for the Rating is not handled correctly. so we need to handle it via an event
-      tracksGrid.SelectionChanged += tracksGrid_SelectionChanged;
 
       // Now Setup the columns, we want to display
       CreateColumns();
@@ -1791,18 +1786,6 @@ namespace MPTagThat.GridView
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
       tracksGrid.Rows[index].DefaultCellStyle.ForeColor =
         ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedForeColor;
-
-      // Rating cell needs special processing
-      if (tracksGrid.Rows[index].Selected)
-      {
-        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-             ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
-      }
-      else
-      {
-        tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-          ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
-      }
     }
 
     /// <summary>
@@ -1815,33 +1798,11 @@ namespace MPTagThat.GridView
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-        // Rating cell needs special processing
-        if (tracksGrid.Rows[index].Selected)
-        {
-          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-               ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
-        }
-        else
-        {
-          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-            ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-        }
-      }
+     }
       else
       {
         tracksGrid.Rows[index].DefaultCellStyle.BackColor =
           ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-        // Rating cell needs special processing
-        if (tracksGrid.Rows[index].Selected)
-        {
-          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-               ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
-        }
-        else
-        {
-          tracksGrid.Rows[index].Cells[RATINGCELLNUMBER].Style.BackColor =
-            ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-        }
       }
     }
 
@@ -2082,7 +2043,6 @@ namespace MPTagThat.GridView
         {
           _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
-          tracksGrid.Rows[0].Cells[RATINGCELLNUMBER].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
       catch (ArgumentOutOfRangeException) { }
@@ -2254,7 +2214,6 @@ namespace MPTagThat.GridView
         {
           _main.TagEditForm.ClearForm();
           tracksGrid.Rows[0].Selected = false;
-          tracksGrid.Rows[0].Cells[RATINGCELLNUMBER].Style.BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
         }
       }
       catch (ArgumentOutOfRangeException) { }
@@ -3189,48 +3148,6 @@ namespace MPTagThat.GridView
         else
         {
           tracksGrid.Cursor = Cursors.Default;
-        }
-      }
-    }
-
-    /// <summary>
-    ///   Handle the Background Color for the Rating Image Cell
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void tracksGrid_SelectionChanged(object sender, EventArgs e)
-    {
-      if (_main.FolderScanning)
-      {
-        return;
-      }
-      
-      for (int i = 0; i < tracksGrid.Rows.Count; i++)
-      {
-        if (tracksGrid.Rows[i].Selected)
-        {
-          tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
-            ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
-
-          tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
-              ServiceScope.Get<IThemeManager>().CurrentTheme.SelectionBackColor;
-        }
-        else
-        {
-          if ((string)tracksGrid.Rows[i].Tag == "Changed")
-          {
-            tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
-              ServiceScope.Get<IThemeManager>().CurrentTheme.ChangedBackColor;
-          }
-          else
-          {
-            if (i % 2 == 0)
-              tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
-                ServiceScope.Get<IThemeManager>().CurrentTheme.DefaultBackColor;
-            else
-              tracksGrid.Rows[i].Cells[RATINGCELLNUMBER].Style.BackColor =
-                ServiceScope.Get<IThemeManager>().CurrentTheme.AlternatingRowBackColor;
-          }
         }
       }
     }
