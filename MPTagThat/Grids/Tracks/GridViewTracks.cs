@@ -3186,7 +3186,7 @@ namespace MPTagThat.GridView
     /// <param name = "e"></param>
     private void tracksGrid_SelectionChanged(object sender, EventArgs e)
     {
-      if (Options.Songlist.Count == 0 || _main.FolderScanning)
+      if (_main.FolderScanning)
       {
         return;
       }
