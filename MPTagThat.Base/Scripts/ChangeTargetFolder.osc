@@ -40,10 +40,4 @@ public class Script : IScript
 	
 	return targetFolder;
   }
-
-  // Not used for this script
-  public bool Invoke(List<TrackData> tracks)
-  {
-    return false;
-  }  
 }

@@ -16,27 +16,16 @@ using TagLib;
 
 public class Script : IScript
 {
-  public bool Invoke(List<TrackData> tracks)
-  {
-    if (tracks == null) return false;
-
-	// Loop through all Music Tracks and perform the necessary action
-	foreach (TrackData track in tracks)
-	{
-		if (track.Pictures.Count > 0)
-		{
-			if (track.Pictures[0].Description != "Front Cover")
-			{
-				track.Pictures[0].Description = "Front Cover";
-				track.Changed = true;
-			}
-		}
-	}
-    return true;
-  }
-  
   public string Invoke(TrackData track)
   {
-	return "";
+	if (track.Pictures.Count > 0)
+	{
+		if (track.Pictures[0].Description != "Front Cover")
+		{
+			track.Pictures[0].Description = "Front Cover";
+			track.Changed = true;
+		}
+	}
+    return "";
   }
 }

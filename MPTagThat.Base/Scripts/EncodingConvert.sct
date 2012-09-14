@@ -21,11 +21,8 @@ public class Script : IScript
   private string encoding = "Latin1";
   private bool runInbatch = false;
   
-  // We get all selected tracks in a list, so that we can loop through them in one call
-  public bool Invoke(List<TrackData> tracks)
+  public string Invoke(TrackData track)
   {
-    if (tracks == null) return false;
-
 	// If NO Form should be displayed uncomment the next line
 	//runInbatch = true;
 	
@@ -42,7 +39,7 @@ public class Script : IScript
 		Form f = new Form1(this);
 		if (f.ShowDialog() == DialogResult.Cancel)
 		{
-			return false;
+			return "";
 		}
 	}
 	
@@ -69,58 +66,49 @@ public class Script : IScript
 			break;
 	}
 	
-	// Loop through all Music Tracks and perform the necessary action
-	foreach (TrackData track in tracks)
+
+	if (track.TagType.ToLower() != "mp3")
 	{
-        if (track.TagType.ToLower() != "mp3")
-        {
-		  // No mp3 continue with next file
-          continue;
-        }
-
-		TagLib.File file = null;
-		bool error = false;
-		
-		Util.SendProgress(string.Format("Procesing file {0}", track.FullFileName));
-		
-		try
-		{
-			TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
-			TagLib.ByteVector.UseBrokenLatin1Behavior = true;
-			
-			file = TagLib.File.Create(track.FullFileName);
-		}
-		catch (CorruptFileException)
-		{
-			error = true;
-		}
-		catch (UnsupportedFormatException)
-		{
-			error = true;
-		}
-		catch (System.IO.FileNotFoundException)
-		{
-			error = true;
-		}
-		catch (Exception ex)
-		{
-			error = true;
-		}
-
-		if (file == null || error)
-		{
-			return false;
-		}
-
-		file.Save();	
+	  // No mp3 continue with next file
+	  return "";
 	}
-	Util.SendProgress("");
-    return true;
-  }
-  
-  public string Invoke(TrackData track)
-  {
-	return "";
+
+	TagLib.File file = null;
+	bool error = false;
+
+	try
+	{
+		TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
+		TagLib.ByteVector.UseBrokenLatin1Behavior = true;
+		
+		file = TagLib.File.Create(track.FullFileName);
+	}
+	catch (CorruptFileException)
+	{
+		error = true;
+	}
+	catch (UnsupportedFormatException)
+	{
+		error = true;
+	}
+	catch (System.IO.FileNotFoundException)
+	{
+		error = true;
+	}
+	catch (Exception ex)
+	{
+		error = true;
+	}
+
+	if (file == null || error)
+	{
+		return "";
+	}
+
+	file.Save();	
+	
+
+    return "";
   }
   
   //

@@ -16,30 +16,19 @@ using TagLib;
 
 public class Script : IScript
 {
-  public bool Invoke(List<TrackData> tracks)
-  {
-    if (tracks == null) return false;
-
-	// Loop through all Music Tracks and perform the necessary action
-	foreach (TrackData track in tracks)
-	{
-		string artist = track.Artist;
-		artist.Trim();
-
-		// Search for the first Blank
-		int iPos = artist.IndexOf(' ');
-		if (iPos > 0)
-		{
-		  // Switch the Artist name
-		  track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1).Trim(), artist.Substring(0, iPos));
-		  track.Changed = true; // Indicate that the track has been changed
-		}
-	}
-    return true;
-  }
-  
   public string Invoke(TrackData track)
   {
-	return "";
+	string artist = track.Artist;
+	artist.Trim();
+
+	// Search for the first Blank
+	int iPos = artist.IndexOf(' ');
+	if (iPos > 0)
+	{
+	  // Switch the Artist name
+	  track.Artist = String.Format("{0}, {1}", artist.Substring(iPos + 1).Trim(), artist.Substring(0, iPos));
+	  track.Changed = true; // Indicate that the track has been changed
+	}
+    return "";
   }
 }

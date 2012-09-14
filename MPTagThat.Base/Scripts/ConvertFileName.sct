@@ -17,26 +17,16 @@ using TagLib;
 public class Script : IScript
 {
   // We get all selected tracks in a list, so that we can loop through them in one call
-  public bool Invoke(List<TrackData> tracks)
-  {
-    if (tracks == null) return false;
-
-	// Loop through all Music Tracks and perform the necessary action
-	foreach (TrackData track in tracks)
-	{
-		string filename = track.FileName;   		// Get the filename from the current track
-
-		filename = filename.ToLowerInvariant();   	// Convert the filename to all lowercase 
-		filename = filename.Replace(" ", "_");		// Replace all blanks with underscores
-		
-		track.FileName = filename;					// Set the filename to the converted filename
-		track.Changed = true; 						// Indicate that the track has been changed
-	}
-    return true;
-  }
-  
   public string Invoke(TrackData track)
   {
-	return "";
+	string filename = track.FileName;   		// Get the filename from the current track
+
+	filename = filename.ToLowerInvariant();   	// Convert the filename to all lowercase 
+	filename = filename.Replace(" ", "_");		// Replace all blanks with underscores
+		
+	track.FileName = filename;					// Set the filename to the converted filename
+	track.Changed = true; 						// Indicate that the track has been changed
+
+    return "";
   }
 }
