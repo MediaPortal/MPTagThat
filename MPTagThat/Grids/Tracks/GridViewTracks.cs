@@ -464,8 +464,9 @@ namespace MPTagThat.GridView
         string newFileName = Path.Combine(path, string.Format("{0}{1}", filename, ext));
 
         // Check, if the New file name already exists
+        // Don't change the newfilename, when only the Case change happened in filename
         int i = 1;
-        if (System.IO.File.Exists(newFileName))
+        if (System.IO.File.Exists(newFileName) && originalFileName.ToLowerInvariant() != track.FileName.ToLowerInvariant())
         {
           newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
           while (System.IO.File.Exists(newFileName))
