@@ -1480,8 +1480,8 @@ namespace MPTagThat
       if (_selectedDirectory != String.Empty)
       {
         tagEditControl.ClearForm();
-        ClearGallery();
         gridViewControl.View.Rows.Clear();
+        ClearGallery();
         toolStripStatusLabelFolder.Text = _selectedDirectory;
         if (TreeView.DatabaseMode)
         {
