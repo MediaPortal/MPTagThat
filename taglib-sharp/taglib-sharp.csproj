@@ -62,6 +62,15 @@
     <Compile Include="TagLib\IFD\Tags\PentaxMakerNoteEntryTag.cs" />
     <Compile Include="TagLib\IFD\Tags\SonyMakerNoteEntryTag.cs" />
     <Compile Include="TagLib\Image\NoMetadata\File.cs" />
+    <Compile Include="TagLib\Matroska\AudioTrack.cs" />
+    <Compile Include="TagLib\Matroska\EBMLElement.cs" />
+    <Compile Include="TagLib\Matroska\EBMLIDs.cs" />
+    <Compile Include="TagLib\Matroska\File.cs" />
+    <Compile Include="TagLib\Matroska\MatroskaIDs.cs" />
+    <Compile Include="TagLib\Matroska\SubtitleTrack.cs" />
+    <Compile Include="TagLib\Matroska\Tag.cs" />
+    <Compile Include="TagLib\Matroska\Track.cs" />
+    <Compile Include="TagLib\Matroska\VideoTrack.cs" />
     <Compile Include="TagLib\Properties.cs" />
     <Compile Include="TagLib\ByteVector.cs" />
     <Compile Include="TagLib\ByteVectorList.cs" />

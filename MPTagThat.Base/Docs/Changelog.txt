@@ -7,6 +7,18 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.0 Date: 20.09.2012 
+-------------------------------------
++ Replaygain Support: TRack Gain and Album Gain can be calculated
++ Script: Added Sample script for changing encoding
++ General: File currently processed is shown in Status Bar
++ General: When working on large number of files a Database will be used instead of keeping the files in memory. Should prevent Out Of memory errors
++ TagEdit: ArtistSort, AlbumArtistSort, AlbumSort and TitleSort are now available for all file types. Not only ID3
++ Rating support for OGG and FLAC
+x The "Star Rating" was not shown correctly in the Grid
+x Picturebox was not cleared in some cases
+x TagEdit: TDRC Frame was removed by mistake
+
 3.0.7 Date: 05.05.2012 
 -------------------------------------
 + Cover Art: Added new setting to resize saved Cover Art to the specified maximum width

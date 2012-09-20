@@ -3,6 +3,7 @@ REM %2 = $(ConfigurationName) Debug/Release
 
 REM Hack to remove dll not needed in root 
 del *.dll
+del *.pdb
 
 REM Copy All new files from base
 xcopy %1\MPTagThat.Base\*.* . /E /R /Y /D

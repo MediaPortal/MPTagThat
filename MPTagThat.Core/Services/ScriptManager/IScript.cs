@@ -25,7 +25,6 @@ namespace MPTagThat.Core
 {
   public interface IScript
   {
-    bool Invoke(List<TrackData> tracks);
     string Invoke(TrackData track);
   }
 }

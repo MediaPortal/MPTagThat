@@ -248,6 +248,10 @@ namespace MPTagThat.Core
 
     public static int ReadOnlyFileHandling { get; set; }
 
+    public static SongList Songlist { get; set; }
+
+    public static int MaximumNumberOfSongsInList { get; set; }
+
     #endregion
 
     #region Constructor
@@ -266,6 +270,8 @@ namespace MPTagThat.Core
                                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
       else
         _configDir = String.Format(@"{0}\Config", Application.StartupPath);
+
+      MaximumNumberOfSongsInList = ServiceScope.Get<ISettingsManager>().GetMaxSongs();
 
       _MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);
@@ -388,6 +394,8 @@ namespace MPTagThat.Core
       _copyPasteBuffer = new List<TrackData>();
 
       ReadOnlyFileHandling = 2; // Don't change attribute as a default.
+
+      Songlist = new SongList();
     }
 
     #endregion

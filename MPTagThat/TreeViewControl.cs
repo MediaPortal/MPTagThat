@@ -157,7 +157,7 @@ namespace MPTagThat
           FileSystem.DeleteDirectory(node.Path, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
 
           // Clear the tracks
-          _main.TracksGridView.TrackList.Clear();
+          Options.Songlist.Clear();
           _main.ClearGallery();
 
           // Now set the Selected directory to the Parent of the delted folder and reread the view
@@ -364,7 +364,7 @@ namespace MPTagThat
 
     private void SwitchMode()
     {
-      _main.TracksGridView.TrackList.Clear();
+      Options.Songlist.Clear();
       _main.ClearGallery();
 
       if (_databaseMode)

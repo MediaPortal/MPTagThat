@@ -96,6 +96,7 @@
 	<String id="Replace">Replace</String>
 	<String id="ValidateSong">Validate MP3</String>
 	<String id="FixSong">Fix MP3</String>
+	<String id="ReplayGain">Replay Gain</String>
     <String id="RemoveCommentPicture">Remove:</String>
     <String id="RemoveComments">Remove all comments</String>
     <String id="RemovePictures">Remove all pictures</String>
@@ -205,6 +206,8 @@
     <String id="ValidateSongText">Uses MP3Val to validate the correctness of the selected MP3 File. Some errors may be fixed using the "Fix MP3" Button</String>
 	<String id="FixSong">Fix MP3</String>
     <String id="FixSongText">Uses MP3Val to fix errors detected in the selected MP3 File.</String>
+	<String id="ReplayGain">Replay Gain</String>
+    <String id="ReplayGainText">Analyses the selected file and calculates the Replay Gain. The calcualted value is written into the Tags.\nNote: The file itself is not modified.</String>
 	
     <!-- Rip Tab-->
     <String id="RipButton">Start Rip</String>
@@ -279,9 +282,10 @@
     <String id="GetTrackLength">Get Track Length from File</String>
     <String id="TrackLength">Track Length (ms):</String>
     <String id="MediaType">Media Type:</String>
-    <String id="TitleSort">Title Sort (ID3 2.4):</String>
-    <String id="AlbumSort">Album Sort (ID3 2.4):</String>
-    <String id="ArtistSort">Artist Sort (ID3 2.4):</String>
+    <String id="TitleSort">Title Sort:</String>
+    <String id="AlbumSort">Album Sort:</String>
+    <String id="ArtistSort">Artist Sort:</String>
+    <String id="AlbumArtistSort">Album Artist Sort:</String>
     <String id="SubTitle">Subtitle:</String>
     <String id="ContentGroup">Content group:</String>
     <String id="Copyright">Copyright:</String>
@@ -333,6 +337,7 @@
     <String id="LyricsHeaderLanguage">Lang</String>
     <String id="LyricsHeaderLyrics">Lyrics</String>
     <!--  Rating -->
+    <String id="GroupBoxRating">Ratings (For Non-ID3 files, please select the rating in the Star column)</String>
     <String id="RemoveExistingRatings">Remove existing Ratings First</String>
     <String id="RatingNote">The rating is 1-255 where 1 is worst and 255 is best. 0 is unknown.\n\nNote: Many programs have their own rating and may redefine the ID3 standard. If no personal counter is wanted it may be omitted.</String>
     <String id="PlayCounter">Play Counter:</String>
@@ -440,6 +445,10 @@
 	<String id="NumDisc">Num. Discs</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
+    <String id="ReplayGainTrack">Track Gain</String>
+    <String id="ReplayGainTrackPeak">Track Peak</String>
+    <String id="ReplayGainAlbum">Album Gain</String>
+    <String id="ReplayGainAlbumPeak">Album Peak</String>
     <String id="Comment">Comment</String>
     <String id="Composer">Composer</String>
     <String id="Conductor">Conductor</String>
@@ -933,5 +942,11 @@
 	<String id="YesToAll">Yes to All</String>
 	<String id="No">No</String>
 	<String id="NoToAll">No to All</String>
+  </Section>
+  
+  <!-- Replay Gain Popup -->
+  <Section name="albumgain">
+    <String id="Header">Album Gain</String>
+    <String id="Explanation">All files are selected.\nShould MPTagThat calculate an Album Gain?</String>
   </Section>
 </Language>

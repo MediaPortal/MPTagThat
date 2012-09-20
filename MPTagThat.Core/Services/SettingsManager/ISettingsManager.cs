@@ -44,5 +44,16 @@ namespace MPTagThat.Core
     /// </summary>
     /// <param name = "portable"></param>
     int GetPortable();
+
+    /// <summary>
+    /// Sets the maximum of Songs before switching to B Mode
+    /// </summary>
+    /// <param name="maxsongs"></param>
+    void SetMaxSongs(int maxsongs);
+
+    /// <summary>
+    /// Gets the maximum of songs alllowed in List
+    /// </summary>
+    int GetMaxSongs();
   }
 }

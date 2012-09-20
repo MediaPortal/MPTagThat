@@ -252,7 +252,7 @@ namespace MPTagThat.TagEdit
       foreach (DataGridViewRow row in main.TracksGridView.View.SelectedRows)
       {
 
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         if (!_isMultiTagEdit)
         {
@@ -401,7 +401,7 @@ namespace MPTagThat.TagEdit
 
         // Get Comment
         string sComment = "";
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           sComment += track.Comment;
           foreach (Comment commentsframe in track.ID3Comments)
@@ -417,7 +417,7 @@ namespace MPTagThat.TagEdit
           if (i == 0)
           {
             strCommentTemp = sComment;
-            if (track.TagType.ToLower() == "mp3")
+            if (track.IsMp3)
             {
               AddComment("", "", track.Comment);
               foreach (Comment commentsframe in track.ID3Comments)
@@ -520,8 +520,56 @@ namespace MPTagThat.TagEdit
           }
         }
 
+        if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbArtistSort.Text = track.ArtistSortName;
+          }
+          else
+          {
+            tbArtistSort.Text = "";
+          }
+        }
+
+        if (tbAlbumArtistSort.Text.Trim() != track.AlbumArtistSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbAlbumArtistSort.Text = track.AlbumArtistSortName;
+          }
+          else
+          {
+            tbAlbumArtistSort.Text = "";
+          }
+        }
+
+        if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbAlbumSort.Text = track.AlbumSortName;
+          }
+          else
+          {
+            tbAlbumSort.Text = "";
+          }
+        }
+
+        if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
+        {
+          if (i == 0)
+          {
+            tbTitleSort.Text = track.TitleSortName;
+          }
+          else
+          {
+            tbTitleSort.Text = "";
+          }
+        }
+
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbInterpretedBy.Text.Trim() != track.Interpreter.Trim())
           {
@@ -582,50 +630,6 @@ namespace MPTagThat.TagEdit
               tbSubTitle.Text = "";
             }
           }
-
-          if (Options.MainSettings.ID3V2Version == 4)
-          {
-            groupBoxSort.Enabled = true;
-            if (tbArtistSort.Text.Trim() != track.ArtistSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbArtistSort.Text = track.ArtistSortName;
-              }
-              else
-              {
-                tbArtistSort.Text = "";
-              }
-            }
-
-            if (tbAlbumSort.Text.Trim() != track.AlbumSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbAlbumSort.Text = track.AlbumSortName;
-              }
-              else
-              {
-                tbAlbumSort.Text = "";
-              }
-            }
-
-            if (tbTitleSort.Text.Trim() != track.TitleSortName.Trim())
-            {
-              if (i == 0)
-              {
-                tbTitleSort.Text = track.TitleSortName;
-              }
-              else
-              {
-                tbTitleSort.Text = "";
-              }
-            }
-          }
-          else
-          {
-            groupBoxSort.Enabled = false;
-          }
         }
 
         #endregion
@@ -633,7 +637,7 @@ namespace MPTagThat.TagEdit
         #region Original Information
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbOriginalAlbum.Text.Trim() != track.OriginalAlbum.Trim())
           {
@@ -713,7 +717,7 @@ namespace MPTagThat.TagEdit
         #region Involved People
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (strInvoledPeopleTemp != track.InvolvedPeople)
           {
@@ -762,7 +766,7 @@ namespace MPTagThat.TagEdit
         #region Web Information
 
         // The following values are only ID3 V2 specific
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (tbCopyrightUrl.Text.Trim() != track.CopyrightInformation.Trim())
           {
@@ -899,7 +903,7 @@ namespace MPTagThat.TagEdit
           #region Lyrics
 
           dataGridViewLyrics.Rows.Clear();
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (Lyric lyricsframe in track.LyricsFrames)
             {
@@ -919,14 +923,14 @@ namespace MPTagThat.TagEdit
           #region Rating
 
           dataGridViewRating.Rows.Clear();
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (PopmFrame popmframe in track.Ratings)
             {
               AddRating(popmframe.User, Convert.ToString(popmframe.Rating), Convert.ToString(popmframe.PlayCount));
             }
           }
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
             groupBoxRating.Enabled = true;
           else
             groupBoxRating.Enabled = false;
@@ -959,7 +963,7 @@ namespace MPTagThat.TagEdit
         List<string> itemsAlbum = new List<string>();
         foreach (DataGridViewRow row in main.TracksGridView.View.SelectedRows)
         {
-          TrackData track = main.TracksGridView.TrackList[row.Index];
+          TrackData track = Options.Songlist[row.Index];
 
           bool found = false;
           foreach (string item in itemsArtist)
@@ -1072,6 +1076,7 @@ namespace MPTagThat.TagEdit
       tbTitleSort.Text = "";
       tbAlbumSort.Text = "";
       tbArtistSort.Text = "";
+      tbAlbumArtistSort.Text = "";
       tbSubTitle.Text = "";
       tbContentGroup.Text = "";
       tbCopyright.Text = "";
@@ -1138,6 +1143,7 @@ namespace MPTagThat.TagEdit
       ckContentGroup.Visible = visible;
       ckSubTitle.Visible = visible;
       ckArtistSort.Visible = visible;
+      ckAlbumArtistSort.Visible = visible;
       ckAlbumSort.Visible = visible;
       ckTitleSort.Visible = visible;
       ckOriginalAlbum.Visible = visible;
@@ -1185,6 +1191,7 @@ namespace MPTagThat.TagEdit
       ckContentGroup.Checked = false;
       ckSubTitle.Checked = false;
       ckArtistSort.Checked = false;
+      ckAlbumSort.Checked = false;
       ckAlbumSort.Checked = false;
       ckTitleSort.Checked = false;
       ckOriginalAlbum.Checked = false;
@@ -1239,6 +1246,7 @@ namespace MPTagThat.TagEdit
         tbContentGroup.TextChanged += OnTextChanged;
         tbSubTitle.TextChanged += OnTextChanged;
         tbArtistSort.TextChanged += OnTextChanged;
+        tbAlbumArtistSort.TextChanged += OnTextChanged;
         tbAlbumSort.TextChanged += OnTextChanged;
         tbTitleSort.TextChanged += OnTextChanged;
         cbMediaType.TextChanged += OnComboChanged;
@@ -1273,6 +1281,7 @@ namespace MPTagThat.TagEdit
         tbContentGroup.TextChanged -= OnTextChanged;
         tbSubTitle.TextChanged -= OnTextChanged;
         tbArtistSort.TextChanged -= OnTextChanged;
+        tbAlbumArtistSort.TextChanged -= OnTextChanged;
         tbAlbumSort.TextChanged -= OnTextChanged;
         tbTitleSort.TextChanged -= OnTextChanged;
         cbMediaType.TextChanged -= OnComboChanged;
@@ -1328,7 +1337,7 @@ namespace MPTagThat.TagEdit
     {
       if (_pic != null)
       {
-        pictureBoxCover.Image = _pic.Data;
+        pictureBoxCover.Image = Picture.ImageFromData(_pic.Data);
       }
     }
 
@@ -1425,7 +1434,7 @@ namespace MPTagThat.TagEdit
       foreach (DataGridViewRow row in tracksGrid.SelectedRows)
       {
         bool trackChanged = false;
-        TrackData track = main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
 
         main.TracksGridView.ClearStatusColumn(row.Index);
 
@@ -1925,6 +1934,23 @@ namespace MPTagThat.TagEdit
 
           if (_isMultiTagEdit)
           {
+            if (ckAlbumArtistSort.Checked)
+            {
+              track.AlbumArtistSortName = tbAlbumArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+          else
+          {
+            if (track.AlbumArtistSortName != tbAlbumArtistSort.Text)
+            {
+              track.AlbumArtistSortName = tbAlbumArtistSort.Text.Trim();
+              trackChanged = true;
+            }
+          }
+
+          if (_isMultiTagEdit)
+          {
             if (ckAlbumSort.Checked)
             {
               track.AlbumSortName = tbAlbumSort.Text.Trim();
@@ -2344,12 +2370,13 @@ namespace MPTagThat.TagEdit
             main.TracksGridView.Changed = true;
             main.TracksGridView.SetBackgroundColorChanged(row.Index);
             track.Changed = true;
+            Options.Songlist[row.Index] = track;
           }
         }
         catch (Exception ex)
         {
           log.Error("Error applying changes from Tagedit: {0} stack: {1}", ex.Message, ex.StackTrace);
-          main.TracksGridView.TrackList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           main.TracksGridView.AddErrorMessage(row, ex.Message);
           bErrors = true;
         }
@@ -2358,7 +2385,7 @@ namespace MPTagThat.TagEdit
 
       main.TracksGridView.Changed = bErrors;
       // check, if we still have changed items in the list
-      foreach (TrackData track in main.TracksGridView.TrackList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           main.TracksGridView.Changed = true;
@@ -2440,6 +2467,10 @@ namespace MPTagThat.TagEdit
 
         case "tbArtistSort":
           ckArtistSort.Checked = true;
+          break;
+
+        case "tbAlbumArtistSort":
+          ckAlbumArtistSort.Checked = true;
           break;
 
         case "tbAlbumSort":
@@ -2743,7 +2774,7 @@ namespace MPTagThat.TagEdit
               extension = "jpg";
 
             string fileName = String.Format("{0}.{1}", sFD.FileName, extension);
-            Image img = _pictures[_selectedPictureGridRow].Data;
+            Image img = Picture.ImageFromData(_pictures[_selectedPictureGridRow].Data);
             if (img != null)
             {
               img.Save(fileName);
@@ -2768,7 +2799,7 @@ namespace MPTagThat.TagEdit
       {
         try
         {
-          Image img = _pictures[e.RowIndex].Data;
+          Image img = Picture.ImageFromData(_pictures[e.RowIndex].Data);
           if (img != null)
           {
             pictureBoxCover.Image = img;
@@ -2882,7 +2913,7 @@ namespace MPTagThat.TagEdit
         _pic.MimeType = "image/jpg";
         _pic.Description = "";
         _pic.Type = TagLib.PictureType.FrontCover;
-        _pic.Data = _pic.ImageFromData(vector.Data);
+        _pic.Data = vector.Data;
         AddPictureToList();
         AddPictureToPictureBox();
         _pictureIsChanged = true;
@@ -2906,7 +2937,7 @@ namespace MPTagThat.TagEdit
         return;
       }
 
-      TrackData track = main.TracksGridView.TrackList[_selectedRowIndex];
+      TrackData track = Options.Songlist[_selectedRowIndex];
       tbTrackLength.Text = track.DurationTimespan.TotalMilliseconds.ToString();
     }
 

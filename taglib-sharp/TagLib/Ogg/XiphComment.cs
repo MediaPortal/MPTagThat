@@ -1110,6 +1110,78 @@ namespace TagLib.Ogg
 			set {SetField ("RELEASECOUNTRY", value);}
 		}
 
+    /// <summary>
+    ///    Gets and sets the ReplayGain Track Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "replaygain_track_gain" field.
+    /// </remarks>
+    public override string ReplayGainTrack
+    {
+      get { return GetFirstField("replaygain_track_gain"); }
+      set { SetField("replaygain_track_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "replaygain_track_peak" field.
+    /// </remarks>
+    public override string ReplayGainTrackPeak
+    {
+      get { return GetFirstField("replaygain_track_peak"); }
+      set { SetField("replaygain_track_peak", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "replaygain_album_gain" field.
+    /// </remarks>
+    public override string ReplayGainAlbum
+    {
+      get { return GetFirstField("replaygain_album_gain"); }
+      set { SetField("replaygain_album_gain", value); }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    This property is implemented using the "replaygain_album_peak" field.
+    /// </remarks>
+    public override string ReplayGainAlbumPeak
+    {
+      get { return GetFirstField("replaygain_album_peak"); }
+      set { SetField("replaygain_album_peak", value); }
+    }
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.

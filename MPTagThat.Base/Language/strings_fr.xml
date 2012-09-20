@@ -241,9 +241,10 @@
     <String id="GetTrackLength">Récupérer la durée de piste</String>
     <String id="TrackLength">Durée de la piste (ms):</String>
     <String id="MediaType">Type de média:</String>
-    <String id="TitleSort">Trier les titres (ID3 2.4):</String>
-    <String id="AlbumSort">Trier les albums (ID3 2.4):</String>
-    <String id="ArtistSort">Trier les artistes (ID3 2.4):</String>
+    <String id="TitleSort">Trier les titres:</String>
+    <String id="AlbumSort">Trier les albums:</String>
+    <String id="ArtistSort">Trier les artistes:</String>
+    <String id="AlbumArtistSort">Trier les artiste-album:</String>
     <String id="SubTitle">Sous-titre:</String>
     <String id="ContentGroup">Groupe:</String>
     <String id="Copyright">Droits d'auteur:</String>

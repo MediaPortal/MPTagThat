@@ -53,6 +53,20 @@ namespace MPTagThat.Core
       return 0;
     }
 
+    /// <summary>
+    /// Sets the maximum of Songs before switching to B Mode
+    /// </summary>
+    /// <param name="maxsongs"></param>
+    public void SetMaxSongs(int maxsongs) {}
+
+    /// <summary>
+    /// Gets the maximum of songs alllowed in List
+    /// </summary>
+    public int GetMaxSongs()
+    {
+      return 200;
+    }
+
     #endregion
   }
 }

@@ -163,9 +163,10 @@
     <String id="GetTrackLength">Obtener Duración de Pista de Archivo</String>
     <String id="TrackLength">Duración de Pista (ms):</String>
     <String id="MediaType">Tipo de Medio:</String>
-    <String id="TitleSort">Ordenar por Título (ID3 2.4):</String>
-    <String id="AlbumSort">Ordenar por Álbum (ID3 2.4):</String>
-    <String id="ArtistSort">Ordenar por Artista (ID3 2.4):</String>
+    <String id="TitleSort">Ordenar por Título:</String>
+    <String id="AlbumSort">Ordenar por Álbum:</String>
+    <String id="ArtistSort">Ordenar por Artista:</String>
+    <String id="AlbumArtistSort">Ordenar por ÁlbumArtista:</String>
     <String id="SubTitle">Subtítulo:</String>
     <String id="ContentGroup">Grupo Contenido:</String>
     <String id="Copyright">Copyright:</String>

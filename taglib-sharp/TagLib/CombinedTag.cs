@@ -1442,6 +1442,178 @@ namespace TagLib {
 			}
 		}
 
+    /// <summary>
+    ///    Gets and sets the ReplayGain Track Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>When getting the value, the child tags are looped
+    ///    through in order and the first non-<see langword="null" />
+    ///    and non-empty value is returned.</para>
+    ///    <para>When setting the value, it is stored in each child
+    ///    tag.</para>
+    /// </remarks>
+    /// <seealso cref="Tag.ReplayGainTrack" />
+    public override string ReplayGainTrack
+    {
+      get
+      {
+        foreach (Tag tag in tags)
+        {
+          if (tag == null)
+            continue;
+
+          string value = tag.ReplayGainTrack;
+
+          if (value != null)
+            return value;
+        }
+
+        return null;
+      }
+
+      set
+      {
+        foreach (Tag tag in tags)
+          if (tag != null)
+            tag.ReplayGainTrack = value;
+      }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>When getting the value, the child tags are looped
+    ///    through in order and the first non-<see langword="null" />
+    ///    and non-empty value is returned.</para>
+    ///    <para>When setting the value, it is stored in each child
+    ///    tag.</para>
+    /// </remarks>
+    /// <seealso cref="Tag.ReplayGainTrackPeak" />
+    public override string ReplayGainTrackPeak
+    {
+      get
+      {
+        foreach (Tag tag in tags)
+        {
+          if (tag == null)
+            continue;
+
+          string value = tag.ReplayGainTrackPeak;
+
+          if (value != null)
+            return value;
+        }
+
+        return null;
+      }
+
+      set
+      {
+        foreach (Tag tag in tags)
+          if (tag != null)
+            tag.ReplayGainTrackPeak = value;
+      }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>When getting the value, the child tags are looped
+    ///    through in order and the first non-<see langword="null" />
+    ///    and non-empty value is returned.</para>
+    ///    <para>When setting the value, it is stored in each child
+    ///    tag.</para>
+    /// </remarks>
+    /// <seealso cref="Tag.ReplayGainAlbum" />
+    public override string ReplayGainAlbum
+    {
+      get
+      {
+        foreach (Tag tag in tags)
+        {
+          if (tag == null)
+            continue;
+
+          string value = tag.ReplayGainAlbum;
+
+          if (value != null)
+            return value;
+        }
+
+        return null;
+      }
+
+      set
+      {
+        foreach (Tag tag in tags)
+          if (tag != null)
+            tag.ReplayGainAlbum = value;
+      }
+    }
+
+    /// <summary>
+    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
+    ///    the current instance.
+    /// </summary>
+    /// <value>
+    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    media represented by the current instance or an empty
+    ///    array if no value is present.
+    /// </value>
+    /// <remarks>
+    ///    <para>When getting the value, the child tags are looped
+    ///    through in order and the first non-<see langword="null" />
+    ///    and non-empty value is returned.</para>
+    ///    <para>When setting the value, it is stored in each child
+    ///    tag.</para>
+    /// </remarks>
+    /// <seealso cref="Tag.ReplayGainAlbumPeak" />
+    public override string ReplayGainAlbumPeak
+    {
+      get
+      {
+        foreach (Tag tag in tags)
+        {
+          if (tag == null)
+            continue;
+
+          string value = tag.ReplayGainAlbumPeak;
+
+          if (value != null)
+            return value;
+        }
+
+        return null;
+      }
+
+      set
+      {
+        foreach (Tag tag in tags)
+          if (tag != null)
+            tag.ReplayGainAlbumPeak = value;
+      }
+    }
+
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.

@@ -29,3 +29,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.sdf
 *.opensdf
+*.ipch
+ipch/*.ipch

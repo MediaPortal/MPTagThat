@@ -267,9 +267,10 @@
     <String id="GetTrackLength">Hent Spor Lengde fra Fil</String>
     <String id="TrackLength">Spor Lengde (ms):</String>
     <String id="MediaType">Media Type:</String>
-    <String id="TitleSort">Tittel Sortering (ID3 2.4):</String>
-    <String id="AlbumSort">Album Sortering (ID3 2.4):</String>
-    <String id="ArtistSort">Artist Sortering (ID3 2.4):</String>
+    <String id="TitleSort">Tittel Sortering:</String>
+    <String id="AlbumSort">Album Sortering:</String>
+    <String id="ArtistSort">Artist Sortering:</String>
+    <String id="AlbumArtistSort">AlbumArtist Sortering:</String>
     <String id="SubTitle">Undertekst:</String>
     <String id="ContentGroup">Innholds gruppe:</String>
     <String id="Copyright">Kopirettighet:</String>

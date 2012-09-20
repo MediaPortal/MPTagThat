@@ -921,6 +921,7 @@ namespace MPTagThat
       ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
       ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -993,7 +994,7 @@ namespace MPTagThat
         ApplicationCommands.SaveAsThumb.Enabled = false;
         if (track.Pictures.Count > 0)
         {
-          img = track.Pictures[0].Data;
+          img = Picture.ImageFromData(track.Pictures[0].Data);
           if (img != null)
           {
             GalleryItem galleryItem = new GalleryItem(img, "", "");
@@ -1046,6 +1047,7 @@ namespace MPTagThat
 
       pinListRecentFolders.Items.Insert(0, pinItem);
 
+      Options.MainSettings.RecentFolders.Remove(newFolder);
       Options.MainSettings.RecentFolders.Insert(0, newFolder);
       if (Options.MainSettings.RecentFolders.Count > 20)
       {
@@ -1274,6 +1276,10 @@ namespace MPTagThat
       buttonFixSong.ScreenTip.Caption = localisation.ToString("screentip", "FixSong");
       buttonFixSong.ScreenTip.Text = localisation.ToString("screentip", "FixSongText");
 
+      buttonReplayGain.Text = localisation.ToString("ribbon", "ReplayGain");
+      buttonReplayGain.ScreenTip.Caption = localisation.ToString("screentip", "ReplayGain");
+      buttonReplayGain.ScreenTip.Text = localisation.ToString("screentip", "ReplayGainText");
+
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
       buttonRipStart.Text = localisation.ToString("ribbon", "RipButton");
@@ -1474,8 +1480,8 @@ namespace MPTagThat
       if (_selectedDirectory != String.Empty)
       {
         tagEditControl.ClearForm();
-        ClearGallery();
         gridViewControl.View.Rows.Clear();
+        ClearGallery();
         toolStripStatusLabelFolder.Text = _selectedDirectory;
         if (TreeView.DatabaseMode)
         {
@@ -3080,6 +3086,12 @@ namespace MPTagThat
           ShowCenteredForm(_dialog);
           _showForm = false; // Don't show the dialog in the Keypress event
           break;
+
+        case Action.ActionType.ACTION_REPLAYGAIN:
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ReplayGain();
+          break;
       }
 
       return handled;
@@ -3144,6 +3156,10 @@ namespace MPTagThat
             Refresh();
             break;
           }
+
+        case "statusprogress":
+          toolStripStatusLabelProgress.Text = message.MessageData["data"] as string;
+          break;
       }
     }
 
@@ -3664,6 +3680,12 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.FixMP3File();
+          break;
+
+        case "ReplayGain":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.ReplayGain();
           break;
       }
     }

@@ -96,6 +96,7 @@
 	<String id="Replace">Ersetzen</String>
 	<String id="ValidateSong">Überprüfen MP3</String>
 	<String id="FixSong">Korrigieren MP3</String>
+	<String id="ReplayGain">Replay Gain Analyse</String>
     <String id="RemoveCommentPicture">Entfernen:</String>
     <String id="RemoveComments">Alle Kommentare entfernen</String>
     <String id="RemovePictures">Alle Bilder entfernen</String>
@@ -205,6 +206,8 @@
     <String id="ValidateSongText">Verwendet MP3Val, um die ausgewählte MP3 Datei auf Fehler zu untersuchen. Manche Fehler können mit der "Korrigieren MP3" Funktion behoben werden.</String>
 	<String id="FixSong">Korrigieren MP3</String>
     <String id="FixSongText">Verwendet MP3Val um Fehler in der MP3 Datei zu korrigieren.</String>
+	<String id="ReplayGain">Replay Gain Analyse</String>
+    <String id="ReplayGainText">Analysiert die ausgewählten Dateien und ermittelt den Replay Gain. Der ermittelte Wert wird in die Tags geschrieben.\nDAchtung: as File selbst wird nicht modifiziert.</String>
 
     <!-- Rip Tab-->
     <String id="RipButton">Rip starten</String>
@@ -279,9 +282,10 @@
     <String id="GetTrackLength">Länge auslesen</String>
     <String id="TrackLength">Dauer (ms):</String>
     <String id="MediaType">Medien Typ:</String>
-    <String id="TitleSort">Titel Sortierung (ID3 2.4):</String>
-    <String id="AlbumSort">Album Sortierung (ID3 2.4):</String>
-    <String id="ArtistSort">Interpret Sortierung (ID3 2.4):</String>
+    <String id="TitleSort">Titel Sortierung:</String>
+    <String id="AlbumSort">Album Sortierung:</String>
+    <String id="ArtistSort">Interpret Sortierung:</String>
+    <String id="AlbumArtistSort">Album Interpret Sortierung:</String>
     <String id="SubTitle">Untertitel:</String>
     <String id="ContentGroup">Gruppierung:</String>
     <String id="Copyright">Copyright:</String>
@@ -333,6 +337,7 @@
     <String id="LyricsHeaderLanguage">Sprache</String>
     <String id="LyricsHeaderLyrics">Liedtexte</String>
     <!--  Rating -->
+    <String id="GroupBoxRating">Bewertung (Für Non-ID3 Dateien die Sterne Bewertung in der Tabelle verwenden)</String>
     <String id="RemoveExistingRatings">Vorhandene Bewertungen zuerst entfernen</String>
     <String id="RatingNote">Die Bewertung ist ein Bereich von 1-255, wobei 1 die Schlechteste und 255 die Beste Bewertung darstellt. 0 bedeutet unbekannt.\n\nAnm: Viele Programme verwenden eigene Bewertungen, die vom ID3 Standard abweichen können. Der Zähler kann weggelassen werden.</String>
     <String id="PlayCounter">Abspielzähler:</String>
@@ -440,6 +445,10 @@
 	<String id="NumDisc">Anz. Medien</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Bewertung</String>
+    <String id="ReplayGainTrack">Track Gain</String>
+    <String id="ReplayGainTrackPeak">Track Peak</String>
+    <String id="ReplayGainAlbum">Album Gain</String>
+    <String id="ReplayGainAlbumPeak">Album Peak</String>
     <String id="Comment">Kommentar</String>
     <String id="Composer">Komponist</String>
     <String id="Conductor">Dirigent</String>
@@ -933,5 +942,11 @@
 	<String id="YesToAll">Ja Alle</String>
 	<String id="No">Nein</String>
 	<String id="NoToAll">Nein Alle</String>
+  </Section>
+   
+  <!-- Replay Gain Popup -->
+  <Section name="albumgain">
+    <String id="Header">Album Gain</String>
+    <String id="Explanation">Alle Titel selektiert.\nSoll MPTagThat den Album Gain berechnen?</String>
   </Section>
 </Language>

@@ -138,7 +138,7 @@ namespace MPTagThat.TagToFileName
           continue;
 
         string fileName = parameter;
-        track = _main.TracksGridView.TrackList[row.Index];
+        track = Options.Songlist[row.Index];
 
         try
         {
@@ -148,7 +148,7 @@ namespace MPTagThat.TagToFileName
           if (fileName.Length > 255)
           {
             log.Debug("Filename too long: {0}", fileName);
-            _main.TracksGridView.TrackList[row.Index].Status = 2;
+            Options.Songlist[row.Index].Status = 2;
             _main.TracksGridView.AddErrorMessage(row,
                                                  String.Format("{0}: {1}",
                                                                localisation.ToString("tag2filename", "NameTooLong"),
@@ -159,11 +159,11 @@ namespace MPTagThat.TagToFileName
           // Check, if we would generate duplicate file names
           foreach (DataGridViewRow file in tracksGrid.Rows)
           {
-            TrackData filedata = _main.TracksGridView.TrackList[file.Index];
+            TrackData filedata = Options.Songlist[file.Index];
             if (filedata.FileName.ToLowerInvariant() == fileName.ToLowerInvariant())
             {
               log.Debug("New Filename already exists: {0}", fileName);
-              _main.TracksGridView.TrackList[row.Index].Status = 2;
+              Options.Songlist[row.Index].Status = 2;
               _main.TracksGridView.AddErrorMessage(row,
                                                    String.Format("{0}: {1}",
                                                                  localisation.ToString("tag2filename", "FileExists"),
@@ -187,11 +187,12 @@ namespace MPTagThat.TagToFileName
 
           _main.TracksGridView.Changed = true;
           _main.TracksGridView.SetBackgroundColorChanged(row.Index);
+          Options.Songlist[row.Index] = track;
         }
         catch (Exception ex)
         {
           log.Error("Error Renaming File: {0} stack: {1}", ex.Message, ex.StackTrace);
-          _main.TracksGridView.TrackList[row.Index].Status = 2;
+          Options.Songlist[row.Index].Status = 2;
           _main.TracksGridView.AddErrorMessage(row,
                                                String.Format("{0}: {1}", localisation.ToString("tag2filename", "Rename"),
                                                              fileName));
@@ -201,7 +202,7 @@ namespace MPTagThat.TagToFileName
 
       _main.TracksGridView.Changed = bErrors;
       // check, if we still have changed items in the list
-      foreach (TrackData track in _main.TracksGridView.TrackList)
+      foreach (TrackData track in Options.Songlist)
       {
         if (track.Changed)
           _main.TracksGridView.Changed = true;
@@ -259,7 +260,7 @@ namespace MPTagThat.TagToFileName
         if (!row.Selected)
           continue;
 
-        TrackData track = _main.TracksGridView.TrackList[row.Index];
+        TrackData track = Options.Songlist[row.Index];
         _previewForm.Tracks.Add(new TrackDataPreview(track.FullFileName));
       }
       log.Trace("<<<");
@@ -285,7 +286,7 @@ namespace MPTagThat.TagToFileName
         index++;
         try
         {
-          track = _main.TracksGridView.TrackList[row.Index];
+          track = Options.Songlist[row.Index];
           trackPreview = _previewForm.Tracks[index];
           trackPreview.NewFileName = ReplaceParametersWithValues(parameters);
         }

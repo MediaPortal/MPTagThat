@@ -22,6 +22,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using MPTagThat.Core.Common;
+using TagLib;
+using Picture = MPTagThat.Core.Common.Picture;
 
 #endregion
 
@@ -30,55 +32,33 @@ namespace MPTagThat.Core
   [Serializable]
   public class TrackData
   {
-    #region Enum
-
-    public enum MP3Error : int
-    {
-      NoError = 0,
-      Fixable = 1,
-      NonFixable = 2,
-      Fixed = 3
-    }
-
-    #endregion
-
     #region Variables
 
     private const int NumTrackDigits = 2;
 
     private string _artist;
+    private string _artistSort;
     private string _albumArtist;
+    private string _albumArtistSort;
     private string _album;
+    private string _albumSort;
     private string _composer;
     private string _conductor;
     private string _copyright;
     private string _genre;
     private string _grouping;
     private string _title;
+    private string _titleSort;
+    private string _replaygainTrack;
+    private string _replaygainAlbum;
 
-    private MP3Error _mp3ValError;
+    private Util.MP3Error _mp3ValError;
     private string _mp3ValErrorText;
     private List<Picture> _pictures = new List<Picture>();
     private List<Comment> _comments = new List<Comment>();
     private List<Lyric> _lyrics = new List<Lyric>();
     private List<PopmFrame> _popmframes = new List<PopmFrame>();
-    private List<TagLib.TagTypes> _removedTagTypes = new List<TagLib.TagTypes>();
-
-    private static readonly string[] _standardId3Frames = new[]
-                                                            {
-                                                              "TPE1", "TPE2", "TALB", "TBPM", "COMM", "TCOM",
-                                                              "TPE3", "TCOP", "TPOS", "TCON", "TIT1", "USLT", "APIC",
-                                                              "POPM", "TIT2", "TRCK", "TYER"
-                                                            };
-
-    private static readonly string[] _extendedId3Frames = new[]
-                                                             {
-                                                               "TSOP", "TSOA", "WCOM", "WCOP", "TENC", "TPE4", "TIPL",
-                                                               "IPLS", "TMED", "TMCL", "WOAF", "WOAR", "WOAS", "WORS", 
-                                                               "WPAY", "WPUB", "TOAL", "TOFN", "TOLY", "TOPE", "TOWN", 
-                                                               "TDOR", "TORY", "TPUB", "TIT3", "TEXT","TSOT", "TLEN",
-                                                               "TCMP"
-                                                             };
+    private List<TagLib.TagTypes> _removedTagTypes = null;
 
     #endregion
 
@@ -88,7 +68,7 @@ namespace MPTagThat.Core
     {
       Changed = false;
       Status = -1;
-      _mp3ValError = MP3Error.NoError;
+      _mp3ValError = Util.MP3Error.NoError;
       _mp3ValErrorText = "";
       Frames = new List<Common.Frame>();
       UserFrames = new List<Frame>();
@@ -98,13 +78,20 @@ namespace MPTagThat.Core
     #endregion
 
     #region Properties
+
     #region Common Properties
+
+    private Guid _id;
 
     /// <summary>
     /// Unique ID of the Track
     /// To be used in identifying cloned / changed tracks
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid Id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
 
     /// <summary>
     /// The ID3 Version
@@ -149,6 +136,10 @@ namespace MPTagThat.Core
     {
       get
       {
+        if (_removedTagTypes == null)
+        {
+          _removedTagTypes = new List<TagTypes>();
+        }
         return _removedTagTypes;
       }
     }
@@ -190,6 +181,14 @@ namespace MPTagThat.Core
     public string TagType { get; set; }
 
     /// <summary>
+    /// Do we have a MP3 File?
+    /// </summary>
+    public bool IsMp3
+    {
+      get { return TagType.ToLower() == "mp3"; }
+    }
+
+    /// <summary>
     /// Number of Pictures in File
     /// </summary>
     public int NumPics
@@ -200,7 +199,7 @@ namespace MPTagThat.Core
     /// <summary>
     /// Has the Track fixable errors?
     /// </summary>
-    public MP3Error MP3ValidationError
+    public Util.MP3Error MP3ValidationError
     {
       get { return _mp3ValError; }
       set { _mp3ValError = value; }
@@ -210,22 +209,6 @@ namespace MPTagThat.Core
     {
       get { return _mp3ValErrorText; }
       set { _mp3ValErrorText = value; }
-    }
-
-    /// <summary>
-    /// The standard ID3 Frames directly supported by TagLib #
-    /// </summary>
-    public string[] StandardFrames
-    {
-      get { return _standardId3Frames; }
-    }
-
-    /// <summary>
-    /// The extended ID3 Frames 
-    /// </summary>
-    public string[] ExtendedFrames
-    {
-      get { return _extendedId3Frames; }
     }
 
     #endregion
@@ -243,13 +226,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Artist Sortname Tag (V 2.4 only)
+    /// Artist Sortname Tag
     /// ID3: TSOP
     /// </summary>
     public string ArtistSortName
     {
-      get { return GetFrame("TSOP"); }
-      set { SetText("TSOP", value); }
+      get { return _artistSort; }
+      set { _artistSort = value ?? ""; }
     }
 
     /// <summary>
@@ -263,6 +246,16 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// AlbumArtist Sortname Tag
+    /// ID3: TSO2
+    /// </summary>
+    public string AlbumArtistSortName
+    {
+      get { return _albumArtistSort; }
+      set { _albumArtistSort = value ?? ""; }
+    }
+
+    /// <summary>
     /// ALbum Tag
     /// ID3: TALB
     /// </summary>
@@ -273,13 +266,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Album Sortname Tag (V 2.4 only)
+    /// Album Sortname Tag
     /// ID3: TSOA
     /// </summary>
     public string AlbumSortName
     {
-      get { return GetFrame("TSOA"); }
-      set { SetText("TSOA", value); }
+      get { return _albumSort; }
+      set { _albumSort = value ?? ""; }
     }
 
     /// <summary>
@@ -696,7 +689,7 @@ namespace MPTagThat.Core
       {
         if (_popmframes.Count == 0)
         {
-          _popmframes.Add(new PopmFrame("", value, 0));
+          _popmframes.Add(new PopmFrame("MPTagThat", value, 0));
         }
         else
         {
@@ -709,6 +702,39 @@ namespace MPTagThat.Core
     {
       get { return _popmframes; }
     }
+
+    public string ReplayGainTrack
+    {
+      get { return _replaygainTrack; } 
+      
+      set
+      {
+        if (value != "" && !value.ToLower().Contains("db"))
+        {
+          value += " dB";
+        }
+        _replaygainTrack = value;
+      }
+    }
+
+    public string ReplayGainTrackPeak { get; set; }
+
+    public string ReplayGainAlbum
+    {
+      get { return _replaygainAlbum; } 
+      
+      set
+      {
+        if (value != "" && !value.ToLower().Contains("db"))
+        {
+          value += " dB";
+        }
+        _replaygainAlbum = value;
+      }
+    }
+
+    public string ReplayGainAlbumPeak { get; set; }
+
 
     /// <summary>
     /// SubTitle / More Detailed Description
@@ -741,13 +767,13 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
-    /// Title SortName Tag (V 2.4 only)
+    /// Title SortName Tag
     /// ID3: TSOT
     /// </summary>
     public string TitleSortName
     {
-      get { return GetFrame("TSOT"); }
-      set { SetText("TSOT", value); }
+      get { return _titleSort; }
+      set { _titleSort = value ?? ""; }
     }
 
     /// <summary>
@@ -879,10 +905,32 @@ namespace MPTagThat.Core
     #endregion
 
     #region Private Methods
+
+    /// <summary>
+    /// Returns the Value of the Frame with the specified Frame id
+    /// </summary>
+    /// <param name="frameId"></param>
+    /// <returns></returns>
     private string GetFrame(string frameId)
     {
       int index = -1;
       if ((index = Frames.FindIndex((f => f.Id == frameId))) > -1)
+      {
+        return Frames[index].Value;
+      }
+      return "";
+    }
+
+    /// <summary>
+    /// Returns the value of the frame with the specified frame id and value
+    /// </summary>
+    /// <param name="frameId"></param>
+    /// <param name="frameValue"></param>
+    /// <returns></returns>
+    private string GetFrame(string frameId, string frameValue)
+    {
+      int index = -1;
+      if ((index = Frames.FindIndex((f => f.Id == frameId && f.Value == frameValue))) > -1)
       {
         return Frames[index].Value;
       }
@@ -901,7 +949,7 @@ namespace MPTagThat.Core
         Frames.Add(new Frame(frameId, "", text));
       }
     }
-    #endregion
 
+    #endregion
   }
 }

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using MPTagThat.Core.Common;
 using TagLib;
 using TagLib.Id3v2;
+using TagLib.Ogg;
 using Frame = MPTagThat.Core.Common.Frame;
 using Picture = MPTagThat.Core.Common.Picture;
 
@@ -83,7 +84,7 @@ namespace MPTagThat.Core
       FileInfo fi = new FileInfo(fileName);
       try
       {
-        track.Id = new Guid();
+        track.Id = Guid.NewGuid();
         track.FullFileName = fileName;
         track.FileName = Path.GetFileName(fileName);
         track.Readonly = fi.IsReadOnly;
@@ -107,13 +108,27 @@ namespace MPTagThat.Core
           track.Artist = track.Artist.Replace("AC;DC", "AC/DC");
         }
 
+        track.ArtistSortName = String.Join(";", file.Tag.PerformersSort);
+        if (track.ArtistSortName.Contains("AC;DC"))
+        {
+          track.ArtistSortName = track.ArtistSortName.Replace("AC;DC", "AC/DC");
+        }
+
         track.AlbumArtist = String.Join(";", file.Tag.AlbumArtists);
         if (track.AlbumArtist.Contains("AC;DC"))
         {
           track.AlbumArtist = track.AlbumArtist.Replace("AC;DC", "AC/DC");
         }
 
+        track.AlbumArtistSortName = String.Join(";", file.Tag.AlbumArtistsSort);
+        if (track.AlbumArtistSortName.Contains("AC;DC"))
+        {
+          track.AlbumArtistSortName = track.AlbumArtistSortName.Replace("AC;DC", "AC/DC");
+        }
+
         track.Album = file.Tag.Album ?? "";
+        track.AlbumSortName = file.Tag.AlbumSort ?? "";
+
         track.BPM = (int)file.Tag.BeatsPerMinute;
         track.Compilation = id3v2tag == null ? false : id3v2tag.IsCompilation;
         track.Composer = string.Join(";", file.Tag.Composers);
@@ -126,6 +141,12 @@ namespace MPTagThat.Core
         track.Genre = string.Join(";", file.Tag.Genres);
         track.Grouping = file.Tag.Grouping ?? "";
         track.Title = file.Tag.Title ?? "";
+        track.TitleSortName = file.Tag.TitleSort ?? "";
+
+        track.ReplayGainTrack = file.Tag.ReplayGainTrack ?? "";
+        track.ReplayGainTrackPeak = file.Tag.ReplayGainTrackPeak ?? "";
+        track.ReplayGainAlbum = file.Tag.ReplayGainAlbum ?? "";
+        track.ReplayGainAlbumPeak = file.Tag.ReplayGainAlbumPeak ?? "";
 
         track.TrackNumber = file.Tag.Track;
         track.TrackCount = file.Tag.TrackCount;
@@ -141,12 +162,12 @@ namespace MPTagThat.Core
             Description = picture.Description
           };
 
-          pic.Data = pic.ImageFromData(picture.Data.Data);
+          pic.Data = picture.Data.Data;
           track.Pictures.Add(pic);
         }
 
         // Comments
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (CommentsFrame commentsframe in id3v2tag.GetFrames<CommentsFrame>())
           {
@@ -160,7 +181,7 @@ namespace MPTagThat.Core
 
         // Lyrics
         track.Lyrics = file.Tag.Lyrics;
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (UnsynchronisedLyricsFrame lyricsframe in id3v2tag.GetFrames<UnsynchronisedLyricsFrame>())
           {
@@ -173,7 +194,7 @@ namespace MPTagThat.Core
         }
 
         // Rating
-        if (track.TagType == "mp3")
+        if (track.IsMp3)
         {
           TagLib.Id3v2.PopularimeterFrame popmFrame = null;
           // First read in all POPM Frames found
@@ -212,25 +233,35 @@ namespace MPTagThat.Core
             }
           }
         }
-        else
+        else if (track.TagType == "ape")
         {
-          if (track.TagType == "ape")
+          TagLib.Ape.Tag apetag = file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
+          TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
+          if (apeItem != null)
           {
-            TagLib.Ape.Tag apetag = file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
-            TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
-            if (apeItem != null)
+            string rating = apeItem.ToString();
+            try
             {
-              string rating = apeItem.ToString();
-              try
-              {
-                track.Rating = Convert.ToInt32(rating);
-              }
-              catch (Exception)
-              { }
+              track.Rating = Convert.ToInt32(rating);
             }
+            catch (Exception)
+            { }
           }
         }
-
+        else if (track.TagType == "ogg" || track.TagType == "flac")
+        {
+          XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, false) as XiphComment;
+          string[] rating = xiph.GetField("RATING");
+          if (rating.Length > 0)
+          {
+            try
+            {
+              track.Rating = Convert.ToInt32(rating[0]);
+            }
+            catch (Exception)
+            { }
+          }
+        }
       }
       catch (Exception ex)
       {
@@ -265,39 +296,43 @@ namespace MPTagThat.Core
       // Now copy all Text frames of an ID3 V2
       try
       {
-        if (track.TagType == "mp3" && id3v2tag != null)
+        if (track.IsMp3 && id3v2tag != null)
         {
           foreach (TagLib.Id3v2.Frame frame in id3v2tag.GetFrames())
           {
             string id = frame.FrameId.ToString();
-            if (!track.StandardFrames.Contains(id) && track.ExtendedFrames.Contains(id))
+            if (!Util.StandardFrames.Contains(id) && Util.ExtendedFrames.Contains(id))
             {
               track.Frames.Add(new Frame(id, "", frame.ToString()));
             }
-            else if (!track.StandardFrames.Contains(id) && !track.ExtendedFrames.Contains(id))
+            else if (!Util.StandardFrames.Contains(id) && !Util.ExtendedFrames.Contains(id))
             {
-              if (frame.GetType() == typeof(UserTextInformationFrame))
+              if ((Type)frame.GetType() == typeof(UserTextInformationFrame))
               {
-                track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
+                // Don't add Replaygain frames, as they are handled in taglib tags
+                if (!Util.IsReplayGain((frame as UserTextInformationFrame).Description))
+                {
+                  track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
                                                (frame as UserTextInformationFrame).Text.Length == 0
                                                  ? ""
                                                  : (frame as UserTextInformationFrame).Text[0]));
+                }
               }
-              else if (frame.GetType() == typeof(PrivateFrame))
+              else if ((Type)frame.GetType() == typeof(PrivateFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
                                                (frame as PrivateFrame).PrivateData == null
                                                  ? ""
                                                  : (frame as PrivateFrame).PrivateData.ToString()));
               }
-              else if (frame.GetType() == typeof(UniqueFileIdentifierFrame))
+              else if ((Type)frame.GetType() == typeof(UniqueFileIdentifierFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
                                                (frame as UniqueFileIdentifierFrame).Identifier == null
                                                  ? ""
                                                  : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
               }
-              else if (frame.GetType() == typeof(UnknownFrame))
+              else if ((Type)frame.GetType() == typeof(UnknownFrame))
               {
                 track.UserFrames.Add(new Frame(id, "",
                                                (frame as UnknownFrame).Data == null
@@ -462,7 +497,7 @@ namespace MPTagThat.Core
         // Get the ID3 Frame for ID3 specifc frame handling
         TagLib.Id3v1.Tag id3v1tag = null;
         TagLib.Id3v2.Tag id3v2tag = null;
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           id3v1tag = file.GetTag(TagTypes.Id3v1, true) as TagLib.Id3v1.Tag;
           id3v2tag = file.GetTag(TagTypes.Id3v2, true) as TagLib.Id3v2.Tag;
@@ -488,7 +523,7 @@ namespace MPTagThat.Core
         if (track.Comment != "")
         {
           file.Tag.Comment = "";
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             id3v1tag.Comment = track.Comment;
             foreach (Comment comment in track.ID3Comments)
@@ -507,7 +542,7 @@ namespace MPTagThat.Core
           file.Tag.Comment = "";
         }
 
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           id3v2tag.IsCompilation = track.Compilation;
         }
@@ -525,6 +560,11 @@ namespace MPTagThat.Core
 
         file.Tag.Year = (uint)track.Year;
 
+        file.Tag.ReplayGainTrack = track.ReplayGainTrack;
+        file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
+        file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
+        file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
+
         #endregion
 
         #region Detailed Information
@@ -534,6 +574,13 @@ namespace MPTagThat.Core
         file.Tag.Conductor = track.Conductor;
         file.Tag.Copyright = track.Copyright;
         file.Tag.Grouping = track.Grouping;
+
+        splitValues = track.ArtistSortName.Split(new[] { ';', '|' });
+        file.Tag.PerformersSort = splitValues;
+        splitValues = track.AlbumArtistSortName.Split(new[] { ';', '|' });
+        file.Tag.AlbumArtistsSort = splitValues;
+        file.Tag.AlbumSort = track.AlbumSortName;
+        file.Tag.TitleSort = track.TitleSortName;
 
         #endregion
 
@@ -546,7 +593,7 @@ namespace MPTagThat.Core
 
           try
           {
-            byte[] byteArray = Picture.ImageToByte(pic.Data);
+            byte[] byteArray = pic.Data;
             ByteVector data = new ByteVector(byteArray);
             tagPic.Data = data;
             tagPic.Description = pic.Description;
@@ -575,7 +622,7 @@ namespace MPTagThat.Core
         if (track.Lyrics != null && track.Lyrics != "")
         {
           file.Tag.Lyrics = track.Lyrics;
-          if (track.TagType.ToLower() == "mp3")
+          if (track.IsMp3)
           {
             foreach (Lyric lyric in track.LyricsFrames)
             {
@@ -596,7 +643,7 @@ namespace MPTagThat.Core
 
         #region Ratings
 
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           if (track.Ratings.Count > 0)
           {
@@ -608,9 +655,18 @@ namespace MPTagThat.Core
             }
           }
           else
+          {
             id3v2tag.RemoveFrames("POPM");
+          }
         }
-
+        else if (track.TagType == "ogg" || track.TagType == "flac")
+        {
+          if (track.Ratings.Count > 0)
+          {
+            XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, true) as XiphComment;
+            xiph.SetField("RATING", track.Rating.ToString());
+          }
+        }
 
         #endregion
 
@@ -684,7 +740,7 @@ namespace MPTagThat.Core
         file = Util.FormatID3Tag(file);
 
         // Set the encoding for ID3 Tags
-        if (track.TagType.ToLower() == "mp3")
+        if (track.IsMp3)
         {
           TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
           switch (Options.MainSettings.CharacterEncoding)
