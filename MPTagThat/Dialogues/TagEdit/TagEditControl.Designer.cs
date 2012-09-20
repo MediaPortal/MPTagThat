@@ -29,8 +29,26 @@
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
+      this.tabPageRating = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPageRatingPanel = new Elegant.Ui.Panel();
+      this.groupBoxRating = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckRemoveExistingRatings = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.lblRatingNote = new MPTagThat.Core.WinControls.MPTLabel();
+      this.numericUpDownPlayCounter = new System.Windows.Forms.NumericUpDown();
+      this.numericUpDownRating = new System.Windows.Forms.NumericUpDown();
+      this.tbRatingUser = new System.Windows.Forms.TextBox();
+      this.lblRatingPlayCounter = new MPTagThat.Core.WinControls.MPTLabel();
+      this.btRatingMoveTop = new MPTagThat.Core.WinControls.MPTButton();
+      this.btRemoveRating = new MPTagThat.Core.WinControls.MPTButton();
+      this.btAddRating = new MPTagThat.Core.WinControls.MPTButton();
+      this.dataGridViewRating = new System.Windows.Forms.DataGridView();
+      this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageMainPanel = new Elegant.Ui.Panel();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -249,24 +267,6 @@
       this.lblLyricsDescriptor = new MPTagThat.Core.WinControls.MPTLabel();
       this.cbLyricsLanguage = new MPTagThat.Core.WinControls.MPTComboBox();
       this.cbLyricsDescriptor = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.tabPageRating = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabPageRatingPanel = new Elegant.Ui.Panel();
-      this.groupBoxRating = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckRemoveExistingRatings = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.lblRatingNote = new MPTagThat.Core.WinControls.MPTLabel();
-      this.numericUpDownPlayCounter = new System.Windows.Forms.NumericUpDown();
-      this.numericUpDownRating = new System.Windows.Forms.NumericUpDown();
-      this.tbRatingUser = new System.Windows.Forms.TextBox();
-      this.lblRatingPlayCounter = new MPTagThat.Core.WinControls.MPTLabel();
-      this.btRatingMoveTop = new MPTagThat.Core.WinControls.MPTButton();
-      this.btRemoveRating = new MPTagThat.Core.WinControls.MPTButton();
-      this.btAddRating = new MPTagThat.Core.WinControls.MPTButton();
-      this.dataGridViewRating = new System.Windows.Forms.DataGridView();
-      this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.lblRating = new MPTagThat.Core.WinControls.MPTLabel();
-      this.lblRatingUser = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageUserDefined = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageUserDefinedPanel = new Elegant.Ui.Panel();
       this.btDeleteAllFrames = new MPTagThat.Core.WinControls.MPTButton();
@@ -282,6 +282,12 @@
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
+      this.tabPageRating.SuspendLayout();
+      this.tabPageRatingPanel.SuspendLayout();
+      this.groupBoxRating.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.tabPageMainPanel.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
@@ -315,12 +321,6 @@
       this.tabPageLyricsPanel.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).BeginInit();
-      this.tabPageRating.SuspendLayout();
-      this.tabPageRatingPanel.SuspendLayout();
-      this.groupBoxRating.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).BeginInit();
       this.tabPageUserDefined.SuspendLayout();
       this.tabPageUserDefinedPanel.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).BeginInit();
@@ -333,7 +333,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPageMain;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageRating;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -346,6 +346,220 @@
             this.tabPageLyrics,
             this.tabPageRating,
             this.tabPageUserDefined});
+      // 
+      // tabPageRating
+      // 
+      this.tabPageRating.ActiveControl = null;
+      this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPageRating.Controls.Add(this.tabPageRatingPanel);
+      this.tabPageRating.KeyTip = null;
+      this.tabPageRating.Localisation = "HeaderRating";
+      this.tabPageRating.LocalisationContext = "TagEdit";
+      this.tabPageRating.Name = "tabPageRating";
+      this.tabPageRating.Size = new System.Drawing.Size(906, 584);
+      this.tabPageRating.TabIndex = 7;
+      this.tabPageRating.Text = "Rating";
+      // 
+      // tabPageRatingPanel
+      // 
+      this.tabPageRatingPanel.AutoScroll = true;
+      this.tabPageRatingPanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageRatingPanel.Controls.Add(this.groupBoxRating);
+      this.tabPageRatingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPageRatingPanel.Location = new System.Drawing.Point(0, 0);
+      this.tabPageRatingPanel.Name = "tabPageRatingPanel";
+      this.tabPageRatingPanel.Size = new System.Drawing.Size(906, 584);
+      this.tabPageRatingPanel.TabIndex = 5;
+      this.tabPageRatingPanel.Text = "panel1";
+      // 
+      // groupBoxRating
+      // 
+      this.groupBoxRating.Controls.Add(this.ckRemoveExistingRatings);
+      this.groupBoxRating.Controls.Add(this.lblRatingNote);
+      this.groupBoxRating.Controls.Add(this.numericUpDownPlayCounter);
+      this.groupBoxRating.Controls.Add(this.numericUpDownRating);
+      this.groupBoxRating.Controls.Add(this.tbRatingUser);
+      this.groupBoxRating.Controls.Add(this.lblRatingPlayCounter);
+      this.groupBoxRating.Controls.Add(this.btRatingMoveTop);
+      this.groupBoxRating.Controls.Add(this.btRemoveRating);
+      this.groupBoxRating.Controls.Add(this.btAddRating);
+      this.groupBoxRating.Controls.Add(this.dataGridViewRating);
+      this.groupBoxRating.Controls.Add(this.lblRating);
+      this.groupBoxRating.Controls.Add(this.lblRatingUser);
+      this.groupBoxRating.Id = "5a97aa97-10d5-4617-89bc-3cb37149a667";
+      this.groupBoxRating.Localisation = "GroupBoxRating";
+      this.groupBoxRating.LocalisationContext = "TagEdit";
+      this.groupBoxRating.Location = new System.Drawing.Point(7, 7);
+      this.groupBoxRating.Name = "groupBoxRating";
+      this.groupBoxRating.Size = new System.Drawing.Size(693, 501);
+      this.groupBoxRating.TabIndex = 4;
+      // 
+      // ckRemoveExistingRatings
+      // 
+      this.ckRemoveExistingRatings.Id = "49287410-7c75-4dde-8587-498a55239e7d";
+      this.ckRemoveExistingRatings.Localisation = "RemoveExistingRatings";
+      this.ckRemoveExistingRatings.LocalisationContext = "TagEdit";
+      this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 153);
+      this.ckRemoveExistingRatings.Name = "ckRemoveExistingRatings";
+      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(479, 29);
+      this.ckRemoveExistingRatings.TabIndex = 6;
+      this.ckRemoveExistingRatings.Text = "Remove existing Ratings First";
+      // 
+      // lblRatingNote
+      // 
+      this.lblRatingNote.Localisation = "RatingNote";
+      this.lblRatingNote.LocalisationContext = "TagEdit";
+      this.lblRatingNote.Location = new System.Drawing.Point(200, 377);
+      this.lblRatingNote.MaximumSize = new System.Drawing.Size(500, 100);
+      this.lblRatingNote.MinimumSize = new System.Drawing.Size(200, 100);
+      this.lblRatingNote.Name = "lblRatingNote";
+      this.lblRatingNote.Size = new System.Drawing.Size(480, 100);
+      this.lblRatingNote.TabIndex = 14;
+      this.lblRatingNote.Text = resources.GetString("lblRatingNote.Text");
+      // 
+      // numericUpDownPlayCounter
+      // 
+      this.numericUpDownPlayCounter.Location = new System.Drawing.Point(200, 94);
+      this.numericUpDownPlayCounter.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.numericUpDownPlayCounter.Name = "numericUpDownPlayCounter";
+      this.numericUpDownPlayCounter.Size = new System.Drawing.Size(49, 22);
+      this.numericUpDownPlayCounter.TabIndex = 2;
+      // 
+      // numericUpDownRating
+      // 
+      this.numericUpDownRating.Location = new System.Drawing.Point(200, 57);
+      this.numericUpDownRating.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.numericUpDownRating.Name = "numericUpDownRating";
+      this.numericUpDownRating.Size = new System.Drawing.Size(49, 22);
+      this.numericUpDownRating.TabIndex = 1;
+      // 
+      // tbRatingUser
+      // 
+      this.tbRatingUser.Location = new System.Drawing.Point(200, 26);
+      this.tbRatingUser.Name = "tbRatingUser";
+      this.tbRatingUser.Size = new System.Drawing.Size(280, 22);
+      this.tbRatingUser.TabIndex = 0;
+      // 
+      // lblRatingPlayCounter
+      // 
+      this.lblRatingPlayCounter.Localisation = "PlayCounter";
+      this.lblRatingPlayCounter.LocalisationContext = "TagEdit";
+      this.lblRatingPlayCounter.Location = new System.Drawing.Point(7, 96);
+      this.lblRatingPlayCounter.Name = "lblRatingPlayCounter";
+      this.lblRatingPlayCounter.Size = new System.Drawing.Size(87, 16);
+      this.lblRatingPlayCounter.TabIndex = 10;
+      this.lblRatingPlayCounter.Text = "Play Counter:";
+      // 
+      // btRatingMoveTop
+      // 
+      this.btRatingMoveTop.Id = "c02e78be-d2af-4dc4-bfa3-444fbf43363c";
+      this.btRatingMoveTop.Localisation = "MoveTop";
+      this.btRatingMoveTop.LocalisationContext = "TagEdit";
+      this.btRatingMoveTop.Location = new System.Drawing.Point(528, 125);
+      this.btRatingMoveTop.Name = "btRatingMoveTop";
+      this.btRatingMoveTop.Size = new System.Drawing.Size(152, 23);
+      this.btRatingMoveTop.TabIndex = 5;
+      this.btRatingMoveTop.Text = "Move to Top";
+      this.btRatingMoveTop.UseVisualStyleBackColor = true;
+      this.btRatingMoveTop.Click += new System.EventHandler(this.btRatingMoveTop_Click);
+      // 
+      // btRemoveRating
+      // 
+      this.btRemoveRating.Id = "1c6e219c-1d88-4fb0-bb53-d1acefced6a2";
+      this.btRemoveRating.Localisation = "RemoveRating";
+      this.btRemoveRating.LocalisationContext = "TagEdit";
+      this.btRemoveRating.Location = new System.Drawing.Point(350, 125);
+      this.btRemoveRating.Name = "btRemoveRating";
+      this.btRemoveRating.Size = new System.Drawing.Size(158, 23);
+      this.btRemoveRating.TabIndex = 4;
+      this.btRemoveRating.Text = "Remove Rating";
+      this.btRemoveRating.UseVisualStyleBackColor = true;
+      this.btRemoveRating.Click += new System.EventHandler(this.btRemoveRating_Click);
+      // 
+      // btAddRating
+      // 
+      this.btAddRating.Id = "03059140-c45f-4ffb-a49b-332d4dab2b4c";
+      this.btAddRating.Localisation = "AddRating";
+      this.btAddRating.LocalisationContext = "TagEdit";
+      this.btAddRating.Location = new System.Drawing.Point(200, 125);
+      this.btAddRating.Name = "btAddRating";
+      this.btAddRating.Size = new System.Drawing.Size(135, 23);
+      this.btAddRating.TabIndex = 3;
+      this.btAddRating.Text = "Add Rating";
+      this.btAddRating.UseVisualStyleBackColor = true;
+      this.btAddRating.Click += new System.EventHandler(this.btAddRating_Click);
+      // 
+      // dataGridViewRating
+      // 
+      this.dataGridViewRating.AllowUserToAddRows = false;
+      this.dataGridViewRating.AllowUserToDeleteRows = false;
+      this.dataGridViewRating.AllowUserToResizeColumns = false;
+      this.dataGridViewRating.AllowUserToResizeRows = false;
+      this.dataGridViewRating.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.dataGridViewRating.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewRating.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12});
+      this.dataGridViewRating.Location = new System.Drawing.Point(200, 188);
+      this.dataGridViewRating.Name = "dataGridViewRating";
+      this.dataGridViewRating.ReadOnly = true;
+      this.dataGridViewRating.RowHeadersVisible = false;
+      this.dataGridViewRating.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewRating.Size = new System.Drawing.Size(480, 170);
+      this.dataGridViewRating.TabIndex = 6;
+      this.dataGridViewRating.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRating_CellClick);
+      // 
+      // dataGridViewTextBoxColumn10
+      // 
+      this.dataGridViewTextBoxColumn10.FillWeight = 150F;
+      this.dataGridViewTextBoxColumn10.Frozen = true;
+      this.dataGridViewTextBoxColumn10.HeaderText = "User";
+      this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+      this.dataGridViewTextBoxColumn10.ReadOnly = true;
+      this.dataGridViewTextBoxColumn10.Width = 280;
+      // 
+      // dataGridViewTextBoxColumn11
+      // 
+      this.dataGridViewTextBoxColumn11.Frozen = true;
+      this.dataGridViewTextBoxColumn11.HeaderText = "Rating";
+      this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+      this.dataGridViewTextBoxColumn11.ReadOnly = true;
+      // 
+      // dataGridViewTextBoxColumn12
+      // 
+      this.dataGridViewTextBoxColumn12.Frozen = true;
+      this.dataGridViewTextBoxColumn12.HeaderText = "Play Count";
+      this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+      this.dataGridViewTextBoxColumn12.ReadOnly = true;
+      // 
+      // lblRating
+      // 
+      this.lblRating.Localisation = "Rating";
+      this.lblRating.LocalisationContext = "TagEdit";
+      this.lblRating.Location = new System.Drawing.Point(7, 62);
+      this.lblRating.Name = "lblRating";
+      this.lblRating.Size = new System.Drawing.Size(50, 16);
+      this.lblRating.TabIndex = 3;
+      this.lblRating.Text = "Rating:";
+      // 
+      // lblRatingUser
+      // 
+      this.lblRatingUser.Localisation = "RatingUser";
+      this.lblRatingUser.LocalisationContext = "TagEdit";
+      this.lblRatingUser.Location = new System.Drawing.Point(6, 31);
+      this.lblRatingUser.Name = "lblRatingUser";
+      this.lblRatingUser.Size = new System.Drawing.Size(84, 16);
+      this.lblRatingUser.TabIndex = 2;
+      this.lblRatingUser.Text = "User (eMail):";
       // 
       // tabPageMain
       // 
@@ -1331,7 +1545,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 136);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 140);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1366,7 +1580,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 98);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 102);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -2880,7 +3094,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 120);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 124);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2890,7 +3104,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 89);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 93);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -2919,220 +3133,6 @@
       this.cbLyricsDescriptor.Name = "cbLyricsDescriptor";
       this.cbLyricsDescriptor.Size = new System.Drawing.Size(280, 24);
       this.cbLyricsDescriptor.TabIndex = 6;
-      // 
-      // tabPageRating
-      // 
-      this.tabPageRating.ActiveControl = null;
-      this.tabPageRating.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPageRating.Controls.Add(this.tabPageRatingPanel);
-      this.tabPageRating.KeyTip = null;
-      this.tabPageRating.Localisation = "HeaderRating";
-      this.tabPageRating.LocalisationContext = "TagEdit";
-      this.tabPageRating.Name = "tabPageRating";
-      this.tabPageRating.Size = new System.Drawing.Size(906, 584);
-      this.tabPageRating.TabIndex = 7;
-      this.tabPageRating.Text = "Rating";
-      // 
-      // tabPageRatingPanel
-      // 
-      this.tabPageRatingPanel.AutoScroll = true;
-      this.tabPageRatingPanel.BackColor = System.Drawing.Color.Transparent;
-      this.tabPageRatingPanel.Controls.Add(this.groupBoxRating);
-      this.tabPageRatingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabPageRatingPanel.Location = new System.Drawing.Point(0, 0);
-      this.tabPageRatingPanel.Name = "tabPageRatingPanel";
-      this.tabPageRatingPanel.Size = new System.Drawing.Size(906, 584);
-      this.tabPageRatingPanel.TabIndex = 5;
-      this.tabPageRatingPanel.Text = "panel1";
-      // 
-      // groupBoxRating
-      // 
-      this.groupBoxRating.Controls.Add(this.ckRemoveExistingRatings);
-      this.groupBoxRating.Controls.Add(this.lblRatingNote);
-      this.groupBoxRating.Controls.Add(this.numericUpDownPlayCounter);
-      this.groupBoxRating.Controls.Add(this.numericUpDownRating);
-      this.groupBoxRating.Controls.Add(this.tbRatingUser);
-      this.groupBoxRating.Controls.Add(this.lblRatingPlayCounter);
-      this.groupBoxRating.Controls.Add(this.btRatingMoveTop);
-      this.groupBoxRating.Controls.Add(this.btRemoveRating);
-      this.groupBoxRating.Controls.Add(this.btAddRating);
-      this.groupBoxRating.Controls.Add(this.dataGridViewRating);
-      this.groupBoxRating.Controls.Add(this.lblRating);
-      this.groupBoxRating.Controls.Add(this.lblRatingUser);
-      this.groupBoxRating.Id = "5a97aa97-10d5-4617-89bc-3cb37149a667";
-      this.groupBoxRating.Localisation = "groupBoxComment";
-      this.groupBoxRating.LocalisationContext = "TagEdit";
-      this.groupBoxRating.Location = new System.Drawing.Point(7, 7);
-      this.groupBoxRating.Name = "groupBoxRating";
-      this.groupBoxRating.Size = new System.Drawing.Size(693, 519);
-      this.groupBoxRating.TabIndex = 4;
-      // 
-      // ckRemoveExistingRatings
-      // 
-      this.ckRemoveExistingRatings.Id = "49287410-7c75-4dde-8587-498a55239e7d";
-      this.ckRemoveExistingRatings.Localisation = "RemoveExistingRatings";
-      this.ckRemoveExistingRatings.LocalisationContext = "TagEdit";
-      this.ckRemoveExistingRatings.Location = new System.Drawing.Point(200, 153);
-      this.ckRemoveExistingRatings.Name = "ckRemoveExistingRatings";
-      this.ckRemoveExistingRatings.Size = new System.Drawing.Size(479, 29);
-      this.ckRemoveExistingRatings.TabIndex = 6;
-      this.ckRemoveExistingRatings.Text = "Remove existing Ratings First";
-      // 
-      // lblRatingNote
-      // 
-      this.lblRatingNote.Localisation = "RatingNote";
-      this.lblRatingNote.LocalisationContext = "TagEdit";
-      this.lblRatingNote.Location = new System.Drawing.Point(200, 377);
-      this.lblRatingNote.MaximumSize = new System.Drawing.Size(500, 100);
-      this.lblRatingNote.MinimumSize = new System.Drawing.Size(200, 100);
-      this.lblRatingNote.Name = "lblRatingNote";
-      this.lblRatingNote.Size = new System.Drawing.Size(480, 100);
-      this.lblRatingNote.TabIndex = 14;
-      this.lblRatingNote.Text = resources.GetString("lblRatingNote.Text");
-      // 
-      // numericUpDownPlayCounter
-      // 
-      this.numericUpDownPlayCounter.Location = new System.Drawing.Point(200, 83);
-      this.numericUpDownPlayCounter.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-      this.numericUpDownPlayCounter.Name = "numericUpDownPlayCounter";
-      this.numericUpDownPlayCounter.Size = new System.Drawing.Size(49, 22);
-      this.numericUpDownPlayCounter.TabIndex = 2;
-      // 
-      // numericUpDownRating
-      // 
-      this.numericUpDownRating.Location = new System.Drawing.Point(200, 46);
-      this.numericUpDownRating.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-      this.numericUpDownRating.Name = "numericUpDownRating";
-      this.numericUpDownRating.Size = new System.Drawing.Size(49, 22);
-      this.numericUpDownRating.TabIndex = 1;
-      // 
-      // tbRatingUser
-      // 
-      this.tbRatingUser.Location = new System.Drawing.Point(200, 15);
-      this.tbRatingUser.Name = "tbRatingUser";
-      this.tbRatingUser.Size = new System.Drawing.Size(280, 22);
-      this.tbRatingUser.TabIndex = 0;
-      // 
-      // lblRatingPlayCounter
-      // 
-      this.lblRatingPlayCounter.Localisation = "PlayCounter";
-      this.lblRatingPlayCounter.LocalisationContext = "TagEdit";
-      this.lblRatingPlayCounter.Location = new System.Drawing.Point(7, 85);
-      this.lblRatingPlayCounter.Name = "lblRatingPlayCounter";
-      this.lblRatingPlayCounter.Size = new System.Drawing.Size(87, 16);
-      this.lblRatingPlayCounter.TabIndex = 10;
-      this.lblRatingPlayCounter.Text = "Play Counter:";
-      // 
-      // btRatingMoveTop
-      // 
-      this.btRatingMoveTop.Id = "c02e78be-d2af-4dc4-bfa3-444fbf43363c";
-      this.btRatingMoveTop.Localisation = "MoveTop";
-      this.btRatingMoveTop.LocalisationContext = "TagEdit";
-      this.btRatingMoveTop.Location = new System.Drawing.Point(528, 125);
-      this.btRatingMoveTop.Name = "btRatingMoveTop";
-      this.btRatingMoveTop.Size = new System.Drawing.Size(152, 23);
-      this.btRatingMoveTop.TabIndex = 5;
-      this.btRatingMoveTop.Text = "Move to Top";
-      this.btRatingMoveTop.UseVisualStyleBackColor = true;
-      this.btRatingMoveTop.Click += new System.EventHandler(this.btRatingMoveTop_Click);
-      // 
-      // btRemoveRating
-      // 
-      this.btRemoveRating.Id = "1c6e219c-1d88-4fb0-bb53-d1acefced6a2";
-      this.btRemoveRating.Localisation = "RemoveRating";
-      this.btRemoveRating.LocalisationContext = "TagEdit";
-      this.btRemoveRating.Location = new System.Drawing.Point(350, 125);
-      this.btRemoveRating.Name = "btRemoveRating";
-      this.btRemoveRating.Size = new System.Drawing.Size(158, 23);
-      this.btRemoveRating.TabIndex = 4;
-      this.btRemoveRating.Text = "Remove Rating";
-      this.btRemoveRating.UseVisualStyleBackColor = true;
-      this.btRemoveRating.Click += new System.EventHandler(this.btRemoveRating_Click);
-      // 
-      // btAddRating
-      // 
-      this.btAddRating.Id = "03059140-c45f-4ffb-a49b-332d4dab2b4c";
-      this.btAddRating.Localisation = "AddRating";
-      this.btAddRating.LocalisationContext = "TagEdit";
-      this.btAddRating.Location = new System.Drawing.Point(200, 125);
-      this.btAddRating.Name = "btAddRating";
-      this.btAddRating.Size = new System.Drawing.Size(135, 23);
-      this.btAddRating.TabIndex = 3;
-      this.btAddRating.Text = "Add Rating";
-      this.btAddRating.UseVisualStyleBackColor = true;
-      this.btAddRating.Click += new System.EventHandler(this.btAddRating_Click);
-      // 
-      // dataGridViewRating
-      // 
-      this.dataGridViewRating.AllowUserToAddRows = false;
-      this.dataGridViewRating.AllowUserToDeleteRows = false;
-      this.dataGridViewRating.AllowUserToResizeColumns = false;
-      this.dataGridViewRating.AllowUserToResizeRows = false;
-      this.dataGridViewRating.BackgroundColor = System.Drawing.SystemColors.Window;
-      this.dataGridViewRating.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewRating.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12});
-      this.dataGridViewRating.Location = new System.Drawing.Point(200, 188);
-      this.dataGridViewRating.Name = "dataGridViewRating";
-      this.dataGridViewRating.ReadOnly = true;
-      this.dataGridViewRating.RowHeadersVisible = false;
-      this.dataGridViewRating.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewRating.Size = new System.Drawing.Size(480, 170);
-      this.dataGridViewRating.TabIndex = 6;
-      this.dataGridViewRating.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRating_CellClick);
-      // 
-      // dataGridViewTextBoxColumn10
-      // 
-      this.dataGridViewTextBoxColumn10.FillWeight = 150F;
-      this.dataGridViewTextBoxColumn10.Frozen = true;
-      this.dataGridViewTextBoxColumn10.HeaderText = "User";
-      this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-      this.dataGridViewTextBoxColumn10.ReadOnly = true;
-      this.dataGridViewTextBoxColumn10.Width = 280;
-      // 
-      // dataGridViewTextBoxColumn11
-      // 
-      this.dataGridViewTextBoxColumn11.Frozen = true;
-      this.dataGridViewTextBoxColumn11.HeaderText = "Rating";
-      this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-      this.dataGridViewTextBoxColumn11.ReadOnly = true;
-      // 
-      // dataGridViewTextBoxColumn12
-      // 
-      this.dataGridViewTextBoxColumn12.Frozen = true;
-      this.dataGridViewTextBoxColumn12.HeaderText = "Play Count";
-      this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-      this.dataGridViewTextBoxColumn12.ReadOnly = true;
-      // 
-      // lblRating
-      // 
-      this.lblRating.Localisation = "Rating";
-      this.lblRating.LocalisationContext = "TagEdit";
-      this.lblRating.Location = new System.Drawing.Point(7, 51);
-      this.lblRating.Name = "lblRating";
-      this.lblRating.Size = new System.Drawing.Size(50, 16);
-      this.lblRating.TabIndex = 3;
-      this.lblRating.Text = "Rating:";
-      // 
-      // lblRatingUser
-      // 
-      this.lblRatingUser.Localisation = "RatingUser";
-      this.lblRatingUser.LocalisationContext = "TagEdit";
-      this.lblRatingUser.Location = new System.Drawing.Point(6, 20);
-      this.lblRatingUser.Name = "lblRatingUser";
-      this.lblRatingUser.Size = new System.Drawing.Size(84, 16);
-      this.lblRatingUser.TabIndex = 2;
-      this.lblRatingUser.Text = "User (eMail):";
       // 
       // tabPageUserDefined
       // 
@@ -3206,8 +3206,8 @@
       this.dataGridViewUserFrames.AllowUserToAddRows = false;
       this.dataGridViewUserFrames.AllowUserToDeleteRows = false;
       this.dataGridViewUserFrames.AllowUserToResizeRows = false;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
-      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(225)))), ((int)(((byte)(245)))));
+      this.dataGridViewUserFrames.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.dataGridViewUserFrames.BackgroundColor = System.Drawing.Color.White;
       this.dataGridViewUserFrames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
       this.dataGridViewUserFrames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -3314,6 +3314,13 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
+      this.tabPageRating.ResumeLayout(false);
+      this.tabPageRatingPanel.ResumeLayout(false);
+      this.groupBoxRating.ResumeLayout(false);
+      this.groupBoxRating.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.tabPageMainPanel.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
@@ -3360,13 +3367,6 @@
       this.groupBoxLyrics.ResumeLayout(false);
       this.groupBoxLyrics.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLyrics)).EndInit();
-      this.tabPageRating.ResumeLayout(false);
-      this.tabPageRatingPanel.ResumeLayout(false);
-      this.groupBoxRating.ResumeLayout(false);
-      this.groupBoxRating.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPlayCounter)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRating)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRating)).EndInit();
       this.tabPageUserDefined.ResumeLayout(false);
       this.tabPageUserDefinedPanel.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserFrames)).EndInit();

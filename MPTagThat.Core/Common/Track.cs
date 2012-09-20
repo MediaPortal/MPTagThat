@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using MPTagThat.Core.Common;
 using TagLib;
 using TagLib.Id3v2;
+using TagLib.Ogg;
 using Frame = MPTagThat.Core.Common.Frame;
 using Picture = MPTagThat.Core.Common.Picture;
 
@@ -232,25 +233,35 @@ namespace MPTagThat.Core
             }
           }
         }
-        else
+        else if (track.TagType == "ape")
         {
-          if (track.TagType == "ape")
+          TagLib.Ape.Tag apetag = file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
+          TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
+          if (apeItem != null)
           {
-            TagLib.Ape.Tag apetag = file.GetTag(TagTypes.Ape, true) as TagLib.Ape.Tag;
-            TagLib.Ape.Item apeItem = apetag.GetItem("RATING");
-            if (apeItem != null)
+            string rating = apeItem.ToString();
+            try
             {
-              string rating = apeItem.ToString();
-              try
-              {
-                track.Rating = Convert.ToInt32(rating);
-              }
-              catch (Exception)
-              { }
+              track.Rating = Convert.ToInt32(rating);
             }
+            catch (Exception)
+            { }
           }
         }
-
+        else if (track.TagType == "ogg" || track.TagType == "flac")
+        {
+          XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, false) as XiphComment;
+          string[] rating = xiph.GetField("RATING");
+          if (rating.Length > 0)
+          {
+            try
+            {
+              track.Rating = Convert.ToInt32(rating[0]);
+            }
+            catch (Exception)
+            { }
+          }
+        }
       }
       catch (Exception ex)
       {
@@ -296,32 +307,32 @@ namespace MPTagThat.Core
             }
             else if (!Util.StandardFrames.Contains(id) && !Util.ExtendedFrames.Contains(id))
             {
-              if ((Type) frame.GetType() == typeof(UserTextInformationFrame))
+              if ((Type)frame.GetType() == typeof(UserTextInformationFrame))
               {
                 // Don't add Replaygain frames, as they are handled in taglib tags
                 if (!Util.IsReplayGain((frame as UserTextInformationFrame).Description))
-                { 
+                {
                   track.UserFrames.Add(new Frame(id, (frame as UserTextInformationFrame).Description ?? "",
                                                (frame as UserTextInformationFrame).Text.Length == 0
                                                  ? ""
                                                  : (frame as UserTextInformationFrame).Text[0]));
                 }
               }
-              else if ((Type) frame.GetType() == typeof(PrivateFrame))
+              else if ((Type)frame.GetType() == typeof(PrivateFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as PrivateFrame).Owner ?? "",
                                                (frame as PrivateFrame).PrivateData == null
                                                  ? ""
                                                  : (frame as PrivateFrame).PrivateData.ToString()));
               }
-              else if ((Type) frame.GetType() == typeof(UniqueFileIdentifierFrame))
+              else if ((Type)frame.GetType() == typeof(UniqueFileIdentifierFrame))
               {
                 track.UserFrames.Add(new Frame(id, (frame as UniqueFileIdentifierFrame).Owner ?? "",
                                                (frame as UniqueFileIdentifierFrame).Identifier == null
                                                  ? ""
                                                  : (frame as UniqueFileIdentifierFrame).Identifier.ToString()));
               }
-              else if ((Type) frame.GetType() == typeof(UnknownFrame))
+              else if ((Type)frame.GetType() == typeof(UnknownFrame))
               {
                 track.UserFrames.Add(new Frame(id, "",
                                                (frame as UnknownFrame).Data == null
@@ -644,9 +655,18 @@ namespace MPTagThat.Core
             }
           }
           else
+          {
             id3v2tag.RemoveFrames("POPM");
+          }
         }
-
+        else if (track.TagType == "ogg" || track.TagType == "flac")
+        {
+          if (track.Ratings.Count > 0)
+          {
+            XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, true) as XiphComment;
+            xiph.SetField("RATING", track.Rating.ToString());
+          }
+        }
 
         #endregion
 

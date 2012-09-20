@@ -689,7 +689,7 @@ namespace MPTagThat.Core
       {
         if (_popmframes.Count == 0)
         {
-          _popmframes.Add(new PopmFrame("", value, 0));
+          _popmframes.Add(new PopmFrame("MPTagThat", value, 0));
         }
         else
         {

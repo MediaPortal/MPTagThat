@@ -337,6 +337,7 @@
     <String id="LyricsHeaderLanguage">Sprache</String>
     <String id="LyricsHeaderLyrics">Liedtexte</String>
     <!--  Rating -->
+    <String id="GroupBoxRating">Bewertung (Für Non-ID3 Dateien die Sterne Bewertung in der Tabelle verwenden)</String>
     <String id="RemoveExistingRatings">Vorhandene Bewertungen zuerst entfernen</String>
     <String id="RatingNote">Die Bewertung ist ein Bereich von 1-255, wobei 1 die Schlechteste und 255 die Beste Bewertung darstellt. 0 bedeutet unbekannt.\n\nAnm: Viele Programme verwenden eigene Bewertungen, die vom ID3 Standard abweichen können. Der Zähler kann weggelassen werden.</String>
     <String id="PlayCounter">Abspielzähler:</String>

@@ -337,6 +337,7 @@
     <String id="LyricsHeaderLanguage">Lang</String>
     <String id="LyricsHeaderLyrics">Lyrics</String>
     <!--  Rating -->
+    <String id="GroupBoxRating">Ratings (For Non-ID3 files, please select the rating in the Star column)</String>
     <String id="RemoveExistingRatings">Remove existing Ratings First</String>
     <String id="RatingNote">The rating is 1-255 where 1 is worst and 255 is best. 0 is unknown.\n\nNote: Many programs have their own rating and may redefine the ID3 standard. If no personal counter is wanted it may be omitted.</String>
     <String id="PlayCounter">Play Counter:</String>
