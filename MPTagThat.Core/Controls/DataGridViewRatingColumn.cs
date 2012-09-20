@@ -105,7 +105,7 @@ namespace MPTagThat.Core
     {
       Image cellImage = (Image)formattedValue;
 
-      int starNumber = GetStarFromMouse(cellBounds, DataGridView.PointToClient(Control.MousePosition));
+      int starNumber = (int) value;
 
       if (starNumber != -1)
         cellImage = starHotImages[starNumber];
