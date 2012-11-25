@@ -8,7 +8,7 @@
 <Language>
   <Section name="system">
     <String id="NotFound">### Ikke funnet ###</String>
-	<String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
+    <String id="ApplicationName">MPTagThat the MediaPortal Tag Editor</String>
   </Section>
 
   <Section name="splash">
@@ -23,7 +23,7 @@
 
   <!-- Main --> 
   <Section name="main">
-  	<!-- Treeview -->
+  <!-- Treeview -->
     <String id="TreeViewPanel">Mapper</String>
     <String id="TreeViewPanelDatabase">Database</String>
     <String id="TreeViewViews">Visning</String>
@@ -92,6 +92,11 @@
     <String id="GetLyrics">Finn Tekster</String>
     <String id="AutoNumber">Auto Nummerering</String>
     <String id="NumberOnClick">Klikk og Nummerer</String>
+    <String id="Find">Finn</String>
+    <String id="Replace">Bytt</String>
+    <String id="ValidateSong">Valider MP3</String>
+    <String id="FixSong">Fiks MP3</String>
+    <String id="ReplayGain">Replay Gain</String>
     <String id="RemoveCommentPicture">Fjern:</String>
     <String id="RemoveComments">Fjern kommentarer</String>
     <String id="RemovePictures">Fjern bilder</String>
@@ -137,7 +142,7 @@
     <String id="Burn">Start Brenner</String>
     <String id="BurnCancel">Avbryt Brenner</String>
     <String id="BurnOptions">Innstillinger for Brenner</String>
-	<String id="Burner">Velg Brenner:</String>
+	  <String id="Burner">Velg Brenner:</String>
     <String id="BurnerSpeed">Brennerhastighet:</String>
 
   </Section>
@@ -193,6 +198,16 @@
     <String id="AddConvertText">Legger de valgte filene til listen over filer som skal konverteres til et annet format.</String>
     <String id="AddPlaylist">Legg til i Spillelisten</String>
     <String id="AddPlaylistText">Legger de valgte filene til i spillerlisten, og starter avspilling av den første på listen hvis den ikke er i bruk allerede.</String>
+    <String id="Find">Finn</String>
+    <String id="FindText">Åpner et dialog vindu hvor du kan skrive inn tekst for søk i de merkede filene.</String>
+    <String id="Replace">Bytt</String>
+    <String id="ReplaceText">Åpner et dialog vindu hvor du kan finne/bytte tekst i de merkede filene.</String>
+    <String id="ValidateSong">Valider MP3</String>
+    <String id="ValidateSongText">Bruke MP3Val for å validere om de merkede MP3 filene er korrekte. Ved feil kan noen av feilene bli ordnet med "Fiks MP3" knappen</String>
+    <String id="FixSong">Fiks MP3</String>
+    <String id="FixSongText">Bruke MP3Val til å ordne feil funnet i de merkede MP3 filene.</String>
+    <String id="ReplayGain">Replay Gain</String>
+    <String id="ReplayGainText">Analysere de valgte filene og kalkulerer Replay Gain. Den kalkulerte verdien skrives i taggen. \nNB! selve MP3 filen endres ikke.</String>
 
     <!-- Rip Tab-->
     <String id="RipButton">Start Ripping</String>
@@ -322,8 +337,9 @@
 	<String id="LyricsHeaderLanguage">Språk</String>
 	<String id="LyricsHeaderLyrics">Lyrikk</String>
     <!--  Rating -->
+  <String id="GroupBoxRating">Ratings (For ikke ID3 filer, vennligst velg rating i kolonnen med stjerne)</String>
 	<String id="RemoveExistingRatings">Fjern eksisterende Rating Først</String>
-    <String id="RatingNote">Rating er fra 1-255 hvor 1 er dårligst og 255 best. 0 er ukjent.\n\nNotis: Mange programmer har sin egen måte å sette rate på, så det kan endre ID3 standard. Hvis ingen personlig teller er ønsket kan det utelates.</String>
+  <String id="RatingNote">Rating er fra 1-255 hvor 1 er dårligst og 255 best. 0 er ukjent.\n\nNotis: Mange programmer har sin egen måte å sette rate på, så det kan endre ID3 standard. Hvis ingen personlig teller er ønsket kan det utelates.</String>
 	<String id="PlayCounter">Teller Avspilt:</String>
 	<String id="RemoveRating">Fjern Rating</String>
 	<String id="AddRating">Legg til Rating</String>
@@ -355,6 +371,7 @@
 	<String id="FrameText">Tekst</String>
 	<String id="AddFrame">Legg til ramme</String>
 	<String id="DeleteFrame">Slett ramme(r)</String>
+  <String id="DeleteAllFrames">Slett alle rammer</String>
   </Section>
   
     
@@ -387,9 +404,13 @@
   <Section name="AmazonAlbumSearch">
     <String id="Header">Album Søk</String>
     <String id="Close">Avbryt</String>
+    <String id="CancelAll">Avbryt alle</String>
     <String id="Update">Velg</String>
+    <String id="Search">Søk</String>
     <String id="Albums">Album</String>
     <String id="GroupBoxResults">Flere Funnet. Vennligst Velg ...</String>
+    <String id="NotFound">Ingen funnet. Se igjennom søkekriteriene ...</String>
+    <String id="Searching">Søker ...</String>
   </Section>
 
   <!--  MusicBrainz Search -->
@@ -424,6 +445,10 @@
     <String id="NumDisc">Ant. CD'r</String>
     <String id="BPM">BPM</String>
     <String id="Rating">Rating</String>
+    <String id="ReplayGainTrack">Gain spor</String>
+    <String id="ReplayGainTrackPeak">Peak spor</String>
+    <String id="ReplayGainAlbum">Album Gain</String>
+    <String id="ReplayGainAlbumPeak">Album Peak</String>
     <String id="Comment">Kommentar</String>
     <String id="Composer">Komponist</String>
     <String id="Conductor">Dirigent</String>
@@ -465,6 +490,7 @@
 
   <!--  Context Menus -->
   <Section name="contextmenu">
+    <String id="CoverLookup">Søk etter sang cover på Google</String>
     <String id="AddBurner">Legg til i brenner</String>
     <String id="AddConverter">Legg til for Konvertering</String>
     <String id="AddPlayList">Legg til i Spilleliste</String>
@@ -581,6 +607,7 @@
     <String id="GroupBoxOptions">Innstillinger</String>
     <String id="GroupBoxSelection">Valg</String>
     <String id="ButtonOrganise">Organisere</String>
+    <String id="Folder">\ = Mappe: spesifise parametrene som skal brukes foran undermappe navnet i målmappen</String>
   </Section>
   
   <!-- Settings  / Preferences --> 
@@ -629,9 +656,10 @@
     <String id="KeyShortCut">Snarvei på tastaturet:</String>
     <String id="RibbonShortCut">Snarvei for knapp:</String>
     <String id="GroupBoxGeneral">Generelle Innstillinger</String>
-	<String id="DebugLevel">Debug Nivå:</String>
+	  <String id="DebugLevel">Debug Nivå:</String>
     <String id="Theme">Tema:</String>
     <String id="Language">Språk:</String>
+    <String id="TrackListLocation">Lokasjon for sporliste:</String>
     <String id="TabTags">Tagger</String>
     <String id="TabTagsID3">ID3</String>
     <String id="TabTagsLyricsCover">Lyrikk / Bilde</String>
@@ -639,6 +667,8 @@
     <String id="GroupBoxPictures">Bilder</String>
     <String id="OverwriteExistingCover">Skriv over eksisterende Bilde(r) ved automatisk tagging</String>
     <String id="EmbedExistingThumb">Legg til eksisterende bilde (folder.jpg) ved bilde søk</String>
+    <String id="OnlySaveFolderThumb">Lagre cover bilde kun som miniatyrbilde. Ikke røre musikk filen</String>
+    <String id="ChangeCoverSize">Lagre cover med et maks piksel bredde som er:</String>
     <String id="AmazonSite">Amazon Søke Side:</String>
     <String id="GroupBoxLyrics">Tekster</String>  
     <String id="SwitchArtist">Bytt Artist føre utførelse</String>
@@ -656,6 +686,8 @@
     <String id="CopyArtist">Kopier Artist til AlbumArtist når denne er tom</String>
     <String id="AutoFillNumberTracks">Automatisk Fyll i "Antall Spor" når Flervalgte Tagg blir brukt</String>
     <String id="CaseConversion">Bruk Bokstav Konvertering når du lagrer</String>
+    <String id="ChangeReadonly">Forandre kun lese atributten ved lagring</String>
+    <String id="Encoding">Kode som brukes ved lagring av tagg:</String>
     <String id="CreateMissingFolderThumb">Lag manglende Mappe Bilde (folder.jpg) når du lagrer</String>
     <String id="AutoCompletion">Bruk MediaPortal Musikk Database for Artist auto-fullføring</String>
     <String id="GroupBoxTagsID3">ID3</String>
@@ -668,6 +700,7 @@
     <String id="ID3Both">ID3V1 og ID3V2</String>
     <String id="ID3V2">ID3V2</String>
     <String id="ID3V1">ID3V1</String>
+    <String id="ClearUserFrames">Fjern bruker definerte rammer ved lagring</String>
     <String id="GroupBoxTagsValidate">MP3 Fil Validering</String>
     <String id="ValidateMP3">Valider MP3 Filer under skanning av folder / database</String>
     <String id="AutoFixMP3">Automatisk fiks feil i MP3 filene</String>
@@ -823,6 +856,12 @@
     <String id="Fixed">Ordnet</String>
     <String id="FatalError">Fatal feil oppstått. MPTagThat vil bli avsluttet\r\nVennligst se i loggen for beskrivelse av grunnen.</String>
     <String id="OutOfMemory">For mange filer skannet.\r\nAvslutter skanning.</String>
+    <String id="ErrorResetAttr">Kan ikke forandre kun lese atributten</String>
+    <String id="CorruptFile">Korrupt fil</String>
+    <String id="UnsupportedFormat">Ikke støttet fil format</String>
+    <String id="NonExistingFile">Filen eksisterer ikke lenger!</String>
+    <String id="ErrorReadingFile">Feil ved lesing av fil: {0}</String>
+    <String id="ErrorSave">Feil ved lagring av fil: {0}</String>
   </Section>
     
   <!-- Progress Dialog -->
@@ -887,14 +926,27 @@
     <String id="FindWhat">Hva skal finnes:</String>
     <String id="MatchCase">Match Settning</String>
     <String id="MatchWords">Match bare hele ord</String>
-    <String id="GroupBoxSearch">Søke Modus</String>
-    <String id="SearchNormal">Normal</String>
-    <String id="SearchRegex">Regular Expression</String>
     <String id="FindNext">Finn Neste</String>
     <String id="Cancel">Lukk</String>
     <String id="TabReplace">Erstat</String>
     <String id="ReplaceWith">Erstatt med:</String>
     <String id="ReplaceBtn">Erstatt</String>
     <String id="ReplaceAllBtn">Erstatt alle</String>
+  </Section>
+
+  <!-- Readonly Dialog -->
+  <Section name="readonly">
+    <String id="Header">Fil kun lese tilgang</String>
+    <String id="Explanation">Filen indikeres som kun leser tilgang.\nSkal MPTagThat forandre atributten og lagre filen?</String>
+    <String id="Yes">Ja</String>
+    <String id="YesToAll">Ja, alle</String>
+    <String id="No">Nei</String>
+    <String id="NoToAll">Nei til alle</String>
+  </Section>
+
+  <!-- Replay Gain Popup -->
+  <Section name="albumgain">
+    <String id="Header">Album Gain</String>
+    <String id="Explanation">Alle filer er valgt.\nSkal MPTagThat kalkulere Album Gain?</String>
   </Section>
 </Language>
