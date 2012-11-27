@@ -107,7 +107,7 @@ namespace MPTagThat.Core
 
       int starNumber = (int) value;
 
-      if (starNumber != -1)
+      if (starNumber > -1 && starNumber < 6)
         cellImage = starHotImages[starNumber];
 
       if (DataGridView.Rows[rowIndex].Selected)
