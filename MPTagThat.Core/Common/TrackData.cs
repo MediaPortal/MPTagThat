@@ -683,7 +683,37 @@ namespace MPTagThat.Core
     {
       get
       {
-        return _popmframes.Count > 0 ? _popmframes[0].Rating : 0;
+        if (_popmframes.Count > 0 && _popmframes[0].User.StartsWith("Windows"))
+        {
+          // Handle Windows Media Player Star Ratings
+          // 1 star = 1, 2 stars = 64, 3 stars = 128, 4 stars = 196, 5 stars = 255
+          int rating = _popmframes[0].Rating;
+          if (rating == 1)
+          {
+            return 1;
+          }
+          if (rating == 64)
+          {
+            return 2;
+          }
+          if (rating == 128)
+          {
+            return 3;
+          }
+          if (rating == 196)
+          {
+            return 4;
+          }
+          if (rating == 255)
+          {
+            return 5;
+          }
+        }
+        else
+        {
+          return _popmframes.Count > 0 ? _popmframes[0].Rating : 0;
+        }
+        return 0;
       }
       set
       {
