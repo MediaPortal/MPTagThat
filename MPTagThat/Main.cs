@@ -1053,6 +1053,14 @@ namespace MPTagThat
       {
         Options.MainSettings.RecentFolders.RemoveAt(20);
       }
+
+      // Refill the TreeView combo box
+      treeViewControl.FolderSelectCombo.Items.Clear();
+      foreach (string folderItem in Options.MainSettings.RecentFolders)
+      {
+        treeViewControl.FolderSelectCombo.Items.Add(folderItem);
+      }
+
     }
 
     private const int WM_SYSCOMMAND = 0x0112;
