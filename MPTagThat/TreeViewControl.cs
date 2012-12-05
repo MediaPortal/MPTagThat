@@ -85,6 +85,11 @@ namespace MPTagThat
       get { return _filter; }
     }
 
+    public Core.WinControls.MPTComboBox FolderSelectCombo
+    {
+      get { return cbSelectedFolder; }
+    }
+
     #endregion
 
     #region ctor
@@ -340,6 +345,12 @@ namespace MPTagThat
           }
           dataGridViewTagFilter.Rows[rowIndex].Cells[2].Value = op;
           rowIndex++;
+        }
+
+        // Fill the Recent folders into the folder selection list
+        foreach (string folderItem in Options.MainSettings.RecentFolders)
+        {
+          cbSelectedFolder.Items.Add(folderItem);
         }
       }
     }
@@ -852,6 +863,44 @@ namespace MPTagThat
       SwitchMode();
       treeViewFolderBrowser.Populate();
       treeViewFolderBrowser.Nodes[0].Expand();
+    }
+
+    /// <summary>
+    /// Jump to the selected Folder
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btJumpToFolder_Click(object sender, EventArgs e)
+    {
+      if (string.IsNullOrEmpty(cbSelectedFolder.Text))
+      {
+        return;
+      }
+
+      string path = Path.GetFullPath(cbSelectedFolder.Text);
+      if (!Directory.Exists(path))
+      {
+        return;
+      }
+
+      treeViewFolderBrowser.ShowFolder(path);
+      _main.CurrentDirectory = path;
+      _main.SetRecentFolder(_main.CurrentDirectory);
+      _main.RefreshTrackList();
+    }
+
+
+    /// <summary>
+    /// The user pressed Enter in the combo box
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void cbSelectedFolder_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Enter)
+      {
+        btJumpToFolder_Click(cbSelectedFolder, new EventArgs());
+      }
     }
 
     #endregion

@@ -47,6 +47,10 @@
       this.treeViewPanelBottom = new MPTagThat.Core.WinControls.MPTPanel();
       this.treeViewFolderBrowser = new Raccoom.Windows.Forms.TreeViewFolderBrowser();
       this.treeViewPanelTop = new MPTagThat.Core.WinControls.MPTPanel();
+      this.treeViewPanelUpper = new MPTagThat.Core.WinControls.MPTPanel();
+      this.jumpToFolderPanel = new MPTagThat.Core.WinControls.TTExtendedPanel();
+      this.cbSelectedFolder = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.btJumpToFolder = new MPTagThat.Core.WinControls.MPTButton();
       this.tabPageFilter = new MPTagThat.Core.WinControls.MPTTabPage();
       this.dataGridViewTagFilter = new System.Windows.Forms.DataGridView();
       this.TagFilterField = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -67,6 +71,8 @@
       this.tabPageViews.SuspendLayout();
       this.treeViewPanel.SuspendLayout();
       this.treeViewPanelBottom.SuspendLayout();
+      this.treeViewPanelUpper.SuspendLayout();
+      this.jumpToFolderPanel.SuspendLayout();
       this.tabPageFilter.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).BeginInit();
       this.panelLeftBottom.SuspendLayout();
@@ -159,7 +165,7 @@
       this.tabControlTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlTreeView.Location = new System.Drawing.Point(0, 0);
       this.tabControlTreeView.Name = "tabControlTreeView";
-      this.tabControlTreeView.SelectedTabPage = this.tabPageFilter;
+      this.tabControlTreeView.SelectedTabPage = this.tabPageViews;
       this.tabControlTreeView.Size = new System.Drawing.Size(218, 535);
       this.tabControlTreeView.TabIndex = 8;
       this.tabControlTreeView.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -170,6 +176,7 @@
       // 
       this.tabPageViews.ActiveControl = null;
       this.tabPageViews.Controls.Add(this.treeViewPanel);
+      this.tabPageViews.Controls.Add(this.treeViewPanelUpper);
       this.tabPageViews.KeyTip = null;
       this.tabPageViews.Localisation = "TreeViewViews";
       this.tabPageViews.LocalisationContext = "main";
@@ -196,9 +203,9 @@
       this.treeViewPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
       this.treeViewPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
       this.treeViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.treeViewPanel.Location = new System.Drawing.Point(3, 3);
+      this.treeViewPanel.Location = new System.Drawing.Point(3, 54);
       this.treeViewPanel.Name = "treeViewPanel";
-      this.treeViewPanel.Size = new System.Drawing.Size(210, 508);
+      this.treeViewPanel.Size = new System.Drawing.Size(210, 457);
       this.treeViewPanel.TabIndex = 7;
       // 
       // treeViewPanelBottom
@@ -207,7 +214,7 @@
       this.treeViewPanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
       this.treeViewPanelBottom.Location = new System.Drawing.Point(0, 24);
       this.treeViewPanelBottom.Name = "treeViewPanelBottom";
-      this.treeViewPanelBottom.Size = new System.Drawing.Size(210, 484);
+      this.treeViewPanelBottom.Size = new System.Drawing.Size(210, 433);
       this.treeViewPanelBottom.TabIndex = 2;
       // 
       // treeViewFolderBrowser
@@ -225,7 +232,7 @@
       this.treeViewFolderBrowser.Location = new System.Drawing.Point(0, 0);
       this.treeViewFolderBrowser.Name = "treeViewFolderBrowser";
       this.treeViewFolderBrowser.SelectedDirectories = ((System.Collections.Specialized.StringCollection)(resources.GetObject("treeViewFolderBrowser.SelectedDirectories")));
-      this.treeViewFolderBrowser.Size = new System.Drawing.Size(210, 484);
+      this.treeViewFolderBrowser.Size = new System.Drawing.Size(210, 433);
       this.treeViewFolderBrowser.TabIndex = 1;
       this.treeViewFolderBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewFolderBrowser_AfterLabelEdit);
       this.treeViewFolderBrowser.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeViewFolderBrowser_NodeMouseHover);
@@ -245,6 +252,69 @@
       this.treeViewPanelTop.Name = "treeViewPanelTop";
       this.treeViewPanelTop.Size = new System.Drawing.Size(210, 24);
       this.treeViewPanelTop.TabIndex = 1;
+      // 
+      // treeViewPanelUpper
+      // 
+      this.treeViewPanelUpper.Controls.Add(this.jumpToFolderPanel);
+      this.treeViewPanelUpper.Dock = System.Windows.Forms.DockStyle.Top;
+      this.treeViewPanelUpper.Location = new System.Drawing.Point(3, 3);
+      this.treeViewPanelUpper.Name = "treeViewPanelUpper";
+      this.treeViewPanelUpper.Size = new System.Drawing.Size(210, 51);
+      this.treeViewPanelUpper.TabIndex = 8;
+      // 
+      // jumpToFolderPanel
+      // 
+      this.jumpToFolderPanel.BorderColor = System.Drawing.Color.Transparent;
+      this.jumpToFolderPanel.CaptionColorOne = System.Drawing.SystemColors.GradientActiveCaption;
+      this.jumpToFolderPanel.CaptionColorTwo = System.Drawing.SystemColors.GradientInactiveCaption;
+      this.jumpToFolderPanel.CaptionFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.jumpToFolderPanel.CaptionSize = 20;
+      this.jumpToFolderPanel.CaptionText = "Jump To Folder";
+      this.jumpToFolderPanel.CaptionTextColor = System.Drawing.Color.Black;
+      this.jumpToFolderPanel.Controls.Add(this.cbSelectedFolder);
+      this.jumpToFolderPanel.Controls.Add(this.btJumpToFolder);
+      this.jumpToFolderPanel.CornerStyle = Stepi.UI.CornerStyle.Normal;
+      this.jumpToFolderPanel.DirectionCtrlColor = System.Drawing.Color.DarkGray;
+      this.jumpToFolderPanel.DirectionCtrlHoverColor = System.Drawing.Color.Orange;
+      this.jumpToFolderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.jumpToFolderPanel.Location = new System.Drawing.Point(0, 0);
+      this.jumpToFolderPanel.Name = "jumpToFolderPanel";
+      this.jumpToFolderPanel.Size = new System.Drawing.Size(210, 51);
+      this.jumpToFolderPanel.TabIndex = 0;
+      // 
+      // cbSelectedFolder
+      // 
+      this.cbSelectedFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.cbSelectedFolder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbSelectedFolder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbSelectedFolder.FormattingEnabled = false;
+      this.cbSelectedFolder.Id = "e54670b5-1a67-47bd-b019-5c891da1775a";
+      this.cbSelectedFolder.Location = new System.Drawing.Point(3, 24);
+      this.cbSelectedFolder.Name = "cbSelectedFolder";
+      this.cbSelectedFolder.Size = new System.Drawing.Size(173, 21);
+      this.cbSelectedFolder.TabIndex = 2;
+      this.cbSelectedFolder.TextEditorWidth = 154;
+      this.cbSelectedFolder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbSelectedFolder_KeyDown);
+      // 
+      // btJumpToFolder
+      // 
+      this.btJumpToFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.btJumpToFolder.BackgroundImage = global::MPTagThat.Properties.Resources.NavForward;
+      this.btJumpToFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+      this.btJumpToFolder.Id = "3e9ba77f-2b25-43bf-82fe-4ad11964b050";
+      this.btJumpToFolder.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Default", global::MPTagThat.Properties.Resources.NavForward)});
+      this.btJumpToFolder.Localisation = "btJumpToFolder";
+      this.btJumpToFolder.LocalisationContext = "ExtendedPanel";
+      this.btJumpToFolder.Location = new System.Drawing.Point(188, 25);
+      this.btJumpToFolder.Name = "btJumpToFolder";
+      this.btJumpToFolder.Size = new System.Drawing.Size(21, 23);
+      this.btJumpToFolder.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Default", global::MPTagThat.Properties.Resources.NavForward)});
+      this.btJumpToFolder.TabIndex = 1;
+      this.btJumpToFolder.UseVisualStyleBackColor = true;
+      this.btJumpToFolder.Click += new System.EventHandler(this.btJumpToFolder_Click);
       // 
       // tabPageFilter
       // 
@@ -452,6 +522,9 @@
       this.tabPageViews.ResumeLayout(false);
       this.treeViewPanel.ResumeLayout(false);
       this.treeViewPanelBottom.ResumeLayout(false);
+      this.treeViewPanelUpper.ResumeLayout(false);
+      this.jumpToFolderPanel.ResumeLayout(false);
+      this.jumpToFolderPanel.PerformLayout();
       this.tabPageFilter.ResumeLayout(false);
       this.tabPageFilter.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTagFilter)).EndInit();
@@ -494,5 +567,9 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn TagFilterValue;
     private System.Windows.Forms.DataGridViewComboBoxColumn TagFilterOperator;
     private MPTagThat.Core.WinControls.MPTComboBox cbDataProvider;
+    private Core.WinControls.MPTPanel treeViewPanelUpper;
+    private Core.WinControls.TTExtendedPanel jumpToFolderPanel;
+    private Core.WinControls.MPTButton btJumpToFolder;
+    private Core.WinControls.MPTComboBox cbSelectedFolder;
   }
 }

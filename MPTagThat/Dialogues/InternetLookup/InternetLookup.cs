@@ -180,7 +180,7 @@ namespace MPTagThat.InternetLookup
             lvItem.SubItems.Add(trackCount.ToString());
             lvItem.SubItems.Add(foundAlbum.Year);
             lvItem.SubItems.Add(foundAlbum.Label);
-            dlgSearchResult.ResultView.Items.Add(lvItem);
+            dlgSearchResult.ResultView.Items.Insert(0, lvItem);
           }
           main.Cursor = Cursors.Default;
 
@@ -192,7 +192,9 @@ namespace MPTagThat.InternetLookup
             if (main.ShowModalDialog(dlgSearchResult) == DialogResult.OK)
             {
               if (dlgSearchResult.ResultView.SelectedIndices.Count > 0)
+              {
                 amazonAlbum = albums[dlgSearchResult.ResultView.SelectedIndices[0]];
+              }
               else
                 amazonAlbum = albums[0];
             }
