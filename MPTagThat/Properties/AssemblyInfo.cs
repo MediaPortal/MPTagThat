@@ -30,9 +30,9 @@ using Elegant.Ui;
 [assembly: AssemblyTitle("MPTagThat")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Helmut Wahrmann")]
 [assembly: AssemblyProduct("MPTagThat")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -54,5 +54,5 @@ using Elegant.Ui;
 //      Revision
 //
 
-[assembly: AssemblyVersion("3.1.1")]
+[assembly: AssemblyVersion("3.1.2")]
 [assembly: DefaultTheme(EmbeddedTheme.Office2007Blue)]
