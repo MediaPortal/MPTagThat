@@ -61,7 +61,7 @@ namespace MPTagThat.Core
     #region public Variables
 
     public static string HelpLocation = "http://www.team-mediaportal.com/manual/MediaPortalTools/MPTagThat";
-    public static string ForumLocation = "http://forum.team-mediaportal.com/mptagthat-310";
+    public static string ForumLocation = "http://forum.team-mediaportal.com/forums/mptagthat.261";
 
     public static Item[] WmaStandardSampleVBR = new[]
                                                   {

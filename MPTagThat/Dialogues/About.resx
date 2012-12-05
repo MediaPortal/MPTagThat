@@ -112,17 +112,17 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxAbout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAcwAAAHMCAYAAABY25iGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDQAA
-        Cw0B7QfALAAA/3lJREFUeF7snQV4FIcWhR9tKbTFHQoFiru7uwZ3CE4IGlyCu7u7uwV3d3cp7lCkuIbk
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDAAA
+        CwwBP0AiyAAA/3lJREFUeF7snQV4FIcWhR9tKbTFHQoFiru7uwZ3CE4IGlyCu7u7uwV3d3cp7lCkuIbk
         vnPuzCQLpW2AEEKYfLnfrO/s7Oz8c67+T0T+Z5u9Dex9wN4H7H3A3gfsfeDf9wEblvYJg70P2PuAvQ/Y
         +4C9D/hhH7A3kh82kn3WZZ952/uAvQ/Y+4C9D9jAtIFp7wP2PmDvA/Y+YO8DftgH7I3kh41kn1naZ5b2
         PmDvA/Y+YO8DNjBtYNr7gL0P2PuAvQ/Y+4Af9gF7I/lhI9lnlvaZpb0P2PuAvQ/Y+4ANTBuY9j5g7wP2
