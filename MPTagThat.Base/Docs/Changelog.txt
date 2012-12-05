@@ -7,6 +7,11 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.1 Date: 27.11.2012 
+-------------------------------------
++ Handle WMP Ratings correctly in the Grid Display
+x Fixed a crash when a file contained WMP Ratings
+
 3.1.0 Date: 20.09.2012 
 -------------------------------------
 + Replaygain Support: TRack Gain and Album Gain can be calculated
