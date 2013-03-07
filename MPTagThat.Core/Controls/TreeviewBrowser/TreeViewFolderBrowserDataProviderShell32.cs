@@ -56,6 +56,11 @@ namespace Raccoom.Windows.Forms
     private TreeNodeCollection _rootCollection;
 
     /// <summary>
+    ///   drive tree node (Network) root collection
+    /// </summary>
+    private TreeNodeCollection _rootCollectionNetwork;
+
+    /// <summary>
     ///   show only filesystem
     /// </summary>
     private bool _showAllShellObjects;
@@ -130,6 +135,11 @@ namespace Raccoom.Windows.Forms
 
             if (_shell.Shell.NameSpace(ShellSpecialFolderConstants.ssfDRIVES).Title == fi.Name)
               _rootCollection = node.Nodes;
+
+            if (fi.Path == "::{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}")
+            {
+              _rootCollectionNetwork = node.Nodes;
+            }
           }
           break;
         case Environment.SpecialFolder.MyComputer:
@@ -180,8 +190,12 @@ namespace Raccoom.Windows.Forms
       }
     }
 
-    public override TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper)
+    public override TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper, bool isNetwork)
     {
+      if (isNetwork)
+      {
+        return _rootCollectionNetwork;
+      }
       return _rootCollection;
     }
 

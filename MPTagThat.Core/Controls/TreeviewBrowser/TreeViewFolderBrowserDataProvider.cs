@@ -62,7 +62,7 @@ namespace Raccoom.Windows.Forms
 
     public virtual void QueryContextMenuItems(TreeViewFolderBrowserHelper helper, TreeNodePath node) {}
 
-    public virtual TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper)
+    public virtual TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper, bool isNetwork)
     {
       switch (helper.TreeView.RootFolder)
       {

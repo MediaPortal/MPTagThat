@@ -240,7 +240,7 @@ namespace Raccoom.Windows.Forms
       }
     }
 
-    public TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper)
+    public TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper, bool isNetwork)
     {
       return helper.TreeView.Nodes;
     }
