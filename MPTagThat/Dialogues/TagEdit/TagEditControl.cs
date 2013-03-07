@@ -1232,6 +1232,7 @@ namespace MPTagThat.TagEdit
         cbArtist.TextChanged += OnComboChanged;
         tbTrack.TextChanged += OnTextChanged;
         cbAlbumArtist.TextChanged += OnComboChanged;
+        cbGenre.TextChanged += OnComboChanged;
         tbNumTracks.TextChanged += OnTextChanged;
         tbBPM.TextChanged += OnTextChanged;
         tbNumDiscs.TextChanged += OnTextChanged;
@@ -1267,6 +1268,7 @@ namespace MPTagThat.TagEdit
         cbArtist.TextChanged -= OnComboChanged;
         tbTrack.TextChanged -= OnTextChanged;
         cbAlbumArtist.TextChanged -= OnComboChanged;
+        cbGenre.TextChanged -= OnComboChanged;
         tbNumTracks.TextChanged -= OnTextChanged;
         tbBPM.TextChanged -= OnTextChanged;
         tbNumDiscs.TextChanged -= OnTextChanged;
@@ -2563,6 +2565,10 @@ namespace MPTagThat.TagEdit
 
         case "cbAlbum":
           ckAlbum.Checked = true;
+          break;
+
+        case "cbGenre":
+          ckGenre.Checked = true;
           break;
       }
     }
