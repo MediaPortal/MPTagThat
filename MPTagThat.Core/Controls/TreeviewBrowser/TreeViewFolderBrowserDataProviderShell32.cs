@@ -117,15 +117,17 @@ namespace Raccoom.Windows.Forms
           helper.TreeView.Nodes.Add(desktopNode);
           desktopNode.Tag = desktopFolder;
           //
-          Folder2 myComputer = (Folder2)_shell.Shell.NameSpace(ShellSpecialFolderConstants.ssfDRIVES);
           foreach (FolderItem fi in desktopFolder.Items())
           {
+            // Don't list Non-Folders, Control Panel and Waste BAsket
             if (!fi.IsFolder) continue;
-            //
+            if (_shell.Shell.NameSpace(ShellSpecialFolderConstants.ssfBITBUCKET).Title == fi.Name) continue;
+            if (fi.Path == "::{26EE0668-A00A-44D7-9371-BEB064C98683}") continue;
+
             TreeNodePath node = CreateTreeNode(helper, fi.Name, fi.Path, true, false, true);
             node.Tag = fi;
             desktopNode.Nodes.Add(node);
-            //
+
             if (_shell.Shell.NameSpace(ShellSpecialFolderConstants.ssfDRIVES).Title == fi.Name)
               _rootCollection = node.Nodes;
           }
