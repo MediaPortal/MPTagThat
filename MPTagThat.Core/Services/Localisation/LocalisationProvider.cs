@@ -33,7 +33,7 @@ namespace MPTagThat.Core
     #region Variables
 
     private readonly List<string> _languageDirectories;
-    private readonly Dictionary<string, Dictionary<string, StringLocalised>> _languageStrings;
+    private readonly Dictionary<string, StringLocalised> _languageStrings;
     private readonly string _systemDirectory;
     private readonly string _userDirectory;
     private Dictionary<string, CultureInfo> _availableLanguages;
@@ -66,7 +66,7 @@ namespace MPTagThat.Core
       if (_currentLanguage == null)
         throw (new ArgumentException("No available language found"));
 
-      _languageStrings = new Dictionary<string, Dictionary<string, StringLocalised>>();
+      _languageStrings = new Dictionary<string, StringLocalised>();
 
       CheckUserStrings();
       ReloadAll();
@@ -121,29 +121,36 @@ namespace MPTagThat.Core
       queue.Send(msg);
     }
 
-    public string ToString(string section, string id)
+    public string ToString(string name)
     {
-      id = id.ToLower();
-      section = section.ToLower();
+      name = name.ToLower();
 
       try
       {
-        if (_languageStrings.ContainsKey(section) && _languageStrings[section].ContainsKey(id))
-          return _languageStrings[section][id].text;
+        if (_languageStrings.ContainsKey(name))
+          return _languageStrings[name].text;
       }
-      catch (KeyNotFoundException) {}
+      catch (KeyNotFoundException) { }
 
       return null;
     }
 
-    public string ToString(string section, string id, object[] parameters)
+    [Obsolete("Language are not split into sections anymore. Use ToString(string name) instead.")]
+    public string ToString(string section, string id)
     {
-      string translation = ToString(section, id);
-      // if parameters or the translation is null, return the translation.
+      string name = String.Format("{0}.{1}", section, id);
+
+      return ToString(name);
+    }
+
+    public string ToString(string name, object[] parameters)
+    {
+      string translation = ToString(name);
+
+      // Stop here if no translation was found or no parameters are available for replacement
       if ((translation == null) || (parameters == null))
-      {
         return translation;
-      }
+
       // return the formatted string. If formatting fails, log the error
       // and return the unformatted string.
       try
@@ -158,6 +165,14 @@ namespace MPTagThat.Core
         // Throw exception??
         return translation;
       }
+    }
+
+    [Obsolete("Language are not split into sections anymore. Use ToString(string name, object[] parameters) instead.")]
+    public string ToString(string section, string id, object[] parameters)
+    {
+      string name = String.Format("{0}.{1}", section, id);
+
+      return ToString(name, parameters);
     }
 
     public CultureInfo[] AvailableLanguages()
@@ -297,40 +312,17 @@ namespace MPTagThat.Core
           return;
         }
 
-        if (_characters < strings.characters)
-          _characters = strings.characters;
-
-        foreach (StringSection section in strings.sections)
+        foreach (StringLocalised languageString in strings.localisedStrings)
         {
-          // convert section name tolower -> no case matching.
-          section.name = section.name.ToLower();
+          // No case matching.
+          languageString.id = languageString.id.ToLower();
+          if (_languageStrings.ContainsKey(languageString.id)) continue;
 
-          Dictionary<string, StringLocalised> newSection;
-          if (_languageStrings.ContainsKey(section.name))
-          {
-            newSection = _languageStrings[section.name];
-            _languageStrings.Remove(section.name);
-          }
-          else
-          {
-            newSection = new Dictionary<string, StringLocalised>();
-          }
-
-          foreach (StringLocalised languageString in section.localisedStrings)
-          {
-            languageString.id = languageString.id.ToLower();
-
-            if (!newSection.ContainsKey(languageString.id))
-            {
-              languageString.language = language;
-              newSection.Add(languageString.id, languageString);
-              if (log)
-                ServiceScope.Get<ILogger>().GetLogger.Info("    String not found, using English: {0}", languageString.ToString());
-            }
-          }
-
-          if (newSection.Count > 0)
-            _languageStrings.Add(section.name, newSection);
+          languageString.language = language;
+          _languageStrings.Add(languageString.id, languageString);
+          if (log)
+            ServiceScope.Get<ILogger>()
+                        .GetLogger.Info("    String not found, using English: {0}", languageString.ToString());
         }
       }
     }
