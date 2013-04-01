@@ -1,682 +1,720 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-     MPTagThat translation file
-
-     Note: English is the fallback for any strings not found in other languages
-
--->
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  
-    <string name="system.NotFound">### Cadena No Encontrada ###</string>
-    <string name="system.ApplicationName">MPTagThat el Editor de Etiquetas de MediaPortal</string>
-  
-  
-    <string name="main.TreeViewPanel">Carpetas</string>
-    <string name="main.TreeViewPanelDatabase">Base de Datos</string>
-    <string name="main.TreeViewViews">Vistas</string>
-    <string name="main.TreeViewFilters">Filtro</string>
-    <string name="main.FilterUseTag">Usar Filtro de Etiqueta</string>
-    <string name="main.FilterHeadingField">Campo</string>
-    <string name="main.FilterHeadingFilter">Filtro</string>
-    <string name="main.FilterHeadingOperator">Operador</string>
-    <string name="main.FilterOperatorAnd">y</string>
-    <string name="main.FilterOperatorOr">o</string>
-    <string name="main.FilterFileMask">Archivo de Máscara</string>
-    <string name="main.FilterAllFiles">Todos los formatos de archivo soportados</string>
-    <string name="main.FilterActive">Filtro de Etiqueta: Activo</string>
-    <string name="main.FilterInActive">Filtro de Etiqueta: Inactivo</string>
-    <string name="main.PicturePanel">Foto</string>
-    <string name="main.InformationPanel">Información</string>
-    <string name="main.PlayerPanel">Reproductor</string>
-    <string name="main.OptionsPanel">Opciones</string>
-    <string name="main.SwitchView">Cambiar Vista</string>
-    <string name="main.ScanSubfolder">Escanear subcarpetas</string>
-    <string name="main.ButtonRefreshFolder">Refrescar Vista\nde Carpetas</string>
-    <string name="main.ErrorHeaderFile">Archivo</string>
-    <string name="main.ErrorHeaderMessage">Mensaje</string>
-    <string name="main.toolStripLabelFiles">Archivos: {0} (Seleccionados: {1})</string>
-    <string name="main.toolStripLabelPlay">Estado del Reproductor: Reproduciendo</string>
-    <string name="main.toolStripLabelPause">Estado del Reproductor: Pausado</string>
-  
-  
-    <string name="ribbon.Settings">Configuración</string>
-    <string name="ribbon.Refresh">Refrescar</string>
-    <string name="ribbon.Save">Guardar</string>
-    <string name="ribbon.ColumnsSelect">Seleccionar Columnas a Mostrar</string>
-    <string name="ribbon.Exit">Salir</string>
-    <string name="ribbon.TagTab">Etiquetas</string>
-    <string name="ribbon.TagFromFile">Etiquetar desde Nombre de Archivo</string>
-    <string name="ribbon.RenameFile">Renombrar Archivo</string>
-    <string name="ribbon.RenameFileMenu">Renombrar Archivo</string>
-    <string name="ribbon.RenameFileOptions">Renombrar Opciones de Archivo</string>
-    <string name="ribbon.IdentifyFile">Identificar Archivo</string>
-    <string name="ribbon.TagFromInternet">Etiquetar desde Internet</string>
-    <string name="ribbon.SingleTagEdit">Edición de Etiqueta Única</string>
-    <string name="ribbon.MultiTagEdit">Edición Múltiple de Etiquetas</string>
-    <string name="ribbon.GetCoverArt">Obtener Portada</string>
-    <string name="ribbon.GetLyrics">Obtener Letras</string>
-    <string name="ribbon.AutoNumber">Autonumerar</string>
-    <string name="ribbon.NumberOnClick">Numerar al Pulsar</string>
-    <string name="ribbon.RemoveCommentPicture">Quitar:</string>
-    <string name="ribbon.RemoveComments">Quitar todos los comentarios</string>
-    <string name="ribbon.RemovePictures">Quitar todas las fotos</string>
-    <string name="ribbon.CaseConversion">Caja de Conversión</string>
-    <string name="ribbon.CaseConversionMenu">Caja de Conversión</string>
-    <string name="ribbon.CaseConversionOption">Opciones de Caja de Conversión</string>
-    <string name="ribbon.DeleteTags">Borrar Etiquetas</string>
-    <string name="ribbon.DeleteAllTags">Borrar Todas las Etiquetas</string>
-    <string name="ribbon.DeleteID3V1Tags">Borrar sólo Etiquetas ID3 V1</string>
-    <string name="ribbon.DeleteID3V2Tags">Borrar sólo Etiquetas ID3 V2</string>
-    <string name="ribbon.EditTags">Editar Etiquetas</string>
-    <string name="ribbon.RetrieveTags">Recuperar Etiquetas</string>
-    <string name="ribbon.OrganiseFiles">Organizar</string>
-    <string name="ribbon.ExecuteScript">Ejecutar Script</string>
-    <string name="ribbon.Scripts">Scripts</string>
-    <string name="ribbon.Organise">Organizar Archivos</string>
-    <string name="ribbon.SaveFolderThumb">Guardar como Miniatura\nde Carpeta</string>
-    <string name="ribbon.AddBurner">Añadir a Grabador</string>
-    <string name="ribbon.AddConvert">Añadir a Conversión</string>
-    <string name="ribbon.AddPlaylist">Añadir a Lista</string>
-    <string name="ribbon.Other">Otro</string>
-    <string name="ribbon.RipTab">Extraer</string>
-    <string name="ribbon.RipButton">Empezar Extracción</string>
-    <string name="ribbon.RipEncoder">Seleccionar Codificador:</string>
-    <string name="ribbon.RipFolder">Carpeta de Destino:</string>
-    <string name="ribbon.RipCancel">Cancelar Extracción</string>
-    <string name="ribbon.RipOptions">Opciones de Extracción</string>
-    <string name="ribbon.ConvertTab">Convertir</string>
-    <string name="ribbon.ConvertButton">Empezar Conversión</string>
-    <string name="ribbon.ConvertEncoder">Seleccionar Codificador:</string>
-    <string name="ribbon.ConvertFolder">Carpeta de Destino:</string>
-    <string name="ribbon.ConvertCancel">Cancelar Conversión</string>
-    <string name="ribbon.ConvertOptions">Opciones de Conversión</string>
-    <string name="ribbon.BurnTab">Grabar</string>
-    <string name="ribbon.Burn">Grabar</string>
-    <string name="ribbon.BurnCancel">Cancelar Grabación</string>
-    <string name="ribbon.BurnOptions">Opciones de Grabación</string>
-  
-  
-    <string name="LyricsSearch.Header">Encontrar Letras para {0} - {1}</string>
-    <string name="LyricsSearch.Cancel">Cancelar</string>
-    <string name="LyricsSearch.Site">Sitio web</string>
-    <string name="LyricsSearch.Result">Resultado</string>
-    <string name="LyricsSearch.Lyric">Letra</string>
-    <string name="LyricsSearch.GroupBoxSearchResults">Resultados de la búsqueda</string>
-    <string name="LyricsSearch.Title">Título:</string>
-    <string name="LyricsSearch.Update">Actualizar</string>
-    <string name="LyricsSearch.Find">Encontrar</string>
-    <string name="LyricsSearch.Close">Cerrar</string>
-    <string name="LyricsSearch.GroupBoxLyric">Letra</string>
-    <string name="LyricsSearch.Artist">Artista:</string>
-    <string name="LyricsSearch.GroupBoxSearchInfo">Buscar información</string>
-    <string name="LyricsSearch.SwitchArtist">Cambiar Artista</string>
-    <string name="LyricsSearch.Heading">Búsqueda de Letras</string>
-    <string name="LyricsSearch.Status">Buscando Letras ... Por favor, espere</string>
-    <string name="LyricsSearch.Finished">Búsqueda finalizada. Deseleccione pistas con Letras incorrectas.</string>
-    <string name="LyricsSearch.NothingToSearch">No hay nada que buscar</string>
-    <string name="LyricsSearch.FoundLyrics">Ok</string>
-    <string name="LyricsSearch.NoLyricsFound">N/D</string>
-  
-  
-    <string name="TagEdit.MultiHeading">Edición Múltiple de Etiquetas</string>
-    <string name="TagEdit.SingleHeading">Editar Etiqueta</string>
-    <string name="TagEdit.HeaderUser">Definido por usuario</string>
-    <string name="TagEdit.HeaderRating">Puntuación</string>
-    <string name="TagEdit.HeaderLyrics">Letras</string>
-    <string name="TagEdit.HeaderWeb">Información Web</string>
-    <string name="TagEdit.HeaderInvolved">Personas Implicadas</string>
-    <string name="TagEdit.HeaderOriginal">Información Original</string>
-    <string name="TagEdit.HeaderDetail">Información Detallada</string>
-    <string name="TagEdit.HeaderMainTags">Principales Etiquetas</string>
-    <string name="TagEdit.HeaderPictures">Fotografías</string>
-    <string name="TagEdit.AlbumArtist">ÁlbumArtista</string>
-    <string name="TagEdit.Track">Pista:</string>
-    <string name="TagEdit.Artist">Artista:</string>
-    <string name="TagEdit.Year">Año:</string>
-    <string name="TagEdit.Title">Título:</string>
-    <string name="TagEdit.Album">Álbum:</string>
-    <string name="TagEdit.GroupBoxComment">Comentario</string>
-    <string name="TagEdit.RemoveExistingComments">Quitar Comentarios primero</string>
-    <string name="TagEdit.MoveTop">Mover al Comienzo</string>
-    <string name="TagEdit.RemoveComment">Quitar Comentario</string>
-    <string name="TagEdit.AddComment">Añadir Comentario</string>
-    <string name="TagEdit.Comment">Comentario:</string>
-    <string name="TagEdit.CommentLanguage">Idioma (sólo ID3):</string>
-    <string name="TagEdit.CommentDescriptor">Descriptor (sólo ID3):</string>
-    <string name="TagEdit.CommentHeaderDescriptor">Descriptor</string>
-    <string name="TagEdit.CommentHeaderLanguage">Lengua</string>
-    <string name="TagEdit.CommentHeaderComment">Comentario</string>
-    <string name="TagEdit.RemoveGenre">Quitar Género</string>
-    <string name="TagEdit.AddGenre">Añadir Género</string>
-    <string name="TagEdit.Genre">Género:</string>
-    <string name="TagEdit.Disc">Disco:</string>
-    <string name="TagEdit.BPM">BPM:</string>
-    <string name="TagEdit.GroupBoxPicture">Fotografía</string>
-    <string name="TagEdit.RemoveExistingPictures">Quitar primero fotos existentes</string>
-    <string name="TagEdit.ExportPicture">Exportar Foto</string>
-    <string name="TagEdit.RemovePicture">Quitar Foto</string>
-    <string name="TagEdit.GetPicture">Obtener de Archivo</string>
-    <string name="TagEdit.GetPictureInternet">Obtener de Internet</string>
-    <string name="TagEdit.PictureType">Tipo de Foto:</string>
-    <string name="TagEdit.PictureHeaderType">Tipo de Foto</string>
-    <string name="TagEdit.PictureDescriptor">Descriptor:</string>
-    <string name="TagEdit.GetTrackLength">Obtener Duración de Pista de Archivo</string>
-    <string name="TagEdit.TrackLength">Duración de Pista (ms):</string>
-    <string name="TagEdit.MediaType">Tipo de Medio:</string>
-    <string name="TagEdit.TitleSort">Ordenar por Título:</string>
-    <string name="TagEdit.AlbumSort">Ordenar por Álbum:</string>
-    <string name="TagEdit.ArtistSort">Ordenar por Artista:</string>
-    <string name="TagEdit.AlbumArtistSort">Ordenar por ÁlbumArtista:</string>
-    <string name="TagEdit.SubTitle">Subtítulo:</string>
-    <string name="TagEdit.ContentGroup">Grupo Contenido:</string>
-    <string name="TagEdit.Copyright">Copyright:</string>
-    <string name="TagEdit.EncodedBy">Codificado por:</string>
-    <string name="TagEdit.Publisher">Publicado por:</string>
-    <string name="TagEdit.TextWriter">Letras / Compositor:</string>
-    <string name="TagEdit.Interpreter">Interpretado por:</string>
-    <string name="TagEdit.Composer">Compositor:</string>
-    <string name="TagEdit.Conductor">Director:</string>
-    <string name="TagEdit.OriginalReleaseYear">Año de Lanzamiento:</string>
-    <string name="TagEdit.OriginalOwber">Propietario Original:</string>
-    <string name="TagEdit.OriginalArtist">Artista Original:</string>
-    <string name="TagEdit.OriginalTextWriter">Compositor de Letras Original:</string>
-    <string name="TagEdit.OriginalFileName">Nombre de Archivo Original:</string>
-    <string name="TagEdit.OriginalAlbumTitle">Título de Álbum Original:</string>
-    <string name="TagEdit.ID3V24only">Sólo ID3 V2.4</string>
-    <string name="TagEdit.RemoveMusician">Quitar Músico</string>
-    <string name="TagEdit.AddMusician">Añadir Músico</string>
-    <string name="TagEdit.MusicianName">Nombre de Músico:</string>
-    <string name="TagEdit.MusicianInstrument">Instrumento Musical:</string>
-    <string name="TagEdit.MusicianHeaderInstrument">Instrumento</string>
-    <string name="TagEdit.MusicianHeaderName">Nombre</string>
-    <string name="TagEdit.RemovePerson">Quitar Persona</string>
-    <string name="TagEdit.AddPerson">Añadir Persona</string>
-    <string name="TagEdit.PersonName">Nombre de la Persona Implicada:</string>
-    <string name="TagEdit.PersonFunction">Función de la Persona Implicada:</string>
-    <string name="TagEdit.PersonHeaderName">Nombre</string>
-    <string name="TagEdit.PersonHeaderFunction">Función</string>
-    <string name="TagEdit.CommercialUrl">URl de Información Comercial:</string>
-    <string name="TagEdit.PublisherUrl">URL Oficial  de la Editorial:</string>
-    <string name="TagEdit.PaymentUrl">URl Oficial para el Pago:</string>
-    <string name="TagEdit.InternetRadioUrl">URL Oficial de la Radio de Internet:</string>
-    <string name="TagEdit.AudioSourceUrl">URL Oficial de la Fuente de Audio:</string>
-    <string name="TagEdit.ArtistUrl">URL Oficial del Artista:</string>
-    <string name="TagEdit.AudioFileUrl">URL Oficial del Archivo de Audio:</string>
-    <string name="TagEdit.CopyrightUrl">URl Oficial de Copyright:</string>
-    <string name="TagEdit.GetLyricsFromInternet">Obtener Letras de Internet</string>
-    <string name="TagEdit.GetLyricsFromText">Obtener Letras de Archivo de Texto</string>
-    <string name="TagEdit.RemoveExistingLyrics">Quitar primero Letras existentes</string>
-    <string name="TagEdit.RemoveLyrics">Quitar Letras</string>
-    <string name="TagEdit.AddLyrics">Añadir Letras</string>
-    <string name="TagEdit.LyricsLanguage">Idioma (sólo ID3)</string>
-    <string name="TagEdit.LyricsDescriptor">Descriptor (sólo ID3)</string>
-    <string name="TagEdit.LyricsHeaderDescriptor">Descriptor</string>
-    <string name="TagEdit.LyricsHeaderLanguage">Lengua</string>
-    <string name="TagEdit.LyricsHeaderLyrics">Letras</string>
-    <string name="TagEdit.RemoveExistingRatings">Quitar primero Puntuaciónes existentes</string>
-    <string name="TagEdit.RatingNote">La puntuación es 1-255 donde 1 es peor y 255 mejor.0 es desconocido.\n\nNota: Muchos programas tienen su propia puntuación y pueden redefinir el estandard ID3.\nSi no se quiere contrarrestar el personal, puede ser omitido.</string>
-    <string name="TagEdit.PlayCounter">Contador de reproducción:</string>
-    <string name="TagEdit.RemoveRating">Quitar Puntuación</string>
-    <string name="TagEdit.AddRating">Añadir Puntuación</string>
-    <string name="TagEdit.Rating">Puntuación:</string>
-    <string name="TagEdit.RatingUser">Usuario (eMail):</string>
-    <string name="TagEdit.panelNavigation">Información de Etiqueta</string>
-    <string name="TagEdit.LinkUserDefined">Definido por Usuario</string>
-    <string name="TagEdit.LinkRating">Puntuación</string>
-    <string name="TagEdit.LinkLyrics">Letras</string>
-    <string name="TagEdit.LinkWeb">Información Web</string>
-    <string name="TagEdit.LinkInvolvedPeople">Personas participantes</string>
-    <string name="TagEdit.LinkOriginalInfo">Información Original</string>
-    <string name="TagEdit.LinkDetailedInfo">Información Detallada</string>
-    <string name="TagEdit.LinkMainTags">Principales Etiquetas</string>
-    <string name="TagEdit.LinkPictures">Fotos</string>
-    <string name="TagEdit.Cancel">Cancelar</string>
-    <string name="TagEdit.Apply">Aplicar</string>
-    <string name="TagEdit.Previous">Archivo anterior</string>
-    <string name="TagEdit.Next">Siguiente archivo</string>
-    <string name="TagEdit.Commands">Comandos</string>
-  
-  
-    <string name="dbsearch.Artist">Artista / Álbum (contiene):</string>
-    <string name="dbsearch.Album">Álbum (contiene):</string>
-    <string name="dbsearch.Title">Título (contiene):</string>
-    <string name="dbsearch.Search">Buscar</string>
-    <string name="dbsearch.NoMusicDB">Para usar la función de búsqueda de la base de datos,\ndebe introducir la localización de la base de datos en la Configuración</string>
-    <string name="dbsearch.NoSearchValues">Por favor, introduzca al menos un valor a buscar.</string>
-    <string name="dbsearch.TooMuchRows">La consulta devolvió demasiadas filas. Sólo se muestran las 1000 primeras.</string>
-  
-  
-    <string name="AmazonAlbumSearch.Header">Búsqueda de Álbum</string>
-    <string name="AmazonAlbumSearch.Close">Cancelar</string>
-    <string name="AmazonAlbumSearch.Update">Seleccionar</string>
-    <string name="AmazonAlbumSearch.Albums">Álbums</string>
-    <string name="AmazonAlbumSearch.GroupBoxResults">Se encontraron varios Álbums, Por favor seleccione ...</string>
-  
-  
-    <string name="MusicBrainz.Header">Buscar en Internet</string>
-    <string name="MusicBrainz.Cancel">Cancelar</string>
-    <string name="MusicBrainz.Update">Seleccione</string>
-    <string name="MusicBrainz.SearchInfo">Pista Identificada</string>
-    <string name="MusicBrainz.Album">Álbum</string>
-    <string name="MusicBrainz.Duration">Duración</string>
-    <string name="MusicBrainz.GroupBoxResults">La pista está disponible en varios álbums. Por favor, seleccione</string>
-  
-  
-    <string name="column_header.FileName">Nombre de Archivo</string>
-    <string name="column_header.FilePath">Ruta</string>
-    <string name="column_header.NewFileName">Nuevo Nombre de Archivo</string>
-    <string name="column_header.Status">Estado</string>
-    <string name="column_header.Track">Pista</string>
-    <string name="column_header.NumTracks">Num. Pistas</string>
-    <string name="column_header.Title">Título</string>
-    <string name="column_header.Artist">Artista</string>
-    <string name="column_header.AlbumArtist">Álbum Artista</string>
-    <string name="column_header.Album">Álbum</string>
-    <string name="column_header.Year">Año</string>
-    <string name="column_header.Genre">Género</string>
-    <string name="column_header.CreationTime">Creado</string>
-    <string name="column_header.LastWriteTime">Cambiado</string>
-    <string name="column_header.TagType">Tipo</string>
-    <string name="column_header.Disc">Disco #</string>
-    <string name="column_header.NumDisc">Num. Discos</string>
-    <string name="column_header.BPM">BPM</string>
-    <string name="column_header.Rating">Puntuación</string>
-    <string name="column_header.Comment">Comentario</string>
-    <string name="column_header.Composer">Compositor</string>
-    <string name="column_header.Conductor">Director</string>
-    <string name="column_header.NumPics"># Fotos</string>
-    <string name="column_header.Picture">Foto</string>
-    <string name="column_header.ArtistSortName">Ordenar por Artista</string>
-    <string name="column_header.AlbumSortName">Ordenar por Álbum</string>
-    <string name="column_header.CommercialInformation">Información Comercial</string>
-    <string name="column_header.Copyright">Copyright</string>
-    <string name="column_header.CopyrightInformation">Información de Copyright</string>
-    <string name="column_header.EncodedBy">Codificado por</string>
-    <string name="column_header.Interpreter">Interpretado por</string>
-    <string name="column_header.Grouping">Agrupación</string>
-    <string name="column_header.Lyrics">Letras</string>
-    <string name="column_header.MediaType">Tipo de Medio</string>
-    <string name="column_header.OfficialAudioFileInformation">Información Ofi. de Audio</string>
-    <string name="column_header.OfficialArtistInformation">Info. Oficial de Artista</string>
-    <string name="column_header.OfficialAudioSourceInformation">Info. Oficial Fuente de Audio</string>
-    <string name="column_header.OfficialInternetRadioInformation">Info. Oficial Internet Radio</string>
-    <string name="column_header.OfficialPaymentInformation">Info. Oficial de Pago</string>
-    <string name="column_header.OfficialPublisherInformation">Info. Oficial Editorial</string>
-    <string name="column_header.OriginalAlbum">Álbum Original</string>
-    <string name="column_header.OriginalFileName">Archivo Original</string>
-    <string name="column_header.OriginalLyricsWriter">Compositor Original</string>
-    <string name="column_header.OriginalArtist">Artista Original</string>
-    <string name="column_header.OriginalOwner">Propietario Original</string>
-    <string name="column_header.OriginalRelease">Lanzamiento</string>
-    <string name="column_header.Publisher">Sello</string>
-    <string name="column_header.SubTitle">Subtítulo</string>
-    <string name="column_header.TextWriter">Compositor</string>
-    <string name="column_header.TitleSortName">Ordenar por Título</string>
-    <string name="column_header.Duration">Duración</string>
-    <string name="column_header.FileSize">Tamaño (kb)</string>
-    <string name="column_header.BitRate">Bitrate</string>
-    <string name="column_header.SampleRate">Muestreo</string>
-    <string name="column_header.Channels">Canales</string>
-    <string name="column_header.Version">Codec</string>
-  
-  
-    <string name="contextmenu.AddBurner">Añadir elemento(s) al Grabador</string>
-    <string name="contextmenu.AddConverter">Añadir elemento(s) al Conversor</string>
-    <string name="contextmenu.AddPlayList">Añadir elemento(s) a la Lista de Reproducción</string>
-    <string name="contextmenu.SavePlayList">Guardar elemento(s) como Lista de Reproducción</string>
-    <string name="contextmenu.CreateFolderThumb">Crear Miniatura de Carpeta</string>
-    <string name="contextmenu.Copy">Copiar</string>
-    <string name="contextmenu.Cut">Cortar</string>
-    <string name="contextmenu.Paste">Pegar</string>
-    <string name="contextmenu.Delete">Borrar</string>
-    <string name="contextmenu.Refresh">Refrescar</string>
-    <string name="contextmenu.SelectAll">Seleccionar Todo</string>
-    <string name="contextmenu.InsertFilter">Insertar Filtro</string>
-    <string name="contextmenu.DeleteFilter">Borrar Filtro</string>
-  
-  
-    <string name="TagAndRename.HeadingTag">Etiquetar desde Nombre de Archivo</string>
-    <string name="TagAndRename.HeadingRename">Renombrar Archivo</string>
-    <string name="TagAndRename.Apply">Aplicar</string>
-    <string name="TagAndRename.Cancel">Cancelar</string>
-    <string name="TagAndRename.Format">Formato:</string>
-    <string name="TagAndRename.RemoveFormat">Quitar formato de la lista</string>
-    <string name="TagAndRename.AddFormat">Añadir formato a la lista</string>
-    <string name="TagAndRename.GroupBoxParm">Parámetros (Click para añadir a la lista)</string>
-    <string name="TagAndRename.Folder">\ = Carpeta:  Si están enfrente de la carpeta, especifica que los parámetros\ndeben tomarse del nombre de la carpeta</string>
-    <string name="TagAndRename.Unused">&lt;X&gt; = Sin Usar</string>
-    <string name="TagAndRename.Comment">&lt;C&gt; = Comentario</string>
-    <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orquesta / Álbum Artista</string>
-    <string name="TagAndRename.Genre">&lt;G&gt; = Género</string>
-    <string name="TagAndRename.DiscTotal">&lt;d&gt; = # Total de discos</string>
-    <string name="TagAndRename.Disc">&lt;D&gt; = Número de Disco</string>
-    <string name="TagAndRename.TrackTotal">&lt;k&gt; = # Total de Pistas</string>
-    <string name="TagAndRename.Track">&lt;K&gt; = Pista Número</string>
-    <string name="TagAndRename.Year">&lt;Y&gt; = Año</string>
-    <string name="TagAndRename.Album">&lt;B&gt; = Álbum</string>
-    <string name="TagAndRename.Title">&lt;T&gt; = Título</string>
-    <string name="TagAndRename.Artist">&lt;A&gt; = Artista</string>
-    <string name="TagAndRename.Conductor">&lt;N&gt; = Director</string>
-    <string name="TagAndRename.Composer">&lt;R&gt; = Compositor</string>
-    <string name="TagAndRename.Group">&lt;U&gt; = Grupo de Contenido</string>
-    <string name="TagAndRename.SubTitle">&lt;S&gt; = Subtítulo</string>
-    <string name="TagAndRename.BPM">&lt;E&gt; = BPM</string>
-    <string name="TagAndRename.ModifiedBY">&lt;M&gt; = Modificado / Remezclado por</string>
-    <string name="TagAndRename.Filename">&lt;F&gt; = Nombre de Archivo Actual</string>
-    <string name="TagAndRename.Enumerate">&lt;#&gt; = Enumerar Archivos</string>
-    <string name="TagAndRename.BitRate">&lt;I&gt; = Bitrate</string>
-    <string name="TagAndRename.FirstNofArtist">&lt;A:n&gt; = Primeros "n" caracteres del Artista</string>
-    <string name="TagAndRename.FirstNofAlbumArtist">&lt;O:n&gt; = Primeros "n" Caracteres del Album Artista</string>
-    <string name="TagAndRename.StartAt">Comienza a</string>
-    <string name="TagAndRename.NumberDigits">Número de Dígitos</string>
-    <string name="TagAndRename.NameTooLong">Nombre de archivo demasiado largo. Por favor, cámbielo</string>
-    <string name="TagAndRename.FileExists">El archivo ya existe. ¿Usar etiquetas comunes?</string>
-    <string name="TagAndRename.Rename">No se puede renombrar el Archivo {0}: {1}</string>
-    <string name="TagAndRename.InvalidParm">Parámetro de Formato Inválido. Por favor, corríjalos</string>
-    <string name="TagAndRename.Original">Original:</string>
-    <string name="TagAndRename.Preview">Vista Previa</string>
-  
-  
-    <string name="CaseConversion.Header">Caja de Conversión</string>
-    <string name="CaseConversion.TabSettings">Configuración</string>
-    <string name="CaseConversion.GroupBoxOptions">Opciones</string>
-    <string name="CaseConversion.AlwaysUpperCaseFirstLetter">Primera letra siempre en Mayúsculas</string>
-    <string name="CaseConversion.ReplaceSpaceByUnderscore">Reemplazar Espacio por "_"</string>
-    <string name="CaseConversion.ReplaceUnderscoreBySpace">Reemplazar "_" por Espacio</string>
-    <string name="CaseConversion.ReplaceSpaceby20">Reemplazar Espacio por "%20"</string>
-    <string name="CaseConversion.Replace20bySpace">Reemplazar "%20" por Espacio</string>
-    <string name="CaseConversion.GroupBoxMethod">Método de Conversión</string>
-    <string name="CaseConversion.AllFirstLetterUpperCase">Todas las Primeras Letras en Mayúsculas</string>
-    <string name="CaseConversion.FirstLetterUpperCase">Primera Letra en Mayúsculas</string>
-    <string name="CaseConversion.AllUpperCase">Todas en Mayúsculas</string>
-    <string name="CaseConversion.AllLowerCase">Todas en Minúsculas</string>
-    <string name="CaseConversion.GroupBoxConvert">Convertir etiquetas por ...</string>
-    <string name="CaseConversion.Comment">Comentario</string>
-    <string name="CaseConversion.Title">Título</string>
-    <string name="CaseConversion.Album">Álbum</string>
-    <string name="CaseConversion.AlbumArtist">ÁlbumArtista</string>
-    <string name="CaseConversion.Artist">Artista</string>
-    <string name="CaseConversion.ConvertTags">Convertir Etiquetas</string>
-    <string name="CaseConversion.ConvertFileName">Convertir nombre de archivo</string>
-    <string name="CaseConversion.Exceptions">Excepciones</string>
-    <string name="CaseConversion.RemoveException">Quitar</string>
-    <string name="CaseConversion.AddException">Añadir</string>
-    <string name="CaseConversion.Convert">Convertir</string>
-    <string name="CaseConversion.Cancel">Cancelar</string>
-  
-  
-    <string name="Burning.NoMedia">No se encontró disco en la unidad.  Por favor, inserte un disco vacío.</string>
-    <string name="Burning.DragAndDrop">Use Arrastrar y Soltar para ordenar las pistas a grabar</string>
-    <string name="Burning.Decoding">Decodificando archivos ...</string>
-    <string name="Burning.Cancelled">Grabación cancelada</string>
-    <string name="Burning.Checking">Comprobando disco</string>
-    <string name="Burning.Erasing">Borrando disco regrabable</string>
-    <string name="Burning.Leadin">Escribiendo Leadin</string>
-    <string name="Burning.Leadout">Escribiendo Leadout</string>
-    <string name="Burning.Burning">Grabando ...</string>
-    <string name="Burning.Finished">Grabación Terminada</string>
-    <string name="Burning.Failed">Grabación fallida: {0}</string>
-    <string name="Burning.FinishedMedia">No se puede grabar en un disco finalizado. Por favor, inserte un disco vacío.</string>
-    <string name="Burning.ClearList">Limpiar lista</string>
-    <string name="Burning.Retrieving">Recuperando información de disco ...</string>
-    <string name="Burning.MediaInfo">Disco: {0} ({1} minutos) Estado: {2}</string>
-    <string name="Burning.Used">Usado: {0}:{1} ( {2} Pista(s))</string>
-    <string name="Burning.Capacity">Atención: La colección excede la capacidad del dispositivo. Quite algunos archivos.</string>
-  
-  
-    <string name="progress.ScanningHeader">Obteniendo etiquetas de pista</string>
-    <string name="progress.Scanning">Obteniendo etiquetas de la pista {0}/{1}</string>
-    <string name="progress.Cancel">Cancelar</string>
-    <string name="progress.SavingHeader">Guardando pistas</string>
-    <string name="progress.Saving">Guardando pista {0}/{1}</string>
-    <string name="progress.InternetHeader">Búsqueda de Internet</string>
-    <string name="progress.Internet">Recuperando información para la pista {0}/{1}</string>
-    <string name="progress.InternetMusicBrainz">Obteniendo huella e identificando archivo</string>
-    <string name="progress.InternetAlbum">Recuperando información de Álbum</string>
-    <string name="progress.CoverArtHeader">Búsqueda de portada</string>
-    <string name="progress.CoverArt">Recuperando Portada de la pista {0}/{1}</string>
-    <string name="progress.LyricsHeader">Búsqueda de Letras</string>
-    <string name="progress.Lyrics">Recuperando Letras de la pista {0}/{1}</string>
-  
-  
-    <string name="FreeDB.Header">Resultados de la búsqueda FreeDB</string>
-    <string name="FreeDB.MultipleMatches">Se encontraron múltiples coincidencias en FreeDB. Por favor, seleccione un disco válido</string>
-    <string name="FreeDB.Ok">Ok</string>
-    <string name="FreeDB.Cancel">Cancelar</string>
-  
-  
-    <string name="Lookup.HeaderArtistAlbum">Búsqueda de Internet - Especificar Artista / Álbum</string>
-    <string name="Lookup.Continue">Continuar &gt;</string>
-    <string name="Lookup.Cancel">Cancelar</string>
-    <string name="Lookup.NoAlbumFound">No se encontró ningún álbum, por favor, elija otro criterio de selección.</string>
-    <string name="Lookup.HeaderSearchResult">Se encontraron múltiples Albums. Por favor, seleccione ...</string>
-    <string name="Lookup.ColArtist">Artista</string>
-    <string name="Lookup.ColAlbum">Álbum</string>
-    <string name="Lookup.ColTracks"># Pistas</string>
-    <string name="Lookup.ColYear">Año</string>
-    <string name="Lookup.ColLabel">Discográfica</string>
-    <string name="Lookup.HeaderDetails">Detalles del Álbum seleccionado</string>
-    <string name="Lookup.AlbumTracks">Pistas en el Álbum</string>
-    <string name="Lookup.TracksToTag">Pistas a etiquetar</string>
-    <string name="Lookup.ColTrackNum">#</string>
-    <string name="Lookup.ColTitle">Título</string>
-    <string name="Lookup.ColFileName">Nombre de Archivo</string>
-    <string name="Lookup.Unassigned">&lt; Sin asignar &gt;</string>
-    <string name="Lookup.MoveUp">Mover arriba</string>
-    <string name="Lookup.MoveDown">Mover abajo</string>
-  
-  
-    <string name="message.Ok">Ok</string>
-    <string name="message.Error">Error</string>
-    <string name="message.Error_Title">Error</string>
-    <string name="message.Save_Changes">Los cambios no se han guardado. ¿Quiere salvar los cambios?</string>
-    <string name="message.Save_Changes_Title">Guardar Cambios</string>
-    <string name="message.Script_Compile_Failed">La compilación del script falló.\n\nPor favor, busque el error en el log y corríjalo.</string>
-    <string name="message.DataEntryError">El valor especificado no es válido.</string>
-    <string name="message.NoSelectionHeader">No hay selección</string>
-    <string name="message.NoSelection">Por favor, seleccione al menos una fila para realizar la acción</string>
-    <string name="message.DeleteConfirmHeader">Borrar Archivo(s)</string>
-    <string name="message.DeleteConfirm">¿Quiere borrar realmente los archivos seleccionados?</string>
-    <string name="message.DeleteFolders">Para borrar una carpeta, por favor, use May-Sup</string>
-    <string name="message.Fixed">Corregido</string>
-  
-  
-    <string name="about.Header">Acerca de</string>
-    <string name="about.Ok">Ok</string>
-    <string name="about.Description">MPTagThat es un editor de etiquetas de código libre que permite la gestión completa de su Colección de Música.\n\nMás información en:</string>
-    <string name="about.Version">Versión:</string>
-    <string name="about.BuildDate">Fecha:</string>
-  
-  
-    <string name="player.Title">Título</string>
-    <string name="player.Artist">Artista</string>
-    <string name="player.Album">Álbum</string>
-    <string name="player.PlayListButton">LR</string>
-    <string name="player.PlayListLoad">Cargar</string>
-    <string name="player.PlayListSave">Guardar</string>
-    <string name="player.ClearPlayList">Limpiar Lista</string>
-    <string name="player.LoadPlayList">Cargar Lista</string>
-    <string name="player.SavePlayList">Guardar Lista</string>
-    <string name="player.UseRelativePath">Usar ruta relativa</string>
-  
-  
-    <string name="Conversion.ErrorDirectory">Error creando Directorio de Música</string>
-    <string name="Conversion.SameFile">Conversión abortada: Archivos de entrada y salida son los mismos</string>
-    <string name="Conversion.OpenFileError">Error abriendo Archivo</string>
-    <string name="Conversion.EncodingFileError">Error convirtiendo Archivo</string>
-    <string name="Conversion.Ripping">Extrayendo ...</string>
-    <string name="Conversion.RippingFinished">Finalizada la extracción de las pistas de audio seleccionadas.</string>
-    <string name="Conversion.FreeDBAccess">Recuperando información de CD de FreeDB ...</string>
-  
-  
-    <string name="ColumnSelect.Header">Seleccione columnas a mostrar</string>
-    <string name="ColumnSelect.Ok">Ok</string>
-    <string name="ColumnSelect.Cancel">Cancelar</string>
-  
-  
-    <string name="organise.Heading">Organizar Archivos</string>
-    <string name="organise.TargetRootDrectory">Especificar Directorio Raiz:</string>
-    <string name="organise.BrowseRootDir">Explorar</string>
-    <string name="organise.OverWriteFiles">Sobreescribir archivos existentes</string>
-    <string name="organise.CopyFiles">Copiar archivos en vez de moverlos</string>
-    <string name="organise.CopyNonMusicFiles">Copiar/Mover archivos no musicales\n(Ej. Fotos, Textos, etc.)</string>
-    <string name="organise.InvalidParm">Formato de parámetro no válido. Por favor, corríjalo</string>
-    <string name="organise.FileExists">El archivo ya existe. No será reemplazado</string>
-    <string name="organise.SameFile">El archivo de origen y destino son el mismo. Archivo omitido</string>
-    <string name="organise.Exists">Existe</string>
-    <string name="organise.Copied">Copiado</string>
-    <string name="organise.Moved">Movido</string>
-    <string name="organise.GroupBoxOptions">Opciones</string>
-    <string name="organise.ButtonOrganise">Organizar</string>
-  
-  
-    <string name="Settings.Heading">Configuración</string>
-    <string name="Settings.NavigationPanel">Navegación</string>
-    <string name="Settings.Blue">Azul</string>
-    <string name="Settings.Silver">Plata</string>
-    <string name="Settings.Black">Negro</string>
-    <string name="Settings.EncoderMP3">MP3 Encoder</string>
-    <string name="Settings.EncoderOgg">OGG Encoder</string>
-    <string name="Settings.EncoderFlac">Flac Encoder</string>
-    <string name="Settings.EncoderAAC">AAC Encoder</string>
-    <string name="Settings.EncoderWMA">WMA Encoder</string>
-    <string name="Settings.EncoderWAV">WAV Encoder</string>
-    <string name="Settings.EncoderMPC">Musepack Encoder</string>
-    <string name="Settings.EncoderWV">WavPack Encoder</string>
-    <string name="Settings.EncoderWMAStandard">Windows Media Audio Standard</string>
-    <string name="Settings.EncoderWMAPro">Windows Media Audio Professional</string>
-    <string name="Settings.EncoderWMALossless">Windows Media Audio Lossless</string>
-    <string name="Settings.EncoderMPCStandard">Alta Calidad (142-184 kbps)</string>
-    <string name="Settings.EncoderMPCxtreme">Calidad Extrema (168-212 kbps)</string>
-    <string name="Settings.EncoderMPCinsane">Calidad Insana (232-268 kbps)</string>
-    <string name="Settings.EncoderMPCbraindead">La más Alta Calidad (232-278 kbps)</string>
-    <string name="Settings.EncoderWVFast">Modo Rápido (rápido, pero compromete el ratio de compresión)</string>
-    <string name="Settings.EncoderWVHigh">Alta Calidad (mejor compresión, pero más lento)</string>
-    <string name="Settings.Stereo">Estéreo</string>
-    <string name="Settings.Mono">Mono</string>
-    <string name="Settings.ParametricStereo">Estéreo Paramétrico</string>
-    <string name="Settings.Cbr">CBR</string>
-    <string name="Settings.Vbr">VBR</string>
-    <string name="Settings.InvalidParm">Formato de parámetro no válido del archivo extraido. Por favor, corríjalo.</string>
-    <string name="Settings.DescPrefMedium">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música.</string>
-    <string name="Settings.DescPrefStandard">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música, y es ya de bastante Alta Calidad</string>
-    <string name="Settings.DescPrefExtreme">Si tiene buen oido y buen equipamiento, este preajuste generalmente le proveerá de una calidad un poco más alta que el modo "standard".</string>
-    <string name="Settings.DescPrefInsane">CBR 320 kbps. Este preajuste será demasiado para la mayoría de la gente y la mayoría de las situaciones, pero si quiere la calidad absolutamente más alta sin preocuparse del tamaño de archivo, este es la adecuado.</string>
-    <string name="Settings.DescPrefABR">Para modos ABR (alta calidad para un bitrate dado pero no tan alta como VBR). Usando este preajuste le dará normalmente buena calidad al bitrate especificado.\n\nDependiendo del bitrate introducido, este preajuste determinará la configuración óptima para la situación en particular. Aunque este método funciona, no es tan flexible como VBR, y normalmente no se obtendrá el mismo nivel de calidad de VBR a  bitrate más altos.</string>
-    <string name="Settings.TabGeneral">General</string>
-    <string name="Settings.GroupBoxKeys">Atajos de Teclado</string>
-    <string name="Settings.ChangeKey">Cambiar</string>
-    <string name="Settings.Shift">Mayus</string>
-    <string name="Settings.Ctrl">Ctrl</string>
-    <string name="Settings.Alt">Alt</string>
-    <string name="Settings.KeyDescription">Descripción:</string>
-    <string name="Settings.KeyAction">Acción:</string>
-    <string name="Settings.GroupBoxGeneral">Configuración General</string>
-    <string name="Settings.DebugLevel">Debug Level:</string>
-    <string name="Settings.Theme">Tema:</string>
-    <string name="Settings.Language">Idioma:</string>
-    <string name="Settings.TabTags">Etiquetas</string>
-    <string name="Settings.TabTagsID3">ID3</string>
-    <string name="Settings.TabTagsLyricsCover">Letras / Portada</string>
-    <string name="Settings.TabTagsDatabase">Base de Datos</string>
-    <string name="Settings.GroupBoxPictures">Fotos</string>
-    <string name="Settings.OverwriteExistingCover">Sobreescribir Portada(s) existente(s) en etiquetado automático</string>
-    <string name="Settings.EmbedExistingThumb">Insertar miniatura de carpeta existente (Carpeta.jpg) en búsqueda de portadas</string>
-    <string name="Settings.AmazonSite">Sitio de Búsqueda Amazon:</string>
-    <string name="Settings.GroupBoxLyrics">Letras</string>
-    <string name="Settings.SwitchArtist">Cambiar Artista antes de enviar</string>
-    <string name="Settings.OverwriteExistingLyrics">Sobreescribir Letras existentes en etiquetado automático</string>
-    <string name="Settings.GroupBoxLyricsSites">Sitios para buscar</string>
-	<string name="Settings.LyricsPlugin">LyricsPlugin</string>
-    <string name="Settings.LyricsOnDemand">Lyrics On Demand</string>
-    <string name="Settings.Lyrics007">Lyrics007</string>
-    <string name="Settings.HotLyrics">Hot Lyrics</string>
-    <string name="Settings.LyricWiki">Lyric Wiki</string>
-    <string name="Settings.Actionext">Actionext</string>
-    <string name="Settings.LyrDB">LyrDB</string>
-    <string name="Settings.LrcFinder">Lrc Finder</string>
-    <string name="Settings.GroupBoxTagsGeneral">General</string>
-    <string name="Settings.CopyArtist">Copiar Artista a ÁlbumArtista cuando esté vacío</string>
-    <string name="Settings.AutoFillNumberTracks">Auto rellenar "Número de Pistas" en Edición Múltiple de Etiquetas</string>
-    <string name="Settings.CaseConversion">Usar configuración de la Caja de Conversión al guardar</string>
-    <string name="Settings.CreateMissingFolderThumb">Crear miniaturas de carpeta ausentes (carpeta.jpg) al Guardar</string>
-    <string name="Settings.AutoCompletion">Usar Base de Datos de Música de MediaPortal para Autocompletar el Artista</string>
-    <string name="Settings.GroupBoxTagsID3">ID3</string>
-    <string name="Settings.UseV4">Usar Version 2.4 para Etiquetas ID3 V2</string>
-    <string name="Settings.UseV3">Usar Version 2.3 para Etiquetas ID3 V2</string>
-    <string name="Settings.UseAPE">Usar APE y etiquetas ID3 V1</string>
-    <string name="Settings.GroupBoxID3Update">Actualizar</string>
-    <string name="Settings.RemoveID3V1">Quitar ID3V1</string>
-    <string name="Settings.RemoveID3V2">Quitar ID3V2</string>
-    <string name="Settings.ID3Both">ID3V1 y ID3V2</string>
-    <string name="Settings.ID3V2">ID3V2</string>
-    <string name="Settings.ID3V1">ID3V1</string>
-    <string name="Settings.GroupBoxTagsValidate">Validación de Archivo MP3</string>
-    <string name="Settings.ValidateMP3">Validar archivos Mp3 mientras se escanea la carpeta / base de datos</string>
-    <string name="Settings.AutoFixMP3">Reparar automáticamente archivos MP3 erróneos</string>
-    <string name="Settings.GroupBoxDatabaseBuild">Construcción de Base de Datos Musical</string>
-    <string name="Settings.DatabaseScanNote">Si no está disponible la base de datos de música de MediaPortal, se puede crear una base de datos\nintroduciendo un nombre de archivo en el campo de texto. Después comience el escaneo.</string>
-    <string name="Settings.StartDBScan">Comenzar Escaneo</string>
-    <string name="Settings.DBScanStatus">Estado de Escaneo</string>
-    <string name="Settings.DBNotExists">La base de datos seleccionada no existe.\nSi selecciona "Yes" se creará una nueva base de datos\nComience un escaneo para rellenar la base de datos.</string>
-    <string name="Settings.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
-    <string name="Settings.SelectMusicFolder">Seleccione la carpeta con sus Archivos de Música</string>
-    <string name="Settings.DBScanIdle">Escaneo de la Base de datos no activo</string>
-    <string name="Settings.DBScanFinished">Escaneo de la Base de Datos realizado.\nProcesadas {0} pistas en: {1:d2}:{2:d2}:{3:d2}{4}</string>
-    <string name="Settings.DBScanTrackSummary"> ({0} segundos por pista)</string>
-    <string name="Settings.DBScanTitle">Confirme interrupción del Escaneo de la Base de Datos</string>
-    <string name="Settings.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
-    <string name="Settings.DBScanProgress">Progreso de archivo {0} de {1}</string>
-    <string name="Settings.TabRipping">Extrayendo</string>
-    <string name="Settings.TabRippingGeneral">General</string>
-    <string name="Settings.CustomPath">Rutas y Nombres de Archivo Personalizados</string>
-    <string name="Settings.Format">Formato:</string>
-    <string name="Settings.TargetFolder">Carpeta de Destino:</string>
-    <string name="Settings.GroupBoxEncoding">Formato de Codificación</string>
-    <string name="Settings.EncodingFormat">Seleccione el formato en el que quiere convertir:</string>
-    <string name="Settings.TabRippingMP3">MP3</string>
-    <string name="Settings.GroupBoxMp3Experts">Ajustes de Experto</string>
-    <string name="Settings.LameExpertsWarning">Atención: La configuración de los preajustes no se utilizará cuando especifique parámetros de LAME</string>
-    <string name="Settings.LameExpertOptions">Introduzca parámetros del Encoder LAME (sólo expertos):</string>
-    <string name="Settings.GroupBoxPresets">Preajustes del Encoder MP3</string>
-    <string name="Settings.ABRBitrate">ABR Bitrate:</string>
-    <string name="Settings.Preset">Preajuste:</string>
-    <string name="Settings.TabRippingOGG">OGG</string>
-    <string name="Settings.GroupBoxOggExpert">Ajustes de Experto</string>
-    <string name="Settings.OggExpertWarning">Atención: Los ajustes anteriores no serán utilizados cuando especifique parámetros de experto de Ogg</string>
-    <string name="Settings.OggExpert">Introduzca parámetros del Encoder OGG (Sólo expertos):</string>
-    <string name="Settings.GroupBoxOggEncoding">Configuración de conversión OGG</string>
-    <string name="Settings.OggQuality">Calidad:</string>
-    <string name="Settings.TabRippingFlac">FLAC</string>
-    <string name="Settings.GroupBoxFlacSettings">Ajustes de Experto</string>
-    <string name="Settings.FlacExpertsWarning">Atención: Los ajustes anteriores no se usarán cuando se especifiquen parámetros de experto FLAC</string>
-    <string name="Settings.FlacExperts">Introduzca parámetros del Encoder FLAC (Sólo expertos):</string>
-    <string name="Settings.GroupBoxFlacEncoding">Configuración de converión FLAC</string>
-    <string name="Settings.FlacQuality">Calidad:</string>
-    <string name="Settings.TabRippingAAC">AAC</string>
-    <string name="Settings.GroupBoxAACEncoding">Configuración de conversión AAC</string>
-    <string name="Settings.AACBitRate">Bitrate:</string>
-    <string name="Settings.TabRippingWMA">WMA</string>
-    <string name="Settings.GroupBoxWMASettings">Configuración de conversión WMA</string>
-    <string name="Settings.WMAQuality">Calidad:</string>
-    <string name="Settings.WMASample">Formato de Muestra:</string>
-    <string name="Settings.WMAEncoder">Formato de Encoder:</string>
-    <string name="Settings.TabRippingMPC">MPC</string>
-    <string name="Settings.GroupBoxMpcExperts">Ajustes de Experto</string>
-    <string name="Settings.MpcExpertsWarning">Atención: Los preajustes no serán usados cuando se especifiquen parámetros de Musepack </string>
-    <string name="Settings.MPCExpertOptions">Introduzca parámetros del Encoder Musepack  (Sólo expertos):</string>
-    <string name="Settings.GroupBoxMPCPresets">Preajustes del Encoder Musepack</string>
-    <string name="Settings.MPCPreset">Preajuste:</string>
-    <string name="Settings.TabRippingWV">WV</string>
-    <string name="Settings.groupBoxWvExperts">Ajustes de experto</string>
-    <string name="Settings.WvExpertsWarning">Atención: Los preajustes no serán usados cuando se especifiquen parámetros WavPack</string>
-    <string name="Settings.WvExpertOptions">Introduzca parámetros del Encoder WavPack (Sólo expertos):</string>
-    <string name="Settings.GroupBoxWvPresets">Preajustes del Encoder WavPack</string>
-    <string name="Settings.WvPreset">Preajuste:</string>
-    <string name="Settings.Cancel">Cancelar</string>
-    <string name="Settings.Apply">Aplicar</string>
-    <string name="Settings.LinkTags">Etiquetas</string>
-    <string name="Settings.LinkGeneral">General</string>
-    <string name="Settings.LinkRipping">Extracción  / Conversión</string>
-  
+  <string name="system.NotFound">### Cadena No Encontrada ###</string>
+  <string name="system.ApplicationName">MPTagThat el Editor de Etiquetas de MediaPortal</string>
+  <string name="splash.Version">Versión:</string>
+  <string name="splash.BuildDate">Fecha:</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Carpetas</string>
+  <string name="main.TreeViewPanelDatabase">Base de Datos</string>
+  <string name="main.TreeViewViews">Vistas</string>
+  <string name="main.TreeViewFilters">Filtro</string>
+  <string name="main.FilterUseTag">Usar Filtro de Etiqueta</string>
+  <string name="main.FilterHeadingField">Campo</string>
+  <string name="main.FilterHeadingFilter">Filtro</string>
+  <string name="main.FilterHeadingOperator">Operador</string>
+  <string name="main.FilterOperatorAnd">y</string>
+  <string name="main.FilterOperatorOr">o</string>
+  <string name="main.FilterFileMask">Archivo de Máscara</string>
+  <string name="main.FilterAllFiles">Todos los formatos de archivo soportados</string>
+  <string name="main.FilterActive">Filtro de Etiqueta: Activo</string>
+  <string name="main.FilterInActive">Filtro de Etiqueta: Inactivo</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Foto</string>
+  <string name="main.InformationPanel">Información</string>
+  <string name="main.PlayerPanel">Reproductor</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Opciones</string>
+  <string name="main.ScanSubfolder">Escanear subcarpetas</string>
+  <string name="main.ButtonRefreshFolder">Refrescar Vista\nde Carpetas</string>
+  <!--Misc. TabControl-->
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Archivo</string>
+  <string name="main.ErrorHeaderMessage">Mensaje</string>
+  <string name="main.ErrorContextMenuClear">Limpiar lista</string>
+  <!--Non Music File Listview-->
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Archivos: {0} (Seleccionados: {1})</string>
+  <string name="main.toolStripLabelPlay">Estado del Reproductor: Reproduciendo</string>
+  <string name="main.toolStripLabelPause">Estado del Reproductor: Pausado</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Configuración</string>
+  <string name="ribbon.Refresh">Refrescar</string>
+  <string name="ribbon.Save">Guardar</string>
+  <string name="ribbon.ColumnsSelect">Seleccionar Columnas a Mostrar</string>
+  <string name="ribbon.Exit">Salir</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Etiquetas</string>
+  <string name="ribbon.TagFromFile">Etiquetar desde Nombre de Archivo</string>
+  <string name="ribbon.RenameFile">Renombrar Archivo</string>
+  <string name="ribbon.RenameFileMenu">Renombrar Archivo</string>
+  <string name="ribbon.RenameFileOptions">Renombrar Opciones de Archivo</string>
+  <string name="ribbon.IdentifyFile">Identificar Archivo</string>
+  <string name="ribbon.TagFromInternet">Etiquetar desde Internet</string>
+  <string name="ribbon.SingleTagEdit">Edición de Etiqueta Única</string>
+  <string name="ribbon.MultiTagEdit">Edición Múltiple de Etiquetas</string>
+  <string name="ribbon.GetCoverArt">Obtener Portada</string>
+  <string name="ribbon.GetLyrics">Obtener Letras</string>
+  <string name="ribbon.AutoNumber">Autonumerar</string>
+  <string name="ribbon.NumberOnClick">Numerar al Pulsar</string>
+  <string name="ribbon.RemoveCommentPicture">Quitar:</string>
+  <string name="ribbon.RemoveComments">Quitar todos los comentarios</string>
+  <string name="ribbon.RemovePictures">Quitar todas las fotos</string>
+  <string name="ribbon.CaseConversion">Caja de Conversión</string>
+  <string name="ribbon.CaseConversionMenu">Caja de Conversión</string>
+  <string name="ribbon.CaseConversionOption">Opciones de Caja de Conversión</string>
+  <string name="ribbon.DeleteTags">Borrar Etiquetas</string>
+  <string name="ribbon.DeleteAllTags">Borrar Todas las Etiquetas</string>
+  <string name="ribbon.DeleteID3V1Tags">Borrar sólo Etiquetas ID3 V1</string>
+  <string name="ribbon.DeleteID3V2Tags">Borrar sólo Etiquetas ID3 V2</string>
+  <string name="ribbon.EditTags">Editar Etiquetas</string>
+  <string name="ribbon.RetrieveTags">Recuperar Etiquetas</string>
+  <string name="ribbon.OrganiseFiles">Organizar</string>
+  <string name="ribbon.SaveFolderThumb">Guardar como Miniatura\nde Carpeta</string>
+  <string name="ribbon.ExecuteScript">Ejecutar Script</string>
+  <string name="ribbon.Organise">Organizar Archivos</string>
+  <string name="ribbon.AddBurner">Añadir a Grabador</string>
+  <string name="ribbon.AddConvert">Añadir a Conversión</string>
+  <string name="ribbon.AddPlaylist">Añadir a Lista</string>
+  <string name="ribbon.Other">Otro</string>
+  <!--Rip Tab-->
+  <string name="ribbon.RipTab">Extraer</string>
+  <string name="ribbon.RipButton">Empezar Extracción</string>
+  <string name="ribbon.RipEncoder">Seleccionar Codificador:</string>
+  <string name="ribbon.RipFolder">Carpeta de Destino:</string>
+  <string name="ribbon.RipCancel">Cancelar Extracción</string>
+  <string name="ribbon.RipOptions">Opciones de Extracción</string>
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Convertir</string>
+  <string name="ribbon.ConvertButton">Empezar Conversión</string>
+  <string name="ribbon.ConvertEncoder">Seleccionar Codificador:</string>
+  <string name="ribbon.ConvertFolder">Carpeta de Destino:</string>
+  <string name="ribbon.ConvertCancel">Cancelar Conversión</string>
+  <string name="ribbon.ConvertOptions">Opciones de Conversión</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Grabar</string>
+  <string name="ribbon.Burn">Grabar</string>
+  <string name="ribbon.BurnCancel">Cancelar Grabación</string>
+  <string name="ribbon.BurnOptions">Opciones de Grabación</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Refrescar</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Etiquetar desde Nombre de Archivo</string>
+  <string name="screentip.IdentifyFile">Identificar Archivo</string>
+  <string name="screentip.TagFromInternet">Etiquetar desde Internet</string>
+  <string name="screentip.SingleTagEdit">Edición de Etiqueta Única</string>
+  <string name="screentip.MultiTagEdit">Edición Múltiple de Etiquetas</string>
+  <string name="screentip.GetCoverArt">Obtener Portada</string>
+  <string name="screentip.SaveFolderThumb">Guardar como Miniatura\nde Carpeta</string>
+  <string name="screentip.GetLyrics">Obtener Letras</string>
+  <string name="screentip.AutoNumber">Autonumerar</string>
+  <string name="screentip.NumberOnClick">Numerar al Pulsar</string>
+  <string name="screentip.RemoveComments">Quitar todos los comentarios</string>
+  <string name="screentip.RemovePictures">Quitar todas las fotos</string>
+  <string name="screentip.CaseConversion">Caja de Conversión</string>
+  <string name="screentip.DeleteTags">Borrar Etiquetas</string>
+  <string name="screentip.RenameFile">Renombrar Archivo</string>
+  <string name="screentip.Organise">Organizar Archivos</string>
+  <string name="screentip.ExecuteScript">Ejecutar Script</string>
+  <string name="screentip.AddBurner">Añadir a Grabador</string>
+  <string name="screentip.AddConvert">Añadir a Conversión</string>
+  <string name="screentip.AddPlaylist">Añadir a Lista</string>
+  <!--Rip Tab-->
+  <string name="screentip.RipButton">Empezar Extracción</string>
+  <string name="screentip.RipCancel">Cancelar Extracción</string>
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Empezar Conversión</string>
+  <string name="screentip.ConvertCancel">Cancelar Conversión</string>
+  <!--Burn Tab-->
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Edición Múltiple de Etiquetas</string>
+  <string name="TagEdit.SingleHeading">Editar Etiqueta</string>
+  <string name="TagEdit.HeaderUser">Definido por usuario</string>
+  <string name="TagEdit.HeaderRating">Puntuación</string>
+  <string name="TagEdit.HeaderLyrics">Letras</string>
+  <string name="TagEdit.HeaderWeb">Información Web</string>
+  <string name="TagEdit.HeaderInvolved">Personas Implicadas</string>
+  <string name="TagEdit.HeaderOriginal">Información Original</string>
+  <string name="TagEdit.HeaderDetail">Información Detallada</string>
+  <string name="TagEdit.HeaderMainTags">Principales Etiquetas</string>
+  <string name="TagEdit.HeaderPictures">Fotografías</string>
+  <!--Main Tags-->
+  <string name="TagEdit.AlbumArtist">ÁlbumArtista</string>
+  <string name="TagEdit.Track">Pista:</string>
+  <string name="TagEdit.Artist">Artista:</string>
+  <string name="TagEdit.Year">Año:</string>
+  <string name="TagEdit.Title">Título:</string>
+  <string name="TagEdit.Album">Álbum:</string>
+  <string name="TagEdit.GroupBoxComment">Comentario</string>
+  <string name="TagEdit.RemoveExistingComments">Quitar Comentarios primero</string>
+  <string name="TagEdit.MoveTop">Mover al Comienzo</string>
+  <string name="TagEdit.RemoveComment">Quitar Comentario</string>
+  <string name="TagEdit.AddComment">Añadir Comentario</string>
+  <string name="TagEdit.Comment">Comentario:</string>
+  <string name="TagEdit.CommentLanguage">Idioma (sólo ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Descriptor (sólo ID3):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Descriptor</string>
+  <string name="TagEdit.CommentHeaderLanguage">Lengua</string>
+  <string name="TagEdit.CommentHeaderComment">Comentario</string>
+  <string name="TagEdit.RemoveGenre">Quitar Género</string>
+  <string name="TagEdit.AddGenre">Añadir Género</string>
+  <string name="TagEdit.Genre">Género:</string>
+  <string name="TagEdit.Disc">Disco:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Fotografía</string>
+  <string name="TagEdit.RemoveExistingPictures">Quitar primero fotos existentes</string>
+  <string name="TagEdit.ExportPicture">Exportar Foto</string>
+  <string name="TagEdit.RemovePicture">Quitar Foto</string>
+  <string name="TagEdit.GetPicture">Obtener de Archivo</string>
+  <string name="TagEdit.GetPictureInternet">Obtener de Internet</string>
+  <string name="TagEdit.PictureType">Tipo de Foto:</string>
+  <string name="TagEdit.PictureHeaderType">Tipo de Foto</string>
+  <string name="TagEdit.PictureDescriptor">Descriptor:</string>
+  <!--Detailed Information-->
+  <string name="TagEdit.GetTrackLengthFromFile">Obtener de Archivo</string>
+  <string name="TagEdit.GetTrackLength">Obtener Duración de Pista de Archivo</string>
+  <string name="TagEdit.TrackLength">Duración de Pista (ms):</string>
+  <string name="TagEdit.MediaType">Tipo de Medio:</string>
+  <string name="TagEdit.TitleSort">Ordenar por Título:</string>
+  <string name="TagEdit.AlbumSort">Ordenar por Álbum:</string>
+  <string name="TagEdit.ArtistSort">Ordenar por Artista:</string>
+  <string name="TagEdit.AlbumArtistSort">Ordenar por ÁlbumArtista:</string>
+  <string name="TagEdit.SubTitle">Subtítulo:</string>
+  <string name="TagEdit.ContentGroup">Grupo Contenido:</string>
+  <string name="TagEdit.Copyright">Copyright:</string>
+  <string name="TagEdit.EncodedBy">Codificado por:</string>
+  <string name="TagEdit.Publisher">Publicado por:</string>
+  <string name="TagEdit.TextWriter">Letras / Compositor:</string>
+  <string name="TagEdit.Interpreter">Interpretado por:</string>
+  <string name="TagEdit.Composer">Compositor:</string>
+  <string name="TagEdit.Conductor">Director:</string>
+  <!--Original Information-->
+  <string name="TagEdit.OriginalReleaseYear">Año de Lanzamiento:</string>
+  <string name="TagEdit.OriginalOwber">Propietario Original:</string>
+  <string name="TagEdit.OriginalArtist">Artista Original:</string>
+  <string name="TagEdit.OriginalTextWriter">Compositor de Letras Original:</string>
+  <string name="TagEdit.OriginalFileName">Nombre de Archivo Original:</string>
+  <string name="TagEdit.OriginalAlbumTitle">Título de Álbum Original:</string>
+  <!--Involved Persons-->
+  <string name="TagEdit.ID3V24only">Sólo ID3 V2.4</string>
+  <string name="TagEdit.RemoveMusician">Quitar Músico</string>
+  <string name="TagEdit.AddMusician">Añadir Músico</string>
+  <string name="TagEdit.MusicianName">Nombre de Músico:</string>
+  <string name="TagEdit.MusicianInstrument">Instrumento Musical:</string>
+  <string name="TagEdit.MusicianHeaderInstrument">Instrumento</string>
+  <string name="TagEdit.MusicianHeaderName">Nombre</string>
+  <string name="TagEdit.RemovePerson">Quitar Persona</string>
+  <string name="TagEdit.AddPerson">Añadir Persona</string>
+  <string name="TagEdit.PersonName">Nombre de la Persona Implicada:</string>
+  <string name="TagEdit.PersonFunction">Función de la Persona Implicada:</string>
+  <string name="TagEdit.PersonHeaderName">Nombre</string>
+  <string name="TagEdit.PersonHeaderFunction">Función</string>
+  <!--Web Information-->
+  <string name="TagEdit.CommercialUrl">URl de Información Comercial:</string>
+  <string name="TagEdit.PublisherUrl">URL Oficial  de la Editorial:</string>
+  <string name="TagEdit.PaymentUrl">URl Oficial para el Pago:</string>
+  <string name="TagEdit.InternetRadioUrl">URL Oficial de la Radio de Internet:</string>
+  <string name="TagEdit.AudioSourceUrl">URL Oficial de la Fuente de Audio:</string>
+  <string name="TagEdit.ArtistUrl">URL Oficial del Artista:</string>
+  <string name="TagEdit.AudioFileUrl">URL Oficial del Archivo de Audio:</string>
+  <string name="TagEdit.CopyrightUrl">URl Oficial de Copyright:</string>
+  <!--Lyrics-->
+  <string name="TagEdit.GetLyricsFromInternet">Obtener Letras de Internet</string>
+  <string name="TagEdit.GetLyricsFromText">Obtener Letras de Archivo de Texto</string>
+  <string name="TagEdit.RemoveExistingLyrics">Quitar primero Letras existentes</string>
+  <string name="TagEdit.RemoveLyrics">Quitar Letras</string>
+  <string name="TagEdit.AddLyrics">Añadir Letras</string>
+  <string name="TagEdit.LyricsLanguage">Idioma (sólo ID3)</string>
+  <string name="TagEdit.LyricsDescriptor">Descriptor (sólo ID3)</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Descriptor</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Lengua</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Letras</string>
+  <!--Rating-->
+  <string name="TagEdit.RemoveExistingRatings">Quitar primero Puntuaciónes existentes</string>
+  <string name="TagEdit.RatingNote">La puntuación es 1-255 donde 1 es peor y 255 mejor.0 es desconocido.\n\nNota: Muchos programas tienen su propia puntuación y pueden redefinir el estandard ID3.\nSi no se quiere contrarrestar el personal, puede ser omitido.</string>
+  <string name="TagEdit.PlayCounter">Contador de reproducción:</string>
+  <string name="TagEdit.RemoveRating">Quitar Puntuación</string>
+  <string name="TagEdit.AddRating">Añadir Puntuación</string>
+  <string name="TagEdit.Rating">Puntuación:</string>
+  <string name="TagEdit.RatingUser">Usuario (eMail):</string>
+  <!--Navigation Pane-->
+  <string name="TagEdit.panelNavigation">Información de Etiqueta</string>
+  <string name="TagEdit.LinkUserDefined">Definido por Usuario</string>
+  <string name="TagEdit.LinkRating">Puntuación</string>
+  <string name="TagEdit.LinkLyrics">Letras</string>
+  <string name="TagEdit.LinkWeb">Información Web</string>
+  <string name="TagEdit.LinkInvolvedPeople">Personas participantes</string>
+  <string name="TagEdit.LinkOriginalInfo">Información Original</string>
+  <string name="TagEdit.LinkDetailedInfo">Información Detallada</string>
+  <string name="TagEdit.LinkMainTags">Principales Etiquetas</string>
+  <string name="TagEdit.LinkPictures">Fotos</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Cancelar</string>
+  <string name="TagEdit.Apply">Aplicar</string>
+  <!--Single Tag Edit Commands-->
+  <string name="TagEdit.Previous">Archivo anterior</string>
+  <string name="TagEdit.Next">Siguiente archivo</string>
+  <string name="TagEdit.Commands">Comandos</string>
+  <!--User Defined Frames-->
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Header">Encontrar Letras para {0} - {1}</string>
+  <string name="LyricsSearch.Cancel">Cancelar</string>
+  <string name="LyricsSearch.Site">Sitio web</string>
+  <string name="LyricsSearch.Result">Resultado</string>
+  <string name="LyricsSearch.Lyric">Letra</string>
+  <string name="LyricsSearch.GroupBoxSearchResults">Resultados de la búsqueda</string>
+  <string name="LyricsSearch.Title">Título:</string>
+  <string name="LyricsSearch.Update">Actualizar</string>
+  <string name="LyricsSearch.Find">Encontrar</string>
+  <string name="LyricsSearch.Close">Cerrar</string>
+  <string name="LyricsSearch.GroupBoxLyric">Letra</string>
+  <string name="LyricsSearch.Artist">Artista:</string>
+  <string name="LyricsSearch.GroupBoxSearchInfo">Buscar información</string>
+  <string name="LyricsSearch.SwitchArtist">Cambiar Artista</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.Heading">Búsqueda de Letras</string>
+  <string name="LyricsSearch.Status">Buscando Letras ... Por favor, espere</string>
+  <string name="LyricsSearch.Finished">Búsqueda finalizada. Deseleccione pistas con Letras incorrectas.</string>
+  <string name="LyricsSearch.NothingToSearch">No hay nada que buscar</string>
+  <string name="LyricsSearch.FoundLyrics">Ok</string>
+  <string name="LyricsSearch.NoLyricsFound">N/D</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Header">Búsqueda de Álbum</string>
+  <string name="AmazonAlbumSearch.Close">Cancelar</string>
+  <string name="AmazonAlbumSearch.Update">Seleccionar</string>
+  <string name="AmazonAlbumSearch.Search">Buscar</string>
+  <string name="AmazonAlbumSearch.Albums">Álbums</string>
+  <string name="AmazonAlbumSearch.GroupBoxResults">Se encontraron varios Álbums, Por favor seleccione ...</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Header">Buscar en Internet</string>
+  <string name="MusicBrainz.Cancel">Cancelar</string>
+  <string name="MusicBrainz.Update">Seleccione</string>
+  <string name="MusicBrainz.SearchInfo">Pista Identificada</string>
+  <string name="MusicBrainz.Album">Álbum</string>
+  <string name="MusicBrainz.Duration">Duración</string>
+  <string name="MusicBrainz.GroupBoxResults">La pista está disponible en varios álbums. Por favor, seleccione</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.FileName">Nombre de Archivo</string>
+  <string name="column_header.FilePath">Ruta</string>
+  <string name="column_header.NewFileName">Nuevo Nombre de Archivo</string>
+  <string name="column_header.Status">Estado</string>
+  <string name="column_header.Track">Pista</string>
+  <string name="column_header.NumTracks">Num. Pistas</string>
+  <string name="column_header.Title">Título</string>
+  <string name="column_header.Artist">Artista</string>
+  <string name="column_header.AlbumArtist">Álbum Artista</string>
+  <string name="column_header.Album">Álbum</string>
+  <string name="column_header.Year">Año</string>
+  <string name="column_header.Genre">Género</string>
+  <string name="column_header.CreationTime">Creado</string>
+  <string name="column_header.LastWriteTime">Cambiado</string>
+  <string name="column_header.TagType">Tipo</string>
+  <string name="column_header.Disc">Disco #</string>
+  <string name="column_header.NumDisc">Num. Discos</string>
+  <string name="column_header.BPM">BPM</string>
+  <string name="column_header.Rating">Puntuación</string>
+  <string name="column_header.Comment">Comentario</string>
+  <string name="column_header.Composer">Compositor</string>
+  <string name="column_header.Conductor">Director</string>
+  <string name="column_header.NumPics"># Fotos</string>
+  <string name="column_header.Picture">Foto</string>
+  <string name="column_header.ArtistSortName">Ordenar por Artista</string>
+  <string name="column_header.AlbumSortName">Ordenar por Álbum</string>
+  <string name="column_header.CommercialInformation">Información Comercial</string>
+  <string name="column_header.Copyright">Copyright</string>
+  <string name="column_header.CopyrightInformation">Información de Copyright</string>
+  <string name="column_header.EncodedBy">Codificado por</string>
+  <string name="column_header.Interpreter">Interpretado por</string>
+  <string name="column_header.Grouping">Agrupación</string>
+  <string name="column_header.Lyrics">Letras</string>
+  <string name="column_header.MediaType">Tipo de Medio</string>
+  <string name="column_header.OfficialAudioFileInformation">Información Ofi. de Audio</string>
+  <string name="column_header.OfficialArtistInformation">Info. Oficial de Artista</string>
+  <string name="column_header.OfficialAudioSourceInformation">Info. Oficial Fuente de Audio</string>
+  <string name="column_header.OfficialInternetRadioInformation">Info. Oficial Internet Radio</string>
+  <string name="column_header.OfficialPaymentInformation">Info. Oficial de Pago</string>
+  <string name="column_header.OfficialPublisherInformation">Info. Oficial Editorial</string>
+  <string name="column_header.OriginalAlbum">Álbum Original</string>
+  <string name="column_header.OriginalFileName">Archivo Original</string>
+  <string name="column_header.OriginalLyricsWriter">Compositor Original</string>
+  <string name="column_header.OriginalArtist">Artista Original</string>
+  <string name="column_header.OriginalOwner">Propietario Original</string>
+  <string name="column_header.OriginalRelease">Lanzamiento</string>
+  <string name="column_header.Publisher">Sello</string>
+  <string name="column_header.SubTitle">Subtítulo</string>
+  <string name="column_header.TextWriter">Compositor</string>
+  <string name="column_header.TitleSortName">Ordenar por Título</string>
+  <string name="column_header.Duration">Duración</string>
+  <string name="column_header.FileSize">Tamaño (kb)</string>
+  <string name="column_header.BitRate">Bitrate</string>
+  <string name="column_header.SampleRate">Muestreo</string>
+  <string name="column_header.Channels">Canales</string>
+  <string name="column_header.Version">Codec</string>
+  <!--Context Menus-->
+  <string name="contextmenu.AddBurner">Añadir elemento(s) al Grabador</string>
+  <string name="contextmenu.AddConverter">Añadir elemento(s) al Conversor</string>
+  <string name="contextmenu.AddPlayList">Añadir elemento(s) a la Lista de Reproducción</string>
+  <string name="contextmenu.SavePlayList">Guardar elemento(s) como Lista de Reproducción</string>
+  <string name="contextmenu.CreateFolderThumb">Crear Miniatura de Carpeta</string>
+  <string name="contextmenu.Copy">Copiar</string>
+  <string name="contextmenu.Cut">Cortar</string>
+  <string name="contextmenu.Paste">Pegar</string>
+  <string name="contextmenu.Delete">Borrar</string>
+  <string name="contextmenu.Refresh">Refrescar</string>
+  <string name="contextmenu.SelectAll">Seleccionar Todo</string>
+  <string name="contextmenu.InsertFilter">Insertar Filtro</string>
+  <string name="contextmenu.DeleteFilter">Borrar Filtro</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingTag">Etiquetar desde Nombre de Archivo</string>
+  <string name="TagAndRename.HeadingRename">Renombrar Archivo</string>
+  <string name="TagAndRename.Apply">Aplicar</string>
+  <string name="TagAndRename.Cancel">Cancelar</string>
+  <string name="TagAndRename.Format">Formato:</string>
+  <string name="TagAndRename.RemoveFormat">Quitar formato de la lista</string>
+  <string name="TagAndRename.AddFormat">Añadir formato a la lista</string>
+  <string name="TagAndRename.GroupBoxParm">Parámetros (Click para añadir a la lista)</string>
+  <string name="TagAndRename.Folder">\ = Carpeta:  Si están enfrente de la carpeta, especifica que los parámetros\ndeben tomarse del nombre de la carpeta</string>
+  <string name="TagAndRename.Unused">&lt;X&gt; = Sin Usar</string>
+  <string name="TagAndRename.Comment">&lt;C&gt; = Comentario</string>
+  <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orquesta / Álbum Artista</string>
+  <string name="TagAndRename.Genre">&lt;G&gt; = Género</string>
+  <string name="TagAndRename.DiscTotal">&lt;d&gt; = # Total de discos</string>
+  <string name="TagAndRename.Disc">&lt;D&gt; = Número de Disco</string>
+  <string name="TagAndRename.TrackTotal">&lt;k&gt; = # Total de Pistas</string>
+  <string name="TagAndRename.Track">&lt;K&gt; = Pista Número</string>
+  <string name="TagAndRename.Year">&lt;Y&gt; = Año</string>
+  <string name="TagAndRename.Album">&lt;B&gt; = Álbum</string>
+  <string name="TagAndRename.Title">&lt;T&gt; = Título</string>
+  <string name="TagAndRename.Artist">&lt;A&gt; = Artista</string>
+  <string name="TagAndRename.Conductor">&lt;N&gt; = Director</string>
+  <string name="TagAndRename.Composer">&lt;R&gt; = Compositor</string>
+  <string name="TagAndRename.Group">&lt;U&gt; = Grupo de Contenido</string>
+  <string name="TagAndRename.SubTitle">&lt;S&gt; = Subtítulo</string>
+  <string name="TagAndRename.BPM">&lt;E&gt; = BPM</string>
+  <string name="TagAndRename.ModifiedBY">&lt;M&gt; = Modificado / Remezclado por</string>
+  <string name="TagAndRename.Filename">&lt;F&gt; = Nombre de Archivo Actual</string>
+  <string name="TagAndRename.Enumerate">&lt;#&gt; = Enumerar Archivos</string>
+  <string name="TagAndRename.BitRate">&lt;I&gt; = Bitrate</string>
+  <string name="TagAndRename.FirstNofArtist">&lt;A:n&gt; = Primeros \"n\" caracteres del Artista</string>
+  <string name="TagAndRename.FirstNofAlbumArtist">&lt;O:n&gt; = Primeros \"n\" Caracteres del Album Artista</string>
+  <string name="TagAndRename.StartAt">Comienza a</string>
+  <string name="TagAndRename.NumberDigits">Número de Dígitos</string>
+  <string name="TagAndRename.NameTooLong">Nombre de archivo demasiado largo. Por favor, cámbielo</string>
+  <string name="TagAndRename.FileExists">El archivo ya existe. ¿Usar etiquetas comunes?</string>
+  <string name="TagAndRename.Rename">No se puede renombrar el Archivo {0}: {1}</string>
+  <string name="TagAndRename.InvalidParm">Parámetro de Formato Inválido. Por favor, corríjalos</string>
+  <string name="TagAndRename.Original">Original:</string>
+  <string name="TagAndRename.Preview">Vista Previa</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Header">Caja de Conversión</string>
+  <string name="CaseConversion.TabSettings">Configuración</string>
+  <string name="CaseConversion.GroupBoxOptions">Opciones</string>
+  <string name="CaseConversion.AlwaysUpperCaseFirstLetter">Primera letra siempre en Mayúsculas</string>
+  <string name="CaseConversion.ReplaceSpaceByUnderscore">Reemplazar Espacio por \"_\"</string>
+  <string name="CaseConversion.ReplaceUnderscoreBySpace">Reemplazar \"_\" por Espacio</string>
+  <string name="CaseConversion.ReplaceSpaceby20">Reemplazar Espacio por \"%20\"</string>
+  <string name="CaseConversion.Replace20bySpace">Reemplazar \"%20\" por Espacio</string>
+  <string name="CaseConversion.GroupBoxMethod">Método de Conversión</string>
+  <string name="CaseConversion.AllFirstLetterUpperCase">Todas las Primeras Letras en Mayúsculas</string>
+  <string name="CaseConversion.FirstLetterUpperCase">Primera Letra en Mayúsculas</string>
+  <string name="CaseConversion.AllUpperCase">Todas en Mayúsculas</string>
+  <string name="CaseConversion.AllLowerCase">Todas en Minúsculas</string>
+  <string name="CaseConversion.GroupBoxConvert">Convertir etiquetas por ...</string>
+  <string name="CaseConversion.Comment">Comentario</string>
+  <string name="CaseConversion.Title">Título</string>
+  <string name="CaseConversion.Album">Álbum</string>
+  <string name="CaseConversion.AlbumArtist">ÁlbumArtista</string>
+  <string name="CaseConversion.Artist">Artista</string>
+  <string name="CaseConversion.ConvertTags">Convertir Etiquetas</string>
+  <string name="CaseConversion.ConvertFileName">Convertir nombre de archivo</string>
+  <string name="CaseConversion.Exceptions">Excepciones</string>
+  <string name="CaseConversion.RemoveException">Quitar</string>
+  <string name="CaseConversion.AddException">Añadir</string>
+  <string name="CaseConversion.Convert">Convertir</string>
+  <string name="CaseConversion.Cancel">Cancelar</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Header">Seleccione columnas a mostrar</string>
+  <string name="ColumnSelect.Ok">Ok</string>
+  <string name="ColumnSelect.Cancel">Cancelar</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.Heading">Organizar Archivos</string>
+  <string name="organise.TargetRootDrectory">Especificar Directorio Raiz:</string>
+  <string name="organise.BrowseRootDir">Explorar</string>
+  <string name="organise.OverWriteFiles">Sobreescribir archivos existentes</string>
+  <string name="organise.CopyFiles">Copiar archivos en vez de moverlos</string>
+  <string name="organise.CopyNonMusicFiles">Copiar/Mover archivos no musicales\n(Ej. Fotos, Textos, etc.)</string>
+  <string name="organise.InvalidParm">Formato de parámetro no válido. Por favor, corríjalo</string>
+  <string name="organise.FileExists">El archivo ya existe. No será reemplazado</string>
+  <string name="organise.SameFile">El archivo de origen y destino son el mismo. Archivo omitido</string>
+  <string name="organise.Exists">Existe</string>
+  <string name="organise.Copied">Copiado</string>
+  <string name="organise.Moved">Movido</string>
+  <string name="organise.GroupBoxOptions">Opciones</string>
+  <string name="organise.ButtonOrganise">Organizar</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Configuración</string>
+  <string name="Settings.NavigationPanel">Navegación</string>
+  <string name="Settings.Blue">Azul</string>
+  <string name="Settings.Silver">Plata</string>
+  <string name="Settings.Black">Negro</string>
+  <string name="Settings.EncoderMP3">MP3 Encoder</string>
+  <string name="Settings.EncoderOgg">OGG Encoder</string>
+  <string name="Settings.EncoderFlac">Flac Encoder</string>
+  <string name="Settings.EncoderAAC">AAC Encoder</string>
+  <string name="Settings.EncoderWMA">WMA Encoder</string>
+  <string name="Settings.EncoderWAV">WAV Encoder</string>
+  <string name="Settings.EncoderMPC">Musepack Encoder</string>
+  <string name="Settings.EncoderWV">WavPack Encoder</string>
+  <string name="Settings.EncoderWMAStandard">Windows Media Audio Standard</string>
+  <string name="Settings.EncoderWMAPro">Windows Media Audio Professional</string>
+  <string name="Settings.EncoderWMALossless">Windows Media Audio Lossless</string>
+  <string name="Settings.EncoderMPCStandard">Alta Calidad (142-184 kbps)</string>
+  <string name="Settings.EncoderMPCxtreme">Calidad Extrema (168-212 kbps)</string>
+  <string name="Settings.EncoderMPCinsane">Calidad Insana (232-268 kbps)</string>
+  <string name="Settings.EncoderMPCbraindead">La más Alta Calidad (232-278 kbps)</string>
+  <string name="Settings.EncoderWVFast">Modo Rápido (rápido, pero compromete el ratio de compresión)</string>
+  <string name="Settings.EncoderWVHigh">Alta Calidad (mejor compresión, pero más lento)</string>
+  <string name="Settings.Stereo">Estéreo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.ParametricStereo">Estéreo Paramétrico</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.InvalidParm">Formato de parámetro no válido del archivo extraido. Por favor, corríjalo.</string>
+  <string name="Settings.DescPrefMedium">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música.</string>
+  <string name="Settings.DescPrefStandard">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música, y es ya de bastante Alta Calidad</string>
+  <string name="Settings.DescPrefExtreme">Si tiene buen oido y buen equipamiento, este preajuste generalmente le proveerá de una calidad un poco más alta que el modo \"standard\".</string>
+  <string name="Settings.DescPrefInsane">CBR 320 kbps. Este preajuste será demasiado para la mayoría de la gente y la mayoría de las situaciones, pero si quiere la calidad absolutamente más alta sin preocuparse del tamaño de archivo, este es la adecuado.</string>
+  <string name="Settings.DescPrefABR">Para modos ABR (alta calidad para un bitrate dado pero no tan alta como VBR). Usando este preajuste le dará normalmente buena calidad al bitrate especificado.\n\nDependiendo del bitrate introducido, este preajuste determinará la configuración óptima para la situación en particular. Aunque este método funciona, no es tan flexible como VBR, y normalmente no se obtendrá el mismo nivel de calidad de VBR a  bitrate más altos.</string>
+  <string name="Settings.TabGeneral">General</string>
+  <string name="Settings.GroupBoxKeys">Atajos de Teclado</string>
+  <string name="Settings.ChangeKey">Cambiar</string>
+  <string name="Settings.Shift">Mayus</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.KeyDescription">Descripción:</string>
+  <string name="Settings.KeyAction">Acción:</string>
+  <string name="Settings.GroupBoxGeneral">Configuración General</string>
+  <string name="Settings.DebugLevel">Debug Level:</string>
+  <string name="Settings.Theme">Tema:</string>
+  <string name="Settings.Language">Idioma:</string>
+  <string name="Settings.TabTags">Etiquetas</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.TabTagsLyricsCover">Letras / Portada</string>
+  <string name="Settings.TabTagsDatabase">Base de Datos</string>
+  <string name="Settings.GroupBoxPictures">Fotos</string>
+  <string name="Settings.OverwriteExistingCover">Sobreescribir Portada(s) existente(s) en etiquetado automático</string>
+  <string name="Settings.EmbedExistingThumb">Insertar miniatura de carpeta existente (Carpeta.jpg) en búsqueda de portadas</string>
+  <string name="Settings.AmazonSite">Sitio de Búsqueda Amazon:</string>
+  <string name="Settings.GroupBoxLyrics">Letras</string>
+  <string name="Settings.SwitchArtist">Cambiar Artista antes de enviar</string>
+  <string name="Settings.OverwriteExistingLyrics">Sobreescribir Letras existentes en etiquetado automático</string>
+  <string name="Settings.GroupBoxLyricsSites">Sitios para buscar</string>
+  <string name="Settings.LyricsPlugin">LyricsPlugin</string>
+  <string name="Settings.LyricsOnDemand">Lyrics On Demand</string>
+  <string name="Settings.Lyrics007">Lyrics007</string>
+  <string name="Settings.HotLyrics">Hot Lyrics</string>
+  <string name="Settings.LyricWiki">Lyric Wiki</string>
+  <string name="Settings.Actionext">Actionext</string>
+  <string name="Settings.LyrDB">LyrDB</string>
+  <string name="Settings.LrcFinder">Lrc Finder</string>
+  <string name="Settings.GroupBoxTagsGeneral">General</string>
+  <string name="Settings.CopyArtist">Copiar Artista a ÁlbumArtista cuando esté vacío</string>
+  <string name="Settings.AutoFillNumberTracks">Auto rellenar \"Número de Pistas\" en Edición Múltiple de Etiquetas</string>
+  <string name="Settings.CaseConversion">Usar configuración de la Caja de Conversión al guardar</string>
+  <string name="Settings.CreateMissingFolderThumb">Crear miniaturas de carpeta ausentes (carpeta.jpg) al Guardar</string>
+  <string name="Settings.AutoCompletion">Usar Base de Datos de Música de MediaPortal para Autocompletar el Artista</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.UseV4">Usar Version 2.4 para Etiquetas ID3 V2</string>
+  <string name="Settings.UseV3">Usar Version 2.3 para Etiquetas ID3 V2</string>
+  <string name="Settings.UseAPE">Usar APE y etiquetas ID3 V1</string>
+  <string name="Settings.GroupBoxID3Update">Actualizar</string>
+  <string name="Settings.RemoveID3V1">Quitar ID3V1</string>
+  <string name="Settings.RemoveID3V2">Quitar ID3V2</string>
+  <string name="Settings.ID3Both">ID3V1 y ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.GroupBoxTagsValidate">Validación de Archivo MP3</string>
+  <string name="Settings.ValidateMP3">Validar archivos Mp3 mientras se escanea la carpeta / base de datos</string>
+  <string name="Settings.AutoFixMP3">Reparar automáticamente archivos MP3 erróneos</string>
+  <string name="Settings.GroupBoxDatabaseBuild">Construcción de Base de Datos Musical</string>
+  <string name="Settings.DatabaseScanNote">Si no está disponible la base de datos de música de MediaPortal, se puede crear una base de datos\nintroduciendo un nombre de archivo en el campo de texto. Después comience el escaneo.</string>
+  <string name="Settings.StartDBScan">Comenzar Escaneo</string>
+  <string name="Settings.DBScanStatus">Estado de Escaneo</string>
+  <string name="Settings.DBNotExists">La base de datos seleccionada no existe.\nSi selecciona \"Yes\" se creará una nueva base de datos\nComience un escaneo para rellenar la base de datos.</string>
+  <string name="Settings.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
+  <string name="Settings.SelectMusicFolder">Seleccione la carpeta con sus Archivos de Música</string>
+  <string name="Settings.DBScanIdle">Escaneo de la Base de datos no activo</string>
+  <string name="Settings.DBScanFinished">Escaneo de la Base de Datos realizado.\nProcesadas {0} pistas en: {1:d2}:{2:d2}:{3:d2}{4}</string>
+  <string name="Settings.DBScanTrackSummary"> ({0} segundos por pista)</string>
+  <string name="Settings.DBScanTitle">Confirme interrupción del Escaneo de la Base de Datos</string>
+  <string name="Settings.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
+  <string name="Settings.DBScanProgress">Progreso de archivo {0} de {1}</string>
+  <string name="Settings.TabRipping">Extrayendo</string>
+  <string name="Settings.TabRippingGeneral">General</string>
+  <string name="Settings.CustomPath">Rutas y Nombres de Archivo Personalizados</string>
+  <string name="Settings.Format">Formato:</string>
+  <string name="Settings.TargetFolder">Carpeta de Destino:</string>
+  <string name="Settings.GroupBoxEncoding">Formato de Codificación</string>
+  <string name="Settings.EncodingFormat">Seleccione el formato en el que quiere convertir:</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.GroupBoxMp3Experts">Ajustes de Experto</string>
+  <string name="Settings.LameExpertsWarning">Atención: La configuración de los preajustes no se utilizará cuando especifique parámetros de LAME</string>
+  <string name="Settings.LameExpertOptions">Introduzca parámetros del Encoder LAME (sólo expertos):</string>
+  <string name="Settings.GroupBoxPresets">Preajustes del Encoder MP3</string>
+  <string name="Settings.ABRBitrate">ABR Bitrate:</string>
+  <string name="Settings.Preset">Preajuste:</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.GroupBoxOggExpert">Ajustes de Experto</string>
+  <string name="Settings.OggExpertWarning">Atención: Los ajustes anteriores no serán utilizados cuando especifique parámetros de experto de Ogg</string>
+  <string name="Settings.OggExpert">Introduzca parámetros del Encoder OGG (Sólo expertos):</string>
+  <string name="Settings.GroupBoxOggEncoding">Configuración de conversión OGG</string>
+  <string name="Settings.OggQuality">Calidad:</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.GroupBoxFlacSettings">Ajustes de Experto</string>
+  <string name="Settings.FlacExpertsWarning">Atención: Los ajustes anteriores no se usarán cuando se especifiquen parámetros de experto FLAC</string>
+  <string name="Settings.FlacExperts">Introduzca parámetros del Encoder FLAC (Sólo expertos):</string>
+  <string name="Settings.GroupBoxFlacEncoding">Configuración de converión FLAC</string>
+  <string name="Settings.FlacQuality">Calidad:</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.GroupBoxAACEncoding">Configuración de conversión AAC</string>
+  <string name="Settings.AACBitRate">Bitrate:</string>
+  <string name="Settings.TabRippingWMA">WMA</string>
+  <string name="Settings.GroupBoxWMASettings">Configuración de conversión WMA</string>
+  <string name="Settings.WMAQuality">Calidad:</string>
+  <string name="Settings.WMASample">Formato de Muestra:</string>
+  <string name="Settings.WMAEncoder">Formato de Encoder:</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.GroupBoxMpcExperts">Ajustes de Experto</string>
+  <string name="Settings.MpcExpertsWarning">Atención: Los preajustes no serán usados cuando se especifiquen parámetros de Musepack </string>
+  <string name="Settings.MPCExpertOptions">Introduzca parámetros del Encoder Musepack  (Sólo expertos):</string>
+  <string name="Settings.GroupBoxMPCPresets">Preajustes del Encoder Musepack</string>
+  <string name="Settings.MPCPreset">Preajuste:</string>
+  <string name="Settings.TabRippingWV">WV</string>
+  <string name="Settings.groupBoxWvExperts">Ajustes de experto</string>
+  <string name="Settings.WvExpertsWarning">Atención: Los preajustes no serán usados cuando se especifiquen parámetros WavPack</string>
+  <string name="Settings.WvExpertOptions">Introduzca parámetros del Encoder WavPack (Sólo expertos):</string>
+  <string name="Settings.GroupBoxWvPresets">Preajustes del Encoder WavPack</string>
+  <string name="Settings.WvPreset">Preajuste:</string>
+  <string name="Settings.Cancel">Cancelar</string>
+  <string name="Settings.Apply">Aplicar</string>
+  <string name="Settings.LinkTags">Etiquetas</string>
+  <string name="Settings.LinkGeneral">General</string>
+  <string name="Settings.LinkRipping">Extracción  / Conversión</string>
+  <!--Burning-->
+  <string name="Burning.NoMedia">No se encontró disco en la unidad.  Por favor, inserte un disco vacío.</string>
+  <string name="Burning.DragAndDrop">Use Arrastrar y Soltar para ordenar las pistas a grabar</string>
+  <string name="Burning.Decoding">Decodificando archivos ...</string>
+  <string name="Burning.Cancelled">Grabación cancelada</string>
+  <string name="Burning.Checking">Comprobando disco</string>
+  <string name="Burning.Erasing">Borrando disco regrabable</string>
+  <string name="Burning.Leadin">Escribiendo Leadin</string>
+  <string name="Burning.Leadout">Escribiendo Leadout</string>
+  <string name="Burning.Burning">Grabando ...</string>
+  <string name="Burning.Finished">Grabación Terminada</string>
+  <string name="Burning.Failed">Grabación fallida: {0}</string>
+  <string name="Burning.FinishedMedia">No se puede grabar en un disco finalizado. Por favor, inserte un disco vacío.</string>
+  <string name="Burning.ClearList">Limpiar lista</string>
+  <string name="Burning.Retrieving">Recuperando información de disco ...</string>
+  <string name="Burning.MediaInfo">Disco: {0} ({1} minutos) Estado: {2}</string>
+  <string name="Burning.Used">Usado: {0}:{1} ( {2} Pista(s))</string>
+  <string name="Burning.Capacity">Atención: La colección excede la capacidad del dispositivo. Quite algunos archivos.</string>
+  <!--Conversion-/ Ripping-->
+  <string name="Conversion.ErrorDirectory">Error creando Directorio de Música</string>
+  <string name="Conversion.SameFile">Conversión abortada: Archivos de entrada y salida son los mismos</string>
+  <string name="Conversion.OpenFileError">Error abriendo Archivo</string>
+  <string name="Conversion.EncodingFileError">Error convirtiendo Archivo</string>
+  <string name="Conversion.Ripping">Extrayendo ...</string>
+  <string name="Conversion.RippingFinished">Finalizada la extracción de las pistas de audio seleccionadas.</string>
+  <string name="Conversion.FreeDBAccess">Recuperando información de CD de FreeDB ...</string>
+  <!--FreeDB-->
+  <string name="FreeDB.Header">Resultados de la búsqueda FreeDB</string>
+  <string name="FreeDB.MultipleMatches">Se encontraron múltiples coincidencias en FreeDB. Por favor, seleccione un disco válido</string>
+  <string name="FreeDB.Ok">Ok</string>
+  <string name="FreeDB.Cancel">Cancelar</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.HeaderArtistAlbum">Búsqueda de Internet - Especificar Artista / Álbum</string>
+  <string name="Lookup.Continue">Continuar &gt;</string>
+  <string name="Lookup.Cancel">Cancelar</string>
+  <string name="Lookup.NoAlbumFound">No se encontró ningún álbum, por favor, elija otro criterio de selección.</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.HeaderSearchResult">Se encontraron múltiples Albums. Por favor, seleccione ...</string>
+  <string name="Lookup.ColArtist">Artista</string>
+  <string name="Lookup.ColAlbum">Álbum</string>
+  <string name="Lookup.ColTracks"># Pistas</string>
+  <string name="Lookup.ColYear">Año</string>
+  <string name="Lookup.ColLabel">Discográfica</string>
+  <!--Album Details-->
+  <string name="Lookup.HeaderDetails">Detalles del Álbum seleccionado</string>
+  <string name="Lookup.AlbumTracks">Pistas en el Álbum</string>
+  <string name="Lookup.TracksToTag">Pistas a etiquetar</string>
+  <string name="Lookup.ColTrackNum">#</string>
+  <string name="Lookup.ColTitle">Título</string>
+  <string name="Lookup.ColFileName">Nombre de Archivo</string>
+  <string name="Lookup.Unassigned">&lt; Sin asignar &gt;</string>
+  <string name="Lookup.MoveUp">Mover arriba</string>
+  <string name="Lookup.MoveDown">Mover abajo</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Ok</string>
+  <string name="message.Error">Error</string>
+  <string name="message.Error_Title">Error</string>
+  <string name="message.Save_Changes">Los cambios no se han guardado. ¿Quiere salvar los cambios?</string>
+  <string name="message.Save_Changes_Title">Guardar Cambios</string>
+  <string name="message.Script_Compile_Failed">La compilación del script falló.\n\nPor favor, busque el error en el log y corríjalo.</string>
+  <string name="message.DataEntryError">El valor especificado no es válido.</string>
+  <string name="message.NoSelectionHeader">No hay selección</string>
+  <string name="message.NoSelection">Por favor, seleccione al menos una fila para realizar la acción</string>
+  <string name="message.DeleteConfirmHeader">Borrar Archivo(s)</string>
+  <string name="message.DeleteConfirm">¿Quiere borrar realmente los archivos seleccionados?</string>
+  <string name="message.DeleteFolders">Para borrar una carpeta, por favor, use May-Sup</string>
+  <string name="message.Fixed">Corregido</string>
+  <!--Progress Dialog-->
+  <string name="progress.ScanningHeader">Obteniendo etiquetas de pista</string>
+  <string name="progress.Scanning">Obteniendo etiquetas de la pista {0}/{1}</string>
+  <string name="progress.Cancel">Cancelar</string>
+  <string name="progress.SavingHeader">Guardando pistas</string>
+  <string name="progress.Saving">Guardando pista {0}/{1}</string>
+  <string name="progress.InternetHeader">Búsqueda de Internet</string>
+  <string name="progress.Internet">Recuperando información para la pista {0}/{1}</string>
+  <string name="progress.InternetMusicBrainz">Obteniendo huella e identificando archivo</string>
+  <string name="progress.InternetAlbum">Recuperando información de Álbum</string>
+  <string name="progress.CoverArtHeader">Búsqueda de portada</string>
+  <string name="progress.CoverArt">Recuperando Portada de la pista {0}/{1}</string>
+  <string name="progress.LyricsHeader">Búsqueda de Letras</string>
+  <string name="progress.Lyrics">Recuperando Letras de la pista {0}/{1}</string>
+  <!--About Dialog-->
+  <string name="about.Header">Acerca de</string>
+  <string name="about.Ok">Ok</string>
+  <string name="about.Description">MPTagThat es un editor de etiquetas de código libre que permite la gestión completa de su Colección de Música.\n\nMás información en:</string>
+  <string name="about.Version">Versión:</string>
+  <string name="about.BuildDate">Fecha:</string>
+  <!--Player-->
+  <string name="player.Title">Título</string>
+  <string name="player.Artist">Artista</string>
+  <string name="player.Album">Álbum</string>
+  <string name="player.PlayListButton">LR</string>
+  <string name="player.PlayListLoad">Cargar</string>
+  <string name="player.PlayListSave">Guardar</string>
+  <string name="player.ClearPlayList">Limpiar Lista</string>
+  <string name="player.LoadPlayList">Cargar Lista</string>
+  <string name="player.SavePlayList">Guardar Lista</string>
+  <string name="player.UseRelativePath">Usar ruta relativa</string>
+  <!--Database Search-->
+  <string name="dbsearch.Artist">Artista / Álbum (contiene):</string>
+  <string name="dbsearch.Album">Álbum (contiene):</string>
+  <string name="dbsearch.Title">Título (contiene):</string>
+  <string name="dbsearch.Search">Buscar</string>
+  <string name="dbsearch.NoMusicDB">Para usar la función de búsqueda de la base de datos,\ndebe introducir la localización de la base de datos en la Configuración</string>
+  <string name="dbsearch.NoSearchValues">Por favor, introduzca al menos un valor a buscar.</string>
+  <string name="dbsearch.TooMuchRows">La consulta devolvió demasiadas filas. Sólo se muestran las 1000 primeras.</string>
+  <!--Find / Replace-->
+  <string name="findreplace.Cancel">Cerrar</string>
+  <!--Readonly Dialog-->
+  <!--Replay Gain Popup-->
 </resources>
