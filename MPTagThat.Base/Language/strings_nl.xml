@@ -1,5 +1,4 @@
-﻿,!-- gebleven bij regel 500  -->
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--  
        Atention: When translating to a new language, copy this file and replace the "en" in the filename with the 2 character ISO code. e.g. de = German, fr = French, etc.
                         If the target language contains special characters (e.g. German Umlaut or French accents), you must ensure that the editor used is capable of storing    the file in UTF-8 format.
@@ -688,7 +687,7 @@
     <String id="DeleteConfirm">Wilt u het geselecteerde bestand(en) definitief verwijderen?</String>
     <String id="DeleteFolders">Om de map te verwijderen, gebruik Shift-Del</String>
     <String id="Fixed">Opgelost</String>
-  </  </Section>
+  </Section>
     
   <!-- Progress Dialog -->
   <Section name="progress">
