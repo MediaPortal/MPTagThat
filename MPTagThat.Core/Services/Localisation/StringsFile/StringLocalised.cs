@@ -27,7 +27,7 @@ namespace MPTagThat.Core
   {
     #region Variables
 
-    [XmlAttribute("id")] public string id;
+    [XmlAttribute("name")] public string id;
     public string language;
     [XmlText] public string text;
 

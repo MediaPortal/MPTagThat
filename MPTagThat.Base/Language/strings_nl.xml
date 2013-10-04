@@ -1,725 +1,689 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--  
-       Atention: When translating to a new language, copy this file and replace the "en" in the filename with the 2 character ISO code. e.g. de = German, fr = French, etc.
-                        If the target language contains special characters (e.g. German Umlaut or French accents), you must ensure that the editor used is capable of storing    the file in UTF-8 format.
-                        If this is not the case, the special characters will not be displayed correctly.
-                        The string "\n" in a literal represents a line feed.
--->
-<Language>
-  <Section name="system">
-    <String id="NotFound">### String niet gevonden ###</String>
-    <String id="ApplicationName">MPTagThat de MediaPortal Tag Editor</String>
-  </Section>
-
-  <!-- Main --> 
-  <Section name="main">
-    <String id="TreeViewPanel">Mappen</String>
-    <String id="PicturePanel">Afbeelding</String>
-    <String id="InformationPanel">Informatie</String>
-    <String id="PlayerPanel">Speler</String>
-    <!-- Options Panel -->
-    <String id="OptionsPanel">Opties</String>
-    <String id="SwitchView">Beeld aanpassen</String>
-    <String id="ScanSubfolder">Submappen scannen</String>
-    <String id="ButtonRefreshFolder">Ververs Map Weergave</String>
-    <!-- Error Gridview -->
-    <String id="ErrorHeaderFile">Bestand</String>
-    <String id="ErrorHeaderMessage">Bericht</String>
-    <!-- Toolstrip -->
-    <String id="toolStripLabelFiles">Bestanden: {0} (Geselecteerd: {1})</String>
-    <String id="toolStripLabelPlay">Speler Status: Speelt af</String>
-    <String id="toolStripLabelPause">Player Status: Gepauzeerd</String>
-  </Section>
-
-  <!-- Ribbon --> 
-  <Section name="ribbon">
-    <!-- Start Menu -->
-    <String id="Settings">Instellingen</String>
-    <String id="Refresh">Ververs</String>
-    <String id="Save">Opslaan</String>
-    <String id="ColumnsSelect">Selecteer Weegegeven Kolommen</String>
-    <String id="Exit">Afsluiten</String>
-
-    <!-- Tags Tab-->
-    <String id="TagTab">Tags</String>
-    <String id="TagFromFile">Tag van Betandsnaam</String>
-    <String id="RenameFile">Hernoem Bestand</String>
-    <String id="RenameFileMenu">Hernoem Bestand</String>
-    <String id="RenameFileOptions">Hernoem Bestand Opties</String>
-    <String id="IdentifyFile">Identificeer Bestand</String>
-    <String id="TagFromInternet">Tag van Internet</String>
-    <String id="SingleTagEdit">Enkele Tag Bewerk</String>
-    <String id="MultiTagEdit">Meerdere Tags Bewerk</String>
-    <String id="GetCoverArt">Verkrijg Cover Art</String>
-    <String id="GetLyrics">Verkrijg Lyrics</String>
-    <String id="AutoNumber">Auto Nummering</String>
-    <String id="NumberOnClick">Nummer bij Klikken</String>
-    <String id="RemoveCommentPicture">Verwijder:</String>
-    <String id="RemoveComments">Verwijder alle commentaar</String>
-    <String id="RemovePictures">Verwijder alle afbeeldingen</String>
-    <String id="CaseConversion">Kapitaal Omzetting</String>
-    <String id="CaseConversionMenu">Kapitaal omzetting</String>
-    <String id="CaseConversionOption">Kapitaal omzettings opties</String>
-    <String id="DeleteTags">Verwijder Tags</String>
-    <String id="DeleteAllTags">Verwijder alle Tags</String>
-    <String id="DeleteID3V1Tags">Verwijder alleen ID3 V1 Tags</String>
-    <String id="DeleteID3V2Tags">Verwijder alleen ID3 V2 Tags</String>
-    <String id="EditTags">Bewerk Tags</String>
-    <String id="RetrieveTags">Tags ophalen</String>
-	<String id="OrganiseFiles">Organiseer</String>
-	<String id="SaveFolderThumb">Opslaan als map miniatuur</String>
-    
-    <String id="ExecuteScript">Uitvoeren Script</String>
-    <String id="Scripts">Scripts</String>
-    
-    <String id="Organise">Organiseer bestanden</String>
-    <String id="AddBurner">Toevoegen aan Brander</String>
-    <String id="AddConvert">Toevoegen aan Omzetting</String>
-    <String id="AddPlaylist">Toevoegen aan Afspeellijst</String>
-    <String id="Other">Andere</String>
-
-    <!-- Rip Tab-->
-    <String id="RipTab">Rippen</String>
-    <String id="RipButton">Start Rippen</String>
-    <String id="RipEncoder">Selecteer Encoder:</String>
-    <String id="RipFolder">Resultaatmap:</String>
-    <String id="RipCancel">Rip Stoppen</String>
-    <String id="RipOptions">Rip Opties</String>
-
-    <!-- Convert Tab-->
-    <String id="ConvertTab">Omzetten</String>
-    <String id="ConvertButton">Start Omzetten</String>
-    <String id="ConvertEncoder">Select Encoder:</String>
-    <String id="ConvertFolder">Resultaatmap:</String>
-    <String id="ConvertCancel">Omzetting Stoppen</String>
-    <String id="ConvertOptions">Omzettings Opties</String>
-
-    <!-- Burn Tab-->
-    <String id="BurnTab">Branden</String>
-    <String id="Burn">Branden</String>
-    <String id="BurnCancel">Stop Branden</String>
-    <String id="BurnOptions">Brand Opties</String>
-
-  </Section>
-  
-  <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
-  <Section name="TagEdit">
-    <!--  Title / Headers -->
-    <String id="MultiHeading">Meerdere Tags Bewerken</String>
-    <String id="SingleHeading">Tag Bewerken</String>
-    <String id="HeaderUser">Door gebruiker gedefiniëerd</String>
-    <String id="HeaderRating">Waardering</String>
-    <String id="HeaderLyrics">Liedteksten</String>
-    <String id="HeaderWeb">Web Informatie</String>
-    <String id="HeaderInvolved">Betrokken personen</String>
-    <String id="HeaderOriginal">Originele Informatie</String>
-    <String id="HeaderDetail">gedetaileerde Informatie</String>
-    <String id="HeaderMainTags">Hoofd Tags</String>
-    <String id="HeaderPictures">Afbeeldingen</String>
-    <!--  Main Tags -->
-    <String id="AlbumArtist">AlbumArtiest:</String>
-    <String id="Track">Nummer:</String>
-    <String id="Artist">Artiest:</String>
-    <String id="Year">Jaar:</String>
-    <String id="Title">Titel:</String>
-    <String id="Album">Album:</String>
-    <String id="GroupBoxComment">Commentaar</String>
-    <String id="RemoveExistingComments">Commentaar eerst verwijderen</String>
-    <String id="MoveTop">Verplaats naar boven</String>
-    <String id="RemoveComment">Commentaar verwijderen</String>
-    <String id="AddComment">Commentaar toevoegen</String>
-    <String id="Comment">Commentaar:</String>
-    <String id="CommentLanguage">Taal (Alleen ID3):</String>
-    <String id="CommentDescriptor">Descriptor (ID3 only):</String>
-    <String id="CommentHeaderDescriptor">Descriptor</String>
-    <String id="CommentHeaderLanguage">Taal</String>
-    <String id="CommentHeaderComment">Commentaar</String>
-    <String id="RemoveGenre">Genre verwijderen</String>
-    <String id="AddGenre">Genre toevoegen</String>
-    <String id="Genre">Genre:</String>
-    <String id="Disc">Disk:</String>
-    <String id="BPM">BPM:</String>
-    <!--  Picture -->
-    <String id="GroupBoxPicture">Afbeelding</String>
-    <String id="RemoveExistingPictures">Bestaande afbeeldingen eerst verwijderen</String>
-    <String id="ExportPicture">Afbeelding Exporteren</String>
-    <String id="RemovePicture">Afbeelding verwijderen</String>
-    <String id="GetPicture">Ophalen uit bestand</String>
-    <String id="GetPictureInternet">Ophalen van Internet</String>
-    <String id="PictureType">Afbeeldingstype:</String>
-    <String id="PictureHeaderType">Afbeeldingstype</String>
-    <String id="PictureDescriptor">Beschrijving:</String>
-    <!--  Detailed Information -->
-    <String id="GetTrackLength">Haal nummer duur uit bestand</String>
-    <String id="TrackLength">Duur nummer (ms):</String>
-    <String id="MediaType">Media Type:</String>
-    <String id="TitleSort">Titel Sortering:</String>
-    <String id="AlbumSort">Album Sortering:</String>
-    <String id="ArtistSort">Artiest Sortering:</String>
-    <String id="AlbumArtistSort">AlbumArtiest Sortering:</String>
-    <String id="SubTitle">Subtitel:</String>
-    <String id="ContentGroup">Groepering:</String>
-    <String id="Copyright">Copyright:</String>
-    <String id="EncodedBy">Geëncodeerd door:</String>
-    <String id="Publisher">Uitgever:</String>
-    <String id="TextWriter">Liedteksten / Tekst Schrijver:</String>
-    <String id="Interpreter">Geïnterpreteerd door:</String>
-    <String id="Composer">Componist:</String>
-    <String id="Conductor">Dirigent:</String>
-    <!--  Original Information -->
-    <String id="OriginalReleaseYear">Oorspronkelijk jaar van uitgave:</String>
-    <String id="OriginalOwber">Oorspronkelijk Eigenaar:</String>
-    <String id="OriginalArtist">Oorspronkelijk Artiest:</String>
-    <String id="OriginalTextWriter">Oorspronkelijk Liedtekst schrijver:</String>
-    <String id="OriginalFileName">Oorspronkelijke Bestandsnaam:</String>
-    <String id="OriginalAlbumTitle">Oorspronkelijke Album Titel:</String>
-    <!--  Involved Persons -->
-    <String id="ID3V24only">Alleen ID3 V2.4</String>
-    <String id="RemoveMusician">Muzikant verwijderen</String>
-    <String id="AddMusician">Muzikant Toevoegen</String>
-    <String id="MusicianName">Muzikant Naam:</String>
-    <String id="MusicianInstrument">Instrument van Muzikant:</String>
-    <String id="MusicianHeaderInstrument">Instrument</String>
-    <String id="MusicianHeaderName">Naam</String>
-    <String id="RemovePerson">Persoon verwijderen</String>
-    <String id="AddPerson">Persoon toevoegen</String>
-    <String id="PersonName">Naam betrokken persoon:</String>
-    <String id="PersonFunction">Functie betrokken persoon:</String>
-    <String id="PersonHeaderName">Naam</String>
-    <String id="PersonHeaderFunction">Functie</String>
-    <!--  Web Information -->
-    <String id="CommercialUrl">URL Commerciële Informatie:</String>
-    <String id="PublisherUrl">URL Officiële Uitgever:</String>
-    <String id="PaymentUrl">URL Officiële Betaling:</String>
-    <String id="InternetRadioUrl">Officiële Internet Radio Stat. URL:</String>
-    <String id="AudioSourceUrl">URL Officiële Audiobron:</String>
-    <String id="ArtistUrl">URL Officiële Artiest:</String>
-    <String id="AudioFileUrl">URL Officiëel Audiobetand:</String>
-    <String id="CopyrightUrl">URL Copyright Informatie:</String>
-    <!--  Lyrics -->
-    <String id="GetLyricsFromInternet">Haal liedteksten op van het Internet</String>
-    <String id="GetLyricsFromText">Haal liedteksten op uit Tekst Bestand</String>
-    <String id="RemoveExistingLyrics">Verwijder eerst bestaande liedteksten</String>
-    <String id="RemoveLyrics">Liedteksten Verwijderen</String>
-    <String id="AddLyrics">Liedteksten toevoegen</String>
-    <String id="LyricsLanguage">Taal (Alleen ID3):</String>
-    <String id="LyricsDescriptor">Type (Alleen ID3):</String>
-    <String id="LyricsHeaderDescriptor">Type</String>
-    <String id="LyricsHeaderLanguage">Taal</String>
-    <String id="LyricsHeaderLyrics">Liedteksten</String>
-    <!--  Rating -->
-    <String id="RemoveExistingRatings">Verwijder eerst bestaande waardering</String>
-    <String id="RatingNote">De waardering is 1-255 waar 1 is het slechtst en 255 is het beste. 0 is onbekend.\n\nOpmerking: Veel programma's hebben hun eigen waardering en definiëren de ID3 standaard anders. Wanneer geen tegenspraak wordt gegeven kan deze worden toegevoegd.</String>
-    <String id="PlayCounter">Afspeel teller:</String>
-    <String id="RemoveRating">Waardering verwijderen</String>
-    <String id="AddRating">Waardering toevoegen</String>
-    <String id="Rating">Waardering:</String>
-    <String id="RatingUser">Gebruiker (e-Mail):</String>
-    <!--  Navigation Pane -->
-    <String id="panelNavigation">Tag Informatie</String>
-    <String id="LinkUserDefined">Gebruiker gedefiniëerd</String>
-    <String id="LinkRating">Waardering</String>
-    <String id="LinkLyrics">Liedteksten</String>
-    <String id="LinkWeb">Web Informatie</String>
-    <String id="LinkInvolvedPeople">Betrokken personen</String>
-    <String id="LinkOriginalInfo">Originele Informatie</String>
-    <String id="LinkDetailedInfo">Gedetaileerde Informatie</String>
-    <String id="LinkMainTags">Hoofd Tags</String>
-    <String id="LinkPictures">Afbeeldingen</String>
-    <!--  General Buttons -->
-    <String id="Cancel">Afbreken</String>
-    <String id="Apply">Toepassen</String>
-
-    <!--  Single Tag Edit Commands -->
-    <String id="Previous">Vorig Bestand</String>
-    <String id="Next">Volgend Bestand</String>
-    <String id="Commands">Commando's</String>
-  </Section>
-  
-    
-  <Section name="LyricsSearch">
-    <!--  Single Lyrics Search as called out of Single / Multiple Tag Edit -->
-    <String id="Header">Vind een liedtekst voor {0} - {1}</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="Site">Lokatie</String>
-    <String id="Result">Resultaat</String>
-    <String id="Lyric">Liedtekst</String>
-    <String id="GroupBoxSearchResults">Zoek resultaten</String>
-    <String id="Title">Titel:</String>
-    <String id="Update">Bijwerken</String>
-    <String id="Find">Ophalen</String>
-    <String id="Close">Sluiten</String>
-    <String id="GroupBoxLyric">Liedtekst</String>
-    <String id="Artist">Artiest:</String>
-    <String id="GroupBoxSearchInfo">Zoek informatie</String>
-    <String id="SwitchArtist">Artiest Wisselen</String>
-    <!--  Multiple Lyrics Search  -->
-    <String id="Heading">Liedtekst zoeken</String>
-    <String id="Status">Zoeken naar Liedtekst ... Even geduld a.u.b.</String>
-    <String id="Finished">Zoeken voltooid. Deselecteer nummers met incorrecte Liedteksten.</String>
-    <String id="NothingToSearch">Er is niets om naar te zoeken</String>
-    <String id="FoundLyrics">Oké</String>
-    <String id="NoLyricsFound">N/B</String>
-  </Section>
-
-  <!--  Amazon Album Search -->
-  <Section name="AmazonAlbumSearch">
-    <String id="Header">Zoek Album</String>
-    <String id="Close">Afbreken</String>
-    <String id="Update">Selecteren</String>
-    <String id="Albums">Album(s)</String>
-    <String id="GroupBoxResults">Meerdere Albums gevonden. A.u.b. Selecteren ...</String>
-  </Section>
-
-  <!--  MusicBrainz Search -->
-  <Section name="MusicBrainz">
-    <String id="Header">Op Internet opzoeken</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="Update">Selecteren</String>
-    <String id="SearchInfo">Geïdentificeerd Nummer</String>
-    <String id="Album">Album</String>
-    <String id="Duration">Duur</String>
-    <String id="GroupBoxResults">Het nummer is beschikbaar op meerdere albums. A.u.b. één selecteren</String>
-  </Section>
-  
-  <!--  Header of the Grid View showing the Tracks -->
-  <Section name="column_header">
-    <String id="FileName">Bestandsnaam</String>
-    <String id="NewFileName">Nieuwe Bestandsnaam</String>
-    <String id="Status">Status</String>
-    <String id="Track">Nummer</String>
-	<String id="NumTracks">Nummer #</String>
-    <String id="Title">Titel</String>
-    <String id="Artist">Artiest</String>
-    <String id="AlbumArtist">Album Artiest</String>
-    <String id="Album">Album</String>
-    <String id="Year">Jaar</String>
-    <String id="Genre">Genre</String>
-    <String id="CreationTime">Productiedatum</String>
-    <String id="LastWriteTime">Veranderd</String>
-    <String id="TagType">Type</String>
-    <String id="Disc">Disk #</String>
-	<String id="NumDisc">Genum. Disks</String>
-    <String id="BPM">BPM</String>
-    <String id="Rating">Waardering</String>
-    <String id="Comment">Commentaar</String>
-    <String id="Composer">Component</String>
-    <String id="Conductor">Dirigent</String>
-    <String id="NumPics"># Afbeelding</String>
-    <String id="ArtistSortName">Sorteer op Artiest</String>
-    <String id="AlbumSortName">Sorteer op =Albumnaam</String>
-    <String id="CommercialInformation">Commerciële Informatie</String>
-    <String id="Copyright">Copyright</String>
-    <String id="CopyrightInformation">Copyright Informatie</String>
-    <String id="EncodedBy">Gecodeerd door</String>
-    <String id="Interpreter">Geïnterpreteerd door</String>
-    <String id="Grouping">Gegroepeerd</String>
-    <String id="Lyrics">Liedteksten</String>
-    <String id="MediaType">Media Type</String>
-    <String id="OfficialAudioFileInformation">Off. Audiobestand Informatie</String>
-    <String id="OfficialArtistInformation">Off. Artiest Informatie</String>
-    <String id="OfficialAudioSourceInformation">Off. Audiobron Informatie</String>
-    <String id="OfficialInternetRadioInformation">Off. Internet Radio Informatie</String>
-    <String id="OfficialPaymentInformation">Off. Betalings Informatie</String>
-    <String id="OfficialPublisherInformation">Off. Uitgevers Informatie</String>
-    <String id="OriginalAlbum">Origineel Album</String>
-    <String id="OriginalFileName">Originele Bestandsnaam</String>
-    <String id="OriginalLyricsWriter">Originele Tekstschrijver</String>
-    <String id="OriginalArtist">Originele Artiest</String>
-    <String id="OriginalOwner">Originele Eigenaar</String>
-    <String id="OriginalRelease">Originele Uitgave</String>
-    <String id="Publisher">Uitgever</String>
-    <String id="SubTitle">Subtitel</String>
-    <String id="TextWriter">Tekstschrijver</String>
-    <String id="TitleSortName">Sorteer op Titelnaam</String>
-    <String id="Duration">Duur</String>
-    <String id="FileSize">Grootte (kb)</String>
-    <String id="BitRate">Bitrate</String>
-    <String id="SampleRate">Samplerate</String>
-    <String id="Channels">Kanalen</String>
-    <String id="Version">Codec</String>
-  </Section>
-
-  <!--  Context Menus -->
-  <Section name="contextmenu">
-    <String id="AddBurner">Onder(deel/delen) aan brander toevoegen</String>
-    <String id="AddConverter">Onderdeel(en) aan omzetter toevoegen</String>
-    <String id="AddPlayList">Onderdeel(en) aan afspeellijst toevoegen</String>
-    <String id="ClearPlayList">Afspeellijst wissen</String>
-    <String id="CreateFolderThumb">Maak miniatuur map</String>
-    <String id="Copy">Kopiëren</String>
-    <String id="Cut">Knippen</String>
-    <String id="Paste">Invoegen</String>
-    <String id="Delete">Verwijderen</String>
-    <String id="Refresh">Verversen</String>
-    <String id="SelectAll">Alles Selecteren</String>
-</Section>
-  
-  <!-- Tag from Filename  / Rename File --> 
-  <Section name="TagAndRename">
-    <String id="HeadingTag">Tag van Bestandsnaam</String>
-    <String id="HeadingRename">Bestand hernoemen</String>
-    <String id="Apply">Toepassen</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="Format">Formaat:</String>
-    <String id="RemoveFormat">Verwijder Formaat uit lijst</String>
-    <String id="AddFormat">Voeg Formaat toe aan lijst</String>
-    <String id="GroupBoxParm">Parameters (klik om aan lijst toe te voegen)</String>
-    <String id="Folder">\ = Map: om te specificeren dat parameters moeten gehaald uit de bestandsstruktuur.</String> 
-    <String id="Unused">&lt;X&gt; = Negeren</String>
-    <String id="Comment">&lt;C&gt; = Commentaar</String>
-    <String id="AlbumArtist">&lt;O&gt; = Orkest / Album Artiest</String>
-    <String id="Genre">&lt;G&gt; = Genre</String>
-    <String id="DiscTotal">&lt;d&gt; = Totaal aantal disks</String>
-    <String id="Disc">&lt;D&gt; = Disk Nummer</String>
-    <String id="TrackTotal">&lt;k&gt; = Totaal aantal Nummers</String>
-    <String id="Track">&lt;K&gt; = Nummer</String>
-    <String id="Year">&lt;Y&gt; = Jaar</String>
-    <String id="Album">&lt;B&gt; = Album</String>
-    <String id="Title">&lt;T&gt; = Titel</String>
-    <String id="Artist">&lt;A&gt; = Artiest</String>
-    <String id="Conductor">&lt;N&gt; = Dirigent</String>
-    <String id="Composer">&lt;R&gt; = Componist</String>
-    <String id="Group">&lt;U&gt; = Groeptype</String>
-    <String id="SubTitle">&lt;S&gt; = SubTitel</String>
-    <String id="BPM">&lt;E&gt; = BPM</String>
-    <String id="ModifiedBY">&lt;M&gt; = Aangepast / geremixed door</String>
-    <String id="Filename">&lt;F&gt; = Huidige bestandsnaam</String>
-    <String id="Enumerate">&lt;#&gt; = Bestands opsomming</String>
-    <String id="BitRate">&lt;I&gt; = Bitrate</String>
-    <String id="FirstNofArtist">&lt;A:n&gt; = Eerste "n" karakters van Artiest</String>
-    <String id="FirstNofAlbumArtist">&lt;O:n&gt; = Eerste "n" karakters van Album Artist</String>
-    <String id="StartAt">Start vanaf</String>
-    <String id="NumberDigits">Aantal tekens</String>
-    <String id="NameTooLong">Bestandsnaam te lang. A.u.b. aanpassen.</String>
-    <String id="FileExists">Bestand bestaat al. Gemeenschappelijke Tags gebruikt?</String>
-    <String id="Rename">Kan bestandsnaam niet aanpassen {0}: {1}</String>
-    <String id="InvalidParm">Ongeldig Parameter Formaat. A.u.b. corrigeren.</String> 
-    <String id="Original">Origineel:</String> 
-    <String id="Preview">Voorbeeld</String> 
-  </Section>
-
-  <!--  Case Conversion -->
-  <Section name="CaseConversion">
-    <String id="Header">Kapitaal Omzetting</String>
-    <String id="TabSettings">Instellingen</String>
-    <String id="GroupBoxOptions">Opties</String>
-    <String id="AlwaysUpperCaseFirstLetter">Eerste letter altijd kapitaal</String>
-    <String id="ReplaceSpaceByUnderscore">Vervang Spatie door "_"</String>
-    <String id="ReplaceUnderscoreBySpace">Vervang "_" door Spatie</String>
-    <String id="ReplaceSpaceby20">Vervang Spatie door "%20"</String>
-    <String id="Replace20bySpace">Vervang "%20" door Spatie</String>
-    <String id="GroupBoxMethod">Conversiemethode</String>
-    <String id="AllFirstLetterUpperCase">Alle eerste letters kapitaal</String>
-    <String id="FirstLetterUpperCase">Eerste letter kapitaal</String>
-    <String id="AllUpperCase">Alles kapitaal</String>
-    <String id="AllLowerCase">Alles kleine letter</String>
-    <String id="GroupBoxConvert">Converteer Tags naar ...</String>
-    <String id="Comment">Commentaar</String>
-    <String id="Title">Titel</String>
-    <String id="Album">Album</String>
-    <String id="AlbumArtist">AlbumArtiest</String>
-    <String id="Artist">Artiest</String>
-    <String id="ConvertTags">Converteer Tags</String>
-    <String id="ConvertFileName">Bestandsnaam converteren</String>
-    <String id="Exceptions">Uitzonderingen</String>
-    <String id="RemoveException">Verwijderen</String>
-    <String id="AddException">Toevoegen</String>
-    <String id="Convert">Omzetten</String>
-    <String id="Cancel">Afbreken</String>
-  </Section>
-
-  <!--  Column Select -->
-  <Section name="ColumnSelect">
-    <String id="Header">Selecteer weergavekolom</String>
-    <String id="Ok">Oké</String>
-    <String id="Cancel">Afbreken</String>
-  </Section>
-  
-  <!-- Organise --> 
-  <!-- Note :the Parameter are found in the TagAndRename section --> 
-  <Section name="organise">
-    <String id="Heading">Organiseer Bestanden</String>
-    <String id="TargetRootDrectory">Doel Root Directory:</String>
-    <String id="BrowseRootDir">Doorzoeken</String>
-    <String id="OverWriteFiles">Overschrijf bestaande bestanden</String>
-    <String id="CopyFiles">Kopiëer bestanden i.p.v. deze te verplaatsen</String>
-    <String id="CopyNonMusicFiles">Kopiëer/Verplaats Non-Muziek bestanden (Afbeeldingen, etc.)</String>
-    <String id="InvalidParm">Ongeldige Parameter Formaat. A.u.b. corrigeren.</String>
-    <String id="FileExists">Bestand bestaat al, wordt niet vervangen</String>
-    <String id="SameFile">Bron en doelbestand zijn dezelfde. Bestand overgeslagen</String>
-    <String id="Exists">Bestaat</String>
-    <String id="Copied">Gekopiëerd</String>
-    <String id="Moved">Verplaatst</String>
-    <String id="GroupBoxOptions">Optie</String>
-    <String id="ButtonOrganise">Organiseren</String>
-  </Section>
-  
-  <!-- Settings  / Preferences --> 
-  <Section name="Settings">
-    <String id="Heading">Instellingen</String>
-    <String id="NavigationPanel">Navigatie</String>
-    <String id="Blue">Blauw</String>
-    <String id="Silver">Zilver</String>
-    <String id="Black">Zwart</String>
-    <String id="EncoderMP3">MP3 Encoder</String>
-    <String id="EncoderOgg">OGG Encoder</String>
-    <String id="EncoderFlac">Flac Encoder</String>
-    <String id="EncoderAAC">AAC Encoder</String>
-    <String id="EncoderWMA">WMA Encoder</String>
-    <String id="EncoderWAV">WAV Encoder</String>
-    <String id="EncoderMPC">Musepack Encoder</String>
-    <String id="EncoderWV">WavPack Encoder</String>
-    <String id="EncoderWMAStandard">Windows Media Audio Standaard</String>
-    <String id="EncoderWMAPro">Windows Media Audio Professional</String>
-    <String id="EncoderWMALossless">Windows Media Audio Lossless</String>
-    <String id="EncoderMPCStandard">High Quality (142-184 kbps)</String>
-    <String id="EncoderMPCxtreme">Higher Quality (168-212 kbps)</String>
-    <String id="EncoderMPCinsane">Much Higher Quality (232-268 kbps)</String>
-    <String id="EncoderMPCbraindead">Highest Quality (232-278 kbps)</String>
-    <String id="EncoderWVFast">Fast Mode (Snel, maar enig compromis in compressie ratio)</String>
-    <String id="EncoderWVHigh">High quality (betere compressie, maar trager)</String>
-    <String id="Stereo">Stereo</String>
-    <String id="Mono">Mono</String>
-    <String id="ParametricStereo">Parametric Stereo</String>
-    <String id="Cbr">CBR</String>
-    <String id="Vbr">VBR</String>
-    <String id="InvalidParm">Ongeldige Parameter Formaat als geripte bestandsnaam. A.u.b. Corrigeren.</String>
-    <String id="DescPrefMedium">Deze voorkeuze geeft bijna volledige transparantie aan vrijwel alle mensen bij vrijwel alle muziek.</String>
-    <String id="DescPrefStandard">Deze voorkeuze zou voor de meeste soorten muziek transparant moeten klinken voor het meerendeel van de toehoorders en heeft een hoog kwaliteits niveau.</String>
-    <String id="DescPrefExtreme">Wanneer u beschikt over  een zeer goed gehoor en vergelijkbare apparatuur, dan bereikt u met deze instelling ietwat betere kualiteit dan de "standaard" instelling.</String>
-    <String id="DescPrefInsane">CBR 320 kbps. Deze voorkeuze is voor de meesten niet nodig in de meeste situaties. Maar indien u desondanks toch de hoogste kwaliteit wenst, ongeacht de grootte van de data, kies dan deze instelling.</String>
-    <String id="DescPrefABR">Voor ABR modi (Hoge kwaliteit per gegeven bitrate) echter niet zo hoog als VBR). Gebruik van deze voorkeuze geeft gewoonlijk goede kwaliteit voor de aangegeven bitrate.\n\nAfhankelijk van de ingevoerde bitrate, deze voorkeuze bepaald de optimale instelling voor die specifieke situatie. Ondanks dat deze benadering werkt, is deze lang niet zo flexibel als VBR, en zal niet dezelfde kwaliteit bereiken als VBR op hogere bitrates.</String>
-    <String id="TabGeneral">Algemeen</String>
-    <String id="GroupBoxKeys">Toetsenbord sneltoetsen</String>
-    <String id="ChangeKey">Aanpassen</String>
-    <String id="Shift">Shift</String>
-    <String id="Ctrl">Ctrl</String>
-    <String id="Alt">Alt</String>
-    <String id="KeyDescription">Beschrijving:</String>
-    <String id="KeyAction">Actie:</String>
-    <String id="GroupBoxGeneral">Algemene Instellingen</String>
-    <String id="DebugLevel">Debug niveau:</String>
-    <String id="Theme">Thema:</String>
-    <String id="Language">Taal:</String>
-    <String id="TabTags">Tags</String>
-    <String id="TabTagsID3">ID3</String>
-    <String id="TabTagsLyricsCover">Liedteksten / Omslag</String>
-    <String id="GroupBoxPictures">Afbeeldingen</String>
-    <String id="OverwriteExistingCover">Overschrijf bestaande omslag(en) bij automatisch Taggen</String>
-    <String id="EmbedExistingThumb">Bestaande miniatuur inbedden(folder.jpg) bij zoeken naar omslag.</String>
-    <String id="AmazonSite">Amazon Zoekwebsite:</String>
-    <String id="GroupBoxLyrics">Liedteksten</String>
-    <String id="SwitchArtist">Wissel Artiest voor doorvoeren aapassing</String>
-    <String id="OverwriteExistingLyrics">Overschrijf bestaande liedtekst(en) bij automatisch Taggen</String>
-    <String id="GroupBoxLyricsSites">Locaties afzoeken</String>
-    <String id="LyricsPlugin">LyricsPlugin</String>
-    <String id="LyricsOnDemand">Liedteksten op aanvraag</String>
-    <String id="Lyrics007">Liedteksten007</String>
-    <String id="HotLyrics">Populaire liedteksten</String>
-    <String id="LyricWiki">Liedtekst Wiki</String>
-    <String id="Actionext">Actionext</String>
-    <String id="LyrDB">LyrDB</String>
-    <String id="LrcFinder">Lrc Finder</String>
-    <String id="GroupBoxTagsGeneral">Algemeen</String>
-    <String id="CopyArtist">Kopie Artiest naar AlbumArtiest wanneer leeg</String>
-    <String id="AutoFillNumberTracks">Bij bewerken van meer dan één nummer automatisch nummering toevoegen aan de nummers</String>
-    <String id="CaseConversion">Gebruik kapitaal omzettingsinstellingen bij opslaan</String>
-    <String id="CreateMissingFolderThumb">Maak missende map miniatuur (folder.jpg) bij opslaan</String>
-    <String id="AutoCompletion">Gebruik de MediaPortal Muziek Database voor Artiest auto-aanvullen</String>
-    <String id="GroupBoxTagsID3">ID3</String>
-    <String id="UseV4">Gebruik Versie 2.4 voor ID3 V2 Tags</String>
-    <String id="UseV3">Gebruik Versie 2.3 voor ID3 V2 Tags</String>
-    <String id="UseAPE">Gebruik APE en ID3 V1 Tags</String>
-    <String id="GroupBoxID3Update">Bijwerken</String>
-    <String id="RemoveID3V1">Verwijder ID3V1</String>
-    <String id="RemoveID3V2">Verwijder ID3V2</String>
-    <String id="ID3Both">ID3V1 en ID3V2</String>
-    <String id="ID3V2">ID3V2</String>
-    <String id="ID3V1">ID3V1</String>
-    <String id="GroupBoxTagsValidate">MP3 bestandformaat controle</String>
-    <String id="ValidateMP3">Valideer MP3 bestand bij inlezen van beschrijving / Database</String>
-    <String id="AutoFixMP3">Beschadigde MP3 data automatisch corrigeren</String>
-	<String id="GroupBoxDatabaseBuild">Muziek-Database opbouw</String>
-	<String id="DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand.\nStart vervolgens het bijwerken.</String>
-	<String id="StartDBScan">Start bijwerken</String>
-	<String id="DBScanStatus">Bijwerk status</String>
-	<String id="DBNotExists">De geselecteerde database bestaat niet.\nWanneer "Ja" wordt gekozen, word er een database aangemaakt.\nStart het bijwerken, om de database te vullen.</String>
-	<String id="ClearDatabase">Database voor bijwerken leegmaken</String>
-	<String id="SelectMusicFolder">Selecteer de muziek beschrijving</String>
-	<String id="DBScanIdle">Database bijwerking niet aktief.</String>
-	<String id="DBScanFinished">Database bijwerken beeindigd.\n{0} Audio bestand in: {1:d2}:{2:d2}:{3:d2}{4} verwerkt.</String>
-	<String id="DBScanTrackSummary"> ({0} Seconden per bestand)</String>
-	<String id="DBScanTitle">Database bijwerken afbreken</String>
-	<String id="DBScanActive">Database bijwerking is nog aktief.\nBijwerking afbreken en applicatie beeindigen?</String>
-	<String id="DBScanProgress">Bewerkt bestand {0} van {1}</String>
-<String id="TabRipping">Rippen</String>
-    <String id="TabRippingGeneral">Algemeen</String>
-    <String id="CustomPath">Aangepast pad en bestandsnaam</String>
-    <String id="Format">Formaat:</String>
-    <String id="TargetFolder">Doel map:</String>
-    <String id="GroupBoxEncoding">Encodeer formaat</String>
-    <String id="EncodingFormat">Selecteer het formaat naar welke je wenst te encoderen:</String>
-    <String id="TabRippingMP3">MP3</String>
-    <String id="GroupBoxMp3Experts">Expert instellingen</String>
-    <String id="LameExpertsWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer de Lame parameters worden ingesteld.</String>
-    <String id="LameExpertOptions">Voer de LAME Encoder parameters in (alleen Experts):</String>
-    <String id="GroupBoxPresets">MP3 Encoder voorkeuzes</String>
-    <String id="ABRBitrate">ABR Bitrate:</String>
-    <String id="Preset">Voorkeuze:</String>
-    <String id="TabRippingOGG">OGG</String>
-    <String id="GroupBoxOggExpert">Expert instellingen</String>
-    <String id="OggExpertWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer de OGG Expert parameters worden ingesteld.</String>
-    <String id="OggExpert">Voer Ogg Encodeer parameters in(alleen Experts):</String>
-    <String id="GroupBoxOggEncoding">OGG Encodeer instellingen</String>
-    <String id="OggQuality">Kwaliteit:</String>
-    <String id="TabRippingFlac">FLAC</String>
-    <String id="GroupBoxFlacSettings">Expert instellingen</String>
-    <String id="FlacExpertsWarning">Waarschuwing: Bovenstaande instellingen worden niet gebruikt, wanneer FLAC Expert parameters worden ingesteld</String>
-    <String id="FlacExperts">Voer FLAC Encodeer parameters in (alleen Experts):</String>
-    <String id="GroupBoxFlacEncoding">FLAC Encodeer instellingen</String>
-    <String id="FlacQuality">Kwaliteit:</String>
-    <String id="TabRippingAAC">AAC</String>
-    <String id="GroupBoxAACEncoding">AAC Encodeer instellingen</String>
-    <String id="AACBitRate">Bitrate:</String>
-    <String id="TabRippingWMA">WMA</String>
-    <String id="GroupBoxWMASettings">WMA Encodeer instellingen</String>
-    <String id="WMAQuality">Kwaliteit:</String>
-    <String id="WMASample">Sample Formaat:</String>
-    <String id="WMAEncoder">Encodeer Formaat:</String>
-    <String id="TabRippingMPC">MPC</String>
-    <String id="GroupBoxMpcExperts">Expert instellingen</String>
-    <String id="MpcExpertsWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer Musepack parameters worden ingesteld</String>
-    <String id="MPCExpertOptions">Voer Musepack Encodeer parameters in (alleen Experts):</String>
-    <String id="GroupBoxMPCPresets">Musepack Encodeer voorkeuzes</String>
-    <String id="MPCPreset">Voorkeuze:</String>
-    <String id="TabRippingWV">WV</String>
-    <String id="WvExpertsWarning">Warning: Preset settings will not be used, when specifying WavPackparameters</String>
-    <String id="groupBoxWvExperts">Expert instellingen</String>
-    <String id="WvExpertOptions">Voer WavPack Encodeer parameters in (alleen Experts):</String>
-    <String id="GroupBoxWvPresets">WavPack Encodeer Voorkeuzes</String>
-    <String id="WvPreset">Voorkeuze:</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="Apply">Toepassen</String>
-    <String id="LinkTags">Tags</String>
-    <String id="LinkGeneral">Algemeen</String>
-    <String id="LinkRipping">Rippen / Omzetten</String>
-  </Section>
- 
-  <!-- Burning -->
-  <Section name="Burning">
-    <String id="NoMedia">Geen Media in drive gevonden. A.u.b. lege disk invoeren.</String>
-    <String id="DragAndDrop">Gebruik Slepen en neerzetten &amp; om de nummers te sorteren voor het branden</String>
-    <String id="Decoding">Decodeer bestanden ...</String>
-    <String id="Cancelled">Branden afgebroken</String>
-    <String id="Checking">Controleer Media</String>
-    <String id="Erasing">RW Media leegmaken</String>
-    <String id="Leadin">Inleiding schrijven</String>
-    <String id="Leadout">Slotfase schrijven</String>
-    <String id="Burning">Branden ...</String>
-    <String id="Finished">Branden afgerond</String>
-    <String id="Failed">Branden mislukt: {0}</String>
-    <String id="FinishedMedia">Kan afgesloten media niet branden. A.u.b. een lege disk invoeren</String>
-    <String id="ClearList">Lijst opschonen</String>
-    <String id="Retrieving">Ophalen Media Informatie ....</String>
-    <String id="MediaInfo">Media: {0} ({1} minuten) Status: {2}</String>
-    <String id="Used">Gebruikt: {0}:{1} ( {2} Nummer(s))</String>
-    <String id="Capacity"> Waarschuwing: Collectie overschrijd apparaat capaciteit! Verwijder een aantal bestanden.</String>
-  </Section>
-
-  <!--  Conversion-/ Ripping -->
-  <Section name="Conversion">
-    <String id="ErrorDirectory">Fout bij maken van muziek beschrijving</String>
-    <String id="SameFile">Omzetting afgebroken: in- en uitvoer bestand zijn hetzelfde</String>
-    <String id="OpenFileError">Fout bij openen van bestand</String>
-    <String id="EncodingFileError">Fout bij encoderen van bestand</String>
-    <String id="Ripping">Rippen ....</String>
-    <String id="RippingFinished">Rippen van de geselecteerde bstanden afgerond.</String>
-    <String id="FreeDBAccess">CD Informatie from FreeDB aan het ophalen...</String>
-  </Section>
- 
-   <!--  FreeDB-->
-  <Section name="FreeDB">
-    <String id="Header">FreeDB Zoek resultaat</String>
-    <String id="MultipleMatches">Meerdere mogelijkheden gevonden via FreeDB. Selecteer A.u.b. de juiste disk</String>
-    <String id="Ok">Oké</String>
-    <String id="Cancel">Afbreken</String>
-  </Section>
- 
-  <!--  Internet Lookup -->
-  <Section name="Lookup">
-    <!--  Dialog to specify Artist / Album for the searchg -->
-    <String id="HeaderArtistAlbum">Internet zoekaktie - voer Artiest / Album in</String>
-    <String id="Continue">Volgende &gt;</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="NoAlbumFound">Geen album gevonden, kies a.u.b. andere collectie criteria.</String>
-    <!--  Search Result Dialog for Multiple Albums found -->
-    <String id="HeaderSearchResult">Meerdere Albums gevonden. Selecteer ...</String>
-    <String id="ColArtist">Artiest</String>
-    <String id="ColAlbum">Album</String>
-    <String id="ColTracks">Nummers #</String>
-    <String id="ColYear">Jaar</String>
-    <String id="ColLabel">Label</String>
-   <!--  Album Details  -->
-    <String id="HeaderDetails">Details bij geselecteerde Album</String>
-    <String id="AlbumTracks">Nummers op Album</String>
-    <String id="TracksToTag">Nummers om te Taggen</String>
-    <String id="ColTrackNum">#</String>
-    <String id="ColTitle">Titel</String>
-    <String id="ColFileName">Bestandsnaam</String>
-    <String id="Unassigned">&lt; Niet toegewezen &gt;</String>
-    <String id="MoveUp">Naar boven</String>
-    <String id="MoveDown">Naar beneden</String>
-  </Section>
-  
-  <!-- Messages shown by the program -->
-  <Section name="message">
-    <String id="Ok">Oké</String>
-    <String id="Error">Fout</String>
-    <String id="Error_Title">Fout</String>
-    <String id="Save_Changes">Wijzigingen zijn niet opgeslagen. Wilt u de wijzigingen opslaan?</String>
-    <String id="Save_Changes_Title">Wijzigingen opslaan</String>
-    <String id="Script_Compile_Failed">Het compileren van het script is mislukt.\n\nkijk in het log voor de foutmelding en corrigeer het.</String>
-    <String id="DataEntryError">De opgegeven waarde klopt niet.</String>
-    <String id="NoSelectionHeader">Geen selectie</String>
-    <String id="NoSelection">Selecteer minimaal één rij om de actie op uit te voeren.</String>
-    <String id="DeleteConfirmHeader">Verwijder bestand(en)</String>
-    <String id="DeleteConfirm">Wilt u het geselecteerde bestand(en) definitief verwijderen?</String>
-    <String id="DeleteFolders">Om de map te verwijderen, gebruik Shift-Del</String>
-    <String id="Fixed">Opgelost</String>
-  </Section>
-    
-  <!-- Progress Dialog -->
-  <Section name="progress">
-    <String id="ScanningHeader">Nummer tags ophalen</String>
-    <String id="Scanning">Tags van Nummer {0}/{1} ophalen</String>
-    <String id="Cancel">Afbreken</String>
-    <String id="SavingHeader">Nummers opslaan</String>
-    <String id="Saving">Nummer opslaan {0}/{1}</String>
-    <String id="InternetHeader">Internet zoekaktie</String>
-    <String id="Internet">Informatie van nummer {0}/{1} ophalen</String>
-    <String id="InternetMusicBrainz">Vingerafdruk maken en bestand identificeren</String>
-    <String id="InternetAlbum">Album Informatie ophalen</String>
-    <String id="CoverArtHeader">Omslag weergave opzoeken</String>
-    <String id="CoverArt">Omslag weergave van nummer {0}/{1} ophalen</String>
-    <String id="LyricsHeader">Liedteksten ophalen</String>
-    <String id="Lyrics">Liedteksten van nummer {0}/{1} ophalen</String>
-  </Section>
-  
-  <!-- About Dialog -->
-  <Section name="about">
-    <String id="Header">Over</String>
-    <String id="Ok">Oké</String>
-    <String id="Description">MPTagThat is een open bron Tag Editor, voor het beheer van uw complete Muziek Collectie.\n\nMeer informatie op:</String>
-	<String id="Version">Versie:</String>
-	<String id="BuildDate">Bouwdatum:</String>
-  </Section>
-  
-  <!-- Player -->
-  <Section name="player">
-    <String id="Title">Titel</String>
-    <String id="Artist">Artiest</String>
-    <String id="Album">Album</String>
-    <String id="PlayListButton">PL</String>
-  </Section>
-</Language>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### String niet gevonden ###</string>
+  <string name="system.ApplicationName">MPTagThat de MediaPortal Tag Editor</string>
+  <string name="splash.Version">Versie:</string>
+  <string name="splash.BuildDate">Bouwdatum:</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Mappen</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Afbeelding</string>
+  <string name="main.InformationPanel">Informatie</string>
+  <string name="main.PlayerPanel">Speler</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Opties</string>
+  <string name="main.ScanSubfolder">Submappen scannen</string>
+  <string name="main.ButtonRefreshFolder">Ververs Map Weergave</string>
+  <!--Misc. TabControl-->
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Bestand</string>
+  <string name="main.ErrorHeaderMessage">Bericht</string>
+  <string name="main.ErrorContextMenuClear">Lijst opschonen</string>
+  <!--Non Music File Listview-->
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Bestanden: {0} (Geselecteerd: {1})</string>
+  <string name="main.toolStripLabelPlay">Speler Status: Speelt af</string>
+  <string name="main.toolStripLabelPause">Player Status: Gepauzeerd</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Instellingen</string>
+  <string name="ribbon.Refresh">Ververs</string>
+  <string name="ribbon.Save">Opslaan</string>
+  <string name="ribbon.ColumnsSelect">Selecteer Weegegeven Kolommen</string>
+  <string name="ribbon.Exit">Afsluiten</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Tags</string>
+  <string name="ribbon.TagFromFile">Tag van Betandsnaam</string>
+  <string name="ribbon.RenameFile">Hernoem Bestand</string>
+  <string name="ribbon.RenameFileMenu">Hernoem Bestand</string>
+  <string name="ribbon.RenameFileOptions">Hernoem Bestand Opties</string>
+  <string name="ribbon.IdentifyFile">Identificeer Bestand</string>
+  <string name="ribbon.TagFromInternet">Tag van Internet</string>
+  <string name="ribbon.SingleTagEdit">Enkele Tag Bewerk</string>
+  <string name="ribbon.MultiTagEdit">Meerdere Tags Bewerk</string>
+  <string name="ribbon.GetCoverArt">Verkrijg Cover Art</string>
+  <string name="ribbon.GetLyrics">Verkrijg Lyrics</string>
+  <string name="ribbon.AutoNumber">Auto Nummering</string>
+  <string name="ribbon.NumberOnClick">Nummer bij Klikken</string>
+  <string name="ribbon.RemoveCommentPicture">Verwijder:</string>
+  <string name="ribbon.RemoveComments">Verwijder alle commentaar</string>
+  <string name="ribbon.RemovePictures">Verwijder alle afbeeldingen</string>
+  <string name="ribbon.CaseConversion">Kapitaal Omzetting</string>
+  <string name="ribbon.CaseConversionMenu">Kapitaal omzetting</string>
+  <string name="ribbon.CaseConversionOption">Kapitaal omzettings opties</string>
+  <string name="ribbon.DeleteTags">Verwijder Tags</string>
+  <string name="ribbon.DeleteAllTags">Verwijder alle Tags</string>
+  <string name="ribbon.DeleteID3V1Tags">Verwijder alleen ID3 V1 Tags</string>
+  <string name="ribbon.DeleteID3V2Tags">Verwijder alleen ID3 V2 Tags</string>
+  <string name="ribbon.EditTags">Bewerk Tags</string>
+  <string name="ribbon.RetrieveTags">Tags ophalen</string>
+  <string name="ribbon.OrganiseFiles">Organiseer</string>
+  <string name="ribbon.SaveFolderThumb">Opslaan als map miniatuur</string>
+  <string name="ribbon.ExecuteScript">Uitvoeren Script</string>
+  <string name="ribbon.Organise">Organiseer bestanden</string>
+  <string name="ribbon.AddBurner">Toevoegen aan Brander</string>
+  <string name="ribbon.AddConvert">Toevoegen aan Omzetting</string>
+  <string name="ribbon.AddPlaylist">Toevoegen aan Afspeellijst</string>
+  <string name="ribbon.Other">Andere</string>
+  <!--Rip Tab-->
+  <string name="ribbon.RipTab">Rippen</string>
+  <string name="ribbon.RipButton">Start Rippen</string>
+  <string name="ribbon.RipEncoder">Selecteer Encoder:</string>
+  <string name="ribbon.RipFolder">Resultaatmap:</string>
+  <string name="ribbon.RipCancel">Rip Stoppen</string>
+  <string name="ribbon.RipOptions">Rip Opties</string>
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Omzetten</string>
+  <string name="ribbon.ConvertButton">Start Omzetten</string>
+  <string name="ribbon.ConvertEncoder">Select Encoder:</string>
+  <string name="ribbon.ConvertFolder">Resultaatmap:</string>
+  <string name="ribbon.ConvertCancel">Omzetting Stoppen</string>
+  <string name="ribbon.ConvertOptions">Omzettings Opties</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Branden</string>
+  <string name="ribbon.Burn">Branden</string>
+  <string name="ribbon.BurnCancel">Stop Branden</string>
+  <string name="ribbon.BurnOptions">Brand Opties</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Verversen</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Tag van Betandsnaam</string>
+  <string name="screentip.IdentifyFile">Identificeer Bestand</string>
+  <string name="screentip.TagFromInternet">Tag van Internet</string>
+  <string name="screentip.SingleTagEdit">Enkele Tag Bewerk</string>
+  <string name="screentip.MultiTagEdit">Meerdere Tags Bewerken</string>
+  <string name="screentip.GetCoverArt">Verkrijg Cover Art</string>
+  <string name="screentip.SaveFolderThumb">Opslaan als map miniatuur</string>
+  <string name="screentip.GetLyrics">Verkrijg Lyrics</string>
+  <string name="screentip.AutoNumber">Auto Nummering</string>
+  <string name="screentip.NumberOnClick">Nummer bij Klikken</string>
+  <string name="screentip.RemoveComments">Verwijder alle commentaar</string>
+  <string name="screentip.RemovePictures">Verwijder alle afbeeldingen</string>
+  <string name="screentip.CaseConversion">Kapitaal Omzetting</string>
+  <string name="screentip.DeleteTags">Verwijder Tags</string>
+  <string name="screentip.RenameFile">Bestand hernoemen</string>
+  <string name="screentip.Organise">Organiseer Bestanden</string>
+  <string name="screentip.ExecuteScript">Uitvoeren Script</string>
+  <string name="screentip.AddBurner">Toevoegen aan Brander</string>
+  <string name="screentip.AddConvert">Toevoegen aan Omzetting</string>
+  <string name="screentip.AddPlaylist">Toevoegen aan Afspeellijst</string>
+  <!--Rip Tab-->
+  <string name="screentip.RipButton">Start Rippen</string>
+  <string name="screentip.RipCancel">Rip Stoppen</string>
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Start Omzetten</string>
+  <string name="screentip.ConvertCancel">Omzetting Stoppen</string>
+  <!--Burn Tab-->
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Meerdere Tags Bewerken</string>
+  <string name="TagEdit.SingleHeading">Tag Bewerken</string>
+  <string name="TagEdit.HeaderUser">Door gebruiker gedefiniëerd</string>
+  <string name="TagEdit.HeaderRating">Waardering</string>
+  <string name="TagEdit.HeaderLyrics">Liedteksten</string>
+  <string name="TagEdit.HeaderWeb">Web Informatie</string>
+  <string name="TagEdit.HeaderInvolved">Betrokken personen</string>
+  <string name="TagEdit.HeaderOriginal">Originele Informatie</string>
+  <string name="TagEdit.HeaderDetail">gedetaileerde Informatie</string>
+  <string name="TagEdit.HeaderMainTags">Hoofd Tags</string>
+  <string name="TagEdit.HeaderPictures">Afbeeldingen</string>
+  <!--Main Tags-->
+  <string name="TagEdit.AlbumArtist">AlbumArtiest:</string>
+  <string name="TagEdit.Track">Nummer:</string>
+  <string name="TagEdit.Artist">Artiest:</string>
+  <string name="TagEdit.Year">Jaar:</string>
+  <string name="TagEdit.Title">Titel:</string>
+  <string name="TagEdit.Album">Album:</string>
+  <string name="TagEdit.GroupBoxComment">Commentaar</string>
+  <string name="TagEdit.RemoveExistingComments">Commentaar eerst verwijderen</string>
+  <string name="TagEdit.MoveTop">Verplaats naar boven</string>
+  <string name="TagEdit.RemoveComment">Commentaar verwijderen</string>
+  <string name="TagEdit.AddComment">Commentaar toevoegen</string>
+  <string name="TagEdit.Comment">Commentaar:</string>
+  <string name="TagEdit.CommentLanguage">Taal (Alleen ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Descriptor (ID3 only):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Descriptor</string>
+  <string name="TagEdit.CommentHeaderLanguage">Taal</string>
+  <string name="TagEdit.CommentHeaderComment">Commentaar</string>
+  <string name="TagEdit.RemoveGenre">Genre verwijderen</string>
+  <string name="TagEdit.AddGenre">Genre toevoegen</string>
+  <string name="TagEdit.Genre">Genre:</string>
+  <string name="TagEdit.Disc">Disk:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Afbeelding</string>
+  <string name="TagEdit.RemoveExistingPictures">Bestaande afbeeldingen eerst verwijderen</string>
+  <string name="TagEdit.ExportPicture">Afbeelding Exporteren</string>
+  <string name="TagEdit.RemovePicture">Afbeelding verwijderen</string>
+  <string name="TagEdit.GetPicture">Ophalen uit bestand</string>
+  <string name="TagEdit.GetPictureInternet">Ophalen van Internet</string>
+  <string name="TagEdit.PictureType">Afbeeldingstype:</string>
+  <string name="TagEdit.PictureHeaderType">Afbeeldingstype</string>
+  <string name="TagEdit.PictureDescriptor">Beschrijving:</string>
+  <!--Detailed Information-->
+  <string name="TagEdit.GetTrackLengthFromFile">Ophalen uit bestand</string>
+  <string name="TagEdit.GetTrackLength">Haal nummer duur uit bestand</string>
+  <string name="TagEdit.TrackLength">Duur nummer (ms):</string>
+  <string name="TagEdit.MediaType">Media Type:</string>
+  <string name="TagEdit.TitleSort">Titel Sortering:</string>
+  <string name="TagEdit.AlbumSort">Album Sortering:</string>
+  <string name="TagEdit.ArtistSort">Artiest Sortering:</string>
+  <string name="TagEdit.AlbumArtistSort">AlbumArtiest Sortering:</string>
+  <string name="TagEdit.SubTitle">Subtitel:</string>
+  <string name="TagEdit.ContentGroup">Groepering:</string>
+  <string name="TagEdit.Copyright">Copyright:</string>
+  <string name="TagEdit.EncodedBy">Geëncodeerd door:</string>
+  <string name="TagEdit.Publisher">Uitgever:</string>
+  <string name="TagEdit.TextWriter">Liedteksten / Tekst Schrijver:</string>
+  <string name="TagEdit.Interpreter">Geïnterpreteerd door:</string>
+  <string name="TagEdit.Composer">Componist:</string>
+  <string name="TagEdit.Conductor">Dirigent:</string>
+  <!--Original Information-->
+  <string name="TagEdit.OriginalReleaseYear">Oorspronkelijk jaar van uitgave:</string>
+  <string name="TagEdit.OriginalOwber">Oorspronkelijk Eigenaar:</string>
+  <string name="TagEdit.OriginalArtist">Oorspronkelijk Artiest:</string>
+  <string name="TagEdit.OriginalTextWriter">Oorspronkelijk Liedtekst schrijver:</string>
+  <string name="TagEdit.OriginalFileName">Oorspronkelijke Bestandsnaam:</string>
+  <string name="TagEdit.OriginalAlbumTitle">Oorspronkelijke Album Titel:</string>
+  <!--Involved Persons-->
+  <string name="TagEdit.ID3V24only">Alleen ID3 V2.4</string>
+  <string name="TagEdit.RemoveMusician">Muzikant verwijderen</string>
+  <string name="TagEdit.AddMusician">Muzikant Toevoegen</string>
+  <string name="TagEdit.MusicianName">Muzikant Naam:</string>
+  <string name="TagEdit.MusicianInstrument">Instrument van Muzikant:</string>
+  <string name="TagEdit.MusicianHeaderInstrument">Instrument</string>
+  <string name="TagEdit.MusicianHeaderName">Naam</string>
+  <string name="TagEdit.RemovePerson">Persoon verwijderen</string>
+  <string name="TagEdit.AddPerson">Persoon toevoegen</string>
+  <string name="TagEdit.PersonName">Naam betrokken persoon:</string>
+  <string name="TagEdit.PersonFunction">Functie betrokken persoon:</string>
+  <string name="TagEdit.PersonHeaderName">Naam</string>
+  <string name="TagEdit.PersonHeaderFunction">Functie</string>
+  <!--Web Information-->
+  <string name="TagEdit.CommercialUrl">URL Commerciële Informatie:</string>
+  <string name="TagEdit.PublisherUrl">URL Officiële Uitgever:</string>
+  <string name="TagEdit.PaymentUrl">URL Officiële Betaling:</string>
+  <string name="TagEdit.InternetRadioUrl">Officiële Internet Radio Stat. URL:</string>
+  <string name="TagEdit.AudioSourceUrl">URL Officiële Audiobron:</string>
+  <string name="TagEdit.ArtistUrl">URL Officiële Artiest:</string>
+  <string name="TagEdit.AudioFileUrl">URL Officiëel Audiobetand:</string>
+  <string name="TagEdit.CopyrightUrl">URL Copyright Informatie:</string>
+  <!--Lyrics-->
+  <string name="TagEdit.GetLyricsFromInternet">Haal liedteksten op van het Internet</string>
+  <string name="TagEdit.GetLyricsFromText">Haal liedteksten op uit Tekst Bestand</string>
+  <string name="TagEdit.RemoveExistingLyrics">Verwijder eerst bestaande liedteksten</string>
+  <string name="TagEdit.RemoveLyrics">Liedteksten Verwijderen</string>
+  <string name="TagEdit.AddLyrics">Liedteksten toevoegen</string>
+  <string name="TagEdit.LyricsLanguage">Taal (Alleen ID3):</string>
+  <string name="TagEdit.LyricsDescriptor">Type (Alleen ID3):</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Type</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Taal</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Liedteksten</string>
+  <!--Rating-->
+  <string name="TagEdit.RemoveExistingRatings">Verwijder eerst bestaande waardering</string>
+  <string name="TagEdit.RatingNote">De waardering is 1-255 waar 1 is het slechtst en 255 is het beste. 0 is onbekend.\n\nOpmerking: Veel programma\'s hebben hun eigen waardering en definiëren de ID3 standaard anders. Wanneer geen tegenspraak wordt gegeven kan deze worden toegevoegd.</string>
+  <string name="TagEdit.PlayCounter">Afspeel teller:</string>
+  <string name="TagEdit.RemoveRating">Waardering verwijderen</string>
+  <string name="TagEdit.AddRating">Waardering toevoegen</string>
+  <string name="TagEdit.Rating">Waardering:</string>
+  <string name="TagEdit.RatingUser">Gebruiker (e-Mail):</string>
+  <!--Navigation Pane-->
+  <string name="TagEdit.panelNavigation">Tag Informatie</string>
+  <string name="TagEdit.LinkUserDefined">Gebruiker gedefiniëerd</string>
+  <string name="TagEdit.LinkRating">Waardering</string>
+  <string name="TagEdit.LinkLyrics">Liedteksten</string>
+  <string name="TagEdit.LinkWeb">Web Informatie</string>
+  <string name="TagEdit.LinkInvolvedPeople">Betrokken personen</string>
+  <string name="TagEdit.LinkOriginalInfo">Originele Informatie</string>
+  <string name="TagEdit.LinkDetailedInfo">Gedetaileerde Informatie</string>
+  <string name="TagEdit.LinkMainTags">Hoofd Tags</string>
+  <string name="TagEdit.LinkPictures">Afbeeldingen</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Afbreken</string>
+  <string name="TagEdit.Apply">Toepassen</string>
+  <!--Single Tag Edit Commands-->
+  <string name="TagEdit.Previous">Vorig Bestand</string>
+  <string name="TagEdit.Next">Volgend Bestand</string>
+  <string name="TagEdit.Commands">Commando\'s</string>
+  <!--User Defined Frames-->
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Header">Vind een liedtekst voor {0} - {1}</string>
+  <string name="LyricsSearch.Cancel">Afbreken</string>
+  <string name="LyricsSearch.Site">Lokatie</string>
+  <string name="LyricsSearch.Result">Resultaat</string>
+  <string name="LyricsSearch.Lyric">Liedtekst</string>
+  <string name="LyricsSearch.GroupBoxSearchResults">Zoek resultaten</string>
+  <string name="LyricsSearch.Title">Titel:</string>
+  <string name="LyricsSearch.Update">Bijwerken</string>
+  <string name="LyricsSearch.Find">Ophalen</string>
+  <string name="LyricsSearch.Close">Sluiten</string>
+  <string name="LyricsSearch.GroupBoxLyric">Liedtekst</string>
+  <string name="LyricsSearch.Artist">Artiest:</string>
+  <string name="LyricsSearch.GroupBoxSearchInfo">Zoek informatie</string>
+  <string name="LyricsSearch.SwitchArtist">Artiest Wisselen</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.Heading">Liedtekst zoeken</string>
+  <string name="LyricsSearch.Status">Zoeken naar Liedtekst ... Even geduld a.u.b.</string>
+  <string name="LyricsSearch.Finished">Zoeken voltooid. Deselecteer nummers met incorrecte Liedteksten.</string>
+  <string name="LyricsSearch.NothingToSearch">Er is niets om naar te zoeken</string>
+  <string name="LyricsSearch.FoundLyrics">Oké</string>
+  <string name="LyricsSearch.NoLyricsFound">N/B</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Header">Zoek Album</string>
+  <string name="AmazonAlbumSearch.Close">Afbreken</string>
+  <string name="AmazonAlbumSearch.Update">Selecteren</string>
+  <string name="AmazonAlbumSearch.Albums">Album(s)</string>
+  <string name="AmazonAlbumSearch.GroupBoxResults">Meerdere Albums gevonden. A.u.b. Selecteren ...</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Header">Op Internet opzoeken</string>
+  <string name="MusicBrainz.Cancel">Afbreken</string>
+  <string name="MusicBrainz.Update">Selecteren</string>
+  <string name="MusicBrainz.SearchInfo">Geïdentificeerd Nummer</string>
+  <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Duration">Duur</string>
+  <string name="MusicBrainz.GroupBoxResults">Het nummer is beschikbaar op meerdere albums. A.u.b. één selecteren</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.FileName">Bestandsnaam</string>
+  <string name="column_header.NewFileName">Nieuwe Bestandsnaam</string>
+  <string name="column_header.Status">Status</string>
+  <string name="column_header.Track">Nummer</string>
+  <string name="column_header.NumTracks">Nummer #</string>
+  <string name="column_header.Title">Titel</string>
+  <string name="column_header.Artist">Artiest</string>
+  <string name="column_header.AlbumArtist">Album Artiest</string>
+  <string name="column_header.Album">Album</string>
+  <string name="column_header.Year">Jaar</string>
+  <string name="column_header.Genre">Genre</string>
+  <string name="column_header.CreationTime">Productiedatum</string>
+  <string name="column_header.LastWriteTime">Veranderd</string>
+  <string name="column_header.TagType">Type</string>
+  <string name="column_header.Disc">Disk #</string>
+  <string name="column_header.NumDisc">Genum. Disks</string>
+  <string name="column_header.BPM">BPM</string>
+  <string name="column_header.Rating">Waardering</string>
+  <string name="column_header.Comment">Commentaar</string>
+  <string name="column_header.Composer">Component</string>
+  <string name="column_header.Conductor">Dirigent</string>
+  <string name="column_header.NumPics"># Afbeelding</string>
+  <string name="column_header.Picture">Afbeelding</string>
+  <string name="column_header.ArtistSortName">Sorteer op Artiest</string>
+  <string name="column_header.AlbumSortName">Sorteer op =Albumnaam</string>
+  <string name="column_header.CommercialInformation">Commerciële Informatie</string>
+  <string name="column_header.Copyright">Copyright</string>
+  <string name="column_header.CopyrightInformation">Copyright Informatie</string>
+  <string name="column_header.EncodedBy">Gecodeerd door</string>
+  <string name="column_header.Interpreter">Geïnterpreteerd door</string>
+  <string name="column_header.Grouping">Gegroepeerd</string>
+  <string name="column_header.Lyrics">Liedteksten</string>
+  <string name="column_header.MediaType">Media Type</string>
+  <string name="column_header.OfficialAudioFileInformation">Off. Audiobestand Informatie</string>
+  <string name="column_header.OfficialArtistInformation">Off. Artiest Informatie</string>
+  <string name="column_header.OfficialAudioSourceInformation">Off. Audiobron Informatie</string>
+  <string name="column_header.OfficialInternetRadioInformation">Off. Internet Radio Informatie</string>
+  <string name="column_header.OfficialPaymentInformation">Off. Betalings Informatie</string>
+  <string name="column_header.OfficialPublisherInformation">Off. Uitgevers Informatie</string>
+  <string name="column_header.OriginalAlbum">Origineel Album</string>
+  <string name="column_header.OriginalFileName">Originele Bestandsnaam</string>
+  <string name="column_header.OriginalLyricsWriter">Originele Tekstschrijver</string>
+  <string name="column_header.OriginalArtist">Originele Artiest</string>
+  <string name="column_header.OriginalOwner">Originele Eigenaar</string>
+  <string name="column_header.OriginalRelease">Originele Uitgave</string>
+  <string name="column_header.Publisher">Uitgever</string>
+  <string name="column_header.SubTitle">Subtitel</string>
+  <string name="column_header.TextWriter">Tekstschrijver</string>
+  <string name="column_header.TitleSortName">Sorteer op Titelnaam</string>
+  <string name="column_header.Duration">Duur</string>
+  <string name="column_header.FileSize">Grootte (kb)</string>
+  <string name="column_header.BitRate">Bitrate</string>
+  <string name="column_header.SampleRate">Samplerate</string>
+  <string name="column_header.Channels">Kanalen</string>
+  <string name="column_header.Version">Codec</string>
+  <!--Context Menus-->
+  <string name="contextmenu.AddBurner">Onder(deel/delen) aan brander toevoegen</string>
+  <string name="contextmenu.AddConverter">Onderdeel(en) aan omzetter toevoegen</string>
+  <string name="contextmenu.AddPlayList">Onderdeel(en) aan afspeellijst toevoegen</string>
+  <string name="contextmenu.CreateFolderThumb">Maak miniatuur map</string>
+  <string name="contextmenu.Copy">Kopiëren</string>
+  <string name="contextmenu.Cut">Knippen</string>
+  <string name="contextmenu.Paste">Invoegen</string>
+  <string name="contextmenu.Delete">Verwijderen</string>
+  <string name="contextmenu.Refresh">Verversen</string>
+  <string name="contextmenu.SelectAll">Alles Selecteren</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingTag">Tag van Bestandsnaam</string>
+  <string name="TagAndRename.HeadingRename">Bestand hernoemen</string>
+  <string name="TagAndRename.Apply">Toepassen</string>
+  <string name="TagAndRename.Cancel">Afbreken</string>
+  <string name="TagAndRename.Format">Formaat:</string>
+  <string name="TagAndRename.RemoveFormat">Verwijder Formaat uit lijst</string>
+  <string name="TagAndRename.AddFormat">Voeg Formaat toe aan lijst</string>
+  <string name="TagAndRename.GroupBoxParm">Parameters (klik om aan lijst toe te voegen)</string>
+  <string name="TagAndRename.Folder">\ = Map: om te specificeren dat parameters moeten gehaald uit de bestandsstruktuur.</string>
+  <string name="TagAndRename.Unused">&lt;X&gt; = Negeren</string>
+  <string name="TagAndRename.Comment">&lt;C&gt; = Commentaar</string>
+  <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orkest / Album Artiest</string>
+  <string name="TagAndRename.Genre">&lt;G&gt; = Genre</string>
+  <string name="TagAndRename.DiscTotal">&lt;d&gt; = Totaal aantal disks</string>
+  <string name="TagAndRename.Disc">&lt;D&gt; = Disk Nummer</string>
+  <string name="TagAndRename.TrackTotal">&lt;k&gt; = Totaal aantal Nummers</string>
+  <string name="TagAndRename.Track">&lt;K&gt; = Nummer</string>
+  <string name="TagAndRename.Year">&lt;Y&gt; = Jaar</string>
+  <string name="TagAndRename.Album">&lt;B&gt; = Album</string>
+  <string name="TagAndRename.Title">&lt;T&gt; = Titel</string>
+  <string name="TagAndRename.Artist">&lt;A&gt; = Artiest</string>
+  <string name="TagAndRename.Conductor">&lt;N&gt; = Dirigent</string>
+  <string name="TagAndRename.Composer">&lt;R&gt; = Componist</string>
+  <string name="TagAndRename.Group">&lt;U&gt; = Groeptype</string>
+  <string name="TagAndRename.SubTitle">&lt;S&gt; = SubTitel</string>
+  <string name="TagAndRename.BPM">&lt;E&gt; = BPM</string>
+  <string name="TagAndRename.ModifiedBY">&lt;M&gt; = Aangepast / geremixed door</string>
+  <string name="TagAndRename.Filename">&lt;F&gt; = Huidige bestandsnaam</string>
+  <string name="TagAndRename.Enumerate">&lt;#&gt; = Bestands opsomming</string>
+  <string name="TagAndRename.BitRate">&lt;I&gt; = Bitrate</string>
+  <string name="TagAndRename.FirstNofArtist">&lt;A:n&gt; = Eerste \"n\" karakters van Artiest</string>
+  <string name="TagAndRename.FirstNofAlbumArtist">&lt;O:n&gt; = Eerste \"n\" karakters van Album Artist</string>
+  <string name="TagAndRename.StartAt">Start vanaf</string>
+  <string name="TagAndRename.NumberDigits">Aantal tekens</string>
+  <string name="TagAndRename.NameTooLong">Bestandsnaam te lang. A.u.b. aanpassen.</string>
+  <string name="TagAndRename.FileExists">Bestand bestaat al. Gemeenschappelijke Tags gebruikt?</string>
+  <string name="TagAndRename.Rename">Kan bestandsnaam niet aanpassen {0}: {1}</string>
+  <string name="TagAndRename.InvalidParm">Ongeldig Parameter Formaat. A.u.b. corrigeren.</string>
+  <string name="TagAndRename.Original">Origineel:</string>
+  <string name="TagAndRename.Preview">Voorbeeld</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Header">Kapitaal Omzetting</string>
+  <string name="CaseConversion.TabSettings">Instellingen</string>
+  <string name="CaseConversion.GroupBoxOptions">Opties</string>
+  <string name="CaseConversion.AlwaysUpperCaseFirstLetter">Eerste letter altijd kapitaal</string>
+  <string name="CaseConversion.ReplaceSpaceByUnderscore">Vervang Spatie door \"_\"</string>
+  <string name="CaseConversion.ReplaceUnderscoreBySpace">Vervang \"_\" door Spatie</string>
+  <string name="CaseConversion.ReplaceSpaceby20">Vervang Spatie door \"%20\"</string>
+  <string name="CaseConversion.Replace20bySpace">Vervang \"%20\" door Spatie</string>
+  <string name="CaseConversion.GroupBoxMethod">Conversiemethode</string>
+  <string name="CaseConversion.AllFirstLetterUpperCase">Alle eerste letters kapitaal</string>
+  <string name="CaseConversion.FirstLetterUpperCase">Eerste letter kapitaal</string>
+  <string name="CaseConversion.AllUpperCase">Alles kapitaal</string>
+  <string name="CaseConversion.AllLowerCase">Alles kleine letter</string>
+  <string name="CaseConversion.GroupBoxConvert">Converteer Tags naar ...</string>
+  <string name="CaseConversion.Comment">Commentaar</string>
+  <string name="CaseConversion.Title">Titel</string>
+  <string name="CaseConversion.Album">Album</string>
+  <string name="CaseConversion.AlbumArtist">AlbumArtiest</string>
+  <string name="CaseConversion.Artist">Artiest</string>
+  <string name="CaseConversion.ConvertTags">Converteer Tags</string>
+  <string name="CaseConversion.ConvertFileName">Bestandsnaam converteren</string>
+  <string name="CaseConversion.Exceptions">Uitzonderingen</string>
+  <string name="CaseConversion.RemoveException">Verwijderen</string>
+  <string name="CaseConversion.AddException">Toevoegen</string>
+  <string name="CaseConversion.Convert">Omzetten</string>
+  <string name="CaseConversion.Cancel">Afbreken</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Header">Selecteer weergavekolom</string>
+  <string name="ColumnSelect.Ok">Oké</string>
+  <string name="ColumnSelect.Cancel">Afbreken</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.Heading">Organiseer Bestanden</string>
+  <string name="organise.TargetRootDrectory">Doel Root Directory:</string>
+  <string name="organise.BrowseRootDir">Doorzoeken</string>
+  <string name="organise.OverWriteFiles">Overschrijf bestaande bestanden</string>
+  <string name="organise.CopyFiles">Kopiëer bestanden i.p.v. deze te verplaatsen</string>
+  <string name="organise.CopyNonMusicFiles">Kopiëer/Verplaats Non-Muziek bestanden (Afbeeldingen, etc.)</string>
+  <string name="organise.InvalidParm">Ongeldige Parameter Formaat. A.u.b. corrigeren.</string>
+  <string name="organise.FileExists">Bestand bestaat al, wordt niet vervangen</string>
+  <string name="organise.SameFile">Bron en doelbestand zijn dezelfde. Bestand overgeslagen</string>
+  <string name="organise.Exists">Bestaat</string>
+  <string name="organise.Copied">Gekopiëerd</string>
+  <string name="organise.Moved">Verplaatst</string>
+  <string name="organise.GroupBoxOptions">Optie</string>
+  <string name="organise.ButtonOrganise">Organiseren</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Instellingen</string>
+  <string name="Settings.NavigationPanel">Navigatie</string>
+  <string name="Settings.Blue">Blauw</string>
+  <string name="Settings.Silver">Zilver</string>
+  <string name="Settings.Black">Zwart</string>
+  <string name="Settings.EncoderMP3">MP3 Encoder</string>
+  <string name="Settings.EncoderOgg">OGG Encoder</string>
+  <string name="Settings.EncoderFlac">Flac Encoder</string>
+  <string name="Settings.EncoderAAC">AAC Encoder</string>
+  <string name="Settings.EncoderWMA">WMA Encoder</string>
+  <string name="Settings.EncoderWAV">WAV Encoder</string>
+  <string name="Settings.EncoderMPC">Musepack Encoder</string>
+  <string name="Settings.EncoderWV">WavPack Encoder</string>
+  <string name="Settings.EncoderWMAStandard">Windows Media Audio Standaard</string>
+  <string name="Settings.EncoderWMAPro">Windows Media Audio Professional</string>
+  <string name="Settings.EncoderWMALossless">Windows Media Audio Lossless</string>
+  <string name="Settings.EncoderMPCStandard">High Quality (142-184 kbps)</string>
+  <string name="Settings.EncoderMPCxtreme">Higher Quality (168-212 kbps)</string>
+  <string name="Settings.EncoderMPCinsane">Much Higher Quality (232-268 kbps)</string>
+  <string name="Settings.EncoderMPCbraindead">Highest Quality (232-278 kbps)</string>
+  <string name="Settings.EncoderWVFast">Fast Mode (Snel, maar enig compromis in compressie ratio)</string>
+  <string name="Settings.EncoderWVHigh">High quality (betere compressie, maar trager)</string>
+  <string name="Settings.Stereo">Stereo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.ParametricStereo">Parametric Stereo</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.InvalidParm">Ongeldige Parameter Formaat als geripte bestandsnaam. A.u.b. Corrigeren.</string>
+  <string name="Settings.DescPrefMedium">Deze voorkeuze geeft bijna volledige transparantie aan vrijwel alle mensen bij vrijwel alle muziek.</string>
+  <string name="Settings.DescPrefStandard">Deze voorkeuze zou voor de meeste soorten muziek transparant moeten klinken voor het meerendeel van de toehoorders en heeft een hoog kwaliteits niveau.</string>
+  <string name="Settings.DescPrefExtreme">Wanneer u beschikt over  een zeer goed gehoor en vergelijkbare apparatuur, dan bereikt u met deze instelling ietwat betere kualiteit dan de \"standaard\" instelling.</string>
+  <string name="Settings.DescPrefInsane">CBR 320 kbps. Deze voorkeuze is voor de meesten niet nodig in de meeste situaties. Maar indien u desondanks toch de hoogste kwaliteit wenst, ongeacht de grootte van de data, kies dan deze instelling.</string>
+  <string name="Settings.DescPrefABR">Voor ABR modi (Hoge kwaliteit per gegeven bitrate) echter niet zo hoog als VBR). Gebruik van deze voorkeuze geeft gewoonlijk goede kwaliteit voor de aangegeven bitrate.\n\nAfhankelijk van de ingevoerde bitrate, deze voorkeuze bepaald de optimale instelling voor die specifieke situatie. Ondanks dat deze benadering werkt, is deze lang niet zo flexibel als VBR, en zal niet dezelfde kwaliteit bereiken als VBR op hogere bitrates.</string>
+  <string name="Settings.TabGeneral">Algemeen</string>
+  <string name="Settings.GroupBoxKeys">Toetsenbord sneltoetsen</string>
+  <string name="Settings.ChangeKey">Aanpassen</string>
+  <string name="Settings.Shift">Shift</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.KeyDescription">Beschrijving:</string>
+  <string name="Settings.KeyAction">Actie:</string>
+  <string name="Settings.GroupBoxGeneral">Algemene Instellingen</string>
+  <string name="Settings.DebugLevel">Debug niveau:</string>
+  <string name="Settings.Theme">Thema:</string>
+  <string name="Settings.Language">Taal:</string>
+  <string name="Settings.TabTags">Tags</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.TabTagsLyricsCover">Liedteksten / Omslag</string>
+  <string name="Settings.GroupBoxPictures">Afbeeldingen</string>
+  <string name="Settings.OverwriteExistingCover">Overschrijf bestaande omslag(en) bij automatisch Taggen</string>
+  <string name="Settings.EmbedExistingThumb">Bestaande miniatuur inbedden(folder.jpg) bij zoeken naar omslag.</string>
+  <string name="Settings.AmazonSite">Amazon Zoekwebsite:</string>
+  <string name="Settings.GroupBoxLyrics">Liedteksten</string>
+  <string name="Settings.SwitchArtist">Wissel Artiest voor doorvoeren aapassing</string>
+  <string name="Settings.OverwriteExistingLyrics">Overschrijf bestaande liedtekst(en) bij automatisch Taggen</string>
+  <string name="Settings.GroupBoxLyricsSites">Locaties afzoeken</string>
+  <string name="Settings.LyricsPlugin">LyricsPlugin</string>
+  <string name="Settings.LyricsOnDemand">Liedteksten op aanvraag</string>
+  <string name="Settings.Lyrics007">Liedteksten007</string>
+  <string name="Settings.HotLyrics">Populaire liedteksten</string>
+  <string name="Settings.LyricWiki">Liedtekst Wiki</string>
+  <string name="Settings.Actionext">Actionext</string>
+  <string name="Settings.LyrDB">LyrDB</string>
+  <string name="Settings.LrcFinder">Lrc Finder</string>
+  <string name="Settings.GroupBoxTagsGeneral">Algemeen</string>
+  <string name="Settings.CopyArtist">Kopie Artiest naar AlbumArtiest wanneer leeg</string>
+  <string name="Settings.AutoFillNumberTracks">Bij bewerken van meer dan één nummer automatisch nummering toevoegen aan de nummers</string>
+  <string name="Settings.CaseConversion">Gebruik kapitaal omzettingsinstellingen bij opslaan</string>
+  <string name="Settings.CreateMissingFolderThumb">Maak missende map miniatuur (folder.jpg) bij opslaan</string>
+  <string name="Settings.AutoCompletion">Gebruik de MediaPortal Muziek Database voor Artiest auto-aanvullen</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.UseV4">Gebruik Versie 2.4 voor ID3 V2 Tags</string>
+  <string name="Settings.UseV3">Gebruik Versie 2.3 voor ID3 V2 Tags</string>
+  <string name="Settings.UseAPE">Gebruik APE en ID3 V1 Tags</string>
+  <string name="Settings.GroupBoxID3Update">Bijwerken</string>
+  <string name="Settings.RemoveID3V1">Verwijder ID3V1</string>
+  <string name="Settings.RemoveID3V2">Verwijder ID3V2</string>
+  <string name="Settings.ID3Both">ID3V1 en ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.GroupBoxTagsValidate">MP3 bestandformaat controle</string>
+  <string name="Settings.ValidateMP3">Valideer MP3 bestand bij inlezen van beschrijving / Database</string>
+  <string name="Settings.AutoFixMP3">Beschadigde MP3 data automatisch corrigeren</string>
+  <string name="Settings.GroupBoxDatabaseBuild">Muziek-Database opbouw</string>
+  <string name="Settings.DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand.\nStart vervolgens het bijwerken.</string>
+  <string name="Settings.StartDBScan">Start bijwerken</string>
+  <string name="Settings.DBScanStatus">Bijwerk status</string>
+  <string name="Settings.DBNotExists">De geselecteerde database bestaat niet.\nWanneer \"Ja\" wordt gekozen, word er een database aangemaakt.\nStart het bijwerken, om de database te vullen.</string>
+  <string name="Settings.ClearDatabase">Database voor bijwerken leegmaken</string>
+  <string name="Settings.SelectMusicFolder">Selecteer de muziek beschrijving</string>
+  <string name="Settings.DBScanIdle">Database bijwerking niet aktief.</string>
+  <string name="Settings.DBScanFinished">Database bijwerken beeindigd.\n{0} Audio bestand in: {1:d2}:{2:d2}:{3:d2}{4} verwerkt.</string>
+  <string name="Settings.DBScanTrackSummary"> ({0} Seconden per bestand)</string>
+  <string name="Settings.DBScanTitle">Database bijwerken afbreken</string>
+  <string name="Settings.DBScanActive">Database bijwerking is nog aktief.\nBijwerking afbreken en applicatie beeindigen?</string>
+  <string name="Settings.DBScanProgress">Bewerkt bestand {0} van {1}</string>
+  <string name="Settings.TabRipping">Rippen</string>
+  <string name="Settings.TabRippingGeneral">Algemeen</string>
+  <string name="Settings.CustomPath">Aangepast pad en bestandsnaam</string>
+  <string name="Settings.Format">Formaat:</string>
+  <string name="Settings.TargetFolder">Doel map:</string>
+  <string name="Settings.GroupBoxEncoding">Encodeer formaat</string>
+  <string name="Settings.EncodingFormat">Selecteer het formaat naar welke je wenst te encoderen:</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.GroupBoxMp3Experts">Expert instellingen</string>
+  <string name="Settings.LameExpertsWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer de Lame parameters worden ingesteld.</string>
+  <string name="Settings.LameExpertOptions">Voer de LAME Encoder parameters in (alleen Experts):</string>
+  <string name="Settings.GroupBoxPresets">MP3 Encoder voorkeuzes</string>
+  <string name="Settings.ABRBitrate">ABR Bitrate:</string>
+  <string name="Settings.Preset">Voorkeuze:</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.GroupBoxOggExpert">Expert instellingen</string>
+  <string name="Settings.OggExpertWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer de OGG Expert parameters worden ingesteld.</string>
+  <string name="Settings.OggExpert">Voer Ogg Encodeer parameters in(alleen Experts):</string>
+  <string name="Settings.GroupBoxOggEncoding">OGG Encodeer instellingen</string>
+  <string name="Settings.OggQuality">Kwaliteit:</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.GroupBoxFlacSettings">Expert instellingen</string>
+  <string name="Settings.FlacExpertsWarning">Waarschuwing: Bovenstaande instellingen worden niet gebruikt, wanneer FLAC Expert parameters worden ingesteld</string>
+  <string name="Settings.FlacExperts">Voer FLAC Encodeer parameters in (alleen Experts):</string>
+  <string name="Settings.GroupBoxFlacEncoding">FLAC Encodeer instellingen</string>
+  <string name="Settings.FlacQuality">Kwaliteit:</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.GroupBoxAACEncoding">AAC Encodeer instellingen</string>
+  <string name="Settings.AACBitRate">Bitrate:</string>
+  <string name="Settings.TabRippingWMA">WMA</string>
+  <string name="Settings.GroupBoxWMASettings">WMA Encodeer instellingen</string>
+  <string name="Settings.WMAQuality">Kwaliteit:</string>
+  <string name="Settings.WMASample">Sample Formaat:</string>
+  <string name="Settings.WMAEncoder">Encodeer Formaat:</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.GroupBoxMpcExperts">Expert instellingen</string>
+  <string name="Settings.MpcExpertsWarning">Waarschuwing: Voorkeuze instellingen worden niet gebruikt, wanneer Musepack parameters worden ingesteld</string>
+  <string name="Settings.MPCExpertOptions">Voer Musepack Encodeer parameters in (alleen Experts):</string>
+  <string name="Settings.GroupBoxMPCPresets">Musepack Encodeer voorkeuzes</string>
+  <string name="Settings.MPCPreset">Voorkeuze:</string>
+  <string name="Settings.TabRippingWV">WV</string>
+  <string name="Settings.groupBoxWvExperts">Expert instellingen</string>
+  <string name="Settings.WvExpertsWarning">Warning: Preset settings will not be used, when specifying WavPackparameters</string>
+  <string name="Settings.WvExpertOptions">Voer WavPack Encodeer parameters in (alleen Experts):</string>
+  <string name="Settings.GroupBoxWvPresets">WavPack Encodeer Voorkeuzes</string>
+  <string name="Settings.WvPreset">Voorkeuze:</string>
+  <string name="Settings.Cancel">Afbreken</string>
+  <string name="Settings.Apply">Toepassen</string>
+  <string name="Settings.LinkTags">Tags</string>
+  <string name="Settings.LinkGeneral">Algemeen</string>
+  <string name="Settings.LinkRipping">Rippen / Omzetten</string>
+  <!--Burning-->
+  <string name="Burning.NoMedia">Geen Media in drive gevonden. A.u.b. lege disk invoeren.</string>
+  <string name="Burning.DragAndDrop">Gebruik Slepen en neerzetten &amp; om de nummers te sorteren voor het branden</string>
+  <string name="Burning.Decoding">Decodeer bestanden ...</string>
+  <string name="Burning.Cancelled">Branden afgebroken</string>
+  <string name="Burning.Checking">Controleer Media</string>
+  <string name="Burning.Erasing">RW Media leegmaken</string>
+  <string name="Burning.Leadin">Inleiding schrijven</string>
+  <string name="Burning.Leadout">Slotfase schrijven</string>
+  <string name="Burning.Burning">Branden ...</string>
+  <string name="Burning.Finished">Branden afgerond</string>
+  <string name="Burning.Failed">Branden mislukt: {0}</string>
+  <string name="Burning.FinishedMedia">Kan afgesloten media niet branden. A.u.b. een lege disk invoeren</string>
+  <string name="Burning.ClearList">Lijst opschonen</string>
+  <string name="Burning.Retrieving">Ophalen Media Informatie ....</string>
+  <string name="Burning.MediaInfo">Media: {0} ({1} minuten) Status: {2}</string>
+  <string name="Burning.Used">Gebruikt: {0}:{1} ( {2} Nummer(s))</string>
+  <string name="Burning.Capacity"> Waarschuwing: Collectie overschrijd apparaat capaciteit! Verwijder een aantal bestanden.</string>
+  <!--Conversion-/ Ripping-->
+  <string name="Conversion.ErrorDirectory">Fout bij maken van muziek beschrijving</string>
+  <string name="Conversion.SameFile">Omzetting afgebroken: in- en uitvoer bestand zijn hetzelfde</string>
+  <string name="Conversion.OpenFileError">Fout bij openen van bestand</string>
+  <string name="Conversion.EncodingFileError">Fout bij encoderen van bestand</string>
+  <string name="Conversion.Ripping">Rippen ....</string>
+  <string name="Conversion.RippingFinished">Rippen van de geselecteerde bstanden afgerond.</string>
+  <string name="Conversion.FreeDBAccess">CD Informatie from FreeDB aan het ophalen...</string>
+  <!--FreeDB-->
+  <string name="FreeDB.Header">FreeDB Zoek resultaat</string>
+  <string name="FreeDB.MultipleMatches">Meerdere mogelijkheden gevonden via FreeDB. Selecteer A.u.b. de juiste disk</string>
+  <string name="FreeDB.Ok">Oké</string>
+  <string name="FreeDB.Cancel">Afbreken</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.HeaderArtistAlbum">Internet zoekaktie - voer Artiest / Album in</string>
+  <string name="Lookup.Continue">Volgende &gt;</string>
+  <string name="Lookup.Cancel">Afbreken</string>
+  <string name="Lookup.NoAlbumFound">Geen album gevonden, kies a.u.b. andere collectie criteria.</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.HeaderSearchResult">Meerdere Albums gevonden. Selecteer ...</string>
+  <string name="Lookup.ColArtist">Artiest</string>
+  <string name="Lookup.ColAlbum">Album</string>
+  <string name="Lookup.ColTracks">Nummers #</string>
+  <string name="Lookup.ColYear">Jaar</string>
+  <string name="Lookup.ColLabel">Label</string>
+  <!--Album Details-->
+  <string name="Lookup.HeaderDetails">Details bij geselecteerde Album</string>
+  <string name="Lookup.AlbumTracks">Nummers op Album</string>
+  <string name="Lookup.TracksToTag">Nummers om te Taggen</string>
+  <string name="Lookup.ColTrackNum">#</string>
+  <string name="Lookup.ColTitle">Titel</string>
+  <string name="Lookup.ColFileName">Bestandsnaam</string>
+  <string name="Lookup.Unassigned">&lt; Niet toegewezen &gt;</string>
+  <string name="Lookup.MoveUp">Naar boven</string>
+  <string name="Lookup.MoveDown">Naar beneden</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Oké</string>
+  <string name="message.Error">Fout</string>
+  <string name="message.Error_Title">Fout</string>
+  <string name="message.Save_Changes">Wijzigingen zijn niet opgeslagen. Wilt u de wijzigingen opslaan?</string>
+  <string name="message.Save_Changes_Title">Wijzigingen opslaan</string>
+  <string name="message.Script_Compile_Failed">Het compileren van het script is mislukt.\n\nkijk in het log voor de foutmelding en corrigeer het.</string>
+  <string name="message.DataEntryError">De opgegeven waarde klopt niet.</string>
+  <string name="message.NoSelectionHeader">Geen selectie</string>
+  <string name="message.NoSelection">Selecteer minimaal één rij om de actie op uit te voeren.</string>
+  <string name="message.DeleteConfirmHeader">Verwijder bestand(en)</string>
+  <string name="message.DeleteConfirm">Wilt u het geselecteerde bestand(en) definitief verwijderen?</string>
+  <string name="message.DeleteFolders">Om de map te verwijderen, gebruik Shift-Del</string>
+  <string name="message.Fixed">Opgelost</string>
+  <!--Progress Dialog-->
+  <string name="progress.ScanningHeader">Nummer tags ophalen</string>
+  <string name="progress.Scanning">Tags van Nummer {0}/{1} ophalen</string>
+  <string name="progress.Cancel">Afbreken</string>
+  <string name="progress.SavingHeader">Nummers opslaan</string>
+  <string name="progress.Saving">Nummer opslaan {0}/{1}</string>
+  <string name="progress.InternetHeader">Internet zoekaktie</string>
+  <string name="progress.Internet">Informatie van nummer {0}/{1} ophalen</string>
+  <string name="progress.InternetMusicBrainz">Vingerafdruk maken en bestand identificeren</string>
+  <string name="progress.InternetAlbum">Album Informatie ophalen</string>
+  <string name="progress.CoverArtHeader">Omslag weergave opzoeken</string>
+  <string name="progress.CoverArt">Omslag weergave van nummer {0}/{1} ophalen</string>
+  <string name="progress.LyricsHeader">Liedteksten ophalen</string>
+  <string name="progress.Lyrics">Liedteksten van nummer {0}/{1} ophalen</string>
+  <!--About Dialog-->
+  <string name="about.Header">Over</string>
+  <string name="about.Ok">Oké</string>
+  <string name="about.Description">MPTagThat is een open bron Tag Editor, voor het beheer van uw complete Muziek Collectie.\n\nMeer informatie op:</string>
+  <string name="about.Version">Versie:</string>
+  <string name="about.BuildDate">Bouwdatum:</string>
+  <!--Player-->
+  <string name="player.Title">Titel</string>
+  <string name="player.Artist">Artiest</string>
+  <string name="player.Album">Album</string>
+  <string name="player.PlayListButton">PL</string>
+  <string name="player.PlayListSave">Opslaan</string>
+  <!--Database Search-->
+  <!--Find / Replace-->
+  <string name="findreplace.Cancel">Sluiten</string>
+  <!--Readonly Dialog-->
+  <!--Replay Gain Popup-->
+</resources>
