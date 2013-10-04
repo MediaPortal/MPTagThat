@@ -759,10 +759,7 @@ namespace MPTagThat
         _initialising = false;
 
         // Activate the form, will be hidden because of the size change
-        TopMost = true;
-        Focus();
-        BringToFront();
-        TopMost = false;
+        Activate();
       }
       catch (Exception ex)
       {

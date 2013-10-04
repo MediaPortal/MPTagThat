@@ -294,6 +294,7 @@ namespace MPTagThat
       _main.CurrentDirectory = startupFolder;
       _main.RefreshTrackList();
       _main.TreeView.TreeView.ShowFolder(startupFolder);
+      _main.Activate();
     }
 
     #endregion
