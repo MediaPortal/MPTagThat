@@ -19,13 +19,13 @@
 
 using System;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.IO.MemoryMappedFiles;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
-using MPTagThat.Core.Burning;
 using MPTagThat.Core.MediaChangeMonitor;
 
 #endregion
@@ -39,6 +39,9 @@ namespace MPTagThat
     private static int _portable;
     private static int _maxSongs;
     private static string _startupFolder;
+    private static Main _main;
+
+    private delegate void ThreadSafeSetCurrentFolderDelegate(string startupFolder);
 
     #endregion
 
@@ -70,6 +73,37 @@ namespace MPTagThat
         {
           _portable = 1;
         }
+      }
+
+      try
+      {
+        // Let's see, if we already have an instance of MPTagThat open
+        using (var mmf = MemoryMappedFile.OpenExisting("MPTagThat"))
+        {
+          if (_startupFolder == string.Empty)
+          {
+            // Don't allow a second instance of MPTagThat running
+            return;
+          }
+
+          byte[] buffer = Encoding.Default.GetBytes(_startupFolder);
+          var messageWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, "MPTagThat_IPC");
+
+          // Create accessor to MMF
+          using (var accessor = mmf.CreateViewAccessor(0, buffer.Length))
+          {
+            // Write to MMF
+            accessor.WriteArray<byte>(0, buffer, 0, buffer.Length);
+            messageWaitHandle.Set();
+
+            // End exit this instance
+            return;
+          }
+        }
+      }
+      catch (FileNotFoundException)
+      {
+        // The Memorymap does not exist, so MPTagThat is not yet running
       }
 
       // Read the Config file
@@ -128,11 +162,11 @@ namespace MPTagThat
 
         try
         {
-          Main main = new Main();
+          _main = new Main();
 
           // Set the Startup Folder we might have received via an argument, before invoking the form
-          main.CurrentDirectory = _startupFolder;
-          Application.Run(main);
+          _main.CurrentDirectory = _startupFolder;
+          Application.Run(_main);
         }
         catch (OutOfMemoryException)
         {
@@ -167,6 +201,32 @@ namespace MPTagThat
       ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
 
       ServiceScope.Get<ILogger>().GetLogger.Info("Finished registering services");
+
+      byte[] buffer = new byte[2048];
+      var messageWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, "MPTagThat_IPC");
+
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering MemoryMappedFile");
+      // Create named MMF
+      using (var mmf = MemoryMappedFile.CreateOrOpen("MPTagThat", 2048))
+      {
+        // Create accessor to MMF
+        using (var accessor = mmf.CreateViewAccessor(0, buffer.Length))
+        {
+          // Wait for the Message to be fired
+          while (true)
+          {
+            ServiceScope.Get<ILogger>().GetLogger.Debug("Wait for Startup Event to be fired");
+            messageWaitHandle.WaitOne();
+            ServiceScope.Get<ILogger>().GetLogger.Debug("Startup Event fired");
+
+            // Read from MMF
+            accessor.ReadArray<byte>(0, buffer, 0, buffer.Length);
+
+            string startupFolder = Encoding.Default.GetString(buffer).Trim(new char[] { ' ', '\x00' });
+            SetCurrentFolder(startupFolder);
+          }
+        }
+      }
     }
 
     /// <summary>
@@ -220,6 +280,20 @@ namespace MPTagThat
       string currentPath = Environment.GetEnvironmentVariable("Path");
       string newPath = string.Format("{0};{1}",currentPath, path);
       Environment.SetEnvironmentVariable("Path", newPath);
+    }
+
+    private static void SetCurrentFolder(string startupFolder)
+    {
+      if (_main.InvokeRequired)
+      {
+        ThreadSafeSetCurrentFolderDelegate d = SetCurrentFolder;
+        _main.Invoke(d, new object[] { startupFolder });
+        return;
+      }
+
+      _main.CurrentDirectory = startupFolder;
+      _main.RefreshTrackList();
+      _main.TreeView.TreeView.ShowFolder(startupFolder);
     }
 
     #endregion
