@@ -3,53 +3,55 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Timers;
-using Timer=System.Timers.Timer;
 
-namespace LyricsEngine.LyricSites
+namespace LyricsEngine.LyricsSites
 {
-    internal class Actionext
+    public class Actionext : AbstractSite
     {
-        private bool complete;
-        private string lyric = "";
-        private int timeLimit;
-        private Timer timer;
+        # region const
 
-        public Actionext(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
+        // Name
+        private const string SiteName = "Actionext";
+
+        // Base url
+        private const string SiteBaseUrl = "http://www.actionext.com";
+
+        # endregion
+
+        public Actionext(string artist, string title, WaitHandle mEventStopSiteSearches, int timeLimit) : base(artist, title, mEventStopSiteSearches, timeLimit)
         {
-            this.timeLimit = timeLimit;
-            timer = new Timer();
+        }
 
-            artist = LyricUtil.RemoveFeatComment(artist);
+        #region interface implemetation
+
+        protected override void FindLyricsWithTimer()
+        {
+            // clean artist
+            var artist = LyricUtil.RemoveFeatComment(Artist);
             artist = artist.Replace(" ", "_");
-            title = LyricUtil.TrimForParenthesis(title);
+            // Clean title
+            var title = LyricUtil.TrimForParenthesis(Title);
             title = title.Replace(" ", "_");
 
+            // Validation
             if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(title))
             {
                 return;
             }
 
-            string urlString = "http://www.actionext.com/names_" + artist[0] + "/" + artist + "_lyrics/" + title +
-                               ".html";
+            var urlString = SiteBaseUrl + "/names_" + artist[0] + "/" + artist + "_lyrics/" + title + ".html";
             urlString = urlString.ToLower();
 
-            LyricsWebClient client = new LyricsWebClient();
-
-            timer.Enabled = true;
-            timer.Interval = timeLimit;
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            timer.Start();
-
-            Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new OpenReadCompletedEventHandler(callbackMethod);
+            var client = new LyricsWebClient();
+            var uri = new Uri(urlString);
+            client.OpenReadCompleted += CallbackMethod;
             client.OpenReadAsync(uri);
 
-            while (complete == false)
+            while (Complete == false)
             {
-                if (m_EventStop_SiteSearches.WaitOne(1, true))
+                if (MEventStopSiteSearches.WaitOne(1, true))
                 {
-                    complete = true;
+                    Complete = true;
                 }
                 else
                 {
@@ -58,58 +60,83 @@ namespace LyricsEngine.LyricSites
             }
         }
 
-        public string Lyric
+        public override LyricType GetLyricType()
         {
-            get { return lyric; }
+            return LyricType.UnsyncedLyrics;
         }
 
-        private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
+        public override SiteType GetSiteType()
         {
-            bool thisMayBeTheCorrectLyric = true;
-            StringBuilder lyricTemp = new StringBuilder();
+            return SiteType.Scrapper;
+        }
 
-            LyricsWebClient client = (LyricsWebClient) sender;
+        public override SiteComplexity GetSiteComplexity()
+        {
+            return SiteComplexity.OneStep;
+        }
+
+        public override SiteSpeed GetSiteSpeed()
+        {
+            return SiteSpeed.VerySlow;
+        }
+
+        public override bool SiteActive()
+        {
+            return true;
+        }
+
+        public override string Name
+        {
+            get { return SiteName; }
+        }
+
+        public override string BaseUrl
+        {
+            get { return SiteBaseUrl; }
+        }
+
+        #endregion interface implemetation
+
+        #region private methods
+
+        private void CallbackMethod(object sender, OpenReadCompletedEventArgs e)
+        {
+            var thisMayBeTheCorrectLyric = true;
+
             Stream reply = null;
-            StreamReader sr = null;
+            StreamReader reader = null;
 
             try
             {
-                reply = (Stream) e.Result;
-                sr = new StreamReader(reply, Encoding.Default);
+                reply = e.Result;
+                reader = new StreamReader(reply, Encoding.Default);
 
-                string line = "";
-                int noOfLinesCount = 0;
+                var line = "";
+                var noOfLinesCount = 0;
 
-                while (line.IndexOf(@"<div class=""lyrics-text"">") == -1)
+                while (line.IndexOf(@"<div class=""lyrics-text"">", StringComparison.Ordinal) == -1)
                 {
-                    if (sr.EndOfStream || ++noOfLinesCount > 300)
+                    if (reader.EndOfStream || ++noOfLinesCount > 300)
                     {
                         thisMayBeTheCorrectLyric = false;
                         break;
                     }
-                    else
-                    {
-                        line = sr.ReadLine();
-                    }
+                    line = reader.ReadLine() ?? "";
                 }
 
                 if (thisMayBeTheCorrectLyric)
                 {
-                    lyricTemp = new StringBuilder();
-                    line = sr.ReadLine();
+                    var lyricTemp = new StringBuilder();
+                    line = reader.ReadLine() ?? "";
 
-                    while (line.IndexOf("</div>") == -1)
+                    while (line.IndexOf("</div>", StringComparison.Ordinal) == -1)
                     {
                         lyricTemp.Append(line);
-                        if (sr.EndOfStream)
+                        if (reader.EndOfStream)
                         {
-                            thisMayBeTheCorrectLyric = false;
                             break;
                         }
-                        else
-                        {
-                            line = sr.ReadLine();
-                        }
+                        line = reader.ReadLine() ?? "";
                     }
 
                     lyricTemp.Replace("<br>", Environment.NewLine);
@@ -117,42 +144,36 @@ namespace LyricsEngine.LyricSites
                     lyricTemp.Replace("<br />", Environment.NewLine);
                     lyricTemp.Replace("&amp;", "&");
 
-                    lyric = lyricTemp.ToString().Trim();
+                    LyricText = lyricTemp.ToString().Trim();
 
-                    if (lyric.Contains("but we do not have the lyrics"))
+                    if (LyricText.Contains("but we do not have the lyrics"))
                     {
-                        lyric = "Not found";
+                        LyricText = NotFound;
                     }
+                }
+                else
+                {
+                    LyricText = NotFound;
                 }
             }
             catch
             {
-                lyric = "Not found";
+                LyricText = NotFound;
             }
             finally
             {
-                if (sr != null)
+                if (reader != null)
                 {
-                    sr.Close();
+                    reader.Close();
                 }
-
                 if (reply != null)
                 {
                     reply.Close();
                 }
-                complete = true;
+                Complete = true;
             }
         }
 
-        private void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            timer.Stop();
-            timer.Close();
-            timer.Dispose();
-
-            lyric = "Not found";
-            complete = true;
-            Thread.CurrentThread.Abort();
-        }
+        #endregion private methods
     }
 }

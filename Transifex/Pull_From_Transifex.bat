@@ -1,0 +1,1 @@
+tx -d pull -a -f > pull.log

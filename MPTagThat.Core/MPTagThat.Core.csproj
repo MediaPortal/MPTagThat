@@ -234,7 +234,6 @@
     <Compile Include="Services\Localisation\StringManager.cs" />
     <Compile Include="Services\Localisation\StringsFile\StringFile.cs" />
     <Compile Include="Services\Localisation\StringsFile\StringLocalised.cs" />
-    <Compile Include="Services\Localisation\StringsFile\StringSection.cs" />
     <Compile Include="Services\Logger\FileLogger.cs" />
     <Compile Include="Services\Logger\ILogger.cs" />
     <Compile Include="Services\Logger\NoLogger.cs" />

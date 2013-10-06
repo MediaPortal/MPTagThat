@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace LyricsEngine.LRC
 {
-    public class SimpleLRCTimeAndLineCollection : IEnumerable, ICollection
+    public class SimpleLRCTimeAndLineCollection : ICollection
     {
-        private object[] items;
+        private readonly object[] _items;
 
         public SimpleLRCTimeAndLineCollection()
         {
@@ -13,20 +13,19 @@ namespace LyricsEngine.LRC
 
         public SimpleLRCTimeAndLineCollection(object[] array)
         {
-            items = array;
-            Sort(items);
+            _items = array;
+            Sort();
         }
 
         public SimpleLRCTimeAndLine this[int index]
         {
             get
             {
-                if (index < items.Length)
+                if (index < _items.Length)
                 {
-                    return (SimpleLRCTimeAndLine) items[index];
+                    return (SimpleLRCTimeAndLine) _items[index];
                 }
-                else
-                    return null;
+                return null;
             }
         }
 
@@ -34,7 +33,7 @@ namespace LyricsEngine.LRC
 
         public IEnumerator GetEnumerator()
         {
-            return new Enumerator(items);
+            return new Enumerator(_items);
         }
 
         #endregion
@@ -43,7 +42,7 @@ namespace LyricsEngine.LRC
 
         public int Count
         {
-            get { return items.Length; }
+            get { return _items.Length; }
         }
 
         public bool IsSynchronized
@@ -67,22 +66,22 @@ namespace LyricsEngine.LRC
 
         private class Enumerator : IEnumerator
         {
-            private int cursor;
-            private object[] elements;
+            private int _cursor;
+            private readonly object[] _elements;
 
             public Enumerator(object[] items)
             {
-                elements = new object[items.Length];
-                Array.Copy(items, elements, items.Length);
-                cursor = -1;
+                _elements = new object[items.Length];
+                Array.Copy(items, _elements, items.Length);
+                _cursor = -1;
             }
 
             #region IEnumerator Members
 
             public bool MoveNext()
             {
-                ++cursor;
-                if (cursor > (elements.Length - 1))
+                ++_cursor;
+                if (_cursor > (_elements.Length - 1))
                 {
                     return false;
                 }
@@ -91,22 +90,22 @@ namespace LyricsEngine.LRC
 
             public void Reset()
             {
-                cursor = -1;
+                _cursor = -1;
             }
 
             public object Current
             {
                 get
                 {
-                    if (cursor > (elements.Length - 1))
+                    if (_cursor > (_elements.Length - 1))
                     {
                         throw new InvalidOperationException("Enumration already finished");
                     }
-                    if (cursor == -1)
+                    if (_cursor == -1)
                     {
                         throw new InvalidOperationException("Enumeration not started");
                     }
-                    return elements[cursor];
+                    return _elements[_cursor];
                 }
             }
 
@@ -135,44 +134,42 @@ namespace LyricsEngine.LRC
 
         public int GetSimpleLRCTimeAndLineIndex(long time)
         {
-            if (time <= ((SimpleLRCTimeAndLine) items[0]).Time)
+            if (time <= ((SimpleLRCTimeAndLine) _items[0]).Time)
             {
                 return 0;
             }
 
-            for (int i = 1; i < items.Length; i++)
+            for (var i = 1; i < _items.Length; i++)
             {
-                if (((SimpleLRCTimeAndLine) items[i - 1]).Time < time && time <= ((SimpleLRCTimeAndLine) items[i]).Time)
+                if (((SimpleLRCTimeAndLine) _items[i - 1]).Time < time &&
+                    time <= ((SimpleLRCTimeAndLine) _items[i]).Time)
                 {
                     return i;
                 }
             }
 
-            if (time > ((SimpleLRCTimeAndLine) items[items.Length - 1]).Time)
+            if (time > ((SimpleLRCTimeAndLine) _items[_items.Length - 1]).Time)
             {
-                return items.Length - 1;
+                return _items.Length - 1;
             }
-            else
-            {
-                throw (new IndexOutOfRangeException("IndexOutOfRangeException in GetSimpleLRCTimeAndLineIndex"));
-            }
+            throw (new IndexOutOfRangeException("IndexOutOfRangeException in GetSimpleLRCTimeAndLineIndex"));
         }
 
         public string[] Copy()
         {
-            string[] array = new string[Count];
-            for (int i = 0; i < Count; i++)
+            var array = new string[Count];
+            for (var i = 0; i < Count; i++)
             {
-                SimpleLRCTimeAndLine timeLine = (SimpleLRCTimeAndLine) items[i];
+                var timeLine = (SimpleLRCTimeAndLine) _items[i];
                 array.SetValue(timeLine.Line, i);
             }
             return array;
         }
 
-        private void Sort(object obj)
+        private void Sort()
         {
             IComparer myComparer = new SortAfterTimeClass();
-            Array.Sort(items, myComparer);
+            Array.Sort(_items, myComparer);
         }
     }
 }

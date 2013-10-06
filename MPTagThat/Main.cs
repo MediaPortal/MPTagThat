@@ -519,7 +519,7 @@ namespace MPTagThat
     {
       log.Trace(">>>");
 
-      //FindRibbonWin();
+      FindRibbonWin();
 
       try
       {
