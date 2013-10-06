@@ -21,8 +21,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <TargetFrameworkSubset>
-    </TargetFrameworkSubset>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -38,37 +36,17 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\Release\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -91,15 +69,23 @@
     <Compile Include="LRC\SimpleLRCFormat.cs" />
     <Compile Include="LRC\SimpleLRCTimeAndLine.cs" />
     <Compile Include="LRC\SimpleLRCTimeAndLineCollection.cs" />
+    <Compile Include="LyricsDatabase\LyricsDatabase.cs" />
+    <Compile Include="LyricsDatabase\LyricsItem.cs" />
     <Compile Include="LyricSearch.cs" />
-    <Compile Include="LyricDiagnostics.cs" />
+    <Compile Include="LyricsSites\AbstractSite.cs" />
     <Compile Include="LyricsSites\Actionext.cs" />
+    <Compile Include="LyricsSites\LyricsNet.cs" />
+    <Compile Include="LyricsSites\ViewLyrics.cs" />
+    <Compile Include="LyricsSites\Lyricsmode.cs" />
+    <Compile Include="LyricsSites\Lyrster.cs" />
+    <Compile Include="LyricsSites\ILyricSite.cs" />
     <Compile Include="LyricsSites\LrcFinder.cs" />
-    <Compile Include="LyricsSites\LyrDB.cs" />
+    <Compile Include="LyricsSites\LyrDb.cs" />
     <Compile Include="LyricsSites\HotLyrics.cs" />
     <Compile Include="LyricsSites\Lyrics007.cs" />
     <Compile Include="LyricsSites\LyricsOnDemand.cs" />
-    <Compile Include="LyricsSites\LyricsPluginSite.cs" />
+    <Compile Include="LyricsSites\LyricsSiteFactory.cs" />
+    <Compile Include="LyricsSites\Shironet.cs" />
     <Compile Include="LyricsWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -186,9 +172,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

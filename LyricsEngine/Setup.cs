@@ -1,39 +1,52 @@
-using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace LyricsEngine
 {
-    public static class Setup
+    public class Setup
     {
-        public static string[] BatchSearchSites = new string[7]
-                                                      {
-                                                          "LrcFinder",
-                                                          //"LyricWiki",
-                                                          "Lyrics007",
-                                                          "LyricsOnDemand",
-                                                          "HotLyrics",
-                                                          "Actionext",
-                                                          "LyrDB",
-                                                          "LyricsPluginSite"
-                                                      };
+        #region Singleton
 
-
-        public static string[] AllSites()
+        private Setup()
         {
-            ArrayList allSites = new ArrayList();
-            allSites.AddRange(BatchSearchSites);
-            string[] allSitesArray = (string[]) allSites.ToArray(typeof (string));
-            return allSitesArray;
+            ActiveSites = new List<string>();
         }
 
-        public static bool IsMember(string value)
+        private static class SetupHolder
         {
-            return Array.IndexOf(BatchSearchSites, value) != -1;
+            public static readonly Setup Instance = new Setup();
         }
 
-        public static int NoOfSites()
+        public static Setup GetInstance()
         {
-            return BatchSearchSites.Length;
+            return SetupHolder.Instance;
+        }
+
+        #endregion Singleton
+
+        public List<string> ActiveSites { get; set; }
+        
+        public bool IsMember(string site)
+        {
+            return ActiveSites.Contains(site);
+        }
+
+        public int NoOfSites()
+        {
+            return ActiveSites.Count;
+        }
+
+        public void UpdateActiveSitesInSetup(CheckedListBox sitesList)
+        {
+            ActiveSites.Clear();
+            for (var index = 0; index < sitesList.Items.Count; index++)
+            {
+                var active = sitesList.GetItemChecked(index);
+                if (active)
+                {
+                    ActiveSites.Add((string) (sitesList.Items[index]));
+                }
+            }
         }
     }
 }
