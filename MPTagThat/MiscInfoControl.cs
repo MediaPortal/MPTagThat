@@ -57,6 +57,13 @@ namespace MPTagThat
 
     public MiscInfoControl()
     {
+      // Activates double buffering 
+      this.SetStyle(ControlStyles.DoubleBuffer |
+         ControlStyles.OptimizedDoubleBuffer |
+         ControlStyles.UserPaint |
+         ControlStyles.AllPaintingInWmPaint, true);
+      this.UpdateStyles();
+
       InitializeComponent();
 
       // Listen to Messages

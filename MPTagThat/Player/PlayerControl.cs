@@ -67,6 +67,13 @@ namespace MPTagThat.Player
 
     public PlayerControl()
     {
+      // Activates double buffering 
+      this.SetStyle(ControlStyles.DoubleBuffer |
+         ControlStyles.OptimizedDoubleBuffer |
+         ControlStyles.UserPaint |
+         ControlStyles.AllPaintingInWmPaint, true);
+      this.UpdateStyles();
+
       InitializeComponent();
 
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
