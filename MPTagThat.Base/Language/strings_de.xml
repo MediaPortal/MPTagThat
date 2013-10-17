@@ -607,14 +607,6 @@
   <string name="Settings.SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</string>
   <string name="Settings.OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</string>
   <string name="Settings.GroupBoxLyricsSites">Durchsuchen der Lyricsseiten</string>
-  <string name="Settings.LyricsPlugin">LyricsPlugin</string>
-  <string name="Settings.LyricsOnDemand">Lyrics On Demand</string>
-  <string name="Settings.Lyrics007">Lyrics007</string>
-  <string name="Settings.HotLyrics">Hot Lyrics</string>
-  <string name="Settings.LyricWiki">Lyric Wiki</string>
-  <string name="Settings.Actionext">Actionext</string>
-  <string name="Settings.LyrDB">LyrDB</string>
-  <string name="Settings.LrcFinder">Lrc Finder</string>
   <string name="Settings.GroupBoxTagsGeneral">Generell</string>
   <string name="Settings.CopyArtist">Interpret nach Album Interpret kopieren, wenn leer</string>
   <string name="Settings.AutoFillNumberTracks">\"Anzahl von Tracks\" bei merfach editieren automatisch füllen</string>
