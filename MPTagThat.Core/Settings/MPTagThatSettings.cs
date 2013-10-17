@@ -36,6 +36,7 @@ namespace MPTagThat.Core
     private int _numTrackDigits = 2;
 
     private List<string> _recentFolders = new List<string>();
+    private List<string> _lyricSites = new List<string>();
 
     #endregion
 
@@ -199,30 +200,13 @@ namespace MPTagThat.Core
 
     #region Lyrics
 
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLyricWiki { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchHotLyrics { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLyrics007 { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLyricsOnDemand { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLyricsPlugin { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchActionext { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLyrDB { get; set; }
-
-    [Setting(SettingScope.User, "true")]
-    public bool SearchLRCFinder { get; set; }
-
+    [Setting(SettingScope.User, "")]
+    public List<string> LyricSites
+    {
+      get { return _lyricSites; }
+      set { _lyricSites = value; }
+    }
+ 
     [Setting(SettingScope.User, "false")]
     public bool SwitchArtist { get; set; }
 

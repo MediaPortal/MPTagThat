@@ -1886,14 +1886,27 @@ namespace MPTagThat
       checkBoxRemoveID3V1.Checked = Options.MainSettings.RemoveID3V1;
       checkBoxRemoveID3V2.Checked = Options.MainSettings.RemoveID3V2;
 
-      ckHotLyrics.Checked = Options.MainSettings.SearchHotLyrics;
-      ckLyrics007.Checked = Options.MainSettings.SearchLyrics007;
-      ckLyricsOnDemand.Checked = Options.MainSettings.SearchLyricsOnDemand;
-      ckLyricWiki.Checked = Options.MainSettings.SearchLyricWiki;
-      ckLyricsPlugin.Checked = Options.MainSettings.SearchLyricsPlugin;
-      ckActionext.Checked = Options.MainSettings.SearchActionext;
-      ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
-      ckLRCFinder.Checked = Options.MainSettings.SearchLRCFinder;
+      // Clean the Lyrics selections first
+      // But not for a new installation
+      if (Options.MainSettings.LyricSites.Count > 0)
+      {
+        foreach (ListViewItem item in listViewLyricsSites.Items)
+        {
+          item.Checked = false;
+        }
+      }
+
+      foreach (string lyricsSite in Options.MainSettings.LyricSites)
+      {
+        foreach (ListViewItem item in listViewLyricsSites.Items)
+        {
+          if (item.Text == lyricsSite)
+          {
+            item.Checked = true;
+          }
+        }
+      }
+
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
       comboBoxAmazonSite.Items.Clear();
@@ -2406,14 +2419,16 @@ namespace MPTagThat
       Options.MainSettings.RemoveID3V1 = checkBoxRemoveID3V1.Checked;
       Options.MainSettings.RemoveID3V2 = checkBoxRemoveID3V2.Checked;
 
-      Options.MainSettings.SearchHotLyrics = ckHotLyrics.Checked;
-      Options.MainSettings.SearchLyrics007 = ckLyrics007.Checked;
-      Options.MainSettings.SearchLyricsOnDemand = ckLyricsOnDemand.Checked;
-      Options.MainSettings.SearchLyricWiki = ckLyricWiki.Checked;
-      Options.MainSettings.SearchLyricsPlugin = ckLyricsPlugin.Checked;
-      Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
-      Options.MainSettings.SearchLRCFinder = ckLRCFinder.Checked;
-      Options.MainSettings.SearchActionext = ckActionext.Checked;
+      var lyricsSites = new List<string>();
+      foreach (ListViewItem lyricsSite in listViewLyricsSites.Items)
+      {
+        if (lyricsSite.Checked)
+        {
+          lyricsSites.Add(lyricsSite.Text);
+        }
+      }
+      Options.MainSettings.LyricSites = lyricsSites;
+
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedItem as Item).Value;
 

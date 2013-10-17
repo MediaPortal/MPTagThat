@@ -113,31 +113,7 @@ namespace MPTagThat.GridView
 
       Localisation();
 
-      sitesToSearch = new List<string>();
-
-      if (Options.MainSettings.SearchLyricWiki)
-        sitesToSearch.Add("LyricWiki");
-
-      if (Options.MainSettings.SearchHotLyrics)
-        sitesToSearch.Add("HotLyrics");
-
-      if (Options.MainSettings.SearchLyrics007)
-        sitesToSearch.Add("Lyrics007");
-
-      if (Options.MainSettings.SearchLyricsOnDemand)
-        sitesToSearch.Add("LyricsOnDemand");
-
-      if (Options.MainSettings.SearchLyricsPlugin)
-        sitesToSearch.Add("LyricsPluginSite");
-
-      if (Options.MainSettings.SearchActionext)
-        sitesToSearch.Add("Actionext");
-
-      if (Options.MainSettings.SearchLyrDB)
-        sitesToSearch.Add("LyrDB");
-
-      if (Options.MainSettings.SearchLRCFinder)
-        sitesToSearch.Add("LrcFinder");
+      sitesToSearch = Options.MainSettings.LyricSites;
 
       // initialize delegates
       m_DelegateLyricFound = new DelegateLyricFound(lyricFound);
