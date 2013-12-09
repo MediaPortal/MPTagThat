@@ -351,6 +351,8 @@ namespace MPTagThat.GridView
           targetDir = string.Format(@"{0}\{1}", artistDir, albumDir);
         }
 
+        targetDir = Util.MakeValidFolderName(targetDir);
+
         targetDir = string.Format(@"{0}\{1}", _musicDir, targetDir);
 
         log.Debug("Rip: Using Target Folder: {0}", targetDir);
