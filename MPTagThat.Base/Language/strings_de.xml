@@ -80,6 +80,7 @@
   <string name="ribbon.ValidateSong">Überprüfen MP3</string>
   <string name="ribbon.FixSong">Korrigieren MP3</string>
   <string name="ribbon.ReplayGain">Replay Gain Analyse</string>
+  <string name="ribbon.BPM">BPM Erkennung</string>
   <string name="ribbon.RemoveCommentPicture">Entfernen:</string>
   <string name="ribbon.RemoveComments">Alle Kommentare entfernen</string>
   <string name="ribbon.RemovePictures">Alle Bilder entfernen</string>
@@ -180,7 +181,9 @@
   <string name="screentip.FixSong">Korrigieren MP3</string>
   <string name="screentip.FixSongText">Verwendet MP3Val um Fehler in der MP3 Datei zu korrigieren.</string>
   <string name="screentip.ReplayGain">Replay Gain Analyse</string>
-  <string name="screentip.ReplayGainText">Analysiert die ausgewählten Dateien und ermittelt den Replay Gain. Der ermittelte Wert wird in die Tags geschrieben.\nDAchtung: as File selbst wird nicht modifiziert.</string>
+  <string name="screentip.ReplayGainText">Analysiert die ausgewählten Dateien und ermittelt den Replay Gain. Der ermittelte Wert wird in die Tags geschrieben.\nAchtung: Die Datei selbst wird nicht modifiziert.</string>
+  <string name="screentip.BPM">BPM Erkennung</string>
+  <string name="screentip.BPMText">Analysiert die ausgewählten Dateien und ermittelt die Beats per Minute (BPM). Der ermittelte Wert wird in die Tags geschrieben.\nAchtung: Die Datei selbst wird nicht modifiziert.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Rip starten</string>
   <string name="screentip.RipButtonText">Startet das Rippen der ausgewählten Dateien.</string>
