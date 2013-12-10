@@ -581,14 +581,6 @@
   <string name="Settings.SwitchArtist">Bytt Artist føre utførelse</string>
   <string name="Settings.OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</string>
   <string name="Settings.GroupBoxLyricsSites">Sider å søke i</string>
-  <string name="Settings.LyricsPlugin">LyricsPlugin</string>
-  <string name="Settings.LyricsOnDemand">Lyrics On Demand</string>
-  <string name="Settings.Lyrics007">Lyrics007</string>
-  <string name="Settings.HotLyrics">Hot Lyrics</string>
-  <string name="Settings.LyricWiki">Lyric Wiki</string>
-  <string name="Settings.Actionext">Actionext</string>
-  <string name="Settings.LyrDB">Lyric DB</string>
-  <string name="Settings.LrcFinder">Lrc Finder</string>
   <string name="Settings.GroupBoxTagsGeneral">Generell</string>
   <string name="Settings.CopyArtist">Kopier Artist til AlbumArtist når denne er tom</string>
   <string name="Settings.AutoFillNumberTracks">Automatisk Fyll i \"Antall Spor\" når Flervalgte Tagg blir brukt</string>

@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### Reťazec nenájdený ###</string>
+  <string name="system.ApplicationName">MPTagThat, MediaPortal Tag Editor</string>
+  <string name="splash.Version">Verzia:</string>
+  <string name="splash.BuildDate">Dátum zostavenia:</string>
+  <string name="splash.Startup">Spúšťam...</string>
+  <string name="splash.AddRibbon">Pridávam záhlavie...</string>
+  <string name="splash.AddGrids">Nastavujem mriežku...</string>
+  <string name="splash.LoadSettings">Načítavam nastavenie...</string>
+  <string name="splash.Localisation">Lokalizácia...</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Zložky</string>
+  <string name="main.TreeViewPanelDatabase">Databáza</string>
+  <string name="main.TreeViewViews">Pohľady</string>
+  <string name="main.TreeViewFilters">Filter</string>
+  <string name="main.FilterUseTag">Použiť filter tagov</string>
+  <string name="main.FilterHeadingField">Pole</string>
+  <string name="main.FilterHeadingFilter">Filter</string>
+  <string name="main.FilterHeadingOperator">Operátor</string>
+  <string name="main.FilterOperatorAnd">a</string>
+  <string name="main.FilterOperatorOr">alebo</string>
+  <string name="main.FilterFileMask">Maska súboru</string>
+  <string name="main.FilterActive">Tagfilter: Aktívny</string>
+  <string name="main.FilterInActive">Tagfilter: Neaktívny</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Obrázok</string>
+  <string name="main.InformationPanel">Informácia</string>
+  <string name="main.PlayerPanel">Prehrávač</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Voľby</string>
+  <string name="main.FolderView">Pohľad na zložky</string>
+  <string name="main.DBView">DB pohľad</string>
+  <string name="main.NetworkView">Pohľad na sieť</string>
+  <string name="main.ScanSubfolder">Sken podzložiek</string>
+  <string name="main.ButtonRefreshFolder">Aktualizovať zložku</string>
+  <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Správy</string>
+  <string name="main.TabPageNonMusicFiles">Nehudobné súbory</string>
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Súbor</string>
+  <string name="main.ErrorHeaderMessage">Správa</string>
+  <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Premenovať na \"folder.jpg\"</string>
+  <!--Toolstrip-->
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Nastavenie</string>
+  <string name="ribbon.Refresh">Aktualizovať</string>
+  <string name="ribbon.Save">Uložiť</string>
+  <string name="ribbon.Exit">Ukončiť</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Tagy</string>
+  <string name="ribbon.TagFromFile">Tag z názvu súboru</string>
+  <string name="ribbon.RenameFile">Premenovať súbor</string>
+  <string name="ribbon.RenameFileMenu">Premenovať súbor</string>
+  <string name="ribbon.TagFromInternet">Tag z internetu</string>
+  <string name="ribbon.SingleTagEdit">Úprava jedného tagu</string>
+  <string name="ribbon.MultiTagEdit">Úprava viacerých tagov</string>
+  <string name="ribbon.GetLyrics">Stiahni texty</string>
+  <string name="ribbon.AutoNumber">Automatické číslovanie</string>
+  <string name="ribbon.Find">Nájsť</string>
+  <string name="ribbon.DeleteTags">Vymazať tagy</string>
+  <string name="ribbon.DeleteAllTags">Vymazať všetky tagy</string>
+  <string name="ribbon.DeleteID3V1Tags">Vymazať len ID3 V1 tagy</string>
+  <string name="ribbon.DeleteID3V2Tags">Vymazať len ID3 V2 tagy</string>
+  <string name="ribbon.EditTags">Upraviť tagy</string>
+  <string name="ribbon.RetrieveTags">Načítať tagy</string>
+  <string name="ribbon.OrganiseFiles">Organizovať</string>
+  <string name="ribbon.Picture">Obal</string>
+  <string name="ribbon.Other">Iné</string>
+  <!--Rip Tab-->
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Konvertovať</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Napáliť</string>
+  <string name="ribbon.Burn">Napáliť</string>
+  <string name="ribbon.BurnCancel">Zrušiť napaľovanie</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Aktualizovať</string>
+  <string name="screentip.Save">Uložiť zmeny</string>
+  <string name="screentip.SaveText">Uložiť zmeny na disk, zmenia sa tagy vybraných súborov</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Tag z názvu súboru</string>
+  <string name="screentip.TagFromInternet">Tag z internetu</string>
+  <string name="screentip.SingleTagEdit">Úprava jedného tagu</string>
+  <string name="screentip.MultiTagEdit">Úprava viacerých tagov</string>
+  <string name="screentip.GetLyrics">Stiahni texty</string>
+  <string name="screentip.AutoNumber">Automatické číslovanie</string>
+  <string name="screentip.DeleteTags">Vymazať tagy</string>
+  <string name="screentip.RenameFile">Premenovať súbor</string>
+  <string name="screentip.Find">Nájsť</string>
+  <!--Rip Tab-->
+  <!--Convert Tab-->
+  <!--Burn Tab-->
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Úprava viacerých tagov</string>
+  <string name="TagEdit.SingleHeading">Úprava tagu</string>
+  <string name="TagEdit.HeaderRating">Hodnotenie</string>
+  <string name="TagEdit.HeaderLyrics">Text</string>
+  <string name="TagEdit.HeaderInvolved">Zainteresovaní ľudia</string>
+  <string name="TagEdit.HeaderPictures">Obrázky</string>
+  <!--Main Tags-->
+  <string name="TagEdit.Year">Rok:</string>
+  <string name="TagEdit.Title">Názov:</string>
+  <string name="TagEdit.Album">Album:</string>
+  <string name="TagEdit.GroupBoxComment">Komentár</string>
+  <string name="TagEdit.Comment">Komentár:</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Popisovač</string>
+  <string name="TagEdit.CommentHeaderLanguage">Jaz.</string>
+  <string name="TagEdit.CommentHeaderComment">Komentár</string>
+  <string name="TagEdit.Disc">Disk:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Obrázok</string>
+  <!--Detailed Information-->
+  <!--Original Information-->
+  <!--Involved Persons-->
+  <string name="TagEdit.MusicianHeaderName">Meno</string>
+  <string name="TagEdit.PersonHeaderName">Meno</string>
+  <!--Web Information-->
+  <!--Lyrics-->
+  <string name="TagEdit.LyricsHeaderDescriptor">Popisovač</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Jaz.</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Text</string>
+  <!--Rating-->
+  <!--Navigation Pane-->
+  <string name="TagEdit.panelNavigation">Informácie o tagu</string>
+  <string name="TagEdit.LinkRating">Hodnotenie</string>
+  <string name="TagEdit.LinkLyrics">Text</string>
+  <string name="TagEdit.LinkInvolvedPeople">Zainteresovaní ľudia</string>
+  <string name="TagEdit.LinkPictures">Obrázky</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Zrušiť</string>
+  <!--Single Tag Edit Commands-->
+  <!--User Defined Frames-->
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Cancel">Zrušiť</string>
+  <string name="LyricsSearch.Lyric">Text</string>
+  <string name="LyricsSearch.Title">Názov:</string>
+  <string name="LyricsSearch.Close">Zatvoriť</string>
+  <string name="LyricsSearch.GroupBoxLyric">Text</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.FoundLyrics">OK</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Close">Zrušiť</string>
+  <string name="AmazonAlbumSearch.Search">Hľadať</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Cancel">Zrušiť</string>
+  <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Duration">Trvanie</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.FileName">Meno súboru</string>
+  <string name="column_header.Track">Stopa</string>
+  <string name="column_header.Title">Názov</string>
+  <string name="column_header.Artist">Umelec</string>
+  <string name="column_header.Album">Album</string>
+  <string name="column_header.Year">Rok</string>
+  <string name="column_header.Rating">Hodnotenie</string>
+  <string name="column_header.Comment">Komentár</string>
+  <string name="column_header.Picture">Obrázok</string>
+  <string name="column_header.Lyrics">Text</string>
+  <string name="column_header.Duration">Trvanie</string>
+  <!--Context Menus-->
+  <string name="contextmenu.Refresh">Aktualizovať</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingTag">Tag z mena súboru</string>
+  <string name="TagAndRename.HeadingRename">Premenovať súbor</string>
+  <string name="TagAndRename.Cancel">Zrušiť</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.TabSettings">Nastavenie</string>
+  <string name="CaseConversion.GroupBoxOptions">Voľby</string>
+  <string name="CaseConversion.Comment">Komentár</string>
+  <string name="CaseConversion.Title">Názov</string>
+  <string name="CaseConversion.Album">Album</string>
+  <string name="CaseConversion.Artist">Umelec</string>
+  <string name="CaseConversion.ConvertTags">Konvertovať tagy</string>
+  <string name="CaseConversion.Convert">Konvertovať</string>
+  <string name="CaseConversion.Cancel">Zrušiť</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Ok">OK</string>
+  <string name="ColumnSelect.Cancel">Zrušiť</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.GroupBoxOptions">Voľby</string>
+  <string name="organise.ButtonOrganise">Organizovať</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Nastavenie</string>
+  <string name="Settings.EncoderMPCStandard">Vysoká kvalita (142-184 kbps)</string>
+  <string name="Settings.EncoderMPCxtreme">Vyššia kvalita (168-212 kbps)</string>
+  <string name="Settings.EncoderMPCinsane">Ešte vyššia kvalita (232-268 kbps)</string>
+  <string name="Settings.EncoderMPCbraindead">Najvyššia kvalita (232-278 kbps)</string>
+  <string name="Settings.Stereo">Stereo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.ParametricStereo">Parametrické Stereo</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.ChangeKey">Zmena</string>
+  <string name="Settings.Shift">Shift</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.KeyDescription">Popis:</string>
+  <string name="Settings.KeyAction">Akcia:</string>
+  <string name="Settings.Language">Jazyk:</string>
+  <string name="Settings.TabTags">Tagy</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.TabTagsDatabase">Databáza</string>
+  <string name="Settings.GroupBoxPictures">Obrázky</string>
+  <string name="Settings.GroupBoxLyrics">Text</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.UseAPE">Použiť APE a ID3 V1 tagy</string>
+  <string name="Settings.ID3Both">ID3V1 a ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.Cancel">Zrušiť</string>
+  <string name="Settings.LinkTags">Tagy</string>
+  <!--Burning-->
+  <!--Conversion-/ Ripping-->
+  <!--FreeDB-->
+  <string name="FreeDB.Ok">OK</string>
+  <string name="FreeDB.Cancel">Zrušiť</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.Continue">Ďalej &gt;</string>
+  <string name="Lookup.Cancel">Zrušiť</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.ColArtist">Umelec</string>
+  <string name="Lookup.ColAlbum">Album</string>
+  <string name="Lookup.ColTracks">Stopy #</string>
+  <string name="Lookup.ColYear">Rok</string>
+  <string name="Lookup.ColLabel">Popis</string>
+  <!--Album Details-->
+  <string name="Lookup.TracksToTag">Stopy do tagov</string>
+  <string name="Lookup.ColTrackNum">#</string>
+  <string name="Lookup.ColTitle">Názov</string>
+  <string name="Lookup.ColFileName">Meno súboru</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">OK</string>
+  <string name="message.Error">Chyba</string>
+  <string name="message.Error_Title">Chyba</string>
+  <string name="message.UnsupportedFormat">Nepodporovaný formát</string>
+  <!--Progress Dialog-->
+  <string name="progress.Cancel">Zrušiť</string>
+  <!--About Dialog-->
+  <string name="about.Header">Niečo o</string>
+  <string name="about.Ok">OK</string>
+  <string name="about.Version">Verzia:</string>
+  <string name="about.BuildDate">Dátum zostavenia:</string>
+  <string name="about.Contributors">Prispeli</string>
+  <!--Player-->
+  <string name="player.Title">Názov</string>
+  <string name="player.Artist">Umelec</string>
+  <string name="player.Album">Album</string>
+  <string name="player.PlayListButton">PL</string>
+  <string name="player.PlayListLoad">Načítať</string>
+  <string name="player.PlayListSave">Uložiť</string>
+  <!--Database Search-->
+  <string name="dbsearch.Search">Hľadať</string>
+  <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Nájsť</string>
+  <string name="findreplace.TabFind">Nájsť</string>
+  <string name="findreplace.Cancel">Zatvoriť</string>
+  <!--Readonly Dialog-->
+  <string name="readonly.Header">Súbor len čítanie</string>
+  <string name="readonly.Yes">Áno</string>
+  <string name="readonly.YesToAll">Vždy áno</string>
+  <string name="readonly.No">Nie</string>
+  <string name="readonly.NoToAll">Vždy nie</string>
+  <!--Replay Gain Popup-->
+</resources>

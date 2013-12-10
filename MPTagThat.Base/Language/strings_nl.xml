@@ -4,27 +4,55 @@
   <string name="system.ApplicationName">MPTagThat de MediaPortal Tag Editor</string>
   <string name="splash.Version">Versie:</string>
   <string name="splash.BuildDate">Bouwdatum:</string>
+  <string name="splash.Startup">Opstarten ...</string>
+  <string name="splash.AddRibbon">Ribbon toevoegen ...</string>
+  <string name="splash.AddGrids">Instellen van roosters ...</string>
+  <string name="splash.LoadSettings">Instellingen laden ...</string>
+  <string name="splash.Localisation">Vertaling ...</string>
   <!--Main-->
   <!--Treeview-->
   <string name="main.TreeViewPanel">Mappen</string>
+  <string name="main.TreeViewPanelDatabase">Database</string>
+  <string name="main.TreeViewViews">Weergaves</string>
+  <string name="main.TreeViewFilters">Filter</string>
+  <string name="main.FilterUseTag">Gebruik Tag Filter</string>
+  <string name="main.FilterHeadingField">Veld</string>
+  <string name="main.FilterHeadingFilter">Filter</string>
+  <string name="main.FilterHeadingOperator">Operator</string>
+  <string name="main.FilterOperatorAnd">and</string>
+  <string name="main.FilterOperatorOr">or</string>
+  <string name="main.FilterFileMask">Bestandsmasker</string>
+  <string name="main.FilterAllFiles">Alle ondersteunde bestandsformaten</string>
+  <string name="main.FilterActive">Tagfilter: Actief</string>
+  <string name="main.FilterInActive">Tagfilter: Inactief</string>
   <!--Various Panels-->
   <string name="main.PicturePanel">Afbeelding</string>
   <string name="main.InformationPanel">Informatie</string>
   <string name="main.PlayerPanel">Speler</string>
   <!--Options Panel-->
   <string name="main.OptionsPanel">Opties</string>
+  <string name="main.FolderView">Map weergave</string>
+  <string name="main.DBView">Database weergave</string>
+  <string name="main.NetworkView">Netwerkmap weergave</string>
   <string name="main.ScanSubfolder">Submappen scannen</string>
   <string name="main.ButtonRefreshFolder">Ververs Map Weergave</string>
   <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Meldingen</string>
+  <string name="main.TabPageNonMusicFiles">Niet-muziekbestanden</string>
   <!--Error Gridview-->
   <string name="main.ErrorHeaderFile">Bestand</string>
   <string name="main.ErrorHeaderMessage">Bericht</string>
   <string name="main.ErrorContextMenuClear">Lijst opschonen</string>
   <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Hernoem naar \"folder,jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Verwijder geselecteerd(e) bestand(en)</string>
+  <string name="main.NonMusicDeleteFilesHeader">Verwijder meerdere items</string>
+  <string name="main.NonMusicDeleteFilesMessage">Weet je zeker dat je deze {0} items naar de prullenbak wilt verplaatsen?</string>
   <!--Toolstrip-->
   <string name="main.toolStripLabelFiles">Bestanden: {0} (Geselecteerd: {1})</string>
   <string name="main.toolStripLabelPlay">Speler Status: Speelt af</string>
   <string name="main.toolStripLabelPause">Player Status: Gepauzeerd</string>
+  <string name="main.toolStripLabelScan">Bestand verwerken: {0}</string>
   <!--Ribbon-->
   <!--Start Menu-->
   <string name="ribbon.Settings">Instellingen</string>
@@ -32,6 +60,7 @@
   <string name="ribbon.Save">Opslaan</string>
   <string name="ribbon.ColumnsSelect">Selecteer Weegegeven Kolommen</string>
   <string name="ribbon.Exit">Afsluiten</string>
+  <string name="ribbon.RecentFolders">Recente mappen</string>
   <!--Tags Tab-->
   <string name="ribbon.TagTab">Tags</string>
   <string name="ribbon.TagFromFile">Tag van Betandsnaam</string>
@@ -46,6 +75,11 @@
   <string name="ribbon.GetLyrics">Verkrijg Lyrics</string>
   <string name="ribbon.AutoNumber">Auto Nummering</string>
   <string name="ribbon.NumberOnClick">Nummer bij Klikken</string>
+  <string name="ribbon.Find">Zoek</string>
+  <string name="ribbon.Replace">Vervang</string>
+  <string name="ribbon.ValidateSong">Valideer MP3</string>
+  <string name="ribbon.FixSong">Repareer MP3</string>
+  <string name="ribbon.ReplayGain">Replay Gain</string>
   <string name="ribbon.RemoveCommentPicture">Verwijder:</string>
   <string name="ribbon.RemoveComments">Verwijder alle commentaar</string>
   <string name="ribbon.RemovePictures">Verwijder alle afbeeldingen</string>
@@ -61,6 +95,7 @@
   <string name="ribbon.OrganiseFiles">Organiseer</string>
   <string name="ribbon.SaveFolderThumb">Opslaan als map miniatuur</string>
   <string name="ribbon.ExecuteScript">Uitvoeren Script</string>
+  <string name="ribbon.Picture">Albumhoes</string>
   <string name="ribbon.Organise">Organiseer bestanden</string>
   <string name="ribbon.AddBurner">Toevoegen aan Brander</string>
   <string name="ribbon.AddConvert">Toevoegen aan Omzetting</string>
@@ -85,37 +120,82 @@
   <string name="ribbon.Burn">Branden</string>
   <string name="ribbon.BurnCancel">Stop Branden</string>
   <string name="ribbon.BurnOptions">Brand Opties</string>
+  <string name="ribbon.Burner">Selecteer brander:</string>
+  <string name="ribbon.BurnerSpeed">Brandersnelheid:</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Verversen</string>
+  <string name="screentip.RefreshText">De inhoud van de geselecteerde map wordt opnieuw ingelezen.⏎\nAls er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moeten worden opgeslagen.</string>
+  <string name="screentip.Save">Wijzgingen opslaan</string>
+  <string name="screentip.SaveText">Slaat de wijzigingen op schijf op door de tags van de geselecteerde bestanden aan te passen.</string>
+  <string name="screentip.ColumnsSelect">Kolommen weergegeven in rooster</string>
+  <string name="screentip.ColumnsSelectText">Selecteer de kolommen die moeten worden weergegeven in het Nummer detail rooster.</string>
   <!--Tags Tab-->
   <string name="screentip.TagFromFile">Tag van Betandsnaam</string>
+  <string name="screentip.TagFromFileText">Door specifieke parameters uit het dialoog te gebruiken, worden tags zoals \"Track #\", \"Artist\", \"Title\", etc. uit de bestandsnaam overgenomen.</string>
   <string name="screentip.IdentifyFile">Identificeer Bestand</string>
+  <string name="screentip.IdentifyFileText">Er wordt een hash gemaakt van de eerste 30 seconden van het bestand. Deze hash word gebruikt om het bestand te identificeren op MusicBrainz.\nDe tags worden van MusicBrainz gehaald en in het bestand geschreven.</string>
   <string name="screentip.TagFromInternet">Tag van Internet</string>
+  <string name="screentip.TagFromInternetText">De gegeven Artiest en Album naam worden gebruikt om te zoeken op Amazon, terwijl geprobeerd word de bestandsnamen te matchen met de lijst van Amazon.</string>
   <string name="screentip.SingleTagEdit">Enkele Tag Bewerk</string>
+  <string name="screentip.SingleTagEditText">Een dialoog staat het bewerken van alle tags toe van bestand.</string>
   <string name="screentip.MultiTagEdit">Meerdere Tags Bewerken</string>
+  <string name="screentip.MultiTagEditText">De tags die zijn aangepast in het dialoog worden toegepast op alle geselecteerde bestanden.</string>
   <string name="screentip.GetCoverArt">Verkrijg Cover Art</string>
+  <string name="screentip.GetCoverArtText">De naam van de artiest en het album worden gebruikt voor het ophalen van de albumhoes op Amazon. Wanneer meerdere matches worden gevonden, wordt een selectie dialoog weergegeven.</string>
   <string name="screentip.SaveFolderThumb">Opslaan als map miniatuur</string>
+  <string name="screentip.SaveFolderThumbText">De weergegeven albumhoes wordt opgeslagen als folder.jpg in de map van het geselecteerde bestand.</string>
   <string name="screentip.GetLyrics">Verkrijg Lyrics</string>
+  <string name="screentip.GetLyricsText">De Lyricsengine haalt de teksten voor de geselecteerde bestanden uit de Lyrics bronnen geselecteerd in de voorkeuren.</string>
   <string name="screentip.AutoNumber">Auto Nummering</string>
+  <string name="screentip.AutoNumberText">Het nummer van de geselecteerde bestanden word ingesteld door de waarde in het tekstvenster te gebruiken als start nummer.</string>
   <string name="screentip.NumberOnClick">Nummer bij Klikken</string>
+  <string name="screentip.NumberOnClickText">Zolang de knop aan staat zal het tracknummer worden ingesteld als er op een bestand wordt geclickt.</string>
   <string name="screentip.RemoveComments">Verwijder alle commentaar</string>
+  <string name="screentip.RemoveCommentsText">Alle commentaar in de geselecteerde bestanden zal worden verwijderd.</string>
   <string name="screentip.RemovePictures">Verwijder alle afbeeldingen</string>
+  <string name="screentip.RemovePicturesText">Alle hoes informatie word uit de geselecteerde bestanden verwijderd.</string>
   <string name="screentip.CaseConversion">Kapitaal Omzetting</string>
+  <string name="screentip.CaseConversionText">Het vervangen van hoofdletters, zoals ingesteld in de Opties, word toegepast op de geselecteerde bestanden.</string>
   <string name="screentip.DeleteTags">Verwijder Tags</string>
+  <string name="screentip.DeleteTagsText">Alle tags worden verwijderd uit de geselecteerde bestanden</string>
   <string name="screentip.RenameFile">Bestand hernoemen</string>
+  <string name="screentip.RenameFileText">De bestanden worden hernoemd volgens de gespecificeerde parameters uit het venster.</string>
   <string name="screentip.Organise">Organiseer Bestanden</string>
+  <string name="screentip.OrganiseText">De bestanden worden gekopieerd/verplaatst naar een nieuwe locatie, gebaseerd op de tags gespecificeerd in de venster parameters.</string>
   <string name="screentip.ExecuteScript">Uitvoeren Script</string>
+  <string name="screentip.ExecuteScriptText">Past het script toe uit de keuzelijst van de geselecteerde bestanden.</string>
   <string name="screentip.AddBurner">Toevoegen aan Brander</string>
+  <string name="screentip.AddBurnerText">Voeg geselecteerde bestanden toe aan de lijst welke klaar zijn om te branden op CD.</string>
   <string name="screentip.AddConvert">Toevoegen aan Omzetting</string>
+  <string name="screentip.AddConvertText">Voeg geselecteerde bestanden toe aan de lijst welke klaar zijn om geconverteerd te worden naar een ander formaat.</string>
   <string name="screentip.AddPlaylist">Toevoegen aan Afspeellijst</string>
+  <string name="screentip.AddPlaylistText">Voeg geselecteerde bestanden toe aan de afspeellijst, en start afspelen van het eerste bestand als de speler stil staat.</string>
+  <string name="screentip.Find">Zoek</string>
+  <string name="screentip.FindText">Open het zoekventers om specifieke strings te zoeken in de geselecteerde Nummers.</string>
+  <string name="screentip.Replace">Vervang</string>
+  <string name="screentip.ReplaceText">Opent het zoek/vervang venster om een gespecificeerde zoekopdracht te vervangen in de geselecteerde Nummers.</string>
+  <string name="screentip.ValidateSong">Valideer MP3</string>
+  <string name="screentip.ValidateSongText">Gebruikt MP3Val om de juistheid van de geselecteerde MP3 bestanden te controleren. Sommige fouten kunnen opgelost worden met de \"Repareer MP3\" knop.</string>
+  <string name="screentip.FixSong">Repareer MP3</string>
+  <string name="screentip.FixSongText">Gebruikt MP3Val om fouten in de geselecteerde MP3 bestanden  te detecteren.</string>
+  <string name="screentip.ReplayGain">Replay Gain</string>
+  <string name="screentip.ReplayGainText">Analiseer de geselecteerde bestanden en calculeer de Replay Gain. De waarde word in de Tags geschreven.\nOpmerking: Het bestand zelf word niet aangepast.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Start Rippen</string>
+  <string name="screentip.RipButtonText">Start het rippen van de geselecteerde bestanden</string>
   <string name="screentip.RipCancel">Rip Stoppen</string>
+  <string name="screentip.RipCancelText">Beeindigd het rippen.</string>
   <!--Convert Tab-->
   <string name="screentip.ConvertButton">Start Omzetten</string>
+  <string name="screentip.ConvertButtonText">Start conversie van de bestanden in de lijst naar het geselecteerde formaat</string>
   <string name="screentip.ConvertCancel">Omzetting Stoppen</string>
+  <string name="screentip.ConvertCancelText">Beeindigd het conversie proces</string>
   <!--Burn Tab-->
+  <string name="screentip.Burn">Brand CD</string>
+  <string name="screentip.BurnText">Start het branden van de bestanden in de brandlijst.</string>
+  <string name="screentip.BurnCancel">Annuleer branden</string>
+  <string name="screentip.BurnCancelText">Beeindigd het brandproces.</string>
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Meerdere Tags Bewerken</string>
@@ -136,6 +216,7 @@
   <string name="TagEdit.Year">Jaar:</string>
   <string name="TagEdit.Title">Titel:</string>
   <string name="TagEdit.Album">Album:</string>
+  <string name="TagEdit.PartOfCompilation">Onderdeel van compilatie</string>
   <string name="TagEdit.GroupBoxComment">Commentaar</string>
   <string name="TagEdit.RemoveExistingComments">Commentaar eerst verwijderen</string>
   <string name="TagEdit.MoveTop">Verplaats naar boven</string>
@@ -222,6 +303,7 @@
   <string name="TagEdit.LyricsHeaderLanguage">Taal</string>
   <string name="TagEdit.LyricsHeaderLyrics">Liedteksten</string>
   <!--Rating-->
+  <string name="TagEdit.GroupBoxRating">Waardering (Gebruik de waardering in de Ster Kolom voor niet-ID3 bestanden)</string>
   <string name="TagEdit.RemoveExistingRatings">Verwijder eerst bestaande waardering</string>
   <string name="TagEdit.RatingNote">De waardering is 1-255 waar 1 is het slechtst en 255 is het beste. 0 is onbekend.\n\nOpmerking: Veel programma\'s hebben hun eigen waardering en definiëren de ID3 standaard anders. Wanneer geen tegenspraak wordt gegeven kan deze worden toegevoegd.</string>
   <string name="TagEdit.PlayCounter">Afspeel teller:</string>
@@ -248,6 +330,12 @@
   <string name="TagEdit.Next">Volgend Bestand</string>
   <string name="TagEdit.Commands">Commando\'s</string>
   <!--User Defined Frames-->
+  <string name="TagEdit.FrameID">Frame Id</string>
+  <string name="TagEdit.FrameDesc">Beschrijving</string>
+  <string name="TagEdit.FrameText">Tekst</string>
+  <string name="TagEdit.AddFrame">Voeg Frame toe</string>
+  <string name="TagEdit.DeleteFrame">Verwijder Frame(s)</string>
+  <string name="TagEdit.DeleteAllFrames">Verwijder alle Frames</string>
   <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
   <string name="LyricsSearch.Header">Vind een liedtekst voor {0} - {1}</string>
   <string name="LyricsSearch.Cancel">Afbreken</string>
@@ -273,9 +361,13 @@
   <!--Amazon Album Search-->
   <string name="AmazonAlbumSearch.Header">Zoek Album</string>
   <string name="AmazonAlbumSearch.Close">Afbreken</string>
+  <string name="AmazonAlbumSearch.CancelAll">Alles annuleren</string>
   <string name="AmazonAlbumSearch.Update">Selecteren</string>
+  <string name="AmazonAlbumSearch.Search">Zoek</string>
   <string name="AmazonAlbumSearch.Albums">Album(s)</string>
   <string name="AmazonAlbumSearch.GroupBoxResults">Meerdere Albums gevonden. A.u.b. Selecteren ...</string>
+  <string name="AmazonAlbumSearch.NotFound">Geen resultaten. Pas a.u.b. de zoekcriteria aan ...</string>
+  <string name="AmazonAlbumSearch.Searching">Zoeken ...</string>
   <!--MusicBrainz Search-->
   <string name="MusicBrainz.Header">Op Internet opzoeken</string>
   <string name="MusicBrainz.Cancel">Afbreken</string>
@@ -286,6 +378,7 @@
   <string name="MusicBrainz.GroupBoxResults">Het nummer is beschikbaar op meerdere albums. A.u.b. één selecteren</string>
   <!--Header of the Grid View showing the Tracks-->
   <string name="column_header.FileName">Bestandsnaam</string>
+  <string name="column_header.FilePath">Pad</string>
   <string name="column_header.NewFileName">Nieuwe Bestandsnaam</string>
   <string name="column_header.Status">Status</string>
   <string name="column_header.Track">Nummer</string>
@@ -303,6 +396,10 @@
   <string name="column_header.NumDisc">Genum. Disks</string>
   <string name="column_header.BPM">BPM</string>
   <string name="column_header.Rating">Waardering</string>
+  <string name="column_header.ReplayGainTrack">Track Gain</string>
+  <string name="column_header.ReplayGainTrackPeak">Track Peak</string>
+  <string name="column_header.ReplayGainAlbum">Album Gain</string>
+  <string name="column_header.ReplayGainAlbumPeak">Album Peak</string>
   <string name="column_header.Comment">Commentaar</string>
   <string name="column_header.Composer">Component</string>
   <string name="column_header.Conductor">Dirigent</string>
@@ -341,9 +438,11 @@
   <string name="column_header.Channels">Kanalen</string>
   <string name="column_header.Version">Codec</string>
   <!--Context Menus-->
+  <string name="contextmenu.CoverLookup">Zoek naar albumhoes op Google</string>
   <string name="contextmenu.AddBurner">Onder(deel/delen) aan brander toevoegen</string>
   <string name="contextmenu.AddConverter">Onderdeel(en) aan omzetter toevoegen</string>
   <string name="contextmenu.AddPlayList">Onderdeel(en) aan afspeellijst toevoegen</string>
+  <string name="contextmenu.SavePlayList">Sla items op als afspeellijst</string>
   <string name="contextmenu.CreateFolderThumb">Maak miniatuur map</string>
   <string name="contextmenu.Copy">Kopiëren</string>
   <string name="contextmenu.Cut">Knippen</string>
@@ -351,6 +450,8 @@
   <string name="contextmenu.Delete">Verwijderen</string>
   <string name="contextmenu.Refresh">Verversen</string>
   <string name="contextmenu.SelectAll">Alles Selecteren</string>
+  <string name="contextmenu.InsertFilter">Voeg filter toe</string>
+  <string name="contextmenu.DeleteFilter">Verwijder filter</string>
   <!--Tag from Filename  / Rename File-->
   <string name="TagAndRename.HeadingTag">Tag van Bestandsnaam</string>
   <string name="TagAndRename.HeadingRename">Bestand hernoemen</string>
@@ -392,6 +493,7 @@
   <string name="TagAndRename.InvalidParm">Ongeldig Parameter Formaat. A.u.b. corrigeren.</string>
   <string name="TagAndRename.Original">Origineel:</string>
   <string name="TagAndRename.Preview">Voorbeeld</string>
+  <string name="TagAndRename.Parameters">Parameters</string>
   <!--Case Conversion-->
   <string name="CaseConversion.Header">Kapitaal Omzetting</string>
   <string name="CaseConversion.TabSettings">Instellingen</string>
@@ -427,6 +529,7 @@
   <!--Note :the Parameter are found in the TagAndRename section-->
   <string name="organise.Heading">Organiseer Bestanden</string>
   <string name="organise.TargetRootDrectory">Doel Root Directory:</string>
+  <string name="organise.TargetRootDrectoryOverride">Overschrijf Target Root Directory met behulp van Script:</string>
   <string name="organise.BrowseRootDir">Doorzoeken</string>
   <string name="organise.OverWriteFiles">Overschrijf bestaande bestanden</string>
   <string name="organise.CopyFiles">Kopiëer bestanden i.p.v. deze te verplaatsen</string>
@@ -438,7 +541,9 @@
   <string name="organise.Copied">Gekopiëerd</string>
   <string name="organise.Moved">Verplaatst</string>
   <string name="organise.GroupBoxOptions">Optie</string>
+  <string name="organise.GroupBoxSelection">Selectie</string>
   <string name="organise.ButtonOrganise">Organiseren</string>
+  <string name="organise.Folder">\ = Folder: om aan te geven dat parameters ervoor gebruikt worden als subfolder naam binnen de doelmap</string>
   <!--Settings  / Preferences-->
   <string name="Settings.Heading">Instellingen</string>
   <string name="Settings.NavigationPanel">Navigatie</string>
@@ -481,33 +586,33 @@
   <string name="Settings.Alt">Alt</string>
   <string name="Settings.KeyDescription">Beschrijving:</string>
   <string name="Settings.KeyAction">Actie:</string>
+  <string name="Settings.KeyShortCut">Toets snelkoppeling:</string>
+  <string name="Settings.RibbonShortCut">Ribbon snelkoppeling:</string>
   <string name="Settings.GroupBoxGeneral">Algemene Instellingen</string>
   <string name="Settings.DebugLevel">Debug niveau:</string>
   <string name="Settings.Theme">Thema:</string>
   <string name="Settings.Language">Taal:</string>
+  <string name="Settings.TrackListLocation">Locatie van tracklijst:</string>
   <string name="Settings.TabTags">Tags</string>
   <string name="Settings.TabTagsID3">ID3</string>
   <string name="Settings.TabTagsLyricsCover">Liedteksten / Omslag</string>
+  <string name="Settings.TabTagsDatabase">Database</string>
   <string name="Settings.GroupBoxPictures">Afbeeldingen</string>
   <string name="Settings.OverwriteExistingCover">Overschrijf bestaande omslag(en) bij automatisch Taggen</string>
   <string name="Settings.EmbedExistingThumb">Bestaande miniatuur inbedden(folder.jpg) bij zoeken naar omslag.</string>
+  <string name="Settings.OnlySaveFolderThumb">Sla albumhoes alleen als mapminiatuur op. Pas het muziekbestand niet aan.</string>
+  <string name="Settings.ChangeCoverSize">Sla albumhoezen op met een maximale breedte (in pixels):</string>
   <string name="Settings.AmazonSite">Amazon Zoekwebsite:</string>
   <string name="Settings.GroupBoxLyrics">Liedteksten</string>
   <string name="Settings.SwitchArtist">Wissel Artiest voor doorvoeren aapassing</string>
   <string name="Settings.OverwriteExistingLyrics">Overschrijf bestaande liedtekst(en) bij automatisch Taggen</string>
   <string name="Settings.GroupBoxLyricsSites">Locaties afzoeken</string>
-  <string name="Settings.LyricsPlugin">LyricsPlugin</string>
-  <string name="Settings.LyricsOnDemand">Liedteksten op aanvraag</string>
-  <string name="Settings.Lyrics007">Liedteksten007</string>
-  <string name="Settings.HotLyrics">Populaire liedteksten</string>
-  <string name="Settings.LyricWiki">Liedtekst Wiki</string>
-  <string name="Settings.Actionext">Actionext</string>
-  <string name="Settings.LyrDB">LyrDB</string>
-  <string name="Settings.LrcFinder">Lrc Finder</string>
   <string name="Settings.GroupBoxTagsGeneral">Algemeen</string>
   <string name="Settings.CopyArtist">Kopie Artiest naar AlbumArtiest wanneer leeg</string>
   <string name="Settings.AutoFillNumberTracks">Bij bewerken van meer dan één nummer automatisch nummering toevoegen aan de nummers</string>
   <string name="Settings.CaseConversion">Gebruik kapitaal omzettingsinstellingen bij opslaan</string>
+  <string name="Settings.ChangeReadonly">Verander alleen-lezen attribuut bij opslaan</string>
+  <string name="Settings.Encoding">Encodering voor het opslaan van tags:</string>
   <string name="Settings.CreateMissingFolderThumb">Maak missende map miniatuur (folder.jpg) bij opslaan</string>
   <string name="Settings.AutoCompletion">Gebruik de MediaPortal Muziek Database voor Artiest auto-aanvullen</string>
   <string name="Settings.GroupBoxTagsID3">ID3</string>
@@ -520,6 +625,7 @@
   <string name="Settings.ID3Both">ID3V1 en ID3V2</string>
   <string name="Settings.ID3V2">ID3V2</string>
   <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.ClearUserFrames">Verwijder Gebruiker Gedefinieerde Frames bij Opslaan.</string>
   <string name="Settings.GroupBoxTagsValidate">MP3 bestandformaat controle</string>
   <string name="Settings.ValidateMP3">Valideer MP3 bestand bij inlezen van beschrijving / Database</string>
   <string name="Settings.AutoFixMP3">Beschadigde MP3 data automatisch corrigeren</string>
@@ -541,6 +647,9 @@
   <string name="Settings.CustomPath">Aangepast pad en bestandsnaam</string>
   <string name="Settings.Format">Formaat:</string>
   <string name="Settings.TargetFolder">Doel map:</string>
+  <string name="Settings.RipOptions">Ripopties</string>
+  <string name="Settings.EjectCD">Werp CD uit na rippen</string>
+  <string name="Settings.ActivateTargetFolder">Activeer doelmap na rippen</string>
   <string name="Settings.GroupBoxEncoding">Encodeer formaat</string>
   <string name="Settings.EncodingFormat">Selecteer het formaat naar welke je wenst te encoderen:</string>
   <string name="Settings.TabRippingMP3">MP3</string>
@@ -655,6 +764,14 @@
   <string name="message.DeleteConfirm">Wilt u het geselecteerde bestand(en) definitief verwijderen?</string>
   <string name="message.DeleteFolders">Om de map te verwijderen, gebruik Shift-Del</string>
   <string name="message.Fixed">Opgelost</string>
+  <string name="message.FatalError">Onherstelbare fout. MPTagThat zal worden afgesloten»⏎\nKijk a.u.b. in de log bestanden voor de reden van afsluiten.</string>
+  <string name="message.OutOfMemory">Te veel bestanden geanalyseerd, het geheugen raakt vol. Analyze wordt afgebroken.</string>
+  <string name="message.ErrorResetAttr">Het alleen-lezen attribuut kan niet gereset worden</string>
+  <string name="message.CorruptFile">Corrupt bestand</string>
+  <string name="message.UnsupportedFormat">Niet ondersteund formaat</string>
+  <string name="message.NonExistingFile">Bestand bestaat niet meer!</string>
+  <string name="message.ErrorReadingFile">Fout bij lezen van bestand: {0}</string>
+  <string name="message.ErrorSave">Fout bij opslaan van bestand: {0}</string>
   <!--Progress Dialog-->
   <string name="progress.ScanningHeader">Nummer tags ophalen</string>
   <string name="progress.Scanning">Tags van Nummer {0}/{1} ophalen</string>
@@ -675,15 +792,49 @@
   <string name="about.Description">MPTagThat is een open bron Tag Editor, voor het beheer van uw complete Muziek Collectie.\n\nMeer informatie op:</string>
   <string name="about.Version">Versie:</string>
   <string name="about.BuildDate">Bouwdatum:</string>
+  <string name="about.Contributors">Medewerkers</string>
   <!--Player-->
   <string name="player.Title">Titel</string>
   <string name="player.Artist">Artiest</string>
   <string name="player.Album">Album</string>
   <string name="player.PlayListButton">PL</string>
+  <string name="player.PlayListLoad">Laden</string>
   <string name="player.PlayListSave">Opslaan</string>
+  <string name="player.ClearPlayList">Afspeellijst leegmaken</string>
+  <string name="player.LoadPlayList">Afspeellijst laden</string>
+  <string name="player.SavePlayList">Afspeellijst opslaan</string>
+  <string name="player.UseRelativePath">Gebruik een relatief pad</string>
   <!--Database Search-->
+  <string name="dbsearch.Artist">Artiest / Albumartiest (bevat):</string>
+  <string name="dbsearch.Album">Album (bevat):</string>
+  <string name="dbsearch.Title">Titel (bevat):</string>
+  <string name="dbsearch.Search">Zoek</string>
+  <string name="dbsearch.NoMusicDB">Om de database zoekfunctie te gebruiken moe je de locatie van de Muziek database opgegeven in de instellingen.</string>
+  <string name="dbsearch.NoSearchValues">Geef a.u.b. minmaal 1 zoekwoord op.</string>
+  <string name="dbsearch.TooMuchRows">Er zijn te veel resultaten. Alleen de eerste 1000 resultaten zullen worden weergegeven.</string>
   <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Zoek</string>
+  <string name="findreplace.HeaderReplace">Vervang</string>
+  <string name="findreplace.NotFound">Zoekwoord niet gevonden</string>
+  <string name="findreplace.NoMoreOccurencesFound">Geen resultaten meer voor zoekwoord</string>
+  <string name="findreplace.TabFind">Zoek</string>
+  <string name="findreplace.FindWhat">Zoek op:</string>
+  <string name="findreplace.MatchCase">Hoofdletter gevoelig</string>
+  <string name="findreplace.MatchWords">Alleen hele woorden</string>
+  <string name="findreplace.FindNext">Volgende zoeken</string>
   <string name="findreplace.Cancel">Sluiten</string>
+  <string name="findreplace.TabReplace">Vervang</string>
+  <string name="findreplace.ReplaceWith">Vervang met:</string>
+  <string name="findreplace.ReplaceBtn">Vervang</string>
+  <string name="findreplace.ReplaceAllBtn">Vervang alle</string>
   <!--Readonly Dialog-->
+  <string name="readonly.Header">Alleen-lezenbestand</string>
+  <string name="readonly.Explanation">Het gekozen bestand is alleen-lezen.⏎\nMoet MPTagThat het attribuut aanpassen en het bestand opslaan?</string>
+  <string name="readonly.Yes">Ja</string>
+  <string name="readonly.YesToAll">Ja op alles</string>
+  <string name="readonly.No">Nee</string>
+  <string name="readonly.NoToAll">Nee op alles</string>
   <!--Replay Gain Popup-->
+  <string name="albumgain.Header">Album Gain</string>
+  <string name="albumgain.Explanation">Alle bestanden geselecteerd.\nMoet MPTagThat een Album Gain berekenen?</string>
 </resources>
