@@ -97,6 +97,7 @@
 	<string name="ribbon.ValidateSong">Validate MP3</string>
 	<string name="ribbon.FixSong">Fix MP3</string>
 	<string name="ribbon.ReplayGain">Replay Gain</string>
+	<string name="ribbon.BPM">BPM Detect</string>
     <string name="ribbon.RemoveCommentPicture">Remove:</string>
     <string name="ribbon.RemoveComments">Remove all comments</string>
     <string name="ribbon.RemovePictures">Remove all pictures</string>
@@ -208,6 +209,9 @@
     <string name="screentip.FixSongText">Uses MP3Val to fix errors detected in the selected MP3 File.</string>
 	<string name="screentip.ReplayGain">Replay Gain</string>
     <string name="screentip.ReplayGainText">Analyses the selected file and calculates the Replay Gain. The calcualted value is written into the Tags.\nNote: The file itself is not modified.</string>
+	<string name="screentip.BPM">BPM Detection</string>
+    <string name="screentip.BPMText">Analyses the selected file and calculates the Beats per Minute (BPM). The calcualted value is written into the Tags.\nNote: The file itself is not modified.</string>
+
 	
     <!-- Rip Tab-->
     <string name="screentip.RipButton">Start Rip</string>

@@ -1319,6 +1319,10 @@ namespace MPTagThat
       buttonReplayGain.ScreenTip.Caption = localisation.ToString("screentip", "ReplayGain");
       buttonReplayGain.ScreenTip.Text = localisation.ToString("screentip", "ReplayGainText");
 
+      buttonBpm.Text = localisation.ToString("ribbon", "BPM");
+      buttonBpm.ScreenTip.Caption = localisation.ToString("screentip", "BPM");
+      buttonBpm.ScreenTip.Text = localisation.ToString("screentip", "BPMText");
+
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
       buttonRipStart.Text = localisation.ToString("ribbon", "RipButton");
