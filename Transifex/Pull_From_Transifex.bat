@@ -1,1 +1,1 @@
-tx -d pull -a -f > pull.log
+tx pull -a -f --minimum-perc=5 > pull.log
