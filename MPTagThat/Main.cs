@@ -952,6 +952,7 @@ namespace MPTagThat
       ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Bpm.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -3739,6 +3740,12 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.ReplayGain();
+          break;
+
+        case "Bpm":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.Bpm();
           break;
       }
     }
