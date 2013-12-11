@@ -52,6 +52,7 @@ namespace MPTagThat.GridView
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IMediaChangeMonitor mediaChangeMonitor;
     private int _currentRow = -1;
+    private bool _freeDBLookupActive = false;
 
     private string _musicDir;
     private string _outFile;
@@ -733,6 +734,7 @@ namespace MPTagThat.GridView
 
     private void mediaChangeMonitor_MediaInserted(string eDriveLetter)
     {
+      _freeDBLookupActive = true;
       if (dataGridViewRip.InvokeRequired)
       {
         ThreadSafeMediaInsertedDelegate d = mediaChangeMonitor_MediaInserted;
@@ -749,6 +751,7 @@ namespace MPTagThat.GridView
       SelectedCDRomDrive = driveLetter;
 
       _main.RipButtonsEnabled = true;
+      _freeDBLookupActive = false;
     }
 
     /// <summary>
@@ -766,6 +769,30 @@ namespace MPTagThat.GridView
           return true;
       }
       return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    /// <summary>
+    /// Fired, when the visibilty of the Grid changes
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void GridViewRip_VisibleChanged(object sender, EventArgs e)
+    {
+      _main.RipButtonsEnabled = false;
+
+      if (!Visible || _freeDBLookupActive)
+      {
+        return;
+      }
+
+      for (int i = 0; i < BassCd.BASS_CD_GetDriveCount(); i++)
+      {
+        if (BassCd.BASS_CD_IsReady(i))
+        {
+          BASS_CD_INFO cdInfo = BassCd.BASS_CD_GetInfo(i);
+          mediaChangeMonitor_MediaInserted(cdInfo.DriveLetter.ToString());
+        }
+      }
     }
 
     /// <summary>

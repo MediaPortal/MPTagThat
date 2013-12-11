@@ -202,6 +202,7 @@ namespace MPTagThat.GridView
       this.Controls.Add(this.panelTop);
       this.Name = "GridViewRip";
       this.Size = new System.Drawing.Size(800, 381);
+      this.VisibleChanged += new System.EventHandler(this.GridViewRip_VisibleChanged);
       this.panelTop.ResumeLayout(false);
       this.panelTop.PerformLayout();
       this.panelMiddle.ResumeLayout(false);
