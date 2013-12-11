@@ -105,6 +105,7 @@ namespace MPTagThat.GridView
         // Change the Datasource of the grid to the correct bindinglist
         if (CurrentDriveID > -1)
         {
+          _freeDBLookupActive = true;
           // Activate the Rip Grid
           _main.Ribbon.CurrentTabPage = _main.TabRip;
           _main.BurnGridView.Hide();
@@ -120,6 +121,8 @@ namespace MPTagThat.GridView
           {
             dataGridViewRip.Rows[0].Selected = false;
           }
+          _freeDBLookupActive = false;
+          _main.RipButtonsEnabled = true;
         }
       }
     }
@@ -734,7 +737,6 @@ namespace MPTagThat.GridView
 
     private void mediaChangeMonitor_MediaInserted(string eDriveLetter)
     {
-      _freeDBLookupActive = true;
       if (dataGridViewRip.InvokeRequired)
       {
         ThreadSafeMediaInsertedDelegate d = mediaChangeMonitor_MediaInserted;
@@ -751,7 +753,6 @@ namespace MPTagThat.GridView
       SelectedCDRomDrive = driveLetter;
 
       _main.RipButtonsEnabled = true;
-      _freeDBLookupActive = false;
     }
 
     /// <summary>
@@ -791,6 +792,9 @@ namespace MPTagThat.GridView
         {
           BASS_CD_INFO cdInfo = BassCd.BASS_CD_GetInfo(i);
           mediaChangeMonitor_MediaInserted(cdInfo.DriveLetter.ToString());
+          _main.CurrentDirectory = string.Format("{0}:",cdInfo.DriveLetter.ToString());
+          _main.TreeView.TreeView.ShowFolder(_main.CurrentDirectory);
+          break;
         }
       }
     }
