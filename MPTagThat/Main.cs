@@ -749,6 +749,8 @@ namespace MPTagThat
         // Now position the Tracklist and Tagedit Panel
         PositionTrackList();
 
+        PopulateScriptsCombo();
+
         // Start Listening for Media Changes
         ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
 
