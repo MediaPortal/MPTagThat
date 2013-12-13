@@ -745,7 +745,6 @@ namespace MPTagThat
 
         // Setup TagEdit Control
         tagEditControl = new TagEditControl(this);
-        tagEditControl.Dock = DockStyle.Fill;
 
         // Now position the Tracklist and Tagedit Panel
         PositionTrackList();
@@ -863,6 +862,11 @@ namespace MPTagThat
     /// </summary>
     private void PositionTrackList()
     {
+      this.SuspendLayout();
+      panelMiddleBottom.SuspendLayout();
+      panelFileList.SuspendLayout();
+      tagEditControl.SuspendLayout();
+
       // Remove controls firs, if they already exist
       if (panelMiddleBottom.Controls.Contains(tagEditControl))
       {
@@ -903,6 +907,13 @@ namespace MPTagThat
         panelMiddleBottom.Controls.Add(gridViewRip);
         panelMiddleBottom.Controls.Add(gridViewConvert);
       }
+
+      tagEditControl.Dock = DockStyle.Fill;
+
+      tagEditControl.ResumeLayout();
+      panelMiddleBottom.ResumeLayout();
+      panelFileList.ResumeLayout();
+      this.ResumeLayout();
     }
     #endregion
 
