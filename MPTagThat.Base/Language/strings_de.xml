@@ -632,6 +632,9 @@
   <string name="Settings.GroupBoxTagsValidate">MP3 Dateiformatprüfung</string>
   <string name="Settings.ValidateMP3">Überprüfe MP3 Dateien beim Einlesen von Verzeichnis / Datenbank</string>
   <string name="Settings.AutoFixMP3">Fehlerhafte MP3 Dateien automatisch korrigieren</string>
+  <string name="Settings.GroupBoxDCustomGenre">Benutzer Genres</string>
+  <string name="Settings.AddCustomGenre">Genre Hinzufügen</string>
+  <string name="Settings.DeleteCustomGenre">Genre Löschen</string>
   <string name="Settings.GroupBoxDatabaseBuild">Musik-Datenbank Erstellung</string>
   <string name="Settings.DatabaseScanNote">Wenn keine MediaPortal Datenbank verfügbar ist,kann eine erstellt werden. Wählen Sie eine neue Datei aus.\nDann starten Sie das Update.</string>
   <string name="Settings.StartDBScan">Start Update</string>

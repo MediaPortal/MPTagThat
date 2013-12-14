@@ -80,6 +80,7 @@
   <string name="ribbon.ValidateSong">Bekräfta MP3</string>
   <string name="ribbon.FixSong">Fixa MP3</string>
   <string name="ribbon.ReplayGain">Uppspelningsvolym</string>
+  <string name="ribbon.BPM">Beräkna BPM </string>
   <string name="ribbon.RemoveCommentPicture">Ta bort:</string>
   <string name="ribbon.RemoveComments">Ta bort alla kommentarer</string>
   <string name="ribbon.RemovePictures">Ta bort alla bilder</string>
@@ -181,6 +182,8 @@
   <string name="screentip.FixSongText">Använder MP3Val till att fixa fel som uppdagats i den valda MP3-filen.</string>
   <string name="screentip.ReplayGain">Uppspelningsvolym</string>
   <string name="screentip.ReplayGainText">Analyserar den valda filen och räknar ut Uppspelningsvolymen. Det uträknade värdet skrivs in i taggen.\nNotera att dynamiken i filen ej ändras.</string>
+  <string name="screentip.BPM">BPM Beräkning</string>
+  <string name="screentip.BPMText">Analyserar den valda filen ock beräknar  slag per minut (BPM). Det beräknade värdet skrivs som en tag, Notera att filen isig inte ändaras.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Påbörja Rippning</string>
   <string name="screentip.RipButtonText">Påbörja rippning av de valda filerna</string>

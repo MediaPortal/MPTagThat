@@ -80,6 +80,7 @@
   <string name="ribbon.ValidateSong">Patvirtinti MP3</string>
   <string name="ribbon.FixSong">Pataisyti MP3</string>
   <string name="ribbon.ReplayGain">Garso stiprumo žyma</string>
+  <string name="ribbon.BPM">Aptikti BPM</string>
   <string name="ribbon.RemoveCommentPicture">Pašalinti:</string>
   <string name="ribbon.RemoveComments">Pašalinti visus komentarus</string>
   <string name="ribbon.RemovePictures">Pašalinti visus vaizdus</string>
@@ -181,6 +182,8 @@
   <string name="screentip.FixSongText">Naudoja MP3Val, kad pataisyti klaidas aptiktas pasirinktame MP3 faile.</string>
   <string name="screentip.ReplayGain">Garso stiprumo žyma</string>
   <string name="screentip.ReplayGainText">Analizuoja pasirinktą failą ir apskaičiuoja Garso lygį. Apskaičiuota vertė įrašoma į Žymas.⏎\nPastaba: failas nebus modifikuotas.</string>
+  <string name="screentip.BPM">BPM aptikimas</string>
+  <string name="screentip.BPMText">Analizuoja pasirinktą failą ir apskaičiuoja Taktų per minutę (BPM) lygį. Apskaičiuota vertė įrašoma į Žymas.\nPastaba: failas nebus modifikuotas.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Pradėti ripinti</string>
   <string name="screentip.RipButtonText">Pradėti pasirinktų failų Skaitmeninį kopijavimą</string>
