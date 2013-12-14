@@ -7,6 +7,28 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.3 Date: 14.12.2013 
+-------------------------------------
++ New TRanslations via Transifex (Danish, Dutch, French, Lithuanian, Swedish, Spanish). Thanks to all translators
++ MPTAG-19: Added BPM Detection
++ MPTAG-29: Allow Adding of User specific Genres to the list of Genres selectable
++ MPTAG-31: Recognize M4B Files
++ Lyrics Sites are now selected via ListView
++ If MPTagThat is already started and it is invoked via Explorer Right Click, just refresh the running instance instead of starting a new version
++ Added Transifex support for language files (thanks Chefkoch)
+x MPTAG-30: Fixed Problems creating folders with special characters
+x Activate the CD Rom Drive Node in Treeview, when a CD is selected
+x When a CD was already inserted in the drive, before start of the application, no FreeDB lookup was performed
+x Upgrade to latest Elegant Ribbon Version
+x Upgrade to latest Lyrics Engine
+x The Main window was not always brought to front in all cases
+x When a Network folder was the last selected folder, the Treeview didn't get expanded on startup
+x Don't list the Bin and Control folder in Treeview, as they will not contain editable content
+x Typing a Genre into the TagEdit Combo, while in MultiEdit, didn't take the change without ticking the check box as well
+x updated to latest BASS binaries
+x Wrong link in About box
+- Remove Language Tool. No longer needed, because translation is via TRansifex
+
 3.1.2 Date: 05.12.2012 
 -------------------------------------
 + Added a Quick Folder selection combo, which also contains the last 20 used folders
