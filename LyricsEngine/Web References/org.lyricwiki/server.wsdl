@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:LyricWiki" xmlns:si="http://soapinterop.org/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:LyricWiki" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:LyricWiki">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AlbumResultArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:AlbumResult[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AlbumResult">
+        <xsd:all>
+          <xsd:element name="artist" type="xsd:string" />
+          <xsd:element name="album" type="xsd:string" />
+          <xsd:element name="year" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SongResult">
+        <xsd:all>
+          <xsd:element name="artist" type="xsd:string" />
+          <xsd:element name="song" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LyricsResult">
+        <xsd:all>
+          <xsd:element name="artist" type="xsd:string" />
+          <xsd:element name="song" type="xsd:string" />
+          <xsd:element name="lyrics" type="xsd:string" />
+          <xsd:element name="url" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SOTDResult">
+        <xsd:all>
+          <xsd:element name="artist" type="xsd:string" />
+          <xsd:element name="song" type="xsd:string" />
+          <xsd:element name="nominatedBy" type="xsd:string" />
+          <xsd:element name="reason" type="xsd:string" />
+          <xsd:element name="lyrics" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AlbumDataArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="xsd:AlbumData[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AlbumData">
+        <xsd:all>
+          <xsd:element name="album" type="xsd:string" />
+          <xsd:element name="year" type="xsd:int" />
+          <xsd:element name="amazonLink" type="xsd:string" />
+          <xsd:element name="songs" type="tns:ArrayOfstring" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="checkSongExistsRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkSongExistsResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="searchArtistsRequest">
+    <wsdl:part name="searchString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchArtistsResponse">
+    <wsdl:part name="return" type="tns:ArrayOfstring" />
+  </wsdl:message>
+  <wsdl:message name="searchAlbumsRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="album" type="xsd:string" />
+    <wsdl:part name="year" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="searchAlbumsResponse">
+    <wsdl:part name="return" type="tns:AlbumResultArray" />
+  </wsdl:message>
+  <wsdl:message name="searchSongsRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="searchSongsResponse">
+    <wsdl:part name="return" type="tns:SongResult" />
+  </wsdl:message>
+  <wsdl:message name="getSOTDRequest" />
+  <wsdl:message name="getSOTDResponse">
+    <wsdl:part name="return" type="tns:SOTDResult" />
+  </wsdl:message>
+  <wsdl:message name="getSongRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSongResponse">
+    <wsdl:part name="return" type="tns:LyricsResult" />
+  </wsdl:message>
+  <wsdl:message name="getSongResultRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSongResultResponse">
+    <wsdl:part name="songResult" type="tns:LyricsResult" />
+  </wsdl:message>
+  <wsdl:message name="getArtistRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getArtistResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="albums" type="tns:AlbumDataArray" />
+  </wsdl:message>
+  <wsdl:message name="getAlbumRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="album" type="xsd:string" />
+    <wsdl:part name="year" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getAlbumResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="album" type="xsd:string" />
+    <wsdl:part name="year" type="xsd:int" />
+    <wsdl:part name="amazonLink" type="xsd:string" />
+    <wsdl:part name="songs" type="tns:ArrayOfstring" />
+  </wsdl:message>
+  <wsdl:message name="getHometownRequest">
+    <wsdl:part name="artist" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getHometownResponse">
+    <wsdl:part name="country" type="xsd:string" />
+    <wsdl:part name="state" type="xsd:string" />
+    <wsdl:part name="hometown" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postArtistRequest">
+    <wsdl:part name="overwriteIfExists" type="xsd:boolean" />
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="albums" type="tns:AlbumDataArray" />
+  </wsdl:message>
+  <wsdl:message name="postArtistResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="dataUsed" type="xsd:boolean" />
+    <wsdl:part name="message" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postAlbumRequest">
+    <wsdl:part name="overwriteIfExists" type="xsd:boolean" />
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="album" type="xsd:string" />
+    <wsdl:part name="year" type="xsd:int" />
+    <wsdl:part name="asin" type="xsd:string" />
+    <wsdl:part name="songs" type="tns:ArrayOfstring" />
+  </wsdl:message>
+  <wsdl:message name="postAlbumResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="album" type="xsd:string" />
+    <wsdl:part name="year" type="xsd:int" />
+    <wsdl:part name="dataUsed" type="xsd:boolean" />
+    <wsdl:part name="message" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postSongRequest">
+    <wsdl:part name="overwriteIfExists" type="xsd:boolean" />
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+    <wsdl:part name="lyrics" type="xsd:string" />
+    <wsdl:part name="onAlbums" type="tns:AlbumResultArray" />
+  </wsdl:message>
+  <wsdl:message name="postSongResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+    <wsdl:part name="dataUsed" type="xsd:boolean" />
+    <wsdl:part name="message" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postSong_flagsRequest">
+    <wsdl:part name="overwriteIfExists" type="xsd:boolean" />
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+    <wsdl:part name="lyrics" type="xsd:string" />
+    <wsdl:part name="onAlbums" type="tns:AlbumResultArray" />
+    <wsdl:part name="flags" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postSong_flagsResponse">
+    <wsdl:part name="artist" type="xsd:string" />
+    <wsdl:part name="song" type="xsd:string" />
+    <wsdl:part name="dataUsed" type="xsd:boolean" />
+    <wsdl:part name="message" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="LyricWikiPortType">
+    <wsdl:operation name="checkSongExists">
+      <documentation>Check if a song exists in the LyricWiki database yet</documentation>
+      <wsdl:input message="tns:checkSongExistsRequest" />
+      <wsdl:output message="tns:checkSongExistsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchArtists">
+      <documentation>Search for an artist by name and return up to 10 close matches</documentation>
+      <wsdl:input message="tns:searchArtistsRequest" />
+      <wsdl:output message="tns:searchArtistsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchAlbums">
+      <documentation>Search for an album on LyricWiki and return up to 10 close matches (year optional)</documentation>
+      <wsdl:input message="tns:searchAlbumsRequest" />
+      <wsdl:output message="tns:searchAlbumsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchSongs">
+      <documentation>Search for a song on LyricWiki and get up to 10 close matches</documentation>
+      <wsdl:input message="tns:searchSongsRequest" />
+      <wsdl:output message="tns:searchSongsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSOTD">
+      <documentation>Get the lyrics for a the current Song of the Day on LyricWiki</documentation>
+      <wsdl:input message="tns:getSOTDRequest" />
+      <wsdl:output message="tns:getSOTDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSong">
+      <documentation>Get the lyrics for a LyricWiki song with the exact artist and song match</documentation>
+      <wsdl:input message="tns:getSongRequest" />
+      <wsdl:output message="tns:getSongResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSongResult">
+      <documentation>Get the lyrics for a LyricWiki song with the exact artist and song match</documentation>
+      <wsdl:input message="tns:getSongResultRequest" />
+      <wsdl:output message="tns:getSongResultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getArtist">
+      <documentation>Gets the entire discography for an artist</documentation>
+      <wsdl:input message="tns:getArtistRequest" />
+      <wsdl:output message="tns:getArtistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAlbum">
+      <documentation>Gets the track listing and amazon link for an album</documentation>
+      <wsdl:input message="tns:getAlbumRequest" />
+      <wsdl:output message="tns:getAlbumResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getHometown">
+      <documentation>Gets the hometown for an artist</documentation>
+      <wsdl:input message="tns:getHometownRequest" />
+      <wsdl:output message="tns:getHometownResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="postArtist">
+      <documentation>Posts data of an artist and their discography.  Will create any missing album pages based on the data passed in.</documentation>
+      <wsdl:input message="tns:postArtistRequest" />
+      <wsdl:output message="tns:postArtistResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="postAlbum">
+      <documentation>Posts data for a single album including its track-list and optionally the amazon ASIN</documentation>
+      <wsdl:input message="tns:postAlbumRequest" />
+      <wsdl:output message="tns:postAlbumResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="postSong">
+      <documentation>Posts data for a single song.  If correcting exiting lyrics, make sure overwriteIfExists is set to true.  In the onAlbums array, if artist is left blank, it will default to the artist of the song.</documentation>
+      <wsdl:input message="tns:postSongRequest" />
+      <wsdl:output message="tns:postSongResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="postSong_flags">
+      <documentation>Posts data for a single song.  If correcting exiting lyrics, make sure overwriteIfExists is set to true.  In the onAlbums array, if artist is left blank, it will default to the artist of the song.For the flags parameter, this is a comma-separated list of flags. For example, pass 'LW_SANDBOX' in to use the sandbox for testing and not actually update the site.</documentation>
+      <wsdl:input message="tns:postSong_flagsRequest" />
+      <wsdl:output message="tns:postSong_flagsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LyricWikiBinding" type="tns:LyricWikiPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="checkSongExists">
+      <soap:operation soapAction="urn:LyricWiki#checkSongExists" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchArtists">
+      <soap:operation soapAction="urn:LyricWiki#searchArtists" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAlbums">
+      <soap:operation soapAction="urn:LyricWiki#searchAlbums" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchSongs">
+      <soap:operation soapAction="urn:LyricWiki#searchSongs" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSOTD">
+      <soap:operation soapAction="urn:LyricWiki#getSOTD" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSong">
+      <soap:operation soapAction="urn:LyricWiki#getSong" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSongResult">
+      <soap:operation soapAction="urn:LyricWiki#getSongResult" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getArtist">
+      <soap:operation soapAction="urn:LyricWiki#getArtist" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlbum">
+      <soap:operation soapAction="urn:LyricWiki#getAlbum" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHometown">
+      <soap:operation soapAction="urn:LyricWiki#getHometown" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postArtist">
+      <soap:operation soapAction="urn:LyricWiki#postArtist" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postAlbum">
+      <soap:operation soapAction="urn:LyricWiki#postAlbum" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postSong">
+      <soap:operation soapAction="urn:LyricWiki#postSong" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="postSong_flags">
+      <soap:operation soapAction="urn:LyricWiki#postSong_flags" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LyricWiki" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LyricWiki">
+    <wsdl:port name="LyricWikiPort" binding="tns:LyricWikiBinding">
+      <soap:address location="http://lyricwiki.org/server.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

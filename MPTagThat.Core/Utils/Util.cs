@@ -445,6 +445,7 @@ namespace MPTagThat.Core
         case ".wma":
         case ".mp4":
         case ".m4a":
+        case ".m4b":
         case ".m4p":
         case ".mpc":
         case ".mp+":

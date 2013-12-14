@@ -110,12 +110,12 @@ namespace MPTagThat
     private TreeNode windowsNode;
 
     // Delegates
-    
+
     // Delegate to fire, when a hover over the Progress Cancel button occurs
     public delegate void ProgressCancelHover(object sender, EventArgs args);
     public delegate void ProgressCancelLeave(object sender, EventArgs args);
-    public event ProgressCancelHover ProgressCancelHovering; 
-    public event ProgressCancelLeave ProgressCancelLeaving; 
+    public event ProgressCancelHover ProgressCancelHovering;
+    public event ProgressCancelLeave ProgressCancelLeaving;
 
     #endregion
 
@@ -519,7 +519,7 @@ namespace MPTagThat
     {
       log.Trace(">>>");
 
-      //FindRibbonWin();
+      FindRibbonWin();
 
       try
       {
@@ -539,93 +539,126 @@ namespace MPTagThat
 
         #region Setup Ribbon
 
-        log.Info("Initialising Ribbon");
-
-        // Register the Ribbon Button Events
-        RegisterCommands();
-
-        // Register Ribbon KeyTips
-        RegisterKeyTips();
-
-        // Load Recent Folders
-        List<PinItem> recentPlacesPinItems = new List<PinItem>();
-
-        foreach (string folderItem in Options.MainSettings.RecentFolders)
-        {
-          try
+        new Thread(() =>
           {
-            string directoryName = Path.GetDirectoryName(folderItem);
-            string folderName = Path.GetFileName(directoryName);
-            if (string.IsNullOrEmpty(folderName))
-              folderName = directoryName;
+            log.Info("Initialising Ribbon");
 
-            PinItem pinItem = new PinItem(
-              folderName,
-              directoryName,
-              Resources.RecentFolder_Large,
-              false,
-              directoryName);
+            ribbon.SetStyle(ControlStyles.DoubleBuffer |
+                 ControlStyles.OptimizedDoubleBuffer |
+                 ControlStyles.UserPaint |
+                 ControlStyles.AllPaintingInWmPaint, true);
 
-            recentPlacesPinItems.Add(pinItem);
+            // Register the Ribbon Button Events
+            RegisterCommands();
+
+            // Register Ribbon KeyTips
+            RegisterKeyTips();
+
+            // Load Recent Folders
+            List<PinItem> recentPlacesPinItems = new List<PinItem>();
+
+            foreach (string folderItem in Options.MainSettings.RecentFolders)
+            {
+              try
+              {
+                string directoryName = Path.GetDirectoryName(folderItem);
+                string folderName = Path.GetFileName(directoryName);
+                if (string.IsNullOrEmpty(folderName))
+                  folderName = directoryName;
+
+                PinItem pinItem = new PinItem(
+                  folderName,
+                  directoryName,
+                  Resources.RecentFolder_Large,
+                  false,
+                  directoryName);
+
+                recentPlacesPinItems.Add(pinItem);
+              }
+              catch (ArgumentException)
+              {
+
+              }
+            }
+
+            pinListRecentFolders.BeginInit();
+            pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
+            pinListRecentFolders.EndInit();
+
+            // Load the available Scripts
+            int i = 0;
+            Invoke((MethodInvoker)delegate
+              {
+                comboBoxScripts.Items.Clear();
+                ArrayList scripts = null;
+
+                if (Options.MainSettings.ActiveScript == "")
+                {
+                  Options.MainSettings.ActiveScript = "Switch Artist";
+                }
+
+                scripts = ServiceScope.Get<IScriptManager>().GetScripts();
+                i = 0;
+                foreach (string[] item in scripts)
+                {
+                  comboBoxScripts.Items.Add(new Item(item[1], item[0], item[2]));
+                  if (item[1] == Options.MainSettings.ActiveScript)
+                  {
+                    comboBoxScripts.SelectedIndex = i;
+                  }
+                  i++;
+                }
+              });
+
+            Invoke((MethodInvoker)delegate
+              {
+                comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+                comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+                comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+                comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+                comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+                comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+                comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+                comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+                comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+                comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+                i = 0;
+                foreach (Item item in comboBoxRipEncoder.Items)
+                {
+                  if ((string)item.Value == Options.MainSettings.RipEncoder)
+                  {
+                    comboBoxRipEncoder.SelectedIndex = i;
+                    break;
+                  }
+                  i++;
+                }
+
+                i = 0;
+                foreach (Item item in comboBoxConvertEncoder.Items)
+                {
+                  if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
+                  {
+                    comboBoxConvertEncoder.SelectedIndex = i;
+                    break;
+                  }
+                  i++;
+                }
+
+                textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
+                ribbon.CurrentTabPage = ribbonTabPageTag;
+                ribbon.CustomTitleBarEnabled = true;
+              });
+            log.Info("Finished Initialising Ribbon");
           }
-          catch (ArgumentException)
-          {
-
-          }
-        }
-
-        pinListRecentFolders.BeginInit();
-        pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
-        pinListRecentFolders.EndInit();
-
-        // Load the available Scripts
-        PopulateScriptsCombo();
-
-        comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-        comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-        comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-        comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-        comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-        comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-        comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-        comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
-
-        comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-        comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
-
-        int i = 0;
-        foreach (Item item in comboBoxRipEncoder.Items)
-        {
-          if ((string) item.Value == Options.MainSettings.RipEncoder)
-          {
-            comboBoxRipEncoder.SelectedIndex = i;
-            break;
-          }
-          i++;
-        }
-
-        i = 0;
-        foreach (Item item in comboBoxConvertEncoder.Items)
-        {
-          if ((string) item.Value == Options.MainSettings.LastConversionEncoderUsed)
-          {
-            comboBoxConvertEncoder.SelectedIndex = i;
-            break;
-          }
-          i++;
-        }
-
-        textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
-        ribbon.CurrentTabPage = ribbonTabPageTag;
-        ribbon.CustomTitleBarEnabled = true;
-        log.Info("Finished Initialising Ribbon");
-
+          ) { Name = "Ribbon Init" }.Start();
         #endregion
 
         #region Setup Grids
@@ -712,10 +745,11 @@ namespace MPTagThat
 
         // Setup TagEdit Control
         tagEditControl = new TagEditControl(this);
-        tagEditControl.Dock = DockStyle.Fill;
 
         // Now position the Tracklist and Tagedit Panel
         PositionTrackList();
+
+        PopulateScriptsCombo();
 
         // Start Listening for Media Changes
         ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
@@ -759,10 +793,7 @@ namespace MPTagThat
         _initialising = false;
 
         // Activate the form, will be hidden because of the size change
-        TopMost = true;
-        Focus();
-        BringToFront();
-        TopMost = false;
+        Activate();
       }
       catch (Exception ex)
       {
@@ -833,6 +864,11 @@ namespace MPTagThat
     /// </summary>
     private void PositionTrackList()
     {
+      this.SuspendLayout();
+      panelMiddleBottom.SuspendLayout();
+      panelFileList.SuspendLayout();
+      tagEditControl.SuspendLayout();
+
       // Remove controls firs, if they already exist
       if (panelMiddleBottom.Controls.Contains(tagEditControl))
       {
@@ -873,6 +909,13 @@ namespace MPTagThat
         panelMiddleBottom.Controls.Add(gridViewRip);
         panelMiddleBottom.Controls.Add(gridViewConvert);
       }
+
+      tagEditControl.Dock = DockStyle.Fill;
+
+      tagEditControl.ResumeLayout();
+      panelMiddleBottom.ResumeLayout();
+      panelFileList.ResumeLayout();
+      this.ResumeLayout();
     }
     #endregion
 
@@ -922,6 +965,7 @@ namespace MPTagThat
       ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
       ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
+      ApplicationCommands.Bpm.Executed += TagsTabButton_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -1288,6 +1332,10 @@ namespace MPTagThat
       buttonReplayGain.ScreenTip.Caption = localisation.ToString("screentip", "ReplayGain");
       buttonReplayGain.ScreenTip.Text = localisation.ToString("screentip", "ReplayGainText");
 
+      buttonBpm.Text = localisation.ToString("ribbon", "BPM");
+      buttonBpm.ScreenTip.Caption = localisation.ToString("screentip", "BPM");
+      buttonBpm.ScreenTip.Text = localisation.ToString("screentip", "BPMText");
+
       // Rip Tab
       ribbonTabPageRip.Text = localisation.ToString("ribbon", "RipTab");
       buttonRipStart.Text = localisation.ToString("ribbon", "RipButton");
@@ -1414,7 +1462,7 @@ namespace MPTagThat
       gridViewControl.View.DefaultCellStyle.SelectionBackColor = themeManager.CurrentTheme.SelectionBackColor;
       gridViewControl.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewControl.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      
+
       gridViewBurn.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewBurn.View.EnableHeadersVisualStyles = false;
       gridViewBurn.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -1422,7 +1470,7 @@ namespace MPTagThat
       gridViewBurn.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewBurn.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewBurn.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      
+
       gridViewRip.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewRip.View.EnableHeadersVisualStyles = false;
       gridViewRip.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -1430,7 +1478,7 @@ namespace MPTagThat
       gridViewRip.BackGroundColor = themeManager.CurrentTheme.BackColor;
       gridViewRip.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
       gridViewRip.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
-      
+
       gridViewConvert.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewConvert.View.EnableHeadersVisualStyles = false;
       gridViewConvert.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
@@ -1672,7 +1720,7 @@ namespace MPTagThat
       // Set the Selectedinde handler after we have filled the box to prevent changing the theme
       comboBoxThemes.SelectedIndex = Options.MainSettings.Theme;
       comboBoxThemes.SelectedIndexChanged += new EventHandler(comboBoxThemes_SelectedIndexChanged);
-      
+
 
       // Save the currently used theme, in case the user presses Cancel.
       prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
@@ -1889,14 +1937,27 @@ namespace MPTagThat
       checkBoxRemoveID3V1.Checked = Options.MainSettings.RemoveID3V1;
       checkBoxRemoveID3V2.Checked = Options.MainSettings.RemoveID3V2;
 
-      ckHotLyrics.Checked = Options.MainSettings.SearchHotLyrics;
-      ckLyrics007.Checked = Options.MainSettings.SearchLyrics007;
-      ckLyricsOnDemand.Checked = Options.MainSettings.SearchLyricsOnDemand;
-      ckLyricWiki.Checked = Options.MainSettings.SearchLyricWiki;
-      ckLyricsPlugin.Checked = Options.MainSettings.SearchLyricsPlugin;
-      ckActionext.Checked = Options.MainSettings.SearchActionext;
-      ckLyrDB.Checked = Options.MainSettings.SearchLyrDB;
-      ckLRCFinder.Checked = Options.MainSettings.SearchLRCFinder;
+      // Clean the Lyrics selections first
+      // But not for a new installation
+      if (Options.MainSettings.LyricSites.Count > 0)
+      {
+        foreach (ListViewItem item in listViewLyricsSites.Items)
+        {
+          item.Checked = false;
+        }
+      }
+
+      foreach (string lyricsSite in Options.MainSettings.LyricSites)
+      {
+        foreach (ListViewItem item in listViewLyricsSites.Items)
+        {
+          if (item.Text == lyricsSite)
+          {
+            item.Checked = true;
+          }
+        }
+      }
+
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
       comboBoxAmazonSite.Items.Clear();
@@ -1914,6 +1975,12 @@ namespace MPTagThat
           comboBoxAmazonSite.SelectedItem = item;
           break;
         }
+      }
+
+      listViewCustomGenres.Items.Clear();
+      foreach (string customGenre in Options.MainSettings.CustomGenres)
+      {
+        listViewCustomGenres.Items.Add(customGenre);
       }
 
       #endregion
@@ -2249,6 +2316,33 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// A Custom Genre should be added to the ListView
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void buttonAddCustomGenre_Click(object sender, EventArgs e)
+    {
+      // Add a new item to the ListView, with an empty label
+      ListViewItem item = listViewCustomGenres.Items.Add(String.Empty);
+
+      // Place the newly-added item into edit mode immediately
+      item.BeginEdit();
+    }
+
+    /// <summary>
+    /// A custom Genre should be deleted from the Listview
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void buttonDeleteCustomGenre_Click(object sender, EventArgs e)
+    {
+      foreach (ListViewItem item in listViewCustomGenres.SelectedItems)
+      {
+        listViewCustomGenres.Items.Remove(item);
+      }
+    }
+
+    /// <summary>
     /// The Tracklist should be displayed top
     /// </summary>
     /// <param name="sender"></param>
@@ -2409,14 +2503,28 @@ namespace MPTagThat
       Options.MainSettings.RemoveID3V1 = checkBoxRemoveID3V1.Checked;
       Options.MainSettings.RemoveID3V2 = checkBoxRemoveID3V2.Checked;
 
-      Options.MainSettings.SearchHotLyrics = ckHotLyrics.Checked;
-      Options.MainSettings.SearchLyrics007 = ckLyrics007.Checked;
-      Options.MainSettings.SearchLyricsOnDemand = ckLyricsOnDemand.Checked;
-      Options.MainSettings.SearchLyricWiki = ckLyricWiki.Checked;
-      Options.MainSettings.SearchLyricsPlugin = ckLyricsPlugin.Checked;
-      Options.MainSettings.SearchLyrDB = ckLyrDB.Checked;
-      Options.MainSettings.SearchLRCFinder = ckLRCFinder.Checked;
-      Options.MainSettings.SearchActionext = ckActionext.Checked;
+      var lyricsSites = new List<string>();
+      foreach (ListViewItem lyricsSite in listViewLyricsSites.Items)
+      {
+        if (lyricsSite.Checked)
+        {
+          lyricsSites.Add(lyricsSite.Text);
+        }
+      }
+      Options.MainSettings.LyricSites = lyricsSites;
+
+      Options.MainSettings.CustomGenres.Clear();
+      foreach (ListViewItem item in listViewCustomGenres.Items)
+      {
+        Options.MainSettings.CustomGenres.Add(item.Text);
+      }
+
+      // Tell the Tag Ediit Control to refresh the Custom Genres
+      QueueMessage msg = new QueueMessage();
+      msg.MessageData["action"] = "customgenresrefreshed";
+      IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      msgQueue.Send(msg);
+
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedItem as Item).Value;
 
@@ -3480,7 +3588,7 @@ namespace MPTagThat
     /// <param name="e"></param>
     private void navigatonBarItem_Click(object sender, EventArgs e)
     {
-      NavigationBarItem item = (NavigationBarItem) sender;
+      NavigationBarItem item = (NavigationBarItem)sender;
       if (item == navigationBarItemGeneral)
       {
         tabControlSettings.SelectedTabPage = tabPageSettingsGeneral;
@@ -3694,6 +3802,12 @@ namespace MPTagThat
           if (!gridViewControl.CheckSelections(true))
             break;
           gridViewControl.ReplayGain();
+          break;
+
+        case "Bpm":
+          if (!gridViewControl.CheckSelections(true))
+            break;
+          gridViewControl.Bpm();
           break;
       }
     }
@@ -3911,16 +4025,16 @@ namespace MPTagThat
       }
       else
       {
-        fileName = (string) fileNameObj;
+        fileName = (string)fileNameObj;
       }
 
       if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
       {
-        TracksGridView.CoverArtDrop(fileName);   
+        TracksGridView.CoverArtDrop(fileName);
       }
     }
 
-    #endregion   
+    #endregion
 
     #endregion
 

@@ -291,8 +291,11 @@ namespace Raccoom.Windows.Forms
     public void ShowFolder(string directoryPath)
     {
       if ((directoryPath == null) || (directoryPath == "") || (directoryPath == string.Empty)) return;
+
+      bool requestNetwork = directoryPath.StartsWith(@"\\") ? true : false;
+
       // start search at root node
-      TreeNodeCollection nodeCol = _dataProvider.RequestDriveCollection(_helper);
+      TreeNodeCollection nodeCol = _dataProvider.RequestDriveCollection(_helper, requestNetwork);
       //
       if (!Directory.Exists(directoryPath) || nodeCol == null) return;
       //
@@ -307,6 +310,12 @@ namespace Raccoom.Windows.Forms
         //
         dirInfo = dirInfo.Parent;
       }
+      // For network we should add also the server tp the dir list
+      if (requestNetwork)
+      {
+        dirs.Add(dirInfo.FullName.Substring(0, dirInfo.FullName.LastIndexOf(@"\")));
+      }
+
       // try to expand all path tokens
       Cursor.Current = Cursors.WaitCursor;
       BeginUpdate();
@@ -763,7 +772,7 @@ namespace Raccoom.Windows.Forms
     /// <summary>
     ///   Gets the tree node collection which holds the drive node's. The requested collection is than used to search a specific node.
     /// </summary>
-    TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper);
+    TreeNodeCollection RequestDriveCollection(TreeViewFolderBrowserHelper helper, bool isNetwork);
   }
 
   /// <summary>

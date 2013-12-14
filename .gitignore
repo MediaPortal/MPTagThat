@@ -31,3 +31,4 @@ _ReSharper*/
 *.opensdf
 *.ipch
 ipch/*.ipch
+*.DotSettings

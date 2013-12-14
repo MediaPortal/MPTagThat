@@ -1,0 +1,843 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### Užklausa nerasta ###</string>
+  <string name="system.ApplicationName">MPTagThat yra MediaPortal Žymų redaktorius</string>
+  <string name="splash.Version">Versija:</string>
+  <string name="splash.BuildDate">Versijos data:</string>
+  <string name="splash.Startup">Startuoja ...</string>
+  <string name="splash.AddRibbon">Pridedama kontrolės juosta ...</string>
+  <string name="splash.AddGrids">Ruošiami tinkleliai ...</string>
+  <string name="splash.LoadSettings">Kraunami nustatymai ...</string>
+  <string name="splash.Localisation">Lokalizacija ...</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Aplankai</string>
+  <string name="main.TreeViewPanelDatabase">Duomenų bazė</string>
+  <string name="main.TreeViewViews">Išvaizdos</string>
+  <string name="main.TreeViewFilters">Filtras</string>
+  <string name="main.FilterUseTag">Naudoti žymų filtrą</string>
+  <string name="main.FilterHeadingField">Laukas</string>
+  <string name="main.FilterHeadingFilter">Filtras</string>
+  <string name="main.FilterHeadingOperator">Valdiklis</string>
+  <string name="main.FilterOperatorAnd">ir</string>
+  <string name="main.FilterOperatorOr">arba</string>
+  <string name="main.FilterFileMask">Failo šablonas</string>
+  <string name="main.FilterAllFiles">Visi palaikomi failų formatai</string>
+  <string name="main.FilterActive">Žymos filtras: aktyvus</string>
+  <string name="main.FilterInActive">Žymos filtras: neaktyvus</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Vaizdas</string>
+  <string name="main.InformationPanel">Informacija</string>
+  <string name="main.PlayerPanel">Grotuvas</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Pasirinkimai</string>
+  <string name="main.FolderView">Aplankų vaizdas</string>
+  <string name="main.DBView">Duomenų bazės vaizdas</string>
+  <string name="main.NetworkView">Tinklo aplankų vaizdas</string>
+  <string name="main.ScanSubfolder">Skenuoti paaplankus</string>
+  <string name="main.ButtonRefreshFolder">Atnaujinti aplankų vaizdą</string>
+  <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Žinutės</string>
+  <string name="main.TabPageNonMusicFiles">Ne muzikos failai</string>
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Failas</string>
+  <string name="main.ErrorHeaderMessage">Žinutė</string>
+  <string name="main.ErrorContextMenuClear">Valyti sąrašą</string>
+  <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Pervadinti į \"folder.jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Ištrinti pasirinktą failą (us)</string>
+  <string name="main.NonMusicDeleteFilesHeader">Ištrinti keletą įrašų</string>
+  <string name="main.NonMusicDeleteFilesMessage">Ar tikrai norite perkelti šiuos {0} įrašus į Šiukšliadėžę?</string>
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Failai: {0} (Pasirinkta: {1})</string>
+  <string name="main.toolStripLabelPlay">Grotuvo būsena: Grojama</string>
+  <string name="main.toolStripLabelPause">Grotuvo statusas: Pauzė</string>
+  <string name="main.toolStripLabelScan">Apdorojamas failas: {0}</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Nustatymai</string>
+  <string name="ribbon.Refresh">Atnaujinti</string>
+  <string name="ribbon.Save">Išsaugoti</string>
+  <string name="ribbon.ColumnsSelect">Pasirinkti rodomus stulpelius</string>
+  <string name="ribbon.Exit">Išeiti</string>
+  <string name="ribbon.RecentFolders">Dažniausi aplankai</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Žymos</string>
+  <string name="ribbon.TagFromFile">Žyma pagal failo vardą</string>
+  <string name="ribbon.RenameFile">Pervadinti failą</string>
+  <string name="ribbon.RenameFileMenu">Pervadinti failą</string>
+  <string name="ribbon.RenameFileOptions">Failo pervadinimo pasirinkimai</string>
+  <string name="ribbon.IdentifyFile">Nustatyti failą</string>
+  <string name="ribbon.TagFromInternet">Žyma iš interneto</string>
+  <string name="ribbon.SingleTagEdit">Vienos žymos redagavimas</string>
+  <string name="ribbon.MultiTagEdit">Keletos žymų redagavimas</string>
+  <string name="ribbon.GetCoverArt">Gauti viršelius</string>
+  <string name="ribbon.GetLyrics">Gauti dainos žodžius</string>
+  <string name="ribbon.AutoNumber">Auto numeravimas</string>
+  <string name="ribbon.NumberOnClick">Numeris paspaudus</string>
+  <string name="ribbon.Find">Rasti</string>
+  <string name="ribbon.Replace">Pakeisti</string>
+  <string name="ribbon.ValidateSong">Patvirtinti MP3</string>
+  <string name="ribbon.FixSong">Pataisyti MP3</string>
+  <string name="ribbon.ReplayGain">Garso stiprumo žyma</string>
+  <string name="ribbon.BPM">Aptikti BPM</string>
+  <string name="ribbon.RemoveCommentPicture">Pašalinti:</string>
+  <string name="ribbon.RemoveComments">Pašalinti visus komentarus</string>
+  <string name="ribbon.RemovePictures">Pašalinti visus vaizdus</string>
+  <string name="ribbon.CaseConversion">Didelių mažų raidžių konvertavimas</string>
+  <string name="ribbon.CaseConversionMenu">Didelių mažų raidžių konvertavimas</string>
+  <string name="ribbon.CaseConversionOption">Didelių mažų raidžių konvertavimo pasirinkimai</string>
+  <string name="ribbon.DeleteTags">Ištrinti žymas</string>
+  <string name="ribbon.DeleteAllTags">Ištrinti visas žymas</string>
+  <string name="ribbon.DeleteID3V1Tags">Ištrinti tik ID3 V1 žymas</string>
+  <string name="ribbon.DeleteID3V2Tags">Ištrinti tik ID3 V2 žymas</string>
+  <string name="ribbon.EditTags">Redaguoti žymas</string>
+  <string name="ribbon.RetrieveTags">Nuskaityti žymas</string>
+  <string name="ribbon.OrganiseFiles">Tvarkyti</string>
+  <string name="ribbon.SaveFolderThumb">Išsaugoti kaip aplanko miniatiūrą</string>
+  <string name="ribbon.ExecuteScript">Paleisti skriptą</string>
+  <string name="ribbon.Picture">Viršelis</string>
+  <string name="ribbon.Organise">Tvarkyti failus</string>
+  <string name="ribbon.AddBurner">Pridėti į kepyklą</string>
+  <string name="ribbon.AddConvert">Pridėti į Konvertavimui</string>
+  <string name="ribbon.AddPlaylist">Pridėti į Grojaraštį</string>
+  <string name="ribbon.Other">Kiti</string>
+  <!--Rip Tab-->
+  <string name="ribbon.RipTab">Ripinti</string>
+  <string name="ribbon.RipButton">Pradėti ripinti</string>
+  <string name="ribbon.RipEncoder">Pasirinkti kodavimą:</string>
+  <string name="ribbon.RipFolder">Išvesties aplankas:</string>
+  <string name="ribbon.RipCancel">Atšaukti ripinimą</string>
+  <string name="ribbon.RipOptions">Ripinimo pasirinkimai</string>
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Konvertuoti</string>
+  <string name="ribbon.ConvertButton">Pradėti konvertavimą</string>
+  <string name="ribbon.ConvertEncoder">Pasirinkti kodavimą:</string>
+  <string name="ribbon.ConvertFolder">Išvesties aplankas:</string>
+  <string name="ribbon.ConvertCancel">atšaukti konvertavimą</string>
+  <string name="ribbon.ConvertOptions">Konvertavimo pasirinkimai</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Įrašyti</string>
+  <string name="ribbon.Burn">Įrašyti</string>
+  <string name="ribbon.BurnCancel">Atšaukti įrašymą</string>
+  <string name="ribbon.BurnOptions">Įrašymo pasirinkimai</string>
+  <string name="ribbon.Burner">Pasirinkti įrašymo įrenginį:</string>
+  <string name="ribbon.BurnerSpeed">Įrašymo greitis:</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Atnaujinti</string>
+  <string name="screentip.RefreshText">Dabar pasirinkto aplanko turinys nustaitytas.⏎\nJei yra laukiančių pakeitimų, sistema klausia ar prieš tai išsaugoti pakeitimus.</string>
+  <string name="screentip.Save">Išsaugoti pakeitimus</string>
+  <string name="screentip.SaveText">Pakeisti visas pažymėtas žymas ir išsaugoti pokyčius į diską.</string>
+  <string name="screentip.ColumnsSelect">Stulpelius rodyti tinklelyje</string>
+  <string name="screentip.ColumnsSelectText">Pasirinkti stulpelius, kuriuos rodyti Takelio aprašymo lentelėje.</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Žyma pagal failo vardą</string>
+  <string name="screentip.TagFromFileText">Naudojant specialiuosius parametrus nurodytus dialoge, įvairios žymos kaip \"Takelis #\", \"Atlikėjas\", \"Antraštė\" ir t.t. bus paimtos iš failo pavadinimo.</string>
+  <string name="screentip.IdentifyFile">Nustatyti failą</string>
+  <string name="screentip.IdentifyFileText">Hešas yra sukuriamas pagal pirmasias 30 failo sekundžių. Šis hešas naudojamas identifikavimui MusicBrainz.⏎\nTuomet žymos paimamos iš Musicbrainz ir įrašoms į failą.</string>
+  <string name="screentip.TagFromInternet">Žyma iš interneto</string>
+  <string name="screentip.TagFromInternetText">Duotas Atlikėjo ir Albumo pavadinimas naudojamas Amazon paieškai bandand sulyginti failo pavadinimą su gautu iš Amazon sąrašu.</string>
+  <string name="screentip.SingleTagEdit">Vienos žymos redagavimas</string>
+  <string name="screentip.SingleTagEditText">Dialogas leidžia redaguoti visas vieno failo žymas.</string>
+  <string name="screentip.MultiTagEdit">Keletos žymų redagavimas</string>
+  <string name="screentip.MultiTagEditText">Dialoge modifikuotos žymos bus pritaikytos visiems pasirinktiems failams.</string>
+  <string name="screentip.GetCoverArt">Gauti viršelius</string>
+  <string name="screentip.GetCoverArtText">Atlikėjo ir Albumo pavadinimai yra naudojami albumų viršeliams Amazon ieškoti. Jei bus rasta keletas sutapimų, tai bus parodyta dialogo lange.</string>
+  <string name="screentip.SaveFolderThumb">Išsaugoti kaip aplanko miniatiūrą</string>
+  <string name="screentip.SaveFolderThumbText">Albumo viršelis yra išsaugotas kaip folder.jpg pasirinkto failo aplanke.</string>
+  <string name="screentip.GetLyrics">Gauti dainos žodžius</string>
+  <string name="screentip.GetLyricsText">Dainos žodžių variklis ieško žodžių pasirinktiems failams Dainos žodžių šaltiniuose nurodytuose nustatymuose.</string>
+  <string name="screentip.AutoNumber">Auto numeravimas</string>
+  <string name="screentip.AutoNumberText">Pasirinkto failo dainos numeris nustatytas naudojant tekstinio įrašo verte kaip pradžios numerį.</string>
+  <string name="screentip.NumberOnClick">Numeris paspaudus</string>
+  <string name="screentip.NumberOnClickText">Kai šis mygtukas įjungtas, paspaudžiant ant failo nustatomas takelio numeris.</string>
+  <string name="screentip.RemoveComments">Pašalinti visus komentarus</string>
+  <string name="screentip.RemoveCommentsText">Visi pasirinktų failų komentarai panaikinti.</string>
+  <string name="screentip.RemovePictures">Pašalinti visus vaizdus</string>
+  <string name="screentip.RemovePicturesText">Visi pasirinktų failų viršeliai panaikinti.</string>
+  <string name="screentip.CaseConversion">Didelių mažų raidžių konvertavimas</string>
+  <string name="screentip.CaseConversionText">Didelių/mažų raidžių taisyklės pagal nustatymus pritaikytos visiems pasirinktiems failams.</string>
+  <string name="screentip.DeleteTags">Ištrinti žymas</string>
+  <string name="screentip.DeleteTagsText">Visos pasirinktų failų žymės panaikintos.</string>
+  <string name="screentip.RenameFile">Pervadinti failą</string>
+  <string name="screentip.RenameFileText">Failai pervadinti pagal dialoge nurodytus parametrus.</string>
+  <string name="screentip.Organise">Tvarkyti failus</string>
+  <string name="screentip.OrganiseText">Failai nukopijuoti/perkelti 5 naują vietą pagal žymas nurodytas dialogų parametruose.</string>
+  <string name="screentip.ExecuteScript">Paleisti skriptą</string>
+  <string name="screentip.ExecuteScriptText">Taiko skriptą pasirinkimo langelyje pažymėtiems failams.</string>
+  <string name="screentip.AddBurner">Pridėti į kepyklą</string>
+  <string name="screentip.AddBurnerText">Prideda pažymėtus failus į sąrašą skirtą įrašymui į CD.</string>
+  <string name="screentip.AddConvert">Pridėti į Konvertavimui</string>
+  <string name="screentip.AddConvertText">Prideda pasirinktus failus į sąrašą, kad būtų konvertuotas į kitą formatą.</string>
+  <string name="screentip.AddPlaylist">Pridėti į Grojaraštį</string>
+  <string name="screentip.AddPlaylistText">Prideda pasirinktus failus į Grojaraštį, jei pasiekiamas grotuvas pradės grotį nuo pirmo failo.</string>
+  <string name="screentip.Find">Rasti</string>
+  <string name="screentip.FindText">Atveria paieškos dialogą pasirinktiems Takeliams pagal numatytą užklausą.</string>
+  <string name="screentip.Replace">Pakeisti</string>
+  <string name="screentip.ReplaceText">Atveria Ieškoti/Pakeisti dialogą, kad būtų pakeista numatytoji užklausą pasirinktiems Takeliams.</string>
+  <string name="screentip.ValidateSong">Patvirtinti MP3</string>
+  <string name="screentip.ValidateSongText">Naudoti MP3Val, kad būtų patvirtintas pasirinktų MP3 failų teisingumas. Kai kurios klaidos gali būti pataisytos naudojant \"Pataisyti MP3\" mygtuku.</string>
+  <string name="screentip.FixSong">Pataisyti MP3</string>
+  <string name="screentip.FixSongText">Naudoja MP3Val, kad pataisyti klaidas aptiktas pasirinktame MP3 faile.</string>
+  <string name="screentip.ReplayGain">Garso stiprumo žyma</string>
+  <string name="screentip.ReplayGainText">Analizuoja pasirinktą failą ir apskaičiuoja Garso lygį. Apskaičiuota vertė įrašoma į Žymas.⏎\nPastaba: failas nebus modifikuotas.</string>
+  <string name="screentip.BPM">BPM aptikimas</string>
+  <string name="screentip.BPMText">Analizuoja pasirinktą failą ir apskaičiuoja Taktų per minutę (BPM) lygį. Apskaičiuota vertė įrašoma į Žymas.\nPastaba: failas nebus modifikuotas.</string>
+  <!--Rip Tab-->
+  <string name="screentip.RipButton">Pradėti ripinti</string>
+  <string name="screentip.RipButtonText">Pradėti pasirinktų failų Skaitmeninį kopijavimą</string>
+  <string name="screentip.RipCancel">Atšaukti ripinimą</string>
+  <string name="screentip.RipCancelText">Nutraukia skaitmeninį kopijavimą.</string>
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Pradėti konvertavimą</string>
+  <string name="screentip.ConvertButtonText">Pradėti failų sąrašo Konvertavimą pasirinktu formatu</string>
+  <string name="screentip.ConvertCancel">atšaukti konvertavimą</string>
+  <string name="screentip.ConvertCancelText">Nutraukia Konvertavimo procesą</string>
+  <!--Burn Tab-->
+  <string name="screentip.Burn">Įrašyti CD</string>
+  <string name="screentip.BurnText">Pradedami įrašyti failai esantys įrašymo sąraše.</string>
+  <string name="screentip.BurnCancel">Atšaukti įrašymą</string>
+  <string name="screentip.BurnCancelText">Nutraukia įrašymo procesą</string>
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Keletos žymų redagavimas</string>
+  <string name="TagEdit.SingleHeading">Redaguoti žymą</string>
+  <string name="TagEdit.HeaderUser">Numatyta vartotojo</string>
+  <string name="TagEdit.HeaderRating">Vertinimas</string>
+  <string name="TagEdit.HeaderLyrics">Dainos žodžiai</string>
+  <string name="TagEdit.HeaderWeb">Žiniatinklio informacija</string>
+  <string name="TagEdit.HeaderInvolved">Įtraukti žmonės</string>
+  <string name="TagEdit.HeaderOriginal">Originali informacija</string>
+  <string name="TagEdit.HeaderDetail">Detali informacija</string>
+  <string name="TagEdit.HeaderMainTags">Pagrindinės žymos</string>
+  <string name="TagEdit.HeaderPictures">Vaizdai</string>
+  <!--Main Tags-->
+  <string name="TagEdit.AlbumArtist">AlbumoAtlikėjas:</string>
+  <string name="TagEdit.Track">Takelis:</string>
+  <string name="TagEdit.Artist">Atlikėjas:</string>
+  <string name="TagEdit.Year">Metai:</string>
+  <string name="TagEdit.Title">Antraštė:</string>
+  <string name="TagEdit.Album">Albumas:</string>
+  <string name="TagEdit.PartOfCompilation">Rinkinio dalis</string>
+  <string name="TagEdit.GroupBoxComment">Komentaras</string>
+  <string name="TagEdit.RemoveExistingComments">Pradžioje pašalinti komentarus</string>
+  <string name="TagEdit.MoveTop">Pakelti į viršų</string>
+  <string name="TagEdit.RemoveComment">Pašalinti komentarą</string>
+  <string name="TagEdit.AddComment">Pridėti komentarą</string>
+  <string name="TagEdit.Comment">Komentaras:</string>
+  <string name="TagEdit.CommentLanguage">Kalba (tiktai ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Apibrėžimas (tikrai ID3):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Apibrėžimas</string>
+  <string name="TagEdit.CommentHeaderLanguage">Kalba</string>
+  <string name="TagEdit.CommentHeaderComment">Komentaras</string>
+  <string name="TagEdit.RemoveGenre">Pašalinti žanrą</string>
+  <string name="TagEdit.AddGenre">Pridėti žanrą</string>
+  <string name="TagEdit.Genre">Žanras:</string>
+  <string name="TagEdit.Disc">Diskas:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Vaizdas</string>
+  <string name="TagEdit.RemoveExistingPictures">Pirma pašalinti esamus vaizdus</string>
+  <string name="TagEdit.ExportPicture">Eksportuoti vaizdą</string>
+  <string name="TagEdit.RemovePicture">Pašalinti vaizdą</string>
+  <string name="TagEdit.GetPicture">Gauti iš failo</string>
+  <string name="TagEdit.GetPictureInternet">Gauti iš interneto</string>
+  <string name="TagEdit.PictureType">Vaizdo tipas:</string>
+  <string name="TagEdit.PictureHeaderType">Vaizdo tipas</string>
+  <string name="TagEdit.PictureDescriptor">Apibrėžimas:</string>
+  <!--Detailed Information-->
+  <string name="TagEdit.GetTrackLengthFromFile">Gauti iš failo</string>
+  <string name="TagEdit.GetTrackLength">Gauti takelio trukmę iš failo</string>
+  <string name="TagEdit.TrackLength">Takelio trukmė (ms):</string>
+  <string name="TagEdit.MediaType">Medijos tipas:</string>
+  <string name="TagEdit.TitleSort">Rūšiuoti antraštes:</string>
+  <string name="TagEdit.AlbumSort">Rūtiuoti albumus:</string>
+  <string name="TagEdit.ArtistSort">Rūšiuoti atlikėjus:</string>
+  <string name="TagEdit.AlbumArtistSort">Rūšiuoti albumų atlikėjus:</string>
+  <string name="TagEdit.SubTitle">Subtitrai:</string>
+  <string name="TagEdit.ContentGroup">Grupuoti turinį:</string>
+  <string name="TagEdit.Copyright">Autorinės teisės:</string>
+  <string name="TagEdit.EncodedBy">Kodavo:</string>
+  <string name="TagEdit.Publisher">Leidėjas:</string>
+  <string name="TagEdit.TextWriter">Dainos žodžių/teksto autorius:</string>
+  <string name="TagEdit.Interpreter">Išaiškino:</string>
+  <string name="TagEdit.Composer">Kompozitorius:</string>
+  <string name="TagEdit.Conductor">Dirigentas:</string>
+  <!--Original Information-->
+  <string name="TagEdit.OriginalReleaseYear">Originalo leidimo metai:</string>
+  <string name="TagEdit.OriginalOwber">Originalus šeimininkas:</string>
+  <string name="TagEdit.OriginalArtist">Originalus atlikėjas:</string>
+  <string name="TagEdit.OriginalTextWriter">Originalus žodžių autorius:</string>
+  <string name="TagEdit.OriginalFileName">Originalus failo vardas:</string>
+  <string name="TagEdit.OriginalAlbumTitle">Originali albumo antraštė:</string>
+  <!--Involved Persons-->
+  <string name="TagEdit.ID3V24only">Tiktai ID3 V2.4</string>
+  <string name="TagEdit.RemoveMusician">Pašalinti muzikantą</string>
+  <string name="TagEdit.AddMusician">Pridėti muzikantą</string>
+  <string name="TagEdit.MusicianName">Muzikanto vardas:</string>
+  <string name="TagEdit.MusicianInstrument">Muzikanto instrumentas:</string>
+  <string name="TagEdit.MusicianHeaderInstrument">Instrumentas</string>
+  <string name="TagEdit.MusicianHeaderName">Vardas</string>
+  <string name="TagEdit.RemovePerson">Pašalinti asmenį</string>
+  <string name="TagEdit.AddPerson">Pridėti asmenį</string>
+  <string name="TagEdit.PersonName">Įtraukto asmens vardas:</string>
+  <string name="TagEdit.PersonFunction">Įtraukto asmens funkcija:</string>
+  <string name="TagEdit.PersonHeaderName">Vardas</string>
+  <string name="TagEdit.PersonHeaderFunction">Funkcija</string>
+  <!--Web Information-->
+  <string name="TagEdit.CommercialUrl">Komercinės informacijos URL:</string>
+  <string name="TagEdit.PublisherUrl">Oficialaus leidėjo URL:</string>
+  <string name="TagEdit.PaymentUrl">Oficialus mokėjimo URL:</string>
+  <string name="TagEdit.InternetRadioUrl">Oficialios interneto radijo stoties URL:</string>
+  <string name="TagEdit.AudioSourceUrl">Oficialaus audio šaltinio URL:</string>
+  <string name="TagEdit.ArtistUrl">Oficialus atlikėjo URL:</string>
+  <string name="TagEdit.AudioFileUrl">Oficialus audio failo URL:</string>
+  <string name="TagEdit.CopyrightUrl">Autorinių teisių informacijos URL:</string>
+  <!--Lyrics-->
+  <string name="TagEdit.GetLyricsFromInternet">Gauti žodžius iš interneto</string>
+  <string name="TagEdit.GetLyricsFromText">Gauti žodžius iš tekstinio failo</string>
+  <string name="TagEdit.RemoveExistingLyrics">Pirma pašalinti esamus žodžius</string>
+  <string name="TagEdit.RemoveLyrics">Pašalinti dainos žodžius</string>
+  <string name="TagEdit.AddLyrics">Pridėti dainos žodžius</string>
+  <string name="TagEdit.LyricsLanguage">Kalba (tiktai ID3):</string>
+  <string name="TagEdit.LyricsDescriptor">Apibrėžimas (tikrai ID3):</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Apibrėžimas</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Kalba</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Dainos žodžiai</string>
+  <!--Rating-->
+  <string name="TagEdit.GroupBoxRating">Reitingai (Netaikomi Ne-ID3 failams, prašome pasirinkti reitingą Žvaigždės stulpelyje)</string>
+  <string name="TagEdit.RemoveExistingRatings">Pirma pašalinti esamus Reitingus</string>
+  <string name="TagEdit.RatingNote">Reitingas gali būti nuo 1 iki 255, kur 1 yra prasčiausias ir 255 geriausias. 0 yra nežinomas.⏎\n⏎\nPastaba: daugelis programų turi savo vertinimus ir gali nustatyti ID3 standartą savaip. Tai gali buti leistina jei asmeniškai tinka.</string>
+  <string name="TagEdit.PlayCounter">Grojimo skaitklis:</string>
+  <string name="TagEdit.RemoveRating">Pašalinti vertinimą</string>
+  <string name="TagEdit.AddRating">Pridėti vertinimą</string>
+  <string name="TagEdit.Rating">Vertinimas:</string>
+  <string name="TagEdit.RatingUser">Vartotojas (epaštas):</string>
+  <!--Navigation Pane-->
+  <string name="TagEdit.panelNavigation">Žymos informacija</string>
+  <string name="TagEdit.LinkUserDefined">Numatyta vartotojo</string>
+  <string name="TagEdit.LinkRating">Vertinimas</string>
+  <string name="TagEdit.LinkLyrics">Dainos žodžiai</string>
+  <string name="TagEdit.LinkWeb">Žiniatinklio informacija</string>
+  <string name="TagEdit.LinkInvolvedPeople">Įtraukti žmonės</string>
+  <string name="TagEdit.LinkOriginalInfo">Originali informacija</string>
+  <string name="TagEdit.LinkDetailedInfo">Detali informacija</string>
+  <string name="TagEdit.LinkMainTags">Pagrindinės žymos</string>
+  <string name="TagEdit.LinkPictures">Vaizdai</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Atšaukti</string>
+  <string name="TagEdit.Apply">Taikyti</string>
+  <!--Single Tag Edit Commands-->
+  <string name="TagEdit.Previous">Ankstesnis failas</string>
+  <string name="TagEdit.Next">Kitas failas</string>
+  <string name="TagEdit.Commands">Komandos</string>
+  <!--User Defined Frames-->
+  <string name="TagEdit.FrameID">Kadro ID</string>
+  <string name="TagEdit.FrameDesc">Aprašymas</string>
+  <string name="TagEdit.FrameText">Tekstas</string>
+  <string name="TagEdit.AddFrame">Pridėti langelį</string>
+  <string name="TagEdit.DeleteFrame">Trinti langelį (ius)</string>
+  <string name="TagEdit.DeleteAllFrames">Trinti visus langelius</string>
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Header">Rasti žodžius {0} - {1}</string>
+  <string name="LyricsSearch.Cancel">Atšaukti</string>
+  <string name="LyricsSearch.Site">Puslapis</string>
+  <string name="LyricsSearch.Result">Rezultatas</string>
+  <string name="LyricsSearch.Lyric">Dainos žodžiai</string>
+  <string name="LyricsSearch.GroupBoxSearchResults">Paieškos rezultatai</string>
+  <string name="LyricsSearch.Title">Antraštė:</string>
+  <string name="LyricsSearch.Update">Atnaujinti</string>
+  <string name="LyricsSearch.Find">Gauti</string>
+  <string name="LyricsSearch.Close">Uždaryti</string>
+  <string name="LyricsSearch.GroupBoxLyric">Dainos žodžiai</string>
+  <string name="LyricsSearch.Artist">Atlikėjas:</string>
+  <string name="LyricsSearch.GroupBoxSearchInfo">Paieškos informacija</string>
+  <string name="LyricsSearch.SwitchArtist">Keisti atlikėją</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.Heading">Dainos žodžių paieška</string>
+  <string name="LyricsSearch.Status">Ieškoma žodžių ... prašome palaukti</string>
+  <string name="LyricsSearch.Finished">Paieška baigta. Nuimkite netinkamų žodžių pasirinkimus .</string>
+  <string name="LyricsSearch.NothingToSearch">Nėra ką ieškoti</string>
+  <string name="LyricsSearch.FoundLyrics">Ok</string>
+  <string name="LyricsSearch.NoLyricsFound">Nėra duomenų</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Header">Albumo paieška</string>
+  <string name="AmazonAlbumSearch.Close">Atšaukti</string>
+  <string name="AmazonAlbumSearch.CancelAll">Atšaukti viską</string>
+  <string name="AmazonAlbumSearch.Update">Pasirinkti</string>
+  <string name="AmazonAlbumSearch.Search">Ieškoti</string>
+  <string name="AmazonAlbumSearch.Albums">Albumai</string>
+  <string name="AmazonAlbumSearch.GroupBoxResults">Rasta keletas albumų. Prašome pasirinkti ..</string>
+  <string name="AmazonAlbumSearch.NotFound">Nieko nerasta. Peržiūrėkite paieškos kriterijus ...</string>
+  <string name="AmazonAlbumSearch.Searching">Ieškoma ...</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Header">Interneto užklausa</string>
+  <string name="MusicBrainz.Cancel">Atšaukti</string>
+  <string name="MusicBrainz.Update">Pasirinkti</string>
+  <string name="MusicBrainz.SearchInfo">Nustatytas takelis</string>
+  <string name="MusicBrainz.Album">Albumas</string>
+  <string name="MusicBrainz.Duration">Trukmė</string>
+  <string name="MusicBrainz.GroupBoxResults">Takelis yra keliuose albumuose. Prašome pasirinkti</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.FileName">Failo vardas</string>
+  <string name="column_header.FilePath">Failo kelias</string>
+  <string name="column_header.NewFileName">Naujas failo vardas</string>
+  <string name="column_header.Status">Būsena</string>
+  <string name="column_header.Track">Takelis</string>
+  <string name="column_header.NumTracks">Takelių num.</string>
+  <string name="column_header.Title">Antraštė</string>
+  <string name="column_header.Artist">Atlikėjas</string>
+  <string name="column_header.AlbumArtist">Albumo atlikėjas</string>
+  <string name="column_header.Album">Albumas</string>
+  <string name="column_header.Year">Metai</string>
+  <string name="column_header.Genre">Žanras</string>
+  <string name="column_header.CreationTime">Sukurta</string>
+  <string name="column_header.LastWriteTime">Pakeista</string>
+  <string name="column_header.TagType">Tipas</string>
+  <string name="column_header.Disc">Diskas #</string>
+  <string name="column_header.NumDisc">Disko num.</string>
+  <string name="column_header.BPM">BPM</string>
+  <string name="column_header.Rating">Vertinimas</string>
+  <string name="column_header.ReplayGainTrack">Takelio garso lygis</string>
+  <string name="column_header.ReplayGainTrackPeak">Takelio garso pikas</string>
+  <string name="column_header.ReplayGainAlbum">Albumo garso normalizavimas</string>
+  <string name="column_header.ReplayGainAlbumPeak">Albumo garso pikas</string>
+  <string name="column_header.Comment">Komentaras</string>
+  <string name="column_header.Composer">Kompozitorius</string>
+  <string name="column_header.Conductor">Dirigentas</string>
+  <string name="column_header.NumPics"># Vaizdų</string>
+  <string name="column_header.Picture">Vaizdas</string>
+  <string name="column_header.ArtistSortName">Atlikėjų rušiavimo žodis</string>
+  <string name="column_header.AlbumSortName">Albumų rūšiavimo žodis</string>
+  <string name="column_header.CommercialInformation">Komercinė informacija</string>
+  <string name="column_header.Copyright">Autorinės teisės</string>
+  <string name="column_header.CopyrightInformation">Autorinių teisių informacija</string>
+  <string name="column_header.EncodedBy">Kodavo</string>
+  <string name="column_header.Interpreter">Išaiškino</string>
+  <string name="column_header.Grouping">Grupavimas</string>
+  <string name="column_header.Lyrics">Dainos žodžiai</string>
+  <string name="column_header.MediaType">Medijos tipas</string>
+  <string name="column_header.OfficialAudioFileInformation">Oficiali audio failo informacija</string>
+  <string name="column_header.OfficialArtistInformation">Oficiali atlikėjo informacija</string>
+  <string name="column_header.OfficialAudioSourceInformation">Oficiali audio šaltinio informacija</string>
+  <string name="column_header.OfficialInternetRadioInformation">Oficiali interneto radijo informacija</string>
+  <string name="column_header.OfficialPaymentInformation">Oficiali mokėjimo informacija</string>
+  <string name="column_header.OfficialPublisherInformation">Oficiali leidėjo informacija</string>
+  <string name="column_header.OriginalAlbum">Originalus albumas</string>
+  <string name="column_header.OriginalFileName">Originalus failo vardas</string>
+  <string name="column_header.OriginalLyricsWriter">Originalus žodžių autorius</string>
+  <string name="column_header.OriginalArtist">Originalus atlikėjas</string>
+  <string name="column_header.OriginalOwner">Originalus šeimininkas</string>
+  <string name="column_header.OriginalRelease">Originalus leidimas</string>
+  <string name="column_header.Publisher">Leidėjas</string>
+  <string name="column_header.SubTitle">Subtitrai</string>
+  <string name="column_header.TextWriter">Teksto autorius</string>
+  <string name="column_header.TitleSortName">Antraščių rūšiavimo žodis</string>
+  <string name="column_header.Duration">Trukmė</string>
+  <string name="column_header.FileSize">Dydis (kB)</string>
+  <string name="column_header.BitRate">Garso kokybė</string>
+  <string name="column_header.SampleRate">Samplo kokybė</string>
+  <string name="column_header.Channels">Kanalai</string>
+  <string name="column_header.Version">Kodekas</string>
+  <!--Context Menus-->
+  <string name="contextmenu.CoverLookup">Ieškoti dainos viršelio Google</string>
+  <string name="contextmenu.AddBurner">Pridėti įrašą (us) į kepyklą</string>
+  <string name="contextmenu.AddConverter">Pridėti įrašą (us) į konverterį</string>
+  <string name="contextmenu.AddPlayList">Pridėti įrašą (us) į grojaraštį</string>
+  <string name="contextmenu.SavePlayList">Išsaugoti įrašą (us) kaip grojaraštį</string>
+  <string name="contextmenu.CreateFolderThumb">Sukurti aplanko miniatiūrą</string>
+  <string name="contextmenu.Copy">Kopijuoti</string>
+  <string name="contextmenu.Cut">Iškirpti</string>
+  <string name="contextmenu.Paste">Įklijuoti</string>
+  <string name="contextmenu.Delete">Trinti</string>
+  <string name="contextmenu.Refresh">Atnaujinti</string>
+  <string name="contextmenu.SelectAll">Pasirinkti viską</string>
+  <string name="contextmenu.InsertFilter">Naudoti filtrą</string>
+  <string name="contextmenu.DeleteFilter">Trinti filtrą</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingTag">Žyma pagal failo vardą</string>
+  <string name="TagAndRename.HeadingRename">Pervadinti failą</string>
+  <string name="TagAndRename.Apply">Taikyti</string>
+  <string name="TagAndRename.Cancel">Atšaukti</string>
+  <string name="TagAndRename.Format">Formatas:</string>
+  <string name="TagAndRename.RemoveFormat">Pašalinti sąrašo formatavimą</string>
+  <string name="TagAndRename.AddFormat">Pritaikyti sąrašui formatavimą</string>
+  <string name="TagAndRename.GroupBoxParm">Parametrai (paspaudžianti pridėti į sąrašą)</string>
+  <string name="TagAndRename.Folder">\ = Katalogas: nustatyti šiuos parametrus pradžioje pagal katalogo vardą</string>
+  <string name="TagAndRename.Unused">&lt;X&gt; = Nenaudojamas</string>
+  <string name="TagAndRename.Comment">&lt;C&gt; = Komentaras</string>
+  <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orkestras/Albumo atlikėjas</string>
+  <string name="TagAndRename.Genre">&lt;G&gt; = Žanras</string>
+  <string name="TagAndRename.DiscTotal">&lt;d&gt; = Iš viso diskų #</string>
+  <string name="TagAndRename.Disc">&lt;D&gt; = Disko numeris</string>
+  <string name="TagAndRename.TrackTotal">&lt;k&gt; = Iš viso takelių #</string>
+  <string name="TagAndRename.Track">&lt;K&gt; = Takelio numeris</string>
+  <string name="TagAndRename.Year">&lt;Y&gt; = Metai</string>
+  <string name="TagAndRename.Album">&lt;B&gt; = Albumas</string>
+  <string name="TagAndRename.Title">&lt;T&gt; = Antrašatė</string>
+  <string name="TagAndRename.Artist">&lt;A&gt; = Atlikėjas</string>
+  <string name="TagAndRename.Conductor">&lt;N&gt; = Dirigentas</string>
+  <string name="TagAndRename.Composer">&lt;R&gt; = Kompozitorius</string>
+  <string name="TagAndRename.Group">&lt;U&gt; = Turinio grupavimas</string>
+  <string name="TagAndRename.SubTitle">&lt;S&gt; = Subtitrai</string>
+  <string name="TagAndRename.BPM">&lt;E&gt; = BPM</string>
+  <string name="TagAndRename.ModifiedBY">&lt;M&gt; = Modifikuota/remiksuota</string>
+  <string name="TagAndRename.Filename">&lt;F&gt; = Esamas failo vardas</string>
+  <string name="TagAndRename.Enumerate">&lt;#&gt; = Numeruoja failus</string>
+  <string name="TagAndRename.BitRate">&lt;I&gt; = Kokybė</string>
+  <string name="TagAndRename.FirstNofArtist">&lt;A:n&gt; = Pirmas \"n\" atlikėjo simbolis</string>
+  <string name="TagAndRename.FirstNofAlbumArtist">&lt;O:n&gt; = Pirmas \"n\" albumo atlikėjo simbolis</string>
+  <string name="TagAndRename.StartAt">Pradėti nuo</string>
+  <string name="TagAndRename.NumberDigits">Skaitmenų kiekis</string>
+  <string name="TagAndRename.NameTooLong">Failo vardas per ilgas. Prašome pakeisti.</string>
+  <string name="TagAndRename.FileExists">Failas jau egzistuoja. Naudojamos Bendrosios Žymos?</string>
+  <string name="TagAndRename.Rename">Negalima pervardinti failo {0}: {1}</string>
+  <string name="TagAndRename.InvalidParm">Negalimas formato parametras. Prašome pakoreguoti.</string>
+  <string name="TagAndRename.Original">Originalus:</string>
+  <string name="TagAndRename.Preview">Peržiūra</string>
+  <string name="TagAndRename.Parameters">Parametrai</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Header">Didelių mažų raidžių konvertavimas</string>
+  <string name="CaseConversion.TabSettings">Nustatymai</string>
+  <string name="CaseConversion.GroupBoxOptions">Pasirinkimai</string>
+  <string name="CaseConversion.AlwaysUpperCaseFirstLetter">Visada naudoti pirmąją didžiąją raidę</string>
+  <string name="CaseConversion.ReplaceSpaceByUnderscore">Pakeisti tarpą \"_\"</string>
+  <string name="CaseConversion.ReplaceUnderscoreBySpace">Pakeisti \"_\" tarpu</string>
+  <string name="CaseConversion.ReplaceSpaceby20">Pakeisti tarpą \"%20\"</string>
+  <string name="CaseConversion.Replace20bySpace">Pakeisti \"%20\" tarpu</string>
+  <string name="CaseConversion.GroupBoxMethod">Konvertavimo būdas</string>
+  <string name="CaseConversion.AllFirstLetterUpperCase">Visos pirmosios raidės didžiosios</string>
+  <string name="CaseConversion.FirstLetterUpperCase">Pirma raidė didžioji</string>
+  <string name="CaseConversion.AllUpperCase">Viskas didžiosiomis raidėmis</string>
+  <string name="CaseConversion.AllLowerCase">Viskas mažosiomis raidėmis</string>
+  <string name="CaseConversion.GroupBoxConvert">Konvertuoti žymas ...</string>
+  <string name="CaseConversion.Comment">Komentaras</string>
+  <string name="CaseConversion.Title">Antraštė</string>
+  <string name="CaseConversion.Album">Albumas</string>
+  <string name="CaseConversion.AlbumArtist">AlbumoAtlikėjas</string>
+  <string name="CaseConversion.Artist">Atlikėjas</string>
+  <string name="CaseConversion.ConvertTags">Konvertuoti žymas</string>
+  <string name="CaseConversion.ConvertFileName">Konvertuoti failo vardą</string>
+  <string name="CaseConversion.Exceptions">Išimtys</string>
+  <string name="CaseConversion.RemoveException">Pašalinti</string>
+  <string name="CaseConversion.AddException">Pridėti</string>
+  <string name="CaseConversion.Convert">Konvertuoti</string>
+  <string name="CaseConversion.Cancel">Atšaukti</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Header">Pasirinkti rodomus stulpelius</string>
+  <string name="ColumnSelect.Ok">Ok</string>
+  <string name="ColumnSelect.Cancel">Atšaukti</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.Heading">Tvarkyti failus</string>
+  <string name="organise.TargetRootDrectory">Objekto šakninė direktorija:</string>
+  <string name="organise.TargetRootDrectoryOverride">Nepaisyti objekto šakninės direktorijos naudojant skriptą:</string>
+  <string name="organise.BrowseRootDir">Naršyti</string>
+  <string name="organise.OverWriteFiles">Užrašyti ant esamų failų</string>
+  <string name="organise.CopyFiles">Kopijuoti failus vietoje perkėlimo</string>
+  <string name="organise.CopyNonMusicFiles">Kopijuoti/perkelti ne muzikos failus (vaizdus ir kt.)</string>
+  <string name="organise.InvalidParm">Negalimas formato parametras. Prašome pakoreguoti.</string>
+  <string name="organise.FileExists">Failas jau egzistuoja. Nebus keičiama</string>
+  <string name="organise.SameFile">Šaltinio ir Rezultato failai sutampa. Failas praleistas</string>
+  <string name="organise.Exists">Egzistuoja</string>
+  <string name="organise.Copied">Nukopijuota</string>
+  <string name="organise.Moved">Perkelta</string>
+  <string name="organise.GroupBoxOptions">Pasirinkimai</string>
+  <string name="organise.GroupBoxSelection">Pasirinkimas</string>
+  <string name="organise.ButtonOrganise">Tvarkyti</string>
+  <string name="organise.Folder">\ = Katalogas: nustatyti šiuos parametrus pradžioje pagal subkatalogo vardą</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Nustatymai</string>
+  <string name="Settings.NavigationPanel">Navigacija</string>
+  <string name="Settings.Blue">Mėlyna</string>
+  <string name="Settings.Silver">Sidabrinė</string>
+  <string name="Settings.Black">Juoda</string>
+  <string name="Settings.EncoderMP3">MP3 kodatorius</string>
+  <string name="Settings.EncoderOgg">OGG kodatorius</string>
+  <string name="Settings.EncoderFlac">FLAC kodatorius</string>
+  <string name="Settings.EncoderAAC">AAC kodatorius</string>
+  <string name="Settings.EncoderWMA">WMA kodatorius</string>
+  <string name="Settings.EncoderWAV">WAV kodatorius</string>
+  <string name="Settings.EncoderMPC">MUSEPACK kodatorius</string>
+  <string name="Settings.EncoderWV">WAVPACK kodatorius</string>
+  <string name="Settings.EncoderWMAStandard">Windows Media Audio Standard</string>
+  <string name="Settings.EncoderWMAPro">Windows Media Audio Professional</string>
+  <string name="Settings.EncoderWMALossless">Windows Media Audio Lossless</string>
+  <string name="Settings.EncoderMPCStandard">Aukšta kokybė (142-184 kbps)</string>
+  <string name="Settings.EncoderMPCxtreme">Aukštesnė kokybė (168-212 kbps)</string>
+  <string name="Settings.EncoderMPCinsane">Žymiai aukštesnė kokybė (232-268 kbps)</string>
+  <string name="Settings.EncoderMPCbraindead">Aukščiausia kokybė (232-278 kbps)</string>
+  <string name="Settings.EncoderWVFast">Greitas metodas (greitas, bet šiek tiek nukenčia suspaudimo santykis)</string>
+  <string name="Settings.EncoderWVHigh">Aukšta kokybė (geresnis suspaudimas, bet lėčiau)</string>
+  <string name="Settings.Stereo">Stereo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.ParametricStereo">Parametrinis stereo</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.InvalidParm">Negalimas nukopijuoto failo formato parametras. Prašome pakoreguoti.</string>
+  <string name="Settings.DescPrefMedium">Šis profilis paliks kokybę tinkamą daugeliui žmonių ir daugumai muzikos garsų (Kokybės rėžis 140-185)</string>
+  <string name="Settings.DescPrefStandard">Šis profilis suteiks kokybę tinkamą daugeliui žmonių ir daugumai muzikos garsų ir yra pakankamai aukštos kokybės (Kokybės rėžis 170-210)</string>
+  <string name="Settings.DescPrefExtreme">Jei turite labai gerą klausą ir atitinkamą įrangą, šis profilis suteiks šiek tiek aukštesnę kokybę nei standartiniu režimu (Kokybės rėžis 220-260)</string>
+  <string name="Settings.DescPrefInsane">CBR 320 kbps. Šis profilis bus perteklinis daugeliui žmonių ir daugelyje situacijų, bet jei norite turėti absoliučiai aukštą kokybę nekreipiant dėmesio į failo dydį, šis jums tinkamiausias.</string>
+  <string name="Settings.DescPrefABR">ABR (aukšta kokybė bet ne tokia kaip VBR). Naudojantį šį profilį gausite gerą kokybę pagal numatytą kokybę.⏎\n⏎\nPriklausomai nuo kokybės kurią įvedėte, šis profilis tinkamas konkrečiai situacijai. Kadangi vidurkinimas turi įtakos, tai nebus tokia gera kokybė kaip naudojant VBR.</string>
+  <string name="Settings.TabGeneral">Bendras</string>
+  <string name="Settings.GroupBoxKeys">Klaviatūros nuoroda</string>
+  <string name="Settings.ChangeKey">Keisti</string>
+  <string name="Settings.Shift">Shift</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.KeyDescription">Aprašymas:</string>
+  <string name="Settings.KeyAction">Veiksmas:</string>
+  <string name="Settings.KeyShortCut">Greitasis mygtukas:</string>
+  <string name="Settings.RibbonShortCut">Komandų lauko greitasis mygtukas:</string>
+  <string name="Settings.GroupBoxGeneral">Bendrieji nustatymai</string>
+  <string name="Settings.DebugLevel">Debug lygis:</string>
+  <string name="Settings.Theme">Tema:</string>
+  <string name="Settings.Language">Kalba:</string>
+  <string name="Settings.TrackListLocation">Takelių sąrašo vieta:</string>
+  <string name="Settings.TabTags">Žymos</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.TabTagsLyricsCover">Žodžiai/viršelis</string>
+  <string name="Settings.TabTagsDatabase">Duomenų bazė</string>
+  <string name="Settings.GroupBoxPictures">Vaizdai</string>
+  <string name="Settings.OverwriteExistingCover">Automatiškai žymint bus užrašyti esamiems viršeliams ant viršaus.</string>
+  <string name="Settings.EmbedExistingThumb">Įdėti esamą katalogo miniatiūrą (folder.jpg) ieškant viršelio</string>
+  <string name="Settings.OnlySaveFolderThumb">Išsaugoti tiktai viršelį į katalogo miniatiūras. Neliesti muzikinio failo</string>
+  <string name="Settings.ChangeCoverSize">Išsaugoti viršelius didžiausiu pikselių pločiu:</string>
+  <string name="Settings.AmazonSite">Amazon paieškos puslapis:</string>
+  <string name="Settings.GroupBoxLyrics">Dainos žodžiai</string>
+  <string name="Settings.SwitchArtist">Keisti atlikėją prieš pateikiant</string>
+  <string name="Settings.OverwriteExistingLyrics">Automatiškai žymint bus užrašyti esamiems žodžiams ant viršaus.</string>
+  <string name="Settings.GroupBoxLyricsSites">Paieškos puslapiai</string>
+  <string name="Settings.GroupBoxTagsGeneral">Bendras</string>
+  <string name="Settings.CopyArtist">Kopijuoti Atlikėja į Albumo atlikėją jei tuščia</string>
+  <string name="Settings.AutoFillNumberTracks">Automatiškai pridėti \"Takelių skaičius\" redaguojant daug žymų</string>
+  <string name="Settings.CaseConversion">Išsaugojant naudoti raidžių dydžių keitimo nustatymus</string>
+  <string name="Settings.ChangeReadonly">Išsaugojant keisti Tik Skaityti atributą</string>
+  <string name="Settings.Encoding">Kodavimas naudotas saugojant Žymas:</string>
+  <string name="Settings.CreateMissingFolderThumb">Sukurti trukstamą katalogo miniatiūrą (folder.jpg) išsaugojant</string>
+  <string name="Settings.AutoCompletion">Naudoti MediPortal Muzikos duomenų bazę Atlikėjo automatiniam nustatymui</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.UseV4">ID3 V žymoms naudoti 2.4 versiją</string>
+  <string name="Settings.UseV3">ID3 V žymoms naudoti 2.3 versiją</string>
+  <string name="Settings.UseAPE">Naudoti APE ir ID3 V1 žymas</string>
+  <string name="Settings.GroupBoxID3Update">Atnaujinti</string>
+  <string name="Settings.RemoveID3V1">Pašalinti ID3V1</string>
+  <string name="Settings.RemoveID3V2">Pašalinti ID3V2</string>
+  <string name="Settings.ID3Both">ID3V1 ir ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.ClearUserFrames">Išsaugojant išvalyti vartotojo numatytus kadrus</string>
+  <string name="Settings.GroupBoxTagsValidate">MP3 failo patvirtinimas</string>
+  <string name="Settings.ValidateMP3">Patvirtinti MP3 failus kai skenuojamas katalogas/duomenų bazė</string>
+  <string name="Settings.AutoFixMP3">Automatiškai taisyti klaidingus MP3 failus</string>
+  <string name="Settings.GroupBoxDatabaseBuild">Muzikos duomenų bazės  versija</string>
+  <string name="Settings.DatabaseScanNote">Jei nėra MediaPortal Muzikos duomenų bazės, tokią gali būti sukurta įvedant failo vardą į ši langelį.⏎\nTuomet pradėkite skenavimą.</string>
+  <string name="Settings.StartDBScan">Pradėti skenuoti</string>
+  <string name="Settings.DBScanStatus">Skenavimo būsena</string>
+  <string name="Settings.DBNotExists">Pasirinkta duomenų bazė nerasta.⏎\nJei pasirinksite \"Taip\", bus sukurta nauja duomenų bazė.⏎\nPradėkite skenuoti, kad užildyti duomenų bazę.</string>
+  <string name="Settings.ClearDatabase">Išvalyti duomenų bazės turinį prieš skenavimą</string>
+  <string name="Settings.SelectMusicFolder">Pasirinkti katalogą su jūsų Muzikos failais</string>
+  <string name="Settings.DBScanIdle">Duomenų bazės skenavimas neaktyvus.</string>
+  <string name="Settings.DBScanFinished">Duomenų bazės skenavimas baigtas.⏎\nUžbaigta  {0} takelių: {1:d2}:{2:d2}:{3:d2}{4}</string>
+  <string name="Settings.DBScanTrackSummary">({0} sekundžių takelyje)</string>
+  <string name="Settings.DBScanTitle">Patvirtinti duomenų bazės skenavimo atšaukimą</string>
+  <string name="Settings.DBScanActive">Duomenų bazė skenavimo vis dar aktyvus.⏎\nAtšaukti skenavimą ir uždaryti programą?</string>
+  <string name="Settings.DBScanProgress">Apdorojamas failas {0} iš {1}</string>
+  <string name="Settings.TabRipping">Kopijuojama</string>
+  <string name="Settings.TabRippingGeneral">Bendras</string>
+  <string name="Settings.CustomPath">Nustatomi keliai ir failų vardai</string>
+  <string name="Settings.Format">Formatas:</string>
+  <string name="Settings.TargetFolder">Rezultato katalogas:</string>
+  <string name="Settings.RipOptions">Kopijavimo pasirinkimai</string>
+  <string name="Settings.EjectCD">Baigus kopijuoti išstumti CD</string>
+  <string name="Settings.ActivateTargetFolder">Aktyvuoti rezultatų katalogą po kopijavimo</string>
+  <string name="Settings.GroupBoxEncoding">Kodavimo formatas</string>
+  <string name="Settings.EncodingFormat">Pasirinkti formatą į kurį keisite:</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.GroupBoxMp3Experts">Ekspertiniai nustatymai</string>
+  <string name="Settings.LameExpertsWarning">Įspėjimas: profiliai nebus naudojami, kada naudojami Lame parametrai</string>
+  <string name="Settings.LameExpertOptions">Įveskite LAME kodavimo parametrus (tik ekspertams):</string>
+  <string name="Settings.GroupBoxPresets">MP3 kodavimo profiliai</string>
+  <string name="Settings.ABRBitrate">ABR kokybė:</string>
+  <string name="Settings.Preset">Išankstiniai nustatymai:</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.GroupBoxOggExpert">Ekspertiniai nustatymai</string>
+  <string name="Settings.OggExpertWarning">Įspėjimas: aukščiau rodomi nustatymai nebus naudojami, kada nustatyti Ogg Ekpertiniai parametrai</string>
+  <string name="Settings.OggExpert">Keisti Ogg kodavimo parametrus (tik ekspertams):</string>
+  <string name="Settings.GroupBoxOggEncoding">OGG kodavimo nustatymai</string>
+  <string name="Settings.OggQuality">Kokybė:</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.GroupBoxFlacSettings">Ekspertiniai nustatymai</string>
+  <string name="Settings.FlacExpertsWarning">Įspėjimas: aukščiau rodomi nustatymai nebus naudojami, kada nustatyti FLAC Ekpertiniai parametrai</string>
+  <string name="Settings.FlacExperts">Įveskite FALC kodavimo parametrus (tik ekspertams):</string>
+  <string name="Settings.GroupBoxFlacEncoding">FLAC kodavimo nustatymai</string>
+  <string name="Settings.FlacQuality">Kokybė:</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.GroupBoxAACEncoding">AAC kodavimo nustatymai</string>
+  <string name="Settings.AACBitRate">Bitrate:</string>
+  <string name="Settings.TabRippingWMA">WMA</string>
+  <string name="Settings.GroupBoxWMASettings">WMA kodavimo nustatymai</string>
+  <string name="Settings.WMAQuality">Kokybė:</string>
+  <string name="Settings.WMASample">Sample formatas:</string>
+  <string name="Settings.WMAEncoder">Koderio formatas:</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.GroupBoxMpcExperts">Ekspertiniai nustatymai</string>
+  <string name="Settings.MpcExpertsWarning">Įspėjimas: aukščiau rodomi nustatymai nebus naudojami, kada nustatyti Musepack parametrai</string>
+  <string name="Settings.MPCExpertOptions">Įveskite Musepack kodavimo parametrus (tik ekspertams):</string>
+  <string name="Settings.GroupBoxMPCPresets">Musepack kodavimo profiliai</string>
+  <string name="Settings.MPCPreset">Išankstiniai nustatymai:</string>
+  <string name="Settings.TabRippingWV">WV</string>
+  <string name="Settings.groupBoxWvExperts">Ekspertiniai nustatymai</string>
+  <string name="Settings.WvExpertsWarning">Įspėjimas: aukščiau rodomi nustatymai nebus naudojami, kada nustatyti Wavpack parametrai</string>
+  <string name="Settings.WvExpertOptions">Įveskite Wvpack kodavimo parametrus (tik ekspertams):</string>
+  <string name="Settings.GroupBoxWvPresets">Wavpack kodavimo profiliai</string>
+  <string name="Settings.WvPreset">Išankstiniai nustatymai:</string>
+  <string name="Settings.Cancel">Atšaukti</string>
+  <string name="Settings.Apply">Taikyti</string>
+  <string name="Settings.LinkTags">Žymos</string>
+  <string name="Settings.LinkGeneral">Bendras</string>
+  <string name="Settings.LinkRipping">Skaitmeninis kopijavimas/konvertavimas</string>
+  <!--Burning-->
+  <string name="Burning.NoMedia">Diske nerasta jokių Media. Prašome įdėti tuščią diską.</string>
+  <string name="Burning.DragAndDrop">Naudoti Vilkti &amp; Įkelti, kad nurodyti takelius įrašymui</string>
+  <string name="Burning.Decoding">Dekoduojami failai ...</string>
+  <string name="Burning.Cancelled">Įrašymas nutrauktas</string>
+  <string name="Burning.Checking">Tikrinama Media</string>
+  <string name="Burning.Erasing">Ištrinama įrašoma Media</string>
+  <string name="Burning.Leadin">Įrašomas pradžios takelis</string>
+  <string name="Burning.Leadout">Įrašomas pabaigos takelis</string>
+  <string name="Burning.Burning">Įrašome ...</string>
+  <string name="Burning.Finished">Baigtas įrašymas</string>
+  <string name="Burning.Failed">Įrašymas nepavyko: {0}</string>
+  <string name="Burning.FinishedMedia">Negalima rašyti į užbaigtą media. Prašome įdėti naują diską</string>
+  <string name="Burning.ClearList">Valyti sąrašą</string>
+  <string name="Burning.Retrieving">Gaunama Media informacija ...</string>
+  <string name="Burning.MediaInfo">Media: {0} ({1} minutės) Būsena: {2}</string>
+  <string name="Burning.Used">Naudoti: {0}:{1} ( {2} Takelis(iai))</string>
+  <string name="Burning.Capacity">Įspėjimas: kolekcija netelpa į įrenginį! Ištrinkite keletą failų.</string>
+  <!--Conversion-/ Ripping-->
+  <string name="Conversion.ErrorDirectory">Klaida kuriant Muzikos katalogą</string>
+  <string name="Conversion.SameFile">Konvertavimas nutrauktas: pirminiai ir išeitiniai failai sutampa</string>
+  <string name="Conversion.OpenFileError">Klaida atveriant failą</string>
+  <string name="Conversion.EncodingFileError">Klaida koduojant failą</string>
+  <string name="Conversion.Ripping">Kopijuojama ...</string>
+  <string name="Conversion.RippingFinished">Bigta kopijuoti pasirinktus audio takelius.</string>
+  <string name="Conversion.FreeDBAccess">Gaunama CD informacij iš FreeDB ...</string>
+  <!--FreeDB-->
+  <string name="FreeDB.Header">FreeDB paieškos rezultatai</string>
+  <string name="FreeDB.MultipleMatches">Daug rezultatų rasta FreeDB. Prašome pasirinkti tinkama diską</string>
+  <string name="FreeDB.Ok">Ok</string>
+  <string name="FreeDB.Cancel">Atšaukti</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.HeaderArtistAlbum">Interneto paieška - Nurodykite Atlikėją/Albumą</string>
+  <string name="Lookup.Continue">Tęsti &gt;</string>
+  <string name="Lookup.Cancel">Atšaukti</string>
+  <string name="Lookup.NoAlbumFound">Nerastas joks albumas, prašome pasirinkti kitą atrankos kriterijų</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.HeaderSearchResult">Rasta keletas albumų. Prašome pasirinkti ..</string>
+  <string name="Lookup.ColArtist">Atlikėjas</string>
+  <string name="Lookup.ColAlbum">Albumas</string>
+  <string name="Lookup.ColTracks"># Takeliai</string>
+  <string name="Lookup.ColYear">Metai</string>
+  <string name="Lookup.ColLabel">Etiketė</string>
+  <!--Album Details-->
+  <string name="Lookup.HeaderDetails">Pasirinktų Albumų detalės</string>
+  <string name="Lookup.AlbumTracks">Takelių albume</string>
+  <string name="Lookup.TracksToTag">Takelių žymėjimui</string>
+  <string name="Lookup.ColTrackNum">#</string>
+  <string name="Lookup.ColTitle">Antraštė</string>
+  <string name="Lookup.ColFileName">Failo vardas</string>
+  <string name="Lookup.Unassigned">&lt; Nepriskirta &gt;</string>
+  <string name="Lookup.MoveUp">Kelti aukštyn</string>
+  <string name="Lookup.MoveDown">Leisti žemyn</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Ok</string>
+  <string name="message.Error">Klaida</string>
+  <string name="message.Error_Title">Klaida</string>
+  <string name="message.Save_Changes">Pakeitimai neišsaugoti. ar norite išsaugoti pakeitimus?</string>
+  <string name="message.Save_Changes_Title">Išsaugoti pakeitimus</string>
+  <string name="message.Script_Compile_Failed">Skripto kompiliavimas nepavyko.⏎\n⏎\nPrašome žiūrėti žurnalinius įrašus.</string>
+  <string name="message.DataEntryError">Nurodyta reikšmė netinkama.</string>
+  <string name="message.NoSelectionHeader">Nėra pasirinkimo</string>
+  <string name="message.NoSelection">Prašome pasirinkti bent vieną eilutę veiksmui atlikti</string>
+  <string name="message.DeleteConfirmHeader">Ištrinti failą(us)</string>
+  <string name="message.DeleteConfirm">Ar jūs tikrai norite ištrinti pasirinktus failus?</string>
+  <string name="message.DeleteFolders">Norint ištrinti katalogą, prašome naudoti Shift-Del</string>
+  <string name="message.Fixed">Pataisyta</string>
+  <string name="message.FatalError">Esminė klaida. MPTagThat bus išjungtas↩⏎\nPrašome šiūrėti žurnalinius įrašus.</string>
+  <string name="message.OutOfMemory">Per daug failų nuskenuota. Trūksta atminties.↩⏎\nAtšaukiamas skenavimas.</string>
+  <string name="message.ErrorResetAttr">Negalima atšaukti tik-skaitymui atributo</string>
+  <string name="message.CorruptFile">Sugadintas failas</string>
+  <string name="message.UnsupportedFormat">Nepalaikomas formatas</string>
+  <string name="message.NonExistingFile">Failo nebėra!</string>
+  <string name="message.ErrorReadingFile">Klaida nuskaitant failą: {0}</string>
+  <string name="message.ErrorSave">Klaida išsaugant failą: {0}</string>
+  <!--Progress Dialog-->
+  <string name="progress.ScanningHeader">Gaunamos takleių žymos</string>
+  <string name="progress.Scanning">Gaunamos žymos takeliams {0}/{1}</string>
+  <string name="progress.Cancel">Atšaukti</string>
+  <string name="progress.SavingHeader">Saugojami takeliai</string>
+  <string name="progress.Saving">Saugojami takeliai {0}/{1}</string>
+  <string name="progress.InternetHeader">Interneto užklausa</string>
+  <string name="progress.Internet">Gaunama informacija takeliams {0}/{1}</string>
+  <string name="progress.InternetMusicBrainz">Gaunami braižas ir identifikuojamas failas</string>
+  <string name="progress.InternetAlbum">Gaunama Albumo informacija ...</string>
+  <string name="progress.CoverArtHeader">Viršelio užklausa</string>
+  <string name="progress.CoverArt">Gaunamas viršelis takeliui {0}/{1}</string>
+  <string name="progress.LyricsHeader">Dainos žodžių užklausa</string>
+  <string name="progress.Lyrics">Gaunami dainos žodžiai takeliui {0}/{1}</string>
+  <!--About Dialog-->
+  <string name="about.Header">Apie</string>
+  <string name="about.Ok">Ok</string>
+  <string name="about.Description">MPTarThat yra atviro kodo Žymų redaktorius, kuris leidžia valdyti visą jūsų muzikos kolekciją.⏎\n⏎\nDaugiau informacijos:</string>
+  <string name="about.Version">Versija:</string>
+  <string name="about.BuildDate">Versijos data:</string>
+  <string name="about.Contributors">Pagalbininkai</string>
+  <!--Player-->
+  <string name="player.Title">Antraštė</string>
+  <string name="player.Artist">Atlikėjas</string>
+  <string name="player.Album">Albumas</string>
+  <string name="player.PlayListButton">PL</string>
+  <string name="player.PlayListLoad">Užkrovimas</string>
+  <string name="player.PlayListSave">Išsaugoti</string>
+  <string name="player.ClearPlayList">Išvalyti grojaraštį</string>
+  <string name="player.LoadPlayList">Užkrauti Grojaraštį</string>
+  <string name="player.SavePlayList">Išsaugoti Grojaraštį</string>
+  <string name="player.UseRelativePath">Naudoti santykinį kelią</string>
+  <!--Database Search-->
+  <string name="dbsearch.Artist">Atlikėjas/Albumo atlikėjas (susideda iš):</string>
+  <string name="dbsearch.Album">Albumas (susideda iš):</string>
+  <string name="dbsearch.Title">Antraštė (susideda iš):</string>
+  <string name="dbsearch.Search">Ieškoti</string>
+  <string name="dbsearch.NoMusicDB">Norėdami naudoti duomenų bazės paieškos funkcija,⏎\njūs turite įvesti į nustatymus muzikos duomenų bazės vietą.</string>
+  <string name="dbsearch.NoSearchValues">Prašome įvesti nors vieną peiškos vertę.</string>
+  <string name="dbsearch.TooMuchRows">Užklausa pateikė per daug įrašų. Tik pirmieji 1000 bus rodomi.</string>
+  <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Rasti</string>
+  <string name="findreplace.HeaderReplace">Pakeisti</string>
+  <string name="findreplace.NotFound">Paieškos eilutė nerast</string>
+  <string name="findreplace.NoMoreOccurencesFound">Daugiau nerasta paieškos eilučių</string>
+  <string name="findreplace.TabFind">Rasti</string>
+  <string name="findreplace.FindWhat">Rasti tai:</string>
+  <string name="findreplace.MatchCase">Lyginti pagal raidžių dydžius</string>
+  <string name="findreplace.MatchWords">Lyginti tiktai pagal visą žodį</string>
+  <string name="findreplace.FindNext">Ieškoti toliau</string>
+  <string name="findreplace.Cancel">Uždaryti</string>
+  <string name="findreplace.TabReplace">Pakeisti</string>
+  <string name="findreplace.ReplaceWith">Pakeisti:</string>
+  <string name="findreplace.ReplaceBtn">Pakeisti</string>
+  <string name="findreplace.ReplaceAllBtn">Pakeisti visus</string>
+  <!--Readonly Dialog-->
+  <string name="readonly.Header">Failas tik-skaitymui</string>
+  <string name="readonly.Explanation">Nurodytas failas yra tik-skaitymui.⏎ Ar turėtų MPTagThat  pakeisti atributą ir įrašyti failą?</string>
+  <string name="readonly.Yes">Taip</string>
+  <string name="readonly.YesToAll">Taip viskam</string>
+  <string name="readonly.No">Ne</string>
+  <string name="readonly.NoToAll">Ne visiems</string>
+  <!--Replay Gain Popup-->
+  <string name="albumgain.Header">Albumo garso normalizavimas</string>
+  <string name="albumgain.Explanation">Visi failai pasirinkti.⏎\nAr turėtų MPTagThat įvertinti albumo garso normalizavimą?</string>
+</resources>

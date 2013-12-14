@@ -52,6 +52,7 @@ namespace MPTagThat.GridView
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly IMediaChangeMonitor mediaChangeMonitor;
     private int _currentRow = -1;
+    private bool _freeDBLookupActive = false;
 
     private string _musicDir;
     private string _outFile;
@@ -104,6 +105,7 @@ namespace MPTagThat.GridView
         // Change the Datasource of the grid to the correct bindinglist
         if (CurrentDriveID > -1)
         {
+          _freeDBLookupActive = true;
           // Activate the Rip Grid
           _main.Ribbon.CurrentTabPage = _main.TabRip;
           _main.BurnGridView.Hide();
@@ -119,6 +121,8 @@ namespace MPTagThat.GridView
           {
             dataGridViewRip.Rows[0].Selected = false;
           }
+          _freeDBLookupActive = false;
+          _main.RipButtonsEnabled = true;
         }
       }
     }
@@ -350,6 +354,8 @@ namespace MPTagThat.GridView
         {
           targetDir = string.Format(@"{0}\{1}", artistDir, albumDir);
         }
+
+        targetDir = Util.MakeValidFolderName(targetDir);
 
         targetDir = string.Format(@"{0}\{1}", _musicDir, targetDir);
 
@@ -764,6 +770,33 @@ namespace MPTagThat.GridView
           return true;
       }
       return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    /// <summary>
+    /// Fired, when the visibilty of the Grid changes
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void GridViewRip_VisibleChanged(object sender, EventArgs e)
+    {
+      _main.RipButtonsEnabled = false;
+
+      if (!Visible || _freeDBLookupActive)
+      {
+        return;
+      }
+
+      for (int i = 0; i < BassCd.BASS_CD_GetDriveCount(); i++)
+      {
+        if (BassCd.BASS_CD_IsReady(i))
+        {
+          BASS_CD_INFO cdInfo = BassCd.BASS_CD_GetInfo(i);
+          mediaChangeMonitor_MediaInserted(cdInfo.DriveLetter.ToString());
+          _main.CurrentDirectory = string.Format("{0}:",cdInfo.DriveLetter.ToString());
+          _main.TreeView.TreeView.ShowFolder(_main.CurrentDirectory);
+          break;
+        }
+      }
     }
 
     /// <summary>

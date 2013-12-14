@@ -41,6 +41,8 @@
       this.tbDescription = new System.Windows.Forms.TextBox();
       this.lbContributors = new MPTagThat.Core.WinControls.MPTLabel();
       this.tbContributors = new System.Windows.Forms.TextBox();
+      this.lbWiki = new MPTagThat.Core.WinControls.MPTLabel();
+      this.lbForum = new MPTagThat.Core.WinControls.MPTLabel();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
       this.SuspendLayout();
       // 
@@ -91,7 +93,7 @@
       // lbWikiLink
       // 
       this.lbWikiLink.AutoSize = true;
-      this.lbWikiLink.Location = new System.Drawing.Point(12, 279);
+      this.lbWikiLink.Location = new System.Drawing.Point(95, 279);
       this.lbWikiLink.Name = "lbWikiLink";
       this.lbWikiLink.Size = new System.Drawing.Size(356, 13);
       this.lbWikiLink.TabIndex = 5;
@@ -132,12 +134,12 @@
       // lbLinkForum
       // 
       this.lbLinkForum.AutoSize = true;
-      this.lbLinkForum.Location = new System.Drawing.Point(12, 308);
+      this.lbLinkForum.Location = new System.Drawing.Point(95, 308);
       this.lbLinkForum.Name = "lbLinkForum";
-      this.lbLinkForum.Size = new System.Drawing.Size(243, 13);
+      this.lbLinkForum.Size = new System.Drawing.Size(279, 13);
       this.lbLinkForum.TabIndex = 9;
       this.lbLinkForum.TabStop = true;
-      this.lbLinkForum.Text = "http://forum.team-mediaportal.com/mptagthat-310";
+      this.lbLinkForum.Text = "http://forum.team-mediaportal.com/forums/mptagthat.261";
       this.lbLinkForum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbLinkForum_LinkClicked);
       // 
       // tbDescription
@@ -150,7 +152,7 @@
       this.tbDescription.Size = new System.Drawing.Size(480, 55);
       this.tbDescription.TabIndex = 10;
       this.tbDescription.Text = "MPTagThat is an open source tag editor which allows to manage your complete music" +
-          " collection.\r\n\r\nMore information at:";
+    " collection.\r\n\r\nMore information at:";
       // 
       // lbContributors
       // 
@@ -172,7 +174,27 @@
       this.tbContributors.Size = new System.Drawing.Size(323, 55);
       this.tbContributors.TabIndex = 12;
       this.tbContributors.Text = "Development: Helmut Wahrmann (Main Development), mackey (Lyrics), rtv (Burner Sup" +
-          "port)\r\n\r\nTesting: Roy Nilsen (Main Tester, Translation)";
+    "port)\r\n\r\nTesting: Roy Nilsen (Main Tester, Translation)";
+      // 
+      // lbWiki
+      // 
+      this.lbWiki.Localisation = "Wiki";
+      this.lbWiki.LocalisationContext = "About";
+      this.lbWiki.Location = new System.Drawing.Point(15, 279);
+      this.lbWiki.Name = "lbWiki";
+      this.lbWiki.Size = new System.Drawing.Size(59, 23);
+      this.lbWiki.TabIndex = 13;
+      this.lbWiki.Text = "Wiki:";
+      // 
+      // lbForum
+      // 
+      this.lbForum.Localisation = "Forum";
+      this.lbForum.LocalisationContext = "About";
+      this.lbForum.Location = new System.Drawing.Point(15, 308);
+      this.lbForum.Name = "lbForum";
+      this.lbForum.Size = new System.Drawing.Size(59, 23);
+      this.lbForum.TabIndex = 14;
+      this.lbForum.Text = "Forum:";
       // 
       // About
       // 
@@ -183,17 +205,19 @@
       this.CancelButton = this.btOk;
       this.ClientSize = new System.Drawing.Size(528, 394);
       this.ControlBox = false;
+      this.Controls.Add(this.lbForum);
+      this.Controls.Add(this.lbWiki);
       this.Controls.Add(this.tbContributors);
       this.Controls.Add(this.lbContributors);
       this.Controls.Add(this.pictureBoxAbout);
-      this.Controls.Add(this.lbLinkForum);
       this.Controls.Add(this.lbDate);
+      this.Controls.Add(this.lbLinkForum);
       this.Controls.Add(this.tbDescription);
       this.Controls.Add(this.lbVersionDetail);
       this.Controls.Add(this.lbBuildDate);
       this.Controls.Add(this.lbVersion);
-      this.Controls.Add(this.lbWikiLink);
       this.Controls.Add(this.lbAppTitle);
+      this.Controls.Add(this.lbWikiLink);
       this.Controls.Add(this.btOk);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Name = "About";
@@ -220,5 +244,7 @@
     private System.Windows.Forms.TextBox tbDescription;
     private MPTagThat.Core.WinControls.MPTLabel lbContributors;
     private System.Windows.Forms.TextBox tbContributors;
+    private Core.WinControls.MPTLabel lbWiki;
+    private Core.WinControls.MPTLabel lbForum;
   }
 }

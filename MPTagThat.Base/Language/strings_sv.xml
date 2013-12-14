@@ -1,0 +1,843 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### Sträng hittades ej ###</string>
+  <string name="system.ApplicationName">MPTagThat tagg-editorn för MediaPortal</string>
+  <string name="splash.Version">Version:</string>
+  <string name="splash.BuildDate">Skapad:</string>
+  <string name="splash.Startup">Startar...</string>
+  <string name="splash.AddRibbon">Lägger till remsa...</string>
+  <string name="splash.AddGrids">Ställer in rutsystem...</string>
+  <string name="splash.LoadSettings">Laddar inställningar...</string>
+  <string name="splash.Localisation">Lokalisering...</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Mappar</string>
+  <string name="main.TreeViewPanelDatabase">Databas</string>
+  <string name="main.TreeViewViews">Vyer</string>
+  <string name="main.TreeViewFilters">Filter</string>
+  <string name="main.FilterUseTag">Använd Tagg-Filter</string>
+  <string name="main.FilterHeadingField">Fält</string>
+  <string name="main.FilterHeadingFilter">Filter</string>
+  <string name="main.FilterHeadingOperator">Operator</string>
+  <string name="main.FilterOperatorAnd">och</string>
+  <string name="main.FilterOperatorOr">eller</string>
+  <string name="main.FilterFileMask">Fil-mask</string>
+  <string name="main.FilterAllFiles">Alla filformat som stöds</string>
+  <string name="main.FilterActive">Taggfilter: Aktivt</string>
+  <string name="main.FilterInActive">Taggfilter: Inaktivt</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Bild</string>
+  <string name="main.InformationPanel">Information</string>
+  <string name="main.PlayerPanel">Spelare</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Val</string>
+  <string name="main.FolderView">Folder-vy</string>
+  <string name="main.DBView">Databas-vy</string>
+  <string name="main.NetworkView">Nätverksmapp-vy</string>
+  <string name="main.ScanSubfolder">Skanna undermappar</string>
+  <string name="main.ButtonRefreshFolder">Uppdatera folder-vy</string>
+  <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Meddelanden</string>
+  <string name="main.TabPageNonMusicFiles">Inga Musik-Filer</string>
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Fil</string>
+  <string name="main.ErrorHeaderMessage">Meddelande</string>
+  <string name="main.ErrorContextMenuClear">Rensa listan</string>
+  <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Byt namn till \"folder.jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Radera valda fil(er)\"</string>
+  <string name="main.NonMusicDeleteFilesHeader">Radera flera filer</string>
+  <string name="main.NonMusicDeleteFilesMessage">Är du säker på att du vill flytta dessa {0} objekt till Papperskorgen?</string>
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Filer: {0} Valda: {1})</string>
+  <string name="main.toolStripLabelPlay">Spelarens Status: Spelar</string>
+  <string name="main.toolStripLabelPause">Spelarens Status: Pausad</string>
+  <string name="main.toolStripLabelScan">Processar fil: {0}</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Inställningar</string>
+  <string name="ribbon.Refresh">Uppdatera</string>
+  <string name="ribbon.Save">Spara</string>
+  <string name="ribbon.ColumnsSelect">Välj Visade Kolumner</string>
+  <string name="ribbon.Exit">Avsluta</string>
+  <string name="ribbon.RecentFolders">Nyligen använda mappar</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Taggar</string>
+  <string name="ribbon.TagFromFile">Taggar från Filnamn</string>
+  <string name="ribbon.RenameFile">Byt namn på fil</string>
+  <string name="ribbon.RenameFileMenu">Byt namn på fil</string>
+  <string name="ribbon.RenameFileOptions">Inställning för byte av filnamn</string>
+  <string name="ribbon.IdentifyFile">Identifiera Fil</string>
+  <string name="ribbon.TagFromInternet">Tagga från Internet</string>
+  <string name="ribbon.SingleTagEdit">Ändra på en enda tagg</string>
+  <string name="ribbon.MultiTagEdit">Ändra på flera taggar</string>
+  <string name="ribbon.GetCoverArt">Hitta omslagsbild</string>
+  <string name="ribbon.GetLyrics">Hitta texter</string>
+  <string name="ribbon.AutoNumber">Automatisk numrering</string>
+  <string name="ribbon.NumberOnClick">Numrera vid klick</string>
+  <string name="ribbon.Find">Hitta</string>
+  <string name="ribbon.Replace">Ersätt</string>
+  <string name="ribbon.ValidateSong">Bekräfta MP3</string>
+  <string name="ribbon.FixSong">Fixa MP3</string>
+  <string name="ribbon.ReplayGain">Uppspelningsvolym</string>
+  <string name="ribbon.BPM">Beräkna BPM </string>
+  <string name="ribbon.RemoveCommentPicture">Ta bort:</string>
+  <string name="ribbon.RemoveComments">Ta bort alla kommentarer</string>
+  <string name="ribbon.RemovePictures">Ta bort alla bilder</string>
+  <string name="ribbon.CaseConversion">Konvertera storleksformatering</string>
+  <string name="ribbon.CaseConversionMenu">Storleksformatering</string>
+  <string name="ribbon.CaseConversionOption">Inställningar för Storleksformatering</string>
+  <string name="ribbon.DeleteTags">Radera taggar</string>
+  <string name="ribbon.DeleteAllTags">Radera alla taggar</string>
+  <string name="ribbon.DeleteID3V1Tags">Radera endast ID3 V1-taggar</string>
+  <string name="ribbon.DeleteID3V2Tags">Radera endast ID3 V2-taggar</string>
+  <string name="ribbon.EditTags">Redigera taggar</string>
+  <string name="ribbon.RetrieveTags">Hämta taggar</string>
+  <string name="ribbon.OrganiseFiles">Organisera</string>
+  <string name="ribbon.SaveFolderThumb">Spara som Mapp-bild</string>
+  <string name="ribbon.ExecuteScript">Exekvera Skript</string>
+  <string name="ribbon.Picture">Omslagsbild</string>
+  <string name="ribbon.Organise">Organisera Filer</string>
+  <string name="ribbon.AddBurner">Lägg till i brännarkö</string>
+  <string name="ribbon.AddConvert">Lägg till i Konverteringskö</string>
+  <string name="ribbon.AddPlaylist">Lägg till i Spellista</string>
+  <string name="ribbon.Other">Övrigt</string>
+  <!--Rip Tab-->
+  <string name="ribbon.RipTab">Rippa</string>
+  <string name="ribbon.RipButton">Påbörja Rippning</string>
+  <string name="ribbon.RipEncoder">Välj Omkodare:</string>
+  <string name="ribbon.RipFolder">Destinationsmapp:</string>
+  <string name="ribbon.RipCancel">Avbryt Rippning</string>
+  <string name="ribbon.RipOptions">Inställningar för Rippning</string>
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Konvertera</string>
+  <string name="ribbon.ConvertButton">Påbörja Konvertering</string>
+  <string name="ribbon.ConvertEncoder">Välj Omkodare:</string>
+  <string name="ribbon.ConvertFolder">Destinationsmapp:</string>
+  <string name="ribbon.ConvertCancel">Avbryt Konvertering</string>
+  <string name="ribbon.ConvertOptions">Inställningar för Konvertering</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Bränn</string>
+  <string name="ribbon.Burn">Bränn</string>
+  <string name="ribbon.BurnCancel">Avbryt Bränning</string>
+  <string name="ribbon.BurnOptions">Inställningar för Bränning</string>
+  <string name="ribbon.Burner">Välj Brännare:</string>
+  <string name="ribbon.BurnerSpeed">Brännarhastighet:</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Uppdatera</string>
+  <string name="screentip.RefreshText">Innehållet i den valda mappen läses om.\nOm ändringar ej sparats kommer systemet att fråga om en sparning skall ske.</string>
+  <string name="screentip.Save">Spara Ändringar</string>
+  <string name="screentip.SaveText">Sparar ändringar genom att ändra samtliga taggar i valda filer.</string>
+  <string name="screentip.ColumnsSelect">Kolumner som Visas i Rutnätet</string>
+  <string name="screentip.ColumnsSelectText">Välj de kolumner som skall visar i rutnätet under spårdetaljer.</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Taggar från Filnamn</string>
+  <string name="screentip.TagFromFileText">Genom att använda de specifika parametrar som angetts i dialogrutan, kommer olika taggar såsom \"Track #\", \"Artist\", \"Title\", osv. att hittas i filnamnet.</string>
+  <string name="screentip.IdentifyFile">Identifiera Fil</string>
+  <string name="screentip.IdentifyFileText">En markör finns, uppbyggd av filens första 30 sekunder. Denna markör kan sedan användas för att identifiera filen på MusicBrainz.\nTaggarna hämtas sedan från MusicBrainz och skrivs in i filen.</string>
+  <string name="screentip.TagFromInternet">Tagga från Internet</string>
+  <string name="screentip.TagFromInternetText">De angivna Artist- och Album-namnen används för att matcha filnamnen mot en lista som hämtas från Amazon.</string>
+  <string name="screentip.SingleTagEdit">Ändra på en enda tagg</string>
+  <string name="screentip.SingleTagEditText">En dialogruta tillåter redigering av samtliga taggar i en enda fil.</string>
+  <string name="screentip.MultiTagEdit">Ändra på flera taggar</string>
+  <string name="screentip.MultiTagEditText">Taggarna som ändrats i dialogrutan appliceras i alla valda filer.</string>
+  <string name="screentip.GetCoverArt">Hitta omslagsbild</string>
+  <string name="screentip.GetCoverArtText">Artist- och Album-namnet används för att hitta en matchande omslagsbild hos Amazon. Om flera träffar görs visas ett urval i en dialogruta.</string>
+  <string name="screentip.SaveFolderThumb">Spara som Mapp-bild</string>
+  <string name="screentip.SaveFolderThumbText">Skivomslagsbilden sparas som folder.jpg i mappen där den valda filen är sparad.</string>
+  <string name="screentip.GetLyrics">Hitta texter</string>
+  <string name="screentip.GetLyricsText">Textmotorn hämtar texter till de valda filerna från de text-källor som är valda i inställningar.</string>
+  <string name="screentip.AutoNumber">Automatisk numrering</string>
+  <string name="screentip.AutoNumberText">Spårnumret för de valda filerna ställs in genom värdet som anges i textrutan.</string>
+  <string name="screentip.NumberOnClick">Nummer vid klick</string>
+  <string name="screentip.NumberOnClickText">När denna funktion är aktiv får en fil sitt spårnummer när man klickar på den.</string>
+  <string name="screentip.RemoveComments">Ta bort alla kommentarer</string>
+  <string name="screentip.RemoveCommentsText">Alla kommentarer som finns sparade i filerna raderas.</string>
+  <string name="screentip.RemovePictures">Ta bort alla bilder</string>
+  <string name="screentip.RemovePicturesText">All bildinformation som finns sparad i de valda filerna raderas.</string>
+  <string name="screentip.CaseConversion">Storleksformatering</string>
+  <string name="screentip.CaseConversionText">Regler för formattering av stora eller små bokstäver appliceras efter de regler som sparats på valda filer.</string>
+  <string name="screentip.DeleteTags">Radera taggar</string>
+  <string name="screentip.DeleteTagsText">Samtliga taggar raderas från de valda filerna.</string>
+  <string name="screentip.RenameFile">Byt namn på fil</string>
+  <string name="screentip.RenameFileText">Filernas namn ändras efter de parametrar som ställts in i dialogrutan.</string>
+  <string name="screentip.Organise">Organisera Filer</string>
+  <string name="screentip.OrganiseText">Filerna kopieras/flyttas till en ny plats baserat på värdena i de taggar som specifierats i dialogrutans parametrar.</string>
+  <string name="screentip.ExecuteScript">Exekvera Skript</string>
+  <string name="screentip.ExecuteScriptText">Använder skriptet i kombo-rutan för de valda filerna.</string>
+  <string name="screentip.AddBurner">Lägg till i brännarkö</string>
+  <string name="screentip.AddBurnerText">Lägger till de valda filerna i listan över filer som är redo att brännas till CD.</string>
+  <string name="screentip.AddConvert">Lägg till i Konverteringskö</string>
+  <string name="screentip.AddConvertText">Lägger till de valda filerna till listan över filer som skall konverteras till ett annat format.</string>
+  <string name="screentip.AddPlaylist">Lägg till i Spellista</string>
+  <string name="screentip.AddPlaylistText">Lägger till de valda filerna i spellistan som börjar med den första filen om spelaren är tillgänglig.</string>
+  <string name="screentip.Find">Hitta</string>
+  <string name="screentip.FindText">Öppnar en dialogruta för sökning efter en specifik sträng i de valda Spåren.</string>
+  <string name="screentip.Replace">Ersätt</string>
+  <string name="screentip.ReplaceText">Öppnar dialogrutan för Hitta/Ersätt vilket möjliggör ersättning av en specifierad söksträng i de valda Spåren.</string>
+  <string name="screentip.ValidateSong">Bekräfta MP3</string>
+  <string name="screentip.ValidateSongText">Använder MP3Val för att bekräfta att den valda MP3-filen är korrekt. Vissa fel som hittas kan åtgärdas genom att använda \"Fixa MP3\"-knappen</string>
+  <string name="screentip.FixSong">Fixa MP3</string>
+  <string name="screentip.FixSongText">Använder MP3Val till att fixa fel som uppdagats i den valda MP3-filen.</string>
+  <string name="screentip.ReplayGain">Uppspelningsvolym</string>
+  <string name="screentip.ReplayGainText">Analyserar den valda filen och räknar ut Uppspelningsvolymen. Det uträknade värdet skrivs in i taggen.\nNotera att dynamiken i filen ej ändras.</string>
+  <string name="screentip.BPM">BPM Beräkning</string>
+  <string name="screentip.BPMText">Analyserar den valda filen ock beräknar  slag per minut (BPM). Det beräknade värdet skrivs som en tag, Notera att filen isig inte ändaras.</string>
+  <!--Rip Tab-->
+  <string name="screentip.RipButton">Påbörja Rippning</string>
+  <string name="screentip.RipButtonText">Påbörja rippning av de valda filerna</string>
+  <string name="screentip.RipCancel">Avbryt Rippning</string>
+  <string name="screentip.RipCancelText">Avbryt rippningen.</string>
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Påbörja Konvertering</string>
+  <string name="screentip.ConvertButtonText">Påbörjar konvertering av filerna i listan till det förvalda formatet</string>
+  <string name="screentip.ConvertCancel">Avbryt Konvertering</string>
+  <string name="screentip.ConvertCancelText">Avbryter konverteringsprocessen</string>
+  <!--Burn Tab-->
+  <string name="screentip.Burn">Bränn CD</string>
+  <string name="screentip.BurnText">Påbörjar bränning av de filer som ligger i listan för bränning.</string>
+  <string name="screentip.BurnCancel">Avbryt bränning</string>
+  <string name="screentip.BurnCancelText">Avbryter bränningen</string>
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Ändra på flera taggar</string>
+  <string name="TagEdit.SingleHeading">Redigera tagg</string>
+  <string name="TagEdit.HeaderUser">Användarinställd</string>
+  <string name="TagEdit.HeaderRating">Klassificering</string>
+  <string name="TagEdit.HeaderLyrics">Texter</string>
+  <string name="TagEdit.HeaderWeb">Web-information</string>
+  <string name="TagEdit.HeaderInvolved">Inblandade personer</string>
+  <string name="TagEdit.HeaderOriginal">Original-information</string>
+  <string name="TagEdit.HeaderDetail">Detaljerad Information</string>
+  <string name="TagEdit.HeaderMainTags">Huvudsakliga taggar</string>
+  <string name="TagEdit.HeaderPictures">Bilder</string>
+  <!--Main Tags-->
+  <string name="TagEdit.AlbumArtist">AlbumArtist:</string>
+  <string name="TagEdit.Track">Spår:</string>
+  <string name="TagEdit.Artist">Artist:</string>
+  <string name="TagEdit.Year">År:</string>
+  <string name="TagEdit.Title">Titel:</string>
+  <string name="TagEdit.Album">Album:</string>
+  <string name="TagEdit.PartOfCompilation">Del av en Samling</string>
+  <string name="TagEdit.GroupBoxComment">Kommentar</string>
+  <string name="TagEdit.RemoveExistingComments">Ta Bort Kommentarer Först</string>
+  <string name="TagEdit.MoveTop">Flytta Längst Upp</string>
+  <string name="TagEdit.RemoveComment">Ta Bort Kommentar</string>
+  <string name="TagEdit.AddComment">Lägg Till Kommentar</string>
+  <string name="TagEdit.Comment">Kommentar:</string>
+  <string name="TagEdit.CommentLanguage">Språk (endast för ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Beskrivare (ID3 endast):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Beskrivare</string>
+  <string name="TagEdit.CommentHeaderLanguage">Språk</string>
+  <string name="TagEdit.CommentHeaderComment">Kommentar</string>
+  <string name="TagEdit.RemoveGenre">Ta bort Genre</string>
+  <string name="TagEdit.AddGenre">Lägg Till Genre</string>
+  <string name="TagEdit.Genre">Genre:</string>
+  <string name="TagEdit.Disc">Skiva:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Bild</string>
+  <string name="TagEdit.RemoveExistingPictures">Ta Bort Existerande Bilder Först</string>
+  <string name="TagEdit.ExportPicture">Exportera Bild</string>
+  <string name="TagEdit.RemovePicture">Ta Bort Bild</string>
+  <string name="TagEdit.GetPicture">Hämta från Fil</string>
+  <string name="TagEdit.GetPictureInternet">Hämta från Internet</string>
+  <string name="TagEdit.PictureType">Bildtyp:</string>
+  <string name="TagEdit.PictureHeaderType">Bildtyp</string>
+  <string name="TagEdit.PictureDescriptor">Beskrivare:</string>
+  <!--Detailed Information-->
+  <string name="TagEdit.GetTrackLengthFromFile">Hämta från Fil</string>
+  <string name="TagEdit.GetTrackLength">Hämta spårlängd från Fil</string>
+  <string name="TagEdit.TrackLength">Spårlängd (ms):</string>
+  <string name="TagEdit.MediaType">Mediatyp</string>
+  <string name="TagEdit.TitleSort">Sortera efter Titel:</string>
+  <string name="TagEdit.AlbumSort">Sortera efter Album:</string>
+  <string name="TagEdit.ArtistSort">Sortera efter Artist:</string>
+  <string name="TagEdit.AlbumArtistSort">Sortera efter AlbumArtist:</string>
+  <string name="TagEdit.SubTitle">Undertext:</string>
+  <string name="TagEdit.ContentGroup">Innehållsgrupp:</string>
+  <string name="TagEdit.Copyright">Copyright:</string>
+  <string name="TagEdit.EncodedBy">Encoding gjord av:</string>
+  <string name="TagEdit.Publisher">Publicerad av:</string>
+  <string name="TagEdit.TextWriter">Lyrik/Text-författare:</string>
+  <string name="TagEdit.Interpreter">Tolkad av:</string>
+  <string name="TagEdit.Composer">Kompositör:</string>
+  <string name="TagEdit.Conductor">Dirigent:</string>
+  <!--Original Information-->
+  <string name="TagEdit.OriginalReleaseYear">Ursprungligt publiceringsår:</string>
+  <string name="TagEdit.OriginalOwber">Ursprunglig ägare:</string>
+  <string name="TagEdit.OriginalArtist">Original-Artist:</string>
+  <string name="TagEdit.OriginalTextWriter">Ursprunglig textförfattare:</string>
+  <string name="TagEdit.OriginalFileName">Ursprungligt Filnamn:</string>
+  <string name="TagEdit.OriginalAlbumTitle">Ursprunglig Albumtitel:</string>
+  <!--Involved Persons-->
+  <string name="TagEdit.ID3V24only">Endast ID3 V2.4</string>
+  <string name="TagEdit.RemoveMusician">Ta Bort Musiker</string>
+  <string name="TagEdit.AddMusician">Lägg Till Musiker</string>
+  <string name="TagEdit.MusicianName">Namn på Musiker:</string>
+  <string name="TagEdit.MusicianInstrument">Instrument för Musiker:</string>
+  <string name="TagEdit.MusicianHeaderInstrument">Instrument</string>
+  <string name="TagEdit.MusicianHeaderName">Namn</string>
+  <string name="TagEdit.RemovePerson">Ta Bort Person</string>
+  <string name="TagEdit.AddPerson">Lägg Till Person</string>
+  <string name="TagEdit.PersonName">Namn på Inblandad Person:</string>
+  <string name="TagEdit.PersonFunction">Inblandad Persons Egenskap:</string>
+  <string name="TagEdit.PersonHeaderName">Namn</string>
+  <string name="TagEdit.PersonHeaderFunction">Funktion</string>
+  <!--Web Information-->
+  <string name="TagEdit.CommercialUrl">URL För Kommersiell information:</string>
+  <string name="TagEdit.PublisherUrl">URL för Officiell Utgivare:</string>
+  <string name="TagEdit.PaymentUrl">URL för Officiell Betalning:</string>
+  <string name="TagEdit.InternetRadioUrl">URL för Officiell Internet-Radio Status:</string>
+  <string name="TagEdit.AudioSourceUrl">URL för Officiell Ljudkälla:</string>
+  <string name="TagEdit.ArtistUrl">URL för Officiell Artist:</string>
+  <string name="TagEdit.AudioFileUrl">URL för Officiell Ljudfil:</string>
+  <string name="TagEdit.CopyrightUrl">URL för Copyrightinformation:</string>
+  <!--Lyrics-->
+  <string name="TagEdit.GetLyricsFromInternet">Hämta texter från Internet</string>
+  <string name="TagEdit.GetLyricsFromText">Hämta Texter från en Textfil</string>
+  <string name="TagEdit.RemoveExistingLyrics">Radera Befintlig Text Först</string>
+  <string name="TagEdit.RemoveLyrics">Ta Bort Texter</string>
+  <string name="TagEdit.AddLyrics">Lägg Till Texter</string>
+  <string name="TagEdit.LyricsLanguage">Språk (endast för ID3):</string>
+  <string name="TagEdit.LyricsDescriptor">Beskrivare (ID3 endast):</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Beskrivare</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Språk</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Texter</string>
+  <!--Rating-->
+  <string name="TagEdit.GroupBoxRating">Gradering (För filer som saknar ID3, var god välj graderingen i Stjärnkolumnen)</string>
+  <string name="TagEdit.RemoveExistingRatings">Radera Befintlig Gradering Först</string>
+  <string name="TagEdit.RatingNote">Graderingen är 1-255 där 1 är värst och 255 är bäst. 0 är okänd.\n\nNotera: Många program har en egen gradering och kan komma att ändra på ID3-standarden. Om ingen personlig räknare önskas kan detta väljas bort.</string>
+  <string name="TagEdit.PlayCounter">Uppspelningsräknare:</string>
+  <string name="TagEdit.RemoveRating">Ta Bort Graderingen</string>
+  <string name="TagEdit.AddRating">Lägg Till Gradering</string>
+  <string name="TagEdit.Rating">Gradering:</string>
+  <string name="TagEdit.RatingUser">Användare: (eMail):</string>
+  <!--Navigation Pane-->
+  <string name="TagEdit.panelNavigation">Tagg-information</string>
+  <string name="TagEdit.LinkUserDefined">Användarinställd</string>
+  <string name="TagEdit.LinkRating">Gradering</string>
+  <string name="TagEdit.LinkLyrics">Texter</string>
+  <string name="TagEdit.LinkWeb">Web-information</string>
+  <string name="TagEdit.LinkInvolvedPeople">Inblandade personer</string>
+  <string name="TagEdit.LinkOriginalInfo">Original-information</string>
+  <string name="TagEdit.LinkDetailedInfo">Detaljerad Information</string>
+  <string name="TagEdit.LinkMainTags">Huvudsakliga taggar</string>
+  <string name="TagEdit.LinkPictures">Bilder</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Avbryt</string>
+  <string name="TagEdit.Apply">Verkställ</string>
+  <!--Single Tag Edit Commands-->
+  <string name="TagEdit.Previous">Föregående Fil</string>
+  <string name="TagEdit.Next">Nästa Fil</string>
+  <string name="TagEdit.Commands">Kommandon</string>
+  <!--User Defined Frames-->
+  <string name="TagEdit.FrameID">Ram-id</string>
+  <string name="TagEdit.FrameDesc">Beskrivning</string>
+  <string name="TagEdit.FrameText">Text</string>
+  <string name="TagEdit.AddFrame">Lägg till Ram</string>
+  <string name="TagEdit.DeleteFrame">Ta bort ram(ar)</string>
+  <string name="TagEdit.DeleteAllFrames">Ta bort samtliga ramar</string>
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Header">Hitta en text till {0} - {1}</string>
+  <string name="LyricsSearch.Cancel">Avbryt</string>
+  <string name="LyricsSearch.Site">Sajt</string>
+  <string name="LyricsSearch.Result">Resultat</string>
+  <string name="LyricsSearch.Lyric">Text</string>
+  <string name="LyricsSearch.GroupBoxSearchResults">Sökresultat</string>
+  <string name="LyricsSearch.Title">Titel:</string>
+  <string name="LyricsSearch.Update">Uppdatera</string>
+  <string name="LyricsSearch.Find">Hämta</string>
+  <string name="LyricsSearch.Close">Stäng</string>
+  <string name="LyricsSearch.GroupBoxLyric">Text</string>
+  <string name="LyricsSearch.Artist">Artist:</string>
+  <string name="LyricsSearch.GroupBoxSearchInfo">Sökinformation</string>
+  <string name="LyricsSearch.SwitchArtist">Byt Artist</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.Heading">Text-Sökning</string>
+  <string name="LyricsSearch.Status">Söker efter Texter... Var god dröj</string>
+  <string name="LyricsSearch.Finished">Sökningen är klar. Avmarkera spår med inkorrekta texter.</string>
+  <string name="LyricsSearch.NothingToSearch">Det finns ingenting att söka efter</string>
+  <string name="LyricsSearch.FoundLyrics">Ok</string>
+  <string name="LyricsSearch.NoLyricsFound">Ej tillgänglig</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Header">Album-Sökning</string>
+  <string name="AmazonAlbumSearch.Close">Avbryt</string>
+  <string name="AmazonAlbumSearch.CancelAll">Avbryt Alla</string>
+  <string name="AmazonAlbumSearch.Update">Välj</string>
+  <string name="AmazonAlbumSearch.Search">Sök</string>
+  <string name="AmazonAlbumSearch.Albums">Album</string>
+  <string name="AmazonAlbumSearch.GroupBoxResults">Flera Album hittades. Gör ett val...</string>
+  <string name="AmazonAlbumSearch.NotFound">Ingenting hittades. Ändra sökkriterier...</string>
+  <string name="AmazonAlbumSearch.Searching">Söker...</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Header">Internet-sökning</string>
+  <string name="MusicBrainz.Cancel">Avbryt</string>
+  <string name="MusicBrainz.Update">Välj</string>
+  <string name="MusicBrainz.SearchInfo">Identifierat Spår</string>
+  <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Duration">Längd</string>
+  <string name="MusicBrainz.GroupBoxResults">Detta spår är tillgänglig på flera album. Gör ett val</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.FileName">Fil-Namn</string>
+  <string name="column_header.FilePath">Sökväg</string>
+  <string name="column_header.NewFileName">Nytt Fil-Namn</string>
+  <string name="column_header.Status">Status</string>
+  <string name="column_header.Track">Spår</string>
+  <string name="column_header.NumTracks">Num. Spår</string>
+  <string name="column_header.Title">Titel</string>
+  <string name="column_header.Artist">Artist</string>
+  <string name="column_header.AlbumArtist">Album-Artist</string>
+  <string name="column_header.Album">Album</string>
+  <string name="column_header.Year">År</string>
+  <string name="column_header.Genre">Genre</string>
+  <string name="column_header.CreationTime">Skapad</string>
+  <string name="column_header.LastWriteTime">Ändrad</string>
+  <string name="column_header.TagType">Typ</string>
+  <string name="column_header.Disc">Skiva #</string>
+  <string name="column_header.NumDisc">Num. Skivor</string>
+  <string name="column_header.BPM">BPM</string>
+  <string name="column_header.Rating">Gradering</string>
+  <string name="column_header.ReplayGainTrack">Spår-Volym</string>
+  <string name="column_header.ReplayGainTrackPeak">Spårets volymtopp</string>
+  <string name="column_header.ReplayGainAlbum">Album-Volym</string>
+  <string name="column_header.ReplayGainAlbumPeak">Albumets volymtopp</string>
+  <string name="column_header.Comment">Kommentar</string>
+  <string name="column_header.Composer">Kompositör</string>
+  <string name="column_header.Conductor">Dirigent</string>
+  <string name="column_header.NumPics"># Bilder</string>
+  <string name="column_header.Picture">Bild</string>
+  <string name="column_header.ArtistSortName">Sorteringsnamn - Artist</string>
+  <string name="column_header.AlbumSortName">Sorteringsnamn - Album</string>
+  <string name="column_header.CommercialInformation">Reklam-Information</string>
+  <string name="column_header.Copyright">Copyright</string>
+  <string name="column_header.CopyrightInformation">Copyright-Information</string>
+  <string name="column_header.EncodedBy">Encoding gjord av:</string>
+  <string name="column_header.Interpreter">Tolkad av</string>
+  <string name="column_header.Grouping">Gruppering</string>
+  <string name="column_header.Lyrics">Texter</string>
+  <string name="column_header.MediaType">Media-Typ</string>
+  <string name="column_header.OfficialAudioFileInformation">Officiell Ljudfilsinformation</string>
+  <string name="column_header.OfficialArtistInformation">Officiell Artistinformation</string>
+  <string name="column_header.OfficialAudioSourceInformation">Officiell Ljudkälleinformation</string>
+  <string name="column_header.OfficialInternetRadioInformation">Officiell Internetradioinformation</string>
+  <string name="column_header.OfficialPaymentInformation">Officiell Betalningsinformation</string>
+  <string name="column_header.OfficialPublisherInformation">Officiell Utgivarinformation</string>
+  <string name="column_header.OriginalAlbum">Ursprungligt Album</string>
+  <string name="column_header.OriginalFileName">Ursprungligt Filnamn</string>
+  <string name="column_header.OriginalLyricsWriter">Ursprunglig Textförfattare</string>
+  <string name="column_header.OriginalArtist">Ursprunglig Artist</string>
+  <string name="column_header.OriginalOwner">Ursprunglig Ägare</string>
+  <string name="column_header.OriginalRelease">Ursprungligt publiceringsår</string>
+  <string name="column_header.Publisher">Utgiven av</string>
+  <string name="column_header.SubTitle">Undertext</string>
+  <string name="column_header.TextWriter">Textförfattare</string>
+  <string name="column_header.TitleSortName">Sortera efter Titel</string>
+  <string name="column_header.Duration">Längd</string>
+  <string name="column_header.FileSize">Storlek (kb)</string>
+  <string name="column_header.BitRate">Bitrate</string>
+  <string name="column_header.SampleRate">Samplerate</string>
+  <string name="column_header.Channels">Kanaler</string>
+  <string name="column_header.Version">Codec</string>
+  <!--Context Menus-->
+  <string name="contextmenu.CoverLookup">Sök efter LåtOmslag på Google</string>
+  <string name="contextmenu.AddBurner">Lägg objekt(en) i Skrivarkö</string>
+  <string name="contextmenu.AddConverter">Lägg till objekt(en) i Konverteringskö</string>
+  <string name="contextmenu.AddPlayList">Lägg till objekt(en) i SpelListan</string>
+  <string name="contextmenu.SavePlayList">Spara objekt(en) som en SpelLista</string>
+  <string name="contextmenu.CreateFolderThumb">Skapa Mapp-bild</string>
+  <string name="contextmenu.Copy">Kopiera</string>
+  <string name="contextmenu.Cut">Klipp Ut</string>
+  <string name="contextmenu.Paste">Klistra In</string>
+  <string name="contextmenu.Delete">Ta Bort</string>
+  <string name="contextmenu.Refresh">Uppdatera</string>
+  <string name="contextmenu.SelectAll">Välj alla</string>
+  <string name="contextmenu.InsertFilter">Lägg till Filter</string>
+  <string name="contextmenu.DeleteFilter">Ta bort Filter</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingTag">Tagga från Fil-Namnet</string>
+  <string name="TagAndRename.HeadingRename">Byt namn på fil</string>
+  <string name="TagAndRename.Apply">Verkställ</string>
+  <string name="TagAndRename.Cancel">Avbryt</string>
+  <string name="TagAndRename.Format">Format:</string>
+  <string name="TagAndRename.RemoveFormat">Ta bort Formatet från Listan</string>
+  <string name="TagAndRename.AddFormat">Lägg till Formatet till Listan</string>
+  <string name="TagAndRename.GroupBoxParm">Parametrar (Klicka för att lägga till i listan)</string>
+  <string name="TagAndRename.Folder">\ = Folder: parametrar framför denna formel hämtas från Mappnamnet</string>
+  <string name="TagAndRename.Unused">&lt;X&gt; = Används ej</string>
+  <string name="TagAndRename.Comment">&lt;C&gt; = Kommentar</string>
+  <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orkester / Album-Artist</string>
+  <string name="TagAndRename.Genre">&lt;G&gt; = Genre</string>
+  <string name="TagAndRename.DiscTotal">&lt;d&gt; = Totalt # antal skivor</string>
+  <string name="TagAndRename.Disc">&lt;D&gt; = Skivnummer</string>
+  <string name="TagAndRename.TrackTotal">&lt;k&gt; = Totalt # antal spår</string>
+  <string name="TagAndRename.Track">&lt;K&gt; = Spårnummer</string>
+  <string name="TagAndRename.Year">&lt;Y&gt; = År</string>
+  <string name="TagAndRename.Album">&lt;B&gt; = Album</string>
+  <string name="TagAndRename.Title">&lt;T&gt; = Titel</string>
+  <string name="TagAndRename.Artist">&lt;A&gt; = Artist</string>
+  <string name="TagAndRename.Conductor">&lt;N&gt; = Dirigent</string>
+  <string name="TagAndRename.Composer">&lt;R&gt; = Kompositör</string>
+  <string name="TagAndRename.Group">&lt;U&gt; = Innehållsgrupp</string>
+  <string name="TagAndRename.SubTitle">&lt;S&gt; = Undertext</string>
+  <string name="TagAndRename.BPM">&lt;E&gt; = BPM</string>
+  <string name="TagAndRename.ModifiedBY">&lt;M&gt; = Ändrad / remixad av</string>
+  <string name="TagAndRename.Filename">&lt;F&gt; = Nuvarande FilNamn</string>
+  <string name="TagAndRename.Enumerate">&lt;#&gt; = Adderar Filer</string>
+  <string name="TagAndRename.BitRate">&lt;I&gt; = Bitrate</string>
+  <string name="TagAndRename.FirstNofArtist">&lt;A:n&gt; = Första \"n\" bokstäverna i artistnamn</string>
+  <string name="TagAndRename.FirstNofAlbumArtist">&lt;O:n&gt; = Första \"n\" bokstäverna i album + artistnamn</string>
+  <string name="TagAndRename.StartAt">Börja vid</string>
+  <string name="TagAndRename.NumberDigits">Antal tecken</string>
+  <string name="TagAndRename.NameTooLong">Filnamnet är för långt. Justera det nu.</string>
+  <string name="TagAndRename.FileExists">Filen existerar redan. Används Vanliga Taggar?</string>
+  <string name="TagAndRename.Rename">Det går inte att byta namn på filen {0}: {1}</string>
+  <string name="TagAndRename.InvalidParm">Parameterformatet är felaktigt. Rätta till det och försök igen.</string>
+  <string name="TagAndRename.Original">Original:</string>
+  <string name="TagAndRename.Preview">Förhandsgranska</string>
+  <string name="TagAndRename.Parameters">Parametrar</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Header">Storleksformatering</string>
+  <string name="CaseConversion.TabSettings">Inställningar</string>
+  <string name="CaseConversion.GroupBoxOptions">Val</string>
+  <string name="CaseConversion.AlwaysUpperCaseFirstLetter">Ändra alla begynnelsebokstäver till versaler</string>
+  <string name="CaseConversion.ReplaceSpaceByUnderscore">Byt ut Mellanslag mot \"_\"</string>
+  <string name="CaseConversion.ReplaceUnderscoreBySpace">Byt ut \"_\" mot Mellanslag</string>
+  <string name="CaseConversion.ReplaceSpaceby20">Byt ut Mellanslag mot \"%20\"</string>
+  <string name="CaseConversion.Replace20bySpace">Byt ut \"%20\" mot Mellanslag</string>
+  <string name="CaseConversion.GroupBoxMethod">Konverteringsmetod</string>
+  <string name="CaseConversion.AllFirstLetterUpperCase">Versaler i början på samtliga ord</string>
+  <string name="CaseConversion.FirstLetterUpperCase">Versaler i början på första ordet</string>
+  <string name="CaseConversion.AllUpperCase">Endast versaler</string>
+  <string name="CaseConversion.AllLowerCase">Endast gemener</string>
+  <string name="CaseConversion.GroupBoxConvert">Konvertera taggar för...</string>
+  <string name="CaseConversion.Comment">Kommentar</string>
+  <string name="CaseConversion.Title">Titel</string>
+  <string name="CaseConversion.Album">Album</string>
+  <string name="CaseConversion.AlbumArtist">AlbumArtist</string>
+  <string name="CaseConversion.Artist">Artist</string>
+  <string name="CaseConversion.ConvertTags">Konvertera Taggar</string>
+  <string name="CaseConversion.ConvertFileName">Konvertera FilNamn</string>
+  <string name="CaseConversion.Exceptions">Undantag</string>
+  <string name="CaseConversion.RemoveException">Ta Bort</string>
+  <string name="CaseConversion.AddException">Lägg Till</string>
+  <string name="CaseConversion.Convert">Konvertera</string>
+  <string name="CaseConversion.Cancel">Avbryt</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Header">Välj vilka kolumner som skall visas</string>
+  <string name="ColumnSelect.Ok">Ok</string>
+  <string name="ColumnSelect.Cancel">Avbryt</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.Heading">Organisera Filer</string>
+  <string name="organise.TargetRootDrectory">Välj målmapp:</string>
+  <string name="organise.TargetRootDrectoryOverride">Förbigå målmapp med Script:</string>
+  <string name="organise.BrowseRootDir">Bläddra</string>
+  <string name="organise.OverWriteFiles">Skriv över befintliga filer</string>
+  <string name="organise.CopyFiles">Kopiera Filerna istället för att flytta dem</string>
+  <string name="organise.CopyNonMusicFiles">Kopiera/Flytta filer som inte är musik (Bilder osv.)</string>
+  <string name="organise.InvalidParm">Parameterformatet är felaktigt. Rätta till det och försök igen.</string>
+  <string name="organise.FileExists">Filen existerar redan. Den kommer inte att skrivas över</string>
+  <string name="organise.SameFile">Källa och Mål är densamma. Filen hoppades över</string>
+  <string name="organise.Exists">Existerar</string>
+  <string name="organise.Copied">Kopierad</string>
+  <string name="organise.Moved">Flyttad</string>
+  <string name="organise.GroupBoxOptions">Val</string>
+  <string name="organise.GroupBoxSelection">Markering</string>
+  <string name="organise.ButtonOrganise">Organisera</string>
+  <string name="organise.Folder">\ = Folder: parametrar framför denna formel kommer att användas för undermappens namn inuti målmappen</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Inställningar</string>
+  <string name="Settings.NavigationPanel">Navigation</string>
+  <string name="Settings.Blue">Blå</string>
+  <string name="Settings.Silver">Silver</string>
+  <string name="Settings.Black">Svart</string>
+  <string name="Settings.EncoderMP3">MP3-Omkodare</string>
+  <string name="Settings.EncoderOgg">OGG-Omkodare</string>
+  <string name="Settings.EncoderFlac">FLAC-Omkodare</string>
+  <string name="Settings.EncoderAAC">AAC-Omkodare</string>
+  <string name="Settings.EncoderWMA">WMA-Omkodare</string>
+  <string name="Settings.EncoderWAV">WAV-Omkodare</string>
+  <string name="Settings.EncoderMPC">Musepack-Omkodare</string>
+  <string name="Settings.EncoderWV">WavPack-Omkodare</string>
+  <string name="Settings.EncoderWMAStandard">Windows Media Audio-Standard</string>
+  <string name="Settings.EncoderWMAPro">Windows Media Audio Professional</string>
+  <string name="Settings.EncoderWMALossless">Windows Media Audio Lossless</string>
+  <string name="Settings.EncoderMPCStandard">Hög Kvalitét (142-184 kbps)</string>
+  <string name="Settings.EncoderMPCxtreme">Högre Kvalitét (168-212 kbps)</string>
+  <string name="Settings.EncoderMPCinsane">Mycket hög Kvalitét (232-268 kbps)</string>
+  <string name="Settings.EncoderMPCbraindead">Högsta Kvalitét (232-278 kbps)</string>
+  <string name="Settings.EncoderWVFast">Snabbt Läge (snabbt, men med lite sämre komprimering)</string>
+  <string name="Settings.EncoderWVHigh">Hög Kvalitét (bättre komprimering, men sämre)</string>
+  <string name="Settings.Stereo">Stereo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.ParametricStereo">Parametrisk Stereo</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.InvalidParm">Ogiltig Format-Parameter för Rippat FilNamn. Ändra och fortsätt.</string>
+  <string name="Settings.DescPrefMedium">Denna inställning ger kvalitét som de flesta anser tillräcklig för alla typer av musik. (Bitrate mellan 140-185)</string>
+  <string name="Settings.DescPrefStandard">Denna inställning är generellt fullt duglig för de flesta lyssnare och i ganska hög kvalitét. (Bitrate mellan 170-210)</string>
+  <string name="Settings.DescPrefExtreme">För de med extremt vältränad hörsel eller hifi-utrustning kan denna inställning ge det lilla extra som saknas utöver \"standard\"-läget. (Bitrate mellan 220-260)</string>
+  <string name="Settings.DescPrefInsane">CBR 320 kbps. Denna inställning är för de flesta lyssnarna och i de flesta fallen onödigt hög, men om du inte vill kompromissa med kvalitét oberoende av filstorlek, så är detta vad du vill ha.</string>
+  <string name="Settings.DescPrefABR">ABR-lägen (hög kvalitét efter angiven bitrate, men inte lika hög som VBR). Användande av denna förinställning ger oftast god kvalitét för en angiven bitrate.\n\nBeroende på vilken bitrate som angivits kommer denna förinställning att beräkna vad som är optimalt för en given situation. Fast denna metod är bra så är den inte i närheten av VBR vad gäller flexibilitet och vanligtvis inte lika kvalitativ vid högre bitrate-inställningar.</string>
+  <string name="Settings.TabGeneral">Generellt</string>
+  <string name="Settings.GroupBoxKeys">Tangentbordsgenvägar</string>
+  <string name="Settings.ChangeKey">Ändra</string>
+  <string name="Settings.Shift">Shift</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.KeyDescription">Beskrivning</string>
+  <string name="Settings.KeyAction">Åtgärd:</string>
+  <string name="Settings.KeyShortCut">Tangentbordsgenväg:</string>
+  <string name="Settings.RibbonShortCut">Genvägsremsa:</string>
+  <string name="Settings.GroupBoxGeneral">Allmänna inställningar</string>
+  <string name="Settings.DebugLevel">Debugnivå:</string>
+  <string name="Settings.Theme">Tema</string>
+  <string name="Settings.Language">Språk</string>
+  <string name="Settings.TrackListLocation">Plats för spårlista:</string>
+  <string name="Settings.TabTags">Taggar</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.TabTagsLyricsCover">Sångtext/omslagsbild</string>
+  <string name="Settings.TabTagsDatabase">Databas</string>
+  <string name="Settings.GroupBoxPictures">Bilder</string>
+  <string name="Settings.OverwriteExistingCover">Skriv över befintliga omslag vid automatisk taggning</string>
+  <string name="Settings.EmbedExistingThumb">Bädda in befintlig mappbild (folder.jpg) vid omslagssökning</string>
+  <string name="Settings.OnlySaveFolderThumb">Spara skivomslaget endast som mappbild. Lagras ej i musikfiler.</string>
+  <string name="Settings.ChangeCoverSize">Spara omslag som har en pixelbredd motsvarande:</string>
+  <string name="Settings.AmazonSite">Amazon sökmotor:</string>
+  <string name="Settings.GroupBoxLyrics">Texter</string>
+  <string name="Settings.SwitchArtist">Byt Artist innan lagring</string>
+  <string name="Settings.OverwriteExistingLyrics">Skriv över befintliga texter vid automatisk taggning</string>
+  <string name="Settings.GroupBoxLyricsSites">Sajter att söka på</string>
+  <string name="Settings.GroupBoxTagsGeneral">Generellt</string>
+  <string name="Settings.CopyArtist">Kopiera Artist till AlbumArtist om fältet är tomt</string>
+  <string name="Settings.AutoFillNumberTracks">Fyll Automatiskt \"Antal Spår\" när fler än en fil redigeras samtidigt</string>
+  <string name="Settings.CaseConversion">Applicera storleksformatering enligt inställning vid sparning</string>
+  <string name="Settings.ChangeReadonly">Ändra skrivskyddsattribut vid Sparning</string>
+  <string name="Settings.Encoding">Omkodning som används när taggar skall sparas:</string>
+  <string name="Settings.CreateMissingFolderThumb">Skapa saknad mappbild (folder.jpg) vid sparning</string>
+  <string name="Settings.AutoCompletion">Använd MediaPortals Musik-Databas för automatisk komplettering av Artistnamn</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.UseV4">Använd Version 2.4 för ID3 V2-taggar</string>
+  <string name="Settings.UseV3">Använd Version 2.3 för ID3 V2-taggar</string>
+  <string name="Settings.UseAPE">Använd APE och ID3 V1-taggar</string>
+  <string name="Settings.GroupBoxID3Update">Uppdatera</string>
+  <string name="Settings.RemoveID3V1">Ta Bort ID3V1</string>
+  <string name="Settings.RemoveID3V2">Ta Bort ID3V2</string>
+  <string name="Settings.ID3Both">ID3V1 och ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.ClearUserFrames">Rensa användardefinierade ramar vid sparning</string>
+  <string name="Settings.GroupBoxTagsValidate">MP3 Fil-Validering</string>
+  <string name="Settings.ValidateMP3">Validera MP3-Filer vid skanning av mappar / databas</string>
+  <string name="Settings.AutoFixMP3">Fixa automatiskt felande MP3-filer</string>
+  <string name="Settings.GroupBoxDatabaseBuild">Bygg Musik-Databas</string>
+  <string name="Settings.DatabaseScanNote">Om ingen databas från MediaPortal är tillgänglig kan en databas skapas genom att ett filnamn läggs in i textrutan ovan.\nStarta sedan en skanning.</string>
+  <string name="Settings.StartDBScan">Påbörja skanning</string>
+  <string name="Settings.DBScanStatus">Skannings-status</string>
+  <string name="Settings.DBNotExists">Den valda databasen existerar inte.\nOm du väljer \"Ja\" kommer en ny databas att skapas.\nStarta en skanning för att fylla databasen.</string>
+  <string name="Settings.ClearDatabase">Rensa databas innan skanning körs</string>
+  <string name="Settings.SelectMusicFolder">Välj den mapp där dina Musik-Filer finns</string>
+  <string name="Settings.DBScanIdle">Databas-skanning är inte aktiv.</string>
+  <string name="Settings.DBScanFinished">Databas-skanning färdig.\n{0} filer har processats under: {1:d2}:{2:d2}:{3:d2}{4}</string>
+  <string name="Settings.DBScanTrackSummary">({0} sekunder per spår)</string>
+  <string name="Settings.DBScanTitle">Bekräfta att du vill avbryta skanning</string>
+  <string name="Settings.DBScanActive">Databas-skanningen är fortfarande aktiv.\nVill du avbryta skanningen och stänga programmet?</string>
+  <string name="Settings.DBScanProgress">Går igenom fil {0} av {1}</string>
+  <string name="Settings.TabRipping">Rippar</string>
+  <string name="Settings.TabRippingGeneral">Generellt</string>
+  <string name="Settings.CustomPath">Egna sökvägar och Filnamn</string>
+  <string name="Settings.Format">Format:</string>
+  <string name="Settings.TargetFolder">Mål-Mapp:</string>
+  <string name="Settings.RipOptions">Inställningar för Rippning</string>
+  <string name="Settings.EjectCD">Mata ut CD efter Rippning</string>
+  <string name="Settings.ActivateTargetFolder">Aktivera målmappen efter Rippning</string>
+  <string name="Settings.GroupBoxEncoding">Avkodnings-format</string>
+  <string name="Settings.EncodingFormat">Välj det format du vill omkoda till:</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.GroupBoxMp3Experts">Expert-Inställningar</string>
+  <string name="Settings.LameExpertsWarning">Varning: Förvalda Inställningar kommer ej att användas när LAME-parametrar specifieras</string>
+  <string name="Settings.LameExpertOptions">Ändra LAME-Omkodarens parametrar (endast för Experter):</string>
+  <string name="Settings.GroupBoxPresets">MP3-Omkodarens förinställningar</string>
+  <string name="Settings.ABRBitrate">ABR Bitrate:</string>
+  <string name="Settings.Preset">Förinställning:</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.GroupBoxOggExpert">Expert-inställningar</string>
+  <string name="Settings.OggExpertWarning">Varning: De ovanstående inställningarna kommer inte att användas när Expertinställningar för OGG specifieras</string>
+  <string name="Settings.OggExpert">Lägg in parametrar för OGG-Omkodaren (endast för Experter):</string>
+  <string name="Settings.GroupBoxOggEncoding">OGG-Omkodarens inställningar</string>
+  <string name="Settings.OggQuality">Kvalitét:</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.GroupBoxFlacSettings">Expert-Inställningar</string>
+  <string name="Settings.FlacExpertsWarning">Varning: De ovanstående inställningarna kommer ej att användas när Expert-parametrar specifieras för FLAC</string>
+  <string name="Settings.FlacExperts">Lägg till parametrar för FLAC-Omkodaren (endast för Experter):</string>
+  <string name="Settings.GroupBoxFlacEncoding">FLAC-Omkodarens inställningar</string>
+  <string name="Settings.FlacQuality">Kvalitét:</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.GroupBoxAACEncoding">AAC-Omkodarens Inställningar</string>
+  <string name="Settings.AACBitRate">Bitrate:</string>
+  <string name="Settings.TabRippingWMA">WMA</string>
+  <string name="Settings.GroupBoxWMASettings">WMA-Omkodarens Inställningar</string>
+  <string name="Settings.WMAQuality">Kvalitét:</string>
+  <string name="Settings.WMASample">Sample-Format:</string>
+  <string name="Settings.WMAEncoder">Omkodar-Format:</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.GroupBoxMpcExperts">Expert-Inställningar</string>
+  <string name="Settings.MpcExpertsWarning">Varning: Förvalda Inställningar kommer ej att användas när Musepackparametrar specifieras</string>
+  <string name="Settings.MPCExpertOptions">Lägg till Musepack-Omkodarens parametrar (endast för Experter):</string>
+  <string name="Settings.GroupBoxMPCPresets">Musepack-Omkodarens förinställningar</string>
+  <string name="Settings.MPCPreset">Förinställning:</string>
+  <string name="Settings.TabRippingWV">WV</string>
+  <string name="Settings.groupBoxWvExperts">Expert-Inställningar</string>
+  <string name="Settings.WvExpertsWarning">Varning: Förvalda Inställningar kommer inte att användas när WavPackparametrar har specifierats</string>
+  <string name="Settings.WvExpertOptions">Lägg till WavPack-Omkodarens parametrar (endast för experter):</string>
+  <string name="Settings.GroupBoxWvPresets">WavPack-Omkodarens förinställningar</string>
+  <string name="Settings.WvPreset">Förinställning:</string>
+  <string name="Settings.Cancel">Avbryt</string>
+  <string name="Settings.Apply">Verkställ</string>
+  <string name="Settings.LinkTags">Taggar</string>
+  <string name="Settings.LinkGeneral">Generellt</string>
+  <string name="Settings.LinkRipping">Rippning / Konvertering</string>
+  <!--Burning-->
+  <string name="Burning.NoMedia">Ingen Media kunde hittas i läsaren. Stoppa i en tom Skiva.</string>
+  <string name="Burning.DragAndDrop">Använd Drag och Släpp för att sortera de spår som skall brännas</string>
+  <string name="Burning.Decoding">Kodar av filerna...</string>
+  <string name="Burning.Cancelled">Bränning avbruten</string>
+  <string name="Burning.Checking">Undersöker media</string>
+  <string name="Burning.Erasing">Raderar omskrivbar media</string>
+  <string name="Burning.Leadin">Skriver Leadin</string>
+  <string name="Burning.Leadout">Skriver Leadout</string>
+  <string name="Burning.Burning">Bränner...</string>
+  <string name="Burning.Finished">Bränningen är färdig</string>
+  <string name="Burning.Failed">Bränningen misslyckades: {0}</string>
+  <string name="Burning.FinishedMedia">Det går inte att bränna till en avslutad skivsession. Stoppa i en tom skiva</string>
+  <string name="Burning.ClearList">Rensa listan</string>
+  <string name="Burning.Retrieving">Hämtar MediaInformation...</string>
+  <string name="Burning.MediaInfo">Media: {0} ({1} minuter) Status: {2}</string>
+  <string name="Burning.Used">Använt: {0}:{1} ( {2} Spår)</string>
+  <string name="Burning.Capacity">Varning: Samlingen överstiger enhetens kapacitet! Ta bort några filer.</string>
+  <!--Conversion-/ Ripping-->
+  <string name="Conversion.ErrorDirectory">Fel vid skapning av Musik-Mapp</string>
+  <string name="Conversion.SameFile">Konverteringen avbruten: Input- och Output-filerna är samma</string>
+  <string name="Conversion.OpenFileError">Fel när Filen skulle öppnas</string>
+  <string name="Conversion.EncodingFileError">Fel när Filen skulle Omkodas</string>
+  <string name="Conversion.Ripping">Rippar...</string>
+  <string name="Conversion.RippingFinished">Rippning av de valda LjudSpåren är färdig.</string>
+  <string name="Conversion.FreeDBAccess">Hämtar CD-information från FreeDB...</string>
+  <!--FreeDB-->
+  <string name="FreeDB.Header">Sökresultat från FreeDB</string>
+  <string name="FreeDB.MultipleMatches">Flera träffar hittade hos FreeDB. Välj en skiva som är giltig.</string>
+  <string name="FreeDB.Ok">Ok</string>
+  <string name="FreeDB.Cancel">Avbryt</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.HeaderArtistAlbum">Internet-sökning - Specifiera Artist / Album</string>
+  <string name="Lookup.Continue">Fortsätt &gt;</string>
+  <string name="Lookup.Cancel">Avbryt</string>
+  <string name="Lookup.NoAlbumFound">Inget Album funnet, var god välj ett annat kriteria.</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.HeaderSearchResult">Flera Album funna. Välj...</string>
+  <string name="Lookup.ColArtist">Artist</string>
+  <string name="Lookup.ColAlbum">Album</string>
+  <string name="Lookup.ColTracks"># Spår</string>
+  <string name="Lookup.ColYear">År</string>
+  <string name="Lookup.ColLabel">Etikett</string>
+  <!--Album Details-->
+  <string name="Lookup.HeaderDetails">Detaljer för valt Album</string>
+  <string name="Lookup.AlbumTracks">Spår på Albumet</string>
+  <string name="Lookup.TracksToTag">Spår att Tagga</string>
+  <string name="Lookup.ColTrackNum">#</string>
+  <string name="Lookup.ColTitle">Titel</string>
+  <string name="Lookup.ColFileName">Fil-Namn</string>
+  <string name="Lookup.Unassigned">&lt; Anvisad &gt;</string>
+  <string name="Lookup.MoveUp">Flytta Upp</string>
+  <string name="Lookup.MoveDown">Flytta Ner</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Ok</string>
+  <string name="message.Error">Fel</string>
+  <string name="message.Error_Title">Fel</string>
+  <string name="message.Save_Changes">Ändringar har inte sparats. Vill du spara ändringarna?</string>
+  <string name="message.Save_Changes_Title">Spara ändringarna</string>
+  <string name="message.Script_Compile_Failed">Skriptet kunde inte kompileras. Titta i log-filen efter felet och rätta till det.</string>
+  <string name="message.DataEntryError">Det specifierade värdet är ogiltigt.</string>
+  <string name="message.NoSelectionHeader">Inget val är gjort</string>
+  <string name="message.NoSelection">Välj åtminstone en rad för att genomföra vald operation</string>
+  <string name="message.DeleteConfirmHeader">Radera Fil(er)</string>
+  <string name="message.DeleteConfirm">Vill du verkligen ta bort de valda filerna?</string>
+  <string name="message.DeleteFolders">För att ta bort en mapp, använd  Shift-Del</string>
+  <string name="message.Fixed">Fixad</string>
+  <string name="message.FatalError">Oåterkallerligt Undantag. MPTagThat kommer att avslutas&gt;&gt;\nI log-filen finns anledningen för detta sparat</string>
+  <string name="message.OutOfMemory">För många filer har skannats. Minnet håller på att ta slut&gt;&gt;\nSkanningen avbryts.</string>
+  <string name="message.ErrorResetAttr">Det gick inte att ta bort skrivskyddet</string>
+  <string name="message.CorruptFile">Filen är korrupt</string>
+  <string name="message.UnsupportedFormat">Formatet stöds inte</string>
+  <string name="message.NonExistingFile">Filen finns inte längre</string>
+  <string name="message.ErrorReadingFile">Fel vid läsning av fil: {0}</string>
+  <string name="message.ErrorSave">Fel vid sparande av fil: {0}</string>
+  <!--Progress Dialog-->
+  <string name="progress.ScanningHeader">Hämtar taggar för spår</string>
+  <string name="progress.Scanning">Hämtar taggar för spår {0}/{1}</string>
+  <string name="progress.Cancel">Avbryt</string>
+  <string name="progress.SavingHeader">Sparar spår</string>
+  <string name="progress.Saving">Sparar spår {0}/{1}</string>
+  <string name="progress.InternetHeader">Internet-sökning</string>
+  <string name="progress.Internet">Hämtar information för spår {0}/{1}</string>
+  <string name="progress.InternetMusicBrainz">Hämtar fingeravtryck och identifierar filen</string>
+  <string name="progress.InternetAlbum">Hämtar Albuminformation</string>
+  <string name="progress.CoverArtHeader">Sök  omslagsbild</string>
+  <string name="progress.CoverArt">Hämtar Skivomslag för spår {0}/{1}</string>
+  <string name="progress.LyricsHeader">Sök sångtext</string>
+  <string name="progress.Lyrics">Hämtar sångtext för spår {0}/{1}</string>
+  <!--About Dialog-->
+  <string name="about.Header">Om</string>
+  <string name="about.Ok">Ok</string>
+  <string name="about.Description">MPTagThat är en Taggredigerare med öppen källkod som ger dig möjlighet att hantera hela din musiksamling.\n\nMer information finns här:</string>
+  <string name="about.Version">Version:</string>
+  <string name="about.BuildDate">Skapad:</string>
+  <string name="about.Contributors">Bidragsgivare</string>
+  <!--Player-->
+  <string name="player.Title">Titel</string>
+  <string name="player.Artist">Artist</string>
+  <string name="player.Album">Album</string>
+  <string name="player.PlayListButton">Spellista</string>
+  <string name="player.PlayListLoad">Ladda</string>
+  <string name="player.PlayListSave">Spara</string>
+  <string name="player.ClearPlayList">Rensa spellista</string>
+  <string name="player.LoadPlayList">Ladda spellista</string>
+  <string name="player.SavePlayList">Spara spellista</string>
+  <string name="player.UseRelativePath">Använd relativ sökväg</string>
+  <!--Database Search-->
+  <string name="dbsearch.Artist">Artist / AlbumArtist (innehåller):</string>
+  <string name="dbsearch.Album">Album (innehåller):</string>
+  <string name="dbsearch.Title">Titel (innehåller):</string>
+  <string name="dbsearch.Search">Sök</string>
+  <string name="dbsearch.NoMusicDB">För att använda sökfunktionen för Databaser måste sökvägen till\nMusikdatabasen anges i Inställningar.</string>
+  <string name="dbsearch.NoSearchValues">Lägg till åtminstone ett värde att söka efter.</string>
+  <string name="dbsearch.TooMuchRows">Databassökningen gav för många träffar. Endast de 1000 första kommer att visas.</string>
+  <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Hitta</string>
+  <string name="findreplace.HeaderReplace">Ersätt</string>
+  <string name="findreplace.NotFound">Söksträngen kunde inte hittas</string>
+  <string name="findreplace.NoMoreOccurencesFound">Inga fler träffar av söksträngen förekom</string>
+  <string name="findreplace.TabFind">Hitta</string>
+  <string name="findreplace.FindWhat">Hitta vad:</string>
+  <string name="findreplace.MatchCase">Matcha gemen/versal</string>
+  <string name="findreplace.MatchWords">Matcha endast hela ord</string>
+  <string name="findreplace.FindNext">Hitta Nästa</string>
+  <string name="findreplace.Cancel">Stäng</string>
+  <string name="findreplace.TabReplace">Ersätt</string>
+  <string name="findreplace.ReplaceWith">Ersätt med:</string>
+  <string name="findreplace.ReplaceBtn">Ersätt</string>
+  <string name="findreplace.ReplaceAllBtn">Ersätt Alla</string>
+  <!--Readonly Dialog-->
+  <string name="readonly.Header">Skrivskyddad Fil</string>
+  <string name="readonly.Explanation">Den markerade filen är skrivskyddad.\nSkall MPTagThat ändra attributen och sedan spara om filen?</string>
+  <string name="readonly.Yes">Ja</string>
+  <string name="readonly.YesToAll">Ja till Allt</string>
+  <string name="readonly.No">Nej</string>
+  <string name="readonly.NoToAll">Nej till Allt</string>
+  <!--Replay Gain Popup-->
+  <string name="albumgain.Header">Album-Volym</string>
+  <string name="albumgain.Explanation">Samtliga filer har markerats.\nSkall MPTagThat beräkna volymen för hela Albumet?</string>
+</resources>

@@ -24,14 +24,12 @@ using System.Xml.Serialization;
 
 namespace MPTagThat.Core
 {
-  [XmlRoot("Language")]
+  [XmlRoot("resources")]
   public class StringFile
   {
     #region Variables
 
-    [XmlAttribute("characters")] public int characters;
-    [XmlAttribute("name")] public string languageName;
-    [XmlElement("Section")] public List<StringSection> sections;
+    [XmlElement("string")] public List<StringLocalised> localisedStrings;
 
     #endregion
   }

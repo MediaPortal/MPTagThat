@@ -190,24 +190,9 @@ namespace MPTagThat.TagEdit
 
       counter = 0;
 
-      sitesToSearch = new List<string>();
+      sitesToSearch = Options.MainSettings.LyricSites;
 
-      if (Options.MainSettings.SearchLyricWiki)
-        sitesToSearch.Add("LyricWiki");
-
-      if (Options.MainSettings.SearchHotLyrics)
-        sitesToSearch.Add("HotLyrics");
-
-      if (Options.MainSettings.SearchLyrics007)
-        sitesToSearch.Add("Lyrics007");
-
-      if (Options.MainSettings.SearchLyricsOnDemand)
-        sitesToSearch.Add("LyricsOnDemand");
-
-      if (Options.MainSettings.SearchLyricsPlugin)
-        sitesToSearch.Add("LyricsPluginSite");
-
-      // If automaticUpdate is set then return after the first positive search
+ // If automaticUpdate is set then return after the first positive search
       lc = new LyricsController(this, m_EventStopThread, sitesToSearch.ToArray(), true, automaticUpdate, "", "");
 
       ThreadStart job = delegate { lc.Run(); };

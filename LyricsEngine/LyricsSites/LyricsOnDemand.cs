@@ -1,26 +1,33 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Timers;
-using Timer=System.Timers.Timer;
 
-namespace LyricsEngine.LyricSites
+namespace LyricsEngine.LyricsSites
 {
-    internal class LyricsOnDemand
+    public class LyricsOnDemand : AbstractSite
     {
-        private bool complete;
-        private string lyric = "";
-        private int timeLimit;
-        private Timer timer;
+        # region const
 
-        public LyricsOnDemand(string artist, string title, ManualResetEvent m_EventStop_SiteSearches, int timeLimit)
+        // Name
+        private const string SiteName = "LyricsOnDemand";
+
+        // Base url
+        private const string SiteBaseUrl = "http://www.lyricsondemand.com";
+
+        # endregion
+
+        public LyricsOnDemand(string artist, string title, WaitHandle mEventStopSiteSearches, int timeLimit) : base(artist, title, mEventStopSiteSearches, timeLimit)
         {
-            this.timeLimit = timeLimit;
-            timer = new Timer();
+        }
 
-            artist = LyricUtil.RemoveFeatComment(artist);
+        #region interface implemetation
+
+        protected override void FindLyricsWithTimer()
+        {
+            var artist = LyricUtil.RemoveFeatComment(Artist);
             artist = LyricUtil.DeleteSpecificChars(artist);
             artist = artist.Replace(" ", "");
             artist = artist.Replace("The ", "");
@@ -31,7 +38,7 @@ namespace LyricsEngine.LyricSites
 
             // Cannot find lyrics contaning non-English letters!
 
-            title = LyricUtil.TrimForParenthesis(title);
+            var title = LyricUtil.TrimForParenthesis(Title);
             title = LyricUtil.DeleteSpecificChars(title);
             title = title.Replace(" ", "");
             title = title.Replace("#", "");
@@ -49,38 +56,33 @@ namespace LyricsEngine.LyricSites
 
             title = title.ToLower();
 
+            // Validation
             if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(title))
             {
                 return;
             }
 
-            string firstLetter = artist[0].ToString();
+            var firstLetter = artist[0].ToString(CultureInfo.InvariantCulture);
 
-            int firstNumber = 0;
+            int firstNumber;
             if (int.TryParse(firstLetter, out firstNumber))
             {
                 firstLetter = "0";
             }
 
-            string urlString = "http://www.lyricsondemand.com/" + firstLetter + "/" + artist + "lyrics/" + title +
-                               "lyrics.html";
+            var urlString = SiteBaseUrl + "/" + firstLetter + "/" + artist + "lyrics/" + title + "lyrics.html";
 
-            LyricsWebClient client = new LyricsWebClient();
+            var client = new LyricsWebClient();
 
-            timer.Enabled = true;
-            timer.Interval = timeLimit;
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            timer.Start();
-
-            Uri uri = new Uri(urlString);
-            client.OpenReadCompleted += new OpenReadCompletedEventHandler(callbackMethod);
+            var uri = new Uri(urlString);
+            client.OpenReadCompleted += CallbackMethod;
             client.OpenReadAsync(uri);
 
-            while (complete == false)
+            while (Complete == false)
             {
-                if (m_EventStop_SiteSearches.WaitOne(1, true))
+                if (MEventStopSiteSearches.WaitOne(1, true))
                 {
-                    complete = true;
+                    Complete = true;
                 }
                 else
                 {
@@ -89,63 +91,90 @@ namespace LyricsEngine.LyricSites
             }
         }
 
-        public string Lyric
+        public override LyricType GetLyricType()
         {
-            get { return lyric; }
+            return LyricType.UnsyncedLyrics;
         }
 
-        private void callbackMethod(object sender, OpenReadCompletedEventArgs e)
+        public override SiteType GetSiteType()
         {
-            bool thisMayBeTheCorrectLyric = true;
-            StringBuilder lyricTemp = new StringBuilder();
+            return SiteType.Scrapper;
+        }
 
-            LyricsWebClient client = (LyricsWebClient) sender;
+        public override SiteComplexity GetSiteComplexity()
+        {
+            return SiteComplexity.OneStep;
+        }
+
+        public override SiteSpeed GetSiteSpeed()
+        {
+            return SiteSpeed.Fast;
+        }
+
+        public override bool SiteActive()
+        {
+            return true;
+        }
+
+        public override string Name
+        {
+            get { return SiteName; }
+        }
+
+        public override string BaseUrl
+        {
+            get { return SiteBaseUrl; }
+        }
+
+        #endregion interface implemetation
+
+        #region private methods
+
+        private void CallbackMethod(object sender, OpenReadCompletedEventArgs e)
+        {
+            var thisMayBeTheCorrectLyric = true;
+
             Stream reply = null;
-            StreamReader sr = null;
+            StreamReader reader = null;
 
             try
             {
-                reply = (Stream) e.Result;
-                sr = new StreamReader(reply, Encoding.Default);
+                reply = e.Result;
+                reader = new StreamReader(reply, Encoding.Default);
 
-                string line = "";
-                int noOfLinesCount = 0;
+                var line = "";
+                var noOfLinesCount = 0;
 
-                while (line.IndexOf(@"<font size=""2"" face=""Verdana"">") == -1)
+                while (line.IndexOf(@"<font size=""2"" face=""Verdana"">", StringComparison.Ordinal) == -1)
                 {
-                    if (sr.EndOfStream || ++noOfLinesCount > 300)
+                    if (reader.EndOfStream || ++noOfLinesCount > 300)
                     {
                         thisMayBeTheCorrectLyric = false;
                         break;
                     }
-                    else
-                    {
-                        line = sr.ReadLine();
-                    }
+                    line = (reader.ReadLine() ?? "").Trim();
                 }
 
                 if (thisMayBeTheCorrectLyric)
                 {
-                    lyricTemp = new StringBuilder();
-                    line = sr.ReadLine().Trim();
+                    var lyricTemp = new StringBuilder();
+                    line = (reader.ReadLine() ?? "").Trim();
 
-                    while (line.Contains("<p>") == false)
+                    while (!line.StartsWith("<script") && !line.StartsWith("<!--"))
                     {
                         lyricTemp.Append(line);
-                        if (sr.EndOfStream || ++noOfLinesCount > 300)
+                        if (reader.EndOfStream || ++noOfLinesCount > 300)
                         {
-                            thisMayBeTheCorrectLyric = false;
                             break;
                         }
-                        else
-                        {
-                            line = sr.ReadLine().Trim();
-                        }
+                        line = (reader.ReadLine() ?? "").Trim();
                     }
 
                     lyricTemp.Replace("<br>", " \r\n");
                     lyricTemp.Replace("</font></p>", " \r\n");
                     lyricTemp.Replace("<p><font size=\"2\" face=\"Verdana\">", " \r\n");
+                    lyricTemp.Replace("</p>", "");
+                    lyricTemp.Replace("<p>", "");
                     lyricTemp.Replace("<i>", "");
                     lyricTemp.Replace("</i>", "");
                     lyricTemp.Replace("*", "");
@@ -160,42 +189,37 @@ namespace LyricsEngine.LyricSites
                     lyricTemp.Replace("&#039;", "'");
                     lyricTemp.Replace("&amp;", "&");
 
-                    lyric = lyricTemp.ToString().Trim();
+                    LyricText = lyricTemp.ToString().Trim();
 
-                    if (lyric.Contains("<td") || lyric.Contains("<IFRAME"))
+                    if (LyricText.Contains("<td") || LyricText.Contains("<IFRAME"))
                     {
-                        lyric = "Not found";
+                        LyricText = NotFound;
                     }
+                }
+                else
+                {
+                    LyricText = NotFound;
                 }
             }
             catch
             {
-                lyric = "Not found";
+                LyricText = NotFound;
             }
             finally
             {
-                if (sr != null)
+                if (reader != null)
                 {
-                    sr.Close();
+                    reader.Close();
                 }
 
                 if (reply != null)
                 {
                     reply.Close();
                 }
-                complete = true;
+                Complete = true;
             }
         }
 
-        private void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            timer.Stop();
-            timer.Close();
-            timer.Dispose();
-
-            lyric = "Not found";
-            complete = true;
-            Thread.CurrentThread.Abort();
-        }
+        #endregion private methods
     }
 }

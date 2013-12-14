@@ -508,6 +508,7 @@ namespace MPTagThat
         }
         if (isCDDrive)
         {
+          _main.RipGridView.SelectedCDRomDrive = driveLetter;
           _main.Ribbon.CurrentTabPage = _main.TabRip;
           _main.BurnGridView.Hide();
           _main.RipGridView.Show();
@@ -516,7 +517,6 @@ namespace MPTagThat
           {
             _main.SplitterRight.ToggleState();
           }
-          _main.RipGridView.SelectedCDRomDrive = driveLetter;
         }
         else
         {

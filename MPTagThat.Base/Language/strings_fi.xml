@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### Merkkijonoa Ei Löytynyt ###</string>
+  <string name="system.ApplicationName">MPTagThat MediaPortalin Tagi Editori</string>
+  <string name="splash.Version">Versio:</string>
+  <string name="splash.BuildDate">Luomis Pvm:</string>
+  <string name="splash.Startup">Käynnistyy ...</string>
+  <string name="splash.LoadSettings">Ladataan asetuksia ...</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Kansiot</string>
+  <string name="main.TreeViewPanelDatabase">Tietokanta</string>
+  <string name="main.TreeViewViews">Näkymät</string>
+  <string name="main.TreeViewFilters">Suodatin</string>
+  <string name="main.FilterHeadingField">Kenttä</string>
+  <string name="main.FilterHeadingFilter">Suodatin</string>
+  <string name="main.FilterOperatorAnd">ja</string>
+  <string name="main.FilterOperatorOr">tai</string>
+  <string name="main.FilterAllFiles">Kaikki tuetut tiedostotyypit</string>
+  <string name="main.FilterActive">Tagi suodatin: Aktiivinen</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Kuva</string>
+  <string name="main.InformationPanel">Tiedot</string>
+  <string name="main.PlayerPanel">Soitin</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Valinnat</string>
+  <string name="main.FolderView">Kansion näkymä</string>
+  <string name="main.DBView">Tietokanta näkymä</string>
+  <string name="main.NetworkView">Verkkokansion näkymä</string>
+  <string name="main.ScanSubfolder">Skannaa alikansiot</string>
+  <string name="main.ButtonRefreshFolder">Päivitä kansio näkymä</string>
+  <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Viestit</string>
+  <string name="main.TabPageNonMusicFiles">Ei-musiikki tiedostot</string>
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Tiedosto</string>
+  <string name="main.ErrorHeaderMessage">Viesti</string>
+  <string name="main.ErrorContextMenuClear">Tyhjennä lista</string>
+  <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Nimeä uudelleen \"folder.jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Poista valitut tiedosto(t)\"</string>
+  <string name="main.NonMusicDeleteFilesHeader">Poista useita kohteita</string>
+  <string name="main.NonMusicDeleteFilesMessage">Haluatko varmasti siirtää nämä {0} kohdetta Roskakoriin?</string>
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Tiedostoja: {0} (Valittu: {1})</string>
+  <string name="main.toolStripLabelPlay">Soittimen tila: Toistaa</string>
+  <string name="main.toolStripLabelPause">Soittimen tila: Pysäytetty</string>
+  <string name="main.toolStripLabelScan">Käsittelee tiedostoa: {0}</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Asetukset</string>
+  <string name="ribbon.Refresh">Päivitä</string>
+  <string name="ribbon.Save">Tallenna</string>
+  <string name="ribbon.ColumnsSelect">Valitse näkyvät sarakkeet</string>
+  <string name="ribbon.Exit">Poistu</string>
+  <string name="ribbon.RecentFolders">Viimeisimmät kansiot</string>
+  <!--Tags Tab-->
+  <string name="ribbon.TagTab">Tagit</string>
+  <string name="ribbon.TagFromFile">Tagi tiedostonimestä</string>
+  <string name="ribbon.RenameFile">Nimeä tiedosto uudelleen</string>
+  <string name="ribbon.RenameFileMenu">Nimeä tiedosto uudelleen</string>
+  <string name="ribbon.RenameFileOptions">Nimeä tiedosto uudelleen valinnat</string>
+  <string name="ribbon.IdentifyFile">Tunnista tiedosto</string>
+  <string name="ribbon.TagFromInternet">Tagi internetistä</string>
+  <string name="ribbon.SingleTagEdit">Yksittäinen tagin muokkaus</string>
+  <string name="ribbon.MultiTagEdit">Useiden tagien muokkaus</string>
+  <string name="ribbon.AutoNumber">Automaattinen numero</string>
+  <string name="ribbon.NumberOnClick">Numero klikattaessa</string>
+  <string name="ribbon.Find">Etsi</string>
+  <string name="ribbon.Replace">Korvaa</string>
+  <string name="ribbon.ValidateSong">Vahvista MP3</string>
+  <string name="ribbon.FixSong">Korjaa MP3</string>
+  <string name="ribbon.ReplayGain">Uudelleen katsonnan vahvistus</string>
+  <string name="ribbon.RemoveCommentPicture">Poista:</string>
+  <string name="ribbon.RemoveComments">Poista kaikki kommentit</string>
+  <string name="ribbon.RemovePictures">Poista kaikki kuvat</string>
+  <string name="ribbon.CaseConversion">Poista tagit</string>
+  <string name="ribbon.CaseConversionMenu">Poista tagit</string>
+  <string name="ribbon.DeleteTags">Poista tagit</string>
+  <string name="ribbon.DeleteAllTags">Poista kaikki tagit</string>
+  <string name="ribbon.DeleteID3V1Tags">Poista ID3 V1 tagit ainoastaan</string>
+  <string name="ribbon.DeleteID3V2Tags">Poista ID3 V2 tagit ainoastaan</string>
+  <string name="ribbon.EditTags">Muokkaa tageja</string>
+  <string name="ribbon.RetrieveTags">Hae tageja</string>
+  <string name="ribbon.OrganiseFiles">Organisoi</string>
+  <string name="ribbon.ExecuteScript">Suorita komentosarja</string>
+  <string name="ribbon.Organise">Organisoi tiedostot</string>
+  <string name="ribbon.AddBurner">Lisää poltettavaksi</string>
+  <string name="ribbon.AddConvert">Lisää muunnokseen</string>
+  <string name="ribbon.AddPlaylist">Lisää soittolistalle</string>
+  <string name="ribbon.Other">Muut</string>
+  <!--Rip Tab-->
+  <string name="ribbon.RipTab">Rippaa</string>
+  <string name="ribbon.RipButton">Aloita rippaus</string>
+  <string name="ribbon.RipEncoder">Valitse enkooderi:</string>
+  <string name="ribbon.RipFolder">Kohdekansio:</string>
+  <string name="ribbon.RipCancel">Peruuta rippaus</string>
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Muunna</string>
+  <string name="ribbon.ConvertButton">Aloita muunnos</string>
+  <string name="ribbon.ConvertEncoder">Valitse enkooderi</string>
+  <string name="ribbon.ConvertFolder">Kohdekansio:</string>
+  <string name="ribbon.ConvertCancel">Peruuta muunnos</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Polta</string>
+  <string name="ribbon.Burn">Polta</string>
+  <string name="ribbon.BurnCancel">Peruuta polttaminen</string>
+  <string name="ribbon.BurnOptions">Polton asetukset</string>
+  <string name="ribbon.Burner">Valitse poltto asema:</string>
+  <string name="ribbon.BurnerSpeed">Polttonopeus:</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Päivitä</string>
+  <string name="screentip.Save">Tallenna muutokset</string>
+  <!--Tags Tab-->
+  <string name="screentip.TagFromFile">Tagi tiedostonimestä</string>
+  <string name="screentip.IdentifyFile">Tunnista tiedosto</string>
+  <string name="screentip.TagFromInternet">Tagi internetistä</string>
+  <string name="screentip.SingleTagEdit">Yksittäinen tagin muokkaus</string>
+  <string name="screentip.MultiTagEdit">Useiden tagien muokkaus</string>
+  <string name="screentip.AutoNumber">Automaattinen numero</string>
+  <string name="screentip.NumberOnClick">Numero klikattaessa</string>
+  <string name="screentip.RemoveComments">Poista kaikki kommentit</string>
+  <string name="screentip.RemovePictures">Poista kaikki kuvat</string>
+  <string name="screentip.CaseConversion">Poista tagit</string>
+  <string name="screentip.DeleteTags">Poista tagit</string>
+  <string name="screentip.DeleteTagsText">Kaikki tagit on poistettu valituista tiedostoista.</string>
+  <string name="screentip.RenameFile">Nimeä tiedosto uudelleen</string>
+  <string name="screentip.Organise">Organisoi tiedostot</string>
+  <string name="screentip.ExecuteScript">Suorita komentosarja</string>
+  <string name="screentip.AddBurner">Lisää poltettavaksi</string>
+  <string name="screentip.AddBurnerText">Lisää valitut tiedostot CD-poltto -listalle.</string>
+  <string name="screentip.AddConvert">Lisää muunnokseen</string>
+  <string name="screentip.AddConvertText">Lisää valitut tiedostot muunnos -listalle.</string>
+  <string name="screentip.AddPlaylist">Lisää soittolistalle</string>
+  <string name="screentip.Find">Etsi</string>
+  <string name="screentip.Replace">Korvaa</string>
+  <string name="screentip.ValidateSong">Vahvista MP3</string>
+  <string name="screentip.FixSong">Korjaa MP3</string>
+  <string name="screentip.ReplayGain">Uudelleen katsonnan vahvistus</string>
+  <!--Rip Tab-->
+  <string name="screentip.RipButton">Aloita rippaus</string>
+  <string name="screentip.RipButtonText">Aloita valittujen tiedostojen rippaus</string>
+  <string name="screentip.RipCancel">Peruuta rippaus</string>
+  <string name="screentip.RipCancelText">Lopettaa rippauksen</string>
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Aloita muunnos</string>
+  <string name="screentip.ConvertButtonText">Aloita listalla olevien tiedostojen munnos valittuun muotoon</string>
+  <string name="screentip.ConvertCancel">Peruuta muunnos</string>
+  <string name="screentip.ConvertCancelText">Lopettaa muunnos prosessin</string>
+  <!--Burn Tab-->
+  <string name="screentip.Burn">Polta CD</string>
+  <string name="screentip.BurnText">Aloittaa listalla olevien tiedostojen polton.</string>
+  <string name="screentip.BurnCancel">Peruuta polttaminen</string>
+  <string name="screentip.BurnCancelText">Lopettaa poltto prosessin</string>
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.MultiHeading">Useiden tagien muokkaus</string>
+  <string name="TagEdit.SingleHeading">Tagin muokkaus</string>
+  <string name="TagEdit.HeaderUser">Käyttäjän määrittämä</string>
+  <string name="TagEdit.HeaderRating">Arvostelu</string>
+  <string name="TagEdit.HeaderLyrics">Lyriikat</string>
+  <string name="TagEdit.HeaderWeb">Internet tiedot</string>
+  <string name="TagEdit.HeaderInvolved">Mukana olevat ihmiset</string>
+  <string name="TagEdit.HeaderOriginal">Alkuperäiset tiedot</string>
+  <string name="TagEdit.HeaderDetail">Tarkemmat tiedot</string>
+  <string name="TagEdit.HeaderPictures">Kuvat</string>
+  <!--Main Tags-->
+  <string name="TagEdit.Track">Kappale:</string>
+  <string name="TagEdit.Artist">Artisti:</string>
+  <string name="TagEdit.Year">Vuosi:</string>
+  <string name="TagEdit.Title">Otsikko:</string>
+  <string name="TagEdit.Album">Albumi:</string>
+  <string name="TagEdit.GroupBoxComment">Kommentti</string>
+  <string name="TagEdit.RemoveExistingComments">Poista kommentit aluksi</string>
+  <string name="TagEdit.MoveTop">Siirry ylös</string>
+  <string name="TagEdit.RemoveComment">Poista kommentti</string>
+  <string name="TagEdit.AddComment">Lisää kommentti</string>
+  <string name="TagEdit.Comment">Kommentti:</string>
+  <string name="TagEdit.CommentLanguage">Kieli (vain ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Deskriptori (vain ID3):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Deskriptori</string>
+  <string name="TagEdit.CommentHeaderComment">Kommentti</string>
+  <string name="TagEdit.RemoveGenre">Poista lajityyppi</string>
+  <string name="TagEdit.AddGenre">Lisää lajityyppi</string>
+  <string name="TagEdit.Genre">Lajityyppi:</string>
+  <string name="TagEdit.Disc">Levy:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Kuva</string>
+  <string name="TagEdit.RemoveExistingPictures">Poista olemassa olevat kuvat ensimmäisenä</string>
+  <string name="TagEdit.ExportPicture">Vie kuva</string>
+  <string name="TagEdit.RemovePicture">Poista kuva</string>
+  <string name="TagEdit.GetPicture">Hae tiedostosta</string>
+  <string name="TagEdit.GetPictureInternet">Hae internetistä</string>
+  <string name="TagEdit.PictureType">Kuvan tyyppi:</string>
+  <string name="TagEdit.PictureHeaderType">Kuvan tyyppi</string>
+  <string name="TagEdit.PictureDescriptor">Deskriptori:</string>
+  <!--Detailed Information-->
+  <string name="TagEdit.GetTrackLengthFromFile">Hae tiedostosta</string>
+  <!--Original Information-->
+  <!--Involved Persons-->
+  <!--Web Information-->
+  <!--Lyrics-->
+  <string name="TagEdit.LyricsLanguage">Kieli (vain ID3):</string>
+  <string name="TagEdit.LyricsDescriptor">Deskriptori (vain ID3):</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Deskriptori</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Lyriikat</string>
+  <!--Rating-->
+  <!--Navigation Pane-->
+  <string name="TagEdit.LinkUserDefined">Käyttäjän määrittämä</string>
+  <string name="TagEdit.LinkRating">Arvostelu</string>
+  <string name="TagEdit.LinkLyrics">Lyriikat</string>
+  <string name="TagEdit.LinkWeb">Internet tiedot</string>
+  <string name="TagEdit.LinkInvolvedPeople">Mukana olevat ihmiset</string>
+  <string name="TagEdit.LinkOriginalInfo">Alkuperäiset tiedot</string>
+  <string name="TagEdit.LinkDetailedInfo">Tarkemmat tiedot</string>
+  <string name="TagEdit.LinkPictures">Kuvat</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Peruuta</string>
+  <!--Single Tag Edit Commands-->
+  <!--User Defined Frames-->
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Cancel">Peruuta</string>
+  <string name="LyricsSearch.Title">Otsikko:</string>
+  <string name="LyricsSearch.Close">Sulje</string>
+  <string name="LyricsSearch.Artist">Artisti:</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.FoundLyrics">Ok</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Close">Peruuta</string>
+  <string name="AmazonAlbumSearch.Search">Etsi</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Cancel">Peruuta</string>
+  <string name="MusicBrainz.Album">Albumi</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.Title">Otsikko</string>
+  <string name="column_header.Artist">Artisti</string>
+  <string name="column_header.Album">Albumi</string>
+  <string name="column_header.Rating">Arvostelu</string>
+  <string name="column_header.Comment">Kommentti</string>
+  <string name="column_header.Picture">Kuva</string>
+  <string name="column_header.Lyrics">Lyriikat</string>
+  <!--Context Menus-->
+  <string name="contextmenu.Refresh">Päivitä</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingRename">Nimeä tiedosto uudelleen</string>
+  <string name="TagAndRename.Cancel">Peruuta</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Header">Poista tagit</string>
+  <string name="CaseConversion.TabSettings">Asetukset</string>
+  <string name="CaseConversion.GroupBoxOptions">Valinnat</string>
+  <string name="CaseConversion.Comment">Kommentti</string>
+  <string name="CaseConversion.Title">Otsikko</string>
+  <string name="CaseConversion.Album">Albumi</string>
+  <string name="CaseConversion.Artist">Artisti</string>
+  <string name="CaseConversion.Convert">Muunna</string>
+  <string name="CaseConversion.Cancel">Peruuta</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Ok">Ok</string>
+  <string name="ColumnSelect.Cancel">Peruuta</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.Heading">Organisoi tiedostot</string>
+  <string name="organise.GroupBoxOptions">Valinnat</string>
+  <string name="organise.ButtonOrganise">Organisoi</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.Heading">Asetukset</string>
+  <string name="Settings.TabTags">Tagit</string>
+  <string name="Settings.TabTagsDatabase">Tietokanta</string>
+  <string name="Settings.GroupBoxPictures">Kuvat</string>
+  <string name="Settings.GroupBoxLyrics">Lyriikat</string>
+  <string name="Settings.Cancel">Peruuta</string>
+  <string name="Settings.LinkTags">Tagit</string>
+  <!--Burning-->
+  <string name="Burning.ClearList">Tyhjennä lista</string>
+  <!--Conversion-/ Ripping-->
+  <!--FreeDB-->
+  <string name="FreeDB.Ok">Ok</string>
+  <string name="FreeDB.Cancel">Peruuta</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.Cancel">Peruuta</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.ColArtist">Artisti</string>
+  <string name="Lookup.ColAlbum">Albumi</string>
+  <!--Album Details-->
+  <string name="Lookup.ColTitle">Otsikko</string>
+  <string name="Lookup.MoveUp">Mene ylös</string>
+  <string name="Lookup.MoveDown">Mene alas</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Ok</string>
+  <string name="message.Error">Virhe</string>
+  <string name="message.Error_Title">Virhe</string>
+  <string name="message.Save_Changes">Muutoksia ei ole tallennettu. Haluatko tallentaa?</string>
+  <string name="message.Save_Changes_Title">Tallenna muutokset</string>
+  <string name="message.NoSelectionHeader">Ei valintaa</string>
+  <string name="message.NoSelection">Valitse ainakin yksi rivi jatkaaksesi</string>
+  <string name="message.DeleteConfirmHeader">Poista tiedosto(t)</string>
+  <string name="message.Fixed">Korjattu</string>
+  <string name="message.ErrorReadingFile">Virhe luettaessa tiedostoa: {0}</string>
+  <string name="message.ErrorSave">Virhe tallennettaessa tiedostoa: {0}</string>
+  <!--Progress Dialog-->
+  <string name="progress.Cancel">Peruuta</string>
+  <string name="progress.SavingHeader">Tallennetaan kappaleita</string>
+  <string name="progress.Saving">Tallennetaan {0}/{1}</string>
+  <string name="progress.Internet">Ladataan tietoja {0}/{1}</string>
+  <string name="progress.InternetAlbum">Ladataan albumin tietoja</string>
+  <string name="progress.Lyrics">Ladataan sanoituksia {0}/{1}</string>
+  <!--About Dialog-->
+  <string name="about.Header">Tietoja</string>
+  <string name="about.Ok">Ok</string>
+  <string name="about.Version">Versio:</string>
+  <string name="about.BuildDate">Luomis Pvm:</string>
+  <!--Player-->
+  <string name="player.Title">Otsikko</string>
+  <string name="player.Artist">Artisti</string>
+  <string name="player.Album">Albumi</string>
+  <string name="player.PlayListLoad">Lataa</string>
+  <string name="player.PlayListSave">Tallenna</string>
+  <string name="player.ClearPlayList">Tyhjennä soittolista</string>
+  <string name="player.LoadPlayList">Lataa soittolista</string>
+  <string name="player.SavePlayList">Tallenna soittolista</string>
+  <!--Database Search-->
+  <string name="dbsearch.Album">Albumi (sisältää):</string>
+  <string name="dbsearch.Title">Otsikko (sisältää);</string>
+  <string name="dbsearch.Search">Etsi</string>
+  <string name="dbsearch.NoSearchValues">Syötä ainakin yksi merkki etsiäksesi.</string>
+  <string name="dbsearch.TooMuchRows">Haku antoi liikaa tuloksia. Näytetään ensimmäiset 1000.</string>
+  <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Etsi</string>
+  <string name="findreplace.HeaderReplace">Korvaa</string>
+  <string name="findreplace.TabFind">Etsi</string>
+  <string name="findreplace.FindWhat">Mitä etsit:</string>
+  <string name="findreplace.FindNext">Etsi seuraava</string>
+  <string name="findreplace.Cancel">Sulje</string>
+  <string name="findreplace.TabReplace">Korvaa</string>
+  <string name="findreplace.ReplaceBtn">Korvaa</string>
+  <string name="findreplace.ReplaceAllBtn">Korvaa kaikki</string>
+  <!--Readonly Dialog-->
+  <string name="readonly.Header">Vain luku tiedosto</string>
+  <string name="readonly.Explanation">Tiedosto on \'Vain luku\' kelpoinen.\nPitäisikö MPTagThat:in vaihtaa arvo ja tallentaa tiedosto?</string>
+  <string name="readonly.Yes">Kyllä</string>
+  <string name="readonly.YesToAll">Kyllä kaikkiin</string>
+  <string name="readonly.No">Ei</string>
+  <string name="readonly.NoToAll">Ei kaikkiin</string>
+  <!--Replay Gain Popup-->
+</resources>

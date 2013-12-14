@@ -45,6 +45,7 @@ using MPTagThat.TagEdit;
 using TagLib;
 using TagLib.Id3v2;
 using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Fx;
 using Un4seen.Bass.AddOn.Mix;
 using Control = System.Windows.Forms.Control;
 using File = TagLib.File;
@@ -85,6 +86,8 @@ namespace MPTagThat.GridView
     private bool _progressCancelled;
     private Point _screenOffset;
     private bool _waitCursorActive;
+
+    private BPMPROCESSPROC _bpmProc;
 
     // Get Properties to be able to sort on column heading 
     private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
@@ -1722,6 +1725,75 @@ namespace MPTagThat.GridView
         leftSamples = new double[length / 2];
         rightSamples = new double[length / 2];
       }
+    }
+
+    #endregion
+
+    #region BPM Detection
+
+    /// <summary>
+    ///   Detects the BPM
+    /// </summary>
+    public void Bpm()
+    {
+      log.Trace(">>>");
+
+      int trackCount = tracksGrid.SelectedRows.Count;
+      
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        SetProgressBar(100);
+        ClearStatusColumn(row.Index);
+
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        Application.DoEvents();
+        if (_progressCancelled)
+        {
+          ResetProgressBar();
+          return;
+        }
+
+        TrackData track = Options.Songlist[row.Index];
+
+        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
+        if (stream == 0)
+        {
+          log.Error("BPM: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
+          continue;
+        }
+
+        GCHandle rowIndex = GCHandle.Alloc(row.Index);
+        _bpmProc = BPMProgressProc;
+
+        double len = Bass.BASS_ChannelBytes2Seconds(stream, Bass.BASS_ChannelGetLength(stream));
+        float bpm = BassFx.BASS_FX_BPM_DecodeGet(stream, 0.0, len, 0, BASSFXBpm.BASS_FX_BPM_BKGRND | BASSFXBpm.BASS_FX_FREESOURCE |BASSFXBpm.BASS_FX_BPM_MULT2, 
+                                                    _bpmProc,GCHandle.ToIntPtr(rowIndex));
+
+        track.BPM = Convert.ToInt32(bpm);
+        BassFx.BASS_FX_BPM_Free(stream);
+
+        SetBackgroundColorChanged(row.Index);
+        track.Changed = true;
+        Options.Songlist[row.Index] = track;
+        _itemsChanged = true;
+      }
+
+      Util.SendProgress("");
+      ResetProgressBar();
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      log.Trace("<<<");
+    }
+
+    private void BPMProgressProc(int channel, float percent, IntPtr userData)
+    {
+      GCHandle gch = GCHandle.FromIntPtr(userData);
+      int rowIndex = (int)gch.Target;
+      _main.progressBar1.Value = Convert.ToInt32(percent);
     }
 
     #endregion
