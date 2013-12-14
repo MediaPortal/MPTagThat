@@ -68,6 +68,10 @@ namespace MPTagThat.TagEdit
          ControlStyles.AllPaintingInWmPaint, true);
       this.UpdateStyles();
 
+      // Setup message queue for receiving Messages
+      IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      queueMessage.OnMessageReceive += OnMessageReceive;
+
       this.main = main;
       InitializeComponent();
     }
@@ -96,8 +100,16 @@ namespace MPTagThat.TagEdit
       log.Trace(">>>");
       BackColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
 
+      cbGenre.Sorted = true;
+
       // Fill the Genre Combo Box
       cbGenre.Items.AddRange(Genres.Audio);
+
+      // Add Possible Custom Genres
+      foreach (string customGenre in Options.MainSettings.CustomGenres)
+      {
+        cbGenre.Items.Add(customGenre);
+      }
 
       // Fill the Picture Type Box
       Type picTypes = typeof(PictureType);
@@ -3317,6 +3329,29 @@ namespace MPTagThat.TagEdit
     }
 
     #endregion
+
+    #region Global Events
+    /// <summary>
+    ///   Handle Messages
+    /// </summary>
+    /// <param name = "message"></param>
+    private void OnMessageReceive(QueueMessage message)
+    {
+      string action = message.MessageData["action"] as string;
+
+      switch (action.ToLower())
+      {
+        case "customgenresrefreshed":
+          cbGenre.Items.Clear();
+          cbGenre.Items.AddRange(Genres.Audio);
+          foreach (string customGenre in Options.MainSettings.CustomGenres)
+          {
+            cbGenre.Items.Add(customGenre);
+          }
+          break;
+      }
+    }
+#endregion
 
     #endregion
   }

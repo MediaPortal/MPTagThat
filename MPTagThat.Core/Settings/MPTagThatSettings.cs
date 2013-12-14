@@ -37,6 +37,7 @@ namespace MPTagThat.Core
 
     private List<string> _recentFolders = new List<string>();
     private List<string> _lyricSites = new List<string>();
+    private List<string> _customGenres = new List<string>();
 
     #endregion
 
@@ -195,6 +196,13 @@ namespace MPTagThat.Core
 
     [Setting(SettingScope.User, "500")]
     public int MaxCoverWidth { get; set; }
+
+    [Setting(SettingScope.User, "")]
+    public List<string> CustomGenres
+    {
+      get { return _customGenres; }
+      set { _customGenres = value; }
+    }
 
     #endregion
 

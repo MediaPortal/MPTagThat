@@ -1977,6 +1977,12 @@ namespace MPTagThat
         }
       }
 
+      listViewCustomGenres.Items.Clear();
+      foreach (string customGenre in Options.MainSettings.CustomGenres)
+      {
+        listViewCustomGenres.Items.Add(customGenre);
+      }
+
       #endregion
 
       log.Trace("<<<");
@@ -2310,6 +2316,33 @@ namespace MPTagThat
     }
 
     /// <summary>
+    /// A Custom Genre should be added to the ListView
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void buttonAddCustomGenre_Click(object sender, EventArgs e)
+    {
+      // Add a new item to the ListView, with an empty label
+      ListViewItem item = listViewCustomGenres.Items.Add(String.Empty);
+
+      // Place the newly-added item into edit mode immediately
+      item.BeginEdit();
+    }
+
+    /// <summary>
+    /// A custom Genre should be deleted from the Listview
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void buttonDeleteCustomGenre_Click(object sender, EventArgs e)
+    {
+      foreach (ListViewItem item in listViewCustomGenres.SelectedItems)
+      {
+        listViewCustomGenres.Items.Remove(item);
+      }
+    }
+
+    /// <summary>
     /// The Tracklist should be displayed top
     /// </summary>
     /// <param name="sender"></param>
@@ -2479,6 +2512,18 @@ namespace MPTagThat
         }
       }
       Options.MainSettings.LyricSites = lyricsSites;
+
+      Options.MainSettings.CustomGenres.Clear();
+      foreach (ListViewItem item in listViewCustomGenres.Items)
+      {
+        Options.MainSettings.CustomGenres.Add(item.Text);
+      }
+
+      // Tell the Tag Ediit Control to refresh the Custom Genres
+      QueueMessage msg = new QueueMessage();
+      msg.MessageData["action"] = "customgenresrefreshed";
+      IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      msgQueue.Send(msg);
 
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedItem as Item).Value;

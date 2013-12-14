@@ -700,6 +700,9 @@
     <string name="Settings.GroupBoxTagsValidate">MP3 File Validation</string>
     <string name="Settings.ValidateMP3">Validate Mp3 Files while scanning the folder / database</string>
     <string name="Settings.AutoFixMP3">Automatically fix errorneous Mp3 Files</string>
+	<string name="Settings.GroupBoxDCustomGenre">Custom Genres</string>
+	<string name="Settings.AddCustomGenre">Add Genre</string>
+	<string name="Settings.DeleteCustomGenre">Delete Genre</string>
 	<string name="Settings.GroupBoxDatabaseBuild">Music Database Build</string>
 	<string name="Settings.DatabaseScanNote">If no MediaPortal Music Database is available, a database may be created, by entering a file name in the above text box.\nThen start the scan.</string>
 	<string name="Settings.StartDBScan">Start Scan</string>
