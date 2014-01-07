@@ -539,126 +539,117 @@ namespace MPTagThat
 
         #region Setup Ribbon
 
-        new Thread(() =>
+        log.Info("Initialising Ribbon");
+
+        ribbon.SetStyle(ControlStyles.DoubleBuffer |
+             ControlStyles.OptimizedDoubleBuffer |
+             ControlStyles.UserPaint |
+             ControlStyles.AllPaintingInWmPaint, true);
+
+        // Register the Ribbon Button Events
+        RegisterCommands();
+
+        // Register Ribbon KeyTips
+        RegisterKeyTips();
+
+        // Load Recent Folders
+        List<PinItem> recentPlacesPinItems = new List<PinItem>();
+
+        foreach (string folderItem in Options.MainSettings.RecentFolders)
+        {
+          try
           {
-            log.Info("Initialising Ribbon");
+            string directoryName = Path.GetDirectoryName(folderItem);
+            string folderName = Path.GetFileName(directoryName);
+            if (string.IsNullOrEmpty(folderName))
+              folderName = directoryName;
 
-            ribbon.SetStyle(ControlStyles.DoubleBuffer |
-                 ControlStyles.OptimizedDoubleBuffer |
-                 ControlStyles.UserPaint |
-                 ControlStyles.AllPaintingInWmPaint, true);
+            PinItem pinItem = new PinItem(
+              folderName,
+              directoryName,
+              Resources.RecentFolder_Large,
+              false,
+              directoryName);
 
-            // Register the Ribbon Button Events
-            RegisterCommands();
-
-            // Register Ribbon KeyTips
-            RegisterKeyTips();
-
-            // Load Recent Folders
-            List<PinItem> recentPlacesPinItems = new List<PinItem>();
-
-            foreach (string folderItem in Options.MainSettings.RecentFolders)
-            {
-              try
-              {
-                string directoryName = Path.GetDirectoryName(folderItem);
-                string folderName = Path.GetFileName(directoryName);
-                if (string.IsNullOrEmpty(folderName))
-                  folderName = directoryName;
-
-                PinItem pinItem = new PinItem(
-                  folderName,
-                  directoryName,
-                  Resources.RecentFolder_Large,
-                  false,
-                  directoryName);
-
-                recentPlacesPinItems.Add(pinItem);
-              }
-              catch (ArgumentException)
-              {
-
-              }
-            }
-
-            pinListRecentFolders.BeginInit();
-            pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
-            pinListRecentFolders.EndInit();
-
-            // Load the available Scripts
-            int i = 0;
-            Invoke((MethodInvoker)delegate
-              {
-                comboBoxScripts.Items.Clear();
-                ArrayList scripts = null;
-
-                if (Options.MainSettings.ActiveScript == "")
-                {
-                  Options.MainSettings.ActiveScript = "Switch Artist";
-                }
-
-                scripts = ServiceScope.Get<IScriptManager>().GetScripts();
-                i = 0;
-                foreach (string[] item in scripts)
-                {
-                  comboBoxScripts.Items.Add(new Item(item[1], item[0], item[2]));
-                  if (item[1] == Options.MainSettings.ActiveScript)
-                  {
-                    comboBoxScripts.SelectedIndex = i;
-                  }
-                  i++;
-                }
-              });
-
-            Invoke((MethodInvoker)delegate
-              {
-                comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-                comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-                comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-                comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-                comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-                comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-                comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-                comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
-
-                comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
-                comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
-
-                i = 0;
-                foreach (Item item in comboBoxRipEncoder.Items)
-                {
-                  if ((string)item.Value == Options.MainSettings.RipEncoder)
-                  {
-                    comboBoxRipEncoder.SelectedIndex = i;
-                    break;
-                  }
-                  i++;
-                }
-
-                i = 0;
-                foreach (Item item in comboBoxConvertEncoder.Items)
-                {
-                  if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
-                  {
-                    comboBoxConvertEncoder.SelectedIndex = i;
-                    break;
-                  }
-                  i++;
-                }
-
-                textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
-                ribbon.CurrentTabPage = ribbonTabPageTag;
-                ribbon.CustomTitleBarEnabled = true;
-              });
-            log.Info("Finished Initialising Ribbon");
+            recentPlacesPinItems.Add(pinItem);
           }
-          ) { Name = "Ribbon Init" }.Start();
+          catch (ArgumentException)
+          {
+
+          }
+        }
+
+        pinListRecentFolders.BeginInit();
+        pinListRecentFolders.Items.AddRange(recentPlacesPinItems.ToArray());
+        pinListRecentFolders.EndInit();
+
+        // Load the available Scripts
+        int i = 0;
+        comboBoxScripts.Items.Clear();
+        ArrayList scripts = null;
+
+        if (Options.MainSettings.ActiveScript == "")
+        {
+          Options.MainSettings.ActiveScript = "Switch Artist";
+        }
+
+        scripts = ServiceScope.Get<IScriptManager>().GetScripts();
+        i = 0;
+        foreach (string[] item in scripts)
+        {
+          comboBoxScripts.Items.Add(new Item(item[1], item[0], item[2]));
+          if (item[1] == Options.MainSettings.ActiveScript)
+          {
+            comboBoxScripts.SelectedIndex = i;
+          }
+          i++;
+        }
+
+        comboBoxRipEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+        comboBoxRipEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+        comboBoxRipEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+        comboBoxRipEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+        comboBoxRipEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+        comboBoxRipEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+        comboBoxConvertEncoder.Items.Add(new Item("MP3 Encoder", "mp3", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("OGG Encoder", "ogg", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("FLAC Encoder", "flac", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("AAC Encoder", "m4a", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WMA Encoder", "wma", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WAV Encoder", "wav", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("MusePack Encoder", "mpc", ""));
+        comboBoxConvertEncoder.Items.Add(new Item("WavPack Encoder", "wv", ""));
+
+        i = 0;
+        foreach (Item item in comboBoxRipEncoder.Items)
+        {
+          if ((string)item.Value == Options.MainSettings.RipEncoder)
+          {
+            comboBoxRipEncoder.SelectedIndex = i;
+            break;
+          }
+          i++;
+        }
+
+        i = 0;
+        foreach (Item item in comboBoxConvertEncoder.Items)
+        {
+          if ((string)item.Value == Options.MainSettings.LastConversionEncoderUsed)
+          {
+            comboBoxConvertEncoder.SelectedIndex = i;
+            break;
+          }
+          i++;
+        }
+
+        textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
+        ribbon.CurrentTabPage = ribbonTabPageTag;
+        ribbon.CustomTitleBarEnabled = true;
+        log.Info("Finished Initialising Ribbon");
+
         #endregion
 
         #region Setup Grids
