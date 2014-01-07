@@ -80,6 +80,7 @@
   <string name="ribbon.ValidateSong">Valideer MP3</string>
   <string name="ribbon.FixSong">Repareer MP3</string>
   <string name="ribbon.ReplayGain">Replay Gain</string>
+  <string name="ribbon.BPM">BPM Detect</string>
   <string name="ribbon.RemoveCommentPicture">Verwijder:</string>
   <string name="ribbon.RemoveComments">Verwijder alle commentaar</string>
   <string name="ribbon.RemovePictures">Verwijder alle afbeeldingen</string>
@@ -181,6 +182,8 @@
   <string name="screentip.FixSongText">Gebruikt MP3Val om fouten in de geselecteerde MP3 bestanden  te detecteren.</string>
   <string name="screentip.ReplayGain">Replay Gain</string>
   <string name="screentip.ReplayGainText">Analiseer de geselecteerde bestanden en calculeer de Replay Gain. De waarde word in de Tags geschreven.\nOpmerking: Het bestand zelf word niet aangepast.</string>
+  <string name="screentip.BPM">BPM Detectie</string>
+  <string name="screentip.BPMText">Analyseert de geselecteerde bestanden en berekend het aantal Beats per Minuut (BPM). De waarde word in de Tags geschreven.\nLet op: Het bestand zelf blijft ongewijzigd.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Start Rippen</string>
   <string name="screentip.RipButtonText">Start het rippen van de geselecteerde bestanden</string>
@@ -629,6 +632,9 @@
   <string name="Settings.GroupBoxTagsValidate">MP3 bestandformaat controle</string>
   <string name="Settings.ValidateMP3">Valideer MP3 bestand bij inlezen van beschrijving / Database</string>
   <string name="Settings.AutoFixMP3">Beschadigde MP3 data automatisch corrigeren</string>
+  <string name="Settings.GroupBoxDCustomGenre">Aangepaste Genres</string>
+  <string name="Settings.AddCustomGenre">Genre toevoegen</string>
+  <string name="Settings.DeleteCustomGenre">Genre verwijderen</string>
   <string name="Settings.GroupBoxDatabaseBuild">Muziek-Database opbouw</string>
   <string name="Settings.DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand.\nStart vervolgens het bijwerken.</string>
   <string name="Settings.StartDBScan">Start bijwerken</string>

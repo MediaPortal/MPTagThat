@@ -80,6 +80,7 @@
   <string name="ribbon.ValidateSong">Valider le MP3</string>
   <string name="ribbon.FixSong">Réparer le MP3</string>
   <string name="ribbon.ReplayGain">Relancer l\'utilitaire Gain</string>
+  <string name="ribbon.BPM">Détection de BPM</string>
   <string name="ribbon.RemoveCommentPicture">Retirer : </string>
   <string name="ribbon.RemoveComments">Retirer tous les commentaires</string>
   <string name="ribbon.RemovePictures">Retirer toutes les images</string>
@@ -181,6 +182,8 @@
   <string name="screentip.FixSongText">Utilise \"MP3Val\" pour réparer les erreurs détectées dans le fichier MP3 sélectionné.</string>
   <string name="screentip.ReplayGain">Relancer l\'utilitaire Gain</string>
   <string name="screentip.ReplayGainText">Analyse du fichier sélectionné et calcule du Gain . La valeur calculée est écrit dans les tags ⏎. Remarque: Le fichier lui-même n\'est pas modifié.</string>
+  <string name="screentip.BPM">Détection de BPM</string>
+  <string name="screentip.BPMText">Analyse du fichier sélectionné et calcule du battement par minute (BPM) . La valeur calculée est écrit dans le tag du fichier .\n Remarque: Le fichier  n\'est pas modifié.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Lancer l\'Extraction</string>
   <string name="screentip.RipButtonText">Démarre l\'Extraction des fichiers sélectionnés.</string>
@@ -629,6 +632,9 @@
   <string name="Settings.GroupBoxTagsValidate">Validation de fichier MP3</string>
   <string name="Settings.ValidateMP3">Valider les fichiers MP3 pendant le scan du dossier / de la base de donnée</string>
   <string name="Settings.AutoFixMP3">Réparer automatiquement les fichiers MP3 erronés</string>
+  <string name="Settings.GroupBoxDCustomGenre">Personnaliser un Genre</string>
+  <string name="Settings.AddCustomGenre">Ajouter un Genre</string>
+  <string name="Settings.DeleteCustomGenre">Effacer un Genre</string>
   <string name="Settings.GroupBoxDatabaseBuild">Construction de la base de données \"Musique\"</string>
   <string name="Settings.DatabaseScanNote">Si aucune base de données \"Musique\" de MediaPortal n\'est disponible, veuillez la créer ci-dessus.\nEnsuite, démarrez le scan.</string>
   <string name="Settings.StartDBScan">Démarrer le scan</string>
