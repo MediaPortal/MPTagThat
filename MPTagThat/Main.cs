@@ -1123,6 +1123,7 @@ namespace MPTagThat
         Thread.Sleep(100);
         hWnd = FindWindowByCaption(IntPtr.Zero, "Elegant UI");
       }
+      Thread.Sleep(500);
       SendMessage((int)hWnd, WM_SYSCOMMAND, SC_CLOSE, 0);
     }
 
