@@ -2560,7 +2560,7 @@ namespace MPTagThat
     private void buttonTargetFolderBrowse_Click(object sender, EventArgs e)
     {
       FolderBrowserDialog oFD = new FolderBrowserDialog();
-      oFD.RootFolder = Environment.SpecialFolder.MyDocuments;
+      oFD.RootFolder = Environment.SpecialFolder.MyComputer;
       if (oFD.ShowDialog() == DialogResult.OK)
       {
         tbTargetFolder.Text = oFD.SelectedPath;

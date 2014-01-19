@@ -69,6 +69,27 @@ namespace MPTagThat
       this.backstageViewPageOptions = new Elegant.Ui.BackstageViewPage();
       this.panel2 = new Elegant.Ui.Panel();
       this.tabControlSettings = new Elegant.Ui.TabControl();
+      this.tabPageSettingsTagsId3 = new Elegant.Ui.TabPage();
+      this.groupBoxCustomGenres = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.buttonDeleteCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
+      this.listViewCustomGenres = new System.Windows.Forms.ListView();
+      this.buttonAddCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
+      this.groupBoxTagValidate = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckAutoFixMp3 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckValidateMP3 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckClearUserFramesOnSave = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.comboBoxCharacterEncoding = new Elegant.Ui.ComboBox();
+      this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.lbCharacterEncoding = new MPTagThat.Core.WinControls.MPTLabel();
+      this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonUseV3 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.groupBoxID3Update = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.checkBoxRemoveID3V1 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.checkBoxRemoveID3V2 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.radioButtonID3Both = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageSettingsGeneral = new Elegant.Ui.TabPage();
       this.groupBoxGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lbTracklistLocation = new MPTagThat.Core.WinControls.MPTLabel();
@@ -102,27 +123,6 @@ namespace MPTagThat
       this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.tabPageSettingsTagsId3 = new Elegant.Ui.TabPage();
-      this.groupBoxCustomGenres = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.buttonDeleteCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
-      this.listViewCustomGenres = new System.Windows.Forms.ListView();
-      this.buttonAddCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
-      this.groupBoxTagValidate = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckAutoFixMp3 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckValidateMP3 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckClearUserFramesOnSave = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.comboBoxCharacterEncoding = new Elegant.Ui.ComboBox();
-      this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.lbCharacterEncoding = new MPTagThat.Core.WinControls.MPTLabel();
-      this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonUseV3 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.groupBoxID3Update = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.checkBoxRemoveID3V1 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.checkBoxRemoveID3V2 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.radioButtonID3Both = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageSettingsLyricsCover = new Elegant.Ui.TabPage();
       this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.tbCoverSize = new System.Windows.Forms.TextBox();
@@ -368,6 +368,11 @@ namespace MPTagThat
       this.backstageViewPageOptions.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).BeginInit();
+      this.tabPageSettingsTagsId3.SuspendLayout();
+      this.groupBoxCustomGenres.SuspendLayout();
+      this.groupBoxTagValidate.SuspendLayout();
+      this.groupBoxTagsID3.SuspendLayout();
+      this.groupBoxID3Update.SuspendLayout();
       this.tabPageSettingsGeneral.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListTop)).BeginInit();
@@ -376,11 +381,6 @@ namespace MPTagThat
       this.groupBoxKeys.SuspendLayout();
       this.tabPageSettingsTagsGeneral.SuspendLayout();
       this.groupBoxTagsGeneral.SuspendLayout();
-      this.tabPageSettingsTagsId3.SuspendLayout();
-      this.groupBoxCustomGenres.SuspendLayout();
-      this.groupBoxTagValidate.SuspendLayout();
-      this.groupBoxTagsID3.SuspendLayout();
-      this.groupBoxID3Update.SuspendLayout();
       this.tabPageSettingsLyricsCover.SuspendLayout();
       this.groupBoxPictures.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
@@ -473,9 +473,9 @@ namespace MPTagThat
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 945);
+      this.panelBottom.Location = new System.Drawing.Point(0, 956);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1201, 90);
+      this.panelBottom.Size = new System.Drawing.Size(1209, 90);
       this.panelBottom.TabIndex = 12;
       // 
       // playerPanel
@@ -483,7 +483,7 @@ namespace MPTagThat
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.playerPanel.Location = new System.Drawing.Point(0, 0);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1201, 90);
+      this.playerPanel.Size = new System.Drawing.Size(1209, 90);
       this.playerPanel.TabIndex = 11;
       // 
       // formFrameSkinner
@@ -497,10 +497,10 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Location = new System.Drawing.Point(0, 1035);
+      this.statusBar.Location = new System.Drawing.Point(0, 1046);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1201, 22);
+      this.statusBar.Size = new System.Drawing.Size(1209, 22);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -514,7 +514,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(886, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(894, 22);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -589,7 +589,7 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(886, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(894, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -670,7 +670,7 @@ namespace MPTagThat
             this.startMenuRefresh});
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
-      this.ribbon.Size = new System.Drawing.Size(1201, 150);
+      this.ribbon.Size = new System.Drawing.Size(1209, 150);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -695,7 +695,7 @@ namespace MPTagThat
             this.backstageViewButtonExit});
       this.backstageView.Location = new System.Drawing.Point(0, 51);
       this.backstageView.Name = "backstageView";
-      this.backstageView.Size = new System.Drawing.Size(1201, 984);
+      this.backstageView.Size = new System.Drawing.Size(1209, 995);
       this.backstageView.TabIndex = 17;
       this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
       // 
@@ -710,7 +710,7 @@ namespace MPTagThat
       this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 0);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
       this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(0, 1, 2, 1);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(1046, 982);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(1054, 993);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -722,7 +722,7 @@ namespace MPTagThat
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel2.Location = new System.Drawing.Point(210, 57);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(834, 924);
+      this.panel2.Size = new System.Drawing.Size(842, 935);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -731,8 +731,8 @@ namespace MPTagThat
       this.tabControlSettings.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
-      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsTagsId3;
-      this.tabControlSettings.Size = new System.Drawing.Size(834, 924);
+      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsRipGeneral;
+      this.tabControlSettings.Size = new System.Drawing.Size(842, 935);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -750,406 +750,6 @@ namespace MPTagThat
             this.tabPageSettingsRipMPC,
             this.tabPageSettingsRipWV});
       // 
-      // tabPageSettingsGeneral
-      // 
-      this.tabPageSettingsGeneral.ActiveControl = null;
-      this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
-      this.tabPageSettingsGeneral.KeyTip = null;
-      this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(824, 898);
-      this.tabPageSettingsGeneral.TabIndex = 0;
-      // 
-      // groupBoxGeneral
-      // 
-      this.groupBoxGeneral.Controls.Add(this.lbTracklistLocation);
-      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListTop);
-      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListBottom);
-      this.groupBoxGeneral.Controls.Add(this.comboBoxDebugLevel);
-      this.groupBoxGeneral.Controls.Add(this.lbDebugLevel);
-      this.groupBoxGeneral.Controls.Add(this.lbTheme);
-      this.groupBoxGeneral.Controls.Add(this.comboBoxThemes);
-      this.groupBoxGeneral.Controls.Add(this.comboBoxLanguage);
-      this.groupBoxGeneral.Controls.Add(this.lbLanguage);
-      this.groupBoxGeneral.Id = "c2880c2d-dfe9-47a1-8adb-fa4a03aa933b";
-      this.groupBoxGeneral.Localisation = "GroupBoxGeneral";
-      this.groupBoxGeneral.LocalisationContext = "Settings";
-      this.groupBoxGeneral.Location = new System.Drawing.Point(6, 25);
-      this.groupBoxGeneral.Name = "groupBoxGeneral";
-      this.groupBoxGeneral.Size = new System.Drawing.Size(587, 207);
-      this.groupBoxGeneral.TabIndex = 1;
-      this.groupBoxGeneral.Text = "General settings";
-      // 
-      // lbTracklistLocation
-      // 
-      this.lbTracklistLocation.Localisation = "Settings";
-      this.lbTracklistLocation.LocalisationContext = "TrackListLocation";
-      this.lbTracklistLocation.Location = new System.Drawing.Point(16, 144);
-      this.lbTracklistLocation.Name = "lbTracklistLocation";
-      this.lbTracklistLocation.Size = new System.Drawing.Size(100, 23);
-      this.lbTracklistLocation.TabIndex = 2;
-      this.lbTracklistLocation.Text = "Location of Tracklist:";
-      // 
-      // pictureBoxTrackListTop
-      // 
-      this.pictureBoxTrackListTop.BackColor = System.Drawing.SystemColors.Control;
-      this.pictureBoxTrackListTop.Image = global::MPTagThat.Properties.Resources.TrackList_top;
-      this.pictureBoxTrackListTop.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListTop.InitialImage")));
-      this.pictureBoxTrackListTop.Location = new System.Drawing.Point(215, 122);
-      this.pictureBoxTrackListTop.Name = "pictureBoxTrackListTop";
-      this.pictureBoxTrackListTop.Size = new System.Drawing.Size(97, 57);
-      this.pictureBoxTrackListTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-      this.pictureBoxTrackListTop.TabIndex = 2;
-      this.pictureBoxTrackListTop.TabStop = false;
-      this.pictureBoxTrackListTop.Text = "pictureBox1";
-      this.pictureBoxTrackListTop.Click += new System.EventHandler(this.pictureBoxTrackListTop_Click);
-      // 
-      // pictureBoxTrackListBottom
-      // 
-      this.pictureBoxTrackListBottom.Image = global::MPTagThat.Properties.Resources.TrackList_bottom;
-      this.pictureBoxTrackListBottom.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListBottom.InitialImage")));
-      this.pictureBoxTrackListBottom.Location = new System.Drawing.Point(333, 122);
-      this.pictureBoxTrackListBottom.Name = "pictureBoxTrackListBottom";
-      this.pictureBoxTrackListBottom.Size = new System.Drawing.Size(97, 57);
-      this.pictureBoxTrackListBottom.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-      this.pictureBoxTrackListBottom.TabIndex = 6;
-      this.pictureBoxTrackListBottom.TabStop = false;
-      this.pictureBoxTrackListBottom.Text = "pictureBox2";
-      this.pictureBoxTrackListBottom.Click += new System.EventHandler(this.pictureBoxTrackListBottom_Click);
-      // 
-      // comboBoxDebugLevel
-      // 
-      this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxDebugLevel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.comboBoxDebugLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.comboBoxDebugLevel.Editable = false;
-      this.comboBoxDebugLevel.FormattingEnabled = true;
-      this.comboBoxDebugLevel.Id = "6b30288d-a831-4af5-b3b0-9049e7ca8e36";
-      this.comboBoxDebugLevel.Location = new System.Drawing.Point(218, 80);
-      this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
-      this.comboBoxDebugLevel.Size = new System.Drawing.Size(320, 21);
-      this.comboBoxDebugLevel.TabIndex = 2;
-      this.comboBoxDebugLevel.TextEditorWidth = 301;
-      // 
-      // lbDebugLevel
-      // 
-      this.lbDebugLevel.Localisation = "DebugLevel";
-      this.lbDebugLevel.LocalisationContext = "Settings";
-      this.lbDebugLevel.Location = new System.Drawing.Point(16, 83);
-      this.lbDebugLevel.Name = "lbDebugLevel";
-      this.lbDebugLevel.Size = new System.Drawing.Size(67, 13);
-      this.lbDebugLevel.TabIndex = 5;
-      this.lbDebugLevel.Text = "Debug level:";
-      // 
-      // lbTheme
-      // 
-      this.lbTheme.Localisation = "Theme";
-      this.lbTheme.LocalisationContext = "Settings";
-      this.lbTheme.Location = new System.Drawing.Point(16, 52);
-      this.lbTheme.Name = "lbTheme";
-      this.lbTheme.Size = new System.Drawing.Size(43, 13);
-      this.lbTheme.TabIndex = 4;
-      this.lbTheme.Text = "Theme:";
-      // 
-      // comboBoxThemes
-      // 
-      this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxThemes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.comboBoxThemes.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.comboBoxThemes.Editable = false;
-      this.comboBoxThemes.FormattingEnabled = true;
-      this.comboBoxThemes.Id = "9accc7a3-4b86-4931-b228-8b00d8d049b6";
-      this.comboBoxThemes.Location = new System.Drawing.Point(218, 49);
-      this.comboBoxThemes.Name = "comboBoxThemes";
-      this.comboBoxThemes.Size = new System.Drawing.Size(320, 21);
-      this.comboBoxThemes.TabIndex = 1;
-      this.comboBoxThemes.TextEditorWidth = 301;
-      this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
-      // 
-      // comboBoxLanguage
-      // 
-      this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.comboBoxLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.comboBoxLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.comboBoxLanguage.Editable = false;
-      this.comboBoxLanguage.FormattingEnabled = true;
-      this.comboBoxLanguage.Id = "1795cc6e-129d-4902-9edc-657a97c2c276";
-      this.comboBoxLanguage.Location = new System.Drawing.Point(218, 17);
-      this.comboBoxLanguage.Name = "comboBoxLanguage";
-      this.comboBoxLanguage.Size = new System.Drawing.Size(320, 21);
-      this.comboBoxLanguage.TabIndex = 0;
-      this.comboBoxLanguage.TextEditorWidth = 301;
-      // 
-      // lbLanguage
-      // 
-      this.lbLanguage.Localisation = "Language";
-      this.lbLanguage.LocalisationContext = "Settings";
-      this.lbLanguage.Location = new System.Drawing.Point(16, 20);
-      this.lbLanguage.Name = "lbLanguage";
-      this.lbLanguage.Size = new System.Drawing.Size(58, 13);
-      this.lbLanguage.TabIndex = 0;
-      this.lbLanguage.Text = "Language:";
-      // 
-      // tabPageSettingsKeys
-      // 
-      this.tabPageSettingsKeys.ActiveControl = null;
-      this.tabPageSettingsKeys.Controls.Add(this.groupBoxKeys);
-      this.tabPageSettingsKeys.KeyTip = null;
-      this.tabPageSettingsKeys.Name = "tabPageSettingsKeys";
-      this.tabPageSettingsKeys.Size = new System.Drawing.Size(832, 909);
-      this.tabPageSettingsKeys.TabIndex = 1;
-      // 
-      // groupBoxKeys
-      // 
-      this.groupBoxKeys.Controls.Add(this.tbRibbonKeyValue);
-      this.groupBoxKeys.Controls.Add(this.lblRibbonShortCut);
-      this.groupBoxKeys.Controls.Add(this.lblKeyShortCut);
-      this.groupBoxKeys.Controls.Add(this.buttonChangeKey);
-      this.groupBoxKeys.Controls.Add(this.tbKeyValue);
-      this.groupBoxKeys.Controls.Add(this.ttLabel1);
-      this.groupBoxKeys.Controls.Add(this.ckShift);
-      this.groupBoxKeys.Controls.Add(this.ckCtrl);
-      this.groupBoxKeys.Controls.Add(this.ckAlt);
-      this.groupBoxKeys.Controls.Add(this.tbKeyDescription);
-      this.groupBoxKeys.Controls.Add(this.lbKeyDescription);
-      this.groupBoxKeys.Controls.Add(this.tbAction);
-      this.groupBoxKeys.Controls.Add(this.lbKeyAction);
-      this.groupBoxKeys.Controls.Add(this.treeViewKeys);
-      this.groupBoxKeys.Id = "7ee90950-d8f0-48ec-988f-d887da43ecac";
-      this.groupBoxKeys.Localisation = "GroupBoxKeys";
-      this.groupBoxKeys.LocalisationContext = "Settings";
-      this.groupBoxKeys.Location = new System.Drawing.Point(9, 21);
-      this.groupBoxKeys.Name = "groupBoxKeys";
-      this.groupBoxKeys.Size = new System.Drawing.Size(581, 471);
-      this.groupBoxKeys.TabIndex = 2;
-      this.groupBoxKeys.Text = "Keyboard Shortcuts";
-      // 
-      // tbRibbonKeyValue
-      // 
-      this.tbRibbonKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbRibbonKeyValue.Location = new System.Drawing.Point(196, 432);
-      this.tbRibbonKeyValue.MaxLength = 1;
-      this.tbRibbonKeyValue.Name = "tbRibbonKeyValue";
-      this.tbRibbonKeyValue.Size = new System.Drawing.Size(20, 20);
-      this.tbRibbonKeyValue.TabIndex = 13;
-      this.tbRibbonKeyValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbRibbonKeyValue_KeyPress);
-      // 
-      // lblRibbonShortCut
-      // 
-      this.lblRibbonShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lblRibbonShortCut.Localisation = "RibbonShortCut";
-      this.lblRibbonShortCut.LocalisationContext = "Settings";
-      this.lblRibbonShortCut.Location = new System.Drawing.Point(22, 435);
-      this.lblRibbonShortCut.Name = "lblRibbonShortCut";
-      this.lblRibbonShortCut.Size = new System.Drawing.Size(87, 13);
-      this.lblRibbonShortCut.TabIndex = 12;
-      this.lblRibbonShortCut.Text = "Ribbon Shortcut:";
-      // 
-      // lblKeyShortCut
-      // 
-      this.lblKeyShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lblKeyShortCut.Localisation = "KeyShortCut";
-      this.lblKeyShortCut.LocalisationContext = "Settings";
-      this.lblKeyShortCut.Location = new System.Drawing.Point(22, 406);
-      this.lblKeyShortCut.Name = "lblKeyShortCut";
-      this.lblKeyShortCut.Size = new System.Drawing.Size(71, 13);
-      this.lblKeyShortCut.TabIndex = 11;
-      this.lblKeyShortCut.Text = "Key Shortcut:";
-      // 
-      // buttonChangeKey
-      // 
-      this.buttonChangeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonChangeKey.Id = "d9904459-a565-4b6e-8ccd-0587e7d0463e";
-      this.buttonChangeKey.Localisation = "ChangeKey";
-      this.buttonChangeKey.LocalisationContext = "Settings";
-      this.buttonChangeKey.Location = new System.Drawing.Point(480, 425);
-      this.buttonChangeKey.Name = "buttonChangeKey";
-      this.buttonChangeKey.Size = new System.Drawing.Size(89, 23);
-      this.buttonChangeKey.TabIndex = 10;
-      this.buttonChangeKey.Text = "Change";
-      this.buttonChangeKey.UseVisualStyleBackColor = true;
-      this.buttonChangeKey.Click += new System.EventHandler(this.buttonChangeKey_Click);
-      // 
-      // tbKeyValue
-      // 
-      this.tbKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbKeyValue.Location = new System.Drawing.Point(416, 393);
-      this.tbKeyValue.Name = "tbKeyValue";
-      this.tbKeyValue.Size = new System.Drawing.Size(153, 20);
-      this.tbKeyValue.TabIndex = 9;
-      // 
-      // ttLabel1
-      // 
-      this.ttLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ttLabel1.Localisation = "ttLabel1";
-      this.ttLabel1.LocalisationContext = "Settings";
-      this.ttLabel1.Location = new System.Drawing.Point(397, 397);
-      this.ttLabel1.Name = "ttLabel1";
-      this.ttLabel1.Size = new System.Drawing.Size(13, 13);
-      this.ttLabel1.TabIndex = 8;
-      this.ttLabel1.Text = "+";
-      // 
-      // ckShift
-      // 
-      this.ckShift.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ckShift.Id = "31312ed6-2c18-4d8d-be30-0f03b5e155ab";
-      this.ckShift.Localisation = "Shift";
-      this.ckShift.LocalisationContext = "Settings";
-      this.ckShift.Location = new System.Drawing.Point(305, 393);
-      this.ckShift.Name = "ckShift";
-      this.ckShift.Size = new System.Drawing.Size(47, 26);
-      this.ckShift.TabIndex = 7;
-      this.ckShift.Text = "Shift";
-      // 
-      // ckCtrl
-      // 
-      this.ckCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ckCtrl.Id = "2552c4f6-671e-43ad-9043-0a7f808e12d1";
-      this.ckCtrl.Localisation = "Ctrl";
-      this.ckCtrl.LocalisationContext = "Settings";
-      this.ckCtrl.Location = new System.Drawing.Point(250, 393);
-      this.ckCtrl.Name = "ckCtrl";
-      this.ckCtrl.Size = new System.Drawing.Size(41, 26);
-      this.ckCtrl.TabIndex = 6;
-      this.ckCtrl.Text = "Ctrl";
-      // 
-      // ckAlt
-      // 
-      this.ckAlt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ckAlt.Id = "61e608bf-f29b-4b86-bca3-cd1b27e98927";
-      this.ckAlt.Localisation = "Alt";
-      this.ckAlt.LocalisationContext = "Settings";
-      this.ckAlt.Location = new System.Drawing.Point(196, 393);
-      this.ckAlt.Name = "ckAlt";
-      this.ckAlt.Size = new System.Drawing.Size(38, 26);
-      this.ckAlt.TabIndex = 5;
-      this.ckAlt.Text = "Alt";
-      // 
-      // tbKeyDescription
-      // 
-      this.tbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbKeyDescription.Location = new System.Drawing.Point(194, 357);
-      this.tbKeyDescription.Name = "tbKeyDescription";
-      this.tbKeyDescription.Size = new System.Drawing.Size(375, 20);
-      this.tbKeyDescription.TabIndex = 1;
-      // 
-      // lbKeyDescription
-      // 
-      this.lbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lbKeyDescription.Localisation = "KeyDescription";
-      this.lbKeyDescription.LocalisationContext = "Settings";
-      this.lbKeyDescription.Location = new System.Drawing.Point(22, 357);
-      this.lbKeyDescription.Name = "lbKeyDescription";
-      this.lbKeyDescription.Size = new System.Drawing.Size(63, 13);
-      this.lbKeyDescription.TabIndex = 3;
-      this.lbKeyDescription.Text = "Description:";
-      // 
-      // tbAction
-      // 
-      this.tbAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbAction.Enabled = false;
-      this.tbAction.Location = new System.Drawing.Point(194, 328);
-      this.tbAction.Name = "tbAction";
-      this.tbAction.ReadOnly = true;
-      this.tbAction.Size = new System.Drawing.Size(375, 20);
-      this.tbAction.TabIndex = 0;
-      // 
-      // lbKeyAction
-      // 
-      this.lbKeyAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.lbKeyAction.Localisation = "KeyAction";
-      this.lbKeyAction.LocalisationContext = "Settings";
-      this.lbKeyAction.Location = new System.Drawing.Point(22, 331);
-      this.lbKeyAction.Name = "lbKeyAction";
-      this.lbKeyAction.Size = new System.Drawing.Size(40, 13);
-      this.lbKeyAction.TabIndex = 1;
-      this.lbKeyAction.Text = "Action:";
-      // 
-      // treeViewKeys
-      // 
-      this.treeViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.treeViewKeys.Location = new System.Drawing.Point(19, 31);
-      this.treeViewKeys.Name = "treeViewKeys";
-      this.treeViewKeys.Size = new System.Drawing.Size(550, 284);
-      this.treeViewKeys.TabIndex = 0;
-      this.treeViewKeys.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewKeys_AfterSelect);
-      // 
-      // tabPageSettingsTagsGeneral
-      // 
-      this.tabPageSettingsTagsGeneral.ActiveControl = null;
-      this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
-      this.tabPageSettingsTagsGeneral.KeyTip = null;
-      this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
-      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(832, 909);
-      this.tabPageSettingsTagsGeneral.TabIndex = 2;
-      // 
-      // groupBoxTagsGeneral
-      // 
-      this.groupBoxTagsGeneral.Controls.Add(this.ckChangeReadonlyAttributte);
-      this.groupBoxTagsGeneral.Controls.Add(this.ckAutoFillNumberOfTracks);
-      this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
-      this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
-      this.groupBoxTagsGeneral.Id = "110f1ef1-e61d-4eaa-bea8-de95a3982eb0";
-      this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.LocalisationContext = "Settings";
-      this.groupBoxTagsGeneral.Location = new System.Drawing.Point(6, 25);
-      this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
-      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(580, 153);
-      this.groupBoxTagsGeneral.TabIndex = 4;
-      this.groupBoxTagsGeneral.Text = "General";
-      // 
-      // ckChangeReadonlyAttributte
-      // 
-      this.ckChangeReadonlyAttributte.Id = "0f774b0f-f698-4696-9d81-8675a25017b4";
-      this.ckChangeReadonlyAttributte.Localisation = "ChangeReadonly";
-      this.ckChangeReadonlyAttributte.LocalisationContext = "Settings";
-      this.ckChangeReadonlyAttributte.Location = new System.Drawing.Point(14, 99);
-      this.ckChangeReadonlyAttributte.Name = "ckChangeReadonlyAttributte";
-      this.ckChangeReadonlyAttributte.Size = new System.Drawing.Size(544, 26);
-      this.ckChangeReadonlyAttributte.TabIndex = 6;
-      this.ckChangeReadonlyAttributte.Text = "Change Readonly Attributte on Save";
-      // 
-      // ckAutoFillNumberOfTracks
-      // 
-      this.ckAutoFillNumberOfTracks.Id = "a7e3a966-0c21-44d1-8d40-0a582b23955e";
-      this.ckAutoFillNumberOfTracks.Localisation = "AutoFillNumberTracks";
-      this.ckAutoFillNumberOfTracks.LocalisationContext = "Settings";
-      this.ckAutoFillNumberOfTracks.Location = new System.Drawing.Point(14, 48);
-      this.ckAutoFillNumberOfTracks.Name = "ckAutoFillNumberOfTracks";
-      this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(544, 26);
-      this.ckAutoFillNumberOfTracks.TabIndex = 5;
-      this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
-      // 
-      // ckUseCaseConversionWhenSaving
-      // 
-      this.ckUseCaseConversionWhenSaving.Id = "26179666-1da5-4f4f-957c-1428254efa78";
-      this.ckUseCaseConversionWhenSaving.Localisation = "CaseConversion";
-      this.ckUseCaseConversionWhenSaving.LocalisationContext = "Settings";
-      this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(14, 73);
-      this.ckUseCaseConversionWhenSaving.Name = "ckUseCaseConversionWhenSaving";
-      this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(544, 26);
-      this.ckUseCaseConversionWhenSaving.TabIndex = 1;
-      this.ckUseCaseConversionWhenSaving.Text = "Use case conversion settings on Save";
-      // 
-      // ckCopyArtistToAlbumArtist
-      // 
-      this.ckCopyArtistToAlbumArtist.Id = "373e4d93-6dd3-41eb-a6e7-69c7e230717e";
-      this.ckCopyArtistToAlbumArtist.Localisation = "CopyArtist";
-      this.ckCopyArtistToAlbumArtist.LocalisationContext = "Settings";
-      this.ckCopyArtistToAlbumArtist.Location = new System.Drawing.Point(15, 25);
-      this.ckCopyArtistToAlbumArtist.Name = "ckCopyArtistToAlbumArtist";
-      this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(543, 26);
-      this.ckCopyArtistToAlbumArtist.TabIndex = 0;
-      this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
-      // 
       // tabPageSettingsTagsId3
       // 
       this.tabPageSettingsTagsId3.ActiveControl = null;
@@ -1158,7 +758,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
       this.tabPageSettingsTagsId3.KeyTip = null;
       this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
-      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(832, 909);
+      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsTagsId3.TabIndex = 3;
       // 
       // groupBoxCustomGenres
@@ -1417,6 +1017,406 @@ namespace MPTagThat
       this.radioButtonID3V1.Text = "ID3V1";
       this.radioButtonID3V1.CheckedChanged += new System.EventHandler(this.radioButtonID3V1_CheckedChanged);
       // 
+      // tabPageSettingsGeneral
+      // 
+      this.tabPageSettingsGeneral.ActiveControl = null;
+      this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
+      this.tabPageSettingsGeneral.KeyTip = null;
+      this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(824, 898);
+      this.tabPageSettingsGeneral.TabIndex = 0;
+      // 
+      // groupBoxGeneral
+      // 
+      this.groupBoxGeneral.Controls.Add(this.lbTracklistLocation);
+      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListTop);
+      this.groupBoxGeneral.Controls.Add(this.pictureBoxTrackListBottom);
+      this.groupBoxGeneral.Controls.Add(this.comboBoxDebugLevel);
+      this.groupBoxGeneral.Controls.Add(this.lbDebugLevel);
+      this.groupBoxGeneral.Controls.Add(this.lbTheme);
+      this.groupBoxGeneral.Controls.Add(this.comboBoxThemes);
+      this.groupBoxGeneral.Controls.Add(this.comboBoxLanguage);
+      this.groupBoxGeneral.Controls.Add(this.lbLanguage);
+      this.groupBoxGeneral.Id = "c2880c2d-dfe9-47a1-8adb-fa4a03aa933b";
+      this.groupBoxGeneral.Localisation = "GroupBoxGeneral";
+      this.groupBoxGeneral.LocalisationContext = "Settings";
+      this.groupBoxGeneral.Location = new System.Drawing.Point(6, 25);
+      this.groupBoxGeneral.Name = "groupBoxGeneral";
+      this.groupBoxGeneral.Size = new System.Drawing.Size(587, 207);
+      this.groupBoxGeneral.TabIndex = 1;
+      this.groupBoxGeneral.Text = "General settings";
+      // 
+      // lbTracklistLocation
+      // 
+      this.lbTracklistLocation.Localisation = "Settings";
+      this.lbTracklistLocation.LocalisationContext = "TrackListLocation";
+      this.lbTracklistLocation.Location = new System.Drawing.Point(16, 144);
+      this.lbTracklistLocation.Name = "lbTracklistLocation";
+      this.lbTracklistLocation.Size = new System.Drawing.Size(100, 23);
+      this.lbTracklistLocation.TabIndex = 2;
+      this.lbTracklistLocation.Text = "Location of Tracklist:";
+      // 
+      // pictureBoxTrackListTop
+      // 
+      this.pictureBoxTrackListTop.BackColor = System.Drawing.SystemColors.Control;
+      this.pictureBoxTrackListTop.Image = global::MPTagThat.Properties.Resources.TrackList_top;
+      this.pictureBoxTrackListTop.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListTop.InitialImage")));
+      this.pictureBoxTrackListTop.Location = new System.Drawing.Point(215, 122);
+      this.pictureBoxTrackListTop.Name = "pictureBoxTrackListTop";
+      this.pictureBoxTrackListTop.Size = new System.Drawing.Size(97, 57);
+      this.pictureBoxTrackListTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.pictureBoxTrackListTop.TabIndex = 2;
+      this.pictureBoxTrackListTop.TabStop = false;
+      this.pictureBoxTrackListTop.Text = "pictureBox1";
+      this.pictureBoxTrackListTop.Click += new System.EventHandler(this.pictureBoxTrackListTop_Click);
+      // 
+      // pictureBoxTrackListBottom
+      // 
+      this.pictureBoxTrackListBottom.Image = global::MPTagThat.Properties.Resources.TrackList_bottom;
+      this.pictureBoxTrackListBottom.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTrackListBottom.InitialImage")));
+      this.pictureBoxTrackListBottom.Location = new System.Drawing.Point(333, 122);
+      this.pictureBoxTrackListBottom.Name = "pictureBoxTrackListBottom";
+      this.pictureBoxTrackListBottom.Size = new System.Drawing.Size(97, 57);
+      this.pictureBoxTrackListBottom.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.pictureBoxTrackListBottom.TabIndex = 6;
+      this.pictureBoxTrackListBottom.TabStop = false;
+      this.pictureBoxTrackListBottom.Text = "pictureBox2";
+      this.pictureBoxTrackListBottom.Click += new System.EventHandler(this.pictureBoxTrackListBottom_Click);
+      // 
+      // comboBoxDebugLevel
+      // 
+      this.comboBoxDebugLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxDebugLevel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxDebugLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.comboBoxDebugLevel.Editable = false;
+      this.comboBoxDebugLevel.FormattingEnabled = true;
+      this.comboBoxDebugLevel.Id = "6b30288d-a831-4af5-b3b0-9049e7ca8e36";
+      this.comboBoxDebugLevel.Location = new System.Drawing.Point(218, 80);
+      this.comboBoxDebugLevel.Name = "comboBoxDebugLevel";
+      this.comboBoxDebugLevel.Size = new System.Drawing.Size(320, 21);
+      this.comboBoxDebugLevel.TabIndex = 2;
+      this.comboBoxDebugLevel.TextEditorWidth = 301;
+      // 
+      // lbDebugLevel
+      // 
+      this.lbDebugLevel.Localisation = "DebugLevel";
+      this.lbDebugLevel.LocalisationContext = "Settings";
+      this.lbDebugLevel.Location = new System.Drawing.Point(16, 83);
+      this.lbDebugLevel.Name = "lbDebugLevel";
+      this.lbDebugLevel.Size = new System.Drawing.Size(67, 13);
+      this.lbDebugLevel.TabIndex = 5;
+      this.lbDebugLevel.Text = "Debug level:";
+      // 
+      // lbTheme
+      // 
+      this.lbTheme.Localisation = "Theme";
+      this.lbTheme.LocalisationContext = "Settings";
+      this.lbTheme.Location = new System.Drawing.Point(16, 52);
+      this.lbTheme.Name = "lbTheme";
+      this.lbTheme.Size = new System.Drawing.Size(43, 13);
+      this.lbTheme.TabIndex = 4;
+      this.lbTheme.Text = "Theme:";
+      // 
+      // comboBoxThemes
+      // 
+      this.comboBoxThemes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxThemes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxThemes.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.comboBoxThemes.Editable = false;
+      this.comboBoxThemes.FormattingEnabled = true;
+      this.comboBoxThemes.Id = "9accc7a3-4b86-4931-b228-8b00d8d049b6";
+      this.comboBoxThemes.Location = new System.Drawing.Point(218, 49);
+      this.comboBoxThemes.Name = "comboBoxThemes";
+      this.comboBoxThemes.Size = new System.Drawing.Size(320, 21);
+      this.comboBoxThemes.TabIndex = 1;
+      this.comboBoxThemes.TextEditorWidth = 301;
+      this.comboBoxThemes.SelectedIndexChanged += new System.EventHandler(this.comboBoxThemes_SelectedIndexChanged);
+      // 
+      // comboBoxLanguage
+      // 
+      this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.comboBoxLanguage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.comboBoxLanguage.Editable = false;
+      this.comboBoxLanguage.FormattingEnabled = true;
+      this.comboBoxLanguage.Id = "1795cc6e-129d-4902-9edc-657a97c2c276";
+      this.comboBoxLanguage.Location = new System.Drawing.Point(218, 17);
+      this.comboBoxLanguage.Name = "comboBoxLanguage";
+      this.comboBoxLanguage.Size = new System.Drawing.Size(320, 21);
+      this.comboBoxLanguage.TabIndex = 0;
+      this.comboBoxLanguage.TextEditorWidth = 301;
+      // 
+      // lbLanguage
+      // 
+      this.lbLanguage.Localisation = "Language";
+      this.lbLanguage.LocalisationContext = "Settings";
+      this.lbLanguage.Location = new System.Drawing.Point(16, 20);
+      this.lbLanguage.Name = "lbLanguage";
+      this.lbLanguage.Size = new System.Drawing.Size(58, 13);
+      this.lbLanguage.TabIndex = 0;
+      this.lbLanguage.Text = "Language:";
+      // 
+      // tabPageSettingsKeys
+      // 
+      this.tabPageSettingsKeys.ActiveControl = null;
+      this.tabPageSettingsKeys.Controls.Add(this.groupBoxKeys);
+      this.tabPageSettingsKeys.KeyTip = null;
+      this.tabPageSettingsKeys.Name = "tabPageSettingsKeys";
+      this.tabPageSettingsKeys.Size = new System.Drawing.Size(840, 920);
+      this.tabPageSettingsKeys.TabIndex = 1;
+      // 
+      // groupBoxKeys
+      // 
+      this.groupBoxKeys.Controls.Add(this.tbRibbonKeyValue);
+      this.groupBoxKeys.Controls.Add(this.lblRibbonShortCut);
+      this.groupBoxKeys.Controls.Add(this.lblKeyShortCut);
+      this.groupBoxKeys.Controls.Add(this.buttonChangeKey);
+      this.groupBoxKeys.Controls.Add(this.tbKeyValue);
+      this.groupBoxKeys.Controls.Add(this.ttLabel1);
+      this.groupBoxKeys.Controls.Add(this.ckShift);
+      this.groupBoxKeys.Controls.Add(this.ckCtrl);
+      this.groupBoxKeys.Controls.Add(this.ckAlt);
+      this.groupBoxKeys.Controls.Add(this.tbKeyDescription);
+      this.groupBoxKeys.Controls.Add(this.lbKeyDescription);
+      this.groupBoxKeys.Controls.Add(this.tbAction);
+      this.groupBoxKeys.Controls.Add(this.lbKeyAction);
+      this.groupBoxKeys.Controls.Add(this.treeViewKeys);
+      this.groupBoxKeys.Id = "7ee90950-d8f0-48ec-988f-d887da43ecac";
+      this.groupBoxKeys.Localisation = "GroupBoxKeys";
+      this.groupBoxKeys.LocalisationContext = "Settings";
+      this.groupBoxKeys.Location = new System.Drawing.Point(9, 21);
+      this.groupBoxKeys.Name = "groupBoxKeys";
+      this.groupBoxKeys.Size = new System.Drawing.Size(581, 471);
+      this.groupBoxKeys.TabIndex = 2;
+      this.groupBoxKeys.Text = "Keyboard Shortcuts";
+      // 
+      // tbRibbonKeyValue
+      // 
+      this.tbRibbonKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbRibbonKeyValue.Location = new System.Drawing.Point(196, 432);
+      this.tbRibbonKeyValue.MaxLength = 1;
+      this.tbRibbonKeyValue.Name = "tbRibbonKeyValue";
+      this.tbRibbonKeyValue.Size = new System.Drawing.Size(20, 20);
+      this.tbRibbonKeyValue.TabIndex = 13;
+      this.tbRibbonKeyValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbRibbonKeyValue_KeyPress);
+      // 
+      // lblRibbonShortCut
+      // 
+      this.lblRibbonShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lblRibbonShortCut.Localisation = "RibbonShortCut";
+      this.lblRibbonShortCut.LocalisationContext = "Settings";
+      this.lblRibbonShortCut.Location = new System.Drawing.Point(22, 435);
+      this.lblRibbonShortCut.Name = "lblRibbonShortCut";
+      this.lblRibbonShortCut.Size = new System.Drawing.Size(87, 13);
+      this.lblRibbonShortCut.TabIndex = 12;
+      this.lblRibbonShortCut.Text = "Ribbon Shortcut:";
+      // 
+      // lblKeyShortCut
+      // 
+      this.lblKeyShortCut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lblKeyShortCut.Localisation = "KeyShortCut";
+      this.lblKeyShortCut.LocalisationContext = "Settings";
+      this.lblKeyShortCut.Location = new System.Drawing.Point(22, 406);
+      this.lblKeyShortCut.Name = "lblKeyShortCut";
+      this.lblKeyShortCut.Size = new System.Drawing.Size(71, 13);
+      this.lblKeyShortCut.TabIndex = 11;
+      this.lblKeyShortCut.Text = "Key Shortcut:";
+      // 
+      // buttonChangeKey
+      // 
+      this.buttonChangeKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonChangeKey.Id = "d9904459-a565-4b6e-8ccd-0587e7d0463e";
+      this.buttonChangeKey.Localisation = "ChangeKey";
+      this.buttonChangeKey.LocalisationContext = "Settings";
+      this.buttonChangeKey.Location = new System.Drawing.Point(480, 425);
+      this.buttonChangeKey.Name = "buttonChangeKey";
+      this.buttonChangeKey.Size = new System.Drawing.Size(89, 23);
+      this.buttonChangeKey.TabIndex = 10;
+      this.buttonChangeKey.Text = "Change";
+      this.buttonChangeKey.UseVisualStyleBackColor = true;
+      this.buttonChangeKey.Click += new System.EventHandler(this.buttonChangeKey_Click);
+      // 
+      // tbKeyValue
+      // 
+      this.tbKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbKeyValue.Location = new System.Drawing.Point(416, 393);
+      this.tbKeyValue.Name = "tbKeyValue";
+      this.tbKeyValue.Size = new System.Drawing.Size(153, 20);
+      this.tbKeyValue.TabIndex = 9;
+      // 
+      // ttLabel1
+      // 
+      this.ttLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ttLabel1.Localisation = "ttLabel1";
+      this.ttLabel1.LocalisationContext = "Settings";
+      this.ttLabel1.Location = new System.Drawing.Point(397, 397);
+      this.ttLabel1.Name = "ttLabel1";
+      this.ttLabel1.Size = new System.Drawing.Size(13, 13);
+      this.ttLabel1.TabIndex = 8;
+      this.ttLabel1.Text = "+";
+      // 
+      // ckShift
+      // 
+      this.ckShift.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ckShift.Id = "31312ed6-2c18-4d8d-be30-0f03b5e155ab";
+      this.ckShift.Localisation = "Shift";
+      this.ckShift.LocalisationContext = "Settings";
+      this.ckShift.Location = new System.Drawing.Point(305, 393);
+      this.ckShift.Name = "ckShift";
+      this.ckShift.Size = new System.Drawing.Size(47, 26);
+      this.ckShift.TabIndex = 7;
+      this.ckShift.Text = "Shift";
+      // 
+      // ckCtrl
+      // 
+      this.ckCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ckCtrl.Id = "2552c4f6-671e-43ad-9043-0a7f808e12d1";
+      this.ckCtrl.Localisation = "Ctrl";
+      this.ckCtrl.LocalisationContext = "Settings";
+      this.ckCtrl.Location = new System.Drawing.Point(250, 393);
+      this.ckCtrl.Name = "ckCtrl";
+      this.ckCtrl.Size = new System.Drawing.Size(41, 26);
+      this.ckCtrl.TabIndex = 6;
+      this.ckCtrl.Text = "Ctrl";
+      // 
+      // ckAlt
+      // 
+      this.ckAlt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ckAlt.Id = "61e608bf-f29b-4b86-bca3-cd1b27e98927";
+      this.ckAlt.Localisation = "Alt";
+      this.ckAlt.LocalisationContext = "Settings";
+      this.ckAlt.Location = new System.Drawing.Point(196, 393);
+      this.ckAlt.Name = "ckAlt";
+      this.ckAlt.Size = new System.Drawing.Size(38, 26);
+      this.ckAlt.TabIndex = 5;
+      this.ckAlt.Text = "Alt";
+      // 
+      // tbKeyDescription
+      // 
+      this.tbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbKeyDescription.Location = new System.Drawing.Point(194, 357);
+      this.tbKeyDescription.Name = "tbKeyDescription";
+      this.tbKeyDescription.Size = new System.Drawing.Size(375, 20);
+      this.tbKeyDescription.TabIndex = 1;
+      // 
+      // lbKeyDescription
+      // 
+      this.lbKeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lbKeyDescription.Localisation = "KeyDescription";
+      this.lbKeyDescription.LocalisationContext = "Settings";
+      this.lbKeyDescription.Location = new System.Drawing.Point(22, 357);
+      this.lbKeyDescription.Name = "lbKeyDescription";
+      this.lbKeyDescription.Size = new System.Drawing.Size(63, 13);
+      this.lbKeyDescription.TabIndex = 3;
+      this.lbKeyDescription.Text = "Description:";
+      // 
+      // tbAction
+      // 
+      this.tbAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbAction.Enabled = false;
+      this.tbAction.Location = new System.Drawing.Point(194, 328);
+      this.tbAction.Name = "tbAction";
+      this.tbAction.ReadOnly = true;
+      this.tbAction.Size = new System.Drawing.Size(375, 20);
+      this.tbAction.TabIndex = 0;
+      // 
+      // lbKeyAction
+      // 
+      this.lbKeyAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.lbKeyAction.Localisation = "KeyAction";
+      this.lbKeyAction.LocalisationContext = "Settings";
+      this.lbKeyAction.Location = new System.Drawing.Point(22, 331);
+      this.lbKeyAction.Name = "lbKeyAction";
+      this.lbKeyAction.Size = new System.Drawing.Size(40, 13);
+      this.lbKeyAction.TabIndex = 1;
+      this.lbKeyAction.Text = "Action:";
+      // 
+      // treeViewKeys
+      // 
+      this.treeViewKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.treeViewKeys.Location = new System.Drawing.Point(19, 31);
+      this.treeViewKeys.Name = "treeViewKeys";
+      this.treeViewKeys.Size = new System.Drawing.Size(550, 284);
+      this.treeViewKeys.TabIndex = 0;
+      this.treeViewKeys.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewKeys_AfterSelect);
+      // 
+      // tabPageSettingsTagsGeneral
+      // 
+      this.tabPageSettingsTagsGeneral.ActiveControl = null;
+      this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
+      this.tabPageSettingsTagsGeneral.KeyTip = null;
+      this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
+      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(832, 909);
+      this.tabPageSettingsTagsGeneral.TabIndex = 2;
+      // 
+      // groupBoxTagsGeneral
+      // 
+      this.groupBoxTagsGeneral.Controls.Add(this.ckChangeReadonlyAttributte);
+      this.groupBoxTagsGeneral.Controls.Add(this.ckAutoFillNumberOfTracks);
+      this.groupBoxTagsGeneral.Controls.Add(this.ckUseCaseConversionWhenSaving);
+      this.groupBoxTagsGeneral.Controls.Add(this.ckCopyArtistToAlbumArtist);
+      this.groupBoxTagsGeneral.Id = "110f1ef1-e61d-4eaa-bea8-de95a3982eb0";
+      this.groupBoxTagsGeneral.Localisation = "GroupBoxTagsGeneral";
+      this.groupBoxTagsGeneral.LocalisationContext = "Settings";
+      this.groupBoxTagsGeneral.Location = new System.Drawing.Point(6, 25);
+      this.groupBoxTagsGeneral.Name = "groupBoxTagsGeneral";
+      this.groupBoxTagsGeneral.Size = new System.Drawing.Size(580, 153);
+      this.groupBoxTagsGeneral.TabIndex = 4;
+      this.groupBoxTagsGeneral.Text = "General";
+      // 
+      // ckChangeReadonlyAttributte
+      // 
+      this.ckChangeReadonlyAttributte.Id = "0f774b0f-f698-4696-9d81-8675a25017b4";
+      this.ckChangeReadonlyAttributte.Localisation = "ChangeReadonly";
+      this.ckChangeReadonlyAttributte.LocalisationContext = "Settings";
+      this.ckChangeReadonlyAttributte.Location = new System.Drawing.Point(14, 99);
+      this.ckChangeReadonlyAttributte.Name = "ckChangeReadonlyAttributte";
+      this.ckChangeReadonlyAttributte.Size = new System.Drawing.Size(544, 26);
+      this.ckChangeReadonlyAttributte.TabIndex = 6;
+      this.ckChangeReadonlyAttributte.Text = "Change Readonly Attributte on Save";
+      // 
+      // ckAutoFillNumberOfTracks
+      // 
+      this.ckAutoFillNumberOfTracks.Id = "a7e3a966-0c21-44d1-8d40-0a582b23955e";
+      this.ckAutoFillNumberOfTracks.Localisation = "AutoFillNumberTracks";
+      this.ckAutoFillNumberOfTracks.LocalisationContext = "Settings";
+      this.ckAutoFillNumberOfTracks.Location = new System.Drawing.Point(14, 48);
+      this.ckAutoFillNumberOfTracks.Name = "ckAutoFillNumberOfTracks";
+      this.ckAutoFillNumberOfTracks.Size = new System.Drawing.Size(544, 26);
+      this.ckAutoFillNumberOfTracks.TabIndex = 5;
+      this.ckAutoFillNumberOfTracks.Text = "Auto Fill \"Number of Tracks\" on Multi Tag Edit";
+      // 
+      // ckUseCaseConversionWhenSaving
+      // 
+      this.ckUseCaseConversionWhenSaving.Id = "26179666-1da5-4f4f-957c-1428254efa78";
+      this.ckUseCaseConversionWhenSaving.Localisation = "CaseConversion";
+      this.ckUseCaseConversionWhenSaving.LocalisationContext = "Settings";
+      this.ckUseCaseConversionWhenSaving.Location = new System.Drawing.Point(14, 73);
+      this.ckUseCaseConversionWhenSaving.Name = "ckUseCaseConversionWhenSaving";
+      this.ckUseCaseConversionWhenSaving.Size = new System.Drawing.Size(544, 26);
+      this.ckUseCaseConversionWhenSaving.TabIndex = 1;
+      this.ckUseCaseConversionWhenSaving.Text = "Use case conversion settings on Save";
+      // 
+      // ckCopyArtistToAlbumArtist
+      // 
+      this.ckCopyArtistToAlbumArtist.Id = "373e4d93-6dd3-41eb-a6e7-69c7e230717e";
+      this.ckCopyArtistToAlbumArtist.Localisation = "CopyArtist";
+      this.ckCopyArtistToAlbumArtist.LocalisationContext = "Settings";
+      this.ckCopyArtistToAlbumArtist.Location = new System.Drawing.Point(15, 25);
+      this.ckCopyArtistToAlbumArtist.Name = "ckCopyArtistToAlbumArtist";
+      this.ckCopyArtistToAlbumArtist.Size = new System.Drawing.Size(543, 26);
+      this.ckCopyArtistToAlbumArtist.TabIndex = 0;
+      this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
+      // 
       // tabPageSettingsLyricsCover
       // 
       this.tabPageSettingsLyricsCover.ActiveControl = null;
@@ -1424,7 +1424,7 @@ namespace MPTagThat
       this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxLyrics);
       this.tabPageSettingsLyricsCover.KeyTip = null;
       this.tabPageSettingsLyricsCover.Name = "tabPageSettingsLyricsCover";
-      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(776, 832);
+      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsLyricsCover.TabIndex = 4;
       // 
       // groupBoxPictures
@@ -1641,7 +1641,7 @@ namespace MPTagThat
       this.tabPageSettingsDatabase.Controls.Add(this.groubBoxTagsDatabase);
       this.tabPageSettingsDatabase.KeyTip = null;
       this.tabPageSettingsDatabase.Name = "tabPageSettingsDatabase";
-      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(744, 788);
+      this.tabPageSettingsDatabase.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsDatabase.TabIndex = 5;
       // 
       // groupBoxDatabaseBuild
@@ -1774,7 +1774,7 @@ namespace MPTagThat
       this.tabPageSettingsRipGeneral.Controls.Add(this.groupBoxCustomPath);
       this.tabPageSettingsRipGeneral.KeyTip = null;
       this.tabPageSettingsRipGeneral.Name = "tabPageSettingsRipGeneral";
-      this.tabPageSettingsRipGeneral.Size = new System.Drawing.Size(744, 788);
+      this.tabPageSettingsRipGeneral.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsRipGeneral.TabIndex = 6;
       // 
       // groupBoxEncoding
@@ -2035,7 +2035,7 @@ namespace MPTagThat
       this.tabPageSettingsRipMp3.Controls.Add(this.groupBoxMp3Experts);
       this.tabPageSettingsRipMp3.KeyTip = null;
       this.tabPageSettingsRipMp3.Name = "tabPageSettingsRipMp3";
-      this.tabPageSettingsRipMp3.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsRipMp3.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsRipMp3.TabIndex = 7;
       // 
       // groupBoxPresets
@@ -2159,7 +2159,7 @@ namespace MPTagThat
       this.tabPageSettingsRipOgg.Controls.Add(this.groupBoxOggExpert);
       this.tabPageSettingsRipOgg.KeyTip = null;
       this.tabPageSettingsRipOgg.Name = "tabPageSettingsRipOgg";
-      this.tabPageSettingsRipOgg.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsRipOgg.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsRipOgg.TabIndex = 8;
       // 
       // groupBoxOggEncoding
@@ -2257,7 +2257,7 @@ namespace MPTagThat
       this.tabPageSettingsRipFlac.Controls.Add(this.groupBoxFlacSettings);
       this.tabPageSettingsRipFlac.KeyTip = null;
       this.tabPageSettingsRipFlac.Name = "tabPageSettingsRipFlac";
-      this.tabPageSettingsRipFlac.Size = new System.Drawing.Size(704, 1039);
+      this.tabPageSettingsRipFlac.Size = new System.Drawing.Size(840, 920);
       this.tabPageSettingsRipFlac.TabIndex = 9;
       // 
       // groupBoxFlacEncoding
@@ -2680,7 +2680,7 @@ namespace MPTagThat
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel3.Location = new System.Drawing.Point(210, 1);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(834, 56);
+      this.panel3.Size = new System.Drawing.Size(842, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2717,7 +2717,7 @@ namespace MPTagThat
       this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
       this.backstageViewPanel1.Location = new System.Drawing.Point(0, 1);
       this.backstageViewPanel1.Name = "backstageViewPanel1";
-      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 980);
+      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 991);
       this.backstageViewPanel1.TabIndex = 0;
       // 
       // groupedNavigationBar1
@@ -2730,7 +2730,7 @@ namespace MPTagThat
       this.groupedNavigationBar1.Id = "0e02f3a9-3b46-4372-b562-76ec70fa44da";
       this.groupedNavigationBar1.Location = new System.Drawing.Point(0, 0);
       this.groupedNavigationBar1.Name = "groupedNavigationBar1";
-      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 980);
+      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 991);
       this.groupedNavigationBar1.TabIndex = 0;
       this.groupedNavigationBar1.Text = "Settings";
       this.groupedNavigationBar1.VisibleOutlookGroupHeadersCount = 0;
@@ -3061,7 +3061,7 @@ namespace MPTagThat
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1201, 99);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1209, 99);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -4025,7 +4025,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 150);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1201, 792);
+      this.panelMiddle.Size = new System.Drawing.Size(1209, 803);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -4036,7 +4036,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(869, 520);
+      this.panelMiddleTop.Size = new System.Drawing.Size(877, 531);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -4044,7 +4044,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(869, 432);
+      this.panelFileList.Size = new System.Drawing.Size(877, 443);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -4067,7 +4067,7 @@ namespace MPTagThat
       this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
       this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(869, 80);
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(877, 80);
       this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // splitterLeft
@@ -4093,7 +4093,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 792);
+      this.panelLeft.Size = new System.Drawing.Size(150, 803);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -4101,7 +4101,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 792);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 803);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -4115,7 +4115,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(1027, 0);
+      this.splitterRight.Location = new System.Drawing.Point(1035, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4128,9 +4128,9 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(1035, 0);
+      this.panelRight.Location = new System.Drawing.Point(1043, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 792);
+      this.panelRight.Size = new System.Drawing.Size(166, 803);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -4143,7 +4143,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 520);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 531);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -4154,9 +4154,9 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 528);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 539);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(885, 264);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(893, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -4167,7 +4167,7 @@ namespace MPTagThat
       this.splitterPlayer.ControlToHide = this.panelBottom;
       this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 942);
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 953);
       this.splitterPlayer.Name = "splitterPlayer";
       this.splitterPlayer.TabIndex = 13;
       this.splitterPlayer.TabStop = false;
@@ -4190,7 +4190,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1201, 1057);
+      this.ClientSize = new System.Drawing.Size(1209, 1068);
       this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
@@ -4229,6 +4229,12 @@ namespace MPTagThat
       this.backstageViewPageOptions.PerformLayout();
       this.panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).EndInit();
+      this.tabPageSettingsTagsId3.ResumeLayout(false);
+      this.groupBoxCustomGenres.ResumeLayout(false);
+      this.groupBoxTagValidate.ResumeLayout(false);
+      this.groupBoxTagsID3.ResumeLayout(false);
+      this.groupBoxTagsID3.PerformLayout();
+      this.groupBoxID3Update.ResumeLayout(false);
       this.tabPageSettingsGeneral.ResumeLayout(false);
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
@@ -4239,12 +4245,6 @@ namespace MPTagThat
       this.groupBoxKeys.PerformLayout();
       this.tabPageSettingsTagsGeneral.ResumeLayout(false);
       this.groupBoxTagsGeneral.ResumeLayout(false);
-      this.tabPageSettingsTagsId3.ResumeLayout(false);
-      this.groupBoxCustomGenres.ResumeLayout(false);
-      this.groupBoxTagValidate.ResumeLayout(false);
-      this.groupBoxTagsID3.ResumeLayout(false);
-      this.groupBoxTagsID3.PerformLayout();
-      this.groupBoxID3Update.ResumeLayout(false);
       this.tabPageSettingsLyricsCover.ResumeLayout(false);
       this.groupBoxPictures.ResumeLayout(false);
       this.groupBoxPictures.PerformLayout();
