@@ -157,7 +157,6 @@ namespace MPTagThat.InternetLookup
         }
         else
         {
-          dlgSearchResult = new AlbumSearchResult();
           for (int i = albums.Count - 1; i >= 0; i--)
           {
 
@@ -170,6 +169,7 @@ namespace MPTagThat.InternetLookup
               continue;
             }
 
+            dlgSearchResult = new AlbumSearchResult();
             // count the number of tracks, as we may have multiple discs
             int trackCount = 0;
             foreach (List<AmazonAlbumTrack> tracks in foundAlbum.Discs)
@@ -187,6 +187,13 @@ namespace MPTagThat.InternetLookup
           // When the Listview contains no items, none of the found albums has track information
           if (dlgSearchResult.ResultView.Items.Count == 0)
             _askForAlbum = true;
+          else if (dlgSearchResult.ResultView.Items.Count == 1)
+          {
+            // We might have ended up, with just only one Album
+            amazonAlbum = albums[0];
+            dlgSearchResult.Dispose();
+            return amazonAlbum;
+          }
           else
           {
             if (main.ShowModalDialog(dlgSearchResult) == DialogResult.OK)
