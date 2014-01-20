@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Xml;
 using Un4seen.Bass;
@@ -34,22 +35,26 @@ namespace MPTagThat.Core.MusicBrainz
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private string fingerprint = string.Empty;
     private long lengthInMS;
-    private string puid = string.Empty;
+    private string fingerPrint = string.Empty;
+    private List<string> _stdOutList = new List<string>(); 
+    private Dictionary<string, string> _postParameters = new Dictionary<string, string>(); 
 
     #endregion
 
     #region Private Constants
 
-    private const string musicDnsKey = "2188faab0b911688a1079f4297253ccf";
-    private const string musicDnsUrl = "http://ofa.musicdns.org/ofa/1/track";
+    private const string musicBrainzUrl = "http://api.acoustid.org/v2/lookup";
 
-    private const string fingerprint_request_format =
-      "cid={0}&cvr={1}&fpt={2}&rmd={3:d}&brt={4:d}&fmt={5}&dur={6:d}&art={7}&ttl={8}&alb={9}&tnm={10:d}&gnr={11}&yrr={12}&enc={13}";
+    #endregion
 
-    private const string clientVersion = "1.0.0.0";
-    private const string unknown = "unknown";
+    #region ctor
 
-    private const string musicBrainzUrl = "http://musicbrainz.org/ws/1/track/?type=xml&inc=artist+releases&puid=";
+    public MusicBrainzTrackInfo()
+    {
+      _postParameters.Add("client", "mfbgmu2P");
+      _postParameters.Add("format", "xml");
+      _postParameters.Add("meta", "recordings+releases+tracks");
+    }
 
     #endregion
 
@@ -58,36 +63,14 @@ namespace MPTagThat.Core.MusicBrainz
     public List<MusicBrainzTrack> GetMusicBrainzTrack(string fileName)
     {
       log.Debug("Identify: Creating Fingerprint");
-      // Create a Decoding Channel
-      int channel = Bass.BASS_StreamCreateFile(fileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
-      if (channel == 0)
-        return null;
-
-      // Now get information about channel and retrieve length
-      BASS_CHANNELINFO chinfo;
-      chinfo = Bass.BASS_ChannelGetInfo(channel);
-
-
-      // Get 135 Seconds of the file to be used for the fingerprint
-      int sampleLength = (int)Bass.BASS_ChannelSeconds2Bytes(channel, 135);
-      byte[] samples = new byte[sampleLength];
-      sampleLength = Bass.BASS_ChannelGetData(channel, samples, sampleLength);
-      lengthInMS = (int)Bass.BASS_ChannelBytes2Seconds(channel, Bass.BASS_ChannelGetLength(channel)) * 1000;
-      Bass.BASS_StreamFree(channel);
-
+      int duration = 0;
       // Get Fingerprint
-      puid = "";
-      StringBuilder fp = new StringBuilder(758);
-      if (NativeMethods.ofa_create_print(fp, samples, 0, sampleLength / 2, chinfo.freq, chinfo.chans == 2 ? true : false))
-      {
-        fingerprint = fp.ToString();
-        puid = GetPuid();
-      }
+      fingerPrint = GetFingerPrint(fileName, out duration);
 
-      if (puid == "")
+      if (fingerPrint == "")
         return null;
 
-      return RetrieveMusicBrainzTrack(puid);
+      return RetrieveMusicBrainzTrack(fingerPrint, duration);
     }
 
     #endregion
@@ -95,104 +78,165 @@ namespace MPTagThat.Core.MusicBrainz
     #region Private Methods
 
     /// <summary>
-    ///   Get the PUID, which we need for MusicBrainz lookup, from the MusicDNS Server
+    /// Get the Fingerprint by calling fpcalc / Chromaprint
     /// </summary>
-    /// <returns></returns>
-    private string GetPuid()
+    /// <param name="fileName"></param>
+    /// <param name="duration"></param>
+    /// <returns>FingerPrint</returns>
+    private string GetFingerPrint(string fileName, out int duration)
     {
-      string requestString = musicDnsUrl + "?" + string.Format(fingerprint_request_format,
-                                                               musicDnsKey.Trim(), // Dns Key
-                                                               clientVersion.Trim(), // Version
-                                                               fingerprint, // Fingerprint Lookup
-                                                               "0", // No Info to be returned
-                                                               0, // The bitrate -> "0"
-                                                               "wav", // Fo
-                                                               lengthInMS,
-                                                               unknown, // Artist
-                                                               unknown, // Title,
-                                                               unknown, // Album,
-                                                               0, // Track number
-                                                               unknown, // Genre,
-                                                               "0", // Year,
-                                                               "");
+      //string fopsParam = string.Format("-length {0} \"{1}\"", duration, fileName);
+      string fopsParam = string.Format("\"{0}\"", fileName);
 
-      log.Debug("Identify: Get MusicBrainz PUID");
-      string responseXml = Util.GetWebPage(requestString);
-      string puid = string.Empty;
-
-      if (responseXml == null)
-        return puid;
-
-      XmlDocument xml = new XmlDocument();
-      xml.LoadXml(responseXml);
-      XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("m", "http://musicbrainz.org/ns/mmd-1.0#");
-
-      XmlNodeList nodes = xml.SelectNodes("/m:metadata/m:track/m:puid-list/m:puid", nsMgr);
-      if (nodes.Count > 0)
+      List<string> fingerPrint = ExecuteProcReturnStdOut("fpcalc.exe", fopsParam, 40000);
+      if (fingerPrint.Count == 3)
       {
-        puid = nodes[0].Attributes["id"].InnerXml;
+        duration = Convert.ToInt32(fingerPrint[1].Substring(9));
+        return fingerPrint[2].Substring(12);
       }
-      return puid;
+      duration = 0;
+      return "";
+    }
+
+    public List<string> ExecuteProcReturnStdOut(string aAppName, string aArguments, int aExpectedTimeoutMs)
+    {
+      _stdOutList.Clear();
+
+      var fopsProc = new Process();
+      var procOptions = new ProcessStartInfo(aAppName, aArguments);
+
+      procOptions.UseShellExecute = false; // Important for WorkingDirectory behaviour
+      procOptions.RedirectStandardOutput = true; // The precious data we're after
+      procOptions.StandardOutputEncoding = Encoding.GetEncoding("ISO-8859-1"); // the output contains "Umlaute", etc.
+      procOptions.CreateNoWindow = true; // Do not spawn a "Dos-Box"      
+      procOptions.ErrorDialog = false; // Do not open an error box on failure        
+
+      fopsProc.OutputDataReceived += StdOutDataReceived;
+      fopsProc.EnableRaisingEvents = true; // We want to know when and why the process died        
+      fopsProc.StartInfo = procOptions;
+
+      try
+      {
+        fopsProc.Start();
+        fopsProc.BeginOutputReadLine();
+        // wait this many seconds until process has to be finished
+        fopsProc.WaitForExit(aExpectedTimeoutMs);
+      }
+      catch (Exception ex)
+      {
+        log.Error("Identify: Error getting Fingerprint. {0} - {1}", ex.Message, ex.StackTrace);
+      }
+
+      return _stdOutList;
+    }
+
+    private void StdOutDataReceived(object sendingProc, DataReceivedEventArgs e)
+    {
+      if (e.Data != null)
+      {
+        _stdOutList.Add(e.Data);
+      }
     }
 
     /// <summary>
     ///   Get the MusicBrainz Track information for the PUID
     /// </summary>
-    /// <param name = "puid"></param>
+    /// <param name = "fingerPrint"></param>
+    /// <param name = "duration"></param>
     /// <returns></returns>
-    private List<MusicBrainzTrack> RetrieveMusicBrainzTrack(string puid)
+    private List<MusicBrainzTrack> RetrieveMusicBrainzTrack(string fingerPrint, int duration)
     {
-      log.Debug("Identify: Get track information for puid: {0}", puid);
+      log.Debug("Identify: Get track information");
       List<MusicBrainzTrack> tracks = new List<MusicBrainzTrack>();
 
-      string requestString = musicBrainzUrl + puid;
-      string responseXml = Util.GetWebPage(requestString);
+      _postParameters.Add("duration", duration.ToString());
+      _postParameters.Add("fingerprint", fingerPrint);
+
+      string responseXml = Util.HttpPostRequest(musicBrainzUrl, _postParameters);
       if (responseXml == null)
         return tracks;
 
       XmlDocument xml = new XmlDocument();
       xml.LoadXml(responseXml);
-      XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("m", "http://musicbrainz.org/ns/mmd-1.0#");
 
-      XmlNodeList nodes = xml.SelectNodes("/m:metadata/m:track-list/m:track", nsMgr);
+      XmlNodeList nodes = xml.SelectNodes("/response/results/result/recordings/recording/releases/release");
       if (nodes.Count > 0)
       {
-        foreach (XmlNode trackListNode in nodes)
+        foreach (XmlNode releaseNode in nodes)
         {
           MusicBrainzTrack track = new MusicBrainzTrack();
-          track.Id = new Guid(trackListNode.Attributes["id"].InnerXml);
-          foreach (XmlNode childNode in trackListNode)
+          foreach (XmlNode childNode in releaseNode)
           {
             if (childNode.Name == "title")
-              track.Title = childNode.InnerText;
-
-            if (childNode.Name == "duration")
-              track.Duration = Convert.ToInt32(childNode.InnerText);
-
-            if (childNode.Name == "artist")
             {
-              foreach (XmlNode artistNode in childNode)
+              track.Album = childNode.InnerText;
+            }
+
+            if (childNode.Name == "artists")
+            {
+              foreach (XmlNode artistsNode in childNode)
               {
-                if (artistNode.Name == "name")
+                foreach (XmlNode artistNode in artistsNode)
                 {
-                  track.Artist = artistNode.InnerText;
+                  if (artistNode.Name == "name")
+                  {
+                    track.AlbumArtist = artistNode.InnerText;
+                    break;
+                  }
+                }
+              }
+            }
+
+            if (childNode.Name == "date")
+            {
+              foreach (XmlNode dateNode in childNode)
+              {
+                if (dateNode.Name == "year")
+                {
+                  track.Year = Convert.ToInt32(dateNode.InnerText);
                   break;
                 }
               }
             }
 
-            if (childNode.Name == "release-list")
+            if (childNode.Name == "id")
             {
-              track.AlbumID = new Guid(childNode.ChildNodes[0].Attributes["id"].InnerXml);
-              foreach (XmlNode releaseNode in childNode.ChildNodes[0].ChildNodes)
-              {
-                if (releaseNode.Name == "title")
-                  track.Album = releaseNode.InnerText;
+              track.AlbumId = childNode.InnerText;
+            }
 
-                if (releaseNode.Name == "track-list")
-                  track.Number = Convert.ToInt32(releaseNode.Attributes["offset"].InnerXml) + 1;
+            if (childNode.Name == "mediums")
+            {
+              foreach (XmlNode mediumNode in childNode.ChildNodes[0].ChildNodes)
+              {
+                if (mediumNode.Name == "tracks")
+                {
+                  foreach (XmlNode trackNode in mediumNode.ChildNodes[0])
+                  {
+                    if (trackNode.Name == "title")
+                      track.Title = trackNode.InnerText;
+
+                    if (trackNode.Name == "id")
+                      track.Id = trackNode.InnerText;
+
+                    if (trackNode.Name == "position")
+                      track.Number = Convert.ToInt32(trackNode.InnerXml);
+
+                    if (trackNode.Name == "artists")
+                    {
+                      foreach (XmlNode artistsNode in trackNode.ChildNodes)
+                      {
+                        foreach (XmlNode artistNode in artistsNode.ChildNodes)
+                        {
+                          if (artistNode.Name == "name")
+                          {
+                            track.Artist = artistNode.InnerText;
+                            break;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -206,7 +250,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region IDisposable Members
 
-    public void Dispose() {}
+    public void Dispose() { }
 
     #endregion
   }

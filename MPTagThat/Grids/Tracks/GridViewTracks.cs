@@ -568,7 +568,7 @@ namespace MPTagThat.GridView
                 bool albumFound = false;
                 foreach (MusicBrainzTrack mbtrack in musicBrainzTracks)
                 {
-                  if (mbtrack.AlbumID == musicBrainzAlbum.Id)
+                  if (mbtrack.AlbumId == musicBrainzAlbum.Id)
                   {
                     albumFound = true;
                     musicBrainzTrack = mbtrack;
@@ -600,7 +600,7 @@ namespace MPTagThat.GridView
 
               // Are we still at the same album?
               // if not, get the album, so that we have the release date
-              if (musicBrainzAlbum.Id != musicBrainzTrack.AlbumID)
+              if (musicBrainzAlbum.Id != musicBrainzTrack.AlbumId)
               {
                 using (MusicBrainzAlbumInfo albumInfo = new MusicBrainzAlbumInfo())
                 {
@@ -610,7 +610,7 @@ namespace MPTagThat.GridView
                     ResetProgressBar();
                     return;
                   }
-                  musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumID.ToString());
+                  musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
                 }
               }
 

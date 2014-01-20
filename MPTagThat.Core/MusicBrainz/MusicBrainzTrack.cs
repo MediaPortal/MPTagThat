@@ -35,7 +35,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region Properties
 
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     public int Number { get; set; }
 
@@ -43,11 +43,15 @@ namespace MPTagThat.Core.MusicBrainz
 
     public string Artist { get; set; }
 
+    public string AlbumArtist { get; set; }
+
     public string Album { get; set; }
 
-    public Guid AlbumID { get; set; }
+    public string AlbumId { get; set; }
 
     public int Duration { get; set; }
+
+    public int Year { get; set; }
 
     #endregion
   }

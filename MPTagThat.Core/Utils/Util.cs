@@ -26,6 +26,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Web;
 using System.Windows.Forms;
 using Elegant.Ui;
 using NLog;
@@ -966,6 +967,49 @@ namespace MPTagThat.Core
       return responseString;
     }
 
+    /// <summary>
+    /// Post data to WebPage and get result.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="postParameters"></param>
+    /// <returns></returns>
+    public static string HttpPostRequest(string url, Dictionary<string, string> postParameters)
+    {
+      string postData = "";
+
+      foreach (string key in postParameters.Keys)
+      {
+        postData += key + "=" + postParameters[key] + "&";
+      }
+
+      HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+      myHttpWebRequest.Method = "POST";
+
+      byte[] data = Encoding.ASCII.GetBytes(postData);
+
+      myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
+      myHttpWebRequest.ContentLength = data.Length;
+
+      Stream requestStream = myHttpWebRequest.GetRequestStream();
+      requestStream.Write(data, 0, data.Length);
+      requestStream.Close();
+
+      HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+
+      Stream responseStream = myHttpWebResponse.GetResponseStream();
+
+      StreamReader myStreamReader = new StreamReader(responseStream, Encoding.Default);
+
+      string pageContent = myStreamReader.ReadToEnd();
+
+      myStreamReader.Close();
+      responseStream.Close();
+
+      myHttpWebResponse.Close();
+
+      return pageContent;
+    }
+    
     /// <summary>
     ///   Reads data from a stream until the end is reached. The
     ///   data is returned as a byte array. An IOException is

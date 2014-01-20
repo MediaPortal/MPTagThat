@@ -42,7 +42,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region Properties
 
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     public string Asin { get; set; }
 

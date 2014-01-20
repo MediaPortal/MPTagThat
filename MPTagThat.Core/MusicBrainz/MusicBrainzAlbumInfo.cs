@@ -53,7 +53,7 @@ namespace MPTagThat.Core.MusicBrainz
       XmlNodeList nodes = xml.SelectNodes("/m:metadata/m:release", nsMgr);
       if (nodes.Count > 0)
       {
-        album.Id = new Guid(nodes[0].Attributes["id"].InnerXml);
+        album.Id = nodes[0].Attributes["id"].InnerXml;
         foreach (XmlNode childNode in nodes[0])
         {
           if (childNode.Name == "title")
@@ -88,8 +88,8 @@ namespace MPTagThat.Core.MusicBrainz
             foreach (XmlNode trackNode in childNode.ChildNodes)
             {
               MusicBrainzTrack track = new MusicBrainzTrack();
-              track.Id = new Guid(trackNode.Attributes["id"].InnerXml);
-              track.AlbumID = album.Id;
+              track.Id = trackNode.Attributes["id"].InnerXml;
+              track.AlbumId = album.Id;
               track.Album = album.Title;
               track.Artist = album.Artist;
               foreach (XmlNode trackDetail in trackNode.ChildNodes)
