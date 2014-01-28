@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="system.NotFound">### Texto Não Encontrado ###</string>
+  <string name="splash.Version">Versão:</string>
+  <string name="splash.BuildDate">Data da versão:</string>
+  <string name="splash.Startup">Iniciando...</string>
+  <string name="splash.LoadSettings">Carregando Definições...</string>
+  <string name="splash.Localisation">Localização...</string>
+  <!--Main-->
+  <!--Treeview-->
+  <string name="main.TreeViewPanel">Pastas</string>
+  <string name="main.TreeViewPanelDatabase">Base de dados</string>
+  <string name="main.TreeViewViews">Vistas</string>
+  <string name="main.TreeViewFilters">Filtro</string>
+  <string name="main.FilterHeadingField">Campo</string>
+  <string name="main.FilterHeadingFilter">Filtro</string>
+  <string name="main.FilterHeadingOperator">Operador</string>
+  <string name="main.FilterOperatorAnd">e</string>
+  <string name="main.FilterOperatorOr">ou</string>
+  <string name="main.FilterAllFiles">Todos os formatos de ficheiros suportados</string>
+  <!--Various Panels-->
+  <string name="main.PicturePanel">Imagem</string>
+  <string name="main.InformationPanel">Informação</string>
+  <string name="main.PlayerPanel">Leitor</string>
+  <!--Options Panel-->
+  <string name="main.OptionsPanel">Opções</string>
+  <string name="main.FolderView">Vista da pasta</string>
+  <string name="main.DBView">Vista da base de dados</string>
+  <string name="main.ScanSubfolder">Procurar nas subpastas</string>
+  <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Mensagens</string>
+  <string name="main.TabPageNonMusicFiles">Ficheiros diferentes de música</string>
+  <!--Error Gridview-->
+  <string name="main.ErrorHeaderFile">Ficheiro</string>
+  <string name="main.ErrorHeaderMessage">Mensagem</string>
+  <string name="main.ErrorContextMenuClear">Limpar lista</string>
+  <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Alterar para \"folder.jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Apagar os ficheiro(s) selecionado(s)\'\'</string>
+  <string name="main.NonMusicDeleteFilesHeader">Remover múltiplos itens</string>
+  <!--Toolstrip-->
+  <string name="main.toolStripLabelFiles">Ficheiros: {0} (Selecionados: {1})</string>
+  <!--Ribbon-->
+  <!--Start Menu-->
+  <string name="ribbon.Settings">Definições</string>
+  <string name="ribbon.Refresh">Actualizar</string>
+  <string name="ribbon.Save">Guardar</string>
+  <string name="ribbon.ColumnsSelect">Selecionar colunas visíveis</string>
+  <string name="ribbon.Exit">Sair</string>
+  <string name="ribbon.RecentFolders">Pastas recentes</string>
+  <!--Tags Tab-->
+  <string name="ribbon.RenameFile">Renomear ficheiro </string>
+  <string name="ribbon.RenameFileMenu">Renomear ficheiro </string>
+  <string name="ribbon.GetCoverArt">Procurar Capa</string>
+  <string name="ribbon.GetLyrics">Procurar Letra</string>
+  <string name="ribbon.AutoNumber">Numeração automática</string>
+  <string name="ribbon.Find">Procurar</string>
+  <string name="ribbon.Replace">Substituir</string>
+  <string name="ribbon.ValidateSong">Validar MP3</string>
+  <string name="ribbon.FixSong">Corrigir MP3</string>
+  <string name="ribbon.RemoveCommentPicture">Remover:</string>
+  <string name="ribbon.OrganiseFiles">Organisar</string>
+  <string name="ribbon.Picture">Capa</string>
+  <string name="ribbon.Other">Outro</string>
+  <!--Rip Tab-->
+  <!--Convert Tab-->
+  <string name="ribbon.ConvertTab">Converter</string>
+  <string name="ribbon.ConvertButton">Iniciar conversão</string>
+  <string name="ribbon.ConvertCancel">Cancelar conversão</string>
+  <string name="ribbon.ConvertOptions">Opções de conversão</string>
+  <!--Burn Tab-->
+  <string name="ribbon.BurnTab">Gravar</string>
+  <string name="ribbon.Burn">Gravar</string>
+  <string name="ribbon.BurnCancel">Cancelar Gravação</string>
+  <string name="ribbon.BurnOptions">Opções de Gravação</string>
+  <string name="ribbon.Burner">Selecionar Gravador:</string>
+  <string name="ribbon.BurnerSpeed">Velocidade de gravação</string>
+  <!--Ribbon Screen Tip-->
+  <!--Start Menu-->
+  <string name="screentip.Refresh">Atualizar</string>
+  <string name="screentip.Save">Guardar alterações</string>
+  <!--Tags Tab-->
+  <string name="screentip.GetCoverArt">Procurar Capa</string>
+  <string name="screentip.GetLyrics">Procurar Letra</string>
+  <string name="screentip.AutoNumber">Numeração automática</string>
+  <string name="screentip.RenameFile">Renomear ficheiro</string>
+  <string name="screentip.Find">Procurar</string>
+  <string name="screentip.Replace">Substituir</string>
+  <string name="screentip.ValidateSong">Validar MP3</string>
+  <string name="screentip.FixSong">Corrigir MP3</string>
+  <!--Rip Tab-->
+  <!--Convert Tab-->
+  <string name="screentip.ConvertButton">Iniciar conversão</string>
+  <string name="screentip.ConvertCancel">Cancelar conversão</string>
+  <!--Burn Tab-->
+  <string name="screentip.Burn">Gravar CD</string>
+  <string name="screentip.BurnCancel">Cancelar Gravação</string>
+  <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
+  <!--Title / Headers-->
+  <string name="TagEdit.HeaderLyrics">Letras</string>
+  <string name="TagEdit.HeaderPictures">Imagens</string>
+  <!--Main Tags-->
+  <string name="TagEdit.Track">Faixa:</string>
+  <string name="TagEdit.Artist">Artista:</string>
+  <string name="TagEdit.Year">Ano:</string>
+  <string name="TagEdit.Title">Título:</string>
+  <string name="TagEdit.Album">Album:</string>
+  <string name="TagEdit.PartOfCompilation">Parte de uma compilação</string>
+  <string name="TagEdit.GroupBoxComment">Comentários</string>
+  <string name="TagEdit.RemoveExistingComments">Primeiro remover comentários</string>
+  <string name="TagEdit.MoveTop">Mover para o topo</string>
+  <string name="TagEdit.RemoveComment">Remover comentários</string>
+  <string name="TagEdit.AddComment">Adicionar comentários</string>
+  <string name="TagEdit.Comment">Comentário:</string>
+  <string name="TagEdit.CommentLanguage">Idioma (Só no ID3):</string>
+  <string name="TagEdit.CommentDescriptor">Descritor (Só no ID3):</string>
+  <string name="TagEdit.CommentHeaderDescriptor">Descritor</string>
+  <string name="TagEdit.CommentHeaderLanguage">Idioma</string>
+  <string name="TagEdit.CommentHeaderComment">Comentário</string>
+  <string name="TagEdit.RemoveGenre">Remover género</string>
+  <string name="TagEdit.AddGenre">Adicionar género</string>
+  <string name="TagEdit.Genre">Género:</string>
+  <string name="TagEdit.Disc">Disco:</string>
+  <string name="TagEdit.BPM">BPM:</string>
+  <!--Picture-->
+  <string name="TagEdit.GroupBoxPicture">Imagem</string>
+  <!--Detailed Information-->
+  <!--Original Information-->
+  <!--Involved Persons-->
+  <string name="TagEdit.MusicianHeaderName">Nome</string>
+  <string name="TagEdit.PersonHeaderName">Nome</string>
+  <!--Web Information-->
+  <!--Lyrics-->
+  <string name="TagEdit.LyricsLanguage">Idioma (Só no ID3):</string>
+  <string name="TagEdit.LyricsDescriptor">Descritor (Só no ID3):</string>
+  <string name="TagEdit.LyricsHeaderDescriptor">Descritor</string>
+  <string name="TagEdit.LyricsHeaderLanguage">Idioma</string>
+  <string name="TagEdit.LyricsHeaderLyrics">Letras</string>
+  <!--Rating-->
+  <!--Navigation Pane-->
+  <string name="TagEdit.LinkLyrics">Letras</string>
+  <string name="TagEdit.LinkPictures">Imagens</string>
+  <!--General Buttons-->
+  <string name="TagEdit.Cancel">Cancelar</string>
+  <string name="TagEdit.Apply">Aplicar</string>
+  <!--Single Tag Edit Commands-->
+  <!--User Defined Frames-->
+  <string name="TagEdit.FrameText">Texto</string>
+  <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
+  <string name="LyricsSearch.Cancel">Cancelar</string>
+  <string name="LyricsSearch.Title">Título:</string>
+  <string name="LyricsSearch.Close">Fechar</string>
+  <string name="LyricsSearch.Artist">Artista:</string>
+  <!--Multiple Lyrics Search-->
+  <string name="LyricsSearch.FoundLyrics">Ok</string>
+  <string name="LyricsSearch.NoLyricsFound">N/D</string>
+  <!--Amazon Album Search-->
+  <string name="AmazonAlbumSearch.Header">Procurar Album</string>
+  <string name="AmazonAlbumSearch.Close">Cancelar</string>
+  <string name="AmazonAlbumSearch.Search">Procurar</string>
+  <!--MusicBrainz Search-->
+  <string name="MusicBrainz.Cancel">Cancelar</string>
+  <string name="MusicBrainz.Album">Album</string>
+  <!--Header of the Grid View showing the Tracks-->
+  <string name="column_header.Status">Estado</string>
+  <string name="column_header.Track">Faixa</string>
+  <string name="column_header.NumTracks">Número de faixas</string>
+  <string name="column_header.Title">Titulo</string>
+  <string name="column_header.Album">Album</string>
+  <string name="column_header.BPM">BPM</string>
+  <string name="column_header.Comment">Comentários</string>
+  <string name="column_header.Picture">Imagem</string>
+  <string name="column_header.Lyrics">Letras</string>
+  <!--Context Menus-->
+  <string name="contextmenu.Refresh">Atualizar</string>
+  <!--Tag from Filename  / Rename File-->
+  <string name="TagAndRename.HeadingRename">Renomear ficheiro </string>
+  <string name="TagAndRename.Apply">Aplicar</string>
+  <string name="TagAndRename.Cancel">Cancelar</string>
+  <string name="TagAndRename.Format">Formato:</string>
+  <!--Case Conversion-->
+  <string name="CaseConversion.Comment">Comentários</string>
+  <string name="CaseConversion.Title">Titulo</string>
+  <string name="CaseConversion.Album">Album</string>
+  <string name="CaseConversion.RemoveException">Remover</string>
+  <string name="CaseConversion.Convert">Converter</string>
+  <string name="CaseConversion.Cancel">Cancelar</string>
+  <!--Column Select-->
+  <string name="ColumnSelect.Ok">Ok</string>
+  <string name="ColumnSelect.Cancel">Cancelar</string>
+  <!--Organise-->
+  <!--Note :the Parameter are found in the TagAndRename section-->
+  <string name="organise.ButtonOrganise">Organisar</string>
+  <!--Settings  / Preferences-->
+  <string name="Settings.EncoderMP3">MP3 Encoder</string>
+  <string name="Settings.EncoderOgg">OGG Encoder</string>
+  <string name="Settings.EncoderFlac">Flac Encoder</string>
+  <string name="Settings.EncoderAAC">AAC Encoder</string>
+  <string name="Settings.EncoderWMA">WMA Encoder</string>
+  <string name="Settings.EncoderWAV">WAV Encoder</string>
+  <string name="Settings.EncoderMPC">Musepack Encoder</string>
+  <string name="Settings.EncoderWV">WavPack Encoder</string>
+  <string name="Settings.Stereo">Stereo</string>
+  <string name="Settings.Mono">Mono</string>
+  <string name="Settings.Cbr">CBR</string>
+  <string name="Settings.Vbr">VBR</string>
+  <string name="Settings.Shift">Shift</string>
+  <string name="Settings.Ctrl">Ctrl</string>
+  <string name="Settings.Alt">Alt</string>
+  <string name="Settings.TabTagsID3">ID3</string>
+  <string name="Settings.GroupBoxPictures">Imagens</string>
+  <string name="Settings.GroupBoxLyrics">Letras</string>
+  <string name="Settings.GroupBoxTagsID3">ID3</string>
+  <string name="Settings.RemoveID3V2">Remover ID3V2</string>
+  <string name="Settings.ID3Both">ID3V1 e ID3V2</string>
+  <string name="Settings.ID3V2">ID3V2</string>
+  <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.AddCustomGenre">Adicionar género</string>
+  <string name="Settings.DeleteCustomGenre">Apagar género</string>
+  <string name="Settings.DBScanTrackSummary"> ({0} segundos por faixa)</string>
+  <string name="Settings.Format">Formato:</string>
+  <string name="Settings.TabRippingMP3">MP3</string>
+  <string name="Settings.TabRippingOGG">OGG</string>
+  <string name="Settings.TabRippingFlac">FLAC</string>
+  <string name="Settings.TabRippingAAC">AAC</string>
+  <string name="Settings.TabRippingWMA">WMA</string>
+  <string name="Settings.TabRippingMPC">MPC</string>
+  <string name="Settings.TabRippingWV">WV</string>
+  <string name="Settings.Cancel">Cancelar</string>
+  <string name="Settings.Apply">Aplicar</string>
+  <!--Burning-->
+  <!--Conversion-/ Ripping-->
+  <!--FreeDB-->
+  <string name="FreeDB.Ok">Ok</string>
+  <string name="FreeDB.Cancel">Cancelar</string>
+  <!--Internet Lookup-->
+  <!--Dialog to specify Artist / Album for the searchg-->
+  <string name="Lookup.Cancel">Cancelar</string>
+  <!--Search Result Dialog for Multiple Albums found-->
+  <string name="Lookup.ColAlbum">Album</string>
+  <string name="Lookup.ColTracks">N.º de Faixas</string>
+  <!--Album Details-->
+  <string name="Lookup.AlbumTracks">Faixas no Album</string>
+  <string name="Lookup.ColTrackNum">N.º</string>
+  <string name="Lookup.ColTitle">Titulo</string>
+  <!--Messages shown by the program-->
+  <string name="message.Ok">Ok</string>
+  <!--Progress Dialog-->
+  <string name="progress.Cancel">Cancelar</string>
+  <!--About Dialog-->
+  <string name="about.Ok">Ok</string>
+  <string name="about.BuildDate">Data da versão:</string>
+  <!--Player-->
+  <string name="player.Title">Titulo</string>
+  <string name="player.Album">Album</string>
+  <!--Database Search-->
+  <string name="dbsearch.Search">Procurar</string>
+  <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Procurar</string>
+  <string name="findreplace.HeaderReplace">Substituir</string>
+  <string name="findreplace.TabFind">Procurar</string>
+  <string name="findreplace.Cancel">Fechar</string>
+  <string name="findreplace.TabReplace">Substituir</string>
+  <string name="findreplace.ReplaceWith">Substituir com:</string>
+  <string name="findreplace.ReplaceBtn">Substituir</string>
+  <string name="findreplace.ReplaceAllBtn">Substituir todos</string>
+  <!--Readonly Dialog-->
+  <string name="readonly.Yes">Sim</string>
+  <string name="readonly.YesToAll">Sim para todos</string>
+  <string name="readonly.No">Não</string>
+  <string name="readonly.NoToAll">Não para todos</string>
+  <!--Replay Gain Popup-->
+</resources>

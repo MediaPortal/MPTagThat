@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Auswählen</string>
   <string name="MusicBrainz.SearchInfo">Identifizierte Lieder</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">Land</string>
   <string name="MusicBrainz.Duration">Dauer</string>
   <string name="MusicBrainz.GroupBoxResults">Das identifizierte Lied ist auf mehreren Alben verfügbar. Bitte auswählen</string>
   <!--Header of the Grid View showing the Tracks-->

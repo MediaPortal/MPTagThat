@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Välj</string>
   <string name="MusicBrainz.SearchInfo">Identifierat Spår</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">Mark</string>
   <string name="MusicBrainz.Duration">Längd</string>
   <string name="MusicBrainz.GroupBoxResults">Detta spår är tillgänglig på flera album. Gör ett val</string>
   <!--Header of the Grid View showing the Tracks-->

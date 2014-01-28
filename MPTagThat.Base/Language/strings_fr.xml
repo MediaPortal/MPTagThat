@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Sélectionner</string>
   <string name="MusicBrainz.SearchInfo">Piste identifiée</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">Pays</string>
   <string name="MusicBrainz.Duration">Durée</string>
   <string name="MusicBrainz.GroupBoxResults">Cette piste est disponible sur plusieurs albums. Faites votre choix ...</string>
   <!--Header of the Grid View showing the Tracks-->

@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Selecteren</string>
   <string name="MusicBrainz.SearchInfo">Geïdentificeerd Nummer</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">land</string>
   <string name="MusicBrainz.Duration">Duur</string>
   <string name="MusicBrainz.GroupBoxResults">Het nummer is beschikbaar op meerdere albums. A.u.b. één selecteren</string>
   <!--Header of the Grid View showing the Tracks-->
