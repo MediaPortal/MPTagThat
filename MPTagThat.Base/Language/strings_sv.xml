@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Välj</string>
   <string name="MusicBrainz.SearchInfo">Identifierat Spår</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">Mark</string>
   <string name="MusicBrainz.Duration">Längd</string>
   <string name="MusicBrainz.GroupBoxResults">Detta spår är tillgänglig på flera album. Gör ett val</string>
   <!--Header of the Grid View showing the Tracks-->
@@ -632,6 +633,9 @@
   <string name="Settings.GroupBoxTagsValidate">MP3 Fil-Validering</string>
   <string name="Settings.ValidateMP3">Validera MP3-Filer vid skanning av mappar / databas</string>
   <string name="Settings.AutoFixMP3">Fixa automatiskt felande MP3-filer</string>
+  <string name="Settings.GroupBoxDCustomGenre">Egna genrer</string>
+  <string name="Settings.AddCustomGenre">Lägg till genre</string>
+  <string name="Settings.DeleteCustomGenre">Ta bort genre</string>
   <string name="Settings.GroupBoxDatabaseBuild">Bygg Musik-Databas</string>
   <string name="Settings.DatabaseScanNote">Om ingen databas från MediaPortal är tillgänglig kan en databas skapas genom att ett filnamn läggs in i textrutan ovan.\nStarta sedan en skanning.</string>
   <string name="Settings.StartDBScan">Påbörja skanning</string>

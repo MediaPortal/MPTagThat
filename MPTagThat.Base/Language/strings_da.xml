@@ -374,6 +374,7 @@
   <string name="MusicBrainz.Update">Vælg</string>
   <string name="MusicBrainz.SearchInfo">identificeret Track</string>
   <string name="MusicBrainz.Album">Album</string>
+  <string name="MusicBrainz.Country">land</string>
   <string name="MusicBrainz.Duration">Varighed</string>
   <string name="MusicBrainz.GroupBoxResults">Nummeret er tilgængelig på flere album. vælg venligst</string>
   <!--Header of the Grid View showing the Tracks-->

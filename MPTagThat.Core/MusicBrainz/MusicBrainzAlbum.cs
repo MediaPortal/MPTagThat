@@ -42,7 +42,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region Properties
 
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     public string Asin { get; set; }
 
@@ -51,6 +51,8 @@ namespace MPTagThat.Core.MusicBrainz
     public string Artist { get; set; }
 
     public string Year { get; set; }
+
+    public int DiscCount { get; set; }
 
     public List<MusicBrainzTrack> Tracks { get; set; }
 

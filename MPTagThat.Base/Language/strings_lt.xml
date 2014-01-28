@@ -377,6 +377,7 @@
   <string name="MusicBrainz.Update">Pasirinkti</string>
   <string name="MusicBrainz.SearchInfo">Nustatytas takelis</string>
   <string name="MusicBrainz.Album">Albumas</string>
+  <string name="MusicBrainz.Country">žemės</string>
   <string name="MusicBrainz.Duration">Trukmė</string>
   <string name="MusicBrainz.GroupBoxResults">Takelis yra keliuose albumuose. Prašome pasirinkti</string>
   <!--Header of the Grid View showing the Tracks-->
@@ -632,6 +633,9 @@
   <string name="Settings.GroupBoxTagsValidate">MP3 failo patvirtinimas</string>
   <string name="Settings.ValidateMP3">Patvirtinti MP3 failus kai skenuojamas katalogas/duomenų bazė</string>
   <string name="Settings.AutoFixMP3">Automatiškai taisyti klaidingus MP3 failus</string>
+  <string name="Settings.GroupBoxDCustomGenre">Tinkinami žanrai</string>
+  <string name="Settings.AddCustomGenre">Pridėti žanrą</string>
+  <string name="Settings.DeleteCustomGenre">Trinti žanrą</string>
   <string name="Settings.GroupBoxDatabaseBuild">Muzikos duomenų bazės  versija</string>
   <string name="Settings.DatabaseScanNote">Jei nėra MediaPortal Muzikos duomenų bazės, tokią gali būti sukurta įvedant failo vardą į ši langelį.⏎\nTuomet pradėkite skenavimą.</string>
   <string name="Settings.StartDBScan">Pradėti skenuoti</string>
