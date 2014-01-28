@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
 using MPTagThat.Core.Amazon;
 
@@ -29,8 +30,8 @@ namespace MPTagThat.Core.MusicBrainz
   {
     #region Private Constants
 
-    private const string musicBrainzUrl = "http://musicbrainz.org/ws/1/release/";
-    private const string requestByID = "{0}?type=xml&inc=artist+release-events+tracks";
+    private const string musicBrainzUrl = "http://musicbrainz.org/ws/2/release";
+    private const string requestByID = "/{0}?format=xml&inc=artists+recordings";
 
     #endregion
 
@@ -38,81 +39,106 @@ namespace MPTagThat.Core.MusicBrainz
 
     public MusicBrainzAlbum GetMusicBrainzAlbumById(string albumID)
     {
-      MusicBrainzAlbum album = new MusicBrainzAlbum();
+      var album = new MusicBrainzAlbum();
+      album.Id = albumID;
 
-      string requestString = musicBrainzUrl + string.Format(requestByID, albumID);
-      string responseXml = Util.GetWebPage(requestString);
+      var requestString = musicBrainzUrl + string.Format(requestByID, albumID);
+      var responseXml = Util.GetWebPage(requestString);
       if (responseXml == null)
         return null;
 
-      XmlDocument xml = new XmlDocument();
+      var xml = new XmlDocument();
       xml.LoadXml(responseXml);
-      XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
-      nsMgr.AddNamespace("m", "http://musicbrainz.org/ns/mmd-1.0#");
+      var nsMgr = new XmlNamespaceManager(xml.NameTable);
+      nsMgr.AddNamespace("m", "http://musicbrainz.org/ns/mmd-2.0#");
 
-      XmlNodeList nodes = xml.SelectNodes("/m:metadata/m:release", nsMgr);
-      if (nodes.Count > 0)
+      // Selecting the Title
+      var nodes = xml.SelectNodes("/m:metadata/m:release/m:title", nsMgr);
+      if (nodes == null)
       {
-        album.Id = nodes[0].Attributes["id"].InnerXml;
-        foreach (XmlNode childNode in nodes[0])
+        return null;
+      }
+      album.Title = nodes[0].InnerText;
+
+      // Get the Album Artist(s)
+      nodes = xml.SelectNodes("/m:metadata/m:release/m:artist-credit/m:name-credit/m:artist/m:name", nsMgr);
+      if (nodes != null)
+      {
+        var artists = new List<string>();
+        foreach (XmlNode node in nodes)
         {
-          if (childNode.Name == "title")
-            album.Title = childNode.InnerText;
+          artists.Add(node.InnerText);
+        }
+        album.Artist = string.Join(";", artists);
+      }
 
-          if (childNode.Name == "asin")
-            album.Asin = childNode.InnerText;
+      // Selecting the Date
+      nodes = xml.SelectNodes("/m:metadata/m:release/m:date", nsMgr);
+      if (nodes != null)
+      {
+        string year = nodes[0].InnerText;
+        if (year.Length > 4)
+        {
+          year = year.Substring(0, 4);
+        }
+        album.Year = year;
+      }
+      else
+      {
+        album.Year = string.Empty;
+      }
 
-          if (childNode.Name == "artist")
+      // Selecting the Asin
+      nodes = xml.SelectNodes("/m:metadata/m:release/m:asin", nsMgr);
+      if (nodes != null)
+      {
+        album.Asin = nodes[0].InnerText;
+      }
+
+      // Selecting the Media
+      nodes = xml.SelectNodes("/m:metadata/m:release/m:medium-list/m:medium", nsMgr);
+      if (nodes != null)
+      {
+        int pos = 1;
+        album.DiscCount = nodes.Count;
+        foreach (XmlNode node in nodes)
+        {
+          foreach (XmlNode childNode in node)
           {
-            foreach (XmlNode artistNode in childNode)
+            if (childNode.Name == "position")
+              pos = Convert.ToInt32(childNode.InnerText);
+
+            if (childNode.Name == "track-list")
             {
-              if (artistNode.Name == "name")
+              int trackCount = Convert.ToInt32(childNode.Attributes["count"].Value);
+              foreach (XmlNode trackNode in childNode.ChildNodes)
               {
-                album.Artist = artistNode.InnerText;
-                break;
+                var track = new MusicBrainzTrack();
+                track.DiscId = pos;
+                track.TrackCount = trackCount;
+                foreach (XmlNode trackDetail in trackNode.ChildNodes)
+                {
+                  if (trackDetail.Name == "recording")
+                    track.Id = trackDetail.Attributes["id"].InnerXml;
+
+                  if (trackDetail.Name == "position")
+                    track.Number = Convert.ToInt32(trackDetail.InnerText);
+                }
+                album.Tracks.Add(track);
               }
             }
-          }
-
-          if (childNode.Name == "release-event-list")
-          {
-            foreach (XmlNode releaseNode in childNode)
-            {
-              if (releaseNode.Name == "event")
-                album.Year = releaseNode.Attributes["date"].InnerXml;
-            }
-          }
-
-          if (childNode.Name == "track-list")
-          {
-            foreach (XmlNode trackNode in childNode.ChildNodes)
-            {
-              MusicBrainzTrack track = new MusicBrainzTrack();
-              track.Id = trackNode.Attributes["id"].InnerXml;
-              track.AlbumId = album.Id;
-              track.Album = album.Title;
-              track.Artist = album.Artist;
-              foreach (XmlNode trackDetail in trackNode.ChildNodes)
-              {
-                if (trackDetail.Name == "title")
-                  track.Title = trackDetail.InnerText;
-
-                if (trackDetail.Name == "duration")
-                  track.Duration = Convert.ToInt32(trackDetail.InnerText);
-              }
-              album.Tracks.Add(track);
-            }
+            
           }
         }
+      }
 
-        if (album.Asin != null)
+      if (album.Asin != null)
+      {
+        // Now do a lookup on Amazon for the Image Url
+        using (var amazonInfo = new AmazonAlbumInfo())
         {
-          // Now do a lookup on Amazon for the Image Url
-          using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
-          {
-            AmazonAlbum amazonAlbum = amazonInfo.AmazonAlbumLookup(album.Asin);
-            album.Amazon = amazonAlbum;
-          }
+          AmazonAlbum amazonAlbum = amazonInfo.AmazonAlbumLookup(album.Asin);
+          album.Amazon = amazonAlbum;
         }
       }
 
@@ -123,7 +149,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region IDisposable Members
 
-    public void Dispose() {}
+    public void Dispose() { }
 
     #endregion
   }

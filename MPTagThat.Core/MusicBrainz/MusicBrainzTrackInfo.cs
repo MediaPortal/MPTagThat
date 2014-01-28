@@ -43,7 +43,9 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region Private Constants
 
-    private const string musicBrainzUrl = "http://api.acoustid.org/v2/lookup";
+    private const string acoustIdUrl = "http://api.acoustid.org/v2/lookup";
+    private const string musicBrainzUrl = "http://musicbrainz.org/ws/2/recording";
+    private const string musicBrainzRequestByID = "/{0}?format=xml&inc=artists+releases";
 
     #endregion
 
@@ -53,7 +55,7 @@ namespace MPTagThat.Core.MusicBrainz
     {
       _postParameters.Add("client", "mfbgmu2P");
       _postParameters.Add("format", "xml");
-      _postParameters.Add("meta", "recordings+releases+tracks");
+      _postParameters.Add("meta", "recordingids");
     }
 
     #endregion
@@ -85,7 +87,6 @@ namespace MPTagThat.Core.MusicBrainz
     /// <returns>FingerPrint</returns>
     private string GetFingerPrint(string fileName, out int duration)
     {
-      //string fopsParam = string.Format("-length {0} \"{1}\"", duration, fileName);
       string fopsParam = string.Format("\"{0}\"", fileName);
 
       List<string> fingerPrint = ExecuteProcReturnStdOut("fpcalc.exe", fopsParam, 40000);
@@ -146,104 +147,120 @@ namespace MPTagThat.Core.MusicBrainz
     /// <returns></returns>
     private List<MusicBrainzTrack> RetrieveMusicBrainzTrack(string fingerPrint, int duration)
     {
-      log.Debug("Identify: Get track information");
+      log.Debug("Identify: Get track information by using fingerprint");
       List<MusicBrainzTrack> tracks = new List<MusicBrainzTrack>();
 
       _postParameters.Add("duration", duration.ToString());
       _postParameters.Add("fingerprint", fingerPrint);
 
-      string responseXml = Util.HttpPostRequest(musicBrainzUrl, _postParameters);
+      string responseXml = Util.HttpPostRequest(acoustIdUrl, _postParameters);
       if (responseXml == null)
         return tracks;
 
-      XmlDocument xml = new XmlDocument();
+      var xml = new XmlDocument();
       xml.LoadXml(responseXml);
 
-      XmlNodeList nodes = xml.SelectNodes("/response/results/result/recordings/recording/releases/release");
-      if (nodes.Count > 0)
+      List<string> trackIds = new List<string>();
+      var idNodes = xml.SelectNodes("/response/results/result/recordings/recording/id");
+      if (idNodes != null)
       {
-        foreach (XmlNode releaseNode in nodes)
+        foreach (XmlNode idNode in idNodes)
         {
-          MusicBrainzTrack track = new MusicBrainzTrack();
-          foreach (XmlNode childNode in releaseNode)
+          trackIds.Add(idNode.InnerText);
+        }
+      }
+
+      log.Debug("Identify: Lookup Track and Album Information at MusicBrainz");
+      foreach (var trackId in trackIds)
+      {
+        string musicBrainzRequest = musicBrainzUrl + string.Format(musicBrainzRequestByID, trackId);
+        responseXml = Util.GetWebPage(musicBrainzRequest);
+        if (responseXml != null)
+        {
+          MusicBrainzTrack mbTrack = ParseMusicBrainzQueryResult(responseXml);
+          if (mbTrack != null)
+          {
+            tracks.Add(mbTrack);
+          }
+        }
+      }
+
+      return tracks;
+    }
+
+    MusicBrainzTrack ParseMusicBrainzQueryResult(string responseXml)
+    {
+      var track = new MusicBrainzTrack();
+      var xml = new XmlDocument();
+      xml.LoadXml(responseXml);
+      var nsMgr = new XmlNamespaceManager(xml.NameTable);
+      nsMgr.AddNamespace("m", "http://musicbrainz.org/ns/mmd-2.0#");
+
+      // Getting the Id
+      var idNode = xml.SelectSingleNode("/m:metadata/m:recording", nsMgr);
+      if (idNode == null)
+      {
+        return null;
+      }
+      track.Id = idNode.Attributes["id"].Value;
+
+      // Selecting the Title
+      var nodes = xml.SelectNodes("/m:metadata/m:recording/m:title", nsMgr);
+      if (nodes == null)
+      {
+        return null;
+      }
+      track.Title = nodes[0].InnerText;
+
+      // Get the Duration
+      nodes = xml.SelectNodes("/m:metadata/m:recording/m:length", nsMgr);
+      if (nodes != null && nodes.Count > 0)
+      {
+        track.Duration = Convert.ToInt32(nodes[0].InnerText) / 1000;
+      }
+
+      // Get the Artist(s)
+      nodes = xml.SelectNodes("/m:metadata/m:recording/m:artist-credit/m:name-credit/m:artist/m:name", nsMgr);
+      if (nodes != null)
+      {
+        var artists = new List<string>();
+        foreach (XmlNode node in nodes)
+        {
+          artists.Add(node.InnerText);
+        }
+        track.Artist = string.Join(";", artists);
+      }
+
+      // Get the Release(s)
+      nodes = xml.SelectNodes("/m:metadata/m:recording/m:release-list/m:release", nsMgr);
+      if (nodes != null)
+      {
+        foreach (XmlNode node in nodes)
+        {
+          var release = new MusicBrainzRelease();
+          release.AlbumId = node.Attributes["id"].Value;
+          foreach (XmlNode childNode in node)
           {
             if (childNode.Name == "title")
-            {
-              track.Album = childNode.InnerText;
-            }
+              release.Album = childNode.InnerText;
 
-            if (childNode.Name == "artists")
-            {
-              foreach (XmlNode artistsNode in childNode)
-              {
-                foreach (XmlNode artistNode in artistsNode)
-                {
-                  if (artistNode.Name == "name")
-                  {
-                    track.AlbumArtist = artistNode.InnerText;
-                    break;
-                  }
-                }
-              }
-            }
+            if (childNode.Name == "country")
+              release.Country = childNode.InnerText;
 
             if (childNode.Name == "date")
             {
-              foreach (XmlNode dateNode in childNode)
+              string year = childNode.InnerText;
+              if (year.Length > 4)
               {
-                if (dateNode.Name == "year")
-                {
-                  track.Year = Convert.ToInt32(dateNode.InnerText);
-                  break;
-                }
+                year = year.Substring(0, 4);
               }
-            }
-
-            if (childNode.Name == "id")
-            {
-              track.AlbumId = childNode.InnerText;
-            }
-
-            if (childNode.Name == "mediums")
-            {
-              foreach (XmlNode mediumNode in childNode.ChildNodes[0].ChildNodes)
-              {
-                if (mediumNode.Name == "tracks")
-                {
-                  foreach (XmlNode trackNode in mediumNode.ChildNodes[0])
-                  {
-                    if (trackNode.Name == "title")
-                      track.Title = trackNode.InnerText;
-
-                    if (trackNode.Name == "id")
-                      track.Id = trackNode.InnerText;
-
-                    if (trackNode.Name == "position")
-                      track.Number = Convert.ToInt32(trackNode.InnerXml);
-
-                    if (trackNode.Name == "artists")
-                    {
-                      foreach (XmlNode artistsNode in trackNode.ChildNodes)
-                      {
-                        foreach (XmlNode artistNode in artistsNode.ChildNodes)
-                        {
-                          if (artistNode.Name == "name")
-                          {
-                            track.Artist = artistNode.InnerText;
-                            break;
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+              release.Year = Convert.ToInt32(year);
             }
           }
-          tracks.Add(track);
+          track.Releases.Add(release);
         }
       }
-      return tracks;
+      return track;
     }
 
     #endregion

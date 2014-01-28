@@ -560,32 +560,50 @@ namespace MPTagThat.GridView
             if (musicBrainzTracks.Count > 0)
             {
               MusicBrainzTrack musicBrainzTrack = null;
-              if (musicBrainzTracks.Count == 1)
+              if (musicBrainzTracks.Count == 1 && musicBrainzTracks[0].Releases.Count == 1)
+              {
                 musicBrainzTrack = musicBrainzTracks[0];
+                // Have we got already this album
+                if (musicBrainzTrack.AlbumId == null || musicBrainzTrack.AlbumId != musicBrainzAlbum.Id)
+                {
+                  using (var albumInfo = new MusicBrainzAlbumInfo())
+                  {
+                    musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
+                  }
+                }
+                musicBrainzTrack.AlbumId = musicBrainzAlbum.Id;
+              }
               else
               {
                 // Skip the Album selection, if the album been selected already for a previous track
                 bool albumFound = false;
-                foreach (MusicBrainzTrack mbtrack in musicBrainzTracks)
+                foreach (var mbtrack in musicBrainzTracks)
                 {
-                  if (mbtrack.AlbumId == musicBrainzAlbum.Id)
+                  foreach (var mbRelease in mbtrack.Releases )
                   {
-                    albumFound = true;
-                    musicBrainzTrack = mbtrack;
-                    break;
+                    if (mbRelease.AlbumId == musicBrainzAlbum.Id)
+                    {
+                      albumFound = true;
+                      musicBrainzTrack = mbtrack;
+                      musicBrainzTrack.AlbumId = mbRelease.AlbumId;
+                      break;
+                    }
                   }
                 }
 
                 if (!albumFound)
                 {
-                  MusicBrainzAlbumResults dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
+                  var dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
                   dlgAlbumResults.Owner = _main;
                   if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
                   {
-                    if (dlgAlbumResults.SelectedListItem > -1)
-                      musicBrainzTrack = musicBrainzTracks[dlgAlbumResults.SelectedListItem];
-                    else
-                      musicBrainzTrack = musicBrainzTracks[0];
+                    var itemTag = dlgAlbumResults.SelectedListItem as Dictionary<string, MusicBrainzTrack>;
+                    foreach (var albumId in itemTag.Keys)
+                    {
+                      itemTag.TryGetValue(albumId, out musicBrainzTrack);
+                      musicBrainzTrack.AlbumId = albumId;
+                    }
+
                   }
                   dlgAlbumResults.Dispose();
                 }
@@ -602,7 +620,7 @@ namespace MPTagThat.GridView
               // if not, get the album, so that we have the release date
               if (musicBrainzAlbum.Id != musicBrainzTrack.AlbumId)
               {
-                using (MusicBrainzAlbumInfo albumInfo = new MusicBrainzAlbumInfo())
+                using (var albumInfo = new MusicBrainzAlbumInfo())
                 {
                   Application.DoEvents();
                   if (_progressCancelled)
@@ -616,8 +634,21 @@ namespace MPTagThat.GridView
 
               track.Title = musicBrainzTrack.Title;
               track.Artist = musicBrainzTrack.Artist;
-              track.Album = musicBrainzTrack.Album;
-              track.Track = musicBrainzTrack.Number.ToString();
+              track.Album = musicBrainzAlbum.Title;
+              track.AlbumArtist = musicBrainzAlbum.Artist;
+
+              // Get the Disic and Track# from the Album
+              foreach (var mbTrack in musicBrainzAlbum.Tracks)
+              {
+                if (mbTrack.Id == musicBrainzTrack.Id)
+                {
+                  track.TrackNumber = Convert.ToUInt32(mbTrack.Number);
+                  track.TrackCount = Convert.ToUInt32(mbTrack.TrackCount);
+                  track.DiscNumber = Convert.ToUInt32(mbTrack.DiscId);
+                  track.DiscCount = Convert.ToUInt32(musicBrainzAlbum.DiscCount);
+                  break;
+                }
+              }
 
               if (musicBrainzAlbum.Year != null && musicBrainzAlbum.Year.Length >= 4)
                 track.Year = Convert.ToInt32(musicBrainzAlbum.Year.Substring(0, 4));
@@ -628,10 +659,10 @@ namespace MPTagThat.GridView
                 // Only write a picture if we don't have a picture OR Overwrite Pictures is set
                 if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
                 {
-                  ByteVector vector = musicBrainzAlbum.Amazon.AlbumImage;
+                  var vector = musicBrainzAlbum.Amazon.AlbumImage;
                   if (vector != null)
                   {
-                    MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+                    var pic = new MPTagThat.Core.Common.Picture();
                     pic.MimeType = "image/jpg";
                     pic.Description = "";
                     pic.Type = PictureType.FrontCover;

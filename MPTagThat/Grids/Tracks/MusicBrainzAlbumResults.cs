@@ -37,9 +37,16 @@ namespace MPTagThat.GridView
 
     #region Properties
 
-    public int SelectedListItem
+    public object SelectedListItem
     {
-      get { return lvSearchResults.SelectedIndices[0]; }
+      get
+      {
+        if (lvSearchResults.SelectedIndices.Count > 0)
+        {
+          return lvSearchResults.Items[lvSearchResults.SelectedIndices[0]].Tag;
+        }
+        return lvSearchResults.Items[0].Tag;
+      }
     }
 
     #endregion
@@ -56,6 +63,8 @@ namespace MPTagThat.GridView
       Text = ServiceScope.Get<ILocalisation>().ToString("MusicBrainz", "Header");
       chAlbum.Text = ServiceScope.Get<ILocalisation>().ToString("MusicBrainz", "Album");
       chDuration.Text = ServiceScope.Get<ILocalisation>().ToString("MusicBrainz", "Duration");
+      chYear.Text = ServiceScope.Get<ILocalisation>().ToString("column_header.Year", "Year");
+      chCountry.Text = ServiceScope.Get<ILocalisation>().ToString("MusicBrainz", "Country");
 
       this.tracks = tracks;
       FillResults();
@@ -72,11 +81,17 @@ namespace MPTagThat.GridView
 
       foreach (MusicBrainzTrack track in tracks)
       {
-        ListViewItem item = new ListViewItem(track.Album);
-        string minute = (track.Duration / 1000 / 60).ToString().PadLeft(2, '0');
-        string secs = ((track.Duration / 1000) % 60).ToString().PadLeft(2, '0');
-        item.SubItems.Add(string.Format("{0}:{1}", minute, secs));
-        lvSearchResults.Items.Add(item);
+        foreach (MusicBrainzRelease release in track.Releases)
+        {
+          var itemTag = new Dictionary<string, MusicBrainzTrack> {{release.AlbumId, track}};
+          var item = new ListViewItem(release.Album) {Tag = itemTag};
+          item.SubItems.Add(release.Country);
+          item.SubItems.Add(release.Year.ToString());
+          string minute = (track.Duration / 60).ToString().PadLeft(2, '0');
+          string secs = ((track.Duration) % 60).ToString().PadLeft(2, '0');
+          item.SubItems.Add(string.Format("{0}:{1}", minute, secs));
+          lvSearchResults.Items.Add(item);          
+        }
       }
     }
 

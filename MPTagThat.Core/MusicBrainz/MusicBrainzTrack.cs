@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -31,27 +32,32 @@ namespace MPTagThat.Core.MusicBrainz
 
     #region Private Fields
 
+    private List<MusicBrainzRelease> _releases = new List<MusicBrainzRelease>(); 
+
     #endregion
 
     #region Properties
 
     public string Id { get; set; }
 
+    public int DiscId { get; set; }
+
     public int Number { get; set; }
+
+    public int TrackCount { get; set; }
 
     public string Title { get; set; }
 
     public string Artist { get; set; }
 
-    public string AlbumArtist { get; set; }
-
-    public string Album { get; set; }
-
     public string AlbumId { get; set; }
 
     public int Duration { get; set; }
 
-    public int Year { get; set; }
+    public List<MusicBrainzRelease> Releases
+    {
+      get { return _releases; }
+    }
 
     #endregion
   }

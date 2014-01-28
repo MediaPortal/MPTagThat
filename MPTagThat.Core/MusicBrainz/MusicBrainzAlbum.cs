@@ -52,6 +52,8 @@ namespace MPTagThat.Core.MusicBrainz
 
     public string Year { get; set; }
 
+    public int DiscCount { get; set; }
+
     public List<MusicBrainzTrack> Tracks { get; set; }
 
     public AmazonAlbum Amazon { get; set; }

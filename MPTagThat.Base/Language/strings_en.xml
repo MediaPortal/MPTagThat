@@ -424,6 +424,7 @@
     <string name="MusicBrainz.Update">Select</string>
     <string name="MusicBrainz.SearchInfo">Identified Track</string>
     <string name="MusicBrainz.Album">Album</string>
+	<string name="MusicBrainz.Country">Country</string>
     <string name="MusicBrainz.Duration">Duration</string>
     <string name="MusicBrainz.GroupBoxResults">The track is available on multiple albums. Please select</string>
   
