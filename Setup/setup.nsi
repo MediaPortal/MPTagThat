@@ -146,8 +146,6 @@ Section -Main SEC0000
     # Base Files
     SetOutPath $INSTDIR
     File ..\MPTagThat.Base\Config.xml
-    File ..\MPTagThat.Base\libfftw3-3.dll
-    File ..\MPTagThat.Base\libofa.dll
     File ..\MPTagThat\bin\Release\MPTagThat.exe
     File ..\MPTagThat\bin\Release\MPTagThat.exe.config
     File ..\MPTagThat\bin\Release\MPTagThat.Core.dll
