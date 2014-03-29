@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
 using MPTagThat.Core.Common;
+using MPTagThat.Core.ShellLib;
 using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 using TagLib;
@@ -2729,12 +2730,10 @@ namespace MPTagThat.TagEdit
     /// <param name = "e"></param>
     private void buttonGetPicture_Click(object sender, EventArgs e)
     {
-      OpenFileDialog oFD = new OpenFileDialog();
-      oFD.Filter = "Pictures (Bmp, Jpg, Gif, Png)|*.jpg;*.jpeg;*.bmp;*.Gif;*.png";
-      oFD.Multiselect = false;
+      var oFD = new ShellOpenFileDialog();
+      oFD.Filter = "Pictures (Bmp, Jpg, Gif, Png)\0*.jpg;*.jpeg;*.bmp;*.Gif;*.png\0";
       oFD.InitialDirectory = main.CurrentDirectory;
-      DialogResult result = oFD.ShowDialog();
-      if (result == DialogResult.OK)
+      if (oFD.ShowDialog())
       {
         try
         {
@@ -2742,6 +2741,7 @@ namespace MPTagThat.TagEdit
           AddPictureToList();
           AddPictureToPictureBox();
           _pictureIsChanged = true;
+          checkBoxRemoveExistingPictures.Checked = true;
         }
         catch (Exception ex)
         {
@@ -2935,6 +2935,7 @@ namespace MPTagThat.TagEdit
         AddPictureToList();
         AddPictureToPictureBox();
         _pictureIsChanged = true;
+        checkBoxRemoveExistingPictures.Checked = true;
       }
       Cursor = Cursors.Default;
     }

@@ -305,6 +305,7 @@
     <Compile Include="ShellLib\ShellFileOperation.cs" />
     <Compile Include="ShellLib\ShellFunctions.cs" />
     <Compile Include="ShellLib\ShellGUIDs.cs" />
+    <Compile Include="ShellLib\ShellOpenFileDialog.cs" />
     <Compile Include="ShellLib\SourceCustomList.cs" />
     <Compile Include="Services\ThemeManager\IThemeManager.cs" />
     <Compile Include="Services\ThemeManager\NoThemeManager.cs" />
