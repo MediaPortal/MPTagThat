@@ -648,6 +648,7 @@ namespace MPTagThat
         textBoxRipOutputFolder.Text = Options.MainSettings.RipTargetFolder;
         ribbon.CurrentTabPage = ribbonTabPageTag;
         ribbon.CustomTitleBarEnabled = true;
+        ribbon.Minimized = false;
         log.Info("Finished Initialising Ribbon");
 
         #endregion
