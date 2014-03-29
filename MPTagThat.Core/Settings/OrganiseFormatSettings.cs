@@ -54,7 +54,7 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "true")]
     public bool OverWriteFiles { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool CopyNonMusicFiles { get; set; }
 
     [Setting(SettingScope.User, "")]
