@@ -71,7 +71,6 @@ namespace MPTagThat
     private bool _keyHandled;
     private MusicDatabaseBuild _musicDatabaseBuild;
     private bool _rightPanelCollapsed;
-    private bool _bottomPanelCollapsed;
     private string _selectedDirectory = ""; // The currently selcted Directory
     private bool _showForm;
     private SplashScreen _splashScreen;
@@ -843,7 +842,6 @@ namespace MPTagThat
       Options.MainSettings.RightPanelSize = panelRight.Width;
       Options.MainSettings.RightPanelCollapsed = _rightPanelCollapsed;
       Options.MainSettings.BottomPanelSize = panelMiddleBottom.Height;
-      Options.MainSettings.BottomPanelCollapsed = _bottomPanelCollapsed;
       Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ScriptsCombo.Text;
       Options.SaveAllSettings();
@@ -1428,10 +1426,6 @@ namespace MPTagThat
 
       if (Options.MainSettings.BottomPanelSize > -1 && Options.MainSettings.BottomPanelSize < 1024)
         panelMiddleBottom.Height = Options.MainSettings.BottomPanelSize;
-
-      _bottomPanelCollapsed = Options.MainSettings.BottomPanelCollapsed;
-      if (Options.MainSettings.BottomPanelCollapsed)
-        splitterBottom.ToggleState();
 
       log.Info("Main: Finished Loading Settings");
       log.Trace("<<<");
@@ -3283,7 +3277,6 @@ namespace MPTagThat
 
     private void splitterBottom_Click(object sender, EventArgs e)
     {
-      _bottomPanelCollapsed = splitterBottom.IsCollapsed;
     }
 
     #endregion

@@ -84,9 +84,6 @@ namespace MPTagThat.Core
     public int BottomPanelSize { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool BottomPanelCollapsed { get; set; }
-
-    [Setting(SettingScope.User, "false")]
     public bool PlayerPanelCollapsed { get; set; }
 
     /// <summary>
