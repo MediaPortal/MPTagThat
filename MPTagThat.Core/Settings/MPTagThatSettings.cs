@@ -158,7 +158,7 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool CreateFolderThumb { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool EmbedFolderThumb { get; set; }
 
     [Setting(SettingScope.User, "false")]
