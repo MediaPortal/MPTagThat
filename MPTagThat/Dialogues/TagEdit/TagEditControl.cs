@@ -117,6 +117,8 @@ namespace MPTagThat.TagEdit
       foreach (string type in Enum.GetNames(picTypes))
         cbPicType.Items.Add(type);
 
+      checkBoxRemoveExistingPictures.Checked = Options.MainSettings.ClearExistingPictures;
+
       // Fill Comments Languages
       cbCommentLanguage.DataSource = Util.ISO_LANGUAGES;
       cbCommentLanguage.Text = "eng - English";
@@ -173,6 +175,12 @@ namespace MPTagThat.TagEdit
       dataGridViewUserFrames.CellValueChanged += dataGridViewUserFrames_CellValueChanged;
 
       ChangeCheckboxStatus(false);
+
+      // Register Main Form Closing event, so that we can store values set in the control
+      if (ParentForm != null)
+      {
+        ParentForm.FormClosing += OnLeave;
+      }
     }
 
     private void Localisation()
@@ -194,6 +202,17 @@ namespace MPTagThat.TagEdit
       FrameDesc.HeaderText = localisation.ToString("TagEdit", "FrameDesc");
       FrameValue.HeaderText = localisation.ToString("TagEdit", "FrameText");
       log.Trace("<<<");
+    }
+
+
+    #endregion
+
+    #region Form Close
+
+    private void OnLeave(object sender, EventArgs e)
+    {
+      Options.MainSettings.ClearExistingPictures = checkBoxRemoveExistingPictures.Checked;
+      Options.SaveAllSettings();
     }
 
     #endregion
@@ -1083,7 +1102,7 @@ namespace MPTagThat.TagEdit
       tbBPM.Text = "";
       tbArtist.Text = "";
       tbAlbumArtist.Text = "";
-      checkBoxRemoveExistingPictures.Checked = false;
+      checkBoxRemoveExistingPictures.Checked = Options.MainSettings.ClearExistingPictures;
       pictureBoxCover.Image = null;
       tbPicDesc.Text = "";
       tbTitleSort.Text = "";
@@ -1227,7 +1246,7 @@ namespace MPTagThat.TagEdit
       ckRemoveLyrics.Checked = false;
       ckMediaType.Checked = false;
       checkBoxRemoveComments.Checked = false;
-      checkBoxRemoveExistingPictures.Checked = false;
+      checkBoxRemoveExistingPictures.Checked = Options.MainSettings.ClearExistingPictures;
       ckTrackLength.Checked = false;
     }
 
@@ -2735,13 +2754,18 @@ namespace MPTagThat.TagEdit
       oFD.InitialDirectory = main.CurrentDirectory;
       if (oFD.ShowDialog())
       {
+        if (checkBoxRemoveExistingPictures.Checked)
+        {
+          dataGridViewPicture.Rows.Clear();
+          _pictures.Clear();
+        }
+
         try
         {
           _pic = new Picture(oFD.FileName);
           AddPictureToList();
           AddPictureToPictureBox();
           _pictureIsChanged = true;
-          checkBoxRemoveExistingPictures.Checked = true;
         }
         catch (Exception ex)
         {
@@ -2924,6 +2948,12 @@ namespace MPTagThat.TagEdit
         return;
       }
 
+      if (checkBoxRemoveExistingPictures.Checked)
+      {
+        dataGridViewPicture.Rows.Clear();
+        _pictures.Clear();
+      }
+
       ByteVector vector = amazonAlbum.AlbumImage;
       if (vector != null)
       {
@@ -2935,7 +2965,6 @@ namespace MPTagThat.TagEdit
         AddPictureToList();
         AddPictureToPictureBox();
         _pictureIsChanged = true;
-        checkBoxRemoveExistingPictures.Checked = true;
       }
       Cursor = Cursors.Default;
     }
@@ -3352,7 +3381,7 @@ namespace MPTagThat.TagEdit
           break;
       }
     }
-#endregion
+    #endregion
 
     #endregion
   }

@@ -201,6 +201,9 @@ namespace MPTagThat.Core
       set { _customGenres = value; }
     }
 
+    [Setting(SettingScope.User, "false")]
+    public bool ClearExistingPictures { get; set; }
+
     #endregion
 
     #region Lyrics
