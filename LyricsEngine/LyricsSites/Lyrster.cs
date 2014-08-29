@@ -110,7 +110,7 @@ namespace LyricsEngine.LyricsSites
             try
             {
                 reply = e.Result;
-                reader = new StreamReader(reply, Encoding.Default);
+                reader = new StreamReader(reply, Encoding.UTF8);
 
                 var line = "";
 
