@@ -48,7 +48,7 @@ namespace MPTagThat.GridView
       _track = new GridViewColumn("Track", "text", 40, true, true, true, true);
       _artist = new GridViewColumn("Artist", "text", 150, true, true, true, true);
       _title = new GridViewColumn("Title", "text", 150, true, true, true, true);
-      _lyrics = new GridViewColumn("Lyrics", "text", 250, true, true, false, true);
+      _lyrics = new GridViewColumn("Lyrics", "text", 330, true, true, false, true);
       LoadSettings();
     }
 
