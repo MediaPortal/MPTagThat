@@ -36,7 +36,7 @@ namespace MPTagThat.GridView
 
     private const int m_NoOfCurrentSearchesAllowed = 6;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly string[] m_strippedPrefixStrings = {"the", "les"};
+    private readonly string[] m_strippedPrefixStrings = {"the ", "les "};
 
     private readonly List<TrackData> tracks;
 
@@ -245,11 +245,9 @@ namespace MPTagThat.GridView
     {
       foreach (string s in strippedPrefixStringArray)
       {
-        int index = artist.IndexOf(s);
-        if (index != -1)
+        if (artist.Trim().ToLowerInvariant().StartsWith(s))
         {
-          string prefix = artist.Substring(index + 2);
-          artist = prefix + " " + artist.Replace(s, "");
+          artist = artist.Substring(s.Length);
           break;
         }
       }
