@@ -126,7 +126,6 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Atnaujinti</string>
-  <string name="screentip.RefreshText">Dabar pasirinkto aplanko turinys nustaitytas.⏎\nJei yra laukiančių pakeitimų, sistema klausia ar prieš tai išsaugoti pakeitimus.</string>
   <string name="screentip.Save">Išsaugoti pakeitimus</string>
   <string name="screentip.SaveText">Pakeisti visas pažymėtas žymas ir išsaugoti pokyčius į diską.</string>
   <string name="screentip.ColumnsSelect">Stulpelius rodyti tinklelyje</string>
@@ -135,7 +134,6 @@
   <string name="screentip.TagFromFile">Žyma pagal failo vardą</string>
   <string name="screentip.TagFromFileText">Naudojant specialiuosius parametrus nurodytus dialoge, įvairios žymos kaip \"Takelis #\", \"Atlikėjas\", \"Antraštė\" ir t.t. bus paimtos iš failo pavadinimo.</string>
   <string name="screentip.IdentifyFile">Nustatyti failą</string>
-  <string name="screentip.IdentifyFileText">Hešas yra sukuriamas pagal pirmasias 30 failo sekundžių. Šis hešas naudojamas identifikavimui MusicBrainz.⏎\nTuomet žymos paimamos iš Musicbrainz ir įrašoms į failą.</string>
   <string name="screentip.TagFromInternet">Žyma iš interneto</string>
   <string name="screentip.TagFromInternetText">Duotas Atlikėjo ir Albumo pavadinimas naudojamas Amazon paieškai bandand sulyginti failo pavadinimą su gautu iš Amazon sąrašu.</string>
   <string name="screentip.SingleTagEdit">Vienos žymos redagavimas</string>
@@ -181,9 +179,7 @@
   <string name="screentip.FixSong">Pataisyti MP3</string>
   <string name="screentip.FixSongText">Naudoja MP3Val, kad pataisyti klaidas aptiktas pasirinktame MP3 faile.</string>
   <string name="screentip.ReplayGain">Garso stiprumo žyma</string>
-  <string name="screentip.ReplayGainText">Analizuoja pasirinktą failą ir apskaičiuoja Garso lygį. Apskaičiuota vertė įrašoma į Žymas.⏎\nPastaba: failas nebus modifikuotas.</string>
   <string name="screentip.BPM">BPM aptikimas</string>
-  <string name="screentip.BPMText">Analizuoja pasirinktą failą ir apskaičiuoja Taktų per minutę (BPM) lygį. Apskaičiuota vertė įrašoma į Žymas.\nPastaba: failas nebus modifikuotas.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Pradėti ripinti</string>
   <string name="screentip.RipButtonText">Pradėti pasirinktų failų Skaitmeninį kopijavimą</string>
@@ -308,7 +304,6 @@
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Reitingai (Netaikomi Ne-ID3 failams, prašome pasirinkti reitingą Žvaigždės stulpelyje)</string>
   <string name="TagEdit.RemoveExistingRatings">Pirma pašalinti esamus Reitingus</string>
-  <string name="TagEdit.RatingNote">Reitingas gali būti nuo 1 iki 255, kur 1 yra prasčiausias ir 255 geriausias. 0 yra nežinomas.⏎\n⏎\nPastaba: daugelis programų turi savo vertinimus ir gali nustatyti ID3 standartą savaip. Tai gali buti leistina jei asmeniškai tinka.</string>
   <string name="TagEdit.PlayCounter">Grojimo skaitklis:</string>
   <string name="TagEdit.RemoveRating">Pašalinti vertinimą</string>
   <string name="TagEdit.AddRating">Pridėti vertinimą</string>
@@ -581,7 +576,6 @@
   <string name="Settings.DescPrefStandard">Šis profilis suteiks kokybę tinkamą daugeliui žmonių ir daugumai muzikos garsų ir yra pakankamai aukštos kokybės (Kokybės rėžis 170-210)</string>
   <string name="Settings.DescPrefExtreme">Jei turite labai gerą klausą ir atitinkamą įrangą, šis profilis suteiks šiek tiek aukštesnę kokybę nei standartiniu režimu (Kokybės rėžis 220-260)</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Šis profilis bus perteklinis daugeliui žmonių ir daugelyje situacijų, bet jei norite turėti absoliučiai aukštą kokybę nekreipiant dėmesio į failo dydį, šis jums tinkamiausias.</string>
-  <string name="Settings.DescPrefABR">ABR (aukšta kokybė bet ne tokia kaip VBR). Naudojantį šį profilį gausite gerą kokybę pagal numatytą kokybę.⏎\n⏎\nPriklausomai nuo kokybės kurią įvedėte, šis profilis tinkamas konkrečiai situacijai. Kadangi vidurkinimas turi įtakos, tai nebus tokia gera kokybė kaip naudojant VBR.</string>
   <string name="Settings.TabGeneral">Bendras</string>
   <string name="Settings.GroupBoxKeys">Klaviatūros nuoroda</string>
   <string name="Settings.ChangeKey">Keisti</string>
@@ -637,17 +631,13 @@
   <string name="Settings.AddCustomGenre">Pridėti žanrą</string>
   <string name="Settings.DeleteCustomGenre">Trinti žanrą</string>
   <string name="Settings.GroupBoxDatabaseBuild">Muzikos duomenų bazės  versija</string>
-  <string name="Settings.DatabaseScanNote">Jei nėra MediaPortal Muzikos duomenų bazės, tokią gali būti sukurta įvedant failo vardą į ši langelį.⏎\nTuomet pradėkite skenavimą.</string>
   <string name="Settings.StartDBScan">Pradėti skenuoti</string>
   <string name="Settings.DBScanStatus">Skenavimo būsena</string>
-  <string name="Settings.DBNotExists">Pasirinkta duomenų bazė nerasta.⏎\nJei pasirinksite \"Taip\", bus sukurta nauja duomenų bazė.⏎\nPradėkite skenuoti, kad užildyti duomenų bazę.</string>
   <string name="Settings.ClearDatabase">Išvalyti duomenų bazės turinį prieš skenavimą</string>
   <string name="Settings.SelectMusicFolder">Pasirinkti katalogą su jūsų Muzikos failais</string>
   <string name="Settings.DBScanIdle">Duomenų bazės skenavimas neaktyvus.</string>
-  <string name="Settings.DBScanFinished">Duomenų bazės skenavimas baigtas.⏎\nUžbaigta  {0} takelių: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary">({0} sekundžių takelyje)</string>
   <string name="Settings.DBScanTitle">Patvirtinti duomenų bazės skenavimo atšaukimą</string>
-  <string name="Settings.DBScanActive">Duomenų bazė skenavimo vis dar aktyvus.⏎\nAtšaukti skenavimą ir uždaryti programą?</string>
   <string name="Settings.DBScanProgress">Apdorojamas failas {0} iš {1}</string>
   <string name="Settings.TabRipping">Kopijuojama</string>
   <string name="Settings.TabRippingGeneral">Bendras</string>
@@ -763,7 +753,6 @@
   <string name="message.Error_Title">Klaida</string>
   <string name="message.Save_Changes">Pakeitimai neišsaugoti. ar norite išsaugoti pakeitimus?</string>
   <string name="message.Save_Changes_Title">Išsaugoti pakeitimus</string>
-  <string name="message.Script_Compile_Failed">Skripto kompiliavimas nepavyko.⏎\n⏎\nPrašome žiūrėti žurnalinius įrašus.</string>
   <string name="message.DataEntryError">Nurodyta reikšmė netinkama.</string>
   <string name="message.NoSelectionHeader">Nėra pasirinkimo</string>
   <string name="message.NoSelection">Prašome pasirinkti bent vieną eilutę veiksmui atlikti</string>
@@ -771,8 +760,6 @@
   <string name="message.DeleteConfirm">Ar jūs tikrai norite ištrinti pasirinktus failus?</string>
   <string name="message.DeleteFolders">Norint ištrinti katalogą, prašome naudoti Shift-Del</string>
   <string name="message.Fixed">Pataisyta</string>
-  <string name="message.FatalError">Esminė klaida. MPTagThat bus išjungtas↩⏎\nPrašome šiūrėti žurnalinius įrašus.</string>
-  <string name="message.OutOfMemory">Per daug failų nuskenuota. Trūksta atminties.↩⏎\nAtšaukiamas skenavimas.</string>
   <string name="message.ErrorResetAttr">Negalima atšaukti tik-skaitymui atributo</string>
   <string name="message.CorruptFile">Sugadintas failas</string>
   <string name="message.UnsupportedFormat">Nepalaikomas formatas</string>
@@ -796,7 +783,6 @@
   <!--About Dialog-->
   <string name="about.Header">Apie</string>
   <string name="about.Ok">Ok</string>
-  <string name="about.Description">MPTarThat yra atviro kodo Žymų redaktorius, kuris leidžia valdyti visą jūsų muzikos kolekciją.⏎\n⏎\nDaugiau informacijos:</string>
   <string name="about.Version">Versija:</string>
   <string name="about.BuildDate">Versijos data:</string>
   <string name="about.Contributors">Pagalbininkai</string>
@@ -816,7 +802,6 @@
   <string name="dbsearch.Album">Albumas (susideda iš):</string>
   <string name="dbsearch.Title">Antraštė (susideda iš):</string>
   <string name="dbsearch.Search">Ieškoti</string>
-  <string name="dbsearch.NoMusicDB">Norėdami naudoti duomenų bazės paieškos funkcija,⏎\njūs turite įvesti į nustatymus muzikos duomenų bazės vietą.</string>
   <string name="dbsearch.NoSearchValues">Prašome įvesti nors vieną peiškos vertę.</string>
   <string name="dbsearch.TooMuchRows">Užklausa pateikė per daug įrašų. Tik pirmieji 1000 bus rodomi.</string>
   <!--Find / Replace-->
@@ -836,12 +821,10 @@
   <string name="findreplace.ReplaceAllBtn">Pakeisti visus</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Failas tik-skaitymui</string>
-  <string name="readonly.Explanation">Nurodytas failas yra tik-skaitymui.⏎ Ar turėtų MPTagThat  pakeisti atributą ir įrašyti failą?</string>
   <string name="readonly.Yes">Taip</string>
   <string name="readonly.YesToAll">Taip viskam</string>
   <string name="readonly.No">Ne</string>
   <string name="readonly.NoToAll">Ne visiems</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Albumo garso normalizavimas</string>
-  <string name="albumgain.Explanation">Visi failai pasirinkti.⏎\nAr turėtų MPTagThat įvertinti albumo garso normalizavimą?</string>
 </resources>

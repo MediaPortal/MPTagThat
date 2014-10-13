@@ -126,7 +126,8 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Uppdatera</string>
-  <string name="screentip.RefreshText">Innehållet i den valda mappen läses om.\nOm ändringar ej sparats kommer systemet att fråga om en sparning skall ske.</string>
+  <string name="screentip.RefreshText">Innehållet i den valda mappen läses om.
+Om ändringar ej sparats kommer systemet att fråga om en sparning skall ske.</string>
   <string name="screentip.Save">Spara Ändringar</string>
   <string name="screentip.SaveText">Sparar ändringar genom att ändra samtliga taggar i valda filer.</string>
   <string name="screentip.ColumnsSelect">Kolumner som Visas i Rutnätet</string>
@@ -135,7 +136,8 @@
   <string name="screentip.TagFromFile">Taggar från Filnamn</string>
   <string name="screentip.TagFromFileText">Genom att använda de specifika parametrar som angetts i dialogrutan, kommer olika taggar såsom \"Track #\", \"Artist\", \"Title\", osv. att hittas i filnamnet.</string>
   <string name="screentip.IdentifyFile">Identifiera Fil</string>
-  <string name="screentip.IdentifyFileText">En markör finns, uppbyggd av filens första 30 sekunder. Denna markör kan sedan användas för att identifiera filen på MusicBrainz.\nTaggarna hämtas sedan från MusicBrainz och skrivs in i filen.</string>
+  <string name="screentip.IdentifyFileText">En markör finns, uppbyggd av filens första 30 sekunder. Denna markör kan sedan användas för att identifiera filen på MusicBrainz.
+Taggarna hämtas sedan från MusicBrainz och skrivs in i filen.</string>
   <string name="screentip.TagFromInternet">Tagga från Internet</string>
   <string name="screentip.TagFromInternetText">De angivna Artist- och Album-namnen används för att matcha filnamnen mot en lista som hämtas från Amazon.</string>
   <string name="screentip.SingleTagEdit">Ändra på en enda tagg</string>
@@ -181,7 +183,8 @@
   <string name="screentip.FixSong">Fixa MP3</string>
   <string name="screentip.FixSongText">Använder MP3Val till att fixa fel som uppdagats i den valda MP3-filen.</string>
   <string name="screentip.ReplayGain">Uppspelningsvolym</string>
-  <string name="screentip.ReplayGainText">Analyserar den valda filen och räknar ut Uppspelningsvolymen. Det uträknade värdet skrivs in i taggen.\nNotera att dynamiken i filen ej ändras.</string>
+  <string name="screentip.ReplayGainText">Analyserar den valda filen och räknar ut Uppspelningsvolymen. Det uträknade värdet skrivs in i taggen.
+Notera att dynamiken i filen ej ändras.</string>
   <string name="screentip.BPM">BPM Beräkning</string>
   <string name="screentip.BPMText">Analyserar den valda filen ock beräknar  slag per minut (BPM). Det beräknade värdet skrivs som en tag, Notera att filen isig inte ändaras.</string>
   <!--Rip Tab-->
@@ -308,7 +311,9 @@
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Gradering (För filer som saknar ID3, var god välj graderingen i Stjärnkolumnen)</string>
   <string name="TagEdit.RemoveExistingRatings">Radera Befintlig Gradering Först</string>
-  <string name="TagEdit.RatingNote">Graderingen är 1-255 där 1 är värst och 255 är bäst. 0 är okänd.\n\nNotera: Många program har en egen gradering och kan komma att ändra på ID3-standarden. Om ingen personlig räknare önskas kan detta väljas bort.</string>
+  <string name="TagEdit.RatingNote">Graderingen är 1-255 där 1 är värst och 255 är bäst. 0 är okänd.
+
+Notera: Många program har en egen gradering och kan komma att ändra på ID3-standarden. Om ingen personlig räknare önskas kan detta väljas bort.</string>
   <string name="TagEdit.PlayCounter">Uppspelningsräknare:</string>
   <string name="TagEdit.RemoveRating">Ta Bort Graderingen</string>
   <string name="TagEdit.AddRating">Lägg Till Gradering</string>
@@ -581,7 +586,9 @@
   <string name="Settings.DescPrefStandard">Denna inställning är generellt fullt duglig för de flesta lyssnare och i ganska hög kvalitét. (Bitrate mellan 170-210)</string>
   <string name="Settings.DescPrefExtreme">För de med extremt vältränad hörsel eller hifi-utrustning kan denna inställning ge det lilla extra som saknas utöver \"standard\"-läget. (Bitrate mellan 220-260)</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Denna inställning är för de flesta lyssnarna och i de flesta fallen onödigt hög, men om du inte vill kompromissa med kvalitét oberoende av filstorlek, så är detta vad du vill ha.</string>
-  <string name="Settings.DescPrefABR">ABR-lägen (hög kvalitét efter angiven bitrate, men inte lika hög som VBR). Användande av denna förinställning ger oftast god kvalitét för en angiven bitrate.\n\nBeroende på vilken bitrate som angivits kommer denna förinställning att beräkna vad som är optimalt för en given situation. Fast denna metod är bra så är den inte i närheten av VBR vad gäller flexibilitet och vanligtvis inte lika kvalitativ vid högre bitrate-inställningar.</string>
+  <string name="Settings.DescPrefABR">ABR-lägen (hög kvalitét efter angiven bitrate, men inte lika hög som VBR). Användande av denna förinställning ger oftast god kvalitét för en angiven bitrate.
+
+Beroende på vilken bitrate som angivits kommer denna förinställning att beräkna vad som är optimalt för en given situation. Fast denna metod är bra så är den inte i närheten av VBR vad gäller flexibilitet och vanligtvis inte lika kvalitativ vid högre bitrate-inställningar.</string>
   <string name="Settings.TabGeneral">Generellt</string>
   <string name="Settings.GroupBoxKeys">Tangentbordsgenvägar</string>
   <string name="Settings.ChangeKey">Ändra</string>
@@ -637,17 +644,22 @@
   <string name="Settings.AddCustomGenre">Lägg till genre</string>
   <string name="Settings.DeleteCustomGenre">Ta bort genre</string>
   <string name="Settings.GroupBoxDatabaseBuild">Bygg Musik-Databas</string>
-  <string name="Settings.DatabaseScanNote">Om ingen databas från MediaPortal är tillgänglig kan en databas skapas genom att ett filnamn läggs in i textrutan ovan.\nStarta sedan en skanning.</string>
+  <string name="Settings.DatabaseScanNote">Om ingen databas från MediaPortal är tillgänglig kan en databas skapas genom att ett filnamn läggs in i textrutan ovan.
+Starta sedan en skanning.</string>
   <string name="Settings.StartDBScan">Påbörja skanning</string>
   <string name="Settings.DBScanStatus">Skannings-status</string>
-  <string name="Settings.DBNotExists">Den valda databasen existerar inte.\nOm du väljer \"Ja\" kommer en ny databas att skapas.\nStarta en skanning för att fylla databasen.</string>
+  <string name="Settings.DBNotExists">Den valda databasen existerar inte.
+Om du väljer \"Ja\" kommer en ny databas att skapas.
+Starta en skanning för att fylla databasen.</string>
   <string name="Settings.ClearDatabase">Rensa databas innan skanning körs</string>
   <string name="Settings.SelectMusicFolder">Välj den mapp där dina Musik-Filer finns</string>
   <string name="Settings.DBScanIdle">Databas-skanning är inte aktiv.</string>
-  <string name="Settings.DBScanFinished">Databas-skanning färdig.\n{0} filer har processats under: {1:d2}:{2:d2}:{3:d2}{4}</string>
+  <string name="Settings.DBScanFinished">Databas-skanning färdig.
+{0} filer har processats under: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary">({0} sekunder per spår)</string>
   <string name="Settings.DBScanTitle">Bekräfta att du vill avbryta skanning</string>
-  <string name="Settings.DBScanActive">Databas-skanningen är fortfarande aktiv.\nVill du avbryta skanningen och stänga programmet?</string>
+  <string name="Settings.DBScanActive">Databas-skanningen är fortfarande aktiv.
+Vill du avbryta skanningen och stänga programmet?</string>
   <string name="Settings.DBScanProgress">Går igenom fil {0} av {1}</string>
   <string name="Settings.TabRipping">Rippar</string>
   <string name="Settings.TabRippingGeneral">Generellt</string>
@@ -771,8 +783,10 @@
   <string name="message.DeleteConfirm">Vill du verkligen ta bort de valda filerna?</string>
   <string name="message.DeleteFolders">För att ta bort en mapp, använd  Shift-Del</string>
   <string name="message.Fixed">Fixad</string>
-  <string name="message.FatalError">Oåterkallerligt Undantag. MPTagThat kommer att avslutas&gt;&gt;\nI log-filen finns anledningen för detta sparat</string>
-  <string name="message.OutOfMemory">För många filer har skannats. Minnet håller på att ta slut&gt;&gt;\nSkanningen avbryts.</string>
+  <string name="message.FatalError">Oåterkallerligt Undantag. MPTagThat kommer att avslutas&gt;&gt;
+I log-filen finns anledningen för detta sparat</string>
+  <string name="message.OutOfMemory">För många filer har skannats. Minnet håller på att ta slut&gt;&gt;
+Skanningen avbryts.</string>
   <string name="message.ErrorResetAttr">Det gick inte att ta bort skrivskyddet</string>
   <string name="message.CorruptFile">Filen är korrupt</string>
   <string name="message.UnsupportedFormat">Formatet stöds inte</string>
@@ -796,7 +810,9 @@
   <!--About Dialog-->
   <string name="about.Header">Om</string>
   <string name="about.Ok">Ok</string>
-  <string name="about.Description">MPTagThat är en Taggredigerare med öppen källkod som ger dig möjlighet att hantera hela din musiksamling.\n\nMer information finns här:</string>
+  <string name="about.Description">MPTagThat is an open source Tag Editor, which allows managing your complete Music Collection.
+
+More information at:</string>
   <string name="about.Version">Version:</string>
   <string name="about.BuildDate">Skapad:</string>
   <string name="about.Contributors">Bidragsgivare</string>
@@ -816,7 +832,8 @@
   <string name="dbsearch.Album">Album (innehåller):</string>
   <string name="dbsearch.Title">Titel (innehåller):</string>
   <string name="dbsearch.Search">Sök</string>
-  <string name="dbsearch.NoMusicDB">För att använda sökfunktionen för Databaser måste sökvägen till\nMusikdatabasen anges i Inställningar.</string>
+  <string name="dbsearch.NoMusicDB">För att använda sökfunktionen för Databaser måste sökvägen till
+Musikdatabasen anges i Inställningar.</string>
   <string name="dbsearch.NoSearchValues">Lägg till åtminstone ett värde att söka efter.</string>
   <string name="dbsearch.TooMuchRows">Databassökningen gav för många träffar. Endast de 1000 första kommer att visas.</string>
   <!--Find / Replace-->
@@ -836,12 +853,14 @@
   <string name="findreplace.ReplaceAllBtn">Ersätt Alla</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Skrivskyddad Fil</string>
-  <string name="readonly.Explanation">Den markerade filen är skrivskyddad.\nSkall MPTagThat ändra attributen och sedan spara om filen?</string>
+  <string name="readonly.Explanation">Den markerade filen är skrivskyddad.
+Skall MPTagThat ändra attributen och sedan spara om filen?</string>
   <string name="readonly.Yes">Ja</string>
   <string name="readonly.YesToAll">Ja till Allt</string>
   <string name="readonly.No">Nej</string>
   <string name="readonly.NoToAll">Nej till Allt</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album-Volym</string>
-  <string name="albumgain.Explanation">Samtliga filer har markerats.\nSkall MPTagThat beräkna volymen för hela Albumet?</string>
+  <string name="albumgain.Explanation">Samtliga filer har markerats.
+Skall MPTagThat beräkna volymen för hela Albumet?</string>
 </resources>

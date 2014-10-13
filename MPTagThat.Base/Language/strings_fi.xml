@@ -339,7 +339,6 @@
   <string name="findreplace.ReplaceAllBtn">Korvaa kaikki</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Vain luku tiedosto</string>
-  <string name="readonly.Explanation">Tiedosto on \'Vain luku\' kelpoinen.\nPitäisikö MPTagThat:in vaihtaa arvo ja tallentaa tiedosto?</string>
   <string name="readonly.Yes">Kyllä</string>
   <string name="readonly.YesToAll">Kyllä kaikkiin</string>
   <string name="readonly.No">Ei</string>
