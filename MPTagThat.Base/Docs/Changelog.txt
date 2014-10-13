@@ -7,6 +7,16 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.5 Date: 13.10.2014 
+-------------------------------------
++ Updated Translation files
+x Identify function was broken due to some changes at Music Brainz
+x Lyrics Search for Artists containing the word "The" was not working
+x Updated Lyrics Engine to latest version
+x The TagEdit Form "Remove Existing Picture" CheckBox State is stored persistent
+x Existing user folder thumb is used when searching for covers
+x Changed default setting for Organise Files
+
 3.1.4 Date: 28.01.2014 
 -------------------------------------
 + Fetched latest Transifex translations
