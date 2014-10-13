@@ -126,7 +126,8 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Verversen</string>
-  <string name="screentip.RefreshText">De inhoud van de geselecteerde map wordt opnieuw ingelezen.⏎\nAls er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moeten worden opgeslagen.</string>
+  <string name="screentip.RefreshText">De inhoud van de geselecteerde map wordt opnieuw ingelezen.
+Als er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moeten worden opgeslagen.</string>
   <string name="screentip.Save">Wijzgingen opslaan</string>
   <string name="screentip.SaveText">Slaat de wijzigingen op schijf op door de tags van de geselecteerde bestanden aan te passen.</string>
   <string name="screentip.ColumnsSelect">Kolommen weergegeven in rooster</string>
@@ -135,7 +136,7 @@
   <string name="screentip.TagFromFile">Tag van Betandsnaam</string>
   <string name="screentip.TagFromFileText">Door specifieke parameters uit het dialoog te gebruiken, worden tags zoals \"Track #\", \"Artist\", \"Title\", etc. uit de bestandsnaam overgenomen.</string>
   <string name="screentip.IdentifyFile">Identificeer Bestand</string>
-  <string name="screentip.IdentifyFileText">Er wordt een hash gemaakt van de eerste 30 seconden van het bestand. Deze hash word gebruikt om het bestand te identificeren op MusicBrainz.\nDe tags worden van MusicBrainz gehaald en in het bestand geschreven.</string>
+  <string name="screentip.IdentifyFileText">Er wordt een hash gemaakt van de eerste 30 seconden van het bestand. Deze hash word gebruikt om het bestand te identificeren op MusicBrainz. De tags worden van MusicBrainz gehaald en in het bestand geschreven.</string>
   <string name="screentip.TagFromInternet">Tag van Internet</string>
   <string name="screentip.TagFromInternetText">De gegeven Artiest en Album naam worden gebruikt om te zoeken op Amazon, terwijl geprobeerd word de bestandsnamen te matchen met de lijst van Amazon.</string>
   <string name="screentip.SingleTagEdit">Enkele Tag Bewerk</string>
@@ -181,9 +182,9 @@
   <string name="screentip.FixSong">Repareer MP3</string>
   <string name="screentip.FixSongText">Gebruikt MP3Val om fouten in de geselecteerde MP3 bestanden  te detecteren.</string>
   <string name="screentip.ReplayGain">Replay Gain</string>
-  <string name="screentip.ReplayGainText">Analiseer de geselecteerde bestanden en calculeer de Replay Gain. De waarde word in de Tags geschreven.\nOpmerking: Het bestand zelf word niet aangepast.</string>
+  <string name="screentip.ReplayGainText">Analiseer de geselecteerde bestanden en calculeer de Replay Gain. De waarde word in de Tags geschreven. Opmerking: Het bestand zelf word niet aangepast.</string>
   <string name="screentip.BPM">BPM Detectie</string>
-  <string name="screentip.BPMText">Analyseert de geselecteerde bestanden en berekend het aantal Beats per Minuut (BPM). De waarde word in de Tags geschreven.\nLet op: Het bestand zelf blijft ongewijzigd.</string>
+  <string name="screentip.BPMText">Analyseert de geselecteerde bestanden en berekend het aantal Beats per Minuut (BPM). De waarde word in de Tags geschreven. Let op: Het bestand zelf blijft ongewijzigd.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Start Rippen</string>
   <string name="screentip.RipButtonText">Start het rippen van de geselecteerde bestanden</string>
@@ -308,7 +309,7 @@
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Waardering (Gebruik de waardering in de Ster Kolom voor niet-ID3 bestanden)</string>
   <string name="TagEdit.RemoveExistingRatings">Verwijder eerst bestaande waardering</string>
-  <string name="TagEdit.RatingNote">De waardering is 1-255 waar 1 is het slechtst en 255 is het beste. 0 is onbekend.\n\nOpmerking: Veel programma\'s hebben hun eigen waardering en definiëren de ID3 standaard anders. Wanneer geen tegenspraak wordt gegeven kan deze worden toegevoegd.</string>
+  <string name="TagEdit.RatingNote">De waardering is 1-255 waar 1 is het slechtst en 255 is het beste. 0 is onbekend. Opmerking: Veel programma\'s hebben hun eigen waardering en definiëren de ID3 standaard anders. Wanneer geen tegenspraak wordt gegeven kan deze worden toegevoegd.</string>
   <string name="TagEdit.PlayCounter">Afspeel teller:</string>
   <string name="TagEdit.RemoveRating">Waardering verwijderen</string>
   <string name="TagEdit.AddRating">Waardering toevoegen</string>
@@ -581,7 +582,7 @@
   <string name="Settings.DescPrefStandard">Deze voorkeuze zou voor de meeste soorten muziek transparant moeten klinken voor het meerendeel van de toehoorders en heeft een hoog kwaliteits niveau.</string>
   <string name="Settings.DescPrefExtreme">Wanneer u beschikt over  een zeer goed gehoor en vergelijkbare apparatuur, dan bereikt u met deze instelling ietwat betere kualiteit dan de \"standaard\" instelling.</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Deze voorkeuze is voor de meesten niet nodig in de meeste situaties. Maar indien u desondanks toch de hoogste kwaliteit wenst, ongeacht de grootte van de data, kies dan deze instelling.</string>
-  <string name="Settings.DescPrefABR">Voor ABR modi (Hoge kwaliteit per gegeven bitrate) echter niet zo hoog als VBR). Gebruik van deze voorkeuze geeft gewoonlijk goede kwaliteit voor de aangegeven bitrate.\n\nAfhankelijk van de ingevoerde bitrate, deze voorkeuze bepaald de optimale instelling voor die specifieke situatie. Ondanks dat deze benadering werkt, is deze lang niet zo flexibel als VBR, en zal niet dezelfde kwaliteit bereiken als VBR op hogere bitrates.</string>
+  <string name="Settings.DescPrefABR">Voor ABR modi (Hoge kwaliteit per gegeven bitrate) echter niet zo hoog als VBR). Gebruik van deze voorkeuze geeft gewoonlijk goede kwaliteit voor de aangegeven bitrate. Afhankelijk van de ingevoerde bitrate, deze voorkeuze bepaald de optimale instelling voor die specifieke situatie. Ondanks dat deze benadering werkt, is deze lang niet zo flexibel als VBR, en zal niet dezelfde kwaliteit bereiken als VBR op hogere bitrates.</string>
   <string name="Settings.TabGeneral">Algemeen</string>
   <string name="Settings.GroupBoxKeys">Toetsenbord sneltoetsen</string>
   <string name="Settings.ChangeKey">Aanpassen</string>
@@ -637,17 +638,18 @@
   <string name="Settings.AddCustomGenre">Genre toevoegen</string>
   <string name="Settings.DeleteCustomGenre">Genre verwijderen</string>
   <string name="Settings.GroupBoxDatabaseBuild">Muziek-Database opbouw</string>
-  <string name="Settings.DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand.\nStart vervolgens het bijwerken.</string>
+  <string name="Settings.DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand. Start vervolgens het bijwerken.</string>
   <string name="Settings.StartDBScan">Start bijwerken</string>
   <string name="Settings.DBScanStatus">Bijwerk status</string>
-  <string name="Settings.DBNotExists">De geselecteerde database bestaat niet.\nWanneer \"Ja\" wordt gekozen, word er een database aangemaakt.\nStart het bijwerken, om de database te vullen.</string>
+  <string name="Settings.DBNotExists">De geselecteerde database bestaat niet. Wanneer \"Ja\" wordt gekozen, word er een database aangemaakt. Start het bijwerken, om de database te vullen.</string>
   <string name="Settings.ClearDatabase">Database voor bijwerken leegmaken</string>
   <string name="Settings.SelectMusicFolder">Selecteer de muziek beschrijving</string>
   <string name="Settings.DBScanIdle">Database bijwerking niet aktief.</string>
-  <string name="Settings.DBScanFinished">Database bijwerken beeindigd.\n{0} Audio bestand in: {1:d2}:{2:d2}:{3:d2}{4} verwerkt.</string>
+  <string name="Settings.DBScanFinished">Database bijwerken beeindigd. {0} Audio bestand in: {1:d2}:{2:d2}:{3:d2}{4} verwerkt.</string>
   <string name="Settings.DBScanTrackSummary"> ({0} Seconden per bestand)</string>
   <string name="Settings.DBScanTitle">Database bijwerken afbreken</string>
-  <string name="Settings.DBScanActive">Database bijwerking is nog aktief.\nBijwerking afbreken en applicatie beeindigen?</string>
+  <string name="Settings.DBScanActive">Database bijwerking is nog aktief.
+Bijwerking afbreken en applicatie beeindigen?</string>
   <string name="Settings.DBScanProgress">Bewerkt bestand {0} van {1}</string>
   <string name="Settings.TabRipping">Rippen</string>
   <string name="Settings.TabRippingGeneral">Algemeen</string>
@@ -763,7 +765,8 @@
   <string name="message.Error_Title">Fout</string>
   <string name="message.Save_Changes">Wijzigingen zijn niet opgeslagen. Wilt u de wijzigingen opslaan?</string>
   <string name="message.Save_Changes_Title">Wijzigingen opslaan</string>
-  <string name="message.Script_Compile_Failed">Het compileren van het script is mislukt.\n\nkijk in het log voor de foutmelding en corrigeer het.</string>
+  <string name="message.Script_Compile_Failed">Het compileren van het script is mislukt. 
+Kijk in het log bestand voor de foutmelding en corrigeer het.</string>
   <string name="message.DataEntryError">De opgegeven waarde klopt niet.</string>
   <string name="message.NoSelectionHeader">Geen selectie</string>
   <string name="message.NoSelection">Selecteer minimaal één rij om de actie op uit te voeren.</string>
@@ -771,8 +774,10 @@
   <string name="message.DeleteConfirm">Wilt u het geselecteerde bestand(en) definitief verwijderen?</string>
   <string name="message.DeleteFolders">Om de map te verwijderen, gebruik Shift-Del</string>
   <string name="message.Fixed">Opgelost</string>
-  <string name="message.FatalError">Onherstelbare fout. MPTagThat zal worden afgesloten»⏎\nKijk a.u.b. in de log bestanden voor de reden van afsluiten.</string>
-  <string name="message.OutOfMemory">Te veel bestanden geanalyseerd, het geheugen raakt vol. Analyze wordt afgebroken.</string>
+  <string name="message.FatalError">Onherstelbare fout. MPTagThat zal worden afgesloten.
+Kijk a.u.b. in de log bestanden voor de reden van afsluiten.</string>
+  <string name="message.OutOfMemory">Te veel bestanden geanalyseerd, het geheugen raakt vol.
+Analyze wordt afgebroken.</string>
   <string name="message.ErrorResetAttr">Het alleen-lezen attribuut kan niet gereset worden</string>
   <string name="message.CorruptFile">Corrupt bestand</string>
   <string name="message.UnsupportedFormat">Niet ondersteund formaat</string>
@@ -796,7 +801,8 @@
   <!--About Dialog-->
   <string name="about.Header">Over</string>
   <string name="about.Ok">Oké</string>
-  <string name="about.Description">MPTagThat is een open bron Tag Editor, voor het beheer van uw complete Muziek Collectie.\n\nMeer informatie op:</string>
+  <string name="about.Description">MPTagThat is een open bron Tag Editor, voor het beheer van uw complete Muziek Collectie.
+Meer informatie op:</string>
   <string name="about.Version">Versie:</string>
   <string name="about.BuildDate">Bouwdatum:</string>
   <string name="about.Contributors">Medewerkers</string>
@@ -816,7 +822,7 @@
   <string name="dbsearch.Album">Album (bevat):</string>
   <string name="dbsearch.Title">Titel (bevat):</string>
   <string name="dbsearch.Search">Zoek</string>
-  <string name="dbsearch.NoMusicDB">Om de database zoekfunctie te gebruiken moe je de locatie van de Muziek database opgegeven in de instellingen.</string>
+  <string name="dbsearch.NoMusicDB">Om de database zoekfunctie te gebruiken moet je de locatie van de Muziek database opgegeven in de instellingen.</string>
   <string name="dbsearch.NoSearchValues">Geef a.u.b. minmaal 1 zoekwoord op.</string>
   <string name="dbsearch.TooMuchRows">Er zijn te veel resultaten. Alleen de eerste 1000 resultaten zullen worden weergegeven.</string>
   <!--Find / Replace-->
@@ -836,12 +842,14 @@
   <string name="findreplace.ReplaceAllBtn">Vervang alle</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Alleen-lezenbestand</string>
-  <string name="readonly.Explanation">Het gekozen bestand is alleen-lezen.⏎\nMoet MPTagThat het attribuut aanpassen en het bestand opslaan?</string>
+  <string name="readonly.Explanation">Het gekozen bestand is alleen-lezen.
+Moet MPTagThat het attribuut aanpassen en het bestand opslaan?</string>
   <string name="readonly.Yes">Ja</string>
   <string name="readonly.YesToAll">Ja op alles</string>
   <string name="readonly.No">Nee</string>
   <string name="readonly.NoToAll">Nee op alles</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album Gain</string>
-  <string name="albumgain.Explanation">Alle bestanden geselecteerd.\nMoet MPTagThat een Album Gain berekenen?</string>
+  <string name="albumgain.Explanation">Alle bestanden geselecteerd.
+Moet MPTagThat een Album Gain berekenen?</string>
 </resources>

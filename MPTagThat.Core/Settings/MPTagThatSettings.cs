@@ -84,9 +84,6 @@ namespace MPTagThat.Core
     public int BottomPanelSize { get; set; }
 
     [Setting(SettingScope.User, "false")]
-    public bool BottomPanelCollapsed { get; set; }
-
-    [Setting(SettingScope.User, "false")]
     public bool PlayerPanelCollapsed { get; set; }
 
     /// <summary>
@@ -158,7 +155,7 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool CreateFolderThumb { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool EmbedFolderThumb { get; set; }
 
     [Setting(SettingScope.User, "false")]
@@ -203,6 +200,9 @@ namespace MPTagThat.Core
       get { return _customGenres; }
       set { _customGenres = value; }
     }
+
+    [Setting(SettingScope.User, "false")]
+    public bool ClearExistingPictures { get; set; }
 
     #endregion
 

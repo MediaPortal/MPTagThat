@@ -4,6 +4,11 @@
   <string name="system.ApplicationName">MPTagThat el Editor de Etiquetas de MediaPortal</string>
   <string name="splash.Version">Versión:</string>
   <string name="splash.BuildDate">Fecha:</string>
+  <string name="splash.Startup">Comenzando ...</string>
+  <string name="splash.AddRibbon">Añadiendo Cinta ...</string>
+  <string name="splash.AddGrids">Configurando Rejillas ...</string>
+  <string name="splash.LoadSettings">Cargando Configuración ...</string>
+  <string name="splash.Localisation">Localización ...</string>
   <!--Main-->
   <!--Treeview-->
   <string name="main.TreeViewPanel">Carpetas</string>
@@ -26,18 +31,29 @@
   <string name="main.PlayerPanel">Reproductor</string>
   <!--Options Panel-->
   <string name="main.OptionsPanel">Opciones</string>
+  <string name="main.FolderView">Vista de Carpeta</string>
+  <string name="main.DBView">Vista de Base de Datos</string>
+  <string name="main.NetworkView">Vista de Carpeta de Red</string>
   <string name="main.ScanSubfolder">Escanear subcarpetas</string>
-  <string name="main.ButtonRefreshFolder">Refrescar Vista\nde Carpetas</string>
+  <string name="main.ButtonRefreshFolder">Refrescar Vista
+de Carpetas</string>
   <!--Misc. TabControl-->
+  <string name="main.TabPageMessages">Mensajes</string>
+  <string name="main.TabPageNonMusicFiles">Sin Archivos de Música</string>
   <!--Error Gridview-->
   <string name="main.ErrorHeaderFile">Archivo</string>
   <string name="main.ErrorHeaderMessage">Mensaje</string>
   <string name="main.ErrorContextMenuClear">Limpiar lista</string>
   <!--Non Music File Listview-->
+  <string name="main.NonMusicContextMenuRenameToFolderJpg">Renombrar a \"folder.jpg\"</string>
+  <string name="main.NonMusicContextMenuDeleteFiles">Borrar archivo(s) seleccionados</string>
+  <string name="main.NonMusicDeleteFilesHeader">Borrar múltiples elementos</string>
+  <string name="main.NonMusicDeleteFilesMessage">¿Estás seguro que quieres mover estos {0} elementos a la Papelera de Reciclaje?</string>
   <!--Toolstrip-->
   <string name="main.toolStripLabelFiles">Archivos: {0} (Seleccionados: {1})</string>
   <string name="main.toolStripLabelPlay">Estado del Reproductor: Reproduciendo</string>
   <string name="main.toolStripLabelPause">Estado del Reproductor: Pausado</string>
+  <string name="main.toolStripLabelScan">Procesando archivo: {0}</string>
   <!--Ribbon-->
   <!--Start Menu-->
   <string name="ribbon.Settings">Configuración</string>
@@ -45,6 +61,7 @@
   <string name="ribbon.Save">Guardar</string>
   <string name="ribbon.ColumnsSelect">Seleccionar Columnas a Mostrar</string>
   <string name="ribbon.Exit">Salir</string>
+  <string name="ribbon.RecentFolders">Carpetas Recientes</string>
   <!--Tags Tab-->
   <string name="ribbon.TagTab">Etiquetas</string>
   <string name="ribbon.TagFromFile">Etiquetar desde Nombre de Archivo</string>
@@ -59,6 +76,12 @@
   <string name="ribbon.GetLyrics">Obtener Letras</string>
   <string name="ribbon.AutoNumber">Autonumerar</string>
   <string name="ribbon.NumberOnClick">Numerar al Pulsar</string>
+  <string name="ribbon.Find">Buscar</string>
+  <string name="ribbon.Replace">Reemplazar</string>
+  <string name="ribbon.ValidateSong">Validar MP3</string>
+  <string name="ribbon.FixSong">Arreglar MP3</string>
+  <string name="ribbon.ReplayGain">Repetir Ganancia</string>
+  <string name="ribbon.BPM">Detectar BPM</string>
   <string name="ribbon.RemoveCommentPicture">Quitar:</string>
   <string name="ribbon.RemoveComments">Quitar todos los comentarios</string>
   <string name="ribbon.RemovePictures">Quitar todas las fotos</string>
@@ -72,8 +95,10 @@
   <string name="ribbon.EditTags">Editar Etiquetas</string>
   <string name="ribbon.RetrieveTags">Recuperar Etiquetas</string>
   <string name="ribbon.OrganiseFiles">Organizar</string>
-  <string name="ribbon.SaveFolderThumb">Guardar como Miniatura\nde Carpeta</string>
+  <string name="ribbon.SaveFolderThumb">Guardar como Miniatura
+de Carpeta</string>
   <string name="ribbon.ExecuteScript">Ejecutar Script</string>
+  <string name="ribbon.Picture">Carátula</string>
   <string name="ribbon.Organise">Organizar Archivos</string>
   <string name="ribbon.AddBurner">Añadir a Grabador</string>
   <string name="ribbon.AddConvert">Añadir a Conversión</string>
@@ -98,37 +123,81 @@
   <string name="ribbon.Burn">Grabar</string>
   <string name="ribbon.BurnCancel">Cancelar Grabación</string>
   <string name="ribbon.BurnOptions">Opciones de Grabación</string>
+  <string name="ribbon.Burner">Seleccionar Grabador:</string>
+  <string name="ribbon.BurnerSpeed">Velocidad de Grabador:</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Refrescar</string>
+  <string name="screentip.Save">Guardar Cambios</string>
+  <string name="screentip.SaveText">Guarda los cambios pendientes en el disco, cambiando las etiquetas de todos los archivos seleccionados.</string>
+  <string name="screentip.ColumnsSelect">Columnas Mostradas en Rejilla</string>
+  <string name="screentip.ColumnsSelectText">Selecciona las columnas que se deben mostrar en la Cuadrícula de Detalles de Pista.</string>
   <!--Tags Tab-->
   <string name="screentip.TagFromFile">Etiquetar desde Nombre de Archivo</string>
+  <string name="screentip.TagFromFileText">Usando parámetros específicos que figuran en el cuadro de diálogo, las diversas etiquetas como \"Track #\", \"Artista\", \"Título\", etc. se extraen del nombre de archivo.</string>
   <string name="screentip.IdentifyFile">Identificar Archivo</string>
   <string name="screentip.TagFromInternet">Etiquetar desde Internet</string>
+  <string name="screentip.TagFromInternetText">El Artista y Nombre del álbum determinado se utilizan para una búsqueda en Amazon tratando de coincidir con los nombres de archivo a la lista extraído de Amazon.</string>
   <string name="screentip.SingleTagEdit">Edición de Etiqueta Única</string>
+  <string name="screentip.SingleTagEditText">Un cuadro de diálogo permite editar todas las etiquetas de los archivos individuales.</string>
   <string name="screentip.MultiTagEdit">Edición Múltiple de Etiquetas</string>
+  <string name="screentip.MultiTagEditText">Las etiquetas modificadas en el diálogo se aplican a todos los archivos seleccionados.</string>
   <string name="screentip.GetCoverArt">Obtener Portada</string>
-  <string name="screentip.SaveFolderThumb">Guardar como Miniatura\nde Carpeta</string>
+  <string name="screentip.GetCoverArtText">El nombre del Artista y del álbum se utilizan para buscar la carátula del álbum en Amazon. Si se encuentran varias coincidencias se muestra un cuadro de diálogo de selección.</string>
+  <string name="screentip.SaveFolderThumb">Guardar como Miniatura
+de Carpeta</string>
+  <string name="screentip.SaveFolderThumbText">La carátula del álbum indicado se guarda como folder.jpg en la carpeta del archivo seleccionado.</string>
   <string name="screentip.GetLyrics">Obtener Letras</string>
+  <string name="screentip.GetLyricsText">El Lyricsengine recupera la letra de los archivos seleccionados de las fuentes de letras marcadas en las preferencias.</string>
   <string name="screentip.AutoNumber">Autonumerar</string>
+  <string name="screentip.AutoNumberText">El número de la pista de los archivos seleccionados se ajusta con el valor en el cuadro de texto como el número de inicio.</string>
   <string name="screentip.NumberOnClick">Numerar al Pulsar</string>
+  <string name="screentip.NumberOnClickText">Mientras que el botón esté activado, un clic en un archivo configura el número de pista.</string>
   <string name="screentip.RemoveComments">Quitar todos los comentarios</string>
+  <string name="screentip.RemoveCommentsText">Eliminados todos los comentarios que se encuentran en los archivos seleccionados.</string>
   <string name="screentip.RemovePictures">Quitar todas las fotos</string>
+  <string name="screentip.RemovePicturesText">Eliminada toda la información de carátulas almacenada en los archivos seleccionados.</string>
   <string name="screentip.CaseConversion">Caja de Conversión</string>
+  <string name="screentip.CaseConversionText">Reglas de Conversión de Mayúsculas, según lo establecido en las opciones se aplican a todos los archivos seleccionados.</string>
   <string name="screentip.DeleteTags">Borrar Etiquetas</string>
+  <string name="screentip.DeleteTagsText">Eliminadas todas las etiquetas de los archivos seleccionados.</string>
   <string name="screentip.RenameFile">Renombrar Archivo</string>
+  <string name="screentip.RenameFileText">Archivos renombrados según los parámetros especificados en el cuadro de diálogo.</string>
   <string name="screentip.Organise">Organizar Archivos</string>
+  <string name="screentip.OrganiseText">Archivos copiados/movidos a una nueva ubicación en base a los valores de su etiqueta como se especifica en los parámetros del diálogo.</string>
   <string name="screentip.ExecuteScript">Ejecutar Script</string>
+  <string name="screentip.ExecuteScriptText">Aplica el script en el cuadro combinado para los archivos seleccionados.</string>
   <string name="screentip.AddBurner">Añadir a Grabador</string>
+  <string name="screentip.AddBurnerText">Añade los archivos seleccionados a la lista de archivos preparados para la grabación en CD.</string>
   <string name="screentip.AddConvert">Añadir a Conversión</string>
+  <string name="screentip.AddConvertText">Añade los archivos seleccionados a la lista de archivos para convertirlos a un formato distinto.</string>
   <string name="screentip.AddPlaylist">Añadir a Lista</string>
+  <string name="screentip.AddPlaylistText">Añade los archivos seleccionados a la lista de reproducción, empezando a reproducir desde el primer archivo si el reproductor está en reposo.</string>
+  <string name="screentip.Find">Buscar</string>
+  <string name="screentip.FindText">Abre el diálogo de búsqueda para buscar la cadena específicada en las Pistas seleccionadas.</string>
+  <string name="screentip.Replace">Reemplazar</string>
+  <string name="screentip.ReplaceText">Abre el diálogo de Buscar / Reemplazar para reemplazar una cadena de búsqueda especificada en las Pistas seleccionadas.</string>
+  <string name="screentip.ValidateSong">Validar MP3</string>
+  <string name="screentip.ValidateSongText">Usa MP3Val para validar el archivo MP3 seleccionado. Algunos errores se pueden arreglar mediante el Botón \"Arreglar MP3\"</string>
+  <string name="screentip.FixSong">Arreglar MP3</string>
+  <string name="screentip.FixSongText">Usa MP3Val para arreglar errores en el archivo MP3 seleccionado.</string>
+  <string name="screentip.ReplayGain">Repetir Ganancia</string>
+  <string name="screentip.BPM">Detección de BPM</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Empezar Extracción</string>
+  <string name="screentip.RipButtonText">Iniciar la Extracción de los archivos seleccionados</string>
   <string name="screentip.RipCancel">Cancelar Extracción</string>
+  <string name="screentip.RipCancelText">Termina la extracción.</string>
   <!--Convert Tab-->
   <string name="screentip.ConvertButton">Empezar Conversión</string>
+  <string name="screentip.ConvertButtonText">Empezar la Conversión de los archivos de la lista al formato seleccionado</string>
   <string name="screentip.ConvertCancel">Cancelar Conversión</string>
+  <string name="screentip.ConvertCancelText">Termina el proceso de Conversión</string>
   <!--Burn Tab-->
+  <string name="screentip.Burn">Grabar CD</string>
+  <string name="screentip.BurnText">Inicia la grabación de los archivos que se encuentran en la lista de grabación.</string>
+  <string name="screentip.BurnCancel">Cancelar Grabación</string>
+  <string name="screentip.BurnCancelText">Termina el proceso de grabación</string>
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Edición Múltiple de Etiquetas</string>
@@ -149,6 +218,7 @@
   <string name="TagEdit.Year">Año:</string>
   <string name="TagEdit.Title">Título:</string>
   <string name="TagEdit.Album">Álbum:</string>
+  <string name="TagEdit.PartOfCompilation">Parte de una Compilación</string>
   <string name="TagEdit.GroupBoxComment">Comentario</string>
   <string name="TagEdit.RemoveExistingComments">Quitar Comentarios primero</string>
   <string name="TagEdit.MoveTop">Mover al Comienzo</string>
@@ -235,8 +305,8 @@
   <string name="TagEdit.LyricsHeaderLanguage">Lengua</string>
   <string name="TagEdit.LyricsHeaderLyrics">Letras</string>
   <!--Rating-->
+  <string name="TagEdit.GroupBoxRating">Valoraciones (Para los archivos sin ID3, por favor selecciona la clasificación en la columna de Estrellas)</string>
   <string name="TagEdit.RemoveExistingRatings">Quitar primero Puntuaciónes existentes</string>
-  <string name="TagEdit.RatingNote">La puntuación es 1-255 donde 1 es peor y 255 mejor.0 es desconocido.\n\nNota: Muchos programas tienen su propia puntuación y pueden redefinir el estandard ID3.\nSi no se quiere contrarrestar el personal, puede ser omitido.</string>
   <string name="TagEdit.PlayCounter">Contador de reproducción:</string>
   <string name="TagEdit.RemoveRating">Quitar Puntuación</string>
   <string name="TagEdit.AddRating">Añadir Puntuación</string>
@@ -261,6 +331,12 @@
   <string name="TagEdit.Next">Siguiente archivo</string>
   <string name="TagEdit.Commands">Comandos</string>
   <!--User Defined Frames-->
+  <string name="TagEdit.FrameID">ID Frame</string>
+  <string name="TagEdit.FrameDesc">Descripción </string>
+  <string name="TagEdit.FrameText">Texto</string>
+  <string name="TagEdit.AddFrame">Añadir Frame</string>
+  <string name="TagEdit.DeleteFrame">Borrar Frame(s)</string>
+  <string name="TagEdit.DeleteAllFrames">Borrar Todos los Frames</string>
   <!--Single Lyrics Search as called out of Single / Multiple Tag Edit-->
   <string name="LyricsSearch.Header">Encontrar Letras para {0} - {1}</string>
   <string name="LyricsSearch.Cancel">Cancelar</string>
@@ -286,16 +362,20 @@
   <!--Amazon Album Search-->
   <string name="AmazonAlbumSearch.Header">Búsqueda de Álbum</string>
   <string name="AmazonAlbumSearch.Close">Cancelar</string>
+  <string name="AmazonAlbumSearch.CancelAll">Cancelar Todo</string>
   <string name="AmazonAlbumSearch.Update">Seleccionar</string>
   <string name="AmazonAlbumSearch.Search">Buscar</string>
   <string name="AmazonAlbumSearch.Albums">Álbums</string>
   <string name="AmazonAlbumSearch.GroupBoxResults">Se encontraron varios Álbums, Por favor seleccione ...</string>
+  <string name="AmazonAlbumSearch.NotFound">No he encontrado nada. Revisar los criterios de búsqueda ...</string>
+  <string name="AmazonAlbumSearch.Searching">Buscando ...</string>
   <!--MusicBrainz Search-->
   <string name="MusicBrainz.Header">Buscar en Internet</string>
   <string name="MusicBrainz.Cancel">Cancelar</string>
   <string name="MusicBrainz.Update">Seleccione</string>
   <string name="MusicBrainz.SearchInfo">Pista Identificada</string>
   <string name="MusicBrainz.Album">Álbum</string>
+  <string name="MusicBrainz.Country">País</string>
   <string name="MusicBrainz.Duration">Duración</string>
   <string name="MusicBrainz.GroupBoxResults">La pista está disponible en varios álbums. Por favor, seleccione</string>
   <!--Header of the Grid View showing the Tracks-->
@@ -318,6 +398,10 @@
   <string name="column_header.NumDisc">Num. Discos</string>
   <string name="column_header.BPM">BPM</string>
   <string name="column_header.Rating">Puntuación</string>
+  <string name="column_header.ReplayGainTrack">Ganancia de Pista</string>
+  <string name="column_header.ReplayGainTrackPeak">Pico de Pista</string>
+  <string name="column_header.ReplayGainAlbum">Ganancia del Álbum</string>
+  <string name="column_header.ReplayGainAlbumPeak">Pico de Álbum</string>
   <string name="column_header.Comment">Comentario</string>
   <string name="column_header.Composer">Compositor</string>
   <string name="column_header.Conductor">Director</string>
@@ -356,6 +440,7 @@
   <string name="column_header.Channels">Canales</string>
   <string name="column_header.Version">Codec</string>
   <!--Context Menus-->
+  <string name="contextmenu.CoverLookup">Buscar Carátula de Canción en Google</string>
   <string name="contextmenu.AddBurner">Añadir elemento(s) al Grabador</string>
   <string name="contextmenu.AddConverter">Añadir elemento(s) al Conversor</string>
   <string name="contextmenu.AddPlayList">Añadir elemento(s) a la Lista de Reproducción</string>
@@ -378,7 +463,8 @@
   <string name="TagAndRename.RemoveFormat">Quitar formato de la lista</string>
   <string name="TagAndRename.AddFormat">Añadir formato a la lista</string>
   <string name="TagAndRename.GroupBoxParm">Parámetros (Click para añadir a la lista)</string>
-  <string name="TagAndRename.Folder">\ = Carpeta:  Si están enfrente de la carpeta, especifica que los parámetros\ndeben tomarse del nombre de la carpeta</string>
+  <string name="TagAndRename.Folder">\ = Carpeta:  Si están enfrente de la carpeta, especifica que los parámetros
+deben tomarse del nombre de la carpeta</string>
   <string name="TagAndRename.Unused">&lt;X&gt; = Sin Usar</string>
   <string name="TagAndRename.Comment">&lt;C&gt; = Comentario</string>
   <string name="TagAndRename.AlbumArtist">&lt;O&gt; = Orquesta / Álbum Artista</string>
@@ -410,6 +496,7 @@
   <string name="TagAndRename.InvalidParm">Parámetro de Formato Inválido. Por favor, corríjalos</string>
   <string name="TagAndRename.Original">Original:</string>
   <string name="TagAndRename.Preview">Vista Previa</string>
+  <string name="TagAndRename.Parameters">Parámetros</string>
   <!--Case Conversion-->
   <string name="CaseConversion.Header">Caja de Conversión</string>
   <string name="CaseConversion.TabSettings">Configuración</string>
@@ -445,10 +532,12 @@
   <!--Note :the Parameter are found in the TagAndRename section-->
   <string name="organise.Heading">Organizar Archivos</string>
   <string name="organise.TargetRootDrectory">Especificar Directorio Raiz:</string>
+  <string name="organise.TargetRootDrectoryOverride">Invalidar Directorio Raíz especificado usando Script:</string>
   <string name="organise.BrowseRootDir">Explorar</string>
   <string name="organise.OverWriteFiles">Sobreescribir archivos existentes</string>
   <string name="organise.CopyFiles">Copiar archivos en vez de moverlos</string>
-  <string name="organise.CopyNonMusicFiles">Copiar/Mover archivos no musicales\n(Ej. Fotos, Textos, etc.)</string>
+  <string name="organise.CopyNonMusicFiles">Copiar/Mover archivos no musicales
+(Ej. Fotos, Textos, etc.)</string>
   <string name="organise.InvalidParm">Formato de parámetro no válido. Por favor, corríjalo</string>
   <string name="organise.FileExists">El archivo ya existe. No será reemplazado</string>
   <string name="organise.SameFile">El archivo de origen y destino son el mismo. Archivo omitido</string>
@@ -456,7 +545,9 @@
   <string name="organise.Copied">Copiado</string>
   <string name="organise.Moved">Movido</string>
   <string name="organise.GroupBoxOptions">Opciones</string>
+  <string name="organise.GroupBoxSelection">Seleccción</string>
   <string name="organise.ButtonOrganise">Organizar</string>
+  <string name="organise.Folder">\ = Carpeta: para especificar los parámetros que van a ser utilizados como nombreDeSubcarpeta dentro de la carpeta de destino</string>
   <!--Settings  / Preferences-->
   <string name="Settings.Heading">Configuración</string>
   <string name="Settings.NavigationPanel">Navegación</string>
@@ -490,7 +581,6 @@
   <string name="Settings.DescPrefStandard">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música, y es ya de bastante Alta Calidad</string>
   <string name="Settings.DescPrefExtreme">Si tiene buen oido y buen equipamiento, este preajuste generalmente le proveerá de una calidad un poco más alta que el modo \"standard\".</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Este preajuste será demasiado para la mayoría de la gente y la mayoría de las situaciones, pero si quiere la calidad absolutamente más alta sin preocuparse del tamaño de archivo, este es la adecuado.</string>
-  <string name="Settings.DescPrefABR">Para modos ABR (alta calidad para un bitrate dado pero no tan alta como VBR). Usando este preajuste le dará normalmente buena calidad al bitrate especificado.\n\nDependiendo del bitrate introducido, este preajuste determinará la configuración óptima para la situación en particular. Aunque este método funciona, no es tan flexible como VBR, y normalmente no se obtendrá el mismo nivel de calidad de VBR a  bitrate más altos.</string>
   <string name="Settings.TabGeneral">General</string>
   <string name="Settings.GroupBoxKeys">Atajos de Teclado</string>
   <string name="Settings.ChangeKey">Cambiar</string>
@@ -499,10 +589,13 @@
   <string name="Settings.Alt">Alt</string>
   <string name="Settings.KeyDescription">Descripción:</string>
   <string name="Settings.KeyAction">Acción:</string>
+  <string name="Settings.KeyShortCut">Tecla de Atajo:</string>
+  <string name="Settings.RibbonShortCut">Cinta de Atajo:</string>
   <string name="Settings.GroupBoxGeneral">Configuración General</string>
   <string name="Settings.DebugLevel">Debug Level:</string>
   <string name="Settings.Theme">Tema:</string>
   <string name="Settings.Language">Idioma:</string>
+  <string name="Settings.TrackListLocation">Localización de la Lista de Canciones:</string>
   <string name="Settings.TabTags">Etiquetas</string>
   <string name="Settings.TabTagsID3">ID3</string>
   <string name="Settings.TabTagsLyricsCover">Letras / Portada</string>
@@ -510,6 +603,8 @@
   <string name="Settings.GroupBoxPictures">Fotos</string>
   <string name="Settings.OverwriteExistingCover">Sobreescribir Portada(s) existente(s) en etiquetado automático</string>
   <string name="Settings.EmbedExistingThumb">Insertar miniatura de carpeta existente (Carpeta.jpg) en búsqueda de portadas</string>
+  <string name="Settings.OnlySaveFolderThumb">Sólo Guardar Carátula en la carpeta. No tocar el archivo de música</string>
+  <string name="Settings.ChangeCoverSize">Guardar carátulas con una anchura máxima de píxeles de:</string>
   <string name="Settings.AmazonSite">Sitio de Búsqueda Amazon:</string>
   <string name="Settings.GroupBoxLyrics">Letras</string>
   <string name="Settings.SwitchArtist">Cambiar Artista antes de enviar</string>
@@ -519,6 +614,8 @@
   <string name="Settings.CopyArtist">Copiar Artista a ÁlbumArtista cuando esté vacío</string>
   <string name="Settings.AutoFillNumberTracks">Auto rellenar \"Número de Pistas\" en Edición Múltiple de Etiquetas</string>
   <string name="Settings.CaseConversion">Usar configuración de la Caja de Conversión al guardar</string>
+  <string name="Settings.ChangeReadonly">Cambiar Atributo de Sólo lectura al Guardar</string>
+  <string name="Settings.Encoding">Codificación utilizada para guardar Etiquetas:</string>
   <string name="Settings.CreateMissingFolderThumb">Crear miniaturas de carpeta ausentes (carpeta.jpg) al Guardar</string>
   <string name="Settings.AutoCompletion">Usar Base de Datos de Música de MediaPortal para Autocompletar el Artista</string>
   <string name="Settings.GroupBoxTagsID3">ID3</string>
@@ -531,27 +628,30 @@
   <string name="Settings.ID3Both">ID3V1 y ID3V2</string>
   <string name="Settings.ID3V2">ID3V2</string>
   <string name="Settings.ID3V1">ID3V1</string>
+  <string name="Settings.ClearUserFrames">Borrar Frames definidos por el Usuario al Guardar</string>
   <string name="Settings.GroupBoxTagsValidate">Validación de Archivo MP3</string>
   <string name="Settings.ValidateMP3">Validar archivos Mp3 mientras se escanea la carpeta / base de datos</string>
   <string name="Settings.AutoFixMP3">Reparar automáticamente archivos MP3 erróneos</string>
+  <string name="Settings.GroupBoxDCustomGenre">Géneros Personalizados</string>
+  <string name="Settings.AddCustomGenre">Añadir Género</string>
+  <string name="Settings.DeleteCustomGenre">Borrar Género</string>
   <string name="Settings.GroupBoxDatabaseBuild">Construcción de Base de Datos Musical</string>
-  <string name="Settings.DatabaseScanNote">Si no está disponible la base de datos de música de MediaPortal, se puede crear una base de datos\nintroduciendo un nombre de archivo en el campo de texto. Después comience el escaneo.</string>
   <string name="Settings.StartDBScan">Comenzar Escaneo</string>
   <string name="Settings.DBScanStatus">Estado de Escaneo</string>
-  <string name="Settings.DBNotExists">La base de datos seleccionada no existe.\nSi selecciona \"Yes\" se creará una nueva base de datos\nComience un escaneo para rellenar la base de datos.</string>
   <string name="Settings.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
   <string name="Settings.SelectMusicFolder">Seleccione la carpeta con sus Archivos de Música</string>
   <string name="Settings.DBScanIdle">Escaneo de la Base de datos no activo</string>
-  <string name="Settings.DBScanFinished">Escaneo de la Base de Datos realizado.\nProcesadas {0} pistas en: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary"> ({0} segundos por pista)</string>
   <string name="Settings.DBScanTitle">Confirme interrupción del Escaneo de la Base de Datos</string>
-  <string name="Settings.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
   <string name="Settings.DBScanProgress">Progreso de archivo {0} de {1}</string>
   <string name="Settings.TabRipping">Extrayendo</string>
   <string name="Settings.TabRippingGeneral">General</string>
   <string name="Settings.CustomPath">Rutas y Nombres de Archivo Personalizados</string>
   <string name="Settings.Format">Formato:</string>
   <string name="Settings.TargetFolder">Carpeta de Destino:</string>
+  <string name="Settings.RipOptions">Opciones de Extracción</string>
+  <string name="Settings.EjectCD">Expulsar CD después de Extraer</string>
+  <string name="Settings.ActivateTargetFolder">Activar Carpeta de Destino después de Extraer</string>
   <string name="Settings.GroupBoxEncoding">Formato de Codificación</string>
   <string name="Settings.EncodingFormat">Seleccione el formato en el que quiere convertir:</string>
   <string name="Settings.TabRippingMP3">MP3</string>
@@ -658,7 +758,6 @@
   <string name="message.Error_Title">Error</string>
   <string name="message.Save_Changes">Los cambios no se han guardado. ¿Quiere salvar los cambios?</string>
   <string name="message.Save_Changes_Title">Guardar Cambios</string>
-  <string name="message.Script_Compile_Failed">La compilación del script falló.\n\nPor favor, busque el error en el log y corríjalo.</string>
   <string name="message.DataEntryError">El valor especificado no es válido.</string>
   <string name="message.NoSelectionHeader">No hay selección</string>
   <string name="message.NoSelection">Por favor, seleccione al menos una fila para realizar la acción</string>
@@ -666,6 +765,12 @@
   <string name="message.DeleteConfirm">¿Quiere borrar realmente los archivos seleccionados?</string>
   <string name="message.DeleteFolders">Para borrar una carpeta, por favor, use May-Sup</string>
   <string name="message.Fixed">Corregido</string>
+  <string name="message.ErrorResetAttr">No se puede restablecer el atributo de sólo lectura</string>
+  <string name="message.CorruptFile">Archivo Corrupto</string>
+  <string name="message.UnsupportedFormat">Formato no Soportado</string>
+  <string name="message.NonExistingFile">¡El Archivo ya no existe!</string>
+  <string name="message.ErrorReadingFile">Error leyendo archivo: {0}</string>
+  <string name="message.ErrorSave">Error guardando archivo: {0}</string>
   <!--Progress Dialog-->
   <string name="progress.ScanningHeader">Obteniendo etiquetas de pista</string>
   <string name="progress.Scanning">Obteniendo etiquetas de la pista {0}/{1}</string>
@@ -683,9 +788,9 @@
   <!--About Dialog-->
   <string name="about.Header">Acerca de</string>
   <string name="about.Ok">Ok</string>
-  <string name="about.Description">MPTagThat es un editor de etiquetas de código libre que permite la gestión completa de su Colección de Música.\n\nMás información en:</string>
   <string name="about.Version">Versión:</string>
   <string name="about.BuildDate">Fecha:</string>
+  <string name="about.Contributors">Colaboradores</string>
   <!--Player-->
   <string name="player.Title">Título</string>
   <string name="player.Artist">Artista</string>
@@ -702,11 +807,29 @@
   <string name="dbsearch.Album">Álbum (contiene):</string>
   <string name="dbsearch.Title">Título (contiene):</string>
   <string name="dbsearch.Search">Buscar</string>
-  <string name="dbsearch.NoMusicDB">Para usar la función de búsqueda de la base de datos,\ndebe introducir la localización de la base de datos en la Configuración</string>
   <string name="dbsearch.NoSearchValues">Por favor, introduzca al menos un valor a buscar.</string>
   <string name="dbsearch.TooMuchRows">La consulta devolvió demasiadas filas. Sólo se muestran las 1000 primeras.</string>
   <!--Find / Replace-->
+  <string name="findreplace.HeaderFind">Buscar</string>
+  <string name="findreplace.HeaderReplace">Reemplazar</string>
+  <string name="findreplace.NotFound">Búsqueda no encontrada</string>
+  <string name="findreplace.NoMoreOccurencesFound">No se encuentran más coincidencias en la búsqueda</string>
+  <string name="findreplace.TabFind">Buscar</string>
+  <string name="findreplace.FindWhat">Buscar que:</string>
+  <string name="findreplace.MatchCase">Coincidir Mayúsculas y Minúsculas</string>
+  <string name="findreplace.MatchWords">Coincidir sólo palabras completas</string>
+  <string name="findreplace.FindNext">Buscar Siguiente</string>
   <string name="findreplace.Cancel">Cerrar</string>
+  <string name="findreplace.TabReplace">Reemplazar</string>
+  <string name="findreplace.ReplaceWith">Reemplazar con:</string>
+  <string name="findreplace.ReplaceBtn">Reemplazar</string>
+  <string name="findreplace.ReplaceAllBtn">Reemplazar Todo</string>
   <!--Readonly Dialog-->
+  <string name="readonly.Header">Archivo de Sólo Lectura</string>
+  <string name="readonly.Yes">Sí</string>
+  <string name="readonly.YesToAll">Sí a Todo</string>
+  <string name="readonly.No">No</string>
+  <string name="readonly.NoToAll">No a Todo</string>
   <!--Replay Gain Popup-->
+  <string name="albumgain.Header">Ganancia del Álbum</string>
 </resources>

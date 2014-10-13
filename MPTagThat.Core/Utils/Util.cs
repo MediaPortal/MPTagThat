@@ -950,6 +950,7 @@ namespace MPTagThat.Core
       {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestString);
         request.Proxy.Credentials = CredentialCache.DefaultCredentials;
+        request.UserAgent = "MPTagThat/3.1 ( hwahrmann@team-mediaportal.com )";
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         using (Stream responseStream = response.GetResponseStream())
         {

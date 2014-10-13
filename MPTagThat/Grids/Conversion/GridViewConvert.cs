@@ -141,6 +141,7 @@ namespace MPTagThat.GridView
 
       if (threadConvert.ThreadState != ThreadState.Running)
       {
+        threadConvert.Priority = ThreadPriority.Highest;
         threadConvert = new Thread(ConversionThread);
         threadConvert.Start();
       }

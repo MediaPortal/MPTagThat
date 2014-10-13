@@ -121,7 +121,6 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Oppfrisk</string>
-  <string name="screentip.RefreshText">Innholdet i mappen vil bli lest på nytt.\nHvis forandringer er gjort vil du få spørsmål om å lagre først.</string>
   <string name="screentip.Save">Lagre forandringer</string>
   <string name="screentip.SaveText">Lagrer forandringer som er gjort, ved å forandre tagg innholdet i de valgte filene.</string>
   <string name="screentip.ColumnsSelect">Kolonner vist i rutenettet</string>
@@ -130,7 +129,6 @@
   <string name="screentip.TagFromFile">Tagg fra Filnavn</string>
   <string name="screentip.TagFromFileText">Ved bruk av gitte parametere i innstillingene, for tagger som \"Track #\", \"Artist\", \"Title\" kan informasjonen hentes fra Filnavnet.</string>
   <string name="screentip.IdentifyFile">Identifiser Fil</string>
-  <string name="screentip.IdentifyFileText">En \"hash\" blir bygget av de første 30 sekunder av filen. Denne brukes da for identifikasjon av filen ved MusicBrainz.\nTaggene blir deretter hentet fra MusicBrainz for deretter å bli skrevet til filen.</string>
   <string name="screentip.TagFromInternet">Tagg fra Internettt</string>
   <string name="screentip.TagFromInternetText">Det gitte Artist og Album navnet blir brukt ved søk hos Amazon for å finne lignende filnavn som listen fra Amazon.</string>
   <string name="screentip.SingleTagEdit">Enkel Tagg Redigering</string>
@@ -292,7 +290,6 @@
   <string name="TagEdit.LyricsHeaderLyrics">Lyrikk</string>
   <!--Rating-->
   <string name="TagEdit.RemoveExistingRatings">Fjern eksisterende Rating Først</string>
-  <string name="TagEdit.RatingNote">Rating er fra 1-255 hvor 1 er dårligst og 255 best. 0 er ukjent.\n\nNotis: Mange programmer har sin egen måte å sette rate på, så det kan endre ID3 standard. Hvis ingen personlig teller er ønsket kan det utelates.</string>
   <string name="TagEdit.PlayCounter">Teller Avspilt:</string>
   <string name="TagEdit.RemoveRating">Fjern Rating</string>
   <string name="TagEdit.AddRating">Legg til Rating</string>
@@ -511,7 +508,8 @@
   <string name="organise.BrowseRootDir">Utforsk</string>
   <string name="organise.OverWriteFiles">Overskriv eksisterende filer</string>
   <string name="organise.CopyFiles">Kopier filer i stedenfor å flytte dem</string>
-  <string name="organise.CopyNonMusicFiles">Kopier/Flytt ikke Musikk\nRelaterte Filer (Bilder, etc.)</string>
+  <string name="organise.CopyNonMusicFiles">Kopier/Flytt ikke Musikk
+Relaterte Filer (Bilder, etc.)</string>
   <string name="organise.InvalidParm">Feil i Parameter Formatet, vennligst korriger.</string>
   <string name="organise.FileExists">Filen eksisterer allerede, vil ikke bli overskrevet</string>
   <string name="organise.SameFile">Kilde og Målfil er den samme. Filen ble hoppet over</string>
@@ -554,7 +552,6 @@
   <string name="Settings.DescPrefStandard">Denne innstillingen burde være bra for de fleste siden kvaliteten er ganske høy. (Bitrate mellom 170-210)</string>
   <string name="Settings.DescPrefExtreme">Hvis du har ekstremt god hørsel og like godt avspillingsutstyr, vil denne innstillingen gi noe høyere kvalitet en ”standard” innstillingen. (Bitrate mellom 220-260)</string>
   <string name="Settings.DescPrefInsane">CBR 320. Denne innstillingen vil være I overkant for de fleste I de fleste situasjoner, men hvis du må ha høyest mulig kvalitet uten å tenke på filstørrelse, er dette veien å gå..</string>
-  <string name="Settings.DescPrefABR">ABR modellen (høy kvalitet/bitrate men ikke så høy som VBR).\r\nVed bruk av denne innstillingen vil vanligvis gi god kvalitet ved en gitt bitrate. \r\nMen denne innstillingen er ikke like fleksibel som VBR og vil som regel ikke gi bedre kvalitet en VBR ved høyere bitrater.</string>
   <string name="Settings.TabGeneral">Generelt</string>
   <string name="Settings.GroupBoxKeys">Snarveier for Tastatur</string>
   <string name="Settings.ChangeKey">Forandre</string>
@@ -601,17 +598,13 @@
   <string name="Settings.ValidateMP3">Valider MP3 Filer under skanning av folder / database</string>
   <string name="Settings.AutoFixMP3">Automatisk fiks feil i MP3 filene</string>
   <string name="Settings.GroupBoxDatabaseBuild">Lag Musikk Database</string>
-  <string name="Settings.DatabaseScanNote">Hvis ingen MediaPortal Musikk Database er tilgjengelig, kan en database bli laget ved å sette in et filnavn I boksen over. \nKlikke så på søk.</string>
   <string name="Settings.StartDBScan">Start Søk</string>
   <string name="Settings.DBScanStatus">Søke Status</string>
-  <string name="Settings.DBNotExists">Den valgte database eksisterer ikke.\nHvis du velger ”Ja” vil en ny database bli laget.\nStart et Søk for å fylle i databasen.</string>
   <string name="Settings.ClearDatabase">Fjern innholdet i databasen før søking</string>
   <string name="Settings.SelectMusicFolder">Veld Mappen som inneholder Musikk filene dine</string>
   <string name="Settings.DBScanIdle">Database Søk ikke aktivert.</string>
-  <string name="Settings.DBScanFinished">Database søk ferdig.\nBehandlet {0} spor i: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary"> ({0} sekunder pr spor)</string>
   <string name="Settings.DBScanTitle">Bekreft avbrytelse av Database søk</string>
-  <string name="Settings.DBScanActive">Database søk er fortsatt aktiv.\nAvslutte søk og avslutte programmet?</string>
   <string name="Settings.DBScanProgress">Behandler fil {0} av {1}</string>
   <string name="Settings.TabRipping">Ripping</string>
   <string name="Settings.TabRippingGeneral">Generelt</string>
@@ -727,7 +720,6 @@
   <string name="message.Error_Title">Feil</string>
   <string name="message.Save_Changes">Endringene har ikke blitt lagret. Vil du lagre de?</string>
   <string name="message.Save_Changes_Title">Lagre Endringer</string>
-  <string name="message.Script_Compile_Failed">Kjøring av script feilet.\n\nVennligst sjekk error loggen for feilen å korriger denne.</string>
   <string name="message.DataEntryError">Valgte verdi er ugyldig.</string>
   <string name="message.NoSelectionHeader">Ingen Valgt</string>
   <string name="message.NoSelection">Vennligst spesifiser minimum 1 linje</string>
@@ -735,8 +727,6 @@
   <string name="message.DeleteConfirm">Vil du virkelig slette valgte fil(er)?</string>
   <string name="message.DeleteFolders">For å slette en Folder, bruk Shift+Del</string>
   <string name="message.Fixed">Ordnet</string>
-  <string name="message.FatalError">Fatal feil oppstått. MPTagThat vil bli avsluttet\r\nVennligst se i loggen for beskrivelse av grunnen.</string>
-  <string name="message.OutOfMemory">For mange filer skannet.\r\nAvslutter skanning.</string>
   <!--Progress Dialog-->
   <string name="progress.ScanningHeader">Henter tagger for Spor</string>
   <string name="progress.Scanning">Henter tagger for spor {0}/{1}</string>
@@ -754,7 +744,6 @@
   <!--About Dialog-->
   <string name="about.Header">Om</string>
   <string name="about.Ok">Ok</string>
-  <string name="about.Description">MPTagThat er en åpen kildekode Tagg Editor, \nsom tillater redigering av komplette musikk kolleksjoner.\n\nMer informasjon finnes:</string>
   <string name="about.Version">Versjon:</string>
   <string name="about.BuildDate">Bygd Dato:</string>
   <string name="about.Contributors">Bidragsytere</string>
@@ -774,7 +763,6 @@
   <string name="dbsearch.Album">Album (inneholder):</string>
   <string name="dbsearch.Title">Tittel (inneholder):</string>
   <string name="dbsearch.Search">Søk</string>
-  <string name="dbsearch.NoMusicDB">For å bruke Database søke funksjon, \nmå du spesifisere hvor Musikk Databasen er lokaliser i Innstillinger.</string>
   <string name="dbsearch.NoSearchValues">Vennligst minst en verdi å søke etter.</string>
   <string name="dbsearch.TooMuchRows">Søket ga for mange rader, viser nå de 1000 første.</string>
   <!--Find / Replace-->

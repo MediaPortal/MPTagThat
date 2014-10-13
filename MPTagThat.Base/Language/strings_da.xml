@@ -125,7 +125,6 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Genopfrisk</string>
-  <string name="screentip.RefreshText">Indholdet af den aktuelt valgte folder genlæse. ⏎\nHvis ændringer er under behandling, systemet spørger, om disse skal gemmes først.</string>
   <string name="screentip.Save">Gem ændringer</string>
   <string name="screentip.SaveText">Gemmer afventende ændringer til disk, ved at ændre tags på alle valgte filer.</string>
   <string name="screentip.ColumnsSelect">Kolonner vist i Grid</string>
@@ -134,7 +133,6 @@
   <string name="screentip.TagFromFile">Tag fra filnavn</string>
   <string name="screentip.TagFromFileText">Ved hjælp af konkrete parametrene i dialogen, de forskellige tags som \"Track #\", \"Artist\", \"Title\", osv. er udtrukket af filnavnet.</string>
   <string name="screentip.IdentifyFile">Identificer fil</string>
-  <string name="screentip.IdentifyFileText">En hash er bygget over de første 30 sekunder af filen. Denne hash anvendes derefter til at identificere filen på MusicBrainz. ⏎\nTags bliver derefter hentet fra MusicBrainz og skrevet til filen.</string>
   <string name="screentip.TagFromInternet">Tag fra Internet</string>
   <string name="screentip.TagFromInternetText">Den givne kunstner og album navn bruges til et opslag på Amazon i et forsøger at matche filnavnene med listen, der hentes fra Amazon.</string>
   <string name="screentip.SingleTagEdit">Enkel Tag redigering</string>
@@ -180,7 +178,6 @@
   <string name="screentip.FixSong">Fix MP3</string>
   <string name="screentip.FixSongText">Bruger MP3val til at rette fejl fundet i den valgte MP3-fil.</string>
   <string name="screentip.ReplayGain">Genspil Gain</string>
-  <string name="screentip.ReplayGainText">Analyserer den valgte fil og beregner Replay Gain. Den beregnede værdi skrives ind i tags. ⏎\nBemærk: Selve filen ikke ændres.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Start Rip</string>
   <string name="screentip.RipButtonText">Start Ripping af de valgte filer</string>
@@ -305,7 +302,6 @@
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Vurderinger (For Non-ID3-filer, skal du vælge vurderingen i stjerne kolonne)</string>
   <string name="TagEdit.RemoveExistingRatings">Fjerne eksisterende vurdering først</string>
-  <string name="TagEdit.RatingNote">Bedømmelsen er 1-255, hvor 1 er værst og 255 er bedst. 0 er ukendt. ⏎\n⏎\nBemærk: Mange programmer har deres egen bedømmelse og kan omdefinere ID3 standard. Hvis ingen personlig tæller ønskes kan dette udelades.</string>
   <string name="TagEdit.PlayCounter">Afspilningstæller:</string>
   <string name="TagEdit.RemoveRating">Fjern vurdering</string>
   <string name="TagEdit.AddRating">Tilføj vurdering</string>
@@ -578,7 +574,6 @@
   <string name="Settings.DescPrefStandard">Denne præindstilling bør tilfredsstille de fleste mennesker med det meste musik og er af ret højt i kvalitet. (Bitrate Range 170-210)</string>
   <string name="Settings.DescPrefExtreme">Hvis du har ekstremt god hørelse og tilsvarende udstyr, vil denne præindstilling generelt give lidt højere kvalitet end \"standard\" mode. (Bitrate Range 220-260)</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Denne præindstiling vil normalt være overkill for de fleste mennesker og de fleste situationer, men hvis du skal have den absolut højeste kvalitet uden hensyntagen til filstørrelse, det er vejen at gå.</string>
-  <string name="Settings.DescPrefABR">For ABR mode (høj kvalitet pr givet bitrate, men ikke så høj som VBR). Brug af denne præindstilling vil normalt give dig en god kvalitet til en specificeret bitrate. ⏎\n⏎\nAfhængigt af bitrate indtastet, vil denne præudindstilling bestemme de optimale indstillinger for den pågældende situation. Selvom denne tilgang virker, er det ikke nær så fleksible som VBR, og vil normalt ikke nå det samme niveau af kvalitet som VBR ved højere bitrates.</string>
   <string name="Settings.TabGeneral">Generelt</string>
   <string name="Settings.GroupBoxKeys">Tastatur genveje</string>
   <string name="Settings.ChangeKey">Ændre</string>
@@ -631,17 +626,13 @@
   <string name="Settings.ValidateMP3">Valider MP3-filer under scanning af folder / database</string>
   <string name="Settings.AutoFixMP3">Automatisk fix MP3-filer med fejl</string>
   <string name="Settings.GroupBoxDatabaseBuild">Musik Database opbygning</string>
-  <string name="Settings.DatabaseScanNote">Hvis ikke MediaPortal Music Database er til rådighed, kan en database skabes, ved at indtaste et filnavn i ovenstående tekstboks. ⏎\nDerefter start scanningen.</string>
   <string name="Settings.StartDBScan">Start Scan</string>
   <string name="Settings.DBScanStatus">Scan Status</string>
-  <string name="Settings.DBNotExists">Den valgte database findes ikke. ⏎\nHvis du vælger \"Yes\" vil en ny database blive oprettet. ⏎\nStart en scanning for at fylde databasen.</string>
   <string name="Settings.ClearDatabase">Tøm database indhold før scanning</string>
   <string name="Settings.SelectMusicFolder">Vælg folderen med dine musikfiler</string>
   <string name="Settings.DBScanIdle">Database Scan er ikke aktiv.</string>
-  <string name="Settings.DBScanFinished">Database scan gjort. ⏎\nForarbejdede {0} track i: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary">({0} sekunder pr track)</string>
   <string name="Settings.DBScanTitle">Bekræft Database Scan afbrydelse</string>
-  <string name="Settings.DBScanActive">Database Scan er stadig aktiv. ⏎\nAfbryd scanning og afslutte programmet?</string>
   <string name="Settings.DBScanProgress">Behandler fil {0} af {1}</string>
   <string name="Settings.TabRipping">Ripping</string>
   <string name="Settings.TabRippingGeneral">Generelt</string>
@@ -757,7 +748,6 @@
   <string name="message.Error_Title">Fejl</string>
   <string name="message.Save_Changes">Ændringer er ikke blevet gemt. Ønsker du at gemme ændringerne?</string>
   <string name="message.Save_Changes_Title">Gem ændringer</string>
-  <string name="message.Script_Compile_Failed">Kompileringen af scriptet mislykkedes. ⏎\n⏎\nVenligst se fejl i loggen, og rette den.</string>
   <string name="message.DataEntryError">Den angivne værdi er ugyldig.</string>
   <string name="message.NoSelectionHeader">Intet valg</string>
   <string name="message.NoSelection">Vælg mindst én række for at udføre handlingen</string>
@@ -765,8 +755,6 @@
   <string name="message.DeleteConfirm">Vil du virkelig slette de valgte filer (r)?</string>
   <string name="message.DeleteFolders">Hvis du vil slette en folder, skal du bruge Shift-Del</string>
   <string name="message.Fixed">Rettet</string>
-  <string name="message.FatalError">Fatal Exception. MPTagThat vil blive afsluttet↩ ⏎\nVenligst se i loggen for grunden</string>
-  <string name="message.OutOfMemory">For mange filer scannet. Løber tør for hukommelse. ↩ ⏎\nAfbryder Scan.</string>
   <string name="message.ErrorResetAttr">Kan ikke nulstille skrivebeskyttet attribut</string>
   <string name="message.CorruptFile">Ødelagt fil</string>
   <string name="message.UnsupportedFormat">Ikke-understøttet format</string>
@@ -790,7 +778,6 @@
   <!--About Dialog-->
   <string name="about.Header">Afbryd</string>
   <string name="about.Ok">Ok</string>
-  <string name="about.Description">MPTagThat er en open source Tag Editor, som organisere din komplette musiksamling. ⏎\n⏎\nMere information på:</string>
   <string name="about.Version">Version:</string>
   <string name="about.BuildDate">Build Dato:</string>
   <string name="about.Contributors">Bidragydere</string>
@@ -810,7 +797,6 @@
   <string name="dbsearch.Album">Album (indeholder):</string>
   <string name="dbsearch.Title">Titel (indeholder):</string>
   <string name="dbsearch.Search">Søg</string>
-  <string name="dbsearch.NoMusicDB">For at bruge databasen søgefunktionen ⏎\nskal du indtaste placeringen af Music Database i Indstillinger.</string>
   <string name="dbsearch.NoSearchValues">Indtast mindst én værdi til at søge efter.</string>
   <string name="dbsearch.TooMuchRows">Query returnere for mange rækker. Viser kun de første 1000.</string>
   <!--Find / Replace-->
@@ -830,12 +816,10 @@
   <string name="findreplace.ReplaceAllBtn">Erstat alle</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Skrivebeskyttet fil</string>
-  <string name="readonly.Explanation">Den angivne fil er skrivebeskyttet. ⏎\nSkal MPTagThat ændre attribut, og gem filen?</string>
   <string name="readonly.Yes">Ja</string>
   <string name="readonly.YesToAll">Ja til alle</string>
   <string name="readonly.No">Nej</string>
   <string name="readonly.NoToAll">Nej til alle</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album Gain</string>
-  <string name="albumgain.Explanation">Alle filer er valgt. ⏎\nSkal MPTagThat beregne et album Gain?</string>
 </resources>
