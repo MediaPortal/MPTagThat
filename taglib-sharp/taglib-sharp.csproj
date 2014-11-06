@@ -56,6 +56,8 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="TagLib\Dsf\File.cs" />
+    <Compile Include="TagLib\Dsf\StreamHeader.cs" />
     <Compile Include="TagLib\Id3v2\Frames\UrlLinkFrame.cs" />
     <Compile Include="TagLib\IFD\Entries\SRationalArrayIFDEntry.cs" />
     <Compile Include="TagLib\IFD\Tags\OlympusMakerNoteEntryTag.cs" />

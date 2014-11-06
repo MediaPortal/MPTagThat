@@ -439,6 +439,7 @@ namespace MPTagThat.Core
         case ".aiff":
         case ".ape":
         case ".asf":
+        case ".dsf":
         case ".flac":
         case ".mp3":
         case ".ogg":
