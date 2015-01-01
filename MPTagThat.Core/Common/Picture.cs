@@ -122,7 +122,7 @@ namespace MPTagThat.Core.Common
       using (MemoryStream stream = new MemoryStream())
       {
         FreeImageBitmap bCopy = new FreeImageBitmap(img);
-        bCopy.Save(stream, FREE_IMAGE_FORMAT.FIF_JPEG);
+        bCopy.Save(stream, FREE_IMAGE_FORMAT.FIF_JPEG, FREE_IMAGE_SAVE_FLAGS.JPEG_QUALITYSUPERB);
         stream.Close();
         byteArray = stream.ToArray();
       }
