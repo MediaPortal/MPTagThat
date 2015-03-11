@@ -37,7 +37,7 @@ namespace TagLib.Dsf
 	[SupportedMimeType("audio/dsf")]
 	[SupportedMimeType("sound/dsf")]
 	[SupportedMimeType("application/x-dsf")]
-	public class File : TagLib.File
+  public class File : TagLib.File
 	{
 		#region Private Fields
 
@@ -56,6 +56,21 @@ namespace TagLib.Dsf
 		/// </summary>
 		private Properties properties = null;
 
+    /// <summary>
+    /// Contains the size of the DSF File
+    /// </summary>
+    private uint dsf_size = 0;
+
+	  /// <summary>
+	  /// Contains the start position of the Tag
+	  /// </summary>
+	  private long tag_start;
+
+    /// <summary>
+    /// Contains the end position of the Tag
+    /// </summary>
+    private long tag_end;
+    
 		#endregion
 
 		#region Public Static Fields
@@ -153,8 +168,6 @@ namespace TagLib.Dsf
 			Mode = AccessMode.Read;
 			try
 			{
-				uint dsf_size;
-				long tag_start, tag_end;
 				Read(true, propertiesStyle, out dsf_size,
 				     out tag_start, out tag_end);
 			}
@@ -164,7 +177,6 @@ namespace TagLib.Dsf
 			}
 
 			TagTypesOnDisk = TagTypes;
-
 			GetTag(TagTypes.Id3v2, true);
 		}
 
@@ -230,60 +242,42 @@ namespace TagLib.Dsf
 			Mode = AccessMode.Write;
 			try
 			{
-				ByteVector data = new ByteVector();
+        long original_tag_length = tag_end - tag_start;
+        ByteVector data = new ByteVector();
 
-				// Add the ID3 chunk and ID32 tag to the vector
-				if (tag != null)
-				{
-					ByteVector tag_data = tag.Render();
-					if (tag_data.Count > 10)
-					{
-						if (tag_data.Count%2 == 1)
-							tag_data.Add(0);
+			  if (tag == null)
+			  {
+			    // The tag has been removed
+			    RemoveBlock(tag_start, original_tag_length);
+          Insert(ByteVector.FromULong((ulong)(0),
+                                     false), 20, 8);
+			  }
+			  else
+			  {
+			    data = tag.Render();
 
-						data.Add("ID3 ");
-						data.Add(ByteVector.FromUInt(
-						         	(uint) tag_data.Count,
-						         	true));
-						data.Add(tag_data);
-					}
-				}
+			    // If tagging info cannot be found, place it at
+			    // the end of the file.
+			    if (tag_start == 0 || tag_end < tag_start)
+			    {
+			      tag_start = tag_end = Length;
+            // Update the New Tag start
+            Insert(ByteVector.FromULong((ulong)(tag_start),
+                                     false), 20, 8);
+			    }
 
-				// Read the file to determine the current DSF File
-				// size and the area tagging is in.
-				uint dsf_size;
-				long tag_start, tag_end;
-				Read(false, ReadStyle.None, out dsf_size,
-				     out tag_start, out tag_end);
+			    // Insert the tagging data.
+			    Insert(data, tag_start, data.Count);
+			  }
 
-				// If tagging info cannot be found, place it at
-				// the end of the file.
-				if (tag_start < 12 || tag_end < tag_start)
-					tag_start = tag_end = Length;
+			  long length = dsf_size + data.Count - original_tag_length;
 
-				int length = (int) (tag_end - tag_start + 8);
-
-				// Insert the tagging data.
-				Insert(data, tag_start, length);
-
-				// If the data size changed update the aiff size.
-				if (data.Count - length != 0 &&
+				// If the data size changed update the dsf  size.
+        if (data.Count - original_tag_length != 0 &&
 				    tag_start <= dsf_size)
 				{
-					// Depending, if a Tag has been added or removed, 
-					// the length needs to be adjusted
-					if (tag == null)
-					{
-						length -= 16;
-					}
-					else
-					{
-						length -= 8;
-					}
-
-					Insert(ByteVector.FromUInt((uint)
-					                           (dsf_size + data.Count - length),
-					                           true), 4, 4);
+					Insert(ByteVector.FromULong((ulong)(length),
+					                           false), 12, 8);
 				}
 				// Update the tag types.
 				TagTypesOnDisk = TagTypes;
@@ -434,14 +428,13 @@ namespace TagLib.Dsf
 
           // Get the length of the tag out of the ID3 chunk
           Seek(tag_start + 6);
-          uint tag_size = SynchData.ToUInt(ReadBlock(4)) + 6;
+          uint tag_size = SynchData.ToUInt(ReadBlock(4)) + 10;
 
 		      InvariantStartPosition = tag_start;
           tag_end = InvariantEndPosition = tag_start + tag_size;
 		    }
 		  }
 		}
-
 		#endregion
 	}
 }
