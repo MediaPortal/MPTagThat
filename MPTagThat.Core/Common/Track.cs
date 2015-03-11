@@ -509,264 +509,270 @@ namespace MPTagThat.Core
           file.RemoveTags(tagType);
         }
 
-        #region Main Tags
-        string[] splitValues = track.Artist.Split(new[] { ';', '|' });
-        file.Tag.Performers = splitValues;
 
-        splitValues = track.AlbumArtist.Split(new[] { ';', '|' });
-        file.Tag.AlbumArtists = splitValues;
-
-        file.Tag.Album = track.Album.Trim();
-        file.Tag.BeatsPerMinute = (uint)track.BPM;
-
-
-        if (track.Comment != "")
+        if (file.Tag != null)
         {
-          file.Tag.Comment = "";
-          if (track.IsMp3)
+          #region Main Tags
+
+          string[] splitValues = track.Artist.Split(new[] {';', '|'});
+          file.Tag.Performers = splitValues;
+
+          splitValues = track.AlbumArtist.Split(new[] {';', '|'});
+          file.Tag.AlbumArtists = splitValues;
+
+          file.Tag.Album = track.Album.Trim();
+          file.Tag.BeatsPerMinute = (uint) track.BPM;
+
+
+          if (track.Comment != "")
           {
-            id3v1tag.Comment = track.Comment;
-            foreach (Comment comment in track.ID3Comments)
+            file.Tag.Comment = "";
+            if (track.IsMp3)
             {
-              CommentsFrame commentsframe = CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
-              commentsframe.Text = comment.Text;
-              commentsframe.Description = comment.Description;
-              commentsframe.Language = comment.Language;
+              id3v1tag.Comment = track.Comment;
+              foreach (Comment comment in track.ID3Comments)
+              {
+                CommentsFrame commentsframe = CommentsFrame.Get(id3v2tag, comment.Description, comment.Language, true);
+                commentsframe.Text = comment.Text;
+                commentsframe.Description = comment.Description;
+                commentsframe.Language = comment.Language;
+              }
             }
+            else
+              file.Tag.Comment = track.Comment;
           }
           else
-            file.Tag.Comment = track.Comment;
-        }
-        else
-        {
-          file.Tag.Comment = "";
-        }
-
-        if (track.IsMp3)
-        {
-          id3v2tag.IsCompilation = track.Compilation;
-        }
-
-        file.Tag.Disc = track.DiscNumber;
-        file.Tag.DiscCount = track.DiscCount;
-
-        splitValues = track.Genre.Split(new[] { ';', '|' });
-        file.Tag.Genres = splitValues;
-
-        file.Tag.Title = track.Title;
-
-        file.Tag.Track = track.TrackNumber;
-        file.Tag.TrackCount = track.TrackCount;
-
-        file.Tag.Year = (uint)track.Year;
-
-        file.Tag.ReplayGainTrack = track.ReplayGainTrack;
-        file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
-        file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
-        file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
-
-        #endregion
-
-        #region Detailed Information
-
-        splitValues = track.Composer.Split(new[] { ';', '|' });
-        file.Tag.Composers = splitValues;
-        file.Tag.Conductor = track.Conductor;
-        file.Tag.Copyright = track.Copyright;
-        file.Tag.Grouping = track.Grouping;
-
-        splitValues = track.ArtistSortName.Split(new[] { ';', '|' });
-        file.Tag.PerformersSort = splitValues;
-        splitValues = track.AlbumArtistSortName.Split(new[] { ';', '|' });
-        file.Tag.AlbumArtistsSort = splitValues;
-        file.Tag.AlbumSort = track.AlbumSortName;
-        file.Tag.TitleSort = track.TitleSortName;
-
-        #endregion
-
-        #region Picture
-
-        List<TagLib.Picture> pics = new List<TagLib.Picture>();
-        foreach (Picture pic in track.Pictures)
-        {
-          TagLib.Picture tagPic = new TagLib.Picture();
-
-          try
           {
-            byte[] byteArray = pic.Data;
-            ByteVector data = new ByteVector(byteArray);
-            tagPic.Data = data;
-            tagPic.Description = pic.Description;
-            tagPic.MimeType = "image/jpg";
-            tagPic.Type = pic.Type;
-            pics.Add(tagPic);
-          }
-          catch (Exception ex)
-          {
-            log.Error("Error saving Picture: {0}", ex.Message);
+            file.Tag.Comment = "";
           }
 
-          file.Tag.Pictures = pics.ToArray();
-        }
-
-        // Clear the picture
-        if (track.Pictures.Count == 0)
-        {
-          file.Tag.Pictures = pics.ToArray();
-        }
-
-        #endregion
-
-        #region Lyrics
-
-        if (track.Lyrics != null && track.Lyrics != "")
-        {
-          file.Tag.Lyrics = track.Lyrics;
           if (track.IsMp3)
           {
-            foreach (Lyric lyric in track.LyricsFrames)
-            {
-              UnsynchronisedLyricsFrame lyricframe = UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description, lyric.Language, true);
-              lyricframe.Text = lyric.Text;
-              lyricframe.Description = lyric.Description;
-              lyricframe.Language = lyric.Language;
-            }
+            id3v2tag.IsCompilation = track.Compilation;
           }
-          else
+
+          file.Tag.Disc = track.DiscNumber;
+          file.Tag.DiscCount = track.DiscCount;
+
+          splitValues = track.Genre.Split(new[] {';', '|'});
+          file.Tag.Genres = splitValues;
+
+          file.Tag.Title = track.Title;
+
+          file.Tag.Track = track.TrackNumber;
+          file.Tag.TrackCount = track.TrackCount;
+
+          file.Tag.Year = (uint) track.Year;
+
+          file.Tag.ReplayGainTrack = track.ReplayGainTrack;
+          file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
+          file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
+          file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
+
+          #endregion
+
+          #region Detailed Information
+
+          splitValues = track.Composer.Split(new[] {';', '|'});
+          file.Tag.Composers = splitValues;
+          file.Tag.Conductor = track.Conductor;
+          file.Tag.Copyright = track.Copyright;
+          file.Tag.Grouping = track.Grouping;
+
+          splitValues = track.ArtistSortName.Split(new[] {';', '|'});
+          file.Tag.PerformersSort = splitValues;
+          splitValues = track.AlbumArtistSortName.Split(new[] {';', '|'});
+          file.Tag.AlbumArtistsSort = splitValues;
+          file.Tag.AlbumSort = track.AlbumSortName;
+          file.Tag.TitleSort = track.TitleSortName;
+
+          #endregion
+
+          #region Picture
+
+          List<TagLib.Picture> pics = new List<TagLib.Picture>();
+          foreach (Picture pic in track.Pictures)
+          {
+            TagLib.Picture tagPic = new TagLib.Picture();
+
+            try
+            {
+              byte[] byteArray = pic.Data;
+              ByteVector data = new ByteVector(byteArray);
+              tagPic.Data = data;
+              tagPic.Description = pic.Description;
+              tagPic.MimeType = "image/jpg";
+              tagPic.Type = pic.Type;
+              pics.Add(tagPic);
+            }
+            catch (Exception ex)
+            {
+              log.Error("Error saving Picture: {0}", ex.Message);
+            }
+
+            file.Tag.Pictures = pics.ToArray();
+          }
+
+          // Clear the picture
+          if (track.Pictures.Count == 0)
+          {
+            file.Tag.Pictures = pics.ToArray();
+          }
+
+          #endregion
+
+          #region Lyrics
+
+          if (track.Lyrics != null && track.Lyrics != "")
+          {
             file.Tag.Lyrics = track.Lyrics;
-        }
-        else
-        {
-          file.Tag.Lyrics = "";
-        }
-        #endregion
-
-        #region Ratings
-
-        if (track.IsMp3)
-        {
-          if (track.Ratings.Count > 0)
-          {
-            foreach (PopmFrame rating in track.Ratings)
+            if (track.IsMp3)
             {
-              PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, rating.User, true);
-              popmFrame.Rating = Convert.ToByte(rating.Rating);
-              popmFrame.PlayCount = Convert.ToUInt32(rating.PlayCount);
+              foreach (Lyric lyric in track.LyricsFrames)
+              {
+                UnsynchronisedLyricsFrame lyricframe = UnsynchronisedLyricsFrame.Get(id3v2tag, lyric.Description,
+                  lyric.Language, true);
+                lyricframe.Text = lyric.Text;
+                lyricframe.Description = lyric.Description;
+                lyricframe.Language = lyric.Language;
+              }
             }
+            else
+              file.Tag.Lyrics = track.Lyrics;
           }
           else
           {
-            id3v2tag.RemoveFrames("POPM");
+            file.Tag.Lyrics = "";
           }
-        }
-        else if (track.TagType == "ogg" || track.TagType == "flac")
-        {
-          if (track.Ratings.Count > 0)
+
+          #endregion
+
+          #region Ratings
+
+          if (track.IsMp3)
           {
-            XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, true) as XiphComment;
-            xiph.SetField("RATING", track.Rating.ToString());
-          }
-        }
-
-        #endregion
-
-        #region Non- Standard Taglib and User Defined Frames
-
-        if (Options.MainSettings.ClearUserFrames)
-        {
-          foreach (Frame frame in track.UserFrames)
-          {
-            ByteVector frameId = new ByteVector(frame.Id);
-
-            if (frame.Id == "TXXX")
+            if (track.Ratings.Count > 0)
             {
-              id3v2tag.SetUserTextAsString(frame.Description, "");
+              foreach (PopmFrame rating in track.Ratings)
+              {
+                PopularimeterFrame popmFrame = PopularimeterFrame.Get(id3v2tag, rating.User, true);
+                popmFrame.Rating = Convert.ToByte(rating.Rating);
+                popmFrame.PlayCount = Convert.ToUInt32(rating.PlayCount);
+              }
             }
             else
             {
-              id3v2tag.SetTextFrame(frameId, "");
+              id3v2tag.RemoveFrames("POPM");
             }
           }
-        }
-
-        List<Frame> allFrames = new List<Frame>();
-        allFrames.AddRange(track.Frames);
-
-        // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
-        if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
-        {
-          // Clean the previously saved Userframes, to avoid duplicates
-          foreach (Frame frame in track.SavedUserFrames)
+          else if (track.TagType == "ogg" || track.TagType == "flac")
           {
-            ByteVector frameId = new ByteVector(frame.Id);
-
-            if (frame.Id == "TXXX")
+            if (track.Ratings.Count > 0)
             {
-              id3v2tag.SetUserTextAsString(frame.Description, "");
-            }
-            else
-            {
-              id3v2tag.SetTextFrame(frameId, "");
+              XiphComment xiph = file.GetTag(TagLib.TagTypes.Xiph, true) as XiphComment;
+              xiph.SetField("RATING", track.Rating.ToString());
             }
           }
 
-          allFrames.AddRange(track.UserFrames);
-        }
+          #endregion
 
-        foreach (Frame frame in allFrames)
-        {
-          ByteVector frameId = new ByteVector(frame.Id);
+          #region Non- Standard Taglib and User Defined Frames
+
+          if (Options.MainSettings.ClearUserFrames)
+          {
+            foreach (Frame frame in track.UserFrames)
+            {
+              ByteVector frameId = new ByteVector(frame.Id);
+
+              if (frame.Id == "TXXX")
+              {
+                id3v2tag.SetUserTextAsString(frame.Description, "");
+              }
+              else
+              {
+                id3v2tag.SetTextFrame(frameId, "");
+              }
+            }
+          }
+
+          List<Frame> allFrames = new List<Frame>();
+          allFrames.AddRange(track.Frames);
 
           // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
-          if (frame.Id == "TXXX")
+          if (track.SavedUserFrames != null && !Options.MainSettings.ClearUserFrames)
           {
-            if (frame.Description != "")
+            // Clean the previously saved Userframes, to avoid duplicates
+            foreach (Frame frame in track.SavedUserFrames)
             {
-              id3v2tag.SetUserTextAsString(frame.Description, "");
-              id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+              ByteVector frameId = new ByteVector(frame.Id);
+
+              if (frame.Id == "TXXX")
+              {
+                id3v2tag.SetUserTextAsString(frame.Description, "");
+              }
+              else
+              {
+                id3v2tag.SetTextFrame(frameId, "");
+              }
+            }
+
+            allFrames.AddRange(track.UserFrames);
+          }
+
+          foreach (Frame frame in allFrames)
+          {
+            ByteVector frameId = new ByteVector(frame.Id);
+
+            // The only way to avoid duplicates of User Frames is to delete them by assigning blank values to them
+            if (frame.Id == "TXXX")
+            {
+              if (frame.Description != "")
+              {
+                id3v2tag.SetUserTextAsString(frame.Description, "");
+                id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+              }
+            }
+            else
+            {
+              id3v2tag.SetTextFrame(frameId, "");
+              id3v2tag.SetTextFrame(frameId, frame.Value);
             }
           }
-          else
+
+          #endregion
+
+
+          // Now, depending on which frames the user wants to save, we will remove the other Frames
+          file = Util.FormatID3Tag(file);
+
+          // Set the encoding for ID3 Tags
+          if (track.IsMp3)
           {
-            id3v2tag.SetTextFrame(frameId, "");
-            id3v2tag.SetTextFrame(frameId, frame.Value);
+            TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
+            switch (Options.MainSettings.CharacterEncoding)
+            {
+              case 0:
+                TagLib.Id3v2.Tag.DefaultEncoding = StringType.Latin1;
+                break;
+
+              case 1:
+                TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16;
+                break;
+
+              case 2:
+                TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16BE;
+                break;
+
+              case 3:
+                TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF8;
+                break;
+
+              case 4:
+                TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16LE;
+                break;
+            }
           }
         }
-
-        #endregion
-
-
-        // Now, depending on which frames the user wants to save, we will remove the other Frames
-        file = Util.FormatID3Tag(file);
-
-        // Set the encoding for ID3 Tags
-        if (track.IsMp3)
-        {
-          TagLib.Id3v2.Tag.ForceDefaultEncoding = true;
-          switch (Options.MainSettings.CharacterEncoding)
-          {
-            case 0:
-              TagLib.Id3v2.Tag.DefaultEncoding = StringType.Latin1;
-              break;
-
-            case 1:
-              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16;
-              break;
-
-            case 2:
-              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16BE;
-              break;
-
-            case 3:
-              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF8;
-              break;
-
-            case 4:
-              TagLib.Id3v2.Tag.DefaultEncoding = StringType.UTF16LE;
-              break;
-          }
-        }
-
         // Save the file
         file.Save();
       }
