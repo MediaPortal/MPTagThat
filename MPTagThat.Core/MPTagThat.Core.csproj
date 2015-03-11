@@ -101,6 +101,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\CommandTypes.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\IdentifyFile.cs" />
+    <Compile Include="Commands\MusicBrainzAlbumResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\MusicBrainzAlbumResults.Designer.cs">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\SupportedCommandType.cs" />
     <Compile Include="Common\SongList.cs" />
     <Compile Include="MusicBrainz\MusicBrainzRelease.cs" />
     <Compile Include="Services\ActionHandler\Button.cs" />
@@ -317,6 +328,10 @@
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Commands\MusicBrainzAlbumResults.resx">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\ReadOnlyDialog.resx">
       <DependentUpon>ReadOnlyDialog.cs</DependentUpon>
     </EmbeddedResource>

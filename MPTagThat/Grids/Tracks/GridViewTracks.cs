@@ -38,6 +38,7 @@ using FreeImageAPI;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
+using MPTagThat.Core.Commands;
 using MPTagThat.Core.MusicBrainz;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
@@ -248,6 +249,99 @@ namespace MPTagThat.GridView
 
     #endregion
 
+    #region Command Execution
+
+    public void ExecuteCommand(string command)
+    {
+      log.Trace(">>>");
+      log.Debug("Invoking Command: {0}", command);
+
+      object[] parameter = {command};
+
+      if (_bgWorker == null)
+      {
+        _bgWorker = new BackgroundWorker();
+        _bgWorker.DoWork += ExecuteCommandThread;
+      }
+
+      if (!_bgWorker.IsBusy)
+      {
+        _bgWorker.RunWorkerAsync(parameter);
+      }
+      log.Trace("<<<");
+    }
+
+    private void ExecuteCommandThread(object sender, DoWorkEventArgs e)
+    {
+      log.Trace(">>>");
+
+      if (tracksGrid.InvokeRequired)
+      {
+        ThreadSafeGridDelegate1 d = ExecuteCommandThread;
+        tracksGrid.Invoke(d, new[] { sender, e });
+        return;
+      }
+
+      // Get the command object
+      object[] parameters = e.Argument as object[];
+      ICommand commandObj = CommandFactory.Create((string)parameters[0]);
+      if (commandObj == null)
+      {
+        return;
+      }
+      
+      int count = 0;
+      int trackCount = tracksGrid.SelectedRows.Count;
+      SetProgressBar(trackCount);
+
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        ClearStatusColumn(row.Index);
+
+        if (!row.Selected)
+        {
+          continue;
+        }
+
+        count++;
+        try
+        {
+          Application.DoEvents();
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
+          {
+            commandObj.CancelCommand();
+            ResetProgressBar();
+            return;
+          }
+          TrackData track = Options.Songlist[row.Index];
+          if (commandObj.Execute(ref track))
+          {
+            SetBackgroundColorChanged(row.Index);
+            track.Changed = true;
+            Options.Songlist[row.Index] = track;
+            _itemsChanged = true;
+          }
+        }
+        catch (Exception ex)
+        {
+          Options.Songlist[row.Index].Status = 2;
+          AddErrorMessage(row, ex.Message);
+        }
+      }
+
+      Util.SendProgress("");
+      tracksGrid.Refresh();
+      tracksGrid.Parent.Refresh();
+      _main.TagEditForm.FillForm();
+
+      ResetProgressBar();
+      log.Trace("<<<");
+    }
+
+
+    #endregion
+    
     #region Save
 
     /// <summary>
@@ -510,189 +604,6 @@ namespace MPTagThat.GridView
     private void IdentifyFilesThread(object sender, DoWorkEventArgs e)
     {
       log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate1 d = IdentifyFilesThread;
-        tracksGrid.Invoke(d, new[] { sender, e });
-        return;
-      }
-
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        try
-        {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-          TrackData track = Options.Songlist[row.Index];
-
-          using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
-          {
-            Util.SendProgress(string.Format("Identifying file {0}", track.FileName));
-            log.Debug("Identify: Processing file: {0}", track.FullFileName);
-            List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
-
-            if (musicBrainzTracks == null)
-            {
-              log.Debug("Identify: Couldn't identify file");
-              continue;
-            }
-
-            if (musicBrainzTracks.Count > 0)
-            {
-              MusicBrainzTrack musicBrainzTrack = null;
-              if (musicBrainzTracks.Count == 1 && musicBrainzTracks[0].Releases.Count == 1)
-              {
-                musicBrainzTrack = musicBrainzTracks[0];
-                // Have we got already this album
-                if (musicBrainzTrack.AlbumId == null || musicBrainzTrack.AlbumId != musicBrainzAlbum.Id)
-                {
-                  using (var albumInfo = new MusicBrainzAlbumInfo())
-                  {
-                    musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
-                  }
-                }
-                musicBrainzTrack.AlbumId = musicBrainzAlbum.Id;
-              }
-              else
-              {
-                // Skip the Album selection, if the album been selected already for a previous track
-                bool albumFound = false;
-                foreach (var mbtrack in musicBrainzTracks)
-                {
-                  foreach (var mbRelease in mbtrack.Releases )
-                  {
-                    if (mbRelease.AlbumId == musicBrainzAlbum.Id)
-                    {
-                      albumFound = true;
-                      musicBrainzTrack = mbtrack;
-                      musicBrainzTrack.AlbumId = mbRelease.AlbumId;
-                      break;
-                    }
-                  }
-                }
-
-                if (!albumFound)
-                {
-                  var dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
-                  dlgAlbumResults.Owner = _main;
-                  if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
-                  {
-                    var itemTag = dlgAlbumResults.SelectedListItem as Dictionary<string, MusicBrainzTrack>;
-                    foreach (var albumId in itemTag.Keys)
-                    {
-                      itemTag.TryGetValue(albumId, out musicBrainzTrack);
-                      musicBrainzTrack.AlbumId = albumId;
-                    }
-
-                  }
-                  dlgAlbumResults.Dispose();
-                }
-              }
-
-              // We didn't get a track
-              if (musicBrainzTrack == null)
-              {
-                log.Debug("Identify: No information returned from Musicbrainz");
-                continue;
-              }
-
-              // Are we still at the same album?
-              // if not, get the album, so that we have the release date
-              if (musicBrainzAlbum.Id != musicBrainzTrack.AlbumId)
-              {
-                using (var albumInfo = new MusicBrainzAlbumInfo())
-                {
-                  Application.DoEvents();
-                  if (_progressCancelled)
-                  {
-                    ResetProgressBar();
-                    return;
-                  }
-                  musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
-                }
-              }
-
-              track.Title = musicBrainzTrack.Title;
-              track.Artist = musicBrainzTrack.Artist;
-              track.Album = musicBrainzAlbum.Title;
-              track.AlbumArtist = musicBrainzAlbum.Artist;
-
-              // Get the Disic and Track# from the Album
-              foreach (var mbTrack in musicBrainzAlbum.Tracks)
-              {
-                if (mbTrack.Id == musicBrainzTrack.Id)
-                {
-                  track.TrackNumber = Convert.ToUInt32(mbTrack.Number);
-                  track.TrackCount = Convert.ToUInt32(mbTrack.TrackCount);
-                  track.DiscNumber = Convert.ToUInt32(mbTrack.DiscId);
-                  track.DiscCount = Convert.ToUInt32(musicBrainzAlbum.DiscCount);
-                  break;
-                }
-              }
-
-              if (musicBrainzAlbum.Year != null && musicBrainzAlbum.Year.Length >= 4)
-                track.Year = Convert.ToInt32(musicBrainzAlbum.Year.Substring(0, 4));
-
-              // Do we have a valid Amazon Album?
-              if (musicBrainzAlbum.Amazon != null)
-              {
-                // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-                if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
-                {
-                  var vector = musicBrainzAlbum.Amazon.AlbumImage;
-                  if (vector != null)
-                  {
-                    var pic = new MPTagThat.Core.Common.Picture();
-                    pic.MimeType = "image/jpg";
-                    pic.Description = "";
-                    pic.Type = PictureType.FrontCover;
-                    pic.Data = vector.Data;
-                    track.Pictures.Add(pic);
-                  }
-                }
-              }
-
-              SetBackgroundColorChanged(row.Index);
-              track.Changed = true;
-              Options.Songlist[row.Index] = track;
-              _itemsChanged = true;
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          Options.Songlist[row.Index].Status = 2;
-          AddErrorMessage(row, ex.Message);
-        }
-      }
-
-      Util.SendProgress("");
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-
-      ResetProgressBar();
-
       log.Trace("<<<");
     }
 

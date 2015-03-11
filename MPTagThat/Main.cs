@@ -3673,7 +3673,7 @@ namespace MPTagThat
           break;
 
         case "IdentifyFiles":
-          TracksGridView.IdentifyFiles();
+          TracksGridView.ExecuteCommand(e.Command.Name);
           break;
 
         case "TagFromInternet":
