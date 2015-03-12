@@ -21,7 +21,6 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 using TagLib;
 using Picture = MPTagThat.Core.Common.Picture;
 
@@ -34,25 +33,24 @@ namespace MPTagThat.Commands
 
     #endregion
 
-    private Picture _pic = null;
-    private string _fileName = null;
+    private Picture _pic;
 
     #region ctor
 
     public CmdCoverArtDrop(object[] parameters)
     {
       object[] cmdParms = (object[])parameters[1];
-      _fileName = (string)cmdParms[0];
+      var fileName = (string)cmdParms[0];
 
       Util.SendMessage("setwaitcursor", null);
-      Util.SendProgress(string.Format("Downloading picture from {0}", _fileName));
-      if (_fileName.ToLower().StartsWith("http"))
+      Util.SendProgress(string.Format("Downloading picture from {0}", fileName));
+      if (fileName.ToLower().StartsWith("http"))
       {
-        _pic = GetCoverArtFromUrl(_fileName);
+        _pic = GetCoverArtFromUrl(fileName);
       }
       else
       {
-        _pic = new Picture(_fileName);
+        _pic = new Picture(fileName);
       }
       if (_pic == null || _pic.Data == null)
       {
@@ -93,15 +91,14 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     private Picture GetCoverArtFromUrl(string url)
     {
-      Picture pic = null;
       try
       {
         // When dragging from Google images, we have a imgurl. extract the right url.
-        int imgurlIndex = url.IndexOf("imgurl=");
+        int imgurlIndex = url.IndexOf("imgurl=", StringComparison.Ordinal);
         if (imgurlIndex > -1)
         {
           url = url.Substring(imgurlIndex + 7);
-          url = url.Substring(0, url.IndexOf("&"));
+          url = url.Substring(0, url.IndexOf("&", StringComparison.Ordinal));
         }
 
         Log.Info("Retrieving Coverart from: {0}", url);
@@ -109,10 +106,6 @@ namespace MPTagThat.Commands
         req.Proxy = new WebProxy();
         req.Proxy.Credentials = CredentialCache.DefaultCredentials;
         WebResponse response = req.GetResponse();
-        if (response == null)
-        {
-          return null;
-        }
         Stream stream = response.GetResponseStream();
         if (stream == null)
         {
@@ -121,7 +114,7 @@ namespace MPTagThat.Commands
         Image img = Image.FromStream(stream);
         stream.Close();
 
-        pic = new Picture { Data = Picture.ImageToByte((Image)img.Clone()) };
+        var pic = new Picture { Data = Picture.ImageToByte((Image)img.Clone()) };
 
         if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
         {
@@ -141,7 +134,6 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public override bool PostProcess()
     {

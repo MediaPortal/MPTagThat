@@ -16,15 +16,15 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("RemoveCoverArt")]
   public class CmdRemoveCoverArt : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     #endregion
@@ -33,6 +33,7 @@ namespace MPTagThat.Commands
 
     public CmdRemoveCoverArt(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
@@ -52,7 +53,6 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public override bool PostProcess()
     {

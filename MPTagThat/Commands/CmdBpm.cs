@@ -17,9 +17,7 @@
 #endregion
 
 using System;
-using System.Runtime.InteropServices;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
 
@@ -28,6 +26,8 @@ namespace MPTagThat.Commands
   [SupportedCommandType("Bpm")]
   public class CmdBpm : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     private BPMPROCESSPROC _bpmProc;
@@ -38,6 +38,7 @@ namespace MPTagThat.Commands
 
     public CmdBpm(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
@@ -55,7 +56,7 @@ namespace MPTagThat.Commands
         return false;
       }
 
-      _bpmProc = BPMProgressProc;
+      _bpmProc = BpmProgressProc;
 
       double len = Bass.BASS_ChannelBytes2Seconds(stream, Bass.BASS_ChannelGetLength(stream));
       float bpm = BassFx.BASS_FX_BPM_DecodeGet(stream, 0.0, len, 0, BASSFXBpm.BASS_FX_BPM_BKGRND | BASSFXBpm.BASS_FX_FREESOURCE | BASSFXBpm.BASS_FX_BPM_MULT2,
@@ -67,7 +68,7 @@ namespace MPTagThat.Commands
       return true;
     }
 
-    private void BPMProgressProc(int channel, float percent, IntPtr userData)
+    private void BpmProgressProc(int channel, float percent, IntPtr userData)
     {
       TracksGrid.MainForm.progressBar1.Value = Convert.ToInt32(percent);
     }

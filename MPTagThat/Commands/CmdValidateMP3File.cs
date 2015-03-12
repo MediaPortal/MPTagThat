@@ -16,23 +16,24 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("ValidateMP3File")]
-  public class CmdValidateMP3File : Command
+  public class CmdValidateMp3File : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     #endregion
 
    #region ctor
 
-    public CmdValidateMP3File(object[] parameters)
+    public CmdValidateMp3File(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
@@ -45,7 +46,7 @@ namespace MPTagThat.Commands
       if (track.IsMp3)
       {
         Util.SendProgress(string.Format("Validating file {0}", track.FileName));
-        string strError = "";
+        string strError;
         track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
         if (track.MP3ValidationError != Util.MP3Error.NoError)
         {

@@ -27,6 +27,8 @@ namespace MPTagThat.Commands
   [SupportedCommandType("GetLyrics")]
   public class CmdGetLyrics : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     List<TrackData> tracks = new List<TrackData>();
@@ -37,6 +39,7 @@ namespace MPTagThat.Commands
 
     public CmdGetLyrics(object[] parameters)
     {
+      Parameters = parameters;
       NeedsPreprocessing = true;
     }
 
@@ -67,7 +70,6 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public override bool PostProcess()
     {

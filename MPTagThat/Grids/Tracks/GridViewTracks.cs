@@ -18,38 +18,27 @@
 #region
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Elegant.Ui;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
-using MPTagThat.Commands;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
 using TagLib;
-using Un4seen.Bass;
-using Un4seen.Bass.AddOn.Fx;
-using Un4seen.Bass.AddOn.Mix;
-using Control = System.Windows.Forms.Control;
-using File = TagLib.File;
 using MessageBox = System.Windows.Forms.MessageBox;
 using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 using Picture = MPTagThat.Core.Common.Picture;
-using Tag = TagLib.Id3v1.Tag;
 using TextBox = System.Windows.Forms.TextBox;
 
 #endregion

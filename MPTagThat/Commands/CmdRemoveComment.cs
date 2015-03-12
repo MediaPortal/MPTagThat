@@ -16,7 +16,6 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using MPTagThat.Core;
 
 namespace MPTagThat.Commands
@@ -24,6 +23,8 @@ namespace MPTagThat.Commands
   [SupportedCommandType("RemoveComment")]
   public class CmdRemoveComment : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     #endregion
@@ -32,6 +33,7 @@ namespace MPTagThat.Commands
 
     public CmdRemoveComment(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion

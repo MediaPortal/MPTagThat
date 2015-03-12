@@ -25,7 +25,6 @@ using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Amazon;
 using MPTagThat.Dialogues;
-using MPTagThat.GridView;
 using TagLib;
 
 namespace MPTagThat.Commands
@@ -33,15 +32,17 @@ namespace MPTagThat.Commands
   [SupportedCommandType("GetCoverArt")]
   public class CmdGetCoverArt : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
-    AmazonAlbum amazonAlbum = null;
-    bool isMultipleArtistAlbum = false;
-    string savedArtist = "";
-    string savedAlbum = "";
-    string savedFolder = "";
-    MPTagThat.Core.Common.Picture folderThumb = null;
-    Dictionary<string, AmazonAlbum> savedCoverCash = new Dictionary<string, AmazonAlbum>();
+    AmazonAlbum _amazonAlbum;
+    bool _isMultipleArtistAlbum;
+    string _savedArtist = "";
+    string _savedAlbum = "";
+    string _savedFolder = "";
+    Core.Common.Picture _folderThumb = null;
+    Dictionary<string, AmazonAlbum> _savedCoverCash = new Dictionary<string, AmazonAlbum>();
 
     #endregion
 
@@ -49,6 +50,7 @@ namespace MPTagThat.Commands
 
     public CmdGetCoverArt(object[] parameters)
     {
+      Parameters = parameters;
       NeedsPreprocessing = true;
     }
 
@@ -63,26 +65,26 @@ namespace MPTagThat.Commands
       // Should we take an existing folder.jpg instead of searching the web
       if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
       {
-        if (folderThumb == null || Path.GetDirectoryName(track.FullFileName) != savedFolder)
+        if (_folderThumb == null || Path.GetDirectoryName(track.FullFileName) != _savedFolder)
         {
-          savedFolder = Path.GetDirectoryName(track.FullFileName);
-          folderThumb = Util.GetFolderThumb(savedFolder);
+          _savedFolder = Path.GetDirectoryName(track.FullFileName);
+          _folderThumb = Util.GetFolderThumb(_savedFolder);
         }
 
-        if (folderThumb != null)
+        if (_folderThumb != null)
         {
           // Only write a picture if we don't have a picture OR Overwrite Pictures is set
           if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
           {
-            if (Options.MainSettings.ChangeCoverSize && MPTagThat.Core.Common.Picture.ImageFromData(folderThumb.Data).Width > Options.MainSettings.MaxCoverWidth)
+            if (Options.MainSettings.ChangeCoverSize && Core.Common.Picture.ImageFromData(_folderThumb.Data).Width > Options.MainSettings.MaxCoverWidth)
             {
-              folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
+              _folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
             }
 
             Log.Debug("CoverArt: Using existing folder.jpg");
             // First Clear all the existingPictures
             track.Pictures.Clear();
-            track.Pictures.Add(folderThumb);
+            track.Pictures.Add(_folderThumb);
             TracksGrid.MainForm.SetGalleryItem();
           }
           return true;
@@ -94,38 +96,38 @@ namespace MPTagThat.Commands
         return true;
 
       string coverSearchString = track.Artist + track.Album;
-      if (isMultipleArtistAlbum)
+      if (_isMultipleArtistAlbum)
       {
         coverSearchString = track.Album;
       }
 
-      bool foundInCash = savedCoverCash.ContainsKey(coverSearchString);
+      bool foundInCash = _savedCoverCash.ContainsKey(coverSearchString);
       if (foundInCash)
       {
-        amazonAlbum = savedCoverCash[coverSearchString];
+        _amazonAlbum = _savedCoverCash[coverSearchString];
       }
       else
       {
-        amazonAlbum = null;
+        _amazonAlbum = null;
       }
 
       // Only retrieve the Cover Art, if we don't have it yet)
-      if (!foundInCash || amazonAlbum == null)
+      if (!foundInCash || _amazonAlbum == null)
       {
         CoverSearch dlgAlbumResults = new CoverSearch();
-        dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
+        dlgAlbumResults.Artist = _isMultipleArtistAlbum ? "" : track.Artist;
         dlgAlbumResults.Album = track.Album;
         dlgAlbumResults.FileDetails = track.FullFileName;
         dlgAlbumResults.Owner = TracksGrid.MainForm;
         dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
 
-        amazonAlbum = null;
+        _amazonAlbum = null;
         DialogResult dlgResult = dlgAlbumResults.ShowDialog();
         if (dlgResult == DialogResult.OK)
         {
           if (dlgAlbumResults.SelectedAlbum != null)
           {
-            amazonAlbum = dlgAlbumResults.SelectedAlbum;
+            _amazonAlbum = dlgAlbumResults.SelectedAlbum;
           }
         }
         else if (dlgResult == DialogResult.Abort)
@@ -142,11 +144,11 @@ namespace MPTagThat.Commands
       }
 
       // Now update the Cover Art
-      if (amazonAlbum != null)
+      if (_amazonAlbum != null)
       {
-        if (!savedCoverCash.ContainsKey(coverSearchString))
+        if (!_savedCoverCash.ContainsKey(coverSearchString))
         {
-          savedCoverCash.Add(coverSearchString, amazonAlbum);
+          _savedCoverCash.Add(coverSearchString, _amazonAlbum);
         }
 
         // Only write a picture if we don't have a picture OR Overwrite Pictures is set);
@@ -154,10 +156,10 @@ namespace MPTagThat.Commands
         {
           track.Pictures.Clear();
 
-          ByteVector vector = amazonAlbum.AlbumImage;
+          ByteVector vector = _amazonAlbum.AlbumImage;
           if (vector != null)
           {
-            MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
+            var pic = new Core.Common.Picture();
             pic.MimeType = "image/jpg";
             pic.Description = "Front Cover";
             pic.Type = PictureType.FrontCover;
@@ -173,9 +175,9 @@ namespace MPTagThat.Commands
 
           // And also set the Year from the Release Date delivered by Amazon
           // only if not present in Track
-          if (amazonAlbum.Year != null)
+          if (_amazonAlbum.Year != null)
           {
-            string strYear = amazonAlbum.Year;
+            string strYear = _amazonAlbum.Year;
             if (strYear.Length > 4)
               strYear = strYear.Substring(0, 4);
 
@@ -184,7 +186,10 @@ namespace MPTagThat.Commands
             {
               year = Convert.ToInt32(strYear);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+              // ignored
+            }
             if (year > 0 && track.Year == 0)
               track.Year = year;
           }
@@ -194,9 +199,9 @@ namespace MPTagThat.Commands
       }
 
       // If the user has selected to store only the folder thumb, without touching the file 
-      if (amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
+      if (_amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
       {
-        ByteVector vector = amazonAlbum.AlbumImage;
+        ByteVector vector = _amazonAlbum.AlbumImage;
         if (vector != null)
         {
           string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
@@ -233,22 +238,21 @@ namespace MPTagThat.Commands
     ///  Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public override bool PreProcess(TrackData track)
     {
-      if (savedArtist == "")
+      if (_savedArtist == "")
       {
-        savedArtist = track.Artist;
-        savedAlbum = track.Album;
+        _savedArtist = track.Artist;
+        _savedAlbum = track.Album;
       }
-      if (savedArtist != track.Artist)
+      if (_savedArtist != track.Artist)
       {
-        isMultipleArtistAlbum = true;
+        _isMultipleArtistAlbum = true;
       }
-      if (savedAlbum != track.Album)
+      if (_savedAlbum != track.Album)
       {
-        isMultipleArtistAlbum = false;
+        _isMultipleArtistAlbum = false;
       }
       return true;
     }
@@ -256,7 +260,6 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public override bool PostProcess()
     {

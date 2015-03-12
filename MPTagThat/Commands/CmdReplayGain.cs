@@ -21,7 +21,6 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Mix;
 
@@ -30,13 +29,15 @@ namespace MPTagThat.Commands
   [SupportedCommandType("ReplayGain")]
   public class CmdReplayGain : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private bool albumGain = false;
-    private bool gainInitialised = false;
-    private int usedFrequency = -1;
-    private float maxPeak = 0.0f;
+    private readonly ILocalisation _localisation = ServiceScope.Get<ILocalisation>();
+    private bool _albumGain;
+    private bool _gainInitialised;
+    private int _usedFrequency = -1;
+    private float _maxPeak;
 
     #endregion
 
@@ -59,6 +60,7 @@ namespace MPTagThat.Commands
 
     public CmdReplayGain(object[] parameters)
     {
+      Parameters = parameters;
       NeedsPreprocessing = true;
     }
 
@@ -86,19 +88,19 @@ namespace MPTagThat.Commands
       Util.SendProgress(string.Format("Analysing gain for {0}", track.FileName));
       Log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
 
-      if (!albumGain || !gainInitialised)
+      if (_albumGain && _gainInitialised)
       {
-        InitGainAnalysis(chInfo.freq);
-        gainInitialised = true;
-        usedFrequency = chInfo.freq;
+        if (_usedFrequency != chInfo.freq)
+        {
+          ResetSampleFrequency(chInfo.freq);
+          _usedFrequency = chInfo.freq;
+        }
       }
       else
       {
-        if (usedFrequency != chInfo.freq)
-        {
-          ResetSampleFrequency(chInfo.freq);
-          usedFrequency = chInfo.freq;
-        }
+        InitGainAnalysis(chInfo.freq);
+        _gainInitialised = true;
+        _usedFrequency = chInfo.freq;
       }
 
       ReplayAnalyze(stream);
@@ -120,9 +122,9 @@ namespace MPTagThat.Commands
         }
       }
 
-      if (albumGain && maxPeak < peak)
+      if (_albumGain && _maxPeak < peak)
       {
-        maxPeak = peak;
+        _maxPeak = peak;
       }
 
       Bass.BASS_StreamFree(stream);
@@ -140,7 +142,6 @@ namespace MPTagThat.Commands
     void ReplayAnalyze(int channel)
     {
       int result;
-      int peak = 0;
 
       int[] chanmap = new int[2];
       chanmap[0] = 0; // left channel
@@ -189,12 +190,12 @@ namespace MPTagThat.Commands
     public override bool PreProcess(TrackData track)
     {
       // Check, if all rows have been selected and provide the option to invoke Album Gain analysis
-      if (!albumGain && TracksGrid.View.Rows.Count == TracksGrid.View.SelectedRows.Count)
+      if (!_albumGain && TracksGrid.View.Rows.Count == TracksGrid.View.SelectedRows.Count)
       {
-        if (MessageBox.Show(localisation.ToString("albumgain", "Explanation"),
-                 localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
+        if (MessageBox.Show(_localisation.ToString("albumgain", "Explanation"),
+                 _localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
         {
-          albumGain = true;
+          _albumGain = true;
         }
       }
       return true;
@@ -207,11 +208,11 @@ namespace MPTagThat.Commands
     public override bool PostProcess()
     {
       // Should we also get Album Gain
-      if (albumGain)
+      if (_albumGain)
       {
         float albumGainValue = GetAlbumGain();
         string albumGainValueStr = albumGainValue.ToString(CultureInfo.InvariantCulture);
-        string albumPeakValueStr = maxPeak.ToString(CultureInfo.InvariantCulture);
+        string albumPeakValueStr = _maxPeak.ToString(CultureInfo.InvariantCulture);
 
         foreach (DataGridViewRow row in TracksGrid.View.Rows)
         {

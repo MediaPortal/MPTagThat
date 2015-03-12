@@ -27,7 +27,7 @@ namespace MPTagThat.Commands
     #region Variables
 
     protected readonly NLog.Logger Log = ServiceScope.Get<ILogger>().GetLogger;
-    protected bool ProgressCancelled = false;
+    protected bool ProgressCancelled;
 
     #endregion
 
@@ -54,7 +54,6 @@ namespace MPTagThat.Commands
     ///  Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public virtual bool PreProcess(TrackData track)
     {
@@ -64,7 +63,6 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
     public virtual bool PostProcess()
     {

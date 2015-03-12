@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.MusicBrainz;
-using MPTagThat.GridView;
 using TagLib;
 
 namespace MPTagThat.Commands
@@ -29,6 +28,8 @@ namespace MPTagThat.Commands
   [SupportedCommandType("IdentifyFiles")]
   public class CmdIdentifyFile : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     MusicBrainzAlbum _musicBrainzAlbum = new MusicBrainzAlbum();
@@ -39,6 +40,7 @@ namespace MPTagThat.Commands
 
     public CmdIdentifyFile(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
@@ -49,6 +51,7 @@ namespace MPTagThat.Commands
     /// Lookup the file in Music Brainz with the Fingerprint
     /// </summary>
     /// <param name="track"></param>
+    /// <param name="rowIndex"></param>
     /// <returns></returns>
     public override bool Execute(ref TrackData track, int rowIndex)
     {
@@ -106,12 +109,12 @@ namespace MPTagThat.Commands
               if (dlgAlbumResults.ShowDialog() == DialogResult.OK)
               {
                 var itemTag = dlgAlbumResults.SelectedListItem as Dictionary<string, MusicBrainzTrack>;
-                foreach (var albumId in itemTag.Keys)
-                {
-                  itemTag.TryGetValue(albumId, out musicBrainzTrack);
-                  musicBrainzTrack.AlbumId = albumId;
-                }
-
+                if (itemTag != null)
+                  foreach (var albumId in itemTag.Keys)
+                  {
+                    itemTag.TryGetValue(albumId, out musicBrainzTrack);
+                    if (musicBrainzTrack != null) musicBrainzTrack.AlbumId = albumId;
+                  }
               }
               dlgAlbumResults.Dispose();
             }
@@ -169,7 +172,7 @@ namespace MPTagThat.Commands
               var vector = _musicBrainzAlbum.Amazon.AlbumImage;
               if (vector != null)
               {
-                var pic = new MPTagThat.Core.Common.Picture();
+                var pic = new Core.Common.Picture();
                 pic.MimeType = "image/jpg";
                 pic.Description = "";
                 pic.Type = PictureType.FrontCover;

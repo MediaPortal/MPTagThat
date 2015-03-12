@@ -16,23 +16,24 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("FixMP3File")]
-  public class CmdFixMP3File : Command
+  public class CmdFixMp3File : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     #endregion
 
     #region ctor
 
-    public CmdFixMP3File(object[] parameters)
+    public CmdFixMp3File(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
@@ -44,7 +45,7 @@ namespace MPTagThat.Commands
       if (track.IsMp3)
       {
         Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
-        string strError = "";
+        string strError;
         track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
         if (track.MP3ValidationError == Util.MP3Error.Fixed)
         {

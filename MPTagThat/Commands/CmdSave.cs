@@ -16,9 +16,7 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-using System;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
@@ -26,6 +24,8 @@ namespace MPTagThat.Commands
   [SupportedCommandType("SaveAll")]
   public class CmdSave : Command
   {
+    public object[] Parameters { get; private set; }
+
     #region Variables
 
     #endregion
@@ -34,6 +34,7 @@ namespace MPTagThat.Commands
 
     public CmdSave(object[] parameters)
     {
+      Parameters = parameters;
     }
 
     #endregion
