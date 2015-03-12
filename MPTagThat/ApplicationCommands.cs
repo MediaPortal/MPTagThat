@@ -140,9 +140,9 @@ namespace MPTagThat
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
     public static Command Replace = new Elegant.Ui.Command("Replace");
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
-    public static Command ValidateSong = new Elegant.Ui.Command("ValidateSong");
+    public static Command ValidateSong = new Elegant.Ui.Command("ValidateMP3File");
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
-    public static Command FixSong = new Elegant.Ui.Command("FixSong");
+    public static Command FixSong = new Elegant.Ui.Command("FixMP3File");
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
     public static Command ReplayGain = new Elegant.Ui.Command("ReplayGain");
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]

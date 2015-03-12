@@ -18,7 +18,7 @@
 
 using System;
 
-namespace MPTagThat.Core.Commands
+namespace MPTagThat.Commands
 {
   public class CommandFactory
   {

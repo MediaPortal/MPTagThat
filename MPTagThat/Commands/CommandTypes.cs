@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MPTagThat.Core.Commands
+namespace MPTagThat.Commands
 {
   /// <summary>
   /// This static class provides a mechanism for registering Command Types, to be used
@@ -33,7 +33,8 @@ namespace MPTagThat.Core.Commands
     
     private static Type[] _staticCommandTypes = new Type[]
     {
-      typeof (IdentifyFile)
+      typeof (IdentifyFile),
+      typeof (CoverArt)
     };
 
     #endregion

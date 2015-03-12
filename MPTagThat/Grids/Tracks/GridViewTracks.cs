@@ -34,17 +34,12 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Elegant.Ui;
-using FreeImageAPI;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
-using MPTagThat.Core.Amazon;
-using MPTagThat.Core.Commands;
-using MPTagThat.Core.MusicBrainz;
+using MPTagThat.Commands;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
-using MPTagThat.TagEdit;
 using TagLib;
-using TagLib.Id3v2;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
 using Un4seen.Bass.AddOn.Mix;
@@ -164,6 +159,22 @@ namespace MPTagThat.GridView
     public FindResult ResultFind
     {
       set { _findResult = value; }
+    }
+
+    /// <summary>
+    /// Returns the instance of the mainform
+    /// </summary>
+    public Main MainForm
+    {
+      get { return _main; }
+    }
+
+    /// <summary>
+    /// Returns the NonMusic File Section
+    /// </summary>
+    public List<FileInfo> NonMusicFiles
+    {
+      get { return _nonMusicFiles; }
     }
 
     #endregion
@@ -294,6 +305,21 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       SetProgressBar(trackCount);
 
+      // If the command needs Preprocessing, then first loop over all tracks
+      if (commandObj.NeedsPreprocessing())
+      {
+        foreach (DataGridViewRow row in tracksGrid.Rows)
+        {
+          if (!row.Selected)
+          {
+            continue;
+          }
+
+          TrackData track = Options.Songlist[row.Index];
+          commandObj.PreProcess(track);
+        }
+      }
+      
       foreach (DataGridViewRow row in tracksGrid.Rows)
       {
         ClearStatusColumn(row.Index);
@@ -315,7 +341,7 @@ namespace MPTagThat.GridView
             return;
           }
           TrackData track = Options.Songlist[row.Index];
-          if (commandObj.Execute(ref track))
+          if (commandObj.Execute(ref track, this))
           {
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;
@@ -334,6 +360,8 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
+
+      commandObj.Dispose();
 
       ResetProgressBar();
       log.Trace("<<<");
@@ -582,354 +610,7 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    #region Identify File
-
-    public void IdentifyFiles()
-    {
-      if (_bgWorker == null)
-      {
-        _bgWorker = new BackgroundWorker();
-        _bgWorker.DoWork += IdentifyFilesThread;
-      }
-
-      if (!_bgWorker.IsBusy)
-      {
-        _bgWorker.RunWorkerAsync();
-      }
-    }
-
-    /// <summary>
-    ///   Tag the the Selected files from Internet
-    /// </summary>
-    private void IdentifyFilesThread(object sender, DoWorkEventArgs e)
-    {
-      log.Trace(">>>");
-      log.Trace("<<<");
-    }
-
-    #endregion
-
     #region Cover Art
-
-    public void GetCoverArt()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(GetCoverArtThread);
-        _asyncThread.Name = "GetCoverArt";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(GetCoverArtThread);
-        _asyncThread.Start();
-      }
-    }
-
-    /// <summary>
-    ///   Get Cover Art via Amazon Webservice
-    /// </summary>
-    private void GetCoverArtThread()
-    {
-      log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = GetCoverArtThread;
-        tracksGrid.Invoke(d, new object[] { });
-        return;
-      }
-
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      AmazonAlbum amazonAlbum = null;
-
-      bool isMultipleArtistAlbum = false;
-      string savedArtist = "";
-      string savedAlbum = "";
-      string savedFolder = "";
-
-      Core.Common.Picture folderThumb = null;
-
-      // Find out, if we deal with a multiple artist album and submit only the album name
-      // If we have different artists, then it is a multiple artist album.
-      // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-        if (savedArtist == "")
-        {
-          savedArtist = track.Artist;
-          savedAlbum = track.Album;
-        }
-        if (savedArtist != track.Artist)
-        {
-          isMultipleArtistAlbum = true;
-        }
-        if (savedAlbum != track.Album)
-        {
-          isMultipleArtistAlbum = false;
-          break;
-        }
-      }
-
-      if (isMultipleArtistAlbum)
-      {
-        log.Debug("CoverArt: Album contains Multiple Artists, just search for the album");
-      }
-
-      Dictionary<string, AmazonAlbum> savedCoverCash = new Dictionary<string, AmazonAlbum>();
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        try
-        {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-          TrackData track = Options.Songlist[row.Index];
-
-          Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
-          log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
-          // Should we take an existing folder.jpg instead of searching the web
-          if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
-          {
-            if (folderThumb == null || Path.GetDirectoryName(track.FullFileName) != savedFolder)
-            {
-              savedFolder = Path.GetDirectoryName(track.FullFileName);
-              folderThumb = GetFolderThumb(savedFolder);
-            }
-
-            if (folderThumb != null)
-            {
-              // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-              if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
-              {
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(folderThumb.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
-                }
-
-                log.Debug("CoverArt: Using existing folder.jpg");
-                // First Clear all the existingPictures
-                track.Pictures.Clear();
-                track.Pictures.Add(folderThumb);
-                SetBackgroundColorChanged(row.Index);
-                track.Changed = true;
-                Options.Songlist[row.Index] = track;
-                _itemsChanged = true;
-                _main.SetGalleryItem();
-              }
-              continue;
-            }
-          }
-
-          // If we don't have an Album don't do any query
-          if (track.Album == "")
-            continue;
-
-          string coverSearchString = track.Artist + track.Album;
-          if (isMultipleArtistAlbum)
-          {
-            coverSearchString = track.Album;
-          }
-
-          bool foundInCash = savedCoverCash.ContainsKey(coverSearchString);
-          if (foundInCash)
-          {
-            amazonAlbum = savedCoverCash[coverSearchString];
-          }
-          else
-          {
-            amazonAlbum = null;
-          }
-
-          // Only retrieve the Cover Art, if we don't have it yet)
-          if (!foundInCash || amazonAlbum == null)
-          {
-            CoverSearch dlgAlbumResults = new CoverSearch();
-            dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
-            dlgAlbumResults.Album = track.Album;
-            dlgAlbumResults.FileDetails = track.FullFileName;
-            dlgAlbumResults.Owner = _main;
-
-            amazonAlbum = null;
-            DialogResult dlgResult = _main.ShowModalDialog(dlgAlbumResults);
-            if (dlgResult == DialogResult.OK)
-            {
-              if (dlgAlbumResults.SelectedAlbum != null)
-              {
-                amazonAlbum = dlgAlbumResults.SelectedAlbum;
-              }
-            }
-            else if (dlgResult == DialogResult.Abort)
-            {
-              log.Debug("CoverArt: Search for all albums cancelled");
-              break;
-            }
-            else
-            {
-              log.Debug("CoverArt: Album Selection cancelled");
-              continue;
-            }
-            dlgAlbumResults.Dispose();
-          }
-
-
-          // Now update the Cover Art
-          if (amazonAlbum != null)
-          {
-            if (!savedCoverCash.ContainsKey(coverSearchString))
-            {
-              savedCoverCash.Add(coverSearchString, amazonAlbum);
-            }
-
-            // Only write a picture if we don't have a picture OR Overwrite Pictures is set);
-            if ((track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers) && !Options.MainSettings.OnlySaveFolderThumb)
-            {
-              track.Pictures.Clear();
-
-              ByteVector vector = amazonAlbum.AlbumImage;
-              if (vector != null)
-              {
-                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
-                pic.MimeType = "image/jpg";
-                pic.Description = "Front Cover";
-                pic.Type = PictureType.FrontCover;
-                pic.Data = vector.Data;
-
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  pic.Resize(Options.MainSettings.MaxCoverWidth);
-                }
-
-                track.Pictures.Add(pic);
-              }
-
-              // And also set the Year from the Release Date delivered by Amazon
-              // only if not present in Track
-              if (amazonAlbum.Year != null)
-              {
-                string strYear = amazonAlbum.Year;
-                if (strYear.Length > 4)
-                  strYear = strYear.Substring(0, 4);
-
-                int year = 0;
-                try
-                {
-                  year = Convert.ToInt32(strYear);
-                }
-                catch (Exception) { }
-                if (year > 0 && track.Year == 0)
-                  track.Year = year;
-              }
-
-              SetBackgroundColorChanged(row.Index);
-              track.Changed = true;
-              Options.Songlist[row.Index] = track;
-              _itemsChanged = true;
-              _main.SetGalleryItem();
-            }
-          }
-
-          // If the user has selected to store only the folder thumb, without touching the file 
-          if (amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
-          {
-            ByteVector vector = amazonAlbum.AlbumImage;
-            if (vector != null)
-            {
-              string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
-              try
-              {
-                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  pic.Resize(Options.MainSettings.MaxCoverWidth);
-                }
-
-                Image img = Picture.ImageFromData(vector.Data);
-
-                // Need to make a copy, otherwise we have a GDI+ Error
-                Bitmap bmp = new Bitmap(img);
-                bmp.Save(fileName, ImageFormat.Jpeg);
-
-                FileInfo fi = new FileInfo(fileName);
-                _nonMusicFiles.RemoveAll(f => f.Name == fi.Name);
-                _nonMusicFiles.Add(fi);
-                _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
-              }
-              catch (Exception ex)
-              {
-                log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
-              }
-              break;
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          Options.Songlist[row.Index].Status = 2;
-          AddErrorMessage(row, ex.Message);
-        }
-      }
-
-      Util.SendProgress("");
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-
-      ResetProgressBar();
-
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Return the folder.jpg as a Taglib.Picture
-    /// </summary>
-    /// <param name = "folder"></param>
-    /// <returns></returns>
-    public Core.Common.Picture GetFolderThumb(string folder)
-    {
-      string thumb = Path.Combine(folder, "folder.jpg");
-      if (!System.IO.File.Exists(thumb))
-      {
-        return null;
-      }
-
-      try
-      {
-        Core.Common.Picture pic = new Core.Common.Picture(thumb);
-        pic.Description = "Front Cover";
-        pic.Type = PictureType.FrontCover;
-        return pic;
-      }
-      catch (Exception ex)
-      {
-        log.Error("Exception loading thumb file: {0} {1}", thumb, ex.Message);
-        return null;
-      }
-    }
 
     /// <summary>
     ///   Save the Picture of the track as folder.jpg

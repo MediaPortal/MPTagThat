@@ -2990,6 +2990,18 @@ namespace MPTagThat
       _dialog = null;
       _showForm = false;
       bool handled = true;
+
+      bool checkSelections = false;
+      string command = Action.ActionToCommand(action, ref checkSelections);
+      if (command != "")
+      {
+        if (checkSelections && gridViewControl.CheckSelections(true))
+        {
+          TracksGridView.ExecuteCommand(command);
+        }
+        return true;
+      }
+      
       switch (action.ID)
       {
         case Action.ActionType.ACTION_HELP:
@@ -2998,14 +3010,6 @@ namespace MPTagThat
 
         case Action.ActionType.ACTION_EXIT:
           Application.Exit();
-          break;
-
-        case Action.ActionType.ACTION_SAVE:
-          gridViewControl.Save();
-          break;
-
-        case Action.ActionType.ACTION_SAVEALL:
-          gridViewControl.SaveAll();
           break;
 
         case Action.ActionType.ACTION_FILENAME2TAG:
@@ -3026,13 +3030,6 @@ namespace MPTagThat
           _showForm = false;
           break;
 
-        case Action.ActionType.ACTION_IDENTIFYFILE:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-
-          gridViewControl.IdentifyFiles();
-          break;
-
         case Action.ActionType.ACTION_TAGFROMINTERNET:
           if (!gridViewControl.CheckSelections(true))
             break;
@@ -3050,16 +3047,6 @@ namespace MPTagThat
           dialog = new OrganiseFiles(this);
           ShowDialogInDetailPanel(dialog);
           _showForm = false;
-          break;
-
-        case Action.ActionType.ACTION_GETCOVERART:
-          if (gridViewControl.CheckSelections(true))
-            gridViewControl.GetCoverArt();
-          break;
-
-        case Action.ActionType.ACTION_GETLYRICS:
-          if (gridViewControl.CheckSelections(true))
-            gridViewControl.GetLyrics();
           break;
 
         case Action.ActionType.ACTION_OPTIONS:
@@ -3151,31 +3138,6 @@ namespace MPTagThat
           splitterRight.ToggleState();
           break;
 
-        case Action.ActionType.ACTION_REMOVECOMMENT:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.RemoveComments();
-          break;
-
-        case Action.ActionType.ACTION_REMOVEPICTURE:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.RemovePictures();
-          break;
-
-        case Action.ActionType.ACTION_VALIDATEMP3:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ValidateMP3File();
-          gridViewControl.View.ClearSelection();
-          break;
-
-        case Action.ActionType.ACTION_FIXMP3:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.FixMP3File();
-          break;
-
         case Action.ActionType.ACTION_FIND:
           _dialog = new FindReplace(this);
           (_dialog as FindReplace).Replace = false;
@@ -3188,12 +3150,6 @@ namespace MPTagThat
           (_dialog as FindReplace).Replace = true;
           ShowCenteredForm(_dialog);
           _showForm = false; // Don't show the dialog in the Keypress event
-          break;
-
-        case Action.ActionType.ACTION_REPLAYGAIN:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ReplayGain();
           break;
       }
 
@@ -3667,13 +3623,20 @@ namespace MPTagThat
 
       switch (e.Command.Name)
       {
+        case "IdentifyFiles":
+        case "GetCoverArt":
+        case "GetLyrics":
+        case "RemoveComment":
+        case "RemoveCoverArt":
+        case "ValidateMP3File":
+        case "FixMP3File":
+        case "ReplayGain":
+          TracksGridView.ExecuteCommand(e.Command.Name);
+          break;
+        
         case "FileNameToTag":
           FileNameToTag.FileNameToTag dlgFileNameToTag = new FileNameToTag.FileNameToTag(this);
           ShowDialogInDetailPanel(dlgFileNameToTag);
-          break;
-
-        case "IdentifyFiles":
-          TracksGridView.ExecuteCommand(e.Command.Name);
           break;
 
         case "TagFromInternet":
@@ -3683,24 +3646,8 @@ namespace MPTagThat
           SetGalleryItem();
           break;
 
-        case "GetCoverArt":
-          TracksGridView.GetCoverArt();
-          break;
-
-        case "GetLyrics":
-          TracksGridView.GetLyrics();
-          break;
-
         case "AutoNumber":
           TracksGridView.AutoNumber();
-          break;
-
-        case "RemoveComment":
-          TracksGridView.RemoveComments();
-          break;
-
-        case "RemoveCoverArt":
-          TracksGridView.RemovePictures();
           break;
 
         case "OrganiseFiles":
@@ -3769,25 +3716,6 @@ namespace MPTagThat
           FindReplace replaceDlg = new FindReplace(this);
           replaceDlg.Replace = true;
           ShowCenteredForm(replaceDlg);
-          break;
-
-        case "ValidateSong":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ValidateMP3File();
-          gridViewControl.View.ClearSelection();
-          break;
-
-        case "FixSong":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.FixMP3File();
-          break;
-
-        case "ReplayGain":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ReplayGain();
           break;
 
         case "Bpm":

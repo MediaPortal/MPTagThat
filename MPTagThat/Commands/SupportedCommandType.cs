@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MPTagThat.Core.Commands
+namespace MPTagThat.Commands
 {
   /// <summary>
 	///    This class provides an attribute for listing supported command-types

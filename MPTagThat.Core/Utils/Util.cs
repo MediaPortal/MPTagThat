@@ -425,6 +425,33 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    ///   Return the folder.jpg as a Taglib.Picture
+    /// </summary>
+    /// <param name = "folder"></param>
+    /// <returns></returns>
+    public static Common.Picture GetFolderThumb(string folder)
+    {
+      string thumb = Path.Combine(folder, "folder.jpg");
+      if (!System.IO.File.Exists(thumb))
+      {
+        return null;
+      }
+
+      try
+      {
+        Common.Picture pic = new Common.Picture(thumb);
+        pic.Description = "Front Cover";
+        pic.Type = PictureType.FrontCover;
+        return pic;
+      }
+      catch (Exception ex)
+      {
+        log.Error("Exception loading thumb file: {0} {1}", thumb, ex.Message);
+        return null;
+      }
+    }
+
+    /// <summary>
     ///   Is this an Audio file, which can be handled by MPTagThat
     /// </summary>
     /// <param name = "fileName"></param>

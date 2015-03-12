@@ -76,6 +76,53 @@ namespace MPTagThat.Core
 
     #region ctor
 
+    public static string ActionToCommand(Action action, ref bool checkSelections)
+    {
+      switch (action.ID)
+      {
+        case ActionType.ACTION_SAVE:
+          return "Save";
+
+        case ActionType.ACTION_SAVEALL:
+          return "SaveAll";
+
+        case ActionType.ACTION_IDENTIFYFILE:
+          checkSelections = true;
+          return "IdentifyFiles";
+
+        case Action.ActionType.ACTION_GETCOVERART:
+          checkSelections = true;
+          return "GetCoverArt";
+
+        case Action.ActionType.ACTION_GETLYRICS:
+          checkSelections = true;
+          return "GetLyrics";
+
+        case Action.ActionType.ACTION_REMOVECOMMENT:
+          checkSelections = true;
+          return "RemoveComments";
+
+        case Action.ActionType.ACTION_REMOVEPICTURE:
+          checkSelections = true;
+          return "RemoveCoverArt";
+
+        case Action.ActionType.ACTION_VALIDATEMP3:
+          checkSelections = true;
+          return "ValidateMP3File";
+
+        case Action.ActionType.ACTION_FIXMP3:
+          checkSelections = true;
+          return "FixMP3File";
+
+        case Action.ActionType.ACTION_REPLAYGAIN:
+          checkSelections = true;
+          return "ReplayGain";
+
+        default:
+          return "";
+      }
+    }
+
     #endregion
   }
 }

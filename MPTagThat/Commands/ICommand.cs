@@ -16,12 +16,17 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
+using MPTagThat.Core;
+using MPTagThat.GridView;
 
-namespace MPTagThat.Core.Commands
+namespace MPTagThat.Commands
 {
   public interface ICommand
   {
     void CancelCommand();
-    bool Execute(ref TrackData track);
+    void Dispose();
+    bool Execute(ref TrackData track, GridViewTracks tracksGrid);
+    bool NeedsPreprocessing();
+    bool PreProcess(TrackData track);
   }
 }
