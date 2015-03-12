@@ -58,12 +58,11 @@ namespace MPTagThat.Commands
         return false;
       }
 
-      GCHandle index = GCHandle.Alloc(rowIndex);
       _bpmProc = BPMProgressProc;
 
       double len = Bass.BASS_ChannelBytes2Seconds(stream, Bass.BASS_ChannelGetLength(stream));
       float bpm = BassFx.BASS_FX_BPM_DecodeGet(stream, 0.0, len, 0, BASSFXBpm.BASS_FX_BPM_BKGRND | BASSFXBpm.BASS_FX_FREESOURCE | BASSFXBpm.BASS_FX_BPM_MULT2,
-                                                  _bpmProc, GCHandle.ToIntPtr(index));
+                                                  _bpmProc, IntPtr.Zero);
 
       track.BPM = Convert.ToInt32(bpm);
       BassFx.BASS_FX_BPM_Free(stream);
@@ -73,8 +72,6 @@ namespace MPTagThat.Commands
 
     private void BPMProgressProc(int channel, float percent, IntPtr userData)
     {
-      GCHandle gch = GCHandle.FromIntPtr(userData);
-      int rowIndex = (int)gch.Target;
       tracksGrid.MainForm.progressBar1.Value = Convert.ToInt32(percent);
     }
 

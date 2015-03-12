@@ -256,6 +256,17 @@ namespace MPTagThat.Commands
       return true;
     }
 
+    /// <summary>
+    /// Post Process after command execution
+    /// </summary>
+    /// <param name="tracksGrid"></param>
+    /// <returns></returns>
+    public override bool PostProcess(GridViewTracks tracksGrid)
+    {
+      _tracksGrid.MainForm.SetGalleryItem();
+      return false;
+    }
+
     #endregion
   }
 }

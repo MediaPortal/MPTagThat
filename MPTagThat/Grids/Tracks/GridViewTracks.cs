@@ -632,114 +632,6 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    #region Cover Art Drop
-
-    /// <summary>
-    /// A Picture file has been dropped on the Ribbon Gallery. 
-    /// Set the picture for all selected rows
-    /// </summary>
-    /// <param name="fileName"></param>
-    public void CoverArtDrop(string fileName)
-    {
-      SetWaitCursor();
-      Util.SendProgress(string.Format("Downloading picture from {0}", fileName));
-      Picture pic = null;
-      if (fileName.ToLower().StartsWith("http"))
-      {
-        pic = GetCoverArtFromUrl(fileName);
-      }
-      else
-      {
-        pic = new Picture(fileName);
-      }
-      if (pic == null || pic.Data == null)
-      {
-        ResetWaitCursor();
-        return;
-      }
-
-      if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-      {
-        pic.Resize(Options.MainSettings.MaxCoverWidth);
-      }
-
-      pic.MimeType = "image/jpg";
-      pic.Description = "Front Cover";
-      pic.Type = PictureType.FrontCover;
-
-
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
-      {
-        ClearStatusColumn(row.Index);
-
-        TrackData track = Options.Songlist[row.Index];
-        track.Pictures.Clear();
-        track.Pictures.Add(pic);
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      Util.SendProgress("");
-      _main.SetGalleryItem();
-      ResetWaitCursor();
-    }
-
-    /// <summary>
-    /// Get Cover Art from a given Url
-    /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    private Picture GetCoverArtFromUrl(string url)
-    {
-      Picture pic = null;
-      try
-      {
-        // When dragging from Google images, we have a imgurl. extract the right url.
-        int imgurlIndex = url.IndexOf("imgurl=");
-        if (imgurlIndex > -1)
-        {
-          url = url.Substring(imgurlIndex + 7);
-          url = url.Substring(0, url.IndexOf("&"));
-        }
-
-        log.Info("Retrieving Coverart from: {0}", url);
-        WebRequest req = WebRequest.Create(url);
-        req.Proxy = new WebProxy();
-        req.Proxy.Credentials = CredentialCache.DefaultCredentials;
-        WebResponse response = req.GetResponse();
-        if (response == null)
-        {
-          return null;
-        }
-        Stream stream = response.GetResponseStream();
-        if (stream == null)
-        {
-          return null;
-        }
-        Image img = Image.FromStream(stream);
-        stream.Close();
-
-        pic = new Picture { Data = Picture.ImageToByte((Image)img.Clone()) };
-
-        if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
-        {
-          pic.Resize(Options.MainSettings.MaxCoverWidth);
-        }
-
-        img.Dispose();
-        return pic;
-      }
-      catch (Exception ex)
-      {
-        log.Error("Error retrieving Image from Url: {0} Error: {1}", url, ex.Message);
-      }
-      return null;
-    }
-
-    #endregion
-
     #region Numbering
 
     public void AutoNumber()
@@ -2002,6 +1894,18 @@ namespace MPTagThat.GridView
             tracksGrid.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
             break;
           }
+
+        case "setwaitcursor":
+        {
+          SetWaitCursor();
+          break;
+        }
+
+        case "resetwaitcursor":
+        {
+          ResetWaitCursor();
+          break;
+        }
       }
     }
 

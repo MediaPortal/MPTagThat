@@ -1607,6 +1607,20 @@ namespace MPTagThat.Core
       msgQueue.Send(msg);
     }
 
+    /// <summary>
+    /// Sends a message
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="data"></param>
+    public static void SendMessage(string action, string data)
+    {
+      QueueMessage msg = new QueueMessage();
+      msg.MessageData["action"] = action;
+      msg.MessageData["data"] = data;
+      IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      msgQueue.Send(msg);
+    }
+
     #endregion
   }
 }

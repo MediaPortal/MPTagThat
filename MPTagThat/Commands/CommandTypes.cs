@@ -42,6 +42,7 @@ namespace MPTagThat.Commands
       typeof (CmdFixMP3File),
       typeof (CmdReplayGain),
       typeof (CmdBpm),
+      typeof (CmdCoverArtDrop),
     };
 
     #endregion

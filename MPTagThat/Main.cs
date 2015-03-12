@@ -3939,7 +3939,8 @@ namespace MPTagThat
 
       if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
       {
-        TracksGridView.CoverArtDrop(fileName);
+        object[] cmdParm = new[] {fileName};
+        TracksGridView.ExecuteCommand("CoverArtDrop", cmdParm);
       }
     }
 

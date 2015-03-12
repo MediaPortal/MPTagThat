@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
+    <Compile Include="Commands\CmdCoverArtDrop.cs" />
     <Compile Include="Commands\CmdFixMP3File.cs" />
     <Compile Include="Commands\CmdReplayGain.cs" />
     <Compile Include="Commands\CmdBpm.cs" />
