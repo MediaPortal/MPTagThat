@@ -22,8 +22,9 @@ using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
-  [SupportedCommandType("RemoveCoverArt")]
-  public class CmdRemoveCoverArt : Command
+  [SupportedCommandType("Save")]
+  [SupportedCommandType("SaveAll")]
+  public class CmdSave : Command
   {
     #region Variables
 
@@ -31,7 +32,7 @@ namespace MPTagThat.Commands
 
     #region ctor
 
-    public CmdRemoveCoverArt(object[] parameters)
+    public CmdSave(object[] parameters)
     {
     }
 
@@ -41,23 +42,8 @@ namespace MPTagThat.Commands
 
     public override bool Execute(ref TrackData track, int rowIndex)
     {
-      if (track.NumPics > 0)
-      {
-        track.Pictures.Clear();
-        return true;
-      }
-      return false;
-    }
 
-    /// <summary>
-    /// Post Process after command execution
-    /// </summary>
-    /// <param name="tracksGrid"></param>
-    /// <returns></returns>
-    public override bool PostProcess()
-    {
-      TracksGrid.MainForm.SetGalleryItem();
-      return false;
+      return false; 
     }
 
     #endregion

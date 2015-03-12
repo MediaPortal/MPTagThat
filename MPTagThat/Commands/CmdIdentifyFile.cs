@@ -31,7 +31,6 @@ namespace MPTagThat.Commands
   {
     #region Variables
 
-    private GridViewTracks _tracksGrid;
     MusicBrainzAlbum _musicBrainzAlbum = new MusicBrainzAlbum();
 
     #endregion
@@ -51,10 +50,8 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="track"></param>
     /// <returns></returns>
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
-      _tracksGrid = tracksGrid;
-
       using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
       {
         Util.SendProgress(string.Format("Identifying file {0}", track.FileName));
@@ -104,7 +101,7 @@ namespace MPTagThat.Commands
             if (!albumFound)
             {
               var dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
-              dlgAlbumResults.Owner = _tracksGrid.MainForm;
+              dlgAlbumResults.Owner = TracksGrid.MainForm;
               dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
               if (dlgAlbumResults.ShowDialog() == DialogResult.OK)
               {

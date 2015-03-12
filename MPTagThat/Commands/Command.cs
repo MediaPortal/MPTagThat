@@ -35,16 +35,17 @@ namespace MPTagThat.Commands
 
     public bool NeedsPreprocessing { get; set; }
 
+    public GridViewTracks TracksGrid { get; set; }
+
     #endregion
 
     /// <summary>
     /// Execute the Command
     /// </summary>
     /// <param name="track"></param>
-    /// <param name="tracksGrid"></param>
     /// <param name="rowIndex"></param>
     /// <returns></returns>
-    public virtual bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public virtual bool Execute(ref TrackData track, int rowIndex)
     {
       return false;
     }
@@ -55,7 +56,7 @@ namespace MPTagThat.Commands
     /// <param name="track"></param>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public virtual bool PreProcess(TrackData track, GridViewTracks tracksGrid)
+    public virtual bool PreProcess(TrackData track)
     {
       return false;
     }
@@ -65,7 +66,7 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public virtual bool PostProcess(GridViewTracks tracksGrid)
+    public virtual bool PostProcess()
     {
       return false;
     }

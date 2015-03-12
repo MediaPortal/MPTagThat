@@ -29,7 +29,6 @@ namespace MPTagThat.Commands
   {
     #region Variables
 
-    private GridViewTracks _tracksGrid;
     List<TrackData> tracks = new List<TrackData>();
 
     #endregion
@@ -46,7 +45,7 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
       return false;
     }
@@ -55,9 +54,8 @@ namespace MPTagThat.Commands
     /// Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PreProcess(TrackData track, GridViewTracks tracksGrid)
+    public override bool PreProcess(TrackData track)
     {
       if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
       {
@@ -71,9 +69,8 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess()
     {
-      _tracksGrid = tracksGrid;
       bool itemsChanged = false;
 
       if (tracks.Count > 0)
@@ -81,7 +78,7 @@ namespace MPTagThat.Commands
         try
         {
           LyricsSearch lyricssearch = new LyricsSearch(tracks);
-          lyricssearch.Owner = _tracksGrid.MainForm;
+          lyricssearch.Owner = TracksGrid.MainForm;
           lyricssearch.StartPosition = FormStartPosition.CenterParent;
           if (lyricssearch.ShowDialog() == DialogResult.OK)
           {
@@ -94,14 +91,14 @@ namespace MPTagThat.Commands
               if ((bool)lyricsRow.Cells[0].Value != true)
                 continue;
 
-              foreach (DataGridViewRow row in _tracksGrid.View.Rows)
+              foreach (DataGridViewRow row in TracksGrid.View.Rows)
               {
                 TrackData lyricsTrack = tracks[lyricsRow.Index];
                 TrackData track = Options.Songlist[row.Index];
                 if (lyricsTrack.FullFileName == track.FullFileName)
                 {
                   track.Lyrics = (string)lyricsRow.Cells[5].Value;
-                  _tracksGrid.SetBackgroundColorChanged(row.Index);
+                  TracksGrid.SetBackgroundColorChanged(row.Index);
                   track.Changed = true;
                   Options.Songlist[row.Index] = track;
                   itemsChanged = true;

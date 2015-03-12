@@ -40,7 +40,7 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
       if (track.IsMp3)
       {
@@ -49,13 +49,13 @@ namespace MPTagThat.Commands
         track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
         if (track.MP3ValidationError != Util.MP3Error.NoError)
         {
-          tracksGrid.SetColorMP3Errors(rowIndex, track.MP3ValidationError);
+          TracksGrid.SetColorMP3Errors(rowIndex, track.MP3ValidationError);
           track.Status = 3;
-          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = strError;
+          TracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = strError;
         }
         else
         {
-          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = "";
+          TracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = "";
         }
       }
 

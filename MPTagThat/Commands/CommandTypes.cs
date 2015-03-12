@@ -43,6 +43,7 @@ namespace MPTagThat.Commands
       typeof (CmdReplayGain),
       typeof (CmdBpm),
       typeof (CmdCoverArtDrop),
+      typeof (CmdSave),
     };
 
     #endregion

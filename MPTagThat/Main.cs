@@ -2995,10 +2995,11 @@ namespace MPTagThat
       string command = Action.ActionToCommand(action, ref checkSelections);
       if (command != "")
       {
-        if (checkSelections && gridViewControl.CheckSelections(true))
+        if (checkSelections)
         {
-          TracksGridView.ExecuteCommand(command);
+          gridViewControl.CheckSelections(true);
         }
+        TracksGridView.ExecuteCommand(command);
         return true;
       }
       

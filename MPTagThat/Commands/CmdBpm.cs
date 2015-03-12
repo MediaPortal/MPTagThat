@@ -30,7 +30,6 @@ namespace MPTagThat.Commands
   {
     #region Variables
 
-    private GridViewTracks tracksGrid;
     private BPMPROCESSPROC _bpmProc;
 
     #endregion
@@ -45,11 +44,9 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
-      this.tracksGrid = tracksGrid;
-
-      tracksGrid.SetProgressBar(100);
+      TracksGrid.SetProgressBar(100);
 
       int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
       if (stream == 0)
@@ -66,13 +63,13 @@ namespace MPTagThat.Commands
 
       track.BPM = Convert.ToInt32(bpm);
       BassFx.BASS_FX_BPM_Free(stream);
-      tracksGrid.MainForm.progressBar1.Value = 0;
+      TracksGrid.MainForm.progressBar1.Value = 0;
       return true;
     }
 
     private void BPMProgressProc(int channel, float percent, IntPtr userData)
     {
-      tracksGrid.MainForm.progressBar1.Value = Convert.ToInt32(percent);
+      TracksGrid.MainForm.progressBar1.Value = Convert.ToInt32(percent);
     }
 
     #endregion

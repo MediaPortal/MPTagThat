@@ -67,7 +67,7 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
       int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
       if (stream == 0)
@@ -185,12 +185,11 @@ namespace MPTagThat.Commands
     /// Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PreProcess(TrackData track, GridViewTracks tracksGrid)
+    public override bool PreProcess(TrackData track)
     {
       // Check, if all rows have been selected and provide the option to invoke Album Gain analysis
-      if (!albumGain && tracksGrid.View.Rows.Count == tracksGrid.View.SelectedRows.Count)
+      if (!albumGain && TracksGrid.View.Rows.Count == TracksGrid.View.SelectedRows.Count)
       {
         if (MessageBox.Show(localisation.ToString("albumgain", "Explanation"),
                  localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -204,9 +203,8 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Post Process after command execution
     /// </summary>
-    /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess()
     {
       // Should we also get Album Gain
       if (albumGain)
@@ -215,7 +213,7 @@ namespace MPTagThat.Commands
         string albumGainValueStr = albumGainValue.ToString(CultureInfo.InvariantCulture);
         string albumPeakValueStr = maxPeak.ToString(CultureInfo.InvariantCulture);
 
-        foreach (DataGridViewRow row in tracksGrid.View.Rows)
+        foreach (DataGridViewRow row in TracksGrid.View.Rows)
         {
           if (!row.Selected)
           {

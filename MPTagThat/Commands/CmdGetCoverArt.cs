@@ -35,7 +35,6 @@ namespace MPTagThat.Commands
   {
     #region Variables
 
-    private GridViewTracks _tracksGrid;
     AmazonAlbum amazonAlbum = null;
     bool isMultipleArtistAlbum = false;
     string savedArtist = "";
@@ -57,10 +56,8 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
-      _tracksGrid = tracksGrid;
-
       Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
       Log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
       // Should we take an existing folder.jpg instead of searching the web
@@ -86,7 +83,7 @@ namespace MPTagThat.Commands
             // First Clear all the existingPictures
             track.Pictures.Clear();
             track.Pictures.Add(folderThumb);
-            _tracksGrid.MainForm.SetGalleryItem();
+            TracksGrid.MainForm.SetGalleryItem();
           }
           return true;
         }
@@ -119,7 +116,7 @@ namespace MPTagThat.Commands
         dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
         dlgAlbumResults.Album = track.Album;
         dlgAlbumResults.FileDetails = track.FullFileName;
-        dlgAlbumResults.Owner = _tracksGrid.MainForm;
+        dlgAlbumResults.Owner = TracksGrid.MainForm;
         dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
 
         amazonAlbum = null;
@@ -192,7 +189,7 @@ namespace MPTagThat.Commands
               track.Year = year;
           }
 
-          tracksGrid.MainForm.SetGalleryItem();
+          TracksGrid.MainForm.SetGalleryItem();
         }
       }
 
@@ -218,9 +215,9 @@ namespace MPTagThat.Commands
             bmp.Save(fileName, ImageFormat.Jpeg);
 
             FileInfo fi = new FileInfo(fileName);
-            _tracksGrid.NonMusicFiles.RemoveAll(f => f.Name == fi.Name);
-            _tracksGrid.NonMusicFiles.Add(fi);
-            _tracksGrid.MainForm.MiscInfoPanel.AddNonMusicFiles(_tracksGrid.NonMusicFiles);
+            TracksGrid.NonMusicFiles.RemoveAll(f => f.Name == fi.Name);
+            TracksGrid.NonMusicFiles.Add(fi);
+            TracksGrid.MainForm.MiscInfoPanel.AddNonMusicFiles(TracksGrid.NonMusicFiles);
           }
           catch (Exception ex)
           {
@@ -238,7 +235,7 @@ namespace MPTagThat.Commands
     /// <param name="track"></param>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PreProcess(TrackData track, GridViewTracks tracksGrid)
+    public override bool PreProcess(TrackData track)
     {
       if (savedArtist == "")
       {
@@ -261,9 +258,9 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess()
     {
-      _tracksGrid.MainForm.SetGalleryItem();
+      TracksGrid.MainForm.SetGalleryItem();
       return false;
     }
 

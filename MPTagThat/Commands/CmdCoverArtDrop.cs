@@ -32,8 +32,6 @@ namespace MPTagThat.Commands
   {
     #region Variables
 
-    private GridViewTracks _tracksGrid;
-
     #endregion
 
     private Picture _pic = null;
@@ -76,10 +74,8 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
-      _tracksGrid = tracksGrid;
-
       if (_pic == null || _pic.Data == null)
       {
         return false;
@@ -147,9 +143,9 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public override bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess()
     {
-      _tracksGrid.MainForm.SetGalleryItem();
+      TracksGrid.MainForm.SetGalleryItem();
       Util.SendMessage("resetwaitcursor", null);
       return false;
     }

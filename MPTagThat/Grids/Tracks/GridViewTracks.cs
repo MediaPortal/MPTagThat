@@ -294,6 +294,9 @@ namespace MPTagThat.GridView
       int trackCount = tracksGrid.SelectedRows.Count;
       SetProgressBar(trackCount);
 
+      // Set a reference to the Track Grid
+      commandObj.TracksGrid = this;
+
       // If the command needs Preprocessing, then first loop over all tracks
       if (commandObj.NeedsPreprocessing)
       {
@@ -305,7 +308,7 @@ namespace MPTagThat.GridView
           }
 
           TrackData track = Options.Songlist[row.Index];
-          commandObj.PreProcess(track, this);
+          commandObj.PreProcess(track);
         }
       }
       
@@ -330,7 +333,7 @@ namespace MPTagThat.GridView
             return;
           }
           TrackData track = Options.Songlist[row.Index];
-          if (commandObj.Execute(ref track, this, row.Index))
+          if (commandObj.Execute(ref track, row.Index))
           {
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;
@@ -346,7 +349,7 @@ namespace MPTagThat.GridView
       }
 
       // Do Command Post Processing
-      if (commandObj.PostProcess(this))
+      if (commandObj.PostProcess())
       {
         _itemsChanged = true;
       }
@@ -783,7 +786,7 @@ namespace MPTagThat.GridView
                                               localisation.ToString("message", "Save_Changes_Title"),
                                               MessageBoxButtons.YesNo);
         if (result == DialogResult.Yes)
-          SaveAll();
+          ExecuteCommand("SaveAll");
         else
           DiscardChanges();
       }

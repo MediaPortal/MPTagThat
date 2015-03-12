@@ -18,7 +18,6 @@
 
 using System;
 using MPTagThat.Core;
-using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
@@ -26,8 +25,6 @@ namespace MPTagThat.Commands
   public class CmdRemoveComment : Command
   {
     #region Variables
-
-    private GridViewTracks _tracksGrid;
 
     #endregion
 
@@ -42,7 +39,7 @@ namespace MPTagThat.Commands
 
     #region Command Implementation
 
-    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, int rowIndex)
     {
       if (track.Comment != "")
       {
