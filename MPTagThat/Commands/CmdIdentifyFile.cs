@@ -27,7 +27,7 @@ using TagLib;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("IdentifyFiles")]
-  public class IdentifyFile : ICommand, IDisposable
+  public class CmdIdentifyFile : ICommand, IDisposable
   {
     #region Variables
 
@@ -209,7 +209,7 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     public bool PostProcess(GridViewTracks tracksGrid)
     {
-      return true;
+      return false;
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ using TagLib;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("GetCoverArt")]
-  public class CoverArt : ICommand, IDisposable
+  public class CmdGetCoverArt : ICommand, IDisposable
   {
     #region Variables
 
@@ -265,7 +265,7 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     public bool PostProcess(GridViewTracks tracksGrid)
     {
-      return true;
+      return false;
     }
 
     /// <summary>

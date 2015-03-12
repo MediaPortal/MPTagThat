@@ -17,23 +17,18 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
-  [SupportedCommandType("GetLyrics")]
-  public class Lyrics : ICommand, IDisposable
+  [SupportedCommandType("RemoveCoverArt")]
+  public class CmdRemoveCoverArt : ICommand, IDisposable
   {
     #region Variables
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private bool _progressCancelled = false;
-    private GridViewTracks _tracksGrid;
-
-    List<TrackData> tracks = new List<TrackData>();
 
     #endregion
 
@@ -41,6 +36,11 @@ namespace MPTagThat.Commands
 
     public bool Execute(ref TrackData track, GridViewTracks tracksGrid)
     {
+      if (track.NumPics > 0)
+      {
+        track.Pictures.Clear();
+        return true;
+      }
       return false;
     }
 
@@ -50,7 +50,7 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     public bool NeedsPreprocessing()
     {
-      return true;
+      return false;
     }
 
     /// <summary>
@@ -60,10 +60,6 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     public bool PreProcess(TrackData track)
     {
-      if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
-      {
-        tracks.Add(track);
-      }
       return true;
     }
 
@@ -74,52 +70,9 @@ namespace MPTagThat.Commands
     /// <returns></returns>
     public bool PostProcess(GridViewTracks tracksGrid)
     {
-      _tracksGrid = tracksGrid;
-      bool itemsChanged = false;
-
-      if (tracks.Count > 0)
-      {
-        try
-        {
-          LyricsSearch lyricssearch = new LyricsSearch(tracks);
-          lyricssearch.Owner = _tracksGrid.MainForm;
-          lyricssearch.StartPosition = FormStartPosition.CenterParent;
-          if (lyricssearch.ShowDialog() == DialogResult.OK)
-          {
-            DataGridView lyricsResult = lyricssearch.GridView;
-            foreach (DataGridViewRow lyricsRow in lyricsResult.Rows)
-            {
-              if (lyricsRow.Cells[0].Value == DBNull.Value || lyricsRow.Cells[0].Value == null)
-                continue;
-
-              if ((bool)lyricsRow.Cells[0].Value != true)
-                continue;
-
-              foreach (DataGridViewRow row in _tracksGrid.View.Rows)
-              {
-                TrackData lyricsTrack = tracks[lyricsRow.Index];
-                TrackData track = Options.Songlist[row.Index];
-                if (lyricsTrack.FullFileName == track.FullFileName)
-                {
-                  track.Lyrics = (string)lyricsRow.Cells[5].Value;
-                  _tracksGrid.SetBackgroundColorChanged(row.Index);
-                  track.Changed = true;
-                  Options.Songlist[row.Index] = track;
-                  itemsChanged = true;
-                  break;
-                }
-              }
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          log.Error("Error in Lyricssearch: {0}", ex.Message);
-        }
-      }
-      return itemsChanged;
+      tracksGrid.MainForm.SetGalleryItem();
+      return false;
     }
-
 
     /// <summary>
     /// Set indicator, that Command processing got interupted by user
@@ -138,6 +91,5 @@ namespace MPTagThat.Commands
     }
 
     #endregion
-
   }
 }
