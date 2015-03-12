@@ -115,6 +115,7 @@
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\CommandTypes.cs" />
     <Compile Include="Commands\CoverArt.cs" />
+    <Compile Include="Commands\Lyrics.cs" />
     <Compile Include="Dialogues\CoverSearch.cs">
       <SubType>Form</SubType>
     </Compile>

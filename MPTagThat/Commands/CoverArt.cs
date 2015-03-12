@@ -113,7 +113,7 @@ namespace MPTagThat.Commands
         dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
         dlgAlbumResults.Album = track.Album;
         dlgAlbumResults.FileDetails = track.FullFileName;
-        dlgAlbumResults.Owner = Application.OpenForms[0];
+        dlgAlbumResults.Owner = _tracksGrid.MainForm;
         dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
 
         amazonAlbum = null;
@@ -255,6 +255,16 @@ namespace MPTagThat.Commands
       {
         isMultipleArtistAlbum = false;
       }
+      return true;
+    }
+
+    /// <summary>
+    /// Post Process after command execution
+    /// </summary>
+    /// <param name="tracksGrid"></param>
+    /// <returns></returns>
+    public bool PostProcess(GridViewTracks tracksGrid)
+    {
       return true;
     }
 

@@ -28,5 +28,6 @@ namespace MPTagThat.Commands
     bool Execute(ref TrackData track, GridViewTracks tracksGrid);
     bool NeedsPreprocessing();
     bool PreProcess(TrackData track);
+    bool PostProcess(GridViewTracks tracksGrid);
   }
 }

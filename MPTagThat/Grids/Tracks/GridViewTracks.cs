@@ -356,6 +356,12 @@ namespace MPTagThat.GridView
         }
       }
 
+      // Do Command Post Processing
+      if (commandObj.PostProcess(this))
+      {
+        _itemsChanged = true;
+      }
+
       Util.SendProgress("");
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
@@ -741,115 +747,6 @@ namespace MPTagThat.GridView
         log.Error("Error retrieving Image from Url: {0} Error: {1}", url, ex.Message);
       }
       return null;
-    }
-
-    #endregion
-
-    #region Lyrics
-
-    public void GetLyrics()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(GetLyricsThread);
-        _asyncThread.Name = "GetLyrics";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(GetLyricsThread);
-        _asyncThread.Start();
-      }
-    }
-
-    /// <summary>
-    ///   Get Lyrics for selected Rows
-    /// </summary>
-    private void GetLyricsThread()
-    {
-      log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = GetLyricsThread;
-        tracksGrid.Invoke(d, new object[] { });
-        return;
-      }
-
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      List<TrackData> tracks = new List<TrackData>();
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-        TrackData track = Options.Songlist[row.Index];
-        if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
-        {
-          tracks.Add(track);
-        }
-      }
-
-      ResetProgressBar();
-
-      if (tracks.Count > 0)
-      {
-        try
-        {
-          LyricsSearch lyricssearch = new LyricsSearch(tracks);
-          lyricssearch.Owner = _main;
-          if (_main.ShowModalDialog(lyricssearch) == DialogResult.OK)
-          {
-            DataGridView lyricsResult = lyricssearch.GridView;
-            foreach (DataGridViewRow lyricsRow in lyricsResult.Rows)
-            {
-              if (lyricsRow.Cells[0].Value == DBNull.Value || lyricsRow.Cells[0].Value == null)
-                continue;
-
-              if ((bool)lyricsRow.Cells[0].Value != true)
-                continue;
-
-              foreach (DataGridViewRow row in tracksGrid.Rows)
-              {
-                TrackData lyricsTrack = tracks[lyricsRow.Index];
-                TrackData track = Options.Songlist[row.Index];
-                if (lyricsTrack.FullFileName == track.FullFileName)
-                {
-                  track.Lyrics = (string)lyricsRow.Cells[5].Value;
-                  SetBackgroundColorChanged(row.Index);
-                  track.Changed = true;
-                  Options.Songlist[row.Index] = track;
-                  _itemsChanged = true;
-                  break;
-                }
-              }
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          log.Error("Error in Lyricssearch: {0}", ex.Message);
-        }
-      }
-
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-
-      log.Trace("<<<");
     }
 
     #endregion

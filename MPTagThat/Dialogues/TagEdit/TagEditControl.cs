@@ -3122,7 +3122,7 @@ namespace MPTagThat.TagEdit
     {
       if (_isMultiTagEdit)
       {
-        main.TracksGridView.GetLyrics();
+        main.TracksGridView.ExecuteCommand("GetLyrics");
       }
       else
       {

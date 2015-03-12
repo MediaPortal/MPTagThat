@@ -34,7 +34,8 @@ namespace MPTagThat.Commands
     private static Type[] _staticCommandTypes = new Type[]
     {
       typeof (IdentifyFile),
-      typeof (CoverArt)
+      typeof (CoverArt),
+      typeof (Lyrics),
     };
 
     #endregion

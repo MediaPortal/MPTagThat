@@ -99,7 +99,7 @@ namespace MPTagThat.Commands
             if (!albumFound)
             {
               var dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
-              dlgAlbumResults.Owner = Application.OpenForms[0];
+              dlgAlbumResults.Owner = _tracksGrid.MainForm;
               dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
               if (dlgAlbumResults.ShowDialog() == DialogResult.OK)
               {
@@ -198,6 +198,16 @@ namespace MPTagThat.Commands
     /// <param name="track"></param>
     /// <returns></returns>
     public bool PreProcess(TrackData track)
+    {
+      return true;
+    }
+
+    /// <summary>
+    /// Post Process after command execution
+    /// </summary>
+    /// <param name="tracksGrid"></param>
+    /// <returns></returns>
+    public bool PostProcess(GridViewTracks tracksGrid)
     {
       return true;
     }
