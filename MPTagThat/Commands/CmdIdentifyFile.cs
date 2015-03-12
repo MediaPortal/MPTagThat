@@ -27,38 +27,35 @@ using TagLib;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("IdentifyFiles")]
-  public class CmdIdentifyFile : ICommand, IDisposable
+  public class CmdIdentifyFile : Command
   {
     #region Variables
 
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _progressCancelled = false;
     private GridViewTracks _tracksGrid;
-
     MusicBrainzAlbum _musicBrainzAlbum = new MusicBrainzAlbum();
 
     #endregion
 
-    #region ICommand Implementation
+    #region Command Implementation
 
     /// <summary>
     /// Lookup the file in Music Brainz with the Fingerprint
     /// </summary>
     /// <param name="track"></param>
     /// <returns></returns>
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
       _tracksGrid = tracksGrid;
 
       using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
       {
         Util.SendProgress(string.Format("Identifying file {0}", track.FileName));
-        log.Debug("Identify: Processing file: {0}", track.FullFileName);
+        Log.Debug("Identify: Processing file: {0}", track.FullFileName);
         List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
 
         if (musicBrainzTracks == null)
         {
-          log.Debug("Identify: Couldn't identify file");
+          Log.Debug("Identify: Couldn't identify file");
           return false;
         }
 
@@ -118,7 +115,7 @@ namespace MPTagThat.Commands
           // We didn't get a track
           if (musicBrainzTrack == null)
           {
-            log.Debug("Identify: No information returned from Musicbrainz");
+            Log.Debug("Identify: No information returned from Musicbrainz");
             return false;
           }
 
@@ -129,7 +126,7 @@ namespace MPTagThat.Commands
             using (var albumInfo = new MusicBrainzAlbumInfo())
             {
               Application.DoEvents();
-              if (_progressCancelled)
+              if (ProgressCancelled)
               {
                 return false;
               }
@@ -181,51 +178,6 @@ namespace MPTagThat.Commands
         }
       }
       return false;
-    }
-
-    /// <summary>
-    /// Indicate, whether we need Preprocess the tracks
-    /// </summary>
-    /// <returns></returns>
-    public bool NeedsPreprocessing()
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Do Preprocessing of the Tracks
-    /// </summary>
-    /// <param name="track"></param>
-    /// <returns></returns>
-    public bool PreProcess(TrackData track)
-    {
-      return true;
-    }
-
-    /// <summary>
-    /// Post Process after command execution
-    /// </summary>
-    /// <param name="tracksGrid"></param>
-    /// <returns></returns>
-    public bool PostProcess(GridViewTracks tracksGrid)
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Set indicator, that Command processing got interupted by user
-    /// </summary>
-    public void CancelCommand()
-    {
-      _progressCancelled = true;
-    }
-
-    /// <summary>
-    /// Cleanup resources
-    /// </summary>
-    public void Dispose()
-    {
-
     }
 
     #endregion

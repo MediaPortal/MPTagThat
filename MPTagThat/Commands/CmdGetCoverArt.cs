@@ -31,14 +31,11 @@ using TagLib;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("GetCoverArt")]
-  public class CmdGetCoverArt : ICommand, IDisposable
+  public class CmdGetCoverArt : Command
   {
     #region Variables
 
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _progressCancelled = false;
     private GridViewTracks _tracksGrid;
-
     AmazonAlbum amazonAlbum = null;
     bool isMultipleArtistAlbum = false;
     string savedArtist = "";
@@ -49,14 +46,23 @@ namespace MPTagThat.Commands
 
     #endregion
 
-    #region ICommand Implementation
+    #region ctor
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public CmdGetCoverArt()
+    {
+      NeedsPreprocessing = true;
+    }
+
+    #endregion
+
+    #region Command Implementation
+
+    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
       _tracksGrid = tracksGrid;
 
       Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
-      log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
+      Log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
       // Should we take an existing folder.jpg instead of searching the web
       if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
       {
@@ -76,7 +82,7 @@ namespace MPTagThat.Commands
               folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
             }
 
-            log.Debug("CoverArt: Using existing folder.jpg");
+            Log.Debug("CoverArt: Using existing folder.jpg");
             // First Clear all the existingPictures
             track.Pictures.Clear();
             track.Pictures.Add(folderThumb);
@@ -127,12 +133,12 @@ namespace MPTagThat.Commands
         }
         else if (dlgResult == DialogResult.Abort)
         {
-          log.Debug("CoverArt: Search for all albums cancelled");
+          Log.Debug("CoverArt: Search for all albums cancelled");
           return true;
         }
         else
         {
-          log.Debug("CoverArt: Album Selection cancelled");
+          Log.Debug("CoverArt: Album Selection cancelled");
           return true;
         }
         dlgAlbumResults.Dispose();
@@ -218,7 +224,7 @@ namespace MPTagThat.Commands
           }
           catch (Exception ex)
           {
-            log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
+            Log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
           }
           return false;
         }
@@ -227,20 +233,12 @@ namespace MPTagThat.Commands
     }
 
     /// <summary>
-    /// Indicate, whether we need Preprocess the tracks
-    /// </summary>
-    /// <returns></returns>
-    public bool NeedsPreprocessing()
-    {
-      return true;
-    }
-
-    /// <summary>
-    /// Do Preprocessing of the Tracks
+    ///  Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
+    /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public bool PreProcess(TrackData track)
+    public override bool PreProcess(TrackData track, GridViewTracks tracksGrid)
     {
       if (savedArtist == "")
       {
@@ -256,32 +254,6 @@ namespace MPTagThat.Commands
         isMultipleArtistAlbum = false;
       }
       return true;
-    }
-
-    /// <summary>
-    /// Post Process after command execution
-    /// </summary>
-    /// <param name="tracksGrid"></param>
-    /// <returns></returns>
-    public bool PostProcess(GridViewTracks tracksGrid)
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Set indicator, that Command processing got interupted by user
-    /// </summary>
-    public void CancelCommand()
-    {
-      _progressCancelled = true;
-    }
-
-    /// <summary>
-    /// Cleanup resources
-    /// </summary>
-    public void Dispose()
-    {
-
     }
 
     #endregion

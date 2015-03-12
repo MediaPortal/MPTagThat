@@ -3631,6 +3631,7 @@ namespace MPTagThat
         case "ValidateMP3File":
         case "FixMP3File":
         case "ReplayGain":
+        case "Bpm":
           TracksGridView.ExecuteCommand(e.Command.Name);
           break;
         
@@ -3716,12 +3717,6 @@ namespace MPTagThat
           FindReplace replaceDlg = new FindReplace(this);
           replaceDlg.Replace = true;
           ShowCenteredForm(replaceDlg);
-          break;
-
-        case "Bpm":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.Bpm();
           break;
       }
     }

@@ -23,18 +23,15 @@ using MPTagThat.GridView;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("FixMP3File")]
-  public class CmdFixMP3File : ICommand, IDisposable
+  public class CmdFixMP3File : Command
   {
     #region Variables
 
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _progressCancelled = false;
-
     #endregion
 
-    #region ICommand Implementation
+    #region Command Implementation
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
+    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
     {
       if (track.IsMp3)
       {
@@ -57,51 +54,6 @@ namespace MPTagThat.Commands
 
       // We don't want to mark thze file as changed, since no change occured in the Tags
       return false; 
-    }
-
-    /// <summary>
-    /// Indicate, whether we need Preprocess the tracks
-    /// </summary>
-    /// <returns></returns>
-    public bool NeedsPreprocessing()
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Do Preprocessing of the Tracks
-    /// </summary>
-    /// <param name="track"></param>
-    /// <returns></returns>
-    public bool PreProcess(TrackData track)
-    {
-      return true;
-    }
-
-    /// <summary>
-    /// Post Process after command execution
-    /// </summary>
-    /// <param name="tracksGrid"></param>
-    /// <returns></returns>
-    public bool PostProcess(GridViewTracks tracksGrid)
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Set indicator, that Command processing got interupted by user
-    /// </summary>
-    public void CancelCommand()
-    {
-      _progressCancelled = true;
-    }
-
-    /// <summary>
-    /// Cleanup resources
-    /// </summary>
-    public void Dispose()
-    {
-
     }
 
     #endregion

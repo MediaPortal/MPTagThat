@@ -25,40 +25,38 @@ using MPTagThat.GridView;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("GetLyrics")]
-  public class CmdGetLyrics : ICommand, IDisposable
+  public class CmdGetLyrics : Command
   {
     #region Variables
 
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _progressCancelled = false;
     private GridViewTracks _tracksGrid;
-
     List<TrackData> tracks = new List<TrackData>();
 
     #endregion
 
-    #region ICommand Implementation
+    #region ctor
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public CmdGetLyrics()
     {
-      return false;
+      NeedsPreprocessing = true;
     }
 
-    /// <summary>
-    /// Indicate, whether we need Preprocess the tracks
-    /// </summary>
-    /// <returns></returns>
-    public bool NeedsPreprocessing()
+    #endregion
+
+    #region Command Implementation
+
+    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
-      return true;
+      return false;
     }
 
     /// <summary>
     /// Do Preprocessing of the Tracks
     /// </summary>
     /// <param name="track"></param>
+    /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public bool PreProcess(TrackData track)
+    public override bool PreProcess(TrackData track, GridViewTracks tracksGrid)
     {
       if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
       {
@@ -72,7 +70,7 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess(GridViewTracks tracksGrid)
     {
       _tracksGrid = tracksGrid;
       bool itemsChanged = false;
@@ -114,30 +112,12 @@ namespace MPTagThat.Commands
         }
         catch (Exception ex)
         {
-          log.Error("Error in Lyricssearch: {0}", ex.Message);
+          Log.Error("Error in Lyricssearch: {0}", ex.Message);
         }
       }
       return itemsChanged;
     }
 
-
-    /// <summary>
-    /// Set indicator, that Command processing got interupted by user
-    /// </summary>
-    public void CancelCommand()
-    {
-      _progressCancelled = true;
-    }
-
-    /// <summary>
-    /// Cleanup resources
-    /// </summary>
-    public void Dispose()
-    {
-
-    }
-
     #endregion
-
   }
 }

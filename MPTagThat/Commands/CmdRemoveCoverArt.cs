@@ -23,18 +23,15 @@ using MPTagThat.GridView;
 namespace MPTagThat.Commands
 {
   [SupportedCommandType("RemoveCoverArt")]
-  public class CmdRemoveCoverArt : ICommand, IDisposable
+  public class CmdRemoveCoverArt : Command
   {
     #region Variables
 
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private bool _progressCancelled = false;
-
     #endregion
 
-    #region ICommand Implementation
+    #region Command Implementation
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
       if (track.NumPics > 0)
       {
@@ -45,49 +42,14 @@ namespace MPTagThat.Commands
     }
 
     /// <summary>
-    /// Indicate, whether we need Preprocess the tracks
-    /// </summary>
-    /// <returns></returns>
-    public bool NeedsPreprocessing()
-    {
-      return false;
-    }
-
-    /// <summary>
-    /// Do Preprocessing of the Tracks
-    /// </summary>
-    /// <param name="track"></param>
-    /// <returns></returns>
-    public bool PreProcess(TrackData track)
-    {
-      return true;
-    }
-
-    /// <summary>
     /// Post Process after command execution
     /// </summary>
     /// <param name="tracksGrid"></param>
     /// <returns></returns>
-    public bool PostProcess(GridViewTracks tracksGrid)
+    public override bool PostProcess(GridViewTracks tracksGrid)
     {
       tracksGrid.MainForm.SetGalleryItem();
       return false;
-    }
-
-    /// <summary>
-    /// Set indicator, that Command processing got interupted by user
-    /// </summary>
-    public void CancelCommand()
-    {
-      _progressCancelled = true;
-    }
-
-    /// <summary>
-    /// Cleanup resources
-    /// </summary>
-    public void Dispose()
-    {
-
     }
 
     #endregion

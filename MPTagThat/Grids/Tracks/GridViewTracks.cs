@@ -83,8 +83,6 @@ namespace MPTagThat.GridView
     private Point _screenOffset;
     private bool _waitCursorActive;
 
-    private BPMPROCESSPROC _bpmProc;
-
     // Get Properties to be able to sort on column heading 
     private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
 
@@ -109,21 +107,6 @@ namespace MPTagThat.GridView
     #region Nested type: ThreadSafeGridDelegate1
 
     private delegate void ThreadSafeGridDelegate1(object sender, DoWorkEventArgs e);
-
-    #endregion
-
-    #region Imports
-
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int InitGainAnalysis(long samplefreq);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int ResetSampleFrequency(long samplefreq);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int AnalyzeSamples(double[] left_samples, double[] right_samples, UIntPtr num_samples, int num_channels);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern float GetTitleGain();
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern float GetAlbumGain();
 
     #endregion
 
@@ -295,7 +278,7 @@ namespace MPTagThat.GridView
 
       // Get the command object
       object[] parameters = e.Argument as object[];
-      ICommand commandObj = CommandFactory.Create((string)parameters[0]);
+      MPTagThat.Commands.Command commandObj = MPTagThat.Commands.Command.Create((string)parameters[0]);
       if (commandObj == null)
       {
         return;
@@ -306,7 +289,7 @@ namespace MPTagThat.GridView
       SetProgressBar(trackCount);
 
       // If the command needs Preprocessing, then first loop over all tracks
-      if (commandObj.NeedsPreprocessing())
+      if (commandObj.NeedsPreprocessing)
       {
         foreach (DataGridViewRow row in tracksGrid.Rows)
         {
@@ -316,7 +299,7 @@ namespace MPTagThat.GridView
           }
 
           TrackData track = Options.Songlist[row.Index];
-          commandObj.PreProcess(track);
+          commandObj.PreProcess(track, this);
         }
       }
       
@@ -877,267 +860,6 @@ namespace MPTagThat.GridView
       tracksGrid.Parent.Refresh();
 
       log.Trace("<<<");
-    }
-
-    #endregion
-
-    #region Replay Gain
-
-    /// <summary>
-    ///   Analyses selected files and calculates the ReplayGain
-    /// </summary>
-    public void ReplayGain()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      bool albumGain = false;
-      bool gainInitialised = false;
-      int usedFrequency = -1;
-
-      // Check, if all rows have been selected and provide the option to invoke Album Gain analysis
-      if (tracksGrid.Rows.Count == tracksGrid.SelectedRows.Count)
-      {
-        if (MessageBox.Show(localisation.ToString("albumgain", "Explanation"),
-                 localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
-        {
-          albumGain = true;
-        }
-      }
-
-      float maxPeak = 0.0f;
-      
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
-        if (stream == 0)
-        {
-          log.Error("ReplayGain: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-
-        BASS_CHANNELINFO chInfo = Bass.BASS_ChannelGetInfo(stream);
-        if (chInfo == null)
-        {
-          log.Error("ReplayGain: Could not get channel info for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-        
-        Util.SendProgress(string.Format("Analysing gain for {0}", track.FileName));
-        log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
-
-        if (!albumGain || !gainInitialised)
-        {
-          InitGainAnalysis(chInfo.freq);
-          gainInitialised = true;
-          usedFrequency = chInfo.freq;
-        }
-        else
-        {
-          if (usedFrequency != chInfo.freq)
-          {
-            ResetSampleFrequency(chInfo.freq);
-            usedFrequency = chInfo.freq;
-          }
-        }
-        
-        ReplayAnalyze(stream);
-        float titleGain = GetTitleGain();
-        
-        // Calculating the peak level
-        float peak = 0;
-        Bass.BASS_ChannelSetPosition(stream, 0);
-
-        float[] level = new float[chInfo.chans];  // allocate for all Channels of the stream
-        while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
-        { // not reached the end yet
-          if(Bass.BASS_ChannelGetLevel(stream, level))
-          {
-            for (int i = 0; i < chInfo.chans; i++ )
-            {
-              if (peak < level[i]) peak = level[i];
-            }
-          }
-        }
-
-        if (albumGain && maxPeak < peak)
-        {
-          maxPeak = peak;
-        }
-
-        Bass.BASS_StreamFree(stream);
-
-        log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", titleGain.ToString(CultureInfo.InvariantCulture), peak.ToString(CultureInfo.InvariantCulture));
-        track.ReplayGainTrack = titleGain.ToString(CultureInfo.InvariantCulture);
-        track.ReplayGainTrackPeak = peak.ToString(CultureInfo.InvariantCulture);
-
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      // Should we also get Album Gain
-      if (albumGain)
-      {
-        float albumGainValue = GetAlbumGain();
-        string albumGainValueStr = albumGainValue.ToString(CultureInfo.InvariantCulture);
-        string albumPeakValueStr = maxPeak.ToString(CultureInfo.InvariantCulture);
-
-        foreach (DataGridViewRow row in tracksGrid.Rows)
-        {
-          if (!row.Selected)
-          {
-            continue;
-          }
-
-          TrackData track = Options.Songlist[row.Index];
-          track.ReplayGainAlbum = albumGainValueStr;
-          track.ReplayGainAlbumPeak = albumPeakValueStr;
-        }
-      }
-
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    /// Do a Replaygain and Peak analyses
-    /// </summary>
-    /// <param name="channel"></param>
-    void ReplayAnalyze(int channel)
-    {
-      int result;
-      int peak = 0;
-
-      int[] chanmap = new int[2];
-      chanmap[0] = 0; // left channel
-      chanmap[1] = -1;
-      int stream1 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
-      chanmap[0] = 1; // right channel
-      int stream2 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
-
-      int length = (int)Bass.BASS_ChannelSeconds2Bytes(channel, 0.02); // 20ms window
-
-      Int16[] buffer = new Int16[length / 2];
-      double[] leftSamples = new double[length / 2];
-      double[] rightSamples = new double[length / 2];
-
-      Bass.BASS_ChannelSetPosition(stream1, 0); // make sure to start from the beginning
-      Bass.BASS_ChannelSetPosition(stream2, 0); // make sure to start from the beginning
-      while (Bass.BASS_ChannelIsActive(stream1) == BASSActive.BASS_ACTIVE_PLAYING
-        || Bass.BASS_ChannelIsActive(stream2) == BASSActive.BASS_ACTIVE_PLAYING)
-      {
-        result = Bass.BASS_ChannelGetData(stream1, buffer, length);
-
-        int l4 = result / 2;
-        for (int a = 0; a < l4; a++)
-        {
-          leftSamples[a] = Convert.ToDouble(buffer[a]);
-        }
-
-        result = Bass.BASS_ChannelGetData(stream2, buffer, length);
-        l4 = result / 2;
-        for (int a = 0; a < l4; a++)
-        {
-          rightSamples[a] = Convert.ToDouble(buffer[a]);
-        }
-
-        AnalyzeSamples(leftSamples, rightSamples, new UIntPtr((uint)l4 / 2), 2);
-        leftSamples = new double[length / 2];
-        rightSamples = new double[length / 2];
-      }
-    }
-
-    #endregion
-
-    #region BPM Detection
-
-    /// <summary>
-    ///   Detects the BPM
-    /// </summary>
-    public void Bpm()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        SetProgressBar(100);
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
-        if (stream == 0)
-        {
-          log.Error("BPM: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-
-        GCHandle rowIndex = GCHandle.Alloc(row.Index);
-        _bpmProc = BPMProgressProc;
-
-        double len = Bass.BASS_ChannelBytes2Seconds(stream, Bass.BASS_ChannelGetLength(stream));
-        float bpm = BassFx.BASS_FX_BPM_DecodeGet(stream, 0.0, len, 0, BASSFXBpm.BASS_FX_BPM_BKGRND | BASSFXBpm.BASS_FX_FREESOURCE |BASSFXBpm.BASS_FX_BPM_MULT2, 
-                                                    _bpmProc,GCHandle.ToIntPtr(rowIndex));
-
-        track.BPM = Convert.ToInt32(bpm);
-        BassFx.BASS_FX_BPM_Free(stream);
-
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      log.Trace("<<<");
-    }
-
-    private void BPMProgressProc(int channel, float percent, IntPtr userData)
-    {
-      GCHandle gch = GCHandle.FromIntPtr(userData);
-      int rowIndex = (int)gch.Target;
-      _main.progressBar1.Value = Convert.ToInt32(percent);
     }
 
     #endregion
@@ -1947,7 +1669,7 @@ namespace MPTagThat.GridView
     ///   Sets the maximum value of Progressbar
     /// </summary>
     /// <param name = "maxCount"></param>
-    private void SetProgressBar(int maxCount)
+    public void SetProgressBar(int maxCount)
     {
       _main.progressBar1.Maximum = maxCount == 0 ? 100 : maxCount;
       _main.progressBar1.Value = 0;
