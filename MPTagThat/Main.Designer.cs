@@ -3240,7 +3240,7 @@ namespace MPTagThat
       // 
       // buttonValidateSong
       // 
-      this.buttonValidateSong.CommandName = "ValidateSong";
+      this.buttonValidateSong.CommandName = "ValidateMP3File";
       this.buttonValidateSong.DescriptionText = null;
       this.buttonValidateSong.Id = "6b558c4a-6aeb-42e1-bedf-c5e7e0ec886e";
       this.buttonValidateSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
@@ -3264,7 +3264,7 @@ namespace MPTagThat
       // 
       // buttonFixSong
       // 
-      this.buttonFixSong.CommandName = "FixSong";
+      this.buttonFixSong.CommandName = "FixMP3File";
       this.buttonFixSong.Id = "2e9164c1-fb65-4678-9aff-2dc474add3ad";
       this.buttonFixSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFixSong.LargeImages.Images"))))});

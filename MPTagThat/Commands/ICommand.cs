@@ -25,7 +25,7 @@ namespace MPTagThat.Commands
   {
     void CancelCommand();
     void Dispose();
-    bool Execute(ref TrackData track, GridViewTracks tracksGrid);
+    bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex);
     bool NeedsPreprocessing();
     bool PreProcess(TrackData track);
     bool PostProcess(GridViewTracks tracksGrid);

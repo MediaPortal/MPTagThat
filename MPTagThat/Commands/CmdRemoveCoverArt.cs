@@ -34,7 +34,7 @@ namespace MPTagThat.Commands
 
     #region ICommand Implementation
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid)
+    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
       if (track.NumPics > 0)
       {

@@ -112,6 +112,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
+    <Compile Include="Commands\CmdFixMP3File.cs" />
+    <Compile Include="Commands\CmdValidateMP3File.cs" />
     <Compile Include="Commands\CmdRemoveCoverArt.cs" />
     <Compile Include="Commands\CmdRemoveComment.cs" />
     <Compile Include="Commands\CommandFactory.cs" />

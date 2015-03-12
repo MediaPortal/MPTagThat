@@ -22,27 +22,41 @@ using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
-  [SupportedCommandType("RemoveComment")]
-  public class CmdRemoveComment : ICommand, IDisposable
+  [SupportedCommandType("FixMP3File")]
+  public class CmdFixMP3File : ICommand, IDisposable
   {
     #region Variables
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private bool _progressCancelled = false;
-    private GridViewTracks _tracksGrid;
 
     #endregion
 
     #region ICommand Implementation
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
     {
-      if (track.Comment != "")
+      if (track.IsMp3)
       {
-        track.ID3Comments.Clear();
-        return true;
+        Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
+        string strError = "";
+        track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
+        if (track.MP3ValidationError == Util.MP3Error.Fixed)
+        {
+          tracksGrid.SetGridRowColors(rowIndex);
+          track.Status = 4;
+          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = "";
+        }
+        else
+        {
+          tracksGrid.SetColorMP3Errors(rowIndex, track.MP3ValidationError);
+          track.Status = 3;
+          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = strError;
+        }
       }
-      return false;
+
+      // We don't want to mark thze file as changed, since no change occured in the Tags
+      return false; 
     }
 
     /// <summary>

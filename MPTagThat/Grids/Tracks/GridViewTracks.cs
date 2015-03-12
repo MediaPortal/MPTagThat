@@ -341,7 +341,7 @@ namespace MPTagThat.GridView
             return;
           }
           TrackData track = Options.Songlist[row.Index];
-          if (commandObj.Execute(ref track, this))
+          if (commandObj.Execute(ref track, this, row.Index))
           {
             SetBackgroundColorChanged(row.Index);
             track.Changed = true;
@@ -876,117 +876,6 @@ namespace MPTagThat.GridView
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
 
-      log.Trace("<<<");
-    }
-
-    #endregion
-
-    #region Validate / Fix MP3 Files
-
-    /// <summary>
-    ///   Validates an MP3 File using mp3val
-    /// </summary>
-    public void ValidateMP3File()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        if (track.IsMp3)
-        {
-          Util.SendProgress(string.Format("Validating file {0}", track.FileName));
-          string strError = "";
-          track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError != Util.MP3Error.NoError)
-          {
-            SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            track.Status = 3;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
-          }
-          else
-          {
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
-          }
-        }
-      }
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Fixes errors in an MP3 file using mp3val
-    /// </summary>
-    public void FixMP3File()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-        if (track.IsMp3)
-        {
-          Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
-          string strError = "";
-          track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError == Util.MP3Error.Fixed)
-          {
-            SetGridRowColors(row.Index);
-            track.Status = 4;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
-          }
-          else
-          {
-            SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            track.Status = 3;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
-          }
-        }
-      }
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
       log.Trace("<<<");
     }
 

@@ -46,7 +46,7 @@ namespace MPTagThat.Commands
     /// </summary>
     /// <param name="track"></param>
     /// <returns></returns>
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid)
+    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
     {
       _tracksGrid = tracksGrid;
 

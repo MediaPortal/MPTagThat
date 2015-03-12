@@ -22,27 +22,39 @@ using MPTagThat.GridView;
 
 namespace MPTagThat.Commands
 {
-  [SupportedCommandType("RemoveComment")]
-  public class CmdRemoveComment : ICommand, IDisposable
+  [SupportedCommandType("ValidateMP3File")]
+  public class CmdValidateMP3File : ICommand, IDisposable
   {
     #region Variables
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private bool _progressCancelled = false;
-    private GridViewTracks _tracksGrid;
 
     #endregion
 
     #region ICommand Implementation
 
-    public bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)
+    public bool Execute(ref TrackData track, GridViewTracks tracksGrid,int rowIndex)
     {
-      if (track.Comment != "")
+      if (track.IsMp3)
       {
-        track.ID3Comments.Clear();
-        return true;
+        Util.SendProgress(string.Format("Validating file {0}", track.FileName));
+        string strError = "";
+        track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
+        if (track.MP3ValidationError != Util.MP3Error.NoError)
+        {
+          tracksGrid.SetColorMP3Errors(rowIndex, track.MP3ValidationError);
+          track.Status = 3;
+          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = strError;
+        }
+        else
+        {
+          tracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = "";
+        }
       }
-      return false;
+
+      // We don't want to mark thze file as changed, since no change occured in the Tags
+      return false; 
     }
 
     /// <summary>

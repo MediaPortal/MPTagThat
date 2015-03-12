@@ -38,6 +38,8 @@ namespace MPTagThat.Commands
       typeof (CmdGetLyrics),
       typeof (CmdRemoveComment),
       typeof (CmdRemoveCoverArt),
+      typeof (CmdValidateMP3File),
+      typeof (CmdFixMP3File),
     };
 
     #endregion

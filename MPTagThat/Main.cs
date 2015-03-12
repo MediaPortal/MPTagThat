@@ -952,8 +952,8 @@ namespace MPTagThat
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
       ApplicationCommands.Find.Executed += TagsTabButton_Executed;
       ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
-      ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
-      ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
+      ApplicationCommands.FixMP3File.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ValidateMP3File.Executed += TagsTabButton_Executed;
       ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
       ApplicationCommands.Bpm.Executed += TagsTabButton_Executed;
 
