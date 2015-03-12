@@ -36,6 +36,14 @@ namespace MPTagThat.Commands
 
     #endregion
 
+    #region ctor
+
+    public CmdIdentifyFile(object[] parameters)
+    {
+    }
+
+    #endregion
+
     #region Command Implementation
 
     /// <summary>

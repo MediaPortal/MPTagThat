@@ -31,6 +31,15 @@ namespace MPTagThat.Commands
 
     #endregion
 
+   #region ctor
+
+    public CmdRemoveComment(object[] parameters)
+    {
+    }
+
+    #endregion
+
+
     #region Command Implementation
 
     public override bool Execute(ref TrackData track, GridViewTracks tracksGrid, int rowIndex)

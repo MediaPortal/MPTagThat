@@ -247,10 +247,16 @@ namespace MPTagThat.GridView
 
     public void ExecuteCommand(string command)
     {
+      object[] parameter = {};
+      ExecuteCommand(command, parameter);
+    }
+
+    public void ExecuteCommand(string command, object parameters)
+    {
       log.Trace(">>>");
       log.Debug("Invoking Command: {0}", command);
 
-      object[] parameter = {command};
+      object[] parameter = { command , parameters};
 
       if (_bgWorker == null)
       {
@@ -278,7 +284,7 @@ namespace MPTagThat.GridView
 
       // Get the command object
       object[] parameters = e.Argument as object[];
-      MPTagThat.Commands.Command commandObj = MPTagThat.Commands.Command.Create((string)parameters[0]);
+      MPTagThat.Commands.Command commandObj = MPTagThat.Commands.Command.Create(parameters);
       if (commandObj == null)
       {
         return;

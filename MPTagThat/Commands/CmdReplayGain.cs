@@ -57,12 +57,13 @@ namespace MPTagThat.Commands
 
     #region ctor
 
-    public CmdReplayGain()
+    public CmdReplayGain(object[] parameters)
     {
       NeedsPreprocessing = true;
     }
 
     #endregion
+
 
     #region Command Implementation
 

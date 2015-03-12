@@ -73,14 +73,16 @@ namespace MPTagThat.Commands
     /// <summary>
     /// Create a Command Object
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="parameters"></param>
     /// <returns></returns>
-    public static Command Create(string command)
+    public static Command Create(object[] parameters)
     {
-      if (string.IsNullOrEmpty(command))
+      if (parameters == null || parameters.GetLength(0) == 0)
       {
         throw new Exception("Command must not be empty");
       }
+
+      var command = (string) parameters[0];
 
       if (!CommandTypes.AvailableCommands.ContainsKey(command))
       {
@@ -91,7 +93,7 @@ namespace MPTagThat.Commands
 
       try
       {
-        Command commandobj = (Command)Activator.CreateInstance(commandType, new object[] { });
+        Command commandobj = (Command)Activator.CreateInstance(commandType, new object[] { parameters });
         return commandobj;
       }
       catch (System.Reflection.TargetInvocationException e)

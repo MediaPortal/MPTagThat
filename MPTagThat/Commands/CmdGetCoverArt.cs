@@ -48,7 +48,7 @@ namespace MPTagThat.Commands
 
     #region ctor
 
-    public CmdGetCoverArt()
+    public CmdGetCoverArt(object[] parameters)
     {
       NeedsPreprocessing = true;
     }

@@ -36,12 +36,13 @@ namespace MPTagThat.Commands
 
     #region ctor
 
-    public CmdGetLyrics()
+    public CmdGetLyrics(object[] parameters)
     {
       NeedsPreprocessing = true;
     }
 
     #endregion
+
 
     #region Command Implementation
 
