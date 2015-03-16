@@ -176,7 +176,8 @@ namespace MPTagThat.Organise
       _directories = new Dictionary<string, string>();
 
       // First do an automatic save of all pending changes
-      _main.TracksGridView.SaveAll(false);
+      object[] parm = { "false" };   // Don't show progress bar
+      _main.TracksGridView.ExecuteCommand("SaveAll", parm);
 
       bool bError = false;
       string targetFolder = cbRootDir.Text;

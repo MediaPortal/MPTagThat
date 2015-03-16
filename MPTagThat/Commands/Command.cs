@@ -34,6 +34,7 @@ namespace MPTagThat.Commands
     #region Public Properties
 
     public bool NeedsPreprocessing { get; set; }
+    public bool NeedsCallback { get; set; }
 
     public GridViewTracks TracksGrid { get; set; }
 

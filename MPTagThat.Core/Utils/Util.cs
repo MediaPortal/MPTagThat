@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -33,6 +34,7 @@ using NLog;
 using TagLib;
 using Un4seen.Bass.AddOn.Cd;
 using File = TagLib.File;
+using Picture = MPTagThat.Core.Common.Picture;
 using StringCollection = System.Collections.Specialized.StringCollection;
 using Tag = TagLib.Id3v2.Tag;
 
@@ -420,6 +422,29 @@ namespace MPTagThat.Core
             instance = new Util();
           }
           return instance;
+        }
+      }
+    }
+
+    /// <summary>
+    ///   Save the Picture of the track as folder.jpg
+    /// </summary>
+    /// <param name = "track"></param>
+    public static void SavePicture(TrackData track)
+    {
+      if (track.NumPics > 0)
+      {
+        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
+        try
+        {
+          Image img = Picture.ImageFromData(track.Pictures[0].Data);
+          // Need to make a copy, otherwise we have a GDI+ Error
+          Bitmap bCopy = new Bitmap(img);
+          bCopy.Save(fileName, ImageFormat.Jpeg);
+        }
+        catch (Exception ex)
+        {
+          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
         }
       }
     }

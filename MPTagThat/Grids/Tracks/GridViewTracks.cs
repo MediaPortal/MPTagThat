@@ -57,7 +57,6 @@ namespace MPTagThat.GridView
     private readonly IThemeManager theme = ServiceScope.Get<IThemeManager>();
     private bool _actionCopy;
 
-    private Thread _asyncThread;
     private BackgroundWorker _bgWorker;
     private Rectangle _dragBoxFromMouseDown;
 
@@ -74,6 +73,9 @@ namespace MPTagThat.GridView
 
     // Get Properties to be able to sort on column heading 
     private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
+
+    public delegate void CommandThreadEnd(object sender, EventArgs args);
+    public event CommandThreadEnd CommandThreadEnded;
 
     #region Nested type: ThreadSafeAddErrorDelegate
 
@@ -278,20 +280,26 @@ namespace MPTagThat.GridView
       {
         return;
       }
+
+      // Extract the command name, since we might need it for specific selections afterwards
+      var command = (string)parameters[0];
+
+      var commandParmObj = (object[]) parameters[1];
+      var commandParm = commandParmObj.GetLength(0) > 0 ? (string) commandParmObj[0] : "";
+      
+      // Set a reference to the Track Grid
+      commandObj.TracksGrid = this;
       
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
       SetProgressBar(trackCount);
-
-      // Set a reference to the Track Grid
-      commandObj.TracksGrid = this;
 
       // If the command needs Preprocessing, then first loop over all tracks
       if (commandObj.NeedsPreprocessing)
       {
         foreach (DataGridViewRow row in tracksGrid.Rows)
         {
-          if (!row.Selected)
+          if (!row.Selected && command != "SaveAll")
           {
             continue;
           }
@@ -305,7 +313,7 @@ namespace MPTagThat.GridView
       {
         ClearStatusColumn(row.Index);
 
-        if (!row.Selected)
+        if (!row.Selected && command != "SaveAll")
         {
           continue;
         }
@@ -314,14 +322,24 @@ namespace MPTagThat.GridView
         try
         {
           Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
+
+          if (command != "SaveAll" && commandParm != "false")
           {
-            commandObj.CancelCommand();
-            ResetProgressBar();
-            return;
+            _main.progressBar1.Value += 1;
+            if (_progressCancelled)
+            {
+              commandObj.CancelCommand();
+              ResetProgressBar();
+              return;
+            }
           }
+
           TrackData track = Options.Songlist[row.Index];
+          if (command == "SaveAll")
+          {
+            track.Status = -1;
+          }
+
           if (commandObj.Execute(ref track, row.Index))
           {
             SetBackgroundColorChanged(row.Index);
@@ -338,15 +356,17 @@ namespace MPTagThat.GridView
       }
 
       // Do Command Post Processing
-      if (commandObj.PostProcess())
-      {
-        _itemsChanged = true;
-      }
+      _itemsChanged = commandObj.PostProcess();
 
       Util.SendProgress("");
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
+
+      if (CommandThreadEnded != null && commandObj.NeedsCallback)
+      {
+        CommandThreadEnded(this, new EventArgs());
+      }
 
       commandObj.Dispose();
 
@@ -354,276 +374,8 @@ namespace MPTagThat.GridView
       log.Trace("<<<");
     }
 
-
     #endregion
     
-    #region Save
-
-    /// <summary>
-    ///   Save the Selected files only
-    /// </summary>
-    public void Save()
-    {
-      log.Trace(">>>");
-
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected || (string)row.Tag != "Changed")
-        {
-          log.Trace("Save: Row {0} not selected or changed", row.Index);
-          continue;
-        }
-
-        count++;
-        try
-        {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-
-          TrackData track = Options.Songlist[row.Index];
-          SaveTrack(track, row.Index);
-        }
-        catch (Exception ex)
-        {
-          Options.Songlist[row.Index].Status = 2;
-          AddErrorMessage(row, ex.Message);
-        }
-      }
-
-      Util.SendProgress("");
-      Options.ReadOnlyFileHandling = 2; //No
-      ResetProgressBar();
-
-      _itemsChanged = false;
-      // check, if we still have changed items in the list
-      foreach (TrackData track in Options.Songlist)
-      {
-        if (track.Changed)
-          _itemsChanged = true;
-      }
-
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Save All changed files, regardless, if they are selected or not
-    /// </summary>
-    public void SaveAll()
-    {
-      SaveAll(true);
-    }
-
-    /// <summary>
-    ///   Save All changed files, regardless, if they are selected or not
-    /// </summary>
-    /// <param name = "showProgressDialog">Show / Hide the progress dialogue</param>
-    public void SaveAll(bool showProgressDialog)
-    {
-      log.Trace(">>>");
-
-      bool bErrors = false;
-
-      if (showProgressDialog)
-      {
-        SetProgressBar(tracksGrid.Rows.Count);
-      }
-
-      int trackCount = Options.Songlist.Count;
-      for (int i = 0; i < trackCount; i++)
-      {
-        Application.DoEvents();
-
-        TrackData track = Options.Songlist[i];
-        track.Status = -1;
-
-        if (showProgressDialog)
-        {
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-        }
-
-        if (!SaveTrack(track, i))
-          bErrors = true;
-      }
-
-      Util.SendProgress("");
-      Options.ReadOnlyFileHandling = 2; //No
-      if (showProgressDialog)
-      {
-        ResetProgressBar();
-      }
-      _itemsChanged = bErrors;
-
-      log.Trace("<<<");
-    }
-
-
-    /// <summary>
-    ///   Does the actual save of the track
-    /// </summary>
-    /// <param name = "track"></param>
-    /// <returns></returns>
-    private bool SaveTrack(TrackData track, int rowIndex)
-    {
-      try
-      {
-        if (track.Changed)
-        {
-          Util.SendProgress(string.Format("Saving file {0}", track.FullFileName));
-          log.Debug("Save: Saving track: {0}", track.FullFileName);
-
-          // The track to be saved, may be currently playing. If this is the case stop playnack to free the file
-          if (track.FullFileName == _main.Player.CurrentSongPlaying)
-          {
-            log.Debug("Save: Song is played in Player. Stop playback to free the file");
-            _main.Player.Stop();
-          }
-
-          if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
-          {
-            track.AlbumArtist = track.Artist;
-          }
-
-          if (Options.MainSettings.UseCaseConversion)
-          {
-            CaseConversion.CaseConversion convert = new CaseConversion.CaseConversion(_main, true);
-            convert.CaseConvert(track, rowIndex);
-            convert.Dispose();
-          }
-
-          // Save the file 
-          string errorMessage = "";
-          if (Track.SaveFile(track, ref errorMessage))
-          {
-            // If we are in Database mode, we should also update the MediaPortal Database
-            if (_main.TreeView.DatabaseMode)
-            {
-              UpdateMusicDatabase(track);
-            }
-
-            if (RenameFile(track))
-            {
-              // rename was ok, so get the new file into the binding list
-              string ext = Path.GetExtension(track.FileName);
-              string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
-                                                String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
-                                                              ext));
-
-              track = Track.Create(newFileName);
-              Options.Songlist[rowIndex] = track;
-            }
-
-            // Check, if we need to create a folder.jpg
-            if (!System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg")) &&
-                Options.MainSettings.CreateFolderThumb)
-            {
-              SavePicture(track);
-            }
-
-            track.Status = 0;
-            tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
-            track.Changed = false;
-            tracksGrid.Rows[rowIndex].Tag = "";
-            Options.Songlist[rowIndex] = track;
-            SetGridRowColors(rowIndex);
-          }
-          else
-          {
-            track.Status = 2;
-            AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        Options.Songlist[rowIndex].Status = 2;
-        AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
-        log.Error("Save: Error Saving data for row {0}: {1} {2}", rowIndex, ex.Message, ex.StackTrace);
-        return false;
-      }
-      return true;
-    }
-
-    /// <summary>
-    ///   Rename the file if necessary
-    ///   Called by Save and SaveAll
-    /// </summary>
-    /// <param name = "track"></param>
-    private bool RenameFile(TrackData track)
-    {
-      string originalFileName = Path.GetFileName(track.FullFileName);
-      if (originalFileName != track.FileName)
-      {
-        string ext = Path.GetExtension(track.FileName);
-        string filename = Path.GetFileNameWithoutExtension(track.FileName);
-        string path = Path.GetDirectoryName(track.FullFileName);
-        string newFileName = Path.Combine(path, string.Format("{0}{1}", filename, ext));
-
-        // Check, if the New file name already exists
-        // Don't change the newfilename, when only the Case change happened in filename
-        int i = 1;
-        if (System.IO.File.Exists(newFileName) && originalFileName.ToLowerInvariant() != track.FileName.ToLowerInvariant())
-        {
-          newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
-          while (System.IO.File.Exists(newFileName))
-          {
-            i++;
-            newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
-          }
-        }
-        
-        System.IO.File.Move(track.FullFileName, newFileName);
-        log.Debug("Save: Renaming track: {0} Newname: {1}", track.FullFileName, newFileName);
-        return true;
-      }
-      return false;
-    }
-
-    #endregion
-
-    #region Cover Art
-
-    /// <summary>
-    ///   Save the Picture of the track as folder.jpg
-    /// </summary>
-    /// <param name = "track"></param>
-    public void SavePicture(TrackData track)
-    {
-      if (track.NumPics > 0)
-      {
-        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
-        try
-        {
-          Image img = Picture.ImageFromData(track.Pictures[0].Data);
-          // Need to make a copy, otherwise we have a GDI+ Error
-          Bitmap bCopy = new Bitmap(img);
-          bCopy.Save(fileName, ImageFormat.Jpeg);
-        }
-        catch (Exception ex)
-        {
-          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
-        }
-      }
-    }
-
-    #endregion
-
     #region Numbering
 
     public void AutoNumber()
@@ -767,7 +519,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Checks for Pending Changes
     /// </summary>
-    public void CheckForChanges()
+    public void CheckForChanges(ref bool waitForCommandThread)
     {
       if (Changed)
       {
@@ -775,7 +527,11 @@ namespace MPTagThat.GridView
                                               localisation.ToString("message", "Save_Changes_Title"),
                                               MessageBoxButtons.YesNo);
         if (result == DialogResult.Yes)
-          ExecuteCommand("SaveAll");
+        {
+          waitForCommandThread = true;
+          object[] parm = {"true"};
+          ExecuteCommand("SaveAll", parm);
+        }
         else
           DiscardChanges();
       }
@@ -1309,7 +1065,7 @@ namespace MPTagThat.GridView
       return sql;
     }
 
-    private void UpdateMusicDatabase(TrackData track)
+    public void UpdateMusicDatabase(TrackData track)
     {
       string db = Options.MainSettings.MediaPortalDatabase;
 
@@ -2609,7 +2365,7 @@ namespace MPTagThat.GridView
         }
 
         TrackData track = Options.Songlist[row.Index];
-        SavePicture(track);
+        Util.SavePicture(track);
       }
     }
 
