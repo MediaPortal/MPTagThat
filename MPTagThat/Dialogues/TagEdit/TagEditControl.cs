@@ -2351,8 +2351,8 @@ namespace MPTagThat.TagEdit
             List<PopmFrame> ratings = new List<PopmFrame>();
             foreach (DataGridViewRow ratingRow in dataGridViewRating.Rows)
             {
-              PopmFrame rating = new PopmFrame(ratingRow.Cells[0].Value.ToString(), (int)ratingRow.Cells[1].Value,
-                                         (int)ratingRow.Cells[2].Value);
+              PopmFrame rating = new PopmFrame(ratingRow.Cells[0].Value.ToString(), Convert.ToInt32(ratingRow.Cells[1].Value.ToString()),
+                                         Convert.ToInt32(ratingRow.Cells[2].Value.ToString()));
               ratings.Add(rating);
             }
 
