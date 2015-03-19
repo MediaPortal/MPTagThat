@@ -539,11 +539,20 @@ namespace MPTagThat.Core
               }
             }
             else
+            {
               file.Tag.Comment = track.Comment;
+            }
           }
           else
           {
-            file.Tag.Comment = "";
+            if (track.IsMp3 && id3v2tag != null)
+            {
+              id3v2tag.RemoveFrames("COMM");
+            }
+            else
+            {
+              file.Tag.Comment = "";
+            }
           }
 
           if (track.IsMp3)
