@@ -282,7 +282,7 @@ namespace MPTagThat.GridView
 
       // Get the command object
       object[] parameters = e.Argument as object[];
-      MPTagThat.Commands.Command commandObj = MPTagThat.Commands.Command.Create(parameters);
+      Commands.Command commandObj = Commands.Command.Create(parameters);
       if (commandObj == null)
       {
         return;

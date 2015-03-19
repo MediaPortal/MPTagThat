@@ -71,8 +71,8 @@ namespace MPTagThat.Core.AudioEncoder
     ///   Starts encoding using the given Parameters
     /// </summary>
     /// <param name = "stream"></param>
-    /// <param name = "encoderParms"></param>
-    public BASSError StartEncoding(int stream)
+    /// <param name = "rowIndex"></param>
+    public BASSError StartEncoding(int stream, int rowIndex)
     {
       BaseEncoder encoder = SetEncoderSettings(stream);
       encoder.EncoderDirectory = _pathToEncoders;
@@ -98,7 +98,9 @@ namespace MPTagThat.Core.AudioEncoder
         double percentComplete = pos / (double)chanLength * 100.0;
 
         // Send the message
-        msg.MessageData["progress"] = percentComplete;
+        msg.MessageData["action"] = "progress";
+        msg.MessageData["percent"] = percentComplete;
+        msg.MessageData["rowindex"] = rowIndex;
         queue.Send(msg);
       }
 

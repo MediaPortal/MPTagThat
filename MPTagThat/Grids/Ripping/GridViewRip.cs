@@ -436,7 +436,7 @@ namespace MPTagThat.GridView
 
           _outFile = audioEncoder.SetEncoder(encoder, _outFile);
 
-          if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
+          if (audioEncoder.StartEncoding(stream, row.Index) != BASSError.BASS_OK)
           {
             log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow,
                       Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));

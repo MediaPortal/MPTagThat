@@ -33,5 +33,9 @@ namespace MPTagThat.GridView
     public string NewFileName { get; set; }
 
     public TrackData Track { get; set; }
+
+    public string RootFolder { get; set; }
+    
+    public string Encoder { get; set; }
   }
 }

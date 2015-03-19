@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
     <Compile Include="Commands\CmdCoverArtDrop.cs" />
+    <Compile Include="Commands\CmdConvert.cs" />
     <Compile Include="Commands\CmdSave.cs" />
     <Compile Include="Commands\CmdFixMP3File.cs" />
     <Compile Include="Commands\CmdReplayGain.cs" />

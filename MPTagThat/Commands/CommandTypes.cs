@@ -44,6 +44,7 @@ namespace MPTagThat.Commands
       typeof (CmdBpm),
       typeof (CmdCoverArtDrop),
       typeof (CmdSave),
+      typeof (CmdConvert),
     };
 
     #endregion
