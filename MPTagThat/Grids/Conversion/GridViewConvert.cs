@@ -18,17 +18,11 @@
 #region
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MPTagThat.Core;
-using MPTagThat.Core.AudioEncoder;
-using Un4seen.Bass;
-using File = TagLib.File;
 
 #endregion
 
@@ -39,13 +33,12 @@ namespace MPTagThat.GridView
     #region Variables
 
     private readonly Main _main;
-    private readonly IAudioEncoder audioEncoder;
 
-    private readonly SortableBindingList<ConversionData> bindingList = new SortableBindingList<ConversionData>();
-    private readonly GridViewColumnsConvert gridColumns;
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private Thread threadConvert;
+    private readonly SortableBindingList<ConversionData> _bindingList = new SortableBindingList<ConversionData>();
+    private readonly GridViewColumnsConvert _gridColumns;
+    private readonly ILocalisation _localisation = ServiceScope.Get<ILocalisation>();
+    private readonly NLog.Logger _log = ServiceScope.Get<ILogger>().GetLogger;
+    private Thread _threadConvert;
 
     #region Nested type: ThreadSafeMessageDelegate
 
@@ -72,10 +65,10 @@ namespace MPTagThat.GridView
     {
       get
       {
-        if (threadConvert == null)
+        if (_threadConvert == null)
           return false;
 
-        if (threadConvert.ThreadState == ThreadState.Running)
+        if (_threadConvert.ThreadState == ThreadState.Running)
           return true;
         else
           return false;
@@ -105,13 +98,11 @@ namespace MPTagThat.GridView
       IMessageQueue queueMessageEncoding = ServiceScope.Get<IMessageBroker>().GetOrCreate("encoding");
       queueMessageEncoding.OnMessageReceive += OnMessageReceiveEncoding;
 
-      audioEncoder = ServiceScope.Get<IAudioEncoder>();
-
       // Load the Settings
-      gridColumns = new GridViewColumnsConvert();
+      _gridColumns = new GridViewColumnsConvert();
 
       dataGridViewConvert.AutoGenerateColumns = false;
-      dataGridViewConvert.DataSource = bindingList;
+      dataGridViewConvert.DataSource = _bindingList;
 
       // Now Setup the columns, we want to display
       CreateColumns();
@@ -128,11 +119,11 @@ namespace MPTagThat.GridView
     /// </summary>
     public void ConvertFiles()
     {
-      threadConvert = new Thread(ConversionThread);
-      threadConvert.Name = "Conversion";
-      threadConvert.Priority = ThreadPriority.Highest;
-      threadConvert = new Thread(ConversionThread);
-      threadConvert.Start();
+      _threadConvert = new Thread(ConversionThread);
+      _threadConvert.Name = "Conversion";
+      _threadConvert.Priority = ThreadPriority.Highest;
+      _threadConvert = new Thread(ConversionThread);
+      _threadConvert.Start();
     }
 
     /// <summary>
@@ -140,9 +131,9 @@ namespace MPTagThat.GridView
     /// </summary>
     public void ConvertFilesCancel()
     {
-      if (threadConvert != null)
+      if (_threadConvert != null)
       {
-        threadConvert.Abort();
+        _threadConvert.Abort();
       }
     }
 
@@ -156,7 +147,7 @@ namespace MPTagThat.GridView
         return;
 
       ConversionData convdata = new ConversionData {Track = track};
-      bindingList.Add(convdata);
+      _bindingList.Add(convdata);
     }
 
     #endregion
@@ -174,7 +165,7 @@ namespace MPTagThat.GridView
         return;
       }
 
-      log.Trace(">>>");
+      _log.Trace(">>>");
       string rootFolder = _main.EncoderOutputDirectory;
       if (string.IsNullOrEmpty(rootFolder))
       {
@@ -188,8 +179,8 @@ namespace MPTagThat.GridView
       }
       catch (Exception ex)
       {
-        MessageBox.Show(localisation.ToString("Conversion", "ErrorDirectory"), localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
-        log.Error("Error creating Conversion output directory: {0}. {1}", rootFolder, ex.Message);
+        MessageBox.Show(_localisation.ToString("Conversion", "ErrorDirectory"), _localisation.ToString("message", "Error_Title"), MessageBoxButtons.OK);
+        _log.Error("Error creating Conversion output directory: {0}. {1}", rootFolder, ex.Message);
         return;
       }
 
@@ -197,7 +188,9 @@ namespace MPTagThat.GridView
 
       if (_main.EncoderCombo.SelectedItem != null)
       {
-        encoder = (string)(_main.EncoderCombo.SelectedItem as Item).Value;
+        var item = _main.EncoderCombo.SelectedItem as Item;
+        if (item != null)
+          encoder = (string)item.Value;
       }
 
       if (encoder == null)
@@ -209,31 +202,8 @@ namespace MPTagThat.GridView
         row.Cells[0].Value = 0;
       }
 
-      /*
-      ParallelOptions po = new ParallelOptions();
-      po.MaxDegreeOfParallelism = Environment.ProcessorCount;
-
-      Parallel.ForEach(dataGridViewConvert.Rows.OfType<DataGridViewRow>(), po, row =>
-      {
-        var conversionData = bindingList[row.Index];
-        conversionData.RootFolder = rootFolder;
-        conversionData.Encoder = encoder;
-
-        object[] parameters = { "Convert", conversionData };
-        Commands.Command commandObj = Commands.Command.Create(parameters);
-        if (commandObj == null)
-        {
-          return;
-        }
-
-        var track = conversionData.Track;
-        commandObj.Execute(ref track, row.Index);
-      }
-      );
-      */
-      
-      int maxThreads = 0;
-      int maxComplThreads = 0;
+      int maxThreads;
+      int maxComplThreads;
       ThreadPool.GetAvailableThreads(out maxThreads, out maxComplThreads);
 
       ThreadPool.SetMaxThreads(Environment.ProcessorCount, maxComplThreads);
@@ -242,7 +212,7 @@ namespace MPTagThat.GridView
       {
         ThreadPool.QueueUserWorkItem((f =>
         {
-          var conversionData = bindingList[row.Index];
+          var conversionData = _bindingList[row.Index];
           conversionData.RootFolder = rootFolder;
           conversionData.Encoder = encoder;
 
@@ -259,34 +229,8 @@ namespace MPTagThat.GridView
         ));
       }
 
-
-
-      /*
-      foreach (DataGridViewRow row in dataGridViewConvert.Rows)
-      {
-        var conversionData = bindingList[row.Index];
-        conversionData.RootFolder = rootFolder;
-        conversionData.Encoder = encoder;
-
-        object[] parameters = { "Convert", conversionData };
-        Commands.Command commandObj = Commands.Command.Create(parameters);
-        if (commandObj == null)
-        {
-          return;
-        }
-
-        var track = conversionData.Track;
-        commandObj.Execute(ref track, row.Index);
-      }
-      */
-
       Options.MainSettings.LastConversionEncoderUsed = encoder;
-      log.Trace("<<<");
-    }
-
-    private IEnumerable<DataGridViewRow> GetRows()
-    {
-      return dataGridViewConvert.Rows.Cast<DataGridViewRow>();
+      _log.Trace("<<<");
     }
 
     #endregion
@@ -299,7 +243,7 @@ namespace MPTagThat.GridView
     private void CreateColumns()
     {
       // Now create the columns 
-      foreach (GridViewColumn column in gridColumns.Settings.Columns)
+      foreach (GridViewColumn column in _gridColumns.Settings.Columns)
       {
         dataGridViewConvert.Columns.Add(Util.FormatGridColumn(column));
       }
@@ -329,10 +273,10 @@ namespace MPTagThat.GridView
         if (i == dataGridViewConvert.Columns.Count - 1)
           break;
 
-        gridColumns.SaveColumnSettings(column, i);
+        _gridColumns.SaveColumnSettings(column, i);
         i++;
       }
-      gridColumns.SaveSettings();
+      _gridColumns.SaveSettings();
     }
 
     /// <summary>
@@ -356,7 +300,6 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Language Change event has been fired. Apply the new language
     /// </summary>
-    /// <param name = "language"></param>
     private void LanguageChanged()
     {
       LocaliseScreen();
@@ -367,7 +310,7 @@ namespace MPTagThat.GridView
       // Update the column Headings
       foreach (DataGridViewColumn col in dataGridViewConvert.Columns)
       {
-        col.HeaderText = localisation.ToString("column_header", col.Name);
+        col.HeaderText = _localisation.ToString("column_header", col.Name);
       }
     }
 
@@ -386,32 +329,33 @@ namespace MPTagThat.GridView
       if (InvokeRequired)
       {
         ThreadSafeMessageDelegate d = OnMessageReceiveEncoding;
-        Invoke(d, new[] { message });
+        Invoke(d, new object[] { message });
         return;
       }
 
       string action = message.MessageData["action"] as string;
       int rowIndex = (int)message.MessageData["rowindex"];
 
-      switch (action.ToLower())
-      {
-        case "progress":
-          double percentComplete = (double)message.MessageData["percent"];
-          dataGridViewConvert.Rows[rowIndex].Cells[0].Value = (int)percentComplete;
-          break;
+      if (action != null)
+        switch (action.ToLower())
+        {
+          case "progress":
+            double percentComplete = (double)message.MessageData["percent"];
+            dataGridViewConvert.Rows[rowIndex].Cells[0].Value = (int)percentComplete;
+            break;
 
-        case "newfilename":
-          bindingList[rowIndex].NewFileName = (string)message.MessageData["filename"];
-          dataGridViewConvert.Refresh();
-          break;
+          case "newfilename":
+            _bindingList[rowIndex].NewFileName = (string)message.MessageData["filename"];
+            dataGridViewConvert.Refresh();
+            break;
 
-        case "error":
+          case "error":
           {
             dataGridViewConvert.Rows[rowIndex].Cells[0].Value = (string)message.MessageData["error"];
             dataGridViewConvert.Rows[rowIndex].Cells[0].ToolTipText = (string)message.MessageData["tooltip"];
             break;
           }
-      }
+        }
 
       dataGridViewConvert.Update();
       Application.DoEvents();
@@ -425,19 +369,20 @@ namespace MPTagThat.GridView
     {
       string action = message.MessageData["action"] as string;
 
-      switch (action.ToLower())
-      {
-        case "languagechanged":
-          LanguageChanged();
-          Refresh();
-          break;
+      if (action != null)
+        switch (action.ToLower())
+        {
+          case "languagechanged":
+            LanguageChanged();
+            Refresh();
+            break;
 
-        case "themechanged":
+          case "themechanged":
           {
             dataGridViewConvert.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
             break;
           }
-      }
+        }
     }
 
     /// <summary>
