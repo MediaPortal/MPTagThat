@@ -239,25 +239,32 @@ namespace MPTagThat.GridView
     public void ExecuteCommand(string command)
     {
       object[] parameter = {};
-      ExecuteCommand(command, parameter);
+      ExecuteCommand(command, parameter, true);
     }
 
-    public void ExecuteCommand(string command, object parameters)
+    public void ExecuteCommand(string command, object parameters, bool runAsync)
     {
       log.Trace(">>>");
       log.Debug("Invoking Command: {0}", command);
 
       object[] parameter = { command , parameters};
 
-      if (_bgWorker == null)
+      if (runAsync)
       {
-        _bgWorker = new BackgroundWorker();
-        _bgWorker.DoWork += ExecuteCommandThread;
-      }
+        if (_bgWorker == null)
+        {
+          _bgWorker = new BackgroundWorker();
+          _bgWorker.DoWork += ExecuteCommandThread;
+        }
 
-      if (!_bgWorker.IsBusy)
+        if (!_bgWorker.IsBusy)
+        {
+          _bgWorker.RunWorkerAsync(parameter);
+        }
+      }
+      else
       {
-        _bgWorker.RunWorkerAsync(parameter);
+        ExecuteCommandThread(this, new DoWorkEventArgs(parameter));
       }
       log.Trace("<<<");
     }
@@ -519,7 +526,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Checks for Pending Changes
     /// </summary>
-    public void CheckForChanges(ref bool waitForCommandThread)
+    public void CheckForChanges()
     {
       if (Changed)
       {
@@ -528,9 +535,8 @@ namespace MPTagThat.GridView
                                               MessageBoxButtons.YesNo);
         if (result == DialogResult.Yes)
         {
-          waitForCommandThread = true;
           object[] parm = {"true"};
-          ExecuteCommand("SaveAll", parm);
+          ExecuteCommand("SaveAll", parm, false);
         }
         else
           DiscardChanges();

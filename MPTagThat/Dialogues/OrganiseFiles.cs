@@ -177,7 +177,7 @@ namespace MPTagThat.Organise
 
       // First do an automatic save of all pending changes
       object[] parm = { "false" };   // Don't show progress bar
-      _main.TracksGridView.ExecuteCommand("SaveAll", parm);
+      _main.TracksGridView.ExecuteCommand("SaveAll", parm, false); // A save all should run Sync
 
       bool bError = false;
       string targetFolder = cbRootDir.Text;

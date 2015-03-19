@@ -116,8 +116,6 @@ namespace MPTagThat
     public event ProgressCancelHover ProgressCancelHovering;
     public event ProgressCancelLeave ProgressCancelLeaving;
 
-    private EventWaitHandle _waitHandle = new AutoResetEvent(false);
-
     #endregion
 
     #region Constructor
@@ -782,7 +780,6 @@ namespace MPTagThat
 
         // setup various Event Handler needed
         gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
-        gridViewControl.CommandThreadEnded += CheckChangesDone;
 
         _initialising = false;
 
@@ -834,13 +831,7 @@ namespace MPTagThat
         _musicDatabaseBuild.AbortScan = true;
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
-      bool waitForCommand = false;
-      gridViewControl.CheckForChanges(ref waitForCommand);
-      if (waitForCommand)
-      {
-        _waitHandle.WaitOne();
-      }
-
+      gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = Location;
@@ -1527,18 +1518,7 @@ namespace MPTagThat
     public void RefreshTrackList()
     {
       log.Trace(">>>");
-      bool waitForCommandThread = false;
-      gridViewControl.CheckForChanges(ref waitForCommandThread);
-      if (!waitForCommandThread)
-      {
-        CheckChangesDone(null, new EventArgs());
-      }
-      log.Trace("<<<");
-    }
-
-    private void CheckChangesDone(object sender, EventArgs args)
-    {
-      _waitHandle.Set();
+      gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
         tagEditControl.ClearForm();
@@ -1555,6 +1535,7 @@ namespace MPTagThat
         }
       }
       AutoNumber = 1; // Reset the number on Folder Change
+      log.Trace("<<<");
     }
 
     /// <summary>
@@ -3959,7 +3940,7 @@ namespace MPTagThat
       if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
       {
         object[] cmdParm = new[] {fileName};
-        TracksGridView.ExecuteCommand("CoverArtDrop", cmdParm);
+        TracksGridView.ExecuteCommand("CoverArtDrop", cmdParm, true);
       }
     }
 
