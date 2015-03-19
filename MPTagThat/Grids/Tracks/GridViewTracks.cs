@@ -330,7 +330,7 @@ namespace MPTagThat.GridView
         {
           Application.DoEvents();
 
-          if (command != "SaveAll" && commandParm != "false")
+          if (command != "SaveAll" || commandParm == "true")
           {
             _main.progressBar1.Value += 1;
             if (_progressCancelled)
