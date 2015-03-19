@@ -128,18 +128,11 @@ namespace MPTagThat.GridView
     /// </summary>
     public void ConvertFiles()
     {
-      if (threadConvert == null)
-      {
-        threadConvert = new Thread(ConversionThread);
-        threadConvert.Name = "Conversion";
-      }
-
-      if (threadConvert.ThreadState != ThreadState.Running)
-      {
-        threadConvert.Priority = ThreadPriority.Highest;
-        threadConvert = new Thread(ConversionThread);
-        threadConvert.Start();
-      }
+      threadConvert = new Thread(ConversionThread);
+      threadConvert.Name = "Conversion";
+      threadConvert.Priority = ThreadPriority.Highest;
+      threadConvert = new Thread(ConversionThread);
+      threadConvert.Start();
     }
 
     /// <summary>
