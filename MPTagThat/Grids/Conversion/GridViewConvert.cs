@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -39,6 +40,8 @@ namespace MPTagThat.GridView
     private readonly ILocalisation _localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger _log = ServiceScope.Get<ILogger>().GetLogger;
     private Thread _threadConvert;
+
+    private bool _abortProcessing;
 
     #region Nested type: ThreadSafeMessageDelegate
 
@@ -90,6 +93,8 @@ namespace MPTagThat.GridView
 
       InitializeComponent();
 
+      _abortProcessing = false;
+
       // Listen to Messages
       // Setup message queue for receiving Messages
       IMessageQueue queueMessage = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -127,14 +132,11 @@ namespace MPTagThat.GridView
     }
 
     /// <summary>
-    ///   Cancel the Ripping Process
+    ///   Cancel the Conversion Process
     /// </summary>
     public void ConvertFilesCancel()
     {
-      if (_threadConvert != null)
-      {
-        _threadConvert.Abort();
-      }
+      _abortProcessing = true;
     }
 
     /// <summary>
@@ -212,6 +214,9 @@ namespace MPTagThat.GridView
       {
         ThreadPool.QueueUserWorkItem((f =>
         {
+          if (_abortProcessing)
+            return;
+
           var conversionData = _bindingList[row.Index];
           conversionData.RootFolder = rootFolder;
           conversionData.Encoder = encoder;
