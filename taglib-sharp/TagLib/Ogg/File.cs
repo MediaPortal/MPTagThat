@@ -37,6 +37,7 @@ namespace TagLib.Ogg
 	[SupportedMimeType("taglib/ogg", "ogg")]
 	[SupportedMimeType("taglib/oga", "oga")]
 	[SupportedMimeType("taglib/ogv", "ogv")]
+	[SupportedMimeType("taglib/opus", "opus")]
 	[SupportedMimeType("application/ogg")]
 	[SupportedMimeType("application/x-ogg")]
 	[SupportedMimeType("audio/vorbis")]
@@ -329,7 +330,7 @@ namespace TagLib.Ogg
 			List<ICodec> codecs = new List<ICodec> ();
 			InvariantStartPosition = end;
 			InvariantEndPosition = Length;
-			
+
 			foreach (uint id in streams.Keys) {
 				tag.AddComment (id,
 					streams [id].Codec.CommentData);
@@ -340,7 +341,14 @@ namespace TagLib.Ogg
 				return;
 			
 			PageHeader last_header = LastPageHeader;
-			
+
+			// Needed for Opus Bitrate Calculation
+			streams[last_header
+				.StreamSerialNumber].Codec.FileLength = InvariantEndPosition;
+			streams[last_header
+				.StreamSerialNumber].Codec.LastGranularPosition =
+				last_header.AbsoluteGranularPosition;
+
 			TimeSpan duration = streams [last_header
 				.StreamSerialNumber].GetDuration (
 					last_header.AbsoluteGranularPosition);

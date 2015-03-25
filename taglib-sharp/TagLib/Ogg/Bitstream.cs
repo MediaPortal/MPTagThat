@@ -93,6 +93,10 @@ namespace TagLib.Ogg
 
 			first_absolute_granular_position =
 				page.Header.AbsoluteGranularPosition;
+
+			// Needed for Opus Bitrate Calculation
+			codec.FirstGranularPosition =
+				first_absolute_granular_position;	
 		}
 		
 #endregion
