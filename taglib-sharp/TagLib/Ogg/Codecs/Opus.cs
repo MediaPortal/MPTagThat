@@ -40,9 +40,9 @@ namespace TagLib.Ogg.Codecs
 		private static ByteVector id = "OpusHead";
 
 		/// <summary>
-		///    Contains the xiphcomment identifier.
+		///    Contains the opus comment identifier.
 		/// </summary>
-		private static ByteVector comment = "OpusTags";
+		private static ByteVector comment_id = "OpusTags";
 
 #endregion
 		
@@ -187,10 +187,9 @@ namespace TagLib.Ogg.Codecs
 			if (comment == null)
 				throw new ArgumentNullException ("comment");
 			
-			ByteVector data = new ByteVector ((byte) 0x03);
-			data.Add (id);
+			ByteVector data = new ByteVector (comment_id);
 			data.Add (comment.Render (true));
-			if (packets.Count > 1 && PacketType (packets [1]) == 0x03)
+			if (packets.Count > 1 && PacketType (packets [1]) == 3)
 				packets [1] = data;
 			else
 				packets.Insert (1, data);
@@ -332,7 +331,7 @@ namespace TagLib.Ogg.Codecs
 			if (packet.Mid(0, id.Count) == id)
 				return 1;
 			
-			if (packet.Mid(0, comment.Count) == comment)
+			if (packet.Mid(0, comment_id.Count) == comment_id)
 				return 3;
 
 			return -1;
@@ -360,6 +359,7 @@ namespace TagLib.Ogg.Codecs
 				sample_rate     = data.Mid(12, 4).ToUInt (false);
 				output_gain			=	data.Mid(16, 2).ToUInt (false);
 				channel_map			= data [18];
+				// TODO: handle channel mapping 
 			}
 		}
 	}
