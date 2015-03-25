@@ -53,6 +53,7 @@ namespace MPTagThat.GridView
     private readonly IMediaChangeMonitor mediaChangeMonitor;
     private int _currentRow = -1;
     private bool _freeDBLookupActive = false;
+    private bool _ripActive = false;
 
     private string _musicDir;
     private string _outFile;
@@ -808,8 +809,17 @@ namespace MPTagThat.GridView
       if (_currentRow < 0)
         return;
 
-      double percentComplete = (double)message.MessageData["progress"];
-      dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
+			string action = message.MessageData["action"] as string;
+
+			if (action != null)
+				switch (action.ToLower())
+				{
+					case "progress":
+						double percentComplete = (double)message.MessageData["percent"];
+						dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
+						break;
+				}
+
       dataGridViewRip.Update();
       Application.DoEvents();
     }

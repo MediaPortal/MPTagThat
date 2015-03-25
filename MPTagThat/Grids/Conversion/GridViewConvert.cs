@@ -40,7 +40,7 @@ namespace MPTagThat.GridView
     private readonly ILocalisation _localisation = ServiceScope.Get<ILocalisation>();
     private readonly NLog.Logger _log = ServiceScope.Get<ILogger>().GetLogger;
     private Thread _threadConvert;
-
+    private bool _conversionActive = false;
     private bool _abortProcessing;
 
     #region Nested type: ThreadSafeMessageDelegate
@@ -137,6 +137,7 @@ namespace MPTagThat.GridView
     public void ConvertFilesCancel()
     {
       _abortProcessing = true;
+      _conversionActive = false;
     }
 
     /// <summary>
@@ -217,6 +218,8 @@ namespace MPTagThat.GridView
           if (_abortProcessing)
             return;
 
+          _conversionActive = true;
+
           var conversionData = _bindingList[row.Index];
           conversionData.RootFolder = rootFolder;
           conversionData.Encoder = encoder;
@@ -225,11 +228,14 @@ namespace MPTagThat.GridView
           Commands.Command commandObj = Commands.Command.Create(parameters);
           if (commandObj == null)
           {
+            _conversionActive = false;
             return;
           }
 
           var track = conversionData.Track;
           commandObj.Execute(ref track, row.Index);
+
+          _conversionActive = false;
         }
         ));
       }
@@ -331,6 +337,11 @@ namespace MPTagThat.GridView
     /// <param name = "message"></param>
     private void OnMessageReceiveEncoding(QueueMessage message)
     {
+      if (!_conversionActive)
+      {
+        return; // Prevent collision with Rip
+      }
+
       if (InvokeRequired)
       {
         ThreadSafeMessageDelegate d = OnMessageReceiveEncoding;
