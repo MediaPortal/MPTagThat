@@ -495,6 +495,7 @@ namespace MPTagThat.Core
         case ".flac":
         case ".mp3":
         case ".ogg":
+        case ".opus":
         case ".wv":
         case ".wma":
         case ".mp4":
