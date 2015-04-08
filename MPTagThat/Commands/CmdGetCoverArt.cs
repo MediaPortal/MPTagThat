@@ -23,7 +23,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using MPTagThat.Core;
-using MPTagThat.Core.Amazon;
+using MPTagThat.Core.AlbumInfo;
 using MPTagThat.Dialogues;
 using TagLib;
 
@@ -36,13 +36,13 @@ namespace MPTagThat.Commands
 
     #region Variables
 
-    AmazonAlbum _amazonAlbum;
+    Album _album;
     bool _isMultipleArtistAlbum;
     string _savedArtist = "";
     string _savedAlbum = "";
     string _savedFolder = "";
     Core.Common.Picture _folderThumb = null;
-    Dictionary<string, AmazonAlbum> _savedCoverCash = new Dictionary<string, AmazonAlbum>();
+    Dictionary<string, Album> _savedCoverCash = new Dictionary<string, Album>();
 
     #endregion
 
@@ -104,15 +104,15 @@ namespace MPTagThat.Commands
       bool foundInCash = _savedCoverCash.ContainsKey(coverSearchString);
       if (foundInCash)
       {
-        _amazonAlbum = _savedCoverCash[coverSearchString];
+        _album = _savedCoverCash[coverSearchString];
       }
       else
       {
-        _amazonAlbum = null;
+        _album = null;
       }
 
       // Only retrieve the Cover Art, if we don't have it yet)
-      if (!foundInCash || _amazonAlbum == null)
+      if (!foundInCash || _album == null)
       {
         CoverSearch dlgAlbumResults = new CoverSearch();
         dlgAlbumResults.Artist = _isMultipleArtistAlbum ? "" : track.Artist;
@@ -121,13 +121,13 @@ namespace MPTagThat.Commands
         dlgAlbumResults.Owner = TracksGrid.MainForm;
         dlgAlbumResults.StartPosition = FormStartPosition.CenterParent;
 
-        _amazonAlbum = null;
+        _album = null;
         DialogResult dlgResult = dlgAlbumResults.ShowDialog();
         if (dlgResult == DialogResult.OK)
         {
           if (dlgAlbumResults.SelectedAlbum != null)
           {
-            _amazonAlbum = dlgAlbumResults.SelectedAlbum;
+            _album = dlgAlbumResults.SelectedAlbum;
           }
         }
         else if (dlgResult == DialogResult.Abort)
@@ -144,11 +144,11 @@ namespace MPTagThat.Commands
       }
 
       // Now update the Cover Art
-      if (_amazonAlbum != null)
+      if (_album != null)
       {
         if (!_savedCoverCash.ContainsKey(coverSearchString))
         {
-          _savedCoverCash.Add(coverSearchString, _amazonAlbum);
+          _savedCoverCash.Add(coverSearchString, _album);
         }
 
         // Only write a picture if we don't have a picture OR Overwrite Pictures is set);
@@ -156,7 +156,7 @@ namespace MPTagThat.Commands
         {
           track.Pictures.Clear();
 
-          ByteVector vector = _amazonAlbum.AlbumImage;
+          ByteVector vector = _album.AlbumImage;
           if (vector != null)
           {
             var pic = new Core.Common.Picture();
@@ -175,9 +175,9 @@ namespace MPTagThat.Commands
 
           // And also set the Year from the Release Date delivered by Amazon
           // only if not present in Track
-          if (_amazonAlbum.Year != null)
+          if (_album.Year != null)
           {
-            string strYear = _amazonAlbum.Year;
+            string strYear = _album.Year;
             if (strYear.Length > 4)
               strYear = strYear.Substring(0, 4);
 
@@ -199,9 +199,9 @@ namespace MPTagThat.Commands
       }
 
       // If the user has selected to store only the folder thumb, without touching the file 
-      if (_amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
+      if (_album != null && Options.MainSettings.OnlySaveFolderThumb)
       {
-        ByteVector vector = _amazonAlbum.AlbumImage;
+        ByteVector vector = _album.AlbumImage;
         if (vector != null)
         {
           string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");

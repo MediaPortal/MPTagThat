@@ -21,25 +21,37 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using MPTagThat.Core;
-using MPTagThat.Core.Amazon;
+using MPTagThat.Core.AlbumInfo;
 
 #endregion
 
 namespace MPTagThat.Dialogues
 {
-  public partial class CoverSearch : ShapedForm
+  public partial class CoverSearch : ShapedForm, IAlbumInfo
   {
+    #region Delegates
+
+    private delegate void DelegateAlbumFound(List<Album> albums, String site);
+    private delegate void DelegateSearchFinished();
+
+    #endregion
+
     #region Variables
 
-    private readonly ImageList imagelist = new ImageList();
-    private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
+    private DelegateAlbumFound _albumFound;
+    private DelegateSearchFinished _searchFinished;
+
+    private readonly ImageList _imagelist = new ImageList();
+    private readonly ILocalisation _localisation = ServiceScope.Get<ILocalisation>();
     
-    private List<AmazonAlbum> _albums;
-    private AmazonAlbum _amazonAlbum = null;
+    private List<Album> _albums = new List<Album>();
+    private Album _album = null;
     private string _artist = "";
-    private string _album = "";
+    private string _albumName = "";
+
     #endregion
 
     #region Properties
@@ -47,9 +59,9 @@ namespace MPTagThat.Dialogues
     /// <summary>
     /// Returns the selected Item
     /// </summary>
-    public AmazonAlbum SelectedAlbum
+    public Album SelectedAlbum
     {
-      get { return _amazonAlbum;  }
+      get { return _album;  }
     }
 
     /// <summary>
@@ -73,7 +85,7 @@ namespace MPTagThat.Dialogues
     /// </summary>
     public string Album
     {
-      set { tbAlbum.Text = _album = value; }
+      set { tbAlbum.Text = _albumName = value; }
     }
 
     #endregion
@@ -94,8 +106,11 @@ namespace MPTagThat.Dialogues
       tbAlbum.Text = "";
 
       lvSearchResults.View = View.LargeIcon;
-      imagelist.ImageSize = new Size(128, 128);
-      lvSearchResults.LargeImageList = imagelist;
+      _imagelist.ImageSize = new Size(128, 128);
+      lvSearchResults.LargeImageList = _imagelist;
+
+      _albumFound = new DelegateAlbumFound(AlbumFoundMethod);
+      _searchFinished = new DelegateSearchFinished(SearchFinishedMethod);
     }
 
     #endregion
@@ -109,63 +124,40 @@ namespace MPTagThat.Dialogues
     /// </summary>
     private void LocaliseScreen()
     {
-      Text = localisation.ToString("AmazonAlbumSearch", "Header");
-      chAlbum.Text = localisation.ToString("AmazonAlbumSearch", "Albums");
+      Text = _localisation.ToString("AmazonAlbumSearch", "Header");
+      chAlbum.Text = _localisation.ToString("AmazonAlbumSearch", "Albums");
     }
 
     #endregion
 
-    private void OnLoad(object sender, EventArgs e)
+    private void OnShown(object sender, EventArgs e)
     {
       DoSearchAlbum();
     }
 
     private void DoSearchAlbum()
     {
+      Update();
+
       Cursor = Cursors.WaitCursor;
       tbArtist.Enabled = false;
       tbAlbum.Enabled = false;
       btSearch.Enabled = false;
       btUpdate.Enabled = false;
-      using (AmazonAlbumInfo amazonInfo = new AmazonAlbumInfo())
-      {
-        _albums = amazonInfo.AmazonAlbumSearch(_artist, _album);
-      }
 
-      if (_albums.Count > 0)
-      {
-        btUpdate.Enabled = true;
-        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "GroupBoxResults");
-        if (_albums.Count == 1)
-        {
-          _amazonAlbum = _albums[0];
-          btUpdate.PerformClick();  // Close the Dialog
-        }
-        else
-        {
-          FillResults();
-        }
-      }
-      else
-      {
-        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "NotFound");
-        ServiceScope.Get<ILogger>().GetLogger.Debug("No Cover Art found");
-        btUpdate.Enabled = false;
-      }
-      tbArtist.Enabled = true;
-      tbAlbum.Enabled = true;
-      btSearch.Enabled = true;
-      Cursor = Cursors.Default;
+      var albumSearch = new AlbumSearch(this, _artist, _albumName);
+      albumSearch.AlbumSites = new string[] {"Amazon"};
+      albumSearch.Run();
     }
 
 
-    private void FillResults()
+    private void FillResults(List<Album> albums, string site)
     {
       int i = 0;
-      foreach (AmazonAlbum album in _albums)
+      foreach (var album in albums)
       {
         AddImageToList(album);
-        string itmText = string.Format("{0} {1}x{2}", album.Title, album.CoverWidth, album.CoverHeight);
+        string itmText = string.Format("{0} {1}x{2} ({3})", album.Title, album.CoverWidth, album.CoverHeight, site);
         ListViewItem item = new ListViewItem(itmText);
         item.ImageIndex = i;
         lvSearchResults.Items.Add(item);
@@ -173,7 +165,7 @@ namespace MPTagThat.Dialogues
       }
     }
 
-    private void AddImageToList(AmazonAlbum album)
+    private void AddImageToList(Album album)
     {
       if (album.AlbumImage == null)
         return;
@@ -183,7 +175,7 @@ namespace MPTagThat.Dialogues
         Image img = Image.FromStream(ms);
         if (img != null)
         {
-          imagelist.Images.Add(img);
+          _imagelist.Images.Add(img);
         }
       }
     }
@@ -213,11 +205,11 @@ namespace MPTagThat.Dialogues
       DialogResult = DialogResult.OK;
       if (lvSearchResults.SelectedIndices.Count > 0)
       {
-        _amazonAlbum = _albums[lvSearchResults.SelectedIndices[0]];   
+        _album = _albums[lvSearchResults.SelectedIndices[0]];   
       }
       else if (_albums.Count > 0)
       {
-        _amazonAlbum = _albums[0];
+        _album = _albums[0];
       }
       Close();
     }
@@ -251,14 +243,80 @@ namespace MPTagThat.Dialogues
     private void btSearch_Click(object sender, EventArgs e)
     {
       _artist = tbArtist.Text;
-      _album = tbAlbum.Text;
+      _albumName = tbAlbum.Text;
       lvSearchResults.Items.Clear();
-      imagelist.Images.Clear();
+      _imagelist.Images.Clear();
       _albums.Clear();
       groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "Searching");
       groupBoxAmazonMultipleAlbums.Refresh();
       DoSearchAlbum();
     }
+    #endregion
+
+    #region Delegate Calls
+
+    public Object[] AlbumFound
+    {
+      set
+      {
+        if (IsDisposed == false)
+        {
+          try
+          {
+            Invoke(_albumFound, value);
+          }
+          catch (InvalidOperationException) { }
+        }
+      }
+    }
+
+    public Object[] SearchFinished
+    {
+      set
+      {
+        if (IsDisposed == false)
+        {
+          try
+          {
+            Invoke(_searchFinished, value);
+          }
+          catch (InvalidOperationException) { }
+        }
+      }
+    }
+
+
+    private void AlbumFoundMethod(List<Album> albums, string siteName)
+    {
+      btUpdate.Enabled = true;
+      groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "GroupBoxResults");
+      _albums.AddRange(albums);
+      FillResults(albums, siteName);
+    }
+
+    private void SearchFinishedMethod()
+    {
+      if (_imagelist.Images.Count == 0)
+      {
+        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "NotFound");
+        ServiceScope.Get<ILogger>().GetLogger.Debug("No Cover Art found");
+        btUpdate.Enabled = false;
+      }
+      else
+      {
+        btUpdate.Enabled = true;
+        groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "GroupBoxResults");
+        if (_imagelist.Images.Count == 1)
+        {
+          btUpdate.PerformClick();  // Close the Dialog
+        }
+      }
+      tbArtist.Enabled = true;
+      tbAlbum.Enabled = true;
+      btSearch.Enabled = true;
+      Cursor = Cursors.Default;
+    }
+
     #endregion
   }
 }

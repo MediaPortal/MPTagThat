@@ -101,6 +101,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumInfo\AlbumSearch.cs" />
+    <Compile Include="AlbumInfo\AlbumSites\AbstractAlbumSite.cs" />
+    <Compile Include="AlbumInfo\Album.cs" />
+    <Compile Include="AlbumInfo\AlbumSites\Amazon.cs" />
+    <Compile Include="AlbumInfo\AlbumTrack.cs" />
+    <Compile Include="AlbumInfo\AlbumSites\AlbumSiteFactory.cs" />
+    <Compile Include="AlbumInfo\AlbumInfoWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AlbumInfo\IAlbumInfo.cs" />
     <Compile Include="Common\SongList.cs" />
     <Compile Include="MusicBrainz\MusicBrainzRelease.cs" />
     <Compile Include="Services\ActionHandler\Button.cs" />

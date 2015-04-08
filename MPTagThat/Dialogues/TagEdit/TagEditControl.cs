@@ -23,7 +23,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MPTagThat.Core;
-using MPTagThat.Core.Amazon;
+using MPTagThat.Core.AlbumInfo;
 using MPTagThat.Core.Common;
 using MPTagThat.Core.ShellLib;
 using MPTagThat.Core.WinControls;
@@ -2929,12 +2929,12 @@ namespace MPTagThat.TagEdit
       dlgAlbumResults.Album = searchAlbum;
       dlgAlbumResults.Owner = main;
 
-      AmazonAlbum amazonAlbum = null;
+      Album album = null;
       if (main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
       {
         if (dlgAlbumResults.SelectedAlbum != null)
         {
-          amazonAlbum = dlgAlbumResults.SelectedAlbum;
+          album = dlgAlbumResults.SelectedAlbum;
         }
       }
       else
@@ -2943,7 +2943,7 @@ namespace MPTagThat.TagEdit
       }
       dlgAlbumResults.Dispose();
 
-      if (amazonAlbum == null)
+      if (album == null)
       {
         return;
       }
@@ -2954,7 +2954,7 @@ namespace MPTagThat.TagEdit
         _pictures.Clear();
       }
 
-      ByteVector vector = amazonAlbum.AlbumImage;
+      ByteVector vector = album.AlbumImage;
       if (vector != null)
       {
         _pic = new Picture();
