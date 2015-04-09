@@ -674,7 +674,6 @@
     <string name="Settings.EmbedExistingThumb">Embed existing folder thumb (folder.jpg) on cover search</string>
     <string name="Settings.OnlySaveFolderThumb">Save Cover Art only to folder thumb. Don't touch the music file</string>
     <string name="Settings.ChangeCoverSize">Save covers with a maximum pixel width of:</string>
-    <string name="Settings.AmazonSite">Amazon Search Site:</string>
     <string name="Settings.GroupBoxLyrics">Lyrics</string>
     <string name="Settings.SwitchArtist">Switch Artist before submit</string>
     <string name="Settings.OverwriteExistingLyrics">Overwrite existing lyrics on automatic tagging</string>
@@ -771,7 +770,7 @@
     <string name="Settings.LinkTags">Tags</string>
     <string name="Settings.LinkGeneral">General</string>
     <string name="Settings.LinkRipping">Ripping / Conversion</string>
-  
+	<string name="Settings.GroupBoxAlbumInfoSites">Album Information Sites</string>
  
   <!-- Burning -->
   
