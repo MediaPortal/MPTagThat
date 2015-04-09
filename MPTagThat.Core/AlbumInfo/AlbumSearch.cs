@@ -92,11 +92,6 @@ namespace MPTagThat.Core.AlbumInfo
       {
         RunSearchForSiteInThread(albumInfoSite);
       }
-
-      while (!_searchHasEnded)
-      {
-        Thread.Sleep(300);
-      }
     }
 
     private void RunSearchForSiteInThread(string albumInfoSite)
