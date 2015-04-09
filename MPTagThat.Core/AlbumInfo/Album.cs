@@ -30,8 +30,6 @@ namespace MPTagThat.Core.AlbumInfo
   {
     #region Private Fields
 
-    private string _coverHeight = "";
-    private string _coverWidth = "";
     private string _largeImage;
     private string _mediumImage;
     private string _smallImage;
@@ -42,12 +40,16 @@ namespace MPTagThat.Core.AlbumInfo
 
     public Album()
     {
+      CoverHeight = "";
+      CoverWidth = "";
       Discs = new List<List<AlbumTrack>>();
     }
 
     #endregion
 
     #region Properties
+
+    public string MusicBrainzId { get; set; }
 
     public string Asin { get; set; }
 
@@ -60,6 +62,8 @@ namespace MPTagThat.Core.AlbumInfo
     public string Label { get; set; }
 
     public string Year { get; set; }
+
+    public int DiscCount { get; set; }
 
     public List<List<AlbumTrack>> Discs { get; set; }
 
@@ -81,17 +85,9 @@ namespace MPTagThat.Core.AlbumInfo
       set { _largeImage = value; }
     }
 
-    public string CoverWidth
-    {
-      get { return _coverWidth; }
-      set { _coverWidth = value; }
-    }
+    public string CoverWidth { get; set; }
 
-    public string CoverHeight
-    {
-      get { return _coverHeight; }
-      set { _coverHeight = value; }
-    }
+    public string CoverHeight { get; set; }
 
     public ByteVector AlbumImage
     {
