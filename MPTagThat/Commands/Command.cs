@@ -27,7 +27,6 @@ namespace MPTagThat.Commands
     #region Variables
 
     protected readonly NLog.Logger Log = ServiceScope.Get<ILogger>().GetLogger;
-    protected bool ProgressCancelled;
 
     #endregion
 
@@ -103,12 +102,9 @@ namespace MPTagThat.Commands
     }
 
     /// <summary>
-    /// Set indicator, that Command processing got interupted by user
+    /// Indicator, that Command processing got interupted by user
     /// </summary>
-    public virtual void CancelCommand()
-    {
-      ProgressCancelled = true;
-    }
+    public bool ProgressCancelled { get; set; }
 
     public void Dispose()
     {

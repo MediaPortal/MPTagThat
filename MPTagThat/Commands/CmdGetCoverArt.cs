@@ -133,12 +133,13 @@ namespace MPTagThat.Commands
         else if (dlgResult == DialogResult.Abort)
         {
           Log.Debug("CoverArt: Search for all albums cancelled");
-          return true;
+          ProgressCancelled = true;
+          return false;
         }
         else
         {
           Log.Debug("CoverArt: Album Selection cancelled");
-          return true;
+          return false;
         }
         dlgAlbumResults.Dispose();
       }
