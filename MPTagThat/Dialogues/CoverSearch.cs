@@ -146,7 +146,7 @@ namespace MPTagThat.Dialogues
       btUpdate.Enabled = false;
 
       var albumSearch = new AlbumSearch(this, _artist, _albumName);
-      albumSearch.AlbumSites = new string[] {"Amazon"};
+      albumSearch.AlbumSites = Options.MainSettings.AlbumInfoSites;
       albumSearch.Run();
     }
 
