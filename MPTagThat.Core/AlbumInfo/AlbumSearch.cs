@@ -31,7 +31,7 @@ namespace MPTagThat.Core.AlbumInfo
     private const int TimeLimit = 30 * 1000;
     private const int TimeLimitForSite = 15 * 1000;
 
-    public string[] AlbumSites;
+    public List<string> AlbumSites = new List<string>();
 
     // Uses to inform the specified site searches to stop searching and exit
     private readonly ManualResetEvent _mEventStopSiteSearches;
@@ -117,7 +117,7 @@ namespace MPTagThat.Core.AlbumInfo
           {
             _albumFound = true;
             _controller.AlbumFound = new Object[] { albums, site};
-            if (++_mSitesSearched == AlbumSites.Length)
+            if (++_mSitesSearched == AlbumSites.Count - 1)
             {
               Dispose();
             }
@@ -125,7 +125,7 @@ namespace MPTagThat.Core.AlbumInfo
           }
           else
           {
-            if (++_mSitesSearched == AlbumSites.Length)
+            if (++_mSitesSearched == AlbumSites.Count - 1)
             {
               Dispose();
             }
