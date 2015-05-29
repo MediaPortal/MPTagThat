@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyricsEngine", "LyricsEngine\LyricsEngine.csproj", "{B0760CE8-086F-4301-9091-C9BE54F261FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPTagThat", "MPTagThat\MPTagThat.csproj", "{A4EC0924-5A90-4E83-8D61-4164ABFE13A5}"
@@ -12,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gain", "gain\gain.vcxproj", "{B16A1BFF-6ADE-4705-AE72-079C0312DC23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeImage", "FreeImage\FreeImage.csproj", "{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscogsNet", "DiscogsNet\DiscogsNet.csproj", "{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +120,20 @@ Global
 		{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}.Release|x64.ActiveCfg = Release|x86
 		{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}.Release|x86.ActiveCfg = Release|x86
 		{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}.Release|x86.Build.0 = Release|x86
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|Win32.ActiveCfg = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

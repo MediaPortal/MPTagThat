@@ -24,3 +24,7 @@ xcopy /y %1\gain\bin\%2\gain.dll .\bin
 
 REM Copy FreeImage Library
 xcopy /y %1\FreeImage\bin\%2\FreeImageNET.dll .\bin
+
+REM Copy DiscogsNet Library
+xcopy /y %1\DiscogsNet\bin\%2\DiscogsNET.dll .\bin
+xcopy /y %1\DiscogsNet\bin\%2\Newtonsoft.Json.dll .\bin

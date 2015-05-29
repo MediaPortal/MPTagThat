@@ -108,6 +108,7 @@
     <Compile Include="AlbumInfo\AlbumSearch.cs" />
     <Compile Include="AlbumInfo\AlbumSites\AbstractAlbumSite.cs" />
     <Compile Include="AlbumInfo\Album.cs" />
+    <Compile Include="AlbumInfo\AlbumSites\Discogs.cs" />
     <Compile Include="AlbumInfo\AlbumSites\Amazon.cs" />
     <Compile Include="AlbumInfo\AlbumTrack.cs" />
     <Compile Include="AlbumInfo\AlbumSites\AlbumSiteFactory.cs" />
@@ -393,6 +394,10 @@
     <None Include="Resources\starhot4.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DiscogsNet\DiscogsNet.csproj">
+      <Project>{1b087a97-c17a-4f75-80b1-8cc1fbfe90fb}</Project>
+      <Name>DiscogsNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FreeImage\FreeImage.csproj">
       <Project>{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}</Project>
       <Name>FreeImage</Name>

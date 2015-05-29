@@ -104,6 +104,12 @@ namespace MPTagThat.Core.AlbumInfo
         {
           WebRequest webReq = null;
           webReq = WebRequest.Create(sUrl);
+
+					// For Discogs, we need a special User Agent
+	        if (sUrl.Contains("discogs.com"))
+	        {
+		        (webReq as HttpWebRequest).UserAgent = "MPTagThat/3.2 +http://www.team-mediaportal.com";
+	        }
           WebResponse webResp = webReq.GetResponse();
           Stream stream = webResp.GetResponseStream();
 
