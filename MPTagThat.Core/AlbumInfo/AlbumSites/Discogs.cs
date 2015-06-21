@@ -107,12 +107,14 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			var discs = new List<List<AlbumTrack>>();
 	    var albumTracks = new List<AlbumTrack>();
 	    var numDiscs = 1;
+	    var lastPosOnAlbumSideA = 0;
 
 	    foreach (var track in release.Tracklist)
 	    {
 		    var pos = track.Position;
 		    var albumTrack = new AlbumTrack();
 		    
+				// check for Multi Disc Album
 		    if (track.Position.Contains("-"))
 		    {
 			    album.DiscCount = Convert.ToInt16(track.Position.Substring(0, track.Position.IndexOf("-", StringComparison.Ordinal)));
@@ -125,6 +127,19 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			    }
 					pos = track.Position.Substring(track.Position.IndexOf("-", StringComparison.Ordinal) + 1);
 		    }
+				else if (!track.Position.Substring(0, 1).All(Char.IsDigit))
+				{
+					// The Master Release returned was a Vinyl Album with side A and B. So we have tracks as "A1", "A2", ... "B1",..
+					pos = track.Position.Substring(1);
+					if (track.Position.Substring(0, 1) == "A")
+					{
+						lastPosOnAlbumSideA = Convert.ToInt16(pos);
+					}
+					else
+					{
+						pos = (lastPosOnAlbumSideA + Convert.ToInt16(pos)).ToString();
+					}
+				}
 		    albumTrack.Number = Convert.ToInt16(pos);
 				albumTrack.Title = track.Title;
 				albumTracks.Add(albumTrack);
