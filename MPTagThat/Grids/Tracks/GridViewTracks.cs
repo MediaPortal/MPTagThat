@@ -367,10 +367,7 @@ namespace MPTagThat.GridView
       }
 
       // Do Command Post Processing
-      if (commandObj.PostProcess())
-      {
-        _itemsChanged = true;
-      }
+      _itemsChanged = commandObj.PostProcess();
 
       Util.SendProgress("");
       tracksGrid.Refresh();
