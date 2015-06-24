@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="FindLRC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindLRCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindLRCResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindLRCs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindLRCsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindLRCsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveLRC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lrcFileString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveLRCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveLRCResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveLRCWithGuid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lrcFileString" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="guid" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveLRCWithGuidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveLRCWithGuidResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewDomain">
+        <s:complexType />
+      </s:element>
+      <s:element name="NewDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewDomainResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FindLRCSoapIn">
+    <wsdl:part name="parameters" element="tns:FindLRC" />
+  </wsdl:message>
+  <wsdl:message name="FindLRCSoapOut">
+    <wsdl:part name="parameters" element="tns:FindLRCResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindLRCsSoapIn">
+    <wsdl:part name="parameters" element="tns:FindLRCs" />
+  </wsdl:message>
+  <wsdl:message name="FindLRCsSoapOut">
+    <wsdl:part name="parameters" element="tns:FindLRCsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveLRCSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveLRC" />
+  </wsdl:message>
+  <wsdl:message name="SaveLRCSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveLRCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveLRCWithGuidSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveLRCWithGuid" />
+  </wsdl:message>
+  <wsdl:message name="SaveLRCWithGuidSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveLRCWithGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:NewDomain" />
+  </wsdl:message>
+  <wsdl:message name="NewDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:NewDomainResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LrcFinderSoap">
+    <wsdl:operation name="FindLRC">
+      <wsdl:input message="tns:FindLRCSoapIn" />
+      <wsdl:output message="tns:FindLRCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindLRCs">
+      <wsdl:input message="tns:FindLRCsSoapIn" />
+      <wsdl:output message="tns:FindLRCsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRC">
+      <wsdl:input message="tns:SaveLRCSoapIn" />
+      <wsdl:output message="tns:SaveLRCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRCWithGuid">
+      <wsdl:input message="tns:SaveLRCWithGuidSoapIn" />
+      <wsdl:output message="tns:SaveLRCWithGuidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewDomain">
+      <wsdl:input message="tns:NewDomainSoapIn" />
+      <wsdl:output message="tns:NewDomainSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LrcFinderSoap" type="tns:LrcFinderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindLRC">
+      <soap:operation soapAction="http://tempuri.org/FindLRC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLRCs">
+      <soap:operation soapAction="http://tempuri.org/FindLRCs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRC">
+      <soap:operation soapAction="http://tempuri.org/SaveLRC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRCWithGuid">
+      <soap:operation soapAction="http://tempuri.org/SaveLRCWithGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewDomain">
+      <soap:operation soapAction="http://tempuri.org/NewDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LrcFinderSoap12" type="tns:LrcFinderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindLRC">
+      <soap12:operation soapAction="http://tempuri.org/FindLRC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLRCs">
+      <soap12:operation soapAction="http://tempuri.org/FindLRCs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRC">
+      <soap12:operation soapAction="http://tempuri.org/SaveLRC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLRCWithGuid">
+      <soap12:operation soapAction="http://tempuri.org/SaveLRCWithGuid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewDomain">
+      <soap12:operation soapAction="http://tempuri.org/NewDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LrcFinder">
+    <wsdl:port name="LrcFinderSoap" binding="tns:LrcFinderSoap">
+      <soap:address location="http://lrcfinder.profiler.nl/LrcFinder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LrcFinderSoap12" binding="tns:LrcFinderSoap12">
+      <soap12:address location="http://lrcfinder.profiler.nl/LrcFinder.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

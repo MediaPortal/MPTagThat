@@ -453,21 +453,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FreeImage\FreeImage.csproj">
-      <Project>{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}</Project>
+    <ProjectReference Include="..\Libraries\FreeImage\FreeImage.csproj">
+      <Project>{6598a7cd-8f27-4d3f-a675-5ae63113a7c3}</Project>
       <Name>FreeImage</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LyricsEngine\LyricsEngine.csproj">
-      <Project>{B0760CE8-086F-4301-9091-C9BE54F261FD}</Project>
+    <ProjectReference Include="..\Libraries\LyricsEngine\LyricsEngine.csproj">
+      <Project>{b0760ce8-086f-4301-9091-c9be54f261fd}</Project>
       <Name>LyricsEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\taglib-sharp\taglib-sharp.csproj">
+      <Project>{6b143a39-c7b2-4743-9917-92262c60e9a6}</Project>
+      <Name>taglib-sharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\MPTagThat.Core\MPTagThat.Core.csproj">
       <Project>{329DC657-B4D5-4324-AA0D-4B77B6F72D8C}</Project>
       <Name>MPTagThat.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\taglib-sharp\taglib-sharp.csproj">
-      <Project>{6B143A39-C7B2-4743-9917-92262C60E9A6}</Project>
-      <Name>taglib-sharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

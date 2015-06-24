@@ -394,20 +394,6 @@
     <None Include="Resources\starhot4.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DiscogsNet\DiscogsNet.csproj">
-      <Project>{1b087a97-c17a-4f75-80b1-8cc1fbfe90fb}</Project>
-      <Name>DiscogsNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FreeImage\FreeImage.csproj">
-      <Project>{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}</Project>
-      <Name>FreeImage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\taglib-sharp\taglib-sharp.csproj">
-      <Project>{6B143A39-C7B2-4743-9917-92262C60E9A6}</Project>
-      <Name>taglib-sharp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -423,6 +409,20 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\DiscogsNet\DiscogsNet.csproj">
+      <Project>{1b087a97-c17a-4f75-80b1-8cc1fbfe90fb}</Project>
+      <Name>DiscogsNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\FreeImage\FreeImage.csproj">
+      <Project>{6598a7cd-8f27-4d3f-a675-5ae63113a7c3}</Project>
+      <Name>FreeImage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\taglib-sharp\taglib-sharp.csproj">
+      <Project>{6b143a39-c7b2-4743-9917-92262c60e9a6}</Project>
+      <Name>taglib-sharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
