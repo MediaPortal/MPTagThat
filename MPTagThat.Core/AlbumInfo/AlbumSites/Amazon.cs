@@ -210,9 +210,9 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
           // The node starts with a "<Disc Number Node" , we want all subnodes of it
 
           List<List<AlbumTrack>> discs = new List<List<AlbumTrack>>();
-          List<AlbumTrack> tracks = new List<AlbumTrack>();
           foreach (XmlNode discNode in childNode.ChildNodes)
           {
+						List<AlbumTrack> tracks = new List<AlbumTrack>();
             foreach (XmlNode trackNode in discNode)
             {
               AlbumTrack track = new AlbumTrack();
