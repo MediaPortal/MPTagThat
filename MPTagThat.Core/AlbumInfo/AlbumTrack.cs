@@ -25,6 +25,8 @@ namespace MPTagThat.Core.AlbumInfo
 
     public string Title { get; set; }
 
+		public string Duration { get; set; }
+
     #endregion
   }
 }

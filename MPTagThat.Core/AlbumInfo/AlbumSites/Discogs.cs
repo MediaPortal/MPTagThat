@@ -136,6 +136,7 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 				}
 		    albumTrack.Number = Convert.ToInt16(pos);
 				albumTrack.Title = track.Title;
+		    albumTrack.Duration = track.Duration;
 				albumTracks.Add(albumTrack);
 	    }
 			discs.Add(albumTracks);
