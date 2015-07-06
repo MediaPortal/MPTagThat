@@ -601,7 +601,6 @@ verschieben/kopieren</string>
   <string name="Settings.EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</string>
   <string name="Settings.OnlySaveFolderThumb">Nur Orndervorschau speichern. Nicht die Musikdatei verändern</string>
   <string name="Settings.ChangeCoverSize">Speichern von Bildern mit einer maximalen Pixel Breite von:</string>
-  <string name="Settings.AmazonSite">Amazon Suchseite:</string>
   <string name="Settings.GroupBoxLyrics">Liedtexte</string>
   <string name="Settings.SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</string>
   <string name="Settings.OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</string>
@@ -694,6 +693,7 @@ verschieben/kopieren</string>
   <string name="Settings.LinkTags">Tags</string>
   <string name="Settings.LinkGeneral">Generell</string>
   <string name="Settings.LinkRipping">Ripping / Konvertierung</string>
+  <string name="Settings.GroupBoxAlbumInfoSites">Album Information Seiten</string>
   <!--Burning-->
   <string name="Burning.NoMedia">Kein Medium im Laufwerk. Bitte eine leere CD/DVD einlegen.</string>
   <string name="Burning.DragAndDrop">Verwenden Sie Drag &amp; Drop um die Tracks anzuordnen</string>

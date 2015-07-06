@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1B087A97-C17A-4F75-80B1-8CC1FBFE90FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiscogsNet</RootNamespace>
+    <AssemblyName>DiscogsNet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Discogs3Cache.cs" />
+    <Compile Include="IDiscogs3Api.cs" />
+    <Compile Include="Model\ArtistReleases.cs" />
+    <Compile Include="Api\Discogs.cs" />
+    <Compile Include="Api\Discogs2.cs" />
+    <Compile Include="Api\Discogs3.cs" />
+    <Compile Include="Api\DiscogsApiException.cs" />
+    <Compile Include="Model\Companies.cs" />
+    <Compile Include="Model\Identity.cs" />
+    <Compile Include="Model\Members.cs" />
+    <Compile Include="Model\PaginationRequest.cs" />
+    <Compile Include="Model\Search\ArtistSearchResult.cs" />
+    <Compile Include="Model\Search\LabelSearchResult.cs" />
+    <Compile Include="Model\Search\MasterReleaseSearchResult.cs" />
+    <Compile Include="Model\PaginationInfo.cs" />
+    <Compile Include="DiscogsAssert.cs" />
+    <Compile Include="DiscogsUriParser.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="FileReading\ArtistReader2.cs" />
+    <Compile Include="FileReading\GZipArtistReader2.cs" />
+    <Compile Include="FileReading\GZipLabelReader2.cs" />
+    <Compile Include="FileReading\GZipMasterReleaseReader2.cs" />
+    <Compile Include="FileReading\GZipReleaseReader2.cs" />
+    <Compile Include="FileReading\LabelReader2.cs" />
+    <Compile Include="FileReading\MasterReleaseReader2.cs" />
+    <Compile Include="FileReading\ReleaseReader2.cs" />
+    <Compile Include="FileReading\ArtistReader.cs" />
+    <Compile Include="FileReading\AsyncReleaseReader.cs" />
+    <Compile Include="FileReading\FindTextReader.cs" />
+    <Compile Include="FileReading\GZipAsyncReleaseReader.cs" />
+    <Compile Include="FileReading\GZipLabelReader.cs" />
+    <Compile Include="FileReading\GZipReleaseReader.cs" />
+    <Compile Include="FileReading\LabelReader.cs" />
+    <Compile Include="FileReading\ReleaseReader.cs" />
+    <Compile Include="FileReading\GZipArtistReader.cs" />
+    <Compile Include="IAsyncDiscogsReader.cs" />
+    <Compile Include="IDiscogsApi.cs" />
+    <Compile Include="IDiscogsReader.cs" />
+    <Compile Include="Model\Artist.cs" />
+    <Compile Include="Model\ArtistAggregate.cs" />
+    <Compile Include="Model\ArtistAlias.cs" />
+    <Compile Include="Model\ArtistRelease.cs" />
+    <Compile Include="Model\ArtistReleaseType.cs" />
+    <Compile Include="Model\DataQuality.cs" />
+    <Compile Include="Model\DataReader.cs" />
+    <Compile Include="Model\DataReader2.cs" />
+    <Compile Include="Model\DataReader3.cs" />
+    <Compile Include="Model\DataReader_Search.cs" />
+    <Compile Include="Model\ExtraArtist.cs" />
+    <Compile Include="Model\ExtraArtistAggregate.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\ImageAggregate.cs" />
+    <Compile Include="Model\ImageType.cs" />
+    <Compile Include="Model\Label.cs" />
+    <Compile Include="Model\LabelRelease.cs" />
+    <Compile Include="Model\LabelReleaseAggregate.cs" />
+    <Compile Include="Model\MasterRelease.cs" />
+    <Compile Include="Model\MasterReleaseAggregate.cs" />
+    <Compile Include="Model\ReleaseBase.cs" />
+    <Compile Include="Model\Search\ReleaseBaseSearchResult.cs" />
+    <Compile Include="Model\Search\ReleaseSearchResult.cs" />
+    <Compile Include="Model\ReleaseVersion.cs" />
+    <Compile Include="Model\NameFixingLevel.cs" />
+    <Compile Include="Model\Release.cs" />
+    <Compile Include="Model\ReleaseAggregate.cs" />
+    <Compile Include="Model\ReleaseArtist.cs" />
+    <Compile Include="Model\ReleaseArtistAggregate.cs" />
+    <Compile Include="Model\ReleaseFormat.cs" />
+    <Compile Include="Model\ReleaseIdentifier.cs" />
+    <Compile Include="Model\ReleaseIdentifierType.cs" />
+    <Compile Include="Model\ReleaseLabel.cs" />
+    <Compile Include="Model\ReleaseLabelAggregate.cs" />
+    <Compile Include="Model\ReleaseStatus.cs" />
+    <Compile Include="Model\ReleaseVersionType.cs" />
+    <Compile Include="Model\ReleaseVideo.cs" />
+    <Compile Include="Model\ReleaseYearGuesser.cs" />
+    <Compile Include="Model\Obsolete\SearchExactResult_Obsolete.cs" />
+    <Compile Include="Model\Obsolete\SearchExactResultAggregate_Obsolete.cs" />
+    <Compile Include="Model\Obsolete\SearchResult_Obsolete.cs" />
+    <Compile Include="Model\Obsolete\SearchResultAggregate_Obsolete.cs" />
+    <Compile Include="Model\Obsolete\SearchResults_Obsolete.cs" />
+    <Compile Include="Model\Obsolete\SearchResultType_Obsolete.cs" />
+    <Compile Include="Model\Search\SearchQuery.cs" />
+    <Compile Include="Model\Search\SearchResult.cs" />
+    <Compile Include="Model\Search\SearchResults.cs" />
+    <Compile Include="Model\Search\SearchItemType.cs" />
+    <Compile Include="Model\Sublabel.cs" />
+    <Compile Include="Model\Track.cs" />
+    <Compile Include="Model\TrackAggregate.cs" />
+    <Compile Include="Model\UserProfile.cs" />
+    <Compile Include="OAuth.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleRegex.cs" />
+    <Compile Include="TimeSpanParser.cs" />
+    <Compile Include="Tracing.cs" />
+    <Compile Include="User\DiscogsAuth.cs" />
+    <Compile Include="User\UserAPI.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="XmlReaderExtensionMethods.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

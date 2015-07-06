@@ -335,7 +335,7 @@ namespace MPTagThat.GridView
             _main.progressBar1.Value += 1;
             if (_progressCancelled)
             {
-              commandObj.CancelCommand();
+              commandObj.ProgressCancelled = true;
               ResetProgressBar();
               return;
             }
@@ -353,6 +353,10 @@ namespace MPTagThat.GridView
             track.Changed = true;
             Options.Songlist[row.Index] = track;
             _itemsChanged = true;
+          }
+          if (commandObj.ProgressCancelled)
+          {
+            break;
           }
         }
         catch (Exception ex)

@@ -37,6 +37,7 @@ namespace MPTagThat.Core
 
     private List<string> _recentFolders = new List<string>();
     private List<string> _lyricSites = new List<string>();
+    private List<string> _albumInfoSites = new List<string>() { "Amazon", "MusicBrainz", "Discogs", "LastFM"};
     private List<string> _customGenres = new List<string>();
 
     #endregion
@@ -149,19 +150,19 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "false")]
     public bool CopyArtist { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool UseCaseConversion { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool CreateFolderThumb { get; set; }
 
     [Setting(SettingScope.User, "true")]
     public bool EmbedFolderThumb { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool OverwriteExistingCovers { get; set; }
 
-    [Setting(SettingScope.User, "false")]
+    [Setting(SettingScope.User, "true")]
     public bool OverwriteExistingLyrics { get; set; }
 
     [Setting(SettingScope.User, "false")]
@@ -181,6 +182,13 @@ namespace MPTagThat.Core
 
     [Setting(SettingScope.User, "com")]
     public string AmazonSite { get; set; }
+
+    [Setting(SettingScope.User, "")]
+    public List<string> AlbumInfoSites
+    {
+      get { return _albumInfoSites; }
+      set { _albumInfoSites = value; }
+    }
 
     [Setting(SettingScope.User, "false")]
     public bool OnlySaveFolderThumb { get; set; }

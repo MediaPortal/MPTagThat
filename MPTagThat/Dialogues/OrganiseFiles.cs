@@ -388,6 +388,7 @@ namespace MPTagThat.Organise
           currentSelectedFolder = currentSelectedFolder.Substring(0, currentSelectedFolder.LastIndexOf("\\"));
           i++; // Max of 10 levels, to avoid possible infinity loop
         }
+				_main.TracksGridView.Changed = false;
         _main.CurrentDirectory = currentSelectedFolder;
         _main.TreeView.RefreshFolders();
         _main.RefreshTrackList();

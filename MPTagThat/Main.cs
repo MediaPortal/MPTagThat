@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -1946,6 +1947,11 @@ namespace MPTagThat
 
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
+      ckAmazon.Checked = Options.MainSettings.AlbumInfoSites.Contains("Amazon");
+      ckMusicBrainz.Checked = Options.MainSettings.AlbumInfoSites.Contains("MusicBrainz");
+      ckDiscogs.Checked = Options.MainSettings.AlbumInfoSites.Contains("Discogs");
+      ckLastFm.Checked = Options.MainSettings.AlbumInfoSites.Contains("LastFM");
+
       comboBoxAmazonSite.Items.Clear();
       comboBoxAmazonSite.Items.Add(new Item("United States (US)", "com", ""));
       comboBoxAmazonSite.Items.Add(new Item("Deutschland (DE)", "de", ""));
@@ -2505,7 +2511,7 @@ namespace MPTagThat
         Options.MainSettings.CustomGenres.Add(item.Text);
       }
 
-      // Tell the Tag Ediit Control to refresh the Custom Genres
+      // Tell the Tag Edit Control to refresh the Custom Genres
       QueueMessage msg = new QueueMessage();
       msg.MessageData["action"] = "customgenresrefreshed";
       IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -2513,6 +2519,13 @@ namespace MPTagThat
 
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedItem as Item).Value;
+
+      var albumInfoSites = new List<string>();
+      if (ckAmazon.Checked) albumInfoSites.Add("Amazon");
+      if (ckMusicBrainz.Checked) albumInfoSites.Add("MusicBrainz");
+      if (ckDiscogs.Checked) albumInfoSites.Add("Discogs");
+      if (ckLastFm.Checked) albumInfoSites.Add("LastFM");
+      Options.MainSettings.AlbumInfoSites = albumInfoSites;
 
       #endregion
 

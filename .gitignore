@@ -32,3 +32,4 @@ _ReSharper*/
 ipch/*.ipch
 *.DotSettings
 Transifex/.transifexrc
+Packages
