@@ -336,7 +336,7 @@ namespace TagLib.Dsf
 					if (tag == null && create)
 					{
 						tag = new Id3v2.Tag();
-						tag.Version = 2;
+						tag.Version = 3;
 					}
 
 					id32_tag = tag;
