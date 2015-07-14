@@ -5,6 +5,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using Hqub.MusicBrainz.API;
 using Hqub.MusicBrainz.API.Entities;
 
@@ -49,7 +50,8 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			Albums.Clear();
 			try
 			{
-				GetAlbumQuery(ArtistName, AlbumName);
+				var album = GetAlbumQuery(ArtistName, AlbumName);
+				Albums.Add(album.Result);
 				log.Debug("MusicBrainz: Found {0} albums", Albums.Count);
 			}
 			catch (Exception ex)
@@ -58,7 +60,7 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			}
 		}
 
-		private async void GetAlbumQuery(string artistName, string albumName)
+		private async Task<Album> GetAlbumQuery(string artistName, string albumName)
 		{
 			// If we have an artist in form "LastName, FirstName" change it to "FirstName LastName" to have both results
 			var artistNameOriginal = _switchedArtist.IsMatch(artistName) ? string.Format(" OR {0}",SwitchArtist(artistName)) : "";
@@ -83,7 +85,7 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 						mbAlbum = albums.Items.Count > 0 ? albums.Items[0] : null;
 						if (mbAlbum == null)
 						{
-							return;
+							return null;
 						}
 					}
 				}
@@ -119,6 +121,7 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 				discs.Add(albumTracks);
 			}
 			album.Discs = discs;
+			return album;
 		}
 
 		private string SwitchArtist(string artist)
