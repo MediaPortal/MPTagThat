@@ -112,6 +112,7 @@
     <Compile Include="AlbumInfo\Album.cs" />
     <Compile Include="AlbumInfo\AlbumSites\Discogs.cs" />
     <Compile Include="AlbumInfo\AlbumSites\Amazon.cs" />
+    <Compile Include="AlbumInfo\AlbumSites\LastFM.cs" />
     <Compile Include="AlbumInfo\AlbumSites\MusicBrainz.cs" />
     <Compile Include="AlbumInfo\AlbumTrack.cs" />
     <Compile Include="AlbumInfo\AlbumSites\AlbumSiteFactory.cs" />
@@ -425,6 +426,10 @@
     <ProjectReference Include="..\Libraries\Hqub.MusicBrainz.API\Hqub.MusicBrainz.API.csproj">
       <Project>{77832ded-eefe-4db9-94af-b0be02cec356}</Project>
       <Name>Hqub.MusicBrainz.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\LastFMLibrary\LastFMLibrary.csproj">
+      <Project>{fe0b7969-38a1-4150-bb3b-c2e87f40aeed}</Project>
+      <Name>LastFMLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\taglib-sharp\taglib-sharp.csproj">
       <Project>{6b143a39-c7b2-4743-9917-92262c60e9a6}</Project>

@@ -31,3 +31,6 @@ xcopy /y %1\Libraries\DiscogsNet\bin\%2\Newtonsoft.Json.dll .\bin
 
 REM Copy Hqub.MusicBrainz.API Library
 xcopy /y %1\Libraries\Hqub.MusicBrainz.API\bin\%2\Hqub.MusicBrainz.API.dll .\bin
+
+REM Copy LastFM Library
+xcopy /y %1\Libraries\LastFMLibrary\bin\%2\LastFMLibrary.dll .\bin
