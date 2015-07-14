@@ -69,15 +69,15 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			var albums = await Release.SearchAsync(query);
 
 			// First look for Albums from the selected country in AmazonSites
-			var mbAlbum = albums.Items.FirstOrDefault(r => Equals(r.Title.ToLower(), albumName.ToLower()) && Equals(r.Country.ToLower(), Options.MainSettings.AmazonSite.ToLower()));
+			var mbAlbum = albums.Items.FirstOrDefault(r => (r.Title != null && r.Title.ToLower() == albumName.ToLower()) && (r.Country != null && r.Country.ToLower() == Options.MainSettings.AmazonSite.ToLower()));
 			if (mbAlbum == null)
 			{
 				// Look for European wide release
-				mbAlbum = albums.Items.FirstOrDefault(r => Equals(r.Title.ToLower(), albumName.ToLower()) && Equals(r.Country.ToLower(), "xe"));
+				mbAlbum = albums.Items.FirstOrDefault(r => (r.Title != null && r.Title.ToLower() == albumName.ToLower()) && (r.Country != null && r.Country.ToLower() == "xe"));
 				if (mbAlbum == null)
 				{
 					// Look for US release
-					mbAlbum = albums.Items.FirstOrDefault(r => Equals(r.Title.ToLower(), albumName.ToLower()) && Equals(r.Country.ToLower(), "us"));
+					mbAlbum = albums.Items.FirstOrDefault(r => (r.Title != null && r.Title.ToLower() == albumName.ToLower()) && (r.Country != null && r.Country.ToLower() == "us"));
 					if (mbAlbum == null)
 					{
 						mbAlbum = albums.Items.Count > 0 ? albums.Items[0] : null;
