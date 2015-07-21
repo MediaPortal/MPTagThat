@@ -99,8 +99,11 @@ namespace MPTagThat.Core.AlbumInfo
       ThreadStart job = delegate
       {
         var albumSearchSite = AlbumSiteFactory.Create(albumInfoSite, _artist, _albumTitle, _mEventStopSiteSearches, TimeLimitForSite);
-        albumSearchSite.GetAlbumInfo();
-        ValidateSearchOutput(albumSearchSite.AlbumInfo, albumInfoSite);
+	      if (albumSearchSite != null)
+	      {
+		      albumSearchSite.GetAlbumInfo();
+		      ValidateSearchOutput(albumSearchSite.AlbumInfo, albumInfoSite);
+	      }
       };
       var searchThread = new Thread(job);
       searchThread.Start();
