@@ -173,11 +173,16 @@ namespace MPTagThat.Dialogues
       if (album.AlbumImage == null)
         return;
 
-      using (MemoryStream ms = new MemoryStream(album.AlbumImage.Data))
-      {
-        Image img = Image.FromStream(ms);
-        _imagelist.Images.Add(img);
-      }
+	    try
+	    {
+		    using (MemoryStream ms = new MemoryStream(album.AlbumImage.Data))
+		    {
+			    Image img = Image.FromStream(ms);
+			    _imagelist.Images.Add(img);
+		    }
+	    }
+			catch (ArgumentException)
+	    {}
     }
 
     #endregion
