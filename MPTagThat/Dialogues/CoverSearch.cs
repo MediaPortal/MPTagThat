@@ -137,9 +137,11 @@ namespace MPTagThat.Dialogues
 
     private void DoSearchAlbum()
     {
-      Update();
+			groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "Searching");
+			groupBoxAmazonMultipleAlbums.Refresh();
+			Update();
 
-      Cursor = Cursors.WaitCursor;
+			Cursor = Cursors.WaitCursor;
       tbArtist.Enabled = false;
       tbAlbum.Enabled = false;
       btSearch.Enabled = false;
@@ -157,12 +159,13 @@ namespace MPTagThat.Dialogues
       foreach (var album in albums)
       {
         AddImageToList(album);
-        string itmText = string.Format("{0} {1}x{2} ({3})", album.Title, album.CoverWidth, album.CoverHeight, site);
-        ListViewItem item = new ListViewItem(itmText);
-        item.ImageIndex = i;
-        lvSearchResults.Items.Add(item);
+				var albumSize = (album.CoverWidth == "0" || album.CoverWidth == "") ? " " : string.Format(" {0}x{1} ", album.CoverWidth, album.CoverHeight);
+        var itmText = string.Format("{0}{1}({2})", album.Title, albumSize, site);
+	      var item = new ListViewItem(itmText) {ImageIndex = i};
+	      lvSearchResults.Items.Add(item);
         i++;
       }
+	    Update();
     }
 
     private void AddImageToList(Album album)
@@ -173,10 +176,7 @@ namespace MPTagThat.Dialogues
       using (MemoryStream ms = new MemoryStream(album.AlbumImage.Data))
       {
         Image img = Image.FromStream(ms);
-        if (img != null)
-        {
-          _imagelist.Images.Add(img);
-        }
+        _imagelist.Images.Add(img);
       }
     }
 
@@ -247,8 +247,6 @@ namespace MPTagThat.Dialogues
       lvSearchResults.Items.Clear();
       _imagelist.Images.Clear();
       _albums.Clear();
-      groupBoxAmazonMultipleAlbums.Text = ServiceScope.Get<ILocalisation>().ToString("AmazonAlbumSearch", "Searching");
-      groupBoxAmazonMultipleAlbums.Refresh();
       DoSearchAlbum();
     }
     #endregion
@@ -311,10 +309,11 @@ namespace MPTagThat.Dialogues
           btUpdate.PerformClick();  // Close the Dialog
         }
       }
+			Update();
       tbArtist.Enabled = true;
       tbAlbum.Enabled = true;
       btSearch.Enabled = true;
-      Cursor = Cursors.Default;
+			Cursor = Cursors.Default;
     }
 
     #endregion
