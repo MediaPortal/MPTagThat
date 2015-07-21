@@ -108,6 +108,11 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 		    var pos = track.Position;
 		    var albumTrack = new AlbumTrack();
 		    
+		    if (string.IsNullOrEmpty(track.Position) || string.IsNullOrEmpty(albumTrack.Title))
+		    {
+			    continue;
+		    }
+
 				// check for Multi Disc Album
 		    if (track.Position.Contains("-"))
 		    {
