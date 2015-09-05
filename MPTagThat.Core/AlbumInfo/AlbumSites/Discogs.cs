@@ -108,7 +108,7 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 		    var pos = track.Position;
 		    var albumTrack = new AlbumTrack();
 		    
-		    if (string.IsNullOrEmpty(track.Position) || string.IsNullOrEmpty(albumTrack.Title))
+		    if (string.IsNullOrEmpty(track.Position) || string.IsNullOrEmpty(track.Title))
 		    {
 			    continue;
 		    }
