@@ -126,6 +126,7 @@
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Refresh</string>
+  <string name="screentip.RefreshText">Der Inhalt des ausgewählten Verzeichnisses wird neu eingelesen.\nWenn Änderungen anstehen, fragt das System, ob diese vorher gespeichert werden sollen.</string>
   <string name="screentip.Save">Änderungen abspeichern.</string>
   <string name="screentip.SaveText">Ausstehende Änderungen an Dateien werden auf die disk zurückgeschrieben.</string>
   <string name="screentip.ColumnsSelect">Angezeigte Spalten in der Tabelle</string>
@@ -134,6 +135,7 @@
   <string name="screentip.TagFromFile">Tag von Dateiname</string>
   <string name="screentip.TagFromFileText">Unter Verwendung der Parameter aus dem Dialog werden die verschiedenen tags wie z.B. \"Track #\", \"Interpret\", \"Titel\", etc. aus dem Dateinamen extrahiert.</string>
   <string name="screentip.IdentifyFile">Dateien Identifizieren</string>
+  <string name="screentip.IdentifyFileText">Es wird ein hash-Wert aus den ersten 30 Sekunden der Datei erzeugt. Dieser Wert wird benutzt, um die Datei bei MusicBrainz zu identifizieren.\nDie Tags werden dann von MusicBrainz geholt und in die Datei geschrieben.</string>
   <string name="screentip.TagFromInternet">Tag von Internet</string>
   <string name="screentip.TagFromInternetText">Der Interpret und Album Name werden für eine Suche bei Amazon verwendet. Es wird versucht einen Bezug zwischen dem Dateinamen und der Titelliste des Albums herzustellen.</string>
   <string name="screentip.SingleTagEdit">Einzeln editieren</string>
@@ -601,6 +603,7 @@ verschieben/kopieren</string>
   <string name="Settings.EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</string>
   <string name="Settings.OnlySaveFolderThumb">Nur Orndervorschau speichern. Nicht die Musikdatei verändern</string>
   <string name="Settings.ChangeCoverSize">Speichern von Bildern mit einer maximalen Pixel Breite von:</string>
+  <string name="Settings.AmazonSite">Amazon Suchseite:</string>
   <string name="Settings.GroupBoxLyrics">Liedtexte</string>
   <string name="Settings.SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</string>
   <string name="Settings.OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</string>
@@ -693,7 +696,6 @@ verschieben/kopieren</string>
   <string name="Settings.LinkTags">Tags</string>
   <string name="Settings.LinkGeneral">Generell</string>
   <string name="Settings.LinkRipping">Ripping / Konvertierung</string>
-  <string name="Settings.GroupBoxAlbumInfoSites">Album Information Seiten</string>
   <!--Burning-->
   <string name="Burning.NoMedia">Kein Medium im Laufwerk. Bitte eine leere CD/DVD einlegen.</string>
   <string name="Burning.DragAndDrop">Verwenden Sie Drag &amp; Drop um die Tracks anzuordnen</string>
@@ -829,4 +831,5 @@ Wollen Sie die änderungen speichern?</string>
   <string name="readonly.NoToAll">Nein Alle</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album Gain</string>
+  <string name="albumgain.Explanation">Alle Dateien sind ausgewählt.\nSoll MPTagThat die Albumverstärkung berechnen?</string>
 </resources>

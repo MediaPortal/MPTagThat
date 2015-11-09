@@ -128,6 +128,7 @@ de Carpeta</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Refrescar</string>
+  <string name="screentip.RefreshText">El contenido de la carpeta actual se ha releído.\nSi hay cambios pendientes, el sistema pregunta si los cambios se deben guardar primero.</string>
   <string name="screentip.Save">Guardar Cambios</string>
   <string name="screentip.SaveText">Guarda los cambios pendientes en el disco, cambiando las etiquetas de todos los archivos seleccionados.</string>
   <string name="screentip.ColumnsSelect">Columnas Mostradas en Rejilla</string>
@@ -136,6 +137,7 @@ de Carpeta</string>
   <string name="screentip.TagFromFile">Etiquetar desde Nombre de Archivo</string>
   <string name="screentip.TagFromFileText">Usando parámetros específicos que figuran en el cuadro de diálogo, las diversas etiquetas como \"Track #\", \"Artista\", \"Título\", etc. se extraen del nombre de archivo.</string>
   <string name="screentip.IdentifyFile">Identificar Archivo</string>
+  <string name="screentip.IdentifyFileText">Un hash se construye en los primeros 30 segundos del archivo. Este hash se utiliza para identificar el archivo de MusicBrainz.\nLas etiquetas se recuperan desde MusicBrainz y se escriben en el archivo.</string>
   <string name="screentip.TagFromInternet">Etiquetar desde Internet</string>
   <string name="screentip.TagFromInternetText">El Artista y Nombre del álbum determinado se utilizan para una búsqueda en Amazon tratando de coincidir con los nombres de archivo a la lista extraído de Amazon.</string>
   <string name="screentip.SingleTagEdit">Edición de Etiqueta Única</string>
@@ -182,7 +184,9 @@ de Carpeta</string>
   <string name="screentip.FixSong">Arreglar MP3</string>
   <string name="screentip.FixSongText">Usa MP3Val para arreglar errores en el archivo MP3 seleccionado.</string>
   <string name="screentip.ReplayGain">Repetir Ganancia</string>
+  <string name="screentip.ReplayGainText">Analiza el archivo seleccionado y calcula la Ganancia de Reproducción. El valor calculado queda escrito en la Etiqueta.\nNota: El propio archivo no es modificado.</string>
   <string name="screentip.BPM">Detección de BPM</string>
+  <string name="screentip.BPMText">Analiza el archivo seleccionado y calcula las Pulsaciones por Minuto (BPM). El valor calculado se escribe en las Etiquetas.\nNota: El archivo no se modifica.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Empezar Extracción</string>
   <string name="screentip.RipButtonText">Iniciar la Extracción de los archivos seleccionados</string>
@@ -307,6 +311,7 @@ de Carpeta</string>
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Valoraciones (Para los archivos sin ID3, por favor selecciona la clasificación en la columna de Estrellas)</string>
   <string name="TagEdit.RemoveExistingRatings">Quitar primero Puntuaciónes existentes</string>
+  <string name="TagEdit.RatingNote">La puntuación es 1-255 donde 1 es peor y 255 mejor.0 es desconocido.\n\nNota: Muchos programas tienen su propia puntuación y pueden redefinir el estandard ID3. Si no se quiere contrarrestar el personal, puede ser omitido.</string>
   <string name="TagEdit.PlayCounter">Contador de reproducción:</string>
   <string name="TagEdit.RemoveRating">Quitar Puntuación</string>
   <string name="TagEdit.AddRating">Añadir Puntuación</string>
@@ -581,6 +586,7 @@ deben tomarse del nombre de la carpeta</string>
   <string name="Settings.DescPrefStandard">Este preajuste debería ser transparente para la mayoría de la gente y la mayoría de la música, y es ya de bastante Alta Calidad</string>
   <string name="Settings.DescPrefExtreme">Si tiene buen oido y buen equipamiento, este preajuste generalmente le proveerá de una calidad un poco más alta que el modo \"standard\".</string>
   <string name="Settings.DescPrefInsane">CBR 320 kbps. Este preajuste será demasiado para la mayoría de la gente y la mayoría de las situaciones, pero si quiere la calidad absolutamente más alta sin preocuparse del tamaño de archivo, este es la adecuado.</string>
+  <string name="Settings.DescPrefABR">Para modos ABR (alta calidad para un bitrate dado pero no tan alta como VBR). Usando este preajuste le dará normalmente buena calidad al bitrate especificado.\n\nDependiendo del bitrate introducido, este preajuste determinará la configuración óptima para la situación en particular. Aunque este método funciona, no es tan flexible como VBR, y normalmente no se obtendrá el mismo nivel de calidad de VBR a bitrate más altos.</string>
   <string name="Settings.TabGeneral">General</string>
   <string name="Settings.GroupBoxKeys">Atajos de Teclado</string>
   <string name="Settings.ChangeKey">Cambiar</string>
@@ -636,13 +642,17 @@ deben tomarse del nombre de la carpeta</string>
   <string name="Settings.AddCustomGenre">Añadir Género</string>
   <string name="Settings.DeleteCustomGenre">Borrar Género</string>
   <string name="Settings.GroupBoxDatabaseBuild">Construcción de Base de Datos Musical</string>
+  <string name="Settings.DatabaseScanNote">Si no está disponible la base de datos de música de MediaPortal, se puede crear una base de datos introduciendo un nombre de archivo en el campo de texto.\nDespués comience el escaneo.</string>
   <string name="Settings.StartDBScan">Comenzar Escaneo</string>
   <string name="Settings.DBScanStatus">Estado de Escaneo</string>
+  <string name="Settings.DBNotExists">La base de datos seleccionada no existe.\nSi selecciona \"Yes\" se creará una nueva base de datos.\nComience un escaneo para rellenar la base de datos.</string>
   <string name="Settings.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
   <string name="Settings.SelectMusicFolder">Seleccione la carpeta con sus Archivos de Música</string>
   <string name="Settings.DBScanIdle">Escaneo de la Base de datos no activo</string>
+  <string name="Settings.DBScanFinished">Escaneo de la Base de Datos realizado.\nProcesadas {0} pistas en: {1:d2}:{2:d2}:{3:d2}{4}</string>
   <string name="Settings.DBScanTrackSummary"> ({0} segundos por pista)</string>
   <string name="Settings.DBScanTitle">Confirme interrupción del Escaneo de la Base de Datos</string>
+  <string name="Settings.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
   <string name="Settings.DBScanProgress">Progreso de archivo {0} de {1}</string>
   <string name="Settings.TabRipping">Extrayendo</string>
   <string name="Settings.TabRippingGeneral">General</string>
@@ -758,6 +768,7 @@ deben tomarse del nombre de la carpeta</string>
   <string name="message.Error_Title">Error</string>
   <string name="message.Save_Changes">Los cambios no se han guardado. ¿Quiere salvar los cambios?</string>
   <string name="message.Save_Changes_Title">Guardar Cambios</string>
+  <string name="message.Script_Compile_Failed">La compilación del script falló.\n\nPor favor, busque el error en el log y corríjalo.</string>
   <string name="message.DataEntryError">El valor especificado no es válido.</string>
   <string name="message.NoSelectionHeader">No hay selección</string>
   <string name="message.NoSelection">Por favor, seleccione al menos una fila para realizar la acción</string>
@@ -765,6 +776,8 @@ deben tomarse del nombre de la carpeta</string>
   <string name="message.DeleteConfirm">¿Quiere borrar realmente los archivos seleccionados?</string>
   <string name="message.DeleteFolders">Para borrar una carpeta, por favor, use May-Sup</string>
   <string name="message.Fixed">Corregido</string>
+  <string name="message.FatalError">Excepción grave. MPTagThat se cerrará.\r\nPor favor mira el archivo de registro para la causa de la interrupción</string>
+  <string name="message.OutOfMemory">Demasiados archivos escaneados. Se está quedando sin Memoria.\r\nAbortando Escaneo.</string>
   <string name="message.ErrorResetAttr">No se puede restablecer el atributo de sólo lectura</string>
   <string name="message.CorruptFile">Archivo Corrupto</string>
   <string name="message.UnsupportedFormat">Formato no Soportado</string>
@@ -788,6 +801,7 @@ deben tomarse del nombre de la carpeta</string>
   <!--About Dialog-->
   <string name="about.Header">Acerca de</string>
   <string name="about.Ok">Ok</string>
+  <string name="about.Description">MPTagThat es un editor de etiquetas de código libre que permite la gestión completa de su Colección de Música.\n\nMás información en:</string>
   <string name="about.Version">Versión:</string>
   <string name="about.BuildDate">Fecha:</string>
   <string name="about.Contributors">Colaboradores</string>
@@ -807,6 +821,7 @@ deben tomarse del nombre de la carpeta</string>
   <string name="dbsearch.Album">Álbum (contiene):</string>
   <string name="dbsearch.Title">Título (contiene):</string>
   <string name="dbsearch.Search">Buscar</string>
+  <string name="dbsearch.NoMusicDB">Para usar la función de búsqueda de la base de datos,\ndebe introducir la localización de la base de datos en la Configuración.</string>
   <string name="dbsearch.NoSearchValues">Por favor, introduzca al menos un valor a buscar.</string>
   <string name="dbsearch.TooMuchRows">La consulta devolvió demasiadas filas. Sólo se muestran las 1000 primeras.</string>
   <!--Find / Replace-->
@@ -826,10 +841,12 @@ deben tomarse del nombre de la carpeta</string>
   <string name="findreplace.ReplaceAllBtn">Reemplazar Todo</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Archivo de Sólo Lectura</string>
+  <string name="readonly.Explanation">El archivo indicado es de sólo lectura.\n¿Debe MPTagThat cambiar el atributo y guardar el archivo?</string>
   <string name="readonly.Yes">Sí</string>
   <string name="readonly.YesToAll">Sí a Todo</string>
   <string name="readonly.No">No</string>
   <string name="readonly.NoToAll">No a Todo</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Ganancia del Álbum</string>
+  <string name="albumgain.Explanation">Todos los archivos seleccionados.\n¿Debe MPTagThat calcular una ganancia de Álbum?</string>
 </resources>
