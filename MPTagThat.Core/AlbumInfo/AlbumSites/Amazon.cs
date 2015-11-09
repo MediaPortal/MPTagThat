@@ -31,9 +31,11 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 {
   public class Amazon : AbstractAlbumSite
   {
-    #region Variables
+		#region Variables
 
-    private const string itemSearch =
+		private const string itemLookup = "&Operation=ItemLookup&ItemId={0}&ResponseGroup=Images,ItemAttributes,Tracks";
+
+		private const string itemSearch =
       "&Operation=ItemSearch&Artist={0}&Title={1}&SearchIndex=Music&ResponseGroup=Images,ItemAttributes,Tracks";
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
@@ -60,11 +62,37 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
     {
     }
 
-    #endregion
+		#endregion
 
-    #region Methods
+		#region Methods
 
-    protected override void GetAlbumInfoWithTimer()
+		public Album AmazonAlbumLookup(string albumId)
+		{
+			Album album = new Album();
+
+			var helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);
+			string requestString = helper.Sign(string.Format(itemLookup, albumId));
+			string responseXml = Util.GetWebPage(requestString);
+			if (responseXml == null)
+				return album;
+
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(responseXml);
+
+			// Retrieve default Namespace of the document and add it to the NameSpacemanager
+			string defaultNameSpace = xml.DocumentElement.GetNamespaceOfPrefix("");
+			XmlNamespaceManager nsMgr = new XmlNamespaceManager(xml.NameTable);
+			nsMgr.AddNamespace("ns", defaultNameSpace);
+
+			XmlNodeList nodes = xml.SelectNodes("/ns:ItemLookupResponse/ns:Items/ns:Item", nsMgr);
+			if (nodes.Count > 0)
+			{
+				album = FillAlbum(nodes[0]);
+			}
+			return album;
+		}
+
+		protected override void GetAlbumInfoWithTimer()
     {
       log.Debug("Amazon: Searching Amazon Webservices");
       var helper = new SignedRequestHelper(Options.MainSettings.AmazonSite);

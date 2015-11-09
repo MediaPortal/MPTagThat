@@ -125,9 +125,6 @@
     <Compile Include="Services\ActionHandler\Button.cs" />
     <Compile Include="Services\ActionHandler\IActionHandler.cs" />
     <Compile Include="Services\ActionHandler\WindowMap.cs" />
-    <Compile Include="Amazon\AmazonAlbum.cs" />
-    <Compile Include="Amazon\AmazonAlbumInfo.cs" />
-    <Compile Include="Amazon\AmazonAlbumTrack.cs" />
     <Compile Include="Services\AudioEncoder\AudioEncoder.cs" />
     <Compile Include="Services\AudioEncoder\IAudioEncoder.cs" />
     <Compile Include="Services\Burner\Burner.cs" />

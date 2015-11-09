@@ -19,7 +19,7 @@
 
 using System;
 using System.Collections.Generic;
-using MPTagThat.Core.Amazon;
+using MPTagThat.Core.AlbumInfo;
 
 #endregion
 
@@ -56,7 +56,7 @@ namespace MPTagThat.Core.MusicBrainz
 
     public List<MusicBrainzTrack> Tracks { get; set; }
 
-    public AmazonAlbum Amazon { get; set; }
+    public Album Amazon { get; set; }
 
     #endregion
   }

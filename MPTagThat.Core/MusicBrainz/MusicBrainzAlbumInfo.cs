@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using MPTagThat.Core.Amazon;
 
 #endregion
 
@@ -134,12 +133,8 @@ namespace MPTagThat.Core.MusicBrainz
 
       if (album.Asin != null)
       {
-        // Now do a lookup on Amazon for the Image Url
-        using (var amazonInfo = new AmazonAlbumInfo())
-        {
-          AmazonAlbum amazonAlbum = amazonInfo.AmazonAlbumLookup(album.Asin);
-          album.Amazon = amazonAlbum;
-        }
+        var amazonAlbum = new AlbumInfo.AlbumSites.Amazon("", "", null, 0);
+        album.Amazon = amazonAlbum.AmazonAlbumLookup(album.Asin);
       }
 
       return album;

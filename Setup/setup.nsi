@@ -116,11 +116,15 @@ Section -Main SEC0000
     # Bin Dir including external binaries
     SetOutPath $INSTDIR\bin
     File /r /x .svn ..\MPTagThat.Base\bin\*
-    File ..\LyricsEngine\bin\Release\LyricsEngine.dll
-    File ..\LyricsEngine\bin\Release\LyricsEngine.dll.config
-	File ..\taglib-sharp\bin\Release\taglib-sharp.dll
-	File ..\gain\bin\Release\gain.dll
-	File ..\FreeImage\bin\Release\FreeImageNET.dll
+    File ..\Libraries\LyricsEngine\bin\Release\LyricsEngine.dll
+    File ..\Libraries\LyricsEngine\bin\Release\LyricsEngine.dll.config
+	File ..\Libraries\taglib-sharp\bin\Release\taglib-sharp.dll
+	File ..\Libraries\gain\bin\Release\gain.dll
+	File ..\Libraries\FreeImage\bin\Release\FreeImageNET.dll
+	File ..\Libraries\DiscogsNet\bin\Release\DiscogsNet.dll
+	File ..\Libraries\DiscogsNet\bin\Release\Newtonsoft.Json.dll
+	File ..\Libraries\Hqub.MusicBrainz.API\bin\Release\Hqub.MusicBrainz.API.dll
+	File ..\Libraries\LastFMLibrary\bin\Release\LastFMLibrary.dll
     
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
