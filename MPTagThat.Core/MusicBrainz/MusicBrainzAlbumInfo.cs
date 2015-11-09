@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using MPTagThat.Core.Amazon;
 
 #endregion
 
@@ -62,7 +61,7 @@ namespace MPTagThat.Core.MusicBrainz
 
       // Get the Album Artist(s)
       nodes = xml.SelectNodes("/m:metadata/m:release/m:artist-credit/m:name-credit/m:artist/m:name", nsMgr);
-      if (nodes != null)
+      if (nodes != null && nodes.Count > 0)
       {
         var artists = new List<string>();
         foreach (XmlNode node in nodes)
@@ -74,7 +73,7 @@ namespace MPTagThat.Core.MusicBrainz
 
       // Selecting the Date
       nodes = xml.SelectNodes("/m:metadata/m:release/m:date", nsMgr);
-      if (nodes != null)
+      if (nodes != null && nodes.Count > 0)
       {
         string year = nodes[0].InnerText;
         if (year.Length > 4)
@@ -90,14 +89,14 @@ namespace MPTagThat.Core.MusicBrainz
 
       // Selecting the Asin
       nodes = xml.SelectNodes("/m:metadata/m:release/m:asin", nsMgr);
-      if (nodes != null)
+      if (nodes != null && nodes.Count > 0)
       {
         album.Asin = nodes[0].InnerText;
       }
 
       // Selecting the Media
       nodes = xml.SelectNodes("/m:metadata/m:release/m:medium-list/m:medium", nsMgr);
-      if (nodes != null)
+      if (nodes != null && nodes.Count > 0)
       {
         int pos = 1;
         album.DiscCount = nodes.Count;
@@ -134,12 +133,8 @@ namespace MPTagThat.Core.MusicBrainz
 
       if (album.Asin != null)
       {
-        // Now do a lookup on Amazon for the Image Url
-        using (var amazonInfo = new AmazonAlbumInfo())
-        {
-          AmazonAlbum amazonAlbum = amazonInfo.AmazonAlbumLookup(album.Asin);
-          album.Amazon = amazonAlbum;
-        }
+        var amazonAlbum = new AlbumInfo.AlbumSites.Amazon("", "", null, 0);
+        album.Amazon = amazonAlbum.AmazonAlbumLookup(album.Asin);
       }
 
       return album;

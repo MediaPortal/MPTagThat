@@ -41,9 +41,13 @@ namespace MPTagThat.Core
 
     public int Compare(T xWord, T yWord)
     {
+			// When we Sort on Track, which is a numeric field in Trackdata,
+			// we should use TrackNumber instead to get correct numeric sorting
+	    var propName = _property.Name == "Track" ? "TrackNumber" : _property.Name;
+
       // Get property values
-      object xValue = GetPropertyValue(xWord, _property.Name);
-      object yValue = GetPropertyValue(yWord, _property.Name);
+      object xValue = GetPropertyValue(xWord, propName);
+      object yValue = GetPropertyValue(yWord, propName);
 
       // Determine sort order
       if (_direction == ListSortDirection.Ascending)

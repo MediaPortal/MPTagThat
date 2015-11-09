@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -33,6 +34,7 @@ using NLog;
 using TagLib;
 using Un4seen.Bass.AddOn.Cd;
 using File = TagLib.File;
+using Picture = MPTagThat.Core.Common.Picture;
 using StringCollection = System.Collections.Specialized.StringCollection;
 using Tag = TagLib.Id3v2.Tag;
 
@@ -425,6 +427,56 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    ///   Save the Picture of the track as folder.jpg
+    /// </summary>
+    /// <param name = "track"></param>
+    public static void SavePicture(TrackData track)
+    {
+      if (track.NumPics > 0)
+      {
+        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
+        try
+        {
+          Image img = Picture.ImageFromData(track.Pictures[0].Data);
+          // Need to make a copy, otherwise we have a GDI+ Error
+          Bitmap bCopy = new Bitmap(img);
+          bCopy.Save(fileName, ImageFormat.Jpeg);
+        }
+        catch (Exception ex)
+        {
+          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
+        }
+      }
+    }
+
+    /// <summary>
+    ///   Return the folder.jpg as a Taglib.Picture
+    /// </summary>
+    /// <param name = "folder"></param>
+    /// <returns></returns>
+    public static Common.Picture GetFolderThumb(string folder)
+    {
+      string thumb = Path.Combine(folder, "folder.jpg");
+      if (!System.IO.File.Exists(thumb))
+      {
+        return null;
+      }
+
+      try
+      {
+        Common.Picture pic = new Common.Picture(thumb);
+        pic.Description = "Front Cover";
+        pic.Type = PictureType.FrontCover;
+        return pic;
+      }
+      catch (Exception ex)
+      {
+        log.Error("Exception loading thumb file: {0} {1}", thumb, ex.Message);
+        return null;
+      }
+    }
+
+    /// <summary>
     ///   Is this an Audio file, which can be handled by MPTagThat
     /// </summary>
     /// <param name = "fileName"></param>
@@ -439,9 +491,11 @@ namespace MPTagThat.Core
         case ".aiff":
         case ".ape":
         case ".asf":
+        case ".dsf":
         case ".flac":
         case ".mp3":
         case ".ogg":
+        case ".opus":
         case ".wv":
         case ".wma":
         case ".mp4":
@@ -950,7 +1004,7 @@ namespace MPTagThat.Core
       {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestString);
         request.Proxy.Credentials = CredentialCache.DefaultCredentials;
-        request.UserAgent = "MPTagThat/3.1 ( hwahrmann@team-mediaportal.com )";
+        request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0)";
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         using (Stream responseStream = response.GetResponseStream())
         {
@@ -1575,6 +1629,20 @@ namespace MPTagThat.Core
       QueueMessage msg = new QueueMessage();
       msg.MessageData["action"] = "statusprogress";
       msg.MessageData["data"] = message;
+      IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
+      msgQueue.Send(msg);
+    }
+
+    /// <summary>
+    /// Sends a message
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="data"></param>
+    public static void SendMessage(string action, string data)
+    {
+      QueueMessage msg = new QueueMessage();
+      msg.MessageData["action"] = action;
+      msg.MessageData["data"] = data;
       IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
       msgQueue.Send(msg);
     }

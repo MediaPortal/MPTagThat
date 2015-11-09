@@ -18,7 +18,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <ApplicationIcon>MPTagThat.ico</ApplicationIcon>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -44,6 +44,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -52,6 +53,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bass.Net, Version=2.4.0.1, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
@@ -112,6 +114,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
+    <Compile Include="Commands\CmdCoverArtDrop.cs" />
+    <Compile Include="Commands\CmdConvert.cs" />
+    <Compile Include="Commands\CmdSave.cs" />
+    <Compile Include="Commands\CmdFixMP3File.cs" />
+    <Compile Include="Commands\CmdReplayGain.cs" />
+    <Compile Include="Commands\CmdBpm.cs" />
+    <Compile Include="Commands\CmdValidateMP3File.cs" />
+    <Compile Include="Commands\CmdRemoveCoverArt.cs" />
+    <Compile Include="Commands\CmdRemoveComment.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandTypes.cs" />
+    <Compile Include="Commands\CmdGetCoverArt.cs" />
+    <Compile Include="Commands\CmdGetLyrics.cs" />
+    <Compile Include="Dialogues\CoverSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\CoverSearch.Designer.cs">
+      <DependentUpon>CoverSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\CmdIdentifyFile.cs" />
+    <Compile Include="Commands\MusicBrainzAlbumResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\MusicBrainzAlbumResults.Designer.cs">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\SupportedCommandType.cs" />
     <Compile Include="DatabaseSearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,12 +185,6 @@
     </Compile>
     <Compile Include="Dialogues\FileNameToTag\ParameterPart.cs" />
     <Compile Include="Dialogues\FileNameToTag\TagFormat.cs" />
-    <Compile Include="Dialogues\CoverSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogues\CoverSearch.Designer.cs">
-      <DependentUpon>CoverSearch.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\InternetLookup\AlbumDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,12 +224,6 @@
     </Compile>
     <Compile Include="Grids\Tracks\LyricsSearch.Designer.cs">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Grids\Tracks\MusicBrainzAlbumResults.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Grids\Tracks\MusicBrainzAlbumResults.Designer.cs">
-      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\TagEdit\LyricsSearch.cs">
       <SubType>Form</SubType>
@@ -300,6 +317,14 @@
     <Compile Include="Player\PlayList\PlayListPLSIO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogues\CoverSearch.resx">
+      <DependentUpon>CoverSearch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\MusicBrainzAlbumResults.resx">
+      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="DatabaseSearchControl.resx">
       <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,10 +347,6 @@
     <EmbeddedResource Include="Dialogues\FileNameToTag\FileNameToTag.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FileNameToTag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogues\CoverSearch.resx">
-      <DependentUpon>CoverSearch.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\Preview.resx">
       <DependentUpon>Preview.cs</DependentUpon>
@@ -350,10 +371,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Grids\Tracks\LyricsSearch.resx">
       <DependentUpon>LyricsSearch.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Grids\Tracks\MusicBrainzAlbumResults.resx">
-      <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\LyricsSearch.resx">
@@ -438,21 +455,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FreeImage\FreeImage.csproj">
-      <Project>{6598A7CD-8F27-4D3F-A675-5AE63113A7C3}</Project>
+    <ProjectReference Include="..\Libraries\FreeImage\FreeImage.csproj">
+      <Project>{6598a7cd-8f27-4d3f-a675-5ae63113a7c3}</Project>
       <Name>FreeImage</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LyricsEngine\LyricsEngine.csproj">
-      <Project>{B0760CE8-086F-4301-9091-C9BE54F261FD}</Project>
+    <ProjectReference Include="..\Libraries\LyricsEngine\LyricsEngine.csproj">
+      <Project>{b0760ce8-086f-4301-9091-c9be54f261fd}</Project>
       <Name>LyricsEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\taglib-sharp\taglib-sharp.csproj">
+      <Project>{6b143a39-c7b2-4743-9917-92262c60e9a6}</Project>
+      <Name>taglib-sharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\MPTagThat.Core\MPTagThat.Core.csproj">
       <Project>{329DC657-B4D5-4324-AA0D-4B77B6F72D8C}</Project>
       <Name>MPTagThat.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\taglib-sharp\taglib-sharp.csproj">
-      <Project>{6B143A39-C7B2-4743-9917-92262C60E9A6}</Project>
-      <Name>taglib-sharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

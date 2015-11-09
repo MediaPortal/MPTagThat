@@ -53,6 +53,7 @@ namespace MPTagThat.GridView
     private readonly IMediaChangeMonitor mediaChangeMonitor;
     private int _currentRow = -1;
     private bool _freeDBLookupActive = false;
+    private bool _ripActive = false;
 
     private string _musicDir;
     private string _outFile;
@@ -436,7 +437,7 @@ namespace MPTagThat.GridView
 
           _outFile = audioEncoder.SetEncoder(encoder, _outFile);
 
-          if (audioEncoder.StartEncoding(stream) != BASSError.BASS_OK)
+          if (audioEncoder.StartEncoding(stream, row.Index) != BASSError.BASS_OK)
           {
             log.Error("Error starting Encoder for Audio Track {0}. Error: {1}", _currentRow,
                       Enum.GetName(typeof(BASSError), Bass.BASS_ErrorGetCode()));
@@ -808,8 +809,17 @@ namespace MPTagThat.GridView
       if (_currentRow < 0)
         return;
 
-      double percentComplete = (double)message.MessageData["progress"];
-      dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
+			string action = message.MessageData["action"] as string;
+
+			if (action != null)
+				switch (action.ToLower())
+				{
+					case "progress":
+						double percentComplete = (double)message.MessageData["percent"];
+						dataGridViewRip.Rows[_currentRow].Cells[1].Value = (int)percentComplete;
+						break;
+				}
+
       dataGridViewRip.Update();
       Application.DoEvents();
     }

@@ -202,7 +202,7 @@
       this.ShowInTaskbar = false;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Internet Search Results";
-      this.Load += new System.EventHandler(this.OnLoad);
+      this.Shown += new System.EventHandler(this.OnShown);
       this.groupBoxAmazonMultipleAlbums.ResumeLayout(false);
       this.groupBoxAmazonMultipleAlbums.PerformLayout();
       this.ResumeLayout(false);

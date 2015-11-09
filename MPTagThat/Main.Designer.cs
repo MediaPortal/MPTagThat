@@ -69,27 +69,6 @@ namespace MPTagThat
       this.backstageViewPageOptions = new Elegant.Ui.BackstageViewPage();
       this.panel2 = new Elegant.Ui.Panel();
       this.tabControlSettings = new Elegant.Ui.TabControl();
-      this.tabPageSettingsTagsId3 = new Elegant.Ui.TabPage();
-      this.groupBoxCustomGenres = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.buttonDeleteCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
-      this.listViewCustomGenres = new System.Windows.Forms.ListView();
-      this.buttonAddCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
-      this.groupBoxTagValidate = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckAutoFixMp3 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.ckValidateMP3 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.ckClearUserFramesOnSave = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.comboBoxCharacterEncoding = new Elegant.Ui.ComboBox();
-      this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.lbCharacterEncoding = new MPTagThat.Core.WinControls.MPTLabel();
-      this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonUseV3 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.groupBoxID3Update = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.checkBoxRemoveID3V1 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.checkBoxRemoveID3V2 = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.radioButtonID3Both = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
-      this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageSettingsGeneral = new Elegant.Ui.TabPage();
       this.groupBoxGeneral = new MPTagThat.Core.WinControls.MPTGroupBox();
       this.lbTracklistLocation = new MPTagThat.Core.WinControls.MPTLabel();
@@ -123,13 +102,38 @@ namespace MPTagThat
       this.ckAutoFillNumberOfTracks = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckUseCaseConversionWhenSaving = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCopyArtistToAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.tabPageSettingsTagsId3 = new Elegant.Ui.TabPage();
+      this.groupBoxCustomGenres = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.buttonDeleteCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
+      this.listViewCustomGenres = new System.Windows.Forms.ListView();
+      this.buttonAddCustomGenre = new MPTagThat.Core.WinControls.MPTButton();
+      this.groupBoxTagValidate = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckAutoFixMp3 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckValidateMP3 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.groupBoxTagsID3 = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckClearUserFramesOnSave = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.comboBoxCharacterEncoding = new Elegant.Ui.ComboBox();
+      this.radioButtonUseApe = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.lbCharacterEncoding = new MPTagThat.Core.WinControls.MPTLabel();
+      this.radioButtonUseV4 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonUseV3 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.groupBoxID3Update = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.checkBoxRemoveID3V1 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.checkBoxRemoveID3V2 = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.radioButtonID3Both = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonID3V2 = new MPTagThat.Core.WinControls.MPTRadioButton();
+      this.radioButtonID3V1 = new MPTagThat.Core.WinControls.MPTRadioButton();
       this.tabPageSettingsLyricsCover = new Elegant.Ui.TabPage();
       this.groupBoxPictures = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.groupBoxAlbumInfoSites = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.ckLastFm = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckDiscogs = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.comboBoxAmazonSite = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.ckMusicBrainz = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.ckAmazon = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tbCoverSize = new System.Windows.Forms.TextBox();
       this.ckChangeCoverSize = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckOnlySaveFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.comboBoxAmazonSite = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.lbAmazonSearchSite = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckUseExistinbgThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckOverwriteExistingCovers = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckCreateMissingFolderThumb = new MPTagThat.Core.WinControls.MPTCheckBox();
@@ -368,11 +372,6 @@ namespace MPTagThat
       this.backstageViewPageOptions.SuspendLayout();
       this.panel2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).BeginInit();
-      this.tabPageSettingsTagsId3.SuspendLayout();
-      this.groupBoxCustomGenres.SuspendLayout();
-      this.groupBoxTagValidate.SuspendLayout();
-      this.groupBoxTagsID3.SuspendLayout();
-      this.groupBoxID3Update.SuspendLayout();
       this.tabPageSettingsGeneral.SuspendLayout();
       this.groupBoxGeneral.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTrackListTop)).BeginInit();
@@ -381,8 +380,14 @@ namespace MPTagThat
       this.groupBoxKeys.SuspendLayout();
       this.tabPageSettingsTagsGeneral.SuspendLayout();
       this.groupBoxTagsGeneral.SuspendLayout();
+      this.tabPageSettingsTagsId3.SuspendLayout();
+      this.groupBoxCustomGenres.SuspendLayout();
+      this.groupBoxTagValidate.SuspendLayout();
+      this.groupBoxTagsID3.SuspendLayout();
+      this.groupBoxID3Update.SuspendLayout();
       this.tabPageSettingsLyricsCover.SuspendLayout();
       this.groupBoxPictures.SuspendLayout();
+      this.groupBoxAlbumInfoSites.SuspendLayout();
       this.groupBoxLyrics.SuspendLayout();
       this.groupBoxLyricsSites.SuspendLayout();
       this.tabPageSettingsDatabase.SuspendLayout();
@@ -473,9 +478,9 @@ namespace MPTagThat
       // 
       this.panelBottom.Controls.Add(this.playerPanel);
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelBottom.Location = new System.Drawing.Point(0, 956);
+      this.panelBottom.Location = new System.Drawing.Point(0, 888);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1209, 90);
+      this.panelBottom.Size = new System.Drawing.Size(1233, 90);
       this.panelBottom.TabIndex = 12;
       // 
       // playerPanel
@@ -483,7 +488,7 @@ namespace MPTagThat
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.playerPanel.Location = new System.Drawing.Point(0, 0);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1209, 90);
+      this.playerPanel.Size = new System.Drawing.Size(1233, 90);
       this.playerPanel.TabIndex = 11;
       // 
       // formFrameSkinner
@@ -497,10 +502,10 @@ namespace MPTagThat
       this.statusBar.Controls.Add(this.statusBarControlsArea1);
       this.statusBar.ControlsArea = this.statusBarControlsArea1;
       this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.statusBar.Location = new System.Drawing.Point(0, 1046);
+      this.statusBar.Location = new System.Drawing.Point(0, 978);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1209, 22);
+      this.statusBar.Size = new System.Drawing.Size(1233, 22);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -514,7 +519,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(894, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(918, 22);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -589,7 +594,7 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(894, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(918, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -670,7 +675,7 @@ namespace MPTagThat
             this.startMenuRefresh});
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
-      this.ribbon.Size = new System.Drawing.Size(1209, 150);
+      this.ribbon.Size = new System.Drawing.Size(1233, 150);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -695,7 +700,7 @@ namespace MPTagThat
             this.backstageViewButtonExit});
       this.backstageView.Location = new System.Drawing.Point(0, 51);
       this.backstageView.Name = "backstageView";
-      this.backstageView.Size = new System.Drawing.Size(1209, 995);
+      this.backstageView.Size = new System.Drawing.Size(1233, 927);
       this.backstageView.TabIndex = 17;
       this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
       // 
@@ -710,7 +715,7 @@ namespace MPTagThat
       this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 0);
       this.backstageViewPageOptions.Name = "backstageViewPageOptions";
       this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(0, 1, 2, 1);
-      this.backstageViewPageOptions.Size = new System.Drawing.Size(1054, 993);
+      this.backstageViewPageOptions.Size = new System.Drawing.Size(1078, 925);
       this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
       this.backstageViewPageOptions.TabIndex = 0;
@@ -722,7 +727,7 @@ namespace MPTagThat
       this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel2.Location = new System.Drawing.Point(210, 57);
       this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(842, 935);
+      this.panel2.Size = new System.Drawing.Size(866, 867);
       this.panel2.TabIndex = 1;
       this.panel2.Text = "panel2";
       // 
@@ -731,8 +736,8 @@ namespace MPTagThat
       this.tabControlSettings.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
       this.tabControlSettings.Name = "tabControlSettings";
-      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsRipGeneral;
-      this.tabControlSettings.Size = new System.Drawing.Size(842, 935);
+      this.tabControlSettings.SelectedTabPage = this.tabPageSettingsLyricsCover;
+      this.tabControlSettings.Size = new System.Drawing.Size(866, 867);
       this.tabControlSettings.TabIndex = 0;
       this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -750,280 +755,13 @@ namespace MPTagThat
             this.tabPageSettingsRipMPC,
             this.tabPageSettingsRipWV});
       // 
-      // tabPageSettingsTagsId3
-      // 
-      this.tabPageSettingsTagsId3.ActiveControl = null;
-      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxCustomGenres);
-      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagValidate);
-      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
-      this.tabPageSettingsTagsId3.KeyTip = null;
-      this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
-      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(840, 920);
-      this.tabPageSettingsTagsId3.TabIndex = 3;
-      // 
-      // groupBoxCustomGenres
-      // 
-      this.groupBoxCustomGenres.Controls.Add(this.buttonDeleteCustomGenre);
-      this.groupBoxCustomGenres.Controls.Add(this.listViewCustomGenres);
-      this.groupBoxCustomGenres.Controls.Add(this.buttonAddCustomGenre);
-      this.groupBoxCustomGenres.Id = "df78b6dd-743a-481b-9555-1707be5754ef";
-      this.groupBoxCustomGenres.Localisation = "GroupBoxCustomGenre";
-      this.groupBoxCustomGenres.LocalisationContext = "Settings";
-      this.groupBoxCustomGenres.Location = new System.Drawing.Point(7, 423);
-      this.groupBoxCustomGenres.Name = "groupBoxCustomGenres";
-      this.groupBoxCustomGenres.Size = new System.Drawing.Size(586, 199);
-      this.groupBoxCustomGenres.TabIndex = 5;
-      this.groupBoxCustomGenres.Text = "Custom Genres";
-      // 
-      // buttonDeleteCustomGenre
-      // 
-      this.buttonDeleteCustomGenre.Id = "bde29032-24fe-41e2-962d-7b902023f3cb";
-      this.buttonDeleteCustomGenre.Localisation = "DeleteCustomGenre";
-      this.buttonDeleteCustomGenre.LocalisationContext = "Settings";
-      this.buttonDeleteCustomGenre.Location = new System.Drawing.Point(388, 85);
-      this.buttonDeleteCustomGenre.Name = "buttonDeleteCustomGenre";
-      this.buttonDeleteCustomGenre.Size = new System.Drawing.Size(183, 36);
-      this.buttonDeleteCustomGenre.TabIndex = 5;
-      this.buttonDeleteCustomGenre.Text = "Delete Genre";
-      this.buttonDeleteCustomGenre.UseVisualStyleBackColor = true;
-      this.buttonDeleteCustomGenre.Click += new System.EventHandler(this.buttonDeleteCustomGenre_Click);
-      // 
-      // listViewCustomGenres
-      // 
-      this.listViewCustomGenres.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-      this.listViewCustomGenres.LabelEdit = true;
-      this.listViewCustomGenres.Location = new System.Drawing.Point(11, 30);
-      this.listViewCustomGenres.Name = "listViewCustomGenres";
-      this.listViewCustomGenres.Size = new System.Drawing.Size(364, 149);
-      this.listViewCustomGenres.TabIndex = 4;
-      this.listViewCustomGenres.UseCompatibleStateImageBehavior = false;
-      this.listViewCustomGenres.View = System.Windows.Forms.View.List;
-      // 
-      // buttonAddCustomGenre
-      // 
-      this.buttonAddCustomGenre.Id = "ae099f6e-773c-425e-9ec9-bf85df65f935";
-      this.buttonAddCustomGenre.Localisation = "AddCustomGenre";
-      this.buttonAddCustomGenre.LocalisationContext = "Settings";
-      this.buttonAddCustomGenre.Location = new System.Drawing.Point(389, 33);
-      this.buttonAddCustomGenre.Name = "buttonAddCustomGenre";
-      this.buttonAddCustomGenre.Size = new System.Drawing.Size(183, 36);
-      this.buttonAddCustomGenre.TabIndex = 3;
-      this.buttonAddCustomGenre.Text = "Add Genre";
-      this.buttonAddCustomGenre.UseVisualStyleBackColor = true;
-      this.buttonAddCustomGenre.Click += new System.EventHandler(this.buttonAddCustomGenre_Click);
-      // 
-      // groupBoxTagValidate
-      // 
-      this.groupBoxTagValidate.Controls.Add(this.ckAutoFixMp3);
-      this.groupBoxTagValidate.Controls.Add(this.ckValidateMP3);
-      this.groupBoxTagValidate.Id = "7717c908-7971-4500-92c4-3eab7b09be59";
-      this.groupBoxTagValidate.Localisation = "GroupBoxTagsValidate";
-      this.groupBoxTagValidate.LocalisationContext = "Settings";
-      this.groupBoxTagValidate.Location = new System.Drawing.Point(6, 317);
-      this.groupBoxTagValidate.Name = "groupBoxTagValidate";
-      this.groupBoxTagValidate.Size = new System.Drawing.Size(586, 87);
-      this.groupBoxTagValidate.TabIndex = 4;
-      this.groupBoxTagValidate.Text = "MP3 File Validation";
-      // 
-      // ckAutoFixMp3
-      // 
-      this.ckAutoFixMp3.Id = "82c36c1d-61ef-4839-9709-f0bb89ebaa02";
-      this.ckAutoFixMp3.Localisation = "AutoFixMp3";
-      this.ckAutoFixMp3.LocalisationContext = "Settings";
-      this.ckAutoFixMp3.Location = new System.Drawing.Point(12, 52);
-      this.ckAutoFixMp3.Name = "ckAutoFixMp3";
-      this.ckAutoFixMp3.Size = new System.Drawing.Size(559, 26);
-      this.ckAutoFixMp3.TabIndex = 1;
-      this.ckAutoFixMp3.Text = "Automatically fix errorneous Mp3 Files";
-      // 
-      // ckValidateMP3
-      // 
-      this.ckValidateMP3.Id = "47cd7155-1711-46cf-9168-881505ad7e87";
-      this.ckValidateMP3.Localisation = "ValidateMP3";
-      this.ckValidateMP3.LocalisationContext = "Settings";
-      this.ckValidateMP3.Location = new System.Drawing.Point(12, 29);
-      this.ckValidateMP3.Name = "ckValidateMP3";
-      this.ckValidateMP3.Size = new System.Drawing.Size(559, 26);
-      this.ckValidateMP3.TabIndex = 0;
-      this.ckValidateMP3.Text = "Validate MP3 Files while scanning the folder";
-      // 
-      // groupBoxTagsID3
-      // 
-      this.groupBoxTagsID3.Controls.Add(this.ckClearUserFramesOnSave);
-      this.groupBoxTagsID3.Controls.Add(this.comboBoxCharacterEncoding);
-      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseApe);
-      this.groupBoxTagsID3.Controls.Add(this.lbCharacterEncoding);
-      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV4);
-      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV3);
-      this.groupBoxTagsID3.Controls.Add(this.groupBoxID3Update);
-      this.groupBoxTagsID3.Id = "1fbe4009-e90a-475d-80d4-5ae18af00579";
-      this.groupBoxTagsID3.Localisation = "GroupBoxTagsID3";
-      this.groupBoxTagsID3.LocalisationContext = "Settings";
-      this.groupBoxTagsID3.Location = new System.Drawing.Point(6, 24);
-      this.groupBoxTagsID3.Name = "groupBoxTagsID3";
-      this.groupBoxTagsID3.Size = new System.Drawing.Size(586, 279);
-      this.groupBoxTagsID3.TabIndex = 3;
-      this.groupBoxTagsID3.Text = "ID3";
-      // 
-      // ckClearUserFramesOnSave
-      // 
-      this.ckClearUserFramesOnSave.Id = "69307696-777b-4791-b91b-7824bfa82600";
-      this.ckClearUserFramesOnSave.Localisation = "ClearUserFrames";
-      this.ckClearUserFramesOnSave.LocalisationContext = "Settings";
-      this.ckClearUserFramesOnSave.Location = new System.Drawing.Point(14, 245);
-      this.ckClearUserFramesOnSave.Name = "ckClearUserFramesOnSave";
-      this.ckClearUserFramesOnSave.Size = new System.Drawing.Size(559, 26);
-      this.ckClearUserFramesOnSave.TabIndex = 2;
-      this.ckClearUserFramesOnSave.Text = "Clear User Defined Frames on Save";
-      // 
-      // comboBoxCharacterEncoding
-      // 
-      this.comboBoxCharacterEncoding.FormattingEnabled = false;
-      this.comboBoxCharacterEncoding.Id = "fc50a15a-5f0f-488c-af4e-5eaceb744e36";
-      this.comboBoxCharacterEncoding.Items.AddRange(new object[] {
-            "Latin1",
-            "UTF-16",
-            "UTF16-BE",
-            "UTF-8",
-            "UTF-16LE"});
-      this.comboBoxCharacterEncoding.Location = new System.Drawing.Point(331, 18);
-      this.comboBoxCharacterEncoding.Name = "comboBoxCharacterEncoding";
-      this.comboBoxCharacterEncoding.Size = new System.Drawing.Size(171, 21);
-      this.comboBoxCharacterEncoding.TabIndex = 7;
-      this.comboBoxCharacterEncoding.TextEditorWidth = 152;
-      // 
-      // radioButtonUseApe
-      // 
-      this.radioButtonUseApe.Id = "01a48f9a-423e-4b38-b64d-98a9f19feb00";
-      this.radioButtonUseApe.Localisation = "UseAPE";
-      this.radioButtonUseApe.LocalisationContext = "Settings";
-      this.radioButtonUseApe.Location = new System.Drawing.Point(12, 92);
-      this.radioButtonUseApe.Name = "radioButtonUseApe";
-      this.radioButtonUseApe.RadioGroupName = "groupBoxTagsID3";
-      this.radioButtonUseApe.Size = new System.Drawing.Size(300, 26);
-      this.radioButtonUseApe.TabIndex = 2;
-      this.radioButtonUseApe.Text = "Use APE and ID3 V1 Tags";
-      // 
-      // lbCharacterEncoding
-      // 
-      this.lbCharacterEncoding.Localisation = "Encoding";
-      this.lbCharacterEncoding.LocalisationContext = "Settings";
-      this.lbCharacterEncoding.Location = new System.Drawing.Point(13, 23);
-      this.lbCharacterEncoding.Name = "lbCharacterEncoding";
-      this.lbCharacterEncoding.Size = new System.Drawing.Size(280, 23);
-      this.lbCharacterEncoding.TabIndex = 6;
-      this.lbCharacterEncoding.Text = "Encoding used for saving Tags:";
-      // 
-      // radioButtonUseV4
-      // 
-      this.radioButtonUseV4.Id = "f99c4ccf-7421-479d-bb55-fcf10f7b8096";
-      this.radioButtonUseV4.Localisation = "UseV4";
-      this.radioButtonUseV4.LocalisationContext = "Settings";
-      this.radioButtonUseV4.Location = new System.Drawing.Point(12, 69);
-      this.radioButtonUseV4.Name = "radioButtonUseV4";
-      this.radioButtonUseV4.RadioGroupName = "groupBoxTagsID3";
-      this.radioButtonUseV4.Size = new System.Drawing.Size(282, 26);
-      this.radioButtonUseV4.TabIndex = 1;
-      this.radioButtonUseV4.Text = "Use Version 2.4 for ID3 V2 Tags";
-      // 
-      // radioButtonUseV3
-      // 
-      this.radioButtonUseV3.Checked = true;
-      this.radioButtonUseV3.Id = "fa8acd7c-132c-4fe5-aecc-1aad2b0b149d";
-      this.radioButtonUseV3.Localisation = "UseV3";
-      this.radioButtonUseV3.LocalisationContext = "Settings";
-      this.radioButtonUseV3.Location = new System.Drawing.Point(12, 46);
-      this.radioButtonUseV3.Name = "radioButtonUseV3";
-      this.radioButtonUseV3.RadioGroupName = "groupBoxTagsID3";
-      this.radioButtonUseV3.Size = new System.Drawing.Size(271, 26);
-      this.radioButtonUseV3.TabIndex = 0;
-      this.radioButtonUseV3.Text = "Use Version 2.3 for ID3 V2 Tags";
-      // 
-      // groupBoxID3Update
-      // 
-      this.groupBoxID3Update.Controls.Add(this.checkBoxRemoveID3V1);
-      this.groupBoxID3Update.Controls.Add(this.checkBoxRemoveID3V2);
-      this.groupBoxID3Update.Controls.Add(this.radioButtonID3Both);
-      this.groupBoxID3Update.Controls.Add(this.radioButtonID3V2);
-      this.groupBoxID3Update.Controls.Add(this.radioButtonID3V1);
-      this.groupBoxID3Update.Id = "baf8fb33-b3c0-4b00-b12f-4bed4121d388";
-      this.groupBoxID3Update.Localisation = "GroupBoxID3Update";
-      this.groupBoxID3Update.LocalisationContext = "Settings";
-      this.groupBoxID3Update.Location = new System.Drawing.Point(12, 134);
-      this.groupBoxID3Update.Name = "groupBoxID3Update";
-      this.groupBoxID3Update.Size = new System.Drawing.Size(560, 99);
-      this.groupBoxID3Update.TabIndex = 1;
-      this.groupBoxID3Update.Text = "Update";
-      // 
-      // checkBoxRemoveID3V1
-      // 
-      this.checkBoxRemoveID3V1.Id = "84a37ab2-3021-4116-a9a4-d1443f38de13";
-      this.checkBoxRemoveID3V1.Localisation = "RemoveID3V1";
-      this.checkBoxRemoveID3V1.LocalisationContext = "Settings";
-      this.checkBoxRemoveID3V1.Location = new System.Drawing.Point(278, 34);
-      this.checkBoxRemoveID3V1.Name = "checkBoxRemoveID3V1";
-      this.checkBoxRemoveID3V1.Size = new System.Drawing.Size(255, 26);
-      this.checkBoxRemoveID3V1.TabIndex = 4;
-      this.checkBoxRemoveID3V1.Text = "Remove ID3V1";
-      // 
-      // checkBoxRemoveID3V2
-      // 
-      this.checkBoxRemoveID3V2.Id = "e0cb86ac-a7ea-40aa-8359-9b3715e7fa05";
-      this.checkBoxRemoveID3V2.Localisation = "RemoveID3V2";
-      this.checkBoxRemoveID3V2.LocalisationContext = "Settings";
-      this.checkBoxRemoveID3V2.Location = new System.Drawing.Point(278, 11);
-      this.checkBoxRemoveID3V2.Name = "checkBoxRemoveID3V2";
-      this.checkBoxRemoveID3V2.Size = new System.Drawing.Size(255, 26);
-      this.checkBoxRemoveID3V2.TabIndex = 3;
-      this.checkBoxRemoveID3V2.Text = "Remove ID3V2";
-      // 
-      // radioButtonID3Both
-      // 
-      this.radioButtonID3Both.Checked = true;
-      this.radioButtonID3Both.Id = "c22286e6-87f6-4a44-8668-1df84c7a73d6";
-      this.radioButtonID3Both.Localisation = "ID3Both";
-      this.radioButtonID3Both.LocalisationContext = "Settings";
-      this.radioButtonID3Both.Location = new System.Drawing.Point(15, 66);
-      this.radioButtonID3Both.Name = "radioButtonID3Both";
-      this.radioButtonID3Both.RadioGroupName = "groupBoxID3Update";
-      this.radioButtonID3Both.Size = new System.Drawing.Size(256, 26);
-      this.radioButtonID3Both.TabIndex = 2;
-      this.radioButtonID3Both.Text = "ID3V1 and ID3V2";
-      this.radioButtonID3Both.CheckedChanged += new System.EventHandler(this.radioButtonID3Both_CheckedChanged);
-      // 
-      // radioButtonID3V2
-      // 
-      this.radioButtonID3V2.Id = "0db1a591-cb74-4ede-8bb7-dfb6f136d66f";
-      this.radioButtonID3V2.Localisation = "ID3V2";
-      this.radioButtonID3V2.LocalisationContext = "Settings";
-      this.radioButtonID3V2.Location = new System.Drawing.Point(15, 43);
-      this.radioButtonID3V2.Name = "radioButtonID3V2";
-      this.radioButtonID3V2.RadioGroupName = "groupBoxID3Update";
-      this.radioButtonID3V2.Size = new System.Drawing.Size(55, 26);
-      this.radioButtonID3V2.TabIndex = 1;
-      this.radioButtonID3V2.Text = "ID3V2";
-      this.radioButtonID3V2.CheckedChanged += new System.EventHandler(this.radioButtonID3V2_CheckedChanged);
-      // 
-      // radioButtonID3V1
-      // 
-      this.radioButtonID3V1.Id = "242b64b1-fc1e-493d-a55f-6d5034b9f0fb";
-      this.radioButtonID3V1.Localisation = "ID3V1";
-      this.radioButtonID3V1.LocalisationContext = "Settings";
-      this.radioButtonID3V1.Location = new System.Drawing.Point(15, 20);
-      this.radioButtonID3V1.Name = "radioButtonID3V1";
-      this.radioButtonID3V1.RadioGroupName = "groupBoxID3Update";
-      this.radioButtonID3V1.Size = new System.Drawing.Size(55, 26);
-      this.radioButtonID3V1.TabIndex = 0;
-      this.radioButtonID3V1.Text = "ID3V1";
-      this.radioButtonID3V1.CheckedChanged += new System.EventHandler(this.radioButtonID3V1_CheckedChanged);
-      // 
       // tabPageSettingsGeneral
       // 
       this.tabPageSettingsGeneral.ActiveControl = null;
       this.tabPageSettingsGeneral.Controls.Add(this.groupBoxGeneral);
       this.tabPageSettingsGeneral.KeyTip = null;
       this.tabPageSettingsGeneral.Name = "tabPageSettingsGeneral";
-      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(824, 898);
+      this.tabPageSettingsGeneral.Size = new System.Drawing.Size(856, 852);
       this.tabPageSettingsGeneral.TabIndex = 0;
       // 
       // groupBoxGeneral
@@ -1355,7 +1093,7 @@ namespace MPTagThat
       this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
       this.tabPageSettingsTagsGeneral.KeyTip = null;
       this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
-      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(832, 909);
+      this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(864, 852);
       this.tabPageSettingsTagsGeneral.TabIndex = 2;
       // 
       // groupBoxTagsGeneral
@@ -1417,6 +1155,273 @@ namespace MPTagThat
       this.ckCopyArtistToAlbumArtist.TabIndex = 0;
       this.ckCopyArtistToAlbumArtist.Text = "Copy Artist to AlbumArtist when empty";
       // 
+      // tabPageSettingsTagsId3
+      // 
+      this.tabPageSettingsTagsId3.ActiveControl = null;
+      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxCustomGenres);
+      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagValidate);
+      this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
+      this.tabPageSettingsTagsId3.KeyTip = null;
+      this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
+      this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(848, 852);
+      this.tabPageSettingsTagsId3.TabIndex = 3;
+      // 
+      // groupBoxCustomGenres
+      // 
+      this.groupBoxCustomGenres.Controls.Add(this.buttonDeleteCustomGenre);
+      this.groupBoxCustomGenres.Controls.Add(this.listViewCustomGenres);
+      this.groupBoxCustomGenres.Controls.Add(this.buttonAddCustomGenre);
+      this.groupBoxCustomGenres.Id = "df78b6dd-743a-481b-9555-1707be5754ef";
+      this.groupBoxCustomGenres.Localisation = "GroupBoxCustomGenre";
+      this.groupBoxCustomGenres.LocalisationContext = "Settings";
+      this.groupBoxCustomGenres.Location = new System.Drawing.Point(7, 423);
+      this.groupBoxCustomGenres.Name = "groupBoxCustomGenres";
+      this.groupBoxCustomGenres.Size = new System.Drawing.Size(586, 199);
+      this.groupBoxCustomGenres.TabIndex = 5;
+      this.groupBoxCustomGenres.Text = "Custom Genres";
+      // 
+      // buttonDeleteCustomGenre
+      // 
+      this.buttonDeleteCustomGenre.Id = "bde29032-24fe-41e2-962d-7b902023f3cb";
+      this.buttonDeleteCustomGenre.Localisation = "DeleteCustomGenre";
+      this.buttonDeleteCustomGenre.LocalisationContext = "Settings";
+      this.buttonDeleteCustomGenre.Location = new System.Drawing.Point(388, 85);
+      this.buttonDeleteCustomGenre.Name = "buttonDeleteCustomGenre";
+      this.buttonDeleteCustomGenre.Size = new System.Drawing.Size(183, 36);
+      this.buttonDeleteCustomGenre.TabIndex = 5;
+      this.buttonDeleteCustomGenre.Text = "Delete Genre";
+      this.buttonDeleteCustomGenre.UseVisualStyleBackColor = true;
+      this.buttonDeleteCustomGenre.Click += new System.EventHandler(this.buttonDeleteCustomGenre_Click);
+      // 
+      // listViewCustomGenres
+      // 
+      this.listViewCustomGenres.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+      this.listViewCustomGenres.LabelEdit = true;
+      this.listViewCustomGenres.Location = new System.Drawing.Point(11, 30);
+      this.listViewCustomGenres.Name = "listViewCustomGenres";
+      this.listViewCustomGenres.Size = new System.Drawing.Size(364, 149);
+      this.listViewCustomGenres.TabIndex = 4;
+      this.listViewCustomGenres.UseCompatibleStateImageBehavior = false;
+      this.listViewCustomGenres.View = System.Windows.Forms.View.List;
+      // 
+      // buttonAddCustomGenre
+      // 
+      this.buttonAddCustomGenre.Id = "ae099f6e-773c-425e-9ec9-bf85df65f935";
+      this.buttonAddCustomGenre.Localisation = "AddCustomGenre";
+      this.buttonAddCustomGenre.LocalisationContext = "Settings";
+      this.buttonAddCustomGenre.Location = new System.Drawing.Point(389, 33);
+      this.buttonAddCustomGenre.Name = "buttonAddCustomGenre";
+      this.buttonAddCustomGenre.Size = new System.Drawing.Size(183, 36);
+      this.buttonAddCustomGenre.TabIndex = 3;
+      this.buttonAddCustomGenre.Text = "Add Genre";
+      this.buttonAddCustomGenre.UseVisualStyleBackColor = true;
+      this.buttonAddCustomGenre.Click += new System.EventHandler(this.buttonAddCustomGenre_Click);
+      // 
+      // groupBoxTagValidate
+      // 
+      this.groupBoxTagValidate.Controls.Add(this.ckAutoFixMp3);
+      this.groupBoxTagValidate.Controls.Add(this.ckValidateMP3);
+      this.groupBoxTagValidate.Id = "7717c908-7971-4500-92c4-3eab7b09be59";
+      this.groupBoxTagValidate.Localisation = "GroupBoxTagsValidate";
+      this.groupBoxTagValidate.LocalisationContext = "Settings";
+      this.groupBoxTagValidate.Location = new System.Drawing.Point(6, 317);
+      this.groupBoxTagValidate.Name = "groupBoxTagValidate";
+      this.groupBoxTagValidate.Size = new System.Drawing.Size(586, 87);
+      this.groupBoxTagValidate.TabIndex = 4;
+      this.groupBoxTagValidate.Text = "MP3 File Validation";
+      // 
+      // ckAutoFixMp3
+      // 
+      this.ckAutoFixMp3.Id = "82c36c1d-61ef-4839-9709-f0bb89ebaa02";
+      this.ckAutoFixMp3.Localisation = "AutoFixMp3";
+      this.ckAutoFixMp3.LocalisationContext = "Settings";
+      this.ckAutoFixMp3.Location = new System.Drawing.Point(12, 52);
+      this.ckAutoFixMp3.Name = "ckAutoFixMp3";
+      this.ckAutoFixMp3.Size = new System.Drawing.Size(559, 26);
+      this.ckAutoFixMp3.TabIndex = 1;
+      this.ckAutoFixMp3.Text = "Automatically fix errorneous Mp3 Files";
+      // 
+      // ckValidateMP3
+      // 
+      this.ckValidateMP3.Id = "47cd7155-1711-46cf-9168-881505ad7e87";
+      this.ckValidateMP3.Localisation = "ValidateMP3";
+      this.ckValidateMP3.LocalisationContext = "Settings";
+      this.ckValidateMP3.Location = new System.Drawing.Point(12, 29);
+      this.ckValidateMP3.Name = "ckValidateMP3";
+      this.ckValidateMP3.Size = new System.Drawing.Size(559, 26);
+      this.ckValidateMP3.TabIndex = 0;
+      this.ckValidateMP3.Text = "Validate MP3 Files while scanning the folder";
+      // 
+      // groupBoxTagsID3
+      // 
+      this.groupBoxTagsID3.Controls.Add(this.ckClearUserFramesOnSave);
+      this.groupBoxTagsID3.Controls.Add(this.comboBoxCharacterEncoding);
+      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseApe);
+      this.groupBoxTagsID3.Controls.Add(this.lbCharacterEncoding);
+      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV4);
+      this.groupBoxTagsID3.Controls.Add(this.radioButtonUseV3);
+      this.groupBoxTagsID3.Controls.Add(this.groupBoxID3Update);
+      this.groupBoxTagsID3.Id = "1fbe4009-e90a-475d-80d4-5ae18af00579";
+      this.groupBoxTagsID3.Localisation = "GroupBoxTagsID3";
+      this.groupBoxTagsID3.LocalisationContext = "Settings";
+      this.groupBoxTagsID3.Location = new System.Drawing.Point(6, 24);
+      this.groupBoxTagsID3.Name = "groupBoxTagsID3";
+      this.groupBoxTagsID3.Size = new System.Drawing.Size(586, 279);
+      this.groupBoxTagsID3.TabIndex = 3;
+      this.groupBoxTagsID3.Text = "ID3";
+      // 
+      // ckClearUserFramesOnSave
+      // 
+      this.ckClearUserFramesOnSave.Id = "69307696-777b-4791-b91b-7824bfa82600";
+      this.ckClearUserFramesOnSave.Localisation = "ClearUserFrames";
+      this.ckClearUserFramesOnSave.LocalisationContext = "Settings";
+      this.ckClearUserFramesOnSave.Location = new System.Drawing.Point(14, 245);
+      this.ckClearUserFramesOnSave.Name = "ckClearUserFramesOnSave";
+      this.ckClearUserFramesOnSave.Size = new System.Drawing.Size(559, 26);
+      this.ckClearUserFramesOnSave.TabIndex = 2;
+      this.ckClearUserFramesOnSave.Text = "Clear User Defined Frames on Save";
+      // 
+      // comboBoxCharacterEncoding
+      // 
+      this.comboBoxCharacterEncoding.FormattingEnabled = false;
+      this.comboBoxCharacterEncoding.Id = "fc50a15a-5f0f-488c-af4e-5eaceb744e36";
+      this.comboBoxCharacterEncoding.Items.AddRange(new object[] {
+            "Latin1",
+            "UTF-16",
+            "UTF16-BE",
+            "UTF-8",
+            "UTF-16LE"});
+      this.comboBoxCharacterEncoding.Location = new System.Drawing.Point(331, 18);
+      this.comboBoxCharacterEncoding.Name = "comboBoxCharacterEncoding";
+      this.comboBoxCharacterEncoding.Size = new System.Drawing.Size(171, 21);
+      this.comboBoxCharacterEncoding.TabIndex = 7;
+      this.comboBoxCharacterEncoding.TextEditorWidth = 152;
+      // 
+      // radioButtonUseApe
+      // 
+      this.radioButtonUseApe.Id = "01a48f9a-423e-4b38-b64d-98a9f19feb00";
+      this.radioButtonUseApe.Localisation = "UseAPE";
+      this.radioButtonUseApe.LocalisationContext = "Settings";
+      this.radioButtonUseApe.Location = new System.Drawing.Point(12, 92);
+      this.radioButtonUseApe.Name = "radioButtonUseApe";
+      this.radioButtonUseApe.RadioGroupName = "groupBoxTagsID3";
+      this.radioButtonUseApe.Size = new System.Drawing.Size(300, 26);
+      this.radioButtonUseApe.TabIndex = 2;
+      this.radioButtonUseApe.Text = "Use APE and ID3 V1 Tags";
+      // 
+      // lbCharacterEncoding
+      // 
+      this.lbCharacterEncoding.Localisation = "Encoding";
+      this.lbCharacterEncoding.LocalisationContext = "Settings";
+      this.lbCharacterEncoding.Location = new System.Drawing.Point(13, 23);
+      this.lbCharacterEncoding.Name = "lbCharacterEncoding";
+      this.lbCharacterEncoding.Size = new System.Drawing.Size(280, 23);
+      this.lbCharacterEncoding.TabIndex = 6;
+      this.lbCharacterEncoding.Text = "Encoding used for saving Tags:";
+      // 
+      // radioButtonUseV4
+      // 
+      this.radioButtonUseV4.Id = "f99c4ccf-7421-479d-bb55-fcf10f7b8096";
+      this.radioButtonUseV4.Localisation = "UseV4";
+      this.radioButtonUseV4.LocalisationContext = "Settings";
+      this.radioButtonUseV4.Location = new System.Drawing.Point(12, 69);
+      this.radioButtonUseV4.Name = "radioButtonUseV4";
+      this.radioButtonUseV4.RadioGroupName = "groupBoxTagsID3";
+      this.radioButtonUseV4.Size = new System.Drawing.Size(282, 26);
+      this.radioButtonUseV4.TabIndex = 1;
+      this.radioButtonUseV4.Text = "Use Version 2.4 for ID3 V2 Tags";
+      // 
+      // radioButtonUseV3
+      // 
+      this.radioButtonUseV3.Checked = true;
+      this.radioButtonUseV3.Id = "fa8acd7c-132c-4fe5-aecc-1aad2b0b149d";
+      this.radioButtonUseV3.Localisation = "UseV3";
+      this.radioButtonUseV3.LocalisationContext = "Settings";
+      this.radioButtonUseV3.Location = new System.Drawing.Point(12, 46);
+      this.radioButtonUseV3.Name = "radioButtonUseV3";
+      this.radioButtonUseV3.RadioGroupName = "groupBoxTagsID3";
+      this.radioButtonUseV3.Size = new System.Drawing.Size(271, 26);
+      this.radioButtonUseV3.TabIndex = 0;
+      this.radioButtonUseV3.Text = "Use Version 2.3 for ID3 V2 Tags";
+      // 
+      // groupBoxID3Update
+      // 
+      this.groupBoxID3Update.Controls.Add(this.checkBoxRemoveID3V1);
+      this.groupBoxID3Update.Controls.Add(this.checkBoxRemoveID3V2);
+      this.groupBoxID3Update.Controls.Add(this.radioButtonID3Both);
+      this.groupBoxID3Update.Controls.Add(this.radioButtonID3V2);
+      this.groupBoxID3Update.Controls.Add(this.radioButtonID3V1);
+      this.groupBoxID3Update.Id = "baf8fb33-b3c0-4b00-b12f-4bed4121d388";
+      this.groupBoxID3Update.Localisation = "GroupBoxID3Update";
+      this.groupBoxID3Update.LocalisationContext = "Settings";
+      this.groupBoxID3Update.Location = new System.Drawing.Point(12, 134);
+      this.groupBoxID3Update.Name = "groupBoxID3Update";
+      this.groupBoxID3Update.Size = new System.Drawing.Size(560, 99);
+      this.groupBoxID3Update.TabIndex = 1;
+      this.groupBoxID3Update.Text = "Update";
+      // 
+      // checkBoxRemoveID3V1
+      // 
+      this.checkBoxRemoveID3V1.Id = "84a37ab2-3021-4116-a9a4-d1443f38de13";
+      this.checkBoxRemoveID3V1.Localisation = "RemoveID3V1";
+      this.checkBoxRemoveID3V1.LocalisationContext = "Settings";
+      this.checkBoxRemoveID3V1.Location = new System.Drawing.Point(278, 34);
+      this.checkBoxRemoveID3V1.Name = "checkBoxRemoveID3V1";
+      this.checkBoxRemoveID3V1.Size = new System.Drawing.Size(255, 26);
+      this.checkBoxRemoveID3V1.TabIndex = 4;
+      this.checkBoxRemoveID3V1.Text = "Remove ID3V1";
+      // 
+      // checkBoxRemoveID3V2
+      // 
+      this.checkBoxRemoveID3V2.Id = "e0cb86ac-a7ea-40aa-8359-9b3715e7fa05";
+      this.checkBoxRemoveID3V2.Localisation = "RemoveID3V2";
+      this.checkBoxRemoveID3V2.LocalisationContext = "Settings";
+      this.checkBoxRemoveID3V2.Location = new System.Drawing.Point(278, 11);
+      this.checkBoxRemoveID3V2.Name = "checkBoxRemoveID3V2";
+      this.checkBoxRemoveID3V2.Size = new System.Drawing.Size(255, 26);
+      this.checkBoxRemoveID3V2.TabIndex = 3;
+      this.checkBoxRemoveID3V2.Text = "Remove ID3V2";
+      // 
+      // radioButtonID3Both
+      // 
+      this.radioButtonID3Both.Checked = true;
+      this.radioButtonID3Both.Id = "c22286e6-87f6-4a44-8668-1df84c7a73d6";
+      this.radioButtonID3Both.Localisation = "ID3Both";
+      this.radioButtonID3Both.LocalisationContext = "Settings";
+      this.radioButtonID3Both.Location = new System.Drawing.Point(15, 66);
+      this.radioButtonID3Both.Name = "radioButtonID3Both";
+      this.radioButtonID3Both.RadioGroupName = "groupBoxID3Update";
+      this.radioButtonID3Both.Size = new System.Drawing.Size(256, 26);
+      this.radioButtonID3Both.TabIndex = 2;
+      this.radioButtonID3Both.Text = "ID3V1 and ID3V2";
+      this.radioButtonID3Both.CheckedChanged += new System.EventHandler(this.radioButtonID3Both_CheckedChanged);
+      // 
+      // radioButtonID3V2
+      // 
+      this.radioButtonID3V2.Id = "0db1a591-cb74-4ede-8bb7-dfb6f136d66f";
+      this.radioButtonID3V2.Localisation = "ID3V2";
+      this.radioButtonID3V2.LocalisationContext = "Settings";
+      this.radioButtonID3V2.Location = new System.Drawing.Point(15, 43);
+      this.radioButtonID3V2.Name = "radioButtonID3V2";
+      this.radioButtonID3V2.RadioGroupName = "groupBoxID3Update";
+      this.radioButtonID3V2.Size = new System.Drawing.Size(55, 26);
+      this.radioButtonID3V2.TabIndex = 1;
+      this.radioButtonID3V2.Text = "ID3V2";
+      this.radioButtonID3V2.CheckedChanged += new System.EventHandler(this.radioButtonID3V2_CheckedChanged);
+      // 
+      // radioButtonID3V1
+      // 
+      this.radioButtonID3V1.Id = "242b64b1-fc1e-493d-a55f-6d5034b9f0fb";
+      this.radioButtonID3V1.Localisation = "ID3V1";
+      this.radioButtonID3V1.LocalisationContext = "Settings";
+      this.radioButtonID3V1.Location = new System.Drawing.Point(15, 20);
+      this.radioButtonID3V1.Name = "radioButtonID3V1";
+      this.radioButtonID3V1.RadioGroupName = "groupBoxID3Update";
+      this.radioButtonID3V1.Size = new System.Drawing.Size(55, 26);
+      this.radioButtonID3V1.TabIndex = 0;
+      this.radioButtonID3V1.Text = "ID3V1";
+      this.radioButtonID3V1.CheckedChanged += new System.EventHandler(this.radioButtonID3V1_CheckedChanged);
+      // 
       // tabPageSettingsLyricsCover
       // 
       this.tabPageSettingsLyricsCover.ActiveControl = null;
@@ -1424,32 +1429,112 @@ namespace MPTagThat
       this.tabPageSettingsLyricsCover.Controls.Add(this.groupBoxLyrics);
       this.tabPageSettingsLyricsCover.KeyTip = null;
       this.tabPageSettingsLyricsCover.Name = "tabPageSettingsLyricsCover";
-      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(840, 920);
+      this.tabPageSettingsLyricsCover.Size = new System.Drawing.Size(864, 852);
       this.tabPageSettingsLyricsCover.TabIndex = 4;
       // 
       // groupBoxPictures
       // 
+      this.groupBoxPictures.Controls.Add(this.groupBoxAlbumInfoSites);
       this.groupBoxPictures.Controls.Add(this.tbCoverSize);
       this.groupBoxPictures.Controls.Add(this.ckChangeCoverSize);
       this.groupBoxPictures.Controls.Add(this.ckOnlySaveFolderThumb);
-      this.groupBoxPictures.Controls.Add(this.comboBoxAmazonSite);
-      this.groupBoxPictures.Controls.Add(this.lbAmazonSearchSite);
       this.groupBoxPictures.Controls.Add(this.ckUseExistinbgThumb);
       this.groupBoxPictures.Controls.Add(this.ckOverwriteExistingCovers);
       this.groupBoxPictures.Controls.Add(this.ckCreateMissingFolderThumb);
       this.groupBoxPictures.Id = "bc9f8805-f201-4e8e-9ff9-8d04ec79ba1d";
       this.groupBoxPictures.Localisation = "GroupBoxPictures";
       this.groupBoxPictures.LocalisationContext = "Settings";
-      this.groupBoxPictures.Location = new System.Drawing.Point(6, 25);
+      this.groupBoxPictures.Location = new System.Drawing.Point(10, 15);
       this.groupBoxPictures.Name = "groupBoxPictures";
-      this.groupBoxPictures.Size = new System.Drawing.Size(590, 259);
+      this.groupBoxPictures.Size = new System.Drawing.Size(596, 349);
       this.groupBoxPictures.TabIndex = 5;
       this.groupBoxPictures.Text = "Pictures";
+      // 
+      // groupBoxAlbumInfoSites
+      // 
+      this.groupBoxAlbumInfoSites.Controls.Add(this.ckLastFm);
+      this.groupBoxAlbumInfoSites.Controls.Add(this.ckDiscogs);
+      this.groupBoxAlbumInfoSites.Controls.Add(this.comboBoxAmazonSite);
+      this.groupBoxAlbumInfoSites.Controls.Add(this.ckMusicBrainz);
+      this.groupBoxAlbumInfoSites.Controls.Add(this.ckAmazon);
+      this.groupBoxAlbumInfoSites.Id = "37a4b17b-f3e5-4a75-b739-508408c6307d";
+      this.groupBoxAlbumInfoSites.Localisation = "GroupBoxAlbumInfoSites";
+      this.groupBoxAlbumInfoSites.LocalisationContext = "Settings";
+      this.groupBoxAlbumInfoSites.Location = new System.Drawing.Point(21, 194);
+      this.groupBoxAlbumInfoSites.Name = "groupBoxAlbumInfoSites";
+      this.groupBoxAlbumInfoSites.Size = new System.Drawing.Size(558, 147);
+      this.groupBoxAlbumInfoSites.TabIndex = 14;
+      this.groupBoxAlbumInfoSites.Text = "Album Information Sites";
+      // 
+      // ckLastFm
+      // 
+      this.ckLastFm.Checked = false;
+      this.ckLastFm.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckLastFm.Id = "7d494528-0c56-480a-9599-f1ca298e5804";
+      this.ckLastFm.Localisation = "ckLastFm";
+      this.ckLastFm.LocalisationContext = "groupBoxAlbumInfoSites";
+      this.ckLastFm.Location = new System.Drawing.Point(12, 107);
+      this.ckLastFm.Name = "ckLastFm";
+      this.ckLastFm.Size = new System.Drawing.Size(104, 24);
+      this.ckLastFm.TabIndex = 3;
+      this.ckLastFm.Text = "LastFM";
+      // 
+      // ckDiscogs
+      // 
+      this.ckDiscogs.Checked = false;
+      this.ckDiscogs.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckDiscogs.Id = "1ce93b04-a14d-4c28-9650-5322aa49c860";
+      this.ckDiscogs.Localisation = "ckDiscogs";
+      this.ckDiscogs.LocalisationContext = "groupBoxAlbumInfoSites";
+      this.ckDiscogs.Location = new System.Drawing.Point(12, 79);
+      this.ckDiscogs.Name = "ckDiscogs";
+      this.ckDiscogs.Size = new System.Drawing.Size(104, 24);
+      this.ckDiscogs.TabIndex = 2;
+      this.ckDiscogs.Text = "Discogs";
+      // 
+      // comboBoxAmazonSite
+      // 
+      this.comboBoxAmazonSite.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.comboBoxAmazonSite.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.comboBoxAmazonSite.Editable = false;
+      this.comboBoxAmazonSite.FormattingEnabled = true;
+      this.comboBoxAmazonSite.Id = "00255aaf-7dc5-4aad-bbef-25bcdf98f8a0";
+      this.comboBoxAmazonSite.Location = new System.Drawing.Point(150, 27);
+      this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
+      this.comboBoxAmazonSite.Size = new System.Drawing.Size(232, 21);
+      this.comboBoxAmazonSite.TabIndex = 10;
+      this.comboBoxAmazonSite.TextEditorWidth = 213;
+      // 
+      // ckMusicBrainz
+      // 
+      this.ckMusicBrainz.Checked = false;
+      this.ckMusicBrainz.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckMusicBrainz.Id = "4ff395e3-dde0-40fb-a55a-ea72d01c3ca6";
+      this.ckMusicBrainz.Localisation = "ckMusicBrainz";
+      this.ckMusicBrainz.LocalisationContext = "groupBoxAlbumInfoSites";
+      this.ckMusicBrainz.Location = new System.Drawing.Point(12, 54);
+      this.ckMusicBrainz.Name = "ckMusicBrainz";
+      this.ckMusicBrainz.Size = new System.Drawing.Size(104, 24);
+      this.ckMusicBrainz.TabIndex = 1;
+      this.ckMusicBrainz.Text = "MusicBrainz";
+      // 
+      // ckAmazon
+      // 
+      this.ckAmazon.Checked = false;
+      this.ckAmazon.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckAmazon.Id = "19d637d3-cfaa-4280-b50e-ca57ecf0fc56";
+      this.ckAmazon.Localisation = "ckAmazon";
+      this.ckAmazon.LocalisationContext = "groupBoxAlbumInfoSites";
+      this.ckAmazon.Location = new System.Drawing.Point(12, 26);
+      this.ckAmazon.Name = "ckAmazon";
+      this.ckAmazon.Size = new System.Drawing.Size(104, 24);
+      this.ckAmazon.TabIndex = 0;
+      this.ckAmazon.Text = "Amazon";
       // 
       // tbCoverSize
       // 
       this.tbCoverSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
-      this.tbCoverSize.Location = new System.Drawing.Point(44, 162);
+      this.tbCoverSize.Location = new System.Drawing.Point(44, 158);
       this.tbCoverSize.MaxLength = 5;
       this.tbCoverSize.Multiline = true;
       this.tbCoverSize.Name = "tbCoverSize";
@@ -1465,9 +1550,9 @@ namespace MPTagThat
       this.ckChangeCoverSize.Id = "cd419dc0-5ec2-428c-9d61-fde91267619f";
       this.ckChangeCoverSize.Localisation = "ChangeCoverSize";
       this.ckChangeCoverSize.LocalisationContext = "Settings";
-      this.ckChangeCoverSize.Location = new System.Drawing.Point(27, 135);
+      this.ckChangeCoverSize.Location = new System.Drawing.Point(27, 133);
       this.ckChangeCoverSize.Name = "ckChangeCoverSize";
-      this.ckChangeCoverSize.Size = new System.Drawing.Size(484, 26);
+      this.ckChangeCoverSize.Size = new System.Drawing.Size(490, 26);
       this.ckChangeCoverSize.TabIndex = 12;
       this.ckChangeCoverSize.Text = "Save covers with a maximum width of:";
       // 
@@ -1481,28 +1566,6 @@ namespace MPTagThat
       this.ckOnlySaveFolderThumb.Size = new System.Drawing.Size(531, 26);
       this.ckOnlySaveFolderThumb.TabIndex = 11;
       this.ckOnlySaveFolderThumb.Text = "Save Cover Art only to folder thumb. Don\'t touch the music file";
-      // 
-      // comboBoxAmazonSite
-      // 
-      this.comboBoxAmazonSite.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.comboBoxAmazonSite.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.comboBoxAmazonSite.Editable = false;
-      this.comboBoxAmazonSite.FormattingEnabled = true;
-      this.comboBoxAmazonSite.Id = "00255aaf-7dc5-4aad-bbef-25bcdf98f8a0";
-      this.comboBoxAmazonSite.Location = new System.Drawing.Point(27, 217);
-      this.comboBoxAmazonSite.Name = "comboBoxAmazonSite";
-      this.comboBoxAmazonSite.Size = new System.Drawing.Size(197, 21);
-      this.comboBoxAmazonSite.TabIndex = 10;
-      // 
-      // lbAmazonSearchSite
-      // 
-      this.lbAmazonSearchSite.Localisation = "AmazonSite";
-      this.lbAmazonSearchSite.LocalisationContext = "Settings";
-      this.lbAmazonSearchSite.Location = new System.Drawing.Point(27, 196);
-      this.lbAmazonSearchSite.Name = "lbAmazonSearchSite";
-      this.lbAmazonSearchSite.Size = new System.Drawing.Size(321, 13);
-      this.lbAmazonSearchSite.TabIndex = 9;
-      this.lbAmazonSearchSite.Text = "Amazon Search Site:";
       // 
       // ckUseExistinbgThumb
       // 
@@ -1545,7 +1608,7 @@ namespace MPTagThat
       this.groupBoxLyrics.Id = "455cf3ea-34c2-46c3-9024-547257e6e4c5";
       this.groupBoxLyrics.Localisation = "GroupBoxLyrics";
       this.groupBoxLyrics.LocalisationContext = "Settings";
-      this.groupBoxLyrics.Location = new System.Drawing.Point(12, 295);
+      this.groupBoxLyrics.Location = new System.Drawing.Point(13, 375);
       this.groupBoxLyrics.Name = "groupBoxLyrics";
       this.groupBoxLyrics.Size = new System.Drawing.Size(590, 284);
       this.groupBoxLyrics.TabIndex = 4;
@@ -2680,7 +2743,7 @@ namespace MPTagThat
       this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel3.Location = new System.Drawing.Point(210, 1);
       this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(842, 56);
+      this.panel3.Size = new System.Drawing.Size(866, 56);
       this.panel3.TabIndex = 2;
       this.panel3.Text = "panel3";
       // 
@@ -2717,7 +2780,7 @@ namespace MPTagThat
       this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
       this.backstageViewPanel1.Location = new System.Drawing.Point(0, 1);
       this.backstageViewPanel1.Name = "backstageViewPanel1";
-      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 991);
+      this.backstageViewPanel1.Size = new System.Drawing.Size(210, 923);
       this.backstageViewPanel1.TabIndex = 0;
       // 
       // groupedNavigationBar1
@@ -2730,7 +2793,7 @@ namespace MPTagThat
       this.groupedNavigationBar1.Id = "0e02f3a9-3b46-4372-b562-76ec70fa44da";
       this.groupedNavigationBar1.Location = new System.Drawing.Point(0, 0);
       this.groupedNavigationBar1.Name = "groupedNavigationBar1";
-      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 991);
+      this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 923);
       this.groupedNavigationBar1.TabIndex = 0;
       this.groupedNavigationBar1.Text = "Settings";
       this.groupedNavigationBar1.VisibleOutlookGroupHeadersCount = 0;
@@ -3061,7 +3124,7 @@ namespace MPTagThat
       this.ribbonTabPageTag.KeyTip = null;
       this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-      this.ribbonTabPageTag.Size = new System.Drawing.Size(1209, 99);
+      this.ribbonTabPageTag.Size = new System.Drawing.Size(1233, 99);
       this.ribbonTabPageTag.TabIndex = 0;
       this.ribbonTabPageTag.Tag = "Tags";
       this.ribbonTabPageTag.Text = "Tags";
@@ -3240,7 +3303,7 @@ namespace MPTagThat
       // 
       // buttonValidateSong
       // 
-      this.buttonValidateSong.CommandName = "ValidateSong";
+      this.buttonValidateSong.CommandName = "ValidateMP3File";
       this.buttonValidateSong.DescriptionText = null;
       this.buttonValidateSong.Id = "6b558c4a-6aeb-42e1-bedf-c5e7e0ec886e";
       this.buttonValidateSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
@@ -3264,7 +3327,7 @@ namespace MPTagThat
       // 
       // buttonFixSong
       // 
-      this.buttonFixSong.CommandName = "FixSong";
+      this.buttonFixSong.CommandName = "FixMP3File";
       this.buttonFixSong.Id = "2e9164c1-fb65-4678-9aff-2dc474add3ad";
       this.buttonFixSong.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonFixSong.LargeImages.Images"))))});
@@ -4025,7 +4088,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 150);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1209, 803);
+      this.panelMiddle.Size = new System.Drawing.Size(1233, 735);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -4036,7 +4099,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(877, 531);
+      this.panelMiddleTop.Size = new System.Drawing.Size(901, 463);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -4044,7 +4107,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 88);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(877, 443);
+      this.panelFileList.Size = new System.Drawing.Size(901, 375);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterTop
@@ -4067,7 +4130,7 @@ namespace MPTagThat
       this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
       this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
       this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-      this.panelMiddleDBSearch.Size = new System.Drawing.Size(877, 80);
+      this.panelMiddleDBSearch.Size = new System.Drawing.Size(901, 80);
       this.panelMiddleDBSearch.TabIndex = 10;
       // 
       // splitterLeft
@@ -4093,7 +4156,7 @@ namespace MPTagThat
       this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
       this.panelLeft.Location = new System.Drawing.Point(0, 0);
       this.panelLeft.Name = "panelLeft";
-      this.panelLeft.Size = new System.Drawing.Size(150, 803);
+      this.panelLeft.Size = new System.Drawing.Size(150, 735);
       this.panelLeft.TabIndex = 1;
       // 
       // panelLeftTop
@@ -4101,7 +4164,7 @@ namespace MPTagThat
       this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
       this.panelLeftTop.Name = "panelLeftTop";
-      this.panelLeftTop.Size = new System.Drawing.Size(150, 803);
+      this.panelLeftTop.Size = new System.Drawing.Size(150, 735);
       this.panelLeftTop.TabIndex = 4;
       // 
       // splitterRight
@@ -4115,7 +4178,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(1035, 0);
+      this.splitterRight.Location = new System.Drawing.Point(1059, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4128,9 +4191,9 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(1043, 0);
+      this.panelRight.Location = new System.Drawing.Point(1067, 0);
       this.panelRight.Name = "panelRight";
-      this.panelRight.Size = new System.Drawing.Size(166, 803);
+      this.panelRight.Size = new System.Drawing.Size(166, 735);
       this.panelRight.TabIndex = 3;
       // 
       // splitterBottom
@@ -4143,7 +4206,7 @@ namespace MPTagThat
       this.splitterBottom.ExpandParentForm = false;
       this.splitterBottom.Localisation = "collapsibleSplitter1";
       this.splitterBottom.LocalisationContext = "Main";
-      this.splitterBottom.Location = new System.Drawing.Point(150, 531);
+      this.splitterBottom.Location = new System.Drawing.Point(150, 463);
       this.splitterBottom.Name = "collapsibleSplitter1";
       this.splitterBottom.TabIndex = 6;
       this.splitterBottom.TabStop = false;
@@ -4154,9 +4217,9 @@ namespace MPTagThat
       // panelMiddleBottom
       // 
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 539);
+      this.panelMiddleBottom.Location = new System.Drawing.Point(150, 471);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(893, 264);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(917, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -4167,7 +4230,7 @@ namespace MPTagThat
       this.splitterPlayer.ControlToHide = this.panelBottom;
       this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.splitterPlayer.ExpandParentForm = false;
-      this.splitterPlayer.Location = new System.Drawing.Point(0, 953);
+      this.splitterPlayer.Location = new System.Drawing.Point(0, 885);
       this.splitterPlayer.Name = "splitterPlayer";
       this.splitterPlayer.TabIndex = 13;
       this.splitterPlayer.TabStop = false;
@@ -4190,7 +4253,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1209, 1068);
+      this.ClientSize = new System.Drawing.Size(1233, 1000);
       this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
@@ -4229,12 +4292,6 @@ namespace MPTagThat
       this.backstageViewPageOptions.PerformLayout();
       this.panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlSettings)).EndInit();
-      this.tabPageSettingsTagsId3.ResumeLayout(false);
-      this.groupBoxCustomGenres.ResumeLayout(false);
-      this.groupBoxTagValidate.ResumeLayout(false);
-      this.groupBoxTagsID3.ResumeLayout(false);
-      this.groupBoxTagsID3.PerformLayout();
-      this.groupBoxID3Update.ResumeLayout(false);
       this.tabPageSettingsGeneral.ResumeLayout(false);
       this.groupBoxGeneral.ResumeLayout(false);
       this.groupBoxGeneral.PerformLayout();
@@ -4245,9 +4302,17 @@ namespace MPTagThat
       this.groupBoxKeys.PerformLayout();
       this.tabPageSettingsTagsGeneral.ResumeLayout(false);
       this.groupBoxTagsGeneral.ResumeLayout(false);
+      this.tabPageSettingsTagsId3.ResumeLayout(false);
+      this.groupBoxCustomGenres.ResumeLayout(false);
+      this.groupBoxTagValidate.ResumeLayout(false);
+      this.groupBoxTagsID3.ResumeLayout(false);
+      this.groupBoxTagsID3.PerformLayout();
+      this.groupBoxID3Update.ResumeLayout(false);
       this.tabPageSettingsLyricsCover.ResumeLayout(false);
       this.groupBoxPictures.ResumeLayout(false);
       this.groupBoxPictures.PerformLayout();
+      this.groupBoxAlbumInfoSites.ResumeLayout(false);
+      this.groupBoxAlbumInfoSites.PerformLayout();
       this.groupBoxLyrics.ResumeLayout(false);
       this.groupBoxLyricsSites.ResumeLayout(false);
       this.tabPageSettingsDatabase.ResumeLayout(false);
@@ -4560,7 +4625,6 @@ namespace MPTagThat
     private Elegant.Ui.TabPage tabPageSettingsLyricsCover;
     private Core.WinControls.MPTGroupBox groupBoxPictures;
     private Core.WinControls.MPTComboBox comboBoxAmazonSite;
-    private Core.WinControls.MPTLabel lbAmazonSearchSite;
     private Core.WinControls.MPTCheckBox ckUseExistinbgThumb;
     private Core.WinControls.MPTCheckBox ckOverwriteExistingCovers;
     private Core.WinControls.MPTCheckBox ckCreateMissingFolderThumb;
@@ -4686,6 +4750,11 @@ namespace MPTagThat
     private Core.WinControls.MPTButton buttonDeleteCustomGenre;
     private ListView listViewCustomGenres;
     private Core.WinControls.MPTButton buttonAddCustomGenre;
+    private Core.WinControls.MPTGroupBox groupBoxAlbumInfoSites;
+    private Core.WinControls.MPTCheckBox ckLastFm;
+    private Core.WinControls.MPTCheckBox ckDiscogs;
+    private Core.WinControls.MPTCheckBox ckMusicBrainz;
+    private Core.WinControls.MPTCheckBox ckAmazon;
   }
 }
 

@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -832,7 +833,6 @@ namespace MPTagThat
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       gridViewControl.CheckForChanges();
-
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
       Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = Location;
@@ -952,8 +952,8 @@ namespace MPTagThat
       ApplicationCommands.SaveAsThumb.Executed += SaveAsThumb_Executed;
       ApplicationCommands.Find.Executed += TagsTabButton_Executed;
       ApplicationCommands.Replace.Executed += TagsTabButton_Executed;
-      ApplicationCommands.ValidateSong.Executed += TagsTabButton_Executed;
-      ApplicationCommands.FixSong.Executed += TagsTabButton_Executed;
+      ApplicationCommands.FixMP3File.Executed += TagsTabButton_Executed;
+      ApplicationCommands.ValidateMP3File.Executed += TagsTabButton_Executed;
       ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
       ApplicationCommands.Bpm.Executed += TagsTabButton_Executed;
 
@@ -1947,6 +1947,11 @@ namespace MPTagThat
 
       ckSwitchArtist.Checked = Options.MainSettings.SwitchArtist;
 
+      ckAmazon.Checked = Options.MainSettings.AlbumInfoSites.Contains("Amazon");
+      ckMusicBrainz.Checked = Options.MainSettings.AlbumInfoSites.Contains("MusicBrainz");
+      ckDiscogs.Checked = Options.MainSettings.AlbumInfoSites.Contains("Discogs");
+      ckLastFm.Checked = Options.MainSettings.AlbumInfoSites.Contains("LastFM");
+
       comboBoxAmazonSite.Items.Clear();
       comboBoxAmazonSite.Items.Add(new Item("United States (US)", "com", ""));
       comboBoxAmazonSite.Items.Add(new Item("Deutschland (DE)", "de", ""));
@@ -2506,7 +2511,7 @@ namespace MPTagThat
         Options.MainSettings.CustomGenres.Add(item.Text);
       }
 
-      // Tell the Tag Ediit Control to refresh the Custom Genres
+      // Tell the Tag Edit Control to refresh the Custom Genres
       QueueMessage msg = new QueueMessage();
       msg.MessageData["action"] = "customgenresrefreshed";
       IMessageQueue msgQueue = ServiceScope.Get<IMessageBroker>().GetOrCreate("message");
@@ -2514,6 +2519,13 @@ namespace MPTagThat
 
       Options.MainSettings.SwitchArtist = ckSwitchArtist.Checked;
       Options.MainSettings.AmazonSite = (string)(comboBoxAmazonSite.SelectedItem as Item).Value;
+
+      var albumInfoSites = new List<string>();
+      if (ckAmazon.Checked) albumInfoSites.Add("Amazon");
+      if (ckMusicBrainz.Checked) albumInfoSites.Add("MusicBrainz");
+      if (ckDiscogs.Checked) albumInfoSites.Add("Discogs");
+      if (ckLastFm.Checked) albumInfoSites.Add("LastFM");
+      Options.MainSettings.AlbumInfoSites = albumInfoSites;
 
       #endregion
 
@@ -2990,6 +3002,19 @@ namespace MPTagThat
       _dialog = null;
       _showForm = false;
       bool handled = true;
+
+      bool checkSelections = false;
+      string command = Action.ActionToCommand(action, ref checkSelections);
+      if (command != "")
+      {
+        if (checkSelections)
+        {
+          gridViewControl.CheckSelections(true);
+        }
+        TracksGridView.ExecuteCommand(command);
+        return true;
+      }
+      
       switch (action.ID)
       {
         case Action.ActionType.ACTION_HELP:
@@ -2998,14 +3023,6 @@ namespace MPTagThat
 
         case Action.ActionType.ACTION_EXIT:
           Application.Exit();
-          break;
-
-        case Action.ActionType.ACTION_SAVE:
-          gridViewControl.Save();
-          break;
-
-        case Action.ActionType.ACTION_SAVEALL:
-          gridViewControl.SaveAll();
           break;
 
         case Action.ActionType.ACTION_FILENAME2TAG:
@@ -3026,13 +3043,6 @@ namespace MPTagThat
           _showForm = false;
           break;
 
-        case Action.ActionType.ACTION_IDENTIFYFILE:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-
-          gridViewControl.IdentifyFiles();
-          break;
-
         case Action.ActionType.ACTION_TAGFROMINTERNET:
           if (!gridViewControl.CheckSelections(true))
             break;
@@ -3050,16 +3060,6 @@ namespace MPTagThat
           dialog = new OrganiseFiles(this);
           ShowDialogInDetailPanel(dialog);
           _showForm = false;
-          break;
-
-        case Action.ActionType.ACTION_GETCOVERART:
-          if (gridViewControl.CheckSelections(true))
-            gridViewControl.GetCoverArt();
-          break;
-
-        case Action.ActionType.ACTION_GETLYRICS:
-          if (gridViewControl.CheckSelections(true))
-            gridViewControl.GetLyrics();
           break;
 
         case Action.ActionType.ACTION_OPTIONS:
@@ -3151,31 +3151,6 @@ namespace MPTagThat
           splitterRight.ToggleState();
           break;
 
-        case Action.ActionType.ACTION_REMOVECOMMENT:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.RemoveComments();
-          break;
-
-        case Action.ActionType.ACTION_REMOVEPICTURE:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.RemovePictures();
-          break;
-
-        case Action.ActionType.ACTION_VALIDATEMP3:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ValidateMP3File();
-          gridViewControl.View.ClearSelection();
-          break;
-
-        case Action.ActionType.ACTION_FIXMP3:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.FixMP3File();
-          break;
-
         case Action.ActionType.ACTION_FIND:
           _dialog = new FindReplace(this);
           (_dialog as FindReplace).Replace = false;
@@ -3188,12 +3163,6 @@ namespace MPTagThat
           (_dialog as FindReplace).Replace = true;
           ShowCenteredForm(_dialog);
           _showForm = false; // Don't show the dialog in the Keypress event
-          break;
-
-        case Action.ActionType.ACTION_REPLAYGAIN:
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ReplayGain();
           break;
       }
 
@@ -3508,7 +3477,7 @@ namespace MPTagThat
     private void Save_Executed(object sender, CommandExecutedEventArgs e)
     {
       this.ribbon.BackstageViewVisible = false;
-      TracksGridView.Save();
+      TracksGridView.ExecuteCommand("Save");
     }
 
     /// <summary>
@@ -3667,13 +3636,21 @@ namespace MPTagThat
 
       switch (e.Command.Name)
       {
+        case "IdentifyFiles":
+        case "GetCoverArt":
+        case "GetLyrics":
+        case "RemoveComment":
+        case "RemoveCoverArt":
+        case "ValidateMP3File":
+        case "FixMP3File":
+        case "ReplayGain":
+        case "Bpm":
+          TracksGridView.ExecuteCommand(e.Command.Name);
+          break;
+        
         case "FileNameToTag":
           FileNameToTag.FileNameToTag dlgFileNameToTag = new FileNameToTag.FileNameToTag(this);
           ShowDialogInDetailPanel(dlgFileNameToTag);
-          break;
-
-        case "IdentifyFiles":
-          TracksGridView.IdentifyFiles();
           break;
 
         case "TagFromInternet":
@@ -3683,24 +3660,8 @@ namespace MPTagThat
           SetGalleryItem();
           break;
 
-        case "GetCoverArt":
-          TracksGridView.GetCoverArt();
-          break;
-
-        case "GetLyrics":
-          TracksGridView.GetLyrics();
-          break;
-
         case "AutoNumber":
           TracksGridView.AutoNumber();
-          break;
-
-        case "RemoveComment":
-          TracksGridView.RemoveComments();
-          break;
-
-        case "RemoveCoverArt":
-          TracksGridView.RemovePictures();
           break;
 
         case "OrganiseFiles":
@@ -3770,31 +3731,6 @@ namespace MPTagThat
           replaceDlg.Replace = true;
           ShowCenteredForm(replaceDlg);
           break;
-
-        case "ValidateSong":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ValidateMP3File();
-          gridViewControl.View.ClearSelection();
-          break;
-
-        case "FixSong":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.FixMP3File();
-          break;
-
-        case "ReplayGain":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.ReplayGain();
-          break;
-
-        case "Bpm":
-          if (!gridViewControl.CheckSelections(true))
-            break;
-          gridViewControl.Bpm();
-          break;
       }
     }
 
@@ -3823,7 +3759,7 @@ namespace MPTagThat
     private void SaveAsThumb_Executed(object sender, CommandExecutedEventArgs e)
     {
       TrackData track = TracksGridView.SelectedTrack;
-      TracksGridView.SavePicture(track);
+      Util.SavePicture(track);
     }
 
     #endregion
@@ -4016,7 +3952,8 @@ namespace MPTagThat
 
       if (Util.IsPicture(fileName) || fileName.ToLower().StartsWith("http"))
       {
-        TracksGridView.CoverArtDrop(fileName);
+        object[] cmdParm = new[] {fileName};
+        TracksGridView.ExecuteCommand("CoverArtDrop", cmdParm, true);
       }
     }
 

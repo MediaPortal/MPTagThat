@@ -18,42 +18,27 @@
 #region
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Elegant.Ui;
-using FreeImageAPI;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
-using MPTagThat.Core.Amazon;
-using MPTagThat.Core.MusicBrainz;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
-using MPTagThat.TagEdit;
 using TagLib;
-using TagLib.Id3v2;
-using Un4seen.Bass;
-using Un4seen.Bass.AddOn.Fx;
-using Un4seen.Bass.AddOn.Mix;
-using Control = System.Windows.Forms.Control;
-using File = TagLib.File;
 using MessageBox = System.Windows.Forms.MessageBox;
 using MessageBoxButtons = System.Windows.Forms.MessageBoxButtons;
 using MessageBoxIcon = System.Windows.Forms.MessageBoxIcon;
 using Picture = MPTagThat.Core.Common.Picture;
-using Tag = TagLib.Id3v1.Tag;
 using TextBox = System.Windows.Forms.TextBox;
 
 #endregion
@@ -72,7 +57,6 @@ namespace MPTagThat.GridView
     private readonly IThemeManager theme = ServiceScope.Get<IThemeManager>();
     private bool _actionCopy;
 
-    private Thread _asyncThread;
     private BackgroundWorker _bgWorker;
     private Rectangle _dragBoxFromMouseDown;
 
@@ -87,10 +71,11 @@ namespace MPTagThat.GridView
     private Point _screenOffset;
     private bool _waitCursorActive;
 
-    private BPMPROCESSPROC _bpmProc;
-
     // Get Properties to be able to sort on column heading 
     private readonly PropertyDescriptorCollection _propColl = TypeDescriptor.GetProperties(new TrackData());
+
+    public delegate void CommandThreadEnd(object sender, EventArgs args);
+    public event CommandThreadEnd CommandThreadEnded;
 
     #region Nested type: ThreadSafeAddErrorDelegate
 
@@ -113,21 +98,6 @@ namespace MPTagThat.GridView
     #region Nested type: ThreadSafeGridDelegate1
 
     private delegate void ThreadSafeGridDelegate1(object sender, DoWorkEventArgs e);
-
-    #endregion
-
-    #region Imports
-
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int InitGainAnalysis(long samplefreq);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int ResetSampleFrequency(long samplefreq);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern int AnalyzeSamples(double[] left_samples, double[] right_samples, UIntPtr num_samples, int num_channels);
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern float GetTitleGain();
-    [DllImport("gain.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-    public static extern float GetAlbumGain();
 
     #endregion
 
@@ -163,6 +133,22 @@ namespace MPTagThat.GridView
     public FindResult ResultFind
     {
       set { _findResult = value; }
+    }
+
+    /// <summary>
+    /// Returns the instance of the mainform
+    /// </summary>
+    public Main MainForm
+    {
+      get { return _main; }
+    }
+
+    /// <summary>
+    /// Returns the NonMusic File Section
+    /// </summary>
+    public List<FileInfo> NonMusicFiles
+    {
+      get { return _nonMusicFiles; }
     }
 
     #endregion
@@ -248,732 +234,129 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    #region Save
+    #region Command Execution
 
-    /// <summary>
-    ///   Save the Selected files only
-    /// </summary>
-    public void Save()
+    public void ExecuteCommand(string command)
+    {
+      object[] parameter = {};
+      ExecuteCommand(command, parameter, true);
+    }
+
+    public void ExecuteCommand(string command, object parameters, bool runAsync)
     {
       log.Trace(">>>");
+      log.Debug("Invoking Command: {0}", command);
 
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
+      object[] parameter = { command , parameters};
 
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      if (runAsync)
       {
-        
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected || (string)row.Tag != "Changed")
+        if (_bgWorker == null)
         {
-          log.Trace("Save: Row {0} not selected or changed", row.Index);
-          continue;
+          _bgWorker = new BackgroundWorker();
+          _bgWorker.DoWork += ExecuteCommandThread;
         }
 
-        count++;
-        try
+        if (!_bgWorker.IsBusy)
         {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-
-          TrackData track = Options.Songlist[row.Index];
-          SaveTrack(track, row.Index);
-        }
-        catch (Exception ex)
-        {
-          Options.Songlist[row.Index].Status = 2;
-          AddErrorMessage(row, ex.Message);
+          _bgWorker.RunWorkerAsync(parameter);
         }
       }
-
-      Util.SendProgress("");
-      Options.ReadOnlyFileHandling = 2; //No
-      ResetProgressBar();
-
-      _itemsChanged = false;
-      // check, if we still have changed items in the list
-      foreach (TrackData track in Options.Songlist)
+      else
       {
-        if (track.Changed)
-          _itemsChanged = true;
+        ExecuteCommandThread(this, new DoWorkEventArgs(parameter));
       }
-
       log.Trace("<<<");
     }
 
-    /// <summary>
-    ///   Save All changed files, regardless, if they are selected or not
-    /// </summary>
-    public void SaveAll()
-    {
-      SaveAll(true);
-    }
-
-    /// <summary>
-    ///   Save All changed files, regardless, if they are selected or not
-    /// </summary>
-    /// <param name = "showProgressDialog">Show / Hide the progress dialogue</param>
-    public void SaveAll(bool showProgressDialog)
+    private void ExecuteCommandThread(object sender, DoWorkEventArgs e)
     {
       log.Trace(">>>");
 
-      bool bErrors = false;
-
-      if (showProgressDialog)
-      {
-        SetProgressBar(tracksGrid.Rows.Count);
-      }
-
-      int trackCount = Options.Songlist.Count;
-      for (int i = 0; i < trackCount; i++)
-      {
-        Application.DoEvents();
-
-        TrackData track = Options.Songlist[i];
-        track.Status = -1;
-
-        if (showProgressDialog)
-        {
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-        }
-
-        if (!SaveTrack(track, i))
-          bErrors = true;
-      }
-
-      Util.SendProgress("");
-      Options.ReadOnlyFileHandling = 2; //No
-      if (showProgressDialog)
-      {
-        ResetProgressBar();
-      }
-      _itemsChanged = bErrors;
-
-      log.Trace("<<<");
-    }
-
-
-    /// <summary>
-    ///   Does the actual save of the track
-    /// </summary>
-    /// <param name = "track"></param>
-    /// <returns></returns>
-    private bool SaveTrack(TrackData track, int rowIndex)
-    {
-      try
-      {
-        if (track.Changed)
-        {
-          Util.SendProgress(string.Format("Saving file {0}", track.FullFileName));
-          log.Debug("Save: Saving track: {0}", track.FullFileName);
-
-          // The track to be saved, may be currently playing. If this is the case stop playnack to free the file
-          if (track.FullFileName == _main.Player.CurrentSongPlaying)
-          {
-            log.Debug("Save: Song is played in Player. Stop playback to free the file");
-            _main.Player.Stop();
-          }
-
-          if (Options.MainSettings.CopyArtist && track.AlbumArtist == "")
-          {
-            track.AlbumArtist = track.Artist;
-          }
-
-          if (Options.MainSettings.UseCaseConversion)
-          {
-            CaseConversion.CaseConversion convert = new CaseConversion.CaseConversion(_main, true);
-            convert.CaseConvert(track, rowIndex);
-            convert.Dispose();
-          }
-
-          // Save the file 
-          string errorMessage = "";
-          if (Track.SaveFile(track, ref errorMessage))
-          {
-            // If we are in Database mode, we should also update the MediaPortal Database
-            if (_main.TreeView.DatabaseMode)
-            {
-              UpdateMusicDatabase(track);
-            }
-
-            if (RenameFile(track))
-            {
-              // rename was ok, so get the new file into the binding list
-              string ext = Path.GetExtension(track.FileName);
-              string newFileName = Path.Combine(Path.GetDirectoryName(track.FullFileName),
-                                                String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName),
-                                                              ext));
-
-              track = Track.Create(newFileName);
-              Options.Songlist[rowIndex] = track;
-            }
-
-            // Check, if we need to create a folder.jpg
-            if (!System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg")) &&
-                Options.MainSettings.CreateFolderThumb)
-            {
-              SavePicture(track);
-            }
-
-            track.Status = 0;
-            tracksGrid.Rows[rowIndex].Cells[0].ToolTipText = "";
-            track.Changed = false;
-            tracksGrid.Rows[rowIndex].Tag = "";
-            Options.Songlist[rowIndex] = track;
-            SetGridRowColors(rowIndex);
-          }
-          else
-          {
-            track.Status = 2;
-            AddErrorMessage(tracksGrid.Rows[rowIndex], errorMessage);
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        Options.Songlist[rowIndex].Status = 2;
-        AddErrorMessage(tracksGrid.Rows[rowIndex], ex.Message);
-        log.Error("Save: Error Saving data for row {0}: {1} {2}", rowIndex, ex.Message, ex.StackTrace);
-        return false;
-      }
-      return true;
-    }
-
-    /// <summary>
-    ///   Rename the file if necessary
-    ///   Called by Save and SaveAll
-    /// </summary>
-    /// <param name = "track"></param>
-    private bool RenameFile(TrackData track)
-    {
-      string originalFileName = Path.GetFileName(track.FullFileName);
-      if (originalFileName != track.FileName)
-      {
-        string ext = Path.GetExtension(track.FileName);
-        string filename = Path.GetFileNameWithoutExtension(track.FileName);
-        string path = Path.GetDirectoryName(track.FullFileName);
-        string newFileName = Path.Combine(path, string.Format("{0}{1}", filename, ext));
-
-        // Check, if the New file name already exists
-        // Don't change the newfilename, when only the Case change happened in filename
-        int i = 1;
-        if (System.IO.File.Exists(newFileName) && originalFileName.ToLowerInvariant() != track.FileName.ToLowerInvariant())
-        {
-          newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
-          while (System.IO.File.Exists(newFileName))
-          {
-            i++;
-            newFileName = Path.Combine(path, string.Format("{0} ({1}){2}", filename, i, ext));
-          }
-        }
-        
-        System.IO.File.Move(track.FullFileName, newFileName);
-        log.Debug("Save: Renaming track: {0} Newname: {1}", track.FullFileName, newFileName);
-        return true;
-      }
-      return false;
-    }
-
-    #endregion
-
-    #region Identify File
-
-    public void IdentifyFiles()
-    {
-      if (_bgWorker == null)
-      {
-        _bgWorker = new BackgroundWorker();
-        _bgWorker.DoWork += IdentifyFilesThread;
-      }
-
-      if (!_bgWorker.IsBusy)
-      {
-        _bgWorker.RunWorkerAsync();
-      }
-    }
-
-    /// <summary>
-    ///   Tag the the Selected files from Internet
-    /// </summary>
-    private void IdentifyFilesThread(object sender, DoWorkEventArgs e)
-    {
-      log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
       if (tracksGrid.InvokeRequired)
       {
-        ThreadSafeGridDelegate1 d = IdentifyFilesThread;
+        ThreadSafeGridDelegate1 d = ExecuteCommandThread;
         tracksGrid.Invoke(d, new[] { sender, e });
         return;
       }
 
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      MusicBrainzAlbum musicBrainzAlbum = new MusicBrainzAlbum();
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      // Get the command object
+      object[] parameters = e.Argument as object[];
+      Commands.Command commandObj = Commands.Command.Create(parameters);
+      if (commandObj == null)
       {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        try
-        {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
-          {
-            ResetProgressBar();
-            return;
-          }
-          TrackData track = Options.Songlist[row.Index];
-
-          using (MusicBrainzTrackInfo trackinfo = new MusicBrainzTrackInfo())
-          {
-            Util.SendProgress(string.Format("Identifying file {0}", track.FileName));
-            log.Debug("Identify: Processing file: {0}", track.FullFileName);
-            List<MusicBrainzTrack> musicBrainzTracks = trackinfo.GetMusicBrainzTrack(track.FullFileName);
-
-            if (musicBrainzTracks == null)
-            {
-              log.Debug("Identify: Couldn't identify file");
-              continue;
-            }
-
-            if (musicBrainzTracks.Count > 0)
-            {
-              MusicBrainzTrack musicBrainzTrack = null;
-              if (musicBrainzTracks.Count == 1 && musicBrainzTracks[0].Releases.Count == 1)
-              {
-                musicBrainzTrack = musicBrainzTracks[0];
-                // Have we got already this album
-                if (musicBrainzTrack.AlbumId == null || musicBrainzTrack.AlbumId != musicBrainzAlbum.Id)
-                {
-                  using (var albumInfo = new MusicBrainzAlbumInfo())
-                  {
-                    musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
-                  }
-                }
-                musicBrainzTrack.AlbumId = musicBrainzAlbum.Id;
-              }
-              else
-              {
-                // Skip the Album selection, if the album been selected already for a previous track
-                bool albumFound = false;
-                foreach (var mbtrack in musicBrainzTracks)
-                {
-                  foreach (var mbRelease in mbtrack.Releases )
-                  {
-                    if (mbRelease.AlbumId == musicBrainzAlbum.Id)
-                    {
-                      albumFound = true;
-                      musicBrainzTrack = mbtrack;
-                      musicBrainzTrack.AlbumId = mbRelease.AlbumId;
-                      break;
-                    }
-                  }
-                }
-
-                if (!albumFound)
-                {
-                  var dlgAlbumResults = new MusicBrainzAlbumResults(musicBrainzTracks);
-                  dlgAlbumResults.Owner = _main;
-                  if (_main.ShowModalDialog(dlgAlbumResults) == DialogResult.OK)
-                  {
-                    var itemTag = dlgAlbumResults.SelectedListItem as Dictionary<string, MusicBrainzTrack>;
-                    foreach (var albumId in itemTag.Keys)
-                    {
-                      itemTag.TryGetValue(albumId, out musicBrainzTrack);
-                      musicBrainzTrack.AlbumId = albumId;
-                    }
-
-                  }
-                  dlgAlbumResults.Dispose();
-                }
-              }
-
-              // We didn't get a track
-              if (musicBrainzTrack == null)
-              {
-                log.Debug("Identify: No information returned from Musicbrainz");
-                continue;
-              }
-
-              // Are we still at the same album?
-              // if not, get the album, so that we have the release date
-              if (musicBrainzAlbum.Id != musicBrainzTrack.AlbumId)
-              {
-                using (var albumInfo = new MusicBrainzAlbumInfo())
-                {
-                  Application.DoEvents();
-                  if (_progressCancelled)
-                  {
-                    ResetProgressBar();
-                    return;
-                  }
-                  musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
-                }
-              }
-
-              track.Title = musicBrainzTrack.Title;
-              track.Artist = musicBrainzTrack.Artist;
-              track.Album = musicBrainzAlbum.Title;
-              track.AlbumArtist = musicBrainzAlbum.Artist;
-
-              // Get the Disic and Track# from the Album
-              foreach (var mbTrack in musicBrainzAlbum.Tracks)
-              {
-                if (mbTrack.Id == musicBrainzTrack.Id)
-                {
-                  track.TrackNumber = Convert.ToUInt32(mbTrack.Number);
-                  track.TrackCount = Convert.ToUInt32(mbTrack.TrackCount);
-                  track.DiscNumber = Convert.ToUInt32(mbTrack.DiscId);
-                  track.DiscCount = Convert.ToUInt32(musicBrainzAlbum.DiscCount);
-                  break;
-                }
-              }
-
-              if (musicBrainzAlbum.Year != null && musicBrainzAlbum.Year.Length >= 4)
-                track.Year = Convert.ToInt32(musicBrainzAlbum.Year.Substring(0, 4));
-
-              // Do we have a valid Amazon Album?
-              if (musicBrainzAlbum.Amazon != null)
-              {
-                // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-                if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
-                {
-                  var vector = musicBrainzAlbum.Amazon.AlbumImage;
-                  if (vector != null)
-                  {
-                    var pic = new MPTagThat.Core.Common.Picture();
-                    pic.MimeType = "image/jpg";
-                    pic.Description = "";
-                    pic.Type = PictureType.FrontCover;
-                    pic.Data = vector.Data;
-                    track.Pictures.Add(pic);
-                  }
-                }
-              }
-
-              SetBackgroundColorChanged(row.Index);
-              track.Changed = true;
-              Options.Songlist[row.Index] = track;
-              _itemsChanged = true;
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          Options.Songlist[row.Index].Status = 2;
-          AddErrorMessage(row, ex.Message);
-        }
-      }
-
-      Util.SendProgress("");
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-
-      ResetProgressBar();
-
-      log.Trace("<<<");
-    }
-
-    #endregion
-
-    #region Cover Art
-
-    public void GetCoverArt()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(GetCoverArtThread);
-        _asyncThread.Name = "GetCoverArt";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(GetCoverArtThread);
-        _asyncThread.Start();
-      }
-    }
-
-    /// <summary>
-    ///   Get Cover Art via Amazon Webservice
-    /// </summary>
-    private void GetCoverArtThread()
-    {
-      log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = GetCoverArtThread;
-        tracksGrid.Invoke(d, new object[] { });
         return;
       }
 
+      // Extract the command name, since we might need it for specific selections afterwards
+      var command = (string)parameters[0];
+
+      var commandParmObj = (object[]) parameters[1];
+      var commandParm = commandParmObj.GetLength(0) > 0 ? (string) commandParmObj[0] : "";
+      
+      // Set a reference to the Track Grid
+      commandObj.TracksGrid = this;
+      
       int count = 0;
       int trackCount = tracksGrid.SelectedRows.Count;
       SetProgressBar(trackCount);
 
-      AmazonAlbum amazonAlbum = null;
-
-      bool isMultipleArtistAlbum = false;
-      string savedArtist = "";
-      string savedAlbum = "";
-      string savedFolder = "";
-
-      Core.Common.Picture folderThumb = null;
-
-      // Find out, if we deal with a multiple artist album and submit only the album name
-      // If we have different artists, then it is a multiple artist album.
-      // BUT: if the album is different, we don't have a multiple artist album and should submit the artist as well
-      foreach (DataGridViewRow row in tracksGrid.Rows)
+      // If the command needs Preprocessing, then first loop over all tracks
+      if (commandObj.NeedsPreprocessing)
       {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
+        foreach (DataGridViewRow row in tracksGrid.Rows)
         {
-          continue;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-        if (savedArtist == "")
-        {
-          savedArtist = track.Artist;
-          savedAlbum = track.Album;
-        }
-        if (savedArtist != track.Artist)
-        {
-          isMultipleArtistAlbum = true;
-        }
-        if (savedAlbum != track.Album)
-        {
-          isMultipleArtistAlbum = false;
-          break;
-        }
-      }
-
-      if (isMultipleArtistAlbum)
-      {
-        log.Debug("CoverArt: Album contains Multiple Artists, just search for the album");
-      }
-
-      Dictionary<string, AmazonAlbum> savedCoverCash = new Dictionary<string, AmazonAlbum>();
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        try
-        {
-          Application.DoEvents();
-          _main.progressBar1.Value += 1;
-          if (_progressCancelled)
+          if (!row.Selected && command != "SaveAll")
           {
-            ResetProgressBar();
-            return;
-          }
-          TrackData track = Options.Songlist[row.Index];
-
-          Util.SendProgress(string.Format("Search coverart for {0}", track.FileName));
-          log.Debug("CoverArt: Retrieving coverart for: {0} - {1}", track.Artist, track.Album);
-          // Should we take an existing folder.jpg instead of searching the web
-          if (Options.MainSettings.EmbedFolderThumb && !Options.MainSettings.OnlySaveFolderThumb)
-          {
-            if (folderThumb == null || Path.GetDirectoryName(track.FullFileName) != savedFolder)
-            {
-              savedFolder = Path.GetDirectoryName(track.FullFileName);
-              folderThumb = GetFolderThumb(savedFolder);
-            }
-
-            if (folderThumb != null)
-            {
-              // Only write a picture if we don't have a picture OR Overwrite Pictures is set
-              if (track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers)
-              {
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(folderThumb.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  folderThumb.Resize(Options.MainSettings.MaxCoverWidth);
-                }
-
-                log.Debug("CoverArt: Using existing folder.jpg");
-                // First Clear all the existingPictures
-                track.Pictures.Clear();
-                track.Pictures.Add(folderThumb);
-                SetBackgroundColorChanged(row.Index);
-                track.Changed = true;
-                Options.Songlist[row.Index] = track;
-                _itemsChanged = true;
-                _main.SetGalleryItem();
-              }
-              continue;
-            }
-          }
-
-          // If we don't have an Album don't do any query
-          if (track.Album == "")
             continue;
-
-          string coverSearchString = track.Artist + track.Album;
-          if (isMultipleArtistAlbum)
-          {
-            coverSearchString = track.Album;
           }
 
-          bool foundInCash = savedCoverCash.ContainsKey(coverSearchString);
-          if (foundInCash)
+          TrackData track = Options.Songlist[row.Index];
+          commandObj.PreProcess(track);
+        }
+      }
+      
+      foreach (DataGridViewRow row in tracksGrid.Rows)
+      {
+        ClearStatusColumn(row.Index);
+
+        if (!row.Selected && command != "SaveAll")
+        {
+          continue;
+        }
+
+        count++;
+        try
+        {
+          Application.DoEvents();
+
+          if (command != "SaveAll" || commandParm == "true")
           {
-            amazonAlbum = savedCoverCash[coverSearchString];
-          }
-          else
-          {
-            amazonAlbum = null;
-          }
-
-          // Only retrieve the Cover Art, if we don't have it yet)
-          if (!foundInCash || amazonAlbum == null)
-          {
-            CoverSearch dlgAlbumResults = new CoverSearch();
-            dlgAlbumResults.Artist = isMultipleArtistAlbum ? "" : track.Artist;
-            dlgAlbumResults.Album = track.Album;
-            dlgAlbumResults.FileDetails = track.FullFileName;
-            dlgAlbumResults.Owner = _main;
-
-            amazonAlbum = null;
-            DialogResult dlgResult = _main.ShowModalDialog(dlgAlbumResults);
-            if (dlgResult == DialogResult.OK)
+            _main.progressBar1.Value += 1;
+            if (_progressCancelled)
             {
-              if (dlgAlbumResults.SelectedAlbum != null)
-              {
-                amazonAlbum = dlgAlbumResults.SelectedAlbum;
-              }
-            }
-            else if (dlgResult == DialogResult.Abort)
-            {
-              log.Debug("CoverArt: Search for all albums cancelled");
-              break;
-            }
-            else
-            {
-              log.Debug("CoverArt: Album Selection cancelled");
-              continue;
-            }
-            dlgAlbumResults.Dispose();
-          }
-
-
-          // Now update the Cover Art
-          if (amazonAlbum != null)
-          {
-            if (!savedCoverCash.ContainsKey(coverSearchString))
-            {
-              savedCoverCash.Add(coverSearchString, amazonAlbum);
-            }
-
-            // Only write a picture if we don't have a picture OR Overwrite Pictures is set);
-            if ((track.Pictures.Count == 0 || Options.MainSettings.OverwriteExistingCovers) && !Options.MainSettings.OnlySaveFolderThumb)
-            {
-              track.Pictures.Clear();
-
-              ByteVector vector = amazonAlbum.AlbumImage;
-              if (vector != null)
-              {
-                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
-                pic.MimeType = "image/jpg";
-                pic.Description = "Front Cover";
-                pic.Type = PictureType.FrontCover;
-                pic.Data = vector.Data;
-
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  pic.Resize(Options.MainSettings.MaxCoverWidth);
-                }
-
-                track.Pictures.Add(pic);
-              }
-
-              // And also set the Year from the Release Date delivered by Amazon
-              // only if not present in Track
-              if (amazonAlbum.Year != null)
-              {
-                string strYear = amazonAlbum.Year;
-                if (strYear.Length > 4)
-                  strYear = strYear.Substring(0, 4);
-
-                int year = 0;
-                try
-                {
-                  year = Convert.ToInt32(strYear);
-                }
-                catch (Exception) { }
-                if (year > 0 && track.Year == 0)
-                  track.Year = year;
-              }
-
-              SetBackgroundColorChanged(row.Index);
-              track.Changed = true;
-              Options.Songlist[row.Index] = track;
-              _itemsChanged = true;
-              _main.SetGalleryItem();
+              commandObj.ProgressCancelled = true;
+              ResetProgressBar();
+              return;
             }
           }
 
-          // If the user has selected to store only the folder thumb, without touching the file 
-          if (amazonAlbum != null && Options.MainSettings.OnlySaveFolderThumb)
+          TrackData track = Options.Songlist[row.Index];
+          if (command == "SaveAll")
           {
-            ByteVector vector = amazonAlbum.AlbumImage;
-            if (vector != null)
-            {
-              string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
-              try
-              {
-                MPTagThat.Core.Common.Picture pic = new MPTagThat.Core.Common.Picture();
-                if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-                {
-                  pic.Resize(Options.MainSettings.MaxCoverWidth);
-                }
+            track.Status = -1;
+          }
 
-                Image img = Picture.ImageFromData(vector.Data);
-
-                // Need to make a copy, otherwise we have a GDI+ Error
-                Bitmap bmp = new Bitmap(img);
-                bmp.Save(fileName, ImageFormat.Jpeg);
-
-                FileInfo fi = new FileInfo(fileName);
-                _nonMusicFiles.RemoveAll(f => f.Name == fi.Name);
-                _nonMusicFiles.Add(fi);
-                _main.MiscInfoPanel.AddNonMusicFiles(_nonMusicFiles);
-              }
-              catch (Exception ex)
-              {
-                log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
-              }
-              break;
-            }
+          if (commandObj.Execute(ref track, row.Index))
+          {
+            SetBackgroundColorChanged(row.Index);
+            track.Changed = true;
+            Options.Songlist[row.Index] = track;
+            _itemsChanged = true;
+          }
+          if (commandObj.ProgressCancelled)
+          {
+            break;
           }
         }
         catch (Exception ex)
@@ -983,285 +366,27 @@ namespace MPTagThat.GridView
         }
       }
 
+      // Do Command Post Processing
+      _itemsChanged = commandObj.PostProcess();
+
       Util.SendProgress("");
       tracksGrid.Refresh();
       tracksGrid.Parent.Refresh();
       _main.TagEditForm.FillForm();
 
-      ResetProgressBar();
-
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Return the folder.jpg as a Taglib.Picture
-    /// </summary>
-    /// <param name = "folder"></param>
-    /// <returns></returns>
-    public Core.Common.Picture GetFolderThumb(string folder)
-    {
-      string thumb = Path.Combine(folder, "folder.jpg");
-      if (!System.IO.File.Exists(thumb))
+      if (CommandThreadEnded != null && commandObj.NeedsCallback)
       {
-        return null;
+        CommandThreadEnded(this, new EventArgs());
       }
 
-      try
-      {
-        Core.Common.Picture pic = new Core.Common.Picture(thumb);
-        pic.Description = "Front Cover";
-        pic.Type = PictureType.FrontCover;
-        return pic;
-      }
-      catch (Exception ex)
-      {
-        log.Error("Exception loading thumb file: {0} {1}", thumb, ex.Message);
-        return null;
-      }
-    }
-
-    /// <summary>
-    ///   Save the Picture of the track as folder.jpg
-    /// </summary>
-    /// <param name = "track"></param>
-    public void SavePicture(TrackData track)
-    {
-      if (track.NumPics > 0)
-      {
-        string fileName = Path.Combine(Path.GetDirectoryName(track.FullFileName), "folder.jpg");
-        try
-        {
-          Image img = Picture.ImageFromData(track.Pictures[0].Data);
-          // Need to make a copy, otherwise we have a GDI+ Error
-          Bitmap bCopy = new Bitmap(img);
-          bCopy.Save(fileName, ImageFormat.Jpeg);
-        }
-        catch (Exception ex)
-        {
-          log.Error("Exception Saving picture: {0} {1}", fileName, ex.Message);
-        }
-      }
-    }
-
-    #endregion
-
-    #region Cover Art Drop
-
-    /// <summary>
-    /// A Picture file has been dropped on the Ribbon Gallery. 
-    /// Set the picture for all selected rows
-    /// </summary>
-    /// <param name="fileName"></param>
-    public void CoverArtDrop(string fileName)
-    {
-      SetWaitCursor();
-      Util.SendProgress(string.Format("Downloading picture from {0}", fileName));
-      Picture pic = null;
-      if (fileName.ToLower().StartsWith("http"))
-      {
-        pic = GetCoverArtFromUrl(fileName);
-      }
-      else
-      {
-        pic = new Picture(fileName);
-      }
-      if (pic == null || pic.Data == null)
-      {
-        ResetWaitCursor();
-        return;
-      }
-
-      if (Options.MainSettings.ChangeCoverSize && Picture.ImageFromData(pic.Data).Width > Options.MainSettings.MaxCoverWidth)
-      {
-        pic.Resize(Options.MainSettings.MaxCoverWidth);
-      }
-
-      pic.MimeType = "image/jpg";
-      pic.Description = "Front Cover";
-      pic.Type = PictureType.FrontCover;
-
-
-      foreach (DataGridViewRow row in tracksGrid.SelectedRows)
-      {
-        ClearStatusColumn(row.Index);
-
-        TrackData track = Options.Songlist[row.Index];
-        track.Pictures.Clear();
-        track.Pictures.Add(pic);
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      Util.SendProgress("");
-      _main.SetGalleryItem();
-      ResetWaitCursor();
-    }
-
-    /// <summary>
-    /// Get Cover Art from a given Url
-    /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    private Picture GetCoverArtFromUrl(string url)
-    {
-      Picture pic = null;
-      try
-      {
-        // When dragging from Google images, we have a imgurl. extract the right url.
-        int imgurlIndex = url.IndexOf("imgurl=");
-        if (imgurlIndex > -1)
-        {
-          url = url.Substring(imgurlIndex + 7);
-          url = url.Substring(0, url.IndexOf("&"));
-        }
-
-        log.Info("Retrieving Coverart from: {0}", url);
-        WebRequest req = WebRequest.Create(url);
-        req.Proxy = new WebProxy();
-        req.Proxy.Credentials = CredentialCache.DefaultCredentials;
-        WebResponse response = req.GetResponse();
-        if (response == null)
-        {
-          return null;
-        }
-        Stream stream = response.GetResponseStream();
-        if (stream == null)
-        {
-          return null;
-        }
-        Image img = Image.FromStream(stream);
-        stream.Close();
-
-        pic = new Picture { Data = Picture.ImageToByte((Image)img.Clone()) };
-
-        if (Options.MainSettings.ChangeCoverSize && img.Width > Options.MainSettings.MaxCoverWidth)
-        {
-          pic.Resize(Options.MainSettings.MaxCoverWidth);
-        }
-
-        img.Dispose();
-        return pic;
-      }
-      catch (Exception ex)
-      {
-        log.Error("Error retrieving Image from Url: {0} Error: {1}", url, ex.Message);
-      }
-      return null;
-    }
-
-    #endregion
-
-    #region Lyrics
-
-    public void GetLyrics()
-    {
-      if (_asyncThread == null)
-      {
-        _asyncThread = new Thread(GetLyricsThread);
-        _asyncThread.Name = "GetLyrics";
-      }
-
-      if (_asyncThread.ThreadState != ThreadState.Running)
-      {
-        _asyncThread = new Thread(GetLyricsThread);
-        _asyncThread.Start();
-      }
-    }
-
-    /// <summary>
-    ///   Get Lyrics for selected Rows
-    /// </summary>
-    private void GetLyricsThread()
-    {
-      log.Trace(">>>");
-      //Make calls to Tracksgrid Threadsafe
-      if (tracksGrid.InvokeRequired)
-      {
-        ThreadSafeGridDelegate d = GetLyricsThread;
-        tracksGrid.Invoke(d, new object[] { });
-        return;
-      }
-
-      int count = 0;
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      List<TrackData> tracks = new List<TrackData>();
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        count++;
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-        TrackData track = Options.Songlist[row.Index];
-        if (track.Lyrics == null || Options.MainSettings.OverwriteExistingLyrics)
-        {
-          tracks.Add(track);
-        }
-      }
+      commandObj.Dispose();
 
       ResetProgressBar();
-
-      if (tracks.Count > 0)
-      {
-        try
-        {
-          LyricsSearch lyricssearch = new LyricsSearch(tracks);
-          lyricssearch.Owner = _main;
-          if (_main.ShowModalDialog(lyricssearch) == DialogResult.OK)
-          {
-            DataGridView lyricsResult = lyricssearch.GridView;
-            foreach (DataGridViewRow lyricsRow in lyricsResult.Rows)
-            {
-              if (lyricsRow.Cells[0].Value == DBNull.Value || lyricsRow.Cells[0].Value == null)
-                continue;
-
-              if ((bool)lyricsRow.Cells[0].Value != true)
-                continue;
-
-              foreach (DataGridViewRow row in tracksGrid.Rows)
-              {
-                TrackData lyricsTrack = tracks[lyricsRow.Index];
-                TrackData track = Options.Songlist[row.Index];
-                if (lyricsTrack.FullFileName == track.FullFileName)
-                {
-                  track.Lyrics = (string)lyricsRow.Cells[5].Value;
-                  SetBackgroundColorChanged(row.Index);
-                  track.Changed = true;
-                  Options.Songlist[row.Index] = track;
-                  _itemsChanged = true;
-                  break;
-                }
-              }
-            }
-          }
-        }
-        catch (Exception ex)
-        {
-          log.Error("Error in Lyricssearch: {0}", ex.Message);
-        }
-      }
-
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-
       log.Trace("<<<");
     }
 
     #endregion
-
+    
     #region Numbering
 
     public void AutoNumber()
@@ -1392,443 +517,6 @@ namespace MPTagThat.GridView
 
     #endregion
 
-    #region Remove Comments / Remove Pictures
-
-    /// <summary>
-    ///   Remove all Comments in te selected tracks
-    /// </summary>
-    public void RemoveComments()
-    {
-      log.Trace(">>>");
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        if (track.Comment != "")
-        {
-          track.ID3Comments.Clear();
-          SetBackgroundColorChanged(row.Index);
-          track.Changed = true;
-          Options.Songlist[row.Index] = track;
-          _itemsChanged = true;
-        }
-      }
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Remove all Picture data for the selected tracks
-    /// </summary>
-    public void RemovePictures()
-    {
-      log.Trace(">>>");
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        if (track.NumPics > 0)
-        {
-          track.Pictures.Clear();
-          SetBackgroundColorChanged(row.Index);
-          track.Changed = true;
-          Options.Songlist[row.Index] = track;
-          _itemsChanged = true;
-        }
-      }
-      _main.SetGalleryItem();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-      log.Trace("<<<");
-    }
-
-    #endregion
-
-    #region Validate / Fix MP3 Files
-
-    /// <summary>
-    ///   Validates an MP3 File using mp3val
-    /// </summary>
-    public void ValidateMP3File()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        if (track.IsMp3)
-        {
-          Util.SendProgress(string.Format("Validating file {0}", track.FileName));
-          string strError = "";
-          track.MP3ValidationError = MP3Val.ValidateMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError != Util.MP3Error.NoError)
-          {
-            SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            track.Status = 3;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
-          }
-          else
-          {
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
-          }
-        }
-      }
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Fixes errors in an MP3 file using mp3val
-    /// </summary>
-    public void FixMP3File()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-        if (track.IsMp3)
-        {
-          Util.SendProgress(string.Format("Fixing file {0}", track.FileName));
-          string strError = "";
-          track.MP3ValidationError = MP3Val.FixMp3File(track.FullFileName, out strError);
-          if (track.MP3ValidationError == Util.MP3Error.Fixed)
-          {
-            SetGridRowColors(row.Index);
-            track.Status = 4;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = "";
-          }
-          else
-          {
-            SetColorMP3Errors(row.Index, track.MP3ValidationError);
-            track.Status = 3;
-            tracksGrid.Rows[row.Index].Cells[0].ToolTipText = strError;
-          }
-        }
-      }
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      _main.TagEditForm.FillForm();
-      log.Trace("<<<");
-    }
-
-    #endregion
-
-    #region Replay Gain
-
-    /// <summary>
-    ///   Analyses selected files and calculates the ReplayGain
-    /// </summary>
-    public void ReplayGain()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      SetProgressBar(trackCount);
-
-      bool albumGain = false;
-      bool gainInitialised = false;
-      int usedFrequency = -1;
-
-      // Check, if all rows have been selected and provide the option to invoke Album Gain analysis
-      if (tracksGrid.Rows.Count == tracksGrid.SelectedRows.Count)
-      {
-        if (MessageBox.Show(localisation.ToString("albumgain", "Explanation"),
-                 localisation.ToString("albumgain", "Header"), MessageBoxButtons.YesNo) == DialogResult.Yes)
-        {
-          albumGain = true;
-        }
-      }
-
-      float maxPeak = 0.0f;
-      
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
-        if (stream == 0)
-        {
-          log.Error("ReplayGain: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-
-        BASS_CHANNELINFO chInfo = Bass.BASS_ChannelGetInfo(stream);
-        if (chInfo == null)
-        {
-          log.Error("ReplayGain: Could not get channel info for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-        
-        Util.SendProgress(string.Format("Analysing gain for {0}", track.FileName));
-        log.Info("ReplayGain: Start gain analysis for: {0}", track.FullFileName);
-
-        if (!albumGain || !gainInitialised)
-        {
-          InitGainAnalysis(chInfo.freq);
-          gainInitialised = true;
-          usedFrequency = chInfo.freq;
-        }
-        else
-        {
-          if (usedFrequency != chInfo.freq)
-          {
-            ResetSampleFrequency(chInfo.freq);
-            usedFrequency = chInfo.freq;
-          }
-        }
-        
-        ReplayAnalyze(stream);
-        float titleGain = GetTitleGain();
-        
-        // Calculating the peak level
-        float peak = 0;
-        Bass.BASS_ChannelSetPosition(stream, 0);
-
-        float[] level = new float[chInfo.chans];  // allocate for all Channels of the stream
-        while (Bass.BASS_ChannelIsActive(stream) == BASSActive.BASS_ACTIVE_PLAYING)
-        { // not reached the end yet
-          if(Bass.BASS_ChannelGetLevel(stream, level))
-          {
-            for (int i = 0; i < chInfo.chans; i++ )
-            {
-              if (peak < level[i]) peak = level[i];
-            }
-          }
-        }
-
-        if (albumGain && maxPeak < peak)
-        {
-          maxPeak = peak;
-        }
-
-        Bass.BASS_StreamFree(stream);
-
-        log.Info("ReplayGain: Finished analysis. Gain: {0} Peak level: {1}", titleGain.ToString(CultureInfo.InvariantCulture), peak.ToString(CultureInfo.InvariantCulture));
-        track.ReplayGainTrack = titleGain.ToString(CultureInfo.InvariantCulture);
-        track.ReplayGainTrackPeak = peak.ToString(CultureInfo.InvariantCulture);
-
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      // Should we also get Album Gain
-      if (albumGain)
-      {
-        float albumGainValue = GetAlbumGain();
-        string albumGainValueStr = albumGainValue.ToString(CultureInfo.InvariantCulture);
-        string albumPeakValueStr = maxPeak.ToString(CultureInfo.InvariantCulture);
-
-        foreach (DataGridViewRow row in tracksGrid.Rows)
-        {
-          if (!row.Selected)
-          {
-            continue;
-          }
-
-          TrackData track = Options.Songlist[row.Index];
-          track.ReplayGainAlbum = albumGainValueStr;
-          track.ReplayGainAlbumPeak = albumPeakValueStr;
-        }
-      }
-
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      log.Trace("<<<");
-    }
-
-    /// <summary>
-    /// Do a Replaygain and Peak analyses
-    /// </summary>
-    /// <param name="channel"></param>
-    void ReplayAnalyze(int channel)
-    {
-      int result;
-      int peak = 0;
-
-      int[] chanmap = new int[2];
-      chanmap[0] = 0; // left channel
-      chanmap[1] = -1;
-      int stream1 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
-      chanmap[0] = 1; // right channel
-      int stream2 = BassMix.BASS_Split_StreamCreate(channel, BASSFlag.BASS_STREAM_DECODE, chanmap);
-
-      int length = (int)Bass.BASS_ChannelSeconds2Bytes(channel, 0.02); // 20ms window
-
-      Int16[] buffer = new Int16[length / 2];
-      double[] leftSamples = new double[length / 2];
-      double[] rightSamples = new double[length / 2];
-
-      Bass.BASS_ChannelSetPosition(stream1, 0); // make sure to start from the beginning
-      Bass.BASS_ChannelSetPosition(stream2, 0); // make sure to start from the beginning
-      while (Bass.BASS_ChannelIsActive(stream1) == BASSActive.BASS_ACTIVE_PLAYING
-        || Bass.BASS_ChannelIsActive(stream2) == BASSActive.BASS_ACTIVE_PLAYING)
-      {
-        result = Bass.BASS_ChannelGetData(stream1, buffer, length);
-
-        int l4 = result / 2;
-        for (int a = 0; a < l4; a++)
-        {
-          leftSamples[a] = Convert.ToDouble(buffer[a]);
-        }
-
-        result = Bass.BASS_ChannelGetData(stream2, buffer, length);
-        l4 = result / 2;
-        for (int a = 0; a < l4; a++)
-        {
-          rightSamples[a] = Convert.ToDouble(buffer[a]);
-        }
-
-        AnalyzeSamples(leftSamples, rightSamples, new UIntPtr((uint)l4 / 2), 2);
-        leftSamples = new double[length / 2];
-        rightSamples = new double[length / 2];
-      }
-    }
-
-    #endregion
-
-    #region BPM Detection
-
-    /// <summary>
-    ///   Detects the BPM
-    /// </summary>
-    public void Bpm()
-    {
-      log.Trace(">>>");
-
-      int trackCount = tracksGrid.SelectedRows.Count;
-      
-      foreach (DataGridViewRow row in tracksGrid.Rows)
-      {
-        SetProgressBar(100);
-        ClearStatusColumn(row.Index);
-
-        if (!row.Selected)
-        {
-          continue;
-        }
-
-        Application.DoEvents();
-        if (_progressCancelled)
-        {
-          ResetProgressBar();
-          return;
-        }
-
-        TrackData track = Options.Songlist[row.Index];
-
-        int stream = Bass.BASS_StreamCreateFile(track.FullFileName, 0, 0, BASSFlag.BASS_STREAM_DECODE);
-        if (stream == 0)
-        {
-          log.Error("BPM: Could not create stream for {0}. {1}", track.FullFileName, Bass.BASS_ErrorGetCode());
-          continue;
-        }
-
-        GCHandle rowIndex = GCHandle.Alloc(row.Index);
-        _bpmProc = BPMProgressProc;
-
-        double len = Bass.BASS_ChannelBytes2Seconds(stream, Bass.BASS_ChannelGetLength(stream));
-        float bpm = BassFx.BASS_FX_BPM_DecodeGet(stream, 0.0, len, 0, BASSFXBpm.BASS_FX_BPM_BKGRND | BASSFXBpm.BASS_FX_FREESOURCE |BASSFXBpm.BASS_FX_BPM_MULT2, 
-                                                    _bpmProc,GCHandle.ToIntPtr(rowIndex));
-
-        track.BPM = Convert.ToInt32(bpm);
-        BassFx.BASS_FX_BPM_Free(stream);
-
-        SetBackgroundColorChanged(row.Index);
-        track.Changed = true;
-        Options.Songlist[row.Index] = track;
-        _itemsChanged = true;
-      }
-
-      Util.SendProgress("");
-      ResetProgressBar();
-      tracksGrid.Refresh();
-      tracksGrid.Parent.Refresh();
-      log.Trace("<<<");
-    }
-
-    private void BPMProgressProc(int channel, float percent, IntPtr userData)
-    {
-      GCHandle gch = GCHandle.FromIntPtr(userData);
-      int rowIndex = (int)gch.Target;
-      _main.progressBar1.Value = Convert.ToInt32(percent);
-    }
-
-    #endregion
-
     #region Misc Methods
 
     /// <summary>
@@ -1850,7 +538,10 @@ namespace MPTagThat.GridView
                                               localisation.ToString("message", "Save_Changes_Title"),
                                               MessageBoxButtons.YesNo);
         if (result == DialogResult.Yes)
-          SaveAll();
+        {
+          object[] parm = {"true"};
+          ExecuteCommand("SaveAll", parm, false);
+        }
         else
           DiscardChanges();
       }
@@ -2384,7 +1075,7 @@ namespace MPTagThat.GridView
       return sql;
     }
 
-    private void UpdateMusicDatabase(TrackData track)
+    public void UpdateMusicDatabase(TrackData track)
     {
       string db = Options.MainSettings.MediaPortalDatabase;
 
@@ -2634,7 +1325,7 @@ namespace MPTagThat.GridView
     ///   Sets the maximum value of Progressbar
     /// </summary>
     /// <param name = "maxCount"></param>
-    private void SetProgressBar(int maxCount)
+    public void SetProgressBar(int maxCount)
     {
       _main.progressBar1.Maximum = maxCount == 0 ? 100 : maxCount;
       _main.progressBar1.Value = 0;
@@ -2961,6 +1652,18 @@ namespace MPTagThat.GridView
             tracksGrid.BackgroundColor = ServiceScope.Get<IThemeManager>().CurrentTheme.BackColor;
             break;
           }
+
+        case "setwaitcursor":
+        {
+          SetWaitCursor();
+          break;
+        }
+
+        case "resetwaitcursor":
+        {
+          ResetWaitCursor();
+          break;
+        }
       }
     }
 
@@ -3672,7 +2375,7 @@ namespace MPTagThat.GridView
         }
 
         TrackData track = Options.Songlist[row.Index];
-        SavePicture(track);
+        Util.SavePicture(track);
       }
     }
 

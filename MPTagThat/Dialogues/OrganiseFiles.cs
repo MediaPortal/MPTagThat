@@ -176,7 +176,8 @@ namespace MPTagThat.Organise
       _directories = new Dictionary<string, string>();
 
       // First do an automatic save of all pending changes
-      _main.TracksGridView.SaveAll(false);
+      object[] parm = { "false" };   // Don't show progress bar
+      _main.TracksGridView.ExecuteCommand("SaveAll", parm, false); // A save all should run Sync
 
       bool bError = false;
       string targetFolder = cbRootDir.Text;
@@ -387,6 +388,7 @@ namespace MPTagThat.Organise
           currentSelectedFolder = currentSelectedFolder.Substring(0, currentSelectedFolder.LastIndexOf("\\"));
           i++; // Max of 10 levels, to avoid possible infinity loop
         }
+				_main.TracksGridView.Changed = false;
         _main.CurrentDirectory = currentSelectedFolder;
         _main.TreeView.RefreshFolders();
         _main.RefreshTrackList();

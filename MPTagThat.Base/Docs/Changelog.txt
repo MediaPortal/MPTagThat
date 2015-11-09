@@ -7,6 +7,21 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.6 Date: 09.11.2015 
+-------------------------------------
++ Adding LastFM Cover Lookup
++ Added MusicBrainz Cover Lookup
++ Added Discogs Cover Lookup
++ Implemented Reading and saving of Opus Tags and Properties
++ Implemented Reading and saving of Tags and Properties for DSF File Format
++ Store Cover Art with the highest possible JPG Quality
+x Updated Project definition to .Net 4.5
+x Sorting on Track in the Grid didn't work correctly, because String Sorting was used instead of Numeric Sorting
+x Conversion: Run conversions in different threads.
+x ID3 Comments were not always cleared correctly
+x When not all information was returned from a MusicBrainz search, an NullPoinzter Exception was raised
+x Some File Types produced an error on Save, if all Tags have been removed
+
 3.1.5 Date: 13.10.2014 
 -------------------------------------
 + Updated Translation files

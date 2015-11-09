@@ -37,7 +37,8 @@ namespace MPTagThat.Core.AudioEncoder
     ///   Starts encoding using the given Parameters
     /// </summary>
     /// <param name = "stream"></param>
-    BASSError StartEncoding(int stream);
+    /// <param name = "rowIndex"></param>
+    BASSError StartEncoding(int stream, int rowIndex);
 
     /// <summary>
     /// Aborts the current encoding
