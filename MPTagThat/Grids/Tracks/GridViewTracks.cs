@@ -482,7 +482,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      for (int i = tracksGrid.Rows.Count - 1; i > 0; i--)
+      for (int i = tracksGrid.Rows.Count - 1; i >= 0; i--)
       {
         DataGridViewRow row = tracksGrid.Rows[i];
         if (!row.Selected)
@@ -2091,6 +2091,11 @@ namespace MPTagThat.GridView
       }
 
       TrackData track = Options.Songlist[e.RowIndex];
+
+	    if (track == null)
+	    {
+		    return;
+	    }
 
       // Handle the status column
       if (e.ColumnIndex == 0)
