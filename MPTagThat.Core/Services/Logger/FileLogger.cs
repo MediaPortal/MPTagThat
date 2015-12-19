@@ -19,10 +19,10 @@
 
 using System;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 using NLog;
 using NLog.Config;
+using NLog.Filters;
 using NLog.Targets;
 
 #endregion
@@ -37,7 +37,6 @@ namespace MPTagThat.Core
   /// </remarks>
   public class FileLogger : ILogger
   {
-    private static readonly object syncObject = new object();
     private readonly string fileName; //holds the file to write to.
     private LogLevel level; //holds the treshold for the log level.
     private Logger _logger = null;
@@ -50,15 +49,14 @@ namespace MPTagThat.Core
     /// <param name = "level">The minimum level messages must have to be written to the file.</param>
     public FileLogger(string fileName, LogLevel level, int portable)
     {
-      string logPath = String.Format(@"{0}\MPTagThat\Log",
-                                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      string logPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\MPTagThat\Log";
       if (portable == 1)
-        logPath = String.Format(@"{0}\Log", Application.StartupPath);
+        logPath = $@"{Application.StartupPath}\Log";
 
       if (!Directory.Exists(logPath))
         Directory.CreateDirectory(logPath);
 
-      this.fileName = String.Format(@"{0}\{1}", logPath, fileName);
+      this.fileName = $@"{logPath}\{fileName}";
 
       string ext = Path.GetExtension(this.fileName);
       string fileNamePattern = Path.ChangeExtension(this.fileName, ".{#}" + ext);
@@ -73,7 +71,7 @@ namespace MPTagThat.Core
       fileTarget.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss.ffffff} " +
                           "[${level:fixedLength=true:padding=5}]" +
                           "[${threadid:padding=3}]" +
-                          "[${stacktrace:format=Flat:topFrames=1:separator=\":\":fixedLength=true:padding=-30}]: " +
+													"[${stacktrace:format=Flat:topFrames=1:separator=\":\":fixedLength=true:padding=-30}]: " +
                           "${message} " +
                           "${exception:format=tostring}";
 
@@ -81,10 +79,14 @@ namespace MPTagThat.Core
 
       level = LogLevel.Debug;
 
-      LoggingRule rule = new LoggingRule("*", level, fileTarget);
-      config.LoggingRules.Add(rule);
+			LoggingRule rule = new LoggingRule("*", level, fileTarget);
 
-      LogManager.Configuration = config;
+			// Create a filter to disable Raven Database Debugging
+			Filter filter = new ConditionBasedFilter {Action = FilterResult.Ignore, Condition = "starts-with('${logger}','Raven')" };
+	    rule.Filters.Add(filter);
+			config.LoggingRules.Add(rule);
+
+			LogManager.Configuration = config;
 
       _logger = LogManager.GetLogger("MPTagThat");
     }
@@ -158,7 +160,13 @@ namespace MPTagThat.Core
             config.LoggingRules[0].EnableLoggingForLevel(LogLevel.FromOrdinal(i));
           }
         }
-        LogManager.Configuration = config;
+
+	      if (Options.RavenDebug == 1 && config.LoggingRules[0].Filters.Count > 0)
+	      {
+		      config.LoggingRules[0].Filters.RemoveAt(0);
+	      }
+
+				LogManager.Configuration = config;
       }
     }
 

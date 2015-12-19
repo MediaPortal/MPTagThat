@@ -252,6 +252,8 @@ namespace MPTagThat.Core
 
     public static int MaximumNumberOfSongsInList { get; set; }
 
+		public static int RavenDebug { get; set; }
+
     #endregion
 
     #region Constructor
@@ -273,7 +275,9 @@ namespace MPTagThat.Core
 
       MaximumNumberOfSongsInList = ServiceScope.Get<ISettingsManager>().GetMaxSongs();
 
-      _MPTagThatSettings = new MPTagThatSettings();
+	    RavenDebug = ServiceScope.Get<ISettingsManager>().GetRavenDebug();
+
+			_MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);
 
       _caseConversionSettings = new CaseConversionSettings();

@@ -46,7 +46,7 @@ namespace MPTagThat.Core
     int GetPortable();
 
     /// <summary>
-    /// Sets the maximum of Songs before switching to B Mode
+    /// Sets the maximum of Songs before switching to DB Mode
     /// </summary>
     /// <param name="maxsongs"></param>
     void SetMaxSongs(int maxsongs);
@@ -55,5 +55,16 @@ namespace MPTagThat.Core
     /// Gets the maximum of songs alllowed in List
     /// </summary>
     int GetMaxSongs();
-  }
+
+		/// <summary>
+		/// Sets the Raven Debug Mode
+		/// </summary>
+		/// <param name="ravendebug"></param>
+		void SetRavenDebug(int ravendebug);
+
+		/// <summary>
+		/// Gets the Raven Debug Mode
+		/// </summary>
+		int GetRavenDebug();
+	}
 }

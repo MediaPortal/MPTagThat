@@ -12,4 +12,10 @@
 	If this mark is reached, the songs will be stored in a temporary database to prevent Out of Memory issues on large collections
   -->
   <MaximumNumberOfSongsInList>200</MaximumNumberOfSongsInList>
+  
+    <!--
+	The following Parameter controls if debugging for Raven Database shall be turned on.
+  -->
+  <RavenDebug>0</RavenDebug>
+
 </config>

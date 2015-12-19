@@ -67,6 +67,13 @@ namespace MPTagThat.Core
       return 200;
     }
 
-    #endregion
+	  public void SetRavenDebug(int ravendebug) {}
+
+	  public int GetRavenDebug()
+	  {
+		  return 0;
+	  }
+
+	  #endregion
   }
 }

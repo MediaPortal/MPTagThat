@@ -24,14 +24,15 @@ namespace MPTagThat.Core
   {
     private int _portable;
     private int _maxSongs;
+		private int _ravenDebug;
 
-    #region ISettingsManager Members
+		#region ISettingsManager Members
 
-    /// <summary>
-    ///   Retrieves an object's public properties from an Xml file
-    /// </summary>
-    /// <param name = "settingsObject">Object's instance</param>
-    public void Load(object settingsObject)
+		/// <summary>
+		///   Retrieves an object's public properties from an Xml file
+		/// </summary>
+		/// <param name = "settingsObject">Object's instance</param>
+		public void Load(object settingsObject)
     {
       ObjectParser.Deserialize(settingsObject);
     }
@@ -79,6 +80,24 @@ namespace MPTagThat.Core
     {
       return _maxSongs;
     }
-    #endregion
+
+		/// <summary>
+		/// Sets the Raven Debug Mode
+		/// </summary>
+		/// <param name="ravendebug"></param>
+		public void SetRavenDebug(int ravendebug)
+		{
+			_ravenDebug = ravendebug;
+		}
+
+		/// <summary>
+		/// Gets the Raven Debug Mode
+		/// </summary>
+		public int GetRavenDebug()
+		{
+			return _ravenDebug;
+		}
+
+	  #endregion
   }
 }

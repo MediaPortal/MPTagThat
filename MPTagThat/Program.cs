@@ -38,7 +38,8 @@ namespace MPTagThat
 
     private static int _portable;
     private static int _maxSongs;
-    private static string _startupFolder;
+		private static int _ravenDebug;
+		private static string _startupFolder;
     private static Main _main;
 
     private delegate void ThreadSafeSetCurrentFolderDelegate(string startupFolder);
@@ -128,8 +129,10 @@ namespace MPTagThat
         ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
         // Set the Max Songs number
         ServiceScope.Get<ISettingsManager>().SetMaxSongs(_maxSongs);
+				// Set the Raven Debug Mode
+				ServiceScope.Get<ISettingsManager>().SetRavenDebug(_ravenDebug);
 
-        try
+				try
         {
           logger.Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
         }
@@ -267,7 +270,17 @@ namespace MPTagThat
         {
           _maxSongs = 200;
         }
-      }
+
+				XmlNode ravenDebugNode = doc.DocumentElement.SelectSingleNode("/config/RavenDebug");
+				if (ravenDebugNode != null)
+				{
+					_ravenDebug = Convert.ToInt32(ravenDebugNode.InnerText);
+				}
+				else
+				{
+					_ravenDebug = 0;
+				}
+			}
       catch (Exception) {}
     }
 
