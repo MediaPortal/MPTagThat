@@ -20,14 +20,16 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Config;
-using Db4objects.Db4o.IO;
-using Db4objects.Db4o.Linq;
-using Db4objects.Db4o.Query;
+using Raven.Client.Embedded;
+using Raven.Client;
+using Raven.Client.Document;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using MPTagThat.Core.Common;
+using Raven.Abstractions.Data;
+using Raven.Client.Connection;
 
 #endregion
 
@@ -42,16 +44,15 @@ namespace MPTagThat.Core
   {
     #region Variables
 
-    private readonly string _databaseName = string.Format(@"{0}\MPTagThat\Songs.db4o",
-                                                         Environment.GetFolderPath(
-                                                           Environment.SpecialFolder.LocalApplicationData));
+	  private readonly string _databaseName = "SongsTemp";
 
     private SortableBindingList<TrackData> _bindingList = new SortableBindingList<TrackData>();
     private bool _databaseModeEnabled = false;
 
-    private IObjectContainer _db = null;
-    private IEmbeddedConfiguration _dbConfig = null;
-    private Dictionary<int, Guid> _dbIdList = new Dictionary<int, Guid>(); 
+		private IDocumentStore _store;
+	  private IDatabaseCommands _dbCommands;
+    private IDocumentSession _session;
+		private List<Guid> _dbIdList = new List<Guid>(); 
 
     private int _lastRetrievedTrackIndex = -1;
     private TrackData _lastRetrievedTrack = null;
@@ -68,12 +69,12 @@ namespace MPTagThat.Core
 
     ~SongList()
     {
-      if (_db != null)
+      if (_store != null && !_store.WasDisposed)
       {
-        _db.Close();
-        _db.Dispose();
+	      _session?.Dispose();
+				_dbCommands.GlobalAdmin.DeleteDatabase(_databaseName, true);
+				_store.Dispose();
       }
-      System.IO.File.Delete(_databaseName);
     }
 
     #endregion
@@ -92,7 +93,7 @@ namespace MPTagThat.Core
         {
           if (_countCache == 0)
           {
-            _countCache = _db.Query(typeof(TrackData)).Count;
+	          _countCache = _session.Query<TrackData>().Count();
           }
           return _countCache;
         }
@@ -123,11 +124,9 @@ namespace MPTagThat.Core
 
           _lastRetrievedTrackIndex = i;
 
-          var result = from TrackData d in _db
-                       where d.Id == _dbIdList[i]
-                       select d;
+	        var result = _session.Load<TrackData>($"TrackDatas/{_dbIdList[i]}");
 
-          _lastRetrievedTrack = result.First();
+          _lastRetrievedTrack = result;
           return _lastRetrievedTrack;
         }
         
@@ -137,13 +136,12 @@ namespace MPTagThat.Core
       {
         if (_databaseModeEnabled)
         {
-          var result = from TrackData d in _db
-                       where d.Id == _dbIdList[i]
-                       select d;
+					var result = _session.Load<TrackData>($"TrackDatas/{_dbIdList[i]}");
 
-          TrackData track = result.First();
+					var track = result;
           track = value;
-          _db.Store(track);
+          _session.Store(track);
+					_session.SaveChanges();
         }
         else
         {
@@ -169,8 +167,9 @@ namespace MPTagThat.Core
 
       if (_databaseModeEnabled)
       {
-        _db.Store(track);
-        _dbIdList.Add(_dbIdList.Count, track.Id);
+        _session.Store(track);
+				_session.SaveChanges();
+        _dbIdList.Add(track.Id);
       }
       else
       {
@@ -186,13 +185,10 @@ namespace MPTagThat.Core
     {
       if (_databaseModeEnabled)
       {
-        var result = from TrackData d in _db
-                     where d.Id == _dbIdList[index]
-                     select d;
-        foreach (var trackData in result)
-        {
-          _db.Delete(trackData);
-        }
+				var track = _session.Load<TrackData>($"TrackDatas/{_dbIdList[index]}");
+				_session.Delete(track);
+				_session.SaveChanges();
+	      _dbIdList.RemoveAt(index);
       }
       else
       {
@@ -207,18 +203,10 @@ namespace MPTagThat.Core
     {
       if (_databaseModeEnabled)
       {
-        var result = from TrackData d in _db
-                select d;
-        foreach (var trackData in result)
-        {
-          _db.Delete(trackData);
-        }
-
         _databaseModeEnabled = false;
-        _db.Close();
-        _db.Dispose();
-        System.IO.File.Delete(_databaseName);
-      }
+				_store.DatabaseCommands.DeleteByIndex("Auto/TrackDatas", new IndexQuery());	
+				_dbIdList.Clear();
+			}
       else
       {
         _bindingList.Clear();
@@ -242,7 +230,7 @@ namespace MPTagThat.Core
           sortMethod = "OrderbyDescending";
         }
 
-        var queryableData = _db.AsQueryable<TrackData>();
+        var queryableData = _session.Query<TrackData>();
         var type = typeof(TrackData);
         var prop = type.GetProperty(sortFieldName);
         var parameter = Expression.Parameter(type, "p");
@@ -261,7 +249,7 @@ namespace MPTagThat.Core
         _dbIdList.Clear();
         foreach (TrackData dataObject in result)
         {
-          _dbIdList.Add(i, dataObject.Id);
+          _dbIdList.Add(dataObject.Id);
           i++;
         }
 
@@ -278,27 +266,26 @@ namespace MPTagThat.Core
 
     private bool CreateDbConnection()
     {
+	    if (_store != null)
+	    {
+		    return true;
+	    }
+
       try
       {
-        if (_db != null)
-        {
-          _db.Close();
-          _db.Dispose();
-          System.IO.File.Delete(_databaseName);
-        }
+	      try
+	      {
+					System.IO.Directory.Delete($@"{System.Windows.Forms.Application.StartupPath}\Database\{_databaseName}", true);
+	      }
+	      catch (IOException)
+	      {
+	      }
 
-        _dbConfig = Db4oEmbedded.NewConfiguration();
-        _dbConfig.Common.ObjectClass(typeof(TrackData)).ObjectField("_id").Indexed(true);
-        _dbConfig.Common.ActivationDepth = 3; // To increase performance
-        _dbConfig.Common.ObjectClass(typeof(TrackData)).CascadeOnUpdate(true);
+	      _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
+				_dbCommands = _store.DatabaseCommands.ForDatabase(_databaseName);
+	      _session = _store.OpenSession(_databaseName);
 
-        IStorage fileStorage = new FileStorage();
-        IStorage cachingStorage = new CachingStorage(fileStorage, 128, 2048);
-        _dbConfig.File.Storage = cachingStorage;
-
-        _db = Db4oEmbedded.OpenFile(_dbConfig, _databaseName);
-
-        return true;
+				return true;
       }
       catch (Exception ex)
       {
@@ -324,13 +311,16 @@ namespace MPTagThat.Core
 
       _dbIdList.Clear();
 
-      foreach (TrackData track in _bindingList)
-      {
-        _db.Store(track);
-        _dbIdList.Add(_dbIdList.Count, track.Id);
-      }
+	    using (BulkInsertOperation bulkInsert = _store.BulkInsert())
+	    {
+		    foreach (TrackData track in _bindingList)
+		    {
+			    bulkInsert.Store(track);
+			    _dbIdList.Add(track.Id);
+		    }
+	    }
 
-      _bindingList.Clear();
+	    _bindingList.Clear();
       _databaseModeEnabled = true;
       ServiceScope.Get<ILogger>().GetLogger.Debug("Finished enabling database mode.");
     }
@@ -347,9 +337,7 @@ namespace MPTagThat.Core
     {
       if (_databaseModeEnabled)
       {
-        return (from TrackData d in _db
-                select d).GetEnumerator();
-
+	      return _session.Query<TrackData>().Take(int.MaxValue).GetEnumerator();
       }
 
       return _bindingList.GetEnumerator();
