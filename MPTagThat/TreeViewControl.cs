@@ -381,10 +381,6 @@ namespace MPTagThat
       if (_databaseMode)
       {
         treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
-        if (_main.SplitterTop.IsCollapsed)
-        {
-          _main.SplitterTop.ToggleState();
-        }
         treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
@@ -404,10 +400,6 @@ namespace MPTagThat
           treeViewFolderBrowser.DataSource = shell32Provider;
         }
 
-        if (!_main.SplitterTop.IsCollapsed)
-        {
-          _main.SplitterTop.ToggleState();
-        }
         treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanel");
         treeViewFolderBrowser.AllowDrop = true;
         checkBoxRecursive.Enabled = true;

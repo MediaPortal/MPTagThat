@@ -79,8 +79,6 @@ namespace MPTagThat
     private bool _treeViewSelected; // Has the user selected the Treeview
     private UserControl _currentControlshown = null;
 
-    private DatabaseSearchControl databaseSearchControl;
-
     // Grids: Can't have them in Designer, as it will fail loading
     private GridViewBurn gridViewBurn;
     private GridViewTracks gridViewControl;
@@ -200,14 +198,6 @@ namespace MPTagThat
         }
         return gridViewRip.Ripping;
       }
-    }
-
-    /// <summary>
-    ///   Returns the Top Splitter
-    /// </summary>
-    public CollapsibleSplitter SplitterTop
-    {
-      get { return splitterTop; }
     }
 
     /// <summary>
@@ -717,18 +707,10 @@ namespace MPTagThat
 
         #endregion
 
-        // Hide the DB Search Panel
-        splitterTop.ToggleState();
-
         // Setup Treeview
         treeViewControl = new TreeViewControl(this);
         treeViewControl.Dock = DockStyle.Fill;
         panelLeftTop.Controls.Add(treeViewControl);
-
-        // Setup Database Search Control
-        databaseSearchControl = new DatabaseSearchControl(this);
-        databaseSearchControl.Dock = DockStyle.Fill;
-        panelMiddleDBSearch.Controls.Add(databaseSearchControl);
 
         // Setup Misc Info Control
         miscInfoControl = new MiscInfoControl();
@@ -1363,7 +1345,14 @@ namespace MPTagThat
       comboBoxBurner.LabelText = localisation.ToString("ribbon", "Burner");
       comboBoxBurnerSpeed.LabelText = localisation.ToString("ribbon", "BurnerSPeed");
 
-      log.Debug("Finished localising Ribbon");
+			// Database Tab
+			ribbonContextualTabGroup1.Caption = localisation.ToString("ribbon", "ContextualTab");
+			ribbonTabPageDatabase.Text = localisation.ToString("ribbon", "DatabaseTab");
+			ribbonGroupDatabaseMaint.Text = localisation.ToString("ribbon", "DatabaseMaintenanceGroup");
+
+
+
+			log.Debug("Finished localising Ribbon");
 
 
       log.Trace("<<<");
@@ -1438,8 +1427,7 @@ namespace MPTagThat
     {
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
       playerControl.BackColor = themeManager.CurrentTheme.BackColor;
-      databaseSearchControl.BackColor = themeManager.CurrentTheme.BackColor;
-
+      
       // We want to have our own color and Font for the various Grids
       gridViewControl.View.Font = themeManager.CurrentTheme.LabelFont;
       gridViewControl.View.EnableHeadersVisualStyles = false;
@@ -3137,10 +3125,6 @@ namespace MPTagThat
 
         case Action.ActionType.ACTION_TOGGLESTREEVIEWSPLITTER:
           splitterLeft.ToggleState();
-          break;
-
-        case Action.ActionType.ACTION_TOGGLEDATABASESPLITTER:
-          splitterTop.ToggleState();
           break;
 
         case Action.ActionType.ACTION_TOGGLEQUICKEDIT:

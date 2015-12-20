@@ -271,6 +271,9 @@ namespace MPTagThat
 			this.ribbonContextualTabGroup1 = new Elegant.Ui.RibbonContextualTabGroup(this.components);
 			this.ribbonTabPageDatabase = new Elegant.Ui.RibbonTabPage();
 			this.ribbonGroupDatabaseMaint = new Elegant.Ui.RibbonGroup();
+			this.buttonStartDBScan = new Elegant.Ui.Button();
+			this.buttonAbortDBScan = new Elegant.Ui.Button();
+			this.buttonDeleteDB = new Elegant.Ui.Button();
 			this.startMenuSave = new Elegant.Ui.Button();
 			this.startMenuRefresh = new Elegant.Ui.Button();
 			this.ribbonTabPageTag = new Elegant.Ui.RibbonTabPage();
@@ -348,8 +351,6 @@ namespace MPTagThat
 			this.panelMiddle = new MPTagThat.Core.WinControls.MPTPanel();
 			this.panelMiddleTop = new MPTagThat.Core.WinControls.MPTPanel();
 			this.panelFileList = new MPTagThat.Core.WinControls.MPTPanel();
-			this.splitterTop = new NJFLib.Controls.CollapsibleSplitter();
-			this.panelMiddleDBSearch = new MPTagThat.Core.WinControls.MPTPanel();
 			this.splitterLeft = new MPTagThat.Core.WinControls.MPTCollapsibleSplitter();
 			this.panelLeft = new MPTagThat.Core.WinControls.MPTPanel();
 			this.panelLeftTop = new MPTagThat.Core.WinControls.MPTPanel();
@@ -360,9 +361,6 @@ namespace MPTagThat
 			this.splitterPlayer = new NJFLib.Controls.CollapsibleSplitter();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.buttonStartDBScan = new Elegant.Ui.Button();
-			this.buttonAbortDBScan = new Elegant.Ui.Button();
-			this.buttonDeleteDB = new Elegant.Ui.Button();
 			themeSelector = new Elegant.Ui.ThemeSelector(this.components);
 			this.panelBottom.SuspendLayout();
 			this.statusBar.SuspendLayout();
@@ -488,9 +486,9 @@ namespace MPTagThat
 			// 
 			this.panelBottom.Controls.Add(this.playerPanel);
 			this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelBottom.Location = new System.Drawing.Point(0, 921);
+			this.panelBottom.Location = new System.Drawing.Point(0, 932);
 			this.panelBottom.Name = "panelBottom";
-			this.panelBottom.Size = new System.Drawing.Size(1257, 90);
+			this.panelBottom.Size = new System.Drawing.Size(1265, 90);
 			this.panelBottom.TabIndex = 12;
 			// 
 			// playerPanel
@@ -498,7 +496,7 @@ namespace MPTagThat
 			this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.playerPanel.Location = new System.Drawing.Point(0, 0);
 			this.playerPanel.Name = "playerPanel";
-			this.playerPanel.Size = new System.Drawing.Size(1257, 90);
+			this.playerPanel.Size = new System.Drawing.Size(1265, 90);
 			this.playerPanel.TabIndex = 11;
 			// 
 			// formFrameSkinner
@@ -512,10 +510,10 @@ namespace MPTagThat
 			this.statusBar.Controls.Add(this.statusBarControlsArea1);
 			this.statusBar.ControlsArea = this.statusBarControlsArea1;
 			this.statusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.statusBar.Location = new System.Drawing.Point(0, 1011);
+			this.statusBar.Location = new System.Drawing.Point(0, 1022);
 			this.statusBar.Name = "statusBar";
 			this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-			this.statusBar.Size = new System.Drawing.Size(1257, 22);
+			this.statusBar.Size = new System.Drawing.Size(1265, 22);
 			this.statusBar.TabIndex = 16;
 			this.statusBar.Text = "statusBar1";
 			// 
@@ -529,7 +527,7 @@ namespace MPTagThat
 			this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
 			this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
 			this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-			this.statusBarNotificationsArea1.Size = new System.Drawing.Size(942, 22);
+			this.statusBarNotificationsArea1.Size = new System.Drawing.Size(950, 22);
 			this.statusBarNotificationsArea1.TabIndex = 1;
 			// 
 			// statusBarPane2
@@ -604,7 +602,7 @@ namespace MPTagThat
 			this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
 			this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
 			this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.statusBarControlsArea1.Location = new System.Drawing.Point(942, 0);
+			this.statusBarControlsArea1.Location = new System.Drawing.Point(950, 0);
 			this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
 			this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
 			this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -672,7 +670,7 @@ namespace MPTagThat
 			this.ribbon.BackstageView = this.backstageView;
 			this.ribbon.ContextualTabGroups.AddRange(new Elegant.Ui.RibbonContextualTabGroup[] {
             this.ribbonContextualTabGroup1});
-			this.ribbon.CurrentTabPage = this.ribbonTabPageDatabase;
+			this.ribbon.CurrentTabPage = this.ribbonTabPageTag;
 			this.ribbon.CustomTitleBarEnabled = false;
 			this.ribbon.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbon.HelpButtonCommandName = "Help";
@@ -687,7 +685,7 @@ namespace MPTagThat
             this.startMenuRefresh});
 			this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
 			this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
-			this.ribbon.Size = new System.Drawing.Size(1257, 150);
+			this.ribbon.Size = new System.Drawing.Size(1265, 150);
 			this.ribbon.TabIndex = 15;
 			this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -712,7 +710,7 @@ namespace MPTagThat
             this.backstageViewButtonExit});
 			this.backstageView.Location = new System.Drawing.Point(0, 51);
 			this.backstageView.Name = "backstageView";
-			this.backstageView.Size = new System.Drawing.Size(1241, 938);
+			this.backstageView.Size = new System.Drawing.Size(1265, 971);
 			this.backstageView.TabIndex = 17;
 			this.backstageView.VisibleChanged += new System.EventHandler(this.backstageView_VisibleChanged);
 			// 
@@ -727,7 +725,7 @@ namespace MPTagThat
 			this.backstageViewPageOptions.Location = new System.Drawing.Point(0, 0);
 			this.backstageViewPageOptions.Name = "backstageViewPageOptions";
 			this.backstageViewPageOptions.Padding = new System.Windows.Forms.Padding(0, 1, 2, 1);
-			this.backstageViewPageOptions.Size = new System.Drawing.Size(1156, 936);
+			this.backstageViewPageOptions.Size = new System.Drawing.Size(1110, 969);
 			this.backstageViewPageOptions.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", global::MPTagThat.Properties.Resources.QuickAccessMenuOptions)});
 			this.backstageViewPageOptions.TabIndex = 0;
@@ -739,7 +737,7 @@ namespace MPTagThat
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(210, 57);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(944, 878);
+			this.panel2.Size = new System.Drawing.Size(898, 911);
 			this.panel2.TabIndex = 1;
 			this.panel2.Text = "panel2";
 			// 
@@ -748,8 +746,8 @@ namespace MPTagThat
 			this.tabControlSettings.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabControlSettings.Location = new System.Drawing.Point(0, 0);
 			this.tabControlSettings.Name = "tabControlSettings";
-			this.tabControlSettings.SelectedTabPage = null;
-			this.tabControlSettings.Size = new System.Drawing.Size(944, 878);
+			this.tabControlSettings.SelectedTabPage = this.tabPageSettingsKeys;
+			this.tabControlSettings.Size = new System.Drawing.Size(898, 911);
 			this.tabControlSettings.TabIndex = 0;
 			this.tabControlSettings.TabPages.AddRange(new Elegant.Ui.TabPage[] {
             this.tabPageSettingsGeneral,
@@ -915,7 +913,7 @@ namespace MPTagThat
 			this.tabPageSettingsKeys.Controls.Add(this.groupBoxKeys);
 			this.tabPageSettingsKeys.KeyTip = null;
 			this.tabPageSettingsKeys.Name = "tabPageSettingsKeys";
-			this.tabPageSettingsKeys.Size = new System.Drawing.Size(840, 920);
+			this.tabPageSettingsKeys.Size = new System.Drawing.Size(896, 896);
 			this.tabPageSettingsKeys.TabIndex = 1;
 			// 
 			// groupBoxKeys
@@ -1105,7 +1103,7 @@ namespace MPTagThat
 			this.tabPageSettingsTagsGeneral.Controls.Add(this.groupBoxTagsGeneral);
 			this.tabPageSettingsTagsGeneral.KeyTip = null;
 			this.tabPageSettingsTagsGeneral.Name = "tabPageSettingsTagsGeneral";
-			this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(864, 852);
+			this.tabPageSettingsTagsGeneral.Size = new System.Drawing.Size(896, 896);
 			this.tabPageSettingsTagsGeneral.TabIndex = 2;
 			// 
 			// groupBoxTagsGeneral
@@ -1175,7 +1173,7 @@ namespace MPTagThat
 			this.tabPageSettingsTagsId3.Controls.Add(this.groupBoxTagsID3);
 			this.tabPageSettingsTagsId3.KeyTip = null;
 			this.tabPageSettingsTagsId3.Name = "tabPageSettingsTagsId3";
-			this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(848, 852);
+			this.tabPageSettingsTagsId3.Size = new System.Drawing.Size(896, 896);
 			this.tabPageSettingsTagsId3.TabIndex = 3;
 			// 
 			// groupBoxCustomGenres
@@ -2755,7 +2753,7 @@ namespace MPTagThat
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel3.Location = new System.Drawing.Point(210, 1);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(944, 56);
+			this.panel3.Size = new System.Drawing.Size(898, 56);
 			this.panel3.TabIndex = 2;
 			this.panel3.Text = "panel3";
 			// 
@@ -2792,7 +2790,7 @@ namespace MPTagThat
 			this.backstageViewPanel1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.backstageViewPanel1.Location = new System.Drawing.Point(0, 1);
 			this.backstageViewPanel1.Name = "backstageViewPanel1";
-			this.backstageViewPanel1.Size = new System.Drawing.Size(210, 934);
+			this.backstageViewPanel1.Size = new System.Drawing.Size(210, 967);
 			this.backstageViewPanel1.TabIndex = 0;
 			// 
 			// groupedNavigationBar1
@@ -2805,7 +2803,7 @@ namespace MPTagThat
 			this.groupedNavigationBar1.Id = "0e02f3a9-3b46-4372-b562-76ec70fa44da";
 			this.groupedNavigationBar1.Location = new System.Drawing.Point(0, 0);
 			this.groupedNavigationBar1.Name = "groupedNavigationBar1";
-			this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 934);
+			this.groupedNavigationBar1.Size = new System.Drawing.Size(210, 967);
 			this.groupedNavigationBar1.TabIndex = 0;
 			this.groupedNavigationBar1.Text = "Settings";
 			this.groupedNavigationBar1.VisibleOutlookGroupHeadersCount = 0;
@@ -2823,7 +2821,7 @@ namespace MPTagThat
             this.navigationBarItemKeys});
 			this.navigationBarGroupItemsContainer1.Location = new System.Drawing.Point(0, 24);
 			this.navigationBarGroupItemsContainer1.Name = "navigationBarGroupItemsContainer1";
-			this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 10);
+			this.navigationBarGroupItemsContainer1.Size = new System.Drawing.Size(208, 48);
 			this.navigationBarGroupItemsContainer1.TabIndex = 2;
 			// 
 			// navigationBarItemGeneral
@@ -2831,7 +2829,7 @@ namespace MPTagThat
 			this.navigationBarItemGeneral.Id = "4db69fb3-e8aa-4ea2-a37e-19b60609bd39";
 			this.navigationBarItemGeneral.Location = new System.Drawing.Point(0, 0);
 			this.navigationBarItemGeneral.Name = "navigationBarItemGeneral";
-			this.navigationBarItemGeneral.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemGeneral.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemGeneral.TabIndex = 1;
 			this.navigationBarItemGeneral.Text = "General";
 			this.navigationBarItemGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2839,9 +2837,9 @@ namespace MPTagThat
 			// navigationBarItemKeys
 			// 
 			this.navigationBarItemKeys.Id = "00b369ff-5784-4a70-b131-59a883bcdcc6";
-			this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemKeys.Location = new System.Drawing.Point(0, 19);
 			this.navigationBarItemKeys.Name = "navigationBarItemKeys";
-			this.navigationBarItemKeys.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemKeys.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemKeys.TabIndex = 2;
 			this.navigationBarItemKeys.Text = "Keys";
 			this.navigationBarItemKeys.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2859,9 +2857,9 @@ namespace MPTagThat
             this.navigationBarItemTagsId3,
             this.navigationBarItemTagsLyricsCover,
             this.navigationBarItemTagsDatabase});
-			this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 58);
+			this.navigationBarGroupItemsContainer2.Location = new System.Drawing.Point(0, 96);
 			this.navigationBarGroupItemsContainer2.Name = "navigationBarGroupItemsContainer2";
-			this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 10);
+			this.navigationBarGroupItemsContainer2.Size = new System.Drawing.Size(208, 86);
 			this.navigationBarGroupItemsContainer2.TabIndex = 5;
 			// 
 			// navigationBarItemTagsGeneral
@@ -2869,7 +2867,7 @@ namespace MPTagThat
 			this.navigationBarItemTagsGeneral.Id = "b3698914-5def-4d5b-9eb3-575e3de603a4";
 			this.navigationBarItemTagsGeneral.Location = new System.Drawing.Point(0, 0);
 			this.navigationBarItemTagsGeneral.Name = "navigationBarItemTagsGeneral";
-			this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemTagsGeneral.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemTagsGeneral.TabIndex = 1;
 			this.navigationBarItemTagsGeneral.Text = "General";
 			this.navigationBarItemTagsGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2877,9 +2875,9 @@ namespace MPTagThat
 			// navigationBarItemTagsId3
 			// 
 			this.navigationBarItemTagsId3.Id = "e5db1b69-dfd6-4c8f-b3e4-89191c88381e";
-			this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemTagsId3.Location = new System.Drawing.Point(0, 19);
 			this.navigationBarItemTagsId3.Name = "navigationBarItemTagsId3";
-			this.navigationBarItemTagsId3.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemTagsId3.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemTagsId3.TabIndex = 2;
 			this.navigationBarItemTagsId3.Text = "ID3";
 			this.navigationBarItemTagsId3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2887,9 +2885,9 @@ namespace MPTagThat
 			// navigationBarItemTagsLyricsCover
 			// 
 			this.navigationBarItemTagsLyricsCover.Id = "8aca463b-fb85-407e-98db-f779d493d24f";
-			this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemTagsLyricsCover.Location = new System.Drawing.Point(0, 38);
 			this.navigationBarItemTagsLyricsCover.Name = "navigationBarItemTagsLyricsCover";
-			this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemTagsLyricsCover.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemTagsLyricsCover.TabIndex = 3;
 			this.navigationBarItemTagsLyricsCover.Text = "Lyrics / Cover";
 			this.navigationBarItemTagsLyricsCover.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2897,9 +2895,9 @@ namespace MPTagThat
 			// navigationBarItemTagsDatabase
 			// 
 			this.navigationBarItemTagsDatabase.Id = "88cfd696-ed66-40cf-8fc8-4b57612a86b1";
-			this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemTagsDatabase.Location = new System.Drawing.Point(0, 57);
 			this.navigationBarItemTagsDatabase.Name = "navigationBarItemTagsDatabase";
-			this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemTagsDatabase.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemTagsDatabase.TabIndex = 4;
 			this.navigationBarItemTagsDatabase.Text = "Database";
 			this.navigationBarItemTagsDatabase.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2921,9 +2919,9 @@ namespace MPTagThat
             this.navigationBarItemRipWMA,
             this.navigationBarItemMPC,
             this.navigationBarItemRipWV});
-			this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 92);
+			this.navigationBarGroupItemsContainer3.Location = new System.Drawing.Point(0, 206);
 			this.navigationBarGroupItemsContainer3.Name = "navigationBarGroupItemsContainer3";
-			this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 10);
+			this.navigationBarGroupItemsContainer3.Size = new System.Drawing.Size(208, 162);
 			this.navigationBarGroupItemsContainer3.TabIndex = 8;
 			// 
 			// navigationBarItemRipGeneral
@@ -2931,7 +2929,7 @@ namespace MPTagThat
 			this.navigationBarItemRipGeneral.Id = "f32def35-f20f-4311-a0f2-1c8355043d68";
 			this.navigationBarItemRipGeneral.Location = new System.Drawing.Point(0, 0);
 			this.navigationBarItemRipGeneral.Name = "navigationBarItemRipGeneral";
-			this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipGeneral.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipGeneral.TabIndex = 1;
 			this.navigationBarItemRipGeneral.Text = "General";
 			this.navigationBarItemRipGeneral.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2939,9 +2937,9 @@ namespace MPTagThat
 			// navigationBarItemRipMp3
 			// 
 			this.navigationBarItemRipMp3.Id = "9d8979f0-7c74-47e7-8197-4792f75f513f";
-			this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemRipMp3.Location = new System.Drawing.Point(0, 19);
 			this.navigationBarItemRipMp3.Name = "navigationBarItemRipMp3";
-			this.navigationBarItemRipMp3.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipMp3.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipMp3.TabIndex = 2;
 			this.navigationBarItemRipMp3.Text = "MP3";
 			this.navigationBarItemRipMp3.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2949,9 +2947,9 @@ namespace MPTagThat
 			// navigationBarItemRipOgg
 			// 
 			this.navigationBarItemRipOgg.Id = "6cd82a8c-1a93-4ea2-87e6-c226163612b2";
-			this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemRipOgg.Location = new System.Drawing.Point(0, 38);
 			this.navigationBarItemRipOgg.Name = "navigationBarItemRipOgg";
-			this.navigationBarItemRipOgg.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipOgg.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipOgg.TabIndex = 3;
 			this.navigationBarItemRipOgg.Text = "OGG";
 			this.navigationBarItemRipOgg.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2959,9 +2957,9 @@ namespace MPTagThat
 			// navigationBarItemFlac
 			// 
 			this.navigationBarItemFlac.Id = "92a49143-104e-4885-a538-db9557075803";
-			this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemFlac.Location = new System.Drawing.Point(0, 57);
 			this.navigationBarItemFlac.Name = "navigationBarItemFlac";
-			this.navigationBarItemFlac.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemFlac.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemFlac.TabIndex = 4;
 			this.navigationBarItemFlac.Text = "FLAC";
 			this.navigationBarItemFlac.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2969,9 +2967,9 @@ namespace MPTagThat
 			// navigationBarItemRipAAC
 			// 
 			this.navigationBarItemRipAAC.Id = "062f0637-9556-4f29-a6b4-ccd7c41f76be";
-			this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemRipAAC.Location = new System.Drawing.Point(0, 76);
 			this.navigationBarItemRipAAC.Name = "navigationBarItemRipAAC";
-			this.navigationBarItemRipAAC.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipAAC.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipAAC.TabIndex = 5;
 			this.navigationBarItemRipAAC.Text = "AAC";
 			this.navigationBarItemRipAAC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2979,9 +2977,9 @@ namespace MPTagThat
 			// navigationBarItemRipWMA
 			// 
 			this.navigationBarItemRipWMA.Id = "16c82fc1-67af-4336-8771-0ba81707e707";
-			this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemRipWMA.Location = new System.Drawing.Point(0, 95);
 			this.navigationBarItemRipWMA.Name = "navigationBarItemRipWMA";
-			this.navigationBarItemRipWMA.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipWMA.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipWMA.TabIndex = 6;
 			this.navigationBarItemRipWMA.Text = "WMA";
 			this.navigationBarItemRipWMA.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2989,9 +2987,9 @@ namespace MPTagThat
 			// navigationBarItemMPC
 			// 
 			this.navigationBarItemMPC.Id = "0187f926-0f64-4f0f-aaa8-f834549b0c63";
-			this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemMPC.Location = new System.Drawing.Point(0, 114);
 			this.navigationBarItemMPC.Name = "navigationBarItemMPC";
-			this.navigationBarItemMPC.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemMPC.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemMPC.TabIndex = 7;
 			this.navigationBarItemMPC.Text = "MPC";
 			this.navigationBarItemMPC.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -2999,9 +2997,9 @@ namespace MPTagThat
 			// navigationBarItemRipWV
 			// 
 			this.navigationBarItemRipWV.Id = "c628d04e-f8e7-4091-be19-4a288c7176a0";
-			this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 0);
+			this.navigationBarItemRipWV.Location = new System.Drawing.Point(0, 133);
 			this.navigationBarItemRipWV.Name = "navigationBarItemRipWV";
-			this.navigationBarItemRipWV.Size = new System.Drawing.Size(0, 0);
+			this.navigationBarItemRipWV.Size = new System.Drawing.Size(208, 19);
 			this.navigationBarItemRipWV.TabIndex = 8;
 			this.navigationBarItemRipWV.Text = "WV";
 			this.navigationBarItemRipWV.Click += new System.EventHandler(this.navigatonBarItem_Click);
@@ -3139,7 +3137,7 @@ namespace MPTagThat
 			this.ribbonTabPageDatabase.KeyTip = null;
 			this.ribbonTabPageDatabase.Location = new System.Drawing.Point(0, 0);
 			this.ribbonTabPageDatabase.Name = "ribbonTabPageDatabase";
-			this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1257, 99);
+			this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1265, 99);
 			this.ribbonTabPageDatabase.TabIndex = 0;
 			this.ribbonTabPageDatabase.Text = "Database";
 			// 
@@ -3153,6 +3151,54 @@ namespace MPTagThat
 			this.ribbonGroupDatabaseMaint.Size = new System.Drawing.Size(149, 94);
 			this.ribbonGroupDatabaseMaint.TabIndex = 0;
 			this.ribbonGroupDatabaseMaint.Text = "Database Maintenance";
+			// 
+			// buttonStartDBScan
+			// 
+			this.buttonStartDBScan.CommandName = "StartDBScan";
+			this.buttonStartDBScan.Id = "c267b997-22b7-43de-b519-6fac84ee5507";
+			this.buttonStartDBScan.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonStartDBScan.LargeImages.Images"))))});
+			this.buttonStartDBScan.Location = new System.Drawing.Point(4, 2);
+			this.buttonStartDBScan.Name = "buttonStartDBScan";
+			this.buttonStartDBScan.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonStartDBScan.ScreenTip.Image")));
+			this.buttonStartDBScan.Size = new System.Drawing.Size(42, 72);
+			this.buttonStartDBScan.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonStartDBScan.SmallImages.Images"))))});
+			this.buttonStartDBScan.TabIndex = 1;
+			this.buttonStartDBScan.Text = "Start Scan";
+			this.buttonStartDBScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+			// 
+			// buttonAbortDBScan
+			// 
+			this.buttonAbortDBScan.CommandName = "AbortDBScan";
+			this.buttonAbortDBScan.Id = "d15a8320-684d-4d94-8c78-13ab3d0c4893";
+			this.buttonAbortDBScan.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonAbortDBScan.LargeImages.Images"))))});
+			this.buttonAbortDBScan.Location = new System.Drawing.Point(48, 2);
+			this.buttonAbortDBScan.Name = "buttonAbortDBScan";
+			this.buttonAbortDBScan.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonAbortDBScan.ScreenTip.Image")));
+			this.buttonAbortDBScan.Size = new System.Drawing.Size(42, 72);
+			this.buttonAbortDBScan.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonAbortDBScan.SmallImages.Images"))))});
+			this.buttonAbortDBScan.TabIndex = 2;
+			this.buttonAbortDBScan.Text = "Abort Scan";
+			this.buttonAbortDBScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+			// 
+			// buttonDeleteDB
+			// 
+			this.buttonDeleteDB.CommandName = "DeletDatabase";
+			this.buttonDeleteDB.Id = "2bc97561-3eb5-4738-9638-9092d8cec7c2";
+			this.buttonDeleteDB.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteDB.LargeImages.Images"))))});
+			this.buttonDeleteDB.Location = new System.Drawing.Point(92, 2);
+			this.buttonDeleteDB.Name = "buttonDeleteDB";
+			this.buttonDeleteDB.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonDeleteDB.ScreenTip.Image")));
+			this.buttonDeleteDB.Size = new System.Drawing.Size(52, 72);
+			this.buttonDeleteDB.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDeleteDB.SmallImages.Images"))))});
+			this.buttonDeleteDB.TabIndex = 3;
+			this.buttonDeleteDB.Text = "Delete Database";
+			this.buttonDeleteDB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			// 
 			// startMenuSave
 			// 
@@ -3196,7 +3242,7 @@ namespace MPTagThat
 			this.ribbonTabPageTag.KeyTip = null;
 			this.ribbonTabPageTag.Location = new System.Drawing.Point(0, 0);
 			this.ribbonTabPageTag.Name = "ribbonTabPageTag";
-			this.ribbonTabPageTag.Size = new System.Drawing.Size(1257, 99);
+			this.ribbonTabPageTag.Size = new System.Drawing.Size(1265, 99);
 			this.ribbonTabPageTag.TabIndex = 0;
 			this.ribbonTabPageTag.Tag = "Tags";
 			this.ribbonTabPageTag.Text = "Tags";
@@ -3519,7 +3565,7 @@ namespace MPTagThat
 			this.comboBoxScripts.LabelAreaWidthTemplate = "";
 			this.comboBoxScripts.Location = new System.Drawing.Point(1, 0);
 			this.comboBoxScripts.Name = "comboBoxScripts";
-			this.comboBoxScripts.Size = new System.Drawing.Size(19, 21);
+			this.comboBoxScripts.Size = new System.Drawing.Size(19, 23);
 			this.comboBoxScripts.TabIndex = 0;
 			this.comboBoxScripts.TextEditorWidth = 0;
 			// 
@@ -3589,7 +3635,7 @@ namespace MPTagThat
 			this.textBoxNumber.MinimumSize = new System.Drawing.Size(60, 0);
 			this.textBoxNumber.Name = "textBoxNumber";
 			this.textBoxNumber.Padding = new System.Windows.Forms.Padding(0, 1, 15, 0);
-			this.textBoxNumber.Size = new System.Drawing.Size(60, 21);
+			this.textBoxNumber.Size = new System.Drawing.Size(60, 23);
 			this.textBoxNumber.TabIndex = 2;
 			this.textBoxNumber.Text = "1";
 			this.textBoxNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -4129,50 +4175,25 @@ namespace MPTagThat
 			this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMiddle.Location = new System.Drawing.Point(0, 150);
 			this.panelMiddle.Name = "panelMiddle";
-			this.panelMiddle.Size = new System.Drawing.Size(1257, 768);
+			this.panelMiddle.Size = new System.Drawing.Size(1265, 779);
 			this.panelMiddle.TabIndex = 10;
 			// 
 			// panelMiddleTop
 			// 
 			this.panelMiddleTop.Controls.Add(this.panelFileList);
-			this.panelMiddleTop.Controls.Add(this.splitterTop);
-			this.panelMiddleTop.Controls.Add(this.panelMiddleDBSearch);
 			this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
 			this.panelMiddleTop.Name = "panelMiddleTop";
-			this.panelMiddleTop.Size = new System.Drawing.Size(925, 496);
+			this.panelMiddleTop.Size = new System.Drawing.Size(933, 512);
 			this.panelMiddleTop.TabIndex = 11;
 			// 
 			// panelFileList
 			// 
 			this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelFileList.Location = new System.Drawing.Point(0, 88);
+			this.panelFileList.Location = new System.Drawing.Point(0, 0);
 			this.panelFileList.Name = "panelFileList";
-			this.panelFileList.Size = new System.Drawing.Size(925, 408);
+			this.panelFileList.Size = new System.Drawing.Size(933, 512);
 			this.panelFileList.TabIndex = 9;
-			// 
-			// splitterTop
-			// 
-			this.splitterTop.AnimationDelay = 20;
-			this.splitterTop.AnimationStep = 20;
-			this.splitterTop.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.splitterTop.ControlToHide = this.panelMiddleDBSearch;
-			this.splitterTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.splitterTop.ExpandParentForm = false;
-			this.splitterTop.Location = new System.Drawing.Point(0, 80);
-			this.splitterTop.Name = "splitterTop";
-			this.splitterTop.TabIndex = 11;
-			this.splitterTop.TabStop = false;
-			this.splitterTop.UseAnimations = true;
-			this.splitterTop.VisualStyle = NJFLib.Controls.VisualStyles.XP;
-			// 
-			// panelMiddleDBSearch
-			// 
-			this.panelMiddleDBSearch.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelMiddleDBSearch.Location = new System.Drawing.Point(0, 0);
-			this.panelMiddleDBSearch.Name = "panelMiddleDBSearch";
-			this.panelMiddleDBSearch.Size = new System.Drawing.Size(925, 80);
-			this.panelMiddleDBSearch.TabIndex = 10;
 			// 
 			// splitterLeft
 			// 
@@ -4197,7 +4218,7 @@ namespace MPTagThat
 			this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panelLeft.Location = new System.Drawing.Point(0, 0);
 			this.panelLeft.Name = "panelLeft";
-			this.panelLeft.Size = new System.Drawing.Size(150, 768);
+			this.panelLeft.Size = new System.Drawing.Size(150, 779);
 			this.panelLeft.TabIndex = 1;
 			// 
 			// panelLeftTop
@@ -4205,7 +4226,7 @@ namespace MPTagThat
 			this.panelLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelLeftTop.Location = new System.Drawing.Point(0, 0);
 			this.panelLeftTop.Name = "panelLeftTop";
-			this.panelLeftTop.Size = new System.Drawing.Size(150, 768);
+			this.panelLeftTop.Size = new System.Drawing.Size(150, 779);
 			this.panelLeftTop.TabIndex = 4;
 			// 
 			// splitterRight
@@ -4219,7 +4240,7 @@ namespace MPTagThat
 			this.splitterRight.ExpandParentForm = false;
 			this.splitterRight.Localisation = "splitterRight";
 			this.splitterRight.LocalisationContext = "Main";
-			this.splitterRight.Location = new System.Drawing.Point(1083, 0);
+			this.splitterRight.Location = new System.Drawing.Point(1091, 0);
 			this.splitterRight.Name = "splitterRight";
 			this.splitterRight.TabIndex = 4;
 			this.splitterRight.TabStop = false;
@@ -4232,9 +4253,9 @@ namespace MPTagThat
 			this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.panelRight.BackColor = System.Drawing.SystemColors.Control;
 			this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panelRight.Location = new System.Drawing.Point(1091, 0);
+			this.panelRight.Location = new System.Drawing.Point(1099, 0);
 			this.panelRight.Name = "panelRight";
-			this.panelRight.Size = new System.Drawing.Size(166, 768);
+			this.panelRight.Size = new System.Drawing.Size(166, 779);
 			this.panelRight.TabIndex = 3;
 			// 
 			// splitterBottom
@@ -4247,7 +4268,7 @@ namespace MPTagThat
 			this.splitterBottom.ExpandParentForm = false;
 			this.splitterBottom.Localisation = "collapsibleSplitter1";
 			this.splitterBottom.LocalisationContext = "Main";
-			this.splitterBottom.Location = new System.Drawing.Point(150, 496);
+			this.splitterBottom.Location = new System.Drawing.Point(150, 512);
 			this.splitterBottom.Name = "collapsibleSplitter1";
 			this.splitterBottom.TabIndex = 6;
 			this.splitterBottom.TabStop = false;
@@ -4258,9 +4279,9 @@ namespace MPTagThat
 			// panelMiddleBottom
 			// 
 			this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelMiddleBottom.Location = new System.Drawing.Point(150, 504);
+			this.panelMiddleBottom.Location = new System.Drawing.Point(150, 515);
 			this.panelMiddleBottom.Name = "panelMiddleBottom";
-			this.panelMiddleBottom.Size = new System.Drawing.Size(941, 264);
+			this.panelMiddleBottom.Size = new System.Drawing.Size(949, 264);
 			this.panelMiddleBottom.TabIndex = 12;
 			// 
 			// splitterPlayer
@@ -4271,7 +4292,7 @@ namespace MPTagThat
 			this.splitterPlayer.ControlToHide = this.panelBottom;
 			this.splitterPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.splitterPlayer.ExpandParentForm = false;
-			this.splitterPlayer.Location = new System.Drawing.Point(0, 918);
+			this.splitterPlayer.Location = new System.Drawing.Point(0, 929);
 			this.splitterPlayer.Name = "splitterPlayer";
 			this.splitterPlayer.TabIndex = 13;
 			this.splitterPlayer.TabStop = false;
@@ -4290,59 +4311,11 @@ namespace MPTagThat
 			this.dataGridViewTextBoxColumn2.HeaderText = "Message";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			// 
-			// buttonStartDBScan
-			// 
-			this.buttonStartDBScan.CommandName = "StartDBScan";
-			this.buttonStartDBScan.Id = "c267b997-22b7-43de-b519-6fac84ee5507";
-			this.buttonStartDBScan.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.LargeImages.Images"))))});
-			this.buttonStartDBScan.Location = new System.Drawing.Point(4, 2);
-			this.buttonStartDBScan.Name = "buttonStartDBScan";
-			this.buttonStartDBScan.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("button1.ScreenTip.Image")));
-			this.buttonStartDBScan.Size = new System.Drawing.Size(42, 72);
-			this.buttonStartDBScan.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.SmallImages.Images"))))});
-			this.buttonStartDBScan.TabIndex = 1;
-			this.buttonStartDBScan.Text = "Start Scan";
-			this.buttonStartDBScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-			// 
-			// buttonAbortDBScan
-			// 
-			this.buttonAbortDBScan.CommandName = "AbortDBScan";
-			this.buttonAbortDBScan.Id = "d15a8320-684d-4d94-8c78-13ab3d0c4893";
-			this.buttonAbortDBScan.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.LargeImages.Images1"))))});
-			this.buttonAbortDBScan.Location = new System.Drawing.Point(48, 2);
-			this.buttonAbortDBScan.Name = "buttonAbortDBScan";
-			this.buttonAbortDBScan.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("button1.ScreenTip.Image1")));
-			this.buttonAbortDBScan.Size = new System.Drawing.Size(42, 72);
-			this.buttonAbortDBScan.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.SmallImages.Images1"))))});
-			this.buttonAbortDBScan.TabIndex = 2;
-			this.buttonAbortDBScan.Text = "Abort Scan";
-			this.buttonAbortDBScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-			// 
-			// buttonDeleteDB
-			// 
-			this.buttonDeleteDB.CommandName = "DeletDatabase";
-			this.buttonDeleteDB.Id = "2bc97561-3eb5-4738-9638-9092d8cec7c2";
-			this.buttonDeleteDB.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.LargeImages.Images2"))))});
-			this.buttonDeleteDB.Location = new System.Drawing.Point(92, 2);
-			this.buttonDeleteDB.Name = "buttonDeleteDB";
-			this.buttonDeleteDB.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("button1.ScreenTip.Image2")));
-			this.buttonDeleteDB.Size = new System.Drawing.Size(52, 72);
-			this.buttonDeleteDB.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
-            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("button1.SmallImages.Images2"))))});
-			this.buttonDeleteDB.TabIndex = 3;
-			this.buttonDeleteDB.Text = "Delete Database";
-			this.buttonDeleteDB.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1257, 1033);
+			this.ClientSize = new System.Drawing.Size(1265, 1044);
 			this.Controls.Add(this.backstageView);
 			this.Controls.Add(this.panelMiddle);
 			this.Controls.Add(this.ribbon);
@@ -4552,8 +4525,6 @@ namespace MPTagThat
     private MPTagThat.Core.WinControls.MPTPanel playerPanel;
     private MPTagThat.Core.WinControls.MPTPanel panelMiddleTop;
     private MPTagThat.Core.WinControls.MPTPanel panelMiddleBottom;
-    private NJFLib.Controls.CollapsibleSplitter splitterTop;
-    private MPTagThat.Core.WinControls.MPTPanel panelMiddleDBSearch;
     private System.Windows.Forms.Panel panelBottom;
     private NJFLib.Controls.CollapsibleSplitter splitterPlayer;
     private Elegant.Ui.FormFrameSkinner formFrameSkinner;
