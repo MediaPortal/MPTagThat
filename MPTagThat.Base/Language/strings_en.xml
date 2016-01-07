@@ -146,8 +146,15 @@
     <string name="ribbon.Burner">Select Burner:</string>
     <string name="ribbon.BurnerSpeed">Burnerspeed:</string>
 
-  
-  
+	<!-- Database Tab -->
+	<string name="ribbon.ContextualTab">Database</string>
+	<string name="ribbon.DatabaseTab">Database</string>
+	<string name="ribbon.DatabaseMaintenanceGroup">Database Maintenance</string>
+	<string name="ribbon.StartDBScan">Start Scan</string>
+	<string name="ribbon.AbortDBScan">Abort Scan</string>
+	<string name="ribbon.DeleteDB">Delete Database</string>
+	
+	
     <!-- Ribbon Screen Tip --> 
   
     <!-- Start Menu -->
