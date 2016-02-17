@@ -1269,7 +1269,7 @@ namespace MPTagThat.GridView
     ///   Adds a Track to the data grid
     /// </summary>
     /// <param name = "track"></param>
-    private void AddTrack(TrackData track)
+    public void AddTrack(TrackData track)
     {
       if (track == null)
         return;

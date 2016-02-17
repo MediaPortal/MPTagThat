@@ -24,12 +24,14 @@ namespace MPTagThat.Core.Common
 				{
 					UseEmbeddedHttpServer = false,
 					DefaultDatabase = databaseName,
+          RunInMemory = false,
 				};
 				docStore.Initialize();
 
-				docStore.Conventions.MaxNumberOfRequestsPerSession = 1000000;
+        docStore.Configuration.MaxPageSize = 50;
+        docStore.Conventions.MaxNumberOfRequestsPerSession = 1000000;
 				docStore.Conventions.AllowMultipuleAsyncOperations = true;
-
+			  
 				return docStore;
 			});
 		}

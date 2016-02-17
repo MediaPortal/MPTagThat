@@ -80,32 +80,34 @@ namespace MPTagThat
     private UserControl _currentControlshown = null;
 
     // Grids: Can't have them in Designer, as it will fail loading
-    private GridViewBurn gridViewBurn;
-    private GridViewTracks gridViewControl;
-    private GridViewConvert gridViewConvert;
-    private GridViewRip gridViewRip;
-    private MiscInfoControl miscInfoControl;
-    private PlayerControl playerControl;
-    private TreeViewControl treeViewControl;
-    private TagEditControl tagEditControl;
+    private GridViewBurn _gridViewBurn;
+    private GridViewTracks _gridViewControl;
+    private GridViewConvert _gridViewConvert;
+    private GridViewRip _gridViewRip;
+    private MiscInfoControl _miscInfoControl;
+    private PlayerControl _playerControl;
+    private TreeViewControl _treeViewControl;
+    private TagEditControl _tagEditControl;
 
     private delegate void ThreadSafeFolderScan();
 
+    private MusicDatabase _musicDatabase;
+
     // Ribbon Related Vars
-    private readonly IActionHandler actionhandler = ServiceScope.Get<IActionHandler>();
+    private readonly IActionHandler _actionhandler = ServiceScope.Get<IActionHandler>();
     private bool _initialising = true;
     private bool _numberingOnClick;
-    private PictureControl picControl;
+    private PictureControl _picControl;
     private GalleryItem _displayedGalleryItem;
 
     // Settings related Variables
-    private readonly List<ActionWindow> mapWindows = new List<ActionWindow>();
+    private readonly List<ActionWindow> _mapWindows = new List<ActionWindow>();
 
     private int _defaultBitRateIndex;
     private bool _keysChanged;
     private TreeNode _selectedNode;
-    private Theme prevTheme;
-    private TreeNode windowsNode;
+    private Theme _prevTheme;
+    private TreeNode _windowsNode;
 
     // Delegates
 
@@ -143,7 +145,7 @@ namespace MPTagThat
     /// </summary>
     public GridViewTracks TracksGridView
     {
-      get { return gridViewControl; }
+      get { return _gridViewControl; }
     }
 
     /// <summary>
@@ -151,7 +153,7 @@ namespace MPTagThat
     /// </summary>
     public GridViewBurn BurnGridView
     {
-      get { return gridViewBurn; }
+      get { return _gridViewBurn; }
     }
 
     /// <summary>
@@ -159,7 +161,7 @@ namespace MPTagThat
     /// </summary>
     public GridViewRip RipGridView
     {
-      get { return gridViewRip; }
+      get { return _gridViewRip; }
     }
 
     /// <summary>
@@ -167,7 +169,7 @@ namespace MPTagThat
     /// </summary>
     public GridViewConvert ConvertGridView
     {
-      get { return gridViewConvert; }
+      get { return _gridViewConvert; }
     }
 
     /// <summary>
@@ -177,11 +179,11 @@ namespace MPTagThat
     {
       get
       {
-        if (gridViewBurn == null)
+        if (_gridViewBurn == null)
         {
           return false;
         }
-        return gridViewBurn.Burning;
+        return _gridViewBurn.Burning;
       }
     }
 
@@ -192,11 +194,11 @@ namespace MPTagThat
     {
       get
       {
-        if (gridViewRip == null)
+        if (_gridViewRip == null)
         {
           return false;
         }
-        return gridViewRip.Ripping;
+        return _gridViewRip.Ripping;
       }
     }
 
@@ -238,7 +240,7 @@ namespace MPTagThat
     /// </summary>
     public PlayerControl Player
     {
-      get { return playerControl; }
+      get { return _playerControl; }
     }
 
     public bool TreeViewSelected
@@ -251,7 +253,7 @@ namespace MPTagThat
 
     public TreeViewControl TreeView
     {
-      get { return treeViewControl; }
+      get { return _treeViewControl; }
     }
 
     public Label ToolStripStatusFiles
@@ -271,12 +273,12 @@ namespace MPTagThat
 
     public MiscInfoControl MiscInfoPanel
     {
-      get { return miscInfoControl; }
+      get { return _miscInfoControl; }
     }
 
     public TagEditControl TagEditForm
     {
-      get { return tagEditControl; }
+      get { return _tagEditControl; }
     }
 
     #endregion
@@ -648,77 +650,77 @@ namespace MPTagThat
         log.Debug("Main: Setup Grid");
         _splashScreen.SetInformation(localisation.ToString("splash", "AddGrids"));
         // Add the Grids to the Main Form
-        gridViewControl = new GridViewTracks();
-        gridViewBurn = new GridViewBurn(this);
-        gridViewRip = new GridViewRip(this);
-        gridViewConvert = new GridViewConvert(this);
-        playerControl = new PlayerControl();
+        _gridViewControl = new GridViewTracks();
+        _gridViewBurn = new GridViewBurn(this);
+        _gridViewRip = new GridViewRip(this);
+        _gridViewConvert = new GridViewConvert(this);
+        _playerControl = new PlayerControl();
 
         // 
         // gridViewControl
         // 
-        gridViewControl.AutoScroll = true;
-        gridViewControl.Changed = false;
-        gridViewControl.Dock = DockStyle.Fill;
-        gridViewControl.Location = new Point(0, 0);
-        gridViewControl.Name = "gridViewControl";
-        gridViewControl.Size = new Size(676, 470);
-        gridViewControl.TabIndex = 8;
+        _gridViewControl.AutoScroll = true;
+        _gridViewControl.Changed = false;
+        _gridViewControl.Dock = DockStyle.Fill;
+        _gridViewControl.Location = new Point(0, 0);
+        _gridViewControl.Name = "gridViewControl";
+        _gridViewControl.Size = new Size(676, 470);
+        _gridViewControl.TabIndex = 8;
         // 
         // gridViewBurn
         // 
-        gridViewBurn.Dock = DockStyle.Fill;
-        gridViewBurn.Location = new Point(0, 0);
-        gridViewBurn.Name = "gridViewBurn";
-        gridViewBurn.Size = new Size(676, 470);
-        gridViewBurn.TabIndex = 9;
-        gridViewBurn.Visible = false;
+        _gridViewBurn.Dock = DockStyle.Fill;
+        _gridViewBurn.Location = new Point(0, 0);
+        _gridViewBurn.Name = "gridViewBurn";
+        _gridViewBurn.Size = new Size(676, 470);
+        _gridViewBurn.TabIndex = 9;
+        _gridViewBurn.Visible = false;
         //
         // gridViewRip
         // 
-        gridViewRip.Dock = DockStyle.Fill;
-        gridViewRip.Location = new Point(0, 0);
-        gridViewRip.Name = "gridViewRip";
-        gridViewRip.Size = new Size(676, 470);
-        gridViewRip.TabIndex = 9;
-        gridViewRip.Visible = false;
+        _gridViewRip.Dock = DockStyle.Fill;
+        _gridViewRip.Location = new Point(0, 0);
+        _gridViewRip.Name = "gridViewRip";
+        _gridViewRip.Size = new Size(676, 470);
+        _gridViewRip.TabIndex = 9;
+        _gridViewRip.Visible = false;
         //
         // gridViewConvert
         // 
-        gridViewConvert.Dock = DockStyle.Fill;
-        gridViewConvert.Location = new Point(0, 0);
-        gridViewConvert.Name = "gridViewConvert";
-        gridViewConvert.Size = new Size(676, 470);
-        gridViewConvert.TabIndex = 9;
-        gridViewConvert.Visible = false;
+        _gridViewConvert.Dock = DockStyle.Fill;
+        _gridViewConvert.Location = new Point(0, 0);
+        _gridViewConvert.Name = "gridViewConvert";
+        _gridViewConvert.Size = new Size(676, 470);
+        _gridViewConvert.TabIndex = 9;
+        _gridViewConvert.Visible = false;
         // 
         // playerControl
         // 
-        playerControl.Dock = DockStyle.Fill;
-        playerControl.Location = new Point(0, 0);
-        playerControl.Name = "playerControl";
-        playerControl.Size = new Size(1008, 68);
-        playerControl.TabIndex = 0;
+        _playerControl.Dock = DockStyle.Fill;
+        _playerControl.Location = new Point(0, 0);
+        _playerControl.Name = "playerControl";
+        _playerControl.Size = new Size(1008, 68);
+        _playerControl.TabIndex = 0;
 
-        playerPanel.Controls.Add(playerControl);
+        playerPanel.Controls.Add(_playerControl);
 
         // Set reference to Main, so that we may use the ErrorGrid
-        gridViewControl.SetMainRef(this);
+        _gridViewControl.SetMainRef(this);
 
         #endregion
 
         // Setup Treeview
-        treeViewControl = new TreeViewControl(this);
-        treeViewControl.Dock = DockStyle.Fill;
-        panelLeftTop.Controls.Add(treeViewControl);
+        _treeViewControl = new TreeViewControl(this);
+        _treeViewControl.Dock = DockStyle.Fill;
+        panelLeftTop.Controls.Add(_treeViewControl);
 
         // Setup Misc Info Control
-        miscInfoControl = new MiscInfoControl();
-        miscInfoControl.Dock = DockStyle.Fill;
-        panelRight.Controls.Add(miscInfoControl);
+        _miscInfoControl = new MiscInfoControl();
+        _miscInfoControl.Dock = DockStyle.Fill;
+        panelRight.Controls.Add(_miscInfoControl);
 
         // Setup TagEdit Control
-        tagEditControl = new TagEditControl(this);
+        _tagEditControl = new TagEditControl(this);
 
         // Now position the Tracklist and Tagedit Panel
         PositionTrackList();
@@ -727,6 +729,11 @@ namespace MPTagThat
 
         // Start Listening for Media Changes
         ServiceScope.Get<IMediaChangeMonitor>().StartListening(Handle);
+
+        //
+        // Music Database
+        //
+        _musicDatabase = new MusicDatabase(this);
 
         // Load BASS
         LoadBass();
@@ -741,10 +748,10 @@ namespace MPTagThat
         LoadSettings();
 
         // Populate the Treeview with the directories found
-        treeViewControl.Init();
-        treeViewControl.TreeView.Populate();
-        treeViewControl.TreeView.Nodes[0].Expand();
-        treeViewControl.TreeView.ShowFolder(_selectedDirectory);
+        _treeViewControl.Init();
+        _treeViewControl.TreeView.Populate();
+        _treeViewControl.TreeView.Nodes[0].Expand();
+        _treeViewControl.TreeView.ShowFolder(_selectedDirectory);
 
         _splashScreen.Stop();
 
@@ -762,7 +769,7 @@ namespace MPTagThat
         }
 
         // setup various Event Handler needed
-        gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
+        _gridViewControl.View.SelectionChanged += DataGridView_SelectionChanged;
 
         _initialising = false;
 
@@ -782,14 +789,14 @@ namespace MPTagThat
     /// </summary>
     private void FolderScanAsync()
     {
-      if (gridViewControl.InvokeRequired)
+      if (_gridViewControl.InvokeRequired)
       {
         ThreadSafeFolderScan d = FolderScanAsync;
-        gridViewControl.Invoke(d);
+        _gridViewControl.Invoke(d);
         return;
       }
 
-      gridViewControl.FolderScan();
+      _gridViewControl.FolderScan();
     }
 
     /// <summary>
@@ -814,9 +821,9 @@ namespace MPTagThat
         _musicDatabaseBuild.AbortScan = true;
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
-      gridViewControl.CheckForChanges();
+      _gridViewControl.CheckForChanges();
       Options.MainSettings.LastFolderUsed = _selectedDirectory;
-      Options.MainSettings.ScanSubFolders = treeViewControl.ScanFolderRecursive;
+      Options.MainSettings.ScanSubFolders = _treeViewControl.ScanFolderRecursive;
       Options.MainSettings.FormLocation = Location;
       Options.MainSettings.FormSize = ClientSize;
       Options.MainSettings.FormIsMaximized = WindowState == FormWindowState.Maximized ? true : false;
@@ -839,52 +846,52 @@ namespace MPTagThat
       this.SuspendLayout();
       panelMiddleBottom.SuspendLayout();
       panelFileList.SuspendLayout();
-      tagEditControl.SuspendLayout();
+      _tagEditControl.SuspendLayout();
 
       // Remove controls firs, if they already exist
-      if (panelMiddleBottom.Controls.Contains(tagEditControl))
+      if (panelMiddleBottom.Controls.Contains(_tagEditControl))
       {
-        panelMiddleBottom.Controls.Remove(tagEditControl);
-        panelFileList.Controls.Remove(gridViewControl);
-        panelFileList.Controls.Remove(gridViewBurn);
-        panelFileList.Controls.Remove(gridViewRip);
-        panelFileList.Controls.Remove(gridViewConvert);
+        panelMiddleBottom.Controls.Remove(_tagEditControl);
+        panelFileList.Controls.Remove(_gridViewControl);
+        panelFileList.Controls.Remove(_gridViewBurn);
+        panelFileList.Controls.Remove(_gridViewRip);
+        panelFileList.Controls.Remove(_gridViewConvert);
       }
-      else if (panelFileList.Controls.Contains(tagEditControl))
+      else if (panelFileList.Controls.Contains(_tagEditControl))
       {
-        panelFileList.Controls.Remove(tagEditControl);
-        panelMiddleBottom.Controls.Remove(gridViewControl);
-        panelMiddleBottom.Controls.Remove(gridViewBurn);
-        panelMiddleBottom.Controls.Remove(gridViewRip);
-        panelMiddleBottom.Controls.Remove(gridViewConvert);
+        panelFileList.Controls.Remove(_tagEditControl);
+        panelMiddleBottom.Controls.Remove(_gridViewControl);
+        panelMiddleBottom.Controls.Remove(_gridViewBurn);
+        panelMiddleBottom.Controls.Remove(_gridViewRip);
+        panelMiddleBottom.Controls.Remove(_gridViewConvert);
       }
 
       if (Options.MainSettings.TrackListLocation == 0)
       {
         // Tag Edit Details goes bottom
-        panelMiddleBottom.Controls.Add(tagEditControl);
+        panelMiddleBottom.Controls.Add(_tagEditControl);
 
         // Tracklist goes Top
-        panelFileList.Controls.Add(gridViewControl);
-        panelFileList.Controls.Add(gridViewBurn);
-        panelFileList.Controls.Add(gridViewRip);
-        panelFileList.Controls.Add(gridViewConvert);
+        panelFileList.Controls.Add(_gridViewControl);
+        panelFileList.Controls.Add(_gridViewBurn);
+        panelFileList.Controls.Add(_gridViewRip);
+        panelFileList.Controls.Add(_gridViewConvert);
       }
       else
       {
         // Tag Edit Details goes Top
-        panelFileList.Controls.Add(tagEditControl);
+        panelFileList.Controls.Add(_tagEditControl);
 
         // Tracklist goes bottom
-        panelMiddleBottom.Controls.Add(gridViewControl);
-        panelMiddleBottom.Controls.Add(gridViewBurn);
-        panelMiddleBottom.Controls.Add(gridViewRip);
-        panelMiddleBottom.Controls.Add(gridViewConvert);
+        panelMiddleBottom.Controls.Add(_gridViewControl);
+        panelMiddleBottom.Controls.Add(_gridViewBurn);
+        panelMiddleBottom.Controls.Add(_gridViewRip);
+        panelMiddleBottom.Controls.Add(_gridViewConvert);
       }
 
-      tagEditControl.Dock = DockStyle.Fill;
+      _tagEditControl.Dock = DockStyle.Fill;
 
-      tagEditControl.ResumeLayout();
+      _tagEditControl.ResumeLayout();
       panelMiddleBottom.ResumeLayout();
       panelFileList.ResumeLayout();
       this.ResumeLayout();
@@ -938,6 +945,10 @@ namespace MPTagThat
       ApplicationCommands.ValidateMP3File.Executed += TagsTabButton_Executed;
       ApplicationCommands.ReplayGain.Executed += TagsTabButton_Executed;
       ApplicationCommands.Bpm.Executed += TagsTabButton_Executed;
+      ApplicationCommands.StartDBScan.Executed += StartDBScan_Executed;
+      ApplicationCommands.AbortDBScan.Executed += AbortDBScan_Executed;
+      ApplicationCommands.DeleteDatabase.Executed += DeleteDatabase_Executed;
+      ApplicationCommands.ExecuteDatabaseQuery.Executed += ExecuteDatabaseQuery_Executed;
 
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
@@ -950,24 +961,24 @@ namespace MPTagThat
     {
       log.Trace(">>>");
       // Start Menu
-      backstageViewButtonSave.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
-      backstageViewButtonRefresh.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
-      backstageViewPageOptions.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_OPTIONS);
-      backstageViewButtonExit.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_EXIT);
+      backstageViewButtonSave.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_SAVE);
+      backstageViewButtonRefresh.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_REFRESH);
+      backstageViewPageOptions.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_OPTIONS);
+      backstageViewButtonExit.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_EXIT);
 
       // Tags Tab
-      buttonTagFromFile.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
-      buttonTagIdentifyFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_IDENTIFYFILE);
-      buttonTagFromInternet.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAGFROMINTERNET);
+      buttonTagFromFile.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_FILENAME2TAG);
+      buttonTagIdentifyFiles.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_IDENTIFYFILE);
+      buttonTagFromInternet.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_TAGFROMINTERNET);
 
-      buttonGetCoverArt.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETCOVERART);
-      buttonGetLyrics.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_GETLYRICS);
-      buttonRemoveComment.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_REMOVECOMMENT);
-      buttonCaseConversion.ButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_CASECONVERSION);
-      buttonScriptExecute.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_SCRIPTEXECUTE);
+      buttonGetCoverArt.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_GETCOVERART);
+      buttonGetLyrics.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_GETLYRICS);
+      buttonRemoveComment.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_REMOVECOMMENT);
+      buttonCaseConversion.ButtonKeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_CASECONVERSION);
+      buttonScriptExecute.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_SCRIPTEXECUTE);
 
-      buttonRenameFiles.ButtonKeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_TAG2FILENAME);
-      buttonOrganiseFiles.KeyTip = actionhandler.GetKeyCode(Action.ActionType.ACTION_ORGANISE);
+      buttonRenameFiles.ButtonKeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_TAG2FILENAME);
+      buttonOrganiseFiles.KeyTip = _actionhandler.GetKeyCode(Action.ActionType.ACTION_ORGANISE);
       log.Trace("<<<");
     }
 
@@ -1071,10 +1082,10 @@ namespace MPTagThat
       }
 
       // Refill the TreeView combo box
-      treeViewControl.FolderSelectCombo.Items.Clear();
+      _treeViewControl.FolderSelectCombo.Items.Clear();
       foreach (string folderItem in Options.MainSettings.RecentFolders)
       {
-        treeViewControl.FolderSelectCombo.Items.Add(folderItem);
+        _treeViewControl.FolderSelectCombo.Items.Add(folderItem);
       }
 
     }
@@ -1375,8 +1386,8 @@ namespace MPTagThat
       {
         _selectedDirectory = Options.MainSettings.LastFolderUsed;
       }
-      treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
-      treeViewControl.DatabaseMode = Options.MainSettings.DataProvider == 3;
+      _treeViewControl.ScanFolderRecursive = Options.MainSettings.ScanSubFolders;
+      _treeViewControl.DatabaseMode = Options.MainSettings.DataProvider == 3;
 
       _formLocation = Options.MainSettings.FormLocation;
       // Check, if we are out of screen bounds
@@ -1426,41 +1437,41 @@ namespace MPTagThat
     private void SetRibbonColorBase()
     {
       playerPanel.BackColor = themeManager.CurrentTheme.BackColor;
-      playerControl.BackColor = themeManager.CurrentTheme.BackColor;
+      _playerControl.BackColor = themeManager.CurrentTheme.BackColor;
       
       // We want to have our own color and Font for the various Grids
-      gridViewControl.View.Font = themeManager.CurrentTheme.LabelFont;
-      gridViewControl.View.EnableHeadersVisualStyles = false;
-      gridViewControl.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      gridViewControl.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      gridViewControl.View.DefaultCellStyle.BackColor = themeManager.CurrentTheme.DefaultBackColor;
-      gridViewControl.View.DefaultCellStyle.SelectionBackColor = themeManager.CurrentTheme.SelectionBackColor;
-      gridViewControl.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
-      gridViewControl.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
+      _gridViewControl.View.Font = themeManager.CurrentTheme.LabelFont;
+      _gridViewControl.View.EnableHeadersVisualStyles = false;
+      _gridViewControl.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
+      _gridViewControl.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+      _gridViewControl.View.DefaultCellStyle.BackColor = themeManager.CurrentTheme.DefaultBackColor;
+      _gridViewControl.View.DefaultCellStyle.SelectionBackColor = themeManager.CurrentTheme.SelectionBackColor;
+      _gridViewControl.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
+      _gridViewControl.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
 
-      gridViewBurn.View.Font = themeManager.CurrentTheme.LabelFont;
-      gridViewBurn.View.EnableHeadersVisualStyles = false;
-      gridViewBurn.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      gridViewBurn.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      gridViewBurn.BackGroundColor = themeManager.CurrentTheme.BackColor;
-      gridViewBurn.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
-      gridViewBurn.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
+      _gridViewBurn.View.Font = themeManager.CurrentTheme.LabelFont;
+      _gridViewBurn.View.EnableHeadersVisualStyles = false;
+      _gridViewBurn.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
+      _gridViewBurn.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+      _gridViewBurn.BackGroundColor = themeManager.CurrentTheme.BackColor;
+      _gridViewBurn.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
+      _gridViewBurn.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
 
-      gridViewRip.View.Font = themeManager.CurrentTheme.LabelFont;
-      gridViewRip.View.EnableHeadersVisualStyles = false;
-      gridViewRip.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      gridViewRip.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      gridViewRip.BackGroundColor = themeManager.CurrentTheme.BackColor;
-      gridViewRip.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
-      gridViewRip.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
+      _gridViewRip.View.Font = themeManager.CurrentTheme.LabelFont;
+      _gridViewRip.View.EnableHeadersVisualStyles = false;
+      _gridViewRip.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
+      _gridViewRip.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+      _gridViewRip.BackGroundColor = themeManager.CurrentTheme.BackColor;
+      _gridViewRip.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
+      _gridViewRip.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
 
-      gridViewConvert.View.Font = themeManager.CurrentTheme.LabelFont;
-      gridViewConvert.View.EnableHeadersVisualStyles = false;
-      gridViewConvert.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
-      gridViewConvert.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
-      gridViewConvert.BackGroundColor = themeManager.CurrentTheme.BackColor;
-      gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
-      gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
+      _gridViewConvert.View.Font = themeManager.CurrentTheme.LabelFont;
+      _gridViewConvert.View.EnableHeadersVisualStyles = false;
+      _gridViewConvert.View.ColumnHeadersDefaultCellStyle.BackColor = themeManager.CurrentTheme.PanelHeadingBackColor;
+      _gridViewConvert.View.ColumnHeadersDefaultCellStyle.ForeColor = themeManager.CurrentTheme.LabelForeColor;
+      _gridViewConvert.BackGroundColor = themeManager.CurrentTheme.BackColor;
+      _gridViewConvert.View.AlternatingRowsDefaultCellStyle.BackColor = themeManager.CurrentTheme.AlternatingRowBackColor;
+      _gridViewConvert.View.AlternatingRowsDefaultCellStyle.ForeColor = themeManager.CurrentTheme.AlternatingRowForeColor;
     }
 
     #endregion
@@ -1507,20 +1518,20 @@ namespace MPTagThat
     public void RefreshTrackList()
     {
       log.Trace(">>>");
-      gridViewControl.CheckForChanges();
+      _gridViewControl.CheckForChanges();
       if (_selectedDirectory != String.Empty)
       {
-        tagEditControl.ClearForm();
-        gridViewControl.View.Rows.Clear();
+        _tagEditControl.ClearForm();
+        _gridViewControl.View.Rows.Clear();
         ClearGallery();
         toolStripStatusLabelFolder.Text = _selectedDirectory;
         if (TreeView.DatabaseMode)
         {
-          gridViewControl.DatabaseScan();
+          _gridViewControl.DatabaseScan();
         }
         else
         {
-          gridViewControl.FolderScan();
+          _gridViewControl.FolderScan();
         }
       }
       AutoNumber = 1; // Reset the number on Folder Change
@@ -1615,11 +1626,11 @@ namespace MPTagThat
     {
       if (show)
       {
-        tagEditControl.Show();
+        _tagEditControl.Show();
       }
       else
       {
-        tagEditControl.Hide();
+        _tagEditControl.Hide();
       }
     }
 
@@ -1698,7 +1709,7 @@ namespace MPTagThat
 
 
       // Save the currently used theme, in case the user presses Cancel.
-      prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
+      _prevTheme = ServiceScope.Get<IThemeManager>().CurrentTheme;
 
       // Debug Level
       comboBoxDebugLevel.Items.Clear();
@@ -1871,9 +1882,6 @@ namespace MPTagThat
       ckOverwriteExistingLyrics.Checked = Options.MainSettings.OverwriteExistingLyrics;
       ckOnlySaveFolderThumb.Checked = Options.MainSettings.OnlySaveFolderThumb;
 
-      ckUseMediaPortalDatabase.Checked = Options.MainSettings.UseMediaPortalDatabase;
-      tbMediaPortalDatabase.Text = Options.MainSettings.MediaPortalDatabase;
-
       ckClearUserFramesOnSave.Checked = Options.MainSettings.ClearUserFrames;
 
       ckValidateMP3.Checked = Options.MainSettings.MP3Validate;
@@ -1973,10 +1981,10 @@ namespace MPTagThat
     private void PopulateKeyTreeView()
     {
       log.Trace(">>>");
-      windowsNode = new TreeNode("Windows");
-      treeViewKeys.Nodes.Add(windowsNode);
+      _windowsNode = new TreeNode("Windows");
+      treeViewKeys.Nodes.Add(_windowsNode);
 
-      foreach (ActionWindow map in mapWindows)
+      foreach (ActionWindow map in _mapWindows)
       {
         TreeNode windownode = new TreeNode(map.Description + "[" + map.Window + "]");
 
@@ -1992,7 +2000,7 @@ namespace MPTagThat
           actionNode.Tag = action;
           windownode.Nodes.Add(actionNode);
         }
-        windowsNode.Nodes.Add(windownode);
+        _windowsNode.Nodes.Add(windownode);
       }
 
       treeViewKeys.Sort();
@@ -2019,7 +2027,7 @@ namespace MPTagThat
 
             writer.WriteStartElement("keymap");
 
-            foreach (ActionWindow window in mapWindows)
+            foreach (ActionWindow window in _mapWindows)
             {
               writer.WriteStartElement("window");
 
@@ -2077,7 +2085,7 @@ namespace MPTagThat
     /// <returns>True if the load was successfull, false if it failed.</returns>
     private bool LoadKeyMap()
     {
-      mapWindows.Clear();
+      _mapWindows.Clear();
       string strFilename = String.Format(@"{0}\{1}", Options.ConfigDir, "keymap.xml");
       if (!System.IO.File.Exists(strFilename))
         strFilename = String.Format(@"{0}\bin\{1}", Application.StartupPath, "keymap.xml");
@@ -2115,7 +2123,7 @@ namespace MPTagThat
             }
             if (map.Buttons.Count > 0)
             {
-              mapWindows.Add(map);
+              _mapWindows.Add(map);
             }
           }
         }
@@ -2455,17 +2463,6 @@ namespace MPTagThat
       Options.MainSettings.MP3Validate = ckValidateMP3.Checked;
       Options.MainSettings.MP3AutoFix = ckAutoFixMp3.Checked;
 
-      if (ckUseMediaPortalDatabase.Checked && System.IO.File.Exists(tbMediaPortalDatabase.Text))
-      {
-        Options.MainSettings.UseMediaPortalDatabase = true;
-        Options.MainSettings.MediaPortalDatabase = tbMediaPortalDatabase.Text;
-      }
-      else
-      {
-        Options.MainSettings.UseMediaPortalDatabase = false;
-        Options.MainSettings.MediaPortalDatabase = "";
-      }
-
       if (radioButtonUseV3.Checked)
         Options.MainSettings.ID3V2Version = 3;
       else if (radioButtonUseV4.Checked)
@@ -2536,9 +2533,9 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void buttonSettingsCancel_Click(object sender, EventArgs e)
     {
-      if (prevTheme.ThemeName != ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName)
+      if (_prevTheme.ThemeName != ServiceScope.Get<IThemeManager>().CurrentTheme.ThemeName)
       {
-        Theme = prevTheme.ThemeName;
+        Theme = _prevTheme.ThemeName;
       }
       this.ribbon.BackstageViewVisible = false;
     }
@@ -2864,63 +2861,6 @@ namespace MPTagThat
 
     #region TabPage Tags
 
-    /// <summary>
-    ///   Offers a File Selection Duialogue to select the MediaPortal Music Database
-    /// </summary>
-    /// <param name = "sender"></param>
-    /// <param name = "e"></param>
-    private void buttonMusicDatabaseBrowse_Click(object sender, EventArgs e)
-    {
-      OpenFileDialog oFD = new OpenFileDialog();
-      oFD.Multiselect = false;
-      oFD.ValidateNames = true;
-      oFD.CheckFileExists = false;
-      oFD.CheckPathExists = true;
-      oFD.Filter = "MediaPortal DB | *.db3";
-      if (oFD.ShowDialog() == DialogResult.OK)
-      {
-        tbMediaPortalDatabase.Text = oFD.FileName;
-      }
-
-      if (!System.IO.File.Exists(oFD.FileName))
-      {
-        // THe selected dababase does not exist. Ask if we create it.
-        if (MessageBox.Show(localisation.ToString("Settings", "DBNotExists"), "", MessageBoxButtons.YesNo) ==
-            DialogResult.Yes)
-        {
-          CreateMusicDatabase(oFD.FileName);
-        }
-      }
-    }
-
-    private void buttonStartDatabaseScan_Click(object sender, EventArgs e)
-    {
-      if (checkBoxClearDatabase.Checked)
-      {
-        if (System.IO.File.Exists(tbMediaPortalDatabase.Text))
-        {
-          System.IO.File.Delete(tbMediaPortalDatabase.Text);
-        }
-      }
-
-      if (!System.IO.File.Exists(tbMediaPortalDatabase.Text))
-      {
-        CreateMusicDatabase(tbMediaPortalDatabase.Text);
-      }
-      FolderBrowserDialog oFB = new FolderBrowserDialog();
-      oFB.Description = localisation.ToString("Settings", "SelectMusicFolder");
-      if (oFB.ShowDialog() == DialogResult.OK)
-      {
-        FillMusicDatabase(oFB.SelectedPath, tbMediaPortalDatabase.Text);
-      }
-    }
-
-    private void buttonDBScanStatus_Click(object sender, EventArgs e)
-    {
-      lbDBScanStatus.Text = DatabaseScanStatus();
-      lbDBScanStatus.Update();
-    }
-
     private void radioButtonID3Both_CheckedChanged(object sender, EventArgs e)
     {
       checkBoxRemoveID3V1.Checked = false;
@@ -2997,7 +2937,7 @@ namespace MPTagThat
       {
         if (checkSelections)
         {
-          gridViewControl.CheckSelections(true);
+          _gridViewControl.CheckSelections(true);
         }
         TracksGridView.ExecuteCommand(command);
         return true;
@@ -3014,7 +2954,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_FILENAME2TAG:
-          if (!gridViewControl.CheckSelections(true))
+          if (!_gridViewControl.CheckSelections(true))
             break;
 
           dialog = new FileNameToTag.FileNameToTag(this);
@@ -3023,7 +2963,7 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TAG2FILENAME:
-          if (!gridViewControl.CheckSelections(true))
+          if (!_gridViewControl.CheckSelections(true))
             break;
 
           dialog = new TagToFileName.TagToFileName(this);
@@ -3032,17 +2972,17 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TAGFROMINTERNET:
-          if (!gridViewControl.CheckSelections(true))
+          if (!_gridViewControl.CheckSelections(true))
             break;
 
           InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(this);
           lookup.SearchForAlbumInformation();
-          tagEditControl.FillForm();
+          _tagEditControl.FillForm();
           SetGalleryItem();
           break;
 
         case Action.ActionType.ACTION_ORGANISE:
-          if (!gridViewControl.CheckSelections(true))
+          if (!_gridViewControl.CheckSelections(true))
             break;
 
           dialog = new OrganiseFiles(this);
@@ -3056,15 +2996,15 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_SELECTALL:
-          TreeNodePath node = treeViewControl.TreeView.SelectedNode as TreeNodePath;
+          TreeNodePath node = _treeViewControl.TreeView.SelectedNode as TreeNodePath;
           if (node != null)
-            gridViewControl.View.SelectAll();
+            _gridViewControl.View.SelectAll();
           break;
 
         case Action.ActionType.ACTION_COPY:
-          if (gridViewControl.View.CurrentCell != null)
+          if (_gridViewControl.View.CurrentCell != null)
           {
-            Clipboard.SetDataObject(gridViewControl.View.CurrentCell.Value);
+            Clipboard.SetDataObject(_gridViewControl.View.CurrentCell.Value);
           }
           break;
 
@@ -3074,18 +3014,18 @@ namespace MPTagThat
           break;
 
         case Action.ActionType.ACTION_TREEREFRESH:
-          treeViewControl.RefreshFolders();
+          _treeViewControl.RefreshFolders();
           break;
 
         case Action.ActionType.ACTION_FOLDERDELETE:
           if (!_treeViewSelected)
             break;
 
-          treeViewControl.DeleteFolder();
+          _treeViewControl.DeleteFolder();
           break;
 
         case Action.ActionType.ACTION_CASECONVERSION:
-          if (!gridViewControl.CheckSelections(true))
+          if (!_gridViewControl.CheckSelections(true))
             break;
 
           dialog = new CaseConversion.CaseConversion(this);
@@ -3099,7 +3039,7 @@ namespace MPTagThat
         case Action.ActionType.ACTION_DELETE:
           // Don't handle the Delete key, if the user edits directly the cell
           // let the grid control handle it
-          if (gridViewControl.View.IsCurrentCellInEditMode)
+          if (_gridViewControl.View.IsCurrentCellInEditMode)
           {
             handled = false;
             break;
@@ -3114,13 +3054,13 @@ namespace MPTagThat
 
           // Don't handle the delete key, if the view is not focused
           // So that delete may be used on other controls as well
-          if (!gridViewControl.View.Focused)
+          if (!_gridViewControl.View.Focused)
           {
             handled = false;
             break;
           }
 
-          gridViewControl.DeleteTracks();
+          _gridViewControl.DeleteTracks();
           break;
 
         case Action.ActionType.ACTION_TOGGLESTREEVIEWSPLITTER:
@@ -3164,9 +3104,9 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void DataGridView_SelectionChanged(object sender, EventArgs e)
     {
-      if (gridViewControl.View.CurrentRow != null && !FolderScanning)
+      if (_gridViewControl.View.CurrentRow != null && !FolderScanning)
       {
-        tagEditControl.FillForm();
+        _tagEditControl.FillForm();
         SetGalleryItem();
       }
 
@@ -3174,8 +3114,8 @@ namespace MPTagThat
       try
       {
         toolStripStatusLabelFiles.Text = string.Format(localisation.ToString("main", "toolStripLabelFiles"),
-                                                       gridViewControl.View.Rows.Count,
-                                                       gridViewControl.View.SelectedRows.Count);
+                                                       _gridViewControl.View.Rows.Count,
+                                                       _gridViewControl.View.SelectedRows.Count);
       }
       catch (InvalidOperationException) // we might get a Cross-thread Exception on startup
       { }
@@ -3243,9 +3183,9 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Main_Resize(object sender, EventArgs e)
     {
-      if (playerControl != null)
+      if (_playerControl != null)
       {
-        playerControl.MovePlayList();
+        _playerControl.MovePlayList();
       }
     }
 
@@ -3256,9 +3196,9 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void Main_Move(object sender, EventArgs e)
     {
-      if (playerControl != null)
+      if (_playerControl != null)
       {
-        playerControl.MovePlayList();
+        _playerControl.MovePlayList();
       }
     }
 
@@ -3315,6 +3255,18 @@ namespace MPTagThat
         else if (e.Invoker == buttonConvertFolderSelect)
         {
           textBoxConvertOutputFolder.Text = oFD.SelectedPath;
+        }
+        else if (e.Invoker == buttonSelectMusicFolder)
+        {
+          if (comboBoxMusicFolder.Items.Contains(oFD.SelectedPath))
+          {
+            comboBoxMusicFolder.SelectedItem = oFD.SelectedPath;
+          }
+          else
+          {
+            comboBoxMusicFolder.Items.Add(oFD.SelectedPath);
+            comboBoxMusicFolder.SelectedItem = oFD.SelectedPath;
+          }
         }
       }
     }
@@ -3548,10 +3500,6 @@ namespace MPTagThat
       {
         tabControlSettings.SelectedTabPage = tabPageSettingsLyricsCover;
       }
-      else if (item == navigationBarItemTagsDatabase)
-      {
-        tabControlSettings.SelectedTabPage = tabPageSettingsDatabase;
-      }
       else if (item == navigationBarItemRipGeneral)
       {
         tabControlSettings.SelectedTabPage = tabPageSettingsRipGeneral;
@@ -3640,7 +3588,7 @@ namespace MPTagThat
         case "TagFromInternet":
           InternetLookup.InternetLookup lookup = new InternetLookup.InternetLookup(this);
           lookup.SearchForAlbumInformation();
-          tagEditControl.FillForm();
+          _tagEditControl.FillForm();
           SetGalleryItem();
           break;
 
@@ -3864,6 +3812,60 @@ namespace MPTagThat
 
     #endregion
 
+    #region Database Tab
+
+    /// <summary>
+    ///   Start database Scan
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void StartDBScan_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      var musicShare = comboBoxMusicFolder?.Text;
+      if (string.IsNullOrEmpty(musicShare) || !Directory.Exists(musicShare))
+      {
+        return;
+      }
+      _musicDatabase.BuildDatabase(musicShare, checkBoxClearDatabase.Checked);
+    }
+
+    /// <summary>
+    ///   Abort database Scan
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void AbortDBScan_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      _musicDatabase.AbortDatabaseScan();
+    }
+
+    /// <summary>
+    ///   Delete Database
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void DeleteDatabase_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      _musicDatabase.DeleteDatabase();
+    }
+
+    /// <summary>
+    ///   Executes a Query against the Music Database
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void ExecuteDatabaseQuery_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      var query = comboBoxDatabaseQuery?.Text;
+      if (string.IsNullOrEmpty(query))
+      {
+        return;
+      }
+      _musicDatabase.ExecuteQuery(query);
+    }
+
+    #endregion
+
     #region Gallery
 
     private void galleryPicture_HoveredItemChanged(object sender, GalleryHoveredItemChangedEventArgs e)
@@ -3876,11 +3878,11 @@ namespace MPTagThat
       if (e.NewValue != null)
       {
         _displayedGalleryItem = (GalleryItem)e.NewValue;
-        if (picControl != null && picControl.Text != "")
+        if (_picControl != null && _picControl.Text != "")
         {
-          picControl.Close();
+          _picControl.Close();
         }
-        picControl = new PictureControl((GalleryItem)e.NewValue, (sender as Gallery).PopupOwnerBounds.Location);
+        _picControl = new PictureControl((GalleryItem)e.NewValue, (sender as Gallery).PopupOwnerBounds.Location);
       }
       else
       {
@@ -3888,9 +3890,9 @@ namespace MPTagThat
         {
           return;
         }
-        if (picControl != null)
+        if (_picControl != null)
         {
-          picControl.Close();
+          _picControl.Close();
         }
       }
     }
@@ -3903,7 +3905,7 @@ namespace MPTagThat
     private void galleryPicture_DragDrop(object sender, DragEventArgs e)
     {
       // If no rows are selected, select them all
-      gridViewControl.CheckSelections(true);
+      _gridViewControl.CheckSelections(true);
 
       if (e.Data == null)
       {

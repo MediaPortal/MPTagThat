@@ -153,6 +153,8 @@
 	<string name="ribbon.StartDBScan">Start Scan</string>
 	<string name="ribbon.AbortDBScan">Abort Scan</string>
 	<string name="ribbon.DeleteDB">Delete Database</string>
+	<string name="ribbon.ClearDatabase">Clear database content before scanning</string>
+	<string name="ribbon.SelectMusicFolder">Music Files</string>
 	
 	
     <!-- Ribbon Screen Tip --> 
@@ -715,8 +717,6 @@
 	<string name="Settings.StartDBScan">Start Scan</string>
 	<string name="Settings.DBScanStatus">Scan Status</string>
 	<string name="Settings.DBNotExists">The selected database does not exist.\nIf you select "Yes" a new database will be created.\nStart a Scan to fill the database.</string>
-	<string name="Settings.ClearDatabase">Clear database content before scanning</string>
-	<string name="Settings.SelectMusicFolder">Select the Folder with your Music Files</string>
 	<string name="Settings.DBScanIdle">Database Scan not active.</string>
 	<string name="Settings.DBScanFinished">Database scan done.\nProcessed {0} tracks in: {1:d2}:{2:d2}:{3:d2}{4}</string>
 	<string name="Settings.DBScanTrackSummary"> ({0} seconds per track)</string>
