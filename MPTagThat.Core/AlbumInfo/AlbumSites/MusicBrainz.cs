@@ -51,7 +51,10 @@ namespace MPTagThat.Core.AlbumInfo.AlbumSites
 			try
 			{
 				var album = GetAlbumQuery(ArtistName, AlbumName);
-				Albums.Add(album.Result);
+			  if (album.Result != null)
+			  {
+			    Albums.Add(album.Result);
+			  }
 				log.Debug("MusicBrainz: Found {0} albums", Albums.Count);
 			}
 			catch (Exception ex)

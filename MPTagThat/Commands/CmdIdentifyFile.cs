@@ -78,7 +78,7 @@ namespace MPTagThat.Commands
             {
               using (var albumInfo = new MusicBrainzAlbumInfo())
               {
-                _musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.AlbumId);
+                _musicBrainzAlbum = albumInfo.GetMusicBrainzAlbumById(musicBrainzTrack.Releases[0].AlbumId);
               }
             }
             musicBrainzTrack.AlbumId = _musicBrainzAlbum.Id;
