@@ -34,20 +34,22 @@ namespace MPTagThat.GridView
   {
     #region Variables
 
-    private const int m_NoOfCurrentSearchesAllowed = 6;
+    private const int NoOfCurrentSearchesAllowed = 6;
     private readonly ILocalisation localisation = ServiceScope.Get<ILocalisation>();
-    private readonly string[] m_strippedPrefixStrings = {"the ", "les "};
+    private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
+    private readonly string[] _strippedPrefixStrings = {"the ", "les "};
+    private readonly string[] _titleBrackets = {"{}", "[]", "()"};
 
-    private readonly List<TrackData> tracks;
+    private readonly List<TrackData> _tracks;
 
-    private BackgroundWorker bgWorkerLyrics;
-    private GridViewColumnsLyrics gridColumns;
-    private LyricsController lc;
-    private NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private Queue lyricsQueue;
-    private ManualResetEvent m_EventStopThread;
-    private Thread m_LyricControllerThread;
-    private List<string> sitesToSearch;
+    private BackgroundWorker _bgWorkerLyrics;
+    private GridViewColumnsLyrics _gridColumns;
+    private LyricsController _lc;
+    
+    private Queue _lyricsQueue;
+    private ManualResetEvent _eventStopThread;
+    private Thread _lyricControllerThread;
+    private List<string> _sitesToSearch;
 
     #endregion
 
@@ -63,21 +65,17 @@ namespace MPTagThat.GridView
 
     public delegate void DelegateThreadFinished(String artist, String title, String message, String site);
 
+    public DelegateLyricFound _delegateLyricFound;
+    public DelegateLyricNotFound _delegateLyricNotFound;
+    public DelegateStringUpdate _delegateStringUpdate;
+    public DelegateThreadException _delegateThreadException;
+    public DelegateThreadFinished _delegateThreadFinished;
+
     #endregion
-
-    public DelegateLyricFound m_DelegateLyricFound;
-    public DelegateLyricNotFound m_DelegateLyricNotFound;
-    public DelegateStringUpdate m_DelegateStringUpdate;
-
-    public DelegateThreadException m_DelegateThreadException;
-    public DelegateThreadFinished m_DelegateThreadFinished;
 
     #region Properties
 
-    public DataGridView GridView
-    {
-      get { return dataGridViewLyrics; }
-    }
+    public DataGridView GridView => dataGridViewLyrics;
 
     #endregion
 
@@ -85,7 +83,7 @@ namespace MPTagThat.GridView
 
     public LyricsSearch(List<TrackData> tracks)
     {
-      this.tracks = tracks;
+      _tracks = tracks;
       InitializeComponent();
     }
 
@@ -102,45 +100,45 @@ namespace MPTagThat.GridView
       ServiceScope.Get<IThemeManager>().NotifyThemeChange();
 
       // Load the Settings
-      gridColumns = new GridViewColumnsLyrics();
+      _gridColumns = new GridViewColumnsLyrics();
 
       // Setup Dataview Grid
       dataGridViewLyrics.AutoGenerateColumns = false;
-      dataGridViewLyrics.DataSource = tracks;
+      dataGridViewLyrics.DataSource = _tracks;
 
       // Now Setup the columns, we want to display
       CreateColumns();
 
       Localisation();
 
-      sitesToSearch = Options.MainSettings.LyricSites;
+      _sitesToSearch = Options.MainSettings.LyricSites;
 
       // initialize delegates
-      m_DelegateLyricFound = new DelegateLyricFound(lyricFound);
-      m_DelegateLyricNotFound = new DelegateLyricNotFound(lyricNotFound);
-      m_DelegateThreadFinished = new DelegateThreadFinished(threadFinished);
-      m_DelegateThreadException = new DelegateThreadException(threadException);
+      _delegateLyricFound = lyricFound;
+      _delegateLyricNotFound = lyricNotFound;
+      _delegateThreadFinished = threadFinished;
+      _delegateThreadException = threadException;
 
-      m_EventStopThread = new ManualResetEvent(false);
+      _eventStopThread = new ManualResetEvent(false);
 
-      bgWorkerLyrics = new BackgroundWorker();
-      bgWorkerLyrics.DoWork += bgWorkerLyrics_DoWork;
-      bgWorkerLyrics.ProgressChanged += bgWorkerLyrics_ProgressChanged;
-      bgWorkerLyrics.RunWorkerCompleted += bgWorkerLyrics_RunWorkerCompleted;
-      bgWorkerLyrics.WorkerSupportsCancellation = true;
+      _bgWorkerLyrics = new BackgroundWorker();
+      _bgWorkerLyrics.DoWork += bgWorkerLyrics_DoWork;
+      _bgWorkerLyrics.ProgressChanged += bgWorkerLyrics_ProgressChanged;
+      _bgWorkerLyrics.RunWorkerCompleted += bgWorkerLyrics_RunWorkerCompleted;
+      _bgWorkerLyrics.WorkerSupportsCancellation = true;
 
       lbFinished.Visible = false;
 
-      lyricsQueue = new Queue();
+      _lyricsQueue = new Queue();
 
       dataGridViewLyrics.ReadOnly = true;
 
-      foreach (TrackData track in tracks)
+      foreach (TrackData track in _tracks)
       {
-        string[] lyricId = new string[2] {track.Artist, track.Title};
-        lyricsQueue.Enqueue(lyricId);
+        string[] lyricId = new string[] {track.Artist, track.Title};
+        _lyricsQueue.Enqueue(lyricId);
       }
-      bgWorkerLyrics.RunWorkerAsync();
+      _bgWorkerLyrics.RunWorkerAsync();
       log.Trace("<<<");
     }
 
@@ -157,7 +155,7 @@ namespace MPTagThat.GridView
     private void CreateColumns()
     {
       // Now create the columns 
-      foreach (GridViewColumn column in gridColumns.Settings.Columns)
+      foreach (GridViewColumn column in _gridColumns.Settings.Columns)
       {
         dataGridViewLyrics.Columns.Add(Util.FormatGridColumn(column));
       }
@@ -187,10 +185,10 @@ namespace MPTagThat.GridView
         if (i == dataGridViewLyrics.Columns.Count - 1)
           break;
 
-        gridColumns.SaveColumnSettings(column, i);
+        _gridColumns.SaveColumnSettings(column, i);
         i++;
       }
-      gridColumns.SaveSettings();
+      _gridColumns.SaveSettings();
     }
 
     #endregion
@@ -201,33 +199,35 @@ namespace MPTagThat.GridView
 
     private void bgWorkerLyrics_DoWork(object sender, DoWorkEventArgs e)
     {
-      if (lyricsQueue.Count > 0)
+      if (_lyricsQueue.Count > 0)
       {
         // start running the lyricController
-        lc = new LyricsController(this, m_EventStopThread, sitesToSearch.ToArray(), false, false, "", "");
+        _lc = new LyricsController(this, _eventStopThread, _sitesToSearch.ToArray(), false, false, "", "")
+        {
+          NoOfLyricsToSearch = _lyricsQueue.Count
+        };
 
-        lc.NoOfLyricsToSearch = lyricsQueue.Count;
-        ThreadStart runLyricController = delegate { lc.Run(); };
-        m_LyricControllerThread = new Thread(runLyricController);
-        m_LyricControllerThread.Start();
+        ThreadStart runLyricController = delegate { _lc.Run(); };
+        _lyricControllerThread = new Thread(runLyricController);
+        _lyricControllerThread.Start();
 
-        lc.StopSearches = false;
+        _lc.StopSearches = false;
 
 
         int row = 0;
-        while (lyricsQueue.Count != 0)
+        while (_lyricsQueue.Count != 0)
         {
-          if (lc == null)
+          if (_lc == null)
             return;
 
-          if (lc.NoOfCurrentSearches < m_NoOfCurrentSearchesAllowed && lc.StopSearches == false)
+          if (_lc.NoOfCurrentSearches < NoOfCurrentSearchesAllowed && _lc.StopSearches == false)
           {
-            string[] lyricID = (string[])lyricsQueue.Dequeue();
+            string[] lyricId = (string[])_lyricsQueue.Dequeue();
 
             if (Options.MainSettings.SwitchArtist)
-              lyricID[0] = SwitchArtist(lyricID[0]);
+              lyricId[0] = SwitchArtist(lyricId[0]);
 
-            lc.AddNewLyricSearch(lyricID[0], lyricID[1], GetStrippedPrefixArtist(lyricID[0], m_strippedPrefixStrings),
+            _lc.AddNewLyricSearch(lyricId[0], TrimTitle(lyricId[1]), GetStrippedPrefixArtist(lyricId[0], _strippedPrefixStrings),
                                  row);
             row++;
           }
@@ -237,7 +237,7 @@ namespace MPTagThat.GridView
       }
       else
       {
-        ThreadFinished = new[] {"", "", localisation.ToString("lyricssearch", "NothingToSearch"), ""};
+        ThreadFinished = new object[] {"", "", localisation.ToString("lyricssearch", "NothingToSearch"), ""};
       }
     }
 
@@ -254,6 +254,43 @@ namespace MPTagThat.GridView
       return artist;
     }
 
+    /// <summary>
+    /// Switches the Artist, if it is separated with a "colon"
+    /// </summary>
+    /// <param name="artist"></param>
+    /// <returns></returns>
+    private string SwitchArtist(string artist)
+    {
+      int iPos = artist.IndexOf(',');
+      if (iPos > 0)
+      {
+        artist = $"{artist.Substring(iPos + 2)} {artist.Substring(0, iPos)}";
+      }
+      return artist;
+    }
+
+    /// <summary>
+    /// Cleans the title before submitting for Lyrics search
+    /// </summary>
+    /// <param name="title"></param>
+    /// <returns></returns>
+    private string TrimTitle(string title)
+    {
+      foreach (string s in _titleBrackets)
+      {
+        if (title.Trim().EndsWith(s.Substring(1,1)))
+        {
+          var startPos = title.LastIndexOf(s.Substring(0, 1), StringComparison.Ordinal);
+          if (startPos > 0)
+          {
+            title = title.Substring(0, startPos).Trim();
+          }
+          break;
+        }
+      }
+      return title;
+    }
+
     private void bgWorkerLyrics_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {}
 
     private void bgWorkerLyrics_ProgressChanged(object sender, ProgressChangedEventArgs e) {}
@@ -264,12 +301,12 @@ namespace MPTagThat.GridView
     // Called when user presses Stop button of form is closed.
     private void StopThread()
     {
-      if (m_LyricControllerThread != null && m_LyricControllerThread.IsAlive) // thread is active
+      if (_lyricControllerThread != null && _lyricControllerThread.IsAlive) // thread is active
       {
-        m_EventStopThread.Set();
+        _eventStopThread.Set();
 
         // wait when thread  will stop or finish
-        while (m_LyricControllerThread.IsAlive)
+        while (_lyricControllerThread.IsAlive)
         {
           // We cannot use here infinite wait because our thread
           // makes syncronous calls to main form, this will cause deadlock.
@@ -280,16 +317,6 @@ namespace MPTagThat.GridView
           break;
         }
       }
-    }
-
-    private string SwitchArtist(string artist)
-    {
-      int iPos = artist.IndexOf(',');
-      if (iPos > 0)
-      {
-        artist = String.Format("{0} {1}", artist.Substring(iPos + 2), artist.Substring(0, iPos));
-      }
-      return artist;
     }
 
     #endregion
@@ -312,15 +339,15 @@ namespace MPTagThat.GridView
     {
       lbStatus.Visible = false;
       lbFinished.Visible = true;
-      if (lc != null)
+      if (_lc != null)
       {
-        lc.StopSearches = true;
+        _lc.StopSearches = true;
       }
 
       // Due to a bug, we first need the view to readonly, otherwise the checkbox in the first column is not displayed as checked.
       dataGridViewLyrics.ReadOnly = false;
       dataGridViewLyrics.Refresh();
-      bgWorkerLyrics.CancelAsync();
+      _bgWorkerLyrics.CancelAsync();
       StopThread();
     }
 
@@ -337,9 +364,9 @@ namespace MPTagThat.GridView
 
     private void btCancel_Click(object sender, EventArgs e)
     {
-      if (lc != null)
+      if (_lc != null)
       {
-        lc.StopSearches = true;
+        _lc.StopSearches = true;
       }
       StopThread();
       Close();
@@ -355,7 +382,7 @@ namespace MPTagThat.GridView
       {
         if (IsDisposed == false)
         {
-          Invoke(m_DelegateStringUpdate, value);
+          Invoke(_delegateStringUpdate, value);
         }
       }
     }
@@ -373,7 +400,7 @@ namespace MPTagThat.GridView
         {
           try
           {
-            Invoke(m_DelegateLyricFound, value);
+            Invoke(_delegateLyricFound, value);
           }
           catch (InvalidOperationException) {}
           ;
@@ -389,7 +416,7 @@ namespace MPTagThat.GridView
         {
           try
           {
-            Invoke(m_DelegateLyricNotFound, value);
+            Invoke(_delegateLyricNotFound, value);
           }
           catch (InvalidOperationException) {}
           ;
@@ -405,7 +432,7 @@ namespace MPTagThat.GridView
         {
           try
           {
-            Invoke(m_DelegateThreadFinished, value);
+            Invoke(_delegateThreadFinished, value);
           }
           catch (InvalidOperationException) {}
           ;
@@ -421,7 +448,7 @@ namespace MPTagThat.GridView
         {
           try
           {
-            Invoke(m_DelegateThreadException);
+            Invoke(_delegateThreadException);
           }
           catch (InvalidOperationException) {}
           ;
