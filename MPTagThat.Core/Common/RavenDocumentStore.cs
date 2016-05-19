@@ -22,7 +22,7 @@ namespace MPTagThat.Core.Common
 			{
 				var docStore = new EmbeddableDocumentStore()
 				{
-					UseEmbeddedHttpServer = false,
+					UseEmbeddedHttpServer = true,
 					DefaultDatabase = databaseName,
           RunInMemory = false,
 				};
