@@ -834,6 +834,7 @@ namespace MPTagThat
       Options.MainSettings.PlayerPanelCollapsed = splitterPlayer.IsCollapsed;
       Options.MainSettings.ActiveScript = ScriptsCombo.Text;
       Options.SaveAllSettings();
+      Options.Songlist.Dispose();
       log.Info("Main: Finished closing Main form");
       log.Trace("<<<");
     }

@@ -20,8 +20,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,9 +49,8 @@ namespace MPTagThat
     private Main _main;
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly string _databaseName = "MusicDatabase";
-
+    private string _databaseFolder;
     private IDocumentStore _store;
-    private IDatabaseCommands _dbCommands;
     private IDocumentSession _session;
 
     private BackgroundWorker _bgwScanShare;
@@ -60,6 +62,7 @@ namespace MPTagThat
     public MusicDatabase(Main main)
     {
       _main = main;
+      _databaseFolder = $"~\\Databases\\{_databaseName}";
     }
 
     ~MusicDatabase()
@@ -92,19 +95,18 @@ namespace MPTagThat
         _session?.Dispose();
         try
         {
-          _dbCommands.GlobalAdmin.DeleteDatabase(_databaseName, true);
+          if (Directory.Exists(_databaseFolder))
+          {
+            Directory.Delete(_databaseFolder);
+          }
         }
         catch (Exception ex)
         {
-          if (!ex.Message.Contains("NotFound"))
-          {
-            log.Error("Exception deleting database {0}", ex.Message);
-          }
+          log.Error("Exception deleting database {0}", ex.Message);
         }
         
-        _dbCommands.GlobalAdmin.EnsureDatabaseExists(_databaseName);
         _store?.Initialize();
-        _session = _store?.OpenSession(_databaseName);
+        _session = _store?.OpenSession();
       }
 
       _bgwScanShare = new BackgroundWorker
@@ -133,17 +135,13 @@ namespace MPTagThat
     /// </summary>
     public void DeleteDatabase()
     {
-      if (_store == null && !CreateDbConnection())
-      {
-        log.Error("Could not delete Database.");
-        return;
-      }
-
       _session?.Dispose();
-      _dbCommands.GlobalAdmin.DeleteDatabase(_databaseName, true);
-      _dbCommands.GlobalAdmin.EnsureDatabaseExists(_databaseName);
-      _store?.Initialize();
-      _session = _store?.OpenSession(_databaseName);
+      _store?.Dispose();
+      if (Directory.Exists(_databaseFolder))
+      {
+        Directory.Delete(_databaseFolder);
+      }
+      CreateDbConnection();
     }
 
     /// <summary>
@@ -195,8 +193,7 @@ namespace MPTagThat
       try
       {
         _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
-        _dbCommands = _store.DatabaseCommands.ForDatabase(_databaseName);
-        _session = _store.OpenSession(_databaseName);
+        _session = _store.OpenSession();
 
         return true;
       }
@@ -234,11 +231,19 @@ namespace MPTagThat
       {
         BulkInsertOptions bulkInsertOptions = new BulkInsertOptions
         {
-          BatchSize = 200,
+          BatchSize = 1000,
           OverwriteExisting = true
         };
 
-        using (BulkInsertOperation bulkInsert = _store.BulkInsert(_databaseName, bulkInsertOptions))
+        // Create folder to store Coverart
+        var picFolder = $@"{Application.StartupPath}\Database\Coverart\";
+        if (!Directory.Exists(picFolder))
+        {
+          Directory.CreateDirectory(picFolder);
+        }
+
+        HashAlgorithm sha = new SHA1CryptoServiceProvider();
+        using (BulkInsertOperation bulkInsert = _store.BulkInsert(null, bulkInsertOptions))
         {
           foreach (FileInfo fi in GetFiles(di, true))
           {
@@ -248,10 +253,29 @@ namespace MPTagThat
               {
                 continue;
               }
-              Util.SendProgress(string.Format("Reading file {0}", fi.FullName));
+              Util.SendProgress($"Reading file {fi.FullName}");
               var track = Track.Create(fi.FullName);
               if (track != null)
               {
+                foreach (Picture picture in track.Pictures)
+                {
+                  string fileName = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
+                  string fullFileName = $"{picFolder}{fileName}.png";
+                  if (!File.Exists(fullFileName))
+                  {
+                    try
+                    {
+                      Image img = Picture.ImageFromData(picture.Data);
+                      // Need to make a copy, otherwise we have a GDI+ Error
+                      Bitmap bCopy = new Bitmap(img);
+                      bCopy.Save(fullFileName, ImageFormat.Png);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                  }
+                }
+                track.Pictures.Clear();
                 bulkInsert.Store(track);
               }
             }

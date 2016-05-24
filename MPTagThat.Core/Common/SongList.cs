@@ -40,17 +40,17 @@ namespace MPTagThat.Core
   /// Based on the amount of songs reatrieved, it either stores them in a <see cref="SortableBindingList{T}"/> or uses
   /// a temporary db4o database created on the fly to prevent Out of Memory issues, when processing a large collection of songs.
   /// </summary>
-  public class SongList : IEnumerable<TrackData>
+  public class SongList : IEnumerable<TrackData>, IDisposable
   {
     #region Variables
 
 	  private readonly string _databaseName = "SongsTemp";
+    private string _databaseFolder;
 
     private SortableBindingList<TrackData> _bindingList = new SortableBindingList<TrackData>();
     private bool _databaseModeEnabled = false;
 
 		private IDocumentStore _store;
-	  private IDatabaseCommands _dbCommands;
     private IDocumentSession _session;
 		private List<Guid> _dbIdList = new List<Guid>(); 
 
@@ -65,16 +65,7 @@ namespace MPTagThat.Core
     public SongList()
     {
       _databaseModeEnabled = false;
-    }
-
-    ~SongList()
-    {
-      if (_store != null && !_store.WasDisposed)
-      {
-	      _session?.Dispose();
-				_dbCommands.GlobalAdmin.DeleteDatabase(_databaseName, true);
-				_store.Dispose();
-      }
+      _databaseFolder = $@"{System.Windows.Forms.Application.StartupPath}\Database\Databases\{_databaseName}";
     }
 
     #endregion
@@ -282,8 +273,7 @@ namespace MPTagThat.Core
 	      }
 
 	      _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
-				_dbCommands = _store.DatabaseCommands.ForDatabase(_databaseName);
-	      _session = _store.OpenSession(_databaseName);
+	      _session = _store.OpenSession();
 
 				return true;
       }
@@ -351,6 +341,46 @@ namespace MPTagThat.Core
     {
       return GetEnumerator();
     }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposedValue)
+      {
+        if (disposing)
+        {
+          if (_store != null && !_store.WasDisposed)
+          {
+            try
+            {
+              _session?.Dispose();
+              _store.Dispose();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            if (Directory.Exists(_databaseFolder))
+            {
+              var dirInfo = new DirectoryInfo(_databaseFolder);
+              dirInfo.Attributes = dirInfo.Attributes & ~FileAttributes.ReadOnly;
+              Directory.Delete(_databaseFolder, true);
+            }
+          }
+        }
+        disposedValue = true;
+      }
+    }
+
+    // This code added to correctly implement the disposable pattern.
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+    }
+    #endregion
 
     #endregion
   }

@@ -22,13 +22,12 @@ namespace MPTagThat.Core.Common
 			{
 				var docStore = new EmbeddableDocumentStore()
 				{
-					UseEmbeddedHttpServer = true,
-					DefaultDatabase = databaseName,
+					UseEmbeddedHttpServer = false,
+          DataDirectory = $"~\\Databases\\{databaseName}",
           RunInMemory = false,
 				};
 				docStore.Initialize();
 
-        docStore.Configuration.MaxPageSize = 50;
         docStore.Conventions.MaxNumberOfRequestsPerSession = 1000000;
 				docStore.Conventions.AllowMultipuleAsyncOperations = true;
 			  
