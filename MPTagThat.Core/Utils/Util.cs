@@ -427,6 +427,28 @@ namespace MPTagThat.Core
     }
 
     /// <summary>
+    /// Deletes folder, setting the attributes before to allow deletionj
+    /// </summary>
+    /// <param name="folderName"></param>
+    public static void DeleteFolder(string folderName)
+    {
+      try
+      {
+        if (Directory.Exists(folderName))
+        {
+          var dirInfo = new DirectoryInfo(folderName);
+          dirInfo.Attributes = dirInfo.Attributes & ~FileAttributes.ReadOnly;
+          Directory.Delete(folderName, true);
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Error("Exception deleting folder: {0} {1}", folderName, ex.Message);
+      }
+    }
+
+
+    /// <summary>
     ///   Save the Picture of the track as folder.jpg
     /// </summary>
     /// <param name = "track"></param>

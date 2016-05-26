@@ -62,7 +62,7 @@ namespace MPTagThat
     public MusicDatabase(Main main)
     {
       _main = main;
-      _databaseFolder = $"~\\Databases\\{_databaseName}";
+      _databaseFolder = $@"{System.Windows.Forms.Application.StartupPath}\Database\Databases\{_databaseName}";
     }
 
     ~MusicDatabase()
@@ -84,29 +84,15 @@ namespace MPTagThat
     /// <param name="deleteDatabase"></param>
     public void BuildDatabase(string musicShare, bool deleteDatabase)
     {
+      if (deleteDatabase)
+      {
+        DeleteDatabase();
+      }
+
       if (_store == null && !CreateDbConnection())
       {
         log.Error("Database Scan aborted.");
         return;
-      }
-
-      if (deleteDatabase)
-      {
-        _session?.Dispose();
-        try
-        {
-          if (Directory.Exists(_databaseFolder))
-          {
-            Directory.Delete(_databaseFolder);
-          }
-        }
-        catch (Exception ex)
-        {
-          log.Error("Exception deleting database {0}", ex.Message);
-        }
-        
-        _store?.Initialize();
-        _session = _store?.OpenSession();
       }
 
       _bgwScanShare = new BackgroundWorker
@@ -137,10 +123,7 @@ namespace MPTagThat
     {
       _session?.Dispose();
       _store?.Dispose();
-      if (Directory.Exists(_databaseFolder))
-      {
-        Directory.Delete(_databaseFolder);
-      }
+      Util.DeleteFolder(_databaseFolder);
       CreateDbConnection();
     }
 

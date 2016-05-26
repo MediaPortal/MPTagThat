@@ -353,21 +353,9 @@ namespace MPTagThat.Core
         {
           if (_store != null && !_store.WasDisposed)
           {
-            try
-            {
-              _session?.Dispose();
-              _store.Dispose();
-            }
-            catch (Exception ex)
-            {
-            }
-
-            if (Directory.Exists(_databaseFolder))
-            {
-              var dirInfo = new DirectoryInfo(_databaseFolder);
-              dirInfo.Attributes = dirInfo.Attributes & ~FileAttributes.ReadOnly;
-              Directory.Delete(_databaseFolder, true);
-            }
+            _session?.Dispose();
+            _store.Dispose();
+            Util.DeleteFolder(_databaseName);
           }
         }
         disposedValue = true;
