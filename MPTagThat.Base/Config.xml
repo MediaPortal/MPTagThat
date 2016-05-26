@@ -11,7 +11,7 @@
 	The following Parameter controls how many songs will be held in memory.
 	If this mark is reached, the songs will be stored in a temporary database to prevent Out of Memory issues on large collections
   -->
-  <MaximumNumberOfSongsInList>200</MaximumNumberOfSongsInList>
+  <MaximumNumberOfSongsInList>500</MaximumNumberOfSongsInList>
   
     <!--
 	The following Parameter controls if debugging for Raven Database shall be turned on.
