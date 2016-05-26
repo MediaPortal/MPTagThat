@@ -812,6 +812,9 @@ namespace MPTagThat.GridView
         tracksGrid.ResumeLayout();
       }
 
+      // Commit changes to SongTemp, in case we have switched to DB Mode
+      Options.Songlist.CommitDatabaseChanges();
+
       Util.SendProgress("");
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
@@ -1346,7 +1349,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Sets the WaitCursor during various operations
     /// </summary>
-    private void SetWaitCursor()
+    public void SetWaitCursor()
     {
       _main.Cursor = Cursors.WaitCursor;
       tracksGrid.Cursor = Cursors.WaitCursor;
@@ -1356,7 +1359,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Resets the WaitCursor to the default
     /// </summary>
-    private void ResetWaitCursor()
+    public void ResetWaitCursor()
     {
       _main.Cursor = Cursors.Default;
       tracksGrid.Cursor = Cursors.Default;

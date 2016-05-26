@@ -159,12 +159,20 @@ namespace MPTagThat.Core
       if (_databaseModeEnabled)
       {
         _session.Store(track);
-				_session.SaveChanges();
         _dbIdList.Add(track.Id);
       }
       else
       {
         _bindingList.Add(track); 
+      }
+    }
+
+
+    public void CommitDatabaseChanges()
+    {
+      if (_databaseModeEnabled)
+      {
+        _session.SaveChanges();
       }
     }
 
@@ -301,7 +309,13 @@ namespace MPTagThat.Core
 
       _dbIdList.Clear();
 
-	    using (BulkInsertOperation bulkInsert = _store.BulkInsert())
+      BulkInsertOptions bulkInsertOptions = new BulkInsertOptions
+      {
+        BatchSize = 1000,
+        OverwriteExisting = true
+      };
+
+      using (BulkInsertOperation bulkInsert = _store.BulkInsert(null, bulkInsertOptions))
 	    {
 		    foreach (TrackData track in _bindingList)
 		    {

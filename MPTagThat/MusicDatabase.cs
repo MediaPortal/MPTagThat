@@ -138,6 +138,8 @@ namespace MPTagThat
       _main.MiscInfoPanel.ClearNonMusicFiles();
       GC.Collect();
 
+      _main.ToolStripStatusScan.Text = "";
+      _main.TracksGridView.SetWaitCursor();
 
       if (_store == null && !CreateDbConnection())
       {
@@ -155,9 +157,20 @@ namespace MPTagThat
         _main.TracksGridView.AddTrack(track);
         _main.TracksGridView.View.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
       }
+
+      // Commit changes to SongTemp, in case we have switched to DB Mode
+      Options.Songlist.CommitDatabaseChanges();
+
+      // Display Status Information
+      try
+      {
+        _main.ToolStripStatusFiles.Text = string.Format(ServiceScope.Get<ILocalisation>().ToString("main", "toolStripLabelFiles"), result.Count, 0);
+      }
+      catch (InvalidOperationException) { }
+
+      _main.TracksGridView.ResetWaitCursor();
     }
-
-
+    
     #endregion
 
     #region Private Methods
@@ -330,7 +343,6 @@ namespace MPTagThat
 
 
     #endregion
-
 
   }
 }
