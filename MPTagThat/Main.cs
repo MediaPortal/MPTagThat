@@ -34,6 +34,7 @@ using Elegant.Ui;
 using MPTagThat.Core;
 using MPTagThat.Core.Burning;
 using MPTagThat.Core.MediaChangeMonitor;
+using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 using MPTagThat.GridView;
@@ -90,7 +91,7 @@ namespace MPTagThat
 
     private delegate void ThreadSafeFolderScan();
 
-    private MusicDatabase _musicDatabase;
+    private IMusicDatabase _musicDatabase; 
 
     // Ribbon Related Vars
     private readonly IActionHandler _actionhandler = ServiceScope.Get<IActionHandler>();
@@ -732,7 +733,7 @@ namespace MPTagThat
         //
         // Music Database
         //
-        _musicDatabase = new MusicDatabase(this);
+        _musicDatabase = ServiceScope.Get<IMusicDatabase>();
 
         // Load BASS
         LoadBass();
@@ -3823,7 +3824,37 @@ namespace MPTagThat
       {
         return;
       }
-      _musicDatabase.ExecuteQuery(query);
+
+      TracksGridView.View.Rows.Clear();
+      Options.Songlist.Clear();
+      MiscInfoPanel.ClearNonMusicFiles();
+      GC.Collect();
+
+      ToolStripStatusScan.Text = "";
+      TracksGridView.SetWaitCursor();
+
+      var result = _musicDatabase.ExecuteQuery(query);
+
+      if (result != null)
+      {
+        foreach (var track in result)
+        {
+          TracksGridView.AddTrack(track);
+          TracksGridView.View.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+        }
+
+        // Commit changes to SongTemp, in case we have switched to DB Mode
+        Options.Songlist.CommitDatabaseChanges();
+      }
+
+      // Display Status Information
+      try
+      {
+        ToolStripStatusFiles.Text = string.Format(ServiceScope.Get<ILocalisation>().ToString("main", "toolStripLabelFiles"), result.Count, 0);
+      }
+      catch (InvalidOperationException) { }
+
+      TracksGridView.ResetWaitCursor();
     }
 
     #endregion

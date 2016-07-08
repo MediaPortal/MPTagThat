@@ -288,6 +288,8 @@
     <Compile Include="Services\MediaChangeMonitor\DeviceVolumeMonitor.cs" />
     <Compile Include="Services\MediaChangeMonitor\IMediaChangeMonitor.cs" />
     <Compile Include="Services\MediaChangeMonitor\MediaChangeMonitor.cs" />
+    <Compile Include="Services\MusicDatabase\IMusicDatabase.cs" />
+    <Compile Include="Services\MusicDatabase\MusicDatabase.cs" />
     <Compile Include="Services\ScriptManager\IScript.cs" />
     <Compile Include="Services\ScriptManager\IScriptManager.cs" />
     <Compile Include="Services\ScriptManager\ScriptManager.cs" />

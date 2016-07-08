@@ -37,16 +37,15 @@ using Raven.Client.Document;
 
 #endregion 
 
-namespace MPTagThat
+namespace MPTagThat.Core.Services.MusicDatabase
 {
   /// <summary>
   /// This class handles all related RavenDB actions
   /// </summary>
-  public class MusicDatabase
+  public class MusicDatabase : IMusicDatabase
   {
     #region Variables
 
-    private Main _main;
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly string _databaseName = "MusicDatabase";
     private string _databaseFolder;
@@ -61,9 +60,8 @@ namespace MPTagThat
 
     #region ctor / dtor
 
-    public MusicDatabase(Main main)
+    public MusicDatabase()
     {
-      _main = main;
       _databaseFolder = $@"{System.Windows.Forms.Application.StartupPath}\Database\Databases\{_databaseName}";
     }
 
@@ -148,23 +146,15 @@ namespace MPTagThat
     }
 
     /// <summary>
-    /// Runs the query against the MusicDatabase and adds the songs to the grid
+    /// Runs the query against the MusicDatabase
     /// </summary>
     /// <param name="query"></param>
-    public void ExecuteQuery(string query)
+    public List<TrackData> ExecuteQuery(string query)
     {
-      _main.TracksGridView.View.Rows.Clear();
-      Options.Songlist.Clear();
-      _main.MiscInfoPanel.ClearNonMusicFiles();
-      GC.Collect();
-
-      _main.ToolStripStatusScan.Text = "";
-      _main.TracksGridView.SetWaitCursor();
-
       if (_store == null && !CreateDbConnection())
       {
         log.Error("Could not establish a session.");
-        return;
+        return null;
       }
 
       var result = _session.Advanced.DocumentQuery<TrackData>()
@@ -172,25 +162,9 @@ namespace MPTagThat
         .Take(int.MaxValue)
         .ToList();
 
-      foreach (var track in result)
-      {
-        _main.TracksGridView.AddTrack(track);
-        _main.TracksGridView.View.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
-      }
-
-      // Commit changes to SongTemp, in case we have switched to DB Mode
-      Options.Songlist.CommitDatabaseChanges();
-
-      // Display Status Information
-      try
-      {
-        _main.ToolStripStatusFiles.Text = string.Format(ServiceScope.Get<ILocalisation>().ToString("main", "toolStripLabelFiles"), result.Count, 0);
-      }
-      catch (InvalidOperationException) { }
-
-      _main.TracksGridView.ResetWaitCursor();
+      return result;
     }
-    
+
     #endregion
 
     #region Private Methods

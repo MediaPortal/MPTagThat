@@ -27,6 +27,7 @@ using System.Xml;
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
 using MPTagThat.Core.MediaChangeMonitor;
+using MPTagThat.Core.Services.MusicDatabase;
 
 #endregion
 
@@ -203,6 +204,9 @@ namespace MPTagThat
       ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Media Change Monitor");
       ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
 
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering MusicDatabase");
+      ServiceScope.Add<IMusicDatabase>(new MusicDatabase());
+      
       ServiceScope.Get<ILogger>().GetLogger.Info("Finished registering services");
 
       byte[] buffer = new byte[2048];

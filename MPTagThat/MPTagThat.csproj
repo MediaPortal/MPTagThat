@@ -298,7 +298,6 @@
     <Compile Include="MiscInfoControl.Designer.cs">
       <DependentUpon>MiscInfoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MusicDatabase.cs" />
     <Compile Include="PictureControl.cs">
       <SubType>Form</SubType>
     </Compile>
