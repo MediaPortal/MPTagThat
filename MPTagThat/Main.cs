@@ -70,7 +70,6 @@ namespace MPTagThat
     private Point _formLocation;
     private Size _formSize;
     private bool _keyHandled;
-    private MusicDatabaseBuild _musicDatabaseBuild;
     private bool _rightPanelCollapsed;
     private string _selectedDirectory = ""; // The currently selcted Directory
     private bool _showForm;
@@ -808,7 +807,7 @@ namespace MPTagThat
     {
       log.Trace(">>>");
       log.Info("Main: Closing Main form");
-      if (_musicDatabaseBuild != null && _musicDatabaseBuild.ScanActive)
+      if (_musicDatabase != null && _musicDatabase.ScanActive)
       {
         if (
           MessageBox.Show(localisation.ToString("Settings", "DBSCanActive"),
@@ -818,7 +817,7 @@ namespace MPTagThat
           e.Cancel = true;
           return;
         }
-        _musicDatabaseBuild.AbortScan = true;
+        _musicDatabase.AbortDatabaseScan();
       }
       ServiceScope.Get<IMediaChangeMonitor>().StopListening();
       _gridViewControl.CheckForChanges();
@@ -1537,44 +1536,6 @@ namespace MPTagThat
       }
       AutoNumber = 1; // Reset the number on Folder Change
       log.Trace("<<<");
-    }
-
-    /// <summary>
-    ///   Creates a Music Database
-    /// </summary>
-    public void CreateMusicDatabase(string databaseName)
-    {
-      if (_musicDatabaseBuild == null)
-      {
-        _musicDatabaseBuild = new MusicDatabaseBuild();
-      }
-      _musicDatabaseBuild.CreateMusicDatabase(databaseName);
-    }
-
-    /// <summary>
-    ///   Starts scanning of the selected folder and fills the Music Database
-    /// </summary>
-    /// <param name = "folder"></param>
-    public void FillMusicDatabase(string folder, string databaseName)
-    {
-      if (_musicDatabaseBuild == null)
-      {
-        _musicDatabaseBuild = new MusicDatabaseBuild();
-      }
-      _musicDatabaseBuild.FillMusicDatabase(folder, databaseName);
-    }
-
-    /// <summary>
-    ///   Returns the Status of the Database Scan
-    /// </summary>
-    /// <returns></returns>
-    public string DatabaseScanStatus()
-    {
-      if (_musicDatabaseBuild == null)
-      {
-        _musicDatabaseBuild = new MusicDatabaseBuild();
-      }
-      return _musicDatabaseBuild.DatabaseScanStatus();
     }
 
     /// <summary>

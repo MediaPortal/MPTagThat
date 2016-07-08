@@ -712,18 +712,7 @@
 	<string name="Settings.GroupBoxDCustomGenre">Custom Genres</string>
 	<string name="Settings.AddCustomGenre">Add Genre</string>
 	<string name="Settings.DeleteCustomGenre">Delete Genre</string>
-	<string name="Settings.GroupBoxDatabaseBuild">Music Database Build</string>
-	<string name="Settings.DatabaseScanNote">If no MediaPortal Music Database is available, a database may be created, by entering a file name in the above text box.\nThen start the scan.</string>
-	<string name="Settings.StartDBScan">Start Scan</string>
-	<string name="Settings.DBScanStatus">Scan Status</string>
-	<string name="Settings.DBNotExists">The selected database does not exist.\nIf you select "Yes" a new database will be created.\nStart a Scan to fill the database.</string>
-	<string name="Settings.DBScanIdle">Database Scan not active.</string>
-	<string name="Settings.DBScanFinished">Database scan done.\nProcessed {0} tracks in: {1:d2}:{2:d2}:{3:d2}{4}</string>
-	<string name="Settings.DBScanTrackSummary"> ({0} seconds per track)</string>
-	<string name="Settings.DBScanTitle">Confirm Database Scan abort</string>
-	<string name="Settings.DBScanActive">Database Scan is still active.\nAbort the scan and quit the application?</string>
-	<string name="Settings.DBScanProgress">Progressing file {0} of {1}</string>
-    <string name="Settings.TabRipping">Ripping</string>
+	<string name="Settings.TabRipping">Ripping</string>
     <string name="Settings.TabRippingGeneral">General</string>
     <string name="Settings.CustomPath">Custom Paths and Filenames</string>
     <string name="Settings.Format">Format:</string>
@@ -910,18 +899,6 @@
 	<string name="player.SavePlayList">Save PlayList</string>
 	<string name="player.UseRelativePath">Use relative Path</string>
   
-  
-    <!-- Database Search -->
-  
-    <string name="dbsearch.Artist">Artist / AlbumArtist (contains):</string>
-    <string name="dbsearch.Album">Album (contains):</string>
-    <string name="dbsearch.Title">Title (contains):</string>
-	<string name="dbsearch.Search">Search</string>
-	<string name="dbsearch.NoMusicDB">To use the Database search function,\nyou must enter the location of the Music Database in the Settings.</string>
-	<string name="dbsearch.NoSearchValues">Please enter at least one Value to search for.</string>
-	<string name="dbsearch.TooMuchRows">Query returned too much rows. Only displaying the first 1000.</string>
-  
-  
   <!-- Find / Replace -->
   
     <string name="findreplace.HeaderFind">Find</string>
@@ -954,5 +931,9 @@
   
     <string name="albumgain.Header">Album Gain</string>
     <string name="albumgain.Explanation">All files are selected.\nShould MPTagThat calculate an Album Gain?</string>
-  
+
+  <!-- Database Related -->
+  <string name="Database.DBScanFinished">Database scan finished.\nProcessed {0} tracks in: {1:d2}:{2:d2}:{3:d2}</string>
+  <string name="Database.DBScanActive">Database Scan is still active.\nAbort the scan and quit the application?</string>
+	
 </resources>

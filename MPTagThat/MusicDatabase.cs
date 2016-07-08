@@ -54,6 +54,8 @@ namespace MPTagThat
     private IDocumentSession _session;
 
     private BackgroundWorker _bgwScanShare;
+    private int _audioFiles;
+    private DateTime _scanStartTime;
 
     #endregion
 
@@ -70,6 +72,24 @@ namespace MPTagThat
       if (_store != null && !_store.WasDisposed)
       {
         _session?.Dispose();
+      }
+    }
+
+    #endregion
+
+    #region Properties
+
+    public bool ScanActive
+    {
+      get
+      {
+        if (_bgwScanShare == null)
+          return false;
+
+        if (_bgwScanShare.IsBusy)
+          return true;
+
+        return false;
       }
     }
 
@@ -214,7 +234,8 @@ namespace MPTagThat
       }
       else
       {
-        Util.SendProgress("Database Scan finished");
+        TimeSpan ts = DateTime.Now - _scanStartTime;
+        Util.SendProgress(string.Format(ServiceScope.Get<ILocalisation>().ToString("Database", "DBScanFinished"), _audioFiles, ts.Hours, ts.Minutes, ts.Seconds));
         log.Info("Database Scan finished");
       }
       bgw.Dispose();
@@ -222,6 +243,7 @@ namespace MPTagThat
 
     private void ScanShare_DoWork(object sender, DoWorkEventArgs e)
     {
+      _scanStartTime = DateTime.Now;
       var di = new DirectoryInfo((string)e.Argument);
       try
       {
@@ -273,6 +295,7 @@ namespace MPTagThat
                 }
                 track.Pictures.Clear();
                 bulkInsert.Store(track);
+                _audioFiles++;
               }
             }
             catch (PathTooLongException)

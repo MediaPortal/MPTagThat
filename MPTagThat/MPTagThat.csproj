@@ -154,12 +154,6 @@
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\SupportedCommandType.cs" />
-    <Compile Include="DatabaseSearchControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DatabaseSearchControl.Designer.cs">
-      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,7 +299,6 @@
       <DependentUpon>MiscInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicDatabase.cs" />
-    <Compile Include="MusicDatabaseBuild.cs" />
     <Compile Include="PictureControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,9 +331,6 @@
     <EmbeddedResource Include="Commands\MusicBrainzAlbumResults.resx">
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DatabaseSearchControl.resx">
-      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\About.resx">
       <DependentUpon>About.cs</DependentUpon>
