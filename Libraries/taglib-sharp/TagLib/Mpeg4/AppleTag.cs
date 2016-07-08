@@ -447,8 +447,8 @@ namespace TagLib.Mpeg4 {
 				data_box.Text = datastring;
 			} else {
 				//Create the new boxes, should use 1 for text as a flag
-				AppleAdditionalInfoBox amean_box = new AppleAdditionalInfoBox(BoxType.Mean, 0, 1);
-				AppleAdditionalInfoBox aname_box = new AppleAdditionalInfoBox(BoxType.Name, 0, 1);
+				AppleAdditionalInfoBox amean_box = new AppleAdditionalInfoBox(BoxType.Mean);
+				AppleAdditionalInfoBox aname_box = new AppleAdditionalInfoBox(BoxType.Name);
 				AppleDataBox adata_box = new AppleDataBox(BoxType.Data, 1);
 				amean_box.Text = meanstring;
 				aname_box.Text = namestring;
@@ -1254,8 +1254,8 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
 		public override string MusicBrainzTrackId {
-		    get { return GetDashBox("com.apple.iTunes","MusicIP PUID");}
-		    set {SetDashBox("com.apple.iTunes", "MusicIP PUID", value);}
+		    get {return GetDashBox("com.apple.iTunes","MusicBrainz Track Id");}
+		    set {SetDashBox("com.apple.iTunes", "MusicBrainz Track Id", value);}
 		}
 
 		/// <summary>

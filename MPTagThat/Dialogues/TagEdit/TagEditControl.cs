@@ -31,6 +31,7 @@ using MPTagThat.Dialogues;
 using TagLib;
 using Picture = MPTagThat.Core.Common.Picture;
 using Action = MPTagThat.Core.Action;
+using TextBox = System.Windows.Forms.TextBox;
 
 #endregion
 

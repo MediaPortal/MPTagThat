@@ -540,7 +540,7 @@ namespace TagLib.IFD
 		/// </returns>
 		private short ReadShort ()
 		{
-			return (short) file.ReadBlock (2).ToUShort (is_bigendian);
+			return file.ReadBlock (2).ToShort (is_bigendian);
 		}
 
 		/// <summary>
@@ -803,11 +803,15 @@ namespace TagLib.IFD
 				length = 1073741824L * 4;
 			}
 
-			if (makernote_offset > length)
-			    throw new Exception ("offset to makernote is beyond file size");
+			if (makernote_offset > length) {
+				file.MarkAsCorrupt ("offset to makernote is beyond file size");
+				return null;
+			}
 
-			if (makernote_offset + header_size > length)
-				throw new Exception ("data is to short to contain a maker note ifd");
+			if (makernote_offset + header_size > length) {
+				file.MarkAsCorrupt ("data is to short to contain a maker note ifd");
+				return null;
+			}
 
 			// read header
 			file.Seek (makernote_offset, SeekOrigin.Begin);
