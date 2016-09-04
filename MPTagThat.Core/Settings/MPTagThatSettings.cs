@@ -165,9 +165,6 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "true")]
     public bool OverwriteExistingLyrics { get; set; }
 
-    [Setting(SettingScope.User, "false")]
-    public bool UseMediaPortalDatabase { get; set; }
-
     [Setting(SettingScope.User, "")]
     public string MediaPortalDatabase { get; set; }
 

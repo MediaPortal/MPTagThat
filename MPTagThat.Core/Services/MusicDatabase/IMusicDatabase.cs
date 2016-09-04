@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MPTagThat.Core.Services.MusicDatabase.Indexes;
 
 namespace MPTagThat.Core.Services.MusicDatabase
 {
@@ -35,5 +36,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// </summary>
     /// <param name="query"></param>
     List<TrackData> ExecuteQuery(string query);
+
+    /// <summary>
+    /// Returnsd Distionct Artists from the Database
+    /// </summary>
+    /// <returns></returns>
+    List<DistinctArtistIndex.Projection> DistinctArtists();
   }
 }

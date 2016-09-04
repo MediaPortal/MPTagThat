@@ -24,6 +24,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using MPTagThat.Core.Services.MusicDatabase;
 
 #endregion
 
@@ -389,12 +390,6 @@ namespace MPTagThat.Core
         _treeViewFilterSettings.Filter.Add(filter);
       }
 
-      // Load Artists / AlbumArtists for Auto Completion
-      if (_MPTagThatSettings.UseMediaPortalDatabase)
-      {
-        ReadArtistDatabase();
-      }
-
       _copyPasteBuffer = new List<TrackData>();
 
       ReadOnlyFileHandling = 2; // Don't change attribute as a default.
@@ -404,48 +399,25 @@ namespace MPTagThat.Core
 
     #endregion
 
-    #region Private Methods
+    #region Public Methods
 
-    private void ReadArtistDatabase()
+    public static void ReadArtistDatabase()
     {
-      if (!File.Exists(_MPTagThatSettings.MediaPortalDatabase))
-        return;
-
-      string connection = string.Format(@"Data Source={0}", _MPTagThatSettings.MediaPortalDatabase);
       try
       {
-        SQLiteConnection conn = new SQLiteConnection(connection);
-        conn.Open();
-        using (SQLiteCommand cmd = new SQLiteCommand())
+        List<string> tmpArtist = new List<string>();
+        var artists = ServiceScope.Get<IMusicDatabase>().DistinctArtists();
+        foreach (var artist in artists)
         {
-          cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText =
-            "select distinct strartist from artist union select stralbumartist from albumartist order by 1";
-          using (SQLiteDataReader reader = cmd.ExecuteReader())
-          {
-            List<string> rows = new List<string>();
-            while (reader.Read())
-            {
-              rows.Add(reader.GetString(0));
-            }
-
-            // Now copy the list to the string array
-            string[] tmpArray = rows.ToArray();
-            _mediaPortalArtists = (string[])tmpArray.Clone();
-          }
+          tmpArtist.Add(artist.name);
         }
-        conn.Close();
+        _mediaPortalArtists = (string[]) tmpArtist.ToArray().Clone();
       }
       catch (Exception ex)
       {
         ServiceScope.Get<ILogger>().GetLogger.Error("Error reading Music Database: {0}", ex.Message);
       }
     }
-
-    #endregion
-
-    #region Public Methods
 
     public static void SaveAllSettings()
     {

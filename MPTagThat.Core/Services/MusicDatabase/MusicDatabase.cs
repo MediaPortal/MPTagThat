@@ -30,10 +30,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Common;
+using MPTagThat.Core.Services.MusicDatabase.Indexes;
 using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Connection;
 using Raven.Client.Document;
+using Raven.Client.Indexes;
 
 #endregion 
 
@@ -165,6 +167,27 @@ namespace MPTagThat.Core.Services.MusicDatabase
       return result;
     }
 
+    /// <summary>
+    /// Get Distinct Artists and Albumartists
+    /// </summary>
+    /// <returns></returns>
+    public List<DistinctArtistIndex.Projection> DistinctArtists()
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var artists = _session.Query<DistinctArtistIndex.Result, DistinctArtistIndex>()
+        .Take(int.MaxValue)
+        .ProjectFromIndexFieldsInto<DistinctArtistIndex.Projection>()
+        .OrderBy(x => x.name)
+        .ToList();
+
+      return artists;
+    }
+
     #endregion
 
     #region Private Methods
@@ -184,6 +207,8 @@ namespace MPTagThat.Core.Services.MusicDatabase
       {
         _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
         _session = _store.OpenSession();
+
+        IndexCreation.CreateIndexes(typeof(DistinctArtistIndex).Assembly, _store);
 
         return true;
       }
