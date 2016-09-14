@@ -2,9 +2,10 @@
 // Opus.cs:
 //
 // Author:
-//   Helmut Wahrmann
+//   Les De Ridder (les@lesderid.net)
 //
-// Copyright (C) 2015 Helmut Wahrmann
+// Copyright (C) 2007 Brian Nickel
+// Copyright (C) 2015 Les De Ridder
 //
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
@@ -28,58 +29,56 @@ namespace TagLib.Ogg.Codecs
 	/// <summary>
 	///    This class extends <see cref="Codec" /> and implements <see
 	///    cref="IAudioCodec" /> to provide support for processing Ogg
-	///    Vorbis bitstreams.
+	///    Opus bitstreams.
 	/// </summary>
 	public class Opus : Codec, IAudioCodec
 	{
 #region Private Static Fields
-		
+
 		/// <summary>
 		///    Contains the file identifier.
 		/// </summary>
-		private static ByteVector id = "OpusHead";
-
-		/// <summary>
-		///    Contains the opus comment identifier.
-		/// </summary>
-		private static ByteVector comment_id = "OpusTags";
+		private static ByteVector magic_signature_base = "Opus";
+		private static ByteVector magic_signature_header = "OpusHead";
+		private static ByteVector magic_signature_comment = "OpusTags";
+		private static int magic_signature_length = 8;
 
 #endregion
-		
-		
-		
+
+
+
 #region Private Fields
-		
+
 		/// <summary>
 		///    Contains the header packet.
 		/// </summary>
 		private HeaderPacket header;
-		
+
 		/// <summary>
 		///    Contains the comment data.
 		/// </summary>
 		private ByteVector comment_data;
-		
+
 #endregion
-		
-		
-		
+
+
+
 #region Constructors
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
-		///    cref="Vorbis" />.
+		///    cref="Opus" />.
 		/// </summary>
 		private Opus ()
 		{
 		}
-		
+
 #endregion
-		
-		
-		
+
+
+
 #region Public Methods
-		
+
 		/// <summary>
 		///    Reads a Ogg packet that has been encountered in the
 		///    stream.
@@ -112,28 +111,29 @@ namespace TagLib.Ogg.Codecs
 		{
 			if (packet == null)
 				throw new ArgumentNullException ("packet");
-			
+
 			if (index < 0)
 				throw new ArgumentOutOfRangeException ("index",
 					"index must be at least zero.");
-			
-			int type = PacketType (packet);
-			if (type != 1 && index == 0)
+
+			ByteVector signature = MagicSignature (packet);
+			if (signature != magic_signature_header && index == 0)
 				throw new CorruptFileException (
 					"Stream does not begin with opus header.");
-			
+
 			if (comment_data == null) {
-				if (type == 1)
+				if (signature == magic_signature_header)
 					header = new HeaderPacket (packet);
-				else if (type == 3)
-					comment_data = packet.Mid (8);
+				else if (signature == magic_signature_comment)
+					comment_data =
+						packet.Mid (magic_signature_length);
 				else
 					return true;
 			}
-			
+
 			return comment_data != null;
 		}
-		
+
 		/// <summary>
 		///    Computes the duration of the stream using the first and
 		///    last granular positions of the stream.
@@ -153,14 +153,13 @@ namespace TagLib.Ogg.Codecs
 		public override TimeSpan GetDuration (long firstGranularPosition,
 		                                      long lastGranularPosition)
 		{
-			return header.sample_rate == 0 ? TimeSpan.Zero : 
-				TimeSpan.FromSeconds ((double)
+			return TimeSpan.FromSeconds ((double)
 					(lastGranularPosition -
-						firstGranularPosition -
-						header.preskip) /
+						firstGranularPosition
+						- 2 * header.pre_skip) /
 					(double) 48000);
 		}
-		
+
 		/// <summary>
 		///    Replaces the comment packet in a collection of packets
 		///    with the rendered version of a Xiph comment or inserts a
@@ -183,24 +182,26 @@ namespace TagLib.Ogg.Codecs
 		{
 			if (packets == null)
 				throw new ArgumentNullException ("packets");
-			
+
 			if (comment == null)
 				throw new ArgumentNullException ("comment");
-			
-			ByteVector data = new ByteVector (comment_id);
+
+			ByteVector data = new ByteVector ();
+			data.Add (magic_signature_comment);
 			data.Add (comment.Render (true));
-			if (packets.Count > 1 && PacketType (packets [1]) == 3)
+			if (packets.Count > 1 && MagicSignature (packets [1])
+						  == magic_signature_comment)
 				packets [1] = data;
 			else
 				packets.Insert (1, data);
 		}
-		
+
 #endregion
-		
-		
-		
+
+
+
 #region Public Properties
-		
+
 		/// <summary>
 		///    Gets the bitrate of the audio represented by the current
 		///    instance.
@@ -209,27 +210,26 @@ namespace TagLib.Ogg.Codecs
 		///    A <see cref="int" /> value containing a bitrate of the
 		///    audio represented by the current instance.
 		/// </value>
+		/// <remarks>
+		///    Always returns zero, since bitrate is variable and no
+		///    information is stored in the Ogg header (unlike e.g. Vorbis).
+		/// </remarks>
 		public int AudioBitrate {
-			get {
-				return (int) (base.file_length * 8 /
-					(double)((base.last_absolute_granular_position -
-						base.first_absolute_granular_position - header.preskip) / 48000.0) /
-						1000.0);
-			}
+			get {return 0;}
 		}
-		
+
 		/// <summary>
 		///    Gets the sample rate of the audio represented by the
 		///    current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="int" /> value containing the sample rate of
-		///    the audio represented by the current instance.
+		///    A <see cref="int" /> value containing the original
+		///    sample rate of the audio represented by the current instance.
 		/// </value>
 		public int AudioSampleRate {
-			get {return (int) header.sample_rate;}
+			get {return (int) header.input_sample_rate;}
 		}
-		
+
 		/// <summary>
 		///    Gets the number of channels in the audio represented by
 		///    the current instance.
@@ -240,9 +240,9 @@ namespace TagLib.Ogg.Codecs
 		///    instance.
 		/// </value>
 		public int AudioChannels {
-			get {return (int) header.channels;}
+			get {return (int) header.channel_count;}
 		}
-		
+
 		/// <summary>
 		///    Gets the types of media represented by the current
 		///    instance.
@@ -253,7 +253,7 @@ namespace TagLib.Ogg.Codecs
 		public override MediaTypes MediaTypes {
 			get {return MediaTypes.Audio;}
 		}
-		
+
 		/// <summary>
 		///    Gets the raw Xiph comment data contained in the codec.
 		/// </summary>
@@ -264,7 +264,7 @@ namespace TagLib.Ogg.Codecs
 		public override ByteVector CommentData {
 			get {return comment_data;}
 		}
-		
+
 		/// <summary>
 		///    Gets a text description of the media represented by the
 		///    current instance.
@@ -280,16 +280,16 @@ namespace TagLib.Ogg.Codecs
 					header.opus_version);
 			}
 		}
-		
+
 #endregion
-		
-		
-		
+
+
+
 #region Public Static Methods
-		
+
 		/// <summary>
 		///    Implements the <see cref="CodecProvider" /> delegate to
-		///    provide support for recognizing a Vorbis stream from the
+		///    provide support for recognizing a Opus stream from the
 		///    header packet.
 		/// </summary>
 		/// <param name="packet">
@@ -299,67 +299,87 @@ namespace TagLib.Ogg.Codecs
 		/// <returns>
 		///    A <see cref="Codec"/> object containing a codec capable
 		///    of parsing the stream of <see langref="null" /> if the
-		///    stream is not a Vorbis stream.
+		///    stream is not a Opus stream.
 		/// </returns>
 		public static Codec FromPacket (ByteVector packet)
 		{
-			return (PacketType (packet) == 1) ? new Opus () : null;
+			return (MagicSignature (packet) == magic_signature_header) ?
+				new Opus () : null;
 		}
-		
+
 #endregion
-		
-		
-		
+
+
+
 #region Private Static Methods
-		
+
 		/// <summary>
-		///    Gets the packet type for a specified Vorbis packet.
+		///    Gets the magic signature for a specified Opus packet.
 		/// </summary>
 		/// <param name="packet">
-		///    A <see cref="ByteVector" /> object containing a Vorbis
+		///    A <see cref="ByteVector" /> object containing a Opus
 		///    packet.
 		/// </param>
 		/// <returns>
-		///    A <see cref="int" /> value containing the packet type or
-		///    -1 if the packet is invalid.
+		///    A <see cref="ByteVector" /> value containing the magic
+		///    signature or null if the packet is invalid.
 		/// </returns>
-		private static int PacketType (ByteVector packet)
+		private static ByteVector MagicSignature (ByteVector packet)
 		{
-			if (packet.Count <= id.Count)
-				return -1;
+			if (packet.Count < magic_signature_length)
+				return null;
 
-			if (packet.Mid(0, id.Count) == id)
-				return 1;
-			
-			if (packet.Mid(0, comment_id.Count) == comment_id)
-				return 3;
+			for (int i = 0; i < magic_signature_base.Count; i++)
+				if (packet[i] != magic_signature_base[i])
+					return null;
 
-			return -1;
+			return packet.Mid(0, magic_signature_length);
 		}
-		
+
 #endregion
-		
+
 		/// <summary>
-		///    This structure represents a Vorbis header packet.
+		///    This structure represents a Opus header packet.
 		/// </summary>
 		private struct HeaderPacket
 		{
-			public uint sample_rate;
-			public uint channels;
-		  public uint preskip;
 			public uint opus_version;
+			public uint channel_count;
+			public uint pre_skip;
+			public uint input_sample_rate;
 			public uint output_gain;
 			public uint channel_map;
+			public uint stream_count;
+			public uint two_channel_stream_count;
+			public uint[] channel_mappings;
 
 			public HeaderPacket (ByteVector data)
 			{
-				opus_version		= data [8];
-				channels        = data [9];
-				preskip					= data.Mid(10, 2).ToUInt (false);
-				sample_rate     = data.Mid(12, 4).ToUInt (false);
-				output_gain			=	data.Mid(16, 2).ToUInt (false);
-				channel_map			= data [18];
-				// TODO: handle channel mapping 
+				opus_version  	  = data [8];
+				channel_count     = data [9];
+				pre_skip	  = data.Mid(10, 2).ToUInt (false);
+				input_sample_rate = data.Mid(12, 4).ToUInt (false);
+				output_gain	  = data.Mid(16, 2).ToUInt (false);
+				channel_map       = data[18];
+
+				if(channel_map == 0) {
+					stream_count = 1;
+					two_channel_stream_count = channel_count - 1;
+
+					channel_mappings = new uint[channel_count];
+					channel_mappings[0] = 0;
+					if(channel_count == 2) {
+						channel_mappings[1] = 1;
+					}
+				} else {
+					stream_count = data[19];
+					two_channel_stream_count = data[20];
+
+					channel_mappings = new uint[channel_count];
+					for (int i = 0; i < channel_count; i++) {
+						channel_mappings[i] = data[21 + i];
+					}
+				}
 			}
 		}
 	}
