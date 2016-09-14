@@ -34,3 +34,4 @@ ipch/*.ipch
 Transifex/.transifexrc
 Packages
 MPTagThat.VC.opendb
+*.VC.db
