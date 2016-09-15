@@ -143,10 +143,10 @@ namespace MPTagThat.Core
         track.Title = file.Tag.Title ?? "";
         track.TitleSortName = file.Tag.TitleSort ?? "";
 
-        track.ReplayGainTrack = file.Tag.ReplayGainTrack ?? "";
-        track.ReplayGainTrackPeak = file.Tag.ReplayGainTrackPeak ?? "";
-        track.ReplayGainAlbum = file.Tag.ReplayGainAlbum ?? "";
-        track.ReplayGainAlbumPeak = file.Tag.ReplayGainAlbumPeak ?? "";
+        track.ReplayGainTrack = double.IsNaN(file.Tag.ReplayGainTrackGain) ? "" : file.Tag.ReplayGainTrackGain.ToString();
+        track.ReplayGainTrackPeak = double.IsNaN(file.Tag.ReplayGainTrackPeak) ? "" : file.Tag.ReplayGainTrackGain.ToString();
+        track.ReplayGainAlbum = double.IsNaN(file.Tag.ReplayGainAlbumGain) ? "" : file.Tag.ReplayGainAlbumGain.ToString();
+        track.ReplayGainAlbumPeak = double.IsNaN(file.Tag.ReplayGainAlbumPeak) ? "" : file.Tag.ReplayGainAlbumPeak.ToString();
 
         track.TrackNumber = file.Tag.Track;
         track.TrackCount = file.Tag.TrackCount;
@@ -573,10 +573,23 @@ namespace MPTagThat.Core
 
           file.Tag.Year = (uint) track.Year;
 
-          file.Tag.ReplayGainTrack = track.ReplayGainTrack;
-          file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
-          file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
-          file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
+          double gain;
+          if (Double.TryParse(track.ReplayGainTrack, out gain))
+          {
+            file.Tag.ReplayGainTrackGain = gain;
+          }
+          if (Double.TryParse(track.ReplayGainTrackPeak, out gain))
+          {
+            file.Tag.ReplayGainTrackPeak = gain;
+          }
+          if (Double.TryParse(track.ReplayGainAlbum, out gain))
+          {
+            file.Tag.ReplayGainAlbumGain = gain;
+          }
+          if (Double.TryParse(track.ReplayGainAlbumPeak, out gain))
+          {
+            file.Tag.ReplayGainAlbumPeak = gain;
+          }
 
           #endregion
 
