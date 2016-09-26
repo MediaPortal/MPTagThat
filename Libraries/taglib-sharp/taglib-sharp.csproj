@@ -71,7 +71,6 @@
     <Compile Include="TagLib\FileTypes.cs" />
     <Compile Include="TagLib\Genres.cs" />
     <Compile Include="TagLib\ICodec.cs" />
-    <Compile Include="TagLib\Id3v2\Frames\UrlLinkFrame.cs" />
     <Compile Include="TagLib\ListBase.cs" />
     <Compile Include="TagLib\Picture.cs" />
     <Compile Include="TagLib\Properties.cs" />
@@ -196,6 +195,7 @@
     <Compile Include="TagLib\Id3v2\Frames\UniqueFileIdentifierFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\UnknownFrame.cs" />
     <Compile Include="TagLib\Id3v2\Frames\UnsynchronisedLyricsFrame.cs" />
+	<Compile Include="TagLib\Id3v2\Frames\UrlLinkFrame.cs" />
     <Compile Include="TagLib\Image\Codec.cs" />
     <Compile Include="TagLib\Image\CombinedImageTag.cs" />
     <Compile Include="TagLib\Image\File.cs" />

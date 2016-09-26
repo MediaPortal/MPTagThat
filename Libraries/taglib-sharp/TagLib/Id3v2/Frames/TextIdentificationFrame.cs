@@ -402,7 +402,7 @@ namespace TagLib.Id3v2 {
 		/// <summary>
 		///    Contains the Encoding of the raw_data
 		/// </summary>
-    private StringType raw_encoding = StringType.Latin1;
+    	private StringType raw_encoding = StringType.Latin1;
 
 		#endregion
 		
@@ -837,10 +837,10 @@ namespace TagLib.Id3v2 {
 		{
 			raw_data = data;
 			raw_version = version;
-
-      // read the string data type (the first byte of the
-      // field data)
-      raw_encoding = (StringType)data[0];
+	
+			// read the string data type (the first byte of the
+			// field data)
+			raw_encoding = (StringType)data[0];
 		}
 		
 		/// <summary>
