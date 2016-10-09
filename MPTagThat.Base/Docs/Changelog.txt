@@ -7,6 +7,12 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.7 Date: 09.10.2016 
+-------------------------------------
++ MusePack SV8 Support
++ Fixed some errors in Lyrics Search
+x Update to Tablib-sharp
+
 3.1.6 Date: 09.11.2015 
 -------------------------------------
 + Adding LastFM Cover Lookup
