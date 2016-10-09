@@ -402,7 +402,7 @@ namespace TagLib.Id3v2 {
 		/// <summary>
 		///    Contains the Encoding of the raw_data
 		/// </summary>
-    private StringType raw_encoding = StringType.Latin1;
+    	private StringType raw_encoding = StringType.Latin1;
 
 		#endregion
 		
@@ -837,10 +837,10 @@ namespace TagLib.Id3v2 {
 		{
 			raw_data = data;
 			raw_version = version;
-
-      // read the string data type (the first byte of the
-      // field data)
-      raw_encoding = (StringType)data[0];
+	
+			// read the string data type (the first byte of the
+			// field data)
+			raw_encoding = (StringType)data[0];
 		}
 		
 		/// <summary>
@@ -1242,6 +1242,73 @@ namespace TagLib.Id3v2 {
 		
 		/// <summary>
 		///    Gets a specified user text frame from the specified tag,
+		///    optionally creating it if it does not exist and optionally
+		///    searching for the frame case-insensitive.
+		/// </summary>
+		/// <param name="tag">
+		///    A <see cref="Tag" /> object to search in.
+		/// </param>
+		/// <param name="description">
+		///    A <see cref="string" /> specifying the description to
+		///    match.
+		/// </param>
+		/// <param name="type">
+		///    A <see cref="StringType" /> specifying the encoding to
+		///    use if creating a new frame.
+		/// </param>
+		/// <param name="create">
+		///    A <see cref="bool" /> specifying whether or not to create
+		///    and add a new frame to the tag if a match is not found.
+		/// </param>
+		/// <param name="caseSensitive">
+		///    A <see cref="bool" /> specifying whether or not to search
+		///    for the frame case-sensitive.
+		/// </param>
+		/// <returns>
+		///    A <see cref="UserTextInformationFrame" /> object
+		///    containing the matching frame, or <see langword="null" />
+		///    if a match wasn't found and <paramref name="create" /> is
+		///    <see langword="false" />.
+		/// </returns>
+		public static UserTextInformationFrame Get (Tag tag,
+		                                            string description,
+		                                            StringType type,
+		                                            bool create,
+		                                            bool caseSensitive)
+		{
+			if (tag == null)
+				throw new ArgumentNullException ("tag");
+			
+			if (description == null)
+				throw new ArgumentNullException ("description");
+			
+			if (description.Length == 0)
+				throw new ArgumentException (
+					"Description must not be empty.",
+					"description");
+			
+			StringComparison stringComparison =
+				caseSensitive ? StringComparison.InvariantCulture :
+					StringComparison.InvariantCultureIgnoreCase;
+			
+			foreach (UserTextInformationFrame frame in
+				tag.GetFrames<UserTextInformationFrame> (
+					FrameType.TXXX))
+				if (description.Equals (frame.Description, stringComparison))
+					return frame;
+			
+			if (!create)
+				return null;
+			
+			UserTextInformationFrame new_frame =
+				new UserTextInformationFrame (description,
+					type);
+			tag.AddFrame (new_frame);
+			return new_frame;
+		}
+		
+		/// <summary>
+		///    Gets a specified user text frame from the specified tag,
 		///    optionally creating it if it does not exist.
 		/// </summary>
 		/// <param name="tag">
@@ -1270,31 +1337,7 @@ namespace TagLib.Id3v2 {
 		                                            StringType type,
 		                                            bool create)
 		{
-			if (tag == null)
-				throw new ArgumentNullException ("tag");
-			
-			if (description == null)
-				throw new ArgumentNullException ("description");
-			
-			if (description.Length == 0)
-				throw new ArgumentException (
-					"Description must not be empty.",
-					"description");
-			
-			foreach (UserTextInformationFrame frame in
-				tag.GetFrames<UserTextInformationFrame> (
-					FrameType.TXXX))
-				if (description.Equals (frame.Description))
-					return frame;
-			
-			if (!create)
-				return null;
-			
-			UserTextInformationFrame new_frame =
-				new UserTextInformationFrame (description,
-					type);
-			tag.AddFrame (new_frame);
-			return new_frame;
+			return Get (tag, description, type, create, true);
 		}
 		
 		/// <summary>

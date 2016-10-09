@@ -1213,7 +1213,7 @@ namespace TagLib.Ogg
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Track Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
@@ -1224,8 +1224,8 @@ namespace TagLib.Ogg
     ///    <para>When setting the value, it is stored in the first
     ///    comment.</para>
     /// </remarks>
-    /// <seealso cref="Tag.ReplayGainTrack" />
-    public override string ReplayGainTrack
+    /// <seealso cref="Tag.ReplayGainTrackGain" />
+    public override double ReplayGainTrackGain
     {
       get
       {
@@ -1234,15 +1234,15 @@ namespace TagLib.Ogg
           if (tag == null)
             continue;
 
-          string value = tag.ReplayGainTrack;
+          double value = tag.ReplayGainTrackGain;
 
-          if (value != null && value.Length > 0)
+          if (!double.IsNaN(value))
             return value;
         }
 
-        return null;
+				return double.NaN;
       }
-      set { if (tags.Count > 0) tags[0].ReplayGainTrack = value; }
+      set { if (tags.Count > 0) tags[0].ReplayGainTrackGain = value; }
     }
 
     /// <summary>
@@ -1250,7 +1250,7 @@ namespace TagLib.Ogg
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Peak Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
@@ -1262,7 +1262,7 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainTrackPeak" />
-    public override string ReplayGainTrackPeak
+    public override double ReplayGainTrackPeak
     {
       get
       {
@@ -1271,13 +1271,13 @@ namespace TagLib.Ogg
           if (tag == null)
             continue;
 
-          string value = tag.ReplayGainTrackPeak;
+          double value = tag.ReplayGainTrackPeak;
 
-          if (value != null && value.Length > 0)
+          if (!double.IsNaN(value))
             return value;
         }
 
-        return null;
+        return double.NaN;
       }
       set { if (tags.Count > 0) tags[0].ReplayGainTrackPeak = value; }
     }
@@ -1287,7 +1287,7 @@ namespace TagLib.Ogg
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Album Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
@@ -1298,8 +1298,8 @@ namespace TagLib.Ogg
     ///    <para>When setting the value, it is stored in the first
     ///    comment.</para>
     /// </remarks>
-    /// <seealso cref="Tag.ReplayGainAlbum" />
-    public override string ReplayGainAlbum
+    /// <seealso cref="Tag.ReplayGainAlbumGain" />
+    public override double ReplayGainAlbumGain
     {
       get
       {
@@ -1308,15 +1308,15 @@ namespace TagLib.Ogg
           if (tag == null)
             continue;
 
-          string value = tag.ReplayGainAlbum;
+          double value = tag.ReplayGainAlbumGain;
 
-          if (value != null && value.Length > 0)
+          if (!double.IsNaN(value))
             return value;
         }
 
-        return null;
+        return double.NaN;
       }
-      set { if (tags.Count > 0) tags[0].ReplayGainAlbum = value; }
+      set { if (tags.Count > 0) tags[0].ReplayGainAlbumGain = value; }
     }
 
     /// <summary>
@@ -1324,7 +1324,7 @@ namespace TagLib.Ogg
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Album Peak Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
@@ -1336,7 +1336,7 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainAlbumPeak" />
-    public override string ReplayGainAlbumPeak
+    public override double ReplayGainAlbumPeak
     {
       get
       {
@@ -1345,13 +1345,13 @@ namespace TagLib.Ogg
           if (tag == null)
             continue;
 
-          string value = tag.ReplayGainAlbumPeak;
+          double value = tag.ReplayGainAlbumPeak;
 
-          if (value != null && value.Length > 0)
+          if (!double.IsNaN(value))
             return value;
         }
 
-        return null;
+        return double.NaN;
       }
       set { if (tags.Count > 0) tags[0].ReplayGainAlbumPeak = value; }
     }

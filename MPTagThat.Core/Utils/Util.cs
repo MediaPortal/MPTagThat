@@ -1004,7 +1004,7 @@ namespace MPTagThat.Core
       {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestString);
         request.Proxy.Credentials = CredentialCache.DefaultCredentials;
-        request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0)";
+        request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0";
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         using (Stream responseStream = response.GetResponseStream())
         {

@@ -33,3 +33,6 @@ ipch/*.ipch
 *.DotSettings
 Transifex/.transifexrc
 Packages
+MPTagThat.VC.opendb
+*.VC.db
+*.VC.VC.opendb

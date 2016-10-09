@@ -1,16 +1,14 @@
 //
-// File.cs: Provides tagging and properties support for MusePack files.
+// File.cs:
 //
 // Author:
-//   Brian Nickel (brian.nickel@gmail.com)
+//   Guy Taylor (s0700260@sms.ed.ac.uk) (thebigguy.co.uk@gmail.com)
 //
 // Original Source:
-//   mpcfile.cpp from TagLib
+//   Ogg/File.cs from TagLib-sharp
 //
-// Copyright (C) 2016 Helmut Wahrmann: SV8 Support based on Taglib imnplementation
-// Copyright (C) 2005-2007 Brian Nickel
-// Copyright (C) 2004 by Allan Sandfeld Jensen (Original Implementation)
-// 
+// Copyright (C) 2009 Guy Taylor (Original Implementation)
+//
 // This library is free software; you can redistribute it and/or modify
 // it  under the terms of the GNU Lesser General Public License version
 // 2.1 as published by the Free Software Foundation.
@@ -25,26 +23,48 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
 // USA
 //
-
 using System;
 
-namespace TagLib.MusePack {
+namespace TagLib.Audible
+{
 	/// <summary>
-	///    This class extends <see cref="TagLib.NonContainer.File" /> to
-	///    provide tagging and properties support for MusePack files.
+	///    This class extends <see cref="TagLib.File" /> to provide tagging
+	///    and properties support for Audible inc's aa file format.
 	/// </summary>
-	/// <remarks>
-	///    A <see cref="TagLib.Ape.Tag" /> will be added automatically to
-	///    any file that doesn't contain one. This change does not effect
-	///    the file and can be reversed using the following method:
-	///    <code>file.RemoveTags (file.TagTypes &amp; ~file.TagTypesOnDisk);</code>
-	/// </remarks>
-	[SupportedMimeType("taglib/mpc", "mpc")]
-	[SupportedMimeType("taglib/mp+", "mp+")]
-	[SupportedMimeType("taglib/mpp", "mpp")]
-	[SupportedMimeType("audio/x-musepack")]
-	public class File : TagLib.NonContainer.File
+	[SupportedMimeType("audio/x-audible")]
+	[SupportedMimeType("taglib/aa", "aa")]
+	[SupportedMimeType("taglib/aax", "aax")]
+	public class File : TagLib.File
 	{
+		
+		#region Private Fields
+		
+		/// <summary>
+		///   Contains the tags for the file.
+		/// </summary>
+		private TagLib.Tag tag;
+		
+		/// <summary>
+		///    Contains the media properties.
+		/// </summary>
+		private Properties properties = new Properties();
+		
+		#endregion	
+		
+		#region Public Static Fields
+		
+		/// <summary>
+		///    The offset to the tag block.
+		/// </summary>
+		public const short TagBlockOffset = 0xBD;
+		
+		/// <summary>
+		///    The offset to the end of tag pointer.
+		/// </summary>
+		public const short OffsetToEndTagPointer = 0x38;
+
+		#endregion
+		
 		#region Constructors
 		
 		/// <summary>
@@ -65,10 +85,11 @@ namespace TagLib.MusePack {
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
 		public File (string path, ReadStyle propertiesStyle)
-			: base (path, propertiesStyle)
+			: this (new File.LocalFileAbstraction (path),
+				propertiesStyle)
 		{
 		}
-		
+
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="File" /> for a specified path in the local file
@@ -81,7 +102,7 @@ namespace TagLib.MusePack {
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="path" /> is <see langword="null" />.
 		/// </exception>
-		public File (string path) : base (path)
+		public File (string path) : this (path, ReadStyle.Average)
 		{
 		}
 		
@@ -103,10 +124,34 @@ namespace TagLib.MusePack {
 		///    <paramref name="abstraction" /> is <see langword="null"
 		///    />.
 		/// </exception>
+		/// <exception cref="CorruptFileException">
+		///    The file is not the write length.
+		/// </exception>
 		public File (File.IFileAbstraction abstraction,
-		             ReadStyle propertiesStyle)
-			: base (abstraction, propertiesStyle)
-		{
+		             ReadStyle propertiesStyle) : base (abstraction)
+		{			
+			
+			Mode = AccessMode.Read;
+			
+			try {
+				// get the pointer to the end of the tag block
+				// and calculate the tag block length
+				Seek (OffsetToEndTagPointer);
+				int tagLen = ( (int) ReadBlock(4).ToUInt(true) ) - TagBlockOffset;
+				
+				// read the whole tag and send to Tag class
+				Seek (TagBlockOffset);
+				ByteVector bv = ReadBlock(tagLen);
+				
+				tag = new  TagLib.Audible.Tag( bv );
+				
+			} finally {
+				Mode = AccessMode.Closed;
+			}
+			
+			// ??
+			TagTypesOnDisk = TagTypes;
+			
 		}
 		
 		/// <summary>
@@ -123,15 +168,44 @@ namespace TagLib.MusePack {
 		///    />.
 		/// </exception>
 		public File (File.IFileAbstraction abstraction)
-			: base (abstraction)
+			: this (abstraction, ReadStyle.Average)
 		{
 		}
 		
 		#endregion
 		
-		
-		
 		#region Public Methods
+		
+		/// <summary>
+		///    Saves the changes made in the current instance to the
+		///    file it represents.
+		/// </summary>
+		/// <remarks>
+		/// 	Currently this does not work as there is not enough
+		/// 	information about the file format
+		/// </remarks>
+		public override void Save ()
+		{
+		}
+		
+		/// <summary>
+		///    Removes a set of tag types from the current instance.
+		/// </summary>
+		/// <param name="types">
+		///    A bitwise combined <see cref="TagLib.TagTypes" /> value
+		///    containing tag types to be removed from the file.
+		/// </param>
+		/// <remarks>
+		///    In order to remove all tags from a file, pass <see
+		///    cref="TagTypes.AllTags" /> as <paramref name="types" />.
+		/// </remarks>
+		/// <remarks>
+		/// 	Currently this does not work as there is not enough
+		/// 	information about the file format
+		/// </remarks>
+		public override void RemoveTags (TagLib.TagTypes types)
+		{
+		}
 		
 		/// <summary>
 		///    Gets a tag of a specified type from the current instance,
@@ -151,93 +225,46 @@ namespace TagLib.MusePack {
 		///    matching tag was found and none was created, <see
 		///    langword="null" /> is returned.
 		/// </returns>
-		/// <remarks>
-		///    If a <see cref="TagLib.Id3v2.Tag" /> is added to the
-		///    current instance, it will be placed at the start of the
-		///    file. On the other hand, <see cref="TagLib.Id3v1.Tag" />
-		///    <see cref="TagLib.Ape.Tag" /> will be added to the end of
-		///    the file. All other tag types will be ignored.
-		/// </remarks>
 		public override TagLib.Tag GetTag (TagTypes type, bool create)
 		{
-			Tag t = (Tag as TagLib.NonContainer.Tag).GetTag (type);
+			if (type == TagTypes.AudibleMetadata)
+				return tag;
 			
-			if (t != null || !create)
-				return t;
-			
-			switch (type)
-			{
-			case TagTypes.Id3v1:
-				return EndTag.AddTag (type, Tag);
-			
-			case TagTypes.Id3v2:
-				return StartTag.AddTag (type, Tag);
-			
-			case TagTypes.Ape:
-				return EndTag.AddTag (type, Tag);
-			
-			default:
-				return null;
-			}
+			return null;
+
 		}
-		
-		#endregion
-		
+#endregion
 		
 		
-		#region Protected Methods
-			
+		
+		#region Public Properties
+		
 		/// <summary>
-		///    Reads format specific information at the end of the
-		///    file.
+		///    Gets a abstract representation of all tags stored in the
+		///    current instance.
 		/// </summary>
-		/// <param name="end">
-		///    A <see cref="long" /> value containing the seek position
-		///    at which the media data ends and the tags begin.
-		/// </param>
-		/// <param name="propertiesStyle">
-		///    A <see cref="ReadStyle" /> value specifying at what level
-		///    of accuracy to read the media properties, or <see
-		///    cref="ReadStyle.None" /> to ignore the properties.
-		/// </param>
-		protected override void ReadEnd (long end,
-		                                 ReadStyle propertiesStyle)
-		{
-			// Make sure we have an APE tag.
-			GetTag (TagTypes.Ape, true);
+		/// <value>
+		///    A <see cref="TagLib.Tag" /> object representing all tags
+		///    stored in the current instance.
+		/// </value>
+		public override TagLib.Tag Tag {
+			get {return tag;}
 		}
 		
 		/// <summary>
-		///    Reads the audio properties from the file represented by
-		///    the current instance.
+		///    Gets the media properties of the file represented by the
+		///    current instance.
 		/// </summary>
-		/// <param name="start">
-		///    A <see cref="long" /> value containing the seek position
-		///    at which the tags end and the media data begins.
-		/// </param>
-		/// <param name="end">
-		///    A <see cref="long" /> value containing the seek position
-		///    at which the media data ends and the tags begin.
-		/// </param>
-		/// <param name="propertiesStyle">
-		///    A <see cref="ReadStyle" /> value specifying at what level
-		///    of accuracy to read the media properties, or <see
-		///    cref="ReadStyle.None" /> to ignore the properties.
-		/// </param>
-		/// <returns>
-		///    A <see cref="TagLib.Properties" /> object describing the
+		/// <value>
+		///    A <see cref="TagLib.Properties" /> object containing the
 		///    media properties of the file represented by the current
 		///    instance.
-		/// </returns>
-		protected override Properties ReadProperties (long start,
-		                                              long end,
-		                                              ReadStyle propertiesStyle)
-		{
-			StreamHeader header = new StreamHeader (this,
-				end - start);
-			return new Properties (TimeSpan.Zero, header);
+		/// </value>
+		public override TagLib.Properties Properties {
+			get {return properties;}
 		}
 		
 		#endregion
+		
 	}
 }

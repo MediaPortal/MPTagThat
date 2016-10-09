@@ -1309,77 +1309,187 @@ namespace TagLib.Asf {
 			set {SetDescriptorString (value, "MusicBrainz/Album Release Country");}
 		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Track Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    This property is implemented using the "replaygain_track_gain" field.
-    /// </remarks>
-    public override string ReplayGainTrack
-    {
-      get { return GetDescriptorString("replaygain_track_gain"); }
-      set { SetDescriptorString("replaygain_track_gain", value); }
-    }
+		/// <summary>
+		///    Gets and sets the ReplayGain track gain in dB.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value in dB for the track gain as
+		///    per the ReplayGain specification.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the 
+		///    "REPLAYGAIN_TRACK_GAIN" field. Set the value to double.NaN
+		///    to clear the field.
+		/// </remarks>
+		public override double ReplayGainTrackGain
+		{
+			get
+			{
+				string text = GetDescriptorString("ReplayGain/Track");
+				double value;
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Peak Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    This property is implemented using the "replaygain_track_peak" field.
-    /// </remarks>
-    public override string ReplayGainTrackPeak
-    {
-      get { return GetDescriptorString("replaygain_track_peak"); }
-      set { SetDescriptorString("replaygain_track_peak", value); }
-    }
+				if (text == null)
+				{
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
+				}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Album Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    This property is implemented using the "replaygain_album_gain" field.
-    /// </remarks>
-    public override string ReplayGainAlbum
-    {
-      get { return GetDescriptorString("replaygain_album_gain"); }
-      set { SetDescriptorString("replaygain_album_gain", value); }
-    }
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveDescriptors("ReplayGain/Track");
+				}
+				else
+				{
+					string text = value.ToString("0.00 dB",
+						CultureInfo.InvariantCulture);
+					SetDescriptorString(text, "ReplayGain/Track");
+				}
+			}
+		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    This property is implemented using the "replaygain_album_peak" field.
-    /// </remarks>
-    public override string ReplayGainAlbumPeak
-    {
-      get { return GetDescriptorString("replaygain_album_peak"); }
-      set { SetDescriptorString("replaygain_album_peak", value); }
-    }
+		/// <summary>
+		///    Gets and sets the ReplayGain track peak sample.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value for the track peak as per the
+		///    ReplayGain specification.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the 
+		///    "REPLAYGAIN_TRACK_PEAK" field. Set the value to double.NaN
+		///    to clear the field.
+		/// </remarks>
+		public override double ReplayGainTrackPeak
+		{
+			get
+			{
+				string text;
+				double value;
+
+				if ((text = GetDescriptorString("ReplayGain/Track Peak")) !=
+					null && double.TryParse(text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveDescriptors("ReplayGain/Track Peak");
+				}
+				else
+				{
+					string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+					SetDescriptorString(text, "ReplayGain/Track Peak");
+				}
+			}
+		}
+
+		/// <summary>
+		///    Gets and sets the ReplayGain album gain in dB.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value in dB for the album gain as
+		///    per the ReplayGain specification.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the 
+		///    "REPLAYGAIN_ALBUM_GAIN" field. Set the value to double.NaN
+		///    to clear the field.
+		/// </remarks>
+		public override double ReplayGainAlbumGain
+		{
+			get
+			{
+				string text = GetDescriptorString("ReplayGain/Album");
+				double value;
+
+				if (text == null)
+				{
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
+				}
+
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveDescriptors("ReplayGain/Album");
+				}
+				else
+				{
+					string text = value.ToString("0.00 dB",
+						CultureInfo.InvariantCulture);
+					SetDescriptorString(text, "ReplayGain/Album");
+				}
+			}
+		}
+
+		/// <summary>
+		///    Gets and sets the ReplayGain album peak sample.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value for the album peak as per the
+		///    ReplayGain specification.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the 
+		///    "REPLAYGAIN_ALBUM_PEAK" field. Set the value to double.NaN
+		///    to clear the field.
+		/// </remarks>
+		public override double ReplayGainAlbumPeak
+		{
+			get
+			{
+				string text;
+				double value;
+
+				if ((text = GetDescriptorString("ReplayGain/Album Peak")) !=
+					null && double.TryParse(text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				if (double.IsNaN(value))
+				{
+					RemoveDescriptors("ReplayGain/Album Peak");
+				}
+				else
+				{
+					string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+					SetDescriptorString(text, "ReplayGain/Album Peak");
+				}
+			}
+		}
 
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with

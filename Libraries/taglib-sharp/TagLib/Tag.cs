@@ -116,6 +116,16 @@ namespace TagLib {
 		Png = 0x00004000,
 
 		/// <summary>
+		/// IPTC-IIM tag
+		/// </summary>
+		IPTCIIM = 0x00008000,
+
+		/// <summary>
+		///    Audible Metadata Blocks Tag
+		/// </summary>
+		AudibleMetadata = 0x00000400,
+		
+		/// <summary>
 		///    All tag types.
 		/// </summary>
 		AllTags      = 0xFFFFFFFF
@@ -823,82 +833,53 @@ namespace TagLib {
 			set {}
 		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Track Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    <para>This field represents the ReplayGain Track Value, and can be used
-    ///    to determine the required Volume leveling on playback of the track.</para>
-    /// </remarks>
-    public virtual string ReplayGainTrack
-    {
-      get { return null; }
-      set { }
-    }
+		/// <summary>
+		///    Gets and sets the ReplayGain track gain in dB.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value in dB for the track gain as
+		///    per the ReplayGain specification.
+		/// </value>
+		public virtual double ReplayGainTrackGain {
+			get { return double.NaN; }
+			set {}
+		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Peak Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    <para>This field represents the ReplayGain Peak Value
-    ///    </para>
-    /// </remarks>
-    public virtual string ReplayGainTrackPeak
-    {
-      get { return null; }
-      set { }
-    }
+		/// <summary>
+		///    Gets and sets the ReplayGain track peak sample.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value for the track peak as per the
+		///    ReplayGain specification.
+		/// </value>
+		public virtual double ReplayGainTrackPeak {
+			get { return double.NaN; }
+			set {}
+		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Album Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    <para>This field represents the ReplayGain Album Value, and can be used
-    ///    to determine the required Volume leveling on playback of the track.</para>
-    /// </remarks>
-    public virtual string ReplayGainAlbum
-    {
-      get { return null; }
-      set { }
-    }
+		/// <summary>
+		///    Gets and sets the ReplayGain album gain in dB.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value in dB for the album gain as
+		///    per the ReplayGain specification.
+		/// </value>
+		public virtual double ReplayGainAlbumGain {
+			get { return double.NaN; }
+			set {}
+		}
 
-    /// <summary>
-    ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
-    ///    the current instance.
-    /// </summary>
-    /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
-    /// </value>
-    /// <remarks>
-    ///    <para>This field represents the ReplayGain Album Peak Value
-    ///    </para>
-    /// </remarks>
-    public virtual string ReplayGainAlbumPeak
-    {
-      get { return null; }
-      set { }
-    }
-
+		/// <summary>
+		///    Gets and sets the ReplayGain album peak sample.
+		/// </summary>
+		/// <value>
+		///    A <see cref="bool" /> value for the album peak as per the
+		///    ReplayGain specification.
+		/// </value>
+		public virtual double ReplayGainAlbumPeak {
+			get { return double.NaN; }
+			set {}
+		}
 
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with

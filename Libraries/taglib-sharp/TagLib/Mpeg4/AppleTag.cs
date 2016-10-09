@@ -447,8 +447,8 @@ namespace TagLib.Mpeg4 {
 				data_box.Text = datastring;
 			} else {
 				//Create the new boxes, should use 1 for text as a flag
-				AppleAdditionalInfoBox amean_box = new AppleAdditionalInfoBox(BoxType.Mean, 0, 1);
-				AppleAdditionalInfoBox aname_box = new AppleAdditionalInfoBox(BoxType.Name, 0, 1);
+				AppleAdditionalInfoBox amean_box = new AppleAdditionalInfoBox(BoxType.Mean);
+				AppleAdditionalInfoBox aname_box = new AppleAdditionalInfoBox(BoxType.Name);
 				AppleDataBox adata_box = new AppleDataBox(BoxType.Data, 1);
 				amean_box.Text = meanstring;
 				aname_box.Text = namestring;
@@ -1254,8 +1254,8 @@ namespace TagLib.Mpeg4 {
 		///    http://musicbrainz.org/doc/PicardTagMapping
 		/// </remarks>
 		public override string MusicBrainzTrackId {
-		    get { return GetDashBox("com.apple.iTunes","MusicIP PUID");}
-		    set {SetDashBox("com.apple.iTunes", "MusicIP PUID", value);}
+		    get {return GetDashBox("com.apple.iTunes","MusicBrainz Track Id");}
+		    set {SetDashBox("com.apple.iTunes", "MusicBrainz Track Id", value);}
 		}
 
 		/// <summary>
@@ -1365,72 +1365,154 @@ namespace TagLib.Mpeg4 {
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Track Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
     /// <remarks>
     ///    This property is implemented using the "dash"/"----" box type.
     /// </remarks>
-    public override string ReplayGainTrack
+    public override double ReplayGainTrackGain
     {
-      get { return GetDashBox("com.apple.iTunes", "replaygain_track_gain"); }
-      set { SetDashBox("com.apple.iTunes", "replaygain_track_gain", value); }
-    }
+			get
+			{
+				string text = GetDashBox("com.apple.iTunes", "REPLAYGAIN_TRACK_GAIN");
+				double value;
+
+				if (text == null)
+				{
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
+				}
+
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				string text = value.ToString("0.00 dB",
+					CultureInfo.InvariantCulture);
+				SetDashBox("com.apple.iTunes", "REPLAYGAIN_TRACK_GAIN", text);
+			}
+		}
 
     /// <summary>
     ///    Gets and sets the ReplayGain Peak Value of the media represented by
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Peak Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
     /// <remarks>
     ///    This property is implemented using the "dash"/"----" box type.
     /// </remarks>
-    public override string ReplayGainTrackPeak
+    public override double ReplayGainTrackPeak
     {
-      get { return GetDashBox("com.apple.iTunes", "replaygain_track_peak"); }
-      set { SetDashBox("com.apple.iTunes", "replaygain_track_peak", value); }
-    }
+			get
+			{
+				string text;
+				double value;
+
+				if ((text = GetDashBox("com.apple.iTunes", "REPLAYGAIN_TRACK_PEAK")) !=
+					null && double.TryParse(text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+				SetDashBox("com.apple.iTunes", "REPLAYGAIN_TRACK_PEAK", text);
+			}
+		}
 
     /// <summary>
     ///    Gets and sets the ReplayGain Album Value of the media represented by
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Album Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
     /// <remarks>
     ///    This property is implemented using the "dash"/"----" box type.
     /// </remarks>
-    public override string ReplayGainAlbum
+    public override double ReplayGainAlbumGain
     {
-      get { return GetDashBox("com.apple.iTunes", "replaygain_album_gain"); }
-      set { SetDashBox("com.apple.iTunes", "replaygain_album_gain", value); }
-    }
+			get
+			{
+				string text = GetDashBox("com.apple.iTunes", "REPLAYGAIN_ALBUM_GAIN");
+				double value;
+
+				if (text == null)
+				{
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db"))
+				{
+					text = text.Substring(0, text.Length - 2).Trim();
+				}
+
+				if (double.TryParse(text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				string text = value.ToString("0.00 dB",
+					CultureInfo.InvariantCulture);
+				SetDashBox("com.apple.iTunes", "REPLAYGAIN_ALBUM_GAIN", text);
+			}
+		}
 
     /// <summary>
     ///    Gets and sets the ReplayGain Album Peak Value of the media represented by
     ///    the current instance.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
+    ///    A <see cref="double" /> containing the ReplayGain Album Peak Value of the
     ///    media represented by the current instance or an empty
     ///    array if no value is present.
     /// </value>
     /// <remarks>
     ///    This property is implemented using the "dash"/"----" box type.
     /// </remarks>
-    public override string ReplayGainAlbumPeak
+    public override double ReplayGainAlbumPeak
     {
-      get { return GetDashBox("com.apple.iTunes", "replaygain_album_peak"); }
-      set { SetDashBox("com.apple.iTunes", "replaygain_album_peak", value); }
-    }
+			get
+			{
+				string text;
+				double value;
+
+				if ((text = GetDashBox("com.apple.iTunes", "REPLAYGAIN_ALBUM_PEAK")) !=
+					null && double.TryParse(text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value))
+				{
+					return value;
+				}
+				return double.NaN;
+			}
+			set
+			{
+				string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+				SetDashBox("com.apple.iTunes", "REPLAYGAIN_ALBUM_PEAK", text);
+			}
+		}
 
 		/// <summary>
 		///    Gets and sets a collection of pictures associated with
