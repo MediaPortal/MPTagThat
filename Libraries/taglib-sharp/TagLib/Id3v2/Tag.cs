@@ -209,7 +209,13 @@ namespace TagLib.Id3v2 {
 		/// </returns>
 		public string GetTextAsString (ByteVector ident)
 		{
-			TextInformationFrame frame = TextInformationFrame.Get (
+			Frame frame;
+			// Handle URL LInk frames differently
+			if (ident[0] == 'W')
+				frame = UrlLinkFrame.Get(
+					this, ident, false);
+			else
+				frame = TextInformationFrame.Get (
 				this, ident, false);
 			
 			string result = frame == null ? null : frame.ToString ();
@@ -471,6 +477,7 @@ namespace TagLib.Id3v2 {
 					UrlLinkFrame.Get(this, ident, true);
 
 				urlFrame.Text = text;
+				urlFrame.TextEncoding = DefaultEncoding;
 				return;
 			}
 
