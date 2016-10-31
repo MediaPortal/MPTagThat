@@ -1032,12 +1032,17 @@ namespace MPTagThat
         if (track.Pictures.Count > 0)
         {
           img = Picture.ImageFromData(track.Pictures[0].Data);
-          if (img != null)
-          {
-            GalleryItem galleryItem = new GalleryItem(img, "", "");
-            galleryPicture.Items.Add(galleryItem);
-            ApplicationCommands.SaveAsThumb.Enabled = true;
-          }
+        }
+        else if (track.PictureHashList.Count > 0)
+        {
+          string filename = $@"{Application.StartupPath}\Database\Coverart\{track.PictureHashList[0]}.png";
+          img = Image.FromFile(filename);
+        }
+        if (img != null)
+        {
+          GalleryItem galleryItem = new GalleryItem(img, "", "");
+          galleryPicture.Items.Add(galleryItem);
+          ApplicationCommands.SaveAsThumb.Enabled = true;
         }
       }
       catch (Exception) { }
