@@ -141,8 +141,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// </summary>
     public void DeleteDatabase()
     {
-      _session?.Dispose();
-      _store?.Dispose();
+      _session?.Advanced.Clear();
+      _session = null;
+      _store.Dispose();
+      _store = null;
+      RavenDocumentStore.RemoveStore("MusicDatabase");
       Util.DeleteFolder(_databaseFolder);
       CreateDbConnection();
     }
@@ -274,10 +277,13 @@ namespace MPTagThat.Core.Services.MusicDatabase
               var track = Track.Create(fi.FullName);
               if (track != null)
               {
+                // Check for pictures in the track and add it to the hashlist
+                // For database objects, the pictures are hashed and stored in the coverart folder
                 foreach (Picture picture in track.Pictures)
                 {
-                  string fileName = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
-                  string fullFileName = $"{picFolder}{fileName}.png";
+                  string hash = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
+                  track.PictureHashList.Add(hash);
+                  string fullFileName = $"{picFolder}{hash}.png";
                   if (!File.Exists(fullFileName))
                   {
                     try
@@ -292,6 +298,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
                     }
                   }
                 }
+                // finally remove the puctures from the database object
                 track.Pictures.Clear();
                 bulkInsert.Store(track);
                 _audioFiles++;
