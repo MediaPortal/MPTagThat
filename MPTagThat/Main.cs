@@ -735,6 +735,15 @@ namespace MPTagThat
         //
         _musicDatabase = ServiceScope.Get<IMusicDatabase>();
 
+        foreach (string musicShare in Options.MainSettings.MusicShares)
+        {
+          comboBoxMusicFolder.Items.Add(musicShare);
+        }
+        if (comboBoxMusicFolder.Items.Count > 0)
+        {
+          comboBoxMusicFolder.SelectedIndex = 0;
+        }
+
         // Load BASS
         LoadBass();
 
@@ -1360,11 +1369,18 @@ namespace MPTagThat
 			// Database Tab
 			ribbonContextualTabGroup1.Caption = localisation.ToString("ribbon", "ContextualTab");
 			ribbonTabPageDatabase.Text = localisation.ToString("ribbon", "DatabaseTab");
-			ribbonGroupDatabaseMaint.Text = localisation.ToString("ribbon", "DatabaseMaintenanceGroup");
+      ribbonGroupQuery.Text = localisation.ToString("ribbon", "DatabaseQueryGroup");
+      buttonExecuteQuery.Text = localisation.ToString("ribbon", "Query");
+      ribbonGroupDatabaseMaint.Text = localisation.ToString("ribbon", "DatabaseMaintenanceGroup");
+      buttonStartDBScan.Text = localisation.ToString("ribbon", "StartDBScan");
+      buttonAbortDBScan.Text = localisation.ToString("ribbon", "AbortDBScan");
+      buttonDeleteDB.Text = localisation.ToString("ribbon", "DeleteDB");
+      labelMusicFolder.Text = localisation.ToString("ribbon", "SelectMusicFolder");
+      checkBoxClearDatabase.Text = localisation.ToString("ribbon", "ClearDatabase");
 
 
 
-			log.Debug("Finished localising Ribbon");
+      log.Debug("Finished localising Ribbon");
 
 
       log.Trace("<<<");
@@ -3229,6 +3245,7 @@ namespace MPTagThat
           {
             comboBoxMusicFolder.Items.Add(oFD.SelectedPath);
             comboBoxMusicFolder.SelectedItem = oFD.SelectedPath;
+            Options.MainSettings.MusicShares.Add(oFD.SelectedPath);
           }
         }
       }

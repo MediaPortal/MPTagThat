@@ -149,6 +149,8 @@
 	<!-- Database Tab -->
 	<string name="ribbon.ContextualTab">Database</string>
 	<string name="ribbon.DatabaseTab">Database</string>
+	<string name="ribbon.DatabaseQueryGroup">Database Query</string>
+	<string name="ribbon.Query">Query</string>
 	<string name="ribbon.DatabaseMaintenanceGroup">Database Maintenance</string>
 	<string name="ribbon.StartDBScan">Start Scan</string>
 	<string name="ribbon.AbortDBScan">Abort Scan</string>

@@ -28,17 +28,13 @@ namespace MPTagThat.Core
   {
     #region Variables
 
-    private string _activeScript = "";
     private Size _formSize = new Size(1200, 1024);
     private string _lastFolderUsed = "";
 
     private string _lastRipEncoderUsed;
     private int _numTrackDigits = 2;
 
-    private List<string> _recentFolders = new List<string>();
-    private List<string> _lyricSites = new List<string>();
     private List<string> _albumInfoSites = new List<string>() { "Amazon", "MusicBrainz", "Discogs", "LastFM"};
-    private List<string> _customGenres = new List<string>();
 
     #endregion
 
@@ -98,11 +94,7 @@ namespace MPTagThat.Core
     #endregion
 
     [Setting(SettingScope.User, "")]
-    public string ActiveScript
-    {
-      get { return _activeScript; }
-      set { _activeScript = value; }
-    }
+    public string ActiveScript { get; set; } = "";
 
     [Setting(SettingScope.User, "mp3")]
     public string LastConversionEncoderUsed { get; set; }
@@ -114,14 +106,13 @@ namespace MPTagThat.Core
     public string SingleEditLastUsedScript { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public List<string> RecentFolders
-    {
-      get { return _recentFolders; }
-      set { _recentFolders = value; }
-    }
+    public List<string> RecentFolders { get; set; } = new List<string>();
 
     [Setting(SettingScope.User, "false")]
     public bool ChangeReadOnlyAttributte { get; set; }
+
+    [Setting(SettingScope.User, "")]
+    public List<string> MusicShares { get; set; } = new List<string>();
 
     #region Tags
 
@@ -200,11 +191,7 @@ namespace MPTagThat.Core
     public int MaxCoverWidth { get; set; }
 
     [Setting(SettingScope.User, "")]
-    public List<string> CustomGenres
-    {
-      get { return _customGenres; }
-      set { _customGenres = value; }
-    }
+    public List<string> CustomGenres { get; set; } = new List<string>();
 
     [Setting(SettingScope.User, "false")]
     public bool ClearExistingPictures { get; set; }
@@ -214,12 +201,8 @@ namespace MPTagThat.Core
     #region Lyrics
 
     [Setting(SettingScope.User, "")]
-    public List<string> LyricSites
-    {
-      get { return _lyricSites; }
-      set { _lyricSites = value; }
-    }
- 
+    public List<string> LyricSites { get; set; } = new List<string>();
+
     [Setting(SettingScope.User, "false")]
     public bool SwitchArtist { get; set; }
 
