@@ -11,12 +11,24 @@ namespace MPTagThat.Core.Common
 		private readonly static ConcurrentDictionary<string, Lazy<IDocumentStore>> Stores = 
 						new ConcurrentDictionary<string, Lazy<IDocumentStore>>();
 
-		public static IDocumentStore GetDocumentStoreFor(string databaseName)
+    #region Public Methods
+
+    public static IDocumentStore GetDocumentStoreFor(string databaseName)
 		{
 			return Stores.GetOrAdd(databaseName, CreateDocumentStore).Value;
 		}
 
-		private static Lazy<IDocumentStore> CreateDocumentStore(string databaseName)
+	  public static void RemoveStore(string databasename)
+	  {
+	   Lazy<IDocumentStore> store = null;
+	    Stores.TryRemove(databasename, out store);
+	  }
+
+    #endregion
+
+    #region Private Methods
+
+    private static Lazy<IDocumentStore> CreateDocumentStore(string databaseName)
 		{
 			return new Lazy<IDocumentStore>(() =>
 			{
@@ -34,5 +46,7 @@ namespace MPTagThat.Core.Common
 				return docStore;
 			});
 		}
-	}
+
+    #endregion
+  }
 }
