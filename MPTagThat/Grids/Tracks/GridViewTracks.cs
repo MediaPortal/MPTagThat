@@ -2105,7 +2105,7 @@ namespace MPTagThat.GridView
       {
         if (track.Changed)
         {
-          e.Value = Properties.Resources.Warning;
+          e.Value = Properties.Resources.Changed;
           return;
         }
 

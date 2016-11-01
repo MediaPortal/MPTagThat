@@ -517,6 +517,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\changed.png" />
     <None Include="Resources\ribbon_Bpm_32x.png" />
     <None Include="Resources\ribbon_Bpm_16x.png" />
     <None Include="Resources\ribbon_Gain_16x.png" />
