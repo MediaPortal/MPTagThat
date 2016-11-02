@@ -1081,7 +1081,6 @@ namespace MPTagThat
           if (pinListRecentFolders.Items[i].DescriptionText == newFolder)
           {
             pinListRecentFolders.Items.RemoveAt(i);
-            break;
           }
         }
       }
