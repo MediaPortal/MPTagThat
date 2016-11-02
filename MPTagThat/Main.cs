@@ -744,6 +744,11 @@ namespace MPTagThat
           comboBoxMusicFolder.SelectedIndex = 0;
         }
 
+        foreach (string query in Options.MainSettings.MusicDatabaseQueries)
+        {
+          comboBoxDatabaseQuery.Items.Add(query);
+        }
+
         // Load BASS
         LoadBass();
 
@@ -3884,6 +3889,19 @@ namespace MPTagThat
       catch (InvalidOperationException) { }
 
       TracksGridView.ResetWaitCursor();
+
+      comboBoxDatabaseQuery.Items.Remove(query);
+      comboBoxDatabaseQuery.Items.Insert(0, query);
+      Options.MainSettings.MusicDatabaseQueries.Clear();
+      int i = 0;
+      foreach (string q in comboBoxDatabaseQuery.Items)
+      {
+        Options.MainSettings.MusicDatabaseQueries.Add(q);
+        if (i++ > 10)
+        {
+          break;
+        }
+      }
     }
 
     #endregion

@@ -114,6 +114,9 @@ namespace MPTagThat.Core
     [Setting(SettingScope.User, "")]
     public List<string> MusicShares { get; set; } = new List<string>();
 
+    [Setting(SettingScope.User, "")]
+    public List<string> MusicDatabaseQueries { get; set; } = new List<string>();
+
     #region Tags
 
     [Setting(SettingScope.User, "1")]
