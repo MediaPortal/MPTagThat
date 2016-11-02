@@ -3852,6 +3852,14 @@ namespace MPTagThat
       MiscInfoPanel.ClearNonMusicFiles();
       GC.Collect();
 
+      if (!splitterLeft.IsCollapsed)
+      {
+        splitterLeft.ToggleState();
+      }
+      if (!splitterRight.IsCollapsed)
+      {
+        splitterRight.ToggleState();
+      }
       ToolStripStatusScan.Text = "";
       TracksGridView.SetWaitCursor();
 
