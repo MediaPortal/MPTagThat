@@ -162,11 +162,24 @@ namespace MPTagThat.Core.Services.MusicDatabase
         return null;
       }
 
-      var result = _session.Advanced.DocumentQuery<TrackData>()
-        .Where(query)
-        .Take(int.MaxValue)
-        .ToList();
+      List<TrackData> result = null;
 
+      if (query.Contains(":"))
+      {
+        result = _session.Advanced.DocumentQuery<TrackData>()
+          .Where(query)
+          .Take(int.MaxValue)
+          .ToList();
+      }
+      else
+      {
+        var searchText = new List<object>();
+        searchText.AddRange(query.Split(new char[] { ' ' }));
+        result = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>()
+          .ContainsAll("Query", searchText)
+          .Take(int.MaxValue)
+          .ToList();
+      }
       return result;
     }
 
@@ -212,6 +225,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
         _session = _store.OpenSession();
 
         IndexCreation.CreateIndexes(typeof(DistinctArtistIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DefaultSearchIndex).Assembly, _store);
 
         return true;
       }
