@@ -38,9 +38,15 @@ namespace MPTagThat.Core.Services.MusicDatabase
     List<TrackData> ExecuteQuery(string query);
 
     /// <summary>
-    /// Returnsd Distionct Artists from the Database
+    /// Returns Distinct Artists from the Database
     /// </summary>
     /// <returns></returns>
     List<DistinctArtistIndex.Projection> DistinctArtists();
+
+    /// <summary>
+    /// Update a track in the Music Database
+    /// </summary>
+    /// <param name="track"></param>
+    void UpdateTrack(TrackData track, string originalFileName);
   }
 }

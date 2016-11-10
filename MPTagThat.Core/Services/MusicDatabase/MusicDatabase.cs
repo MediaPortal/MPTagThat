@@ -25,17 +25,15 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Common;
 using MPTagThat.Core.Services.MusicDatabase.Indexes;
 using Raven.Abstractions.Data;
 using Raven.Client;
-using Raven.Client.Connection;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
+using Raven.Json.Linq;
 
 #endregion 
 
@@ -183,6 +181,42 @@ namespace MPTagThat.Core.Services.MusicDatabase
       return result;
     }
 
+    /// <summary>
+    /// Update a track in the database
+    /// </summary>
+    /// <param name="track"></param>
+    /// <param name="originalFileName"></param>
+    public void UpdateTrack(TrackData track, string originalFileName)
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return;
+      }
+
+      try
+      {
+        originalFileName = Util.EscapeDatabaseQuery(originalFileName);
+        // Lookup the track in the database
+        var dbTracks = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>().WhereEquals("Query", originalFileName).ToList();
+        if (dbTracks.Count > 0)
+        {
+          var id = dbTracks[0].Id;
+          var dbTrackData = _session.Load<TrackData>($"TrackDatas/{id}");
+          _session.Advanced.Evict(dbTrackData);
+          track.Id = id;
+          // Reset status
+          track.Status = -1;
+          track.Changed = false;
+          _session.Store(track);
+        }
+      }
+      catch (Exception ex)
+      {
+        log.Error("UpdateTrack: Error updating track in database {0}: {1}", ex.Message, ex.InnerException);
+      }
+    }
+    
     /// <summary>
     /// Get Distinct Artists and Albumartists
     /// </summary>

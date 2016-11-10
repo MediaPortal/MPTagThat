@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -1669,6 +1670,80 @@ namespace MPTagThat.Core
       msgQueue.Send(msg);
     }
 
+
+    public static string EscapeDatabaseQuery(string query)
+    {
+      var literal = new StringBuilder(query.Length);
+      foreach (var c in query)
+      {
+        switch (c)
+        {
+          // && || 
+          case '+':
+            literal.Append(@"\+");
+            break;
+          case '-':
+            literal.Append(@"\-");
+            break;
+          case '!':
+            literal.Append(@"\!");
+            break;
+          case '(':
+            literal.Append(@"\(");
+            break;
+          case ')':
+            literal.Append(@"\)");
+            break;
+          case '}':
+            literal.Append(@"\}");
+            break;
+          case '{':
+            literal.Append(@"\{");
+            break;
+          case '[':
+            literal.Append(@"\[");
+            break;
+          case ']':
+            literal.Append(@"\]");
+            break;
+          case '^':
+            literal.Append(@"\^");
+            break;
+          case '~':
+            literal.Append(@"\~");
+            break;
+          case '*':
+            literal.Append(@"\*");
+            break;
+          case '?':
+            literal.Append(@"\?");
+            break;
+          case ':':
+            literal.Append(@"\:");
+            break;
+          case '\\':
+            literal.Append(@"\\");
+            break;
+
+          case '"':
+            literal.Append("\"");
+            break;
+          default:
+            if (Char.GetUnicodeCategory(c) != UnicodeCategory.Control)
+            {
+              literal.Append(c);
+            }
+            else
+            {
+              literal.Append(@"\u");
+              literal.Append(((ushort) c).ToString("x4"));
+            }
+            break;
+        }
+      }
+      return literal.ToString();
+    }
+
     #endregion
-  }
+    }
 }

@@ -20,6 +20,7 @@ using System;
 using System.IO;
 using Elegant.Ui;
 using MPTagThat.Core;
+using MPTagThat.Core.Services.MusicDatabase;
 
 namespace MPTagThat.Commands
 {
@@ -59,7 +60,7 @@ namespace MPTagThat.Commands
       }
 
       // returning false here, since we are setting the Track Status in Save Track
-      // and don't want to have it cvhanged again in calling routine
+      // and don't want to have it changed again in calling routine
       return false; 
     }
 
@@ -84,8 +85,8 @@ namespace MPTagThat.Commands
       {
         if (track.Changed)
         {
-          Util.SendProgress(string.Format("Saving file {0}", track.FullFileName));
-          Log.Debug("Save: Saving track: {0}", track.FullFileName);
+          Util.SendProgress($"Saving file {track.FullFileName}");
+          Log.Debug($"Save: Saving track: {track.FullFileName}");
 
           // The track to be saved, may be currently playing. If this is the case stop playback to free the file
           if (track.FullFileName == TracksGrid.MainForm.Player.CurrentSongPlaying)
@@ -106,16 +107,12 @@ namespace MPTagThat.Commands
             convert.Dispose();
           }
 
+          string originalFileName = track.FullFileName; // Need the original filename for database update, in case a rename happens
+
           // Save the file 
           string errorMessage = "";
           if (Track.SaveFile(track, ref errorMessage))
           {
-            // If we are in Database mode, we should also update the MediaPortal Database
-            if (TracksGrid.MainForm.TreeView.DatabaseMode)
-            {
-              TracksGrid.UpdateMusicDatabase(track);
-            }
-
             if (RenameFile(track))
             {
               // rename was ok, so get the new file into the binding list
@@ -141,6 +138,9 @@ namespace MPTagThat.Commands
             TracksGrid.View.Rows[rowIndex].Tag = "";
             Options.Songlist[rowIndex] = track;
             TracksGrid.SetGridRowColors(rowIndex);
+
+            // Update the Music Database
+            ServiceScope.Get<IMusicDatabase>().UpdateTrack(track, originalFileName);
           }
           else
           {
