@@ -133,7 +133,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AlbumInfo\IAlbumInfo.cs" />
-    <Compile Include="Common\RavenDocumentStore.cs" />
     <Compile Include="Common\SongList.cs" />
     <Compile Include="MusicBrainz\MusicBrainzRelease.cs" />
     <Compile Include="Services\ActionHandler\Button.cs" />
@@ -317,6 +316,7 @@
     <Compile Include="Settings\CaseConversionSettings.cs" />
     <Compile Include="Settings\OrganiseFormatSettings.cs" />
     <Compile Include="Settings\ParameterFormat.cs" />
+    <Compile Include="Settings\StartupSettings.cs" />
     <Compile Include="Settings\TagToFileNameFormatSettings.cs" />
     <Compile Include="Settings\FileNameToTagFormatSettings.cs" />
     <Compile Include="Settings\Options.cs" />

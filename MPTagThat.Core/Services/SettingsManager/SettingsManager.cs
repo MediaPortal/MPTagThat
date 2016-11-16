@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
+
+using MPTagThat.Core.Settings;
+
 namespace MPTagThat.Core
 {
   /// <summary>
@@ -22,11 +25,7 @@ namespace MPTagThat.Core
   /// </summary>
   public class SettingsManager : ISettingsManager
   {
-    private int _portable;
-    private int _maxSongs;
-		private int _ravenDebug;
-
-		#region ISettingsManager Members
+    #region ISettingsManager Members
 
 		/// <summary>
 		///   Retrieves an object's public properties from an Xml file
@@ -46,58 +45,8 @@ namespace MPTagThat.Core
       ObjectParser.Serialize(settingsObject);
     }
 
-    /// <summary>
-    ///   Sets the Portable Status
-    /// </summary>
-    /// <param name = "portable"></param>
-    public void SetPortable(int portable)
-    {
-      _portable = portable;
-    }
+    public StartupSettings StartSettings { get; set; }
 
-    /// <summary>
-    ///   Gets the Portable Status
-    /// </summary>
-    /// <returns></returns>
-    public int GetPortable()
-    {
-      return _portable;
-    }
-
-    /// <summary>
-    /// Sets the maximum of Songs before switching to B Mode
-    /// </summary>
-    /// <param name="maxsongs"></param>
-    public void SetMaxSongs(int maxsongs)
-    {
-      _maxSongs = maxsongs;
-    }
-
-    /// <summary>
-    /// Gets the maximum of songs alllowed in List
-    /// </summary>
-    public int GetMaxSongs()
-    {
-      return _maxSongs;
-    }
-
-		/// <summary>
-		/// Sets the Raven Debug Mode
-		/// </summary>
-		/// <param name="ravendebug"></param>
-		public void SetRavenDebug(int ravendebug)
-		{
-			_ravenDebug = ravendebug;
-		}
-
-		/// <summary>
-		/// Gets the Raven Debug Mode
-		/// </summary>
-		public int GetRavenDebug()
-		{
-			return _ravenDebug;
-		}
-
-	  #endregion
+    #endregion
   }
 }

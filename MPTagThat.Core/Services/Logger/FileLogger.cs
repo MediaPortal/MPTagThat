@@ -161,7 +161,7 @@ namespace MPTagThat.Core
           }
         }
 
-	      if (Options.RavenDebug == 1 && config.LoggingRules[0].Filters.Count > 0)
+	      if (Options.StartupSettings.RavenDebug && config.LoggingRules[0].Filters.Count > 0)
 	      {
 		      config.LoggingRules[0].Filters.RemoveAt(0);
 	      }

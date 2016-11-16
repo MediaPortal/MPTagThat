@@ -4,11 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MPTagThat.Core.Services.MusicDatabase.Indexes;
+using Raven.Client;
 
 namespace MPTagThat.Core.Services.MusicDatabase
 {
   public interface IMusicDatabase
   {
+    /// <summary>
+    /// Get A Document Store
+    /// </summary>
+    /// <param name="databaseName"></param>
+    /// <returns></returns>
+    IDocumentStore GetDocumentStoreFor(string databaseName);
+
+    /// <summary>
+    /// Remove the Store
+    /// </summary>
+    /// <param name="databasename"></param>
+    void RemoveStore(string databasename);
+
     /// <summary>
     /// Returns, if a Database Scan is Active
     /// </summary>

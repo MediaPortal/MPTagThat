@@ -18,6 +18,7 @@
 #region 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -32,6 +33,7 @@ using MPTagThat.Core.Services.MusicDatabase.Indexes;
 using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Embedded;
 using Raven.Client.Indexes;
 using Raven.Json.Linq;
 
@@ -55,6 +57,9 @@ namespace MPTagThat.Core.Services.MusicDatabase
     private BackgroundWorker _bgwScanShare;
     private int _audioFiles;
     private DateTime _scanStartTime;
+
+    private readonly ConcurrentDictionary<string, Lazy<IDocumentStore>> _stores =
+        new ConcurrentDictionary<string, Lazy<IDocumentStore>>();
 
     #endregion
 
@@ -94,6 +99,26 @@ namespace MPTagThat.Core.Services.MusicDatabase
     #endregion
 
     #region Public Methods
+
+    /// <summary>
+    /// Return a document store
+    /// </summary>
+    /// <param name="databaseName"></param>
+    /// <returns></returns>
+    public IDocumentStore GetDocumentStoreFor(string databaseName)
+    {
+      return _stores.GetOrAdd(databaseName, CreateDocumentStore).Value;
+    }
+
+    /// <summary>
+    /// Remove a store
+    /// </summary>
+    /// <param name="databasename"></param>
+    public void RemoveStore(string databasename)
+    {
+      Lazy<IDocumentStore> store = null;
+      _stores.TryRemove(databasename, out store);
+    }
 
     /// <summary>
     /// Builds the database using the Music Share
@@ -143,7 +168,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
       _session = null;
       _store.Dispose();
       _store = null;
-      RavenDocumentStore.RemoveStore("MusicDatabase");
+      RemoveStore("MusicDatabase");
       Util.DeleteFolder(_databaseFolder);
       CreateDbConnection();
     }
@@ -376,7 +401,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
       try
       {
-        _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
+        _store = GetDocumentStoreFor(_databaseName);
         _session = _store.OpenSession();
 
         IndexCreation.CreateIndexes(typeof(DistinctCombinedArtistIndex).Assembly, _store);
@@ -546,7 +571,34 @@ namespace MPTagThat.Core.Services.MusicDatabase
       }
     }
 
+    /// <summary>
+    /// Creates a Raven Document Store
+    /// </summary>
+    /// <param name="databaseName"></param>
+    /// <returns></returns>
+    private Lazy<IDocumentStore> CreateDocumentStore(string databaseName)
+    {
+      return new Lazy<IDocumentStore>(() =>
+      {       
+        var docStore = new EmbeddableDocumentStore()
+        {
+          UseEmbeddedHttpServer = Options.StartupSettings.RavenStudio,
+          DataDirectory = $"~\\Databases\\{databaseName}",
+          RunInMemory = false,
+          Configuration = { Port = Options.StartupSettings.RavenStudioPort },
+        };
+        if (Options.StartupSettings.RavenStudio)
+        {
+          Raven.Database.Server.NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(Options.StartupSettings.RavenStudioPort);
+        }
+        docStore.Initialize();
 
+        docStore.Conventions.MaxNumberOfRequestsPerSession = 1000000;
+        docStore.Conventions.AllowMultipuleAsyncOperations = true;
+
+        return docStore;
+      });
+    }
     #endregion
 
   }

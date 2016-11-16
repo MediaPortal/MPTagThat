@@ -13,9 +13,19 @@
   -->
   <MaximumNumberOfSongsInList>500</MaximumNumberOfSongsInList>
   
-    <!--
+  <!--
 	The following Parameter controls if debugging for Raven Database shall be turned on.
   -->
   <RavenDebug>0</RavenDebug>
 
+  <!--
+	The following Parameter controls if Web interface for the RavenDB should be started.
+  -->
+  <RavenStudio>0</RavenStudio>
+
+  <!--
+	The following Parameter sets the port used by the RavenDB Web interface.
+  -->
+  <RavenStudioPort>8080</RavenStudioPort>
+ 
 </config>

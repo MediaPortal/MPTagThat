@@ -25,6 +25,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
 using MPTagThat.Core.Services.MusicDatabase;
+using MPTagThat.Core.Settings;
 
 #endregion
 
@@ -251,9 +252,7 @@ namespace MPTagThat.Core
 
     public static SongList Songlist { get; set; }
 
-    public static int MaximumNumberOfSongsInList { get; set; }
-
-		public static int RavenDebug { get; set; }
+    public static StartupSettings StartupSettings { get; set; }
 
     #endregion
 
@@ -267,18 +266,13 @@ namespace MPTagThat.Core
 
     public Options()
     {
-      int portable = ServiceScope.Get<ISettingsManager>().GetPortable();
-      if (portable == 0)
-        _configDir = String.Format(@"{0}\MPTagThat\Config",
-                                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      StartupSettings = ServiceScope.Get<ISettingsManager>().StartSettings;
+      if (StartupSettings.Portable)
+        _configDir = $@"{Application.StartupPath}\Config";
       else
-        _configDir = String.Format(@"{0}\Config", Application.StartupPath);
+        _configDir = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\MPTagThat\Config";
 
-      MaximumNumberOfSongsInList = ServiceScope.Get<ISettingsManager>().GetMaxSongs();
-
-	    RavenDebug = ServiceScope.Get<ISettingsManager>().GetRavenDebug();
-
-			_MPTagThatSettings = new MPTagThatSettings();
+      _MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);
 
       _caseConversionSettings = new CaseConversionSettings();

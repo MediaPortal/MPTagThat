@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using MPTagThat.Core.Common;
+using MPTagThat.Core.Services.MusicDatabase;
 using Raven.Abstractions.Data;
 using Raven.Client.Connection;
 
@@ -151,7 +152,7 @@ namespace MPTagThat.Core
     /// <param name="track"></param>
     public void Add(TrackData track)
     {
-      if (!_databaseModeEnabled && _bindingList.Count > Options.MaximumNumberOfSongsInList )
+      if (!_databaseModeEnabled && _bindingList.Count > Options.StartupSettings.MaxSongs )
       {
         CopyLIstToDatabase();  
       }
@@ -280,7 +281,7 @@ namespace MPTagThat.Core
 	      {
 	      }
 
-	      _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
+	      _store = ServiceScope.Get<IMusicDatabase>().GetDocumentStoreFor(_databaseName);
 	      _session = _store.OpenSession();
 
 				return true;

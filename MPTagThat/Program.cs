@@ -28,6 +28,7 @@ using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
 using MPTagThat.Core.MediaChangeMonitor;
 using MPTagThat.Core.Services.MusicDatabase;
+using MPTagThat.Core.Settings;
 
 #endregion
 
@@ -37,9 +38,8 @@ namespace MPTagThat
   {
     #region Variables
 
+    private static StartupSettings _startupSettings;
     private static int _portable;
-    private static int _maxSongs;
-		private static int _ravenDebug;
 		private static string _startupFolder;
     private static Main _main;
 
@@ -52,6 +52,7 @@ namespace MPTagThat
     /// </summary>
     /// <param name = "/folder=">A startup folder. used when executing via Explorer Context Menu</param>
     /// <param name = "/portable">Run in Portable mode</param>
+    /// <param name="args"></param>
     [STAThread]
     private static void Main(string[] args)
     {
@@ -95,7 +96,7 @@ namespace MPTagThat
           using (var accessor = mmf.CreateViewAccessor(0, buffer.Length))
           {
             // Write to MMF
-            accessor.WriteArray<byte>(0, buffer, 0, buffer.Length);
+            accessor.WriteArray(0, buffer, 0, buffer.Length);
             messageWaitHandle.Set();
 
             // End exit this instance
@@ -127,11 +128,7 @@ namespace MPTagThat
         log.Debug("Registering Settings Manager");
         ServiceScope.Add<ISettingsManager>(new SettingsManager());
         // Set the portable Indicator
-        ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
-        // Set the Max Songs number
-        ServiceScope.Get<ISettingsManager>().SetMaxSongs(_maxSongs);
-				// Set the Raven Debug Mode
-				ServiceScope.Get<ISettingsManager>().SetRavenDebug(_ravenDebug);
+        ServiceScope.Get<ISettingsManager>().StartSettings = _startupSettings;
 
 				try
         {
@@ -156,9 +153,11 @@ namespace MPTagThat
         ServiceScope.Add<IActionHandler>(new ActionHandler());
 
         // Move Init of Services, which we don't need immediately to a separate thread to increase startup performance
-        Thread initService = new Thread(DoInitService);
-        initService.IsBackground = true;
-        initService.Name = "InitService";
+        Thread initService = new Thread(DoInitService)
+        {
+          IsBackground = true,
+          Name = "InitService"
+        };
         initService.Start();
 
         Application.EnableVisualStyles();
@@ -166,10 +165,9 @@ namespace MPTagThat
 
         try
         {
-          _main = new Main();
+          _main = new Main {CurrentDirectory = _startupFolder};
 
           // Set the Startup Folder we might have received via an argument, before invoking the form
-          _main.CurrentDirectory = _startupFolder;
           Application.Run(_main);
         }
         catch (OutOfMemoryException)
@@ -227,9 +225,9 @@ namespace MPTagThat
             ServiceScope.Get<ILogger>().GetLogger.Debug("Startup Event fired");
 
             // Read from MMF
-            accessor.ReadArray<byte>(0, buffer, 0, buffer.Length);
+            accessor.ReadArray(0, buffer, 0, buffer.Length);
 
-            string startupFolder = Encoding.Default.GetString(buffer).Trim(new char[] { ' ', '\x00' });
+            string startupFolder = Encoding.Default.GetString(buffer).Trim(' ', '\x00');
             SetCurrentFolder(startupFolder);
           }
         }
@@ -245,6 +243,7 @@ namespace MPTagThat
       if (!File.Exists(configFile))
         return;
 
+      _startupSettings = new StartupSettings();
       try
       {
         XmlDocument doc = new XmlDocument();
@@ -263,29 +262,25 @@ namespace MPTagThat
             // Only use the value from Config, if not overriden by an argument
             _portable = Convert.ToInt32(portableNode.InnerText);
           }
+          _startupSettings.Portable = _portable != 0;
         }
 
         XmlNode maxSongsNode = doc.DocumentElement.SelectSingleNode("/config/MaximumNumberOfSongsInList");
-        if (maxSongsNode != null)
-        {
-          _maxSongs = Convert.ToInt32(maxSongsNode.InnerText);
-        }
-        else
-        {
-          _maxSongs = 200;
-        }
+        _startupSettings.MaxSongs = maxSongsNode != null ? Convert.ToInt32(maxSongsNode.InnerText) : 200;
 
 				XmlNode ravenDebugNode = doc.DocumentElement.SelectSingleNode("/config/RavenDebug");
-				if (ravenDebugNode != null)
-				{
-					_ravenDebug = Convert.ToInt32(ravenDebugNode.InnerText);
-				}
-				else
-				{
-					_ravenDebug = 0;
-				}
-			}
-      catch (Exception) {}
+				_startupSettings.RavenDebug = ravenDebugNode != null && Convert.ToInt32(ravenDebugNode.InnerText) != 0;
+
+        XmlNode ravenStudioNode = doc.DocumentElement.SelectSingleNode("/config/RavenStudio");
+        _startupSettings.RavenStudio = ravenStudioNode != null && Convert.ToInt32(ravenStudioNode.InnerText) != 0;
+
+        XmlNode ravenPortNode = doc.DocumentElement.SelectSingleNode("/config/RavenStudioPort");
+        _startupSettings.RavenStudioPort = ravenPortNode != null ? Convert.ToInt32(ravenPortNode.InnerText) : 8080;
+      }
+      catch (Exception)
+      {
+        // ignored
+      }
     }
 
     /// <summary>
@@ -295,7 +290,7 @@ namespace MPTagThat
     private static void SetPath(string path)
     {
       string currentPath = Environment.GetEnvironmentVariable("Path");
-      string newPath = string.Format("{0};{1}",currentPath, path);
+      string newPath = $"{currentPath};{path}";
       Environment.SetEnvironmentVariable("Path", newPath);
     }
 
@@ -304,7 +299,7 @@ namespace MPTagThat
       if (_main.InvokeRequired)
       {
         ThreadSafeSetCurrentFolderDelegate d = SetCurrentFolder;
-        _main.Invoke(d, new object[] { startupFolder });
+        _main.Invoke(d, startupFolder);
         return;
       }
 
