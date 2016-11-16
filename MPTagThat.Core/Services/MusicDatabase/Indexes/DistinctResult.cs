@@ -16,34 +16,12 @@
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
-#region
-
-using System.Linq;
-using Raven.Abstractions.Indexing;
-using Raven.Client.Indexes;
-
-#endregion
-
 namespace MPTagThat.Core.Services.MusicDatabase.Indexes
 {
-  /// <summary>
-  /// Map Reduce Index to retrieve distinct Artist
-  /// </summary>
-  public class DistinctArtistIndex : AbstractIndexCreationTask<TrackData, DistinctResult>
+  public class DistinctResult
   {
-    public DistinctArtistIndex()
-    {
-      Map = tracks => from track in tracks
-                            from artists in track.Artist.Split(';').ToList()
-                            select new { Name = artists };
-
-
-      Reduce = results => from result in results
-                          group result by result.Name into g
-                          select new { Name = g.Key };
-
-      Store(song => song.Name, FieldStorage.Yes);
-      Sort(song => song.Name, SortOptions.String);
-    }
+    public string Name { get; set; }
+    public string Album { get; set; }
+    public string Genre { get; set; }
   }
 }

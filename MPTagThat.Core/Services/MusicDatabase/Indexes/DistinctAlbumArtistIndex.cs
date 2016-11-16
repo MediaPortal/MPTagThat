@@ -27,17 +27,16 @@ using Raven.Client.Indexes;
 namespace MPTagThat.Core.Services.MusicDatabase.Indexes
 {
   /// <summary>
-  /// Map Reduce Index to retrieve distinct Artist
+  /// Map Reduce Index to retrieve distinct AlbumArtists
   /// </summary>
-  public class DistinctArtistIndex : AbstractIndexCreationTask<TrackData, DistinctResult>
+  public class DistinctAlbumArtistIndex : AbstractIndexCreationTask<TrackData, DistinctResult>
   {
-    public DistinctArtistIndex()
+    public DistinctAlbumArtistIndex()
     {
       Map = tracks => from track in tracks
-                            from artists in track.Artist.Split(';').ToList()
-                            select new { Name = artists };
-
-
+                            from albumartists in track.AlbumArtist.Split(';').ToList()
+                            select new { Name = albumartists };
+      
       Reduce = results => from result in results
                           group result by result.Name into g
                           select new { Name = g.Key };

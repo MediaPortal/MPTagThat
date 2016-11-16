@@ -32,6 +32,7 @@ using System.Windows.Forms;
 using Elegant.Ui;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
+using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
 using TagLib;
@@ -924,47 +925,14 @@ namespace MPTagThat.GridView
         return;
       }
 
-      List<string> songs = new List<string>();
-      string sql = FormatSQL(searchString);
-
-      string connection = string.Format(@"Data Source={0}", Options.MainSettings.MediaPortalDatabase);
-      try
-      {
-        SQLiteConnection conn = new SQLiteConnection(connection);
-        conn.Open();
-        using (SQLiteCommand cmd = new SQLiteCommand())
-        {
-          cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText = sql;
-          log.Debug("Database Scan: Executing sql: {0}", sql);
-          using (SQLiteDataReader reader = cmd.ExecuteReader())
-          {
-            while (reader.Read())
-            {
-              songs.Add(reader.GetString(0));
-            }
-          }
-        }
-        conn.Close();
-      }
-      catch (Exception ex)
-      {
-        log.Error("Database Scan: Error executing sql: {0}", ex.Message);
-      }
-
-      log.Debug("Database Scan: Query returned {0} songs", songs.Count);
-      AddDatabaseSongsToGrid(songs);
-    }
-
-    public void AddDatabaseSongsToGrid(List<string> songs)
-    {
+      SetWaitCursor();
       // Clear the list and free up resources
       tracksGrid.Rows.Clear();
       Options.Songlist.Clear();
       GC.Collect();
 
-      SetProgressBar(songs.Count);
+      var query = CreateQuery(searchString);
+      var result = ServiceScope.Get<IMusicDatabase>().ExecuteQuery(query);
 
       // Get File Filter Settings
       _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
@@ -973,29 +941,32 @@ namespace MPTagThat.GridView
                           : _main.TreeView.ActiveFilter.FileMask.Trim();
 
       int count = 1;
-      foreach (string song in songs)
+      if (result != null)
       {
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          break;
-        }
+        log.Debug("Database Scan: Query returned {0} songs", result.Count);
+        SetProgressBar(result.Count);
 
-        if (ApplyFileFilter(song))
+        foreach (var track in result)
         {
-          TrackData track = Track.Create(song);
-          if (ApplyTagFilter(track))
+          Application.DoEvents();
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
           {
-            AddTrack(track);
-            tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+            break;
           }
+
+          if (ApplyFileFilter(track.FullFileName) && ApplyTagFilter(track))
+          {
+             AddTrack(track);
+             tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+          }
+          count++;
         }
-        count++;
       }
 
       _main.FolderScanning = false;
       ResetProgressBar();
+      ResetWaitCursor();
 
       // Display Status Information
       try
@@ -1024,58 +995,49 @@ namespace MPTagThat.GridView
       }
     }
 
-    private string FormatSQL(string[] searchString)
+    private string CreateQuery(string[] searchString)
     {
-      string sql = "select strPath from tracks where {0} order by {1}";
+      var query = "";
 
-      string whereClause = "";
-      string orderByClause = "";
       switch (searchString[0])
       {
         case "artist":
-          whereClause = string.Format("strArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strAlbum, iTrack";
+          query = $"Artist:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          //orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            //orderByClause = "iTrack";
           }
           break;
 
         case "albumartist":
-          whereClause = string.Format("strAlbumArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strAlbum, iTrack";
+          query = $"AlbumArtist:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          //orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            //orderByClause = "iTrack";
           }
-          break;
-
-        case "album":
-          whereClause = string.Format("strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "iTrack";
           break;
 
         case "genre":
-          whereClause = string.Format("strGenre like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strArtist, strAlbum, iTrack";
+          query = $"Genre:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          //orderByClause = "strArtist, strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "strAlbum, iTrack";
+            query += $" AND Artist:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            //orderByClause = "strAlbum, iTrack";
           }
           if (searchString.GetLength(0) > 3)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[3]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[3])}\"";
+            //orderByClause = "iTrack";
           }
           break;
       }
 
-      sql = string.Format(sql, whereClause, orderByClause);
-
-      return sql;
+      return query;
     }
 
     #endregion

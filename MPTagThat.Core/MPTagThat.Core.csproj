@@ -219,7 +219,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProvider.cs" />
-    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderMediaPortal.cs" />
+    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderMusicDb.cs" />
     <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderShell32.cs" />
     <Compile Include="Controls\TreeviewBrowser\Win32\Logicaldisk.cs">
       <SubType>Component</SubType>
@@ -290,7 +290,15 @@
     <Compile Include="Services\MediaChangeMonitor\MediaChangeMonitor.cs" />
     <Compile Include="Services\MusicDatabase\IMusicDatabase.cs" />
     <Compile Include="Services\MusicDatabase\Indexes\DefaultSearchIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctAlbumArtistAlbumsIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctAlbumArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctArtistAlbumIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreArtistAlbumIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreIndex.cs" />
     <Compile Include="Services\MusicDatabase\Indexes\DistinctArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctCombinedArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctResult.cs" />
     <Compile Include="Services\MusicDatabase\MusicDatabase.cs" />
     <Compile Include="Services\ScriptManager\IScript.cs" />
     <Compile Include="Services\ScriptManager\IScriptManager.cs" />

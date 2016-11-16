@@ -221,7 +221,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// Get Distinct Artists and Albumartists
     /// </summary>
     /// <returns></returns>
-    public List<DistinctArtistIndex.Projection> DistinctArtists()
+    public List<DistinctCombinedArtistIndex.Projection> DistinctArtists()
     {
       if (_store == null && !CreateDbConnection())
       {
@@ -229,13 +229,134 @@ namespace MPTagThat.Core.Services.MusicDatabase
         return null;
       }
 
-      var artists = _session.Query<DistinctArtistIndex.Result, DistinctArtistIndex>()
+      var artists = _session.Query<DistinctCombinedArtistIndex.Result, DistinctCombinedArtistIndex>()
         .Take(int.MaxValue)
-        .ProjectFromIndexFieldsInto<DistinctArtistIndex.Projection>()
+        .ProjectFromIndexFieldsInto<DistinctCombinedArtistIndex.Projection>()
         .OrderBy(x => x.name)
         .ToList();
 
       return artists;
+    }
+
+    public List<DistinctResult> GetArtists()
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var artists = _session.Query<DistinctResult, DistinctArtistIndex>()
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Name)
+        .ToList();
+
+      return artists;
+    }
+
+    public List<DistinctResult> GetArtistAlbums(string query)
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var artistalbums = _session.Query<DistinctResult, DistinctArtistAlbumIndex>()
+        .Where(x => x.Name == Util.EscapeDatabaseQuery(query))
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Name)
+        .ThenBy(x => x.Album)
+        .ToList();
+
+      return artistalbums;
+    }
+
+    public List<DistinctResult> GetAlbumArtists()
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var albumartists = _session.Query<DistinctResult, DistinctAlbumArtistIndex>()
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Name)
+        .ToList();
+
+      return albumartists;
+    }
+
+    public List<DistinctResult> GetAlbumArtistAlbums(string query)
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var artistalbums = _session.Query<DistinctResult, DistinctAlbumArtistAlbumIndex>()
+        .Where(x => x.Name == Util.EscapeDatabaseQuery(query))
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Name)
+        .ThenBy(x => x.Album)
+        .ToList();
+
+      return artistalbums;
+    }
+
+    public List<DistinctResult> GetGenres()
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var genres = _session.Query<DistinctResult, DistinctGenreIndex>()
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Genre)
+        .ToList();
+
+      return genres;
+    }
+
+    public List<DistinctResult> GetGenreArtists(string query)
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var genreartists = _session.Query<DistinctResult, DistinctGenreArtistIndex>()
+        .Where(x => x.Genre == Util.EscapeDatabaseQuery(query))
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Genre)
+        .ThenBy(x => x.Name)
+        .ToList();
+
+      return genreartists;
+    }
+
+    public List<DistinctResult> GetGenreArtistAlbums(string genre, string artist)
+    {
+      if (_store == null && !CreateDbConnection())
+      {
+        log.Error("Could not establish a session.");
+        return null;
+      }
+
+      var genreartists = _session.Query<DistinctResult, DistinctGenreArtistAlbumIndex>()
+        .Where(x => x.Genre == Util.EscapeDatabaseQuery(genre) && x.Name == Util.EscapeDatabaseQuery(artist))
+        .Take(int.MaxValue)
+        .OrderBy(x => x.Genre)
+        .ThenBy(x => x.Name)
+        .ThenBy(x => x.Album)
+        .ToList();
+
+      return genreartists;
     }
 
     #endregion
@@ -258,8 +379,15 @@ namespace MPTagThat.Core.Services.MusicDatabase
         _store = RavenDocumentStore.GetDocumentStoreFor(_databaseName);
         _session = _store.OpenSession();
 
-        IndexCreation.CreateIndexes(typeof(DistinctArtistIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctCombinedArtistIndex).Assembly, _store);
         IndexCreation.CreateIndexes(typeof(DefaultSearchIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctArtistIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctArtistAlbumIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctAlbumArtistIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctAlbumArtistAlbumIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctGenreIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctGenreArtistIndex).Assembly, _store);
+        IndexCreation.CreateIndexes(typeof(DistinctGenreArtistAlbumIndex).Assembly, _store);
 
         return true;
       }

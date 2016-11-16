@@ -41,12 +41,60 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// Returns Distinct Artists from the Database
     /// </summary>
     /// <returns></returns>
-    List<DistinctArtistIndex.Projection> DistinctArtists();
+    List<DistinctCombinedArtistIndex.Projection> DistinctArtists();
 
     /// <summary>
     /// Update a track in the Music Database
     /// </summary>
     /// <param name="track"></param>
+    /// <param name="originalFileName"></param>
     void UpdateTrack(TrackData track, string originalFileName);
+
+    /// <summary>
+    /// Retrieves Distinct Artists
+    /// </summary>
+    /// <returns></returns>
+    List<DistinctResult> GetArtists();
+
+    /// <summary>
+    /// Retrieves Distinct Artists and their Distinct Albums based on the query
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    List<DistinctResult> GetArtistAlbums(string query);
+
+    /// <summary>
+    /// Retrieves Distinct AlbumArtists 
+    /// </summary>
+    /// <returns></returns>
+    List<DistinctResult> GetAlbumArtists();
+
+    /// <summary>
+    /// Retrieves Distinct AlbumArtists and their Distinct Albums based on the query
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    List<DistinctResult> GetAlbumArtistAlbums(string query);
+
+    /// <summary>
+    /// Retrieves Distinct Genres
+    /// </summary>
+    /// <returns></returns>
+    List<DistinctResult> GetGenres();
+
+    /// <summary>
+    /// Retrieves Distinct Genres and their Distinct Artists
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    List<DistinctResult> GetGenreArtists(string query);
+
+    /// <summary>
+    /// Retrieves Distinct Genres and their Distinct Artists and Albums
+    /// </summary>
+    /// <param name="genre"></param>
+    /// <param name="album"></param>
+    /// <returns></returns>
+    List<DistinctResult> GetGenreArtistAlbums(string genre, string album);
   }
 }

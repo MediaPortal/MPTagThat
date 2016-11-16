@@ -130,7 +130,7 @@ namespace MPTagThat
       cbDataProvider.SelectedIndex = Options.MainSettings.DataProvider;
       //  Add the event Handler here to prevent it from firing, when setting the selected item
       cbDataProvider.SelectedIndexChanged += cbDataProvider_SelectedIndexChanged;
-      if (Options.MainSettings.DataProvider == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
+      if (Options.MainSettings.DataProvider == 2)
       {
         _databaseMode = true;
       }
@@ -380,7 +380,7 @@ namespace MPTagThat
 
       if (_databaseMode)
       {
-        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMediaPortal();
+        treeViewFolderBrowser.DataSource = new TreeViewFolderBrowserDataProviderMusicDb();
         treeViewPanel.CaptionText = localisation.ToString("main", "TreeViewPanelDatabase");
         treeViewFolderBrowser.AllowDrop = false;
         checkBoxRecursive.Enabled = false;
@@ -844,7 +844,7 @@ namespace MPTagThat
     private void cbDataProvider_SelectedIndexChanged(object sender, EventArgs e)
     {
       Options.MainSettings.DataProvider = cbDataProvider.SelectedIndex;
-      if (cbDataProvider.SelectedIndex == 2 && File.Exists(Options.MainSettings.MediaPortalDatabase))
+      if (cbDataProvider.SelectedIndex == 2)
       {
         _databaseMode = true;
       }
