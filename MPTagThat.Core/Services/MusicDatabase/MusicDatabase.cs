@@ -230,6 +230,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
           // Reset status
           track.Status = -1;
           track.Changed = false;
+          track = StoreCoverArt(track);
           _session.Store(track);
         }
       }
@@ -453,7 +454,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
           OverwriteExisting = true
         };
 
-        HashAlgorithm sha = new SHA1CryptoServiceProvider();
+       
         using (BulkInsertOperation bulkInsert = _store.BulkInsert(null, bulkInsertOptions))
         {
           foreach (FileInfo fi in GetFiles(di, true))
@@ -468,29 +469,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
               var track = Track.Create(fi.FullName);
               if (track != null)
               {
-                // Check for pictures in the track and add it to the hashlist
-                // For database objects, the pictures are hashed and stored in the coverart folder
-                foreach (Picture picture in track.Pictures)
-                {
-                  string hash = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
-                  track.PictureHashList.Add(hash);
-                  string fullFileName = $"{Options.StartupSettings.CoverArtFolder}{hash}.png";
-                  if (!File.Exists(fullFileName))
-                  {
-                    try
-                    {
-                      Image img = Picture.ImageFromData(picture.Data);
-                      // Need to make a copy, otherwise we have a GDI+ Error
-                      Bitmap bCopy = new Bitmap(img);
-                      bCopy.Save(fullFileName, ImageFormat.Png);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                  }
-                }
-                // finally remove the puctures from the database object
-                track.Pictures.Clear();
+                track = StoreCoverArt(track);
                 bulkInsert.Store(track);
                 _audioFiles++;
               }
@@ -514,6 +493,36 @@ namespace MPTagThat.Core.Services.MusicDatabase
       {
         log.Error("Error during Database BulkInsert {0}", ex.Message);
       }
+    }
+
+    private TrackData StoreCoverArt(TrackData track)
+    {
+      HashAlgorithm sha = new SHA1CryptoServiceProvider();
+      // Check for pictures in the track and add it to the hashlist
+      // For database objects, the pictures are hashed and stored in the coverart folder
+      foreach (Picture picture in track.Pictures)
+      {
+        string hash = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
+        track.PictureHashList.Add(hash);
+        string fullFileName = $"{Options.StartupSettings.CoverArtFolder}{hash}.png";
+        if (!File.Exists(fullFileName))
+        {
+          try
+          {
+            Image img = Picture.ImageFromData(picture.Data);
+            // Need to make a copy, otherwise we have a GDI+ Error
+            Bitmap bCopy = new Bitmap(img);
+            bCopy.Save(fullFileName, ImageFormat.Png);
+          }
+          catch (Exception)
+          {
+            // ignored
+          }
+        }
+      }
+      // finally remove the puctures from the database object
+      track.Pictures.Clear();
+      return track;
     }
 
     /// <summary>

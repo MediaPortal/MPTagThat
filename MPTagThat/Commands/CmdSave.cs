@@ -132,15 +132,15 @@ namespace MPTagThat.Commands
               Util.SavePicture(track);
             }
 
+            // Update the Music Database
+            ServiceScope.Get<IMusicDatabase>().UpdateTrack(track, originalFileName);
+
             track.Status = 0;
             TracksGrid.View.Rows[rowIndex].Cells[0].ToolTipText = "";
             track.Changed = false;
             TracksGrid.View.Rows[rowIndex].Tag = "";
             Options.Songlist[rowIndex] = track;
             TracksGrid.SetGridRowColors(rowIndex);
-
-            // Update the Music Database
-            ServiceScope.Get<IMusicDatabase>().UpdateTrack(track, originalFileName);
           }
           else
           {
