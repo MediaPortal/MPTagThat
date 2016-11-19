@@ -50,7 +50,6 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly string _databaseName = "MusicDatabase";
-    private string _databaseFolder;
     private IDocumentStore _store;
     private IDocumentSession _session;
 
@@ -66,9 +65,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
     #region ctor / dtor
 
     public MusicDatabase()
-    {
-      _databaseFolder = $@"{System.Windows.Forms.Application.StartupPath}\Database\Databases\{_databaseName}";
-    }
+    {}
 
     ~MusicDatabase()
     {
@@ -169,7 +166,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
       _store.Dispose();
       _store = null;
       RemoveStore("MusicDatabase");
-      Util.DeleteFolder(_databaseFolder);
+      Util.DeleteFolder(Options.StartupSettings.DatabaseFolder);
       CreateDbConnection();
     }
 
@@ -456,13 +453,6 @@ namespace MPTagThat.Core.Services.MusicDatabase
           OverwriteExisting = true
         };
 
-        // Create folder to store Coverart
-        var picFolder = $@"{Application.StartupPath}\Database\Coverart\";
-        if (!Directory.Exists(picFolder))
-        {
-          Directory.CreateDirectory(picFolder);
-        }
-
         HashAlgorithm sha = new SHA1CryptoServiceProvider();
         using (BulkInsertOperation bulkInsert = _store.BulkInsert(null, bulkInsertOptions))
         {
@@ -484,7 +474,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
                 {
                   string hash = BitConverter.ToString(sha.ComputeHash(picture.Data)).Replace("-", string.Empty);
                   track.PictureHashList.Add(hash);
-                  string fullFileName = $"{picFolder}{hash}.png";
+                  string fullFileName = $"{Options.StartupSettings.CoverArtFolder}{hash}.png";
                   if (!File.Exists(fullFileName))
                   {
                     try
@@ -583,9 +573,13 @@ namespace MPTagThat.Core.Services.MusicDatabase
         var docStore = new EmbeddableDocumentStore()
         {
           UseEmbeddedHttpServer = Options.StartupSettings.RavenStudio,
-          DataDirectory = $"~\\Databases\\{databaseName}",
+          DataDirectory = $"{Options.StartupSettings.DatabaseFolder}{databaseName}",
           RunInMemory = false,
-          Configuration = { Port = Options.StartupSettings.RavenStudioPort },
+          Configuration =
+          {
+            Port = Options.StartupSettings.RavenStudioPort,
+            MaxPageSize = 300000,
+          },
         };
         if (Options.StartupSettings.RavenStudio)
         {

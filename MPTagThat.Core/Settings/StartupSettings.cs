@@ -31,6 +31,7 @@ namespace MPTagThat.Core.Settings
     public bool RavenDebug { get; set; }
     public bool RavenStudio { get; set; }
     public int RavenStudioPort { get; set; }
-
+    public string DatabaseFolder { get; set; }
+    public string CoverArtFolder { get; set; }
   }
 }

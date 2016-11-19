@@ -266,7 +266,7 @@ namespace MPTagThat
         }
 
         XmlNode maxSongsNode = doc.DocumentElement.SelectSingleNode("/config/MaximumNumberOfSongsInList");
-        _startupSettings.MaxSongs = maxSongsNode != null ? Convert.ToInt32(maxSongsNode.InnerText) : 200;
+        _startupSettings.MaxSongs = maxSongsNode != null ? Convert.ToInt32(maxSongsNode.InnerText) : 500;
 
 				XmlNode ravenDebugNode = doc.DocumentElement.SelectSingleNode("/config/RavenDebug");
 				_startupSettings.RavenDebug = ravenDebugNode != null && Convert.ToInt32(ravenDebugNode.InnerText) != 0;
@@ -276,11 +276,64 @@ namespace MPTagThat
 
         XmlNode ravenPortNode = doc.DocumentElement.SelectSingleNode("/config/RavenStudioPort");
         _startupSettings.RavenStudioPort = ravenPortNode != null ? Convert.ToInt32(ravenPortNode.InnerText) : 8080;
+
+        XmlNode ravenDatabaseNode = doc.DocumentElement.SelectSingleNode("/config/MusicDatabaseFolder");
+        var dbPath = ravenDatabaseNode?.InnerText ?? "%APPDATA%\\MPTagThat\\Databases";
+        dbPath = CheckPath(dbPath);
+        _startupSettings.DatabaseFolder = dbPath;
+
+        XmlNode coverArtNode = doc.DocumentElement.SelectSingleNode("/config/CoverArtFolder");
+        var coverArtPath = coverArtNode?.InnerText ?? "%APPDATA%\\MPTagThat\\CoverArt";
+        coverArtPath = CheckPath(coverArtPath);
+        _startupSettings.CoverArtFolder = coverArtPath;
       }
       catch (Exception)
       {
         // ignored
       }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="strPath"></param>
+    /// <returns></returns>
+    private static string CheckPath(string strPath)
+    {
+      string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+      strPath = strPath.Replace("%APPDATA%", appData);
+      strPath = strPath.Replace("%AppData%", appData);
+      string commonData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+      strPath = strPath.Replace("%PROGRAMDATA%", commonData);
+      strPath = strPath.Replace("%ProgramData%", commonData);
+
+      // Check to see, if the location was specified with an absolute or relative path.
+      // In case of relative path, prefix it with the startuppath   
+      if (!Path.IsPathRooted(strPath))
+      {
+        strPath = Path.Combine(Application.StartupPath,strPath);
+      }
+
+      // Create the folder
+      if (!Directory.Exists(strPath))
+      {
+        try
+        {
+          Directory.CreateDirectory(strPath);
+        }
+        catch (Exception)
+        {
+          // ignored
+        }
+      }
+
+      // See if we got a slash at the end. If not add one.
+      if (!strPath.EndsWith(@"\"))
+      {
+        strPath += @"\";
+      }
+
+      return strPath;
     }
 
     /// <summary>

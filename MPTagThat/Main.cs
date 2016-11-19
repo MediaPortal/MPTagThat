@@ -1024,7 +1024,7 @@ namespace MPTagThat
     }
 
     /// <summary>
-    ///   Get the Coverart out of the selected TRack item and fill the Ribbon Gallery
+    ///   Get the Coverart out of the selected Track item and fill the Ribbon Gallery
     /// </summary>
     public void SetGalleryItem()
     {
@@ -1040,7 +1040,7 @@ namespace MPTagThat
         }
         else if (track.PictureHashList.Count > 0)
         {
-          string filename = $@"{Application.StartupPath}\Database\Coverart\{track.PictureHashList[0]}.png";
+          string filename = $@"{Options.StartupSettings.CoverArtFolder}{track.PictureHashList[0]}.png";
           img = Image.FromFile(filename);
         }
         if (img != null)
