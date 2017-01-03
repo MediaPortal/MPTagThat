@@ -585,7 +585,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
       {       
         var docStore = new EmbeddableDocumentStore()
         {
-          UseEmbeddedHttpServer = Options.StartupSettings.RavenStudio,
+          UseEmbeddedHttpServer = databaseName == "MusicDatabase" && Options.StartupSettings.RavenStudio,
           DataDirectory = $"{Options.StartupSettings.DatabaseFolder}{databaseName}",
           RunInMemory = false,
           Configuration =
