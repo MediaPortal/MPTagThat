@@ -472,6 +472,10 @@ namespace MPTagThat.Core.Services.MusicDatabase
                 track = StoreCoverArt(track);
                 bulkInsert.Store(track);
                 _audioFiles++;
+                if (_audioFiles%1000 == 0)
+                {
+                  log.Info($"Number of processed files: {_audioFiles}");
+                }
               }
             }
             catch (PathTooLongException)
