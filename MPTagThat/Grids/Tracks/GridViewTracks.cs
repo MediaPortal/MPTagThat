@@ -25,6 +25,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -910,6 +911,9 @@ namespace MPTagThat.GridView
 
     #region Database Scanning / Update
 
+    /// <summary>
+    /// BAsed on selection in the TReeview, lookup the database
+    /// </summary>
     public void DatabaseScan()
     {
       if (_main.CurrentDirectory == null)
@@ -995,6 +999,11 @@ namespace MPTagThat.GridView
       }
     }
 
+    /// <summary>
+    /// Create a query based on the selection
+    /// </summary>
+    /// <param name="searchString"></param>
+    /// <returns></returns>
     private string CreateQuery(string[] searchString)
     {
       var query = "";
@@ -1002,7 +1011,7 @@ namespace MPTagThat.GridView
       switch (searchString[0])
       {
         case "artist":
-          query = $"Artist:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          query = FormatMultipleEntries(searchString[1], "Artist");
           //orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
@@ -1012,7 +1021,7 @@ namespace MPTagThat.GridView
           break;
 
         case "albumartist":
-          query = $"AlbumArtist:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          query = FormatMultipleEntries(searchString[1], "AlbumArtist");
           //orderByClause = "strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
@@ -1022,11 +1031,12 @@ namespace MPTagThat.GridView
           break;
 
         case "genre":
-          query = $"Genre:\"{Util.EscapeDatabaseQuery(searchString[1])}\"";
+          query = FormatMultipleEntries(searchString[1], "Genre");
           //orderByClause = "strArtist, strAlbum, iTrack";
           if (searchString.GetLength(0) > 2)
           {
-            query += $" AND Artist:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            query += " AND ";
+            query += FormatMultipleEntries(searchString[2], "Artist");
             //orderByClause = "strAlbum, iTrack";
           }
           if (searchString.GetLength(0) > 3)
@@ -1038,6 +1048,19 @@ namespace MPTagThat.GridView
       }
 
       return query;
+    }
+
+    /// <summary>
+    /// Format Multiple Value fields, like Artist, AlbumArtist and Genre 
+    /// </summary>
+    /// <param name="searchString"></param>
+    /// <param name="fieldtype"></param>
+    /// <returns></returns>
+    private string FormatMultipleEntries(string searchString, string fieldtype)
+    {
+      return string.Join(" AND ", Util.EscapeDatabaseQuery(searchString)
+            .Split(new[] { " ", "," }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => $"{fieldtype}:*{x}* "));
     }
 
     #endregion
