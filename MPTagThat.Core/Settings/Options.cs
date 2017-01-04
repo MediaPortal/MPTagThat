@@ -20,9 +20,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.IO;
 using System.Windows.Forms;
 using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Core.Settings;
