@@ -208,6 +208,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
       {
         result = _session.Advanced.DocumentQuery<TrackData>()
           .Where(query)
+          .OrderBy()
           .Take(int.MaxValue)
           .ToList();
       }

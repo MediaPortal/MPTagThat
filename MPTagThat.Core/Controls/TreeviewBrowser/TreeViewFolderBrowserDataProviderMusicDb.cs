@@ -17,18 +17,14 @@
 #endregion
 #region
 
-using System;
 using System.Collections;
-using System.Data;
 using System.Data.SqlClient;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Core.Services.MusicDatabase.Indexes;
 using Raccoom.Win32;
-using Raven.Database.Linq.PrivateExtensions;
 
 #endregion
 
