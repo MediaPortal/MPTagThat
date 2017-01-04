@@ -38,3 +38,4 @@ xcopy /y %1\Libraries\LastFMLibrary\bin\%2\LastFMLibrary.dll .\bin
 
 REM Copy RavenDB
 xcopy /y %1\MPTagThat.Core\bin\%2\Raven.*.dll .\bin
+xcopy /y %1\MPTagThat.Core\bin\%2\Microsoft.Owin.Host.HttpListener.dll .\bin

@@ -217,6 +217,15 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
       if (query.Contains(":"))
       {
+        // Set Artist as default order, if nothing is specified
+        if (order[0] == "")
+        {
+          Array.Resize(ref order, 3);
+          order[0] = "Artist";
+          order[1] = "Album";
+          order[2] = "Track";
+        }
+
         result = _session.Advanced.DocumentQuery<TrackData>()
           .Where(query)
           .OrderBy(order)
@@ -225,6 +234,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
       }
       else
       {
+        if (order[0] == "")
+        {
+          order[0] = "Query";
+        }
+
         var searchText = new List<object>();
         searchText.AddRange(query.Split(new char[] { ' ' }));
         result = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>()
