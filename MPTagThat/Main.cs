@@ -1068,6 +1068,12 @@ namespace MPTagThat
     /// <param name = "newFolder"></param>
     public void SetRecentFolder(string newFolder)
     {
+      // Don't set the recent folder, while in database mode
+      if (_treeViewControl.DatabaseMode)
+      {
+        return;
+      }
+
       string folderName = Path.GetFileName(newFolder);
       if (string.IsNullOrEmpty(folderName))
         folderName = newFolder;
