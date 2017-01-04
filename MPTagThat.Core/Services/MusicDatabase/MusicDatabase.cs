@@ -50,6 +50,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private readonly string _databaseName = "MusicDatabase";
+    private readonly string _workDatabaseName = "MusicWork";
     private IDocumentStore _store;
     private IDocumentSession _session;
 
@@ -65,7 +66,9 @@ namespace MPTagThat.Core.Services.MusicDatabase
     #region ctor / dtor
 
     public MusicDatabase()
-    {}
+    {
+      CurrentDatabase = _databaseName;
+    }
 
     ~MusicDatabase()
     {
@@ -92,6 +95,8 @@ namespace MPTagThat.Core.Services.MusicDatabase
         return false;
       }
     }
+
+    public string CurrentDatabase { get; set; }
 
     #endregion
 
@@ -165,9 +170,24 @@ namespace MPTagThat.Core.Services.MusicDatabase
       _session = null;
       _store.Dispose();
       _store = null;
-      RemoveStore("MusicDatabase");
+      RemoveStore(CurrentDatabase);
       Util.DeleteFolder(Options.StartupSettings.DatabaseFolder);
       CreateDbConnection();
+    }
+
+    /// <summary>
+    /// Switch between Work and Productive database
+    /// </summary>
+    public void SwitchDatabase()
+    {
+      _session?.Advanced.Clear();
+      _session = null;
+      _store.Dispose();
+      _store = null;
+      RemoveStore(CurrentDatabase);
+      CurrentDatabase = CurrentDatabase == _databaseName ? _workDatabaseName : _databaseName;
+      CreateDbConnection();
+      log.Info($"Database has been switch to {CurrentDatabase}");
     }
 
     /// <summary>
@@ -399,7 +419,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
       try
       {
-        _store = GetDocumentStoreFor(_databaseName);
+        _store = GetDocumentStoreFor(CurrentDatabase);
         _session = _store.OpenSession();
 
         IndexCreation.CreateIndexes(typeof(DistinctCombinedArtistIndex).Assembly, _store);

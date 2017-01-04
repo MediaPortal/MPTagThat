@@ -261,6 +261,8 @@ namespace MPTagThat
       this.ribbonGroupQuery = new Elegant.Ui.RibbonGroup();
       this.comboBoxDatabaseQuery = new Elegant.Ui.ComboBox();
       this.buttonExecuteQuery = new Elegant.Ui.Button();
+      this.separator4 = new Elegant.Ui.Separator();
+      this.buttonDBSwitch = new Elegant.Ui.Button();
       this.ribbonGroupDatabaseMaint = new Elegant.Ui.RibbonGroup();
       this.labelMusicFolder = new Elegant.Ui.Label();
       this.comboBoxMusicFolder = new Elegant.Ui.ComboBox();
@@ -482,7 +484,7 @@ namespace MPTagThat
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelBottom.Location = new System.Drawing.Point(0, 1072);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1457, 90);
+      this.panelBottom.Size = new System.Drawing.Size(1481, 90);
       this.panelBottom.TabIndex = 12;
       // 
       // playerPanel
@@ -490,7 +492,7 @@ namespace MPTagThat
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.playerPanel.Location = new System.Drawing.Point(0, 0);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1457, 90);
+      this.playerPanel.Size = new System.Drawing.Size(1481, 90);
       this.playerPanel.TabIndex = 11;
       // 
       // formFrameSkinner
@@ -507,7 +509,7 @@ namespace MPTagThat
       this.statusBar.Location = new System.Drawing.Point(0, 1162);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1457, 22);
+      this.statusBar.Size = new System.Drawing.Size(1481, 22);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -521,7 +523,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(1142, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(1166, 22);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -596,7 +598,7 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(1142, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(1166, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -679,7 +681,7 @@ namespace MPTagThat
             this.startMenuRefresh});
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
-      this.ribbon.Size = new System.Drawing.Size(1457, 150);
+      this.ribbon.Size = new System.Drawing.Size(1481, 150);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -2988,7 +2990,7 @@ namespace MPTagThat
       this.ribbonTabPageDatabase.KeyTip = null;
       this.ribbonTabPageDatabase.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageDatabase.Name = "ribbonTabPageDatabase";
-      this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1457, 99);
+      this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1481, 99);
       this.ribbonTabPageDatabase.TabIndex = 0;
       this.ribbonTabPageDatabase.Text = "Database";
       // 
@@ -2996,9 +2998,11 @@ namespace MPTagThat
       // 
       this.ribbonGroupQuery.Controls.Add(this.comboBoxDatabaseQuery);
       this.ribbonGroupQuery.Controls.Add(this.buttonExecuteQuery);
+      this.ribbonGroupQuery.Controls.Add(this.separator4);
+      this.ribbonGroupQuery.Controls.Add(this.buttonDBSwitch);
       this.ribbonGroupQuery.Location = new System.Drawing.Point(1, 1);
       this.ribbonGroupQuery.Name = "ribbonGroupQuery";
-      this.ribbonGroupQuery.Size = new System.Drawing.Size(360, 94);
+      this.ribbonGroupQuery.Size = new System.Drawing.Size(421, 94);
       this.ribbonGroupQuery.TabIndex = 1;
       this.ribbonGroupQuery.Text = "Database Query";
       // 
@@ -3026,6 +3030,29 @@ namespace MPTagThat
       this.buttonExecuteQuery.TabIndex = 1;
       this.buttonExecuteQuery.Text = "Query";
       // 
+      // separator4
+      // 
+      this.separator4.Id = "e86a3ab9-92ec-4bcd-9bfd-a162dd395555";
+      this.separator4.Location = new System.Drawing.Point(358, 6);
+      this.separator4.Name = "separator4";
+      this.separator4.Size = new System.Drawing.Size(3, 61);
+      this.separator4.TabIndex = 3;
+      this.separator4.Text = "separator4";
+      // 
+      // buttonDBSwitch
+      // 
+      this.buttonDBSwitch.CommandName = "SwitchDatabase";
+      this.buttonDBSwitch.Id = "c0163602-3527-47b3-a81b-f32b28e31f1b";
+      this.buttonDBSwitch.LargeImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDBSwitch.LargeImages.Images"))))});
+      this.buttonDBSwitch.Location = new System.Drawing.Point(364, 2);
+      this.buttonDBSwitch.Name = "buttonDBSwitch";
+      this.buttonDBSwitch.Size = new System.Drawing.Size(52, 72);
+      this.buttonDBSwitch.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
+            new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDBSwitch.SmallImages.Images"))))});
+      this.buttonDBSwitch.TabIndex = 2;
+      this.buttonDBSwitch.Text = "Switch Database";
+      // 
       // ribbonGroupDatabaseMaint
       // 
       this.ribbonGroupDatabaseMaint.Controls.Add(this.labelMusicFolder);
@@ -3035,7 +3062,7 @@ namespace MPTagThat
       this.ribbonGroupDatabaseMaint.Controls.Add(this.buttonStartDBScan);
       this.ribbonGroupDatabaseMaint.Controls.Add(this.buttonAbortDBScan);
       this.ribbonGroupDatabaseMaint.Controls.Add(this.buttonDeleteDB);
-      this.ribbonGroupDatabaseMaint.Location = new System.Drawing.Point(361, 1);
+      this.ribbonGroupDatabaseMaint.Location = new System.Drawing.Point(422, 1);
       this.ribbonGroupDatabaseMaint.Name = "ribbonGroupDatabaseMaint";
       this.ribbonGroupDatabaseMaint.Size = new System.Drawing.Size(424, 94);
       this.ribbonGroupDatabaseMaint.TabIndex = 0;
@@ -4103,7 +4130,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 150);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1457, 919);
+      this.panelMiddle.Size = new System.Drawing.Size(1481, 919);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -4112,7 +4139,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(1125, 647);
+      this.panelMiddleTop.Size = new System.Drawing.Size(1149, 647);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -4120,7 +4147,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 0);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(1125, 647);
+      this.panelFileList.Size = new System.Drawing.Size(1149, 647);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterLeft
@@ -4168,7 +4195,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(1283, 0);
+      this.splitterRight.Location = new System.Drawing.Point(1307, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4181,7 +4208,7 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(1291, 0);
+      this.panelRight.Location = new System.Drawing.Point(1315, 0);
       this.panelRight.Name = "panelRight";
       this.panelRight.Size = new System.Drawing.Size(166, 919);
       this.panelRight.TabIndex = 3;
@@ -4209,7 +4236,7 @@ namespace MPTagThat
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(1141, 264);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(1165, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -4243,7 +4270,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1457, 1184);
+      this.ClientSize = new System.Drawing.Size(1481, 1184);
       this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
@@ -4748,6 +4775,8 @@ namespace MPTagThat
     private Elegant.Ui.RibbonGroup ribbonGroupQuery;
     private Elegant.Ui.ComboBox comboBoxDatabaseQuery;
     private Elegant.Ui.Button buttonExecuteQuery;
+    private Elegant.Ui.Button buttonDBSwitch;
+    private Elegant.Ui.Separator separator4;
   }
 }
 

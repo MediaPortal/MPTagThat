@@ -964,7 +964,7 @@ namespace MPTagThat
       ApplicationCommands.AbortDBScan.Executed += AbortDBScan_Executed;
       ApplicationCommands.DeleteDatabase.Executed += DeleteDatabase_Executed;
       ApplicationCommands.ExecuteDatabaseQuery.Executed += ExecuteDatabaseQuery_Executed;
-
+      ApplicationCommands.SwitchDatabase.Executed += SwitchDatabase_Executed;
       ApplicationCommands.SaveAsThumb.Enabled = false; // Disable button initally
       log.Trace("<<<");
     }
@@ -1378,8 +1378,10 @@ namespace MPTagThat
 			// Database Tab
 			ribbonContextualTabGroup1.Caption = localisation.ToString("ribbon", "ContextualTab");
 			ribbonTabPageDatabase.Text = localisation.ToString("ribbon", "DatabaseTab");
-      ribbonGroupQuery.Text = localisation.ToString("ribbon", "DatabaseQueryGroup");
+      ribbonGroupQuery.Text =
+        $"{localisation.ToString("ribbon", "DatabaseQueryGroup")}. {localisation.ToString("ribbon", "ActiveDatabase")} {_musicDatabase.CurrentDatabase}";
       buttonExecuteQuery.Text = localisation.ToString("ribbon", "Query");
+      buttonDBSwitch.Text = localisation.ToString("ribbon", "SwitchDatabase");
       ribbonGroupDatabaseMaint.Text = localisation.ToString("ribbon", "DatabaseMaintenanceGroup");
       buttonStartDBScan.Text = localisation.ToString("ribbon", "StartDBScan");
       buttonAbortDBScan.Text = localisation.ToString("ribbon", "AbortDBScan");
@@ -3903,6 +3905,18 @@ namespace MPTagThat
         }
       }
     }
+
+    /// <summary>
+    ///   Switch the database
+    /// </summary>
+    /// <param name = "sender"></param>
+    /// <param name = "e"></param>
+    private void SwitchDatabase_Executed(object sender, CommandExecutedEventArgs e)
+    {
+      _musicDatabase.SwitchDatabase();
+      ribbonGroupQuery.Text =
+        $"{localisation.ToString("ribbon", "DatabaseQueryGroup")}. {localisation.ToString("ribbon", "ActiveDatabase")} {_musicDatabase.CurrentDatabase}";
+  }
 
     #endregion
 

@@ -29,6 +29,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
     bool ScanActive { get; }
 
     /// <summary>
+    /// Returns the active database
+    /// </summary>
+    string CurrentDatabase { get; }
+
+    /// <summary>
     /// Start a Database Build out of a given Share
     /// </summary>
     /// <param name="musicShare"></param>
@@ -44,6 +49,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// Deletes the Music Database
     /// </summary>
     void DeleteDatabase();
+
+    /// <summary>
+    /// Switch between Work and Productive database
+    /// </summary>
+    void SwitchDatabase();
 
     /// <summary>
     /// Runs the query against the MusicDatabase

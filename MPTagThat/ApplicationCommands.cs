@@ -155,5 +155,7 @@ namespace MPTagThat
     public static Command DeleteDatabase = new Elegant.Ui.Command("DeleteDatabase");
     [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
     public static Command ExecuteDatabaseQuery = new Elegant.Ui.Command("ExecuteDatabaseQuery");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command SwitchDatabase = new Elegant.Ui.Command("SwitchDatabase");
   }
 }

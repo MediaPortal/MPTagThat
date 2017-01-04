@@ -151,12 +151,14 @@
 	<string name="ribbon.DatabaseTab">Database</string>
 	<string name="ribbon.DatabaseQueryGroup">Database Query</string>
 	<string name="ribbon.Query">Query</string>
+	<string name="ribbon.SwitchDatabase">Switch Database</string>
 	<string name="ribbon.DatabaseMaintenanceGroup">Database Maintenance</string>
 	<string name="ribbon.StartDBScan">Start Scan</string>
 	<string name="ribbon.AbortDBScan">Abort Scan</string>
 	<string name="ribbon.DeleteDB">Delete Database</string>
 	<string name="ribbon.ClearDatabase">Clear database content before scanning</string>
 	<string name="ribbon.SelectMusicFolder">Music Files</string>
+	<string name="ribbon.ActiveDatabase">Active database:</string>
 	
 	
     <!-- Ribbon Screen Tip --> 
