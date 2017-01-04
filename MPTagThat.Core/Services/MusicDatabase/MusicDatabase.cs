@@ -171,7 +171,8 @@ namespace MPTagThat.Core.Services.MusicDatabase
       _store.Dispose();
       _store = null;
       RemoveStore(CurrentDatabase);
-      Util.DeleteFolder(Options.StartupSettings.DatabaseFolder);
+      var dbPath = $"{Options.StartupSettings.DatabaseFolder}{CurrentDatabase}";
+      Util.DeleteFolder(dbPath);
       CreateDbConnection();
     }
 
