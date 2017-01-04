@@ -245,13 +245,13 @@ namespace MPTagThat.Core.Services.MusicDatabase
         {
           var id = dbTracks[0].Id;
           var dbTrackData = _session.Load<TrackData>($"TrackDatas/{id}");
-          _session.Advanced.Evict(dbTrackData);
           track.Id = id;
           // Reset status
           track.Status = -1;
           track.Changed = false;
           track = StoreCoverArt(track);
-          _session.Store(track);
+          dbTrackData = track;
+          _session.SaveChanges();
         }
       }
       catch (Exception ex)
