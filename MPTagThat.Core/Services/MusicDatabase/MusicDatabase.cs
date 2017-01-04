@@ -196,19 +196,30 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// <param name="query"></param>
     public List<TrackData> ExecuteQuery(string query)
     {
+      return ExecuteQuery(query, "");
+    }
+
+    /// <summary>
+    /// Runs the query against the MusicDatabase
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="orderBy"></param>
+    public List<TrackData> ExecuteQuery(string query, string orderBy)
+    {
       if (_store == null && !CreateDbConnection())
       {
         log.Error("Could not establish a session.");
         return null;
       }
 
+      var order = orderBy.Split(',');
       List<TrackData> result = null;
 
       if (query.Contains(":"))
       {
         result = _session.Advanced.DocumentQuery<TrackData>()
           .Where(query)
-          .OrderBy()
+          .OrderBy(order)
           .Take(int.MaxValue)
           .ToList();
       }
@@ -218,6 +229,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
         searchText.AddRange(query.Split(new char[] { ' ' }));
         result = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>()
           .ContainsAll("Query", searchText)
+          .OrderBy(order)
           .Take(int.MaxValue)
           .ToList();
       }

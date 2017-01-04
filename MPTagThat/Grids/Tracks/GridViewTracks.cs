@@ -931,8 +931,9 @@ namespace MPTagThat.GridView
       Options.Songlist.Clear();
       GC.Collect();
 
-      var query = CreateQuery(searchString);
-      var result = ServiceScope.Get<IMusicDatabase>().ExecuteQuery(query);
+      var orderBy = "";
+      var query = CreateQuery(searchString, out orderBy);
+      var result = ServiceScope.Get<IMusicDatabase>().ExecuteQuery(query, orderBy);
 
       // Get File Filter Settings
       _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
@@ -999,46 +1000,49 @@ namespace MPTagThat.GridView
     /// Create a query based on the selection
     /// </summary>
     /// <param name="searchString"></param>
+    /// <param name="orderBy"></param>
     /// <returns></returns>
-    private string CreateQuery(string[] searchString)
+    private string CreateQuery(string[] searchString, out string orderBy)
     {
       var query = "";
+      orderBy = "";
 
       switch (searchString[0])
       {
         case "artist":
           query = FormatMultipleEntries(searchString[1], "Artist");
-          //orderByClause = "strAlbum, iTrack";
+          orderBy = "Album,Track";
           if (searchString.GetLength(0) > 2)
           {
             query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
-            //orderByClause = "iTrack";
+            orderBy = "Track";
           }
           break;
 
         case "albumartist":
           query = FormatMultipleEntries(searchString[1], "AlbumArtist");
-          //orderByClause = "strAlbum, iTrack";
+          orderBy = "Album,Track";
           if (searchString.GetLength(0) > 2)
           {
             query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
-            //orderByClause = "iTrack";
+            orderBy = "Track";
           }
           break;
 
         case "genre":
           query = FormatMultipleEntries(searchString[1], "Genre");
           //orderByClause = "strArtist, strAlbum, iTrack";
+          orderBy = "Artist,Album,Track";
           if (searchString.GetLength(0) > 2)
           {
             query += " AND ";
             query += FormatMultipleEntries(searchString[2], "Artist");
-            //orderByClause = "strAlbum, iTrack";
+            orderBy = "Album,Track";
           }
           if (searchString.GetLength(0) > 3)
           {
             query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[3])}\"";
-            //orderByClause = "iTrack";
+            orderBy = "Album,Track";
           }
           break;
       }
