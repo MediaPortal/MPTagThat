@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Configuration;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Text;
@@ -56,6 +57,29 @@ namespace MPTagThat
     [STAThread]
     private static void Main(string[] args)
     {
+      try
+      {
+        // We need to set the app.config file programmatically to point to the users APPDATA Folder
+        var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        var settings = configFile.AppSettings.Settings;
+        var key = "Raven/WorkingDir";
+        var value = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                    "\\MPTagthat\\Databases";
+        if (settings[key] == null)
+        {
+          settings.Add(key, value);
+        }
+        else
+        {
+          settings[key].Value = value;
+        }
+        configFile.Save(ConfigurationSaveMode.Modified);
+        ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+      }
+      catch (ConfigurationErrorsException ex)
+      {
+      }
+
       // Need to reset the Working directory, since when we called via the Explorer Context menu, it'll be different
       Directory.SetCurrentDirectory(Application.StartupPath);
 
