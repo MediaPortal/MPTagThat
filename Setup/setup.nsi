@@ -36,7 +36,7 @@ SetCompressor /SOLID lzma
 
 # Defines
 !define REGKEY "SOFTWARE\Team MediaPortal\$(^Name)"
-!define VERSION 3.0.0
+!define VERSION 3.5.0
 !define COMPANY "Team MediaPortal"
 !define AUTHOR "Helmut Wahrmann"
 !define URL www.team-mediaportal.com
@@ -59,7 +59,7 @@ SetCompressor /SOLID lzma
 !include MUI2.nsh
 !include LogicLib.nsh
 !include InstallOptions.nsh
-!include "DotNetVer.nsh"
+!include "DotNetChecker.nsh"
 
 # Variables
 Var StartMenuGroup
@@ -87,7 +87,7 @@ InstallDir "$PROGRAMFILES\Team MediaPortal\MPTagThat"
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 3.0.0.0
+VIProductVersion 3.5.0.0
 VIAddVersionKey ProductName "MPTagThat the MediaPortal Tag Editor"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
@@ -103,13 +103,8 @@ BrandingText  "$(^Name) ${VERSION} by ${AUTHOR}"
 
 # Installer sections
 Section -Main SEC0000
-	${IfNOT} ${HasDotNet4.0}
-		MessageBox MB_OK "Missing installation of Microsoft .NET Framework 4.0. Please install first."
-		Abort "Missing Microsoft .NET Framework 4.0"
-		Quit
-	${EndIf}
-
-	DetailPrint "Microsoft .NET Framework 4.0 installed."
+	
+	!insertmacro CheckNetFramework 45
 	
     SetOverwrite on
     
@@ -125,6 +120,9 @@ Section -Main SEC0000
 	File ..\Libraries\DiscogsNet\bin\Release\Newtonsoft.Json.dll
 	File ..\Libraries\Hqub.MusicBrainz.API\bin\Release\Hqub.MusicBrainz.API.dll
 	File ..\Libraries\LastFMLibrary\bin\Release\LastFMLibrary.dll
+	File ..\MPTagThat\bin\Release\bin\Raven*.*
+	File ..\MPTagThat\bin\Release\bin\Nlog.dll
+	File ..\MPTagThat\bin\Release\bin\Microsoft.Owin.Host.HttpListener.dll
     
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
