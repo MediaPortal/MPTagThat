@@ -84,7 +84,7 @@ namespace MPTagThat.Core
       FileInfo fi = new FileInfo(fileName);
       try
       {
-        track.Id = Guid.NewGuid();
+        track.Id = null; // Raven should generate the ID
         track.FullFileName = fileName;
         track.FileName = Path.GetFileName(fileName);
         track.Readonly = fi.IsReadOnly;

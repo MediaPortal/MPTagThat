@@ -53,7 +53,7 @@ namespace MPTagThat.Core
 
 		private IDocumentStore _store;
     private IDocumentSession _session;
-		private List<Guid> _dbIdList = new List<Guid>(); 
+		private List<string> _dbIdList = new List<string>(); 
 
     private int _lastRetrievedTrackIndex = -1;
     private TrackData _lastRetrievedTrack = null;
@@ -244,15 +244,11 @@ namespace MPTagThat.Core
 
         var result = queryableData.Provider.CreateQuery<TrackData>(queryExpr);
 
-
-        int i = 0;
         _dbIdList.Clear();
         foreach (TrackData dataObject in result)
         {
           _dbIdList.Add(dataObject.Id);
-          i++;
         }
-
       }
       else
       {

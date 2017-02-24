@@ -26,8 +26,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Windows.Forms;
-using MPTagThat.Core;
 using MPTagThat.Core.Common;
 using MPTagThat.Core.Services.MusicDatabase.Indexes;
 using Raven.Abstractions.Data;
@@ -35,7 +33,6 @@ using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
 using Raven.Client.Indexes;
-using Raven.Json.Linq;
 
 #endregion 
 
@@ -60,6 +57,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
     private readonly ConcurrentDictionary<string, Lazy<IDocumentStore>> _stores =
         new ConcurrentDictionary<string, Lazy<IDocumentStore>>();
+
 
     #endregion
 
@@ -271,14 +269,14 @@ namespace MPTagThat.Core.Services.MusicDatabase
         var dbTracks = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>().WhereEquals("Query", originalFileName).ToList();
         if (dbTracks.Count > 0)
         {
-          var id = dbTracks[0].Id;
-          var dbTrackData = _session.Load<TrackData>($"TrackDatas/{id}");
-          track.Id = id;
+          track.Id = dbTracks[0].Id;
+          _session.Advanced.Evict(dbTracks[0]); // Release refe
           // Reset status
           track.Status = -1;
           track.Changed = false;
           track = StoreCoverArt(track);
-          dbTrackData = track;
+          
+          _session.Store(track);
           _session.SaveChanges();
         }
       }

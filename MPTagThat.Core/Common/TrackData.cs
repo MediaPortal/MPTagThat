@@ -21,6 +21,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using MPTagThat.Core.Common;
 using TagLib;
 using Picture = MPTagThat.Core.Common.Picture;
@@ -82,17 +83,11 @@ namespace MPTagThat.Core
 
     #region Common Properties
 
-    private Guid _id;
-
     /// <summary>
     /// Unique ID of the Track
     /// To be used in identifying cloned / changed tracks
     /// </summary>
-    public Guid Id
-    {
-      get { return _id; }
-      set { _id = value; }
-    }
+    public string Id { get; set; }
 
     /// <summary>
     /// The ID3 Version
