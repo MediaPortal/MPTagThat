@@ -53,11 +53,13 @@ namespace MPTagThat.Core
 
 		private IDocumentStore _store;
     private IDocumentSession _session;
-		private List<string> _dbIdList = new List<string>(); 
+		private List<string> _dbIdList = new List<string>();
+    private int _trackId = 0;
 
     private int _lastRetrievedTrackIndex = -1;
     private TrackData _lastRetrievedTrack = null;
     private int _countCache = 0;
+
 
     #endregion
 
@@ -66,7 +68,7 @@ namespace MPTagThat.Core
     public SongList()
     {
       _databaseModeEnabled = false;
-      _databaseFolder = $@"{System.Windows.Forms.Application.StartupPath}\Database\Databases\{_databaseName}";
+      _databaseFolder = $"{Options.StartupSettings.DatabaseFolder}{_databaseName}";
     }
 
     #endregion
@@ -116,7 +118,7 @@ namespace MPTagThat.Core
 
           _lastRetrievedTrackIndex = i;
 
-	        var result = _session.Load<TrackData>($"TrackDatas/{_dbIdList[i]}");
+	        var result = _session.Load<TrackData>(_dbIdList[i]);
 
           _lastRetrievedTrack = result;
           return _lastRetrievedTrack;
@@ -128,7 +130,7 @@ namespace MPTagThat.Core
       {
         if (_databaseModeEnabled)
         {
-					var result = _session.Load<TrackData>($"TrackDatas/{_dbIdList[i]}");
+					var result = _session.Load<TrackData>(_dbIdList[i]);
 
 					var track = result;
           track = value;
@@ -159,6 +161,7 @@ namespace MPTagThat.Core
 
       if (_databaseModeEnabled)
       {
+        track.Id = $"TrackDatas/{_trackId++.ToString()}";
         _session.Store(track);
         _dbIdList.Add(track.Id);
       }
@@ -185,7 +188,7 @@ namespace MPTagThat.Core
     {
       if (_databaseModeEnabled)
       {
-				var track = _session.Load<TrackData>($"TrackDatas/{_dbIdList[index]}");
+				var track = _session.Load<TrackData>(_dbIdList[index]);
 				_session.Delete(track);
 				_session.SaveChanges();
 	      _dbIdList.RemoveAt(index);
@@ -203,6 +206,7 @@ namespace MPTagThat.Core
     {
       if (_databaseModeEnabled)
       {
+        _trackId = 0;
         _databaseModeEnabled = false;
 				_store.DatabaseCommands.DeleteByIndex("Auto/TrackDatas", new IndexQuery());	
 				_dbIdList.Clear();
@@ -271,7 +275,7 @@ namespace MPTagThat.Core
       {
 	      try
 	      {
-					System.IO.Directory.Delete($@"{System.Windows.Forms.Application.StartupPath}\Database\{_databaseName}", true);
+					System.IO.Directory.Delete(_databaseFolder, true);
 	      }
 	      catch (IOException)
 	      {
@@ -305,6 +309,7 @@ namespace MPTagThat.Core
       }
 
       _dbIdList.Clear();
+      _trackId = 0;
 
       BulkInsertOptions bulkInsertOptions = new BulkInsertOptions
       {
@@ -316,6 +321,7 @@ namespace MPTagThat.Core
 	    {
 		    foreach (TrackData track in _bindingList)
 		    {
+		      track.Id = $"TrackDatas/{_trackId++.ToString()}";
 			    bulkInsert.Store(track);
 			    _dbIdList.Add(track.Id);
 		    }
