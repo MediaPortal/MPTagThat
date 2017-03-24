@@ -490,6 +490,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
     private void ScanShare_DoWork(object sender, DoWorkEventArgs e)
     {
+      _audioFiles = 0;
       _scanStartTime = DateTime.Now;
       var di = new DirectoryInfo((string)e.Argument);
       try
