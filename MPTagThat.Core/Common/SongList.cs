@@ -208,8 +208,12 @@ namespace MPTagThat.Core
       {
         _trackId = 0;
         _databaseModeEnabled = false;
-				_store.DatabaseCommands.DeleteByIndex("Auto/TrackDatas", new IndexQuery());	
-				_dbIdList.Clear();
+        _session?.Advanced.Clear();
+        _session = null;
+        _store.Dispose();
+        _store = null;
+        ServiceScope.Get<IMusicDatabase>().RemoveStore(_databaseName);
+        _dbIdList.Clear();
 			}
       else
       {
@@ -273,24 +277,15 @@ namespace MPTagThat.Core
 
       try
       {
-	      try
-	      {
-					System.IO.Directory.Delete(_databaseFolder, true);
-	      }
-	      catch (IOException)
-	      {
-	      }
-
-	      _store = ServiceScope.Get<IMusicDatabase>().GetDocumentStoreFor(_databaseName);
+	      Util.DeleteFolder(_databaseFolder);
+        _store = ServiceScope.Get<IMusicDatabase>().GetDocumentStoreFor(_databaseName);
 	      _session = _store.OpenSession();
-
-				return true;
+        return true;
       }
       catch (Exception ex)
       {
         ServiceScope.Get<ILogger>().GetLogger.Error("Error creating DB Connection. Database Mode disabled. {0}", ex.Message);
       }
-
       return false;
     }
 
