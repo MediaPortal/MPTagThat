@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using Elegant.Ui;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
+using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -303,6 +304,11 @@ namespace MPTagThat.Organise
               FileSystem.MoveFile(track.FullFileName, newFilename, ckOverwriteFiles.Checked);
               Options.Songlist[row.Index].Status = 0;
             }
+
+            // Update the Music Database
+            var originalFileName = track.FullFileName;
+            track.FullFileName = newFilename;
+            ServiceScope.Get<IMusicDatabase>().UpdateTrack(track, originalFileName);
           }
           catch (Exception e2)
           {
