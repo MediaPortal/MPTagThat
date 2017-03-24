@@ -233,18 +233,15 @@ namespace MPTagThat.Core.Services.MusicDatabase
       }
       else
       {
-        if (order[0] == "")
-        {
-          order[0] = "Query";
-        }
-
         var searchText = new List<object>();
         searchText.AddRange(query.Split(new char[] { ' ' }));
-        result = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>()
+        var resultSet = _session.Advanced.DocumentQuery<TrackData, DefaultSearchIndex>()
           .ContainsAll("Query", searchText)
-          .OrderBy(order)
           .Take(int.MaxValue)
           .ToList();
+
+        // need to do our own ordering
+        result = resultSet.OrderBy(x => x.Artist).ThenBy(x => x.Album).ThenBy(x => x.Track).ToList();
       }
       return result;
     }
