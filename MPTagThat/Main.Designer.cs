@@ -484,7 +484,7 @@ namespace MPTagThat
       this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelBottom.Location = new System.Drawing.Point(0, 1072);
       this.panelBottom.Name = "panelBottom";
-      this.panelBottom.Size = new System.Drawing.Size(1481, 90);
+      this.panelBottom.Size = new System.Drawing.Size(1489, 90);
       this.panelBottom.TabIndex = 12;
       // 
       // playerPanel
@@ -492,7 +492,7 @@ namespace MPTagThat
       this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.playerPanel.Location = new System.Drawing.Point(0, 0);
       this.playerPanel.Name = "playerPanel";
-      this.playerPanel.Size = new System.Drawing.Size(1481, 90);
+      this.playerPanel.Size = new System.Drawing.Size(1489, 90);
       this.playerPanel.TabIndex = 11;
       // 
       // formFrameSkinner
@@ -509,7 +509,7 @@ namespace MPTagThat
       this.statusBar.Location = new System.Drawing.Point(0, 1162);
       this.statusBar.Name = "statusBar";
       this.statusBar.NotificationsArea = this.statusBarNotificationsArea1;
-      this.statusBar.Size = new System.Drawing.Size(1481, 22);
+      this.statusBar.Size = new System.Drawing.Size(1489, 22);
       this.statusBar.TabIndex = 16;
       this.statusBar.Text = "statusBar1";
       // 
@@ -523,7 +523,7 @@ namespace MPTagThat
       this.statusBarNotificationsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarNotificationsArea1.Name = "statusBarNotificationsArea1";
-      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(1166, 22);
+      this.statusBarNotificationsArea1.Size = new System.Drawing.Size(1174, 22);
       this.statusBarNotificationsArea1.TabIndex = 1;
       // 
       // statusBarPane2
@@ -598,7 +598,7 @@ namespace MPTagThat
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane4);
       this.statusBarControlsArea1.Controls.Add(this.statusBarPane1);
       this.statusBarControlsArea1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.statusBarControlsArea1.Location = new System.Drawing.Point(1166, 0);
+      this.statusBarControlsArea1.Location = new System.Drawing.Point(1174, 0);
       this.statusBarControlsArea1.MaximumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.MinimumSize = new System.Drawing.Size(0, 22);
       this.statusBarControlsArea1.Name = "statusBarControlsArea1";
@@ -681,7 +681,7 @@ namespace MPTagThat
             this.startMenuRefresh});
       this.ribbon.QuickAccessToolbarCustomizationDialogEnabled = false;
       this.ribbon.QuickAccessToolbarCustomizationEnabled = false;
-      this.ribbon.Size = new System.Drawing.Size(1481, 150);
+      this.ribbon.Size = new System.Drawing.Size(1489, 150);
       this.ribbon.TabIndex = 15;
       this.ribbon.TabPages.AddRange(new Elegant.Ui.RibbonTabPage[] {
             this.ribbonTabPageTag,
@@ -2990,7 +2990,7 @@ namespace MPTagThat
       this.ribbonTabPageDatabase.KeyTip = null;
       this.ribbonTabPageDatabase.Location = new System.Drawing.Point(0, 0);
       this.ribbonTabPageDatabase.Name = "ribbonTabPageDatabase";
-      this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1481, 99);
+      this.ribbonTabPageDatabase.Size = new System.Drawing.Size(1489, 99);
       this.ribbonTabPageDatabase.TabIndex = 0;
       this.ribbonTabPageDatabase.Text = "Database";
       // 
@@ -3047,6 +3047,7 @@ namespace MPTagThat
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDBSwitch.LargeImages.Images"))))});
       this.buttonDBSwitch.Location = new System.Drawing.Point(364, 2);
       this.buttonDBSwitch.Name = "buttonDBSwitch";
+      this.buttonDBSwitch.ScreenTip.Image = ((System.Drawing.Image)(resources.GetObject("buttonDBSwitch.ScreenTip.Image")));
       this.buttonDBSwitch.Size = new System.Drawing.Size(52, 72);
       this.buttonDBSwitch.SmallImages.Images.AddRange(new Elegant.Ui.ControlImage[] {
             new Elegant.Ui.ControlImage("Normal", ((System.Drawing.Image)(resources.GetObject("buttonDBSwitch.SmallImages.Images"))))});
@@ -4130,7 +4131,7 @@ namespace MPTagThat
       this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddle.Location = new System.Drawing.Point(0, 150);
       this.panelMiddle.Name = "panelMiddle";
-      this.panelMiddle.Size = new System.Drawing.Size(1481, 919);
+      this.panelMiddle.Size = new System.Drawing.Size(1489, 919);
       this.panelMiddle.TabIndex = 10;
       // 
       // panelMiddleTop
@@ -4139,7 +4140,7 @@ namespace MPTagThat
       this.panelMiddleTop.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelMiddleTop.Location = new System.Drawing.Point(158, 0);
       this.panelMiddleTop.Name = "panelMiddleTop";
-      this.panelMiddleTop.Size = new System.Drawing.Size(1149, 647);
+      this.panelMiddleTop.Size = new System.Drawing.Size(1157, 647);
       this.panelMiddleTop.TabIndex = 11;
       // 
       // panelFileList
@@ -4147,7 +4148,7 @@ namespace MPTagThat
       this.panelFileList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panelFileList.Location = new System.Drawing.Point(0, 0);
       this.panelFileList.Name = "panelFileList";
-      this.panelFileList.Size = new System.Drawing.Size(1149, 647);
+      this.panelFileList.Size = new System.Drawing.Size(1157, 647);
       this.panelFileList.TabIndex = 9;
       // 
       // splitterLeft
@@ -4195,7 +4196,7 @@ namespace MPTagThat
       this.splitterRight.ExpandParentForm = false;
       this.splitterRight.Localisation = "splitterRight";
       this.splitterRight.LocalisationContext = "Main";
-      this.splitterRight.Location = new System.Drawing.Point(1307, 0);
+      this.splitterRight.Location = new System.Drawing.Point(1315, 0);
       this.splitterRight.Name = "splitterRight";
       this.splitterRight.TabIndex = 4;
       this.splitterRight.TabStop = false;
@@ -4208,7 +4209,7 @@ namespace MPTagThat
       this.panelRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.panelRight.BackColor = System.Drawing.SystemColors.Control;
       this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
-      this.panelRight.Location = new System.Drawing.Point(1315, 0);
+      this.panelRight.Location = new System.Drawing.Point(1323, 0);
       this.panelRight.Name = "panelRight";
       this.panelRight.Size = new System.Drawing.Size(166, 919);
       this.panelRight.TabIndex = 3;
@@ -4236,7 +4237,7 @@ namespace MPTagThat
       this.panelMiddleBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.panelMiddleBottom.Location = new System.Drawing.Point(150, 655);
       this.panelMiddleBottom.Name = "panelMiddleBottom";
-      this.panelMiddleBottom.Size = new System.Drawing.Size(1165, 264);
+      this.panelMiddleBottom.Size = new System.Drawing.Size(1173, 264);
       this.panelMiddleBottom.TabIndex = 12;
       // 
       // splitterPlayer
@@ -4270,7 +4271,7 @@ namespace MPTagThat
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1481, 1184);
+      this.ClientSize = new System.Drawing.Size(1489, 1184);
       this.Controls.Add(this.backstageView);
       this.Controls.Add(this.panelMiddle);
       this.Controls.Add(this.ribbon);
