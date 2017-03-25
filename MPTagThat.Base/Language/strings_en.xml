@@ -939,5 +939,6 @@
   <!-- Database Related -->
   <string name="Database.DBScanFinished">Database scan finished. Processed {0} tracks in: {1:d2}:{2:d2}:{3:d2}</string>
   <string name="Database.DBScanActive">Database Scan is still active.\nAbort the scan and quit the application?</string>
-	
+  <string name="Database.DBScanAborted">Database scan cancelled</string>
+  
 </resources>

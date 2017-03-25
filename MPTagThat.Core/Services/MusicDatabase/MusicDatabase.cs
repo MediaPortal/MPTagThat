@@ -470,6 +470,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
       BackgroundWorker bgw = (BackgroundWorker)sender;
       if (e.Cancelled)
       {
+        Util.SendProgress(ServiceScope.Get<ILocalisation>().ToString("Database", "DBScanAborted"));
         log.Info("Database Scan cancelled");
       }
       else if (e.Error != null)
@@ -503,6 +504,12 @@ namespace MPTagThat.Core.Services.MusicDatabase
         {
           foreach (FileInfo fi in GetFiles(di, true))
           {
+            if (_bgwScanShare.CancellationPending)
+            {
+              e.Cancel = true;
+              break;
+            }
+
             try
             {
               if (!Util.IsAudio(fi.FullName))
