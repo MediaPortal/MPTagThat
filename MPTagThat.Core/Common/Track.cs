@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -143,10 +144,10 @@ namespace MPTagThat.Core
         track.Title = file.Tag.Title ?? "";
         track.TitleSortName = file.Tag.TitleSort ?? "";
 
-        track.ReplayGainTrack = file.Tag.ReplayGainTrack ?? "";
-        track.ReplayGainTrackPeak = file.Tag.ReplayGainTrackPeak ?? "";
-        track.ReplayGainAlbum = file.Tag.ReplayGainAlbum ?? "";
-        track.ReplayGainAlbumPeak = file.Tag.ReplayGainAlbumPeak ?? "";
+        track.ReplayGainTrack = double.IsNaN(file.Tag.ReplayGainTrackGain) ? "" : file.Tag.ReplayGainTrackGain.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainTrackPeak = double.IsNaN(file.Tag.ReplayGainTrackPeak) ? "" : file.Tag.ReplayGainTrackPeak.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainAlbum = double.IsNaN(file.Tag.ReplayGainAlbumGain) ? "" : file.Tag.ReplayGainAlbumGain.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainAlbumPeak = double.IsNaN(file.Tag.ReplayGainAlbumPeak) ? "" : file.Tag.ReplayGainAlbumPeak.ToString(CultureInfo.InvariantCulture);
 
         track.TrackNumber = file.Tag.Track;
         track.TrackCount = file.Tag.TrackCount;
@@ -573,10 +574,10 @@ namespace MPTagThat.Core
 
           file.Tag.Year = (uint) track.Year;
 
-          file.Tag.ReplayGainTrack = track.ReplayGainTrack;
-          file.Tag.ReplayGainTrackPeak = track.ReplayGainTrackPeak;
-          file.Tag.ReplayGainAlbum = track.ReplayGainAlbum;
-          file.Tag.ReplayGainAlbumPeak = track.ReplayGainAlbumPeak;
+          file.Tag.ReplayGainTrackGain = double.Parse(track.ReplayGainTrack);
+          file.Tag.ReplayGainTrackPeak = double.Parse(track.ReplayGainTrackPeak);
+          file.Tag.ReplayGainAlbumGain = double.Parse(track.ReplayGainAlbum);
+          file.Tag.ReplayGainAlbumPeak = double.Parse(track.ReplayGainAlbumPeak);
 
           #endregion
 

@@ -49,6 +49,9 @@ namespace TagLib.Ogg
 	[SupportedMimeType("video/x-ogm+ogg")]
 	[SupportedMimeType("video/x-theora+ogg")]
 	[SupportedMimeType("video/x-theora")]
+	[SupportedMimeType("audio/opus")]
+	[SupportedMimeType("audio/x-opus")]
+	[SupportedMimeType("audio/x-opus+ogg")]
 	public class File : TagLib.File
 	{
 #region Private Fields
@@ -341,13 +344,6 @@ namespace TagLib.Ogg
 				return;
 			
 			PageHeader last_header = LastPageHeader;
-
-			// Needed for Opus Bitrate Calculation
-			streams[last_header
-				.StreamSerialNumber].Codec.FileLength = InvariantEndPosition;
-			streams[last_header
-				.StreamSerialNumber].Codec.LastGranularPosition =
-				last_header.AbsoluteGranularPosition;
 
 			TimeSpan duration = streams [last_header
 				.StreamSerialNumber].GetDuration (

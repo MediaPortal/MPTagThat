@@ -194,6 +194,35 @@ namespace TagLib.Id3v2 {
 #region Public Methods
 		
 		/// <summary>
+		///    Gets the text value from a specified Text Information
+		///    Frame.
+		/// </summary>
+		/// <param name="ident">
+		///    A <see cref="ByteVector" /> object containing the frame
+		///    identifier of the Text Information Frame to get the value
+		///    from.
+		/// </param>
+		/// <returns>
+		///    A <see cref="string" /> object containing the text of the
+		///    specified frame, or <see langword="null" /> if no value
+		///    was found.
+		/// </returns>
+		public string GetTextAsString (ByteVector ident)
+		{
+			Frame frame;
+			// Handle URL LInk frames differently
+			if (ident[0] == 'W')
+				frame = UrlLinkFrame.Get(
+					this, ident, false);
+			else
+				frame = TextInformationFrame.Get (
+					this, ident, false);
+			
+			string result = frame == null ? null : frame.ToString ();
+			return string.IsNullOrEmpty (result) ? null : result;
+		}
+		
+		/// <summary>
 		///    Gets all frames contained in the current instance.
 		/// </summary>
 		/// <returns>
@@ -448,6 +477,7 @@ namespace TagLib.Id3v2 {
           UrlLinkFrame.Get(this, ident, true);
 
         urlFrame.Text = text;
+				urlFrame.TextEncoding = DefaultEncoding;
         return;
       }
 
@@ -887,11 +917,14 @@ namespace TagLib.Id3v2 {
 				Frame frame = null;
 				
 				try {
-					frame = FrameFactory.CreateFrame (data,
+					frame = FrameFactory.CreateFrame(
+						data,
 						ref frame_data_position,
 						header.MajorVersion,
 						fullTagUnsynch);
 				} catch (NotImplementedException) {
+					continue;
+				} catch (CorruptFileException) {
 					continue;
 				}
 				
@@ -972,31 +1005,6 @@ namespace TagLib.Id3v2 {
 		
 #region Private Methods
 		
-		// TODO: These should become public some day.
-		
-		/// <summary>
-		///    Gets the text value from a specified Text Information
-		///    Frame.
-		/// </summary>
-		/// <param name="ident">
-		///    A <see cref="ByteVector" /> object containing the frame
-		///    identifier of the Text Information Frame to get the value
-		///    from.
-		/// </param>
-		/// <returns>
-		///    A <see cref="string" /> object containing the text of the
-		///    specified frame, or <see langword="null" /> if no value
-		///    was found.
-		/// </returns>
-		private string GetTextAsString (ByteVector ident)
-		{
-			TextInformationFrame frame = TextInformationFrame.Get (
-				this, ident, false);
-			
-			string result = frame == null ? null : frame.ToString ();
-			return string.IsNullOrEmpty (result) ? null : result;
-		}
-		
 		/// <summary>
 		///    Gets the text values from a specified Text Information
 		///    Frame.
@@ -1055,21 +1063,51 @@ namespace TagLib.Id3v2 {
 		}
 
 		/// <summary>
-		/// Gets a TXXX frame via reference of the description field
+		/// Gets a TXXX frame via reference of the description field, optionally searching for the
+		/// frame in a case-sensitive manner.
 		/// </summary>
 		/// <param name="description">String containing the description field</param>
 		/// <returns>UserTextInformationFrame (TXXX) that corresponds to the description</returns>
-		private string GetUserTextAsString (string description){
+		private string GetUserTextAsString (string description, bool caseSensitive) {
 
 			//Gets the TXXX frame, frame will be null if nonexistant
 			UserTextInformationFrame frame = UserTextInformationFrame.Get (
-				this, description, false);
+				this, description, Tag.DefaultEncoding, false, caseSensitive);
 
 			//TXXX frames support multivalue strings, join them up and return
 			//only the text from the frame.
 			string result = frame == null ? null : string.Join (";",frame.Text);
 			return string.IsNullOrEmpty (result) ? null : result;
 
+		}
+
+		/// <summary>
+		/// Gets a TXXX frame via reference of the description field.
+		/// </summary>
+		/// <param name="description">String containing the description field</param>
+		/// <returns>UserTextInformationFrame (TXXX) that corresponds to the description</returns>
+		private string GetUserTextAsString (string description) {
+			return GetUserTextAsString (description, true);
+		}
+
+		/// <summary>
+		/// Creates and/or sets a UserTextInformationFrame (TXXX)  with the given
+		/// description and text, optionally searching for the frame in a case-sensitive manner.
+		/// </summary>
+		/// <param name="description">String containing the Description field for the
+		/// TXXX frame</param>
+		/// <param name="text">String containing the Text field for the TXXX frame</param>
+		private void SetUserTextAsString(string description, string text, bool caseSensitive) {
+			//Get the TXXX frame, create a new one if needed
+			UserTextInformationFrame frame = UserTextInformationFrame.Get(
+				this, description, Tag.DefaultEncoding, true, caseSensitive);
+
+			if (!string.IsNullOrEmpty(text)) {
+				frame.Text = text.Split(';');
+			} else {
+			//Text string is null or empty, delete the frame, prevent empties
+				RemoveFrame(frame);
+			}
 		}
 
 		/// <summary>
@@ -1080,19 +1118,7 @@ namespace TagLib.Id3v2 {
 		/// TXXX frame</param>
 		/// <param name="text">String containing the Text field for the TXXX frame</param>
 		public void SetUserTextAsString(string description, string text) {
-
-			//Get the TXXX frame, create a new one if needed
-			UserTextInformationFrame frame = UserTextInformationFrame.Get(
-				this, description, true);
-
-			if (!string.IsNullOrEmpty(text)) {
-				frame.Text = text.Split(';');
-			}
-			else {
-			//Text string is null or empty, delete the frame, prevent empties
-				RemoveFrame(frame);
-			}
-
+			SetUserTextAsString (description, text, true);
 		}
 
 		/// <summary>
@@ -1904,75 +1930,149 @@ namespace TagLib.Id3v2 {
 		}
 
     /// <summary>
-    ///    Gets and sets the ReplayGain Track Value of the media represented by
-    ///    the current instance.
+		///    Gets and sets the ReplayGain track gain in dB.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Track Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
+		///    A <see cref="bool" /> value in dB for the track gain as
+		///    per the ReplayGain specification.
     /// </value>
     /// <remarks>
-    ///    This property is implemented using the "TXXX:replaygain_track_gain" frame.
+		///    This property is implemented using the "TXXX:REPLAYGAIN_TRACK_GAIN" frame.
+		///    http://wiki.hydrogenaudio.org/index.php?title=ReplayGain_specification#ID3v2
     /// </remarks>
-    public override string ReplayGainTrack
-    {
-      get { return GetUserTextAsString("replaygain_track_gain"); }
-      set { SetUserTextAsString("replaygain_track_gain", value); }
+		public override double ReplayGainTrackGain {
+			get {
+				string text = GetUserTextAsString ("REPLAYGAIN_TRACK_GAIN", false);
+				double value;
+
+				if (text == null) {
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db")) {
+					text = text.Substring (0, text.Length - 2).Trim();
+				}
+				
+				if (double.TryParse (text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value)) {
+					return value;
+				}
+				return double.NaN;
+			}
+			set {
+				if (double.IsNaN (value)) {
+					SetUserTextAsString ("REPLAYGAIN_TRACK_GAIN", null, false);
+				} else {
+					string text = value.ToString("0.00 dB",
+						CultureInfo.InvariantCulture);
+					SetUserTextAsString ("REPLAYGAIN_TRACK_GAIN", text, false);
+				}
+			}
     }
 
     /// <summary>
-    ///    Gets and sets the ReplayGain Peak Value of the media represented by
-    ///    the current instance.
+		///    Gets and sets the ReplayGain track peak sample.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
+		///    A <see cref="bool" /> value for the track peak as per the
+		///    ReplayGain specification.
     /// </value>
     /// <remarks>
-    ///    This property is implemented using the "TXXX:replaygain_track_peak" frame.
+		///    This property is implemented using the "TXXX:REPLAYGAIN_TRACK_PEAK" frame.
+		///    http://wiki.hydrogenaudio.org/index.php?title=ReplayGain_specification#ID3v2
     /// </remarks>
-    public override string ReplayGainTrackPeak
-    {
-      get { return GetUserTextAsString("replaygain_track_peak"); }
-      set { SetUserTextAsString("replaygain_track_peak", value); }
+		public override double ReplayGainTrackPeak {
+			get {
+				string text;
+				double value;
+
+				if ((text = GetUserTextAsString ("REPLAYGAIN_TRACK_PEAK", false)) !=
+					null && double.TryParse (text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value)) {
+						return value;
+				}
+				return double.NaN;
+			}
+			set {
+				if (double.IsNaN (value)) {
+					SetUserTextAsString ("REPLAYGAIN_TRACK_PEAK", null, false);
+				} else {
+					string text = value.ToString ("0.000000", CultureInfo.InvariantCulture);
+					SetUserTextAsString ("REPLAYGAIN_TRACK_PEAK", text, false);
+				}
+			}
     }
 
     /// <summary>
-    ///    Gets and sets the ReplayGain Album Value of the media represented by
-    ///    the current instance.
+		///    Gets and sets the ReplayGain album gain in dB.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
+		///    A <see cref="bool" /> value in dB for the album gain as
+		///    per the ReplayGain specification.
     /// </value>
     /// <remarks>
-    ///    This property is implemented using the "TXXX:replaygain_album_gain" frame.
+		///    This property is implemented using the "TXXX:REPLAYGAIN_ALBUM_GAIN" frame.
+		///    http://wiki.hydrogenaudio.org/index.php?title=ReplayGain_specification#ID3v2
     /// </remarks>
-    public override string ReplayGainAlbum
-    {
-      get { return GetUserTextAsString("replaygain_album_gain"); }
-      set { SetUserTextAsString("replaygain_album_gain", value); }
+		public override double ReplayGainAlbumGain {
+			get {
+				string text = GetUserTextAsString ("REPLAYGAIN_ALBUM_GAIN", false);
+				double value;
+
+				if (text == null) {
+					return double.NaN;
+				}
+				if (text.ToLower(CultureInfo.InvariantCulture).EndsWith("db")) {
+					text = text.Substring (0, text.Length - 2).Trim();
+				}
+				
+				if (double.TryParse (text, NumberStyles.Float,
+					CultureInfo.InvariantCulture, out value)) {
+					return value;
+				}
+				return double.NaN;
+			}
+			set {
+				if (double.IsNaN (value)) {
+					SetUserTextAsString ("REPLAYGAIN_ALBUM_GAIN", null, false);
+				} else {
+					string text = value.ToString ("0.00 dB",
+						CultureInfo.InvariantCulture);
+					SetUserTextAsString ("REPLAYGAIN_ALBUM_GAIN", text, false);
+				}
+			}
     }
 
     /// <summary>
-    ///    Gets and sets the ReplayGain ALbum Peak Value of the media represented by
-    ///    the current instance.
+		///    Gets and sets the ReplayGain album peak sample.
     /// </summary>
     /// <value>
-    ///    A <see cref="string" /> containing the ReplayGain Album Peak Value of the
-    ///    media represented by the current instance or an empty
-    ///    array if no value is present.
+		///    A <see cref="bool" /> value for the album peak as per the
+		///    ReplayGain specification.
     /// </value>
     /// <remarks>
-    ///    This property is implemented using the "TXXX:replaygain_album_peak" frame.
+		///    This property is implemented using the "TXXX:REPLAYGAIN_ALBUM_PEAK" frame.
+		///    http://wiki.hydrogenaudio.org/index.php?title=ReplayGain_specification#ID3v2
     /// </remarks>
-    public override string ReplayGainAlbumPeak
-    {
-      get { return GetUserTextAsString("replaygain_album_peak"); }
-      set { SetUserTextAsString("replaygain_album_peak", value); }
+		public override double ReplayGainAlbumPeak {
+			get {
+				string text;
+				double value;
+
+				if ((text = GetUserTextAsString ("REPLAYGAIN_ALBUM_PEAK", false)) !=
+					null && double.TryParse (text, NumberStyles.Float,
+						CultureInfo.InvariantCulture, out value)) {
+						return value;
+				}
+				return double.NaN;
+			}
+			set {
+				if (double.IsNaN (value)) {
+					SetUserTextAsString ("REPLAYGAIN_ALBUM_PEAK", null, false);
+				} else {
+					string text = value.ToString("0.000000", CultureInfo.InvariantCulture);
+					SetUserTextAsString ("REPLAYGAIN_ALBUM_PEAK", text, false);
+				}
+			}
     }
 
 		/// <summary>

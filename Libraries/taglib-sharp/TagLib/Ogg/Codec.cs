@@ -91,10 +91,6 @@ namespace TagLib.Ogg
 		private static List<CodecProvider> providers =
 			new List<CodecProvider> ();
 
-		protected long file_length;
-		protected long first_absolute_granular_position;
-		protected long last_absolute_granular_position;
-
 #endregion
 		
 		
@@ -140,7 +136,7 @@ namespace TagLib.Ogg
 			if (c != null)
 				return c;
 
-			c = Codecs.Opus.FromPacket(packet);
+			c = Codecs.Opus.FromPacket (packet);
 			if (c != null)
 				return c;
 			
@@ -213,21 +209,6 @@ namespace TagLib.Ogg
 		/// </remarks>
 		public TimeSpan Duration {
 			get {return TimeSpan.Zero;}
-		}
-
-		public long FileLength
-		{
-			set {file_length = value;}
-		}
-
-		public long FirstGranularPosition
-		{
-			set { first_absolute_granular_position = value; }
-		}
-
-		public long LastGranularPosition
-		{
-			set { last_absolute_granular_position = value; }
 		}
 
 #endregion
