@@ -24,11 +24,11 @@
 using System;
 using System.Reflection;
 
-[assembly:AssemblyVersion("2.1.0.1")]
+[assembly:AssemblyVersion("2.1.0.3")]
 [assembly:AssemblyTitle ("TagLib#")]
 [assembly:AssemblyDescription ("A library for reading and writing audio metatags.")]
 [assembly:AssemblyProduct("MediaPortal specific version.")]
-[assembly:AssemblyCopyright ("Copyright (c) 2006-2007 Brian Nickel.  Copyright (c) 2009-2010 Other contributors")]
+[assembly:AssemblyCopyright ("Copyright (c) 2006-2007 Brian Nickel.  Copyright (c) 2009-2017 Other contributors")]
 [assembly:AssemblyCompany ("Team MediaPortal")]
 [assembly:AssemblyDelaySign(false)]
 [assembly:AssemblyKeyFile("taglib-sharp.snk")]
