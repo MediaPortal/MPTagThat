@@ -244,6 +244,12 @@
     <string name="screentip.BurnCancel">Cancel Burning</string>
     <string name="screentip.BurnCancelText">Terminates the burning process</string>
 
+	<!-- Database Tab -->
+	<string name="screentip.Query">Runs the Query against the selected Database</string>
+	<string name="screentip.SwitchDatabase">Opens a dialog to switch between Databases</string>
+	<string name="screentip.StartDBScan">Starts scanning the specified share and stores the result in the selected database.</string>
+	<string name="screentip.AbortDBScan">Aborts the currently running scan</string>
+	<string name="screentip.DeleteDB">Deletes the active Database</string>
   
   
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 

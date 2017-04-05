@@ -1387,11 +1387,16 @@ namespace MPTagThat
       ribbonGroupQuery.Text =
         $"{localisation.ToString("ribbon", "DatabaseQueryGroup")}. {localisation.ToString("ribbon", "ActiveDatabase")} {_musicDatabase.CurrentDatabase}";
       buttonExecuteQuery.Text = localisation.ToString("ribbon", "Query");
+      buttonExecuteQuery.ScreenTip.Text = localisation.ToString("screentip", "Query");
       buttonDBSwitch.Text = localisation.ToString("ribbon", "SwitchDatabase");
+      buttonDBSwitch.ScreenTip.Text = localisation.ToString("screentip", "SwitchDatabase");
       ribbonGroupDatabaseMaint.Text = localisation.ToString("ribbon", "DatabaseMaintenanceGroup");
       buttonStartDBScan.Text = localisation.ToString("ribbon", "StartDBScan");
+      buttonStartDBScan.ScreenTip.Text = localisation.ToString("screentip", "StartDBScan");
       buttonAbortDBScan.Text = localisation.ToString("ribbon", "AbortDBScan");
+      buttonAbortDBScan.ScreenTip.Text = localisation.ToString("screentip", "AbortDBScan");
       buttonDeleteDB.Text = localisation.ToString("ribbon", "DeleteDB");
+      buttonDeleteDB.ScreenTip.Text = localisation.ToString("screentip", "DeleteDB");
       labelMusicFolder.Text = localisation.ToString("ribbon", "SelectMusicFolder");
       checkBoxClearDatabase.Text = localisation.ToString("ribbon", "ClearDatabase");
 
