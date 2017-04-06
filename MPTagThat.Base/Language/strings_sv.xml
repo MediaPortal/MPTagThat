@@ -123,6 +123,11 @@
   <string name="ribbon.BurnOptions">Inställningar för Bränning</string>
   <string name="ribbon.Burner">Välj Brännare:</string>
   <string name="ribbon.BurnerSpeed">Brännarhastighet:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Databas</string>
+  <string name="ribbon.DatabaseTab">Databas</string>
+  <string name="ribbon.StartDBScan">Påbörja skanning</string>
+  <string name="ribbon.ClearDatabase">Rensa databas innan skanning körs</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Uppdatera</string>
@@ -202,6 +207,7 @@ Notera att dynamiken i filen ej ändras.</string>
   <string name="screentip.BurnText">Påbörjar bränning av de filer som ligger i listan för bränning.</string>
   <string name="screentip.BurnCancel">Avbryt bränning</string>
   <string name="screentip.BurnCancelText">Avbryter bränningen</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Ändra på flera taggar</string>
@@ -613,7 +619,6 @@ Beroende på vilken bitrate som angivits kommer denna förinställning att berä
   <string name="Settings.EmbedExistingThumb">Bädda in befintlig mappbild (folder.jpg) vid omslagssökning</string>
   <string name="Settings.OnlySaveFolderThumb">Spara skivomslaget endast som mappbild. Lagras ej i musikfiler.</string>
   <string name="Settings.ChangeCoverSize">Spara omslag som har en pixelbredd motsvarande:</string>
-  <string name="Settings.AmazonSite">Amazon sökmotor:</string>
   <string name="Settings.GroupBoxLyrics">Texter</string>
   <string name="Settings.SwitchArtist">Byt Artist innan lagring</string>
   <string name="Settings.OverwriteExistingLyrics">Skriv över befintliga texter vid automatisk taggning</string>
@@ -643,24 +648,6 @@ Beroende på vilken bitrate som angivits kommer denna förinställning att berä
   <string name="Settings.GroupBoxDCustomGenre">Egna genrer</string>
   <string name="Settings.AddCustomGenre">Lägg till genre</string>
   <string name="Settings.DeleteCustomGenre">Ta bort genre</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Bygg Musik-Databas</string>
-  <string name="Settings.DatabaseScanNote">Om ingen databas från MediaPortal är tillgänglig kan en databas skapas genom att ett filnamn läggs in i textrutan ovan.
-Starta sedan en skanning.</string>
-  <string name="Settings.StartDBScan">Påbörja skanning</string>
-  <string name="Settings.DBScanStatus">Skannings-status</string>
-  <string name="Settings.DBNotExists">Den valda databasen existerar inte.
-Om du väljer \"Ja\" kommer en ny databas att skapas.
-Starta en skanning för att fylla databasen.</string>
-  <string name="Settings.ClearDatabase">Rensa databas innan skanning körs</string>
-  <string name="Settings.SelectMusicFolder">Välj den mapp där dina Musik-Filer finns</string>
-  <string name="Settings.DBScanIdle">Databas-skanning är inte aktiv.</string>
-  <string name="Settings.DBScanFinished">Databas-skanning färdig.
-{0} filer har processats under: {1:d2}:{2:d2}:{3:d2}{4}</string>
-  <string name="Settings.DBScanTrackSummary">({0} sekunder per spår)</string>
-  <string name="Settings.DBScanTitle">Bekräfta att du vill avbryta skanning</string>
-  <string name="Settings.DBScanActive">Databas-skanningen är fortfarande aktiv.
-Vill du avbryta skanningen och stänga programmet?</string>
-  <string name="Settings.DBScanProgress">Går igenom fil {0} av {1}</string>
   <string name="Settings.TabRipping">Rippar</string>
   <string name="Settings.TabRippingGeneral">Generellt</string>
   <string name="Settings.CustomPath">Egna sökvägar och Filnamn</string>
@@ -827,15 +814,6 @@ More information at:</string>
   <string name="player.LoadPlayList">Ladda spellista</string>
   <string name="player.SavePlayList">Spara spellista</string>
   <string name="player.UseRelativePath">Använd relativ sökväg</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Artist / AlbumArtist (innehåller):</string>
-  <string name="dbsearch.Album">Album (innehåller):</string>
-  <string name="dbsearch.Title">Titel (innehåller):</string>
-  <string name="dbsearch.Search">Sök</string>
-  <string name="dbsearch.NoMusicDB">För att använda sökfunktionen för Databaser måste sökvägen till
-Musikdatabasen anges i Inställningar.</string>
-  <string name="dbsearch.NoSearchValues">Lägg till åtminstone ett värde att söka efter.</string>
-  <string name="dbsearch.TooMuchRows">Databassökningen gav för många träffar. Endast de 1000 första kommer att visas.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Hitta</string>
   <string name="findreplace.HeaderReplace">Ersätt</string>
@@ -863,4 +841,10 @@ Skall MPTagThat ändra attributen och sedan spara om filen?</string>
   <string name="albumgain.Header">Album-Volym</string>
   <string name="albumgain.Explanation">Samtliga filer har markerats.
 Skall MPTagThat beräkna volymen för hela Albumet?</string>
+  <!--Database Related-->
+  <string name="Database.DBScanActive">Databas-skanningen är fortfarande aktiv.
+Vill du avbryta skanningen och stänga programmet?</string>
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Stäng</string>
+  <string name="dbswitch.notavailable">Ej tillgänglig</string>
 </resources>

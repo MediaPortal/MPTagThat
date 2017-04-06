@@ -118,6 +118,11 @@
   <string name="ribbon.BurnOptions">Innstillinger for Brenner</string>
   <string name="ribbon.Burner">Velg Brenner:</string>
   <string name="ribbon.BurnerSpeed">Brennerhastighet:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Database</string>
+  <string name="ribbon.DatabaseTab">Database</string>
+  <string name="ribbon.StartDBScan">Start Søk</string>
+  <string name="ribbon.ClearDatabase">Fjern innholdet i databasen før søking</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Oppfrisk</string>
@@ -182,6 +187,7 @@
   <string name="screentip.BurnText">Starter brenning av filer som finnes i listen til CD.</string>
   <string name="screentip.BurnCancel">Avbryt Brenning</string>
   <string name="screentip.BurnCancelText">Avbryt brenner prosessen</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Flervalgt Tagg Endring</string>
@@ -573,7 +579,6 @@ Relaterte Filer (Bilder, etc.)</string>
   <string name="Settings.GroupBoxPictures">Bilder</string>
   <string name="Settings.OverwriteExistingCover">Skriv over eksisterende Bilde(r) ved automatisk tagging</string>
   <string name="Settings.EmbedExistingThumb">Legg til eksisterende bilde (folder.jpg) ved bilde søk</string>
-  <string name="Settings.AmazonSite">Amazon Søke Side:</string>
   <string name="Settings.GroupBoxLyrics">Tekster</string>
   <string name="Settings.SwitchArtist">Bytt Artist føre utførelse</string>
   <string name="Settings.OverwriteExistingLyrics">Skriv over eksisterende lyrikk ved automatisk tagging</string>
@@ -597,15 +602,6 @@ Relaterte Filer (Bilder, etc.)</string>
   <string name="Settings.GroupBoxTagsValidate">MP3 Fil Validering</string>
   <string name="Settings.ValidateMP3">Valider MP3 Filer under skanning av folder / database</string>
   <string name="Settings.AutoFixMP3">Automatisk fiks feil i MP3 filene</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Lag Musikk Database</string>
-  <string name="Settings.StartDBScan">Start Søk</string>
-  <string name="Settings.DBScanStatus">Søke Status</string>
-  <string name="Settings.ClearDatabase">Fjern innholdet i databasen før søking</string>
-  <string name="Settings.SelectMusicFolder">Veld Mappen som inneholder Musikk filene dine</string>
-  <string name="Settings.DBScanIdle">Database Søk ikke aktivert.</string>
-  <string name="Settings.DBScanTrackSummary"> ({0} sekunder pr spor)</string>
-  <string name="Settings.DBScanTitle">Bekreft avbrytelse av Database søk</string>
-  <string name="Settings.DBScanProgress">Behandler fil {0} av {1}</string>
   <string name="Settings.TabRipping">Ripping</string>
   <string name="Settings.TabRippingGeneral">Generelt</string>
   <string name="Settings.CustomPath">Egne Baner og Filnavn</string>
@@ -758,13 +754,6 @@ Relaterte Filer (Bilder, etc.)</string>
   <string name="player.LoadPlayList">Åpne Spilleliste</string>
   <string name="player.SavePlayList">Lagre Spilleliste</string>
   <string name="player.UseRelativePath">Bruk relativ Bane</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Artist / AlbumArtist (inneholder):</string>
-  <string name="dbsearch.Album">Album (inneholder):</string>
-  <string name="dbsearch.Title">Tittel (inneholder):</string>
-  <string name="dbsearch.Search">Søk</string>
-  <string name="dbsearch.NoSearchValues">Vennligst minst en verdi å søke etter.</string>
-  <string name="dbsearch.TooMuchRows">Søket ga for mange rader, viser nå de 1000 første.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Finn</string>
   <string name="findreplace.HeaderReplace">Erstatt</string>
@@ -782,4 +771,8 @@ Relaterte Filer (Bilder, etc.)</string>
   <string name="findreplace.ReplaceAllBtn">Erstatt alle</string>
   <!--Readonly Dialog-->
   <!--Replay Gain Popup-->
+  <!--Database Related-->
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Lukk</string>
+  <string name="dbswitch.notavailable">N/A</string>
 </resources>
