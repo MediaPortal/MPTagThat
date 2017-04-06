@@ -125,6 +125,11 @@ de Carpeta</string>
   <string name="ribbon.BurnOptions">Opciones de Grabación</string>
   <string name="ribbon.Burner">Seleccionar Grabador:</string>
   <string name="ribbon.BurnerSpeed">Velocidad de Grabador:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Base de Datos</string>
+  <string name="ribbon.DatabaseTab">Base de Datos</string>
+  <string name="ribbon.StartDBScan">Comenzar Escaneo</string>
+  <string name="ribbon.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Refrescar</string>
@@ -202,6 +207,7 @@ de Carpeta</string>
   <string name="screentip.BurnText">Inicia la grabación de los archivos que se encuentran en la lista de grabación.</string>
   <string name="screentip.BurnCancel">Cancelar Grabación</string>
   <string name="screentip.BurnCancelText">Termina el proceso de grabación</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Edición Múltiple de Etiquetas</string>
@@ -611,7 +617,6 @@ deben tomarse del nombre de la carpeta</string>
   <string name="Settings.EmbedExistingThumb">Insertar miniatura de carpeta existente (Carpeta.jpg) en búsqueda de portadas</string>
   <string name="Settings.OnlySaveFolderThumb">Sólo Guardar Carátula en la carpeta. No tocar el archivo de música</string>
   <string name="Settings.ChangeCoverSize">Guardar carátulas con una anchura máxima de píxeles de:</string>
-  <string name="Settings.AmazonSite">Sitio de Búsqueda Amazon:</string>
   <string name="Settings.GroupBoxLyrics">Letras</string>
   <string name="Settings.SwitchArtist">Cambiar Artista antes de enviar</string>
   <string name="Settings.OverwriteExistingLyrics">Sobreescribir Letras existentes en etiquetado automático</string>
@@ -641,19 +646,6 @@ deben tomarse del nombre de la carpeta</string>
   <string name="Settings.GroupBoxDCustomGenre">Géneros Personalizados</string>
   <string name="Settings.AddCustomGenre">Añadir Género</string>
   <string name="Settings.DeleteCustomGenre">Borrar Género</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Construcción de Base de Datos Musical</string>
-  <string name="Settings.DatabaseScanNote">Si no está disponible la base de datos de música de MediaPortal, se puede crear una base de datos introduciendo un nombre de archivo en el campo de texto.\nDespués comience el escaneo.</string>
-  <string name="Settings.StartDBScan">Comenzar Escaneo</string>
-  <string name="Settings.DBScanStatus">Estado de Escaneo</string>
-  <string name="Settings.DBNotExists">La base de datos seleccionada no existe.\nSi selecciona \"Yes\" se creará una nueva base de datos.\nComience un escaneo para rellenar la base de datos.</string>
-  <string name="Settings.ClearDatabase">Borrar contenido de la base de datos antes de escanear</string>
-  <string name="Settings.SelectMusicFolder">Seleccione la carpeta con sus Archivos de Música</string>
-  <string name="Settings.DBScanIdle">Escaneo de la Base de datos no activo</string>
-  <string name="Settings.DBScanFinished">Escaneo de la Base de Datos realizado.\nProcesadas {0} pistas en: {1:d2}:{2:d2}:{3:d2}{4}</string>
-  <string name="Settings.DBScanTrackSummary"> ({0} segundos por pista)</string>
-  <string name="Settings.DBScanTitle">Confirme interrupción del Escaneo de la Base de Datos</string>
-  <string name="Settings.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
-  <string name="Settings.DBScanProgress">Progreso de archivo {0} de {1}</string>
   <string name="Settings.TabRipping">Extrayendo</string>
   <string name="Settings.TabRippingGeneral">General</string>
   <string name="Settings.CustomPath">Rutas y Nombres de Archivo Personalizados</string>
@@ -816,14 +808,6 @@ deben tomarse del nombre de la carpeta</string>
   <string name="player.LoadPlayList">Cargar Lista</string>
   <string name="player.SavePlayList">Guardar Lista</string>
   <string name="player.UseRelativePath">Usar ruta relativa</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Artista / Álbum (contiene):</string>
-  <string name="dbsearch.Album">Álbum (contiene):</string>
-  <string name="dbsearch.Title">Título (contiene):</string>
-  <string name="dbsearch.Search">Buscar</string>
-  <string name="dbsearch.NoMusicDB">Para usar la función de búsqueda de la base de datos,\ndebe introducir la localización de la base de datos en la Configuración.</string>
-  <string name="dbsearch.NoSearchValues">Por favor, introduzca al menos un valor a buscar.</string>
-  <string name="dbsearch.TooMuchRows">La consulta devolvió demasiadas filas. Sólo se muestran las 1000 primeras.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Buscar</string>
   <string name="findreplace.HeaderReplace">Reemplazar</string>
@@ -849,4 +833,9 @@ deben tomarse del nombre de la carpeta</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Ganancia del Álbum</string>
   <string name="albumgain.Explanation">Todos los archivos seleccionados.\n¿Debe MPTagThat calcular una ganancia de Álbum?</string>
+  <!--Database Related-->
+  <string name="Database.DBScanActive">El escaneo de la Base de Datos sigue activo.\n¿Abortar escaneado y salir de la aplicación?</string>
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Cerrar</string>
+  <string name="dbswitch.notavailable">N/D</string>
 </resources>

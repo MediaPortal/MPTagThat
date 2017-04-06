@@ -216,7 +216,7 @@ namespace TagLib.Id3v2 {
 					this, ident, false);
 			else
 				frame = TextInformationFrame.Get (
-				this, ident, false);
+					this, ident, false);
 			
 			string result = frame == null ? null : frame.ToString ();
 			return string.IsNullOrEmpty (result) ? null : result;

@@ -123,6 +123,11 @@
   <string name="ribbon.BurnOptions">Brand Opties</string>
   <string name="ribbon.Burner">Selecteer brander:</string>
   <string name="ribbon.BurnerSpeed">Brandersnelheid:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Database</string>
+  <string name="ribbon.DatabaseTab">Database</string>
+  <string name="ribbon.StartDBScan">Start bijwerken</string>
+  <string name="ribbon.ClearDatabase">Database voor bijwerken leegmaken</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Verversen</string>
@@ -200,6 +205,7 @@ Als er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moe
   <string name="screentip.BurnText">Start het branden van de bestanden in de brandlijst.</string>
   <string name="screentip.BurnCancel">Annuleer branden</string>
   <string name="screentip.BurnCancelText">Beeindigd het brandproces.</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Meerdere Tags Bewerken</string>
@@ -607,7 +613,6 @@ Als er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moe
   <string name="Settings.EmbedExistingThumb">Bestaande miniatuur inbedden(folder.jpg) bij zoeken naar omslag.</string>
   <string name="Settings.OnlySaveFolderThumb">Sla albumhoes alleen als mapminiatuur op. Pas het muziekbestand niet aan.</string>
   <string name="Settings.ChangeCoverSize">Sla albumhoezen op met een maximale breedte (in pixels):</string>
-  <string name="Settings.AmazonSite">Amazon Zoekwebsite:</string>
   <string name="Settings.GroupBoxLyrics">Liedteksten</string>
   <string name="Settings.SwitchArtist">Wissel Artiest voor doorvoeren aapassing</string>
   <string name="Settings.OverwriteExistingLyrics">Overschrijf bestaande liedtekst(en) bij automatisch Taggen</string>
@@ -637,20 +642,6 @@ Als er niet opgeslagen wijzigingen zijn zal het systeem eerst vragen of deze moe
   <string name="Settings.GroupBoxDCustomGenre">Aangepaste Genres</string>
   <string name="Settings.AddCustomGenre">Genre toevoegen</string>
   <string name="Settings.DeleteCustomGenre">Genre verwijderen</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Muziek-Database opbouw</string>
-  <string name="Settings.DatabaseScanNote">Wanneer geen MediaPortal Database beschikbaar is, kan er een worden aangemaakt. Selecteer nieuw bestand. Start vervolgens het bijwerken.</string>
-  <string name="Settings.StartDBScan">Start bijwerken</string>
-  <string name="Settings.DBScanStatus">Bijwerk status</string>
-  <string name="Settings.DBNotExists">De geselecteerde database bestaat niet. Wanneer \"Ja\" wordt gekozen, word er een database aangemaakt. Start het bijwerken, om de database te vullen.</string>
-  <string name="Settings.ClearDatabase">Database voor bijwerken leegmaken</string>
-  <string name="Settings.SelectMusicFolder">Selecteer de muziek beschrijving</string>
-  <string name="Settings.DBScanIdle">Database bijwerking niet aktief.</string>
-  <string name="Settings.DBScanFinished">Database bijwerken beeindigd. {0} Audio bestand in: {1:d2}:{2:d2}:{3:d2}{4} verwerkt.</string>
-  <string name="Settings.DBScanTrackSummary"> ({0} Seconden per bestand)</string>
-  <string name="Settings.DBScanTitle">Database bijwerken afbreken</string>
-  <string name="Settings.DBScanActive">Database bijwerking is nog aktief.
-Bijwerking afbreken en applicatie beeindigen?</string>
-  <string name="Settings.DBScanProgress">Bewerkt bestand {0} van {1}</string>
   <string name="Settings.TabRipping">Rippen</string>
   <string name="Settings.TabRippingGeneral">Algemeen</string>
   <string name="Settings.CustomPath">Aangepast pad en bestandsnaam</string>
@@ -817,14 +808,6 @@ Meer informatie op:</string>
   <string name="player.LoadPlayList">Afspeellijst laden</string>
   <string name="player.SavePlayList">Afspeellijst opslaan</string>
   <string name="player.UseRelativePath">Gebruik een relatief pad</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Artiest / Albumartiest (bevat):</string>
-  <string name="dbsearch.Album">Album (bevat):</string>
-  <string name="dbsearch.Title">Titel (bevat):</string>
-  <string name="dbsearch.Search">Zoek</string>
-  <string name="dbsearch.NoMusicDB">Om de database zoekfunctie te gebruiken moet je de locatie van de Muziek database opgegeven in de instellingen.</string>
-  <string name="dbsearch.NoSearchValues">Geef a.u.b. minmaal 1 zoekwoord op.</string>
-  <string name="dbsearch.TooMuchRows">Er zijn te veel resultaten. Alleen de eerste 1000 resultaten zullen worden weergegeven.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Zoek</string>
   <string name="findreplace.HeaderReplace">Vervang</string>
@@ -852,4 +835,10 @@ Moet MPTagThat het attribuut aanpassen en het bestand opslaan?</string>
   <string name="albumgain.Header">Album Gain</string>
   <string name="albumgain.Explanation">Alle bestanden geselecteerd.
 Moet MPTagThat een Album Gain berekenen?</string>
+  <!--Database Related-->
+  <string name="Database.DBScanActive">Database bijwerking is nog aktief.
+Bijwerking afbreken en applicatie beeindigen?</string>
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Sluiten</string>
+  <string name="dbswitch.notavailable">N/B</string>
 </resources>

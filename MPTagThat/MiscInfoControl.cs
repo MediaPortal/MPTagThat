@@ -212,7 +212,11 @@ namespace MPTagThat
       size = new Size(0, 0);
       try
       {
-        img = new FreeImageBitmap(fileName);
+        using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        {
+          img = new FreeImageBitmap(fs);
+          fs.Close();
+        }
         size = img.Size;
 
         // convert Image Size to 64 x 64 for display in the Imagelist

@@ -147,5 +147,15 @@ namespace MPTagThat
     public static Command ReplayGain = new Elegant.Ui.Command("ReplayGain");
     [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
     public static Command Bpm = new Elegant.Ui.Command("Bpm");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command StartDBScan = new Elegant.Ui.Command("StartDBScan");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command AbortDBScan = new Elegant.Ui.Command("AbortDBScan");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command DeleteDatabase = new Elegant.Ui.Command("DeleteDatabase");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command ExecuteDatabaseQuery = new Elegant.Ui.Command("ExecuteDatabaseQuery");
+    [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+    public static Command SwitchDatabase = new Elegant.Ui.Command("SwitchDatabase");
   }
 }

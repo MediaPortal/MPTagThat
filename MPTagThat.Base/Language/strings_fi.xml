@@ -108,6 +108,9 @@
   <string name="ribbon.BurnOptions">Polton asetukset</string>
   <string name="ribbon.Burner">Valitse poltto asema:</string>
   <string name="ribbon.BurnerSpeed">Polttonopeus:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Tietokanta</string>
+  <string name="ribbon.DatabaseTab">Tietokanta</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Päivitä</string>
@@ -153,6 +156,7 @@
   <string name="screentip.BurnText">Aloittaa listalla olevien tiedostojen polton.</string>
   <string name="screentip.BurnCancel">Peruuta polttaminen</string>
   <string name="screentip.BurnCancelText">Lopettaa poltto prosessin</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Useiden tagien muokkaus</string>
@@ -321,12 +325,6 @@
   <string name="player.ClearPlayList">Tyhjennä soittolista</string>
   <string name="player.LoadPlayList">Lataa soittolista</string>
   <string name="player.SavePlayList">Tallenna soittolista</string>
-  <!--Database Search-->
-  <string name="dbsearch.Album">Albumi (sisältää):</string>
-  <string name="dbsearch.Title">Otsikko (sisältää);</string>
-  <string name="dbsearch.Search">Etsi</string>
-  <string name="dbsearch.NoSearchValues">Syötä ainakin yksi merkki etsiäksesi.</string>
-  <string name="dbsearch.TooMuchRows">Haku antoi liikaa tuloksia. Näytetään ensimmäiset 1000.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Etsi</string>
   <string name="findreplace.HeaderReplace">Korvaa</string>
@@ -344,4 +342,7 @@
   <string name="readonly.No">Ei</string>
   <string name="readonly.NoToAll">Ei kaikkiin</string>
   <!--Replay Gain Popup-->
+  <!--Database Related-->
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Sulje</string>
 </resources>

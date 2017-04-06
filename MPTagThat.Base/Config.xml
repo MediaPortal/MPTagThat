@@ -11,5 +11,25 @@
 	The following Parameter controls how many songs will be held in memory.
 	If this mark is reached, the songs will be stored in a temporary database to prevent Out of Memory issues on large collections
   -->
-  <MaximumNumberOfSongsInList>200</MaximumNumberOfSongsInList>
+  <MaximumNumberOfSongsInList>500</MaximumNumberOfSongsInList>
+  
+  <!-- 	The following Parameter controls if debugging for Raven Database shall be turned on.   -->
+  <RavenDebug>0</RavenDebug>
+
+  <!-- 	The following Parameter controls if Web interface for the RavenDB should be started. -->
+  <RavenStudio>0</RavenStudio>
+
+  <!-- 	The following Parameter sets the port used by the RavenDB Web interface.  -->
+  <RavenStudioPort>8080</RavenStudioPort>
+
+  <!-- 	The following Parameter sets the location of the Music Database.
+		Either specify an absolut path or use variables %PROGRAMDATA% or %APPDATA% 
+  -->
+  <MusicDatabaseFolder>%APPDATA%\MPTagThat\Databases</MusicDatabaseFolder>
+
+  <!-- 	The following Parameter sets the location of the Coberart to be used together with the Music Database.
+		Either specify an absolut path or use variables %PROGRAMDATA% or %APPDATA% 
+  -->
+  <CoverArtFolder>%APPDATA%\MPTagThat\CoverArt</CoverArtFolder>
+  
 </config>

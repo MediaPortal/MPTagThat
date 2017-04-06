@@ -150,7 +150,9 @@ namespace MPTagThat.TagEdit
 
       tabControlTagEdit.SelectFirstTab();
 
-      if (Options.MainSettings.UseMediaPortalDatabase && Options.MediaPortalArtists != null)
+      Options.ReadArtistDatabase();
+
+      if (Options.MediaPortalArtists != null)
       {
         // Add Auto Complete Option for Artist
         AutoCompleteStringCollection customSource = new AutoCompleteStringCollection();

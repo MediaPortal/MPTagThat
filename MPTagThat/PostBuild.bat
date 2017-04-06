@@ -10,6 +10,7 @@ xcopy %1\MPTagThat.Base\*.* . /E /R /Y /D
 
 REM Copy Core 
 xcopy /y %1\MPTagThat.Core\bin\%2\MPTagThat.Core.* .
+xcopy /y %1\MPTagThat.Core\bin\%2\NLog.dll .\bin
 
 REM Copy Taglib-Sharp 
 xcopy /y %1\Libraries\taglib-sharp\bin\%2\taglib-sharp.dll .\bin
@@ -34,3 +35,7 @@ xcopy /y %1\Libraries\Hqub.MusicBrainz.API\bin\%2\Hqub.MusicBrainz.API.dll .\bin
 
 REM Copy LastFM Library
 xcopy /y %1\Libraries\LastFMLibrary\bin\%2\LastFMLibrary.dll .\bin
+
+REM Copy RavenDB
+xcopy /y %1\MPTagThat.Core\bin\%2\Raven.*.dll .\bin
+xcopy /y %1\MPTagThat.Core\bin\%2\Microsoft.Owin.Host.HttpListener.dll .\bin

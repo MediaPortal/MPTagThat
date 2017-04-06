@@ -105,6 +105,9 @@ namespace MPTagThat.Core
     {
       Image cellImage = (Image)formattedValue;
 
+      if (value == null)
+        return;
+
       int starNumber = (int) value;
 
       if (starNumber > -1 && starNumber < 6)

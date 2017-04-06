@@ -122,6 +122,11 @@
   <string name="ribbon.BurnOptions">Brænde muligheder</string>
   <string name="ribbon.Burner">Vælg brænder:</string>
   <string name="ribbon.BurnerSpeed">Brændings hastighed;</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Database</string>
+  <string name="ribbon.DatabaseTab">Database</string>
+  <string name="ribbon.StartDBScan">Start Scan</string>
+  <string name="ribbon.ClearDatabase">Tøm database indhold før scanning</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Genopfrisk</string>
@@ -193,6 +198,7 @@
   <string name="screentip.BurnText">Starter brænding af filer, der findes i brændingen listen.</string>
   <string name="screentip.BurnCancel">Annuller brænding</string>
   <string name="screentip.BurnCancelText">Afslutter brænde processen</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Flere Tag redigering</string>
@@ -598,7 +604,6 @@
   <string name="Settings.EmbedExistingThumb">Integrer eksisterende folder thumb (folder.jpg) ved cover søgning</string>
   <string name="Settings.OnlySaveFolderThumb">Gem Cover Art kun i folder thumb. Rør ikke musikfilen</string>
   <string name="Settings.ChangeCoverSize">Gem cover med en maksimal pixel bredde på:</string>
-  <string name="Settings.AmazonSite">Amazon søge Site:</string>
   <string name="Settings.GroupBoxLyrics">Tekster</string>
   <string name="Settings.SwitchArtist">Skift kunstner før indsendelse</string>
   <string name="Settings.OverwriteExistingLyrics">Overskriv eksisterende tekster ved automatisk tagging</string>
@@ -625,15 +630,6 @@
   <string name="Settings.GroupBoxTagsValidate">MP3 Fil validering</string>
   <string name="Settings.ValidateMP3">Valider MP3-filer under scanning af folder / database</string>
   <string name="Settings.AutoFixMP3">Automatisk fix MP3-filer med fejl</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Musik Database opbygning</string>
-  <string name="Settings.StartDBScan">Start Scan</string>
-  <string name="Settings.DBScanStatus">Scan Status</string>
-  <string name="Settings.ClearDatabase">Tøm database indhold før scanning</string>
-  <string name="Settings.SelectMusicFolder">Vælg folderen med dine musikfiler</string>
-  <string name="Settings.DBScanIdle">Database Scan er ikke aktiv.</string>
-  <string name="Settings.DBScanTrackSummary">({0} sekunder pr track)</string>
-  <string name="Settings.DBScanTitle">Bekræft Database Scan afbrydelse</string>
-  <string name="Settings.DBScanProgress">Behandler fil {0} af {1}</string>
   <string name="Settings.TabRipping">Ripping</string>
   <string name="Settings.TabRippingGeneral">Generelt</string>
   <string name="Settings.CustomPath">Tilpassede Stier og filnavne</string>
@@ -792,13 +788,6 @@
   <string name="player.LoadPlayList">Hent PlayList</string>
   <string name="player.SavePlayList">Gem PlayList</string>
   <string name="player.UseRelativePath">Brug relativ Path</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Kunstner / Album Kunstner (indeholder):</string>
-  <string name="dbsearch.Album">Album (indeholder):</string>
-  <string name="dbsearch.Title">Titel (indeholder):</string>
-  <string name="dbsearch.Search">Søg</string>
-  <string name="dbsearch.NoSearchValues">Indtast mindst én værdi til at søge efter.</string>
-  <string name="dbsearch.TooMuchRows">Query returnere for mange rækker. Viser kun de første 1000.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Find</string>
   <string name="findreplace.HeaderReplace">Erstat</string>
@@ -822,4 +811,8 @@
   <string name="readonly.NoToAll">Nej til alle</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album Gain</string>
+  <!--Database Related-->
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Luk</string>
+  <string name="dbswitch.notavailable">N/A</string>
 </resources>
