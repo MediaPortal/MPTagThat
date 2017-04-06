@@ -65,12 +65,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Db4objects.Db4o">
-      <HintPath>..\MPTagThat.Base\bin\Db4objects.Db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.Linq">
-      <HintPath>..\MPTagThat.Base\bin\Db4objects.Db4o.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="Elegant.Ui.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Common.dll</HintPath>
