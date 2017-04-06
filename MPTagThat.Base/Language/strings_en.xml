@@ -251,7 +251,6 @@
 	<string name="screentip.AbortDBScan">Aborts the currently running scan</string>
 	<string name="screentip.DeleteDB">Deletes the active Database</string>
   
-  
   <!-- Tag Edit  (Multi Tagedit / Single Tagedit) --> 
   
     <!--  Title / Headers -->
@@ -946,5 +945,12 @@
   <string name="Database.DBScanFinished">Database scan finished. Processed {0} tracks in: {1:d2}:{2:d2}:{3:d2}</string>
   <string name="Database.DBScanActive">Database Scan is still active.\nAbort the scan and quit the application?</string>
   <string name="Database.DBScanAborted">Database scan cancelled</string>
+  
+  <!-- Database Switch Dialog -->
+  <string name="dbswitch.databasedescription">Database Description:</string>
+  <string name="dbswitch.defaultdatabasedescription">Default Music Database</string>
+  <string name="dbswitch.databaseadd">Add Database</string>
+  <string name="dbswitch.Close">Close</string>
+  <string name="dbswitch.notavailable">N/A</string>
   
 </resources>

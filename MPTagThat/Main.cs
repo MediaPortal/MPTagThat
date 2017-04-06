@@ -3848,7 +3848,7 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void DeleteDatabase_Executed(object sender, CommandExecutedEventArgs e)
     {
-      _musicDatabase.DeleteDatabase();
+      _musicDatabase.DeleteDatabase(_musicDatabase.CurrentDatabase);
     }
 
     /// <summary>
@@ -3924,9 +3924,11 @@ namespace MPTagThat
     /// <param name = "e"></param>
     private void SwitchDatabase_Executed(object sender, CommandExecutedEventArgs e)
     {
-      _musicDatabase.SwitchDatabase();
+      SwitchDatabase switchDatabaseDlg = new SwitchDatabase();
+      ShowModalDialog(switchDatabaseDlg);
+      var desc = switchDatabaseDlg.Description;
       ribbonGroupQuery.Text =
-        $"{localisation.ToString("ribbon", "DatabaseQueryGroup")}. {localisation.ToString("ribbon", "ActiveDatabase")} {_musicDatabase.CurrentDatabase}";
+        $"{localisation.ToString("ribbon", "DatabaseQueryGroup")}. {localisation.ToString("ribbon", "ActiveDatabase")} {desc}";
   }
 
     #endregion

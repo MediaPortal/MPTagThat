@@ -46,8 +46,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
     #region Variables
 
     private readonly NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
-    private readonly string _databaseName = "MusicDatabase";
-    private readonly string _workDatabaseName = "MusicWork";
+    private readonly string _defaultMusicDatabaseName = "MusicDatabase";
     private IDocumentStore _store;
     private IDocumentSession _session;
 
@@ -65,7 +64,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
     public MusicDatabase()
     {
-      CurrentDatabase = _databaseName;
+      CurrentDatabase = _defaultMusicDatabaseName;
     }
 
     ~MusicDatabase()
@@ -129,7 +128,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
     {
       if (deleteDatabase)
       {
-        DeleteDatabase();
+        DeleteDatabase(CurrentDatabase);
       }
 
       if (_store == null && !CreateDbConnection())
@@ -162,31 +161,39 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// <summary>
     /// Deletes the Music Database
     /// </summary>
-    public void DeleteDatabase()
+    public void DeleteDatabase(string databaseName)
     {
       _session?.Advanced.Clear();
       _session = null;
-      _store.Dispose();
+      _store?.Dispose();
       _store = null;
-      RemoveStore(CurrentDatabase);
-      var dbPath = $"{Options.StartupSettings.DatabaseFolder}{CurrentDatabase}";
+      RemoveStore(databaseName);
+      var dbPath = $"{Options.StartupSettings.DatabaseFolder}{databaseName}";
       Util.DeleteFolder(dbPath);
-      CreateDbConnection();
+      if (CurrentDatabase == databaseName)
+      {
+        CurrentDatabase = _defaultMusicDatabaseName;
+      }
     }
 
     /// <summary>
-    /// Switch between Work and Productive database
+    /// Switch between databases
     /// </summary>
-    public void SwitchDatabase()
+    public bool SwitchDatabase(string databaseName)
     {
+      var dbName = Util.MakeValidFileName(databaseName);
       _session?.Advanced.Clear();
       _session = null;
-      _store.Dispose();
+      _store?.Dispose();
       _store = null;
       RemoveStore(CurrentDatabase);
-      CurrentDatabase = CurrentDatabase == _databaseName ? _workDatabaseName : _databaseName;
-      CreateDbConnection();
-      log.Info($"Database has been switch to {CurrentDatabase}");
+      CurrentDatabase = dbName;
+      if (CreateDbConnection())
+      {
+        log.Info($"Database has been switch to {CurrentDatabase}");
+        return true;
+      }
+      return false;
     }
 
     /// <summary>

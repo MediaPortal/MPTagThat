@@ -48,12 +48,12 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// <summary>
     /// Deletes the Music Database
     /// </summary>
-    void DeleteDatabase();
+    void DeleteDatabase(string databaseName);
 
     /// <summary>
     /// Switch between Work and Productive database
     /// </summary>
-    void SwitchDatabase();
+    bool SwitchDatabase(string databaseName);
 
     /// <summary>
     /// Runs the query against the MusicDatabase

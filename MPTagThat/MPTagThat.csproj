@@ -219,6 +219,12 @@
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Dialogues\SwitchDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\SwitchDatabase.Designer.cs">
+      <DependentUpon>SwitchDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -369,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\SplashScreen\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\SwitchDatabase.resx">
+      <DependentUpon>SwitchDatabase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\TagEditControl.resx">
       <DependentUpon>TagEditControl.cs</DependentUpon>
