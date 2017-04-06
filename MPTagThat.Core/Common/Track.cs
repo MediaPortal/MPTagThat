@@ -578,19 +578,6 @@ namespace MPTagThat.Core
           file.Tag.ReplayGainTrackPeak = double.Parse(track.ReplayGainTrackPeak);
           file.Tag.ReplayGainAlbumGain = double.Parse(track.ReplayGainAlbum);
           file.Tag.ReplayGainAlbumPeak = double.Parse(track.ReplayGainAlbumPeak);
-          }
-          if (Double.TryParse(track.ReplayGainTrackPeak, out gain))
-          {
-            file.Tag.ReplayGainTrackPeak = gain;
-          }
-          if (Double.TryParse(track.ReplayGainAlbum, out gain))
-          {
-            file.Tag.ReplayGainAlbumGain = gain;
-          }
-          if (Double.TryParse(track.ReplayGainAlbumPeak, out gain))
-          {
-            file.Tag.ReplayGainAlbumPeak = gain;
-          }
 
           #endregion
 
