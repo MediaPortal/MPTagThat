@@ -22,7 +22,7 @@ public class Script : IScript
     // Use "Artist" or "SortArtist" as the result of the Auto Correction
     var artistType = "SortArtist";
 
-    var searchList = new List<string>() {" feat ", " feat. ", " ft ", " ft. ", " vs "};
+    var searchList = new List<string>() {" feat ", " feat. ", " ft ", " ft. ", " vs ", " vs. "};
     var foundArtists = new List<string>();
     var artistSplit = new List<string>();
     var sqlStmt = "select {0} from artist where artist like '{1}'";
@@ -39,7 +39,7 @@ public class Script : IScript
       // Does the artist contain a string specified in the searchList above?
       foreach (var searchstring in searchList)
       {
-        var index = artist.IndexOf(searchstring, StringComparison.Ordinal);
+        var index = artist.IndexOf(searchstring, StringComparison.InvariantCultureIgnoreCase);
         if (index > 0)
         {
           artistSplit.Add(artist.Substring(0, index));
@@ -66,7 +66,7 @@ public class Script : IScript
       }
       else
       {
-        foundArtists.Add(artist);
+        foundArtists.Add(searchArtist);
       }
     }
 

@@ -282,14 +282,7 @@ namespace MPTagThat.TagEdit
 
         TrackData track = Options.Songlist[row.Index];
 
-        if (!_isMultiTagEdit)
-        {
-          lbEditedFile.Text = track.FileName;
-        }
-        else
-        {
-          lbEditedFile.Text = "";
-        }
+        lbEditedFile.Text = !_isMultiTagEdit ? track.FileName : "";
 
         #region Main Tags
 
@@ -297,38 +290,17 @@ namespace MPTagThat.TagEdit
         {
           if (cbArtist.Text.Trim() != track.Artist.Trim())
           {
-            if (i == 0)
-            {
-              cbArtist.Text = track.Artist;
-            }
-            else
-            {
-              cbArtist.Text = "";
-            }
+            cbArtist.Text = i == 0 ? track.Artist : "";
           }
 
           if (cbAlbumArtist.Text.Trim() != track.AlbumArtist.Trim())
           {
-            if (i == 0)
-            {
-              cbAlbumArtist.Text = track.AlbumArtist;
-            }
-            else
-            {
-              cbAlbumArtist.Text = "";
-            }
+            cbAlbumArtist.Text = i == 0 ? track.AlbumArtist : "";
           }
 
           if (cbAlbum.Text.Trim() != track.Album.Trim())
           {
-            if (i == 0)
-            {
-              cbAlbum.Text = track.Album;
-            }
-            else
-            {
-              cbAlbum.Text = "";
-            }
+            cbAlbum.Text = i == 0 ? track.Album : "";
           }
         }
         else
@@ -342,14 +314,7 @@ namespace MPTagThat.TagEdit
         {
           if (checkBoxCompilation.Checked != track.Compilation)
           {
-            if (i == 0)
-            {
-              checkBoxCompilation.Checked = track.Compilation;
-            }
-            else
-            {
-              checkBoxCompilation.Checked = false;
-            }
+            checkBoxCompilation.Checked = i == 0 && track.Compilation;
           }
         }
         else
@@ -358,10 +323,9 @@ namespace MPTagThat.TagEdit
         }
 
         if (tbTitle.Text.Trim() != track.Title.Trim())
-          if (i == 0)
-            tbTitle.Text = track.Title;
-          else
-            tbTitle.Text = "";
+        {
+          tbTitle.Text = i == 0 ? track.Title : "";
+        }
 
         if (tbYear.Text.Trim() != track.Year.ToString())
           if (i == 0 && track.Year > 0)
@@ -2529,7 +2493,6 @@ namespace MPTagThat.TagEdit
             break;
 
           case "cbArtist":
-            ckArtist.Checked = true;
             if (_needUpdateArtists)
             {
               if (_canUpdateArtists)
@@ -2545,7 +2508,6 @@ namespace MPTagThat.TagEdit
             break;
 
           case "cbAlbumArtist":
-            ckAlbumArtist.Checked = true;
             if (_needUpdateAlbumArtists)
             {
               if (_canUpdateAlbumArtists)
@@ -2615,6 +2577,7 @@ namespace MPTagThat.TagEdit
     private void cbArtist_KeyPress(object sender, KeyPressEventArgs e)
     {
       _needUpdateArtists = true;
+      ckArtist.Checked = true;
     }
 
     private void RestartArtistTimer()
@@ -2657,6 +2620,7 @@ namespace MPTagThat.TagEdit
     private void cbAlbumArtist_KeyPress(object sender, KeyPressEventArgs e)
     {
       _needUpdateAlbumArtists = true;
+      ckAlbumArtist.Checked = true;
     }
 
     private void RestartAlbumArtistTimer()
