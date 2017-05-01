@@ -798,98 +798,42 @@ namespace MPTagThat.TagEdit
         {
           if (tbCopyrightUrl.Text.Trim() != track.CopyrightInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbCopyrightUrl.Text = track.CopyrightInformation;
-            }
-            else
-            {
-              tbCopyrightUrl.Text = "";
-            }
+            tbCopyrightUrl.Text = i == 0 ? track.CopyrightInformation : "";
           }
 
           if (tbOfficialAudioFileUrl.Text.Trim() != track.OfficialAudioFileInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialAudioFileUrl.Text = track.OfficialAudioFileInformation;
-            }
-            else
-            {
-              tbOfficialAudioFileUrl.Text = "";
-            }
+            tbOfficialAudioFileUrl.Text = i == 0 ? track.OfficialAudioFileInformation : "";
           }
 
           if (tbOfficialArtistUrl.Text.Trim() != track.OfficialArtistInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialArtistUrl.Text = track.OfficialArtistInformation;
-            }
-            else
-            {
-              tbOfficialArtistUrl.Text = "";
-            }
+            tbOfficialArtistUrl.Text = i == 0 ? track.OfficialArtistInformation : "";
           }
 
           if (tbOfficialAudioSourceUrl.Text.Trim() != track.OfficialAudioSourceInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialAudioSourceUrl.Text = track.OfficialAudioSourceInformation;
-            }
-            else
-            {
-              tbOfficialAudioSourceUrl.Text = "";
-            }
+            tbOfficialAudioSourceUrl.Text = i == 0 ? track.OfficialAudioSourceInformation : "";
           }
 
           if (tbOfficialInternetRadioUrl.Text.Trim() != track.OfficialInternetRadioInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialInternetRadioUrl.Text = track.OfficialInternetRadioInformation;
-            }
-            else
-            {
-              tbOfficialInternetRadioUrl.Text = "";
-            }
+            tbOfficialInternetRadioUrl.Text = i == 0 ? track.OfficialInternetRadioInformation : "";
           }
 
           if (tbOfficialPaymentUrl.Text.Trim() != track.OfficialPaymentInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialPaymentUrl.Text = track.OfficialPaymentInformation;
-            }
-            else
-            {
-              tbOfficialPaymentUrl.Text = "";
-            }
+            tbOfficialPaymentUrl.Text = i == 0 ? track.OfficialPaymentInformation : "";
           }
 
           if (tbOfficialPublisherUrl.Text.Trim() != track.OfficialPublisherInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbOfficialPublisherUrl.Text = track.OfficialPublisherInformation;
-            }
-            else
-            {
-              tbOfficialPublisherUrl.Text = "";
-            }
+            tbOfficialPublisherUrl.Text = i == 0 ? track.OfficialPublisherInformation : "";
           }
 
           if (tbCommercialInformationUrl.Text.Trim() != track.CommercialInformation.Trim())
           {
-            if (i == 0)
-            {
-              tbCommercialInformationUrl.Text = track.CommercialInformation;
-            }
-            else
-            {
-              tbCommercialInformationUrl.Text = "";
-            }
+            tbCommercialInformationUrl.Text = i == 0 ? track.CommercialInformation : "";
           }
         }
 
@@ -2577,52 +2521,53 @@ namespace MPTagThat.TagEdit
     private void OnComboChanged(object sender, EventArgs e)
     {
       MPTComboBox cb = sender as MPTComboBox;
-      switch (cb.Name)
-      {
-        case "cbMediaType":
-          ckMediaType.Checked = true;
-          break;
+      if (cb != null)
+        switch (cb.Name)
+        {
+          case "cbMediaType":
+            ckMediaType.Checked = true;
+            break;
 
-        case "cbArtist":
-          ckArtist.Checked = true;
-          if (_needUpdateArtists)
-          {
-            if (_canUpdateArtists)
+          case "cbArtist":
+            ckArtist.Checked = true;
+            if (_needUpdateArtists)
             {
-              _canUpdateArtists = false;
-              SearchAutocompleteArtists();
+              if (_canUpdateArtists)
+              {
+                _canUpdateArtists = false;
+                SearchAutocompleteArtists();
+              }
+              else
+              {
+                RestartArtistTimer();
+              }
             }
-            else
-            {
-              RestartArtistTimer();
-            }
-          }
-          break;
+            break;
 
-        case "cbAlbumArtist":
-          ckAlbumArtist.Checked = true;
-          if (_needUpdateAlbumArtists)
-          {
-            if (_canUpdateAlbumArtists)
+          case "cbAlbumArtist":
+            ckAlbumArtist.Checked = true;
+            if (_needUpdateAlbumArtists)
             {
-              _canUpdateAlbumArtists = false;
-              SearchAutocompleteAlbumArtists();
+              if (_canUpdateAlbumArtists)
+              {
+                _canUpdateAlbumArtists = false;
+                SearchAutocompleteAlbumArtists();
+              }
+              else
+              {
+                RestartAlbumArtistTimer();
+              }
             }
-            else
-            {
-              RestartAlbumArtistTimer();
-            }
-          }
-          break;
+            break;
 
-        case "cbAlbum":
-          ckAlbum.Checked = true;
-          break;
+          case "cbAlbum":
+            ckAlbum.Checked = true;
+            break;
 
-        case "cbGenre":
-          ckGenre.Checked = true;
-          break;
-      }
+          case "cbGenre":
+            ckGenre.Checked = true;
+            break;
+        }
     }
 
     /// <summary>
