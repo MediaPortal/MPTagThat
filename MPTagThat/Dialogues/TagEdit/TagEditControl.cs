@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using MPTagThat.Core;
 using MPTagThat.Core.AlbumInfo;
 using MPTagThat.Core.Common;
+using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Core.ShellLib;
 using MPTagThat.Core.WinControls;
 using MPTagThat.Dialogues;
@@ -57,6 +58,15 @@ namespace MPTagThat.TagEdit
     private ILocalisation localisation = ServiceScope.Get<ILocalisation>();
     private NLog.Logger log = ServiceScope.Get<ILogger>().GetLogger;
     private Main main;
+
+    // For Autocomplete support
+    private bool _canUpdateArtists = true;
+    private bool _needUpdateArtists = false;
+    private Timer _artistsTimer = null;
+
+    private bool _canUpdateAlbumArtists = true;
+    private bool _needUpdateAlbumArtists = false;
+    private Timer _albumArtistsTimer = null;
 
     #endregion
 
@@ -150,34 +160,17 @@ namespace MPTagThat.TagEdit
 
       tabControlTagEdit.SelectFirstTab();
 
-      Options.ReadArtistDatabase();
-
-      if (Options.MediaPortalArtists != null)
-      {
-        // Add Auto Complete Option for Artist
-        AutoCompleteStringCollection customSource = new AutoCompleteStringCollection();
-        customSource.AddRange(Options.MediaPortalArtists);
-
-        cbArtist.AutoCompleteCustomSource = customSource;
-        cbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        cbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-
-        tbArtist.AutoCompleteCustomSource = customSource;
-        tbArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        tbArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-
-        cbAlbumArtist.AutoCompleteCustomSource = customSource;
-        cbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        cbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-
-        tbAlbumArtist.AutoCompleteCustomSource = customSource;
-        tbAlbumArtist.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        tbAlbumArtist.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-      }
-
       dataGridViewUserFrames.CellValueChanged += dataGridViewUserFrames_CellValueChanged;
 
       ChangeCheckboxStatus(false);
+
+      // Autocomplete for Artist and AlbumArtist
+      _artistsTimer = new Timer();
+      _artistsTimer.Interval = 1500;
+      _artistsTimer.Tick += _artistsTimer_Tick;
+      _albumArtistsTimer = new Timer();
+      _albumArtistsTimer.Interval = 1500;
+      _albumArtistsTimer.Tick += _albumArtistsTimer_Tick;
 
       // Register Main Form Closing event, so that we can store values set in the control
       if (ParentForm != null)
@@ -239,6 +232,10 @@ namespace MPTagThat.TagEdit
       ClearForm();
       EnableTextBoxEvents(false);
 
+      // We need to enable those events for Autocompletionn
+      cbArtist.TextChanged += OnComboChanged;
+      cbAlbumArtist.TextChanged += OnComboChanged;
+
       // Do we have Multiple Rows selected
       if (main.TracksGridView.View.SelectedRows.Count > 1)
       {
@@ -249,8 +246,6 @@ namespace MPTagThat.TagEdit
         ChangeCheckboxStatus(true);
 
         // Show the Combo boxes, which are only available for Multi Tag Edit
-        cbArtist.Visible = true;
-        cbAlbumArtist.Visible = true;
         cbAlbum.Visible = true;
 
         ckTrackLength.Visible = true;
@@ -271,8 +266,6 @@ namespace MPTagThat.TagEdit
         ChangeCheckboxStatus(false);
 
         // Hide the Combo boxes, which are only available for Multi Tag Edit
-        cbArtist.Visible = false;
-        cbAlbumArtist.Visible = false;
         cbAlbum.Visible = false;
 
         ckTrackLength.Visible = false;
@@ -340,8 +333,8 @@ namespace MPTagThat.TagEdit
         }
         else
         {
-          tbArtist.Text = track.Artist;
-          tbAlbumArtist.Text = track.AlbumArtist;
+          cbArtist.Text = track.Artist;
+          cbAlbumArtist.Text = track.AlbumArtist;
           tbAlbum.Text = track.Album;
         }
 
@@ -1075,7 +1068,9 @@ namespace MPTagThat.TagEdit
       lbEditedFile.Text = "";
 
       cbArtist.Text = "";
+      cbArtist.Items.Clear();
       cbAlbumArtist.Text = "";
+      cbAlbumArtist.Items.Clear();
       tbAlbum.Text = "";
       checkBoxCompilation.Checked = false;
       tbTitle.Text = "";
@@ -1103,8 +1098,6 @@ namespace MPTagThat.TagEdit
       cbAlbum.Items.Clear();
       tbNumDiscs.Text = "";
       tbBPM.Text = "";
-      tbArtist.Text = "";
-      tbAlbumArtist.Text = "";
       checkBoxRemoveExistingPictures.Checked = Options.MainSettings.ClearExistingPictures;
       pictureBoxCover.Image = null;
       tbPicDesc.Text = "";
@@ -1501,15 +1494,15 @@ namespace MPTagThat.TagEdit
           }
           else
           {
-            if (track.Artist != tbArtist.Text.Trim())
+            if (track.Artist != cbArtist.Text.Trim())
             {
-              track.Artist = tbArtist.Text.Trim();
+              track.Artist = cbArtist.Text.Trim();
               trackChanged = true;
             }
 
-            if (track.AlbumArtist != tbAlbumArtist.Text.Trim())
+            if (track.AlbumArtist != cbAlbumArtist.Text.Trim())
             {
-              track.AlbumArtist = tbAlbumArtist.Text.Trim();
+              track.AlbumArtist = cbAlbumArtist.Text.Trim();
               trackChanged = true;
             }
 
@@ -2592,10 +2585,34 @@ namespace MPTagThat.TagEdit
 
         case "cbArtist":
           ckArtist.Checked = true;
+          if (_needUpdateArtists)
+          {
+            if (_canUpdateArtists)
+            {
+              _canUpdateArtists = false;
+              SearchAutocompleteArtists();
+            }
+            else
+            {
+              RestartArtistTimer();
+            }
+          }
           break;
 
         case "cbAlbumArtist":
           ckAlbumArtist.Checked = true;
+          if (_needUpdateAlbumArtists)
+          {
+            if (_canUpdateAlbumArtists)
+            {
+              _canUpdateAlbumArtists = false;
+              SearchAutocompleteAlbumArtists();
+            }
+            else
+            {
+              RestartAlbumArtistTimer();
+            }
+          }
           break;
 
         case "cbAlbum":
@@ -2615,15 +2632,96 @@ namespace MPTagThat.TagEdit
     /// <param name="e"></param>
     private void btCopyArtistToAlbumArtist_Click(object sender, EventArgs e)
     {
-      if (_isMultiTagEdit)
-      {
-        cbAlbumArtist.Text = cbArtist.Text;
-      }
-      else
-      {
-        tbAlbumArtist.Text = tbArtist.Text;
-      }
+      cbAlbumArtist.Text = cbArtist.Text;
     }
+
+    #region Auto Complete for Artist and AlbumArtist
+
+    /// <summary>
+    /// Timer expired. so Artist search can be done
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void _artistsTimer_Tick(object sender, EventArgs e)
+    {
+      _canUpdateArtists = true;
+      _artistsTimer.Stop();
+      SearchAutocompleteArtists();
+    }
+
+    private void SearchAutocompleteArtists()
+    {
+      if (cbArtist.Text.Length < 3)
+      {
+        return;
+      }
+
+      var tempText = cbArtist.Text;
+      cbArtist.Items.Clear();
+      cbArtist.Items.AddRange(ServiceScope.Get<IMusicDatabase>().SearchAutocompleteArtists(cbArtist.Text).ToArray());
+      cbArtist.Text = tempText;
+    }
+
+    private void cbArtist_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      _needUpdateArtists = false;
+    }
+    
+    private void cbArtist_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      _needUpdateArtists = true;
+    }
+
+    private void RestartArtistTimer()
+    {
+      _artistsTimer.Stop();
+      _canUpdateArtists = false;
+      _artistsTimer.Start();
+    }
+
+    /// <summary>
+    /// Timer expired. so Artist search can be done
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void _albumArtistsTimer_Tick(object sender, EventArgs e)
+    {
+      _canUpdateAlbumArtists = true;
+      _albumArtistsTimer.Stop();
+      SearchAutocompleteAlbumArtists();
+    }
+
+    private void SearchAutocompleteAlbumArtists()
+    {
+      if (cbAlbumArtist.Text.Length < 3)
+      {
+        return;
+      }
+
+      var tempText = cbAlbumArtist.Text;
+      cbAlbumArtist.Items.Clear();
+      cbAlbumArtist.Items.AddRange(ServiceScope.Get<IMusicDatabase>().SearchAutocompleteArtists(cbAlbumArtist.Text).ToArray());
+      cbAlbumArtist.Text = tempText;
+    }
+
+    private void cbAlbumArtist_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      _needUpdateAlbumArtists = false;
+    }
+
+    private void cbAlbumArtist_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      _needUpdateAlbumArtists = true;
+    }
+
+    private void RestartAlbumArtistTimer()
+    {
+      _albumArtistsTimer.Stop();
+      _canUpdateAlbumArtists = false;
+      _albumArtistsTimer.Start();
+    }
+
+    #endregion
 
     #region Genre
 
@@ -2917,7 +3015,7 @@ namespace MPTagThat.TagEdit
       }
       else
       {
-        searchArtist = tbArtist.Text.Trim();
+        searchArtist = cbArtist.Text.Trim();
         searchAlbum = tbAlbum.Text.Trim();
       }
 
@@ -3129,7 +3227,7 @@ namespace MPTagThat.TagEdit
       }
       else
       {
-        LyricsSearch lyricsSearch = new LyricsSearch(this, tbArtist.Text, tbTitle.Text, false);  
+        LyricsSearch lyricsSearch = new LyricsSearch(this, cbArtist.Text, tbTitle.Text, false);  
       }
     }
 

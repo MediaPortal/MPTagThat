@@ -39,3 +39,7 @@ xcopy /y %1\Libraries\LastFMLibrary\bin\%2\LastFMLibrary.dll .\bin
 REM Copy RavenDB
 xcopy /y %1\MPTagThat.Core\bin\%2\Raven.*.dll .\bin
 xcopy /y %1\MPTagThat.Core\bin\%2\Microsoft.Owin.Host.HttpListener.dll .\bin
+
+REM Copy SQLite
+xcopy /y %1\packages\System.Data.SQLite.Core.1.0.105.0\lib\net451\System.Data.SQLite.dll .\bin
+xcopy /y %1\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\x86\SQLite.Interop.dll .\bin

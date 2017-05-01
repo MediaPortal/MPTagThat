@@ -53,7 +53,6 @@ namespace MPTagThat.Core
 
     private static string _configDir;
     private static readonly string[] availableThemes = new[] { "ControlDefault", "Office2007Silver", "Office2007Black", "Office2010Blue", "Office2010Silver", "Office2010Black" };
-    private static string[] _mediaPortalArtists; // String array filled with database content to be available in tagedit
 
     #endregion
 
@@ -174,11 +173,6 @@ namespace MPTagThat.Core
     public static Options Instance
     {
       get { return instance; }
-    }
-
-    public static string[] MediaPortalArtists
-    {
-      get { return _mediaPortalArtists; }
     }
 
     public static string ConfigDir
@@ -391,24 +385,6 @@ namespace MPTagThat.Core
     #endregion
 
     #region Public Methods
-
-    public static void ReadArtistDatabase()
-    {
-      try
-      {
-        List<string> tmpArtist = new List<string>();
-        var artists = ServiceScope.Get<IMusicDatabase>().DistinctArtists();
-        foreach (var artist in artists)
-        {
-          tmpArtist.Add(artist.name);
-        }
-        _mediaPortalArtists = (string[]) tmpArtist.ToArray().Clone();
-      }
-      catch (Exception ex)
-      {
-        ServiceScope.Get<ILogger>().GetLogger.Error("Error reading Music Database: {0}", ex.Message);
-      }
-    }
 
     public static void SaveAllSettings()
     {

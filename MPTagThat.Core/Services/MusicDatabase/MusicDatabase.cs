@@ -21,6 +21,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -58,6 +59,8 @@ namespace MPTagThat.Core.Services.MusicDatabase
         new ConcurrentDictionary<string, Lazy<IDocumentStore>>();
 
 
+    private SQLiteConnection _sqLiteConnection;  
+
     #endregion
 
     #region ctor / dtor
@@ -65,6 +68,10 @@ namespace MPTagThat.Core.Services.MusicDatabase
     public MusicDatabase()
     {
       CurrentDatabase = _defaultMusicDatabaseName;
+
+      // Open Connection tzo the SQLite Database with the music brainz artists
+      _sqLiteConnection = new SQLiteConnection("Data Source=bin\\MusicBrainzArtists.db3");
+      _sqLiteConnection?.Open();
     }
 
     ~MusicDatabase()
@@ -290,26 +297,6 @@ namespace MPTagThat.Core.Services.MusicDatabase
       }
     }
     
-    /// <summary>
-    /// Get Distinct Artists and Albumartists
-    /// </summary>
-    /// <returns></returns>
-    public List<DistinctCombinedArtistIndex.Projection> DistinctArtists()
-    {
-      if (_store == null && !CreateDbConnection())
-      {
-        log.Error("Could not establish a session.");
-        return null;
-      }
-
-      var artists = _session.Query<DistinctCombinedArtistIndex.Result, DistinctCombinedArtistIndex>()
-        .Take(int.MaxValue)
-        .ProjectFromIndexFieldsInto<DistinctCombinedArtistIndex.Projection>()
-        .OrderBy(x => x.name)
-        .ToList();
-
-      return artists;
-    }
 
     public List<DistinctResult> GetArtists()
     {
@@ -431,6 +418,32 @@ namespace MPTagThat.Core.Services.MusicDatabase
 
       return genreartists;
     }
+    
+    /// <summary>
+    /// Search for Artists to put into Autocompletion Combo
+    /// </summary>
+    /// <param name="artist"></param>
+    /// <returns></returns>
+    public List<object> SearchAutocompleteArtists(string artist)
+    {
+      var artists = new List<object>();
+
+      if (_sqLiteConnection != null)
+      {
+        var sql = $"select artist,sortartist from artist where artist like '{artist}%' or artist like '% {artist}%'";
+        var command = new SQLiteCommand(sql, _sqLiteConnection);
+        var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+          artists.Add(reader["Artist"]);
+          if (!reader["Artist"].Equals(reader["SortArtist"]))
+          {
+            artists.Add(reader["SortArtist"]);
+          }
+        }
+      }
+      return artists;
+    }
 
     #endregion
 
@@ -452,7 +465,6 @@ namespace MPTagThat.Core.Services.MusicDatabase
         _store = GetDocumentStoreFor(CurrentDatabase);
         _session = _store.OpenSession();
 
-        IndexCreation.CreateIndexes(typeof(DistinctCombinedArtistIndex).Assembly, _store);
         IndexCreation.CreateIndexes(typeof(DefaultSearchIndex).Assembly, _store);
         IndexCreation.CreateIndexes(typeof(DistinctArtistIndex).Assembly, _store);
         IndexCreation.CreateIndexes(typeof(DistinctArtistAlbumIndex).Assembly, _store);

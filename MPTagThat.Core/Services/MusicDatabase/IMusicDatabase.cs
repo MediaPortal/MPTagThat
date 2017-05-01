@@ -69,12 +69,6 @@ namespace MPTagThat.Core.Services.MusicDatabase
     List<TrackData> ExecuteQuery(string query, string orderBy);
 
     /// <summary>
-    /// Returns Distinct Artists from the Database
-    /// </summary>
-    /// <returns></returns>
-    List<DistinctCombinedArtistIndex.Projection> DistinctArtists();
-
-    /// <summary>
     /// Update a track in the Music Database
     /// </summary>
     /// <param name="track"></param>
@@ -127,5 +121,12 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// <param name="album"></param>
     /// <returns></returns>
     List<DistinctResult> GetGenreArtistAlbums(string genre, string album);
+
+    /// <summary>
+    /// Search for Artists to put into Autocompletion Combo
+    /// </summary>
+    /// <param name="artist"></param>
+    /// <returns></returns>
+    List<object> SearchAutocompleteArtists(string artist);
   }
 }

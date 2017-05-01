@@ -31,22 +31,6 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditControl));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.tabControlTagEdit = new Elegant.Ui.TabControl();
-      this.tabPagePictures = new MPTagThat.Core.WinControls.MPTTabPage();
-      this.tabPagePicturePanel = new Elegant.Ui.Panel();
-      this.groupBoxPicture = new MPTagThat.Core.WinControls.MPTGroupBox();
-      this.buttonGetPictureInternet = new MPTagThat.Core.WinControls.MPTButton();
-      this.checkBoxRemoveExistingPictures = new MPTagThat.Core.WinControls.MPTCheckBox();
-      this.dataGridViewPicture = new System.Windows.Forms.DataGridView();
-      this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.PictureType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.buttonExportPicture = new MPTagThat.Core.WinControls.MPTButton();
-      this.buttonRemovePicture = new MPTagThat.Core.WinControls.MPTButton();
-      this.buttonGetPicture = new MPTagThat.Core.WinControls.MPTButton();
-      this.lblPicType = new MPTagThat.Core.WinControls.MPTLabel();
-      this.cbPicType = new MPTagThat.Core.WinControls.MPTComboBox();
-      this.pictureBoxCover = new System.Windows.Forms.PictureBox();
-      this.tbPicDesc = new System.Windows.Forms.TextBox();
-      this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageMain = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageMainPanel = new Elegant.Ui.Panel();
       this.groupBoxComment = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -88,7 +72,6 @@
       this.tbBPM = new System.Windows.Forms.TextBox();
       this.tbNumTracks = new System.Windows.Forms.TextBox();
       this.label1 = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbArtist = new System.Windows.Forms.TextBox();
       this.ckYear = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.ckTrack = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblAlbumArtist = new MPTagThat.Core.WinControls.MPTLabel();
@@ -97,7 +80,6 @@
       this.tbTrack = new System.Windows.Forms.TextBox();
       this.ckAlbumArtist = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblArtist = new MPTagThat.Core.WinControls.MPTLabel();
-      this.tbAlbumArtist = new System.Windows.Forms.TextBox();
       this.tbAlbum = new System.Windows.Forms.TextBox();
       this.ckAlbum = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.lblYear = new MPTagThat.Core.WinControls.MPTLabel();
@@ -106,6 +88,22 @@
       this.lblAlbum = new MPTagThat.Core.WinControls.MPTLabel();
       this.ckTitle = new MPTagThat.Core.WinControls.MPTCheckBox();
       this.tbTitle = new System.Windows.Forms.TextBox();
+      this.tabPagePictures = new MPTagThat.Core.WinControls.MPTTabPage();
+      this.tabPagePicturePanel = new Elegant.Ui.Panel();
+      this.groupBoxPicture = new MPTagThat.Core.WinControls.MPTGroupBox();
+      this.buttonGetPictureInternet = new MPTagThat.Core.WinControls.MPTButton();
+      this.checkBoxRemoveExistingPictures = new MPTagThat.Core.WinControls.MPTCheckBox();
+      this.dataGridViewPicture = new System.Windows.Forms.DataGridView();
+      this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.PictureType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.buttonExportPicture = new MPTagThat.Core.WinControls.MPTButton();
+      this.buttonRemovePicture = new MPTagThat.Core.WinControls.MPTButton();
+      this.buttonGetPicture = new MPTagThat.Core.WinControls.MPTButton();
+      this.lblPicType = new MPTagThat.Core.WinControls.MPTLabel();
+      this.cbPicType = new MPTagThat.Core.WinControls.MPTComboBox();
+      this.pictureBoxCover = new System.Windows.Forms.PictureBox();
+      this.tbPicDesc = new System.Windows.Forms.TextBox();
+      this.lblPicDesc = new MPTagThat.Core.WinControls.MPTLabel();
       this.tabPageDetails = new MPTagThat.Core.WinControls.MPTTabPage();
       this.tabPageDetailsPanel = new Elegant.Ui.Panel();
       this.groupBoxMedia = new MPTagThat.Core.WinControls.MPTGroupBox();
@@ -282,17 +280,17 @@
       this.lbEditedFile = new MPTagThat.Core.WinControls.MPTLabel();
       this.btApply = new MPTagThat.Core.WinControls.MPTButton();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).BeginInit();
-      this.tabPagePictures.SuspendLayout();
-      this.tabPagePicturePanel.SuspendLayout();
-      this.groupBoxPicture.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
       this.tabPageMain.SuspendLayout();
       this.tabPageMainPanel.SuspendLayout();
       this.groupBoxComment.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComment)).BeginInit();
       this.groupBoxGenre.SuspendLayout();
       this.groupBoxArtist.SuspendLayout();
+      this.tabPagePictures.SuspendLayout();
+      this.tabPagePicturePanel.SuspendLayout();
+      this.groupBoxPicture.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
       this.tabPageDetails.SuspendLayout();
       this.tabPageDetailsPanel.SuspendLayout();
       this.groupBoxMedia.SuspendLayout();
@@ -333,7 +331,7 @@
       this.tabControlTagEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.tabControlTagEdit.Location = new System.Drawing.Point(0, 46);
       this.tabControlTagEdit.Name = "tabControlTagEdit";
-      this.tabControlTagEdit.SelectedTabPage = this.tabPagePictures;
+      this.tabControlTagEdit.SelectedTabPage = this.tabPageMain;
       this.tabControlTagEdit.Size = new System.Drawing.Size(908, 608);
       this.tabControlTagEdit.TabIndex = 27;
       this.tabControlTagEdit.TabPages.AddRange(new Elegant.Ui.TabPage[] {
@@ -346,213 +344,6 @@
             this.tabPageLyrics,
             this.tabPageRating,
             this.tabPageUserDefined});
-      // 
-      // tabPagePictures
-      // 
-      this.tabPagePictures.ActiveControl = null;
-      this.tabPagePictures.BackColor = System.Drawing.Color.LightSteelBlue;
-      this.tabPagePictures.Controls.Add(this.tabPagePicturePanel);
-      this.tabPagePictures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tabPagePictures.KeyTip = null;
-      this.tabPagePictures.Localisation = "HeaderPictures";
-      this.tabPagePictures.LocalisationContext = "TagEdit";
-      this.tabPagePictures.Name = "tabPagePictures";
-      this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPagePictures.Size = new System.Drawing.Size(906, 584);
-      this.tabPagePictures.TabIndex = 1;
-      this.tabPagePictures.Text = "Picture";
-      // 
-      // tabPagePicturePanel
-      // 
-      this.tabPagePicturePanel.AutoScroll = true;
-      this.tabPagePicturePanel.BackColor = System.Drawing.Color.Transparent;
-      this.tabPagePicturePanel.Controls.Add(this.groupBoxPicture);
-      this.tabPagePicturePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tabPagePicturePanel.Location = new System.Drawing.Point(3, 3);
-      this.tabPagePicturePanel.Name = "tabPagePicturePanel";
-      this.tabPagePicturePanel.Size = new System.Drawing.Size(900, 578);
-      this.tabPagePicturePanel.TabIndex = 1;
-      this.tabPagePicturePanel.Text = "panel1";
-      // 
-      // groupBoxPicture
-      // 
-      this.groupBoxPicture.Controls.Add(this.buttonGetPictureInternet);
-      this.groupBoxPicture.Controls.Add(this.checkBoxRemoveExistingPictures);
-      this.groupBoxPicture.Controls.Add(this.dataGridViewPicture);
-      this.groupBoxPicture.Controls.Add(this.buttonExportPicture);
-      this.groupBoxPicture.Controls.Add(this.buttonRemovePicture);
-      this.groupBoxPicture.Controls.Add(this.buttonGetPicture);
-      this.groupBoxPicture.Controls.Add(this.lblPicType);
-      this.groupBoxPicture.Controls.Add(this.cbPicType);
-      this.groupBoxPicture.Controls.Add(this.pictureBoxCover);
-      this.groupBoxPicture.Controls.Add(this.tbPicDesc);
-      this.groupBoxPicture.Controls.Add(this.lblPicDesc);
-      this.groupBoxPicture.Id = "e8ec43a1-29ef-4ba1-a1e9-b57b2efbbe5b";
-      this.groupBoxPicture.Localisation = "GroupBoxPicture";
-      this.groupBoxPicture.LocalisationContext = "TagEdit";
-      this.groupBoxPicture.Location = new System.Drawing.Point(7, 6);
-      this.groupBoxPicture.Name = "groupBoxPicture";
-      this.groupBoxPicture.Size = new System.Drawing.Size(857, 372);
-      this.groupBoxPicture.TabIndex = 0;
-      this.groupBoxPicture.Text = "Picture";
-      // 
-      // buttonGetPictureInternet
-      // 
-      this.buttonGetPictureInternet.Id = "e70c69fe-92c5-4cec-a8de-5d478cc66da2";
-      this.buttonGetPictureInternet.Localisation = "GetPictureInternet";
-      this.buttonGetPictureInternet.LocalisationContext = "TagEdit";
-      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 133);
-      this.buttonGetPictureInternet.Name = "buttonGetPictureInternet";
-      this.buttonGetPictureInternet.Size = new System.Drawing.Size(197, 45);
-      this.buttonGetPictureInternet.TabIndex = 2;
-      this.buttonGetPictureInternet.Text = "Get from Internet";
-      this.buttonGetPictureInternet.UseVisualStyleBackColor = true;
-      this.buttonGetPictureInternet.Click += new System.EventHandler(this.buttonGetPictureInternet_Click);
-      // 
-      // checkBoxRemoveExistingPictures
-      // 
-      this.checkBoxRemoveExistingPictures.Id = "f879a4c8-8bb0-45e3-985e-813bc3a0f387";
-      this.checkBoxRemoveExistingPictures.Localisation = "RemoveExistingPictures";
-      this.checkBoxRemoveExistingPictures.LocalisationContext = "TagEdit";
-      this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(251, 325);
-      this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
-      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(329, 29);
-      this.checkBoxRemoveExistingPictures.TabIndex = 5;
-      this.checkBoxRemoveExistingPictures.Text = "Remove Existing Pictures First";
-      // 
-      // dataGridViewPicture
-      // 
-      this.dataGridViewPicture.AllowUserToAddRows = false;
-      this.dataGridViewPicture.AllowUserToDeleteRows = false;
-      this.dataGridViewPicture.AllowUserToResizeColumns = false;
-      this.dataGridViewPicture.AllowUserToResizeRows = false;
-      this.dataGridViewPicture.BackgroundColor = System.Drawing.SystemColors.Window;
-      this.dataGridViewPicture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridViewPicture.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Description,
-            this.PictureType});
-      this.dataGridViewPicture.Location = new System.Drawing.Point(250, 86);
-      this.dataGridViewPicture.Name = "dataGridViewPicture";
-      this.dataGridViewPicture.ReadOnly = true;
-      this.dataGridViewPicture.RowHeadersVisible = false;
-      this.dataGridViewPicture.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.dataGridViewPicture.Size = new System.Drawing.Size(330, 223);
-      this.dataGridViewPicture.TabIndex = 24;
-      this.dataGridViewPicture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPicture_CellClick);
-      // 
-      // Description
-      // 
-      this.Description.HeaderText = "Description";
-      this.Description.Name = "Description";
-      this.Description.ReadOnly = true;
-      this.Description.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-      this.Description.Width = 200;
-      // 
-      // PictureType
-      // 
-      this.PictureType.HeaderText = "Picture Type";
-      this.PictureType.Name = "PictureType";
-      this.PictureType.ReadOnly = true;
-      this.PictureType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-      this.PictureType.Width = 126;
-      // 
-      // buttonExportPicture
-      // 
-      this.buttonExportPicture.Enabled = false;
-      this.buttonExportPicture.Id = "0765fcfd-0748-436e-9807-9c39203077f7";
-      this.buttonExportPicture.Localisation = "ExportPicture";
-      this.buttonExportPicture.LocalisationContext = "TagEdit";
-      this.buttonExportPicture.Location = new System.Drawing.Point(9, 239);
-      this.buttonExportPicture.Name = "buttonExportPicture";
-      this.buttonExportPicture.Size = new System.Drawing.Size(197, 45);
-      this.buttonExportPicture.TabIndex = 4;
-      this.buttonExportPicture.Text = "Export Picture";
-      this.buttonExportPicture.UseVisualStyleBackColor = true;
-      this.buttonExportPicture.Click += new System.EventHandler(this.buttonExportPicture_Click);
-      // 
-      // buttonRemovePicture
-      // 
-      this.buttonRemovePicture.Enabled = false;
-      this.buttonRemovePicture.Id = "faa4e74f-ad91-438d-bb51-db629c26fd8e";
-      this.buttonRemovePicture.Localisation = "RemovePicture";
-      this.buttonRemovePicture.LocalisationContext = "TagEdit";
-      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 186);
-      this.buttonRemovePicture.Name = "buttonRemovePicture";
-      this.buttonRemovePicture.Size = new System.Drawing.Size(197, 45);
-      this.buttonRemovePicture.TabIndex = 3;
-      this.buttonRemovePicture.Text = "Remove Picture";
-      this.buttonRemovePicture.UseVisualStyleBackColor = true;
-      this.buttonRemovePicture.Click += new System.EventHandler(this.buttonRemovePicture_Click);
-      // 
-      // buttonGetPicture
-      // 
-      this.buttonGetPicture.Id = "ad252556-9e15-401c-9f1f-01f1ae2dd2cc";
-      this.buttonGetPicture.Localisation = "GetPicture";
-      this.buttonGetPicture.LocalisationContext = "TagEdit";
-      this.buttonGetPicture.Location = new System.Drawing.Point(9, 80);
-      this.buttonGetPicture.Name = "buttonGetPicture";
-      this.buttonGetPicture.Size = new System.Drawing.Size(197, 45);
-      this.buttonGetPicture.TabIndex = 1;
-      this.buttonGetPicture.Text = "Get from File";
-      this.buttonGetPicture.UseVisualStyleBackColor = true;
-      this.buttonGetPicture.Click += new System.EventHandler(this.buttonGetPicture_Click);
-      // 
-      // lblPicType
-      // 
-      this.lblPicType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblPicType.Localisation = "PictureType";
-      this.lblPicType.LocalisationContext = "TagEdit";
-      this.lblPicType.Location = new System.Drawing.Point(6, 49);
-      this.lblPicType.Name = "lblPicType";
-      this.lblPicType.Size = new System.Drawing.Size(87, 16);
-      this.lblPicType.TabIndex = 18;
-      this.lblPicType.Text = "Picture Type:";
-      // 
-      // cbPicType
-      // 
-      this.cbPicType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-      this.cbPicType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-      this.cbPicType.Editable = false;
-      this.cbPicType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.cbPicType.FormattingEnabled = true;
-      this.cbPicType.Id = "571c1f15-9644-4b1d-ab6b-40bf7b4c9044";
-      this.cbPicType.Location = new System.Drawing.Point(250, 51);
-      this.cbPicType.Name = "cbPicType";
-      this.cbPicType.Size = new System.Drawing.Size(330, 24);
-      this.cbPicType.Sorted = true;
-      this.cbPicType.TabIndex = 7;
-      this.cbPicType.SelectedIndexChanged += new System.EventHandler(this.cbPicType_SelectedIndexChanged);
-      // 
-      // pictureBoxCover
-      // 
-      this.pictureBoxCover.BackColor = System.Drawing.Color.White;
-      this.pictureBoxCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.pictureBoxCover.Location = new System.Drawing.Point(642, 21);
-      this.pictureBoxCover.Name = "pictureBoxCover";
-      this.pictureBoxCover.Size = new System.Drawing.Size(160, 172);
-      this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.pictureBoxCover.TabIndex = 12;
-      this.pictureBoxCover.TabStop = false;
-      // 
-      // tbPicDesc
-      // 
-      this.tbPicDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbPicDesc.Location = new System.Drawing.Point(250, 24);
-      this.tbPicDesc.Name = "tbPicDesc";
-      this.tbPicDesc.Size = new System.Drawing.Size(330, 22);
-      this.tbPicDesc.TabIndex = 6;
-      this.tbPicDesc.Validated += new System.EventHandler(this.tbPicDesc_Validated);
-      // 
-      // lblPicDesc
-      // 
-      this.lblPicDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblPicDesc.Localisation = "PictureDescriptor";
-      this.lblPicDesc.LocalisationContext = "TagEdit";
-      this.lblPicDesc.Location = new System.Drawing.Point(6, 21);
-      this.lblPicDesc.Name = "lblPicDesc";
-      this.lblPicDesc.Size = new System.Drawing.Size(73, 16);
-      this.lblPicDesc.TabIndex = 10;
-      this.lblPicDesc.Text = "Descriptor:";
       // 
       // tabPageMain
       // 
@@ -887,7 +678,6 @@
       this.groupBoxArtist.Controls.Add(this.tbBPM);
       this.groupBoxArtist.Controls.Add(this.tbNumTracks);
       this.groupBoxArtist.Controls.Add(this.label1);
-      this.groupBoxArtist.Controls.Add(this.tbArtist);
       this.groupBoxArtist.Controls.Add(this.ckYear);
       this.groupBoxArtist.Controls.Add(this.ckTrack);
       this.groupBoxArtist.Controls.Add(this.lblAlbumArtist);
@@ -896,7 +686,6 @@
       this.groupBoxArtist.Controls.Add(this.tbTrack);
       this.groupBoxArtist.Controls.Add(this.ckAlbumArtist);
       this.groupBoxArtist.Controls.Add(this.lblArtist);
-      this.groupBoxArtist.Controls.Add(this.tbAlbumArtist);
       this.groupBoxArtist.Controls.Add(this.tbAlbum);
       this.groupBoxArtist.Controls.Add(this.ckAlbum);
       this.groupBoxArtist.Controls.Add(this.lblYear);
@@ -955,10 +744,12 @@
       this.cbAlbumArtist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
       this.cbAlbumArtist.FormattingEnabled = true;
       this.cbAlbumArtist.Id = "07584ff1-bc72-444c-902b-6c9e466f47ed";
-      this.cbAlbumArtist.Location = new System.Drawing.Point(608, 14);
+      this.cbAlbumArtist.Location = new System.Drawing.Point(610, 14);
       this.cbAlbumArtist.Name = "cbAlbumArtist";
       this.cbAlbumArtist.Size = new System.Drawing.Size(201, 24);
       this.cbAlbumArtist.TabIndex = 1;
+      this.cbAlbumArtist.SelectedIndexChanged += new System.EventHandler(this.cbAlbumArtist_SelectedIndexChanged);
+      this.cbAlbumArtist.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbAlbumArtist_KeyPress);
       // 
       // cbArtist
       // 
@@ -970,6 +761,8 @@
       this.cbArtist.Name = "cbArtist";
       this.cbArtist.Size = new System.Drawing.Size(201, 24);
       this.cbArtist.TabIndex = 0;
+      this.cbArtist.SelectedIndexChanged += new System.EventHandler(this.cbArtist_SelectedIndexChanged);
+      this.cbArtist.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbArtist_KeyPress);
       // 
       // tbNumDiscs
       // 
@@ -1073,14 +866,6 @@
       this.label1.TabIndex = 0;
       this.label1.Text = "/";
       // 
-      // tbArtist
-      // 
-      this.tbArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbArtist.Location = new System.Drawing.Point(150, 16);
-      this.tbArtist.Name = "tbArtist";
-      this.tbArtist.Size = new System.Drawing.Size(201, 22);
-      this.tbArtist.TabIndex = 0;
-      // 
       // ckYear
       // 
       this.ckYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1171,14 +956,6 @@
       this.lblArtist.TabIndex = 1;
       this.lblArtist.Text = "Artist:";
       // 
-      // tbAlbumArtist
-      // 
-      this.tbAlbumArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbAlbumArtist.Location = new System.Drawing.Point(610, 14);
-      this.tbAlbumArtist.Name = "tbAlbumArtist";
-      this.tbAlbumArtist.Size = new System.Drawing.Size(201, 22);
-      this.tbAlbumArtist.TabIndex = 1;
-      // 
       // tbAlbum
       // 
       this.tbAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1260,6 +1037,213 @@
       this.tbTitle.Size = new System.Drawing.Size(659, 22);
       this.tbTitle.TabIndex = 3;
       // 
+      // tabPagePictures
+      // 
+      this.tabPagePictures.ActiveControl = null;
+      this.tabPagePictures.BackColor = System.Drawing.Color.LightSteelBlue;
+      this.tabPagePictures.Controls.Add(this.tabPagePicturePanel);
+      this.tabPagePictures.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tabPagePictures.KeyTip = null;
+      this.tabPagePictures.Localisation = "HeaderPictures";
+      this.tabPagePictures.LocalisationContext = "TagEdit";
+      this.tabPagePictures.Name = "tabPagePictures";
+      this.tabPagePictures.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPagePictures.Size = new System.Drawing.Size(906, 584);
+      this.tabPagePictures.TabIndex = 1;
+      this.tabPagePictures.Text = "Picture";
+      // 
+      // tabPagePicturePanel
+      // 
+      this.tabPagePicturePanel.AutoScroll = true;
+      this.tabPagePicturePanel.BackColor = System.Drawing.Color.Transparent;
+      this.tabPagePicturePanel.Controls.Add(this.groupBoxPicture);
+      this.tabPagePicturePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabPagePicturePanel.Location = new System.Drawing.Point(3, 3);
+      this.tabPagePicturePanel.Name = "tabPagePicturePanel";
+      this.tabPagePicturePanel.Size = new System.Drawing.Size(900, 578);
+      this.tabPagePicturePanel.TabIndex = 1;
+      this.tabPagePicturePanel.Text = "panel1";
+      // 
+      // groupBoxPicture
+      // 
+      this.groupBoxPicture.Controls.Add(this.buttonGetPictureInternet);
+      this.groupBoxPicture.Controls.Add(this.checkBoxRemoveExistingPictures);
+      this.groupBoxPicture.Controls.Add(this.dataGridViewPicture);
+      this.groupBoxPicture.Controls.Add(this.buttonExportPicture);
+      this.groupBoxPicture.Controls.Add(this.buttonRemovePicture);
+      this.groupBoxPicture.Controls.Add(this.buttonGetPicture);
+      this.groupBoxPicture.Controls.Add(this.lblPicType);
+      this.groupBoxPicture.Controls.Add(this.cbPicType);
+      this.groupBoxPicture.Controls.Add(this.pictureBoxCover);
+      this.groupBoxPicture.Controls.Add(this.tbPicDesc);
+      this.groupBoxPicture.Controls.Add(this.lblPicDesc);
+      this.groupBoxPicture.Id = "e8ec43a1-29ef-4ba1-a1e9-b57b2efbbe5b";
+      this.groupBoxPicture.Localisation = "GroupBoxPicture";
+      this.groupBoxPicture.LocalisationContext = "TagEdit";
+      this.groupBoxPicture.Location = new System.Drawing.Point(7, 6);
+      this.groupBoxPicture.Name = "groupBoxPicture";
+      this.groupBoxPicture.Size = new System.Drawing.Size(857, 372);
+      this.groupBoxPicture.TabIndex = 0;
+      this.groupBoxPicture.Text = "Picture";
+      // 
+      // buttonGetPictureInternet
+      // 
+      this.buttonGetPictureInternet.Id = "e70c69fe-92c5-4cec-a8de-5d478cc66da2";
+      this.buttonGetPictureInternet.Localisation = "GetPictureInternet";
+      this.buttonGetPictureInternet.LocalisationContext = "TagEdit";
+      this.buttonGetPictureInternet.Location = new System.Drawing.Point(9, 133);
+      this.buttonGetPictureInternet.Name = "buttonGetPictureInternet";
+      this.buttonGetPictureInternet.Size = new System.Drawing.Size(197, 45);
+      this.buttonGetPictureInternet.TabIndex = 2;
+      this.buttonGetPictureInternet.Text = "Get from Internet";
+      this.buttonGetPictureInternet.UseVisualStyleBackColor = true;
+      this.buttonGetPictureInternet.Click += new System.EventHandler(this.buttonGetPictureInternet_Click);
+      // 
+      // checkBoxRemoveExistingPictures
+      // 
+      this.checkBoxRemoveExistingPictures.Id = "f879a4c8-8bb0-45e3-985e-813bc3a0f387";
+      this.checkBoxRemoveExistingPictures.Localisation = "RemoveExistingPictures";
+      this.checkBoxRemoveExistingPictures.LocalisationContext = "TagEdit";
+      this.checkBoxRemoveExistingPictures.Location = new System.Drawing.Point(251, 325);
+      this.checkBoxRemoveExistingPictures.Name = "checkBoxRemoveExistingPictures";
+      this.checkBoxRemoveExistingPictures.Size = new System.Drawing.Size(329, 29);
+      this.checkBoxRemoveExistingPictures.TabIndex = 5;
+      this.checkBoxRemoveExistingPictures.Text = "Remove Existing Pictures First";
+      // 
+      // dataGridViewPicture
+      // 
+      this.dataGridViewPicture.AllowUserToAddRows = false;
+      this.dataGridViewPicture.AllowUserToDeleteRows = false;
+      this.dataGridViewPicture.AllowUserToResizeColumns = false;
+      this.dataGridViewPicture.AllowUserToResizeRows = false;
+      this.dataGridViewPicture.BackgroundColor = System.Drawing.SystemColors.Window;
+      this.dataGridViewPicture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dataGridViewPicture.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Description,
+            this.PictureType});
+      this.dataGridViewPicture.Location = new System.Drawing.Point(250, 86);
+      this.dataGridViewPicture.Name = "dataGridViewPicture";
+      this.dataGridViewPicture.ReadOnly = true;
+      this.dataGridViewPicture.RowHeadersVisible = false;
+      this.dataGridViewPicture.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.dataGridViewPicture.Size = new System.Drawing.Size(330, 223);
+      this.dataGridViewPicture.TabIndex = 24;
+      this.dataGridViewPicture.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPicture_CellClick);
+      // 
+      // Description
+      // 
+      this.Description.HeaderText = "Description";
+      this.Description.Name = "Description";
+      this.Description.ReadOnly = true;
+      this.Description.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      this.Description.Width = 200;
+      // 
+      // PictureType
+      // 
+      this.PictureType.HeaderText = "Picture Type";
+      this.PictureType.Name = "PictureType";
+      this.PictureType.ReadOnly = true;
+      this.PictureType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+      this.PictureType.Width = 126;
+      // 
+      // buttonExportPicture
+      // 
+      this.buttonExportPicture.Enabled = false;
+      this.buttonExportPicture.Id = "0765fcfd-0748-436e-9807-9c39203077f7";
+      this.buttonExportPicture.Localisation = "ExportPicture";
+      this.buttonExportPicture.LocalisationContext = "TagEdit";
+      this.buttonExportPicture.Location = new System.Drawing.Point(9, 239);
+      this.buttonExportPicture.Name = "buttonExportPicture";
+      this.buttonExportPicture.Size = new System.Drawing.Size(197, 45);
+      this.buttonExportPicture.TabIndex = 4;
+      this.buttonExportPicture.Text = "Export Picture";
+      this.buttonExportPicture.UseVisualStyleBackColor = true;
+      this.buttonExportPicture.Click += new System.EventHandler(this.buttonExportPicture_Click);
+      // 
+      // buttonRemovePicture
+      // 
+      this.buttonRemovePicture.Enabled = false;
+      this.buttonRemovePicture.Id = "faa4e74f-ad91-438d-bb51-db629c26fd8e";
+      this.buttonRemovePicture.Localisation = "RemovePicture";
+      this.buttonRemovePicture.LocalisationContext = "TagEdit";
+      this.buttonRemovePicture.Location = new System.Drawing.Point(9, 186);
+      this.buttonRemovePicture.Name = "buttonRemovePicture";
+      this.buttonRemovePicture.Size = new System.Drawing.Size(197, 45);
+      this.buttonRemovePicture.TabIndex = 3;
+      this.buttonRemovePicture.Text = "Remove Picture";
+      this.buttonRemovePicture.UseVisualStyleBackColor = true;
+      this.buttonRemovePicture.Click += new System.EventHandler(this.buttonRemovePicture_Click);
+      // 
+      // buttonGetPicture
+      // 
+      this.buttonGetPicture.Id = "ad252556-9e15-401c-9f1f-01f1ae2dd2cc";
+      this.buttonGetPicture.Localisation = "GetPicture";
+      this.buttonGetPicture.LocalisationContext = "TagEdit";
+      this.buttonGetPicture.Location = new System.Drawing.Point(9, 80);
+      this.buttonGetPicture.Name = "buttonGetPicture";
+      this.buttonGetPicture.Size = new System.Drawing.Size(197, 45);
+      this.buttonGetPicture.TabIndex = 1;
+      this.buttonGetPicture.Text = "Get from File";
+      this.buttonGetPicture.UseVisualStyleBackColor = true;
+      this.buttonGetPicture.Click += new System.EventHandler(this.buttonGetPicture_Click);
+      // 
+      // lblPicType
+      // 
+      this.lblPicType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblPicType.Localisation = "PictureType";
+      this.lblPicType.LocalisationContext = "TagEdit";
+      this.lblPicType.Location = new System.Drawing.Point(6, 49);
+      this.lblPicType.Name = "lblPicType";
+      this.lblPicType.Size = new System.Drawing.Size(87, 16);
+      this.lblPicType.TabIndex = 18;
+      this.lblPicType.Text = "Picture Type:";
+      // 
+      // cbPicType
+      // 
+      this.cbPicType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+      this.cbPicType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+      this.cbPicType.Editable = false;
+      this.cbPicType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.cbPicType.FormattingEnabled = true;
+      this.cbPicType.Id = "571c1f15-9644-4b1d-ab6b-40bf7b4c9044";
+      this.cbPicType.Location = new System.Drawing.Point(250, 51);
+      this.cbPicType.Name = "cbPicType";
+      this.cbPicType.Size = new System.Drawing.Size(330, 24);
+      this.cbPicType.Sorted = true;
+      this.cbPicType.TabIndex = 7;
+      this.cbPicType.SelectedIndexChanged += new System.EventHandler(this.cbPicType_SelectedIndexChanged);
+      // 
+      // pictureBoxCover
+      // 
+      this.pictureBoxCover.BackColor = System.Drawing.Color.White;
+      this.pictureBoxCover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.pictureBoxCover.Location = new System.Drawing.Point(642, 21);
+      this.pictureBoxCover.Name = "pictureBoxCover";
+      this.pictureBoxCover.Size = new System.Drawing.Size(160, 172);
+      this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.pictureBoxCover.TabIndex = 12;
+      this.pictureBoxCover.TabStop = false;
+      // 
+      // tbPicDesc
+      // 
+      this.tbPicDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbPicDesc.Location = new System.Drawing.Point(250, 24);
+      this.tbPicDesc.Name = "tbPicDesc";
+      this.tbPicDesc.Size = new System.Drawing.Size(330, 22);
+      this.tbPicDesc.TabIndex = 6;
+      this.tbPicDesc.Validated += new System.EventHandler(this.tbPicDesc_Validated);
+      // 
+      // lblPicDesc
+      // 
+      this.lblPicDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblPicDesc.Localisation = "PictureDescriptor";
+      this.lblPicDesc.LocalisationContext = "TagEdit";
+      this.lblPicDesc.Location = new System.Drawing.Point(6, 21);
+      this.lblPicDesc.Name = "lblPicDesc";
+      this.lblPicDesc.Size = new System.Drawing.Size(73, 16);
+      this.lblPicDesc.TabIndex = 10;
+      this.lblPicDesc.Text = "Descriptor:";
+      // 
       // tabPageDetails
       // 
       this.tabPageDetails.ActiveControl = null;
@@ -1331,7 +1315,7 @@
       this.lblTRackLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblTRackLength.Localisation = "TrackLength";
       this.lblTRackLength.LocalisationContext = "TagEdit";
-      this.lblTRackLength.Location = new System.Drawing.Point(6, 148);
+      this.lblTRackLength.Location = new System.Drawing.Point(6, 156);
       this.lblTRackLength.Name = "lblTRackLength";
       this.lblTRackLength.Size = new System.Drawing.Size(118, 16);
       this.lblTRackLength.TabIndex = 46;
@@ -1366,7 +1350,7 @@
       this.lblMediaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblMediaType.Localisation = "MediaType";
       this.lblMediaType.LocalisationContext = "TagEdit";
-      this.lblMediaType.Location = new System.Drawing.Point(6, 110);
+      this.lblMediaType.Location = new System.Drawing.Point(6, 118);
       this.lblMediaType.Name = "lblMediaType";
       this.lblMediaType.Size = new System.Drawing.Size(84, 16);
       this.lblMediaType.TabIndex = 32;
@@ -2880,7 +2864,7 @@
       // 
       this.lblLyricsLanguage.Localisation = "LyricsLanguage";
       this.lblLyricsLanguage.LocalisationContext = "TagEdit";
-      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 132);
+      this.lblLyricsLanguage.Location = new System.Drawing.Point(14, 140);
       this.lblLyricsLanguage.Name = "lblLyricsLanguage";
       this.lblLyricsLanguage.Size = new System.Drawing.Size(131, 16);
       this.lblLyricsLanguage.TabIndex = 3;
@@ -2890,7 +2874,7 @@
       // 
       this.lblLyricsDescriptor.Localisation = "LyricsDescriptor";
       this.lblLyricsDescriptor.LocalisationContext = "TagEdit";
-      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 101);
+      this.lblLyricsDescriptor.Location = new System.Drawing.Point(13, 109);
       this.lblLyricsDescriptor.Name = "lblLyricsDescriptor";
       this.lblLyricsDescriptor.Size = new System.Drawing.Size(132, 16);
       this.lblLyricsDescriptor.TabIndex = 2;
@@ -3314,12 +3298,6 @@
       this.Size = new System.Drawing.Size(908, 654);
       this.Load += new System.EventHandler(this.OnLoad);
       ((System.ComponentModel.ISupportInitialize)(this.tabControlTagEdit)).EndInit();
-      this.tabPagePictures.ResumeLayout(false);
-      this.tabPagePicturePanel.ResumeLayout(false);
-      this.groupBoxPicture.ResumeLayout(false);
-      this.groupBoxPicture.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
       this.tabPageMain.ResumeLayout(false);
       this.tabPageMainPanel.ResumeLayout(false);
       this.groupBoxComment.ResumeLayout(false);
@@ -3329,6 +3307,12 @@
       this.groupBoxGenre.PerformLayout();
       this.groupBoxArtist.ResumeLayout(false);
       this.groupBoxArtist.PerformLayout();
+      this.tabPagePictures.ResumeLayout(false);
+      this.tabPagePicturePanel.ResumeLayout(false);
+      this.groupBoxPicture.ResumeLayout(false);
+      this.groupBoxPicture.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPicture)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
       this.tabPageDetails.ResumeLayout(false);
       this.tabPageDetailsPanel.ResumeLayout(false);
       this.groupBoxMedia.ResumeLayout(false);
@@ -3415,7 +3399,6 @@
     protected System.Windows.Forms.TextBox tbBPM;
     protected System.Windows.Forms.TextBox tbNumTracks;
     protected Core.WinControls.MPTLabel label1;
-    protected System.Windows.Forms.TextBox tbArtist;
     protected Core.WinControls.MPTCheckBox ckYear;
     protected Core.WinControls.MPTCheckBox ckTrack;
     protected Core.WinControls.MPTLabel lblAlbumArtist;
@@ -3424,7 +3407,6 @@
     protected System.Windows.Forms.TextBox tbTrack;
     protected Core.WinControls.MPTCheckBox ckAlbumArtist;
     protected Core.WinControls.MPTLabel lblArtist;
-    protected System.Windows.Forms.TextBox tbAlbumArtist;
     protected System.Windows.Forms.TextBox tbAlbum;
     protected Core.WinControls.MPTCheckBox ckAlbum;
     protected Core.WinControls.MPTLabel lblYear;
