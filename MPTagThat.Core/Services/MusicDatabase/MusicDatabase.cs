@@ -445,6 +445,27 @@ namespace MPTagThat.Core.Services.MusicDatabase
       return artists;
     }
 
+    /// <summary>
+    /// Search for the Artist to do auto correction
+    /// </summary>
+    /// <param name="sql"></param>
+    /// <returns></returns>
+    public List<string> GetAutoCorrectArtists(string sql)
+    {
+      var artists = new List<string>();
+
+      if (_sqLiteConnection != null)
+      {
+        var command = new SQLiteCommand(sql, _sqLiteConnection);
+        var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+          artists.Add(reader[0].ToString());
+        }
+      }
+      return artists;
+    }
+
     #endregion
 
     #region Private Methods

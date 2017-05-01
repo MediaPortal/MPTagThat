@@ -1,0 +1,91 @@
+// Title: AutoCorrect Artist
+// Description: This script looks up the Artist in the MusicBrainz DB. Based on a setting, it may return the SortArtist
+//
+// ------------ Don't change anything in the following block -------
+//css_ref bin\taglib-sharp.dll; 
+//css_ref MPTagThat.Core.dll; 
+using System;
+using System.Collections.Generic;
+using MPTagThat.Core;
+using MPTagThat.Core.Services.MusicDatabase;
+using TagLib;
+// ----------------------------------------------------------------
+// Insert any using here that your script might need
+// If referencing an external dll, whose assembly name is not the same 
+// as in the using, you need to insert a css_ref comment pointing to the dll.
+// See the example how taglib-sharp.dll is referenced on top of this file.
+
+public class Script : IScript
+{
+  public string Invoke(TrackData track)
+  {
+    // Use "Artist" or "SortArtist" as the result of the Auto Correction
+    var artistType = "SortArtist";
+
+    var searchList = new List<string>() {" feat ", " feat. ", " ft ", " ft. ", " vs "};
+    var foundArtists = new List<string>();
+    var artistSplit = new List<string>();
+    var sqlStmt = "select {0} from artist where artist like '{1}'";
+
+    var artist = track.Artist.Trim();
+
+    // Do we have Artists separated with a semi colon?
+    if (artist.IndexOf(";", StringComparison.InvariantCulture) > 1)
+    {
+      artistSplit.AddRange(artist.Split(';'));
+    }
+    else
+    {
+      // Does the artist contain a string specified in the searchList above?
+      foreach (var searchstring in searchList)
+      {
+        var index = artist.IndexOf(searchstring, StringComparison.Ordinal);
+        if (index > 0)
+        {
+          artistSplit.Add(artist.Substring(0, index));
+          artistSplit.Add(artist.Substring(index + searchstring.Length));
+          break;
+        }
+      }
+    }
+
+    // If none of the above matched, use the original content of the field
+    if (artistSplit.Count == 0)
+    {
+      artistSplit.Add(artist);
+    }
+
+    // Lookup the artist in the database
+    foreach (var searchArtist in artistSplit)
+    {
+      var sql = string.Format(sqlStmt, artistType, searchArtist);
+      var returnedArtists = ServiceScope.Get<IMusicDatabase>().GetAutoCorrectArtists(sql);
+      if (returnedArtists.Count > 0)
+      {
+        foundArtists.Add(returnedArtists[0]);
+      }
+      else
+      {
+        foundArtists.Add(artist);
+      }
+    }
+
+    // Update the track artist with the search result
+    var result = "";
+    for (int i = 0; i < foundArtists.Count; i++)
+    {
+      result += foundArtists[i];
+      if (i < foundArtists.Count - 1)
+      {
+        result += ";";
+      }
+    } 
+
+    if (result.Length > 0)
+    {
+       track.Artist = result;
+       track.Changed = true;
+    }
+    return "";
+  }
+}

@@ -128,5 +128,12 @@ namespace MPTagThat.Core.Services.MusicDatabase
     /// <param name="artist"></param>
     /// <returns></returns>
     List<object> SearchAutocompleteArtists(string artist);
+
+    /// <summary>
+    /// Used by the AutoCorrect script
+    /// </summary>
+    /// <param name="sql"></param>
+    /// <returns></returns>
+    List<string> GetAutoCorrectArtists(string sql);
   }
 }
