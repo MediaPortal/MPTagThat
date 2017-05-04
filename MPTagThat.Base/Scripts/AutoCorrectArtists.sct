@@ -56,13 +56,16 @@ public class Script : IScript
     }
 
     // Lookup the artist in the database
+    bool foundSomeArtists = false;
     foreach (var searchArtist in artistSplit)
     {
-      var sql = string.Format(sqlStmt, artistType, searchArtist);
+      var tmpArtist = Util.RemoveInvalidChars(searchArtist);
+      var sql = string.Format(sqlStmt, artistType, tmpArtist);
       var returnedArtists = ServiceScope.Get<IMusicDatabase>().GetAutoCorrectArtists(sql);
       if (returnedArtists.Count > 0)
       {
         foundArtists.Add(returnedArtists[0]);
+        foundSomeArtists = true;
       }
       else
       {
@@ -71,20 +74,19 @@ public class Script : IScript
     }
 
     // Update the track artist with the search result
-    var result = "";
-    for (int i = 0; i < foundArtists.Count; i++)
+    if (foundSomeArtists)
     {
-      result += foundArtists[i];
-      if (i < foundArtists.Count - 1)
+      var result = "";
+      for (int i = 0; i < foundArtists.Count; i++)
       {
-        result += ";";
-      }
-    } 
-
-    if (result.Length > 0)
-    {
-       track.Artist = result;
-       track.Changed = true;
+        result += foundArtists[i];
+        if (i < foundArtists.Count - 1)
+        {
+          result += ";";
+        }
+      } 
+      track.Artist = result;
+      track.Changed = true;
     }
     return "";
   }

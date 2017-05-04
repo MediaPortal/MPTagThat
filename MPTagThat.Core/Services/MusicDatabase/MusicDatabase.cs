@@ -428,6 +428,7 @@ namespace MPTagThat.Core.Services.MusicDatabase
     {
       var artists = new List<object>();
 
+      artist = Util.RemoveInvalidChars(artist);
       if (_sqLiteConnection != null)
       {
         var sql = $"select artist,sortartist from artist where artist like '{artist}%' or artist like '% {artist}%'";
