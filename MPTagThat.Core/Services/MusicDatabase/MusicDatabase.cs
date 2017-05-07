@@ -69,9 +69,14 @@ namespace MPTagThat.Core.Services.MusicDatabase
     {
       CurrentDatabase = _defaultMusicDatabaseName;
 
-      // Open Connection tzo the SQLite Database with the music brainz artists
-      _sqLiteConnection = new SQLiteConnection("Data Source=bin\\MusicBrainzArtists.db3");
-      _sqLiteConnection?.Open();
+      // Open Connection to the SQLite Database with the music brainz artists
+      MusicBrainzDatabaseActive = false;
+      if (File.Exists(@"bin\\MusicBrainzArtists.db3"))
+      {
+        _sqLiteConnection = new SQLiteConnection("Data Source=bin\\MusicBrainzArtists.db3");
+        _sqLiteConnection?.Open();
+        MusicBrainzDatabaseActive = true;
+      }
     }
 
     ~MusicDatabase()
@@ -101,6 +106,8 @@ namespace MPTagThat.Core.Services.MusicDatabase
     }
 
     public string CurrentDatabase { get; set; }
+
+    public bool MusicBrainzDatabaseActive { get; set; }
 
     #endregion
 
@@ -428,6 +435,9 @@ namespace MPTagThat.Core.Services.MusicDatabase
     {
       var artists = new List<object>();
 
+      if (!MusicBrainzDatabaseActive)
+        return artists;
+
       artist = Util.RemoveInvalidChars(artist);
       if (_sqLiteConnection != null)
       {
@@ -454,6 +464,9 @@ namespace MPTagThat.Core.Services.MusicDatabase
     public List<string> GetAutoCorrectArtists(string sql)
     {
       var artists = new List<string>();
+
+      if (!MusicBrainzDatabaseActive)
+        return artists;
 
       if (_sqLiteConnection != null)
       {

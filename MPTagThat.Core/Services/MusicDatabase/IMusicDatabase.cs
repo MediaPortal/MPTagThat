@@ -29,6 +29,11 @@ namespace MPTagThat.Core.Services.MusicDatabase
     bool ScanActive { get; }
 
     /// <summary>
+    /// Returns, if the MusicBrainzDatabase search option has been enabled
+    /// </summary>
+    bool MusicBrainzDatabaseActive { get; set; }
+
+    /// <summary>
     /// Returns the active database
     /// </summary>
     string CurrentDatabase { get; }

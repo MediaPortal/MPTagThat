@@ -68,6 +68,8 @@ namespace MPTagThat.TagEdit
     private bool _needUpdateAlbumArtists = false;
     private Timer _albumArtistsTimer = null;
 
+    private bool _musicBrainzDatabaseActive = ServiceScope.Get<IMusicDatabase>().MusicBrainzDatabaseActive;
+
     #endregion
 
     #region ctor
@@ -165,12 +167,15 @@ namespace MPTagThat.TagEdit
       ChangeCheckboxStatus(false);
 
       // Autocomplete for Artist and AlbumArtist
-      _artistsTimer = new Timer();
-      _artistsTimer.Interval = 1500;
-      _artistsTimer.Tick += _artistsTimer_Tick;
-      _albumArtistsTimer = new Timer();
-      _albumArtistsTimer.Interval = 1500;
-      _albumArtistsTimer.Tick += _albumArtistsTimer_Tick;
+      if (_musicBrainzDatabaseActive)
+      {
+        _artistsTimer = new Timer();
+        _artistsTimer.Interval = 1500;
+        _artistsTimer.Tick += _artistsTimer_Tick;
+        _albumArtistsTimer = new Timer();
+        _albumArtistsTimer.Interval = 1500;
+        _albumArtistsTimer.Tick += _albumArtistsTimer_Tick;
+      }
 
       // Register Main Form Closing event, so that we can store values set in the control
       if (ParentForm != null)
@@ -233,8 +238,11 @@ namespace MPTagThat.TagEdit
       EnableTextBoxEvents(false);
 
       // We need to enable those events for Autocompletionn
-      cbArtist.TextChanged += OnComboChanged;
-      cbAlbumArtist.TextChanged += OnComboChanged;
+      if (_musicBrainzDatabaseActive)
+      {
+        cbArtist.TextChanged += OnComboChanged;
+        cbAlbumArtist.TextChanged += OnComboChanged;
+      }
 
       // Do we have Multiple Rows selected
       if (main.TracksGridView.View.SelectedRows.Count > 1)
@@ -2493,7 +2501,7 @@ namespace MPTagThat.TagEdit
             break;
 
           case "cbArtist":
-            if (_needUpdateArtists)
+            if (_needUpdateArtists && _musicBrainzDatabaseActive)
             {
               if (_canUpdateArtists)
               {
@@ -2508,7 +2516,7 @@ namespace MPTagThat.TagEdit
             break;
 
           case "cbAlbumArtist":
-            if (_needUpdateAlbumArtists)
+            if (_needUpdateAlbumArtists && _musicBrainzDatabaseActive)
             {
               if (_canUpdateAlbumArtists)
               {
