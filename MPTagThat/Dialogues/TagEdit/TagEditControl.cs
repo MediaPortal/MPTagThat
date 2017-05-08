@@ -68,7 +68,7 @@ namespace MPTagThat.TagEdit
     private bool _needUpdateAlbumArtists = false;
     private Timer _albumArtistsTimer = null;
 
-    private bool _musicBrainzDatabaseActive = ServiceScope.Get<IMusicDatabase>().MusicBrainzDatabaseActive;
+    private bool _musicBrainzDatabaseActive;
 
     #endregion
 
@@ -165,6 +165,8 @@ namespace MPTagThat.TagEdit
       dataGridViewUserFrames.CellValueChanged += dataGridViewUserFrames_CellValueChanged;
 
       ChangeCheckboxStatus(false);
+
+      _musicBrainzDatabaseActive = ServiceScope.Get<IMusicDatabase>().MusicBrainzDatabaseActive;
 
       // Autocomplete for Artist and AlbumArtist
       if (_musicBrainzDatabaseActive)
