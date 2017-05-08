@@ -66,6 +66,7 @@ Var StartMenuGroup
 Var CreateStartMenu
 Var CreateDeskTopShortCut
 Var CreateExplorerMenu
+Var DownloadMusicbrainz
 
 # Installer pages
 !insertmacro MUI_PAGE_WELCOME
@@ -152,6 +153,11 @@ Section -Main SEC0000
     File ..\MPTagThat\bin\Release\MPTagThat.exe.config
     File ..\MPTagThat\bin\Release\MPTagThat.Core.dll
     WriteRegStr HKLM "${REGKEY}\Components" Main 1
+
+    # Download MusicBrainz
+    ${IF} $DownloadMusicbrainz == 1
+		NSISdl::download "http://install.team-mediaportal.com/MPTagThat/MusicBrainzArtists.db3" "..\MPTagThat\bin\MusicBrainzArtists.db3" 
+    ${ENDIF}
 SectionEnd
 
 Section -post SEC0001
@@ -280,6 +286,7 @@ Function OptionsValidate
   ReadINIStr $CreateStartMenu "$PLUGINSDIR\options.ini" "Field 1" "State"
   ReadINIStr $CreateDeskTopShortCut "$PLUGINSDIR\options.ini" "Field 2" "State"
   ReadINIStr $CreateExplorerMenu "$PLUGINSDIR\options.ini" "Field 3" "State"
+  ReadINIStr $DownloadMusicbrainz "$PLUGINSDIR\options.ini" "Field 4" "State"
  
 FunctionEnd
 
