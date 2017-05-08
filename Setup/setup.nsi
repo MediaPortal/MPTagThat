@@ -124,6 +124,8 @@ Section -Main SEC0000
 	File ..\MPTagThat\bin\Release\bin\Raven*.*
 	File ..\MPTagThat\bin\Release\bin\Nlog.dll
 	File ..\MPTagThat\bin\Release\bin\Microsoft.Owin.Host.HttpListener.dll
+    File ..\MPTagThat\bin\Release\bin\System.Data.SQLite.dll
+    File ..\MPTagThat\bin\Release\bin\SQLite.Interop.dll
     
 	# Docs Dir
 	SetOutPath $INSTDIR\Docs
