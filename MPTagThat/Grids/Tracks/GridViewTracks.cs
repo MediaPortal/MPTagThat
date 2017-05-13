@@ -1861,7 +1861,12 @@ namespace MPTagThat.GridView
 
         // Split up the cell content into 3 pieces
         string cellContent = e.Value == null ? "" : e.Value.ToString();
-        ;
+
+        if (_findResult.StartPos + _findResult.Length > cellContent.Length)
+        {
+          return;
+        }
+
         string[] results = new string[3];
         results[0] = cellContent.Substring(0, _findResult.StartPos);
         results[1] = cellContent.Substring(_findResult.StartPos, _findResult.Length);
