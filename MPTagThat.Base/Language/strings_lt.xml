@@ -123,6 +123,11 @@
   <string name="ribbon.BurnOptions">Įrašymo pasirinkimai</string>
   <string name="ribbon.Burner">Pasirinkti įrašymo įrenginį:</string>
   <string name="ribbon.BurnerSpeed">Įrašymo greitis:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Duomenų bazė</string>
+  <string name="ribbon.DatabaseTab">Duomenų bazė</string>
+  <string name="ribbon.StartDBScan">Pradėti skenuoti</string>
+  <string name="ribbon.ClearDatabase">Išvalyti duomenų bazės turinį prieš skenavimą</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Atnaujinti</string>
@@ -195,6 +200,7 @@
   <string name="screentip.BurnText">Pradedami įrašyti failai esantys įrašymo sąraše.</string>
   <string name="screentip.BurnCancel">Atšaukti įrašymą</string>
   <string name="screentip.BurnCancelText">Nutraukia įrašymo procesą</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Keletos žymų redagavimas</string>
@@ -600,7 +606,6 @@
   <string name="Settings.EmbedExistingThumb">Įdėti esamą katalogo miniatiūrą (folder.jpg) ieškant viršelio</string>
   <string name="Settings.OnlySaveFolderThumb">Išsaugoti tiktai viršelį į katalogo miniatiūras. Neliesti muzikinio failo</string>
   <string name="Settings.ChangeCoverSize">Išsaugoti viršelius didžiausiu pikselių pločiu:</string>
-  <string name="Settings.AmazonSite">Amazon paieškos puslapis:</string>
   <string name="Settings.GroupBoxLyrics">Dainos žodžiai</string>
   <string name="Settings.SwitchArtist">Keisti atlikėją prieš pateikiant</string>
   <string name="Settings.OverwriteExistingLyrics">Automatiškai žymint bus užrašyti esamiems žodžiams ant viršaus.</string>
@@ -630,15 +635,6 @@
   <string name="Settings.GroupBoxDCustomGenre">Tinkinami žanrai</string>
   <string name="Settings.AddCustomGenre">Pridėti žanrą</string>
   <string name="Settings.DeleteCustomGenre">Trinti žanrą</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Muzikos duomenų bazės  versija</string>
-  <string name="Settings.StartDBScan">Pradėti skenuoti</string>
-  <string name="Settings.DBScanStatus">Skenavimo būsena</string>
-  <string name="Settings.ClearDatabase">Išvalyti duomenų bazės turinį prieš skenavimą</string>
-  <string name="Settings.SelectMusicFolder">Pasirinkti katalogą su jūsų Muzikos failais</string>
-  <string name="Settings.DBScanIdle">Duomenų bazės skenavimas neaktyvus.</string>
-  <string name="Settings.DBScanTrackSummary">({0} sekundžių takelyje)</string>
-  <string name="Settings.DBScanTitle">Patvirtinti duomenų bazės skenavimo atšaukimą</string>
-  <string name="Settings.DBScanProgress">Apdorojamas failas {0} iš {1}</string>
   <string name="Settings.TabRipping">Kopijuojama</string>
   <string name="Settings.TabRippingGeneral">Bendras</string>
   <string name="Settings.CustomPath">Nustatomi keliai ir failų vardai</string>
@@ -797,13 +793,6 @@
   <string name="player.LoadPlayList">Užkrauti Grojaraštį</string>
   <string name="player.SavePlayList">Išsaugoti Grojaraštį</string>
   <string name="player.UseRelativePath">Naudoti santykinį kelią</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Atlikėjas/Albumo atlikėjas (susideda iš):</string>
-  <string name="dbsearch.Album">Albumas (susideda iš):</string>
-  <string name="dbsearch.Title">Antraštė (susideda iš):</string>
-  <string name="dbsearch.Search">Ieškoti</string>
-  <string name="dbsearch.NoSearchValues">Prašome įvesti nors vieną peiškos vertę.</string>
-  <string name="dbsearch.TooMuchRows">Užklausa pateikė per daug įrašų. Tik pirmieji 1000 bus rodomi.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Rasti</string>
   <string name="findreplace.HeaderReplace">Pakeisti</string>
@@ -827,4 +816,8 @@
   <string name="readonly.NoToAll">Ne visiems</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Albumo garso normalizavimas</string>
+  <!--Database Related-->
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Uždaryti</string>
+  <string name="dbswitch.notavailable">Nėra duomenų</string>
 </resources>

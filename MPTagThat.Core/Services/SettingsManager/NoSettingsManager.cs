@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with MPTagThat. If not, see <http://www.gnu.org/licenses/>.
 #endregion
+
+using MPTagThat.Core.Settings;
+
 namespace MPTagThat.Core
 {
   /// <summary>
@@ -38,34 +41,7 @@ namespace MPTagThat.Core
     /// <param name = "settingsObject">Object's instance</param>
     public void Save(object settingsObject) {}
 
-    /// <summary>
-    ///   Sets the Portable Status
-    /// </summary>
-    /// <param name = "portable"></param>
-    public void SetPortable(int portable) {}
-
-    /// <summary>
-    ///   Gets the Portable Status
-    /// </summary>
-    /// <returns></returns>
-    public int GetPortable()
-    {
-      return 0;
-    }
-
-    /// <summary>
-    /// Sets the maximum of Songs before switching to B Mode
-    /// </summary>
-    /// <param name="maxsongs"></param>
-    public void SetMaxSongs(int maxsongs) {}
-
-    /// <summary>
-    /// Gets the maximum of songs alllowed in List
-    /// </summary>
-    public int GetMaxSongs()
-    {
-      return 200;
-    }
+    public StartupSettings StartSettings { get; set; }
 
     #endregion
   }

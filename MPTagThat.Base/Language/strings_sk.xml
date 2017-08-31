@@ -77,6 +77,9 @@
   <string name="ribbon.BurnTab">Napáliť</string>
   <string name="ribbon.Burn">Napáliť</string>
   <string name="ribbon.BurnCancel">Zrušiť napaľovanie</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Databáza</string>
+  <string name="ribbon.DatabaseTab">Databáza</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Aktualizovať</string>
@@ -95,6 +98,7 @@
   <!--Rip Tab-->
   <!--Convert Tab-->
   <!--Burn Tab-->
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Úprava viacerých tagov</string>
@@ -262,8 +266,6 @@
   <string name="player.PlayListButton">PL</string>
   <string name="player.PlayListLoad">Načítať</string>
   <string name="player.PlayListSave">Uložiť</string>
-  <!--Database Search-->
-  <string name="dbsearch.Search">Hľadať</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Nájsť</string>
   <string name="findreplace.TabFind">Nájsť</string>
@@ -275,4 +277,7 @@
   <string name="readonly.No">Nie</string>
   <string name="readonly.NoToAll">Vždy nie</string>
   <!--Replay Gain Popup-->
+  <!--Database Related-->
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Zatvoriť</string>
 </resources>

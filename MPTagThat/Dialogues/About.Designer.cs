@@ -173,8 +173,8 @@
       this.tbContributors.ReadOnly = true;
       this.tbContributors.Size = new System.Drawing.Size(323, 55);
       this.tbContributors.TabIndex = 12;
-      this.tbContributors.Text = "Development: Helmut Wahrmann (Main Development), mackey (Lyrics), rtv (Burner Sup" +
-    "port)\r\n\r\nTesting: Roy Nilsen (Main Tester, Translation)";
+      this.tbContributors.Text = "Development: Helmut Wahrmann\r\n\r\nThanks to other Team Mediaportal members for code" +
+    " contribution.\r\n";
       // 
       // lbWiki
       // 

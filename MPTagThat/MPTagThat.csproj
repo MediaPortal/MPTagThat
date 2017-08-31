@@ -90,20 +90,34 @@
       <HintPath>..\MPTagThat.Base\bin\Interop.Shell32.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.3.0.1\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Abstractions, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Database.3.5.2\lib\net45\Raven.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Client.3.5.2\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Database, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Database.3.5.2\lib\net45\Raven.Database.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -141,12 +155,6 @@
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\SupportedCommandType.cs" />
-    <Compile Include="DatabaseSearchControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DatabaseSearchControl.Designer.cs">
-      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogues\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +219,12 @@
       <DependentUpon>SplashForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogues\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Dialogues\SwitchDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogues\SwitchDatabase.Designer.cs">
+      <DependentUpon>SwitchDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogues\TagEdit\TagEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -291,7 +305,6 @@
     <Compile Include="MiscInfoControl.Designer.cs">
       <DependentUpon>MiscInfoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MusicDatabaseBuild.cs" />
     <Compile Include="PictureControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,9 +337,6 @@
     <EmbeddedResource Include="Commands\MusicBrainzAlbumResults.resx">
       <DependentUpon>MusicBrainzAlbumResults.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DatabaseSearchControl.resx">
-      <DependentUpon>DatabaseSearchControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\About.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -365,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\SplashScreen\SplashForm.resx">
       <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogues\SwitchDatabase.resx">
+      <DependentUpon>SwitchDatabase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogues\TagEdit\TagEditControl.resx">
       <DependentUpon>TagEditControl.cs</DependentUpon>
@@ -437,7 +450,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="..\packages\RavenDB.Database.3.5.2\tools\Raven.Studio.Html5.zip">
+      <Link>Raven.Studio.Html5.zip</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -510,6 +528,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MPTagThat.ico" />
+    <None Include="Resources\changed.png" />
     <None Include="Resources\ribbon_Bpm_32x.png" />
     <None Include="Resources\ribbon_Bpm_16x.png" />
     <None Include="Resources\ribbon_Gain_16x.png" />

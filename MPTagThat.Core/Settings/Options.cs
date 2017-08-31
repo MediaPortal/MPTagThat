@@ -20,10 +20,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.IO;
 using System.Windows.Forms;
+using MPTagThat.Core.Services.MusicDatabase;
+using MPTagThat.Core.Settings;
 
 #endregion
 
@@ -54,7 +53,6 @@ namespace MPTagThat.Core
 
     private static string _configDir;
     private static readonly string[] availableThemes = new[] { "ControlDefault", "Office2007Silver", "Office2007Black", "Office2010Blue", "Office2010Silver", "Office2010Black" };
-    private static string[] _mediaPortalArtists; // String array filled with database content to be available in tagedit
 
     #endregion
 
@@ -177,11 +175,6 @@ namespace MPTagThat.Core
       get { return instance; }
     }
 
-    public static string[] MediaPortalArtists
-    {
-      get { return _mediaPortalArtists; }
-    }
-
     public static string ConfigDir
     {
       get { return _configDir; }
@@ -250,7 +243,7 @@ namespace MPTagThat.Core
 
     public static SongList Songlist { get; set; }
 
-    public static int MaximumNumberOfSongsInList { get; set; }
+    public static StartupSettings StartupSettings { get; set; }
 
     #endregion
 
@@ -264,14 +257,11 @@ namespace MPTagThat.Core
 
     public Options()
     {
-      int portable = ServiceScope.Get<ISettingsManager>().GetPortable();
-      if (portable == 0)
-        _configDir = String.Format(@"{0}\MPTagThat\Config",
-                                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      StartupSettings = ServiceScope.Get<ISettingsManager>().StartSettings;
+      if (StartupSettings.Portable)
+        _configDir = $@"{Application.StartupPath}\Config";
       else
-        _configDir = String.Format(@"{0}\Config", Application.StartupPath);
-
-      MaximumNumberOfSongsInList = ServiceScope.Get<ISettingsManager>().GetMaxSongs();
+        _configDir = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\MPTagThat\Config";
 
       _MPTagThatSettings = new MPTagThatSettings();
       ServiceScope.Get<ISettingsManager>().Load(_MPTagThatSettings);
@@ -385,58 +375,11 @@ namespace MPTagThat.Core
         _treeViewFilterSettings.Filter.Add(filter);
       }
 
-      // Load Artists / AlbumArtists for Auto Completion
-      if (_MPTagThatSettings.UseMediaPortalDatabase)
-      {
-        ReadArtistDatabase();
-      }
-
       _copyPasteBuffer = new List<TrackData>();
 
       ReadOnlyFileHandling = 2; // Don't change attribute as a default.
 
       Songlist = new SongList();
-    }
-
-    #endregion
-
-    #region Private Methods
-
-    private void ReadArtistDatabase()
-    {
-      if (!File.Exists(_MPTagThatSettings.MediaPortalDatabase))
-        return;
-
-      string connection = string.Format(@"Data Source={0}", _MPTagThatSettings.MediaPortalDatabase);
-      try
-      {
-        SQLiteConnection conn = new SQLiteConnection(connection);
-        conn.Open();
-        using (SQLiteCommand cmd = new SQLiteCommand())
-        {
-          cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText =
-            "select distinct strartist from artist union select stralbumartist from albumartist order by 1";
-          using (SQLiteDataReader reader = cmd.ExecuteReader())
-          {
-            List<string> rows = new List<string>();
-            while (reader.Read())
-            {
-              rows.Add(reader.GetString(0));
-            }
-
-            // Now copy the list to the string array
-            string[] tmpArray = rows.ToArray();
-            _mediaPortalArtists = (string[])tmpArray.Clone();
-          }
-        }
-        conn.Close();
-      }
-      catch (Exception ex)
-      {
-        ServiceScope.Get<ILogger>().GetLogger.Error("Error reading Music Database: {0}", ex.Message);
-      }
     }
 
     #endregion

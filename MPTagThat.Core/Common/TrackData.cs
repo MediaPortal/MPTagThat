@@ -21,6 +21,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using MPTagThat.Core.Common;
 using TagLib;
 using Picture = MPTagThat.Core.Common.Picture;
@@ -55,6 +56,7 @@ namespace MPTagThat.Core
     private Util.MP3Error _mp3ValError;
     private string _mp3ValErrorText;
     private List<Picture> _pictures = new List<Picture>();
+    private List<string> _pictureHashList = new List<string>();
     private List<Comment> _comments = new List<Comment>();
     private List<Lyric> _lyrics = new List<Lyric>();
     private List<PopmFrame> _popmframes = new List<PopmFrame>();
@@ -81,17 +83,11 @@ namespace MPTagThat.Core
 
     #region Common Properties
 
-    private Guid _id;
-
     /// <summary>
     /// Unique ID of the Track
     /// To be used in identifying cloned / changed tracks
     /// </summary>
-    public Guid Id
-    {
-      get { return _id; }
-      set { _id = value; }
-    }
+    public string Id { get; set; }
 
     /// <summary>
     /// The ID3 Version
@@ -183,18 +179,12 @@ namespace MPTagThat.Core
     /// <summary>
     /// Do we have a MP3 File?
     /// </summary>
-    public bool IsMp3
-    {
-      get { return TagType.ToLower() == "mp3"; }
-    }
+    public bool IsMp3 => TagType.ToLower() == "mp3";
 
     /// <summary>
     /// Number of Pictures in File
     /// </summary>
-    public int NumPics
-    {
-      get { return Pictures.Count; }
-    }
+    public int NumPics => Pictures.Count > 0 ? Pictures.Count : PictureHashList.Count;
 
     /// <summary>
     /// Has the Track fixable errors?
@@ -659,11 +649,18 @@ namespace MPTagThat.Core
       }
     }
 
-
+    /// <summary>
+    /// Returns the stored Coverart for the TRack
+    /// </summary>
     public List<Picture> Pictures
     {
       get { return _pictures; }
     }
+
+    /// <summary>
+    /// Returns the Hashlist for objects, which we have in the database
+    /// </summary>
+    public List<string> PictureHashList => _pictureHashList;
 
     /// <summary>
     /// Publisher Writer Tag

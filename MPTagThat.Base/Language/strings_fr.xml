@@ -123,6 +123,11 @@
   <string name="ribbon.BurnOptions">Options de gravure</string>
   <string name="ribbon.Burner">Graveur : </string>
   <string name="ribbon.BurnerSpeed">Vitesse de gravure : </string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Base de données</string>
+  <string name="ribbon.DatabaseTab">Base de données</string>
+  <string name="ribbon.StartDBScan">Démarrer le scan</string>
+  <string name="ribbon.ClearDatabase">Videz le contenu de la base de données avant de scanner</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Rafraîchir</string>
@@ -199,6 +204,7 @@
   <string name="screentip.BurnText">Démarre la gravure des fichiers se trouvant dans le liste de gravure.</string>
   <string name="screentip.BurnCancel">Annuler la gravure</string>
   <string name="screentip.BurnCancelText">Arrête le processus de gravure.</string>
+  <!--Database Tab-->
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Editer plusieurs Tags</string>
@@ -607,7 +613,6 @@ Niveau maximum de la piste</string>
   <string name="Settings.EmbedExistingThumb">Inclure la vignette du dossier (folder.jpg) existante lors de la recherche de la jaquette</string>
   <string name="Settings.OnlySaveFolderThumb">Enregistrer la jaquette uniquement dans la vignette du dossier. Ne pas toucher au fichier</string>
   <string name="Settings.ChangeCoverSize">Enregistrer les jaquettes ayant une largeur maximale de pixel : </string>
-  <string name="Settings.AmazonSite">Site de recherche Amazon : </string>
   <string name="Settings.GroupBoxLyrics">Paroles</string>
   <string name="Settings.SwitchArtist">Echanger l\'artiste avant de soumettre</string>
   <string name="Settings.OverwriteExistingLyrics">Ecraser les paroles existantes lors du marquage automatique</string>
@@ -637,19 +642,6 @@ Niveau maximum de la piste</string>
   <string name="Settings.GroupBoxDCustomGenre">Personnaliser un Genre</string>
   <string name="Settings.AddCustomGenre">Ajouter un Genre</string>
   <string name="Settings.DeleteCustomGenre">Effacer un Genre</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Construction de la base de données \"Musique\"</string>
-  <string name="Settings.DatabaseScanNote">Si aucune base de données \"Musique\" de MediaPortal n\'est disponible, veuillez la créer ci-dessus. \nEnsuite, démarrez le scan.</string>
-  <string name="Settings.StartDBScan">Démarrer le scan</string>
-  <string name="Settings.DBScanStatus">Etat du scan</string>
-  <string name="Settings.DBNotExists">La base de données sélectionnée n\'existe pas. \nSi vous choisissez \"Oui\", une nouvelle sera créée. Lancez un scan pour la remplir.</string>
-  <string name="Settings.ClearDatabase">Videz le contenu de la base de données avant de scanner</string>
-  <string name="Settings.SelectMusicFolder">Sélectionnez le dossier contenant vos fichiers musicaux</string>
-  <string name="Settings.DBScanIdle">Le scan de la base de données est inactif.</string>
-  <string name="Settings.DBScanFinished">Scan de la base de données terminé. \n{0} pistes dans : {1:d2}:{2:d2}:{3:d2}{4} traitées</string>
-  <string name="Settings.DBScanTrackSummary"> ({0} secondes par piste)</string>
-  <string name="Settings.DBScanTitle">Confirmez l\'abandon du scan de la base de données</string>
-  <string name="Settings.DBScanActive">Le scan de la base de données est toujours actif. \nL\'abandonner et quitter l\'application ?</string>
-  <string name="Settings.DBScanProgress">Fichier {0} de {1} en cours de traitement</string>
   <string name="Settings.TabRipping">Extraction</string>
   <string name="Settings.TabRippingGeneral">Général</string>
   <string name="Settings.CustomPath">Personnaliser les chemins et les noms des fichiers</string>
@@ -812,14 +804,6 @@ Niveau maximum de la piste</string>
   <string name="player.LoadPlayList">Charger la liste de lecture</string>
   <string name="player.SavePlayList">Enregistrer la liste de lecture</string>
   <string name="player.UseRelativePath">Utiliser le chemin relatif</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Artiste/ - de l\'album (contenu) : </string>
-  <string name="dbsearch.Album">Album (contenu) : </string>
-  <string name="dbsearch.Title">Titre (contenu) : </string>
-  <string name="dbsearch.Search">Rechercher</string>
-  <string name="dbsearch.NoMusicDB">Pour utiliser la fonction de recherche dans la base de données, \nvous devez indiquer sa localisation dans les Préférences.</string>
-  <string name="dbsearch.NoSearchValues">Entrez au moins une valeur à chercher.</string>
-  <string name="dbsearch.TooMuchRows">La requête à renvoyer a trop de lignes. Seules les 1000 premières seront affichées.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Trouver</string>
   <string name="findreplace.HeaderReplace">Remplacer</string>
@@ -845,4 +829,9 @@ Niveau maximum de la piste</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Réglage du volume (Gain) de l\'album</string>
   <string name="albumgain.Explanation">Tous les fichiers sont sélectionnés.\n MPTagThat doit-il calculer le Gain pour l\'album?</string>
+  <!--Database Related-->
+  <string name="Database.DBScanActive">Le scan de la base de données est toujours actif. \nL\'abandonner et quitter l\'application ?</string>
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.Close">Fermer</string>
+  <string name="dbswitch.notavailable">N/A</string>
 </resources>

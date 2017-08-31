@@ -18,6 +18,7 @@
 #region
 
 using System;
+using System.Configuration;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Text;
@@ -27,6 +28,8 @@ using System.Xml;
 using MPTagThat.Core;
 using MPTagThat.Core.AudioEncoder;
 using MPTagThat.Core.MediaChangeMonitor;
+using MPTagThat.Core.Services.MusicDatabase;
+using MPTagThat.Core.Settings;
 
 #endregion
 
@@ -36,9 +39,9 @@ namespace MPTagThat
   {
     #region Variables
 
+    private static StartupSettings _startupSettings;
     private static int _portable;
-    private static int _maxSongs;
-    private static string _startupFolder;
+		private static string _startupFolder;
     private static Main _main;
 
     private delegate void ThreadSafeSetCurrentFolderDelegate(string startupFolder);
@@ -50,9 +53,33 @@ namespace MPTagThat
     /// </summary>
     /// <param name = "/folder=">A startup folder. used when executing via Explorer Context Menu</param>
     /// <param name = "/portable">Run in Portable mode</param>
+    /// <param name="args"></param>
     [STAThread]
     private static void Main(string[] args)
     {
+      try
+      {
+        // We need to set the app.config file programmatically to point to the users APPDATA Folder
+        var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        var settings = configFile.AppSettings.Settings;
+        var key = "Raven/WorkingDir";
+        var value = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                    "\\MPTagthat\\Databases";
+        if (settings[key] == null)
+        {
+          settings.Add(key, value);
+        }
+        else
+        {
+          settings[key].Value = value;
+        }
+        configFile.Save(ConfigurationSaveMode.Modified);
+        ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+      }
+      catch (ConfigurationErrorsException ex)
+      {
+      }
+
       // Need to reset the Working directory, since when we called via the Explorer Context menu, it'll be different
       Directory.SetCurrentDirectory(Application.StartupPath);
 
@@ -93,7 +120,7 @@ namespace MPTagThat
           using (var accessor = mmf.CreateViewAccessor(0, buffer.Length))
           {
             // Write to MMF
-            accessor.WriteArray<byte>(0, buffer, 0, buffer.Length);
+            accessor.WriteArray(0, buffer, 0, buffer.Length);
             messageWaitHandle.Set();
 
             // End exit this instance
@@ -125,11 +152,9 @@ namespace MPTagThat
         log.Debug("Registering Settings Manager");
         ServiceScope.Add<ISettingsManager>(new SettingsManager());
         // Set the portable Indicator
-        ServiceScope.Get<ISettingsManager>().SetPortable(_portable);
-        // Set the Max Songs number
-        ServiceScope.Get<ISettingsManager>().SetMaxSongs(_maxSongs);
+        ServiceScope.Get<ISettingsManager>().StartSettings = _startupSettings;
 
-        try
+				try
         {
           logger.Level = NLog.LogLevel.FromString(Options.MainSettings.DebugLevel);
         }
@@ -152,9 +177,11 @@ namespace MPTagThat
         ServiceScope.Add<IActionHandler>(new ActionHandler());
 
         // Move Init of Services, which we don't need immediately to a separate thread to increase startup performance
-        Thread initService = new Thread(DoInitService);
-        initService.IsBackground = true;
-        initService.Name = "InitService";
+        Thread initService = new Thread(DoInitService)
+        {
+          IsBackground = true,
+          Name = "InitService"
+        };
         initService.Start();
 
         Application.EnableVisualStyles();
@@ -162,10 +189,9 @@ namespace MPTagThat
 
         try
         {
-          _main = new Main();
+          _main = new Main {CurrentDirectory = _startupFolder};
 
           // Set the Startup Folder we might have received via an argument, before invoking the form
-          _main.CurrentDirectory = _startupFolder;
           Application.Run(_main);
         }
         catch (OutOfMemoryException)
@@ -200,6 +226,9 @@ namespace MPTagThat
       ServiceScope.Get<ILogger>().GetLogger.Debug("Registering Media Change Monitor");
       ServiceScope.Add<IMediaChangeMonitor>(new MediaChangeMonitor());
 
+      ServiceScope.Get<ILogger>().GetLogger.Debug("Registering MusicDatabase");
+      ServiceScope.Add<IMusicDatabase>(new MusicDatabase());
+      
       ServiceScope.Get<ILogger>().GetLogger.Info("Finished registering services");
 
       byte[] buffer = new byte[2048];
@@ -220,9 +249,9 @@ namespace MPTagThat
             ServiceScope.Get<ILogger>().GetLogger.Debug("Startup Event fired");
 
             // Read from MMF
-            accessor.ReadArray<byte>(0, buffer, 0, buffer.Length);
+            accessor.ReadArray(0, buffer, 0, buffer.Length);
 
-            string startupFolder = Encoding.Default.GetString(buffer).Trim(new char[] { ' ', '\x00' });
+            string startupFolder = Encoding.Default.GetString(buffer).Trim(' ', '\x00');
             SetCurrentFolder(startupFolder);
           }
         }
@@ -238,6 +267,7 @@ namespace MPTagThat
       if (!File.Exists(configFile))
         return;
 
+      _startupSettings = new StartupSettings();
       try
       {
         XmlDocument doc = new XmlDocument();
@@ -256,19 +286,78 @@ namespace MPTagThat
             // Only use the value from Config, if not overriden by an argument
             _portable = Convert.ToInt32(portableNode.InnerText);
           }
+          _startupSettings.Portable = _portable != 0;
         }
 
         XmlNode maxSongsNode = doc.DocumentElement.SelectSingleNode("/config/MaximumNumberOfSongsInList");
-        if (maxSongsNode != null)
+        _startupSettings.MaxSongs = maxSongsNode != null ? Convert.ToInt32(maxSongsNode.InnerText) : 500;
+
+				XmlNode ravenDebugNode = doc.DocumentElement.SelectSingleNode("/config/RavenDebug");
+				_startupSettings.RavenDebug = ravenDebugNode != null && Convert.ToInt32(ravenDebugNode.InnerText) != 0;
+
+        XmlNode ravenStudioNode = doc.DocumentElement.SelectSingleNode("/config/RavenStudio");
+        _startupSettings.RavenStudio = ravenStudioNode != null && Convert.ToInt32(ravenStudioNode.InnerText) != 0;
+
+        XmlNode ravenPortNode = doc.DocumentElement.SelectSingleNode("/config/RavenStudioPort");
+        _startupSettings.RavenStudioPort = ravenPortNode != null ? Convert.ToInt32(ravenPortNode.InnerText) : 8080;
+
+        XmlNode ravenDatabaseNode = doc.DocumentElement.SelectSingleNode("/config/MusicDatabaseFolder");
+        var dbPath = ravenDatabaseNode?.InnerText ?? "%APPDATA%\\MPTagThat\\Databases";
+        dbPath = CheckPath(dbPath);
+        _startupSettings.DatabaseFolder = dbPath;
+
+        XmlNode coverArtNode = doc.DocumentElement.SelectSingleNode("/config/CoverArtFolder");
+        var coverArtPath = coverArtNode?.InnerText ?? "%APPDATA%\\MPTagThat\\CoverArt";
+        coverArtPath = CheckPath(coverArtPath);
+        _startupSettings.CoverArtFolder = coverArtPath;
+      }
+      catch (Exception)
+      {
+        // ignored
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="strPath"></param>
+    /// <returns></returns>
+    private static string CheckPath(string strPath)
+    {
+      string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+      strPath = strPath.Replace("%APPDATA%", appData);
+      strPath = strPath.Replace("%AppData%", appData);
+      string commonData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+      strPath = strPath.Replace("%PROGRAMDATA%", commonData);
+      strPath = strPath.Replace("%ProgramData%", commonData);
+
+      // Check to see, if the location was specified with an absolute or relative path.
+      // In case of relative path, prefix it with the startuppath   
+      if (!Path.IsPathRooted(strPath))
+      {
+        strPath = Path.Combine(Application.StartupPath,strPath);
+      }
+
+      // Create the folder
+      if (!Directory.Exists(strPath))
+      {
+        try
         {
-          _maxSongs = Convert.ToInt32(maxSongsNode.InnerText);
+          Directory.CreateDirectory(strPath);
         }
-        else
+        catch (Exception)
         {
-          _maxSongs = 200;
+          // ignored
         }
       }
-      catch (Exception) {}
+
+      // See if we got a slash at the end. If not add one.
+      if (!strPath.EndsWith(@"\"))
+      {
+        strPath += @"\";
+      }
+
+      return strPath;
     }
 
     /// <summary>
@@ -278,7 +367,7 @@ namespace MPTagThat
     private static void SetPath(string path)
     {
       string currentPath = Environment.GetEnvironmentVariable("Path");
-      string newPath = string.Format("{0};{1}",currentPath, path);
+      string newPath = $"{currentPath};{path}";
       Environment.SetEnvironmentVariable("Path", newPath);
     }
 
@@ -287,7 +376,7 @@ namespace MPTagThat
       if (_main.InvokeRequired)
       {
         ThreadSafeSetCurrentFolderDelegate d = SetCurrentFolder;
-        _main.Invoke(d, new object[] { startupFolder });
+        _main.Invoke(d, startupFolder);
         return;
       }
 

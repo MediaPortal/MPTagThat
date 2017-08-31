@@ -123,6 +123,19 @@
   <string name="ribbon.BurnOptions">Brenn-Optionen</string>
   <string name="ribbon.Burner">Brenner auswählen:</string>
   <string name="ribbon.BurnerSpeed">Geschwindigkeit:</string>
+  <!--Database Tab-->
+  <string name="ribbon.ContextualTab">Datenbank</string>
+  <string name="ribbon.DatabaseTab">Datenbank</string>
+  <string name="ribbon.DatabaseQueryGroup">Datenbank Abfrage</string>
+  <string name="ribbon.Query">Abfrage</string>
+  <string name="ribbon.SwitchDatabase">Datenbank Umschalten</string>
+  <string name="ribbon.DatabaseMaintenanceGroup">Datenbanken verwalten</string>
+  <string name="ribbon.StartDBScan">Start Update</string>
+  <string name="ribbon.AbortDBScan">Scan abbrechen</string>
+  <string name="ribbon.DeleteDB">Datenbank löschen</string>
+  <string name="ribbon.ClearDatabase">Datenbank vor Update löschen</string>
+  <string name="ribbon.SelectMusicFolder">Musik Dateien</string>
+  <string name="ribbon.ActiveDatabase">Aktive Datenbank:</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Refresh</string>
@@ -181,7 +194,9 @@
   <string name="screentip.FixSong">Korrigieren MP3</string>
   <string name="screentip.FixSongText">Verwendet MP3Val um Fehler in der MP3 Datei zu korrigieren.</string>
   <string name="screentip.ReplayGain">Replay Gain Analyse</string>
+  <string name="screentip.ReplayGainText">Analysiert die ausgewählte Datei und errechnet die Wiedergabeverstärkung. Der Wert wird in die Metadaten geschrieben.\nDie Datei selbst wird nicht geändert.</string>
   <string name="screentip.BPM">BPM Erkennung</string>
+  <string name="screentip.BPMText">Analysiert die ausgewählte Datei und errechnet die Beats per Minute (BPM). Der Wert wird in die Metadaten geschrieben.\nDie Datei selbst wird nicht geändert.</string>
   <!--Rip Tab-->
   <string name="screentip.RipButton">Rip starten</string>
   <string name="screentip.RipButtonText">Startet das Rippen der ausgewählten Dateien.</string>
@@ -197,6 +212,12 @@
   <string name="screentip.BurnText">Startet das Brennen der Dateien in der Brennliste.</string>
   <string name="screentip.BurnCancel">Brennen abbrechen</string>
   <string name="screentip.BurnCancelText">Beendet das Brennen der CD</string>
+  <!--Database Tab-->
+  <string name="screentip.Query">Setzt eine Abfrage gegen die aktive Datenbank ab</string>
+  <string name="screentip.SwitchDatabase">Öffnet einen Dialog zum Umschalten der Datenbank</string>
+  <string name="screentip.StartDBScan">Startet einen scan des ausgewählten Shares und speichert das Resultat in der aktiven Datenbank</string>
+  <string name="screentip.AbortDBScan">Bricht den aktiven Scan ab</string>
+  <string name="screentip.DeleteDB">Löscht die aktive Datenbank</string>
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Mehrfach editieren</string>
@@ -306,6 +327,7 @@
   <!--Rating-->
   <string name="TagEdit.GroupBoxRating">Bewertung (Für Non-ID3 Dateien die Sterne Bewertung in der Tabelle verwenden)</string>
   <string name="TagEdit.RemoveExistingRatings">Vorhandene Bewertungen zuerst entfernen</string>
+  <string name="TagEdit.RatingNote">Die Wertung geht von 1-255. 1 ist am schlechstesten, 255 am besten. 0 bedeutet unbekannt.\n\nAchtung: Viele Programme haben ihr eigene Wertung und ignorieren den ID3-Standart. Wenn keine eigene Wertung gewünscht ist kann diese ignoriert werden.</string>
   <string name="TagEdit.PlayCounter">Abspielzähler:</string>
   <string name="TagEdit.RemoveRating">Bewertung entfernen</string>
   <string name="TagEdit.AddRating">Bewertung hinzufügen</string>
@@ -579,6 +601,7 @@ verschieben/kopieren</string>
   <string name="Settings.DescPrefStandard">Diese Einstellung sollte für die meisten Musikarten transparent für den Hörer sein und bietet bereits eine hohe Qualität. (Bitrate Bereich 170-210)</string>
   <string name="Settings.DescPrefExtreme">Wenn Sie über sehr gute Höreigenschaften verfügen und entsprechendes Equipment verfügbar ist, dann erreichen Sie mit dieser Einstellung eine etwas bessere Qualität als im \"Standard\" modus. (Bitrate Bereich 220-260)</string>
   <string name="Settings.DescPrefInsane">Konatsnte Bitrate von 320 kbps. Diese Einstallung ist für die meisten Benutzer nicht notwendig. Wenn Sie aber die absolut höchste Qualität, ohne Berücksichtigung der Dateigröße, benötigen, dann sollten Sie diese Einstellung verwenden.</string>
+  <string name="Settings.DescPrefABR">Für ABR Modi (Hohe Qualität für die gewählte Bitrate, aber nicht so hoch wie VBR). Die Verwendung dieser Voreinstellung bringt normalerweise eine gute Qualität für die gewählte Bitrate.\n\nAbhängig von der gewählten Bitrate, wählt diese Voreinstellung die optimalen Einstellungen für die Bitrate aus. Obwohl dieser Ansatz funktioniert, ist er nicht gleich flexibel wie VBR  und wird normalerweise nicht denselben Grad an Qualität wie VBR erreichen.</string>
   <string name="Settings.TabGeneral">Generell</string>
   <string name="Settings.GroupBoxKeys">Tastatur Shortcuts</string>
   <string name="Settings.ChangeKey">Ändern</string>
@@ -603,7 +626,6 @@ verschieben/kopieren</string>
   <string name="Settings.EmbedExistingThumb">Existierende Ordnervorschau (folder.jpg) bei Bildersuche verwenden</string>
   <string name="Settings.OnlySaveFolderThumb">Nur Orndervorschau speichern. Nicht die Musikdatei verändern</string>
   <string name="Settings.ChangeCoverSize">Speichern von Bildern mit einer maximalen Pixel Breite von:</string>
-  <string name="Settings.AmazonSite">Amazon Suchseite:</string>
   <string name="Settings.GroupBoxLyrics">Liedtexte</string>
   <string name="Settings.SwitchArtist">Interpret (Nachname, Vorname)  vor Durchführung tauschen</string>
   <string name="Settings.OverwriteExistingLyrics">Existierende Liedtexte beim automatischen Tagging überschreiben</string>
@@ -633,15 +655,6 @@ verschieben/kopieren</string>
   <string name="Settings.GroupBoxDCustomGenre">Benutzer Genres</string>
   <string name="Settings.AddCustomGenre">Genre Hinzufügen</string>
   <string name="Settings.DeleteCustomGenre">Genre Löschen</string>
-  <string name="Settings.GroupBoxDatabaseBuild">Musik-Datenbank Erstellung</string>
-  <string name="Settings.StartDBScan">Start Update</string>
-  <string name="Settings.DBScanStatus">Update Status</string>
-  <string name="Settings.ClearDatabase">Datenbank vor Update löschen</string>
-  <string name="Settings.SelectMusicFolder">Wählen Sie das Musikverzeichnis aus</string>
-  <string name="Settings.DBScanIdle">Datenbank Update nicht aktiv.</string>
-  <string name="Settings.DBScanTrackSummary"> ({0} Sekunden pro Datei)</string>
-  <string name="Settings.DBScanTitle">Datenbank Update abbrechen</string>
-  <string name="Settings.DBScanProgress">Verarbeite Datei {0} von {1}</string>
   <string name="Settings.TabRipping">Rip</string>
   <string name="Settings.TabRippingGeneral">Generell</string>
   <string name="Settings.CustomPath">Pfad und Dateiname</string>
@@ -696,6 +709,7 @@ verschieben/kopieren</string>
   <string name="Settings.LinkTags">Tags</string>
   <string name="Settings.LinkGeneral">Generell</string>
   <string name="Settings.LinkRipping">Ripping / Konvertierung</string>
+  <string name="Settings.GroupBoxAlbumInfoSites">ALbum Informations Quellen</string>
   <!--Burning-->
   <string name="Burning.NoMedia">Kein Medium im Laufwerk. Bitte eine leere CD/DVD einlegen.</string>
   <string name="Burning.DragAndDrop">Verwenden Sie Drag &amp; Drop um die Tracks anzuordnen</string>
@@ -757,6 +771,7 @@ verschieben/kopieren</string>
   <string name="message.Save_Changes">Änderungen nicht abgespeichert.
 Wollen Sie die änderungen speichern?</string>
   <string name="message.Save_Changes_Title">Änderungen speichern.</string>
+  <string name="message.Script_Compile_Failed">Das Script enthält Fehler.\n\nDie genaue Fehlerursache ist im Log zu finden</string>
   <string name="message.DataEntryError">Der eingegebene Wert ist ungültig.</string>
   <string name="message.NoSelectionHeader">Keine Auswahl getroffen</string>
   <string name="message.NoSelection">Bitte selektieren Sie mindestens eine Zeile, um die gewählte Aktion auszuführen.</string>
@@ -764,6 +779,8 @@ Wollen Sie die änderungen speichern?</string>
   <string name="message.DeleteConfirm">Wollen Sie die ausgewählten Dateien tatsächlich löschen?</string>
   <string name="message.DeleteFolders">Zum löschen eines Verzeichnisses, bitte Shift-Del benutzen</string>
   <string name="message.Fixed">Fixed</string>
+  <string name="message.FatalError">Fataler Fehler. MpTagthat wird beendet.\n\nDie genaue Fehlerursache ist im Log zu finden</string>
+  <string name="message.OutOfMemory">Zuviele Files gescanned. Kein verfügbarer Speicherplatz.\r\nDer Scan wird abgebrochen.</string>
   <string name="message.ErrorResetAttr">Schreibschutz Attribut nicht zurückgesetzt</string>
   <string name="message.CorruptFile">Beschädigte Datie</string>
   <string name="message.UnsupportedFormat">Format nicht unterstützt</string>
@@ -787,6 +804,7 @@ Wollen Sie die änderungen speichern?</string>
   <!--About Dialog-->
   <string name="about.Header">Über</string>
   <string name="about.Ok">Ok</string>
+  <string name="about.Description">MPTagThat ist ein open source Tag Editor für Audio Dateien, der es ermöglicht die gesamte Musik Sammlung zu verwalten.\n\nMehr Informationen auf:</string>
   <string name="about.Version">Version:</string>
   <string name="about.BuildDate">Build Datum:</string>
   <string name="about.Contributors">Mitwirkende</string>
@@ -801,13 +819,6 @@ Wollen Sie die änderungen speichern?</string>
   <string name="player.LoadPlayList">Abspielliste laden</string>
   <string name="player.SavePlayList">Abspielliste speicherm</string>
   <string name="player.UseRelativePath">Relativen Pfad verwenden</string>
-  <!--Database Search-->
-  <string name="dbsearch.Artist">Interpret / Album Interpret (enthält):</string>
-  <string name="dbsearch.Album">Album (enthält):</string>
-  <string name="dbsearch.Title">Titel (enthält):</string>
-  <string name="dbsearch.Search">Suche</string>
-  <string name="dbsearch.NoSearchValues">Bitte mindestens einen Suchwert eingeben.</string>
-  <string name="dbsearch.TooMuchRows">Die Suche ergab zuviele Resultate. Zeige nur die ersten 1000.</string>
   <!--Find / Replace-->
   <string name="findreplace.HeaderFind">Suchen</string>
   <string name="findreplace.HeaderReplace">Ersetzen</string>
@@ -825,6 +836,7 @@ Wollen Sie die änderungen speichern?</string>
   <string name="findreplace.ReplaceAllBtn">Alle ersetzen</string>
   <!--Readonly Dialog-->
   <string name="readonly.Header">Schreibgeschützte Datei</string>
+  <string name="readonly.Explanation">Die ausgewählte Datei ist nur lesbar.\nSoll MPTagThat das Attribut ändern und die Datei speichern?</string>
   <string name="readonly.Yes">Ja</string>
   <string name="readonly.YesToAll">Ja Alle</string>
   <string name="readonly.No">Nein</string>
@@ -832,4 +844,14 @@ Wollen Sie die änderungen speichern?</string>
   <!--Replay Gain Popup-->
   <string name="albumgain.Header">Album Gain</string>
   <string name="albumgain.Explanation">Alle Dateien sind ausgewählt.\nSoll MPTagThat die Albumverstärkung berechnen?</string>
+  <!--Database Related-->
+  <string name="Database.DBScanFinished">Datenbank Scan beendet. {0} Dateien in {1:d2}:{2:d2}:{3:d2} verarbeitet</string>
+  <string name="Database.DBScanActive">Aktiver Datenbank Scan gefunden.\nScan abbrechen und die Applikation beenden?</string>
+  <string name="Database.DBScanAborted">Datenbank Scan abgebrochen</string>
+  <!--Database Switch Dialog-->
+  <string name="dbswitch.databasedescription">Datenbankbeschreibung:</string>
+  <string name="dbswitch.defaultdatabasedescription">Standard Musik Datenbank</string>
+  <string name="dbswitch.databaseadd">Datenbank hinzufg.</string>
+  <string name="dbswitch.Close">Schließen</string>
+  <string name="dbswitch.notavailable">N/A</string>
 </resources>

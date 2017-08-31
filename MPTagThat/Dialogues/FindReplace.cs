@@ -148,11 +148,11 @@ namespace MPTagThat.Dialogues
             _searchStringFound = true;
             _curCell = j;
             _curRow = i;
-            _curCellFindPos = regexMatches[0].Index + 1;
+            _curCellFindPos += regexMatches[0].Index + 1;
             _findResult = new FindResult();
             _findResult.Row = _curRow;
             _findResult.Column = _curCell;
-            _findResult.StartPos = regexMatches[0].Index;
+            _findResult.StartPos = _curCellFindPos - 1;
             _findResult.Length = regexMatches[0].Length;
             _main.TracksGridView.ResultFind = _findResult;
 

@@ -20,18 +20,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using Elegant.Ui;
 using Microsoft.VisualBasic.FileIO;
 using MPTagThat.Core;
+using MPTagThat.Core.Services.MusicDatabase;
 using MPTagThat.Dialogues;
 using MPTagThat.Player;
 using TagLib;
@@ -482,7 +480,7 @@ namespace MPTagThat.GridView
         }
       }
 
-      for (int i = tracksGrid.Rows.Count - 1; i > 0; i--)
+      for (int i = tracksGrid.Rows.Count - 1; i >= 0; i--)
       {
         DataGridViewRow row = tracksGrid.Rows[i];
         if (!row.Selected)
@@ -812,6 +810,9 @@ namespace MPTagThat.GridView
         tracksGrid.ResumeLayout();
       }
 
+      // Commit changes to SongTemp, in case we have switched to DB Mode
+      Options.Songlist.CommitDatabaseChanges();
+
       Util.SendProgress("");
       log.Info("FolderScan: Scanned {0} files. Found {1} audio files", nonMusicCount + count, count);
 
@@ -906,6 +907,9 @@ namespace MPTagThat.GridView
 
     #region Database Scanning / Update
 
+    /// <summary>
+    /// BAsed on selection in the TReeview, lookup the database
+    /// </summary>
     public void DatabaseScan()
     {
       if (_main.CurrentDirectory == null)
@@ -921,47 +925,15 @@ namespace MPTagThat.GridView
         return;
       }
 
-      List<string> songs = new List<string>();
-      string sql = FormatSQL(searchString);
-
-      string connection = string.Format(@"Data Source={0}", Options.MainSettings.MediaPortalDatabase);
-      try
-      {
-        SQLiteConnection conn = new SQLiteConnection(connection);
-        conn.Open();
-        using (SQLiteCommand cmd = new SQLiteCommand())
-        {
-          cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText = sql;
-          log.Debug("Database Scan: Executing sql: {0}", sql);
-          using (SQLiteDataReader reader = cmd.ExecuteReader())
-          {
-            while (reader.Read())
-            {
-              songs.Add(reader.GetString(0));
-            }
-          }
-        }
-        conn.Close();
-      }
-      catch (Exception ex)
-      {
-        log.Error("Database Scan: Error executing sql: {0}", ex.Message);
-      }
-
-      log.Debug("Database Scan: Query returned {0} songs", songs.Count);
-      AddDatabaseSongsToGrid(songs);
-    }
-
-    public void AddDatabaseSongsToGrid(List<string> songs)
-    {
+      SetWaitCursor();
       // Clear the list and free up resources
       tracksGrid.Rows.Clear();
       Options.Songlist.Clear();
       GC.Collect();
 
-      SetProgressBar(songs.Count);
+      var orderBy = "";
+      var query = CreateQuery(searchString, out orderBy);
+      var result = ServiceScope.Get<IMusicDatabase>().ExecuteQuery(query, orderBy);
 
       // Get File Filter Settings
       _filterFileExtensions = _main.TreeView.ActiveFilter.FileFilter.Split('|');
@@ -970,29 +942,32 @@ namespace MPTagThat.GridView
                           : _main.TreeView.ActiveFilter.FileMask.Trim();
 
       int count = 1;
-      foreach (string song in songs)
+      if (result != null)
       {
-        Application.DoEvents();
-        _main.progressBar1.Value += 1;
-        if (_progressCancelled)
-        {
-          break;
-        }
+        log.Debug("Database Scan: Query returned {0} songs", result.Count);
+        SetProgressBar(result.Count);
 
-        if (ApplyFileFilter(song))
+        foreach (var track in result)
         {
-          TrackData track = Track.Create(song);
-          if (ApplyTagFilter(track))
+          Application.DoEvents();
+          _main.progressBar1.Value += 1;
+          if (_progressCancelled)
           {
-            AddTrack(track);
-            tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+            break;
           }
+
+          if (ApplyFileFilter(track.FullFileName) && ApplyTagFilter(track))
+          {
+             AddTrack(track);
+             tracksGrid.Rows.Add(); // Add a row to the grid. Virtualmode will handle the filling of cells
+          }
+          count++;
         }
-        count++;
       }
 
       _main.FolderScanning = false;
       ResetProgressBar();
+      ResetWaitCursor();
 
       // Display Status Information
       try
@@ -1021,163 +996,71 @@ namespace MPTagThat.GridView
       }
     }
 
-    private string FormatSQL(string[] searchString)
+    /// <summary>
+    /// Create a query based on the selection
+    /// </summary>
+    /// <param name="searchString"></param>
+    /// <param name="orderBy"></param>
+    /// <returns></returns>
+    private string CreateQuery(string[] searchString, out string orderBy)
     {
-      string sql = "select strPath from tracks where {0} order by {1}";
+      var query = "";
+      orderBy = "";
 
-      string whereClause = "";
-      string orderByClause = "";
       switch (searchString[0])
       {
         case "artist":
-          whereClause = string.Format("strArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strAlbum, iTrack";
+          query = FormatMultipleEntries(searchString[1], "Artist");
+          orderBy = "Album,Track";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            orderBy = "Track";
           }
           break;
 
         case "albumartist":
-          whereClause = string.Format("strAlbumArtist like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strAlbum, iTrack";
+          query = FormatMultipleEntries(searchString[1], "AlbumArtist");
+          orderBy = "Album,Track";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[2])}\"";
+            orderBy = "Track";
           }
-          break;
-
-        case "album":
-          whereClause = string.Format("strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "iTrack";
           break;
 
         case "genre":
-          whereClause = string.Format("strGenre like '%| {0}%'", Util.RemoveInvalidChars(searchString[1]));
-          orderByClause = "strArtist, strAlbum, iTrack";
+          query = FormatMultipleEntries(searchString[1], "Genre");
+          //orderByClause = "strArtist, strAlbum, iTrack";
+          orderBy = "Artist,Album,Track";
           if (searchString.GetLength(0) > 2)
           {
-            whereClause += string.Format(" AND strArtist like '%{0}%'", Util.RemoveInvalidChars(searchString[2]));
-            orderByClause = "strAlbum, iTrack";
+            query += " AND ";
+            query += FormatMultipleEntries(searchString[2], "Artist");
+            orderBy = "Album,Track";
           }
           if (searchString.GetLength(0) > 3)
           {
-            whereClause += string.Format(" AND strAlbum like '{0}'", Util.RemoveInvalidChars(searchString[3]));
-            orderByClause = "iTrack";
+            query += $" AND Album:\"{Util.EscapeDatabaseQuery(searchString[3])}\"";
+            orderBy = "Album,Track";
           }
           break;
       }
 
-      sql = string.Format(sql, whereClause, orderByClause);
-
-      return sql;
-    }
-
-    public void UpdateMusicDatabase(TrackData track)
-    {
-      string db = Options.MainSettings.MediaPortalDatabase;
-
-      if (!System.IO.File.Exists(db))
-      {
-        return;
-      }
-
-      string[] tracks = track.Track.Split('/');
-      int trackNumber = 0;
-      if (tracks[0] != "")
-      {
-        trackNumber = Convert.ToInt32(tracks[0]);
-      }
-      int trackTotal = 0;
-      if (tracks.Length > 1)
-      {
-        trackTotal = Convert.ToInt32(tracks[1]);
-      }
-
-      string[] discs = track.Disc.Split('/');
-      int discNumber = 0;
-      if (discs[0] != "")
-      {
-        discNumber = Convert.ToInt32(discs[0]);
-      }
-      int discTotal = 0;
-      if (discs.Length > 1)
-      {
-        discTotal = Convert.ToInt32(discs[1]);
-      }
-
-      string originalFileName = Path.GetFileName(track.FullFileName);
-      string newFileName = "";
-      newFileName = track.FullFileName;
-
-      /*
-      if (originalFileName != track.FileName)
-      {
-        string ext = Path.GetExtension(track.File.Name);
-        newFileName = Path.Combine(Path.GetDirectoryName(track.File.Name),
-                                   String.Format("{0}{1}", Path.GetFileNameWithoutExtension(track.FileName), ext));
-      }
-      else
-      {
-        newFileName = track.FullFileName;
-      }
-       */
-
-
-      string sql = String.Format(
-        @"update tracks 
-              set strArtist = '{0}', strAlbumArtist = '{1}', strAlbum = '{2}', 
-              strGenre = '{3}', strTitle = '{4}', iTrack = {5}, iNumTracks = {6}, 
-              iYear = {7}, iRating = {8}, iDisc = {9}, iNumDisc = {10}, strLyrics = '{11}', strPath = '{12}'
-            where strPath = '{13}'",
-        Util.RemoveInvalidChars(FormatMultipleEntry(track.Artist)),
-        Util.RemoveInvalidChars(FormatMultipleEntry(track.AlbumArtist)), Util.RemoveInvalidChars(track.Album),
-        Util.RemoveInvalidChars(FormatMultipleEntry(track.Genre)), Util.RemoveInvalidChars(track.Title), trackNumber,
-        trackTotal,
-        track.Year, track.Rating, discNumber, discTotal,
-        Util.RemoveInvalidChars(track.Lyrics), Util.RemoveInvalidChars(newFileName),
-        Util.RemoveInvalidChars(track.FullFileName)
-        );
-
-
-      string connection = string.Format(@"Data Source={0}", db);
-      try
-      {
-        SQLiteConnection conn = new SQLiteConnection(connection);
-        conn.Open();
-        using (SQLiteCommand cmd = new SQLiteCommand())
-        {
-          cmd.Connection = conn;
-          cmd.CommandType = CommandType.Text;
-          cmd.CommandText = sql;
-          int result = cmd.ExecuteNonQuery();
-        }
-        conn.Close();
-      }
-      catch (Exception ex)
-      {
-        log.Error("Database Update: Error executing sql: {0}", ex.Message);
-      }
+      return query;
     }
 
     /// <summary>
-    ///   Multiple Entry fields need to be formatted to contain a | at the end to be able to search correct
+    /// Format Multiple Value fields, like Artist, AlbumArtist and Genre 
     /// </summary>
-    /// <param name = "str"></param>
-    /// <returns>Formatted string</returns>
-    private string FormatMultipleEntry(string str)
+    /// <param name="searchString"></param>
+    /// <param name="fieldtype"></param>
+    /// <returns></returns>
+    private string FormatMultipleEntries(string searchString, string fieldtype)
     {
-      string[] strSplit = str.Split(new[] { ';', '|' });
-      // Can't use a simple String.Join as i need to trim all the elements 
-      string strJoin = "| ";
-      foreach (string strTmp in strSplit)
-      {
-        string s = strTmp.Trim();
-        strJoin += String.Format("{0} | ", s.Trim());
-      }
-      return strJoin;
+      return string.Join(" AND ", Util.EscapeDatabaseQuery(searchString)
+            .Split(new[] { " ", "," }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => $"{fieldtype}:*{x}* "));
     }
 
     #endregion
@@ -1269,7 +1152,7 @@ namespace MPTagThat.GridView
     ///   Adds a Track to the data grid
     /// </summary>
     /// <param name = "track"></param>
-    private void AddTrack(TrackData track)
+    public void AddTrack(TrackData track)
     {
       if (track == null)
         return;
@@ -1346,7 +1229,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Sets the WaitCursor during various operations
     /// </summary>
-    private void SetWaitCursor()
+    public void SetWaitCursor()
     {
       _main.Cursor = Cursors.WaitCursor;
       tracksGrid.Cursor = Cursors.WaitCursor;
@@ -1356,7 +1239,7 @@ namespace MPTagThat.GridView
     /// <summary>
     ///   Resets the WaitCursor to the default
     /// </summary>
-    private void ResetWaitCursor()
+    public void ResetWaitCursor()
     {
       _main.Cursor = Cursors.Default;
       tracksGrid.Cursor = Cursors.Default;
@@ -1978,7 +1861,12 @@ namespace MPTagThat.GridView
 
         // Split up the cell content into 3 pieces
         string cellContent = e.Value == null ? "" : e.Value.ToString();
-        ;
+
+        if (_findResult.StartPos + _findResult.Length > cellContent.Length)
+        {
+          return;
+        }
+
         string[] results = new string[3];
         results[0] = cellContent.Substring(0, _findResult.StartPos);
         results[1] = cellContent.Substring(_findResult.StartPos, _findResult.Length);
@@ -2092,12 +1980,17 @@ namespace MPTagThat.GridView
 
       TrackData track = Options.Songlist[e.RowIndex];
 
+	    if (track == null)
+	    {
+		    return;
+	    }
+
       // Handle the status column
       if (e.ColumnIndex == 0)
       {
         if (track.Changed)
         {
-          e.Value = Properties.Resources.Warning;
+          e.Value = Properties.Resources.Changed;
           return;
         }
 

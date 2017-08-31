@@ -32,13 +32,15 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
@@ -65,12 +67,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\CSScriptLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="Db4objects.Db4o">
-      <HintPath>..\MPTagThat.Base\bin\Db4objects.Db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.Linq">
-      <HintPath>..\MPTagThat.Base\bin\Db4objects.Db4o.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="Elegant.Ui.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=3a2b400713aae6e0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\Elegant.Ui.Common.dll</HintPath>
@@ -79,25 +75,42 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MPTagThat.Base\bin\Interop.Shell32.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.3.0.1\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Mono.Reflection">
       <HintPath>..\MPTagThat.Base\bin\Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Abstractions, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Database.3.5.2\lib\net45\Raven.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Client.3.5.2\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Database, Version=3.5.2.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <HintPath>..\packages\RavenDB.Database.3.5.2\lib\net45\Raven.Database.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MPTagThat.Base\bin\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net45\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -205,10 +218,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProvider.cs" />
-    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderMediaPortal.cs" />
-    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderShell32.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderMusicDb.cs" />
+    <Compile Include="Controls\TreeviewBrowser\TreeViewFolderBrowserDataProviderShell32.cs" />
     <Compile Include="Controls\TreeviewBrowser\Win32\Logicaldisk.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -276,6 +287,17 @@
     <Compile Include="Services\MediaChangeMonitor\DeviceVolumeMonitor.cs" />
     <Compile Include="Services\MediaChangeMonitor\IMediaChangeMonitor.cs" />
     <Compile Include="Services\MediaChangeMonitor\MediaChangeMonitor.cs" />
+    <Compile Include="Services\MusicDatabase\IMusicDatabase.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DefaultSearchIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctAlbumArtistAlbumsIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctAlbumArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctArtistAlbumIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreArtistAlbumIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctGenreIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctArtistIndex.cs" />
+    <Compile Include="Services\MusicDatabase\Indexes\DistinctResult.cs" />
+    <Compile Include="Services\MusicDatabase\MusicDatabase.cs" />
     <Compile Include="Services\ScriptManager\IScript.cs" />
     <Compile Include="Services\ScriptManager\IScriptManager.cs" />
     <Compile Include="Services\ScriptManager\ScriptManager.cs" />
@@ -293,6 +315,7 @@
     <Compile Include="Settings\CaseConversionSettings.cs" />
     <Compile Include="Settings\OrganiseFormatSettings.cs" />
     <Compile Include="Settings\ParameterFormat.cs" />
+    <Compile Include="Settings\StartupSettings.cs" />
     <Compile Include="Settings\TagToFileNameFormatSettings.cs" />
     <Compile Include="Settings\FileNameToTagFormatSettings.cs" />
     <Compile Include="Settings\Options.cs" />
@@ -358,6 +381,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\packages\RavenDB.Database.3.5.2\tools\Raven.Studio.Html5.zip">
+      <Link>Raven.Studio.Html5.zip</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\starhot5.png" />
   </ItemGroup>
@@ -445,4 +473,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.0\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.105.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.105.0\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>

@@ -158,7 +158,7 @@ namespace MPTagThat.Dialogues
       // 
       this.lblFindWhat.Localisation = "FindWhat";
       this.lblFindWhat.LocalisationContext = "FindReplace";
-      this.lblFindWhat.Location = new System.Drawing.Point(74, 84);
+      this.lblFindWhat.Location = new System.Drawing.Point(68, 84);
       this.lblFindWhat.Name = "lblFindWhat";
       this.lblFindWhat.Size = new System.Drawing.Size(56, 13);
       this.lblFindWhat.TabIndex = 5;
@@ -166,7 +166,7 @@ namespace MPTagThat.Dialogues
       // 
       // cbFind
       // 
-      this.cbFind.Location = new System.Drawing.Point(147, 77);
+      this.cbFind.Location = new System.Drawing.Point(144, 79);
       this.cbFind.Name = "cbFind";
       this.cbFind.Size = new System.Drawing.Size(195, 21);
       this.cbFind.TabIndex = 0;

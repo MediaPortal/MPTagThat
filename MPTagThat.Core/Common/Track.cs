@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -84,7 +85,7 @@ namespace MPTagThat.Core
       FileInfo fi = new FileInfo(fileName);
       try
       {
-        track.Id = Guid.NewGuid();
+        track.Id = null; // Raven should generate the ID
         track.FullFileName = fileName;
         track.FileName = Path.GetFileName(fileName);
         track.Readonly = fi.IsReadOnly;
@@ -143,10 +144,10 @@ namespace MPTagThat.Core
         track.Title = file.Tag.Title ?? "";
         track.TitleSortName = file.Tag.TitleSort ?? "";
 
-        track.ReplayGainTrack = double.IsNaN(file.Tag.ReplayGainTrackGain) ? "" : file.Tag.ReplayGainTrackGain.ToString();
-        track.ReplayGainTrackPeak = double.IsNaN(file.Tag.ReplayGainTrackPeak) ? "" : file.Tag.ReplayGainTrackGain.ToString();
-        track.ReplayGainAlbum = double.IsNaN(file.Tag.ReplayGainAlbumGain) ? "" : file.Tag.ReplayGainAlbumGain.ToString();
-        track.ReplayGainAlbumPeak = double.IsNaN(file.Tag.ReplayGainAlbumPeak) ? "" : file.Tag.ReplayGainAlbumPeak.ToString();
+        track.ReplayGainTrack = double.IsNaN(file.Tag.ReplayGainTrackGain) ? "" : file.Tag.ReplayGainTrackGain.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainTrackPeak = double.IsNaN(file.Tag.ReplayGainTrackPeak) ? "" : file.Tag.ReplayGainTrackPeak.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainAlbum = double.IsNaN(file.Tag.ReplayGainAlbumGain) ? "" : file.Tag.ReplayGainAlbumGain.ToString(CultureInfo.InvariantCulture);
+        track.ReplayGainAlbumPeak = double.IsNaN(file.Tag.ReplayGainAlbumPeak) ? "" : file.Tag.ReplayGainAlbumPeak.ToString(CultureInfo.InvariantCulture);
 
         track.TrackNumber = file.Tag.Track;
         track.TrackCount = file.Tag.TrackCount;
