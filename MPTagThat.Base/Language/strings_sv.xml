@@ -126,8 +126,16 @@
   <!--Database Tab-->
   <string name="ribbon.ContextualTab">Databas</string>
   <string name="ribbon.DatabaseTab">Databas</string>
+  <string name="ribbon.DatabaseQueryGroup">Databas-fråga</string>
+  <string name="ribbon.Query">Fråga</string>
+  <string name="ribbon.SwitchDatabase">Byt databas</string>
+  <string name="ribbon.DatabaseMaintenanceGroup">Underhåll av databasen</string>
   <string name="ribbon.StartDBScan">Påbörja skanning</string>
+  <string name="ribbon.AbortDBScan">Avbryt skanning</string>
+  <string name="ribbon.DeleteDB">Ta bort databas</string>
   <string name="ribbon.ClearDatabase">Rensa databas innan skanning körs</string>
+  <string name="ribbon.SelectMusicFolder">Musikfiler</string>
+  <string name="ribbon.ActiveDatabase">Aktiv databas</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Uppdatera</string>
@@ -208,6 +216,11 @@ Notera att dynamiken i filen ej ändras.</string>
   <string name="screentip.BurnCancel">Avbryt bränning</string>
   <string name="screentip.BurnCancelText">Avbryter bränningen</string>
   <!--Database Tab-->
+  <string name="screentip.Query">Ställer frågan mot den valda databasen</string>
+  <string name="screentip.SwitchDatabase">Öppnar en dialog där du kan byta databas</string>
+  <string name="screentip.StartDBScan">Startar skanning av de angivna katalogerna och sparar resultatet i den valda databasen</string>
+  <string name="screentip.AbortDBScan">Avbryter skanning</string>
+  <string name="screentip.DeleteDB">Tar bort aktiv databas</string>
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Ändra på flera taggar</string>
@@ -702,6 +715,7 @@ Beroende på vilken bitrate som angivits kommer denna förinställning att berä
   <string name="Settings.LinkTags">Taggar</string>
   <string name="Settings.LinkGeneral">Generellt</string>
   <string name="Settings.LinkRipping">Rippning / Konvertering</string>
+  <string name="Settings.GroupBoxAlbumInfoSites">Internetsidor med albuminformation</string>
   <!--Burning-->
   <string name="Burning.NoMedia">Ingen Media kunde hittas i läsaren. Stoppa i en tom Skiva.</string>
   <string name="Burning.DragAndDrop">Använd Drag och Släpp för att sortera de spår som skall brännas</string>
@@ -842,9 +856,14 @@ Skall MPTagThat ändra attributen och sedan spara om filen?</string>
   <string name="albumgain.Explanation">Samtliga filer har markerats.
 Skall MPTagThat beräkna volymen för hela Albumet?</string>
   <!--Database Related-->
+  <string name="Database.DBScanFinished">Databasskanning klar. Bearbetat {0} spår i: {1:d2}:{2:d2}:{3:d2}</string>
   <string name="Database.DBScanActive">Databas-skanningen är fortfarande aktiv.
 Vill du avbryta skanningen och stänga programmet?</string>
+  <string name="Database.DBScanAborted">Databas-skanning avbruten</string>
   <!--Database Switch Dialog-->
+  <string name="dbswitch.databasedescription">Databasbeskrivning</string>
+  <string name="dbswitch.defaultdatabasedescription">Förvald musik-databas</string>
+  <string name="dbswitch.databaseadd">Lägg till databas</string>
   <string name="dbswitch.Close">Stäng</string>
   <string name="dbswitch.notavailable">Ej tillgänglig</string>
 </resources>
