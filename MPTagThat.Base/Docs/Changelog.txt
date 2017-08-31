@@ -7,6 +7,15 @@ Legend:
 - Deleted
 x Fixed
 
+3.1.8 Date: 31.08.2017 
+-------------------------------------
++ Database Edit - Import Tags into database and edit tags based on query (experimental)
++ Multiple databases allowed. User can switch between databases
++ Musicbrainz Artist Database available for download - Allows accurate use of Artist names
++ AutoCorrectArtist script - looks up artist in the internal MusicBrainz Database and allows correction
++ In Artist and AlbumArtist Combo boxes the Musicbrainz database is searched
+x Update to Tablib-sharp
+
 3.1.7 Date: 09.10.2016 
 -------------------------------------
 + MusePack SV8 Support
