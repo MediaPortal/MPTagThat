@@ -65,6 +65,11 @@ namespace TagLib.Id3v2 {
 		private PictureType type = PictureType.Other;
 		
 		/// <summary>
+		///    Contains the filename.
+		/// </summary>
+		private string filename = null;
+
+		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description = null;
@@ -182,6 +187,7 @@ namespace TagLib.Id3v2 {
 			
 			mime_type   = picture.MimeType;
 			type        = picture.Type;
+			filename    = picture.Filename; 
 			description = picture.Description;
 			data        = picture.Data;
 		}
@@ -296,6 +302,21 @@ namespace TagLib.Id3v2 {
 			set {type = value;}
 		}
 		
+
+		/// <summary>
+		///    Gets and sets a filename of the picture stored in the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing a fielname, with
+		///    extension, of the picture stored in the current instance.
+		/// </value>
+		public string Filename
+		{
+			get { return filename; }
+			set { filename = value; }
+		}
+
 		/// <summary>
 		///    Gets and sets the description stored in the current
 		///    instance.
@@ -691,6 +712,7 @@ namespace TagLib.Id3v2 {
 			frame.text_encoding = text_encoding;
 			frame.mime_type = mime_type;
 			frame.type = type;
+			frame.filename = filename;
 			frame.description = description;
 			if (data != null)
 				frame.data = new ByteVector (data);

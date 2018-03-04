@@ -524,7 +524,7 @@ namespace TagLib.Id3v2 {
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string[]" /> containing the text contained
+		///    A <see cref="T:string[]" /> containing the text contained
 		///    in the current instance.
 		/// </value>
 		/// <remarks>
@@ -534,15 +534,15 @@ namespace TagLib.Id3v2 {
 		/// </remarks>
 		/// <example>
 		///    <para>Modifying the values text values of a frame.</para>
-		///    <code>TextInformationFrame frame = TextInformationFrame.Get (myTag, "TPE1", true);
-		////* Upper casing all the text: */
-		///string[] text = frame.Text;
-		///for (int i = 0; i &lt; text.Length; i++)
+		///    <code> TextInformationFrame frame = TextInformationFrame.Get (myTag, "TPE1", true);
+		/// /* Upper casing all the text: */
+		/// string[] text = frame.Text;
+		/// for (int i = 0; i &lt; text.Length; i++)
 		///	text [i] = text [i].ToUpper ();
-		///frame.Text = text;
+		/// frame.Text = text;
 		///
-		////* Replacing the value completely: */
-		///frame.Text = new string [] {"DJ Jazzy Jeff"};</code>
+		/// /* Replacing the value completely: */
+		/// frame.Text = new string [] {"DJ Jazzy Jeff"};</code>
 		/// </example>
 		public virtual string [] Text {
 			get {
@@ -602,7 +602,7 @@ namespace TagLib.Id3v2 {
 		///    Sets the text contained in the current instance.
 		/// </summary>
 		/// <param name="text">
-		///    A <see cref="string[]" /> containing text to store in the
+		///    A <see cref="T:string[]" /> containing text to store in the
 		///    current instance.
 		/// </param>
 		[Obsolete("Use TextInformationFrame.Text")]
@@ -711,11 +711,11 @@ namespace TagLib.Id3v2 {
 		///    use <see cref="Get(Tag,ByteVector,bool)" />.
 		/// </remarks>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="tag" /> or <paramref name="type" /> is
+		///    <paramref name="tag" /> or <paramref name="ident" /> is
 		///    <see langword="null" />.
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		///    <paramref name="type" /> is not exactly four bytes long.
+		///    <paramref name="ident" /> is not exactly four bytes long.
 		/// </exception>
 		public static TextInformationFrame Get (Tag tag,
 		                                        ByteVector ident,
@@ -801,11 +801,11 @@ namespace TagLib.Id3v2 {
 		///    langword="null" /> if no value was found.
 		/// </returns>
 		/// <exception cref="ArgumentNullException">
-		///    <paramref name="tag" /> or <paramref name="type" /> is
+		///    <paramref name="tag" /> or <paramref name="ident" /> is
 		///    <see langword="null" />.
 		/// </exception>
 		/// <exception cref="ArgumentException">
-		///    <paramref name="type" /> is not exactly four bytes long.
+		///    <paramref name="ident" /> is not exactly four bytes long.
 		/// </exception>
 		[Obsolete("Use TextInformationFrame.Get(Tag,ByteVector,bool)")]
 		public static TextInformationFrame Get (Tag tag,
@@ -878,12 +878,13 @@ namespace TagLib.Id3v2 {
 				
 				// Truncate values containing NULL bytes
 				int null_index = value.IndexOf ('\x00');
-				if (null_index >= 0 && FrameId != FrameType.IPLS) {
+				if (null_index >= 0) {
 					value = value.Substring (0, null_index);
 				}
 				
 				if (FrameId == FrameType.TCOM ||
 					FrameId == FrameType.TEXT ||
+					FrameId == FrameType.TMCL ||
 					FrameId == FrameType.TOLY ||
 					FrameId == FrameType.TOPE ||
 					FrameId == FrameType.TPE1 ||
@@ -1181,7 +1182,7 @@ namespace TagLib.Id3v2 {
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string[]" /> containing the text contained
+		///    A <see cref="T:string[]" /> containing the text contained
 		///    in the current instance.
 		/// </value>
 		/// <remarks>

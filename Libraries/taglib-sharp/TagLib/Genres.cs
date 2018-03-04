@@ -242,7 +242,7 @@ namespace TagLib {
 		///    Gets a list of standard audio generes.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string[]" /> containing standard audio
+		///    A <see cref="T:string[]" /> containing standard audio
 		///    genres.
 		/// </value>
 		/// <remarks>
@@ -257,7 +257,7 @@ namespace TagLib {
 		///    Gets a list of standard video generes.
 		/// </summary>
 		/// <value>
-		///    A <see cref="string[]" /> containing standard video
+		///    A <see cref="T:string[]" /> containing standard video
 		///    genres.
 		/// </value>
 		/// <remarks>

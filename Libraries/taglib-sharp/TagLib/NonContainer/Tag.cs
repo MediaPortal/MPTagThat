@@ -123,7 +123,7 @@ namespace TagLib.NonContainer {
 		///    Gets the tags combined in the current instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="Tag[]" /> containing the tags combined in
+		///    A <see cref="T:TagLib.Tag[]" /> containing the tags combined in
 		///    the current instance.
 		/// </value>
 		/// <remarks>

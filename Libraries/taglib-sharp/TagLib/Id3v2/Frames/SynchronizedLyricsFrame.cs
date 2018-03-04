@@ -361,7 +361,7 @@ namespace TagLib.Id3v2
 		///    instance.
 		/// </summary>
 		/// <value>
-		///    A <see cref="SynchedText[]" /> containing the text
+		///    A <see cref="T:SynchedText[]" /> containing the text
 		///    contained in the current instance.
 		/// </value>
 		public SynchedText [] Text {

@@ -35,11 +35,11 @@ namespace TagLib.Matroska
 
 #pragma warning disable 414 // Assigned, never used
         private double rate;
-        private uint channels;
-        private uint depth;
+		private ulong channels;
+		private ulong depth;
 #pragma warning restore 414
 
-        private List<EBMLElement> unknown_elems = new List<EBMLElement> ();
+		private List<EBMLreader> unknown_elems = new List<EBMLreader> ();
 
         #endregion
 
@@ -52,33 +52,37 @@ namespace TagLib.Matroska
         /// parent element's data section.
         /// </summary>
         /// <param name="_file"><see cref="File" /> instance to read from.</param>
-        /// <param name="element">Parent <see cref="EBMLElement" />.</param>
-        public AudioTrack (File _file, EBMLElement element)
+		/// <param name="element">Parent <see cref="EBMLreader" />.</param>
+		public AudioTrack (File _file, EBMLreader element)
             : base (_file, element)
         {
             MatroskaID matroska_id;
 
             // Here we handle the unknown elements we know, and store the rest
-            foreach (EBMLElement elem in base.UnknownElements) {
+			foreach (EBMLreader elem in base.UnknownElements) {
 
                 matroska_id = (MatroskaID) elem.ID;
 
-                if (matroska_id == MatroskaID.MatroskaTrackAudio) {
+
+				switch (matroska_id)
+				{
+					case MatroskaID.TrackAudio:
+						{
                     ulong i = 0;
 
                     while (i < elem.DataSize) {
-                        EBMLElement child = new EBMLElement (_file, elem.DataOffset + i);
+								EBMLreader child = new EBMLreader (_file, elem.DataOffset + i);
 
                         matroska_id = (MatroskaID) child.ID;
 
                         switch (matroska_id) {
-                            case MatroskaID.MatroskaAudioChannels:
-                                channels = child.ReadUInt ();
+									case MatroskaID.AudioChannels:
+										channels = child.ReadULong ();
                                 break;
-                            case MatroskaID.MatroskaAudioBitDepth:
-                                depth = child.ReadUInt ();
+									case MatroskaID.AudioBitDepth:
+										depth = child.ReadULong ();
                                 break;
-                            case MatroskaID.MatroskaAudioSamplingFreq:
+									case MatroskaID.AudioSamplingFreq:
                                 rate = child.ReadDouble ();
                                 break;
                             default:
@@ -88,9 +92,13 @@ namespace TagLib.Matroska
 
                         i += child.Size;
                     }
+
+							break;
                 }
-                else {
+
+					default: 
                     unknown_elems.Add (elem);
+						break;
                 }
             }
         }
@@ -102,7 +110,7 @@ namespace TagLib.Matroska
         /// <summary>
         /// List of unknown elements encountered while parsing.
         /// </summary>
-        public new List<EBMLElement> UnknownElements
+		public new List<EBMLreader> UnknownElements
         {
             get { return unknown_elems; }
         }
@@ -152,5 +160,6 @@ namespace TagLib.Matroska
         }
 
         #endregion
+
     }
 }

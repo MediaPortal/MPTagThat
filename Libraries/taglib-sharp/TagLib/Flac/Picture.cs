@@ -44,6 +44,11 @@ namespace TagLib.Flac
 		private string mime_type;
 		
 		/// <summary>
+		///    Contains the filename.
+		/// </summary>
+		private string filename;
+		
+		/// <summary>
 		///    Contains the description.
 		/// </summary>
 		private string description;
@@ -159,6 +164,7 @@ namespace TagLib.Flac
 			
 			type = picture.Type;
 			mime_type = picture.MimeType;
+			filename = picture.Filename;
 			description = picture.Description;
 			picture_data = picture.Data;
 			
@@ -248,6 +254,20 @@ namespace TagLib.Flac
 			set {type = value;}
 		}
 		
+		/// <summary>
+		///    Gets and sets a filename of the picture stored in the
+		///    current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing a fielname, with
+		///    extension, of the picture stored in the current instance.
+		/// </value>
+		public string Filename
+		{
+			get { return filename; }
+			set { filename = value; }
+		}
+
 		/// <summary>
 		///    Gets and sets a description of the picture stored in the
 		///    current instance.

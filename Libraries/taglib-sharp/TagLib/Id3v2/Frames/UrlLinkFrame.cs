@@ -212,7 +212,7 @@ namespace TagLib.Id3v2
 				///    instance.
 				/// </summary>
 				/// <value>
-				///    A <see cref="string[]" /> containing the text contained
+		///    A <see cref="T:string[]" /> containing the text contained
 				///    in the current instance.
 				/// </value>
 				/// <remarks>
@@ -222,15 +222,15 @@ namespace TagLib.Id3v2
 				/// </remarks>
 				/// <example>
 				///    <para>Modifying the values text values of a frame.</para>
-				///    <code>UrlLinkFrame frame = UrlLinkFrame.Get (myTag, "WCOP", true);
-				////* Upper casing all the text: */
-				///string[] text = frame.Text;
-				///for (int i = 0; i &lt; text.Length; i++)
+		///    <code> UrlLinkFrame frame = UrlLinkFrame.Get (myTag, "WCOP", true);
+		/// /* Upper casing all the text: */
+		/// string[] text = frame.Text;
+		/// for (int i = 0; i &lt; text.Length; i++)
 				///	text [i] = text [i].ToUpper ();
-				///frame.Text = text;
+		/// frame.Text = text;
 				///
-				////* Replacing the value completely: */
-				///frame.Text = new string [] {"http://www.somewhere.com"};</code>
+		/// /* Replacing the value completely: */
+		/// frame.Text = new string [] {"http://www.somewhere.com"};</code>
 				/// </example>
 				public virtual string [] Text {
 						get {
@@ -332,7 +332,7 @@ namespace TagLib.Id3v2
 				///    use <see cref="Get(Tag,ByteVector,bool)" />.
 				/// </remarks>
 				/// <exception cref="ArgumentNullException">
-				///    <paramref name="tag" /> or <paramref name="type" /> is
+		///    <paramref name="tag" /> or <paramref name="ident" /> is
 				///    <see langword="null" />.
 				/// </exception>
 				/// <exception cref="ArgumentException">
@@ -665,7 +665,7 @@ namespace TagLib.Id3v2
 				///    instance.
 				/// </summary>
 				/// <value>
-				///    A <see cref="string[]" /> containing the text contained
+				///    A <see cref="T:string[]" /> containing the text contained
 				///    in the current instance.
 				/// </value>
 				/// <remarks>
