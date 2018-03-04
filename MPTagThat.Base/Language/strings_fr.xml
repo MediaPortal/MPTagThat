@@ -126,8 +126,16 @@
   <!--Database Tab-->
   <string name="ribbon.ContextualTab">Base de données</string>
   <string name="ribbon.DatabaseTab">Base de données</string>
+  <string name="ribbon.DatabaseQueryGroup">Base de données de requête</string>
+  <string name="ribbon.Query">Requete</string>
+  <string name="ribbon.SwitchDatabase">Changer de base de données </string>
+  <string name="ribbon.DatabaseMaintenanceGroup">Maintenance de base de données</string>
   <string name="ribbon.StartDBScan">Démarrer le scan</string>
+  <string name="ribbon.AbortDBScan">Abandonner le scan</string>
+  <string name="ribbon.DeleteDB">Supprimer la base de données</string>
   <string name="ribbon.ClearDatabase">Videz le contenu de la base de données avant de scanner</string>
+  <string name="ribbon.SelectMusicFolder">Fichiers musicaux</string>
+  <string name="ribbon.ActiveDatabase">Base de données active:</string>
   <!--Ribbon Screen Tip-->
   <!--Start Menu-->
   <string name="screentip.Refresh">Rafraîchir</string>
@@ -205,6 +213,11 @@
   <string name="screentip.BurnCancel">Annuler la gravure</string>
   <string name="screentip.BurnCancelText">Arrête le processus de gravure.</string>
   <!--Database Tab-->
+  <string name="screentip.Query">Exécute la requête vers la base de données sélectionnée</string>
+  <string name="screentip.SwitchDatabase">Ouvre une boîte de dialogue permettant de  basculer d\'unebase de données à une autre</string>
+  <string name="screentip.StartDBScan">Analyse le site spécifié puis stocke le résultat dans la base de données sélectionnée.</string>
+  <string name="screentip.AbortDBScan">Abandon de  l\'analyse en cours d\'exécution</string>
+  <string name="screentip.DeleteDB">Supprime la base de données active</string>
   <!--Tag Edit  (Multi Tagedit / Single Tagedit)-->
   <!--Title / Headers-->
   <string name="TagEdit.MultiHeading">Editer plusieurs Tags</string>
@@ -696,6 +709,7 @@ Niveau maximum de la piste</string>
   <string name="Settings.LinkTags">Tags</string>
   <string name="Settings.LinkGeneral">Général</string>
   <string name="Settings.LinkRipping">Extraction/Conversion</string>
+  <string name="Settings.GroupBoxAlbumInfoSites"> Sites d\'informations concernant les albums</string>
   <!--Burning-->
   <string name="Burning.NoMedia">Aucun média détecté dans le lecteur. Insérez un disque vierge.</string>
   <string name="Burning.DragAndDrop">Utilisez le \"Glisser &amp; déposer\" pour ordonner les pistes à graver</string>
@@ -830,8 +844,13 @@ Niveau maximum de la piste</string>
   <string name="albumgain.Header">Réglage du volume (Gain) de l\'album</string>
   <string name="albumgain.Explanation">Tous les fichiers sont sélectionnés.\n MPTagThat doit-il calculer le Gain pour l\'album?</string>
   <!--Database Related-->
+  <string name="Database.DBScanFinished">Analyse de la base de données terminée.  {0} Données analysées sur: {1: d2}: {2: d2}: {3: d2}</string>
   <string name="Database.DBScanActive">Le scan de la base de données est toujours actif. \nL\'abandonner et quitter l\'application ?</string>
+  <string name="Database.DBScanAborted">Analyse de base de données annulée</string>
   <!--Database Switch Dialog-->
+  <string name="dbswitch.databasedescription">Description de la base de données :</string>
+  <string name="dbswitch.defaultdatabasedescription">Base de données  Musique par défaut</string>
+  <string name="dbswitch.databaseadd">Ajouter la base de données</string>
   <string name="dbswitch.Close">Fermer</string>
   <string name="dbswitch.notavailable">N/A</string>
 </resources>
