@@ -1175,7 +1175,7 @@ namespace TagLib.Id3v2 {
 		/// <param name="description">String containing the Description field for the
 		/// TXXX frame</param>
 		/// <param name="text">String containing the Text field for the TXXX frame</param>
-		private void SetUserTextAsString(string description, string text) {
+		public void SetUserTextAsString(string description, string text) {
 			SetUserTextAsString (description, text, true);
 		}
 

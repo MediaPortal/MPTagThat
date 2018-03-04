@@ -40,3 +40,5 @@ db.lock
 storage.ide
 Solution.VC.db-shm
 Solution.VC.db-wal
+storage.ide-shm
+storage.ide-wal
