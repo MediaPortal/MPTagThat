@@ -24,7 +24,7 @@
 using System;
 using System.Reflection;
 
-[assembly:AssemblyVersion("2.1.0.3")]
+[assembly:AssemblyVersion("2.1.0.4")]
 [assembly:AssemblyTitle ("TagLib#")]
 [assembly:AssemblyDescription ("A library for reading and writing audio metatags.")]
 [assembly:AssemblyProduct("MediaPortal specific version.")]
