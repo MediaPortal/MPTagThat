@@ -67,7 +67,8 @@ namespace TagLib.Ape {
 			"Cover Art (colored fish)",
 			"Cover Art (illustration)",
 			"Cover Art (band logo)",
-			"Cover Art (publisher logo)"
+			"Cover Art (publisher logo)",
+			"Embedded Object"
 		};
 		
 #endregion
@@ -1390,6 +1391,25 @@ namespace TagLib.Ape {
 		}
 
 		/// <summary>
+		///    Gets and sets the MusicBrainz Release Group ID of the media
+		///    represented by the current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the MusicBrainz
+		///    ReleaseGroupID for the media represented by the current instance
+		///    or <see langword="null" /> if no value is present.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "MUSICBRAINZ_RELEASEGROUPID" item.
+		///    http://musicbrainz.org/doc/PicardTagMapping
+		/// </remarks>
+		public override string MusicBrainzReleaseGroupId
+		{
+			get { return GetItemAsString("MUSICBRAINZ_RELEASEGROUPID"); }
+			set { SetValue("MUSICBRAINZ_RELEASEGROUPID", value); }
+		}
+
+		/// <summary>
 		///    Gets and sets the MusicBrainz Release ID of the media
 		///    represented by the current instance.
 		/// </summary>
@@ -1749,16 +1769,25 @@ namespace TagLib.Ape {
 		public override IPicture [] Pictures {
 			get {
 				List<IPicture> pictures = new List<IPicture> ();
+				StringComparison comparison =
+					StringComparison.InvariantCultureIgnoreCase;
 				
-				for (int i = 0; i < picture_item_names.Length;
-					i++) {
-					Item item = GetItem (
-						picture_item_names [i]);
+				foreach (Item item in items) {
 					
 					if (item == null ||
 						item.Type != ItemType.Binary)
 						continue;
 					
+					int i;
+					for (i = 0; i < picture_item_names.Length; i++) {
+						if (picture_item_names[i].Equals(item.Key, comparison))
+							break;
+					}
+					
+
+					if (i >= picture_item_names.Length)
+						continue;
+
 					int index = item.Value.Find (
 						ByteVector.TextDelimiter (
 							StringType.UTF8));
@@ -1773,7 +1802,8 @@ namespace TagLib.Ape {
 						.ToString (StringType.UTF8, 0,
 							index);
 					
-					pic.Type = (PictureType) i;
+					pic.Type = i < picture_item_names.Length - 1 ?
+						(PictureType) i : PictureType.NotAPicture;
 					
 					pictures.Add (pic);
 				}
@@ -1791,7 +1821,7 @@ namespace TagLib.Ape {
 					int type = (int) pic.Type;
 					
 					if (type >= picture_item_names.Length)
-						type = 0;
+						type = picture_item_names.Length - 1;
 					
 					string name = picture_item_names [type];
 					

@@ -887,6 +887,9 @@ namespace TagLib.Id3v2 {
 					FrameId == FrameType.TMCL ||
 					FrameId == FrameType.TOLY ||
 					FrameId == FrameType.TOPE ||
+					FrameId == FrameType.TSOC ||
+					FrameId == FrameType.TSOP ||
+					FrameId == FrameType.TSO2 ||
 					FrameId == FrameType.TPE1 ||
 					FrameId == FrameType.TPE2 ||
 					FrameId == FrameType.TPE3 ||
@@ -913,7 +916,7 @@ namespace TagLib.Id3v2 {
 					}
 					
 					if (value.Length > 0)
-						field_list.AddRange (value.Split (new char [] {'/'}));
+						field_list.AddRange (value.Split (new char [] {'/', ';'}));
 				} else {
 					field_list.Add (value);
 				}
@@ -985,7 +988,7 @@ namespace TagLib.Id3v2 {
 				StringBuilder data = new StringBuilder ();
 				foreach (string s in text) {
 					if (!prev_value_indexed) {
-						data.Append ("/").Append (s);
+						data.Append (";").Append (s);
 						continue;
 					}
 					

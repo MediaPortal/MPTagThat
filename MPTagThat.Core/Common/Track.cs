@@ -709,7 +709,7 @@ namespace MPTagThat.Core
 
               if (frame.Id == "TXXX")
               {
-                id3v2tag.SetUserTextAsString(frame.Description, "");
+                id3v2tag.SetUserTextAsString(frame.Description, "", false);
               }
               else
               {
@@ -731,7 +731,7 @@ namespace MPTagThat.Core
 
               if (frame.Id == "TXXX")
               {
-                id3v2tag.SetUserTextAsString(frame.Description, "");
+                id3v2tag.SetUserTextAsString(frame.Description, "", false);
               }
               else
               {
@@ -751,8 +751,8 @@ namespace MPTagThat.Core
             {
               if (frame.Description != "")
               {
-                id3v2tag.SetUserTextAsString(frame.Description, "");
-                id3v2tag.SetUserTextAsString(frame.Description, frame.Value);
+                id3v2tag.SetUserTextAsString(frame.Description, "", false);
+                id3v2tag.SetUserTextAsString(frame.Description, frame.Value, false);
               }
             }
             else

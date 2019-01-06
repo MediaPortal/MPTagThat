@@ -206,13 +206,15 @@ namespace TagLib.Matroska
 		
 		#region Public Methods
 
-
 		/// <summary>
 		///    Saves the changes made in the current instance to the
 		///    file it represents.
 		/// </summary>
 		public override void Save ()
 		{
+			// Boilerplate
+			PreSave();
+
 			Mode = AccessMode.Write;
 			try {
 				ReadWrite(ReadStyle.None);
@@ -350,7 +352,7 @@ namespace TagLib.Matroska
 				}
 				catch(Exception ex)
 				{
-					// Sometimes, the file have zero padding at the end
+					// Sometimes, the file has zero padding at the end
 					if (hasSegment) break; // Avoid crash 
 					throw ex;
 				}
@@ -410,7 +412,7 @@ namespace TagLib.Matroska
 						break;
 
 					case MatroskaID.Tracks:
-						if (Mode != AccessMode.Write && propertiesStyle != ReadStyle.None)
+						if (Mode != AccessMode.Write && (propertiesStyle & ReadStyle.Average) != 0)
 						{
 							if (valid = child.Read()) ReadTracks(child);
 						}
@@ -425,7 +427,7 @@ namespace TagLib.Matroska
 					case MatroskaID.Attachments:
 						valid = child.Read();
 						if (Mode == AccessMode.Write) child.SetVoid();
-						else if (valid) ReadAttachments(child);
+						else if (valid) ReadAttachments(child, propertiesStyle);
 						break;
 
 					case MatroskaID.CRC32: // We don't support it
@@ -443,7 +445,9 @@ namespace TagLib.Matroska
 			// Detect invalid SeekHead
 			if (!valid)
 			{
-				if (!retry) throw new InvalidOperationException("Invalid EBML element Read");
+				if (retry)
+				{
+					MarkAsCorrupt("Invalid Meta Seek");
 
 				// Retry the ReadWriteSegment without using SeekHead
 				if (Mode != AccessMode.Write)
@@ -454,6 +458,11 @@ namespace TagLib.Matroska
 
 				// Retry it one last time
 				ReadWriteSegment(element, propertiesStyle, false);
+				}
+				else
+				{
+					MarkAsCorrupt("Invalid EBML element Read");
+				}
 
 			}
 			else if (Mode == AccessMode.Write)
@@ -651,7 +660,17 @@ namespace TagLib.Matroska
 
 			while (i < element.DataSize)
 			{
-				EBMLreader child = new EBMLreader(element, element.DataOffset + i);
+				EBMLreader child;
+
+				try
+				{
+					child = new EBMLreader(element, element.DataOffset + i);
+				}
+				catch
+				{
+					MarkAsCorrupt("Truncated file or invalid EBML entry");
+					break; // Corrupted file: quit here and good luck for the rest
+				}
 
 				MatroskaID matroska_id = child.ID;
 				bool refInSeekHead = false;
@@ -663,8 +682,7 @@ namespace TagLib.Matroska
 						{
 							// Take only the first SeekHead into account
 							var ebml_seek = new List<EBMLreader>(10) { child };
-							ReadSeekHead(child, ebml_seek);
-							if (ebml_seek.Count > 0)
+							if (ReadSeekHead(child, ebml_seek))
 							{
 								// Always reference the first element
 								if (ebml_seek[0].Offset > element.DataOffset)
@@ -672,6 +690,11 @@ namespace TagLib.Matroska
 
 								segm_list = ebml_seek;
 								i = element.DataSize; // Exit the loop: we got what we need
+							}
+							else
+							{
+								MarkAsCorrupt("Invalid Meta Seek");
+								refInSeekHead = true;
 							}
 						}
 						else
@@ -710,7 +733,7 @@ namespace TagLib.Matroska
 
 
 
-		private List<EBMLreader> ReadSeekHead(EBMLreader element, List<EBMLreader> segm_list)
+		private bool ReadSeekHead(EBMLreader element, List<EBMLreader> segm_list)
 		{
 			MatroskaID ebml_id = 0;
 			ulong ebml_position = 0;
@@ -721,7 +744,7 @@ namespace TagLib.Matroska
 				EBMLreader ebml_seek = new EBMLreader(element, element.DataOffset + i);
 				MatroskaID matroska_id = ebml_seek.ID;
 
-				if (matroska_id != MatroskaID.Seek) return null; // corrupted SeekHead
+				if (matroska_id != MatroskaID.Seek) return false; // corrupted SeekHead
 
 				ulong j = 0;
 				while (j < ebml_seek.DataSize)
@@ -760,7 +783,7 @@ namespace TagLib.Matroska
 					// Chained SeekHead recursive read
 					if (ebml_id == MatroskaID.SeekHead)
 					{
-						if (!ebml.Read()) return null; // Corrupted
+						if (!ebml.Read()) return false; // Corrupted
 						ReadSeekHead(ebml, segm_list);
 					}
 				}
@@ -768,7 +791,7 @@ namespace TagLib.Matroska
 				i += ebml_seek.Size;
 			}
 
-			return segm_list;
+			return true;
 		}
 
 
@@ -956,7 +979,7 @@ namespace TagLib.Matroska
 		}
 
 
-		private void ReadAttachments(EBMLreader element)
+		private void ReadAttachments(EBMLreader element, ReadStyle propertiesStyle)
 		{
 			ulong i = 0;
 
@@ -969,7 +992,7 @@ namespace TagLib.Matroska
 				switch (matroska_id)
 				{
 					case MatroskaID.AttachedFile:
-						ReadAttachedFile(child);
+						ReadAttachedFile(child, propertiesStyle);
 						break;
 					default:
 						break;
@@ -980,12 +1003,12 @@ namespace TagLib.Matroska
 		}
 
 
-		private void ReadAttachedFile(EBMLreader element)
+		private void ReadAttachedFile(EBMLreader element, ReadStyle propertiesStyle)
 		{
 			ulong i = 0;
 #pragma warning disable 219 // Assigned, never read
 			string file_name = null, file_mime = null, file_desc = null;
-			ByteVector file_data = null;
+			EBMLreader file_data = null;
 			ulong file_uid = 0;
 #pragma warning restore 219
 
@@ -1007,7 +1030,7 @@ namespace TagLib.Matroska
 						file_desc = child.ReadString();
 						break;
 					case MatroskaID.FileData:
-						file_data = child.ReadBytes();
+						file_data = child;
 						break;
 					case MatroskaID.FileUID:
 						file_uid = child.ReadULong();
@@ -1025,7 +1048,9 @@ namespace TagLib.Matroska
 
 				Array.Resize(ref attachments, tags.Attachments.Length + 1);
 
-				var attach = new Attachment(file_data);
+				var attach = new Attachment(file_abstraction, (long)file_data.DataOffset, (long)file_data.DataSize);
+				if (Mode == AccessMode.Write || (propertiesStyle & ReadStyle.PictureLazy) == 0) attach.Load();
+
 				attach.Filename = file_name;
 				attach.Description = file_desc != null ? file_desc : file_name;
 				attach.MimeType = file_mime;

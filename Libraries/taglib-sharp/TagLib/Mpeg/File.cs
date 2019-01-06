@@ -305,7 +305,7 @@ namespace TagLib.Mpeg {
 		protected override void ReadStart (long start,
 		                                   ReadStyle propertiesStyle)
 		{
-			if (propertiesStyle == ReadStyle.None)
+			if ((propertiesStyle & ReadStyle.Average) == 0)
 				return;
 			
 			FindMarker (ref start, Marker.SystemSyncPacket);
@@ -332,10 +332,14 @@ namespace TagLib.Mpeg {
 			GetTag (TagTypes.Id3v1, true);
 			GetTag (TagTypes.Id3v2, true);
 			
-			if (propertiesStyle == ReadStyle.None ||
+			if ((propertiesStyle & ReadStyle.Average) == 0 ||
 				start_time == null)
 				return;
 			
+			// Enable to search the marker in the entire file if none is found so far
+			if (end == Length)
+				end = 0;
+
 			RFindMarker (ref end, Marker.SystemSyncPacket);
 			
 			end_time = ReadTimestamp (end + 4);
@@ -441,15 +445,10 @@ namespace TagLib.Mpeg {
 		///    A <see cref="Marker" /> value specifying the type of
 		///    marker to search for.
 		/// </param>
-		/// <returns>
-		///    A <see cref="Marker" /> value containing the type of
-		///    marker found at the specified position. This value will
-		///    be identical to <paramref name="marker" />.
-		/// </returns>
 		/// <exception cref="CorruptFileException">
 		///    A valid marker could not be found.
 		/// </exception>
-		protected Marker FindMarker (ref long position, Marker marker)
+		protected void FindMarker (ref long position, Marker marker)
 		{
 			ByteVector packet = new ByteVector (MarkerStart);
 			packet.Add ((byte) marker);
@@ -458,8 +457,6 @@ namespace TagLib.Mpeg {
 			if (position < 0)
 				throw new CorruptFileException (
 					"Marker not found");
-			
-			return GetMarker (position);
 		}
 		
 		/// <summary>
@@ -475,15 +472,10 @@ namespace TagLib.Mpeg {
 		///    A <see cref="Marker" /> value specifying the type of
 		///    marker to search for.
 		/// </param>
-		/// <returns>
-		///    A <see cref="Marker" /> value containing the type of
-		///    marker found at the specified position. This value will
-		///    be identical to <paramref name="marker" />.
-		/// </returns>
 		/// <exception cref="CorruptFileException">
 		///    A valid marker could not be found.
 		/// </exception>
-		protected Marker RFindMarker (ref long position, Marker marker)
+		protected void RFindMarker (ref long position, Marker marker)
 		{
 			ByteVector packet = new ByteVector (MarkerStart);
 			packet.Add ((byte) marker);
@@ -492,8 +484,6 @@ namespace TagLib.Mpeg {
 			if (position < 0)
 				throw new CorruptFileException (
 					"Marker not found");
-			
-			return GetMarker (position);
 		}
 		
 		/// <summary>
@@ -675,7 +665,7 @@ namespace TagLib.Mpeg {
 					(uint) (data [1] << 22) |
 					(uint)((data [2] >> 1) << 15) |
 					(uint) (data [3] << 7) |
-					(uint) (data [4] << 1);
+					(uint) (data [4] >> 1);
 			} else {
 				ByteVector data = ReadBlock (6);
 				high = (double) ((data [0] & 0x20) >> 5);

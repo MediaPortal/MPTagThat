@@ -780,6 +780,25 @@ namespace TagLib {
 		}
 
 		/// <summary>
+		///    Gets and sets the MusicBrainz Release Group ID of the media represented by
+		///    the current instance.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> containing the MusicBrainz ReleaseGroupID of the
+		///    media represented by the current instance or an empty
+		///    array if no value is present.
+		/// </value>
+		/// <remarks>
+		///    <para>This field represents the MusicBrainz ReleaseGroupID, and is used
+		///    to uniquely identify a particular Release Group to which this track belongs.</para>
+		/// </remarks>
+		public virtual string MusicBrainzReleaseGroupId
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
 		///    Gets and sets the MusicBrainz Release ID of the media represented by
 		///    the current instance.
 		/// </summary>
@@ -995,6 +1014,57 @@ namespace TagLib {
 		public virtual double ReplayGainAlbumPeak {
 			get { return double.NaN; }
 			set {}
+		}
+
+		/// <summary>
+		///    Gets and sets the initial key of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> value for the initial key
+		///    of the song.
+		/// </value>
+		public virtual string InitialKey
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Gets and sets the remixer of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> value for the remixer
+		///    of the song.
+		/// </value>
+		public virtual string RemixedBy
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Gets and sets the publisher of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> value for the publisher
+		///    of the song.
+		/// </value>
+		public virtual string Publisher
+		{
+			get { return null; }
+			set { }
+		}
+
+		/// <summary>
+		///    Gets and sets the ISRC (International Standard Recording Code) of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> value containing the ISRC of the song.
+		/// </value>
+		public virtual string ISRC
+		{
+			get { return null; }
+			set { }
 		}
 
 		/// <summary>
@@ -1295,7 +1365,7 @@ namespace TagLib {
 		/// </returns>
 		private static string JoinGroup (string [] group)
 		{
-			if (group == null)
+			if (group == null || group.Length == 0)
 				return null;
 			
 			return string.Join ("; ", group);
@@ -1477,6 +1547,18 @@ namespace TagLib {
 			
 			if (overwrite || target.BeatsPerMinute == 0)
 				target.BeatsPerMinute = BeatsPerMinute;
+			
+			if (overwrite || IsNullOrLikeEmpty (target.InitialKey))
+				target.InitialKey = InitialKey;
+			
+			if (overwrite || IsNullOrLikeEmpty (target.Publisher))
+				target.Publisher = Publisher;
+			
+			if (overwrite || IsNullOrLikeEmpty (target.ISRC))
+				target.ISRC = ISRC;
+			
+			if (overwrite || IsNullOrLikeEmpty (target.RemixedBy))
+				target.RemixedBy = RemixedBy;
 			
 			if (overwrite || IsNullOrLikeEmpty (target.Grouping))
 				target.Grouping = Grouping;

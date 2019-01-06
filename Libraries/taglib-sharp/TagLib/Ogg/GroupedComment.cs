@@ -33,7 +33,7 @@ namespace TagLib.Ogg
 	/// </summary>
 	public class GroupedComment : Tag
 	{
-#region Private Fields
+		#region Private Fields
 		
 		/// <summary>
 		///    Contains a mapping between stream serial numbers and
@@ -46,20 +46,20 @@ namespace TagLib.Ogg
 		/// </summary>
 		private List<XiphComment> tags;
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Constructors
+		#region Constructors
 		
 		/// <summary>
 		///    Constructs and initializes a new instance of <see
 		///    cref="GroupedComment" /> with now contents.
 		/// </summary>
-		public GroupedComment () : base ()
+		public GroupedComment() : base()
 		{
-			comment_hash = new Dictionary <uint, XiphComment> ();
-			tags = new List<XiphComment> ();
+			comment_hash = new Dictionary<uint, XiphComment>();
+			tags = new List<XiphComment>();
 		}
 		
 		/// <summary>
@@ -72,7 +72,7 @@ namespace TagLib.Ogg
 		///    /> objects contained in the current instance.
 		/// </value>
 		public IEnumerable<XiphComment> Comments {
-			get {return tags;}
+			get { return tags; }
 		}
 		
 		/// <summary>
@@ -87,9 +87,9 @@ namespace TagLib.Ogg
 		///    A <see cref="XiphComment"/> with the matching serial
 		///    number.
 		/// </returns>
-		public XiphComment GetComment (uint streamSerialNumber)
+		public XiphComment GetComment(uint streamSerialNumber)
 		{
-			return comment_hash [streamSerialNumber];
+			return comment_hash[streamSerialNumber];
 		}
 		
 		/// <summary>
@@ -103,11 +103,11 @@ namespace TagLib.Ogg
 		///    A <see cref="XiphComment" /> object to add to the current
 		///    instance.
 		/// </param>
-		public void AddComment (uint streamSerialNumber,
+		public void AddComment(uint streamSerialNumber,
 		                        XiphComment comment)
 		{
-			comment_hash.Add (streamSerialNumber, comment);
-			tags.Add (comment);
+			comment_hash.Add(streamSerialNumber, comment);
+			tags.Add(comment);
 		}
 		
 		/// <summary>
@@ -121,17 +121,17 @@ namespace TagLib.Ogg
 		///    A <see cref="ByteVector"/> object containing the raw Xiph
 		///    comment to add to the current instance.
 		/// </param>
-		public void AddComment (uint streamSerialNumber,
+		public void AddComment(uint streamSerialNumber,
 		                        ByteVector data)
 		{
-			AddComment (streamSerialNumber, new XiphComment (data));
+			AddComment(streamSerialNumber, new XiphComment(data));
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region TagLib.Tag
+		#region TagLib.Tag
 		
 		/// <summary>
 		///    Gets the tag types contained in the current instance.
@@ -216,13 +216,13 @@ namespace TagLib.Ogg
 					
 					string value = tag.TitleSort;
 					
-					if (value != null && value.Length > 0)
+					if (!string.IsNullOrEmpty(value))
 						return value;
 				}
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].TitleSort = value;}
+			set { if (tags.Count > 0) tags[0].TitleSort = value; }
 		}
 		
 		/// <summary>
@@ -242,12 +242,9 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.Subtitle" />
-		public override string Subtitle
-		{
-			get
-			{
-				foreach (XiphComment tag in tags)
-				{
+		public override string Subtitle {
+			get {
+				foreach (XiphComment tag in tags) {
 					if (tag == null)
 						continue;
 
@@ -283,12 +280,9 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.Description" />
-		public override string Description
-		{
-			get
-			{
-				foreach (XiphComment tag in tags)
-				{
+		public override string Description {
+			get {
+				foreach (XiphComment tag in tags) {
 					if (tag == null)
 						continue;
 
@@ -356,7 +350,7 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.PerformersSort" />
-		public override string [] PerformersSort {
+		public override string[] PerformersSort {
 			get {
 				foreach (XiphComment tag in tags) {
 					if (tag == null)
@@ -370,7 +364,7 @@ namespace TagLib.Ogg
 				
 				return new string[] { };
 			}
-			set {if (tags.Count > 0) tags [0].PerformersSort = value;}
+			set { if (tags.Count > 0) tags[0].PerformersSort = value; }
 		}
 		
 		/// <summary>
@@ -389,12 +383,9 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.PerformersRole" />
-		public override string[] PerformersRole
-		{
-			get
-			{
-				foreach (XiphComment tag in tags)
-				{
+		public override string[] PerformersRole {
+			get {
+				foreach (XiphComment tag in tags) {
 					if (tag == null)
 						continue;
 
@@ -481,7 +472,7 @@ namespace TagLib.Ogg
 				return new string[] { };
 			}
 			
-			set {if (tags.Count > 0) tags [0].AlbumArtistsSort = value;}
+			set { if (tags.Count > 0) tags[0].AlbumArtistsSort = value; }
 		}
 		
 		/// <summary>
@@ -535,7 +526,7 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.ComposersSort" />
-		public override string [] ComposersSort {
+		public override string[] ComposersSort {
 			get {
 				foreach (XiphComment tag in tags) {
 					if (tag == null)
@@ -549,7 +540,7 @@ namespace TagLib.Ogg
 				
 				return new string[] { };
 			}
-			set {if (tags.Count > 0) tags [0].ComposersSort = value;}
+			set { if (tags.Count > 0) tags[0].ComposersSort = value; }
 		}
 		
 		/// <summary>
@@ -617,7 +608,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].AlbumSort = value;}
+			set { if (tags.Count > 0) tags[0].AlbumSort = value; }
 		}
 		
 		/// <summary>
@@ -887,7 +878,7 @@ namespace TagLib.Ogg
 					
 					string value = tag.Grouping;
 					
-					if (value != null && value.Length > 0)
+					if (!string.IsNullOrEmpty(value))
 						return value;
 				}
 				
@@ -1009,12 +1000,9 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.DateTagged" />
-		public override DateTime? DateTagged
-		{
-			get
-			{
-				foreach (XiphComment tag in tags)
-				{
+		public override DateTime? DateTagged {
+			get {
+				foreach (XiphComment tag in tags) {
 					if (tag == null)
 						continue;
 
@@ -1059,7 +1047,40 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzArtistId = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzArtistId = value; }
+		}
+
+		/// <summary>
+		///    Gets and sets the MusicBrainz Release Group ID.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> containing the MusicBrainz
+		///    ReleaseGroupID for the media described by the 
+		///    current instance or null if no value is present.
+		/// </value>
+		/// <remarks>
+		///    <para>When getting the value, the child comments are looped
+		///    through in order and the first non-<see langword="null" />
+		///    and non-empty value is returned.</para>
+		///    <para>When setting the value, it is stored in the first
+		///    comment.</para>
+		/// </remarks>
+		/// <seealso cref="Tag.MusicBrainzReleaseGroupId" />
+		public override string MusicBrainzReleaseGroupId {
+			get {
+				foreach (XiphComment tag in tags) {
+					if (tag == null)
+						continue;
+
+					string value = tag.MusicBrainzReleaseGroupId;
+
+					if (value != null && value.Length > 0)
+						return value;
+				}
+
+				return null;
+			}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseGroupId = value; }
 		}
 
 		/// <summary>
@@ -1092,7 +1113,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzReleaseId = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseId = value; }
 		}
 
 		/// <summary>
@@ -1125,7 +1146,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzReleaseArtistId = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseArtistId = value; }
 		}
 
 		/// <summary>
@@ -1158,7 +1179,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzTrackId = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzTrackId = value; }
 		}
 
 		/// <summary>
@@ -1191,7 +1212,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzDiscId = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzDiscId = value; }
 		}
 
 		/// <summary>
@@ -1224,7 +1245,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicIpId = value;}
+			set { if (tags.Count > 0) tags[0].MusicIpId = value; }
 		}
 
 		/// <summary>
@@ -1257,7 +1278,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].AmazonId = value;}
+			set { if (tags.Count > 0) tags[0].AmazonId = value; }
 		}
 
 		/// <summary>
@@ -1290,7 +1311,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzReleaseStatus = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseStatus = value; }
 		}
 
 		/// <summary>
@@ -1323,7 +1344,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzReleaseType = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseType = value; }
 		}
 
 		/// <summary>
@@ -1356,7 +1377,7 @@ namespace TagLib.Ogg
 				
 				return null;
 			}
-			set {if (tags.Count > 0) tags [0].MusicBrainzReleaseCountry = value;}
+			set { if (tags.Count > 0) tags[0].MusicBrainzReleaseCountry = value; }
 		}
 
     /// <summary>
@@ -1376,12 +1397,9 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainTrackGain" />
-    public override double ReplayGainTrackGain
-    {
-      get
-      {
-        foreach (XiphComment tag in tags)
-        {
+		public override double ReplayGainTrackGain {
+			get {
+				foreach (XiphComment tag in tags) {
           if (tag == null)
             continue;
 
@@ -1413,12 +1431,9 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainTrackPeak" />
-    public override double ReplayGainTrackPeak
-    {
-      get
-      {
-        foreach (XiphComment tag in tags)
-        {
+		public override double ReplayGainTrackPeak {
+			get {
+				foreach (XiphComment tag in tags) {
           if (tag == null)
             continue;
 
@@ -1450,12 +1465,9 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainAlbumGain" />
-    public override double ReplayGainAlbumGain
-    {
-      get
-      {
-        foreach (XiphComment tag in tags)
-        {
+		public override double ReplayGainAlbumGain {
+			get {
+				foreach (XiphComment tag in tags) {
           if (tag == null)
             continue;
 
@@ -1487,12 +1499,9 @@ namespace TagLib.Ogg
     ///    comment.</para>
     /// </remarks>
     /// <seealso cref="Tag.ReplayGainAlbumPeak" />
-    public override double ReplayGainAlbumPeak
-    {
-      get
-      {
-        foreach (XiphComment tag in tags)
-        {
+		public override double ReplayGainAlbumPeak {
+			get {
+				foreach (XiphComment tag in tags) {
           if (tag == null)
             continue;
 
@@ -1524,16 +1533,16 @@ namespace TagLib.Ogg
 		///    comment.</para>
 		/// </remarks>
 		/// <seealso cref="Tag.Pictures" />
-		public override IPicture [] Pictures {
+		public override IPicture[] Pictures {
 			get {
-				IPicture [] output = new IPicture [0];
+				IPicture[] output = new IPicture[0];
 				foreach (XiphComment tag in tags)
 					if (tag != null && output.Length == 0)
 						output = tag.Pictures;
 				
 				return output;
 			}
-			set {if (tags.Count > 0) tags [0].Pictures = value;}
+			set { if (tags.Count > 0) tags[0].Pictures = value; }
 		}
 		
 		/// <summary>
@@ -1557,12 +1566,12 @@ namespace TagLib.Ogg
 		/// <summary>
 		///    Clears all of the child tags.
 		/// </summary>
-		public override void Clear ()
+		public override void Clear()
 		{
 			foreach (XiphComment tag in tags)
-				tag.Clear ();
+				tag.Clear();
 		}
 		
-#endregion
+		#endregion
 	}
 }

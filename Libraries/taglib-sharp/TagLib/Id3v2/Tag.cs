@@ -132,6 +132,10 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="long" /> value specify at what position to
 		///    read the tag.
 		/// </param>
+		/// <param name="style">
+		///    A <see cref="ReadStyle"/> value specifying how the media
+		///    data is to be read into the current instance.
+		/// </param>
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
@@ -139,7 +143,7 @@ namespace TagLib.Id3v2 {
 		///    <paramref name="position" /> is less than zero or greater
 		///    than the size of the file.
 		/// </exception>
-		public Tag (File file, long position)
+		public Tag (File file, long position, ReadStyle style)
 		{
 			if (file == null)
 				throw new ArgumentNullException ("file");
@@ -151,7 +155,7 @@ namespace TagLib.Id3v2 {
 				throw new ArgumentOutOfRangeException (
 					"position");
 			
-			Read (file, position);
+			Read (file, position, style);
 		}
 		
 		/// <summary>
@@ -190,7 +194,7 @@ namespace TagLib.Id3v2 {
 					"Does not contain enough tag data.");
 			
 			Parse (data.Mid ((int) Header.Size,
-				(int) header.TagSize));
+				(int) header.TagSize), null, 0, ReadStyle.None);
 		}
 		
 #endregion
@@ -864,11 +868,11 @@ namespace TagLib.Id3v2 {
 			set {use_numeric_genres = value;}
 		}
 		
-#endregion
+		#endregion
 		
 		
 		
-#region Protected Methods
+		#region Protected Methods
 		
 		/// <summary>
 		///    Populates the current instance be reading in a tag from
@@ -881,6 +885,10 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="long" /> value specifying the seek position
 		///    at which to read the tag.
 		/// </param>
+		/// <param name="style">
+		///    A <see cref="ReadStyle"/> value specifying how the media
+		///    data is to be read into the current instance.
+		/// </param>
 		/// <exception cref="ArgumentNullException">
 		///    <paramref name="file" /> is <see langword="null" />.
 		/// </exception>
@@ -888,7 +896,7 @@ namespace TagLib.Id3v2 {
 		///    <paramref name="position" /> is less than 0 or greater
 		///    than the size of the file.
 		/// </exception>
-		protected void Read (File file, long position)
+		protected void Read (File file, long position, ReadStyle style)
 		{
 			if (file == null)
 				throw new ArgumentNullException ("file");
@@ -909,7 +917,8 @@ namespace TagLib.Id3v2 {
 			if(header.TagSize == 0)
 				return;
 			
-			Parse (file.ReadBlock ((int) header.TagSize));
+			position += Header.Size;
+			Parse (null, file, position, style);
 		}
 		
 		/// <summary>
@@ -920,26 +929,53 @@ namespace TagLib.Id3v2 {
 		///    A <see cref="ByteVector" /> object containing the content
 		///    of an ID3v2 tag, minus the header.
 		/// </param>
+		/// <param name="file">
+		///    A <see cref="File"/> object containing
+		///    abstraction of the file to read. 
+		///    Ignored if <paramref name="data"/> is not null.
+		/// </param>
+		/// <param name="position">
+		///    A <see cref="int" /> value reference specifying at what
+		///    index in <paramref name="file" />
+		///    at which the frame begins. 
+		/// </param>
+		/// <param name="style">
+		///    A <see cref="ReadStyle"/> value specifying how the media
+		///    data is to be read into the current instance.
+		/// </param>
 		/// <remarks>
 		///    This method must only be called after the internal
 		///    header has been read from the file, otherwise the data
 		///    cannot be parsed correctly.
 		/// </remarks>
-		protected void Parse (ByteVector data)
+		protected void Parse (ByteVector data, File file, long position, ReadStyle style)
 		{
-			if (data == null)
-				throw new ArgumentNullException ("data");
-
 			// If the entire tag is marked as unsynchronized, and this tag
 			// is version id3v2.3 or lower, resynchronize it.
-			bool fullTagUnsynch =  (header.MajorVersion < 4) && ((header.Flags & HeaderFlags.Unsynchronisation) != 0);
+			bool fullTagUnsynch =  (header.MajorVersion < 4) && 
+				(header.Flags & HeaderFlags.Unsynchronisation) != 0;
+
+			// Avoid to load all the ID3 tag if PictureLazy enabled and size is 
+			// significant enough (ID3v4 and later only)
+			if (data == null && 
+				(fullTagUnsynch || 
+				header.TagSize<1024 || 
+				(style & ReadStyle.PictureLazy) == 0 || 
+				(header.Flags & HeaderFlags.ExtendedHeader) != 0))
+			{
+				file.Seek(position);
+				data = file.ReadBlock((int)header.TagSize);
+			}
+
 			if (fullTagUnsynch)
 				SynchData.ResynchByteVector (data);
 			
-			int frame_data_position = 0;
-			int frame_data_length = data.Count;
+			int frame_data_position = data != null ? 0 : (int)position;
+			int frame_data_endposition = (data != null ? data.Count  : (int)header.TagSize) 
+				+ frame_data_position - (int)FrameHeader.Size(header.MajorVersion);
 			
-			// Check for the extended header.
+
+			// Check for the extended header (ID3v2 only)
 			
 			if ((header.Flags & HeaderFlags.ExtendedHeader) != 0) {
 				extended_header = new ExtendedHeader (data,
@@ -948,7 +984,7 @@ namespace TagLib.Id3v2 {
 				if (extended_header.Size <= data.Count) {
 					frame_data_position += (int)
 						extended_header.Size;
-					frame_data_length -= (int)
+					frame_data_endposition -= (int)
 						extended_header.Size;
 				}
 			}
@@ -961,20 +997,13 @@ namespace TagLib.Id3v2 {
 			TextInformationFrame tdat = null;
 			TextInformationFrame time = null;
 			
-			while (frame_data_position < frame_data_length -
-				FrameHeader.Size (header.MajorVersion)) {
-				
-				// If the next data is position is 0, assume
-				// that we've hit the padding portion of the
-				// frame data.
-				if(data [frame_data_position] == 0)
-					break;
+			while (frame_data_position < frame_data_endposition) {
 				
 				Frame frame = null;
 				
 				try {
 					frame = FrameFactory.CreateFrame(
-						data,
+						data, file,
 						ref frame_data_position,
 						header.MajorVersion,
 						fullTagUnsynch);
@@ -1155,7 +1184,7 @@ namespace TagLib.Id3v2 {
 		/// TXXX frame</param>
 		/// <param name="text">String containing the Text field for the TXXX frame</param>
 		/// <param name="caseSensitive">case-sensitive search if true.</param>
-		private void SetUserTextAsString(string description, string text, bool caseSensitive) {
+		public void SetUserTextAsString(string description, string text, bool caseSensitive) {
 			//Get the TXXX frame, create a new one if needed
 			UserTextInformationFrame frame = UserTextInformationFrame.Get(
 				this, description, Tag.DefaultEncoding, true, caseSensitive);
@@ -1175,7 +1204,7 @@ namespace TagLib.Id3v2 {
 		/// <param name="description">String containing the Description field for the
 		/// TXXX frame</param>
 		/// <param name="text">String containing the Text field for the TXXX frame</param>
-		public void SetUserTextAsString(string description, string text) {
+		private void SetUserTextAsString(string description, string text) {
 			SetUserTextAsString (description, text, true);
 		}
 
@@ -2011,6 +2040,23 @@ namespace TagLib.Id3v2 {
 		}
 
 		/// <summary>
+		///    Gets and sets the MusicBrainz ReleaseGroupID
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> containing the MusicBrainz
+		///    ReleaseGroupID for the media described by the current 
+		///    instance, or null if no value is present. 
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "TXXX:MusicBrainz Release Group Id" frame.
+		///    http://musicbrainz.org/doc/PicardTagMapping
+		/// </remarks>
+		public override string MusicBrainzReleaseGroupId {
+			get { return GetUserTextAsString("MusicBrainz Release Group Id"); }
+			set { SetUserTextAsString("MusicBrainz Release Group Id", value); }
+		}
+
+		/// <summary>
 		///    Gets and sets the MusicBrainz ReleaseID
 		/// </summary>
 		/// <value>
@@ -2310,6 +2356,66 @@ namespace TagLib.Id3v2 {
     }
 
 		/// <summary>
+		///    Gets and sets the initial key of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the initial key of the song.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "TKEY" field.
+		/// </remarks>
+		public override string InitialKey
+		{
+			get { return GetTextAsString(FrameType.TKEY); }
+			set { SetTextFrame(FrameType.TKEY, value); }
+		}
+
+		/// <summary>
+		///    Gets and sets the remixer of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the remixer of the song.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "TPE4" field.
+		/// </remarks>
+		public override string RemixedBy
+		{
+			get { return GetTextAsString(FrameType.TPE4); }
+			set { SetTextFrame(FrameType.TPE4, value); }
+		}
+
+		/// <summary>
+		///    Gets and sets the publisher of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the publisher of the song.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "TPUB" field.
+		/// </remarks>
+		public override string Publisher
+		{
+			get { return GetTextAsString(FrameType.TPUB); }
+			set { SetTextFrame(FrameType.TPUB, value); }
+		}
+
+		/// <summary>
+		///    Gets and sets the ISRC (International Standard Recording Code) of the song.
+		/// </summary>
+		/// <value>
+		///    A <see cref="string" /> object containing the ISRC of the song.
+		/// </value>
+		/// <remarks>
+		///    This property is implemented using the "TSRC" field.
+		/// </remarks>
+		public override string ISRC
+		{
+			get { return GetTextAsString(FrameType.TSRC); }
+			set { SetTextFrame(FrameType.TSRC, value); }
+		}
+
+		/// <summary>
 		///    Gets and sets a collection of pictures associated with
 		///    the media represented by the current instance.
 		/// </summary>
@@ -2324,22 +2430,22 @@ namespace TagLib.Id3v2 {
 		/// </remarks>
 		public override IPicture [] Pictures {
 			get {
-				return new List<AttachedPictureFrame> (
-					GetFrames <AttachedPictureFrame> (
-						FrameType.APIC)).ToArray ();
+				return new List<AttachmentFrame> (
+					GetFrames <AttachmentFrame> ()).ToArray ();
 			}
 			set {
 				RemoveFrames(FrameType.APIC);
+				RemoveFrames(FrameType.GEOB);
 				
-				if(value == null || value.Length == 0)
+				if (value == null || value.Length == 0)
 					return;
 				
 				foreach(IPicture picture in value) {
-					AttachedPictureFrame frame =
-						picture as AttachedPictureFrame;
+					AttachmentFrame frame =
+						picture as AttachmentFrame;
 					
 					if (frame == null)
-						frame = new AttachedPictureFrame (
+						frame = new AttachmentFrame (
 							picture);
 					
 					AddFrame (frame);

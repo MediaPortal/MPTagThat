@@ -64,6 +64,7 @@ namespace TagLib.Id3v2 {
 		public static readonly ReadOnlyByteVector TIT2 = "TIT2";
 		public static readonly ReadOnlyByteVector TIT3 = "TIT3";
 		public static readonly ReadOnlyByteVector TIME = "TIME";
+		public static readonly ReadOnlyByteVector TKEY = "TKEY";
 		public static readonly ReadOnlyByteVector TMCL = "TMCL";
 		public static readonly ReadOnlyByteVector TOLY = "TOLY";
 		public static readonly ReadOnlyByteVector TOPE = "TOPE";
@@ -72,6 +73,7 @@ namespace TagLib.Id3v2 {
 		public static readonly ReadOnlyByteVector TPE3 = "TPE3";
 		public static readonly ReadOnlyByteVector TPE4 = "TPE4";
 		public static readonly ReadOnlyByteVector TPOS = "TPOS";
+		public static readonly ReadOnlyByteVector TPUB = "TPUB";
 		public static readonly ReadOnlyByteVector TRCK = "TRCK";
 		public static readonly ReadOnlyByteVector TRDA = "TRDA";
 		public static readonly ReadOnlyByteVector TSIZ = "TSIZ";
@@ -80,6 +82,7 @@ namespace TagLib.Id3v2 {
 		public static readonly ReadOnlyByteVector TSOC = "TSOC"; // Composer Sort Frame
 		public static readonly ReadOnlyByteVector TSOP = "TSOP"; // Performer Sort Frame
 		public static readonly ReadOnlyByteVector TSOT = "TSOT"; // Track Title Sort Frame
+		public static readonly ReadOnlyByteVector TSRC = "TSRC";
 		public static readonly ReadOnlyByteVector TXXX = "TXXX";
 		public static readonly ReadOnlyByteVector TYER = "TYER";
 		public static readonly ReadOnlyByteVector UFID = "UFID";
@@ -94,5 +97,6 @@ namespace TagLib.Id3v2 {
 		public static readonly ReadOnlyByteVector WPAY = "WPAY";
 		public static readonly ReadOnlyByteVector WPUB = "WPUB";
 		public static readonly ReadOnlyByteVector WXXX = "WXXX";
+		public static readonly ReadOnlyByteVector ETCO = "ETCO";
 	}
 }

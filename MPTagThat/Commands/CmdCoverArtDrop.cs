@@ -22,6 +22,7 @@ using System.IO;
 using System.Net;
 using MPTagThat.Core;
 using TagLib;
+using File = System.IO.File;
 using Picture = MPTagThat.Core.Common.Picture;
 
 namespace MPTagThat.Commands
@@ -102,10 +103,19 @@ namespace MPTagThat.Commands
         }
 
         Log.Info("Retrieving Coverart from: {0}", url);
-        WebRequest req = WebRequest.Create(url);
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+        req.AllowAutoRedirect = true;
         req.Proxy = new WebProxy();
         req.Proxy.Credentials = CredentialCache.DefaultCredentials;
-        WebResponse response = req.GetResponse();
+        HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+        if ((int) response.StatusCode >= 300 && (int) response.StatusCode <= 399)
+        {
+          // We have a redeirect
+          string newurl = response.Headers["Location"];
+          req = (HttpWebRequest)WebRequest.Create(newurl);
+          response = (HttpWebResponse)req.GetResponse();
+        }
         Stream stream = response.GetResponseStream();
         if (stream == null)
         {

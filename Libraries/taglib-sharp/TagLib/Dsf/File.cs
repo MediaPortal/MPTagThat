@@ -239,6 +239,9 @@ namespace TagLib.Dsf
 		/// </summary>
 		public override void Save()
 		{
+			// Boilerplate
+			PreSave();
+
 			Mode = AccessMode.Write;
 			try
 			{
@@ -336,7 +339,7 @@ namespace TagLib.Dsf
 					if (tag == null && create)
 					{
 						tag = new Id3v2.Tag();
-						tag.Version = 3;
+						tag.Version = 2;
 					}
 
 					id32_tag = tag;
@@ -423,7 +426,7 @@ namespace TagLib.Dsf
 		    {
           if (read_tags && tag == null)
           {
-            tag = new Id3v2.Tag(this, tag_start);
+						tag = new Id3v2.Tag(this, tag_start, style);
           }
 
           // Get the length of the tag out of the ID3 chunk
